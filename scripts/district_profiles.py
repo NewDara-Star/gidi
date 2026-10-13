@@ -115,7 +115,8 @@ def maze(ST, LM):
         "named": [{"poi": "The steal", "from": ["stalls"]},
                   {"poi": "Tunde's room", "from": ["back"]}],
         "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
-        "lock": {"reserve": ["Ladi Lane Parts Market"], "buildings": ["The steal", "Tunde's room"]},   # the opening, fixed for good (web/locked.json)
+        "post": {"poi": "Boss's post", "market": "Ladi Lane Parts Market", "from": "The steal", "m": [6, 4]},   # the boss sits here during the opening
+        "lock": {"reserve": ["Ladi Lane Parts Market"], "buildings": ["The steal", "Tunde's room", "Boss's post"]},   # the opening, fixed for good (web/locked.json)
         "clear_access": True,           # streets stop at the market's own road instead of running beside it (living test, Oct 2026)
     }
 

@@ -52,7 +52,7 @@
     const walls = T.dark ? ["#6d6a66", "#75706a", "#6a6f72", "#7a7369"] : ["#e9e2d6", "#e3d9c8", "#dcdcd6", "#e6dccd", "#d9d2c4"];
     const tin = T.dark ? ["#6e4a3a", "#5f4d42", "#6b6560"] : ["#a3684a", "#8f5f47", "#9a8f84", "#b07a58"];
     const flat = T.dark ? "#77746f" : "#cfcac0";
-    const special = { warehouse: T.dark ? "#5d6670" : "#b9c0c8", stalls: T.dark ? "#8a5b2e" : "#d69a55", school: T.dark ? "#7b6a3c" : "#e1c46a", kiosk: T.dark ? "#4f6a86" : "#7ea2c6", shed: T.dark ? "#5b5650" : "#a59d92" };
+    const special = { canopy: T.dark ? "#7a4a8c" : "#a86cc1", warehouse: T.dark ? "#5d6670" : "#b9c0c8", stalls: T.dark ? "#8a5b2e" : "#d69a55", school: T.dark ? "#7b6a3c" : "#e1c46a", kiosk: T.dark ? "#4f6a86" : "#7ea2c6", shed: T.dark ? "#5b5650" : "#a59d92" };
     let n = 0;
     const tmp = new THREE.Color();
     for (const [id, list] of Object.entries(G.buildings || {})) {
@@ -60,7 +60,7 @@
       list.forEach((b, i) => {
         n++;
         const kind = b[0], ring = b.slice(1); const s = st[i] || 1;
-        const H = kind === "stalls" ? 3 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
+        const H = kind === "stalls" ? 3 : kind === "canopy" ? 2.8 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
         const wallC = special[kind] || walls[Math.floor(hash(n) * walls.length)];
         const roofC = special[kind] || (s <= 2 && hash(n + 7) < 0.62 ? tin[Math.floor(hash(n + 3) * tin.length)] : flat);
         const k = ring.length;

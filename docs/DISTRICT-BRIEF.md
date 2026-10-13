@@ -61,7 +61,11 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - Turn on `walk` in the profile (the Maze's is the example): it adds footpaths along the rail, along canal banks and across the rail, makes lanes start on streets, and keeps buildings within reach of a way.
    - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
    - **Everyday places are placed by coverage.** `bake_web.py` puts schools, places of worship and chemists/clinics on real plots so that every house has each within 10 min walk (15 at most). Check 13 fails otherwise; run it after baking.
-   - **The opening is locked** (`web/locked.json`): the Maze's parts market and its aisles, The steal's stall, Tunde's room and the Hub's boss's motor park. Regenerating keeps them exactly; check 12 fails if any of them moves. To re-record them on purpose, run the generator with `GIDI_LOCK=write`.
+   - **Locked places** (`web/locked.json`):
+     - **the opening:** the Maze's parts market and its aisles, The steal's stall, Tunde's room, the boss's post (a canopy at the market's west mouth), and the Hub's boss's motor park
+     - **Water Town:** the Okobaba Sawmill's plot
+     - Regenerating keeps them exactly, and check 12 fails if any of them moves.
+     - To re-record them on purpose, run the generator with `GIDI_LOCK=write`. Locks that already exist are kept.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
 6. **City living test:** every district ends with this test.
    - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.

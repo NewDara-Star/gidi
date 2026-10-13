@@ -51,7 +51,7 @@ def resolve(arg):
     hits = [p for p in POIS if arg.lower() in p["name"].lower()]
     if not hits: sys.exit(f"no place matching '{arg}'. Try: places")
     p = hits[0]; return Point(p["x"], p["y"]), p["name"]
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
 
 def overview():
     from collections import Counter

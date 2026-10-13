@@ -1136,13 +1136,28 @@ parcels += extra_parcels
 for sp in NAMED_LATE:   # places inside a parcel, named after its buildings exist (The steal: the stall at the market's near end)
     pin = POIS.get(sp["poi"]); cands = [r for r, k in bld if k in sp["from"]]
     if pin is not None and cands: poi_pos[sp["poi"]] = min(cands, key=lambda r: r.distance(pin)).centroid
-for name in PROF.get("lock", {}).get("buildings", []):   # locked buildings: the stall where the story starts, Tunde's room
+PO = PROF.get("post")
+if PO:   # the boss's post: a canopy over a bench at the market's far mouth, where his boys collect the park's levy from the traders
+    mk = next((x for x in RES if x.get("poi") == PO["market"]), None); steal = poi_pos.get(PO["from"])
+    aisles = [x for k, x in PATHS if k == "market aisle" and mk is not None and x.intersects(mk["geom"])]
+    if aisles and steal is not None:
+        ai = max(aisles, key=lambda x: x.length)   # the through aisle, the chase route
+        e0, e1 = Point(ai.coords[0]), Point(ai.coords[-1]); far, near = (e0, e1) if e0.distance(steal) > e1.distance(steal) else (e1, e0)
+        mouth = ai.intersection(mk["geom"].exterior); mouth = min(getattr(mouth, "geoms", [mouth]), key=lambda q: q.distance(far))
+        L = far.distance(near); ux, uy = (near.x - far.x) / L, (near.y - far.y) / L   # into the market
+        w, d = PO["m"]; off = 1.75 + 0.6 + d / 2   # beside the aisle, clear of it
+        cx, cy = mouth.x + ux * (w / 2 + 1.5) - uy * off, mouth.y + uy * (w / 2 + 1.5) + ux * off
+        post = rect(cx, cy, w, d, math.atan2(uy, ux))
+        bld = [(r, k) for r, k in bld if not r.intersects(post.buffer(0.3))] + [(post, "canopy")]
+        poi_pos[PO["poi"]] = post.centroid
+for name in PROF.get("lock", {}).get("buildings", []):   # locked buildings: the stall where the story starts, Tunde's room, the boss's post
     LK = LOCK.get("buildings", {}).get(name)
     if LK:
         lp = Polygon(LK["poly"])
         if not any(r.equals_exact(lp, 0.01) for r, k in bld):
             bld = [(r, k) for r, k in bld if not r.intersects(lp.buffer(0.3))] + [(lp, LK["kind"])]
         poi_pos[name] = Point(LK["pt"])
+        if LOCK_WRITE: NEW_LOCK.setdefault("buildings", {})[name] = LK   # recording a new lock keeps the ones already there
     elif LOCK_WRITE and name in poi_pos:
         r0, k0 = min(bld, key=lambda rk: rk[0].centroid.distance(poi_pos[name]))
         NEW_LOCK.setdefault("buildings", {})[name] = {"poly": list(r0.exterior.coords), "kind": k0, "pt": [poi_pos[name].x, poi_pos[name].y]}
@@ -1190,7 +1205,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
