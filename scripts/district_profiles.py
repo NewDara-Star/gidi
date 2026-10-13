@@ -137,7 +137,8 @@ def jungle(ST, LM):
         "big_front": 0.15,            # few big buildings: 3% over 400 m2, 1.3 per km2 over 1,500 m2
         "internal_mains": 1, "continue_mains": True,   # the Maze's Adeleke Road carries on south to the coast
         "exp_bridge_m": LM["flyover_spans_m"]["p50"],  # ...over the Coastal Expressway on a flyover
-        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"]},
+        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"],
+                            "max_gap_m": 300},   # owner's review: no stretch of the expressway over 300 m without a way across on foot
         "name_endings": ends,
         "reserve": [   # the plank market faces the expressway (real markets and retail: median 2.2 ha, 4 m from a main road)
             {"kind": "market", "poi": "Boundary Plank Market", "m2": ST["markets_and_retail"]["ha"]["p50"] * 1e4, "aspect": 1.6, "front": "art"},
@@ -154,6 +155,7 @@ def jungle(ST, LM):
         "canal_footbridges": 1,
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True,
+        "clear_access": True,           # living test (Oct 2026): streets join the market's own road instead of running beside it
     }
 
 def foodgate(ST, LM):

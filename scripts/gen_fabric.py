@@ -423,6 +423,12 @@ def prune(streets):
     m = linemerge(segs)
     return list(getattr(m, "geoms", [m]))
 streets = prune(streets)
+if PROF.get("clear_access"):   # a big place's own road joins the street grid at its back corners (no road that only meets the arterial)
+    st_u = unary_union(streets)
+    for ar in [g for g in access if len(g.coords) >= 4]:
+        for c in [Point(q) for q in list(ar.coords)[1:-1]]:
+            q = nearest_points(st_u, c)[0]
+            if 0.5 < c.distance(q) <= 40: streets.append(LineString([c, q]))
 # no block bigger than the real 90th percentile (~3.2 ha): split oversize blocks with a street across their long axis
 for _ in range(3):
     big = [b for b in polygonize(noded(streets + hard + [rail] + ([rail_zone.exterior] if PROF.get("rail_frontage") else []))) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
@@ -693,6 +699,28 @@ if XF:   # footbridges over the expressway (real: about one per 3 km of major ro
                 o = walk_to.geometries[int(np.atleast_1d(walk_to.query_nearest(e))[0])]
                 q = nearest_points(o, e)[0]
                 if q.distance(e) > 0.5: lk = LineString([e, q]); PATHS.append(("link", lk)); clear_geoms.append(lk.buffer(1.2))
+if XF and XF.get("max_gap_m"):   # more footbridges where the expressway runs too far without a way across (flyovers and footbridges count)
+    for xa in [a for n, k, a in arts if k == "exp" and a.intersection(poly).length > 100]:
+        inside = xa.intersection(land)
+        for seg in lines(inside):
+            t0, t1 = sorted([xa.project(Point(seg.coords[0])), xa.project(Point(seg.coords[-1]))])
+            def crossings():
+                return sorted([t0, t1] + [xa.project(x["geom"].intersection(xa)) for x in STRUCT
+                                          if x["kind"] in ("flyover", "skywalk") and x["geom"].intersects(xa) and x["geom"].intersection(xa).geom_type == "Point"])
+            for _ in range(4):
+                cs = crossings(); gaps = [(b - a, a, b) for a, b in zip(cs, cs[1:])]
+                g_, a_, b_ = max(gaps)
+                if g_ <= XF["max_gap_m"]: break
+                avoid = unary_union([x["geom"].buffer(12) for x in STRUCT] + [ln.buffer(15) for n, ln in mains] + [r["geom"] for r in RES])
+                walk_to = STRtree([g for k, g in net_lines if k not in ("art", "exp")] + lanes + [g for k, g in PATHS])
+                got = [gfb for gfb in LMK.skywalks(xa, xa.interpolate((a_ + b_) / 2), 1, XF["m"], avoid, spacing=200)]
+                got = [gfb.intersection(land) for gfb in got]; got = [gfb for gfb in got if gfb.geom_type == "LineString"]
+                if not got: break
+                gfb = got[0]; STRUCT.append({"kind": "skywalk", "name": "Expressway footbridge", "geom": gfb, "layer": 1, "width": 3})
+                for e in (Point(gfb.coords[0]), Point(gfb.coords[-1])):   # the stairs come down onto the nearest street
+                    o = walk_to.geometries[int(np.atleast_1d(walk_to.query_nearest(e))[0])]
+                    q = nearest_points(o, e)[0]
+                    if q.distance(e) > 0.5: lk = LineString([e, q]); PATHS.append(("link", lk)); clear_geoms.append(lk.buffer(1.2))
 for RF in PROF.get("road_footbridges", []):   # a footbridge over an arterial in front of a busy place (market, bus park)
     at_r = next((r for r in RES if r["kind"] == RF["near"]), None)
     rds = [a for n, k, a in arts if k in RF["cls"] and a.intersection(poly).length > 100]
