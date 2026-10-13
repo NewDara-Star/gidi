@@ -62,7 +62,10 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - Turn on `walk` in the profile (the Maze's is the example): it adds footpaths along the rail, along canal banks and across the rail, makes lanes start on streets, and keeps buildings within reach of a way.
    - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
-6. **Report and PR:**
+6. **City living test:** every district ends with this test.
+   - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.
+   - Verify every problem the agents report, fix the real ones, and write `docs/living-test-<date>.md` with the standard-trips table.
+7. **Report and PR:**
    - Commit, push the branch and open a PR. Show the owner the side-by-side picture and the match table: what matched, what didn't, and why.
    - After the owner merges, republish `web/gidi-maps.html` to the live map (https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP; read it first, then publish to that URL), so the city map grows district by district.
 
