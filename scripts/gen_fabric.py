@@ -579,10 +579,32 @@ if W:
             q = nearest_points(near, e)[0]
             if q.distance(e) > 0.5: PATHS.append(("link", LineString([e, q])))
             links_t.append(rail.project(e))
-    # worn crossings: between the crossings the line already has (street, bridge, the edge roads at either end),
-    # spread evenly, never more than 200 m apart; each moves onto a street end nearby if one is within 20 m
     have = [rail.project(x) for g in streets for x in [g.intersection(rail)] if x.geom_type == "Point"] + \
            [rail.project(x["geom"].interpolate(0.5, normalized=True)) for x in STRUCT if x["kind"] == "flyover" and x["geom"].intersects(rail)]
+    # cut-throughs: deep blocks beside the line get a footpath from the rail path straight out to the next street
+    # (no long way round for the back rows), and a worn crossing over the tracks where it meets the line
+    cut_pts = []
+    if W.get("cut_every_m"):
+        stop_u = unary_union(streets + [e for n, e, nb in edge_roads] + [ln for n, ln in mains] + [a for n, k, a in arts] + lanes + access)
+        link_pts = [Point(g.coords[0]) for k, g in PATHS if k == "link"]
+        for rl in [g for sd in rail_sides for g in sd]:
+            for t in np.arange(W["cut_every_m"] / 2, rl.length, W["cut_every_m"]):
+                p = rl.interpolate(t)
+                if any(p.distance(q) < W["cut_every_m"] / 3 for q in link_pts + cut_pts): continue
+                r0 = nearest_points(rail, p)[0]; L = p.distance(r0) or 1; ux, uy = (p.x - r0.x) / L, (p.y - r0.y) / L
+                ray = LineString([p, (p.x + ux * W["cut_max_m"], p.y + uy * W["cut_max_m"])]); x = ray.intersection(stop_u)
+                hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point" and ray.project(h) > 5]
+                if not hits: continue
+                seg = LineString([p, min(hits, key=ray.project)])
+                if seg.length < 25 or seg.intersects(parcel_u.buffer(1)) or (RES_U is not None and seg.intersects(RES_U.buffer(2))): continue
+                PATHS.append(("cut-through", seg)); cut_pts.append(p); links_t.append(rail.project(p))
+                h = W["rail_path_m"]; q = rail.interpolate(rail.project(p)); vx, vy = LMK.direction_at(rail, rail.project(p))
+                cr = LineString([(q.x - vy * h, q.y + vx * h), (q.x + vy * h, q.y - vx * h)])
+                near_cross = [u for u in have if abs(u - rail.project(p)) < 60]
+                if not near_cross and land.buffer(-2).contains(cr) and not cr.intersects(parcel_u):
+                    PATHS.append(("worn crossing", cr)); have.append(rail.project(p))
+    # worn crossings: between the crossings the line already has (street, bridge, the edge roads at either end),
+    # spread evenly, never more than 200 m apart; each moves onto a street end nearby if one is within 20 m
     lo, hi = W["cross_every_m"]
     for r0 in lines(rail_in):
         ta, tb = sorted([rail.project(Point(r0.coords[0])), rail.project(Point(r0.coords[-1]))])
