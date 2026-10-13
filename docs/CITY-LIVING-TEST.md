@@ -41,7 +41,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 
 ## Personas (rotate, and add one per new district)
 - **Tunde, okada rider:**
-  - lives in the Maze and starts the day at the boss's motor park in the Hub
+  - lives in Jungle City (Tunde's room, a back room in a face-me-I-face-you compound) and starts the day at the boss's motor park in the Hub
   - passenger runs between the interchange, markets, rail station, stadium and hotel
   - one oja run from a market to the hotel
   - a viewing centre at night
@@ -63,6 +63,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 ## Standard trips (track these every test)
 | Trip | Mode | Why |
 |---|---|---|
+| Tunde's room → The steal | walk | His way to the opening scene, Jungle City into the Maze |
 | The steal → Gang Canal | walk | Opening chase, gang line |
 | Maze house near the rail → Ladi Lane Parts Market | walk | Rail as a barrier |
 | Gidi Interchange → Hub Rail Station | walk | Bus–rail transfer |

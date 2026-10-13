@@ -45,6 +45,7 @@ Every problem they reported was re-run and checked by hand before it went into t
 ## Standard trips
 | Trip | Mode | Before: m / min / detour | After: m / min / detour |
 |---|---|---|---|
+| Tunde's room → The steal (added after this run) | walk | 1,740 / 20.9 / ×1.14 | 1,740 / 20.9 / ×1.14 |
 | The steal → Gang Canal | walk | 353 / 4.2 / ×1.56 | 353 / 4.2 / ×1.56 |
 | Maze house by the rail (3040,4815) → Ladi Lane Parts Market | walk | 931 / 11.2 / ×1.54 | 931 / 11.2 / ×1.54 |
 | **Gidi Interchange → Hub Rail Station** | walk | **708 / 8.5 / ×3.35** | **211 / 2.5 / ×1.00** |
@@ -90,7 +91,7 @@ There is no earlier test to compare with, so the baseline is the Before column.
 - **Footbridges and roads aren't places,** and the overview shows the 7 m canal footbridges as "0.0 km".
 - **"Outside the built districts" on routes.** These run along an edge road shared with an unbuilt neighbour (Alaba Road with the Port), or through the unbuilt Bazaar.
 - **"The coast at 2000,5400" and "the west point 2100,5300"** are in the unbuilt Bazaar, not Jungle City.
-- **Tunde's room is in Jungle City,** while the test doc's persona says Tunde lives in the Maze. The pin is the owner's (`districts_info.json`), so it's a persona wording question, not a map fault.
+- **Tunde's room is in Jungle City,** while the test doc's persona said Tunde lives in the Maze. The owner confirmed the pin is right, so the persona in `CITY-LIVING-TEST.md` is fixed. His walk from his room to The steal is now a standard trip: 1,740 m, 20.9 minutes, ×1.14, up Adeleke Road and over its rail bridge.
 
 ## What was fixed in this session
 - **Hub (PR #6):**
