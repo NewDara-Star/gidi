@@ -114,6 +114,7 @@ def maze(ST, LM):
         "named": [{"poi": "The steal", "from": ["stalls"]},
                   {"poi": "Tunde's room", "from": ["back"]}],
         "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
+        "clear_access": True,           # streets stop at the market's own road instead of running beside it (living test, Oct 2026)
     }
 
 def jungle(ST, LM):
@@ -153,7 +154,47 @@ def jungle(ST, LM):
         "fence_parcels": True, "rail_frontage": True,
     }
 
+def foodgate(ST, LM):
+    """Food Gate: the Ojota-Ketu-Mile 12 corridor of Kosofe (study-foodgate*, a box inside the LGA; whole Kosofe is in study-kosofe*,
+    mostly wetland). Heights from Kosofe in lga_table.json. A produce district: the night market, lorries, the interstate bus park."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 81 x 1.9 = 153 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Crescent", "Avenue")}
+    return {
+        "lgas": ["Kosofe"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.4, "cross_scale": 1.35,
+        "dead_end": 0.95,             # nearly every long rib stops short: real dead ends 0.40-0.42 per junction, the most of any district so far
+        "size_lo_u": 0.7, "plot_u": [0.65, 0.99],   # wider plots, bigger houses (real typical house 152-168 m2)
+        "back_row": 0.45, "big_front": 0.12,
+        "vacant": 0.4,                # many empty and half-built plots: real squares are only 15-27% built on
+        "internal_mains": 1, "continue_mains": True,   # the Maze's Adeleke Road carries on north
+        "name_endings": ends,
+        "reserve": [
+            # the produce market that runs at night: the real Ketu Market (6.3 ha; Mile 12 itself is 12.5 ha, 7% of this district), on the arterial
+            {"kind": "market", "poi": "Mile Market", "m2": 63099, "aspect": 1.8, "front": "art"},
+            # interstate coaches: the real Mile 12 Bus Terminal (1.1 ha), on the arterial, with a low terminal shed
+            {"kind": "bus terminal", "poi": "Northern Bus Park", "m2": LM["bus_stations"]["max_m2"], "aspect": 2.2, "front": "art",
+             "building": {"kind": "terminal", "share": 0.3, "storeys": 1}},
+        ],
+        "parcels": [
+            {"kind": "lorry park", "ha": round(LM["parking_lots_m2"]["p75"] / 1e4, 2), "near": "res:market", "near_main": False, "gate": "nearest"},   # the 1.8-1.9 ha yards by the market
+            {"kind": "park", "poi": "Freedom Ground", "ha": 0.89, "near_main": True},   # the largest mapped park (0.89 ha); a stage at one end
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
+        ],
+        "road_footbridges": [   # real: 0.71 per km of major road; 48 m (p75) clears the arterial
+            {"near": "market", "cls": ["art"], "m": LM["footbridges"]["length_m"]["p75"], "name": "Market footbridge"},
+            {"near": "bus terminal", "cls": ["art"], "m": LM["footbridges"]["length_m"]["p75"], "name": "Bus park footbridge"}],
+        "spots": [{"poi": "Long Bridge checkpoint", "kind": "checkpoint", "w": 4.0, "d": 3.0}],   # the taskforce post on the road to the bridge
+        "jetty": {"poi": "Agboyi Creek Villages", "name": "Agboyi canoe jetty", "m": 15},   # the creek villages are reached only by canoe
+        "market_through_aisle": True, "clear_access": True,
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate}.get(did, lambda ST, LM: {})(ST, LM)

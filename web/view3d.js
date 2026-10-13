@@ -87,7 +87,7 @@
     const deckM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6b6f75" : "#e4dfd5"), side: THREE.DoubleSide });
     const sideM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#4b4f55" : "#b9b3a8"), side: THREE.DoubleSide });
     for (const s of G.structures || []) {
-      const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : 7 * (s.layer || 1);
+      const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : s.kind === "jetty" ? 0.9 : 7 * (s.layer || 1);
       const top = ribbon([s.pts], s.width, y, []);
       group.add(new THREE.Mesh(geomFrom(top), deckM));
       // deck edge (a strip hanging 1.2 m below each side) and pillars every ~28 m
@@ -130,7 +130,7 @@
       const m = new THREE.Mesh(flatPoly(d.poly, 0.2), new THREE.MeshLambertMaterial({ color: tint, side: THREE.DoubleSide }));
       m.userData.district = d.id; scene.add(m); pick.push(m);
     }
-    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch };
+    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch };
     for (const list of Object.values(G.parcels || {})) for (const p of list) scene.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
 
     const lanes = [], streets = [], mains = [], arts = [];

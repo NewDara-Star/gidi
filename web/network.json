@@ -350,6 +350,168 @@
      5920.0
     ]
    ]
+  },
+  "foodgate|watertown": {
+   "between": [
+    "foodgate",
+    "watertown"
+   ],
+   "name": "Ogunleye Road",
+   "pts": [
+    [
+     3440.0,
+     3960.0
+    ],
+    [
+     3439.3,
+     3812.1
+    ],
+    [
+     3451.4,
+     3665.3
+    ],
+    [
+     3480.0,
+     3520.0
+    ]
+   ]
+  },
+  "foodgate|watertown#2": {
+   "between": [
+    "foodgate",
+    "watertown"
+   ],
+   "name": "Ibrahim Road",
+   "pts": [
+    [
+     3480.0,
+     3520.0
+    ],
+    [
+     3617.6,
+     3461.9
+    ],
+    [
+     3744.5,
+     3382.3
+    ],
+    [
+     3880.0,
+     3320.0
+    ]
+   ]
+  },
+  "foodgate|outer3": {
+   "between": [
+    "foodgate",
+    null
+   ],
+   "name": "Folake Street",
+   "pts": [
+    [
+     3880.0,
+     3320.0
+    ],
+    [
+     3932.6,
+     3093.2
+    ],
+    [
+     3997.7,
+     2869.3
+    ],
+    [
+     4040.0,
+     2640.0
+    ]
+   ]
+  },
+  "foodgate|outer4": {
+   "between": [
+    "foodgate",
+    null
+   ],
+   "name": "Ilori Road",
+   "pts": [
+    [
+     4040.0,
+     2640.0
+    ],
+    [
+     3813.1,
+     2551.1
+    ],
+    [
+     3579.6,
+     2481.2
+    ],
+    [
+     3353.7,
+     2389.3
+    ],
+    [
+     3120.0,
+     2320.0
+    ]
+   ]
+  },
+  "foodgate|outer5": {
+   "between": [
+    "foodgate",
+    null
+   ],
+   "name": "Abeni Road",
+   "pts": [
+    [
+     3120.0,
+     2320.0
+    ],
+    [
+     2938.2,
+     2472.9
+    ],
+    [
+     2751.6,
+     2619.6
+    ],
+    [
+     2560.0,
+     2760.0
+    ]
+   ]
+  },
+  "capital|foodgate": {
+   "between": [
+    "foodgate",
+    "capital"
+   ],
+   "name": "Ajasa Street",
+   "pts": [
+    [
+     2560.0,
+     2760.0
+    ],
+    [
+     2515.9,
+     2982.3
+    ],
+    [
+     2484.7,
+     3206.4
+    ],
+    [
+     2457.5,
+     3431.1
+    ],
+    [
+     2424.2,
+     3654.9
+    ],
+    [
+     2400.0,
+     3880.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -631,6 +793,70 @@
    "pt": [
     2279.5,
     5883.3
+   ],
+   "bearing_deg": 270
+  },
+  {
+   "from": "foodgate",
+   "to": "maze",
+   "road": "Adeleke Road",
+   "kind": "main",
+   "pt": [
+    2865.0,
+    3904.9
+   ]
+  },
+  {
+   "from": "foodgate",
+   "to": "capital",
+   "road": "Northern Road",
+   "kind": "arterial",
+   "pt": [
+    2406.5,
+    3819.2
+   ]
+  },
+  {
+   "from": "foodgate",
+   "to": "maze",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3116.2,
+    3930.1
+   ],
+   "bearing_deg": 180
+  },
+  {
+   "from": "foodgate",
+   "to": "watertown",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3449.4,
+    3689.6
+   ],
+   "bearing_deg": 133
+  },
+  {
+   "from": "foodgate",
+   "to": "watertown",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3853.3,
+    3332.3
+   ],
+   "bearing_deg": 95
+  },
+  {
+   "from": "foodgate",
+   "to": "capital",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2443.6,
+    3524.3
    ],
    "bearing_deg": 270
   }
