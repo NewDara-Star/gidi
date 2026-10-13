@@ -69,6 +69,11 @@ def street_name(kind="street", r=None):
 NET_F = "web/network.json"
 NET = json.load(open(NET_F)) if os.path.exists(NET_F) else {"edges": {}, "gateways": []}
 if PROF: used |= {e["name"] for e in NET["edges"].values()}
+# the opening is locked (owner, Oct 2026): web/locked.json holds the exact market, its aisles, The steal's stall, Tunde's room and the
+# boss's motor park; regenerating uses them as they are. GIDI_LOCK=write records them from this run (done once).
+LOCK_F = "web/locked.json"; LOCK_ALL = json.load(open(LOCK_F)) if os.path.exists(LOCK_F) else {}
+LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") else {}
+LOCK_WRITE = bool(PROF.get("lock")) and os.environ.get("GIDI_LOCK") == "write"; NEW_LOCK = {}
 # a district rebuilt after its neighbours keeps the crossings it already agreed with them (web/network.json), road for road
 KEEP = bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
 arts = [(a["name"], a["cls"], LineString(a["pts"])) for a in G["arterials"] if a["cls"] != "bridge" and LineString(a["pts"]).distance(poly) < 160]
@@ -242,9 +247,15 @@ for spec in PROF.get("reserve", []):
         + [ln.buffer(CLEAR["main"] + 2) for n, ln in mains] + ([canal.buffer(CLEAR["canal"] + 10)] if canal is not None else [])
     if knot is not None: others.append(knot.buffer(60))
     # it faces its own road (its margin may reach it), but stays clear of everything else
-    got = LMK.place_reserved(spec, hint, fronts, off, land, unary_union(others), GAP + (6 if spec["front"] != "rail" else 0))
+    LK = LOCK.get("reserve", {}).get(spec.get("poi") or "")
+    if LK:   # locked: exactly where it was recorded
+        got = (Polygon(LK["rect"]), (next((a for n, k, a in arts if n == LK["front"]), None), *LK["info"]))
+    else:
+        got = LMK.place_reserved(spec, hint, fronts, off, land, unary_union(others), GAP + (6 if spec["front"] != "rail" else 0))
     if not got: print("could not place", spec["kind"], file=sys.stderr); continue
     r, info = got
+    if LOCK_WRITE and spec.get("poi") in PROF["lock"].get("reserve", []):
+        NEW_LOCK.setdefault("reserve", {})[spec["poi"]] = {"rect": list(r.exterior.coords), "front": next((n for n, k, a in arts if a is info[0]), None), "info": list(info[1:])}
     RES.append({"kind": spec["kind"], "geom": r, "poi": spec.get("poi"), "spec": spec, "info": info})
     hard_u = unary_union([e for n, e, nb in edge_roads] + [a for n, k, a in arts] + access)
     if spec["front"] == "art": access.append(LMK.u_road(info, GAP))
@@ -348,6 +359,10 @@ for g in incoming:
     streets.append(substring(ray, 0, cut))
 if RES_U is not None:   # with "clear_access", streets also stop short of a big place's own road and snap onto it (no double road beside it)
     streets = [x for s0 in streets for x in lines(s0.difference(RES_U.buffer((GAP if PROF.get("clear_access") else 0) + CLEAR["street"] + 1))) if x.length > 18]
+# streets never run through the locked opening: Tunde's room and The steal keep their clearance, the boss's park its ground
+LOCK_U = unary_union([Polygon(e["poly"]).buffer(CLEAR["street"] - 0.1) for e in LOCK.get("buildings", {}).values()] +
+                     [Polygon(e["poly"]).buffer(1.5) for e in LOCK.get("parcels", {}).values()])
+if not LOCK_U.is_empty: streets = [x for s0 in streets for x in lines(s0.difference(LOCK_U)) if x.length > 18]
 # keep residential streets off the rail (they stop short: people cross on foot) and clip to land
 streets = [g for s in streets for g in lines(s.difference(rail_zone)) if g.length > 18]
 # snap: dangling ends within 12 m of another line get extended to it (no near-misses)
@@ -417,6 +432,7 @@ for _ in range(3):
         e1, e2 = ((cc[0], cc[1]), (cc[3], cc[2])) if math.dist(cc[0], cc[1]) >= math.dist(cc[1], cc[2]) else ((cc[1], cc[2]), (cc[0], cc[3]))
         f = rnd.uniform(.4, .6); p1 = LineString(e1).interpolate(f, normalized=True); p2 = LineString(e2).interpolate(f, normalized=True)
         ln = LineString([(p1.x + (p1.x - p2.x), p1.y + (p1.y - p2.y)), (p2.x + (p2.x - p1.x), p2.y + (p2.y - p1.y))]).intersection(b)
+        ln = ln.difference(LOCK_U) if not LOCK_U.is_empty else ln   # and never through the locked opening
         streets += [g for g in lines(ln.difference(rail_zone) if PROF.get("rail_frontage") else ln) if g.length > 20]   # stop short of the rail like every other street
 
 # a few residential streets carry straight on into the neighbour (real: ~0.9 per km of edge); the rest T into the edge road
@@ -509,9 +525,13 @@ for spec in PROF.get("parcels", []):
         hint = max(cand, key=lambda q: q.distance(noise)) if cand else c0
     ha = spec["ha"]
     if ha == "from_study": ha = min(spec["cap_ha"], ST["landuse_polygons_ha"].get("industrial", [0, 0])[1] / ST["area_km2"] / 100 * land.area / 1e4)
-    g = take(spec["kind"], hint, ha, near_main=spec["near_main"], min_w=spec.get("min_w", 0))
+    LK = LOCK.get("parcels", {}).get(spec.get("poi") or "")
+    if LK: g = Polygon(LK["poly"]); parcels.append({"kind": spec["kind"], "geom": g})   # locked
+    else: g = take(spec["kind"], hint, ha, near_main=spec["near_main"], min_w=spec.get("min_w", 0))
     if spec.get("gate"): GATES.append((g, spec["gate"]))
-    if spec.get("poi"): poi_pos[spec["poi"]] = g.representative_point()
+    if spec.get("poi"): poi_pos[spec["poi"]] = Point(LK["pt"]) if LK else g.representative_point()
+    if LOCK_WRITE and spec.get("poi") in PROF["lock"].get("parcels", []):
+        NEW_LOCK.setdefault("parcels", {})[spec["poi"]] = {"poly": list(g.exterior.coords), "pt": [poi_pos[spec["poi"]].x, poi_pos[spec["poi"]].y]}
 parcel_u = unary_union([p["geom"] for p in parcels])
 if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken for a parcel stop at its fence
     if any(g.intersects(parcel_u) for g in streets):
@@ -555,6 +575,7 @@ for b in blocks:
             if g.length > 25:
                 ln2 = LineString([m0] + [g.coords[-1]])
                 if PROF and ln2.intersects(parcel_u.buffer(3)): continue   # lanes never run through a school or a park
+                if not LOCK_U.is_empty and ln2.distance(LOCK_U) < 1.2: continue   # lanes keep clear of the locked opening too
                 lanes.append(ln2)
 # ---------- 3b. footpaths: the walking network the streets leave out ----------
 # Along the rail (in its clear strip), along both canal banks, short links from street ends to the rail path,
@@ -909,6 +930,11 @@ for p in parcels:
                 hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point"]
                 ends.append(min(hits, key=ray.project) if hits else None)
             if all(ends): spines.append(LineString(ends)); PATHS.append(("market aisle", spines[-1]))
+        lk = next((x.get("poi") for x in RES if x["geom"] is g), None)
+        if lk and LOCK.get("aisles", {}).get(lk):   # locked aisles (the chase route)
+            PATHS[:] = [(k2, x2) for k2, x2 in PATHS if not (k2 == "market aisle" and any(x2 is sp for sp in spines))]
+            spines = [LineString(q) for q in LOCK["aisles"][lk]]; PATHS += [("market aisle", sp) for sp in spines]
+        if LOCK_WRITE and lk in PROF["lock"].get("reserve", []): NEW_LOCK.setdefault("aisles", {})[lk] = [list(sp.coords) for sp in spines]
         for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=3.5):   # each piece is a row of four lock-ups under one roof
             if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))
     if p["kind"] == "estate":   # 1970s walk-up flats in rows, gardens between, shops built into the gardens
@@ -961,6 +987,16 @@ parcels += extra_parcels
 for sp in NAMED_LATE:   # places inside a parcel, named after its buildings exist (The steal: the stall at the market's near end)
     pin = POIS.get(sp["poi"]); cands = [r for r, k in bld if k in sp["from"]]
     if pin is not None and cands: poi_pos[sp["poi"]] = min(cands, key=lambda r: r.distance(pin)).centroid
+for name in PROF.get("lock", {}).get("buildings", []):   # locked buildings: the stall where the story starts, Tunde's room
+    LK = LOCK.get("buildings", {}).get(name)
+    if LK:
+        lp = Polygon(LK["poly"])
+        if not any(r.equals_exact(lp, 0.01) for r, k in bld):
+            bld = [(r, k) for r, k in bld if not r.intersects(lp.buffer(0.3))] + [(lp, LK["kind"])]
+        poi_pos[name] = Point(LK["pt"])
+    elif LOCK_WRITE and name in poi_pos:
+        r0, k0 = min(bld, key=lambda rk: rk[0].centroid.distance(poi_pos[name]))
+        NEW_LOCK.setdefault("buildings", {})[name] = {"poly": list(r0.exterior.coords), "kind": k0, "pt": [poi_pos[name].x, poi_pos[name].y]}
 # the old highlife hotel: a tall block on a main-road frontage near its pin; the houses it replaces are cleared
 H = PROF.get("hotel")
 if H and H["poi"] in POIS:
@@ -1037,6 +1073,8 @@ if PROF:
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))
+if LOCK_WRITE:
+    LOCK_ALL[DID] = NEW_LOCK; json.dump(LOCK_ALL, open(LOCK_F, "w"), indent=1); print("locked:", {k: list(v) for k, v in NEW_LOCK.items()}, file=sys.stderr)
 _k = lambda L: sorted(json.dumps(g, sort_keys=True) for g in L)
 if _k(NET["gateways"]) == _k(NET_GW0): NET["gateways"] = NET_GW0
 if OUT == f"web/gen-{DID}.json": json.dump(NET, open(NET_F, "w"), indent=1)

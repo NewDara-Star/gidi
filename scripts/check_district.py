@@ -1,6 +1,6 @@
 """Independent checker for a generated district.  Usage: python3 scripts/check_district.py <id>
 Prints a PASS/FAIL line per check; exits 1 if any fails.  Import and call run(did) for raw results."""
-import glob, json, os, sys
+import glob, json, math, os, sys
 import numpy as np
 from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import polygonize, unary_union
@@ -281,6 +281,36 @@ def check_reach(gen, G, bgeoms, limit=45.0):
     return len(bad), worst(bad, 5)
 
 
+def check_locked(did, gen, tol=0.15):
+    """12: the locked opening (web/locked.json) is exactly where it was recorded: market, aisles, The steal, Tunde's room, the boss's park."""
+    p = os.path.join(ROOT, "locked.json")
+    L = json.load(open(p)).get(did) if os.path.exists(p) else None
+    if not L:
+        return None, "nothing locked in this district"
+    def same_ring(a, b):   # same points, allowing the 0.1 m rounding of the generated file
+        return len(a) == len(b) and all(abs(x[0] - y[0]) <= tol and abs(x[1] - y[1]) <= tol for x, y in zip(a, b))
+    bad, ok = [], []
+    for name, e in L.get("reserve", {}).items():
+        hit = any(same_ring(q["pts"], e["rect"]) for q in gen["parcels"])
+        (ok if hit else bad).append("%s plot" % name)
+    for name, lines_ in L.get("aisles", {}).items():
+        have = [q["pts"] for q in gen.get("paths", []) if q["kind"] == "market aisle"]
+        for ln in lines_:
+            hit = any(same_ring(h, ln) for h in have)
+            (ok if hit else bad).append("%s aisle" % name)
+    for name, e in L.get("buildings", {}).items():
+        hit = any(b[0] == e["kind"] and same_ring(b[1:], e["poly"][:-1]) for b in gen["buildings"])
+        pos = gen["poi_pos"].get(name)
+        hit = hit and pos is not None and math.dist(pos, e["pt"]) <= 1
+        (ok if hit else bad).append(name)
+    for name, e in L.get("parcels", {}).items():
+        hit = any(same_ring(q["pts"], e["poly"]) for q in gen["parcels"])
+        pos = gen["poi_pos"].get(name)
+        hit = hit and pos is not None and math.dist(pos, e["pt"]) <= 1
+        (ok if hit else bad).append(name)
+    return len(bad), "moved: %s; in place: %s" % (", ".join(bad) or "none", ", ".join(ok))
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
@@ -299,6 +329,7 @@ def run(did):
     add("8 storeys", check_storeys(gen, bg))
     add("9 lanes, paths, footbridges joined", check_connected(gen, G))
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
+    add("12 opening locked", check_locked(did, gen))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

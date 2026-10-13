@@ -68,6 +68,7 @@ def hub(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200],
                  "cut_every_m": 90, "cut_max_m": 130},   # owner's review: the rail-side blocks west of Ayinde Avenue were too deep (walks x2.6-3.5)
         "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
+        "lock": {"parcels": ["Boss's motor park"]},   # the opening: the boss watches the chase from here (web/locked.json)
     }
 
 def maze(ST, LM):
@@ -114,6 +115,7 @@ def maze(ST, LM):
         "named": [{"poi": "The steal", "from": ["stalls"]},
                   {"poi": "Tunde's room", "from": ["back"]}],
         "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
+        "lock": {"reserve": ["Ladi Lane Parts Market"], "buildings": ["The steal", "Tunde's room"]},   # the opening, fixed for good (web/locked.json)
         "clear_access": True,           # streets stop at the market's own road instead of running beside it (living test, Oct 2026)
     }
 

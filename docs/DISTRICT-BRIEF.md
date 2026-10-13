@@ -61,6 +61,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.
    - Turn on `walk` in the profile (the Maze's is the example): it adds footpaths along the rail, along canal banks and across the rail, makes lanes start on streets, and keeps buildings within reach of a way.
    - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
+   - **The opening is locked** (`web/locked.json`): the Maze's parts market and its aisles, The steal's stall, Tunde's room and the Hub's boss's motor park. Regenerating keeps them exactly; check 12 fails if any of them moves. To re-record them on purpose, run the generator with `GIDI_LOCK=write`.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
 6. **City living test:** every district ends with this test.
    - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.
