@@ -99,5 +99,10 @@
   {"type":"police","name":"Frontier Police Division","note":"Takes sides in land disputes.","u":0.2,"v":0.6},
   {"type":"fire","name":"Frontier Fire Station","note":"Refinery fires, new-estate fires.","u":0.75,"v":0.3}
  ]
+},
+"key_late": {
+ "jungle": [
+  {"type":"school","name":"Jungle City North Primary School","note":"Public school north of the expressway. Kids in uniform fill the lanes at 7 a.m. and 2 p.m.; before it opened, the north side walked 12 minutes to school.","x":2470,"y":5140}
+ ]
 }
 }

@@ -79,6 +79,6 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.
 - **Network:** no walking islands, apart from tiny pieces at the study border.
 - **Houses:** none more than 45 m from a street, lane or path.
-- **Everyday places:** every house has a chemist, a place of worship and a school within 10 minutes' walk.
+- **Everyday places:** every house has a chemist and a place of worship within 10 minutes' walk, and a school within 10 minutes. Up to 15 minutes to school is acceptable (owner, Oct 2026).
 - **Okada:** most cross-district rides take under 5 minutes.
 - **Rail:** pedestrians can cross the rail every 150–250 m (informal crossings count). Vehicles cross at bridges and level crossings.
