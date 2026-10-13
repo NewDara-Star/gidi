@@ -242,7 +242,7 @@ for spec in PROF.get("reserve", []):
     hard_u = unary_union([e for n, e, nb in edge_roads] + [a for n, k, a in arts] + access)
     if spec["front"] == "art": access.append(LMK.u_road(info, GAP))
     elif spec["front"] == "rail": access.append(LMK.back_road(info, GAP))
-    else: access += LMK.ring_road(r, GAP, hard_u)
+    else: access += LMK.ring_road(r, GAP, hard_u, spec.get("access_roads", 1), rail.buffer(CLEAR["rail"]).union(unary_union([x["geom"] for x in RES[:-1]])) if RES[:-1] else rail.buffer(CLEAR["rail"]))
 RES_U = unary_union([r["geom"] for r in RES]) if RES else None
 
 # ---------- 2. sectors and residential streets ----------

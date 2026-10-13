@@ -52,7 +52,8 @@ def hub(ST, LM):
             {"kind": "station", "poi": "Hub Rail Station", "m2": 2600, "aspect": 5.0, "front": "rail",
              "building": {"kind": "station", "m2": LM["rail_station_building_m2"][0], "storeys": 2}},
             {"kind": "stadium", "poi": "National Bowl", "m2": LM["stadium"]["stadium_ground_m2"][0], "aspect": 1.35, "front": None,
-             "bowl_m2": LM["stadium"]["bowl_building_m2"][0], "storeys": 4},
+             "bowl_m2": LM["stadium"]["bowl_building_m2"][0], "storeys": 4,
+             "access_roads": 2},   # owner's review: a second vehicle access from another side (one road made the okada run x2.40)
         ],
         # smaller places taken from finished blocks, as in the Maze
         "parcels": [

@@ -147,12 +147,26 @@ def back_road(info, gap, extra=40):
     def P(u, v): return (p.x + ux * u + nx * v, p.y + uy * u + ny * v)
     return LineString([P(-w / 2 - extra, off + d + gap), P(w / 2 + extra, off + d + gap)])
 
-def ring_road(r, gap, hard_union):
-    """A loop around a parcel with no frontage (the stadium) and one straight access road to the nearest road."""
+def ring_road(r, gap, hard_union, n_access=1, avoid=None):
+    """A loop around a parcel with no frontage (the stadium) and straight access roads to the nearest road:
+    the first from the nearest point, any more from other sides of the loop (never across `avoid`, e.g. the rail)."""
     ring = r.buffer(gap, join_style=2).exterior
     from shapely.ops import nearest_points
     a, b = nearest_points(ring, hard_union)
-    return [LineString(ring.coords), LineString([a, b])]
+    out = [LineString(ring.coords), LineString([a, b])]
+    if n_access > 1:
+        cc = list(ring.coords); sides = [LineString([p, q]) for p, q in zip(cc, cc[1:]) if math.dist(p, q) > 10]
+        used = [min(range(len(sides)), key=lambda i: sides[i].distance(a))]
+        for _ in range(n_access - 1):
+            best = None
+            for i, sd in enumerate(sides):
+                if i in used: continue
+                for f in (0.3, 0.5, 0.7):
+                    p0 = sd.interpolate(f, normalized=True); q0 = nearest_points(hard_union, p0)[0]; seg = LineString([p0, q0])
+                    if seg.length < 1 or seg.crosses(ring) or seg.intersects(r) or (avoid is not None and seg.intersects(avoid)): continue
+                    if best is None or seg.length < best[0]: best = (seg.length, seg, i)
+            if best: out.append(best[1]); used.append(best[2])
+    return out
 
 # ---------- buildings inside the big places ----------
 def stands(parcel, bowl_m2, inset=6, n=4):
