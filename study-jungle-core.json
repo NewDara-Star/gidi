@@ -1,0 +1,90 @@
+{
+ "median": {
+  "bounds": [
+   538369,
+   713395,
+   539369,
+   714395
+  ],
+  "drive_km_per_km2": 14.8,
+  "main_km_per_km2": 1.73,
+  "junctions_per_km2": 72,
+  "T_share": 0.83,
+  "dead_end_ratio": 0.22,
+  "block_m2": {
+   "p25": 2814.2,
+   "p50": 9325.3,
+   "p75": 18587.9
+  },
+  "blocks_per_km2": 25,
+  "buildings_per_km2": 2951,
+  "coverage": 0.406,
+  "footprint_m2": {
+   "p10": 26.1,
+   "p25": 55.6,
+   "p50": 113.1,
+   "p75": 182.5,
+   "p90": 257.0
+  },
+  "share_under_60m2": 0.27,
+  "share_over_400m2": 0.03,
+  "edge_to_street_m": {
+   "p10": 2.3,
+   "p25": 4.7,
+   "p50": 10.3,
+   "p75": 26.4,
+   "p90": 42.4
+  },
+  "front_row_share": 0.54,
+  "gap_m": {
+   "p25": 0.5,
+   "p50": 0.8,
+   "p75": 1.2
+  },
+  "overlaps_with_streets": 19
+ },
+ "dense": {
+  "bounds": [
+   536619,
+   712145,
+   537619,
+   713145
+  ],
+  "drive_km_per_km2": 16.3,
+  "main_km_per_km2": 1.01,
+  "junctions_per_km2": 61,
+  "T_share": 0.92,
+  "dead_end_ratio": 0.07,
+  "block_m2": {
+   "p25": 10546.4,
+   "p50": 21526.4,
+   "p75": 30500.9
+  },
+  "blocks_per_km2": 22,
+  "buildings_per_km2": 2467,
+  "coverage": 0.426,
+  "footprint_m2": {
+   "p10": 36.9,
+   "p25": 74.6,
+   "p50": 163.6,
+   "p75": 253.4,
+   "p90": 318.2
+  },
+  "share_under_60m2": 0.19,
+  "share_over_400m2": 0.03,
+  "edge_to_street_m": {
+   "p10": 4.3,
+   "p25": 6.6,
+   "p50": 10.2,
+   "p75": 18.5,
+   "p90": 30.7
+  },
+  "front_row_share": 0.58,
+  "gap_m": {
+   "p25": 0.6,
+   "p50": 0.9,
+   "p75": 1.5
+  },
+  "overlaps_with_streets": 7
+ }
+}
