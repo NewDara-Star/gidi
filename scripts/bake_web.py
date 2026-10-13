@@ -175,6 +175,45 @@ def wpick(lst):
     return lst[0][0]
 ART_LINES=[LineString([m(p) for p in pts]) for _,_,pts in ART]
 allp=[Point(p["x"],p["y"]) for p in out["pois"]]
+# Everyday places in the built districts are placed by coverage (owner, Oct 2026): every house gets a school, a place of worship
+# and a chemist or clinic within 10 minutes' walk (833 m at 5 km/h); a house that can't be reached in 10 gets 15 (1250 m).
+# Same walking network as the living test (scripts/walknet.py). Names are still dealt at random.
+import sys as _sys; _sys.path.insert(0,"scripts"); import walknet
+EVERYDAY={"school":("school",),"worship":("church","mosque"),"health":("chemist","clinic")}
+if GEN:
+    REACH=walknet.Reach(walknet.graph(walknet.ways_of(out,list(GEN)),"walk"))
+def coverage_plan(id_):
+    """{type: [points]} for this district's schools, places of worship, chemists and clinics, chosen greedily by coverage."""
+    houses=[Polygon(b[1:]).centroid for b in out["buildings"][id_] if b[0] in ("front","back")]
+    HA=[REACH.attach(h) for h in houses]
+    cands=[Point(q["x"],q["y"]) for q in SL]
+    def covered(dist,limit): return {i for i,(u,du,v,dv,off) in enumerate(HA) if min(dist.get(u,1e18)+du,dist.get(v,1e18)+dv)+off<=limit}
+    CC={}   # candidate -> houses within 10 and 15 min
+    for j,c in enumerate(cands):
+        d=REACH.from_points([c],1250); CC[j]=(covered(d,833),covered(d,1250))
+    plan={}; taken=set(); report={}
+    for cat,types in EVERYDAY.items():
+        want={t:max(0,cnt[t]-keyed.get(t,0)) for t in types}; need=sum(want.values())
+        have=[Point(p["x"],p["y"]) for p in out["pois"] if p["d"]==id_ and p["type"] in types]
+        d0=REACH.from_points(have,1250) if have else {}
+        c10,c15=covered(d0,833),covered(d0,1250); picks=[]
+        for limit in (833,1250):   # 10 minutes first; whoever is still out of reach gets 15
+            while True:
+                gain=lambda j: len((CC[j][0] if limit==833 else CC[j][1])-(c10 if limit==833 else c15|c10))
+                free_=[j for j in CC if j not in taken and all(cands[j].distance(cands[k])>60 for k in picks)]
+                if not free_: break
+                j=max(free_,key=lambda j:(gain(j),-j)); g=gain(j)
+                if g==0 and (limit==1250 or len(picks)>=need): break
+                if g==0:   # every house is covered but the district still has places to fill: spread them out
+                    j=max(free_,key=lambda j:min([cands[j].distance(cands[k]) for k in picks]+[cands[j].distance(h) for h in have]+[1e9]))
+                picks.append(j); taken.add(j); c10|=CC[j][0]; c15|=CC[j][1]
+        seq=[]   # share the picks between the types in proportion (churches and mosques; chemists and clinics)
+        for k in range(len(picks)):
+            t=max(types,key=lambda t:(want[t]+0.5)/(1+sum(1 for x in seq if x==t))); seq.append(t)
+        for j,t in zip(picks,seq): plan.setdefault(t,[]).append(cands[j])
+        report[cat]=(round(100*len(c10)/max(1,len(houses))),round(100*len(c15|c10)/max(1,len(houses))),len(picks),need)
+    print(id_,"everyday places within 10 / 15 min (%), placed / planned:",report)
+    return plan
 LEFT={}   # each district's unused civic slots, for the late places
 for (name,ins,act,pts),id_ in zip(D,IDS):
     poly=Polygon(mp(pts)).buffer(0); land=poly.difference(water).difference(ocean); core=land.buffer(-35)
@@ -210,17 +249,23 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
     keyed={}
     for k in CIV["key"].get(id_,[]): keyed[k["type"]]=keyed.get(k["type"],0)+1
     dn=name.title()
+    PLAN=coverage_plan(id_) if SL else {}
+    for q in [q for pts_ in PLAN.values() for q in pts_]:   # the planned plots are taken
+        SL[:]=[r for r in SL if (r["x"],r["y"])!=(q.x,q.y)]
+    def spot_or_plan(t, **kw):
+        if PLAN.get(t): pt=PLAN[t].pop(0); allp.append(pt); return pt
+        return spot(**kw)
     for t in ORDER:
-        n=max(0,cnt[t]-keyed.get(t,0))
+        n=max(0,cnt[t]-keyed.get(t,0),len(PLAN.get(t,[])))
         for i in range(n):
-            if t=="church": nm=f"{crnd.choice(CH_A)} {crnd.choice(CH_B)}"; note=wpick(CH_K); pt=spot()
-            elif t=="mosque": nm=f"{crnd.choice(MQ)} Mosque"; note=wpick(MQ_K); pt=spot()
+            if t=="church": nm=f"{crnd.choice(CH_A)} {crnd.choice(CH_B)}"; note=wpick(CH_K); pt=spot_or_plan(t)
+            elif t=="mosque": nm=f"{crnd.choice(MQ)} Mosque"; note=wpick(MQ_K); pt=spot_or_plan(t)
             elif t=="school":
                 if crnd.random()<0.55: nm=crnd.choice(SC_PRI); note="Private school in a converted house, name painted on the wall. School-run jams at 7 a.m. and 2 p.m."
                 else: nm=dn.replace("The ","")+" "+crnd.choice(SC_PUB).format(n=crnd.randint(1,9)); note="Public school with a sandy yard. Kids in uniform fill the lanes at 7 a.m. and 2 p.m."
-                pt=spot(spacing=90)
-            elif t=="clinic": nm=crnd.choice(CL); note=NOTE["clinic"]; pt=spot()
-            elif t=="chemist": nm=crnd.choice(CHEM); note=NOTE["chemist"]; pt=spot(near_road=True,spacing=45)
+                pt=spot_or_plan(t,spacing=90)
+            elif t=="clinic": nm=crnd.choice(CL); note=NOTE["clinic"]; pt=spot_or_plan(t)
+            elif t=="chemist": nm=crnd.choice(CHEM); note=NOTE["chemist"]; pt=spot_or_plan(t,near_road=True,spacing=45)
             elif t=="fuel": nm=crnd.choice(FUEL); note=NOTE["fuel"]; pt=spot(near_road=True,spacing=120)
             elif t=="bank": nm=crnd.choice(BANK); note=NOTE["bank"]; pt=spot(near_road=True,spacing=50)
             elif t=="sport":

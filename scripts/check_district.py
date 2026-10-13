@@ -311,6 +311,23 @@ def check_locked(did, gen, tol=0.15):
     return len(bad), "moved: %s; in place: %s" % (", ".join(bad) or "none", ", ".join(ok))
 
 
+def check_everyday(did, G, limit=833, hard=1250):
+    """13: every house has a school, a place of worship and a chemist or clinic within 10 min walk (15 at most), on the
+    baked city (run bake_web.py first), on the same walking network as the living test."""
+    import sys as _s; _s.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import walknet
+    built = sorted(G.get("buildings", {}))
+    if did not in built: return None, "not baked yet"
+    R = walknet.Reach(walknet.graph(walknet.ways_of(G, built), "walk"))
+    houses = [Polygon(b[1:]).centroid for b in G["buildings"][did] if b[0] in ("front", "back")]
+    bad, txt = 0, []
+    for cat, types in (("school", {"school"}), ("worship", {"church", "mosque"}), ("chemist", {"chemist", "clinic", "hospital"})):
+        d = R.from_points([Point(p["x"], p["y"]) for p in G["pois"] if p["type"] in types], hard + 1)
+        t = [R.to_point(d, h) for h in houses]
+        over10 = sum(1 for x in t if x > limit); over15 = sum(1 for x in t if x > hard); bad += over15
+        txt.append("%s: %d over 10 min, %d over 15, worst %.1f min" % (cat, over10, over15, max(t) / 83.33))
+    return bad, "; ".join(txt)
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
@@ -330,6 +347,7 @@ def run(did):
     add("9 lanes, paths, footbridges joined", check_connected(gen, G))
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
     add("12 opening locked", check_locked(did, gen))
+    add("13 everyday places in reach", check_everyday(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
