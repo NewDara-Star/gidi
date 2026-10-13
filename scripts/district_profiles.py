@@ -62,6 +62,10 @@ def hub(ST, LM):
             {"kind": "pitch", "ha": round(ST["landuse_polygons_ha"]["pitch"][1] / ST["landuse_polygons_ha"]["pitch"][0], 2), "near_main": False},     # real mean pitch
         ],
         "hotel": _hotel("Stadium Highlife Hotel", LM),
+        # owner's review (Oct 2026): the same walking rules as the Maze (rail paths, worn crossings every 150-200 m,
+        # lanes start on streets, nothing over 44 m from a way), and a skywalk from the terminal to the station
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
     }
 
 def maze(ST, LM):

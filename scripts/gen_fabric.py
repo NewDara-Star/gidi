@@ -160,6 +160,7 @@ for n, e, nb in (edge_roads if INTERNAL_MAINS > 1 and big is not None else []):
         sc = abs(ln.length - 520)
         if cand is None or sc < cand[0]: cand = (sc, ln)
 if cand: mains.append((street_name("main"), cand[1]))
+NET_GW0 = list(NET["gateways"])   # to keep the file's order when nothing about this district's crossings changed
 if not KEEP: NET["gateways"] = [g for g in NET["gateways"] if g["from"] != DID]
 def add_gate(pt, nb, road, kind, bearing=None):
     if KEEP: return   # already recorded; the neighbours built against these
@@ -578,9 +579,11 @@ if W:
                 want = a0 + (b0 - a0) * k / (n + 1)
                 near = [u for u in links_t if abs(u - want) < 20]
                 tc = min(near, key=lambda u: abs(u - want)) if near else want
-                q = rail.interpolate(tc); ux, uy = LMK.direction_at(rail, tc); h = W["rail_path_m"]
-                cr = LineString([(q.x - uy * h, q.y + ux * h), (q.x + uy * h, q.y - ux * h)])
-                if land.buffer(-2).contains(cr) and not cr.intersects(parcel_u): PATHS.append(("worn crossing", cr))
+                room = min((b0 - a0) / (n + 1) * 0.45, 60)   # if a yard or the edge is in the way, slide along the line, keeping the spacing
+                for sh in sorted(range(-int(room), int(room) + 1, 5), key=abs):
+                    q = rail.interpolate(tc + sh); ux, uy = LMK.direction_at(rail, tc + sh); h = W["rail_path_m"]
+                    cr = LineString([(q.x - uy * h, q.y + ux * h), (q.x + uy * h, q.y - ux * h)])
+                    if land.buffer(-2).contains(cr) and not cr.intersects(parcel_u): PATHS.append(("worn crossing", cr)); break
 paths_u = unary_union([g for k, g in PATHS]) if PATHS else None
 
 # ---------- 4. buildings: plots along every street frontage, compounds behind ----------
@@ -594,6 +597,12 @@ for r in RES:
         avoid = unary_union([x["geom"].buffer(3) for x in STRUCT] + [rr.buffer(3) for rr in ramps])
         for g in LMK.skywalks(fl, r["geom"].centroid, n_sw, IC["skywalk_m"], avoid, spacing=r["info"][4] * 0.55):
             STRUCT.append({"kind": "skywalk", "name": "Interchange skywalk", "geom": g, "layer": 1, "width": 4})
+        SS = PROF.get("station_skywalk")
+        st_res = next((x for x in RES if x["kind"] == "station"), None)
+        if SS and st_res:   # one deck from the terminal over the arterial and the rail to the station (as at the real interchange)
+            g = LineString([r["geom"].centroid, st_res["geom"].centroid]).difference(st_res["geom"].buffer(0.5))
+            g = max(lines(g), key=lambda l: l.length)   # it lands on the station's facade; the terminal end is trimmed at its facade below
+            STRUCT.append({"kind": "skywalk", "name": SS["name"], "geom": g, "layer": 1, "width": SS["width"]})
 # footbridges over the canal where streets cross it too far apart; they join the walkable banks (inside the canal's clear strip)
 if canal is not None and PROF.get("canal_footbridges"):   # in the longest stretches between street crossings
     cuts = sorted(canal.project(q) for k, g in net_lines for x in [canal.intersection(g)] for q in getattr(x, "geoms", [x]) if q.geom_type == "Point")
@@ -618,6 +627,7 @@ if XF:   # footbridges over the expressway (real: about one per 3 km of major ro
                 q = nearest_points(o, e)[0]
                 if q.distance(e) > 0.5: lk = LineString([e, q]); PATHS.append(("link", lk)); clear_geoms.append(lk.buffer(1.2))
 SKY_CLEAR = [x["geom"].buffer(x["width"] / 2 + 1) for x in STRUCT if x["kind"] == "skywalk"]
+if PROF.get("station_skywalk") and RES_U is not None: SKY_CLEAR = [c.difference(RES_U) for c in SKY_CLEAR]   # the decks land inside the terminal and station plots
 clear_geoms += SKY_CLEAR
 blocked = unary_union(clear_geoms + [parcel_u.buffer(1.0)])
 buildable = land.difference(blocked)
@@ -851,7 +861,11 @@ for p in parcels:
         pp = fl.interpolate(t); ux, uy = LMK.direction_at(fl, t); nx2, ny2 = -uy * side, ux * side
         bd = min(d - 4, 20.0); bw = m2 / bd
         r = rect(pp.x + nx2 * (off + 1 + d - 2 - bd / 2), pp.y + ny2 * (off + 1 + d - 2 - bd / 2), bw, bd, a2)
-        if fit(r): bld.append((r, "station"))
+        if fit(r):
+            bld.append((r, "station"))
+            for x in STRUCT:   # the station skywalk comes down at the facade, as the terminal's does
+                if x["name"] == PROF.get("station_skywalk", {}).get("name"):
+                    x["geom"] = max(lines(LineString([x["geom"].coords[0], r.centroid.coords[0]]).difference(r.buffer(x["width"] / 2 + 0.3))), key=lambda l: l.length)
     if p["kind"] == "stadium":
         R0 = next(x for x in RES if x["geom"] is g)
         st_, pitch = LMK.stands(g, R0["spec"]["bowl_m2"])
@@ -938,4 +952,6 @@ if PROF:
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))
+_k = lambda L: sorted(json.dumps(g, sort_keys=True) for g in L)
+if _k(NET["gateways"]) == _k(NET_GW0): NET["gateways"] = NET_GW0
 if OUT == f"web/gen-{DID}.json": json.dump(NET, open(NET_F, "w"), indent=1)
