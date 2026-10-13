@@ -114,7 +114,7 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
 | Streets, km/km² | 9.7 | 11.3 | **17.0** |
 | Junctions/km² | 43 | 56 | **82** |
 | T-junctions | 88% | 93% | **92%** |
-| Dead ends per junction | 0.53 | 0.48 | **0.25** |
+| Dead ends per junction | 0.53 | 0.48 | **0.22** |
 | Typical block | 1.7 ha | 1.5 ha | **1.9 ha** |
 | Buildings/km² | 2,702 | 3,813 | **3,483** |
 | Ground built on | 30% | 36% | **29%** |
@@ -128,7 +128,7 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
   - Water Town is small (0.85 km²), with six edge roads and Ring Road.
   - The rule that no block may be bigger than the real 90th percentile (3.1 ha) splits big blocks with new streets. Wider spacing just brings the splits back.
   - The real waterfront land squares also include water edges, which have no streets.
-- **Dead ends:** 0.25 against about 0.5, even with 90% of long ribs stopping short.
+- **Dead ends:** 0.22 against about 0.5, even with 90% of long ribs stopping short.
 - **The stilt village is less covered than real** (40% against 46%). The canoe lanes between rows are wider than real.
 
 ## 6. Questions for Daramola

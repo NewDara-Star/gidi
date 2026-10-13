@@ -1144,6 +1144,12 @@ rnd.shuffle(slots)
 # ---------- 6. measure against the real core squares ----------
 WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon: measured on their own, not with the land fabric
 B = [r for r, k in bld if k not in WATER_KINDS]
+# a street left lying on top of another (two clean-up steps cut the same line) is a walking island: drop the copy (short ties stay)
+_kept = []
+for g in sorted(streets, key=lambda s: -s.length):
+    if _kept and g.length > 18 and g.difference(unary_union(_kept).buffer(1.5)).length < 0.2 * g.length: continue
+    _kept.append(g)
+if len(_kept) < len(streets): streets = [g for g in streets if any(g is k for k in _kept)]
 gen_streets = [("street", g) for g in streets + access] + [("main", e) for n, e, nb in edge_roads] + [("main", ln) for n, ln in mains + [("", r) for r in ramps]] + [("art", a) for n, k, a in arts]
 M = measure(gen_streets, B, land.buffer(3))
 # edge roads are shared with neighbours: count half of their length in the density figures

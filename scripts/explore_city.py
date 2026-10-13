@@ -25,9 +25,11 @@ from shapely.ops import unary_union
 DIDS = os.environ.get("DISTRICTS", "").split(",") if os.environ.get("DISTRICTS") else sorted(G.get("buildings", {}).keys())
 DS = {d["id"]: d for d in G["districts"] if d["id"] in DIDS}; DP = {k: Polygon(v["poly"][0]) for k, v in DS.items()}
 POLY = unary_union(list(DP.values())).buffer(1); AREA = POLY.buffer(120)
+# a district's stilt village, stilt bar and rafts stand over the lagoon, outside its land outline, but they are still that district
+WATER = {k: unary_union([Polygon(b[1:]) for b in G["buildings"][k] if b[0] in ("stilt", "stilt bar", "raft")]).buffer(25) for k in DP}
 def where(pt):
     for k, p in DP.items():
-        if p.buffer(2).contains(pt): return DS[k]["name"]
+        if p.buffer(2).contains(pt) or WATER[k].contains(pt): return DS[k]["name"]
     return "outside the built districts"
 B = [(b[0], Polygon(b[1:]), st) for DID in DIDS for b, st in zip(G["buildings"][DID], G["storeys"][DID])]
 BT = STRtree([p for k, p, st in B])
