@@ -118,13 +118,13 @@ def route(a, b, mode):
                 print(f"you cross the rail on {label(e['kind'], e['name'])}{how}")
         print("districts on the way: " + " -> ".join(dict.fromkeys(where(P_(c)) for c in path[::max(1, len(path)//12)] + [path[-1]])))
 def home(n=None):
-    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back")]
+    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt")]
     i = res[n % len(res)] if n is not None else random.choice(res)   # n picks the n-th house; the printed id is its building index
     k, p, st = B[i]; c = p.centroid
     print(f"house #{i}: {bkind(k, st)}, footprint {p.area:.0f} m², at {c.x:.0f},{c.y:.0f}")
     look(c.x, c.y, 40)
 def problems():
-    far = [(i, k) for i, (k, p, st) in enumerate(B) if k in ("front", "back") and nearest_way(p.centroid)[3] > 45]
+    far = [(i, k) for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt") and nearest_way(p.centroid)[3] > 45]
     print(f"houses more than 45 m from any street, lane or path: {len(far)} of {sum(1 for k,_,_ in B if k in ('front','back'))}")
     for i, k in far[:8]: c = B[i][1].centroid; print(f"  #{i} {k} at {c.x:.0f},{c.y:.0f} ({nearest_way(c)[3]:.0f} m)")
     Gx = graph("walk"); comps = sorted(nx.connected_components(Gx), key=len, reverse=True)

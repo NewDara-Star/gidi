@@ -219,6 +219,12 @@ for n, ln in (mains if PROF.get("exp_bridge_m") else []):   # an internal main c
             if p.geom_type != "Point" or not poly.contains(p): continue
             tb = ln.project(p); h = PROF["exp_bridge_m"] / 2
             STRUCT.append({"kind": "flyover", "name": f"{n} Flyover", "geom": substring(ln, max(0, tb - h), min(ln.length, tb + h)), "layer": 1, "width": WIDTH["main"]})
+for n, e, nb in (edge_roads if PROF.get("edge_rail_bridge_m") else []):   # an edge road crossing the rail goes over it (real majors: bridged)
+    x = e.intersection(rail)
+    for p in getattr(x, "geoms", [x]):
+        if p.geom_type != "Point": continue
+        tb = e.project(p); h = PROF["edge_rail_bridge_m"] / 2
+        STRUCT.append({"kind": "flyover", "name": f"{n} Rail Bridge", "geom": substring(e, max(0, tb - h), min(e.length, tb + h)), "layer": 1, "width": WIDTH["main"]})
 if PROF.get("rail_bridge_m"):   # an internal main road crosses the rail on a bridge (real: most major roads do)
     for n, ln in mains:
         x = ln.intersection(rail)
@@ -441,6 +447,13 @@ for _ in range(3):
         ln = ln.difference(LOCK_U) if not LOCK_U.is_empty else ln   # and never through the locked opening
         streets += [g for g in lines(ln.difference(rail_zone) if PROF.get("rail_frontage") else ln) if g.length > 20]   # stop short of the rail like every other street
 
+if PROF.get("keep_gateways"):   # every recorded street crossing on this district's edge ends on one of its streets (tie any that clean-up cut short)
+    for g in NET["gateways"]:
+        if g["kind"] != "street" or DID not in (g["from"], g["to"]): continue
+        pg = Point(g["pt"])
+        if any(Point(st.coords[i]).distance(pg) <= 1.5 for st in streets for i in (0, -1)): continue
+        su = unary_union(streets); q = nearest_points(su, pg)[0]
+        if 0.5 < q.distance(pg) <= 15: streets.append(LineString([q, pg]))
 # a few residential streets carry straight on into the neighbour (real: ~0.9 per km of edge); the rest T into the edge road
 for g in incoming: add_gate(Point(g["pt"]), g["from"], g["road"], g["kind"], (g.get("bearing_deg", 0) + 180) % 360)
 for en, e, nb in edge_roads:
@@ -507,7 +520,11 @@ if not PROF:
 GATES = []   # (parcel, "nearest" | "north" | ...): a short access road from the parcel's fence to a street
 for spec in PROF.get("parcels", []):
     parcel_u0 = unary_union([p["geom"] for p in parcels])
-    if spec.get("near") == "rail":   # on the line, as close to its pin as the rail allows
+    if spec.get("near") == "shore":   # on the water's edge, as close to its pin as the shore allows (the sawmill and its rafts)
+        pin = POIS.get(spec.get("poi"), c0); shl = land.boundary.intersection(water.buffer(5))
+        hint = nearest_points(shl, pin)[0] if not shl.is_empty else pin
+        hint = nearest_points(land.buffer(-40), hint)[0]
+    elif spec.get("near") == "rail":   # on the line, as close to its pin as the rail allows
         pin = POIS.get(spec.get("poi"), c0); rin = rail.intersection(land.buffer(-30))
         hint = nearest_points(rin, pin)[0] if not rin.is_empty else pin
     elif str(spec.get("near", "")).startswith("res:"):   # next to a big place carved out earlier (the lorry park behind the market)
@@ -541,7 +558,15 @@ for spec in PROF.get("parcels", []):
 parcel_u = unary_union([p["geom"] for p in parcels])
 if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken for a parcel stop at its fence
     if any(g.intersects(parcel_u) for g in streets):
-        streets = [x for g in streets for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
+        GW = [Point(g["pt"]) for g in NET["gateways"] if g["kind"] == "street" and DID in (g["from"], g["to"])]
+        keep = [g for g in streets if any(Point(g.coords[i]).distance(p) <= 1.5 for p in GW for i in (0, -1))]   # a street that carries a crossing stays
+        if keep:   # ...and the parcel gives way to it instead
+            cut = unary_union([g.buffer(CLEAR["street"] + 1) for g in keep])
+            for p in parcels:
+                if p["geom"].intersects(cut): p["geom"] = max(getattr(p["geom"].difference(cut), "geoms", [p["geom"].difference(cut)]), key=lambda x: x.area)
+            parcel_u = unary_union([p["geom"] for p in parcels])
+        streets = [g for g in streets if any(g is k for k in keep)] + \
+                  [x for g in streets if not any(g is k for k in keep) for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
 DIRS = {"north": (0, -1), "south": (0, 1), "east": (1, 0), "west": (-1, 0)}   # y runs south
 for g, how in GATES:
     ways_u = unary_union([x for k, x in net_lines])
@@ -741,10 +766,12 @@ JT = PROF.get("jetty")
 if JT and JT["poi"] in POIS:   # a canoe jetty: from the shore road straight out over the water, toward the creek villages
     pin = POIS[JT["poi"]]; shore = [e for n, e, nb in edge_roads if nb is None and e.distance(water) < 20]
     if shore:
-        sh = min(shore, key=lambda e: e.distance(pin)); q = sh.interpolate(sh.project(pin)); w0 = nearest_points(water, q)[0]
-        L = q.distance(w0) or 1; ux, uy = (w0.x - q.x) / L, (w0.y - q.y) / L
-        STRUCT.append({"kind": "jetty", "name": JT["name"], "geom": LineString([q, (w0.x + ux * JT["m"], w0.y + uy * JT["m"])]), "layer": 0, "width": 2.5})
-        poi_pos[JT["poi"]] = Point(w0.x + ux * JT["m"], w0.y + uy * JT["m"])
+        sh = min(shore, key=lambda e: e.distance(pin)); t = sh.project(pin); q = sh.interpolate(t)
+        vx, vy = LMK.direction_at(sh, t); ux, uy = -vy, vx   # straight out from the shore road, on the water side
+        if not water.contains(Point(q.x + ux * 8, q.y + uy * 8)): ux, uy = -ux, -uy
+        end = Point(q.x + ux * (JT["m"] + 3), q.y + uy * (JT["m"] + 3))
+        STRUCT.append({"kind": "jetty", "name": JT["name"], "geom": LineString([q, end]), "layer": 0, "width": 2.5})
+        poi_pos[JT["poi"]] = end
 SKY_CLEAR = [x["geom"].buffer(x["width"] / 2 + 1) for x in STRUCT if x["kind"] == "skywalk"]
 if PROF.get("station_skywalk") and RES_U is not None: SKY_CLEAR = [c.difference(RES_U) for c in SKY_CLEAR]   # the decks land inside the terminal and station plots
 clear_geoms += SKY_CLEAR
@@ -793,6 +820,8 @@ def reachable(r):   # someone has to walk to its door: no building more than 44 
     return REACH is None or len(np.atleast_1d(REACH.query_nearest(r, max_distance=44))) > 0
 def place(plot, r):
     if not reachable(r): return False
+    cc = list(r.exterior.coords)
+    if min(math.dist(cc[0], cc[1]), math.dist(cc[1], cc[2])) < 0.3: return False   # no zero-width slivers
     if plot.buffer(0.05).contains(r) and buildable.contains(r) and not any((o.distance(r) < 0.15) if PROF else (o.intersection(r).area > 0.05) for o in near(r)): add(r, kind_now[0]); return True   # 15 cm: survives rounding to 0.1 m
     return False
 kind_now = ["front"]
@@ -917,6 +946,57 @@ for sp in [x for x in PROF.get("named", []) if set(x["from"]) & {"front", "back"
     i = min(cands, key=lambda i: bld[i][0].distance(pin))
     if sp.get("kind"): bld[i] = (bld[i][0], sp["kind"])
     poi_pos[sp["poi"]] = bld[i][0].centroid
+SV = PROF.get("stilt_village")
+if SV:   # houses on stilts over the lagoon: plank boardwalks out from the shore road, huts along them, canoe lanes between the rows
+    shore = [e for n, e, nb in edge_roads if nb is None and e.distance(water) < 20]
+    bridge = next((LineString(a["pts"]) for a in G["arterials"] if a["cls"] == "bridge" and LineString(a["pts"]).distance(poly) < 120), None)
+    anchor = POIS.get(SV["poi"], poly.centroid)
+    if SV.get("near") == "bridge" and bridge is not None: anchor = Point(bridge.coords[0])   # "stilt houses under the Long Bridge"
+    sh = min(shore, key=lambda e: e.distance(anchor)); t_a = sh.project(anchor) + SV.get("shift_m", 0)
+    bw = []; vrnd = random.Random(SEED * 13 + 1)
+    class _Grid:   # huts already built, by 20 m cell: where boardwalks converge, rows from two boardwalks must not overlap
+        def __init__(self): self.c = {}
+        def add(self, r): x, y = r.centroid.x, r.centroid.y; self.c.setdefault((int(x // 20), int(y // 20)), []).append(r)
+        def query_list(self, r):
+            x, y = r.centroid.x, r.centroid.y; return [o for i in (-1, 0, 1) for j in (-1, 0, 1) for o in self.c.get((int(x // 20) + i, int(y // 20) + j), [])]
+    HUTS = _Grid()
+    zone = water.intersection(poly.buffer(SV["depth_m"] + 30))
+    for k in range(int(SV["length_m"] // SV["spine_every_m"]) + 1):
+        t = t_a - SV["length_m"] / 2 + k * SV["spine_every_m"]
+        if not 0 < t < sh.length: continue
+        p0 = sh.interpolate(t); ux, uy = LMK.direction_at(sh, t); nx2, ny2 = -uy, ux
+        if not water.contains(Point(p0.x + nx2 * 15, p0.y + ny2 * 15)): nx2, ny2 = -nx2, -ny2
+        sp = LineString([p0, (p0.x + nx2 * SV["depth_m"], p0.y + ny2 * SV["depth_m"])])
+        sp = max(lines(sp.intersection(zone.union(land))), key=lambda l: l.length, default=None)
+        if sp is None or sp.length < 40: continue
+        bw.append(sp)
+        for side in (1, -1):   # a row of huts on each side of the boardwalk, some with a second hut behind
+            d = 6.0; tt = 10.0
+            while tt < sp.length - 3:
+                w_ = max(3.0, vrnd.gauss(SV["hut_m"][0], 0.6)); dd = max(4.0, vrnd.gauss(SV["hut_m"][1], 1.0))
+                q = sp.interpolate(tt); vx, vy = LMK.direction_at(sp, tt); ox, oy = -vy * side, vx * side; a2 = math.atan2(vy, vx)
+                for row in (0, 1):
+                    if row == 1 and vrnd.random() > SV["second_row"]: break
+                    off = 1.5 + dd / 2 + row * (dd + SV["gap_m"])
+                    r = rect(q.x + ox * off, q.y + oy * off, w_, dd, a2)
+                    if water.contains(r) and not any(r.distance(o) < 0.15 for o in HUTS.query_list(r)): bld.append((r, "stilt")); HUTS.add(r)   # 15 cm: survives rounding
+                tt += w_ + SV["gap_m"]
+    # plank walkways across the canoe lanes tie the boardwalks together (plank bridges, real median 13 m)
+    for k in range(1, int(SV["depth_m"] // SV["cross_every_m"]) + 1):
+        ends = [b.interpolate(min(b.length - 1, k * SV["cross_every_m"])) for b in bw if b.length > k * SV["cross_every_m"]]
+        for p1, p2 in zip(ends, ends[1:]):
+            if p1.distance(p2) < SV["spine_every_m"] * 1.6:
+                cw = LineString([p1, p2]); bld = [(r, kk) for r, kk in bld if not (kk == "stilt" and r.intersects(cw.buffer(1.2)))]; bw.append(cw)
+    PATHS += [("boardwalk", b) for b in bw]
+    if SV.get("bar_poi"):   # the stilt bar: a bigger two-storey house on the boardwalks
+        target = bw[len(bw) // 2].interpolate(0.6, normalized=True); vx, vy = LMK.direction_at(bw[0], 5)
+        bwu = unary_union([b.buffer(1.2) for b in bw])
+        for r0 in sorted([r for r, kk in bld if kk == "stilt"], key=lambda r: r.centroid.distance(target))[:60]:   # the nearest spot it fits
+            c = r0.centroid; bar = rect(c.x, c.y, 10, 12, math.atan2(vy, vx))
+            if water.contains(bar) and not bar.intersects(bwu):
+                bld = [(r, kk) for r, kk in bld if not (kk == "stilt" and r.intersects(bar.buffer(0.5)))]
+                bld.append((bar, "stilt bar")); poi_pos[SV["bar_poi"]] = bar.centroid; break
+    poi_pos[SV["poi"]] = bw[len(bw) // 2].interpolate(0.5, normalized=True) if bw else anchor
 NAMED_LATE = [sp for sp in PROF.get("named", []) if not set(sp["from"]) & {"front", "back"}]
 extra_parcels = []
 # parcel buildings: market sheds, warehouses (the big >1500 m2 buildings sit near mains), school blocks
@@ -1004,6 +1084,20 @@ for p in parcels:
         st_, pitch = LMK.stands(g, R0["spec"]["bowl_m2"])
         bld += [(r, "stands") for r in st_ if fit(r)]
         extra_parcels.append({"kind": "pitch", "geom": pitch})
+    if p["kind"] == "sawmill":   # open saw sheds, sawdust piles, and log rafts tied up in the water alongside
+        for k2 in range(-1, 2):
+            r = rect(ctr.x + math.cos(a) * k2 * 34, ctr.y + math.sin(a) * k2 * 34, 28, 12, a)
+            if fit(r): bld.append((r, "saw shed"))
+        for k2 in range(6):
+            r = rect(ctr.x + math.cos(a) * (k2 * 16 - 40) - math.sin(a) * 26, ctr.y + math.sin(a) * (k2 * 16 - 40) + math.cos(a) * 26, 7, 7, a)
+            if fit(r): bld.append((r, "sawdust"))
+        shl = water.exterior.intersection(g.buffer(60))
+        if not shl.is_empty:
+            q = nearest_points(shl, ctr)[0]; L = q.distance(ctr) or 1; ux, uy = (q.x - ctr.x) / L, (q.y - ctr.y) / L
+            for k2 in range(8):   # rafts: 20 x 4 m bundles of logs, side by side off the shore
+                cx, cy = q.x + ux * (22 + (k2 // 4) * 24) - uy * ((k2 % 4) * 6 - 9), q.y + uy * (22 + (k2 // 4) * 24) + ux * ((k2 % 4) * 6 - 9)
+                r = rect(cx, cy, 4, 20, math.atan2(uy, ux) + math.pi / 2)
+                if water.contains(r) and r.distance(unary_union([e for n, e, nb in edge_roads])) > CLEAR["main"]: bld.append((r, "raft"))
     if p["kind"] == "park":   # a protest ground: open, with a raised stage at one end
         r = rect(ctr.x + math.cos(a) * (LL / 2 - 12), ctr.y + math.sin(a) * (LL / 2 - 12), 8, 14, a)
         if fit(r): bld.append((r, "stage"))
@@ -1048,7 +1142,8 @@ for r, kind in bld:
 rnd.shuffle(slots)
 
 # ---------- 6. measure against the real core squares ----------
-B = [r for r, k in bld]
+WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon: measured on their own, not with the land fabric
+B = [r for r, k in bld if k not in WATER_KINDS]
 gen_streets = [("street", g) for g in streets + access] + [("main", e) for n, e, nb in edge_roads] + [("main", ln) for n, ln in mains + [("", r) for r in ramps]] + [("art", a) for n, k, a in arts]
 M = measure(gen_streets, B, land.buffer(3))
 # edge roads are shared with neighbours: count half of their length in the density figures
@@ -1062,7 +1157,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "stage": 1, "checkpoint": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]

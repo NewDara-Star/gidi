@@ -113,12 +113,21 @@ def land_of(gen, G):
     return max(polys, key=lambda p: p.area).buffer(1).difference(lagoon(G))
 
 
-def check_land(bgeoms, land):
-    """3: every building inside the land (edge-road polygon + 1 m, minus lagoon)."""
+WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon on purpose (Water Town)
+
+
+def check_land(bgeoms, land, kinds=None, G=None):
+    """3: every building inside the land (edge-road polygon + 1 m, minus lagoon); stilt houses, the stilt bar and log rafts
+    must instead stand over the lagoon, within 400 m of the district's land."""
     if land is None:
         return None, "edge roads do not form a closed polygon"
     bad = []
-    for b in bgeoms:
+    lag = lagoon(G) if G is not None else None
+    for i, b in enumerate(bgeoms):
+        if kinds and kinds[i] in WATER_KINDS:
+            if lag is None or not lag.buffer(0.5).contains(b) or b.distance(land) > 400:
+                bad.append((b.area, "%s %s not over the lagoon next to the district" % (kinds[i], xy(b))))
+            continue
         out = b.difference(land).area
         if out > 0.01:
             bad.append((out, "%s %.1f m2 outside" % (xy(b), out)))
@@ -318,7 +327,7 @@ def check_everyday(did, G, limit=833, hard=1250):
     built = sorted(G.get("buildings", {}))
     if did not in built: return None, "not baked yet"
     R = walknet.Reach(walknet.graph(walknet.ways_of(G, built), "walk"))
-    houses = [Polygon(b[1:]).centroid for b in G["buildings"][did] if b[0] in ("front", "back")]
+    houses = [Polygon(b[1:]).centroid for b in G["buildings"][did] if b[0] in ("front", "back", "stilt")]
     bad, txt = 0, []
     for cat, types in (("school", {"school"}), ("worship", {"church", "mosque"}), ("chemist", {"chemist", "clinic", "hospital"})):
         d = R.from_points([Point(p["x"], p["y"]) for p in G["pois"] if p["type"] in types], hard + 1)
@@ -338,7 +347,7 @@ def run(did):
         res.append((name, None if n is None else n == 0, "%s%s" % ("" if n is None else "%d found. " % n, d)))
     add("1 houses on roads/ramps/decks", check_roads(gen, bg, G))
     add("2 building overlaps", check_overlaps(bg))
-    add("3 buildings on land", check_land(bg, land))
+    add("3 buildings on land", check_land(bg, land, [b[0] for b in gen["buildings"]], G))
     add("4 edge roads match network", check_edges(did, gen, net))
     add("5 neighbour streets", check_neighbours(did, gen, G))
     add("6 incoming gateways continued", check_incoming(did, gen, net, G))

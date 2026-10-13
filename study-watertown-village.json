@@ -1,0 +1,35 @@
+{
+ "method": "buildings more than 60 m from any mapped road: the stilt village",
+ "count": 5897,
+ "area_ha": 41.2,
+ "per_km2_of_village": 14325,
+ "coverage": 0.46,
+ "footprint_m2": {
+  "p10": 9.8,
+  "p25": 15.6,
+  "p50": 25.9,
+  "p75": 39.6,
+  "p90": 58.1
+ },
+ "short_side_m": {
+  "p25": 3.2,
+  "p50": 4.1,
+  "p75": 5.0
+ },
+ "long_side_m": {
+  "p25": 4.8,
+  "p50": 6.4,
+  "p75": 8.3
+ },
+ "gap_m": {
+  "p25": 0.3,
+  "p50": 0.4,
+  "p75": 0.8
+ },
+ "canoe_channels_km_per_km2_of_village": 29.3,
+ "plank_bridges_m": {
+  "p25": 11.9,
+  "p50": 13.0,
+  "p75": 29.4
+ }
+}

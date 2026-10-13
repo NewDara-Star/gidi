@@ -9,9 +9,9 @@ tr = Transformer.from_crs(4326, 32631, always_xy=True).transform
 adm = json.load(open("adm6.geojson"))
 lag = [f for f in adm["features"] if f["properties"].get("admin_level") == "6" and 2.6 < shape(f["geometry"]).representative_point().x < 4.4 and 6.3 < shape(f["geometry"]).representative_point().y < 6.75]
 area = unary_union([shape(f["geometry"]) for f in lag if f["properties"]["name"] in LGAS])
-if len(sys.argv) > 3:   # neighbourhood-level study: only the part of the LGAs inside a lon/lat box (west,south,east,north)
+if len(sys.argv) > 3:   # neighbourhood-level study: only the part of the LGAs inside lon/lat boxes (west,south,east,north;...)
     from shapely.geometry import box as _box
-    area = area.intersection(_box(*map(float, sys.argv[3].split(","))))
+    area = area.intersection(unary_union([_box(*map(float, b.split(","))) for b in sys.argv[3].split(";")]))
 ring = area.buffer(0.02)  # ~2 km halo for connections to neighbours
 pa, pr = prep(area), prep(ring)
 F = osmium.geom.WKBFactory()

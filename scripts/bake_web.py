@@ -184,7 +184,7 @@ if GEN:
     REACH=walknet.Reach(walknet.graph(walknet.ways_of(out,list(GEN)),"walk"))
 def coverage_plan(id_):
     """{type: [points]} for this district's schools, places of worship, chemists and clinics, chosen greedily by coverage."""
-    houses=[Polygon(b[1:]).centroid for b in out["buildings"][id_] if b[0] in ("front","back")]
+    houses=[Polygon(b[1:]).centroid for b in out["buildings"][id_] if b[0] in ("front","back","stilt")]   # homes, on land and on stilts
     HA=[REACH.attach(h) for h in houses]
     cands=[Point(q["x"],q["y"]) for q in SL]
     def covered(dist,limit): return {i for i,(u,du,v,dv,off) in enumerate(HA) if min(dist.get(u,1e18)+du,dist.get(v,1e18)+dv)+off<=limit}

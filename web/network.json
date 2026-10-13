@@ -512,6 +512,89 @@
      3880.0
     ]
    ]
+  },
+  "port|watertown": {
+   "between": [
+    "watertown",
+    "port"
+   ],
+   "name": "Adeyemi Road",
+   "pts": [
+    [
+     3200.0,
+     4920.0
+    ],
+    [
+     3398.3,
+     4863.2
+    ],
+    [
+     3603.9,
+     4835.4
+    ],
+    [
+     3799.4,
+     4767.7
+    ],
+    [
+     4000.0,
+     4720.0
+    ]
+   ]
+  },
+  "watertown|outer1": {
+   "between": [
+    "watertown",
+    null
+   ],
+   "name": "Durojaiye Road",
+   "pts": [
+    [
+     4000.0,
+     4720.0
+    ],
+    [
+     4016.9,
+     4533.6
+    ],
+    [
+     4033.4,
+     4347.1
+    ],
+    [
+     4040.0,
+     4160.0
+    ]
+   ]
+  },
+  "watertown|outer2": {
+   "between": [
+    "watertown",
+    null
+   ],
+   "name": "Adebayo Road",
+   "pts": [
+    [
+     4040.0,
+     4160.0
+    ],
+    [
+     4002.7,
+     3949.5
+    ],
+    [
+     3953.4,
+     3741.3
+    ],
+    [
+     3927.3,
+     3528.6
+    ],
+    [
+     3880.0,
+     3320.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -859,6 +942,90 @@
     3524.3
    ],
    "bearing_deg": 270
+  },
+  {
+   "from": "watertown",
+   "to": "port",
+   "road": "Ring Road",
+   "kind": "arterial",
+   "pt": [
+    3523.6,
+    4846.3
+   ]
+  },
+  {
+   "from": "watertown",
+   "to": "maze",
+   "road": "Ring Road",
+   "kind": "arterial",
+   "pt": [
+    3283.5,
+    4550.4
+   ]
+  },
+  {
+   "from": "watertown",
+   "to": "port",
+   "road": "Gidi Rail",
+   "kind": "rail",
+   "pt": [
+    3454.0,
+    4855.7
+   ]
+  },
+  {
+   "from": "watertown",
+   "to": "maze",
+   "road": "Gidi Rail",
+   "kind": "rail",
+   "pt": [
+    3222.4,
+    4817.1
+   ]
+  },
+  {
+   "from": "watertown",
+   "to": "maze",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3345.6,
+    4285.9
+   ],
+   "bearing_deg": 275
+  },
+  {
+   "from": "watertown",
+   "to": "foodgate",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3449.4,
+    3689.6
+   ],
+   "bearing_deg": 313
+  },
+  {
+   "from": "watertown",
+   "to": "foodgate",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3853.3,
+    3332.3
+   ],
+   "bearing_deg": 275
+  },
+  {
+   "from": "watertown",
+   "to": "port",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3942.5,
+    4733.7
+   ],
+   "bearing_deg": 166
   }
  ]
 }
