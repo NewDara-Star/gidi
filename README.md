@@ -1,0 +1,34 @@
+# Gidi
+
+The city for Tunde's story: an invented city with the feeling of Lagos, built for an Unreal open-world game.
+This repo is the **city master plan**: 15 districts, roads, buildings and places, generated from patterns measured in real Lagos.
+That master plan is what gets carried into Unreal.
+
+**Rule zero:** we study real Lagos and build our own city. No real street layout, building outline or name is copied into Gidi.
+
+## What's here
+| Path | What |
+|---|---|
+| `scripts/map02.py` | District layout v0.3: polygons, lagoon, arterials (map units 0.8 km). |
+| `scripts/study_extract.py` → `study_analyse.py` → `study_connect.py` → `study_core.py` | Pattern study of a district's real inspiration areas (OSM). Statistics only. |
+| `scripts/fabric_metrics.py` | One measuring stick for real and generated fabric. |
+| `scripts/gen_fabric.py` | The original street + building generator. Calibrated to a study, it writes `web/gen-<id>.json` and updates `web/network.json`. |
+| `scripts/draw_gen.py` | Side-by-side check picture: generated district vs a real 1 km square. |
+| `scripts/bake_web.py` | Bakes everything into `web/gidi-data.js` for the 2D map (`web/shell.html` + `web/app.js`). |
+| `web/network.json` | **Shared state between districts:** edge roads and gateways. Always pull before working. |
+| `data/results/lga_table.json` | Per local government area: building heights (storey bands), people per km², tree/built-up cover, surface height. |
+| `data/tools/` | Download scripts for the raw datasets. The raw files stay on the owner's Mac, about 17 GB. |
+| `lagos.osm.pbf`, `adm6.geojson` | OpenStreetMap extract of Lagos and admin boundaries (ODbL, © OpenStreetMap contributors). |
+| `docs/` | Districts v0.3, the Lagos LGA research, the data plan, and the Maze pattern study (the worked example). |
+
+## Status
+- **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`.
+- **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
+- **Live 2D map** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
+
+## Data credits
+- OpenStreetMap contributors (ODbL)
+- Google Open Buildings 2.5D Temporal (CC-BY 4.0)
+- ESA WorldCover 2021 (CC-BY 4.0)
+- WorldPop 2020 (CC-BY 4.0)
+- Copernicus DEM GLO-30 (© DLR/Airbus, provided under COPERNICUS by the European Union and ESA)

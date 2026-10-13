@@ -1,0 +1,684 @@
+{
+ "Ibeju Lekki": {
+  "mean_h": 5.0,
+  "h_bands": [
+   56,
+   34,
+   5,
+   3,
+   2,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 53.9,
+   "shrub": 0.1,
+   "grass": 27.5,
+   "crops": 0.8,
+   "built": 10.8,
+   "bare": 5.4,
+   "wetland": 1.1,
+   "mangrove": 0.4
+  },
+  "water_pct_of_area": 13.8,
+  "land_km2": 515.1,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 6.7,
+   "p90": 13.8,
+   "max": 23.9,
+   "share_below_3m": 19.8,
+   "share_below_5m": 34.7
+  },
+  "population_2020": 168114,
+  "people_per_land_km2": 326,
+  "busiest_100m_cell": 124
+ },
+ "Ojo": {
+  "mean_h": 4.7,
+  "h_bands": [
+   54,
+   41,
+   4,
+   1,
+   0,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 30.9,
+   "shrub": 0.2,
+   "grass": 11.0,
+   "crops": 0.4,
+   "built": 39.0,
+   "bare": 0.8,
+   "wetland": 1.5,
+   "mangrove": 16.3
+  },
+  "water_pct_of_area": 10.3,
+  "land_km2": 168.0,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 4.3,
+   "p90": 8.5,
+   "max": 20.0,
+   "share_below_3m": 31.9,
+   "share_below_5m": 58.5
+  },
+  "population_2020": 882726,
+  "people_per_land_km2": 5254,
+  "busiest_100m_cell": 383
+ },
+ "Badagry": {
+  "mean_h": 3.7,
+  "h_bands": [
+   79,
+   20,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 44.3,
+   "shrub": 0.9,
+   "grass": 23.6,
+   "crops": 0.8,
+   "built": 16.9,
+   "bare": 0.9,
+   "wetland": 10.5,
+   "mangrove": 2.2
+  },
+  "water_pct_of_area": 11.9,
+  "land_km2": 445.4,
+  "surface_m": {
+   "p10": 0.5,
+   "p50": 4.6,
+   "p90": 9.9,
+   "max": 23.2,
+   "share_below_3m": 33.3,
+   "share_below_5m": 54.6
+  },
+  "population_2020": 304160,
+  "people_per_land_km2": 682,
+  "busiest_100m_cell": 317
+ },
+ "Eti Osa": {
+  "mean_h": 6.3,
+  "h_bands": [
+   31,
+   50,
+   13,
+   3,
+   2,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 11.0,
+   "shrub": 0.1,
+   "grass": 16.9,
+   "crops": 0.8,
+   "built": 58.9,
+   "bare": 7.7,
+   "wetland": 1.8,
+   "mangrove": 2.8
+  },
+  "water_pct_of_area": 29.8,
+  "land_km2": 201.1,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 2.6,
+   "p90": 6.9,
+   "max": 25.9,
+   "share_below_3m": 54.1,
+   "share_below_5m": 75.7
+  },
+  "population_2020": 470201,
+  "people_per_land_km2": 2338,
+  "busiest_100m_cell": 185
+ },
+ "Epe": {
+  "mean_h": 4.3,
+  "h_bands": [
+   68,
+   26,
+   3,
+   2,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 70.5,
+   "shrub": 0.1,
+   "grass": 16.4,
+   "crops": 0.2,
+   "built": 3.2,
+   "bare": 0.3,
+   "wetland": 7.9,
+   "mangrove": 1.3
+  },
+  "water_pct_of_area": 28.9,
+  "land_km2": 980.3,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 6.4,
+   "p90": 18.7,
+   "max": 65.1,
+   "share_below_3m": 38.1,
+   "share_below_5m": 44.5
+  },
+  "population_2020": 247583,
+  "people_per_land_km2": 252,
+  "busiest_100m_cell": 189
+ },
+ "Kosofe": {
+  "mean_h": 5.6,
+  "h_bands": [
+   28,
+   60,
+   10,
+   1,
+   0,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 7.2,
+   "shrub": 0.1,
+   "grass": 11.6,
+   "crops": 2.9,
+   "built": 53.4,
+   "bare": 0.3,
+   "wetland": 4.6,
+   "mangrove": 19.8
+  },
+  "water_pct_of_area": 13.1,
+  "land_km2": 83.2,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 2.6,
+   "p90": 22.2,
+   "max": 48.5,
+   "share_below_3m": 56.6,
+   "share_below_5m": 70.8
+  },
+  "population_2020": 1033530,
+  "people_per_land_km2": 12422,
+  "busiest_100m_cell": 554
+ },
+ "\u00cck\u00f2r\u00f2d\u00fa": {
+  "mean_h": 4.3,
+  "h_bands": [
+   64,
+   32,
+   2,
+   1,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 36.6,
+   "shrub": 0.2,
+   "grass": 9.7,
+   "crops": 0.3,
+   "built": 48.6,
+   "bare": 0.4,
+   "wetland": 0.9,
+   "mangrove": 3.2
+  },
+  "water_pct_of_area": 6.7,
+  "land_km2": 437.0,
+  "surface_m": {
+   "p10": 1.9,
+   "p50": 15.3,
+   "p90": 37.4,
+   "max": 63.2,
+   "share_below_3m": 13.5,
+   "share_below_5m": 20.8
+  },
+  "population_2020": 817316,
+  "people_per_land_km2": 1870,
+  "busiest_100m_cell": 381
+ },
+ "Ikeja": {
+  "mean_h": 7.3,
+  "h_bands": [
+   18,
+   48,
+   19,
+   8,
+   6,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 9.4,
+   "shrub": 0.2,
+   "grass": 7.2,
+   "crops": 0.0,
+   "built": 83.0,
+   "bare": 0.1,
+   "wetland": 0.0
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 57.5,
+  "surface_m": {
+   "p10": 14.4,
+   "p50": 32.6,
+   "p90": 43.5,
+   "max": 54.8,
+   "share_below_3m": 0.1,
+   "share_below_5m": 1.5
+  },
+  "population_2020": 608453,
+  "people_per_land_km2": 10581,
+  "busiest_100m_cell": 723
+ },
+ "Agege": {
+  "mean_h": 5.5,
+  "h_bands": [
+   28,
+   64,
+   7,
+   1,
+   0,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 0.5,
+   "shrub": 0.0,
+   "grass": 0.2,
+   "built": 99.3
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 13.3,
+  "surface_m": {
+   "p10": 27.5,
+   "p50": 42.5,
+   "p90": 47.1,
+   "max": 51.9,
+   "share_below_3m": 0.0,
+   "share_below_5m": 0.0
+  },
+  "population_2020": 353419,
+  "people_per_land_km2": 26572,
+  "busiest_100m_cell": 541
+ },
+ "Ifako/Ijaye": {
+  "mean_h": 5.4,
+  "h_bands": [
+   33,
+   57,
+   7,
+   1,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 3.4,
+   "shrub": 0.0,
+   "grass": 0.4,
+   "crops": 0.0,
+   "built": 96.2,
+   "bare": 0.0,
+   "wetland": 0.0
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 30.6,
+  "surface_m": {
+   "p10": 23.1,
+   "p50": 49.2,
+   "p90": 63.4,
+   "max": 73.2,
+   "share_below_3m": 0.0,
+   "share_below_5m": 0.0
+  },
+  "population_2020": 554630,
+  "people_per_land_km2": 18125,
+  "busiest_100m_cell": 489
+ },
+ "Alimosho": {
+  "mean_h": 4.8,
+  "h_bands": [
+   46,
+   50,
+   4,
+   0,
+   0,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 14.4,
+   "shrub": 0.0,
+   "grass": 4.1,
+   "crops": 0.0,
+   "built": 80.8,
+   "bare": 0.1,
+   "wetland": 0.7
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 209.8,
+  "surface_m": {
+   "p10": 4.4,
+   "p50": 23.7,
+   "p90": 43.9,
+   "max": 66.0,
+   "share_below_3m": 4.5,
+   "share_below_5m": 12.1
+  },
+  "population_2020": 2541288,
+  "people_per_land_km2": 12112,
+  "busiest_100m_cell": 538
+ },
+ "Oshodi/Isolo": {
+  "mean_h": 6.0,
+  "h_bands": [
+   24,
+   58,
+   13,
+   3,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 3.6,
+   "shrub": 0.0,
+   "grass": 4.5,
+   "crops": 0.1,
+   "built": 91.4,
+   "bare": 0.1,
+   "wetland": 0.3
+  },
+  "water_pct_of_area": 0.2,
+  "land_km2": 50.4,
+  "surface_m": {
+   "p10": 2.6,
+   "p50": 12.5,
+   "p90": 26.1,
+   "max": 45.0,
+   "share_below_3m": 12.7,
+   "share_below_5m": 26.5
+  },
+  "population_2020": 1203205,
+  "people_per_land_km2": 23873,
+  "busiest_100m_cell": 802
+ },
+ "Ajeromi/Ifelodun": {
+  "mean_h": 5.8,
+  "h_bands": [
+   26,
+   61,
+   11,
+   2,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 1.8,
+   "grass": 1.7,
+   "crops": 0.1,
+   "built": 96.1,
+   "bare": 0.4,
+   "wetland": 0.0
+  },
+  "water_pct_of_area": 0.9,
+  "land_km2": 13.9,
+  "surface_m": {
+   "p10": 2.9,
+   "p50": 5.0,
+   "p90": 7.8,
+   "max": 14.5,
+   "share_below_3m": 11.2,
+   "share_below_5m": 49.3
+  },
+  "population_2020": 614933,
+  "people_per_land_km2": 44239,
+  "busiest_100m_cell": 1364
+ },
+ "Surulere": {
+  "mean_h": 6.6,
+  "h_bands": [
+   20,
+   57,
+   14,
+   5,
+   3,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 3.1,
+   "grass": 1.8,
+   "crops": 0.1,
+   "built": 94.8,
+   "bare": 0.1,
+   "wetland": 0.0
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 25.5,
+  "surface_m": {
+   "p10": 3.5,
+   "p50": 5.6,
+   "p90": 8.1,
+   "max": 21.1,
+   "share_below_3m": 5.3,
+   "share_below_5m": 36.3
+  },
+  "population_2020": 621116,
+  "people_per_land_km2": 24357,
+  "busiest_100m_cell": 1363
+ },
+ "Amuwo Odofin": {
+  "mean_h": 6.0,
+  "h_bands": [
+   34,
+   45,
+   13,
+   5,
+   2,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 13.6,
+   "shrub": 0.3,
+   "grass": 15.6,
+   "crops": 0.3,
+   "built": 46.2,
+   "bare": 5.3,
+   "wetland": 0.6,
+   "mangrove": 18.1
+  },
+  "water_pct_of_area": 22.9,
+  "land_km2": 122.9,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 3.4,
+   "p90": 7.2,
+   "max": 21.4,
+   "share_below_3m": 44.3,
+   "share_below_5m": 71.9
+  },
+  "population_2020": 715175,
+  "people_per_land_km2": 5819,
+  "busiest_100m_cell": 1548
+ },
+ "Apapa": {
+  "mean_h": 7.2,
+  "h_bands": [
+   26,
+   45,
+   16,
+   6,
+   5,
+   2,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 4.7,
+   "shrub": 0.1,
+   "grass": 7.2,
+   "crops": 0.1,
+   "built": 78.9,
+   "bare": 0.9,
+   "wetland": 0.8,
+   "mangrove": 7.4
+  },
+  "water_pct_of_area": 28.0,
+  "land_km2": 22.8,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 3.2,
+   "p90": 6.5,
+   "max": 22.0,
+   "share_below_3m": 48.3,
+   "share_below_5m": 75.4
+  },
+  "population_2020": 201639,
+  "people_per_land_km2": 8843,
+  "busiest_100m_cell": 280
+ },
+ "Lagos Island": {
+  "mean_h": 8.8,
+  "h_bands": [
+   11,
+   51,
+   21,
+   7,
+   6,
+   3,
+   1
+  ],
+  "cover_pct_of_land": {
+   "trees": 0.4,
+   "grass": 7.3,
+   "crops": 0.3,
+   "built": 82.0,
+   "bare": 0.6,
+   "wetland": 8.1,
+   "mangrove": 1.4
+  },
+  "water_pct_of_area": 96.1,
+  "land_km2": 7.5,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 0.0,
+   "p90": 0.0,
+   "max": 21.9,
+   "share_below_3m": 97.3,
+   "share_below_5m": 98.2
+  },
+  "population_2020": 68176,
+  "people_per_land_km2": 9090,
+  "busiest_100m_cell": 230
+ },
+ "Lagos Mainland": {
+  "mean_h": 6.6,
+  "h_bands": [
+   20,
+   55,
+   16,
+   6,
+   3,
+   1,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 4.3,
+   "grass": 3.8,
+   "crops": 0.1,
+   "built": 89.0,
+   "bare": 1.4,
+   "wetland": 0.7,
+   "mangrove": 0.8
+  },
+  "water_pct_of_area": 32.4,
+  "land_km2": 12.5,
+  "surface_m": {
+   "p10": 0.0,
+   "p50": 2.6,
+   "p90": 8.4,
+   "max": 24.5,
+   "share_below_3m": 54.7,
+   "share_below_5m": 71.4
+  },
+  "population_2020": 191138,
+  "people_per_land_km2": 15291,
+  "busiest_100m_cell": 434
+ },
+ "Mushin": {
+  "mean_h": 6.8,
+  "h_bands": [
+   19,
+   53,
+   15,
+   7,
+   4,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 0.8,
+   "shrub": 0.0,
+   "grass": 0.2,
+   "built": 98.9,
+   "bare": 0.0
+  },
+  "water_pct_of_area": 0.0,
+  "land_km2": 21.2,
+  "surface_m": {
+   "p10": 6.9,
+   "p50": 20.1,
+   "p90": 27.4,
+   "max": 45.7,
+   "share_below_3m": 0.1,
+   "share_below_5m": 2.4
+  },
+  "population_2020": 621529,
+  "people_per_land_km2": 29317,
+  "busiest_100m_cell": 818
+ },
+ "Shomolu": {
+  "mean_h": 5.8,
+  "h_bands": [
+   25,
+   62,
+   10,
+   2,
+   1,
+   0,
+   0
+  ],
+  "cover_pct_of_land": {
+   "trees": 5.8,
+   "grass": 1.5,
+   "crops": 0.1,
+   "built": 90.5,
+   "bare": 0.1,
+   "wetland": 0.3,
+   "mangrove": 1.7
+  },
+  "water_pct_of_area": 4.7,
+  "land_km2": 17.7,
+  "surface_m": {
+   "p10": 2.1,
+   "p50": 8.5,
+   "p90": 17.8,
+   "max": 30.0,
+   "share_below_3m": 14.9,
+   "share_below_5m": 24.2
+  },
+  "population_2020": 395905,
+  "people_per_land_km2": 22367,
+  "busiest_100m_cell": 418
+ }
+}

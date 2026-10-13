@@ -1,0 +1,234 @@
+{
+ "edges": {
+  "jungle|maze": {
+   "between": [
+    "maze",
+    "jungle"
+   ],
+   "name": "Afolabi Avenue",
+   "pts": [
+    [
+     2320.0,
+     4880.0
+    ],
+    [
+     2540.3,
+     4884.4
+    ],
+    [
+     2759.8,
+     4903.8
+    ],
+    [
+     2980.7,
+     4894.3
+    ],
+    [
+     3200.0,
+     4920.0
+    ]
+   ]
+  },
+  "maze|watertown": {
+   "between": [
+    "maze",
+    "watertown"
+   ],
+   "name": "Okafor Road",
+   "pts": [
+    [
+     3200.0,
+     4920.0
+    ],
+    [
+     3252.7,
+     4678.2
+    ],
+    [
+     3310.7,
+     4437.7
+    ],
+    [
+     3366.2,
+     4196.5
+    ],
+    [
+     3440.0,
+     3960.0
+    ]
+   ]
+  },
+  "foodgate|maze": {
+   "between": [
+    "maze",
+    "foodgate"
+   ],
+   "name": "Akande Road",
+   "pts": [
+    [
+     3440.0,
+     3960.0
+    ],
+    [
+     3232.8,
+     3934.0
+    ],
+    [
+     3024.1,
+     3927.1
+    ],
+    [
+     2817.1,
+     3898.2
+    ],
+    [
+     2607.9,
+     3897.4
+    ],
+    [
+     2400.0,
+     3880.0
+    ]
+   ]
+  },
+  "hub|maze": {
+   "between": [
+    "maze",
+    "hub"
+   ],
+   "name": "Idowu Street",
+   "pts": [
+    [
+     2400.0,
+     3880.0
+    ],
+    [
+     2398.8,
+     4081.2
+    ],
+    [
+     2364.6,
+     4279.7
+    ],
+    [
+     2355.6,
+     4480.3
+    ],
+    [
+     2333.3,
+     4679.8
+    ],
+    [
+     2320.0,
+     4880.0
+    ]
+   ]
+  }
+ },
+ "gateways": [
+  {
+   "from": "maze",
+   "to": "jungle",
+   "road": "Adeleke Road",
+   "kind": "main",
+   "pt": [
+    2798.8,
+    4902.1
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "foodgate",
+   "road": "Adeleke Road",
+   "kind": "main",
+   "pt": [
+    2865.0,
+    3904.9
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "watertown",
+   "road": "Ring Road",
+   "kind": "arterial",
+   "pt": [
+    3283.5,
+    4550.4
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "hub",
+   "road": "Ring Road",
+   "kind": "arterial",
+   "pt": [
+    2357.2,
+    4443.7
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "watertown",
+   "road": "Gidi Rail",
+   "kind": "rail",
+   "pt": [
+    3222.4,
+    4817.1
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "hub",
+   "road": "Gidi Rail",
+   "kind": "rail",
+   "pt": [
+    2341.6,
+    4605.4
+   ]
+  },
+  {
+   "from": "maze",
+   "to": "jungle",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2876.3,
+    4898.8
+   ],
+   "bearing_deg": 188
+  },
+  {
+   "from": "maze",
+   "to": "watertown",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3345.6,
+    4285.9
+   ],
+   "bearing_deg": 95
+  },
+  {
+   "from": "maze",
+   "to": "foodgate",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3116.2,
+    3930.1
+   ],
+   "bearing_deg": 0
+  },
+  {
+   "from": "maze",
+   "to": "hub",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2355.7,
+    4477.2
+   ],
+   "bearing_deg": 275
+  }
+ ]
+}

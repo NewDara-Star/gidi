@@ -1,0 +1,202 @@
+{
+"jungle": {
+ "inspired": "Ajegunle + Festac", "okada": "free",
+ "blurb": "Reclaimed marsh packed between the port and the expressway. Face-me-I-face-you rows, rusty roofs, school-party hotels, internet cafés where the scam boys work, and a music scene born in cheap studios. Floods every rainy season.",
+ "oja": "Small parcels, phones",
+ "activities": ["DJ and studio side stories", "Flood days", "The friend's internet café", "School-party hotel runs"],
+ "model": ["Face-me-I-face-you bungalow rows (10 rooms, shared corridor, rusted brown roofs)", "Half-converted 1970s estate flats with shops built into gardens", "Open gutters and canals choked with rubbish", "Plank market stalls", "Tiny hotels with painted names", "Generators in cages on the street"],
+ "pois": [
+  {"name":"Tunde's room","type":"story","u":0.18,"v":0.2,"note":"Opening. A single room off a shared corridor. No light, landlord banging for rent."},
+  {"name":"Boundary Plank Market","type":"market","u":0.55,"v":0.75,"note":"Wooden-plank stalls. The section that burns in the market-fire event."},
+  {"name":"Ireti Hotel","type":"night","u":0.75,"v":0.45,"note":"Small hotel where school parties and studio sessions happen."},
+  {"name":"Jahman Sound Studio","type":"landmark","u":0.35,"v":0.55,"note":"Cheap studio of the old DJ who mentors street musicians."},
+  {"name":"Network Plus Café","type":"landmark","u":0.6,"v":0.3,"note":"Internet café. Tunde's friend and the scam boys work here."},
+  {"name":"Canal 7","type":"water","u":0.85,"v":0.15,"note":"Blocked canal that floods the streets every rainy season."}
+ ]},
+"maze": {
+ "inspired": "Mushin + Shomolu", "okada": "sweep",
+ "blurb": "The densest district. Lanes of second-hand car parts, house-front print shops running at 4 a.m., boys charging for every parking spot, and a canal that splits two gangs. Market streets trucks can't fit into.",
+ "oja": "Car parts, forged papers",
+ "activities": ["Fencing stolen parts", "Print runs before a raid", "Parking 'ticketing' turf", "Blackout riot event"],
+ "model": ["Tight lanes 4–6 m wide with parts stacked to the roofline", "Print kiosks bolted onto the fronts of 2–3 storey houses", "Laminating machines, paper bales, ink drums", "A canal with a footbridge (the gang line)", "One transformer pole feeding a whole block", "Buka under a flyover next to mechanics"],
+ "pois": [
+  {"name":"The steal","type":"story","u":0.42,"v":0.3,"note":"Opening. Food stall where Tunde grabs food. 'Ole!' starts here."},
+  {"name":"Ladi Lane Parts Market","type":"market","u":0.25,"v":0.55,"note":"Maze of tokunbo car parts. Chop-shop missions."},
+  {"name":"Pedro Print Row","type":"industry","u":0.7,"v":0.7,"note":"House-front presses. Forged papers at 4 a.m."},
+  {"name":"Gang Canal","type":"danger","u":0.6,"v":0.45,"note":"Canal that divides two street gangs. Crossing changes who chases you."},
+  {"name":"Daleko Grain Yard","type":"market","u":0.15,"v":0.2,"note":"Wholesale rice and beans."},
+  {"name":"Transformer 44","type":"landmark","u":0.82,"v":0.3,"note":"When it's hit, the whole Maze goes dark (blackout event)."}
+ ]},
+"hub": {
+ "inspired": "Oshodi + Ojuelegba (Surulere)", "okada": "sweep",
+ "blurb": "Where every route meets. A giant bus interchange with skywalks above and the under-bridge world below: touts, pickpockets, food sellers. Motor parks, a decaying 1970s stadium held by squatters, an old highlife hotel.",
+ "oja": "Whatever the boss says",
+ "activities": ["Okada fares", "The toll run: pay levies, later collect them", "Union faction fights", "Stadium hideout"],
+ "model": ["Three-storey bus terminal with skywalks and CCTV towers", "Under-bridge zone: stalls, touts, danfo bays", "Motor park with a union office shack and levy table", "1970s concrete stadium, cracked bowl, squatter tents", "Old highlife hotel with a neon sign", "Yellow danfo buses everywhere"],
+ "pois": [
+  {"name":"Boss's motor park","type":"story","u":0.25,"v":0.35,"note":"The boss's park. Tunde gets the bike here on 'work and pay'."},
+  {"name":"The gate","type":"story","u":0.75,"v":0.12,"note":"Opening. Where the boss pulls Tunde out of the mob."},
+  {"name":"Gidi Interchange","type":"transit","u":0.5,"v":0.55,"note":"Bus terminal with skywalks. Under-bridge world below."},
+  {"name":"Under the Bridge","type":"danger","u":0.6,"v":0.45,"note":"Touts, pickpockets, night food. Lawless after dark."},
+  {"name":"National Bowl","type":"landmark","u":0.3,"v":0.75,"note":"Decaying 1970s stadium held by squatters. Hideout."},
+  {"name":"Stadium Highlife Hotel","type":"night","u":0.45,"v":0.85,"note":"Old bandleader's hotel. Live music nights."},
+  {"name":"Hub Rail Station","type":"transit","u":0.65,"v":0.3,"note":"Gidi Rail stop."}
+ ]},
+"railside": {
+ "inspired": "Agege + Ifako-Ijaiye + Alimosho", "okada": "free",
+ "blurb": "Commuter sprawl along the railway. Bread bakeries at dawn, the cattle market and abattoir, a northern community by the tracks, a market roundabout where everything jams, a landfill, an old colonial waterworks, and pipelines tapped at night. Okada heartland.",
+ "oja": "Bread at dawn, meat, fuel",
+ "activities": ["Dawn bread runs (don't crush the stack)", "Outrunning trains", "Bike-seizure riot event", "Pipeline night set piece"],
+ "model": ["Bakeries with wood ovens and lidded bread tins", "Abattoir: open sheds, cattle pens, red gutters", "Shanties and scrap yards along the rail line", "Four-exit roundabout around a huge market", "Landfill with smoke and scavengers", "1915 brick waterworks building", "Bungalows and uncompleted buildings, laterite side streets"],
+ "pois": [
+  {"name":"Oko Cattle Market & Abattoir","type":"industry","u":0.3,"v":0.45,"note":"Cattle, goats, the odd camel. Smoke and red gutters."},
+  {"name":"Ayo Bakery Row","type":"industry","u":0.55,"v":0.6,"note":"Dawn bread runs start here."},
+  {"name":"Ikotun-style Roundabout Market","type":"market","u":0.5,"v":0.2,"note":"Four exits, 8,000 lock-ups. Rush-hour gridlock puzzle."},
+  {"name":"Iju Waterworks (1915)","type":"landmark","u":0.2,"v":0.85,"note":"Colonial waterworks. Cut its power and the city's taps dry."},
+  {"name":"Pipeline Corridor","type":"danger","u":0.75,"v":0.75,"note":"Where fuel thieves tap the line at night."},
+  {"name":"Railside Landfill","type":"danger","u":0.15,"v":0.15,"note":"Smoke, scavengers, trucks. Stash and body-dump missions."},
+  {"name":"Bale Market (Mon/Wed/Fri)","type":"market","u":0.8,"v":0.35,"note":"Second-hand clothes bales. Best buys 6–10 a.m."}
+ ]},
+"foodgate": {
+ "inspired": "Kosofe (Mile 12, Ketu, Ojota)", "okada": "sweep",
+ "blurb": "The main road in from the north. The food market where trucks unload pepper and tomatoes before dawn, a big bus park, a protest park, and creek villages behind it reachable only by boat. Holds the mainland end of the Long Bridge.",
+ "oja": "Produce that spoils (freshness timer)",
+ "activities": ["Dawn unloading rush", "Riot that starts with one road accident", "Creek smuggling by canoe", "Long Bridge checkpoint dodging"],
+ "model": ["Open food market with lorries reversing into it", "Baskets of pepper, tomatoes, onions, yams", "Fenced service lane and concrete barriers", "Bus terminal for interstate coaches", "Protest park with a stage", "Creek villages on wooden platforms"],
+ "pois": [
+  {"name":"Mile Market","type":"market","u":0.35,"v":0.35,"note":"Northern trucks unload before dawn. Produce rots by noon."},
+  {"name":"Northern Bus Park","type":"transit","u":0.55,"v":0.55,"note":"Interstate coaches. Bags of oja arrive here."},
+  {"name":"Freedom Ground","type":"landmark","u":0.3,"v":0.75,"note":"Protest park. Story event: the city's protest day."},
+  {"name":"Long Bridge checkpoint","type":"check","u":0.95,"v":0.35,"note":"Taskforce seizes okadas trying to cross."},
+  {"name":"Agboyi Creek Villages","type":"water","u":0.85,"v":0.7,"note":"Reachable only by canoe. Smuggling route."}
+ ]},
+"port": {
+ "inspired": "Apapa + Mile 2 + the prison", "okada": "ban",
+ "blurb": "Containers, tank farms and a leafy colonial reserve strangled by trucks. Tankers queue for days, a collector every few hundred metres, and a lawless market under the bridge at night. Where the oja comes in.",
+ "oja": "The container that isn't what the paperwork says",
+ "activities": ["The toll run through 10+ collectors", "Tanker fire set piece", "Weaving the truck canyon", "Prison visits"],
+ "model": ["Container stacks and gantry cranes", "Tank farms with pipe racks", "Parked tankers and trailers forming walls", "Colonial bungalows on a leafy avenue (the reserve)", "Prison walls and watchtowers", "Customs sheds and clearing-agent kiosks"],
+ "pois": [
+  {"name":"Container Yard","type":"industry","u":0.45,"v":0.2,"note":"Where the oja comes in. Gantry cranes."},
+  {"name":"Tank Farm","type":"danger","u":0.75,"v":0.45,"note":"Fuel storage. Tanker-fire set piece."},
+  {"name":"Liverpool Under-Bridge","type":"night","u":0.6,"v":0.7,"note":"Lawless night market. Fence and mission-giver."},
+  {"name":"Kiri Prison","type":"gov","u":0.2,"v":0.1,"note":"Prison with a 'VIP wing'."},
+  {"name":"Old Reserve Avenue","type":"landmark","u":0.3,"v":0.8,"note":"Leafy colonial street sealed in by gridlock. Bosses live here."},
+  {"name":"Collector Row","type":"check","u":0.15,"v":0.5,"note":"Police, traffic, union, area boys: pay each one."}
+ ]},
+"bazaar": {
+ "inspired": "Ojo (electronics market) + Trade Fair", "okada": "free",
+ "blurb": "A self-governing market of second-hand electronics with its own court, container jail, taskforce and lenders. Next door, a sinking livestock-and-scrap market with a back-alley pill trade. An army barracks and a broken expressway.",
+ "oja": "Electronics, pirated discs, pills",
+ "activities": ["Market-court jobs", "Demolition-day stock rescue", "Chop-shop: build hybrid TVs and generators", "Release-day bootleg runs"],
+ "model": ["Single-storey lock-up shops (3×3 m) in long rows", "Generators on tyres, radio masts over rooftops", "A shipping-container jail and a shop used as a courtroom", "Sinking livestock market with clogged drains", "Army barracks wall", "Half-built wholesale plazas"],
+ "pois": [
+  {"name":"Alade Electronics Market","type":"market","u":0.4,"v":0.6,"note":"50,000 traders, its own court and container jail."},
+  {"name":"Container Court","type":"gov","u":0.55,"v":0.5,"note":"Market justice. Jobs for the market association."},
+  {"name":"Rago Yard","type":"danger","u":0.75,"v":0.3,"note":"Livestock and scrap. Pills sold in the back alley."},
+  {"name":"Fair Wholesale Plazas","type":"market","u":0.3,"v":0.25,"note":"Car parts and cloth wholesale. Bulldozed on demolition day."},
+  {"name":"Barracks","type":"gov","u":0.15,"v":0.8,"note":"Army barracks. Checkpoint outside."}
+ ]},
+"border": {
+ "inspired": "Badagry", "okada": "free",
+ "blurb": "The far-west frontier. Coconut beaches, an old colonial heritage strip, a long road of checkpoints run by different agencies, and bush paths around them. Rice and fuel cross every day.",
+ "oja": "Smuggled rice and fuel",
+ "activities": ["Rice runs on bush paths", "The checkpoint gauntlet", "Creek boat runs", "Sunday beach"],
+ "model": ["Long road with checkpoints: tyres, drums, a plank with nails", "Bush paths through coconut palms", "Colonial two-storey buildings with long balconies", "Fishing villages and beach shacks", "Fuel in jerrycans on okadas", "Border post sheds"],
+ "pois": [
+  {"name":"Border Post","type":"check","u":0.05,"v":0.35,"note":"The edge of the map. Rice and fuel come through."},
+  {"name":"Checkpoint Mile","type":"check","u":0.45,"v":0.5,"note":"Different agencies, each wanting money."},
+  {"name":"Coconut Beach","type":"water","u":0.6,"v":0.08,"note":"Palm beach. Weekend crowds."},
+  {"name":"Heritage Strip","type":"landmark","u":0.75,"v":0.7,"note":"Old colonial buildings with balconies. Quiet scenery, not crime turf."},
+  {"name":"Bush Paths","type":"danger","u":0.3,"v":0.85,"note":"50+ paths around the checkpoints."}
+ ]},
+"capital": {
+ "inspired": "Ikeja", "okada": "ban",
+ "blurb": "Government quarter with wide boulevards, a maze of houses turned into phone malls, an all-night strip around a roundabout, a live-music shrine, the airport fence, and barracks with a disaster in their past.",
+ "oja": "Phones, documents, people",
+ "activities": ["Phone fencing and swap scams", "Protest-day road closures", "Night-strip rides", "Airport pickups"],
+ "model": ["Government secretariat blocks and a landscaped park", "Houses stacked into 3–4 storey phone malls", "Night strip: neon hotels, a bust on a roundabout, noodle and suya stalls", "Live-music hall with bad speakers", "Airport perimeter fence and runway lights", "Barracks wall"],
+ "pois": [
+  {"name":"Gadget Village","type":"market","u":0.5,"v":0.4,"note":"Phone malls in converted houses. Swap scams, instant crowds."},
+  {"name":"Secretariat","type":"gov","u":0.4,"v":0.8,"note":"Government quarter. Protest-day closures."},
+  {"name":"Allen Roundabout Strip","type":"night","u":0.7,"v":0.6,"note":"All-night strip. Neon, suya, hotel touts."},
+  {"name":"The Shrine","type":"night","u":0.25,"v":0.55,"note":"Live-music hall. Afrobeat through bad speakers."},
+  {"name":"Airport Fence","type":"transit","u":0.15,"v":0.2,"note":"Edge of the airport. Pickups and drops."},
+  {"name":"Cantonment","type":"gov","u":0.8,"v":0.2,"note":"Barracks. Backstory: an armoury blast decades ago."}
+ ]},
+"estate": {
+ "inspired": "Magodo, Omole, Ikeja GRA", "okada": "free",
+ "blurb": "Gated streets, gatemen, big houses, generators humming. The politicians and the men above the boss live here. Quiet, which makes trouble loud.",
+ "oja": "Deliveries to men you don't question",
+ "activities": ["Gateman informants", "Land-case siege event", "Night deliveries", "Meeting the men above the boss"],
+ "model": ["Estate gates with barriers and gatehouses", "Two-storey duplexes behind high walls with razor wire", "Big generators and water tanks", "Tree-lined streets, little traffic", "Church and mosque at the estate centre"],
+ "pois": [
+  {"name":"Estate Gate","type":"check","u":0.5,"v":0.1,"note":"Gatemen check every okada."},
+  {"name":"The Senator's House","type":"story","u":0.55,"v":0.65,"note":"Where the men above the boss meet."},
+  {"name":"Estate Club","type":"night","u":0.3,"v":0.45,"note":"Quiet bar for big men."}
+ ]},
+"watertown": {
+ "inspired": "Makoko + Bariga + Agboyi + the sawmill", "okada": "free",
+ "blurb": "Stilt houses under the Long Bridge, canoe lanes, the sawmill quarter with timber rafts and sawdust, a stilt bar. The state wants the land, and the bulldozer barges are coming. The land war ends here.",
+ "oja": "Anything moved by canoe",
+ "activities": ["Canoe getaways", "Sawmill chases", "Demolition night", "Stilt-bar meetings"],
+ "model": ["Wooden houses on stilts over the lagoon", "Plank walkways and canoe lanes", "Sawmill sheds, timber rafts, sawdust piles", "Stilt bar raised above the street", "Rusted tin roofs", "Bridge pillars overhead"],
+ "pois": [
+  {"name":"Stilt Village","type":"water","u":0.85,"v":0.55,"note":"Houses on stilts. Canoe lanes. The land war's last stand."},
+  {"name":"Okobaba Sawmill","type":"industry","u":0.45,"v":0.25,"note":"Timber rafts and sawdust. Chase scenes."},
+  {"name":"The Stilt Bar","type":"night","u":0.6,"v":0.7,"note":"Bar high on stilts. Meetings and hideouts."},
+  {"name":"Canoe Jetty","type":"transit","u":0.8,"v":0.3,"note":"Canoes to the creeks and Old Shore."}
+ ]},
+"oldshore": {
+ "inspired": "Ikorodu + Epe", "okada": "free",
+ "blurb": "The old royal towns across the lagoon. A fish market at dawn, barges and canoes, a ferry jetty, old quarters with their own kings. On curfew nights the town empties and the roads change.",
+ "oja": "Fish (freshness timer), goods by ferry",
+ "activities": ["Ferry runs", "Curfew nights (invented, never shown)", "Fish runs before the heat", "Barge yard"],
+ "model": ["Fish market at a jetty: baskets, smoking racks, barges", "Statue on the garage roundabout (invented founder)", "Low-rise old town: bungalows, corrugated roofs", "Ferry jetty with overloaded speedboats", "Water hyacinth on the shore"],
+ "pois": [
+  {"name":"Shore Fish Market","type":"market","u":0.55,"v":0.15,"note":"Dawn catch. Race fish to restaurants before it spoils."},
+  {"name":"Ferry Jetty","type":"transit","u":0.45,"v":0.05,"note":"Ferries to the Heights and Water Town."},
+  {"name":"Hunter Roundabout","type":"landmark","u":0.3,"v":0.5,"note":"Invented founder statue. Okada meeting point."},
+  {"name":"Old Quarter","type":"landmark","u":0.7,"v":0.75,"note":"Old town with its own king. Curfew nights empty it."},
+  {"name":"Barge Yard","type":"industry","u":0.85,"v":0.3,"note":"Half-built barges. Boat chase."}
+ ]},
+"oldisland": {
+ "inspired": "Lagos Island", "okada": "ban",
+ "blurb": "The oldest town. The palace, cloth markets run by market-women leaders, rotting returnee houses with arches and shutters, bank towers on the waterfront 300 m away, and lanes only porters can enter.",
+ "oja": "Cloth, cash",
+ "activities": ["Market-queen jobs", "Porter runs through lanes", "Invented festival day closes the main road", "Bank-tower deliveries"],
+ "model": ["Afro-Brazilian houses: brick, arches, wooden shutters, decaying", "Cloth market lanes 2–3 m wide, porters with head loads", "Bank towers on the waterfront", "The palace compound (shown with respect, never a crime site)", "Fenced square with fountains"],
+ "pois": [
+  {"name":"Cloth Market","type":"market","u":0.4,"v":0.5,"note":"Run by the market queen. Porter runs."},
+  {"name":"The Palace","type":"landmark","u":0.6,"v":0.65,"note":"Royal palace. Never a crime location."},
+  {"name":"Bank Row","type":"landmark","u":0.35,"v":0.15,"note":"Glass towers on the waterfront."},
+  {"name":"Brazilian Quarter","type":"landmark","u":0.2,"v":0.7,"note":"Rotting returnee houses with arches and shutters."},
+  {"name":"Island Motor Park","type":"park","u":0.75,"v":0.3,"note":"Union factions fight over this junction."}
+ ]},
+"heights": {
+ "inspired": "Ikoyi, VI, Banana Island", "okada": "ban",
+ "blurb": "Towers, embassies, clubs, mansions behind walls, a tolled cable bridge, Sunday beach crowds. The richest ground, built on cleared fishing villages.",
+ "oja": "Money, secrets",
+ "activities": ["Driver jobs for the rich", "Club nights", "Sunday beach", "Toll-bridge runs"],
+ "model": ["Glass towers and luxury apartment blocks", "Gated mansions on cul-de-sacs", "Cable-stayed toll bridge", "Club strip with valet parking", "Beach with shacks and horses", "Colonial bungalows on leafy roads"],
+ "pois": [
+  {"name":"Cable Bridge","type":"transit","u":0.5,"v":0.85,"note":"Tolled. Joggers at dawn. Big vehicles banned."},
+  {"name":"Pearl Towers","type":"landmark","u":0.3,"v":0.4,"note":"Luxury towers."},
+  {"name":"Club Strip","type":"night","u":0.65,"v":0.35,"note":"Clubs and lounges. Valets and touts."},
+  {"name":"Sunday Beach","type":"water","u":0.5,"v":0.05,"note":"Weekend crowds, horses, shacks."},
+  {"name":"The Gold Island","type":"landmark","u":0.85,"v":0.75,"note":"Billionaire enclave on reclaimed sand."}
+ ]},
+"frontier": {
+ "inspired": "Lekki + Ibeju-Lekki", "okada": "free",
+ "blurb": "One long road down the peninsula past a toll plaza, half-built estates, plots with two owners, a refinery glowing on the horizon, and a beach eaten by the sea. Every fence is a fight.",
+ "oja": "Land papers, site security",
+ "activities": ["Fence fights and site security", "Ocean-surge night", "Refinery convoy heist", "Toll plaza crossings"],
+ "model": ["Toll plaza with booths and canopies", "Half-built estates and fenced empty plots", "'This land is not for sale' painted walls", "Refinery towers and flare stack (floodlit at night)", "Eroded beach with fallen coconut trees", "Sand tippers and tankers on the road"],
+ "pois": [
+  {"name":"Toll Plaza","type":"check","u":0.1,"v":0.4,"note":"Toll booths. A protest here could be the Act 2 turning point."},
+  {"name":"Disputed Plots","type":"danger","u":0.4,"v":0.65,"note":"Every plot has two owners."},
+  {"name":"Refinery","type":"industry","u":0.85,"v":0.7,"note":"Glows at night. Convoy heist."},
+  {"name":"Eroding Beach","type":"water","u":0.6,"v":0.05,"note":"The sea eats the road. Ocean-surge night."},
+  {"name":"New Estates","type":"landmark","u":0.3,"v":0.25,"note":"Half-built estates for the new money."}
+ ]}
+}

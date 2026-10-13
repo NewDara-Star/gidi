@@ -1,0 +1,110 @@
+<title>Gidi 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: full-bleed 3D scene; floating district switcher on top, info panel left (bottom sheet on phones), Apple-style control stack right. */
+:root{
+  --bg:#e9e6df; --panel:rgba(255,255,255,.92); --panel-solid:#ffffff; --fg:#1d1d1f; --fg2:#5e5e63; --fg3:#8a8a8f; --line:rgba(0,0,0,.08);
+  --accent:#0a7cff; --halo:#ffffff; --hover:rgba(0,0,0,.05);
+  --a1:#1e8e3e; --a2:#c98400; --a3:#d93025; --ban:#d93025; --sweep:#d26a00;
+  --shadow:0 2px 10px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.06);
+  --display:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1d2228; --panel:rgba(32,34,38,.9); --panel-solid:#202226; --fg:#f2f2f4; --fg2:#b4b4ba; --fg3:#8c8c93; --line:rgba(255,255,255,.1);
+  --accent:#4ea1ff; --halo:#1d2228; --hover:rgba(255,255,255,.07); --a1:#5bb974; --a2:#f2bf42; --a3:#f28b82; --ban:#f28b82; --sweep:#fcad70;
+  --shadow:0 2px 12px rgba(0,0,0,.45),0 0 0 .5px rgba(255,255,255,.06); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1d2228; --panel:rgba(32,34,38,.9); --panel-solid:#202226; --fg:#f2f2f4; --fg2:#b4b4ba; --fg3:#8c8c93; --line:rgba(255,255,255,.1);
+  --accent:#4ea1ff; --halo:#1d2228; --hover:rgba(255,255,255,.07); --a1:#5bb974; --a2:#f2bf42; --a3:#f28b82; --ban:#f28b82; --sweep:#fcad70;
+  --shadow:0 2px 12px rgba(0,0,0,.45),0 0 0 .5px rgba(255,255,255,.06); color-scheme:dark;}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);overflow:hidden}
+.app{position:fixed;inset:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) 0}
+#scene{position:absolute;inset:0;touch-action:none}
+#scene canvas{display:block}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag3{position:absolute;left:0;top:0;will-change:transform;white-space:nowrap}
+.poi3{pointer-events:auto;display:flex;align-items:center;gap:5px;background:none;border:0;padding:0;font:inherit;cursor:pointer;margin:-12px 0 0 -12px}
+.poi3 .pin{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;background:var(--c);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.poi3 .pl{font-weight:600;font-size:12.5px;color:var(--c);text-shadow:0 0 3px var(--halo),0 0 3px var(--halo),0 0 4px var(--halo)}
+.poi3.far .pl{display:none} .poi3:focus-visible .pin{outline:2px solid var(--accent);outline-offset:2px}
+.street3{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fg2);text-shadow:0 0 3px var(--halo),0 0 3px var(--halo);transform-origin:0 0;margin:-7px 0 0 -30px}
+.road3{font-size:12px;font-weight:600;color:var(--fg);background:var(--panel);padding:2px 8px;border-radius:10px;box-shadow:var(--shadow);margin:-10px 0 0 -40px}
+.t-story{--c:#8430ce}.t-market{--c:#e8710a}.t-transit{--c:#0a7cff}.t-danger{--c:#d93025}.t-check{--c:#b31412}.t-night{--c:#a142f4}
+.t-landmark{--c:#188038}.t-industry{--c:#5f6368}.t-water{--c:#129eaf}.t-gov{--c:#3c4043}.t-park{--c:#c26401}
+.t-church{--c:#5b5bd6}.t-mosque{--c:#0f8a68}.t-school{--c:#b86e00}.t-hospital{--c:#c5221f}.t-clinic{--c:#e0533e}.t-chemist{--c:#d14f7a}
+.t-police{--c:#1f3c88}.t-fire{--c:#e8590c}.t-council{--c:#455a64}.t-fuel{--c:#3f6fd8}.t-bank{--c:#6d4c41}.t-sport{--c:#2e9e4f}.t-betting{--c:#a3297a}.t-cemetery{--c:#7d7d7d}
+.poi3.civic3{margin:-9px 0 0 -9px} .poi3.civic3 .pin{width:18px;height:18px;font-size:9.5px;border-width:1.5px} .poi3.civic3 .pl{font-size:11px;font-weight:500}
+.top{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:8px;align-items:center;pointer-events:none}
+.top>*{pointer-events:auto}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:9px 14px;border-radius:12px;box-shadow:var(--shadow)}
+.brand span{color:var(--fg3);font-weight:500}
+.districts{display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;padding:2px 2px 6px;scrollbar-width:none}
+.dchip{flex:none;height:34px;padding:0 12px;border-radius:17px;border:0;background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);font:inherit;font-size:13px;font-weight:500;color:var(--fg3);cursor:default}
+.dchip.on{color:#fff;background:var(--accent);cursor:pointer}
+.dchip small{font-size:11px;opacity:.75;margin-left:4px}
+.panel{position:absolute;top:66px;left:12px;bottom:12px;width:356px;background:var(--panel);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.panel.shut{bottom:auto}
+.phead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 0}
+.eyebrow{font-size:12px;color:var(--fg3)}
+.toggle{border:0;background:none;color:var(--accent);font:inherit;font-weight:500;cursor:pointer;padding:4px 6px;border-radius:6px}
+.pbody{overflow:auto;padding:4px 16px 18px}
+h1{font-family:var(--display);font-size:26px;font-weight:700;margin:2px 0 6px;letter-spacing:-.01em}
+h2{font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--fg3);margin:18px 0 8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:500;padding:3px 9px;border-radius:10px;border:1px solid var(--line);color:var(--fg2)}
+.chip.a1{color:var(--a1)} .chip.ban{color:var(--ban);background:color-mix(in srgb,var(--ban) 12%,transparent);border-color:transparent}
+.chip.sweep{color:var(--sweep);background:color-mix(in srgb,var(--sweep) 12%,transparent);border-color:transparent}
+.lead{line-height:1.55;font-size:14px;margin:10px 0 0}
+.stats{font-size:12px;color:var(--fg3);margin-top:8px;font-variant-numeric:tabular-nums}
+ul{list-style:none;margin:0;padding:0}
+.places button{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:0;background:none;font:inherit;color:var(--fg);padding:8px 6px;border-radius:9px;cursor:pointer}
+.places button:hover,.places button.on{background:var(--hover)}
+.places .pin{width:22px;height:22px;flex:none;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:10.5px;font-weight:700;background:var(--c)}
+.pn{display:block;font-weight:600;font-size:14px} .ps{display:block;font-size:12.5px;color:var(--fg2);line-height:1.4;margin-top:1px}
+.model li{display:flex;gap:9px;padding:5px 0;line-height:1.45;font-size:13.5px}
+.model input{margin-top:3px;accent-color:var(--accent)}
+.legend{display:grid;grid-template-columns:14px 1fr;gap:6px 9px;font-size:12.5px;color:var(--fg2);align-items:center}
+.sw{width:14px;height:14px;border-radius:3px;border:1px solid var(--line)}
+.ctrl{position:absolute;right:12px;bottom:16px;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.stack{display:flex;flex-direction:column;background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.stack button{width:44px;height:44px;border:0;background:none;color:var(--fg);font:inherit;font-weight:600;font-size:15px;cursor:pointer}
+.stack button+button{border-top:1px solid var(--line)} .stack button:hover{background:var(--hover)}
+.stack button:focus-visible,.dchip:focus-visible,.toggle:focus-visible,.places button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+#compass{width:44px;height:44px;border-radius:50%;border:0;background:var(--panel);backdrop-filter:blur(14px);box-shadow:var(--shadow);cursor:pointer;position:relative}
+#compass-needle{position:absolute;inset:6px;display:grid;place-items:start center;font-size:10px;font-weight:700;color:#d93025}
+#compass-needle::after{content:"";position:absolute;left:50%;top:50%;width:2px;height:14px;background:linear-gradient(#d93025 50%,var(--fg3) 50%);transform:translate(-50%,-50%)}
+.note{position:absolute;left:380px;bottom:16px;font-size:11.5px;color:var(--fg2);background:var(--panel);padding:5px 10px;border-radius:8px;box-shadow:var(--shadow)}
+@media (max-width:760px){
+  .panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:44%;border-radius:16px 16px 0 0}
+  .ctrl{bottom:calc(44% + 12px)} .note{display:none}
+}
+</style>
+<div class="app">
+  <div id="scene" aria-label="3D model of the district"></div>
+  <div id="labels"></div>
+  <div class="top">
+    <div class="brand">Gidi <span>3D</span></div>
+    <div class="districts" id="districts"></div>
+  </div>
+  <aside class="panel" id="panel">
+    <div class="phead"><span class="eyebrow" id="eyebrow"></span><button class="toggle" id="toggle">Hide</button></div>
+    <div class="pbody" id="pbody"></div>
+  </aside>
+  <div class="ctrl">
+    <button id="compass" aria-label="Point north"><span id="compass-needle">N</span></button>
+    <div class="stack">
+      <button id="dim" aria-label="Switch between 2D and 3D">2D</button>
+      <button id="home" aria-label="Show the whole district">⤢</button>
+    </div>
+    <div class="stack">
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="zout" aria-label="Zoom out">−</button>
+    </div>
+  </div>
+  <div class="note">Design model, not the game. Buildings are generated from the plan; landmarks are placed by hand.</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
