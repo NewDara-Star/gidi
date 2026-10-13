@@ -11,8 +11,12 @@ That master plan is what gets carried into Unreal.
 |---|---|
 | `scripts/map02.py` | District layout v0.3: polygons, lagoon, arterials (map units 0.8 km). |
 | `scripts/study_extract.py` → `study_analyse.py` → `study_connect.py` → `study_core.py` | Pattern study of a district's real inspiration areas (OSM). Statistics only. |
+| `scripts/study_landmarks.py` | Sizes of a district's big structures (flyovers, interchanges, footbridges, terminals, stadiums, stations, hotels). Statistics only. |
 | `scripts/fabric_metrics.py` | One measuring stick for real and generated fabric. |
 | `scripts/gen_fabric.py` | The original street + building generator. Calibrated to a study, it writes `web/gen-<id>.json` and updates `web/network.json`. |
+| `scripts/district_profiles.py` | Per-district settings for the generator (landmarks, calibration knobs, height bands), each with its source. The Maze has none and keeps the original behaviour. |
+| `scripts/landmarks.py` | Big pieces laid out before the street fabric: the interchange knot (flyovers, slip roads, skywalks), terminals, stations, stadiums. |
+| `scripts/check_district.py` | Checks a generated district: no house on a road, no overlaps, edges match `network.json`, neighbours' gateways continued, storeys valid. |
 | `scripts/draw_gen.py` | Side-by-side check picture: generated district vs a real 1 km square. |
 | `scripts/bake_web.py` | Bakes everything into `web/gidi-data.js` for the 2D map (`web/shell.html` + `web/app.js`). |
 | `web/network.json` | **Shared state between districts:** edge roads and gateways. Always pull before working. |
@@ -23,6 +27,7 @@ That master plan is what gets carried into Unreal.
 
 ## Status
 - **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`.
+- **In review:** the Hub (Oshodi/Isolo + Surulere). See `docs/hub-pattern-study.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live 2D map** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
 

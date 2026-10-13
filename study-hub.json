@@ -1,0 +1,582 @@
+{
+ "road_km_by_class": {
+  "residential": 708.6,
+  "service": 129.2,
+  "primary": 67.3,
+  "tertiary": 52.1,
+  "secondary": 38.7,
+  "motorway": 34.2,
+  "unclassified": 15.2,
+  "trunk": 10.1,
+  "motorway_link": 5.0,
+  "footway": 4.2,
+  "construction": 3.8,
+  "primary_link": 2.6,
+  "steps": 2.2,
+  "secondary_link": 1.4,
+  "trunk_link": 1.2,
+  "path": 1.1,
+  "platform": 0.2,
+  "track": 0.1,
+  "tertiary_link": 0.1
+ },
+ "road_km_per_km2": {
+  "drive (no service)": 14.5,
+  "service": 2.0,
+  "foot/path": 0.1
+ },
+ "surface_tags": {
+  "unpaved": 2188,
+  "paved": 405,
+  "asphalt": 95,
+  "paving_stones": 18,
+  "ground": 16,
+  "compacted": 2
+ },
+ "lanes_tags": {
+  "2": 59,
+  "1": 38,
+  "4": 14
+ },
+ "oneway_share_by_km": 0.194,
+ "named_share_minor": 0.33,
+ "street_name_endings": {
+  "Street": 880,
+  "Road": 196,
+  "Close": 79,
+  "Avenue": 64,
+  "Expressway": 64,
+  "Crescent": 40,
+  "Way": 20,
+  "Drive": 18,
+  "Lane": 14,
+  "Cresent": 8,
+  "Bridge": 6,
+  "(Road)": 3
+ },
+ "junctions": {
+  "per_km2": 68,
+  "dead_ends_per_km2": 16,
+  "T_share": 0.89,
+  "X_share": 0.1,
+  "dead_end_to_junction_ratio": 0.24
+ },
+ "street_length_between_junctions_m": {
+  "minor": {
+   "p10": 31.2,
+   "p25": 61.1,
+   "p50": 86.6,
+   "p75": 149.5,
+   "p90": 244.9
+  },
+  "major+tertiary": {
+   "p10": 10.9,
+   "p25": 31.7,
+   "p50": 77.0,
+   "p75": 147.8,
+   "p90": 249.5
+  }
+ },
+ "sinuosity_segments_over_40m": {
+  "p50": 1.0,
+  "p75": 1.0,
+  "p90": 1.0,
+  "p97": 1.2
+ },
+ "orientation_whole_area": {
+  "entropy": 3.469,
+  "grid_order_0to1": 0.101,
+  "top_bearings_deg": [
+   135,
+   175,
+   85,
+   45
+  ]
+ },
+ "local_400m_cells": {
+  "n": 273,
+  "grid_order": {
+   "p25": 0.7,
+   "p50": 0.9,
+   "p75": 1.0
+  },
+  "turn_between_neighbour_cells_deg": {
+   "p25": 5.0,
+   "p50": 30.0,
+   "p75": 80.0,
+   "p90": 85.0
+  },
+  "share_neighbours_turned_over_20deg": 0.54
+ },
+ "parallel_street_spacing_m": {
+  "p10": 52.2,
+  "p25": 69.3,
+  "p50": 82.4,
+  "p75": 96.4,
+  "p90": 159.6
+ },
+ "blocks": {
+  "n": 1860,
+  "area_m2": {
+   "p10": 2003.1,
+   "p25": 8833.0,
+   "p50": 16845.8,
+   "p75": 29394.4,
+   "p90": 47496.9
+  },
+  "mean_m2": 29128,
+  "elongation_long_over_short": {
+   "p25": 1.6,
+   "p50": 2.3,
+   "p75": 3.5
+  },
+  "compactness_area_over_rect": {
+   "p25": 0.7,
+   "p50": 0.8,
+   "p75": 0.9
+  },
+  "width_short_side_m": {
+   "p10": 23.2,
+   "p25": 73.1,
+   "p50": 88.7,
+   "p75": 121.4,
+   "p90": 199.0
+  },
+  "building_coverage_share": {
+   "p25": 0.3,
+   "p50": 0.4,
+   "p75": 0.4
+  },
+  "buildings_per_block": {
+   "p25": 18.0,
+   "p50": 37.0,
+   "p75": 63.2
+  },
+  "buildings_per_hectare_of_block": {
+   "p25": 15.2,
+   "p50": 21.3,
+   "p75": 28.4
+  }
+ },
+ "main_road_mesh": {
+  "superblocks_fully_closed": 101,
+  "superblock_area_m2": {
+   "p25": 9666.9,
+   "p50": 24271.8,
+   "p75": 167369.3
+  },
+  "main_km_per_km2": 3.29
+ },
+ "side_streets_on_mains": {
+  "gap_between_side_junctions_m": {
+   "p10": 12.2,
+   "p25": 32.4,
+   "p50": 75.2,
+   "p75": 133.5,
+   "p90": 231.6
+  },
+  "T_vs_X": {
+   "X+": 95,
+   "T": 798
+  }
+ },
+ "buildings": {
+  "count": 115508,
+  "per_km2": 1789,
+  "coverage_share_of_land": 0.316,
+  "footprint_m2": {
+   "p10": 26.5,
+   "p25": 58.4,
+   "p50": 133.4,
+   "p75": 241.1,
+   "p90": 349.6,
+   "p99": 777.6
+  },
+  "size_bands_share": {
+   "<60": 0.26,
+   "60-150": 0.29,
+   "150-400": 0.4,
+   "400-1500": 0.06,
+   "1500+": 0.003
+  },
+  "type_tags": {
+   "yes": 114201,
+   "construction": 1254,
+   "house": 15,
+   "roof": 11,
+   "residential": 8,
+   "industrial": 5,
+   "stadium": 2,
+   "hotel": 2,
+   "hospital": 2,
+   "train_station": 2
+  },
+  "levels_tagged": {
+   "1": 7,
+   "3": 6,
+   "2": 3,
+   "0": 1,
+   "5": 1
+  },
+  "roof_tags": {},
+  "long_side_m": {
+   "p10": 6.5,
+   "p25": 10.4,
+   "p50": 15.5,
+   "p75": 22.6,
+   "p90": 28.0
+  },
+  "short_side_m": {
+   "p10": 3.8,
+   "p25": 5.5,
+   "p50": 8.6,
+   "p75": 12.0,
+   "p90": 14.3
+  },
+  "aspect": {
+   "p25": 1.4,
+   "p50": 1.8,
+   "p75": 2.3
+  },
+  "rectangularity": {
+   "p10": 0.9,
+   "p50": 1.0
+  },
+  "edge_to_street_centreline_m": {
+   "p10": 4.4,
+   "p25": 7.3,
+   "p50": 12.3,
+   "p75": 23.9,
+   "p90": 34.9
+  },
+  "share_within_12m_of_street(front row)": 0.49,
+  "angle_to_nearest_street_deg": {
+   "p25": 3.7,
+   "p50": 76.7,
+   "p75": 87.5
+  },
+  "share_aligned_within_15deg_or_perp": 0.89,
+  "front_row_long_side_parallel_share": 0.35,
+  "gap_to_nearest_neighbour_m": {
+   "p10": 0.3,
+   "p25": 0.6,
+   "p50": 1.0,
+   "p75": 1.9,
+   "p90": 3.4
+  },
+  "share_touching(<0.5m)": 0.21
+ },
+ "big_buildings_over_1500m2": {
+  "count": 317,
+  "per_km2": 4.9,
+  "tags": {
+   "yes": 306,
+   "industrial": 4,
+   "construction": 3,
+   "stadium": 2,
+   "warehouse": 1,
+   "train_station": 1
+  },
+  "dist_to_main_road_m": {
+   "p25": 35.2,
+   "p50": 72.7,
+   "p75": 142.9
+  },
+  "all_buildings_dist_to_main_m": {
+   "p25": 71.6,
+   "p50": 182.5,
+   "p75": 369.4
+  }
+ },
+ "coverage_variation_250m_cells": {
+  "p10": 0.2,
+  "p25": 0.3,
+  "p50": 0.3,
+  "p75": 0.4,
+  "p90": 0.5
+ },
+ "landuse_polygons_ha": {
+  "residential": [
+   27,
+   3476.8
+  ],
+  "industrial": [
+   21,
+   454.1
+  ],
+  "scrub": [
+   19,
+   91.9
+  ],
+  "military": [
+   1,
+   90.6
+  ],
+  "retail": [
+   7,
+   73.1
+  ],
+  "school": [
+   51,
+   64.6
+  ],
+  "grass": [
+   4,
+   51.4
+  ],
+  "railway": [
+   1,
+   48.7
+  ],
+  "wood": [
+   5,
+   40.2
+  ],
+  "sports_centre": [
+   2,
+   32.6
+  ],
+  "wetland": [
+   2,
+   24.8
+  ],
+  "commercial": [
+   8,
+   13.0
+  ],
+  "pitch": [
+   22,
+   12.8
+  ],
+  "hospital": [
+   2,
+   7.9
+  ],
+  "farmland": [
+   2,
+   6.9
+  ],
+  "water": [
+   3,
+   6.5
+  ]
+ },
+ "waterways_km": {
+  "stream": 15.86,
+  "ditch": 12.66,
+  "canal": 7.08,
+  "drain": 4.76
+ },
+ "rail": {
+  "km_in_area": 35.36,
+  "types": {
+   "rail": 81,
+   "subway": 5,
+   "construction": 3,
+   "disused": 2,
+   "platform": 11,
+   "station": 3
+  },
+  "drive_roads_crossing": 17,
+  "of_which_bridge_or_layer": 9,
+  "buildings_within_15m_of_track": 233,
+  "buildings_within_30m": 446
+ },
+ "power": {
+  "line": 6,
+  "substation": 3,
+  "plant": 10,
+  "generator": 69
+ },
+ "point_tags": {
+  "power:tower": 61,
+  "tree": 49,
+  "rail:level_crossing": 32,
+  "hw:traffic_signals": 28,
+  "hw:crossing": 28,
+  "bank": 18,
+  "fuel": 17,
+  "hw:bus_stop": 11,
+  "school": 7,
+  "office": 7,
+  "hw:motorway_junction": 6,
+  "hotel": 6,
+  "rail:stop": 6,
+  "rail:station": 5,
+  "shop:convenience": 4,
+  "mast": 4,
+  "rail:switch": 4,
+  "pharmacy": 3,
+  "place_of_worship": 2,
+  "clinic": 2,
+  "power:portal": 2,
+  "residential": 2,
+  "fast_food": 1,
+  "police": 1,
+  "sports_centre": 1,
+  "nightclub": 1,
+  "swimming_pool": 1,
+  "veterinary": 1,
+  "bar": 1,
+  "guest_house": 1
+ },
+ "trees_mapped": 73,
+ "markets_and_retail": {
+  "n": 7,
+  "ha": {
+   "p25": 3.3,
+   "p50": 5.3,
+   "p75": 6.8
+  },
+  "dist_to_main_m": {
+   "p25": 0.9,
+   "p50": 4.3,
+   "p75": 7.5
+  }
+ },
+ "civic_mapped_note": {
+  "places_of_worship": 3,
+  "schools": 58,
+  "warning": "OSM civic coverage here is far below reality; use for placement rules only, not counts"
+ },
+ "civic_dist_to_main_m": {
+  "worship": {
+   "p25": 224.1,
+   "p50": 268.8,
+   "p75": 741.1
+  },
+  "schools": {
+   "p25": 8.4,
+   "p50": 84.9,
+   "p75": 198.0
+  }
+ },
+ "connections": {
+  "perimeter_km": 58.8,
+  "crossings": {
+   "minor": 94,
+   "major": 143,
+   "tertiary": 12
+  },
+  "per_km_of_edge": {
+   "minor": 1.6,
+   "major": 2.4,
+   "tertiary": 0.2
+  },
+  "major_crossings_by_neighbour": {
+   "Ikeja": 19,
+   "Lagos Mainland": 12,
+   "Amuwo Odofin": 30,
+   "Mushin": 58,
+   "Apapa": 11,
+   "Ajeromi/Ifelodun": 5,
+   "Alimosho": 8
+  },
+  "all_crossings_by_neighbour": {
+   "Mushin": 83,
+   "Lagos Mainland": 31,
+   "Amuwo Odofin": 33,
+   "Alimosho": 54,
+   "Ikeja": 31,
+   "Apapa": 12,
+   "Ajeromi/Ifelodun": 5
+  },
+  "gap_between_main_gateways_m": {
+   "p10": 9.5,
+   "p25": 25.4,
+   "p50": 85.7,
+   "p75": 264.9,
+   "p90": 924.9
+  },
+  "edge_share_on_hard_line": 0.76
+ },
+ "through_routes_km": {
+  "Apapa-Oworonshoki Expressway": 38.16,
+  "Western Avenue": 12.54,
+  "Lagos-Badagry Expressway": 10.15,
+  "Ago Palace Way": 8.93,
+  "Egbe Road": 8.29,
+  "Agege Motor Road": 8.21,
+  "International Airport Road": 5.54,
+  "Okota Road": 4.35,
+  "Mushin Road": 3.55,
+  "Babs Animashaun Street": 2.65
+ },
+ "area_km2": 64.6,
+ "connections_dedup": {
+  "perimeter_km": 58.8,
+  "main_gateways": 78,
+  "minor_gateways": 39,
+  "main_gateways_per_km_edge": 1.33,
+  "minor_gateways_per_km_edge": 0.66,
+  "gap_between_main_gateways_m": {
+   "p25": 179,
+   "p50": 333,
+   "p75": 860
+  },
+  "main_gateways_by_neighbour": {
+   "Ikeja": 9,
+   "Lagos Mainland": 8,
+   "Amuwo Odofin": 18,
+   "Mushin": 29,
+   "Apapa": 7,
+   "Ajeromi/Ifelodun": 3,
+   "Alimosho": 4
+  },
+  "minor_by_neighbour": {
+   "Mushin": 6,
+   "Lagos Mainland": 4,
+   "Alimosho": 22,
+   "Amuwo Odofin": 1,
+   "Ikeja": 6
+  },
+  "main_gateway_roads": [
+   "Adeniyi Street",
+   "Agege Motor Road",
+   "Ago Okota Expressway",
+   "Airport Road",
+   "Ajibulu Street",
+   "Akanro Street",
+   "Akinyemi Thompson Street",
+   "Apapa Road",
+   "Apapa-Oworonshoki Expressway",
+   "Atitebi Street",
+   "Ayilara Street",
+   "Babalola Street",
+   "Bello Street",
+   "Egbe Road",
+   "Eko Bridge",
+   "Ibadan Street",
+   "Idimu-Ejibo Road",
+   "Ijesha Road",
+   "International Airport Road",
+   "Ishaga Road",
+   "Isolo Road",
+   "Itire Road",
+   "Jebba Street",
+   "Kalejaiye Street",
+   "Kano Street",
+   "Ladipo Street",
+   "Lagos Badagry Expressway",
+   "Lagos-Badagry Expressway",
+   "Lawanson Road",
+   "Martins Street"
+  ],
+  "edge_share_on_hard_line": 0.76,
+  "one_km_squares": {
+   "n": 540,
+   "drive_km_p25": 13.3,
+   "drive_km_p50": 14.9,
+   "drive_km_p75": 16.3,
+   "drive_km_p90": 17.5,
+   "coverage_p25": 0.28,
+   "coverage_p50": 0.33,
+   "coverage_p75": 0.38,
+   "coverage_p90": 0.42,
+   "buildings_p25": 1456,
+   "buildings_p50": 1853,
+   "buildings_p75": 2275,
+   "buildings_p90": 2748
+  }
+ }
+}

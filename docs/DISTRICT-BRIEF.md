@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze
-- **Ring around the Maze (one at a time):** hub, jungle, foodgate, watertown
+- **Done:** maze, hub (in review)
+- **Ring around the Maze (one at a time):** jungle, foodgate, watertown
 - **Then:** capital, bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
@@ -47,6 +47,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - For the neighbourhood-level districts, add a bounding-box or polygon option to `study_extract.py`.
    - Write `docs/<id>-pattern-study.md` in the same shape as the Maze study. It covers roads, buildings, land, water, rail, connections and the limits of the data, plus the height, people, tree and terrain numbers from `lga_table.json`.
 3. **Generate:**
+   - Add the district to `scripts/district_profiles.py` (the Hub's profile is the worked example). The Maze has no profile, so it keeps its original behaviour.
    - `gen_fabric.py` was written for the Maze. Generalise what it needs:
      - parcels and landmarks for this district (its market, park, port, etc.)
      - storeys per building from the district's height bands
@@ -55,8 +56,8 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze used seed 71, scale 1.35.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
-   - Confirm 0 houses on roads and 0 neighbour streets inside the district.
-   - Confirm the edge roads match the neighbours' entries in `network.json`.
+   - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued.
+   - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
 5. **Bake and look:** `python3 scripts/bake_web.py`. Open `web/shell.html` with the data and app to check the 2D map. Look before publishing.
 6. **Report and PR:**
    - Commit, push the branch and open a PR. Show the owner the side-by-side picture and the match table: what matched, what didn't, and why.
