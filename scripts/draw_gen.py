@@ -19,6 +19,7 @@ PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch"
 for p in F["parcels"]: ax.fill(*zip(*p["pts"]), fc=PC[p["kind"]], ec="none")
 for b in F["buildings"]: ax.fill(*zip(*b[1:]), fc=COL[b[0]], ec="none", lw=0)
 for l in F["streets"]: ax.plot(*zip(*l), c="#ffffff", lw=2.2, solid_capstyle="round"); ax.plot(*zip(*l), c="#9aa0a6", lw=.4)
+for p in F.get("paths", []): ax.plot(*zip(*p["pts"]), c="#a88a63", lw=0.9, ls=(0, (2, 1)), zorder=4)
 for l in F.get("lanes", []): ax.plot(*zip(*l), c="#ffffff", lw=1.2); ax.plot(*zip(*l), c="#b0b4b8", lw=.3, ls=(0,(2,1)))
 for m in F["mains"]: ax.plot(*zip(*m["pts"]), c="#f5c542", lw=3.6, solid_capstyle="round")
 for a in G["arterials"]:

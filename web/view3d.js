@@ -149,7 +149,9 @@
     // rail: dark ballast with a light centre line
     scene.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 7, 0.65, [])), roadM(T.dark ? "#3a3e44" : "#8f8b84")));
     scene.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 1.6, 0.7, [])), roadM(T.dark ? "#8a8f96" : "#d8d4cc")));
-    for (const c of G.canals || []) scene.add(new THREE.Mesh(geomFrom(ribbon([c.pts], 9, 0.62, [])), roadM(T.water)));
+    for (const c of G.canals || []) scene.add(new THREE.Mesh(geomFrom(ribbon([c.pts], 4, 0.62, [])), roadM(T.water)));   // 4 m of water; the banks are walkable
+    const foot = []; for (const list of Object.values(G.paths || {})) ribbon(list, 1.5, 0.66, foot);
+    scene.add(new THREE.Mesh(geomFrom(foot), roadM(T.dark ? "#7a6a55" : "#c9b48f")));
     if (G.boardwalks) scene.add(new THREE.Mesh(geomFrom(ribbon(G.boardwalks, 2.5, 1.2, [])), roadM(T.dark ? "#7a6a55" : "#b59b76")));
 
     const b = buildings(T); scene.add(b);

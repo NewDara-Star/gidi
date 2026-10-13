@@ -88,6 +88,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         out.setdefault("buildings",{})[id_]=F["buildings"]
         out.setdefault("parcels",{})[id_]=F["parcels"]
         out.setdefault("lanes",{})[id_]=F.get("lanes",[])
+        if F.get("paths"): out.setdefault("paths",{})[id_]=[p["pts"] for p in F["paths"]]   # footpaths: rail side, canal banks, worn crossings
         if F.get("canal"): out.setdefault("canals",[]).append({"d":id_,"pts":F["canal"]})
         for st in F.get("structures",[]):  # flyovers, rail bridges and skywalks drawn above the roads (slip roads are already in mains)
             if st["kind"]!="ramp": out.setdefault("structures",[]).append({"d":id_,**st})

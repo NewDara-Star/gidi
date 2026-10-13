@@ -95,6 +95,8 @@ def maze(ST, LM):
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
             {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},     # median: a small street-football pitch
         ],
+        "walk": {"rail_path_m": 4.5,          # a footpath each side of the line, inside its 6 m clear strip
+                 "cross_every_m": [150, 200]},   # worn crossings over the rail (owner's call; OSM maps only 15 level crossings, one per 1.1 km)
         "rail_frontage": True,           # plots along the line are built 6 m from the track (real: 658 buildings within 30 m, 247 within 15 m); off for the Hub
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
