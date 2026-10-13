@@ -23,11 +23,11 @@ That master plan is what gets carried into Unreal.
 | `data/results/lga_table.json` | Per local government area: building heights (storey bands), people per km², tree/built-up cover, surface height. |
 | `data/tools/` | Download scripts for the raw datasets. The raw files stay on the owner's Mac, about 17 GB. |
 | `lagos.osm.pbf`, `adm6.geojson` | OpenStreetMap extract of Lagos and admin boundaries (ODbL, © OpenStreetMap contributors). |
-| `docs/` | Districts v0.3, the Lagos LGA research, the data plan, and the Maze pattern study (the worked example). |
+| `docs/` | Districts v0.3, the Lagos LGA research, the data plan, and the pattern studies (Maze, Hub, Jungle City). |
 
 ## Status
 - **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`. v2 is in review: it was rebuilt with the current generator, and its edge roads and gateways are unchanged.
-- **In review:** the Hub (Oshodi/Isolo + Surulere). See `docs/hub-pattern-study.md`.
+- **In review:** the Hub (Oshodi/Isolo + Surulere), see `docs/hub-pattern-study.md`; Jungle City (Ajegunle + Festac), see `docs/jungle-pattern-study.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
 

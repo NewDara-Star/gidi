@@ -198,6 +198,37 @@ Hub figures count the shared edge roads at half, because each neighbour owns the
 - **Slip roads:** 1 instead of 4, so the Under the Bridge market is small (0.12 ha, 48 stalls). See question 1 below.
 - **Empty strips:** there are bare strips along the rail near the station. Houses keep 6 m from the track; the real data has 233 buildings within 15 m.
 
+### v1.1: walking network and the station skywalk (owner's review)
+`scripts/gen_fabric.py hub 23 2.4`, with two new settings in the Hub's profile: `walk` and `station_skywalk`. The streets, the knot, the parcels and `web/network.json` are unchanged.
+
+![The station skywalk: from Gidi Interchange over Northern Road, Ring Road and the rail to Hub Rail Station](img/hub-station-skywalk.png)
+
+- **Footpaths along the rail,** one on each side, 4.5 m from the track. Short links join every street that stops at the rail. The rail-side houses around 2100 E, which had no way to reach them, are now all within 44 m of a path.
+- **Worn crossings over the rail.** There are 3 new ones, set between the line's fixed crossings: the edge roads, the two bridges, the street that crosses and the skywalk.
+  - Most gaps are 140–175 m.
+  - A few are 50–100 m, where fixed crossings sit close together near the knot.
+  - **One gap stays at 247 m,** at the west end. There the rail runs along the 2.9 ha industrial yard for about 200 m, and every crossing spot would cut through the yard. No houses face that stretch.
+- **Station skywalk:**
+  - A 4 m deck, about 160 m long, runs from the south face of the terminal to the station, as at the real interchange.
+  - It crosses Northern Road near the knot, then Ring Road, then the rail.
+  - It meets one of the terminal's two Northern Road skywalks at deck level, so the decks form one network.
+  - Both ends come down 2.3 m from the facades, as the existing skywalks do.
+- **Lanes start on streets.** That fixes the Hub's 3 floating lanes.
+- **No house or shed more than 44 m from a way.** That fixes the 8 back-of-plot sheds that were 45–47 m away.
+- **Checks:** `check_district.py hub` passes all 10, including the two new ones: lanes, paths and footbridges joined, and every building within 45 m of a way.
+- **What moved** (the plots are redrawn, so the houses are not the same ones):
+
+| | Before | After |
+|---|---|---|
+| Buildings/km² | 1,954 | 1,922 |
+| Ground built on | 33% | 33% |
+| Typical house | 125 m² | 127 m² |
+| Over 400 m² | 6% | 5% |
+| Front row | 45% | 46% |
+
+  The streets, the junctions, the blocks and the storey shares are unchanged.
+- **Still open:** the bare strips along the rail (section 5). The Maze builds houses up to the rail's clear strip (`rail_frontage`). The Hub doesn't yet, because that would redraw much more of it.
+
 ## 6. Public places
 - **Done, all on their pins:**
   - Gidi Interchange: terminal with skywalks

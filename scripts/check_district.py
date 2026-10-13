@@ -224,6 +224,63 @@ def check_storeys(gen, bgeoms):
     return 0, " | ".join(txt)
 
 
+def ways_of(gen, G):
+    """Every way a person can walk or drive on: (kind, line). Paths and footbridges included."""
+    w = [("street", line(p)) for p in gen.get("streets", [])] + [("lane", line(p)) for p in gen.get("lanes", [])] \
+        + [("path", line(p["pts"] if isinstance(p, dict) else p)) for p in gen.get("paths", [])] \
+        + [("main", line(m["pts"])) for m in gen["mains"]] \
+        + [(s["kind"], line(s["pts"])) for s in gen.get("structures", []) if s["kind"] in ("footbridge", "skywalk")] \
+        + [("arterial", line(a["pts"])) for a in G["arterials"] if a["cls"] in ("art", "exp")]
+    return [(k, l) for k, l in w if l is not None]
+
+
+def check_connected(gen, G, tol=1.0):
+    """9: every lane, path and footbridge joins the road network (lines within 1 m count as joined);
+    a footbridge must land on a way at both ends."""
+    W = ways_of(gen, G)
+    geoms = [l for _, l in W]
+    tree = STRtree(geoms)
+    parent = list(range(len(W)))
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]; i = parent[i]
+        return i
+    for i, g in enumerate(geoms):
+        for j in tree.query(g.buffer(tol)):
+            if j != i and g.distance(geoms[j]) <= tol:
+                parent[find(i)] = find(int(j))
+    roots = {find(i) for i, (k, _) in enumerate(W) if k in ("main", "arterial")}
+    bad = []
+    for i, (k, g) in enumerate(W):
+        if k in ("lane", "path", "footbridge", "street") and find(i) not in roots:
+            bad.append((g.length, "%s %s floats (%.0f m)" % (k, xy(g), g.length)))
+        if k == "footbridge":
+            for e in (Point(g.coords[0]), Point(g.coords[-1])):
+                if not any(j != i and geoms[j].distance(e) <= tol for j in tree.query(e.buffer(tol))):
+                    bad.append((g.length, "footbridge end (%.0f,%.0f) lands on nothing" % (e.x, e.y)))
+    return len(bad), worst(bad, 5)
+
+
+def check_reach(gen, G, bgeoms, limit=45.0):
+    """10: every building is within 45 m of a street, lane, path or road (someone has to walk to its door).
+    Buildings inside a parcel (yard, market, school) count from the parcel, which must be within 10 m of a way."""
+    W = [l for _, l in ways_of(gen, G)]
+    tree = STRtree(W)
+    parcels = [poly(p["pts"]) for p in gen.get("parcels", [])]
+    bad = []
+    for i, b in enumerate(bgeoms):
+        home = next((p for p in parcels if p.buffer(0.5).contains(b)), None)
+        if home is not None:   # a yard, market or school ground is open: measure from its fence, which must touch a way
+            if min(l.distance(home) for l in W) > 10:
+                bad.append((99, "%s %s: its parcel touches no way" % (gen["buildings"][i][0], xy(b))))
+            continue
+        j = tree.query_nearest(b, max_distance=limit)
+        if len(np.atleast_1d(j)) == 0:
+            d = min(W[int(k)].distance(b) for k in np.atleast_1d(tree.query_nearest(b)))
+            bad.append((d, "%s %s %.0f m" % (gen["buildings"][i][0], xy(b), d)))
+    return len(bad), worst(bad, 5)
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
@@ -240,10 +297,12 @@ def run(did):
     add("6 incoming gateways continued", check_incoming(did, gen, net, G))
     add("7 outgoing gateways on edges", check_outgoing(did, gen, net))
     add("8 storeys", check_storeys(gen, bg))
+    add("9 lanes, paths, footbridges joined", check_connected(gen, G))
+    add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
-    res.append(("9 parcels (report only)", True, ", ".join("%s: %d" % kv for kv in sorted(kinds.items())) or "none"))
+    res.append(("11 parcels (report only)", True, ", ".join("%s: %d" % kv for kv in sorted(kinds.items())) or "none"))
     return res
 
 

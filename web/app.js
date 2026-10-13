@@ -55,6 +55,7 @@
   const bldPaths = Object.entries(G.buildings || {}).map(([k, v]) => [k, v.map((b) => rectPath(b.slice(1))).join("")]);
   const parcelPaths = Object.entries(G.parcels || {}).flatMap(([k, v]) => v.map((p, i) => ({ key: k + i, kind: p.kind.replace(" ", "-"), d: rectPath(p.pts) })));
   const lanePaths = Object.entries(G.lanes || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
+  const footPaths = Object.entries(G.paths || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
   const mainsPath = G.mains.map((m, i) => ({ id: "main" + i, d: pts2d(m.pts), name: m.name, district: m.d }));
 
   // Search index
@@ -90,6 +91,7 @@
       z > 0.22 && h("g", { pointerEvents: "none" }, bldPaths.map(([k, d]) => h("path", { key: "b" + k, d, className: "bld", style: { strokeWidth: px(0.5) } }))),
       (G.canals || []).map((c, i) => h("path", { key: "cn" + i, d: pts2d(c.pts), className: "canal", style: { strokeWidth: w(6, 1.2) }, pointerEvents: "none" })),
       z > 0.3 && h("g", { pointerEvents: "none" }, lanePaths.map(([k, d]) => h("path", { key: "l" + k, d, className: "lane", style: { strokeWidth: w(3, 0.8) } }))),
+      z > 0.5 && h("g", { pointerEvents: "none" }, footPaths.map(([k, d]) => h("path", { key: "fp" + k, d, className: "footpath", style: { strokeWidth: w(1.5, 0.6), strokeDasharray: px(3) + " " + px(2) } }))),
       showStreets && h("g", { pointerEvents: "none" },
         Object.entries(streetPaths).map(([k, d]) => h("path", { key: "sc" + k, d, className: "st-case", style: { strokeWidth: w(9, 1.6) } })),
         Object.entries(streetPaths).map(([k, d]) => h("path", { key: "s" + k, d, className: "st", style: { strokeWidth: w(6, 0.9) } })),

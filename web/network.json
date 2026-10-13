@@ -222,6 +222,134 @@
      4800.0
     ]
    ]
+  },
+  "jungle|outer0": {
+   "between": [
+    "jungle",
+    null
+   ],
+   "name": "Okonkwo Road",
+   "pts": [
+    [
+     2280.0,
+     5920.0
+    ],
+    [
+     2318.1,
+     6064.6
+    ],
+    [
+     2320.7,
+     6215.6
+    ],
+    [
+     2360.0,
+     6360.0
+    ]
+   ]
+  },
+  "jungle|outer1": {
+   "between": [
+    "jungle",
+    null
+   ],
+   "name": "Ogundipe Road",
+   "pts": [
+    [
+     2360.0,
+     6360.0
+    ],
+    [
+     2560.0,
+     6367.2
+    ],
+    [
+     2760.0,
+     6358.9
+    ],
+    [
+     2960.0,
+     6348.3
+    ],
+    [
+     3160.0,
+     6360.0
+    ]
+   ]
+  },
+  "jungle|port": {
+   "between": [
+    "jungle",
+    "port"
+   ],
+   "name": "Alaba Road",
+   "pts": [
+    [
+     3160.0,
+     6360.0
+    ],
+    [
+     3152.4,
+     6153.9
+    ],
+    [
+     3185.1,
+     5949.0
+    ],
+    [
+     3189.1,
+     5743.2
+    ],
+    [
+     3168.8,
+     5536.8
+    ],
+    [
+     3175.1,
+     5331.1
+    ],
+    [
+     3200.9,
+     5125.9
+    ],
+    [
+     3200.0,
+     4920.0
+    ]
+   ]
+  },
+  "bazaar|jungle": {
+   "between": [
+    "jungle",
+    "bazaar"
+   ],
+   "name": "Ireti Road",
+   "pts": [
+    [
+     2320.0,
+     4880.0
+    ],
+    [
+     2307.5,
+     5087.8
+    ],
+    [
+     2293.2,
+     5295.6
+    ],
+    [
+     2285.5,
+     5503.6
+    ],
+    [
+     2277.3,
+     5711.6
+    ],
+    [
+     2280.0,
+     5920.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -442,6 +570,69 @@
     4570.2
    ],
    "bearing_deg": 272
+  },
+  {
+   "from": "jungle",
+   "to": "maze",
+   "road": "Adeleke Road",
+   "kind": "main",
+   "pt": [
+    2798.8,
+    4902.1
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "port",
+   "road": "Coastal Expressway",
+   "kind": "arterial",
+   "pt": [
+    3176.4,
+    5321.1
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "bazaar",
+   "road": "Coastal Expressway",
+   "kind": "arterial",
+   "pt": [
+    2290.9,
+    5359.0
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "maze",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2876.3,
+    4898.8
+   ],
+   "bearing_deg": 8
+  },
+  {
+   "from": "jungle",
+   "to": "port",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3200.8,
+    5109.6
+   ],
+   "bearing_deg": 93
+  },
+  {
+   "from": "jungle",
+   "to": "bazaar",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2279.5,
+    5883.3
+   ],
+   "bearing_deg": 270
   }
  ]
 }

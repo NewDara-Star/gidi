@@ -62,6 +62,10 @@ def hub(ST, LM):
             {"kind": "pitch", "ha": round(ST["landuse_polygons_ha"]["pitch"][1] / ST["landuse_polygons_ha"]["pitch"][0], 2), "near_main": False},     # real mean pitch
         ],
         "hotel": _hotel("Stadium Highlife Hotel", LM),
+        # owner's review (Oct 2026): the same walking rules as the Maze (rail paths, worn crossings every 150-200 m,
+        # lanes start on streets, nothing over 44 m from a way), and a skywalk from the terminal to the station
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
     }
 
 def maze(ST, LM):
@@ -95,6 +99,8 @@ def maze(ST, LM):
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
             {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},     # median: a small street-football pitch
         ],
+        "walk": {"rail_path_m": 4.5,          # a footpath each side of the line, inside its 6 m clear strip
+                 "cross_every_m": [150, 200]},   # worn crossings over the rail (owner's call; OSM maps only 15 level crossings, one per 1.1 km)
         "rail_frontage": True,           # plots along the line are built 6 m from the track (real: 658 buildings within 30 m, 247 within 15 m); off for the Hub
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
@@ -103,7 +109,45 @@ def maze(ST, LM):
                   {"poi": "The steal", "kind": "kiosk", "w": 3.5, "d": 2.5}],          # the food stall where the story opens
     }
 
+def jungle(ST, LM):
+    """Jungle City: Ajegunle (Ajeromi/Ifelodun, studied on its own) with a Festac estate block (Amuwo Odofin, study-festac*.json)."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 74 x 2.6 = 193 m: Ajegunle's blocks are long, on a regular grid
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Lane", "Crescent", "Close")}
+    FE = json.load(open("study-festac.json"))
+    return {
+        "lgas": ["Ajeromi/Ifelodun"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.5, "dead_end": 0.12,
+        "cross_scale": 1.8,           # cross streets far apart: Ajegunle is long east-west streets with few cross streets
+        "size_lo_u": 0.65,            # house sizes from the upper 35% of the real range (plots shrink many of them)
+        "back_row": 0.65,
+        "courtyard_m": [0.8, 2.0],    # tighter compounds than Mushin's 1.5-4 m: real gaps 0.8-0.9 m, ground built on 41-43%
+        "big_front": 0.15,            # few big buildings: 3% over 400 m2, 1.3 per km2 over 1,500 m2
+        "internal_mains": 1, "continue_mains": True,   # the Maze's Adeleke Road carries on south to the coast
+        "exp_bridge_m": LM["flyover_spans_m"]["p50"],  # ...over the Coastal Expressway on a flyover
+        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"]},
+        "name_endings": ends,
+        "reserve": [   # the plank market faces the expressway (real markets and retail: median 2.2 ha, 4 m from a main road)
+            {"kind": "market", "poi": "Boundary Plank Market", "m2": ST["markets_and_retail"]["ha"]["p50"] * 1e4, "aspect": 1.6, "front": "art"},
+        ],
+        "parcels": [
+            {"kind": "estate", "ha": round(FE["blocks"]["area_m2"]["p75"] / 1e4, 2), "uv": [0.15, 0.35], "near_main": True, "min_w": 60,   # one Festac block (p75: room for a few rows)
+             "block_m": [16, 24], "gap_m": 4.5, "garden_m": 20, "shop_share": 0.5, "storeys": 4},   # Festac flats: 16 x 24 m, 4.5 m apart (measured); 4 storeys is the district model's "1970s estate flats"
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
+        ],
+        "hotel": {"poi": "Ireti Hotel", "m2": ST["buildings"]["footprint_m2"]["p90"], "storeys": 3},   # "tiny hotels": a big house's footprint (p90), 3 storeys; no hotels mapped
+        "named": [{"poi": "Jahman Sound Studio", "kind": "studio", "from": ["front"]},
+                  {"poi": "Network Plus Café", "kind": "cafe", "from": ["front"]},
+                  {"poi": "Tunde's room", "from": ["back"]}],    # a room in a face-me-I-face-you house, behind the street
+        "canal_footbridges": 1,
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle}.get(did, lambda ST, LM: {})(ST, LM)

@@ -157,6 +157,20 @@ Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 
 
 **Unchanged for the Hub:** every new behaviour is switched on by a setting in the Maze's profile. Regenerating the Hub gives a file identical to before.
 
+### v2.1: the walking network (owner's review)
+- **Footpaths** are a new layer, `paths` in `web/gen-maze.json`. They are drawn as brown dashes in 2D and as dirt strips in 3D.
+  - **Along the rail:** one on each side, 4.5 m from the track, inside its clear strip. Street ends that stop at the rail walk on to it by a short link.
+  - **Along both canal banks**, 3 m from the centre of the canal. The Gang Canal footbridge now lands on these bank paths at both ends. In v2 it touched nothing.
+  - **Worn crossings over the rail.** They sit between the line's fixed crossings (the edge roads, the level crossing and the Adeleke Road bridge), spread evenly so that no gap is over 200 m. Where it can, each one lines up with a street end. The fixed crossings leave stretches of 200, 286 and 420 m, so a few gaps come out at 140–145 m, a little under the 150 m you asked for.
+  - **Through the parts market:** one walk-through aisle across the stall rows, from its back road to Ring Road.
+  - Real Mushin + Shomolu has only 15 mapped level crossings (one per 1.1 km of track). Informal crossings are rarely mapped, so the 150–200 m spacing is your call, not the data's.
+- **Lanes start on a street.** v2 sometimes started a service lane on the rail side of a block, which left three lanes floating. Lanes now start only on a block edge that is a street.
+- **No building more than 44 m from a way.** Houses and sheds that would be further from any street, lane or path are not placed. This mostly affects sheds at the back of deep plots.
+- **Two new checks** in `check_district.py`, both passing for the Maze:
+  - **9:** every lane, path and footbridge is joined to the road network, and a footbridge lands on a way at both ends.
+  - **10:** every building is within 45 m of a way. Buildings inside a yard, market or school count from the parcel's fence, which must touch a way.
+- **The town-plan figures barely move.** Streets stay at 18.5 km/km². Buildings per km² go from 2,062 to 2,077, the typical house from 131 to 134 m², and the front row from 61% to 62%.
+
 ## 5. Result vs real (same measuring stick for both)
 
 ![The Maze v2 (left) beside a dense real square (right)](img/maze-vs-real.png)
