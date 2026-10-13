@@ -58,10 +58,10 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued.
    - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
-5. **Bake and look:** `python3 scripts/bake_web.py`. Open `web/shell.html` with the data and app to check the 2D map. Look before publishing.
+5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
 6. **Report and PR:**
    - Commit, push the branch and open a PR. Show the owner the side-by-side picture and the match table: what matched, what didn't, and why.
-   - Update the live map artifact only after the owner approves.
+   - After the owner merges, republish `web/gidi-maps.html` to the live map (https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP; read it first, then publish to that URL), so the city map grows district by district.
 
 ## Paste this to start a session
 > Clone https://github.com/NewDara-Star/gidi. Read README.md and docs/DISTRICT-BRIEF.md, then build the **<district id>** district following the brief. Work on a branch and open a PR; don't push to main.
