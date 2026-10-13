@@ -98,9 +98,13 @@
       h("g", { pointerEvents: "none" },
         G.arterials.map((a, i) => h("path", { key: "ac" + i, d: pts2d(a.pts), className: "ar-case " + a.cls, style: { strokeWidth: w(a.cls === "exp" ? 34 : 26, a.cls === "exp" ? 5.5 : 4.5) } })),
         G.arterials.map((a, i) => h("path", { key: "a" + i, id: "art" + i, d: pts2d(a.pts), className: "ar " + a.cls, style: { strokeWidth: w(a.cls === "exp" ? 26 : 19, a.cls === "exp" ? 3.8 : 3) } }))),
+      h("g", { pointerEvents: "none" },   // flyovers and rail bridges sit above the roads; skywalks above everything
+        (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "fc" + i, d: pts2d(s.pts), className: "fly-case", style: { strokeWidth: w(s.width + 6, 5) } })),
+        (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "f" + i, d: pts2d(s.pts), className: "fly", style: { strokeWidth: w(s.width, 3.6) } }))),
       layers.rail && h("g", { pointerEvents: "none" },
         h("path", { d: pts2d(G.rail.pts), className: "rail-case", style: { strokeWidth: px(5) } }),
         h("path", { d: pts2d(G.rail.pts), className: "rail", style: { strokeWidth: px(2.5), strokeDasharray: px(7) + " " + px(5) } })),
+      z > 0.22 && h("g", { pointerEvents: "none" }, (G.structures || []).filter((s) => s.kind === "skywalk").map((s, i) => h("path", { key: "sw" + i, d: pts2d(s.pts), className: "skywalk", style: { strokeWidth: w(s.width, 1.2) } }))),
       layers.ferries && G.ferries.map((f, i) => h("path", { key: "f" + i, d: pts2d(f.pts), className: "ferry", style: { strokeWidth: px(2), strokeDasharray: px(2) + " " + px(5) }, pointerEvents: "none" })),
       // street names along paths
       layers.names && z > 0.55 && h("g", { pointerEvents: "none", className: "street-names" },
