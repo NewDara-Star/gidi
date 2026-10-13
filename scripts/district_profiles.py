@@ -1,5 +1,6 @@
 # Per-district settings for gen_fabric.py. Each number says where it comes from.
-# The Maze has no profile: the generator keeps its original (v1) behaviour for it, so the finished Maze can be reproduced.
+# A district with no profile gets the generator's original (v1) behaviour. The Maze got its own profile in v2; its edge roads
+# and gateways in web/network.json are kept exactly ("keep_gateways"), because the Hub was built against them.
 import json, os
 
 def _lga_table():
@@ -63,7 +64,46 @@ def hub(ST, LM):
         "hotel": _hotel("Stadium Highlife Hotel", LM),
     }
 
+def maze(ST, LM):
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 73 x 2.0 = 146 m, the v1 Maze's 150 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Avenue", "Close", "Way", "Crescent", "Lane")}
+    mk = sorted(LM["markets_m2"]); mk = [m for m in mk if m < 50000]   # the one 21 ha market is a whole quarter, not a parcel
+    return {
+        "lgas": ["Mushin", "Shomolu"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.5,            # v1 value: half the cross streets line up (real: 84% T, 16% X)
+        "cross_scale": 1.35,          # same stretch as the ribs, as in v1
+        "size_lo_u": 0.5,             # house sizes from the upper half of the real range (plots shrink many of them)
+        "back_row": 0.45,             # chance of a back house behind the front one; v1's 0.85 left the front row at ~50% (real 61-63%)
+        "dead_end": 0.12,
+        "big_front": 0.08,            # a few big shops and workshops on the main roads (real: 2-5% of buildings over 400 m2)
+        "internal_mains": 1,          # the through-road only: its two gateways are already agreed with Jungle City and Food Gate
+        "keep_gateways": True,        # web/network.json already holds the Maze's edge roads and crossings; the Hub was built against them
+        "name_endings": ends,
+        # majors crossing the rail: 4 of 6 on a bridge (67%), so the through-road bridges it; residential streets cross at level (real: 15 level crossings)
+        "rail_bridge_m": LM["flyover_spans_m"]["p50"], "level_crossings": 1,
+        # big places carved out before streets are drawn
+        "reserve": [
+            {"kind": "market", "poi": "Ladi Lane Parts Market", "m2": mk[len(mk) // 2], "aspect": 1.6, "front": "art"},   # median market; 4 of 5 touch a major road
+        ],
+        # smaller places taken from finished blocks
+        "parcels": [
+            {"kind": "industrial", "poi": "Daleko Grain Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False},   # houses and yards hug the line
+            {"kind": "motor park", "ha": round(LM["bus_stations"]["area_m2"]["p25"] / 1e4, 2), "near": "junction", "near_main": True, "min_w": 35},  # small park where the through-road meets Ring Road
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},     # median: a small street-football pitch
+        ],
+        "rail_frontage": True,           # plots along the line are built 6 m from the track (real: 658 buildings within 30 m, 247 within 15 m); off for the Hub
+        "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
+        "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
+        "print_row": {"poi": "Pedro Print Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
+        "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5},    # one transformer feeding a whole block
+                  {"poi": "The steal", "kind": "kiosk", "w": 3.5, "d": 2.5}],          # the food stall where the story opens
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze}.get(did, lambda ST, LM: {})(ST, LM)

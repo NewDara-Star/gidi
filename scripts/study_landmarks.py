@@ -59,4 +59,21 @@ R["rail_stops_per_km_of_track"] = round(sum(1 for t, p in D["points"] if t.get("
 R["hotels"] = [{"m2": round(g.area), "height_m": t.get("height")} for t, g in D["buildings"] if t.get("building") == "hotel"]
 mk = [g for t, g in D["landuse"] if t.get("amenity") == "marketplace"]
 R["markets_m2"] = sorted(round(g.area) for g in mk)
+R["markets_touching_major_road"] = sum(1 for g in mk if g.distance(mainU) < 10)
+
+# Typical compounds: the median, because a few campuses and sports grounds pull the mean up
+R["school_m2"] = pct([g.area for t, g in D["landuse"] if t.get("amenity") == "school"])
+R["pitch_m2"] = pct([g.area for t, g in D["landuse"] if t.get("leisure") == "pitch"])
+
+# How streets meet the rail and the water
+from collections import Counter
+R["rail_crossings_by_road"] = {f"{h} {'bridge' if b else 'level'}": n for (h, b), n in Counter((hw(t), bool(t.get("bridge") or t.get("layer"))) for t, g in D["roads"] if hw(t) and g.intersects(rail)).items()}
+R["level_crossings_mapped"] = sum(1 for t, p in D["points"] if t.get("railway") == "level_crossing")
+wat = unary_union([g for t, g in D["water"]])
+wx = [t for t, g in D["roads"] if hw(t) and not wat.is_empty and g.intersects(wat)]
+R["water_crossings"] = {"n": len(wx), "share_bridged": round(np.mean([bool(t.get("bridge")) for t in wx]), 2) if wx else None}
+
+# Power: pylons and lines
+R["power"] = {"towers": sum(1 for t, p in D["points"] if t.get("power") == "tower"), "line_km_per_km2": round(sum(g.length for t, g in D["power"] if t.get("power") == "line") / 1000 / A, 2),
+              "substations": sum(1 for t, g in D["power"] if t.get("power") == "substation")}
 json.dump(R, open(f"study-{DID}-landmarks.json", "w"), indent=1); print(json.dumps(R, indent=1))

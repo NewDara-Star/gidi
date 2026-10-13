@@ -76,7 +76,7 @@ def check_roads(gen, bgeoms, G):
         w = s.get("width")
         if s["kind"] == "ramp":
             add(s["pts"], (w or 8) / 2, "ramp " + s.get("name", ""))
-        elif s["kind"] in ("flyover", "skywalk") and s.get("layer", 0) >= 1:
+        elif s["kind"] in ("flyover", "skywalk", "footbridge") and s.get("layer", 0) >= 1:
             add(s["pts"], (w / 2) if w else (6 if s["kind"] == "flyover" else 2),
                 s["kind"] + " " + s.get("name", ""), {"stalls", "kiosk"})
     tree = STRtree([g for g, _, _ in shapes])

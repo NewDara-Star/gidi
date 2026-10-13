@@ -14,7 +14,7 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub (in review)
+- **Done:** maze (v2 in review), hub (in review)
 - **Ring around the Maze (one at a time):** jungle, foodgate, watertown
 - **Then:** capital, bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
@@ -47,13 +47,15 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - For the neighbourhood-level districts, add a bounding-box or polygon option to `study_extract.py`.
    - Write `docs/<id>-pattern-study.md` in the same shape as the Maze study. It covers roads, buildings, land, water, rail, connections and the limits of the data, plus the height, people, tree and terrain numbers from `lga_table.json`.
 3. **Generate:**
-   - Add the district to `scripts/district_profiles.py` (the Hub's profile is the worked example). The Maze has no profile, so it keeps its original behaviour.
+   - Add the district to `scripts/district_profiles.py`. The Hub's and the Maze's profiles are the worked examples.
+   - To rebuild a district whose neighbours are already built, set `keep_gateways`. Its edge roads and crossings in `web/network.json` are then reused exactly, as the Maze v2 does.
+   - `rail_frontage` builds houses up to the rail's clear strip. `fence_parcels` stops dead ends at a parcel's edge. Both are worth turning on for new districts.
    - `gen_fabric.py` was written for the Maze. Generalise what it needs:
      - parcels and landmarks for this district (its market, park, port, etc.)
      - storeys per building from the district's height bands
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze used seed 71, scale 1.35.
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, and the Hub used seed 23, scale 2.4. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued.

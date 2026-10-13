@@ -81,13 +81,13 @@
     m.userData.count = n; return m;
   }
 
-  // flyovers (decks on pillars) and skywalks
+  // flyovers (decks on pillars), skywalks and canal footbridges
   function structures(T) {
     const group = new THREE.Group();
     const deckM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6b6f75" : "#e4dfd5"), side: THREE.DoubleSide });
     const sideM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#4b4f55" : "#b9b3a8"), side: THREE.DoubleSide });
     for (const s of G.structures || []) {
-      const y = s.kind === "skywalk" ? 6.5 : 7 * (s.layer || 1);
+      const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : 7 * (s.layer || 1);
       const top = ribbon([s.pts], s.width, y, []);
       group.add(new THREE.Mesh(geomFrom(top), deckM));
       // deck edge (a strip hanging 1.2 m below each side) and pillars every ~28 m
@@ -97,9 +97,10 @@
         const nx = -(z1 - z0) / L * s.width / 2, nz = (x1 - x0) / L * s.width / 2;
         for (const sg of [1, -1]) {
           const ax = x0 + nx * sg, az = z0 + nz * sg, bx = x1 + nx * sg, bz = z1 + nz * sg;
-          edge.push(ax, y, az, bx, y, bz, bx, y - 1.2, bz, ax, y, az, bx, y - 1.2, bz, ax, y - 1.2, az);
+          const lip = Math.min(1.2, y);
+          edge.push(ax, y, az, bx, y, bz, bx, y - lip, bz, ax, y, az, bx, y - lip, bz, ax, y - lip, az);
         }
-        if (s.kind !== "skywalk") for (let t = 14; t < L; t += 28) {
+        if (s.kind === "flyover") for (let t = 14; t < L; t += 28) {
           const p = new THREE.Mesh(new THREE.BoxGeometry(2.2, y - 1.2, 2.2), sideM);
           p.position.set(x0 + (x1 - x0) * t / L, (y - 1.2) / 2, z0 + (z1 - z0) * t / L); group.add(p);
         }
