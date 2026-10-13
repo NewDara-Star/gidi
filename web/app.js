@@ -28,6 +28,7 @@
     betting: { label: "Betting / viewing centre", glyph: "◇", civic: 1 }, cemetery: { label: "Cemetery", glyph: "†", civic: 1 },
   };
   const CIVIC_ORDER = ["church", "mosque", "school", "hospital", "clinic", "chemist", "police", "fire", "council", "fuel", "bank", "sport", "betting", "cemetery"];
+  window.GIDI_TYPE = TYPE;
   const byId = Object.fromEntries(G.districts.map((d) => [d.id, d]));
   const ACT_ORDER = [1, 2, 3];
 
@@ -130,6 +131,9 @@
     const drag = useRef(null);
     const pointers = useRef(new Map());
     const anim = useRef(null);
+    const [dim, setDim] = useState(() => load("gidi-dim", "2d"));
+    const api3d = useRef(null);
+    useEffect(() => save("gidi-dim", dim), [dim]);
 
     useEffect(() => save("gidi-layers", layers), [layers]);
 
@@ -259,6 +263,36 @@
     const showCivic = layers.civic && z > 0.32;
     const showCivicLabels = z > 0.75;
 
+    const TOPBAR = () =>
+      h("div", { className: "topbar ui" },
+        h("div", { className: "search" + (focusSearch && results.length ? " open" : "") },
+          h("div", { className: "brand" }, "Gidi"),
+          h("input", { id: "search", type: "search", placeholder: "Search districts, places, roads", value: q, autoComplete: "off",
+            onChange: (e) => setQ(e.target.value), onFocus: () => setFocusSearch(true), onBlur: () => setTimeout(() => setFocusSearch(false), 150),
+            onKeyDown: (e) => { if (e.key === "Enter" && results[0]) { select(results[0]); setQ(""); e.target.blur(); } } }),
+          focusSearch && results.length > 0 && h("ul", { className: "results" },
+            results.map((r) => h("li", { key: r.kind + r.id },
+              h("button", { onMouseDown: (e) => e.preventDefault(), onClick: () => { select(r); setQ(""); document.activeElement.blur(); } },
+                h("span", { className: "rn" }, r.name), h("span", { className: "rs" }, r.sub)))))),
+        h("div", { className: "chips" },
+          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"]].map(([k, t]) =>
+            h("button", { key: k, className: "chip" + (layers[k] ? " on" : ""), "aria-pressed": layers[k], onClick: () => setLayers({ ...layers, [k]: !layers[k] }) }, t))));
+    const is3d = dim === "3d";
+    const dimBox = h("div", { className: "dim ui" },
+      h("div", { className: "seg", role: "group", "aria-label": "Map view" },
+        h("button", { id: "dim2d", "aria-pressed": !is3d, onClick: () => setDim("2d") }, "2D"),
+        h("button", { id: "dim3d", "aria-pressed": is3d, onClick: () => setDim("3d") }, "3D")),
+      is3d && h("button", { className: "compass", "aria-label": "Turn the map to face north", onClick: () => api3d.current && api3d.current.north() }, h("span", { id: "compass3d" })));
+    const controls3d = h("div", { className: "controls ui" },
+      h("button", { "aria-label": "Zoom in", onClick: () => api3d.current && api3d.current.zoom(0.62) }, "+"),
+      h("button", { "aria-label": "Zoom out", onClick: () => api3d.current && api3d.current.zoom(1.6) }, "−"),
+      h("button", { "aria-label": "Show all of Gidi", className: "fit", onClick: () => api3d.current && api3d.current.home() }, "⤢"));
+    if (is3d) return h("div", { ref: wrap, className: "map" },
+      h(window.GidiView3D, { sel, select: (item) => { setSel(item); if (item) setPanelOpen(true); }, onReady: (a) => { api3d.current = a; } }),
+      TOPBAR(),
+      h(Panel, { sel, select, open: panelOpen, setOpen: setPanelOpen, close: () => setSel(null) }),
+      dimBox, controls3d);
+
     return h("div", { ref: wrap, className: "map", onPointerDown: onDown, onPointerMove: onMove, onPointerUp: onUp, onPointerCancel: onUp, onDoubleClick: onDbl },
       h("svg", { className: "canvas", width: size.w, height: size.h, role: "img", "aria-label": "Map of Gidi" },
         h("defs", null,
@@ -287,19 +321,7 @@
             ((civic ? showCivicLabels : showPoiLabels) || isSel) && h("span", { className: "plabel" }, p.name));
         })),
       // search
-      h("div", { className: "topbar ui" },
-        h("div", { className: "search" + (focusSearch && results.length ? " open" : "") },
-          h("div", { className: "brand" }, "Gidi"),
-          h("input", { id: "search", type: "search", placeholder: "Search districts, places, roads", value: q, autoComplete: "off",
-            onChange: (e) => setQ(e.target.value), onFocus: () => setFocusSearch(true), onBlur: () => setTimeout(() => setFocusSearch(false), 150),
-            onKeyDown: (e) => { if (e.key === "Enter" && results[0]) { select(results[0]); setQ(""); e.target.blur(); } } }),
-          focusSearch && results.length > 0 && h("ul", { className: "results" },
-            results.map((r) => h("li", { key: r.kind + r.id },
-              h("button", { onMouseDown: (e) => e.preventDefault(), onClick: () => { select(r); setQ(""); document.activeElement.blur(); } },
-                h("span", { className: "rn" }, r.name), h("span", { className: "rs" }, r.sub)))))),
-        h("div", { className: "chips" },
-          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"]].map(([k, t]) =>
-            h("button", { key: k, className: "chip" + (layers[k] ? " on" : ""), "aria-pressed": layers[k], onClick: () => setLayers({ ...layers, [k]: !layers[k] }) }, t)))),
+      TOPBAR(),
       // side panel
       h(Panel, { sel, select, open: panelOpen, setOpen: setPanelOpen, close: () => setSel(null) }),
       // controls
@@ -307,6 +329,7 @@
         h("button", { "aria-label": "Zoom in", onClick: () => zoomAt(size.w / 2, size.h / 2, 1.6) }, "+"),
         h("button", { "aria-label": "Zoom out", onClick: () => zoomAt(size.w / 2, size.h / 2, 1 / 1.6) }, "−"),
         h("button", { "aria-label": "Show all of Gidi", className: "fit", onClick: () => flyTo(fit([0, 0, MW, MH * 0.97], 24)) }, "⤢")),
+      dimBox,
       h("div", { className: "scale ui" },
         h("div", { className: "bar", style: { width: metres * z } }), h("span", null, scaleLabel),
         cursor && h("span", { className: "coord" }, `${(cursor[0] / 1000).toFixed(2)} km E · ${((MH - cursor[1]) / 1000).toFixed(2)} km N`)),

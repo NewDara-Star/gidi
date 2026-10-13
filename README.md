@@ -29,7 +29,7 @@ That master plan is what gets carried into Unreal.
 - **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`.
 - **In review:** the Hub (Oshodi/Isolo + Surulere). See `docs/hub-pattern-study.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
-- **Live 2D map** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
+- **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
 
 ## Data credits
 - OpenStreetMap contributors (ODbL)

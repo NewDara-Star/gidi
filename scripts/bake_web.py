@@ -12,6 +12,19 @@ def mp(pts): return [m(p) for p in pts]
 W,H=11*S,(8+0.4)*S
 water=Polygon(mp(lagoon)).union(Polygon(mp([(5.0,0.05),(5.5,0.05),(5.5,2.0),(5.0,2.1)])))
 ocean=Polygon(mp([(0,-0.4),(11,-0.4),(11,0.6),(5.0,0.6),(5.0,0.05),(2.95,0.05),(2.85,0.6),(0,0.6)]))
+
+# Storeys for districts generated before the generator wrote them (the Maze): bigger footprints go taller,
+# matched to the real height bands of the district's inspiration (data/results/lga_table.json, built-area shares).
+BANDS={"maze":[22,57,13,7]}
+def derive_storeys(blds,id_):
+    from shapely.geometry import Polygon as _P
+    fixed={"shed":1,"kiosk":1,"stalls":1,"warehouse":2,"school":2}
+    st=[fixed.get(b[0]) for b in blds]
+    free=sorted([i for i,b in enumerate(blds) if st[i] is None],key=lambda i:-_P(blds[i][1:]).area)
+    b1,b2,b3,b4=BANDS.get(id_,[25,55,13,7]); n=len(free); cut4=n*b4/100; cut3=cut4+n*b3/100; cut2=cut3+n*b2/100
+    for r,i in enumerate(free):
+        st[i]=(4 if r<cut4*0.7 else 5) if r<cut4 else 3 if r<cut3 else 2 if r<cut2 else 1
+    return st
 GEN={}
 IDS=["border","bazaar","jungle","port","maze","hub","railside","capital","estate","foodgate","watertown","oldshore","oldisland","heights","frontier"]
 INFO=json.load(open("web/districts_info.json"))
@@ -78,6 +91,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         if F.get("canal"): out.setdefault("canals",[]).append({"d":id_,"pts":F["canal"]})
         for st in F.get("structures",[]):  # flyovers, rail bridges and skywalks drawn above the roads (slip roads are already in mains)
             if st["kind"]!="ramp": out.setdefault("structures",[]).append({"d":id_,**st})
+        out.setdefault("storeys",{})[id_]=F.get("storeys") or derive_storeys(F["buildings"],id_)
         GEN[id_]=F
         core=json.load(open(f"study-{id_}-core.json")); M=F["metrics"]
         NETJ=json.load(open("web/network.json")) if os.path.exists("web/network.json") else {"gateways":[]}
