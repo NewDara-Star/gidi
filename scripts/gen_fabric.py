@@ -300,10 +300,15 @@ def split_big(P):
     return out
 collectors = []
 secs2 = []
-for P in sectors: secs2 += split_big(P)
+for P in sectors: secs2 += [P] if PROF.get("fingers") else split_big(P)   # fingers run the whole way down to the shore: no collector across them
 streets = []
+FG = PROF.get("fingers")   # waterfront: long streets run down to the shore and end short of the water (real: about half the junctions are dead ends)
+SHORE = unary_union([e for n, e, nb in edge_roads if nb is None and e.distance(water) < 20]) if FG else None
+def shore_angle(P):   # bearing of the shore nearest the sector: fingers run square to it
+    q = nearest_points(SHORE, P.centroid)[0]; sh = min(lines(SHORE), key=lambda l: l.distance(q)); vx, vy = LMK.direction_at(sh, sh.project(q))
+    return math.atan2(vy, vx)
 for P in secs2:
-    th = frontage_angle(P) + math.radians(rnd.uniform(-6, 6))
+    th = (shore_angle(P) if FG else frontage_angle(P)) + math.radians(rnd.uniform(-6, 6))
     c = P.centroid; Pr = rotate(P, -th, origin=c, use_radians=True)  # frontage now runs along x; ribs run along y
     minx, miny, maxx, maxy = Pr.bounds
     xs = []; x = minx + rnd.uniform(20, 55)
@@ -316,9 +321,28 @@ for P in secs2:
         ln = LineString([ln.coords[0], (x + bow, (miny + maxy) / 2), ln.coords[1]])
         seg = [g for g in lines(ln.intersection(Pr)) if g.length > 30]
         for g in seg:
+            if FG:   # a finger: its shore end stops short of the water's edge; inland it meets the road
+                gr = rotate(g, th, origin=c, use_radians=True); a0, a1 = Point(gr.coords[0]), Point(gr.coords[-1])
+                fwd = a0.distance(SHORE) > a1.distance(SHORE)   # True: runs from inland (start) toward the shore (end)
+                if (P.distance(SHORE) < 15 and rnd.random() >= FG.get("through", 0)) or (P.distance(SHORE) >= 15 and rnd.random() < RULE["dead_end"]):   # a few run on to the shore road
+                    keep = g.length - rnd.uniform(*FG["stop_m"])
+                    if keep < 40: continue
+                    g = substring(g, 0, keep) if fwd else substring(g, g.length - keep, g.length)
+                ribs.append(g); continue
             if rnd.random() < RULE["dead_end"] and g.length > 110:  # stop short inside the block: a dead end
                 keep = rnd.uniform(.45, .8); g = substring(g, 0, g.length * keep) if rnd.random() < .5 else substring(g, g.length * (1 - keep), g.length)
             ribs.append(g)
+    if FG and FG.get("spur_every_m"):   # short side lanes off each finger, ending in the compounds (a fishbone: a T and a dead end each)
+        spurs = []
+        for g in ribs:
+            t = rnd.uniform(.3, 1) * FG["spur_every_m"]
+            while t < g.length - 25:
+                q = g.interpolate(t); sd = rnd.choice((1, -1)); L = rnd.uniform(*FG["spur_m"])
+                sp = LineString([(q.x, q.y), (q.x + sd * L, q.y)])
+                if Pr.buffer(-8).contains(sp.interpolate(1.0, normalized=True)) and all(sp.distance(o) > 18 for o in ribs + spurs if o is not g):
+                    spurs.append(sp)
+                t += rnd.uniform(.6, 1.4) * FG["spur_every_m"]
+        streets += [rotate(g, th, origin=c, use_radians=True) for g in spurs]
     # cross streets between neighbouring ribs, staggered so most junctions are T's
     ribs.sort(key=lambda g: g.centroid.x)
     walls = [Pr.exterior]  # the sector edge is a road: cross streets may run to it too
@@ -362,6 +386,8 @@ for g in incoming:
     if KEEP: stop = stop.union(unary_union(streets))   # a rebuilt district ties its kept crossings into the first street they meet
     x = ray.intersection(stop); hits = [] if x.is_empty else [q for q in getattr(x, "geoms", [x]) if q.geom_type == "Point"]
     cut = min([ray.project(q) for q in hits if ray.project(q) > (25 if KEEP else 5)] or [ray.length])
+    if FG and ray.interpolate(cut).distance(SHORE) < 2:   # a street that runs down to the shore stops short of it too (unless it is only a short link)
+        st_ = rnd.uniform(*FG["stop_m"]); cut = cut - st_ if cut - st_ > 60 else cut
     streets.append(substring(ray, 0, cut))
 if RES_U is not None:   # with "clear_access", streets also stop short of a big place's own road and snap onto it (no double road beside it)
     streets = [x for s0 in streets for x in lines(s0.difference(RES_U.buffer((GAP if PROF.get("clear_access") else 0) + CLEAR["street"] + 1))) if x.length > 18]
@@ -436,7 +462,8 @@ if PROF.get("clear_access"):   # a big place's own road joins the street grid at
             q = nearest_points(st_u, c)[0]
             if 0.5 < c.distance(q) <= 40: streets.append(LineString([c, q]))
 # no block bigger than the real 90th percentile (~3.2 ha): split oversize blocks with a street across their long axis
-for _ in range(3):
+# (not between fingers: the land between them opens onto the water, it is not a block)
+for _ in range(0 if FG else 3):
     big = [b for b in polygonize(noded(streets + hard + [rail] + ([rail_zone.exterior] if PROF.get("rail_frontage") else []))) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
     if not big: break
     for b in big:
@@ -953,7 +980,7 @@ if SV:   # houses on stilts over the lagoon: plank boardwalks out from the shore
     anchor = POIS.get(SV["poi"], poly.centroid)
     if SV.get("near") == "bridge" and bridge is not None: anchor = Point(bridge.coords[0])   # "stilt houses under the Long Bridge"
     sh = min(shore, key=lambda e: e.distance(anchor)); t_a = sh.project(anchor) + SV.get("shift_m", 0)
-    bw = []; vrnd = random.Random(SEED * 13 + 1)
+    bw = []; vrnd = random.Random(SV.get("seed", SEED) * 13 + 1)   # the village keeps its own dice: rebuilding the land never moves a hut
     class _Grid:   # huts already built, by 20 m cell: where boardwalks converge, rows from two boardwalks must not overlap
         def __init__(self): self.c = {}
         def add(self, r): x, y = r.centroid.x, r.centroid.y; self.c.setdefault((int(x // 20), int(y // 20)), []).append(r)

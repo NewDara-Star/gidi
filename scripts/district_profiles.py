@@ -210,8 +210,11 @@ def watertown(ST, LM):
         "lgas": ["Lagos Mainland", "Shomolu"],
         "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense land squares
-        "x_junction": 0.3, "cross_scale": 2.4, "dead_end": 0.9, "size_lo_u": 0.4, "plot_u": [0.3, 0.9],
-        "back_row": 0.85, "courtyard_m": [0.5, 1.5], "big_front": 0.1, "vacant": 0.25,
+        "x_junction": 0.0, "cross_scale": 4.5, "dead_end": 0.9, "size_lo_u": 0.4, "plot_u": [0.3, 0.9],
+        "back_row": 0.9, "courtyard_m": [0.5, 1.5], "big_front": 0.1, "vacant": 0.18,
+        # streets run down to the shore as fingers and most stop short of the water (the real waterfront: ~10 km of road per km2,
+        # about half the junctions dead ends); short side lanes branch off them into the compounds, and a few cross links tie them
+        "fingers": {"stop_m": [25, 45], "through": 0.4, "spur_every_m": 200, "spur_m": [30, 55]},
         "internal_mains": 0,          # Ring Road crosses it; the real waterfront has little main road (0.6-1.6 km/km2)
         "name_endings": ends,
         "edge_rail_bridge_m": LM["flyover_spans_m"]["p50"],   # Okafor Road over the rail: majors cross on bridges (Mainland + Shomolu 6 of 6; Mushin + Shomolu 4 of 6)
@@ -219,7 +222,7 @@ def watertown(ST, LM):
             {"kind": "sawmill", "poi": "Okobaba Sawmill", "ha": 1.5, "near": "shore", "near_main": False, "gate": "nearest"},   # on the water, with log rafts
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
         ],
-        "stilt_village": {"poi": "Stilt Village", "near": "bridge", "shift_m": -170, "bar_poi": "The Stilt Bar",
+        "stilt_village": {"poi": "Stilt Village", "near": "bridge", "shift_m": -170, "bar_poi": "The Stilt Bar", "seed": 42,   # built with seed 42 (v1)
                           "length_m": 300, "depth_m": 190,            # about 5.7 ha of water (the real village is 41 ha: chosen, not scaled)
                           "spine_every_m": 34,                        # boardwalks; a canoe lane between each pair of hut rows
                           "cross_every_m": 70,                        # plank walkways across the lanes
@@ -228,6 +231,7 @@ def watertown(ST, LM):
         "jetty": {"poi": "Canoe Jetty", "name": "Canoe Jetty", "m": 20},   # canoes to the creeks and Old Shore
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+        "lock": {"parcels": ["Okobaba Sawmill"]},   # the sawmill chase's ground stays put when the land fabric is rebuilt (web/locked.json)
     }
 
 def profile(did, ST):
