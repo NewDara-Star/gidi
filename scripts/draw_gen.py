@@ -12,7 +12,8 @@ fig, axs = plt.subplots(1, n, figsize=(9 * n, 9)); axs = [axs] if n == 1 else ax
 ax = axs[0]
 ax.fill(*poly.exterior.xy, fc="#f1eee8", ec="#999", lw=.8)
 COL = {"front": "#b9a48a", "back": "#a8977f", "shed": "#8f8577", "kiosk": "#6e8fb0", "warehouse": "#7a7f86", "stalls": "#d08a3a", "school": "#c9a227",
-       "terminal": "#5d7fa3", "station": "#8a5d9e", "stands": "#9a8f80", "hotel": "#b0473a"}
+       "terminal": "#5d7fa3", "station": "#8a5d9e", "stands": "#9a8f80", "hotel": "#b0473a",
+       "print": "#7d5ba6", "transformer": "#e0b000"}
 PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch": "#bfe3b4", "motor park": "#d6dbe8",
       "bus terminal": "#d6dbe8", "station": "#e6d8ef", "stadium": "#e3e8d6", "under bridge": "#f6d7b0"}
 for p in F["parcels"]: ax.fill(*zip(*p["pts"]), fc=PC[p["kind"]], ec="none")
@@ -29,7 +30,7 @@ for p in getattr(r, "geoms", [r]): ax.plot(*p.xy, c="#555", lw=1.6, ls=(0, (4, 2
 if F.get("canal"): ax.plot(*zip(*F["canal"]), c="#4aa3c7", lw=2.5)
 for st in F.get("structures", []):   # flyovers and bridges on top, slip roads, skywalks
     if st["kind"] == "ramp": ax.plot(*zip(*st["pts"]), c="#f5c542", lw=3.0, solid_capstyle="round")
-    elif st["kind"] == "skywalk": ax.plot(*zip(*st["pts"]), c="#2b6cb0", lw=2.4)
+    elif st["kind"] in ("skywalk", "footbridge"): ax.plot(*zip(*st["pts"]), c="#2b6cb0", lw=2.4, zorder=6)
     else:
         ax.plot(*zip(*st["pts"]), c="#333", lw=9 + 2 * st["layer"], solid_capstyle="butt", zorder=5)
         ax.plot(*zip(*st["pts"]), c="#bdbdbd" if st["layer"] == 1 else "#e0e0e0", lw=7 + 2 * st["layer"], solid_capstyle="butt", zorder=5)

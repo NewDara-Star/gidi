@@ -13,7 +13,7 @@ W,H=11*S,(8+0.4)*S
 water=Polygon(mp(lagoon)).union(Polygon(mp([(5.0,0.05),(5.5,0.05),(5.5,2.0),(5.0,2.1)])))
 ocean=Polygon(mp([(0,-0.4),(11,-0.4),(11,0.6),(5.0,0.6),(5.0,0.05),(2.95,0.05),(2.85,0.6),(0,0.6)]))
 
-# Storeys for districts generated before the generator wrote them (the Maze): bigger footprints go taller,
+# Storeys for any district file generated before the generator wrote them (v1): bigger footprints go taller,
 # matched to the real height bands of the district's inspiration (data/results/lga_table.json, built-area shares).
 BANDS={"maze":[22,57,13,7]}
 def derive_storeys(blds,id_):

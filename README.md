@@ -14,7 +14,7 @@ That master plan is what gets carried into Unreal.
 | `scripts/study_landmarks.py` | Sizes of a district's big structures (flyovers, interchanges, footbridges, terminals, stadiums, stations, hotels). Statistics only. |
 | `scripts/fabric_metrics.py` | One measuring stick for real and generated fabric. |
 | `scripts/gen_fabric.py` | The original street + building generator. Calibrated to a study, it writes `web/gen-<id>.json` and updates `web/network.json`. |
-| `scripts/district_profiles.py` | Per-district settings for the generator (landmarks, calibration knobs, height bands), each with its source. The Maze has none and keeps the original behaviour. |
+| `scripts/district_profiles.py` | Per-district settings for the generator (landmarks, calibration knobs, height bands), each with its source. The Maze and the Hub both have one. Settings such as `keep_gateways`, `rail_frontage` and `fence_parcels` switch on newer behaviour per district. |
 | `scripts/landmarks.py` | Big pieces laid out before the street fabric: the interchange knot (flyovers, slip roads, skywalks), terminals, stations, stadiums. |
 | `scripts/check_district.py` | Checks a generated district: no house on a road, no overlaps, edges match `network.json`, neighbours' gateways continued, storeys valid. |
 | `scripts/draw_gen.py` | Side-by-side check picture: generated district vs a real 1 km square. |
@@ -26,7 +26,7 @@ That master plan is what gets carried into Unreal.
 | `docs/` | Districts v0.3, the Lagos LGA research, the data plan, and the Maze pattern study (the worked example). |
 
 ## Status
-- **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`.
+- **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`. v2 is in review: it was rebuilt with the current generator, and its edge roads and gateways are unchanged.
 - **In review:** the Hub (Oshodi/Isolo + Surulere). See `docs/hub-pattern-study.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP

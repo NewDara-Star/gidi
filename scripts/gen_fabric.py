@@ -43,7 +43,7 @@ RULE = {
 if PROF:
     ce = PROF["cross_every"]; RULE["cross_every"] = sampler({k: ce[k] for k in ("p25", "p50", "p75")}, ce["lo"], ce["hi"])
     RULE["x_junction"] = PROF["x_junction"]; RULE["dead_end"] = PROF.get("dead_end", RULE["dead_end"])
-    RULE["big_front"] = PROF.get("big_front", 0.0); RULE["cross_scale"] = PROF.get("cross_scale", SCALE); RULE["size_lo_u"] = PROF.get("size_lo_u", 0.25)
+    RULE["back_row"] = PROF.get("back_row", RULE["back_row"]); RULE["big_front"] = PROF.get("big_front", 0.0); RULE["cross_scale"] = PROF.get("cross_scale", SCALE); RULE["size_lo_u"] = PROF.get("size_lo_u", 0.25)
 CLEAR = {"lane": 2.2, "street": 3.4, "main": 6.5, "art": 12.5, "exp": 15, "rail": 6.0, "canal": 4.0}   # building edge to centreline, minimum
 WIDTH = {"street": 5.5, "main": 10, "art": 22}
 FIRST = ["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Folake","Agboola","Shonibare","Ilori","Durojaiye","Ogunleye","Aremu","Okonkwo","Nwosu","Danjuma"]
@@ -69,6 +69,8 @@ def street_name(kind="street", r=None):
 NET_F = "web/network.json"
 NET = json.load(open(NET_F)) if os.path.exists(NET_F) else {"edges": {}, "gateways": []}
 if PROF: used |= {e["name"] for e in NET["edges"].values()}
+# a district rebuilt after its neighbours keeps the crossings it already agreed with them (web/network.json), road for road
+KEEP = bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
 arts = [(a["name"], a["cls"], LineString(a["pts"])) for a in G["arterials"] if a["cls"] != "bridge" and LineString(a["pts"]).distance(poly) < 160]
 rail = LineString(G["rail"]["pts"]); rail_in = rail.intersection(poly.buffer(30))
 coords = list(poly.exterior.coords)[:-1]
@@ -101,8 +103,8 @@ import landmarks as LMK
 INTERNAL_MAINS = PROF.get("internal_mains", 2) if PROF else 2
 # internal mains: one through-route crossing the district (gateways on both sides), one half-route that T's into it.
 # Main density target ~3 km/km2 (dense core square 3.1); edge roads count half because neighbours share them.
-def through_main(e1, e2, t1, t2, bend):
-    p, q = e1.interpolate(t1, normalized=True), e2.interpolate(t2, normalized=True)
+def through_main(e1, e2, t1, t2, bend, ends=None):
+    p, q = ends or (e1.interpolate(t1, normalized=True), e2.interpolate(t2, normalized=True))
     m = LineString([p, q]).interpolate(rnd.uniform(.4, .6), normalized=True)
     L = p.distance(q); nx_, ny_ = -(q.y - p.y) / L, (q.x - p.x) / L
     k = (m.x + nx_ * bend, m.y + ny_ * bend)
@@ -111,10 +113,15 @@ def through_main(e1, e2, t1, t2, bend):
 E = [(i, e) for i, (n, e, nb) in enumerate(edge_roads)]
 pairs = [(i, j) for i in range(len(E)) for j in range(len(E)) if i < j and E[i][1].distance(E[j][1]) > 300]
 best = None
+PIN = {}   # kept main-road gateways: the through-route must start and end exactly on them
+for g in (NET["gateways"] if KEEP else []):
+    if g["from"] == DID and g["kind"] == "main": PIN.setdefault(g["road"], []).append(Point(g["pt"]))
+PIN = [(n, v) for n, v in PIN.items() if len(v) == 2]
+if PIN: pairs = [(None, None)]
 for i, j in (pairs if INTERNAL_MAINS else []):
     for t in range(40):
         t1, t2 = rnd.uniform(.35, .65), rnd.uniform(.35, .65)
-        ln = through_main(E[i][1], E[j][1], t1, t2, rnd.uniform(-35, 35))
+        ln = through_main(None, None, 0, 0, rnd.uniform(-35, 35), PIN[0][1]) if PIN else through_main(E[i][1], E[j][1], t1, t2, rnd.uniform(-35, 35))
         # stay clear of arterials running parallel; crossing them is fine
         def cross_angle(a):
             x = ln.intersection(a)
@@ -126,7 +133,8 @@ for i, j in (pairs if INTERNAL_MAINS else []):
         ang_ok = all(cross_angle(a) >= 55 for n, k, a in arts) and cross_angle(rail) >= 40
         score = (0 if ang_ok else 1e4) + ln.distance(poly.centroid) * 2 + abs(ln.length - 1000) * .2
         if best is None or score < best[0]: best = (score, ln, (i, j))
-mains = [(street_name("main"), best[1])] if best else []
+mains = [(PIN[0][0] if PIN else street_name("main"), best[1])] if best else []
+if PIN: used.add(PIN[0][0])
 # half-route from another edge into the through-route, on the biggest leftover piece
 pieces = [] if not best else list(polygonize(unary_union([e for n, e, nb in edge_roads] + [a for n, k, a in arts] + [best[1], rail])))
 pieces = [p.intersection(land) for p in pieces if poly.buffer(-5).intersects(p.representative_point())]
@@ -143,8 +151,9 @@ for n, e, nb in (edge_roads if INTERNAL_MAINS > 1 and big is not None else []):
         sc = abs(ln.length - 520)
         if cand is None or sc < cand[0]: cand = (sc, ln)
 if cand: mains.append((street_name("main"), cand[1]))
-NET["gateways"] = [g for g in NET["gateways"] if g["from"] != DID]
+if not KEEP: NET["gateways"] = [g for g in NET["gateways"] if g["from"] != DID]
 def add_gate(pt, nb, road, kind, bearing=None):
+    if KEEP: return   # already recorded; the neighbours built against these
     NET["gateways"].append({"from": DID, "to": nb, "road": road, "kind": kind, "pt": [round(pt.x, 1), round(pt.y, 1)], **({"bearing_deg": round(bearing)} if bearing is not None else {})})
 for n, ln in mains:  # gateways where internal mains reach the district edge: the neighbour continues the road from here
     for en, e, nb in edge_roads:
@@ -159,16 +168,6 @@ for en, e, nb in edge_roads:  # rail crossing the edge
     x = rail.intersection(e)
     for p in getattr(x, "geoms", [x]):
         if p.geom_type == "Point" and nb: add_gate(p, nb, "Gidi Rail", "rail")
-# canal (real: ~0.76 km of canal/drain/stream per km2) - one open canal following the land, with culverts under streets
-canal = None
-gc = next((p for p in G["pois"] if p["d"] == DID and "Canal" in p["name"]), None)
-if gc:
-    c0 = Point(gc["x"], gc["y"]); ang = rnd.uniform(0, math.pi); pts = []
-    for t in np.linspace(-1, 1, 9):
-        pts.append((c0.x + math.cos(ang) * 340 * t + rnd.uniform(-12, 12), c0.y + math.sin(ang) * 340 * t + rnd.uniform(-12, 12)))
-    canal = LineString(pts).intersection(land.buffer(-12))
-    canal = max(lines(canal), key=lambda l: l.length) if not canal.is_empty else None
-
 # ---------- 1b. landmarks carved out first (Hub: the knot of flyovers and slip roads, terminal, station, stadium) ----------
 STRUCT, ramps, access, RES = [], [], [], []   # RES: reserved parcels {"kind","geom","poi"} that ordinary streets and houses keep out of
 POIS = {p["name"]: Point(p["x"], p["y"]) for p in G["pois"] if p["d"] == DID}
@@ -178,7 +177,25 @@ if PROF:  # the designed pins (districts_info.json), placed the way bake_web.py 
     for q in json.load(open("web/districts_info.json"))[DID]["pois"]:
         pt = Point(_b[0] + (_b[2] - _b[0]) * q["u"], _b[1] + (_b[3] - _b[1]) * (1 - q["v"]))
         POIS[q["name"]] = pt if _core.contains(pt) else nearest_points(_core, pt)[0]
+# canal (real: ~0.76 km of canal/drain/stream per km2) - one open canal following the land, with culverts under streets
+canal = None
+gc = next((p for p in G["pois"] if p["d"] == DID and "Canal" in p["name"]), None)
+if gc:
+    c0 = POIS[gc["name"]]; ang = rnd.uniform(0, math.pi); pts = []   # with a profile, the designed pin (the baked one moves onto the canal we draw)
+    for t in np.linspace(-1, 1, 9):
+        pts.append((c0.x + math.cos(ang) * 340 * t + rnd.uniform(-12, 12), c0.y + math.sin(ang) * 340 * t + rnd.uniform(-12, 12)))
+    canal = LineString(pts).intersection(land.buffer(-12))
+    canal = max(lines(canal), key=lambda l: l.length) if not canal.is_empty else None
+    if canal is not None and PROF: canal = max(lines(canal.difference(rail.buffer(CLEAR["rail"] + 4))), key=lambda l: l.length)   # it stops at the rail and goes under in a culvert
+
 knot = None; poi_pos = {}
+if PROF.get("rail_bridge_m"):   # an internal main road crosses the rail on a bridge (real: most major roads do)
+    for n, ln in mains:
+        x = ln.intersection(rail)
+        for p in getattr(x, "geoms", [x]):
+            if p.geom_type != "Point" or not poly.contains(p): continue
+            tb = ln.project(p); h = PROF["rail_bridge_m"] / 2
+            STRUCT.append({"kind": "flyover", "name": f"{n} Rail Bridge", "geom": substring(ln, max(0, tb - h), min(ln.length, tb + h)), "layer": 1, "width": WIDTH["main"]})
 if PROF.get("interchange"):
     IC = PROF["interchange"]
     art_in = [(n, k, a) for n, k, a in arts if a.intersection(poly).length > 100]
@@ -196,7 +213,8 @@ for spec in PROF.get("reserve", []):
     off = CLEAR["art"] if spec["front"] == "art" else CLEAR["rail"]
     if spec["front"] and not fronts: print("skipped", spec["kind"], "- nothing to face", file=sys.stderr); continue
     others = [e.buffer(CLEAR["main"] + 2) for n, e, nb in edge_roads] + [a.buffer(CLEAR["art"] + 2) for n, k, a in arts if all(a is not f for f in fronts)] \
-        + [r.buffer(CLEAR["main"] + 2) for r in ramps] + [r["geom"].buffer(GAP + 10) for r in RES] + ([] if spec["front"] == "rail" else [rail.buffer(CLEAR["rail"] + 2)])
+        + [r.buffer(CLEAR["main"] + 2) for r in ramps] + [r["geom"].buffer(GAP + 10) for r in RES] + ([] if spec["front"] == "rail" else [rail.buffer(CLEAR["rail"] + 2)]) \
+        + [ln.buffer(CLEAR["main"] + 2) for n, ln in mains] + ([canal.buffer(CLEAR["canal"] + 10)] if canal is not None else [])
     if knot is not None: others.append(knot.buffer(60))
     # it faces its own road (its margin may reach it), but stays clear of everything else
     got = LMK.place_reserved(spec, hint, fronts, off, land, unary_union(others), GAP + (6 if spec["front"] != "rail" else 0))
@@ -292,12 +310,16 @@ GEN_DONE = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
 incoming = [g for g in NET["gateways"] if g["to"] == DID and g["from"] in GEN_DONE and g["kind"] in ("street", "main") and "bearing_deg" in g] if PROF else []
 if PROF and any(g["to"] == DID and g["kind"] == "main" and "bearing_deg" not in g for g in NET["gateways"]):
     print("note: a neighbour's main road gateway has no bearing; continue it by hand", file=sys.stderr)
+if KEEP:  # the district's own street crossings, already recorded: a street runs in from each one (bearing points out, so turn it round)
+    incoming = incoming + [{**g, "bearing_deg": (g["bearing_deg"] + 180) % 360} for g in NET["gateways"] if g["from"] == DID and g["kind"] == "street" and "bearing_deg" in g
+                           and all(Point(g["pt"]).distance(Point(h["pt"])) > 1 for h in incoming)]
 for g in incoming:
     b = math.radians(g.get("bearing_deg", 0)); p0 = Point(g["pt"]); dx, dy = math.sin(b), -math.cos(b)
     ray = LineString([p0, (p0.x + dx * 600, p0.y + dy * 600)])
     stop = unary_union([a for n, k, a in arts] + ramps + access + [rail.buffer(9).exterior] + ([RES_U.exterior if RES_U.geom_type == "Polygon" else RES_U.boundary] if RES_U is not None else []) + [e for n, e, nb in edge_roads if e.distance(p0) > 1])
+    if KEEP: stop = stop.union(unary_union(streets))   # a rebuilt district ties its kept crossings into the first street they meet
     x = ray.intersection(stop); hits = [] if x.is_empty else [q for q in getattr(x, "geoms", [x]) if q.geom_type == "Point"]
-    cut = min([ray.project(q) for q in hits if ray.project(q) > 5] or [ray.length])
+    cut = min([ray.project(q) for q in hits if ray.project(q) > (25 if KEEP else 5)] or [ray.length])
     streets.append(substring(ray, 0, cut))
 if RES_U is not None: streets = [x for s0 in streets for x in lines(s0.difference(RES_U.buffer(CLEAR["street"] + 1))) if x.length > 18]
 # keep residential streets off the rail (they stop short: people cross on foot) and clip to land
@@ -316,6 +338,28 @@ def snap(g):
         if best and 0.3 < best[0] < 12: c[end] = nearest_points(best[1], p)[0].coords[0]
     return LineString(c)
 streets = [snap(g) for g in streets]
+# level crossings (real Mushin + Shomolu: 15 mapped): a street that stops at the rail carries straight over it to the first street beyond
+LX = []
+if PROF.get("level_crossings"):
+    away = unary_union([x["geom"] for x in STRUCT]).buffer(150) if STRUCT else None
+    cand = []
+    for g in streets:
+        c = list(g.coords)
+        for i0, i1 in ((0, 1), (-1, -2)):
+            p, q = Point(c[i0]), Point(c[i1])
+            if p.distance(rail_zone.exterior) > 1.5: continue
+            L = p.distance(q) or 1; ux, uy = (p.x - q.x) / L, (p.y - q.y) / L
+            ray = LineString([p, (p.x + ux * 200, p.y + uy * 200)]); x = ray.intersection(rail)
+            if x.geom_type != "Point" or not land.buffer(-40).contains(x) or (away is not None and away.contains(x)): continue
+            vx, vy = LMK.direction_at(rail, rail.project(x)); ang = math.degrees(math.acos(min(1, abs(ux * vx + uy * vy))))
+            if ang < 40: continue   # the same rule as the through-road: cross the line at a real angle
+            beyond = ray.intersection(unary_union([o for o in streets + hard if o is not g]))
+            hits = [h for h in getattr(beyond, "geoms", [beyond]) if h.geom_type == "Point" and ray.project(h) > ray.project(x) + 9]
+            if not hits: continue
+            h = min(hits, key=ray.project)
+            cand.append((-ang + x.distance(land.centroid) / 20, LineString([p, h])))
+    LX = [ln for sc, ln in sorted(cand, key=lambda c: c[0])[:PROF["level_crossings"]]]
+    streets += LX
 # clean-up: node the network and prune spurs shorter than 15 m (slivers left by clipping), repeat until stable
 import networkx as nx
 def prune(streets):
@@ -340,19 +384,19 @@ def prune(streets):
 streets = prune(streets)
 # no block bigger than the real 90th percentile (~3.2 ha): split oversize blocks with a street across their long axis
 for _ in range(3):
-    big = [b for b in polygonize(noded(streets + hard + [rail])) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
+    big = [b for b in polygonize(noded(streets + hard + [rail] + ([rail_zone.exterior] if PROF.get("rail_frontage") else []))) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
     if not big: break
     for b in big:
         mr = b.minimum_rotated_rectangle; cc = list(mr.exterior.coords)
         e1, e2 = ((cc[0], cc[1]), (cc[3], cc[2])) if math.dist(cc[0], cc[1]) >= math.dist(cc[1], cc[2]) else ((cc[1], cc[2]), (cc[0], cc[3]))
         f = rnd.uniform(.4, .6); p1 = LineString(e1).interpolate(f, normalized=True); p2 = LineString(e2).interpolate(f, normalized=True)
         ln = LineString([(p1.x + (p1.x - p2.x), p1.y + (p1.y - p2.y)), (p2.x + (p2.x - p1.x), p2.y + (p2.y - p1.y))]).intersection(b)
-        streets += [g for g in lines(ln) if g.length > 20]
+        streets += [g for g in lines(ln.difference(rail_zone) if PROF.get("rail_frontage") else ln) if g.length > 20]   # stop short of the rail like every other street
 
 # a few residential streets carry straight on into the neighbour (real: ~0.9 per km of edge); the rest T into the edge road
 for g in incoming: add_gate(Point(g["pt"]), g["from"], g["road"], g["kind"], (g.get("bearing_deg", 0) + 180) % 360)
 for en, e, nb in edge_roads:
-    if not nb or (PROF and nb in GEN_DONE): continue   # a finished neighbour already chose where streets cross this edge
+    if not nb or KEEP or (PROF and nb in GEN_DONE): continue   # a finished neighbour already chose where streets cross this edge
     ends = []
     for g in streets:
         for i0, i1 in ((0, 1), (-1, -2)):
@@ -362,15 +406,18 @@ for en, e, nb in edge_roads:
     rnd.shuffle(ends); n_keep = max(1, round(0.9 * e.length / 1000))
     for p, brg in ends[:n_keep]: add_gate(p, nb, "", "street", brg)
 # ---------- 3. parcels for the places a neighbourhood needs ----------
-net_lines = [("street", g) for g in streets] + [("main", e) for n, e, nb in edge_roads] + [("main", ln) for n, ln in mains] + [("main", l) for l in links] + [(k, a) for n, k, a in arts] \
+NET_LINES = lambda: [("street", g) for g in streets] + [("main", e) for n, e, nb in edge_roads] + [("main", ln) for n, ln in mains] + [("main", l) for l in links] + [(k, a) for n, k, a in arts] \
     + [("main", r) for r in ramps] + [("street", g) for g in access]
+net_lines = NET_LINES()
 blocks = [b for b in polygonize(noded([g for k, g in net_lines] + [rail])) if land.buffer(1).contains(b.representative_point()) and b.area > 120]
 mainU = unary_union([g for k, g in net_lines if k != "street"])
 parcels = [{"kind": r["kind"], "geom": r["geom"]} for r in RES]
 for r in RES:
     if r.get("poi"): poi_pos[r["poi"]] = r["geom"].representative_point()
-def take(kind, near_pt, want_ha, near_main=True, max_dist=None):
-    cands = [b for b in blocks if not any(b.intersects(p["geom"]) for p in parcels)]
+def short_side(b):
+    cc = list(b.minimum_rotated_rectangle.exterior.coords); return min(math.dist(cc[0], cc[1]), math.dist(cc[1], cc[2]))
+def take(kind, near_pt, want_ha, near_main=True, max_dist=None, min_w=0):
+    cands = [b for b in blocks if not any(b.intersects(p["geom"]) for p in parcels) and (not min_w or short_side(b) >= min_w)]
     if near_main: cands = [b for b in cands if b.distance(mainU) < 3]
     elif PROF: cands = [b for b in cands if b.distance(unary_union([a for n, k, a in arts] + ramps)) > 20] or cands   # off the arterials
     else: cands = [b for b in cands if 0.6 * want_ha * 1e4 < b.area < 1.8 * want_ha * 1e4 and 30 < b.centroid.distance(mainU) < 200] or cands
@@ -411,7 +458,13 @@ if not PROF:
     take("motor park", Point(poly.bounds[0], poly.bounds[1]), 0.25)
 for spec in PROF.get("parcels", []):
     parcel_u0 = unary_union([p["geom"] for p in parcels])
-    if spec.get("poi"): hint = POIS.get(spec["poi"], c0)
+    if spec.get("near") == "rail":   # on the line, as close to its pin as the rail allows
+        pin = POIS.get(spec.get("poi"), c0); rin = rail.intersection(land.buffer(-30))
+        hint = nearest_points(rin, pin)[0] if not rin.is_empty else pin
+    elif spec.get("near") == "junction":   # where an internal main meets an arterial
+        xs = [q for n, ln in mains for n2, k, a in arts for q in getattr(ln.intersection(a), "geoms", [ln.intersection(a)]) if q.geom_type == "Point"]
+        hint = xs[0] if xs else c0
+    elif spec.get("poi"): hint = POIS.get(spec["poi"], c0)
     elif spec.get("near") == "rail_far_from_knot":   # industry lines the rail, away from the crowds at the interchange
         rin = rail.intersection(land.buffer(-30)); rls = lines(rin)
         if not rls: hint = c0
@@ -425,9 +478,12 @@ for spec in PROF.get("parcels", []):
         hint = max(cand, key=lambda q: q.distance(noise)) if cand else c0
     ha = spec["ha"]
     if ha == "from_study": ha = min(spec["cap_ha"], ST["landuse_polygons_ha"].get("industrial", [0, 0])[1] / ST["area_km2"] / 100 * land.area / 1e4)
-    g = take(spec["kind"], hint, ha, near_main=spec["near_main"])
+    g = take(spec["kind"], hint, ha, near_main=spec["near_main"], min_w=spec.get("min_w", 0))
     if spec.get("poi"): poi_pos[spec["poi"]] = g.representative_point()
 parcel_u = unary_union([p["geom"] for p in parcels])
+if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken for a parcel stop at its fence
+    if any(g.intersects(parcel_u) for g in streets):
+        streets = [x for g in streets for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
 def mostly_parcel(b): return b.intersection(parcel_u).area > 0.6 * b.area
 
 # service lanes (real: ~3 km per km2 of service ways): deep blocks get a dead-end lane so their middle can be built on
@@ -462,6 +518,13 @@ for r in RES:
         avoid = unary_union([x["geom"].buffer(3) for x in STRUCT] + [rr.buffer(3) for rr in ramps])
         for g in LMK.skywalks(fl, r["geom"].centroid, n_sw, IC["skywalk_m"], avoid, spacing=r["info"][4] * 0.55):
             STRUCT.append({"kind": "skywalk", "name": "Interchange skywalk", "geom": g, "layer": 1, "width": 4})
+# footbridges over the canal where streets cross it too far apart; they join the walkable banks (inside the canal's clear strip)
+if canal is not None and PROF.get("canal_footbridges"):   # in the longest stretches between street crossings
+    cuts = sorted(canal.project(q) for k, g in net_lines for x in [canal.intersection(g)] for q in getattr(x, "geoms", [x]) if q.geom_type == "Point")
+    for a0, b0 in sorted(zip([0.0] + cuts, cuts + [canal.length]), key=lambda ab: ab[0] - ab[1])[:PROF["canal_footbridges"]]:
+        t = (a0 + b0) / 2; q = canal.interpolate(t); ux, uy = LMK.direction_at(canal, t); h = CLEAR["canal"] - 0.3
+        STRUCT.append({"kind": "footbridge", "name": "Gang Canal footbridge", "geom": LineString([(q.x + uy * h, q.y - ux * h), (q.x - uy * h, q.y + ux * h)]), "layer": 1, "width": 2.5})
+    poi_pos["Gang Canal"] = canal.interpolate(0.5, normalized=True)
 SKY_CLEAR = [x["geom"].buffer(x["width"] / 2 + 1) for x in STRUCT if x["kind"] == "skywalk"]
 clear_geoms += SKY_CLEAR
 blocked = unary_union(clear_geoms + [parcel_u.buffer(1.0)])
@@ -544,6 +607,7 @@ for _, p, q, bi in fronts:
         mid = Point((p[0] + q[0]) / 2 + nx_ * 2, (p[1] + q[1]) / 2 + ny_ * 2)
         if not b.contains(mid): nx_, ny_ = -nx_, -ny_
         cl = CLEAR.get(edge_class(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)), 3.4)
+        if PROF.get("rail_frontage") and rail.distance(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)) < 1: cl = CLEAR["rail"]   # houses back onto the line
         a = math.atan2(uy, ux); t = 0.0
         big_ok = PROF and cl >= CLEAR["main"]   # big shops, plazas and warehouses face the main roads (real: 73 m from a main vs 183 m for all)
         while t < L - 4:
@@ -594,6 +658,32 @@ for k, g in net_lines:
         a = math.atan2(q.y - p.y, q.x - p.x); side = rnd.choice((1, -1)); off = CLEAR.get(k, 3.4) + 1.6
         r = rect(p.x - math.sin(a) * off * side, p.y + math.cos(a) * off * side, rnd.uniform(2.2, 4), rnd.uniform(2, 3.2), a)
         if free(r, 0.2): add(r, "kiosk")
+# small named things on the street edge near their pins: a transformer, a food stall
+for sp in PROF.get("spots", []):
+    pin = POIS.get(sp["poi"])
+    if pin is None: continue
+    got = None
+    for k, g in sorted(net_lines, key=lambda kg: kg[1].distance(pin)):
+        if k == "art" or g.distance(pin) > 150: continue
+        t0 = g.project(pin)
+        for dt in sorted(range(-120, 121, 2), key=abs):
+            if not 0 < t0 + dt < g.length: continue
+            q = g.interpolate(t0 + dt); ux, uy = LMK.direction_at(g, t0 + dt); off = CLEAR.get(k, 3.4) + sp["d"] / 2 + 0.2
+            for side in (1, -1):
+                r = rect(q.x - uy * off * side, q.y + ux * off * side, sp["w"], sp["d"], math.atan2(uy, ux))
+                if free(r, 0.3): got = r; break
+            if got: break
+        if got: break
+    if got: add(got, sp["kind"]); poi_pos[sp["poi"]] = got.centroid
+    else: print("no room for", sp["poi"], file=sys.stderr)
+# a print row: the house fronts along one street near the pin are presses and copy shops
+PR = PROF.get("print_row")
+if PR and PR["poi"] in POIS:
+    pin = POIS[PR["poi"]]; sg = min([g for g in streets if g.length > PR["length_m"] * 0.6], key=lambda g: g.distance(pin))
+    t0 = min(max(sg.project(pin), PR["length_m"] / 2), sg.length - PR["length_m"] / 2)
+    row = substring(sg, max(0, t0 - PR["length_m"] / 2), min(sg.length, t0 + PR["length_m"] / 2))
+    bld = [(r, "print" if k == "front" and r.distance(row) < CLEAR["street"] + 2 and 0 < row.project(r.centroid) < row.length else k) for r, k in bld]
+    poi_pos[PR["poi"]] = row.interpolate(0.5, normalized=True)
 extra_parcels = []
 # parcel buildings: market sheds, warehouses (the big >1500 m2 buildings sit near mains), school blocks
 for p in parcels:
@@ -604,7 +694,7 @@ for p in parcels:
         for dx in (-1, 1):
             r = rect(ctr.x + math.cos(a) * dx * 30, ctr.y + math.sin(a) * dx * 30, 46, 30, a)
             if g.contains(r): bld.append((r, "warehouse"))
-    if p["kind"] == "market":
+    if p["kind"] == "market" and not PROF:
         for i in range(-3, 4):
             for j in range(-2, 3):
                 r = rect(ctr.x + math.cos(a) * i * 13 - math.sin(a) * j * 11, ctr.y + math.sin(a) * i * 13 + math.cos(a) * j * 11, 10, 7, a)
@@ -616,6 +706,9 @@ for p in parcels:
     if not PROF: continue
     fit = lambda r: g.contains(r) and road_free.contains(r)
     bld[:] = [(r, k) for r, k in bld if not (k in ("warehouse", "stalls", "school") and r.intersects(g) and not road_free.contains(r))]   # v1 parcel buildings must clear roads too
+    if p["kind"] == "market":   # a parts market: back-to-back rows of lock-up stalls with narrow aisles, cleared off its access road
+        for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=3.5):   # each piece is a row of four lock-ups under one roof
+            if road_free.contains(r): bld.append((r, "stalls"))
     if p["kind"] == "under bridge":   # rows of stalls between the slip road and the flyover
         for r in LMK.stall_rows(g, a): 
             if road_free.contains(r): bld.append((r, "stalls"))
@@ -675,13 +768,14 @@ M = measure(gen_streets, B, land.buffer(3))
 half = sum(e.intersection(land.buffer(1)).length for n, e, nb in edge_roads) / 2000 / (land.area / 1e6)
 M["drive_km_per_km2_edges_half"] = round(M["drive_km_per_km2"] - half, 1); M["main_km_per_km2_edges_half"] = round(M["main_km_per_km2"] - half, 2)
 _bt = STRtree(B)   # counted, not assumed (the Maze's v1 file said 0 but its sheds overlapped back houses)
+if PROF.get("level_crossings"): M["level_crossings"] = len(LX)
 M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b) if j > i and b.intersection(B[j]).area > 0.05))
 
 # ---------- 7. storeys: match the inspiration area's height bands (share of built area), tallest on big plots near main roads ----------
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
     storeys = [FIXED.get(k) for r, k in bld]
@@ -698,6 +792,8 @@ if PROF:
         while b > 0 and acc >= max(0, target[b]): b -= 1; acc = 0.0
         lo, hi = STOREY_BANDS[b]; storeys[i] = lo if lo == hi else min(hi, lo + int(srnd.expovariate(1.2)))
         acc += bld[i][0].area
+    if PROF.get("print_row"):   # the presses sit in 2-3 storey houses (district model); the band shares barely move
+        lo, hi = PROF["print_row"]["storeys"]; storeys = [min(hi, max(lo, st)) if k == "print" else st for st, (r, k) in zip(storeys, bld)]
     M["storeys_share_by_area"] = [round(sum(bld[i][0].area for i in range(len(bld)) if band_of(storeys[i]) == q) / tot, 3) for q in range(7)]
     M["storeys_target_by_area"] = [round(x, 3) for x in bands]
 print(json.dumps({"seed": SEED, "scale": SCALE, "gidi": M, "real_median": {k: CORE["median"][k] for k in M if k in CORE["median"]}, "real_dense": {k: CORE["dense"][k] for k in M if k in CORE["dense"]}}, indent=1))
