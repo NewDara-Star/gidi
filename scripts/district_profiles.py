@@ -56,7 +56,7 @@ def hub(ST, LM):
         ],
         # smaller places taken from finished blocks, as in the Maze
         "parcels": [
-            {"kind": "motor park", "poi": "Boss's motor park", "ha": LM["bus_stations"]["area_m2"]["p75"] / 1e4, "near_main": True},
+            {"kind": "motor park", "poi": "Boss's motor park", "ha": LM["bus_stations"]["area_m2"]["p75"] / 1e4, "near_main": True, "gate": "nearest"},   # its driveway onto the nearest road
             {"kind": "industrial", "ha": "from_study", "cap_ha": 3.0, "near": "rail_far_from_knot", "near_main": True},
             {"kind": "school", "ha": round(ST["landuse_polygons_ha"]["school"][1] / ST["landuse_polygons_ha"]["school"][0], 2), "near_main": False},   # real mean school compound
             {"kind": "pitch", "ha": round(ST["landuse_polygons_ha"]["pitch"][1] / ST["landuse_polygons_ha"]["pitch"][0], 2), "near_main": False},     # real mean pitch
@@ -105,8 +105,12 @@ def maze(ST, LM):
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
         "print_row": {"poi": "Pedro Print Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
-        "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5},    # one transformer feeding a whole block
-                  {"poi": "The steal", "kind": "kiosk", "w": 3.5, "d": 2.5}],          # the food stall where the story opens
+        "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5}],   # one transformer feeding a whole block
+        # the opening (owner, Oct 2026): Tunde's room is a short walk from the parts market; The steal is the stall at its near (east)
+        # end; the chase runs the length of the market and comes out across Idowu Street from the boss's motor park in the Hub
+        "named": [{"poi": "The steal", "from": ["stalls"]},
+                  {"poi": "Tunde's room", "from": ["back"]}],
+        "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
     }
 
 def jungle(ST, LM):
@@ -140,8 +144,7 @@ def jungle(ST, LM):
         ],
         "hotel": {"poi": "Ireti Hotel", "m2": ST["buildings"]["footprint_m2"]["p90"], "storeys": 3},   # "tiny hotels": a big house's footprint (p90), 3 storeys; no hotels mapped
         "named": [{"poi": "Jahman Sound Studio", "kind": "studio", "from": ["front"]},
-                  {"poi": "Network Plus Café", "kind": "cafe", "from": ["front"]},
-                  {"poi": "Tunde's room", "from": ["back"]}],    # a room in a face-me-I-face-you house, behind the street
+                  {"poi": "Network Plus Café", "kind": "cafe", "from": ["front"]}],
         "canal_footbridges": 1,
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True,

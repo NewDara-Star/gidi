@@ -474,6 +474,7 @@ if not PROF:
     take("school", c0, 0.8, near_main=False)                                              # schools sit ~65 m back from mains
     take("pitch", c0, 0.3, near_main=False)
     take("motor park", Point(poly.bounds[0], poly.bounds[1]), 0.25)
+GATES = []   # (parcel, "nearest" | "north" | ...): a short access road from the parcel's fence to a street
 for spec in PROF.get("parcels", []):
     parcel_u0 = unary_union([p["geom"] for p in parcels])
     if spec.get("near") == "rail":   # on the line, as close to its pin as the rail allows
@@ -499,11 +500,24 @@ for spec in PROF.get("parcels", []):
     ha = spec["ha"]
     if ha == "from_study": ha = min(spec["cap_ha"], ST["landuse_polygons_ha"].get("industrial", [0, 0])[1] / ST["area_km2"] / 100 * land.area / 1e4)
     g = take(spec["kind"], hint, ha, near_main=spec["near_main"], min_w=spec.get("min_w", 0))
+    if spec.get("gate"): GATES.append((g, spec["gate"]))
     if spec.get("poi"): poi_pos[spec["poi"]] = g.representative_point()
 parcel_u = unary_union([p["geom"] for p in parcels])
 if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken for a parcel stop at its fence
     if any(g.intersects(parcel_u) for g in streets):
         streets = [x for g in streets for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
+DIRS = {"north": (0, -1), "south": (0, 1), "east": (1, 0), "west": (-1, 0)}   # y runs south
+for g, how in GATES:
+    ways_u = unary_union([x for k, x in net_lines])
+    if how == "nearest":
+        a0, b0 = nearest_points(g.exterior, ways_u); gl = LineString([a0, b0])
+    else:   # leave the parcel on that side, straight out to the first street
+        dx, dy = DIRS[how]; c = g.centroid; far = Point(c.x + dx * 1000, c.y + dy * 1000)
+        a0 = nearest_points(g.exterior, far)[0]; ray = LineString([a0, (a0.x + dx * 300, a0.y + dy * 300)])
+        x = ray.intersection(ways_u); hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point" and ray.project(h) > 0.5]
+        gl = LineString([a0, min(hits, key=ray.project)]) if hits else None
+    if gl is not None and gl.length > 0.5: access.append(gl)
+if GATES: net_lines = NET_LINES()
 def mostly_parcel(b): return b.intersection(parcel_u).area > 0.6 * b.area
 
 # service lanes (real: ~3 km per km2 of service ways): deep blocks get a dead-end lane so their middle can be built on
@@ -790,7 +804,7 @@ if PR and PR["poi"] in POIS:
     row = substring(sg, max(0, t0 - PR["length_m"] / 2), min(sg.length, t0 + PR["length_m"] / 2))
     bld = [(r, "print" if k == "front" and r.distance(row) < CLEAR["street"] + 2 and 0 < row.project(r.centroid) < row.length else k) for r, k in bld]
     poi_pos[PR["poi"]] = row.interpolate(0.5, normalized=True)
-for sp in PROF.get("named", []):   # a house near the pin becomes the studio, the cafe, Tunde's room
+for sp in [x for x in PROF.get("named", []) if set(x["from"]) & {"front", "back"}]:   # a house near the pin becomes the studio, the cafe, Tunde's room
     pin = POIS.get(sp["poi"])
     if pin is None: continue
     cands = [i for i, (r, k) in enumerate(bld) if k in sp["from"]]
@@ -798,6 +812,7 @@ for sp in PROF.get("named", []):   # a house near the pin becomes the studio, th
     i = min(cands, key=lambda i: bld[i][0].distance(pin))
     if sp.get("kind"): bld[i] = (bld[i][0], sp["kind"])
     poi_pos[sp["poi"]] = bld[i][0].centroid
+NAMED_LATE = [sp for sp in PROF.get("named", []) if not set(sp["from"]) & {"front", "back"}]
 extra_parcels = []
 # parcel buildings: market sheds, warehouses (the big >1500 m2 buildings sit near mains), school blocks
 for p in parcels:
@@ -830,8 +845,16 @@ for p in parcels:
                 hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point"]
                 ends.append(min(hits, key=ray.project) if hits else None)
             if all(ends): spine = LineString(ends); PATHS.append(("market aisle", spine))
+        spines = [spine] if spine is not None else []
+        if W and PROF.get("market_through_aisle"):   # and one along its length, end to end
+            c = g.centroid; ends = []
+            for sg in (1, -1):
+                ray = LineString([c, (c.x + math.cos(a) * sg * 400, c.y + math.sin(a) * sg * 400)]); x = ray.intersection(stop)
+                hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point"]
+                ends.append(min(hits, key=ray.project) if hits else None)
+            if all(ends): spines.append(LineString(ends)); PATHS.append(("market aisle", spines[-1]))
         for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=3.5):   # each piece is a row of four lock-ups under one roof
-            if road_free.contains(r) and (spine is None or r.distance(spine) > 1.5): bld.append((r, "stalls"))
+            if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))
     if p["kind"] == "estate":   # 1970s walk-up flats in rows, gardens between, shops built into the gardens
         ES = next(x for x in PROF["parcels"] if x["kind"] == "estate"); bl, bs, gap, garden = ES["block_m"][1], ES["block_m"][0], ES["gap_m"], ES["garden_m"]
         ca, sa = math.cos(a), math.sin(a); R = LL
@@ -876,6 +899,9 @@ for p in parcels:
             r = rect(ctr.x + math.cos(a) * (k2 * 9 - 4), ctr.y + math.sin(a) * (k2 * 9 - 4), w2, d2, a)
             if fit(r): bld.append((r, "shed"))
 parcels += extra_parcels
+for sp in NAMED_LATE:   # places inside a parcel, named after its buildings exist (The steal: the stall at the market's near end)
+    pin = POIS.get(sp["poi"]); cands = [r for r, k in bld if k in sp["from"]]
+    if pin is not None and cands: poi_pos[sp["poi"]] = min(cands, key=lambda r: r.distance(pin)).centroid
 # the old highlife hotel: a tall block on a main-road frontage near its pin; the houses it replaces are cleared
 H = PROF.get("hotel")
 if H and H["poi"] in POIS:

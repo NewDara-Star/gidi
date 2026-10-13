@@ -118,9 +118,15 @@ def look(x, y, r=60):
     print(f"rail: {RAIL.distance(pt):.0f} m away" + (f"; canal: {min(c.distance(pt) for c in CANALS):.0f} m" if CANALS else ""))
 def route(a, b, mode):
     Gx = graph(mode); pa, na = resolve(a); pb, nb = resolve(b)
-    def attach(p):
-        best = min(Gx.nodes, key=lambda q: (q[0]-p.x)**2 + (q[1]-p.y)**2); return best, p.distance(Point(best))
-    sa, da = attach(pa); sb, db = attach(pb)
+    EL = list(Gx.edges(data=True)); ET = STRtree([e[2]["geom"] for e in EL])
+    def attach(p, tag):   # step onto the nearest point of the nearest way (not the nearest junction), splitting that way there
+        u, v, e = EL[int(np.atleast_1d(ET.query_nearest(p))[0])]; g = e["geom"]; t = g.project(p); q = g.interpolate(t)
+        n = ("start" if tag == "a" else "end", round(q.x, 2), round(q.y, 2))
+        du, dv = (u, v) if Point(u).distance(Point(g.coords[0])) <= Point(v).distance(Point(g.coords[0])) else (v, u)
+        Gx.add_edge(du, n, w=t, kind=e["kind"], name=e["name"], geom=g)
+        Gx.add_edge(n, dv, w=g.length - t, kind=e["kind"], name=e["name"], geom=g)
+        return n, p.distance(q)
+    sa, da = attach(pa, "a"); sb, db = attach(pb, "b")
     try: path = nx.shortest_path(Gx, sa, sb, weight="w")
     except nx.NetworkXNoPath: print(f"NO ROUTE from {na} to {nb} by {mode} — the network is split"); return
     legs = []; total = 0
@@ -133,7 +139,8 @@ def route(a, b, mode):
     print(f"{mode}: {na} -> {nb}: {dist:.0f} m ({dist/1000/speed*60:.1f} min at {speed} km/h); straight line {straight:.0f} m; detour ×{dist/max(1,straight):.2f}")
     print(f"off-network bits: {da:.0f} m at start, {db:.0f} m at end")
     for lab, L in legs: print(f"  {L:5.0f} m  {lab}")
-    geo = LineString([Point(c) for c in path]) if len(path) > 1 else None
+    P_ = lambda c: Point(c[1:] if isinstance(c[0], str) else c)   # route points: junctions, or the split points where a trip joins a way
+    geo = LineString([P_(c) for c in path]) if len(path) > 1 else None
     if geo is not None:
         seen = [p['name'] for p in POIS if geo.distance(Point(p['x'], p['y'])) < 35]
         if seen: print("you pass: " + "; ".join(seen[:15]))
@@ -144,7 +151,7 @@ def route(a, b, mode):
                 up = e["kind"] in ("skywalk", "footbridge")
                 how = " (up on the deck)" if up else (f" (bridge: {over[0]})" if over else (" (worn path over the tracks)" if e["kind"] == "path" else " (at ground level)"))
                 print(f"you cross the rail on {label(e['kind'], e['name'])}{how}")
-        print("districts on the way: " + " -> ".join(dict.fromkeys(where(Point(c)) for c in path[::max(1, len(path)//12)] + [path[-1]])))
+        print("districts on the way: " + " -> ".join(dict.fromkeys(where(P_(c)) for c in path[::max(1, len(path)//12)] + [path[-1]])))
 def home(n=None):
     res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back")]
     i = res[n % len(res)] if n is not None else random.choice(res)   # n picks the n-th house; the printed id is its building index

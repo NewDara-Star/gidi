@@ -41,7 +41,9 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 
 ## Personas (rotate, and add one per new district)
 - **Tunde, okada rider:**
-  - lives in Jungle City (Tunde's room, a back room in a face-me-I-face-you compound) and starts the day at the boss's motor park in the Hub
+  - his home is set by the opening, not by a district. Tunde's room is a back room in a compound in the Maze, under 3 minutes' walk from Ladi Lane Parts Market.
+  - "The steal" is the stall at the market's near (east) end. The chase runs the length of the market and comes out on the west side. The boss's motor park is just across Idowu Street, in the Hub, and the boss sees the chase from there.
+  - starts the day at the boss's motor park
   - passenger runs between the interchange, markets, rail station, stadium and hotel
   - one oja run from a market to the hotel
   - a viewing centre at night
@@ -57,13 +59,15 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - checks that their everyday places (school, worship, chemist, market, transport) are within reach
   - checks that the new district's edge roads and gateways actually lead somewhere
 - **The chase (when the opening area is built):**
-  - runs "The steal" → canal → out of the district by different routes
-  - counts the escape options: how many different first turns, and where the dead ends are
+  - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
+  - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
+  - checks that the boss's end (the west side, toward the boss's motor park) can be reached, but is not the only way out
 
 ## Standard trips (track these every test)
 | Trip | Mode | Why |
 |---|---|---|
-| Tunde's room → The steal | walk | His way to the opening scene, Jungle City into the Maze |
+| Tunde's room → The steal | walk | His way to the opening scene (rule: under 3 min) |
+| The steal → boss's motor park, through the market | walk | The opening chase, out of the market's far end to the boss's base |
 | The steal → Gang Canal | walk | Opening chase, gang line |
 | Maze house near the rail → Ladi Lane Parts Market | walk | Rail as a barrier |
 | Gidi Interchange → Hub Rail Station | walk | Bus–rail transfer |

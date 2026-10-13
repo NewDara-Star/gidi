@@ -6,7 +6,6 @@
  "activities": ["DJ and studio side stories", "Flood days", "The friend's internet café", "School-party hotel runs"],
  "model": ["Face-me-I-face-you bungalow rows (10 rooms, shared corridor, rusted brown roofs)", "Half-converted 1970s estate flats with shops built into gardens", "Open gutters and canals choked with rubbish", "Plank market stalls", "Tiny hotels with painted names", "Generators in cages on the street"],
  "pois": [
-  {"name":"Tunde's room","type":"story","u":0.18,"v":0.2,"note":"Opening. A single room off a shared corridor. No light, landlord banging for rent."},
   {"name":"Boundary Plank Market","type":"market","u":0.55,"v":0.75,"note":"Wooden-plank stalls. The section that burns in the market-fire event."},
   {"name":"Ireti Hotel","type":"night","u":0.75,"v":0.45,"note":"Small hotel where school parties and studio sessions happen."},
   {"name":"Jahman Sound Studio","type":"landmark","u":0.35,"v":0.55,"note":"Cheap studio of the old DJ who mentors street musicians."},
@@ -20,7 +19,8 @@
  "activities": ["Fencing stolen parts", "Print runs before a raid", "Parking 'ticketing' turf", "Blackout riot event"],
  "model": ["Tight lanes 4–6 m wide with parts stacked to the roofline", "Print kiosks bolted onto the fronts of 2–3 storey houses", "Laminating machines, paper bales, ink drums", "A canal with a footbridge (the gang line)", "One transformer pole feeding a whole block", "Buka under a flyover next to mechanics"],
  "pois": [
-  {"name":"The steal","type":"story","u":0.42,"v":0.3,"note":"Opening. Food stall where Tunde grabs food. 'Ole!' starts here."},
+  {"name":"Tunde's room","type":"story","u":0.36,"v":0.55,"note":"Opening. A single room off a shared corridor, a short walk from Ladi Lane Parts Market. No light, landlord banging for rent."},
+  {"name":"The steal","type":"story","u":0.31,"v":0.49,"note":"Opening. A food stall at the near end of Ladi Lane Parts Market, where Tunde grabs food. 'Ole!' starts here and the chase runs through the market."},
   {"name":"Ladi Lane Parts Market","type":"market","u":0.25,"v":0.55,"note":"Maze of tokunbo car parts. Chop-shop missions."},
   {"name":"Pedro Print Row","type":"industry","u":0.7,"v":0.7,"note":"House-front presses. Forged papers at 4 a.m."},
   {"name":"Gang Canal","type":"danger","u":0.6,"v":0.45,"note":"Canal that divides two street gangs. Crossing changes who chases you."},
@@ -34,7 +34,7 @@
  "activities": ["Okada fares", "The toll run: pay levies, later collect them", "Union faction fights", "Stadium hideout"],
  "model": ["Three-storey bus terminal with skywalks and CCTV towers", "Under-bridge zone: stalls, touts, danfo bays", "Motor park with a union office shack and levy table", "1970s concrete stadium, cracked bowl, squatter tents", "Old highlife hotel with a neon sign", "Yellow danfo buses everywhere"],
  "pois": [
-  {"name":"Boss's motor park","type":"story","u":0.25,"v":0.35,"note":"The boss's park. Tunde gets the bike here on 'work and pay'."},
+  {"name":"Boss's motor park","type":"story","u":0.95,"v":0.41,"note":"The boss's park, just across Idowu Street from the far end of Ladi Lane Parts Market: he sees the chase from here. Tunde gets the bike here on 'work and pay'."},
   {"name":"The gate","type":"story","u":0.75,"v":0.12,"note":"Opening. Where the boss pulls Tunde out of the mob."},
   {"name":"Gidi Interchange","type":"transit","u":0.5,"v":0.55,"note":"Bus terminal with skywalks. Under-bridge world below."},
   {"name":"Under the Bridge","type":"danger","u":0.6,"v":0.45,"note":"Touts, pickpockets, night food. Lawless after dark."},
