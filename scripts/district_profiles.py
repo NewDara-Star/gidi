@@ -52,11 +52,12 @@ def hub(ST, LM):
             {"kind": "station", "poi": "Hub Rail Station", "m2": 2600, "aspect": 5.0, "front": "rail",
              "building": {"kind": "station", "m2": LM["rail_station_building_m2"][0], "storeys": 2}},
             {"kind": "stadium", "poi": "National Bowl", "m2": LM["stadium"]["stadium_ground_m2"][0], "aspect": 1.35, "front": None,
-             "bowl_m2": LM["stadium"]["bowl_building_m2"][0], "storeys": 4},
+             "bowl_m2": LM["stadium"]["bowl_building_m2"][0], "storeys": 4,
+             "access_roads": 2},   # owner's review: a second vehicle access from another side (one road made the okada run x2.40)
         ],
         # smaller places taken from finished blocks, as in the Maze
         "parcels": [
-            {"kind": "motor park", "poi": "Boss's motor park", "ha": LM["bus_stations"]["area_m2"]["p75"] / 1e4, "near_main": True},
+            {"kind": "motor park", "poi": "Boss's motor park", "ha": LM["bus_stations"]["area_m2"]["p75"] / 1e4, "near_main": True, "gate": "nearest"},   # its driveway onto the nearest road
             {"kind": "industrial", "ha": "from_study", "cap_ha": 3.0, "near": "rail_far_from_knot", "near_main": True},
             {"kind": "school", "ha": round(ST["landuse_polygons_ha"]["school"][1] / ST["landuse_polygons_ha"]["school"][0], 2), "near_main": False},   # real mean school compound
             {"kind": "pitch", "ha": round(ST["landuse_polygons_ha"]["pitch"][1] / ST["landuse_polygons_ha"]["pitch"][0], 2), "near_main": False},     # real mean pitch
@@ -64,7 +65,8 @@ def hub(ST, LM):
         "hotel": _hotel("Stadium Highlife Hotel", LM),
         # owner's review (Oct 2026): the same walking rules as the Maze (rail paths, worn crossings every 150-200 m,
         # lanes start on streets, nothing over 44 m from a way), and a skywalk from the terminal to the station
-        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200],
+                 "cut_every_m": 90, "cut_max_m": 130},   # owner's review: the rail-side blocks west of Ayinde Avenue were too deep (walks x2.6-3.5)
         "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
     }
 
@@ -94,7 +96,8 @@ def maze(ST, LM):
         ],
         # smaller places taken from finished blocks
         "parcels": [
-            {"kind": "industrial", "poi": "Daleko Grain Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False},   # houses and yards hug the line
+            {"kind": "industrial", "poi": "Daleko Grain Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False,   # houses and yards hug the line
+             "gate": "north"},   # owner's review: a north entrance onto the nearest street (it only opened to the south)
             {"kind": "motor park", "ha": round(LM["bus_stations"]["area_m2"]["p25"] / 1e4, 2), "near": "junction", "near_main": True, "min_w": 35},  # small park where the through-road meets Ring Road
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
             {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},     # median: a small street-football pitch
@@ -105,8 +108,13 @@ def maze(ST, LM):
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
         "print_row": {"poi": "Pedro Print Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
-        "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5},    # one transformer feeding a whole block
-                  {"poi": "The steal", "kind": "kiosk", "w": 3.5, "d": 2.5}],          # the food stall where the story opens
+        "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5}],   # one transformer feeding a whole block
+        # the opening (owner, Oct 2026): Tunde's room is a short walk from the parts market; The steal is the stall at its near (east)
+        # end; the chase runs the length of the market and comes out across Idowu Street from the boss's motor park in the Hub
+        "named": [{"poi": "The steal", "from": ["stalls"]},
+                  {"poi": "Tunde's room", "from": ["back"]}],
+        "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
+        "clear_access": True,           # streets stop at the market's own road instead of running beside it (living test, Oct 2026)
     }
 
 def jungle(ST, LM):
@@ -140,14 +148,53 @@ def jungle(ST, LM):
         ],
         "hotel": {"poi": "Ireti Hotel", "m2": ST["buildings"]["footprint_m2"]["p90"], "storeys": 3},   # "tiny hotels": a big house's footprint (p90), 3 storeys; no hotels mapped
         "named": [{"poi": "Jahman Sound Studio", "kind": "studio", "from": ["front"]},
-                  {"poi": "Network Plus Café", "kind": "cafe", "from": ["front"]},
-                  {"poi": "Tunde's room", "from": ["back"]}],    # a room in a face-me-I-face-you house, behind the street
+                  {"poi": "Network Plus Café", "kind": "cafe", "from": ["front"]}],
         "canal_footbridges": 1,
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True,
     }
 
+def foodgate(ST, LM):
+    """Food Gate: the Ojota-Ketu-Mile 12 corridor of Kosofe (study-foodgate*, a box inside the LGA; whole Kosofe is in study-kosofe*,
+    mostly wetland). Heights from Kosofe in lga_table.json. A produce district: the night market, lorries, the interstate bus park."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 81 x 1.9 = 153 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Crescent", "Avenue")}
+    return {
+        "lgas": ["Kosofe"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.4, "cross_scale": 1.35,
+        "dead_end": 0.95,             # nearly every long rib stops short: real dead ends 0.40-0.42 per junction, the most of any district so far
+        "size_lo_u": 0.7, "plot_u": [0.65, 0.99],   # wider plots, bigger houses (real typical house 152-168 m2)
+        "back_row": 0.45, "big_front": 0.12,
+        "vacant": 0.4,                # many empty and half-built plots: real squares are only 15-27% built on
+        "internal_mains": 1, "continue_mains": True,   # the Maze's Adeleke Road carries on north
+        "name_endings": ends,
+        "reserve": [
+            # the produce market that runs at night: the real Ketu Market (6.3 ha; Mile 12 itself is 12.5 ha, 7% of this district), on the arterial
+            {"kind": "market", "poi": "Mile Market", "m2": 63099, "aspect": 1.8, "front": "art"},
+            # interstate coaches: the real Mile 12 Bus Terminal (1.1 ha), on the arterial, with a low terminal shed
+            {"kind": "bus terminal", "poi": "Northern Bus Park", "m2": LM["bus_stations"]["max_m2"], "aspect": 2.2, "front": "art",
+             "building": {"kind": "terminal", "share": 0.3, "storeys": 1}},
+        ],
+        "parcels": [
+            {"kind": "lorry park", "ha": round(LM["parking_lots_m2"]["p75"] / 1e4, 2), "near": "res:market", "near_main": False, "gate": "nearest"},   # the 1.8-1.9 ha yards by the market
+            {"kind": "park", "poi": "Freedom Ground", "ha": 0.89, "near_main": True},   # the largest mapped park (0.89 ha); a stage at one end
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
+        ],
+        "road_footbridges": [   # real: 0.71 per km of major road; 48 m (p75) clears the arterial
+            {"near": "market", "cls": ["art"], "m": LM["footbridges"]["length_m"]["p75"], "name": "Market footbridge"},
+            {"near": "bus terminal", "cls": ["art"], "m": LM["footbridges"]["length_m"]["p75"], "name": "Bus park footbridge"}],
+        "spots": [{"poi": "Long Bridge checkpoint", "kind": "checkpoint", "w": 4.0, "d": 3.0}],   # the taskforce post on the road to the bridge
+        "jetty": {"poi": "Agboyi Creek Villages", "name": "Agboyi canoe jetty", "m": 15},   # the creek villages are reached only by canoe
+        "market_through_aisle": True, "clear_access": True,
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate}.get(did, lambda ST, LM: {})(ST, LM)

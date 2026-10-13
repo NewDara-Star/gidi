@@ -175,6 +175,7 @@ def wpick(lst):
     return lst[0][0]
 ART_LINES=[LineString([m(p) for p in pts]) for _,_,pts in ART]
 allp=[Point(p["x"],p["y"]) for p in out["pois"]]
+LEFT={}   # each district's unused civic slots, for the late places
 for (name,ins,act,pts),id_ in zip(D,IDS):
     poly=Polygon(mp(pts)).buffer(0); land=poly.difference(water).difference(ocean); core=land.buffer(-35)
     if core.is_empty: core=land
@@ -225,6 +226,16 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
             elif t=="sport":
                 nm,note=crnd.choice(SPORT); pt=spot(); t2="betting" if "Odds" in nm or "Viewing" in nm else "sport"; add(t2,nm,note,pt); continue
             add(t,nm,note,pt)
+    LEFT[id_]=SL
+
+# places added after review ("key_late"): placed after every district's random ones, on the nearest free real plot, so no other civic pin moves
+for id_,ks in CIV.get("key_late",{}).items():
+    SL=LEFT.get(id_)
+    for k in ks:
+        pt=Point(k["x"],k["y"])
+        if SL:
+            q=min(SL,key=lambda q:Point(q["x"],q["y"]).distance(pt)); SL.remove(q); pt=Point(q["x"],q["y"])
+        out["pois"].append({"name":k["name"],"type":k["type"],"note":k["note"],"d":id_,"x":round(pt.x),"y":round(pt.y),"civic":True})
 
 def rd(o):
     if isinstance(o,float): return round(o,1)

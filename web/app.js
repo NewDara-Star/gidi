@@ -107,7 +107,7 @@
       layers.rail && h("g", { pointerEvents: "none" },
         h("path", { d: pts2d(G.rail.pts), className: "rail-case", style: { strokeWidth: px(5) } }),
         h("path", { d: pts2d(G.rail.pts), className: "rail", style: { strokeWidth: px(2.5), strokeDasharray: px(7) + " " + px(5) } })),
-      z > 0.22 && h("g", { pointerEvents: "none" }, (G.structures || []).filter((s) => s.kind === "skywalk" || s.kind === "footbridge").map((s, i) => h("path", { key: "sw" + i, d: pts2d(s.pts), className: "skywalk", style: { strokeWidth: w(s.width, 1.2) } }))),
+      z > 0.22 && h("g", { pointerEvents: "none" }, (G.structures || []).filter((s) => s.kind === "skywalk" || s.kind === "footbridge" || s.kind === "jetty").map((s, i) => h("path", { key: "sw" + i, d: pts2d(s.pts), className: "skywalk", style: { strokeWidth: w(s.width, 1.2) } }))),
       layers.ferries && G.ferries.map((f, i) => h("path", { key: "f" + i, d: pts2d(f.pts), className: "ferry", style: { strokeWidth: px(2), strokeDasharray: px(2) + " " + px(5) }, pointerEvents: "none" })),
       // street names along paths
       layers.names && z > 0.55 && h("g", { pointerEvents: "none", className: "street-names" },
