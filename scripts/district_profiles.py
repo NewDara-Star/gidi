@@ -68,6 +68,7 @@ def hub(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200],
                  "cut_every_m": 90, "cut_max_m": 130},   # owner's review: the rail-side blocks west of Ayinde Avenue were too deep (walks x2.6-3.5)
         "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
+        "lock": {"parcels": ["Boss's motor park"]},   # the opening: the boss watches the chase from here (web/locked.json)
     }
 
 def maze(ST, LM):
@@ -114,6 +115,7 @@ def maze(ST, LM):
         "named": [{"poi": "The steal", "from": ["stalls"]},
                   {"poi": "Tunde's room", "from": ["back"]}],
         "market_through_aisle": True,   # an aisle along the market's length as well as across it: the chase route
+        "lock": {"reserve": ["Ladi Lane Parts Market"], "buildings": ["The steal", "Tunde's room"]},   # the opening, fixed for good (web/locked.json)
         "clear_access": True,           # streets stop at the market's own road instead of running beside it (living test, Oct 2026)
     }
 
@@ -135,7 +137,8 @@ def jungle(ST, LM):
         "big_front": 0.15,            # few big buildings: 3% over 400 m2, 1.3 per km2 over 1,500 m2
         "internal_mains": 1, "continue_mains": True,   # the Maze's Adeleke Road carries on south to the coast
         "exp_bridge_m": LM["flyover_spans_m"]["p50"],  # ...over the Coastal Expressway on a flyover
-        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"]},
+        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"],
+                            "max_gap_m": 300},   # owner's review: no stretch of the expressway over 300 m without a way across on foot
         "name_endings": ends,
         "reserve": [   # the plank market faces the expressway (real markets and retail: median 2.2 ha, 4 m from a main road)
             {"kind": "market", "poi": "Boundary Plank Market", "m2": ST["markets_and_retail"]["ha"]["p50"] * 1e4, "aspect": 1.6, "front": "art"},
@@ -152,6 +155,7 @@ def jungle(ST, LM):
         "canal_footbridges": 1,
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True,
+        "clear_access": True,           # living test (Oct 2026): streets join the market's own road instead of running beside it
     }
 
 def foodgate(ST, LM):
@@ -192,9 +196,41 @@ def foodgate(ST, LM):
         "market_through_aisle": True, "clear_access": True,
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True,
+        "keep_gateways": True,   # rebuilt after Water Town: its crossings with Water Town (and all others) stay as agreed
+    }
+
+def watertown(ST, LM):
+    """Water Town: the Makoko-Iwaya and Bariga waterfront (study-watertown*, two boxes inside Lagos Mainland + Shomolu).
+    The land fabric is calibrated on the land buildings; the stilt village on study-watertown-village.json (the buildings on the water)."""
+    V = json.load(open("study-watertown-village.json"))
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Way")}
+    return {
+        "lgas": ["Lagos Mainland", "Shomolu"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense land squares
+        "x_junction": 0.3, "cross_scale": 2.4, "dead_end": 0.9, "size_lo_u": 0.4, "plot_u": [0.3, 0.9],
+        "back_row": 0.85, "courtyard_m": [0.5, 1.5], "big_front": 0.1, "vacant": 0.25,
+        "internal_mains": 0,          # Ring Road crosses it; the real waterfront has little main road (0.6-1.6 km/km2)
+        "name_endings": ends,
+        "edge_rail_bridge_m": LM["flyover_spans_m"]["p50"],   # Okafor Road over the rail: majors cross on bridges (Mainland + Shomolu 6 of 6; Mushin + Shomolu 4 of 6)
+        "parcels": [
+            {"kind": "sawmill", "poi": "Okobaba Sawmill", "ha": 1.5, "near": "shore", "near_main": False, "gate": "nearest"},   # on the water, with log rafts
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+        ],
+        "stilt_village": {"poi": "Stilt Village", "near": "bridge", "shift_m": -170, "bar_poi": "The Stilt Bar",
+                          "length_m": 300, "depth_m": 190,            # about 5.7 ha of water (the real village is 41 ha: chosen, not scaled)
+                          "spine_every_m": 34,                        # boardwalks; a canoe lane between each pair of hut rows
+                          "cross_every_m": 70,                        # plank walkways across the lanes
+                          "hut_m": [V["short_side_m"]["p50"], V["long_side_m"]["p50"]], "gap_m": V["gap_m"]["p50"],
+                          "second_row": 0.4},                         # tuned to the real 46% cover
+        "jetty": {"poi": "Canoe Jetty", "name": "Canoe Jetty", "m": 20},   # canoes to the creeks and Old Shore
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
     }
 
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown}.get(did, lambda ST, LM: {})(ST, LM)

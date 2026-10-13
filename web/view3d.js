@@ -60,7 +60,7 @@
       list.forEach((b, i) => {
         n++;
         const kind = b[0], ring = b.slice(1); const s = st[i] || 1;
-        const H = kind === "stalls" ? 3 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
+        const H = kind === "stalls" ? 3 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
         const wallC = special[kind] || walls[Math.floor(hash(n) * walls.length)];
         const roofC = special[kind] || (s <= 2 && hash(n + 7) < 0.62 ? tin[Math.floor(hash(n + 3) * tin.length)] : flat);
         const k = ring.length;
@@ -130,7 +130,7 @@
       const m = new THREE.Mesh(flatPoly(d.poly, 0.2), new THREE.MeshLambertMaterial({ color: tint, side: THREE.DoubleSide }));
       m.userData.district = d.id; scene.add(m); pick.push(m);
     }
-    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch };
+    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial };
     for (const list of Object.values(G.parcels || {})) for (const p of list) scene.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
 
     const lanes = [], streets = [], mains = [], arts = [];

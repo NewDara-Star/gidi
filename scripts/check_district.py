@@ -1,6 +1,6 @@
 """Independent checker for a generated district.  Usage: python3 scripts/check_district.py <id>
 Prints a PASS/FAIL line per check; exits 1 if any fails.  Import and call run(did) for raw results."""
-import glob, json, os, sys
+import glob, json, math, os, sys
 import numpy as np
 from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import polygonize, unary_union
@@ -113,12 +113,21 @@ def land_of(gen, G):
     return max(polys, key=lambda p: p.area).buffer(1).difference(lagoon(G))
 
 
-def check_land(bgeoms, land):
-    """3: every building inside the land (edge-road polygon + 1 m, minus lagoon)."""
+WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon on purpose (Water Town)
+
+
+def check_land(bgeoms, land, kinds=None, G=None):
+    """3: every building inside the land (edge-road polygon + 1 m, minus lagoon); stilt houses, the stilt bar and log rafts
+    must instead stand over the lagoon, within 400 m of the district's land."""
     if land is None:
         return None, "edge roads do not form a closed polygon"
     bad = []
-    for b in bgeoms:
+    lag = lagoon(G) if G is not None else None
+    for i, b in enumerate(bgeoms):
+        if kinds and kinds[i] in WATER_KINDS:
+            if lag is None or not lag.buffer(0.5).contains(b) or b.distance(land) > 400:
+                bad.append((b.area, "%s %s not over the lagoon next to the district" % (kinds[i], xy(b))))
+            continue
         out = b.difference(land).area
         if out > 0.01:
             bad.append((out, "%s %.1f m2 outside" % (xy(b), out)))
@@ -281,6 +290,53 @@ def check_reach(gen, G, bgeoms, limit=45.0):
     return len(bad), worst(bad, 5)
 
 
+def check_locked(did, gen, tol=0.15):
+    """12: the locked opening (web/locked.json) is exactly where it was recorded: market, aisles, The steal, Tunde's room, the boss's park."""
+    p = os.path.join(ROOT, "locked.json")
+    L = json.load(open(p)).get(did) if os.path.exists(p) else None
+    if not L:
+        return None, "nothing locked in this district"
+    def same_ring(a, b):   # same points, allowing the 0.1 m rounding of the generated file
+        return len(a) == len(b) and all(abs(x[0] - y[0]) <= tol and abs(x[1] - y[1]) <= tol for x, y in zip(a, b))
+    bad, ok = [], []
+    for name, e in L.get("reserve", {}).items():
+        hit = any(same_ring(q["pts"], e["rect"]) for q in gen["parcels"])
+        (ok if hit else bad).append("%s plot" % name)
+    for name, lines_ in L.get("aisles", {}).items():
+        have = [q["pts"] for q in gen.get("paths", []) if q["kind"] == "market aisle"]
+        for ln in lines_:
+            hit = any(same_ring(h, ln) for h in have)
+            (ok if hit else bad).append("%s aisle" % name)
+    for name, e in L.get("buildings", {}).items():
+        hit = any(b[0] == e["kind"] and same_ring(b[1:], e["poly"][:-1]) for b in gen["buildings"])
+        pos = gen["poi_pos"].get(name)
+        hit = hit and pos is not None and math.dist(pos, e["pt"]) <= 1
+        (ok if hit else bad).append(name)
+    for name, e in L.get("parcels", {}).items():
+        hit = any(same_ring(q["pts"], e["poly"]) for q in gen["parcels"])
+        pos = gen["poi_pos"].get(name)
+        hit = hit and pos is not None and math.dist(pos, e["pt"]) <= 1
+        (ok if hit else bad).append(name)
+    return len(bad), "moved: %s; in place: %s" % (", ".join(bad) or "none", ", ".join(ok))
+
+
+def check_everyday(did, G, limit=833, hard=1250):
+    """13: every house has a school, a place of worship and a chemist or clinic within 10 min walk (15 at most), on the
+    baked city (run bake_web.py first), on the same walking network as the living test."""
+    import sys as _s; _s.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import walknet
+    built = sorted(G.get("buildings", {}))
+    if did not in built: return None, "not baked yet"
+    R = walknet.Reach(walknet.graph(walknet.ways_of(G, built), "walk"))
+    houses = [Polygon(b[1:]).centroid for b in G["buildings"][did] if b[0] in ("front", "back", "stilt")]
+    bad, txt = 0, []
+    for cat, types in (("school", {"school"}), ("worship", {"church", "mosque"}), ("chemist", {"chemist", "clinic", "hospital"})):
+        d = R.from_points([Point(p["x"], p["y"]) for p in G["pois"] if p["type"] in types], hard + 1)
+        t = [R.to_point(d, h) for h in houses]
+        over10 = sum(1 for x in t if x > limit); over15 = sum(1 for x in t if x > hard); bad += over15
+        txt.append("%s: %d over 10 min, %d over 15, worst %.1f min" % (cat, over10, over15, max(t) / 83.33))
+    return bad, "; ".join(txt)
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
@@ -291,7 +347,7 @@ def run(did):
         res.append((name, None if n is None else n == 0, "%s%s" % ("" if n is None else "%d found. " % n, d)))
     add("1 houses on roads/ramps/decks", check_roads(gen, bg, G))
     add("2 building overlaps", check_overlaps(bg))
-    add("3 buildings on land", check_land(bg, land))
+    add("3 buildings on land", check_land(bg, land, [b[0] for b in gen["buildings"]], G))
     add("4 edge roads match network", check_edges(did, gen, net))
     add("5 neighbour streets", check_neighbours(did, gen, G))
     add("6 incoming gateways continued", check_incoming(did, gen, net, G))
@@ -299,6 +355,8 @@ def run(did):
     add("8 storeys", check_storeys(gen, bg))
     add("9 lanes, paths, footbridges joined", check_connected(gen, G))
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
+    add("12 opening locked", check_locked(did, gen))
+    add("13 everyday places in reach", check_everyday(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

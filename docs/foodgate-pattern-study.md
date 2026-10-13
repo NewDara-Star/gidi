@@ -134,7 +134,7 @@ Data:
 
 | | Real, typical km² | Real, dense km² | **Food Gate** |
 |---|---|---|---|
-| Streets, km/km² | 14.5 | 16.7 | **16.8** |
+| Streets, km/km² | 14.5 | 16.7 | **16.9** |
 | Junctions/km² | 60 | 80 | **79** |
 | T-junctions | 88% | 86% | **88%** |
 | Dead ends per junction | 0.40 | 0.42 | **0.34** |

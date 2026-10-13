@@ -8,12 +8,17 @@ DR = {"motorway","trunk","primary","secondary","tertiary","unclassified","reside
 M = {"motorway":"main","trunk":"main","primary":"main","secondary":"main","tertiary":"main"}
 st = [(M.get(t["highway"].replace("_link",""), "street"), g) for t, g in D["roads"] if t.get("highway","").replace("_link","") in DR]
 B = [g for t, g in D["buildings"] if g.area > 6]
+LAND = None
+if "--land" in sys.argv:   # a waterfront study: measure the land fabric only (buildings within 60 m of a road; squares mostly land)
+    from shapely.ops import unary_union as _uu
+    LAND = _uu([g for c, g in st]).buffer(100)
+    B = [b for b in B if b.distance(_uu([g for c, g in st])) <= 60]
 rt = STRtree([g for c, g in st]); bt = STRtree(B)
 minx, miny, maxx, maxy = AREA.bounds; sq = []
 for x in np.arange(minx, maxx, 250):
     for y in np.arange(miny, maxy, 250):
         b = box(x, y, x + 1000, y + 1000)
-        if AREA.contains(b):
+        if AREA.contains(b) and (LAND is None or LAND.intersection(b).area > 0.7e6):
             L = sum(st[k][1].intersection(b).length for k in rt.query(b)) / 1000
             cov = sum(B[k].intersection(b).area for k in bt.query(b)) / 1e6
             sq.append((L, cov, b))

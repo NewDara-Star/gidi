@@ -22,7 +22,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 
 ## How to run it
 1. Bake, then run `explore_city.py problems` and `overview` yourself first.
-2. Launch **3 Haiku sub-agents in parallel** (model: haiku). Each gets one persona below and these rules:
+2. Launch **one Haiku sub-agent per persona, in parallel** (model: haiku). Each gets one persona below and these rules:
    - explore only through the tool
    - don't edit files, and don't read the tool source or the data
    - 30–45 commands each
@@ -62,7 +62,12 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - lives in Food Gate and works the night shift at Mile Market
   - carries loads to the lorry park, to Northern Bus Park over the Northern Road footbridges, and down to the Maze and the Hub
   - checks Freedom Ground, the Long Bridge checkpoint and the canoe jetty, and checks that Food Gate's edges lead somewhere
-- **The chase (when the opening area is built):**
+- **Bola, canoe paddler, Water Town (on foot, by okada, and by canoe):**
+  - lives in a stilt house in the village under the Long Bridge, and drinks at the Stilt Bar
+  - takes fish to the Canoe Jetty and timber from the Okobaba Sawmill
+  - sells at Mile Market and goes into the Maze and the Hub by okada
+  - checks that the boardwalks reach the shore roads, and that every hut has a school, a place of worship and a chemist within reach
+- **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
   - checks that the boss's end (the west side, toward the boss's motor park) can be reached, but is not the only way out
@@ -80,6 +85,9 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Newest district centre → Gidi Interchange | ride | Joins the city? |
 | Food Gate house (3100,3884) → Mile Market | walk | A porter's way to work |
 | Mile Market → Ladi Lane Parts Market | ride | The produce run into the Maze |
+| Stilt Village → Canoe Jetty | walk | A paddler's way to work, over the boardwalks |
+| Stilt Village → Mile Market | walk | Water Town to the market district |
+| Jungle City 3017,5225 → 3029,5181 | walk | The Coastal Expressway as a barrier |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

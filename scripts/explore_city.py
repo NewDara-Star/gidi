@@ -25,56 +25,23 @@ from shapely.ops import unary_union
 DIDS = os.environ.get("DISTRICTS", "").split(",") if os.environ.get("DISTRICTS") else sorted(G.get("buildings", {}).keys())
 DS = {d["id"]: d for d in G["districts"] if d["id"] in DIDS}; DP = {k: Polygon(v["poly"][0]) for k, v in DS.items()}
 POLY = unary_union(list(DP.values())).buffer(1); AREA = POLY.buffer(120)
+# a district's stilt village, stilt bar and rafts stand over the lagoon, outside its land outline, but they are still that district
+WATER = {k: unary_union([Polygon(b[1:]) for b in G["buildings"][k] if b[0] in ("stilt", "stilt bar", "raft")]).buffer(25) for k in DP}
 def where(pt):
     for k, p in DP.items():
-        if p.buffer(2).contains(pt): return DS[k]["name"]
+        if p.buffer(2).contains(pt) or WATER[k].contains(pt): return DS[k]["name"]
     return "outside the built districts"
 B = [(b[0], Polygon(b[1:]), st) for DID in DIDS for b, st in zip(G["buildings"][DID], G["storeys"][DID])]
 BT = STRtree([p for k, p, st in B])
-ways = []   # (kind, name, LineString)
-for DID in DIDS:
-    for l in G["streets"].get(DID, []): ways.append(("street", "", LineString(l)))
-    for l in G.get("lanes", {}).get(DID, []): ways.append(("lane", "", LineString(l)))
-    for l in G.get("paths", {}).get(DID, []): ways.append(("path", "", LineString(l)))   # footpaths: rail side, canal banks, worn crossings
-for m in G["mains"]:
-    for p in lines(LineString(m["pts"]).intersection(AREA)): ways.append(("main", m["name"], p))
-for a in G["arterials"]:
-    g = LineString(a["pts"]).intersection(AREA)
-    for p in lines(g): ways.append(("arterial", a["name"], p))
-for st in G.get("structures", []):
-    if st.get("d") in DIDS and st["kind"] in ("footbridge", "skywalk"): ways.append((st["kind"], st.get("name", st["kind"]), LineString(st["pts"])))
+import walknet
+ways = walknet.ways_of(G, DIDS, AREA)   # (kind, name, LineString)
 RAIL = LineString(G["rail"]["pts"]); CANALS = [LineString(c["pts"]) for c in G.get("canals", []) if c["d"] in DIDS]
 POIS = [p for p in G["pois"] if p["d"] in DIDS]
 PARCELS = [(p["kind"], Polygon(p["pts"])) for DID in DIDS for p in G.get("parcels", {}).get(DID, [])]
 FLY = [(st["name"], LineString(st["pts"])) for st in G.get("structures", []) if st.get("d") in DIDS and st["kind"] == "flyover"]
 WT = STRtree([g for k, n, g in ways])
 
-def graph(mode):
-    keep = [(k, n, g) for k, n, g in ways if not (mode == "ride" and k in ("lane", "path", "footbridge", "skywalk"))]
-    U = noded([g for k, n, g in keep]); Gx = nx.Graph()
-    snap = {}   # junctions closer than 25 cm are one node (rounding alone splits a junction that falls on a rounding boundary)
-    def key(c):
-        cell = (int(c[0] // 0.5), int(c[1] // 0.5))
-        for dx in (-1, 0, 1):
-            for dy in (-1, 0, 1):
-                for q in snap.get((cell[0] + dx, cell[1] + dy), []):
-                    if (q[0] - c[0]) ** 2 + (q[1] - c[1]) ** 2 < 0.0625: return q
-        q = (round(c[0], 2), round(c[1], 2)); snap.setdefault(cell, []).append(q); return q
-    tr = STRtree([g for k, n, g in keep])
-    for seg in lines(U):
-        ka, kb = key(seg.coords[0]), key(seg.coords[-1])
-        if ka == kb: continue   # a sliver shorter than the snap: its two ends are one junction (never drop a short link)
-        m = seg.interpolate(0.5, normalized=True); i = int(np.atleast_1d(tr.query_nearest(m))[0]); k, n, _ = keep[i]
-        Gx.add_edge(ka, kb, w=seg.length, kind=k, name=n, geom=seg)
-    # noding collinear streets can drop a sub-metre sliver between two pieces; a loose end within 1 m of another node joins it
-    # (the same 1 m tolerance check_district.py uses)
-    nodes = list(Gx.nodes); NT = STRtree([Point(q) for q in nodes])
-    for q in [q for q, d in Gx.degree() if d == 1]:
-        for j in NT.query(Point(q).buffer(1.0)):
-            o = nodes[int(j)]
-            if o != q and not Gx.has_edge(q, o) and math.dist(q, o) <= 1.0:
-                Gx.add_edge(q, o, w=math.dist(q, o), kind=Gx[q][next(iter(Gx[q]))]["kind"], name="", geom=LineString([q, o]))
-    return Gx
+def graph(mode): return walknet.graph(ways, mode)
 def nearest_way(pt):
     i = int(np.atleast_1d(WT.query_nearest(pt))[0]); k, n, g = ways[i]; return k, n, g, g.distance(pt)
 def label(k, n): return f"{n} ({k})" if n else f"unnamed {k}"
@@ -153,13 +120,13 @@ def route(a, b, mode):
                 print(f"you cross the rail on {label(e['kind'], e['name'])}{how}")
         print("districts on the way: " + " -> ".join(dict.fromkeys(where(P_(c)) for c in path[::max(1, len(path)//12)] + [path[-1]])))
 def home(n=None):
-    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back")]
+    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt")]
     i = res[n % len(res)] if n is not None else random.choice(res)   # n picks the n-th house; the printed id is its building index
     k, p, st = B[i]; c = p.centroid
     print(f"house #{i}: {bkind(k, st)}, footprint {p.area:.0f} m², at {c.x:.0f},{c.y:.0f}")
     look(c.x, c.y, 40)
 def problems():
-    far = [(i, k) for i, (k, p, st) in enumerate(B) if k in ("front", "back") and nearest_way(p.centroid)[3] > 45]
+    far = [(i, k) for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt") and nearest_way(p.centroid)[3] > 45]
     print(f"houses more than 45 m from any street, lane or path: {len(far)} of {sum(1 for k,_,_ in B if k in ('front','back'))}")
     for i, k in far[:8]: c = B[i][1].centroid; print(f"  #{i} {k} at {c.x:.0f},{c.y:.0f} ({nearest_way(c)[3]:.0f} m)")
     Gx = graph("walk"); comps = sorted(nx.connected_components(Gx), key=len, reverse=True)
