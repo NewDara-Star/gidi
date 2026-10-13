@@ -103,6 +103,14 @@
 "key_late": {
  "jungle": [
   {"type":"school","name":"Jungle City North Primary School","note":"Public school north of the expressway. Kids in uniform fill the lanes at 7 a.m. and 2 p.m.; before it opened, the north side walked 12 minutes to school.","x":2470,"y":5140}
+ ],
+ "foodgate": [
+  {"type":"mosque","name":"Al-Ikhlas Mosque","note":"Market mosque by the lagoon side. Porters pray between lorries; Friday prayers fill the street.","x":3780,"y":3100},
+  {"type":"chemist","name":"Daily Care Chemist","note":"Patent medicine store. There's one on almost every street.","x":2655,"y":3100},
+  {"type":"chemist","name":"Remedy Stores","note":"Patent medicine store. There's one on almost every street.","x":3096,"y":2560},
+  {"type":"school","name":"Food Gate Community Primary School","note":"Public school with a sandy yard near the lagoon side. Kids in uniform fill the lanes at 7 a.m. and 2 p.m.","x":3700,"y":3100},
+  {"type":"school","name":"Wisdom Gate Schools","note":"Private school in a converted house, name painted on the wall. School-run jams at 7 a.m. and 2 p.m.","x":3289,"y":3652},
+  {"type":"chemist","name":"Alafia Pharmacy","note":"Patent medicine store by the lagoon road. Porters buy painkillers before the night shift.","x":3800,"y":2950}
  ]
 }
 }

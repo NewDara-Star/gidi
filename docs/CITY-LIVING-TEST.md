@@ -58,6 +58,10 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - lives there and commutes to the other districts on foot and by okada
   - checks that their everyday places (school, worship, chemist, market, transport) are within reach
   - checks that the new district's edge roads and gateways actually lead somewhere
+- **Sule, market porter, Food Gate (on foot and by okada):**
+  - lives in Food Gate and works the night shift at Mile Market
+  - carries loads to the lorry park, to Northern Bus Park over the Northern Road footbridges, and down to the Maze and the Hub
+  - checks Freedom Ground, the Long Bridge checkpoint and the canoe jetty, and checks that Food Gate's edges lead somewhere
 - **The chase (when the opening area is built):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -74,6 +78,8 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Boss's motor park → Ladi Lane Parts Market | ride | Tunde's core run |
 | Under the Bridge → Daleko Grain Yard | walk | Trader supply run |
 | Newest district centre → Gidi Interchange | ride | Joins the city? |
+| Food Gate house (3100,3884) → Mile Market | walk | A porter's way to work |
+| Mile Market → Ladi Lane Parts Market | ride | The produce run into the Maze |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.
