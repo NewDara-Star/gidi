@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 import scene  # noqa: E402
-from gidi_kit import archetypes, parts  # noqa: E402
+from gidi_kit import archetypes, parts, registry  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import UNFINISHED_SHARE  # noqa: E402
@@ -118,19 +118,16 @@ for b in blds:
     a = attributes(b)
     rng = Rng(district, b['i'])
     k = b['kind']
-    if k in ('front', 'back', 'shed'):
-        ob, spec = archetypes.house(a, rng, col)
+    fn = registry.builder(k)
+    if fn is None:  # kinds without an archetype yet: a plain house so the area is complete
+        fn, a = archetypes.house, dict(a, kind='back')
+    ob, spec = fn(a, rng, col)
+    if fn is archetypes.house:
         b['H'] = spec['storeys'] * 3.1 + spec.get('lift', 0)
         if spec['shop']:
             e = a['facing']
             pa, pb = a['poly'][e], a['poly'][(e + 1) % 4]
             shops.append(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2))
-    elif k == 'stalls':
-        archetypes.stall(a, rng, col)
-    elif k == 'kiosk':
-        archetypes.kiosk(a, rng, col)
-    else:  # kinds without an archetype yet: a plain house so the area is complete
-        archetypes.house(dict(a, kind='back'), rng, col)
     counts[k] = counts.get(k, 0) + 1
 print('built', counts)
 

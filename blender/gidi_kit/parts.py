@@ -50,6 +50,11 @@ _FONT = None
 def font():
     """A heavy sans font if the machine has one (signs are hand-lettered in that spirit), else Blender's own."""
     global _FONT
+    try:
+        if _FONT:
+            _FONT.name  # still alive after a scene reset?
+    except ReferenceError:
+        _FONT = None
     if _FONT is None:
         for p in ('/System/Library/Fonts/Supplemental/Impact.ttf', '/System/Library/Fonts/Supplemental/Arial Black.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'):
             if os.path.exists(p):

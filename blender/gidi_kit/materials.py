@@ -134,8 +134,12 @@ def _weathered(nt, base, dirt=(0.30, 0.20, 0.13), splash=(0.42, 0.19, 0.09), str
 
 
 def master(name):
-    if name in _cache and _cache[name].name in bpy.data.materials:
-        return _cache[name]
+    if name in _cache:
+        try:  # the scene may have been reset since
+            if _cache[name].name in bpy.data.materials:
+                return _cache[name]
+        except ReferenceError:
+            pass
     mat = bpy.data.materials.new(name)
     nt = _NT(mat)
     col = nt.attr('Col').outputs['Color']
