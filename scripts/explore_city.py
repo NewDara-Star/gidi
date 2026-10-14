@@ -35,6 +35,7 @@ def where(pt):
     return "outside the built districts"
 B = [(b[0], Polygon(b[1:]), st) for DID in DIDS for b, st in zip(G["buildings"][DID], G["storeys"][DID])]
 BD = [DID for DID in DIDS for b in G["buildings"][DID]]   # each building's district
+BS = [st for DID in DIDS for st in (G.get("styles", {}).get(DID) or [None] * len(G["buildings"][DID]))]   # each house's style (the Heights)
 BT = STRtree([p for k, p, st in B])
 import walknet
 ways = walknet.ways_of(G, DIDS, AREA)   # (kind, name, LineString)
@@ -81,6 +82,8 @@ def look(x, y, r=60):
     near = [B[i] for i in BT.query(pt.buffer(r))]
     from collections import Counter
     print(f"within {r} m: {len(near)} buildings; " + ", ".join(f"{c}× {bkind(kk, st)}" for (kk, st), c in Counter((kk, st) for kk, _, st in near).most_common(8)))
+    sty = Counter(BS[i] for i in BT.query(pt.buffer(r)) if BS[i])
+    if sty: print("house styles: " + ", ".join(f"{c}× {s_}" for s_, c in sty.most_common()))
     if near:
         tall = max(near, key=lambda b: b[2]); print(f"tallest nearby: {bkind(tall[0], tall[2])}, {tall[1].area:.0f} m² footprint")
     inside = [b for b in near if b[1].contains(pt)]

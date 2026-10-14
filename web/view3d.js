@@ -55,15 +55,36 @@
     const special = { works: T.dark ? "#7a3f2e" : "#b05a3c", mound: T.dark ? "#4a4236" : "#9c8a6a", bakery: T.dark ? "#8a6a3a" : "#d9a85b", crane: T.dark ? "#8a5b2e" : "#d9822b", stack: T.dark ? "#3b6a8a" : "#4f8fc0", tank: T.dark ? "#8a8f96" : "#e6e8eb", villa: T.dark ? "#6b6250" : "#d8cfb8", cellblock: T.dark ? "#55595e" : "#9aa0a6", tower: T.dark ? "#55595e" : "#80868b", trailer: T.dark ? "#5b5650" : "#b0b4ba", plaza: T.dark ? "#5d6670" : "#c9c1b0", unfinished: T.dark ? "#4a4a4a" : "#b5b5b5", pen: T.dark ? "#5b5650" : "#a59d92", scrap: T.dark ? "#5a4636" : "#8a6a4f", container: T.dark ? "#2f5a8a" : "#3b78b8", "phone mall": T.dark ? "#4f6a86" : "#86a6c8", strip: T.dark ? "#8a3b33" : "#c8645a", hall: T.dark ? "#5e4a86" : "#9b7fc7", office: T.dark ? "#5d6670" : "#c3cad3", barracks: T.dark ? "#55603f" : "#a3ad84", bust: T.dark ? "#888" : "#555", canopy: T.dark ? "#7a4a8c" : "#a86cc1", warehouse: T.dark ? "#5d6670" : "#b9c0c8", stalls: T.dark ? "#8a5b2e" : "#d69a55", school: T.dark ? "#7b6a3c" : "#e1c46a", kiosk: T.dark ? "#4f6a86" : "#7ea2c6", shed: T.dark ? "#5b5650" : "#a59d92", gatehouse: T.dark ? "#8a3b33" : "#c8645a", generator: T.dark ? "#3f4348" : "#5f646a", "water tank": T.dark ? "#2f5a8a" : "#3b78b8", mansion: T.dark ? "#7a6a55" : "#efe6d2", clubhouse: T.dark ? "#5e4a86" : "#9b7fc7", palace: T.dark ? "#8a7a3a" : "#e8d590", "bank tower": T.dark ? "#3f6a8f" : "#8fb8d8", "brazilian house": T.dark ? "#7a4a35" : "#c98a62", "apartment tower": T.dark ? "#355a7a" : "#7fa8cc", nightclub: T.dark ? "#7a2f55" : "#c0628f", "toll booth": T.dark ? "#8a3b33" : "#c8645a", "office block": T.dark ? "#4f5d6e" : "#aebccc", "beach shack": T.dark ? "#6b5636" : "#d8b47a", "beach bar": T.dark ? "#8a4a22" : "#e8955a", "horse shelter": T.dark ? "#5a4636" : "#9c7a5c" };
     let n = 0, count = 0;
     const tmp = new THREE.Color();
+    // house styles (the Heights: "variety in architecture"): walls, roof colour, and a hipped roof of this height (0 = flat)
+    const STYLE = { "colonial bungalow": { wall: ["#f2efe8", "#ece6da"], roof: "#a4473a", hip: 2.4 }, duplex: { wall: ["#e8d9bd", "#dcc9a8"], roof: "#6e4b3a", hip: 2.0 },
+      "mediterranean villa": { wall: ["#e7b98a", "#f0cfa6"], roof: "#c0602d", hip: 1.8 }, "modern villa": { wall: ["#f7f7f5", "#d9dde0"], roof: "#5d646b", hip: 0 },
+      mansion: { wall: ["#efe6d2", "#e4dccb"], roof: "#4d5560", hip: 3.2 } };
+    const shade = (c) => { tmp.set(c); if (T.dark) tmp.multiplyScalar(0.55); return "#" + tmp.getHexString(); };
+    function hipRoof(ring, H, rh) {   // a hipped roof on a four-cornered house: a ridge along the long side, slopes down to every wall
+      const d = (p, q) => Math.hypot(q[0] - p[0], q[1] - p[1]);
+      const cx = (ring[0][0] + ring[1][0] + ring[2][0] + ring[3][0]) / 4, cz = (ring[0][1] + ring[1][1] + ring[2][1] + ring[3][1]) / 4;
+      const l1 = d(ring[0], ring[1]), l2 = d(ring[1], ring[2]);
+      const [p, q, L, W] = l1 >= l2 ? [ring[0], ring[1], l1, l2] : [ring[1], ring[2], l2, l1];
+      const ux = (q[0] - p[0]) / L, uz = (q[1] - p[1]) / L, e = Math.max(0, L / 2 - W / 2);
+      const R = [[cx - ux * e, cz - uz * e], [cx + ux * e, cz + uz * e]], out = [];
+      for (let j = 0; j < 4; j++) {
+        const a = ring[j], b = ring[(j + 1) % 4];
+        const ra = d(a, R[0]) <= d(a, R[1]) ? R[0] : R[1], rb = d(b, R[0]) <= d(b, R[1]) ? R[0] : R[1];
+        out.push(a[0], H, a[1], b[0], H, b[1], rb[0], H + rh, rb[1]);
+        if (ra !== rb) out.push(a[0], H, a[1], rb[0], H + rh, rb[1], ra[0], H + rh, ra[1]);
+      }
+      return out;
+    }
     for (const [id, list] of Object.entries(G.buildings || {})) {
-      const st = (G.storeys || {})[id] || [];
+      const st = (G.storeys || {})[id] || [], sty = (G.styles || {})[id] || [];
       list.forEach((b, i) => {
         n++;
         const kind = b[0], ring = b.slice(1); const s = st[i] || 1;
         if (kind !== "generator" && kind !== "water tank") count++;   // generator houses and tanks are not counted as buildings
         const H = kind === "stalls" ? 3 : kind === "canopy" ? 2.8 : kind === "mound" ? 5 : kind === "crane" ? 32 : kind === "tank" ? 14 : kind === "stack" ? 7.8 : kind === "trailer" ? 4 : kind === "pen" ? 2.4 : kind === "scrap" ? 2.5 : kind === "container" ? 2.6 : kind === "bust" ? 4 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "generator" ? 1.8 : kind === "water tank" ? 5.5 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
-        const wallC = special[kind] || walls[Math.floor(hash(n) * walls.length)];
-        const roofC = special[kind] || (s <= 2 && hash(n + 7) < 0.62 ? tin[Math.floor(hash(n + 3) * tin.length)] : flat);
+        const SS = STYLE[sty[i]];
+        const wallC = SS ? shade(SS.wall[Math.floor(hash(n) * SS.wall.length)]) : special[kind] || walls[Math.floor(hash(n) * walls.length)];
+        const roofC = SS ? shade(SS.roof) : special[kind] || (s <= 2 && hash(n + 7) < 0.62 ? tin[Math.floor(hash(n + 3) * tin.length)] : flat);
         const k = ring.length;
         for (let j = 0; j < k; j++) {   // walls, darker at the foot for a little depth
           const [x0, z0] = ring[j], [x1, z1] = ring[(j + 1) % k];
@@ -72,7 +93,10 @@
           col.push(...bot, ...bot, ...top, ...bot, ...top, ...top);
         }
         tmp.set(roofC);
-        for (let j = 1; j < k - 1; j++) {   // roof fan
+        if (SS && SS.hip && k === 4) {
+          const rp = hipRoof(ring, H, SS.hip); pos.push(...rp);
+          for (let j = 0; j < rp.length / 3; j++) col.push(tmp.r, tmp.g, tmp.b);
+        } else for (let j = 1; j < k - 1; j++) {   // roof fan
           pos.push(ring[0][0], H, ring[0][1], ring[j + 1][0], H, ring[j + 1][1], ring[j][0], H, ring[j][1]);
           col.push(tmp.r, tmp.g, tmp.b, tmp.r, tmp.g, tmp.b, tmp.r, tmp.g, tmp.b);
         }
@@ -131,7 +155,7 @@
       const m = new THREE.Mesh(flatPoly(d.poly, 0.2), new THREE.MeshLambertMaterial({ color: tint, side: THREE.DoubleSide }));
       m.userData.district = d.id; scene.add(m); pick.push(m);
     }
-    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial, government: T.industrial, garden: T.pitch, barracks: T.pitch, airfield: T.pitch, plazas: T.industrial, livestock: T.market, "container yard": T.industrial, "tank farm": T.industrial, villas: T.pitch, prison: T.industrial, "truck park": T.park, waterworks: T.industrial, landfill: T.market, pipeline: T.pitch, compound: T.pitch, club: T.pitch, pool: T.water, court: T.market, palace: T.pitch, square: T.pitch, enclave: T.dark ? "#5a5240" : "#efe3c2", forecourt: T.market, fountain: T.water };
+    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial, government: T.industrial, garden: T.pitch, barracks: T.pitch, airfield: T.pitch, plazas: T.industrial, livestock: T.market, "container yard": T.industrial, "tank farm": T.industrial, villas: T.pitch, prison: T.industrial, "truck park": T.park, waterworks: T.industrial, landfill: T.market, pipeline: T.pitch, compound: T.pitch, club: T.pitch, pool: T.water, court: T.market, palace: T.pitch, square: T.pitch, enclave: T.dark ? "#5a5240" : "#efe3c2", "golf course": T.dark ? "#3f6b3a" : "#9fd18b", green: T.dark ? "#4f8a47" : "#c3ebb0", bunker: T.dark ? "#6b6040" : "#efe0b0", pond: T.water, forecourt: T.market, fountain: T.water };
     for (const list of Object.values(G.parcels || {})) for (const p of list) scene.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
 
     const lanes = [], streets = [], mains = [], arts = [];

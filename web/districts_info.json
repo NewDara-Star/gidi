@@ -185,7 +185,8 @@
   {"name":"Pearl Towers","type":"landmark","u":0.3,"v":0.4,"note":"Luxury towers."},
   {"name":"Club Strip","type":"night","u":0.65,"v":0.35,"note":"Clubs and lounges. Valets and touts."},
   {"name":"Sunday Beach","type":"water","u":0.5,"v":0.05,"note":"Weekend crowds, horses, shacks."},
-  {"name":"The Gold Island","type":"landmark","u":0.85,"v":0.75,"note":"Billionaire enclave on reclaimed sand."}
+  {"name":"The Gold Island","type":"landmark","u":0.85,"v":0.75,"note":"Billionaire enclave on reclaimed sand."},
+  {"name":"Heights Golf Club","type":"landmark","u":0.3,"v":0.65,"note":"Private golf club behind a wall. Caddies, big deals on the greens, a long waiting list."}
  ]},
 "frontier": {
  "inspired": "Lekki + Ibeju-Lekki", "okada": "free",
