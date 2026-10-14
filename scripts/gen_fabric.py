@@ -298,6 +298,14 @@ for spec in PROF.get("reserve", []):
     else: access += LMK.ring_road(r, GAP, hard_u, spec.get("access_roads", 1), rail.buffer(CLEAR["rail"]).union(unary_union([x["geom"] for x in RES[:-1]])) if RES[:-1] else rail.buffer(CLEAR["rail"]))
 RES_U = unary_union([r["geom"] for r in RES]) if RES else None
 
+# a quarter with its own rules (the Heights: the Victoria Island side, south of Waterfront Drive: an office grid, no walls)
+QP = PROF.get("quarter") or {}; QZ = None
+if QP:
+    qa = next(a for n, k, a in arts if n == QP["south_of"]); qc = sorted(qa.coords)
+    _b = poly.bounds; QZ = Polygon([(_b[0] - 500, qc[0][1])] + qc + [(_b[2] + 500, qc[-1][1]), (_b[2] + 500, _b[3] + 2000), (_b[0] - 500, _b[3] + 2000)]).intersection(poly.buffer(60))   # the edge roads bend up to 16 m outside the outline
+def in_q(pt): return QZ is not None and QZ.contains(pt)
+def QV(k, default): return QP["rules"][k] if QP and k in QP["rules"] and QV.on else default
+QV.on = False
 # ---------- 2. sectors and residential streets ----------
 hard = [e for n, e, nb in edge_roads] + [a for n, k, a in arts] + [ln for n, ln in mains] + links + ramps + access
 sector_lines = unary_union(hard + [rail])
@@ -337,6 +345,8 @@ def shore_angle(P):   # bearing of the shore nearest the sector: fingers run squ
     q = nearest_points(SHORE, P.centroid)[0]; sh = min(lines(SHORE), key=lambda l: l.distance(q)); vx, vy = LMK.direction_at(sh, sh.project(q))
     return math.atan2(vy, vx)
 for P in secs2:
+    QV.on = in_q(P.representative_point()); RULE_X, RULE_D = RULE["x_junction"], RULE["dead_end"]
+    RULE["x_junction"], RULE["dead_end"] = QV("x_junction", RULE_X), QV("dead_end", RULE_D)
     th = (shore_angle(P) if FG else frontage_angle(P)) + math.radians(rnd.uniform(-6, 6))
     c = P.centroid; Pr = rotate(P, -th, origin=c, use_radians=True)  # frontage now runs along x; ribs run along y
     minx, miny, maxx, maxy = Pr.bounds
@@ -361,7 +371,7 @@ for P in secs2:
             if rnd.random() < RULE["dead_end"] and g.length > 110:  # stop short inside the block: a dead end
                 keep = rnd.uniform(.45, .8); g = substring(g, 0, g.length * keep) if rnd.random() < .5 else substring(g, g.length * (1 - keep), g.length)
             ribs.append(g)
-    SPUR = FG if FG and FG.get("spur_every_m") else PROF.get("spurs")
+    SPUR = FG if FG and FG.get("spur_every_m") else QV("spurs", PROF.get("spurs"))
     if SPUR:   # short side streets off each rib (or finger), ending in the compounds (a fishbone: a T and a dead end each, no new block)
         spurs = []
         for g in ribs:
@@ -400,6 +410,8 @@ for P in secs2:
             y += RULE.get("cross_scale", SCALE) * RULE["cross_every"]()
         prev = cur
     streets += [rotate(g, th, origin=c, use_radians=True) for g in ribs]
+    RULE["x_junction"], RULE["dead_end"] = RULE_X, RULE_D
+QV.on = False
 streets += [g for c in collectors for g in lines(c)]
 # streets a finished neighbour started on the shared edge carry straight on into this district
 GEN_DONE = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
@@ -974,12 +986,12 @@ for _, p, q, bi in fronts:
         if not b.contains(mid): nx_, ny_ = -nx_, -ny_
         cl = CLEAR.get(edge_class(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)), 3.4)
         if PROF.get("rail_frontage") and rail.distance(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)) < 1: cl = CLEAR["rail"]   # houses back onto the line
-        a = math.atan2(uy, ux); t = 0.0
+        a = math.atan2(uy, ux); t = 0.0; QV.on = in_q(Point(mid.x + nx_ * 15, mid.y + ny_ * 15))   # 15 m into the plot: plots facing the dividing road count on their own side
         big_ok = PROF and cl >= CLEAR["main"]   # big shops, plazas and warehouses face the main roads (real: 73 m from a main vs 183 m for all)
         while t < L - 4:
-            big = big_ok and rnd.random() < RULE["big_front"]
-            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*PROF.get("plot_u", (.35, .97))))) + RULE["gap"]()
-            side = rnd.uniform(*PROF["side_garden_m"]) if PROF.get("side_garden_m") else 0.0   # estates: a garden down each side of the house
+            big = big_ok and rnd.random() < QV("big_front", RULE["big_front"])
+            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97)))))) + RULE["gap"]()
+            side = rnd.uniform(*QV("side_garden_m", PROF.get("side_garden_m"))) if QV("side_garden_m", PROF.get("side_garden_m")) else 0.0   # estates: a garden down each side of the house
             w = min(w + side, L - t)
             P0 = (p[0] + ux * t, p[1] + uy * t); P1 = (p[0] + ux * (t + w), p[1] + uy * (t + w))
             strip = Polygon([P0, P1, (P1[0] + nx_ * dmax, P1[1] + ny_ * dmax), (P0[0] + nx_ * dmax, P0[1] + ny_ * dmax)])
@@ -992,18 +1004,18 @@ for _, p, q, bi in fronts:
             t += w
             if plot is None or plot.area < 30: continue
             taken[bi] = plot if bi not in taken else taken[bi].union(plot).buffer(0); plot_count += 1
-            if rnd.random() < PROF.get("vacant", 0.07):          # vacant / abandoned plot
+            if rnd.random() < QV("vacant", PROF.get("vacant", 0.07)):          # vacant / abandoned plot
                 vacant += 1
-                if PW and rnd.random() < PW["vacant_walled"]: COMPOUNDS.append((plot, None))   # a walled empty plot: bought, never built
+                if PW and not QV("no_walls", False) and rnd.random() < PW["vacant_walled"]: COMPOUNDS.append((plot, None))   # a walled empty plot: bought, never built
                 continue
             gap = RULE["gap"](); hw = w - gap - side; base = (P0[0] + ux * w / 2, P0[1] + uy * w / 2)
             if side and hw < 3: continue   # estates: a short end of frontage is garden only
             def at(off, d, ww):  # rectangle whose front edge sits `off` metres in from the street centreline
                 return rect(base[0] + nx_ * (off + d / 2), base[1] + ny_ * (off + d / 2), ww, d, a)
-            off = cl + (rnd.uniform(*PROF["setback_m"]) if PROF.get("setback_m") else abs(rnd.gauss(0, 2.2))); first = True   # estates: a front yard behind the wall
+            off = cl + (rnd.uniform(*QV("setback_m", PROF.get("setback_m"))) if QV("setback_m", PROF.get("setback_m")) else abs(rnd.gauss(0, 2.2))); first = True   # estates: a front yard behind the wall
             n0 = len(bld)
             while off < dmax - 3:
-                sh, lo = size(RULE.get("size_lo_u", 0.25))
+                sh, lo = size(QV("size_lo_u", RULE.get("size_lo_u", 0.25)))
                 if first and big: d = rnd.uniform(18, 40)          # 400-1,300 m2: the real 400-1,500 m2 band
                 elif first: d = lo if rnd.random() < RULE["perp_front"] else sh
                 else: d = rnd.choice([sh, lo])
@@ -1016,9 +1028,9 @@ for _, p, q, bi in fronts:
                     if place(plot, at(off, dd, ww)): ok = True; off += dd; break
                 if not ok: break
                 first = False
-                if rnd.random() > RULE["back_row"]: break
+                if rnd.random() > QV("back_row", RULE["back_row"]): break
                 off += rnd.uniform(*PROF.get("courtyard_m", (1.5, 4)))   # courtyard
-            if PW and len(bld) > n0:   # the wall round the plot, its car gate on the street in front of the house
+            if PW and not QV("no_walls", False) and len(bld) > n0:   # the wall round the plot, its car gate on the street in front of the house
                 COMPOUNDS.append((plot, Point(base[0] + nx_ * (cl - 0.3), base[1] + ny_ * (cl - 0.3))))
             if YK and len(bld) > n0 and bld[n0][1] == "front":   # a generator house in the side garden, a water tank on a stand behind
                 hr = bld[n0][0]; hc = hr.centroid; hd = hr.area / max(hw, 1)
@@ -1033,6 +1045,9 @@ for _, p, q, bi in fronts:
                 kind_now[0] = "shed"; ow, od = rnd.uniform(2.2, 4.5), rnd.uniform(2.2, 4.0)
                 r = at(dmax - od - 0.3, od, ow)
                 if not any(o.intersects(r) for o in near(r)): place(plot, r)   # fix: sheds used to land on top of back houses
+QV.on = False
+if QP.get("office_m2"):   # in the quarter, the big buildings on the street are offices and hotels, not houses
+    bld = [(r, "office block" if k == "front" and r.area >= QP["office_m2"] and in_q(r.centroid) else k) for r, k in bld]
 # kiosks and sheds on leftover frontage (the many <60 m2 structures)
 for k, g in net_lines:
     if k == "art": continue
@@ -1324,8 +1339,8 @@ for p in parcels:
                 cx, cy = q.x + ux * (22 + (k2 // 4) * 24) - uy * ((k2 % 4) * 6 - 9), q.y + uy * (22 + (k2 // 4) * 24) + ux * ((k2 % 4) * 6 - 9)
                 r = rect(cx, cy, 4, 20, math.atan2(uy, ux) + math.pi / 2)
                 if water.contains(r) and r.distance(unary_union([e for n, e, nb in edge_roads])) > CLEAR["main"]: bld.append((r, "raft"))
-    if p["kind"] in ("compound", "club", "palace", "square", "enclave"):   # a big man's compound, the estate club, the palace, a square with fountains, an enclave
-        CP = next(x for x in PROF["parcels"] if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a)
+    if p["kind"] in ("compound", "club", "palace", "square", "enclave", "golf course"):   # a big man's compound, the estate club, the palace, a square with fountains, an enclave, a golf course
+        CP = next(x for x in PROF.get("parcels", []) + PROF.get("reserve", []) if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a)
         for kind_, (bw_, bd_), (u_, v_) in CP.get("buildings", []):   # u_, v_: fractions of the parcel's half length and half width from its centre
             r = rect(ctr.x + ca * u_ * LL / 2 - sa * v_ * g.area / LL / 2, ctr.y + sa * u_ * LL / 2 + ca * v_ * g.area / LL / 2, bw_, bd_, a)
             if g.buffer(-3).contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-20:]): bld.append((r, kind_))
@@ -1393,6 +1408,23 @@ if TL:   # a tolled bridge: a booth either side of the bridge road just off the 
             off = WIDTH["main"] / 2 + 2.0
             bld.append((rect(q.x - uy * off * side, q.y + ux * off * side, 4.0, 2.5, math.atan2(uy, ux)), "toll booth"))
         poi_pos[TL["poi"]] = q
+BC = PROF.get("beach")
+if BC:   # the beach: shacks, bars and a horse shelter on the sand between the shore edge road and the sea (outside the edge road)
+    br_ = random.Random(SEED * 7 + 11); shore_e = max([e for n, e, nb in edge_roads if nb is None], key=lambda e: e.centroid.y)   # the ocean side (y runs south)
+    sand = []; t = br_.uniform(10, 30)
+    while t < shore_e.length - 10:
+        q = shore_e.interpolate(t); ux, uy = LMK.direction_at(shore_e, t)
+        nx_, ny_ = -uy, ux
+        if ny_ < 0: nx_, ny_ = -nx_, -ny_   # face the sea (south)
+        kind_ = br_.choices(["beach shack", "beach bar", "horse shelter"], weights=BC["mix"])[0]
+        w_, d_ = {"beach shack": (4, 3), "beach bar": (9, 6), "horse shelter": (10, 4)}[kind_]
+        off = CLEAR["main"] + 2 + br_.uniform(0, BC["depth_m"]) + d_ / 2
+        r = rect(q.x + nx_ * off, q.y + ny_ * off, w_, d_, math.atan2(uy, ux))
+        if not r.intersects(ring_poly) and not r.intersects(water) and not any(r.distance(o) < 1.5 for o, k in sand):
+            sand.append((r, kind_)); bld.append((r, kind_))
+        t += br_.uniform(*BC["every_m"])
+    bars = [r for r, k in sand if k == "beach bar"]
+    if bars: poi_pos[BC["poi"]] = bars[len(bars) // 2].centroid
 for HL in PROF.get("halls", []):   # a big named building on a main-road frontage near its pin (the Shrine's music hall); the houses it replaces are cleared
     if HL["poi"] not in POIS: continue
     hp = POIS[HL["poi"]]; hw_ = math.sqrt(HL["m2"] * HL.get("aspect", 1.3)); hd_ = HL["m2"] / hw_
@@ -1465,8 +1497,27 @@ rnd.shuffle(slots)
 
 # ---------- 6. measure against the real core squares ----------
 WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon: measured on their own, not with the land fabric
+STY = PROF.get("styles"); MODERN = set()
+if STY:   # architecture (owner, Oct 2026: "variety in architecture"): some houses are modern villas, L-shaped, a back corner left open as a terrace
+    srnd_ = random.Random(SEED * 13 + 7)
+    for i, (r, k) in enumerate(bld):
+        if k != "front" or (STY.get("outside_quarter") and in_q(r.centroid)) or srnd_.random() >= STY["modern"] or r.area < 120: continue
+        cc = list(r.exterior.coords)[:4]; a0 = srnd_.randrange(4); p0, p1, p3 = cc[a0], cc[(a0 + 1) % 4], cc[(a0 - 1) % 4]
+        f1, f2 = srnd_.uniform(.35, .5), srnd_.uniform(.35, .5)   # the notch: a share of each side at that corner
+        q1 = (p0[0] + (p1[0] - p0[0]) * f1, p0[1] + (p1[1] - p0[1]) * f1); q3 = (p0[0] + (p3[0] - p0[0]) * f2, p0[1] + (p3[1] - p0[1]) * f2)
+        q2 = (q1[0] + q3[0] - p0[0], q1[1] + q3[1] - p0[1])
+        L_ = r.difference(Polygon([p0, q1, q2, q3]))
+        if L_.geom_type == "Polygon": bld[i] = (L_, k); MODERN.add(i)
 NOT_BUILDINGS = ("stack", "trailer", "crane", "generator", "water tank")   # containers, parked trailers, gantry cranes, generator houses and tanks: not counted against the real ones
 B = [r for r, k in bld if k not in WATER_KINDS + NOT_BUILDINGS]
+# a street left floating (a parcel cut it off from the rest) is tied to the nearest way by a short link, if that is clear of buildings
+_all = lambda: [g for k, g in NET_LINES()] + lanes + [g for k, g in PATHS]
+for g in list(streets):
+    rest = unary_union([x for x in _all() if x is not g])
+    if g.distance(rest) <= 1.0: continue
+    a_, b_ = nearest_points(g, rest); tie = LineString([a_, b_])
+    if tie.length < 30 and not any(tie.intersects(r.buffer(0.5)) for r, k in bld): streets.append(tie)
+    else: streets.remove(g)
 # a street left lying on top of another (two clean-up steps cut the same line) is a walking island: drop the copy (short ties stay)
 _kept = []
 for g in sorted(streets, key=lambda s: -s.length):
@@ -1486,7 +1537,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
@@ -1512,6 +1563,15 @@ if PROF:
         lo, hi = PROF["print_row"]["storeys"]; storeys = [min(hi, max(lo, st)) if k == "print" else st for st, (r, k) in zip(storeys, bld)]
     M["storeys_share_by_area"] = [round(sum(bld[i][0].area for i in range(len(bld)) if band_of(storeys[i]) == q) / tot, 3) for q in range(7)]
     M["storeys_target_by_area"] = [round(x, 3) for x in bands]
+STYLES = None
+if STY:   # each house's style, from its size and storeys (the map draws walls and roofs by style); the kind stays "front" (a home)
+    srnd_ = random.Random(SEED * 13 + 9); STYLES = [None] * len(bld)
+    for i, (r, k) in enumerate(bld):
+        if k != "front" or (STY.get("outside_quarter") and in_q(r.centroid)): continue
+        st = storeys[i] if PROF else 1
+        STYLES[i] = "modern villa" if i in MODERN else "mansion" if r.area >= STY["mansion_m2"] else "colonial bungalow" if st == 1 \
+            else ("mediterranean villa" if srnd_.random() < STY["mediterranean"] else "duplex")
+    M["styles"] = {s_: STYLES.count(s_) for s_ in ("colonial bungalow", "duplex", "mediterranean villa", "modern villa", "mansion")}
 print(json.dumps({"seed": SEED, "scale": SCALE, "gidi": M, "real_median": {k: CORE["median"][k] for k in M if k in CORE["median"]}, "real_dense": {k: CORE["dense"][k] for k in M if k in CORE["dense"]}}, indent=1))
 
 # a named place inside a fenced or walled plot is entered by its gate, so its pin goes there (owner, Oct 2026): the gate if the plot
@@ -1546,6 +1606,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        **({"walls": [R2(g) for g in WALLS], "gates": [{"pts": [[round(x, 1), round(y, 1)] for x, y in q["bar"]], "main": q["main"]} for q in GATES_OUT]} if PW or EG or WALLS else {})}
 if PROF:
     out["storeys"] = storeys
+    if STYLES: out["styles"] = STYLES
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))

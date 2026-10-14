@@ -2033,11 +2033,11 @@
   {
    "from": "heights",
    "to": "frontier",
-   "road": "Ekpo Street",
+   "road": "Wahab Road",
    "kind": "main",
    "pt": [
-    6409.1,
-    5356.2
+    6412.5,
+    5385.2
    ]
   },
   {
@@ -2077,10 +2077,10 @@
    "road": "",
    "kind": "street",
    "pt": [
-    6400.0,
-    5278.8
+    6412.9,
+    5001.9
    ],
-   "bearing_deg": 83
+   "bearing_deg": 89
   }
  ]
 }

@@ -114,6 +114,7 @@ def land_of(gen, G):
 
 
 WATER_KINDS = ("stilt", "stilt bar", "raft", "toll booth")   # built over the lagoon on purpose (Water Town; the toll booths on the Cable Bridge)
+BEACH_KINDS = ("beach shack", "beach bar", "horse shelter")   # on the sand beyond the shore road (the Heights' Sunday Beach)
 
 
 def check_land(bgeoms, land, kinds=None, G=None):
@@ -124,6 +125,10 @@ def check_land(bgeoms, land, kinds=None, G=None):
     bad = []
     lag = lagoon(G) if G is not None else None
     for i, b in enumerate(bgeoms):
+        if kinds and kinds[i] in BEACH_KINDS:
+            if (lag is not None and b.intersects(lag)) or b.distance(land) > 60:
+                bad.append((b.area, "%s %s not on the beach next to the district" % (kinds[i], xy(b))))
+            continue
         if kinds and kinds[i] in WATER_KINDS:
             if lag is None or not lag.buffer(0.5).contains(b) or b.distance(land) > 400:
                 bad.append((b.area, "%s %s not over the lagoon next to the district" % (kinds[i], xy(b))))

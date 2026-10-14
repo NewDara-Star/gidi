@@ -487,7 +487,7 @@ def heights(ST, LM):
         "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.3,
         "sector_split_ha": 40,
         "spurs": {"spur_every_m": 150, "spur_m": [40, 90]},   # closes: real dead ends 0.33-0.41 per junction
-        "size_lo_u": 0.35, "plot_u": [0.5, 0.95], "back_row": 0.4, "courtyard_m": [1, 2.5], "big_front": 0.0, "vacant": 0.4,   # real typical 218-238 m2, 26-28% over 400 m2
+        "size_lo_u": 0.35, "plot_u": [0.5, 0.95], "back_row": 0.4, "courtyard_m": [1, 2.5], "big_front": 0.12, "vacant": 0.33,   # big houses: a rich man's area (owner, Oct 2026), bigger than Ikoyi's real 140-146 m2
         "setback_m": [8, 16], "side_garden_m": [1.5, 4],   # real edge-to-street median 22 m, the deepest of any district
         "kiosk_every_m": 500,
         "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # real main roads 4.3-5.3 km per km2
@@ -506,11 +506,27 @@ def heights(ST, LM):
         # the gates: real 6.1 street gates per km2 mapped, the most of any area. Only the closes are gated here (district model:
         # "gated mansions on cul-de-sacs"); the through streets stay open
         "estate_gates": {"in_m": 13, "house_m": [3.5, 3.0], "main_in_m": 30, "main_house_m": [6, 4], "closes_only": True, "main_gates": False},
-        "plot_walls": {"gate_m": 4.0, "vacant_walled": 0.6, "parcels": ["enclave", "school"]},   # mansions behind walls (district model)
+        "plot_walls": {"gate_m": 4.0, "vacant_walled": 0.6, "parcels": ["enclave", "school", "golf course"]},   # mansions behind walls (district model)
         "yard_kit": {"generator": 0.85, "generator_m": [2.6, 1.6], "water tank": 0.5, "tank_m": [2.4, 2.4]},
         # the club strip: the houses round the pin are clubs and lounges (district model: valets and touts)
         "zone": {"poi": "Club Strip", "r_m": 80, "kind": "nightclub", "min_m2": 120, "storeys": [1, 3], "kiosk_every_m": 1000},
         # Pearl Towers: luxury apartment towers on a main road (real: 2.7% of the boxes' built area is 14+ storeys, 4.3% 7-13)
+        # the Victoria Island side (owner, Oct 2026): south of Waterfront Drive, towards the beach, an office-and-hotel grid with no compound
+        # walls. Measured on the VI box alone (study-hvi-core): 264-410 buildings per km2, typical 281-293 m2, 29-33% over 400 m2, 74-80% T
+        # (a grid: more crossroads), 0.32 dead ends per junction; Ikoyi's box alone: 520-619 per km2, typical 140-146 m2, 16-17% over 400
+        "quarter": {"south_of": "Waterfront Drive", "office_m2": 400,
+                    "rules": {"x_junction": 0.6, "dead_end": 0.1, "spurs": None, "size_lo_u": 0.35, "plot_u": [0.7, 0.99], "back_row": 0.15,
+                              "vacant": 0.42, "setback_m": [8, 16], "side_garden_m": [3, 8], "big_front": 0.08, "no_walls": True}},
+        # the Ikoyi side's houses in five styles (owner, Oct 2026: "variety in architecture"; see the study, section 8)
+        "styles": {"outside_quarter": True, "modern": 0.22, "mansion_m2": 450, "mediterranean": 0.35},
+        # the golf club (owner, Oct 2026; real: two golf courses, 77 ha, in the study's Ikoyi box): a 6 ha course on the Ikoyi side,
+        # carved out before the streets so they run round it; a clubhouse, greens, bunkers and a pond
+        "reserve": [{"kind": "golf course", "poi": "Heights Golf Club", "m2": 60000, "aspect": 1.6, "front": None,
+                     "buildings": [["clubhouse", [30, 16], [0.85, 0.0]]],
+                     "grounds": [["green", [22, 16], [-0.75, -0.55]], ["green", [22, 16], [-0.3, 0.6]], ["green", [22, 16], [0.25, -0.6]], ["green", [22, 16], [0.55, 0.55]],
+                                 ["bunker", [12, 7], [-0.6, -0.35]], ["bunker", [12, 7], [0.4, -0.3]], ["pond", [40, 22], [-0.05, 0.05]]]}],
+        # Sunday Beach (owner, Oct 2026): shacks, bars and a horse shelter on the sand beyond the shore road (district model: "beach with shacks and horses")
+        "beach": {"poi": "Sunday Beach", "every_m": [14, 30], "depth_m": 22, "mix": [6, 3, 1]},
         "halls": [{"poi": "Pearl Towers", "kind": "apartment tower", "m2": 1100, "aspect": 1.3, "storeys": 20, "within_m": 250, "front_m": 20} for _ in range(3)],   # behind a front yard, like the houses
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]}, "lane_passages": False,
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,

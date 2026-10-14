@@ -35,6 +35,7 @@ def where(pt):
     return "outside the built districts"
 B = [(b[0], Polygon(b[1:]), st) for DID in DIDS for b, st in zip(G["buildings"][DID], G["storeys"][DID])]
 BD = [DID for DID in DIDS for b in G["buildings"][DID]]   # each building's district
+BS = [st for DID in DIDS for st in (G.get("styles", {}).get(DID) or [None] * len(G["buildings"][DID]))]   # each house's style (the Heights)
 BT = STRtree([p for k, p, st in B])
 import walknet
 ways = walknet.ways_of(G, DIDS, AREA)   # (kind, name, LineString)
@@ -59,7 +60,7 @@ def resolve(arg, near=None):
     if near is None: hits = [p for p in hits if p["name"].lower() == arg.lower()] or hits   # alone: an exact name first
     p = min(hits, key=lambda p: near.distance(Point(p["x"], p["y"]))) if near is not None else hits[0]
     return Point(p["x"], p["y"]), p["name"] + (f" ({p['x']},{p['y']})" if len(hits) > 1 else "")
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "works": "waterworks building", "mound": "landfill mound", "bakery": "bakery", "warehouse": "warehouse", "school": "school block", "gatehouse": "gatehouse", "generator": "generator house", "water tank": "water tank on a stand", "mansion": "big house", "clubhouse": "clubhouse", "palace": "the palace", "bank tower": "bank tower (glass)", "apartment tower": "apartment tower (glass)", "nightclub": "club or lounge", "toll booth": "toll booth", "brazilian house": "Brazilian house (brick, arches, shutters)"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse", "bank tower", "brazilian house") else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "works": "waterworks building", "mound": "landfill mound", "bakery": "bakery", "warehouse": "warehouse", "school": "school block", "gatehouse": "gatehouse", "generator": "generator house", "water tank": "water tank on a stand", "mansion": "big house", "clubhouse": "clubhouse", "palace": "the palace", "bank tower": "bank tower (glass)", "apartment tower": "apartment tower (glass)", "nightclub": "club or lounge", "toll booth": "toll booth", "office block": "office or hotel block", "beach shack": "beach shack", "beach bar": "beach bar", "horse shelter": "horse shelter (beach rides)", "brazilian house": "Brazilian house (brick, arches, shutters)"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse", "bank tower", "brazilian house") else "")
 
 def overview():
     from collections import Counter
@@ -81,6 +82,8 @@ def look(x, y, r=60):
     near = [B[i] for i in BT.query(pt.buffer(r))]
     from collections import Counter
     print(f"within {r} m: {len(near)} buildings; " + ", ".join(f"{c}× {bkind(kk, st)}" for (kk, st), c in Counter((kk, st) for kk, _, st in near).most_common(8)))
+    sty = Counter(BS[i] for i in BT.query(pt.buffer(r)) if BS[i])
+    if sty: print("house styles: " + ", ".join(f"{c}× {s_}" for s_, c in sty.most_common()))
     if near:
         tall = max(near, key=lambda b: b[2]); print(f"tallest nearby: {bkind(tall[0], tall[2])}, {tall[1].area:.0f} m² footprint")
     inside = [b for b in near if b[1].contains(pt)]
