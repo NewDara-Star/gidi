@@ -74,12 +74,12 @@ Data:
 1. **The Container Yard:** 16 ha on the lagoon quay, carved out before the streets.
    - Blocks of container stacks: 6 × 3 boxes of 12.2 × 2.4 m, two high.
    - A line of 18 gantry cranes on the quay side, and two customs sheds on the landward side.
-   - Access roads all round, joined to the streets at two points.
+   - Access roads all round, joined to the streets at two points, and yard lanes along and across it for the trucks.
 2. **The Tank Farm:** 5 ha on the quay, with 20 round tanks of 14 m radius in a grid.
 3. **The truck park:** 2.1 ha next to the tank farm (the real p75 parking yard), with rows of parked trailers. The tankers queue here.
 4. **The Liverpool Under-Bridge:** a 0.9 ha night market of stall rows under the expressway's approach to the Wharf Bridge.
 5. **Kiri Prison:** 3 ha walled, with cell blocks and watchtowers at the corners.
-6. **Old Reserve Avenue:** 4.8 ha of colonial bungalows in big gardens.
+6. **Old Reserve Avenue:** 4.8 ha of colonial bungalows in big gardens, either side of the reserve's own avenue, which joins the streets at both ends.
 7. **Collector Row:** four checkpoints along one road, about 50–100 m apart. Police, traffic, union, area boys: pay each one.
 8. **Three footbridges over the expressway,** under the owner's 300 m rule.
 9. **A school** and **a pitch**.
