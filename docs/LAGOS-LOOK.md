@@ -73,19 +73,34 @@ The kit pieces in `parts.py`:
 - Statues on a stepped plinth with a plaque and railing: a founder in agbada and fila, a white-robed masquerade, a talking-drummer.
 - Welded scrap sculpture, a clock tower (stopped hands, pyramid cap), a big LED screen at the junction.
 - A "WELCOME TO …" arch on the main roads into each built district, and the lighthouse on the port mole.
-- `city.py` places them: corners of main-road junctions by district character (up to four a district), arches where main roads enter, the lighthouse fixed. The sites also go to `web/city/monuments.json`, so the Mock gives them colliders.
+- `city.py` places them: corners of main-road junctions by district character (up to four a district), arches where main roads enter, the lighthouse fixed. The sites also go to `web/city/monuments.json`.
 
-## The whole city, and the Mock
+## Roadside: lights and wayfinding
+`gidi_kit/roadside.py`; the contact sheet is `blender/roadside_sheet.py`.
+- **Street lights:** galvanised poles with one arm, two arms on medians, or solar ones with a panel. They stand along every main road and along the streets of the elite and civic districts. A seeded share are dead, more in the poor districts. Each tile's JSON lists its working lamp heads.
+- **Signs:**
+  - Green direction signs with arrows stand 30 m before every big junction. They name where each crossing road leads: the district at its far end, or the road's own name when it stays in the district.
+  - Overhead gantries stand on the expressways and bridges every 800 m.
+  - Speed limits after each junction: 50, 60 or 80 by road class.
+  - No-parking discs by the markets.
+- **Decks** (flyovers, the Long Bridge, the Cable Bridge): ramps at the real ends, yellow edge lines, white lane dashes, and a black-and-white chequered median with double lamps on the wide decks. The expressways have the same median and lamps.
+
+## The whole city, in the map's 3D view
 - **The city:**
   - `python3 blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:
     - buildings by kind, the named civic plots
     - point places (the nearest plot turns into the police station, the fuel station...)
-    - parcels, roads in their conditions with poles and wires
+    - parcels, roads in their conditions with poles, wires and street lights
     - structures, expressways and bridges, rail, canals, boardwalks, estate walls, water, trees
-  - It writes two detail levels to `web/city/` (not committed): `full` (the renders' detail) and `web` (lighter, for distance). Each tile is a Draco GLB that keeps its material names, with wear carried in the vertex colour's alpha.
+    - monuments and roadside signs
+  - It writes two detail levels to `web/city/` (not committed): `full` (the renders' detail, about 7M triangles a tile) and `web` (lighter, about 1M). Each tile is a Draco GLB that keeps its material names.
   - Kinds the kit can't build yet are listed in `web/city/manifest.json` → `gaps`.
-- **The lane network:** `tools/roadnet` turns Gidi's roads into OSM. SUMO's netconvert and the owner's `bake_net.py` from Real-world then give lanes, right of way, signals, crossings and walking areas (`web/city/net/gidi.net.bin`).
-- **The Mock:** `mock/` (see `mock/README.md`). This is the third tab of the map (2D · 3D · Mock), and also a desktop app. You walk and drive the generated city. The behaviour comes from Real-world: car physics, the G29 with force feedback, traffic with signals and give-way, pedestrians. The models are the kit's.
+- **The 3D view** (`web/view3d.js`, the map's 3D tab):
+  - Close in, it streams these tiles round where you're looking. The light build covers the nearest 3×3 or 5×5 tiles, and the full build covers the tile under the view centre when you're right in.
+  - Zoomed out, or where a tile isn't loaded, the data's extruded stand-ins show instead.
+  - The look follows the Ladi Lane mock: a pale harmattan sky, warm light, soft sun shadows near the centre, and haze in the distance.
+  - The dark theme is Gidi at night, with lit windows and street lamps.
+  - Tiles load from `web/city/` beside the page, or from `window.GIDI_TILES` if it's set. Serve the repo root (`python3 -m http.server`) and open `/web/gidi-maps.html`.
 
 ## Previews
 | | |

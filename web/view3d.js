@@ -1,11 +1,19 @@
-/* Gidi Maps, 3D view: the same city data (window.GIDI) as extruded buildings, raised flyovers and flat ground,
-   drawn with three.js r147 (UMD) and MapControls. Map metres: x east, y south. Three.js: X = x, Z = y, Y = up.
-   Exposes window.GidiView3D (a React component) for app.js. */
+/* Gidi Maps, 3D view. Close in, the city is the Blender kit's own models (blender/city_run.py writes
+   them as 400 m tiles to web/city/<detail>/tiles): they stream in round where you're looking, the
+   light "web" build out to about a kilometre and the full build right up close. Zoomed out, and
+   wherever a tile isn't loaded, the city data (window.GIDI) stands in as extruded buildings, raised
+   decks and flat ground. The dark theme is Gidi at night: lit windows and street lamps.
+   three.js r147 (UMD), MapControls, GLTFLoader + DRACOLoader. Map metres: x east, y south.
+   Three.js: X = x, Z = y, Y = up. Exposes window.GidiView3D (a React component) for app.js. */
 (function () {
   const { useEffect, useRef, useState } = React;
   const h = React.createElement;
   const G = window.GIDI;
   const STOREY = 3.1;
+  const TILE = 400;
+  const tileKey = (x, z) => `${Math.floor(x / TILE)}_${Math.floor(z / TILE)}`;
+  // where the kit's tiles are: beside the page by default (web/city/), or window.GIDI_TILES
+  const TILES_BASE = window.GIDI_TILES || "city/";
 
   function tokens() {
     const cs = getComputedStyle(document.documentElement);
@@ -48,7 +56,8 @@
 
   // walls and roofs for every generated building, one merged mesh
   function buildings(T) {
-    const pos = [], col = [];
+    const byTile = new Map();   // the stand-in boxes, one mesh per kit tile so each hides when its models arrive
+    let pos, col;
     const walls = T.dark ? ["#6d6a66", "#75706a", "#6a6f72", "#7a7369"] : ["#e9e2d6", "#e3d9c8", "#dcdcd6", "#e6dccd", "#d9d2c4"];
     const tin = T.dark ? ["#6e4a3a", "#5f4d42", "#6b6560"] : ["#a3684a", "#8f5f47", "#9a8f84", "#b07a58"];
     const flat = T.dark ? "#77746f" : "#cfcac0";
@@ -80,6 +89,9 @@
       list.forEach((b, i) => {
         n++;
         const kind = b[0], ring = b.slice(1); const s = st[i] || 1;
+        const key = tileKey(ring[0][0], ring[0][1]);
+        if (!byTile.has(key)) byTile.set(key, { pos: [], col: [] });
+        ({ pos, col } = byTile.get(key));
         if (kind !== "generator" && kind !== "water tank") count++;   // generator houses and tanks are not counted as buildings
         const H = kind === "stalls" ? 3 : kind === "canopy" ? 2.8 : kind === "mound" ? 5 : kind === "crane" ? 32 : kind === "tank" ? 14 : kind === "stack" ? 7.8 : kind === "trailer" ? 4 : kind === "pen" ? 2.4 : kind === "scrap" ? 2.5 : kind === "container" ? 2.6 : kind === "bust" ? 4 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "generator" ? 1.8 : kind === "water tank" ? 5.5 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
         const SS = STYLE[sty[i]];
@@ -102,19 +114,23 @@
         }
       });
     }
-    const m = new THREE.Mesh(geomFrom(pos, col), new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide }));
-    m.userData.count = count; return m;
+    const group = new THREE.Group(), meshes = new Map();
+    const mat = new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide });
+    for (const [key, a] of byTile) { const m = new THREE.Mesh(geomFrom(a.pos, a.col), mat); meshes.set(key, m); group.add(m); }
+    group.userData.count = count; group.userData.byTile = meshes; return group;
   }
 
   // flyovers (decks on pillars), skywalks and canal footbridges
-  function structures(T) {
+  function structures(T, byTile) {   // each deck goes into the tile of its middle (byTile: key -> Group)
     const group = new THREE.Group();
+    const into = (key) => { if (!byTile.has(key)) { const g = new THREE.Group(); byTile.set(key, g); group.add(g); } return byTile.get(key); };
     const deckM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6b6f75" : "#e4dfd5"), side: THREE.DoubleSide });
     const sideM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#4b4f55" : "#b9b3a8"), side: THREE.DoubleSide });
     for (const s of G.structures || []) {
       const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : s.kind === "jetty" ? 0.9 : 7 * (s.layer || 1);
+      const mid = s.pts[Math.floor(s.pts.length / 2)], tg = into(tileKey(mid[0], mid[1]));
       const top = ribbon([s.pts], s.width, y, []);
-      group.add(new THREE.Mesh(geomFrom(top), deckM));
+      tg.add(new THREE.Mesh(geomFrom(top), deckM));
       // deck edge (a strip hanging 1.2 m below each side) and pillars every ~28 m
       const pts = s.pts, edge = [];
       for (let i = 0; i < pts.length - 1; i++) {
@@ -127,36 +143,59 @@
         }
         if (s.kind === "flyover") for (let t = 14; t < L; t += 28) {
           const p = new THREE.Mesh(new THREE.BoxGeometry(2.2, y - 1.2, 2.2), sideM);
-          p.position.set(x0 + (x1 - x0) * t / L, (y - 1.2) / 2, z0 + (z1 - z0) * t / L); group.add(p);
+          p.position.set(x0 + (x1 - x0) * t / L, (y - 1.2) / 2, z0 + (z1 - z0) * t / L); tg.add(p);
         }
       }
-      group.add(new THREE.Mesh(geomFrom(edge), sideM));
+      tg.add(new THREE.Mesh(geomFrom(edge), sideM));
     }
     return group;
   }
 
   function buildScene(T) {
     const scene = new THREE.Scene();
+    const flat = new THREE.Group();   // ground, water, roads and plots from the data; sinks under the models close in
+    const stand = new Map();          // tile key -> Group of stand-in decks (and the building box mesh)
     scene.background = C(T.sky);
     scene.fog = new THREE.Fog(T.sky, 9000, 26000);
-    scene.add(new THREE.HemisphereLight(T.dark ? 0x9fb3c8 : 0xffffff, T.dark ? 0x2a2d31 : 0xd9d2c3, T.dark ? 0.6 : 0.62));
-    const sun = new THREE.DirectionalLight(0xffffff, T.dark ? 0.4 : 0.42); sun.position.set(-0.6, 1, -0.35); scene.add(sun);
+    const fogFar = scene.fog;
+    // light as the Ladi Lane mock had it: a pale harmattan sky, warm bounce off the red earth, a warm sun
+    scene.add(new THREE.HemisphereLight(T.dark ? 0x7f93b8 : 0xcfe0ee, T.dark ? 0x2a2d31 : 0x8a5a3a, T.dark ? 0.55 : 0.75));
+    if (!T.dark) {
+      const skyU = { top: { value: new THREE.Color(0x8fb4cf) }, bottom: { value: new THREE.Color(0xe6d6bc) } };
+      const sky = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 16), new THREE.ShaderMaterial({
+        side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+        vertexShader: "varying vec3 vp; void main(){ vp = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
+        fragmentShader: "uniform vec3 top; uniform vec3 bottom; varying vec3 vp; void main(){ float h = clamp(normalize(vp).y * 1.6, 0.0, 1.0); gl_FragColor = vec4(mix(bottom, top, pow(h, 0.7)), 1.0); }",
+      }));
+      sky.renderOrder = -1; sky.frustumCulled = false;
+      scene.userData.sky = sky; scene.add(sky);
+    }
+    // the sun, casting shadows over the ground round the view centre (KitTiles moves it along)
+    const sun = new THREE.DirectionalLight(T.dark ? 0x9fb3d8 : 0xffe2b8, T.dark ? 0.2 : 2.3);
+    sun.castShadow = !T.dark;
+    sun.shadow.mapSize.set(4096, 4096);
+    Object.assign(sun.shadow.camera, { left: -450, right: 450, top: 450, bottom: -450, near: 10, far: 3000 });
+    sun.shadow.camera.updateProjectionMatrix();
+    sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.6;
+    scene.add(sun, sun.target);
+    scene.userData.sun = sun;
+    scene.add(flat);
 
     const [MW, MH] = G.size;
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(MW + 30000, MH + 30000), new THREE.MeshLambertMaterial({ color: C(T.bush) }));
-    ground.rotation.x = -Math.PI / 2; ground.position.set(MW / 2, -0.3, MH / 2); scene.add(ground);
+    ground.rotation.x = -Math.PI / 2; ground.position.set(MW / 2, -0.3, MH / 2); flat.add(ground);
     const flatM = (c) => new THREE.MeshLambertMaterial({ color: C(c), side: THREE.DoubleSide });
-    for (const r of G.ocean) scene.add(new THREE.Mesh(flatPoly([r], 0.05), flatM(T.ocean)));
-    scene.add(new THREE.Mesh(flatPoly(G.water, 0.1), flatM(T.water)));
+    for (const r of G.ocean) flat.add(new THREE.Mesh(flatPoly([r], 0.05), flatM(T.ocean)));
+    flat.add(new THREE.Mesh(flatPoly(G.water, 0.1), flatM(T.water)));
 
     const pick = [];
     for (const d of G.districts) {
       const tint = C(T.land).lerp(C(T["a" + d.act]), T.dark ? 0.1 : 0.07);
       const m = new THREE.Mesh(flatPoly(d.poly, 0.2), new THREE.MeshLambertMaterial({ color: tint, side: THREE.DoubleSide }));
-      m.userData.district = d.id; scene.add(m); pick.push(m);
+      m.userData.district = d.id; flat.add(m); pick.push(m);
     }
     const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial, government: T.industrial, garden: T.pitch, barracks: T.pitch, airfield: T.pitch, plazas: T.industrial, livestock: T.market, "container yard": T.industrial, "tank farm": T.industrial, villas: T.pitch, prison: T.industrial, "truck park": T.park, waterworks: T.industrial, landfill: T.market, pipeline: T.pitch, compound: T.pitch, club: T.pitch, pool: T.water, court: T.market, palace: T.pitch, square: T.pitch, enclave: T.dark ? "#5a5240" : "#efe3c2", "golf course": T.dark ? "#3f6b3a" : "#9fd18b", green: T.dark ? "#4f8a47" : "#c3ebb0", bunker: T.dark ? "#6b6040" : "#efe0b0", pond: T.water, forecourt: T.market, fountain: T.water };
-    for (const list of Object.values(G.parcels || {})) for (const p of list) scene.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
+    for (const list of Object.values(G.parcels || {})) for (const p of list) flat.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
 
     const lanes = [], streets = [], mains = [], arts = [];
     for (const list of Object.values(G.lanes || {})) ribbon(list, 3, 0.45, lanes);
@@ -164,20 +203,28 @@
     ribbon(G.mains.map((m) => m.pts), 10, 0.55, mains);
     ribbon(G.arterials.filter((a) => a.cls !== "bridge").map((a) => a.pts), 22, 0.6, arts);
     const roadM = (c) => new THREE.MeshLambertMaterial({ color: C(c), side: THREE.DoubleSide });
-    scene.add(new THREE.Mesh(geomFrom(lanes), roadM(T.st)));
-    scene.add(new THREE.Mesh(geomFrom(streets), roadM(T.st)));
-    scene.add(new THREE.Mesh(geomFrom(mains), roadM(T.mn)));
-    scene.add(new THREE.Mesh(geomFrom(arts), roadM(T.ar)));
+    flat.add(new THREE.Mesh(geomFrom(lanes), roadM(T.st)));
+    flat.add(new THREE.Mesh(geomFrom(streets), roadM(T.st)));
+    flat.add(new THREE.Mesh(geomFrom(mains), roadM(T.mn)));
+    flat.add(new THREE.Mesh(geomFrom(arts), roadM(T.ar)));
     // water bridges ride above the lagoon
-    const br = []; ribbon(G.arterials.filter((a) => a.cls === "bridge").map((a) => a.pts), 24, 9, br);
-    scene.add(new THREE.Mesh(geomFrom(br), roadM(T.bridge)));
+    const brM = roadM(T.bridge), brTile = new Map();
+    for (const a of G.arterials.filter((a) => a.cls === "bridge")) for (let i = 0; i < a.pts.length - 1; i++) {   // in 40 m pieces, each in its tile
+      const [x0, z0] = a.pts[i], [x1, z1] = a.pts[i + 1], n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, z1 - z0) / 40));
+      for (let k = 0; k < n; k++) {
+        const p = [[x0 + (x1 - x0) * k / n, z0 + (z1 - z0) * k / n], [x0 + (x1 - x0) * (k + 1) / n, z0 + (z1 - z0) * (k + 1) / n]];
+        const key = tileKey((p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2);
+        if (!brTile.has(key)) brTile.set(key, []);
+        ribbon([p], 24, 9, brTile.get(key));
+      }
+    }
     // rail: dark ballast with a light centre line
-    scene.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 7, 0.65, [])), roadM(T.dark ? "#3a3e44" : "#8f8b84")));
-    scene.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 1.6, 0.7, [])), roadM(T.dark ? "#8a8f96" : "#d8d4cc")));
-    for (const c of G.canals || []) scene.add(new THREE.Mesh(geomFrom(ribbon([c.pts], 4, 0.62, [])), roadM(T.water)));   // 4 m of water; the banks are walkable
+    flat.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 7, 0.65, [])), roadM(T.dark ? "#3a3e44" : "#8f8b84")));
+    flat.add(new THREE.Mesh(geomFrom(ribbon([G.rail.pts], 1.6, 0.7, [])), roadM(T.dark ? "#8a8f96" : "#d8d4cc")));
+    for (const c of G.canals || []) flat.add(new THREE.Mesh(geomFrom(ribbon([c.pts], 4, 0.62, [])), roadM(T.water)));   // 4 m of water; the banks are walkable
     const foot = []; for (const list of Object.values(G.paths || {})) ribbon(list, 1.5, 0.66, foot);
-    scene.add(new THREE.Mesh(geomFrom(foot), roadM(T.dark ? "#7a6a55" : "#c9b48f")));
-    if (G.boardwalks) scene.add(new THREE.Mesh(geomFrom(ribbon(G.boardwalks, 2.5, 1.2, [])), roadM(T.dark ? "#7a6a55" : "#b59b76")));
+    flat.add(new THREE.Mesh(geomFrom(foot), roadM(T.dark ? "#7a6a55" : "#c9b48f")));
+    if (G.boardwalks) flat.add(new THREE.Mesh(geomFrom(ribbon(G.boardwalks, 2.5, 1.2, [])), roadM(T.dark ? "#7a6a55" : "#b59b76")));
 
     // compound walls, 2.4 m high, and the estate gates' barriers (a red-and-white pole across the street, 1.1 m up)
     const wallM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6d6a66" : "#d9d2c4"), side: THREE.DoubleSide }), wp = [];
@@ -185,12 +232,114 @@
       const [x0, z0] = pts[i], [x1, z1] = pts[i + 1];
       wp.push(x0, 0, z0, x1, 0, z1, x1, 2.4, z1, x0, 0, z0, x1, 2.4, z1, x0, 2.4, z0);
     }
-    if (wp.length) scene.add(new THREE.Mesh(geomFrom(wp), wallM));
+    if (wp.length) flat.add(new THREE.Mesh(geomFrom(wp), wallM));
     const gp = []; for (const q of G.gates || []) { const [[x0, z0], [x1, z1]] = q.pts; gp.push(x0, 1.0, z0, x1, 1.0, z1, x1, 1.25, z1, x0, 1.0, z0, x1, 1.25, z1, x0, 1.25, z0); }
-    if (gp.length) scene.add(new THREE.Mesh(geomFrom(gp), new THREE.MeshLambertMaterial({ color: C("#d93025"), side: THREE.DoubleSide })));
+    if (gp.length) flat.add(new THREE.Mesh(geomFrom(gp), new THREE.MeshLambertMaterial({ color: C("#d93025"), side: THREE.DoubleSide })));
     const b = buildings(T); scene.add(b);
-    scene.add(structures(T));
-    return { scene, pick, buildingCount: b.userData.count };
+    scene.add(structures(T, stand));
+    for (const [key, m] of b.userData.byTile) { if (!stand.has(key)) { const g = new THREE.Group(); stand.set(key, g); scene.add(g); } stand.get(key).userData.boxes = m; }
+    for (const [key, tri] of brTile) { if (!stand.has(key)) { const g = new THREE.Group(); stand.set(key, g); scene.add(g); } stand.get(key).add(new THREE.Mesh(geomFrom(tri), brM)); }
+    return { scene, pick, flat, stand, fogFar, dark: T.dark, buildingCount: b.userData.count };
+  }
+
+
+  // ---------- the kit's models, streamed by tile ----------
+  // Kit materials come back by name (blender/gidi_kit/materials.py); colours ride on the vertices.
+  function kitMaterial(name, dark) {
+    const base = { vertexColors: true, roughness: 0.85, metalness: 0 };
+    if (name === "glass") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.08, metalness: 0.4 });
+    if (name === "glass_lit") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.08, metalness: 0.4, emissive: dark ? 0xffc77a : 0x000000, emissiveIntensity: dark ? 0.9 : 0 });
+    if (name === "lamp") return new THREE.MeshBasicMaterial({ color: dark ? 0xffe2a8 : 0x9a9a92 });
+    if (name === "emit") return new THREE.MeshBasicMaterial({ vertexColors: true });
+    if (name === "water") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.12, metalness: 0.1 });
+    if (name === "zinc" || name === "steel") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.45, metalness: 0.45 });
+    if (name === "asphalt") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.95 });
+    return new THREE.MeshStandardMaterial(base);
+  }
+
+  class KitTiles {
+    constructor(world, dark) {
+      this.world = world; this.dark = dark;
+      this.group = new THREE.Group(); world.scene.add(this.group);
+      this.loaded = new Map();   // key -> { detail, obj } | "loading"
+      this.mats = new Map(); this.manifest = null; this.busy = 0; this.lastKey = ""; this.lastAt = 0;
+      const draco = new THREE.DRACOLoader();
+      draco.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");   // decoder 1.5.6: the full tiles are too big for r147's
+      draco.setWorkerLimit(1);
+      this.loader = new THREE.GLTFLoader(); this.loader.setDRACOLoader(draco);
+      fetch(TILES_BASE + "manifest.json").then((r) => (r.ok ? r.json() : null)).then((m) => { this.manifest = m; }, () => {});
+    }
+    material(name) {
+      if (!this.mats.has(name)) this.mats.set(name, kitMaterial(name, this.dark));
+      return this.mats.get(name);
+    }
+    // camera distance d from the target decides how much to load: none far out, the light build to
+    // ~1.2 km, the full build for the nearest tiles when you're right in
+    update(now, target, d) {
+      if (!this.manifest || now - this.lastAt < 250) return;
+      this.lastAt = now;
+      const close = d < 2600;
+      const ring = !close ? -1 : d < 1200 ? 1 : 2;   // a light tile is ~1M triangles: 9 to 25 of them
+      const full = d < 450;                          // a full one is ~7M: only the tile you're over
+      const tx = Math.floor(target.x / TILE), ty = Math.floor(target.z / TILE);
+      const want = new Map();
+      for (let dx = -ring; dx <= ring; dx++) for (let dy = -ring; dy <= ring; dy++) {
+        const k = `${tx + dx}_${ty + dy}`, have = this.manifest.tiles[k];
+        if (!have) continue;
+        const r = Math.max(Math.abs(dx), Math.abs(dy));
+        const det = full && r === 0 && have.full ? "full" : have.web ? "web" : have.full ? "full" : "";
+        if (det) want.set(k, [det, r]);
+      }
+      for (const [k, v] of [...this.loaded]) {   // drop what's out of range (a change of detail swaps when the new one arrives)
+        if (v === "loading" || k.includes("#")) continue;
+        if (!want.has(k)) this.drop(k);
+      }
+      // sink the data's flat ground under the models while any are up; show stand-ins where they aren't
+      this.world.flat.position.y = close ? -1.6 : 0;
+      const sun = this.world.scene.userData.sun;   // shadows follow the view centre, on the same heading as ever
+      sun.target.position.set(target.x, 0, target.z); sun.position.set(target.x - 1000, 1050, target.z - 600); sun.target.updateMatrixWorld();
+      for (const [k, g] of this.world.stand) {
+        const up = this.loaded.get(k), has = up && up !== "loading";
+        g.visible = !has; if (g.userData.boxes) g.userData.boxes.visible = !has;
+      }
+      const order = [...want.entries()].sort((a, b) => a[1][1] - b[1][1]);
+      for (const [k, [det]] of order) {
+        if (this.busy >= 2 || (det === "full" && this.busy > 0)) break;   // never decode a full tile alongside others
+        const cur = this.loaded.get(k);
+        if (cur === "loading" || (cur && cur.detail === det) || this.loaded.get(k + "#next") === "loading") continue;
+        this.fetchTile(k, det, !!cur);
+      }
+    }
+    fetchTile(k, det, upgrade) {
+      const slot = upgrade ? k + "#next" : k;
+      this.loaded.set(slot, "loading"); this.busy++;
+      const [ax, ay] = k.split("_").map(Number);
+      this.loader.load(TILES_BASE + det + "/tiles/" + k + ".glb", (gltf) => {
+        this.busy--;
+        const obj = gltf.scene;
+        obj.position.set(ax * TILE, 0, (ay + 1) * TILE);   // the tile's corner (Blender's y north is the map's y south)
+        obj.traverse((o) => {
+          if (!o.isMesh) return;
+          const name = ((o.material && o.material.name) || "paint").split(".")[0];
+          if (o.material && o.material.dispose) o.material.dispose();
+          o.material = this.material(name);
+          o.castShadow = o.receiveShadow = name !== "emit" && name !== "lamp";
+        });
+        if (upgrade) { this.drop(k); this.loaded.delete(slot); }
+        else this.loaded.delete(slot);
+        this.group.add(obj); this.loaded.set(k, { detail: det, obj });
+      }, undefined, () => { this.busy--; this.loaded.delete(slot); });
+    }
+    drop(k) {
+      const v = this.loaded.get(k);
+      if (v && v !== "loading") { this.group.remove(v.obj); v.obj.traverse((o) => o.geometry && o.geometry.dispose()); }
+      this.loaded.delete(k);
+    }
+    dispose() {
+      for (const k of [...this.loaded.keys()]) this.drop(k);
+      for (const m of this.mats.values()) m.dispose();
+      this.world.scene.remove(this.group);
+    }
   }
 
   function bboxOf(pts) { let a = [1e9, 1e9, -1e9, -1e9]; for (const [x, y] of pts) a = [Math.min(a[0], x), Math.min(a[1], y), Math.max(a[2], x), Math.max(a[3], y)]; return a; }
@@ -203,18 +352,26 @@
 
     useEffect(() => {
       const el = host.current;
-      const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+      // no logarithmic depth: it breaks the sun's shadows; near and far follow the zoom instead (loop)
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;   // the Ladi Lane mock's look
+      renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
       el.appendChild(renderer.domElement);
-      const camera = new THREE.PerspectiveCamera(40, 1, 2, 60000);
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.5, 60000);
       const controls = new THREE.MapControls(camera, renderer.domElement);
       controls.enableDamping = true; controls.dampingFactor = 0.12; controls.screenSpacePanning = false;
-      controls.maxPolarAngle = 1.32; controls.minDistance = 60; controls.maxDistance = 20000;
+      controls.maxPolarAngle = 1.45; controls.minDistance = 25; controls.maxDistance = 20000;
 
-      let world = null;
+      let world = null, kit = null;
       const build = () => {
+        if (kit) kit.dispose();
         if (world) world.scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
-        world = buildScene(tokens());
+        const T = tokens();
+        world = buildScene(T);
+        kit = new KitTiles(world, T.dark);
         setInfo({ built: Object.keys(G.buildings || {}).length, total: G.districts.length, count: world.buildingCount });
       };
       build();
@@ -280,7 +437,20 @@
       const loop = (now) => {
         raf = requestAnimationFrame(loop);
         if (fly) fly(now);
-        controls.update(); renderer.render(world.scene, camera); placeLabels();
+        controls.update();
+        const dist = camera.position.distanceTo(controls.target);
+        const near = Math.max(0.5, dist * 0.01), far = Math.max(8000, dist * 30);
+        if (Math.abs(camera.near - near) > near * 0.2 || camera.far !== far) { camera.near = near; camera.far = far; camera.updateProjectionMatrix(); }
+        kit.update(now, controls.target, dist);
+        const sky = world.scene.userData.sky;
+        if (sky) { sky.position.copy(camera.position); sky.scale.setScalar(far * 0.9); }
+        if (!world.dark) {
+          if (dist < 2600) {   // harmattan haze close in, thinning as you pull back
+            if (!world.scene.fog.isFogExp2) world.scene.fog = new THREE.FogExp2(0xdccfb6, 0);
+            world.scene.fog.density = 0.45 / Math.max(dist, 250);
+          } else if (world.scene.fog.isFogExp2) world.scene.fog = world.fogFar;
+        }
+        renderer.render(world.scene, camera); placeLabels();
         if (compass) { const az = Math.atan2(camera.position.x - controls.target.x, camera.position.z - controls.target.z); compass.style.transform = `rotate(${az}rad)`; }
       };
       raf = requestAnimationFrame(loop);
@@ -297,8 +467,9 @@
           const from = camera.position.clone(), t0 = performance.now(); fly = (now) => { const k = Math.min(1, (now - t0) / 500); camera.position.lerpVectors(from, to, k); if (k >= 1) fly = null; }; },
       };
       onReady && onReady(api.current);
+      window.__gidi3d = { ...api.current, camera, controls, renderer, world: () => world, tiles: () => kit && [...kit.loaded.keys()] };   // for checking the view from a script
       return () => {
-        cancelAnimationFrame(raf); ro.disconnect(); mq.removeEventListener("change", onTheme); mo.disconnect(); controls.dispose();
+        cancelAnimationFrame(raf); ro.disconnect(); mq.removeEventListener("change", onTheme); mo.disconnect(); controls.dispose(); kit.dispose();
         world.scene.traverse((o) => { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
         renderer.dispose(); el.removeChild(renderer.domElement); labels.current && (labels.current.innerHTML = "");
         onReady && onReady(null);

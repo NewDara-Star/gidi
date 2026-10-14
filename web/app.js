@@ -283,30 +283,16 @@
         h("div", { className: "chips" },
           [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"]].map(([k, t]) =>
             h("button", { key: k, className: "chip" + (layers[k] ? " on" : ""), "aria-pressed": layers[k], onClick: () => setLayers({ ...layers, [k]: !layers[k] }) }, t))));
-    const is3d = dim === "3d", isMock = dim === "mock";
+    const is3d = dim === "3d";
     const dimBox = h("div", { className: "dim ui" },
       h("div", { className: "seg", role: "group", "aria-label": "Map view" },
         h("button", { id: "dim2d", "aria-pressed": dim === "2d", onClick: () => setDim("2d") }, "2D"),
-        h("button", { id: "dim3d", "aria-pressed": is3d, onClick: () => setDim("3d") }, "3D"),
-        h("button", { id: "dimmock", "aria-pressed": isMock, title: "Walk and drive the generated city", onClick: () => setDim("mock") }, "Mock")),
+        h("button", { id: "dim3d", "aria-pressed": is3d, onClick: () => setDim("3d") }, "3D")),
       is3d && h("button", { className: "compass", "aria-label": "Turn the map to face north", onClick: () => api3d.current && api3d.current.north() }, h("span", { id: "compass3d" })));
     const controls3d = h("div", { className: "controls ui" },
       h("button", { "aria-label": "Zoom in", onClick: () => api3d.current && api3d.current.zoom(0.62) }, "+"),
       h("button", { "aria-label": "Zoom out", onClick: () => api3d.current && api3d.current.zoom(1.6) }, "−"),
       h("button", { "aria-label": "Show all of Gidi", className: "fit", onClick: () => api3d.current && api3d.current.home() }, "⤢"));
-    if (isMock) {
-      // The Mock (mock/dist): the Blender-generated city to walk and drive, starting at the selected
-      // place or the middle of the 2D view. It needs the city tiles beside it, so it runs in the Gidi
-      // desktop app (mock: npm run desktop) or from a local server at the repo root.
-      const at = sel && sel.name ? `at=${encodeURIComponent(sel.name)}` : view ? `xy=${Math.round(view.cx)},${Math.round(view.cy)}` : "";
-      return h("div", { ref: wrap, className: "map" },
-        h("iframe", { className: "mock", src: `../mock/dist/index.html?${at}`, title: "Gidi Mock", allow: "hid; gamepad; fullscreen", style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, background: "#0d0f12" } }),
-        h("div", { className: "mock-note ui", style: { position: "absolute", right: 64, bottom: 12, maxWidth: 360, padding: "8px 10px", borderRadius: 8, background: "var(--panel)", boxShadow: "var(--shadow)", fontSize: 12, color: "var(--fg2)" } },
-          "Mock: the generated city to walk (WASD) and drive (F danfo, G car; G29 or pad). If it stays blank, open Gidi in the desktop app: cd mock && npm run desktop."),
-        TOPBAR(),
-        h(Panel, { sel, select, open: panelOpen, setOpen: setPanelOpen, close: () => setSel(null) }),
-        dimBox);
-    }
     if (is3d) return h("div", { ref: wrap, className: "map" },
       h(window.GidiView3D, { sel, select: (item) => { setSel(item); if (item) setPanelOpen(true); }, onReady: (a) => { api3d.current = a; } }),
       TOPBAR(),

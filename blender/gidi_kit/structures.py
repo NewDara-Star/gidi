@@ -58,8 +58,7 @@ def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=
 
 def deck_height(s, S, H, R):
     """Deck height at s metres along a structure S long: up from the road at each end over R metres
-    (a smoothstep, so the car feels a vertical curve), H in the middle. The Mock uses the same
-    profile (mock/src/world.ts deckHeight) to put cars and walkers on the deck."""
+    (a smoothstep, a proper vertical curve), H in the middle."""
     R = min(R, S * 0.45)
     u = max(0.0, min(1.0, min(s, S - s) / R)) if R > 0 else 1.0
     return 0.05 + (H - 0.05) * u * u * (3 - 2 * u)
@@ -73,7 +72,7 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
     piers whose middle passes keep(p) (the tile being built) are made, so a bridge crossing many
     tiles comes out seamless. Dressed as Lagos decks are: yellow edge lines, white dashed lanes, on
     wide decks (w >= 18) a chequered black-and-white median barrier with double-arm lamps on it,
-    otherwise lamps on alternate sides. Lamp heads are appended to `lamps` (for the Mock)."""
+    otherwise lamps on alternate sides. Lamp heads are appended to `lamps` (saved with the tile)."""
     from . import roadside
     S = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
     median = w >= 18
@@ -197,8 +196,7 @@ def skywalk(mb, pts, w, rng):
 def snap_footbridge(pts, canals, gap=10.0):
     """A footbridge in the data is drawn from somewhere near the canal; centre it on the canal's
     line and make it span the channel and both banks (CANAL_W + 4 m), square across the flow.
-    Returns the new two-point line, or the original if no canal is near. The Mock does the same
-    (mock/src/world.ts) so walkers climb the same deck."""
+    Returns the new two-point line, or the original if no canal is near."""
     m = ((pts[0][0] + pts[-1][0]) / 2, (pts[0][1] + pts[-1][1]) / 2)
     best = None
     for c in canals:

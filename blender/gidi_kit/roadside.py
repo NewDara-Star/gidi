@@ -23,7 +23,7 @@ SODIUM = hex_rgb('#ffb060')
 
 def street_light(mb, x, y, ang, rng, arms=1, h=None, working=True, solar=False, z0=0.0):
     """A galvanised tapered pole with one arm (reaching over the road along ang) or two (a median
-    pole, arms both ways). Returns the lamp heads' positions [(x, y, z), ...] for the Mock's light pools."""
+    pole, arms both ways). Returns the lamp heads' positions [(x, y, z), ...] for the 3D view's night lights."""
     h = h or rng.between(8.5, 10.5)
     M = Matrix.Translation((x, y, z0)) @ Matrix.Rotation(ang, 4, 'Z')
     parts.cyl(mb, 'steel', M, 0.11, h, GALV, rng.between(0.3, 0.7), seg=8, r2=0.06)

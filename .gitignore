@@ -7,4 +7,3 @@ blender/out/
 __pycache__/
 web/city/
 .venv/
-mock/public/models/

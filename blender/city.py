@@ -227,15 +227,14 @@ def _clear(p, pad=1.5):
 
 
 CANALS = [[P(p) for p in c['pts']] for c in GD.get('canals', [])]
-BUILT = set(GD['buildings'])  # districts with buildings; the rest are walled off in the Mock
+BUILT = set(GD['buildings'])  # districts with buildings (the others aren't built yet)
 
 
 def monument_sites():
     """Where the monuments stand (blender/gidi_kit/monuments.py), the same for every tile and detail:
     a corner of the main-road junctions (a statue, clock tower, sculpture or LED screen by the
     district's character, up to four a district), a welcome arch on the main roads entering each
-    built district, and the lighthouse on the port mole. Written to web/city/monuments.json too,
-    so the Mock can give them colliders."""
+    built district, and the lighthouse on the port mole. Also written to web/city/monuments.json."""
     mains = [r for r in ROADS if r['k'] == 'main']
     sites, per = [], {}
     for i, r1 in enumerate(mains):
@@ -451,7 +450,7 @@ def build_roadside(mb, s_):
         roadside.gantry(mb, s_['x'], s_['y'], s_['ang'], s_['span'], s_['panels'], rng, z0=s_.get('z0', 0.0))
 
 
-LAMPS = []  # this tile's working lamp heads (Blender frame), for the Mock's light pools
+LAMPS = []  # this tile's working lamp heads (Blender frame), saved in the tile's JSON for the 3D view's night lights
 DEAD_LAMPS = {'elite': 0.05, 'civic': 0.15, 'old_island': 0.3, 'dense': 0.45, 'sprawl': 0.4, 'port': 0.4, 'waterfront': 0.6}
 
 
