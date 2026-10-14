@@ -192,6 +192,53 @@ def master(name):
         nt.bsdf(col, rough=0.55)
     elif name == 'emit':
         nt.bsdf(col, rough=0.5, emit=col, emit_strength=2.0)
+    elif name == 'asphalt':
+        # grain, a web of fine cracks (voronoi edges) that opens up with wear, oil and dust
+        pos = nt.world_pos()
+        wear = nt.attr('Wear').outputs['Fac']
+        base = nt.mix(nt.math('MULTIPLY', nt.noise(40, 2, pos), 0.25), col, (0.5, 0.5, 0.5), 'MULTIPLY')
+        vor = nt.add('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE')
+        vor.inputs['Scale'].default_value = 1.6
+        nt.link(pos, vor.inputs['Vector'])
+        crack = nt.math('MULTIPLY', nt.math('SUBTRACT', 1.0, nt.ramp(vor.outputs['Distance'], 0.0, 0.025)), nt.math('MULTIPLY', wear, 0.9))
+        base = nt.mix(crack, base, (0.03, 0.03, 0.03))
+        oil = nt.ramp(nt.noise(0.6, 3, pos), 0.62, 0.8)
+        base = nt.mix(nt.math('MULTIPLY', oil, 0.4), base, (0.05, 0.05, 0.05))
+        nt.bsdf(base, rough=0.9)
+    elif name == 'mud':
+        # laterite and silt: Wear is wetness here; wet mud is darker and glossy
+        pos = nt.world_pos()
+        wet = nt.attr('Wear').outputs['Fac']
+        base = nt.mix(nt.math('MULTIPLY', nt.noise(9, 3, pos), 0.3), col, (0.5, 0.45, 0.4), 'MULTIPLY')
+        base = nt.mix(nt.math('MULTIPLY', wet, 0.35), base, (0.1, 0.06, 0.04), 'MULTIPLY')
+        rough = nt.math('SUBTRACT', 0.95, nt.math('MULTIPLY', nt.math('MULTIPLY', wet, nt.ramp(nt.noise(1.5, 2, pos), 0.3, 0.7)), 0.7))
+        nt.bsdf(base, rough=rough)
+    elif name == 'pavers':
+        br = nt.add('ShaderNodeTexBrick')
+        br.inputs['Scale'].default_value = 1.0
+        br.inputs['Mortar Size'].default_value = 0.006
+        br.inputs['Brick Width'].default_value = 0.2
+        br.inputs['Row Height'].default_value = 0.1
+        br.inputs['Color1'].default_value = (0.5, 0.5, 0.5, 1)
+        br.inputs['Color2'].default_value = (0.42, 0.42, 0.41, 1)
+        br.inputs['Mortar'].default_value = (0.25, 0.24, 0.22, 1)
+        nt.link(nt.world_pos(), br.inputs['Vector'])
+        base = nt.mix(1.0, col, br.outputs['Color'], 'MULTIPLY')
+        base = nt.mix(1.0, base, (2.0, 2.0, 2.0), 'MULTIPLY')
+        base, *_ = _weathered(nt, base, chalk=False, streak_dir=False)
+        nt.bsdf(base, rough=0.85)
+    elif name == 'water':
+        pos = nt.world_pos()
+        p = nt.add('ShaderNodeBsdfPrincipled')
+        nt._in(col, p.inputs['Base Color'])
+        p.inputs['Roughness'].default_value = 0.12  # muddy water: soft reflections, mostly its own colour
+        p.inputs['Specular IOR Level'].default_value = 0.35
+        bump = nt.add('ShaderNodeBump')
+        bump.inputs['Strength'].default_value = 0.08
+        nt.link(nt.noise(3.0, 2, pos), bump.inputs['Height'])
+        nt.link(bump.outputs['Normal'], p.inputs['Normal'])
+        out = nt.add('ShaderNodeOutputMaterial')
+        nt.link(p.outputs['BSDF'], out.inputs['Surface'])
     elif name == 'ground':
         base, *_ = _weathered(nt, col, chalk=False)
         nt.bsdf(base, rough=0.95)

@@ -22,6 +22,20 @@ UNFINISHED_SHARE = {
     'bazaar': 0.014, 'port': 0.014, 'railside': 0.041, 'estate': 0.001, 'oldisland': 0.0, 'heights': 0.0,
 }
 
+# Share of the real inspiration's land below 3 m (docs/LAGOS-ISMS.md, from the LGA DEM): floods, wet roads.
+FLOOD = {'maze': 0.08, 'hub': 0.09, 'jungle': 0.45, 'foodgate': 0.57, 'watertown': 0.55, 'capital': 0.0, 'bazaar': 0.32,
+         'port': 0.48, 'railside': 0.03, 'estate': 0.2, 'oldisland': 0.97, 'heights': 0.54, 'frontier': 0.5, 'border': 0.4, 'oldshore': 0.4}
+# The street kit per character: drain size and cover, wire tangle, litter, kerb paint, poles of timber.
+STREET = {
+    'dense': dict(drain=(0.5, 0.45), cover=0.3, rubbish=0.6, drops=(2, 4), litter=1.0, kerb='yellow', wood_pole=0.15, heaps=1.0, bumps=0.3),
+    'sprawl': dict(drain=(0.5, 0.45), cover=0.25, rubbish=0.5, drops=(1, 3), litter=0.7, kerb='grey', wood_pole=0.1, heaps=0.8, bumps=0.3),
+    'old_island': dict(drain=(0.45, 0.5), cover=0.4, rubbish=0.6, drops=(2, 4), litter=1.0, kerb='white', wood_pole=0.35, heaps=0.8, bumps=0.2),
+    'elite': dict(drain=(0.45, 0.45), cover=0.92, rubbish=0.05, drops=(0, 1), litter=0.05, kerb='white', wood_pole=0.0, heaps=0.0, bumps=1.0),
+    'civic': dict(drain=(0.6, 0.5), cover=0.6, rubbish=0.3, drops=(1, 2), litter=0.4, kerb='yellow', wood_pole=0.0, heaps=0.3, bumps=0.4),
+    'waterfront': dict(drain=(0.5, 0.4), cover=0.1, rubbish=0.8, drops=(1, 3), litter=1.3, kerb='grey', wood_pole=0.4, heaps=1.5, bumps=0.1),
+    'port': dict(drain=(0.9, 0.8), cover=0.4, rubbish=0.6, drops=(1, 2), litter=1.0, kerb='yellow', wood_pole=0.1, heaps=1.2, bumps=0.1),
+}
+
 # ---------------------------------------------------------------- per character
 C = {
     'dense': dict(
