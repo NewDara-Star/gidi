@@ -255,6 +255,11 @@ if PROF.get("interchange"):
 GAP = 8.0   # room between a reserved parcel and its access road
 for spec in PROF.get("reserve", []):
     hint = knot if spec.get("near_knot") and knot else POIS.get(spec["poi"], poly.centroid)
+    if spec.get("near") == "shore":   # on the quay: the point of the lagoon shore nearest its pin, pulled in by half its depth
+        shl = land.boundary.intersection(water.buffer(5))
+        if not shl.is_empty:
+            q = nearest_points(shl, hint)[0]; dpt = math.sqrt(spec["m2"] / spec["aspect"]) / 2 + 20
+            hint = nearest_points(land.buffer(-dpt), q)[0] if not land.buffer(-dpt).is_empty else q
     fronts = [a for n, k, a in arts if a.intersection(poly).length > 100] if spec["front"] == "art" else ([rail] if spec["front"] == "rail" else [])
     off = CLEAR["art"] if spec["front"] == "art" else CLEAR["rail"]
     if spec["front"] and not fronts: print("skipped", spec["kind"], "- nothing to face", file=sys.stderr); continue
@@ -958,7 +963,7 @@ for sp in PROF.get("spots", []):
     for k, g in sorted(net_lines, key=lambda kg: kg[1].distance(pin)):
         if k == "art" or g.distance(pin) > 150: continue
         t0 = g.project(pin)
-        for dt in sorted(range(-120, 121, 2), key=abs):
+        for dt in sorted(range(-160, 161, 2), key=lambda d: abs(d - sp.get("shift_m", 0))):   # shift_m: a row of posts, spaced out
             if not 0 < t0 + dt < g.length: continue
             q = g.interpolate(t0 + dt); ux, uy = LMK.direction_at(g, t0 + dt); off = CLEAR.get(k, 3.4) + sp["d"] / 2 + 0.2
             for side in (1, -1):
@@ -1139,6 +1144,51 @@ for p in parcels:
         for k2 in range(LV["scrap_piles"]):
             q = edge.interpolate(k2 / LV["scrap_piles"], normalized=True); r = rect(q.x, q.y, 6, 6, a)
             if g.contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-200:] if kk == "pen"): bld.append((r, "scrap"))
+    if p["kind"] == "container yard":   # the port: stacks of containers in blocks, gantry cranes on the quay, customs sheds by the gate
+        CY = next(x for x in PROF["reserve"] if x["kind"] == "container yard"); ca, sa = math.cos(a), math.sin(a)
+        shl = water.exterior.intersection(g.buffer(80)); quay = nearest_points(shl, ctr)[0] if not shl.is_empty else None
+        sgn = 1 if quay is None or ((quay.x - ctr.x) * -sa + (quay.y - ctr.y) * ca) >= 0 else -1   # which long side faces the water
+        W2 = min(LL, math.sqrt(g.area * CY["aspect"])) / 2; D2 = g.area / (2 * W2) / 2
+        yard = []   # yard lanes: one along the yard and one across it, out to its own road all round (the trucks' way in)
+        for (u0, v0, u1, v1) in ((-W2 - GAP - 1, 0, W2 + GAP + 1, 0), (0, -D2 - GAP - 1, 0, D2 + GAP + 1)):
+            yard.append(LineString([(ctr.x + u0 * ca - v0 * sa, ctr.y + u0 * sa + v0 * ca), (ctr.x + u1 * ca - v1 * sa, ctr.y + u1 * sa + v1 * ca)]))
+        yu = unary_union([y.buffer(5) for y in yard]); lanes += yard
+        bld = [(o, kk) for o, kk in bld if not (o.intersects(yu) and o.intersects(g))]
+        for u in np.arange(-W2 + 14, W2 - 10, 30):   # gantry cranes in a line along the quay side
+            r = rect(ctr.x + u * ca - sa * sgn * (D2 - 12), ctr.y + u * sa + ca * sgn * (D2 - 12), 14, 9, a)
+            if fit(r) and not r.intersects(yu): bld.append((r, "crane"))
+        for v in np.arange(-D2 + 18, D2 - 40, 16):   # stacks: blocks of 6 x 3 boxes (12.2 x 2.4 m), 3 m lanes, 12 m roads between blocks
+            for u in np.arange(-W2 + 10, W2 - 10, 6 * 12.2 + 12):
+                for j in range(3):
+                    r = rect(ctr.x + (u + 36.6) * ca - sa * (v + j * 3.2), ctr.y + (u + 36.6) * sa + ca * (v + j * 3.2), 6 * 12.2, 2.4, a)
+                    if g.buffer(-6).contains(r) and road_free.contains(r) and not r.intersects(yu): bld.append((r, "stack"))
+        for k2 in (-1, 1):   # customs sheds on the landward side
+            r = rect(ctr.x + k2 * 40 * ca + sa * sgn * (D2 - 20), ctr.y + k2 * 40 * sa - ca * sgn * (D2 - 20), 50, 22, a)
+            if fit(r) and not r.intersects(yu): bld = [(o, kk) for o, kk in bld if not (kk == "stack" and o.intersects(r.buffer(3)))] + [(r, "warehouse")]
+    if p["kind"] == "tank farm":   # round fuel tanks in a grid, each in its own bund
+        TF = next(x for x in PROF["reserve"] if x["kind"] == "tank farm"); ca, sa = math.cos(a), math.sin(a); R2_ = TF["tank_r_m"]; step = 2 * R2_ + 14
+        for v in np.arange(-LL, LL, step):
+            for u in np.arange(-LL, LL, step):
+                c2 = Point(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca); r = c2.buffer(R2_, 24)
+                if g.buffer(-8).contains(r) and road_free.contains(r): bld.append((r, "tank"))
+    if p["kind"] in ("villas", "prison", "truck park"):   # grids of one building type: bungalows in gardens, cell blocks, parked trailers
+        VS = next(x for x in PROF["parcels"] + PROF.get("reserve", []) if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a); bl, bs = VS["block_m"]
+        av = None
+        if VS.get("avenue"):   # the reserve's own avenue down its length, carried on to the first street at each end
+            wu = unary_union([x for k, x in net_lines]); pts_ = []
+            for sg in (-1, 1):
+                ray = LineString([(ctr.x, ctr.y), (ctr.x + sg * ca * (LL / 2 + 40), ctr.y + sg * sa * (LL / 2 + 40))]); x = ray.intersection(wu)
+                hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point"]
+                pts_.append(min(hits, key=ray.project) if hits else ray.interpolate(LL / 2 - 5))
+            av = LineString(pts_); lanes.append(av)
+        for v in np.arange(-LL, LL, bs + VS["gap_m"][1]):
+            for u in np.arange(-LL, LL, bl + VS["gap_m"][0]):
+                r = rect(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca, bl, bs, a)
+                if g.buffer(-VS.get("margin_m", 4)).contains(r) and road_free.contains(r) and (av is None or r.distance(av) > 6): bld.append((r, VS["building"]))
+        if p["kind"] == "prison":   # a watchtower at each corner of the wall
+            for q in list(g.minimum_rotated_rectangle.exterior.coords)[:4]:
+                q2 = nearest_points(g.buffer(-4), Point(q))[0]; r = rect(q2.x, q2.y, 4, 4, a)
+                if road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-300:]): bld.append((r, "tower"))
     if p["kind"] == "under bridge":   # rows of stalls between the slip road and the flyover
         for r in LMK.stall_rows(g, a): 
             if road_free.contains(r): bld.append((r, "stalls"))
@@ -1273,7 +1323,8 @@ rnd.shuffle(slots)
 
 # ---------- 6. measure against the real core squares ----------
 WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon: measured on their own, not with the land fabric
-B = [r for r, k in bld if k not in WATER_KINDS]
+NOT_BUILDINGS = ("stack", "trailer", "crane")   # containers, parked trailers and gantry cranes are not buildings: not counted against the real ones
+B = [r for r, k in bld if k not in WATER_KINDS + NOT_BUILDINGS]
 # a street left lying on top of another (two clean-up steps cut the same line) is a walking island: drop the copy (short ties stay)
 _kept = []
 for g in sorted(streets, key=lambda s: -s.length):
@@ -1293,7 +1344,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
