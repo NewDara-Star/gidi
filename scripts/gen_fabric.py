@@ -44,6 +44,7 @@ if PROF:
     ce = PROF["cross_every"]; RULE["cross_every"] = sampler({k: ce[k] for k in ("p25", "p50", "p75")}, ce["lo"], ce["hi"])
     RULE["x_junction"] = PROF["x_junction"]; RULE["dead_end"] = PROF.get("dead_end", RULE["dead_end"])
     RULE["back_row"] = PROF.get("back_row", RULE["back_row"]); RULE["big_front"] = PROF.get("big_front", 0.0); RULE["cross_scale"] = PROF.get("cross_scale", SCALE); RULE["size_lo_u"] = PROF.get("size_lo_u", 0.25)
+    RULE["sector_split_ha"] = PROF.get("sector_split_ha", RULE["sector_split_ha"])   # bigger: fewer collector streets cutting the land into patches
 if PROF.get("sizes_from"):   # under-mapped area (central Ikeja): house sizes and gaps from the whole LGA's mapped buildings (see the study doc)
     SZ = json.load(open(f"study-{PROF['sizes_from']}.json"))["buildings"]
     RULE["short_side"] = sampler(SZ["short_side_m"], 3.0, 18); RULE["long_side"] = sampler(SZ["long_side_m"], 4.5, 34); RULE["gap"] = sampler(SZ["gap_to_nearest_neighbour_m"], 0.0, 6)

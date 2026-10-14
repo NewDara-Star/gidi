@@ -41,7 +41,8 @@
    "p50": 0.8,
    "p75": 1.2
   },
-  "overlaps_with_streets": 19
+  "overlaps_with_streets": 19,
+  "blocks_per_km2_closed": 42
  },
  "dense": {
   "bounds": [
@@ -85,6 +86,7 @@
    "p50": 0.9,
    "p75": 1.5
   },
-  "overlaps_with_streets": 7
+  "overlaps_with_streets": 7,
+  "blocks_per_km2_closed": 44
  }
 }

@@ -133,6 +133,7 @@ def jungle(ST, LM):
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.5, "dead_end": 0.12,
         "cross_scale": 1.8,           # cross streets far apart: Ajegunle is long east-west streets with few cross streets
+        "sector_split_ha": 19,        # fewer collector streets: blocks counted like the real squares (closed) were 57/km2 against 42-44
         "size_lo_u": 0.65,            # house sizes from the upper 35% of the real range (plots shrink many of them)
         "back_row": 0.65,
         "courtyard_m": [0.8, 2.0],    # tighter compounds than Mushin's 1.5-4 m: real gaps 0.8-0.9 m, ground built on 41-43%
@@ -148,7 +149,7 @@ def jungle(ST, LM):
         "parcels": [
             {"kind": "estate", "ha": round(FE["blocks"]["area_m2"]["p75"] / 1e4, 2), "uv": [0.15, 0.35], "near_main": True, "min_w": 60,   # one Festac block (p75: room for a few rows)
              "block_m": [16, 24], "gap_m": 4.5, "garden_m": 20, "shop_share": 0.5, "storeys": 4},   # Festac flats: 16 x 24 m, 4.5 m apart (measured); 4 storeys is the district model's "1970s estate flats"
-            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False, "gate": "nearest"},   # a gate onto the nearest street (with fewer collectors, its block can be deep)
             {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
         ],
         "hotel": {"poi": "Ireti Hotel", "m2": ST["buildings"]["footprint_m2"]["p90"], "storeys": 3},   # "tiny hotels": a big house's footprint (p90), 3 storeys; no hotels mapped
@@ -249,6 +250,7 @@ def capital(ST, LM):
         "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.5, "cross_scale": 2.2, "dead_end": 0.1, "size_lo_u": 0.5, "plot_u": [0.55, 0.99],   # bigger houses (real typical 187 m2)
+        "sector_split_ha": 22,        # fewer collector streets: 59 blocks/km2 against the real 31-49 (counted closed)
         "back_row": 0.55, "big_front": 0.5, "vacant": 0.08,   # offices, plazas and banks on the main roads (real: 16% over 400 m2)
         "internal_mains": 2,          # real main roads 4-5.5 km/km2: the most of any district so far
         "name_endings": ends,

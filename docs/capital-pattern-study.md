@@ -87,7 +87,7 @@ Data:
 - **Land use, whole LGA:** residential 1,937 ha, industrial 862 ha, commercial 165 ha, military 186 ha.
 
 ## 4. The generator: what is new for the Capital
-`scripts/gen_fabric.py capital 3 3.2`, with its settings in `scripts/district_profiles.py` (`capital`).
+`scripts/gen_fabric.py capital 3 3.2` (v1.1: collector streets above 22 ha), with its settings in `scripts/district_profiles.py` (`capital`).
 
 **Landmarks** (from the district model):
 1. **Gadget Village** (`zone`). The houses within 120 m of the pin (4.5 ha) are stacked into 3–4 storey phone malls, with a kiosk every ~9 m along the streets.
@@ -119,22 +119,25 @@ Data:
 
 | | Real, typical km² | Real, dense km² | **The Capital** |
 |---|---|---|---|
-| Streets, km/km² (edge roads half) | 11.3 | 15.9 | **15.8** |
-| Junctions/km² | 47 | 80 | **76** |
-| T-junctions | 83% | 88% | **87%** |
-| Dead ends per junction | 0.17 | 0.14 | **0.12** |
-| Typical block | 1.6 ha | 0.8 ha | **1.0 ha** |
-| Buildings/km² (estimated) | 967 | 1,107 | **1,191** |
-| Ground built on (estimated) | 30% | 35% | **31%** |
+| Streets, km/km² (edge roads half) | 11.3 | 15.9 | **14.7** |
+| Junctions/km² | 47 | 80 | **61** |
+| T-junctions | 83% | 88% | **84%** |
+| Dead ends per junction | 0.17 | 0.14 | **0.09** |
+| Blocks/km² (counted closed) | 31 | 49 | **46** |
+| Typical block | 1.6 ha | 0.8 ha | **2.2 ha** |
+| Buildings/km² (estimated) | 967 | 1,107 | **1,150** |
+| Ground built on (estimated) | 30% | 35% | **30%** |
 | Typical building | 187 m² | 187 m² | **219 m²** |
 | Over 400 m² | 16% | 16% | **19%** |
-| Gap between houses | 2.2 m | 2.2 m | **2.2 m** |
+| Gap between houses | 2.2 m | 2.2 m | **2.1 m** |
+
+**v1.1 (14 Oct 2026):** blocks are now counted the fair way, with the real square's border closed as our edge roads close the district. Counted like that, the Capital had 59 blocks per km² against the real 31–49. Collector streets now start only above 22 ha, which brings blocks, streets and junctions inside the real range. Dead ends (0.09) stay a little under it.
 
 **Checks:** `check_district.py capital` passes all its checks, including check 13: every house has a school, a place of worship and a chemist within 10 minutes (the worst is 9.9 minutes).
 
 **What doesn't match yet (honest):**
 - **The buildings are estimated, not measured.** If you have better building data for central Ikeja, the targets can be redone in one command.
-- **Streets sit at the dense end** (15.8 against 11.3–15.9), and so do blocks (59 per km² against 13–31). The real squares' blocks are under-counted because OSM's service lanes and plots leave many of them open, but ours is still the denser grid.
+- **Blocks are bigger than the real typical block** (2.2 ha against 0.8–1.6) since v1.1, though their count (46) is in range.
 - **Main roads:** 6.4 km per km² against 4–5.5. Four edge roads, the arterial and two internal mains are a lot for a 1.1 km² district.
 - **Houses run a little big** (219 m² against 187) and a little many (1,191 against 1,107), from the setting that keeps the cover right.
 - **Gadget Village is 4.5 ha,** a third of the real 14 ha. A bigger zone would swallow the strip and the Shrine.

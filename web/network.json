@@ -883,69 +883,6 @@
    "bearing_deg": 272
   },
   {
-   "from": "jungle",
-   "to": "maze",
-   "road": "Adeleke Road",
-   "kind": "main",
-   "pt": [
-    2798.8,
-    4902.1
-   ]
-  },
-  {
-   "from": "jungle",
-   "to": "port",
-   "road": "Coastal Expressway",
-   "kind": "arterial",
-   "pt": [
-    3176.4,
-    5321.1
-   ]
-  },
-  {
-   "from": "jungle",
-   "to": "bazaar",
-   "road": "Coastal Expressway",
-   "kind": "arterial",
-   "pt": [
-    2290.9,
-    5359.0
-   ]
-  },
-  {
-   "from": "jungle",
-   "to": "maze",
-   "road": "",
-   "kind": "street",
-   "pt": [
-    2876.3,
-    4898.8
-   ],
-   "bearing_deg": 8
-  },
-  {
-   "from": "jungle",
-   "to": "port",
-   "road": "",
-   "kind": "street",
-   "pt": [
-    3200.8,
-    5109.6
-   ],
-   "bearing_deg": 93
-  },
-  {
-   "from": "jungle",
-   "to": "bazaar",
-   "road": "",
-   "kind": "street",
-   "pt": [
-    2279.5,
-    5883.3
-   ],
-   "bearing_deg": 270
-  },
-  {
    "from": "foodgate",
    "to": "maze",
    "road": "Adeleke Road",
@@ -1094,6 +1031,69 @@
    "bearing_deg": 166
   },
   {
+   "from": "jungle",
+   "to": "maze",
+   "road": "Adeleke Road",
+   "kind": "main",
+   "pt": [
+    2798.8,
+    4902.1
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "port",
+   "road": "Coastal Expressway",
+   "kind": "arterial",
+   "pt": [
+    3176.4,
+    5321.1
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "bazaar",
+   "road": "Coastal Expressway",
+   "kind": "arterial",
+   "pt": [
+    2290.9,
+    5359.0
+   ]
+  },
+  {
+   "from": "jungle",
+   "to": "maze",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2876.3,
+    4898.8
+   ],
+   "bearing_deg": 8
+  },
+  {
+   "from": "jungle",
+   "to": "port",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    3200.9,
+    5115.3
+   ],
+   "bearing_deg": 98
+  },
+  {
+   "from": "jungle",
+   "to": "bazaar",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2302.8,
+    5156.1
+   ],
+   "bearing_deg": 275
+  },
+  {
    "from": "capital",
    "to": "railside",
    "road": "Lawal Road",
@@ -1181,10 +1181,10 @@
    "road": "",
    "kind": "street",
    "pt": [
-    2203.1,
-    2761.7
+    1913.9,
+    2749.8
    ],
-   "bearing_deg": 357
+   "bearing_deg": 355
   },
   {
    "from": "capital",
@@ -1192,10 +1192,10 @@
    "road": "",
    "kind": "street",
    "pt": [
-    1456.9,
-    3113.3
+    1442.6,
+    3246.2
    ],
-   "bearing_deg": 270
+   "bearing_deg": 207
   }
  ]
 }
