@@ -36,11 +36,11 @@ That master plan is what gets carried into Unreal.
 - **Done:** Railside (Agege, Ifako/Ijaye, Alimosho), see `docs/railside-pattern-study.md`.
 - **Done:** the Estate (Ikeja GRA, Magodo, Omole: gated streets, walled compounds), see `docs/estate-pattern-study.md`.
 - **Done:** Old Island (Lagos Island: the old dense core, the cloth market, the palace, bank towers on the waterfront; reached by two bridges; okadas banned), see `docs/oldisland-pattern-study.md`.
-- **Done:** the Heights (Ikoyi, Victoria Island, Banana Island: walled compounds, gated cul-de-sacs, apartment towers, a billionaires' enclave, a tolled cable bridge; okadas banned), see `docs/heights-pattern-study.md`.
+- **Done:** the Heights (Ikoyi, Victoria Island, Banana Island; v2: walled Ikoyi compounds and gated cul-de-sacs north of Waterfront Drive, a Victoria Island office-and-hotel grid south of it, a billionaires' enclave, a tolled cable bridge, shacks and bars on Sunday Beach; okadas banned), see `docs/heights-pattern-study.md`.
 - **Safe ground in the data:** every church, mosque, school, hospital and clinic, and the Palace, carries `"safe": true` in `web/gidi-data.js`, and `safe_ground` lists each one's plot, so the game never sets a crime there or routes a chase through it.
 - **Pins at gates:** a named place inside a fenced or walled plot has its pin at the plot's gate on the street.
 - **Lagos-isms:** the real data's eccentricities, logged for the owner's "feel like Lagos" pass: `docs/LAGOS-ISMS.md`.
-- **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-14g.md`.
+- **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-14h.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
 

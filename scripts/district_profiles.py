@@ -487,7 +487,7 @@ def heights(ST, LM):
         "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.3,
         "sector_split_ha": 40,
         "spurs": {"spur_every_m": 150, "spur_m": [40, 90]},   # closes: real dead ends 0.33-0.41 per junction
-        "size_lo_u": 0.35, "plot_u": [0.5, 0.95], "back_row": 0.4, "courtyard_m": [1, 2.5], "big_front": 0.0, "vacant": 0.4,   # real typical 218-238 m2, 26-28% over 400 m2
+        "size_lo_u": 0.05, "plot_u": [0.3, 0.88], "back_row": 0.4, "courtyard_m": [1, 2.5], "big_front": 0.0, "vacant": 0.33,   # Ikoyi alone: typical 140-146 m2, 520-619 per km2
         "setback_m": [8, 16], "side_garden_m": [1.5, 4],   # real edge-to-street median 22 m, the deepest of any district
         "kiosk_every_m": 500,
         "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # real main roads 4.3-5.3 km per km2
@@ -511,6 +511,14 @@ def heights(ST, LM):
         # the club strip: the houses round the pin are clubs and lounges (district model: valets and touts)
         "zone": {"poi": "Club Strip", "r_m": 80, "kind": "nightclub", "min_m2": 120, "storeys": [1, 3], "kiosk_every_m": 1000},
         # Pearl Towers: luxury apartment towers on a main road (real: 2.7% of the boxes' built area is 14+ storeys, 4.3% 7-13)
+        # the Victoria Island side (owner, Oct 2026): south of Waterfront Drive, towards the beach, an office-and-hotel grid with no compound
+        # walls. Measured on the VI box alone (study-hvi-core): 264-410 buildings per km2, typical 281-293 m2, 29-33% over 400 m2, 74-80% T
+        # (a grid: more crossroads), 0.32 dead ends per junction; Ikoyi's box alone: 520-619 per km2, typical 140-146 m2, 16-17% over 400
+        "quarter": {"south_of": "Waterfront Drive", "office_m2": 400,
+                    "rules": {"x_junction": 0.6, "dead_end": 0.1, "spurs": None, "size_lo_u": 0.35, "plot_u": [0.7, 0.99], "back_row": 0.15,
+                              "vacant": 0.42, "setback_m": [8, 16], "side_garden_m": [3, 8], "big_front": 0.08, "no_walls": True}},
+        # Sunday Beach (owner, Oct 2026): shacks, bars and a horse shelter on the sand beyond the shore road (district model: "beach with shacks and horses")
+        "beach": {"poi": "Sunday Beach", "every_m": [14, 30], "depth_m": 22, "mix": [6, 3, 1]},
         "halls": [{"poi": "Pearl Towers", "kind": "apartment tower", "m2": 1100, "aspect": 1.3, "storeys": 20, "within_m": 250, "front_m": 20} for _ in range(3)],   # behind a front yard, like the houses
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]}, "lane_passages": False,
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
