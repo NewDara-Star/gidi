@@ -13,35 +13,37 @@
 **Limits of the data:**
 - **OSM is incomplete.** Ikeja's buildings and every area's footpaths are under-mapped, so these are floors, not ceilings.
 - **OSM centrelines are only good to 2–3 m,** which inflates the "road reserve" count. Read it as a comparison between areas, not a census.
-- **The 30 m Copernicus DEM is not on this machine.** Low ground comes from each LGA's share of land below 3 m and 5 m (`data/results/lga_table.json`, made from that DEM) and from mapped wetland.
+- **Low ground is per LGA, not per street.** It comes from each LGA's share of land below 3 m and 5 m (`data/results/lga_table.json`, made from the 30 m Copernicus DEM) and from mapped wetland. The DEM itself is in the project's data folder (`data/tools/pull-data.sh` puts it there), so a street-by-street measure is possible later. It is a surface model (it includes roofs and trees), which makes built-up ground read high.
 
 ## The numbers (per km² of each study area, unless it says otherwise)
 
-| | Maze (Mushin + Shomolu) | Hub (Oshodi + Surulere) | Jungle (Ajegunle) | Festac (Amuwo Odofin) | Food Gate (Kosofe corridor) | Water Town (Makoko–Bariga) | Capital (central Ikeja) | Ikeja (whole) | Bazaar (Ojo market) | Port (Apapa) | Railside (Agege, Ifako, Alimosho) | Estate (Ikeja GRA, Magodo, Omole) | Old Island (Lagos Island, the island) |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Area studied, km² | 34 | 65 | 12 | 135 | 19 | 7 | 16 | 49 | 22 | 27 | 215 | 24 | 9 |
-| Streets dead-ending at a canal or drain | 1.6 | 0.7 | 0.8 | 0.1 | **2.7** | 1.9 | 0.2 | 0.4 | 0.4 | 0.2 | 0.3 | 1.2 | 0.3 |
-| Streets dead-ending at the rail | **0.6** | 0.1 | 0 | 0 | 0 | 0 | 0.2 | 0.1 | 0 | 0.2 | 0.02 | 0 | 0 |
-| Missing links (two dead ends < 25 m apart) | 1.0 | 1.0 | 0.5 | 0.5 | 1.5 | 1.0 | **2.4** | 2.0 | 0.4 | 0.2 | 0.9 | 1.9 | 1.4 |
-| Buildings on a drainage channel or its bank | 3.3 | 1.6 | 2.9 | 0.1 | 6.7 | **48** | 0 | 0.1 | 1.0 | 1.8 | 0.7 | 0.04 | 0.5 |
-| Buildings in the road reserve | 102 | 79 | **158** | 22 | 45 | 92 | 9 | 12 | 66 | 54 | 87 | 21 | 71 |
-| Markets reaching a main road's carriageway | 5 of 7 | 5 of 7 | 3 of 5 | 4 of 7 | 9 of 15 | — | 4 of 8 | 7 of 20 | 3 of 5 | 3 of 5 | 6 of 12 | 5 of 11 | 4 of 10 |
-| Side streets joining main roads, per km | 5.0 | 5.0 | 3.5 | 3.1 | 3.9 | 0.4 | 5.2 | 4.8 | 2.6 | 3.4 | **10.4** | 3.4 | 2.9 |
-| Unfinished buildings (tagged), per km² | 9 | 19 | 10 | 15 | 0.2 | 3 | 0 | 1 | 14 | 14 | **79** | 0.6 | 0 |
-| …as a share of all buildings | 0.6% | 1.1% | 0.4% | 2.8% | 0% | 0.2% | 0% | 0.4% | 1.4% | 1.4% | **4.1%** | 0.1% | 0% |
-| Junctions where five or more roads meet | 0 | 0.02 | 0 | 0.02 | 0 | 0 | 0.06 | 0.02 | 0 | 0.04 | 0 | 0 | 0 |
-| Junctions where two roads meet under 25° | 0.4 | 0.5 | 0.2 | 0.2 | 0.6 | 0.6 | 0.8 | 0.6 | 0 | 0.7 | 0.2 | 0.3 | **3.1**† |
-| Buildings standing in mapped wetland | 0 | 0.1 | **243** | 4.7 | 0.3 | 0 | 0 | 0 | 4.5 | 4.4 | 0 | 0 | 0 |
-| Land below 3 m (the LGA, from the DEM) | 0–15% | 5–13% | 11% | 44% | 57% | 55% | 0% | 0% | 32% | 48% | 0–5% | 0% (Ikeja), 57% (Kosofe) | **97%** |
-| Expressway and trunk road, km | 63 | 82 | 15 | 48 | 31 | 27 | 27 | 66 | 35 | 30 | 33 | 30 | 53* |
-| …bus stops on them | 5 | 9 | 0 | 0 | 8 | 0 | 3 | 8 | 0 | 0 | 0 | 1 | 0 |
-| …longest stretch with no mapped way across on foot | 9.5 km | 5.3 km | 1.6 km | 2.5 km | 3.7 km | 9.5 km* | 9.3 km | 5.3 km | **12.0 km** | 3.5 km | 4.7 km | 5.4 km | 9.5 km* |
-| Gates across residential streets, per km² | 2.2 | 1.8 | 0.2 | 2.0 | 3.1 | 1.8 | 2.2 | 3.0 | 0.6 | 0.3 | 2.5 | **5.2** | 0.2 |
-| **One-way streets, share of street length (new)** | 14% | 14% | 8% | 14% | 12% | 5% | 36% | 29% | 11% | 27% | 8% | 14% | **40%** |
+| | Maze (Mushin + Shomolu) | Hub (Oshodi + Surulere) | Jungle (Ajegunle) | Festac (Amuwo Odofin) | Food Gate (Kosofe corridor) | Water Town (Makoko–Bariga) | Capital (central Ikeja) | Ikeja (whole) | Bazaar (Ojo market) | Port (Apapa) | Railside (Agege, Ifako, Alimosho) | Estate (Ikeja GRA, Magodo, Omole) | Old Island (Lagos Island, the island) | Heights (Ikoyi, VI, Banana Island) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Area studied, km² | 34 | 65 | 12 | 135 | 19 | 7 | 16 | 49 | 22 | 27 | 215 | 24 | 9 | 19 |
+| Streets dead-ending at a canal or drain | 1.6 | 0.7 | 0.8 | 0.1 | **2.7** | 1.9 | 0.2 | 0.4 | 0.4 | 0.2 | 0.3 | 1.2 | 0.3 | 2.1 |
+| Streets dead-ending at the rail | **0.6** | 0.1 | 0 | 0 | 0 | 0 | 0.2 | 0.1 | 0 | 0.2 | 0.02 | 0 | 0 | 0 |
+| Missing links (two dead ends < 25 m apart) | 1.0 | 1.0 | 0.5 | 0.5 | 1.5 | 1.0 | 2.4 | 2.0 | 0.4 | 0.2 | 0.9 | 1.9 | 1.4 | **2.7** |
+| Buildings on a drainage channel or its bank | 3.3 | 1.6 | 2.9 | 0.1 | 6.7 | **48** | 0 | 0.1 | 1.0 | 1.8 | 0.7 | 0.04 | 0.5 | 1.7 |
+| Buildings in the road reserve | 102 | 79 | **158** | 22 | 45 | 92 | 9 | 12 | 66 | 54 | 87 | 21 | 71 | 14 |
+| Markets reaching a main road's carriageway | 5 of 7 | 5 of 7 | 3 of 5 | 4 of 7 | 9 of 15 | — | 4 of 8 | 7 of 20 | 3 of 5 | 3 of 5 | 6 of 12 | 5 of 11 | 4 of 10 | 10 of 45‡ |
+| Side streets joining main roads, per km | 5.0 | 5.0 | 3.5 | 3.1 | 3.9 | 0.4 | 5.2 | 4.8 | 2.6 | 3.4 | **10.4** | 3.4 | 2.9 | 5.3 |
+| Unfinished buildings (tagged), per km² | 9 | 19 | 10 | 15 | 0.2 | 3 | 0 | 1 | 14 | 14 | **79** | 0.6 | 0 | 0 |
+| …as a share of all buildings | 0.6% | 1.1% | 0.4% | 2.8% | 0% | 0.2% | 0% | 0.4% | 1.4% | 1.4% | **4.1%** | 0.1% | 0% | 0% |
+| Junctions where five or more roads meet | 0 | 0.02 | 0 | 0.02 | 0 | 0 | 0.06 | 0.02 | 0 | 0.04 | 0 | 0 | 0 | 0.05 |
+| Junctions where two roads meet under 25° | 0.4 | 0.5 | 0.2 | 0.2 | 0.6 | 0.6 | 0.8 | 0.6 | 0 | 0.7 | 0.2 | 0.3 | **3.1**† | 1.3 |
+| Buildings standing in mapped wetland | 0 | 0.1 | **243** | 4.7 | 0.3 | 0 | 0 | 0 | 4.5 | 4.4 | 0 | 0 | 0 | 0 |
+| Land below 3 m (the LGA, from the DEM) | 0–15% | 5–13% | 11% | 44% | 57% | 55% | 0% | 0% | 32% | 48% | 0–5% | 0% (Ikeja), 57% (Kosofe) | **97%** | 54% (Eti Osa) |
+| Expressway and trunk road, km | 63 | 82 | 15 | 48 | 31 | 27 | 27 | 66 | 35 | 30 | 33 | 30 | 53* | 30 |
+| …bus stops on them | 5 | 9 | 0 | 0 | 8 | 0 | 3 | 8 | 0 | 0 | 0 | 1 | 0 | 5 |
+| …longest stretch with no mapped way across on foot | 9.5 km | 5.3 km | 1.6 km | 2.5 km | 3.7 km | 9.5 km* | 9.3 km | 5.3 km | **12.0 km** | 3.5 km | 4.7 km | 5.4 km | 9.5 km* | 6.9 km |
+| Gates across residential streets, per km² | 2.2 | 1.8 | 0.2 | 2.0 | 3.1 | 1.8 | 2.2 | 3.0 | 0.6 | 0.3 | 2.5 | 5.2 | 0.2 | **6.1** |
+| **One-way streets, share of street length (new)** | 14% | 14% | 8% | 14% | 12% | 5% | 36% | 29% | 11% | 27% | 8% | 14% | **40%** | 40% |
 
 \* Water Town's is the long lagoon bridge, where nobody crosses on foot. Old Island's 53 km and 9.5 km are the expressway bridges that leave the island: the study counts their whole length.
 
 † Old Island's acute junctions are mostly slip roads merging into the expressway that rings the island (3.3991, 6.4595; 3.4081, 6.4557), not street corners.
+
+‡ The Heights' 45 are small shops and retail plots: no market is mapped in its three boxes.
 
 One-way streets: the share of the length of primary to residential streets tagged one-way (expressways left out: their carriageways are always one-way). Measured on each study's extract, outside `study_isms.py`.
 
@@ -173,24 +175,32 @@ One-way streets: the share of the length of primary to residential streets tagge
 ### 12. Gates across streets (from the Estate on)
 - **What:** a gate or barrier across a residential street, with a gateman. Estates, closes and walled streets shut the public road, at least at night.
 - **Where:**
-  - Ikeja GRA, Magodo and Omole: 5.2 per km² mapped, twice the rate anywhere else (3.3601, 6.6481 in Omole; 3.3925, 6.6029 by Magodo). A median 13 m in from the main road.
+  - Ikoyi, Victoria Island and Banana Island (the Heights' study): 6.1 per km² mapped, the most of any area (3.4189, 6.4483 in Ikoyi; 3.4491, 6.4619 on Banana Island)
+  - Ikeja GRA, Magodo and Omole: 5.2 per km² mapped (3.3601, 6.6481 in Omole; 3.3925, 6.6029 by Magodo). A median 13 m in from the main road.
   - The rest of Lagos: 0.2–3.1 per km², most in the Kosofe corridor (3.1), Ikeja as a whole (3.0) and Railside's sprawl (2.5).
 - **Read with care:** gates are under-mapped everywhere (only 12% of the estates' street entries off a main road show one).
 - **Suits:**
   - **the Estate:** built (every estate street gated where it leaves a public road, and the main gate on the road in from the Capital)
   - **Railside** and **Food Gate:** a few gated closes off the main road
-  - **the Heights** and **the Frontier** (estates of their own)
+  - **the Heights:** built (every cul-de-sac gated at its mouth; the through streets stay open)
+  - **the Frontier** (estates of its own)
 - **Also in the Estate's real data:** streets that end at a stream in a valley (1.2 per km², Magodo, 3.3755, 6.6094), and missing links (1.9 per km², Omole's north, 3.3771, 6.6349), where two estates meet wall to wall. Few buildings reach into the road (21 per km², against 79–158 in the dense districts): the walls stand back.
 
 ### 13. One-way streets (new with Old Island)
 - **What:** the old core's narrow streets run one way, so a car or a bus goes round the block to reach the house across the road. Walkers and okadas ignore it.
 - **Where:**
   - Lagos Island: 40% of the street length is one-way (3.3849, 6.4553; 3.3837, 6.4621 in the old core), the most of any area studied
+  - Ikoyi, Victoria Island and Banana Island: 40% too, mostly VI's grid and Ikoyi's dual roads
   - central Ikeja (the Capital's study): 36%; Apapa: 27%
   - everywhere else: 5–14%
 - **Suits:**
   - **Old Island:** one-way loops round the cloth market and the palace; traffic jams at every turn
-  - **the Capital** and **the Port**
+  - **the Capital**, **the Port** and **the Heights**
+- **Also in the Heights' real data:**
+  - **the most missing links of any area** (2.7 per km², 3.4283, 6.4501 in Ikoyi): closes from neighbouring compounds end back to back, a wall apart
+  - **streets that end at the water** (2.1 per km², 3.4229, 6.4249 on VI's lagoon front)
+  - **few buildings in the road reserve** (14 per km²): walls and deep front yards stand the houses back 22 m
+  - **an expressway with a 6.9 km stretch and no way across on foot** (3.4585, 6.4226), and 5 bus stops on it
 - **Also in Lagos Island's real data:**
   - **the lowest ground of any area:** 97% of the LGA's land is below 3 m (Water Town's is 55%): every street is a flood-prone low spot.
   - **an expressway round the island** with slip roads merging at acute angles (3.1 per km², four times anywhere else)
@@ -211,8 +221,10 @@ One-way streets: the share of the length of primary to residential streets tagge
 | Railside | one road doing every job (side streets every ~100 m, the market on it); unfinished buildings (4%); streets ending at the line |
 | The Estate | missing links where estates meet wall to wall; streets ending at the valley streams; a gate on a close off the main road (gates themselves are built) |
 | Old Island | one-way streets (40%); flooding (97% of the land below 3 m); the expressway ring and its slip roads; markets on the carriageway |
+| The Heights | one-way streets (40%); missing links where closes meet back to back; streets ending at the lagoon; the expressway with nowhere to cross on foot (gates themselves are built) |
 
 ## Log
+- **14 Oct 2026:** the Heights' study (Ikoyi, Victoria Island, Banana Island; three boxes in Eti Osa) added. No new ism: it tops the gates (6.1 per km²) and missing links (2.7), and ties Lagos Island on one-way streets. The note that the DEM was not on this machine was wrong and is corrected.
 - **14 Oct 2026:** Old Island's study (Lagos Island, boxed to the island) added, and a new ism measured for every area: one-way streets.
 - **14 Oct 2026:** the Estate's study (Ikeja GRA, Magodo, Omole) added, and a new ism measured for every area: gates across residential streets.
 - **14 Oct 2026:** the log started. The backlog for the eight finished districts' studies was measured with `study_isms.py`, plus Railside's study (Agege, Ifako/Ijaye, Alimosho).

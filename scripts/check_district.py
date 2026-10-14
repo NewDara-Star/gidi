@@ -113,7 +113,7 @@ def land_of(gen, G):
     return max(polys, key=lambda p: p.area).buffer(1).difference(lagoon(G))
 
 
-WATER_KINDS = ("stilt", "stilt bar", "raft")   # built over the lagoon on purpose (Water Town)
+WATER_KINDS = ("stilt", "stilt bar", "raft", "toll booth")   # built over the lagoon on purpose (Water Town; the toll booths on the Cable Bridge)
 
 
 def check_land(bgeoms, land, kinds=None, G=None):
@@ -129,7 +129,7 @@ def check_land(bgeoms, land, kinds=None, G=None):
                 bad.append((b.area, "%s %s not over the lagoon next to the district" % (kinds[i], xy(b))))
             continue
         out = b.difference(land).area
-        if out > 0.01:
+        if out > 0.05:   # coordinates are written to 0.1 m: a house flush with the shore can cross it by a few cm (as for overlaps)
             bad.append((out, "%s %.1f m2 outside" % (xy(b), out)))
     return len(bad), worst(bad)
 

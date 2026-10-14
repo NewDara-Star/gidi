@@ -15,7 +15,7 @@ houses with no way in, and whether districts feel like one city.
 | `home N [district]` | Pick the N-th house (in one district, e.g. `home 3 hub`) and describe it; the printed #id is not N |
 | `look X Y [r]` | What's around a spot: buildings, nearest way, parcels, places, rail/canal distance |
 | `walk FROM TO` | Shortest walk at 5 km/h: distance, minutes, detour ×, roads used, places passed, rail crossings, districts crossed |
-| `ride FROM TO [--through]` | Same by okada at 25 km/h (no lanes, footpaths or footbridges). It goes round okada ban zones (the Capital, the Port, Old Island); `--through` rides through anyway and reports the metres ridden inside the ban |
+| `ride FROM TO [--through]` | Same by okada at 25 km/h (no lanes, footpaths or footbridges). It goes round okada ban zones (the Capital, the Port, Old Island, the Heights); `--through` rides through anyway and reports the metres ridden inside the ban |
 | `problems` | Houses >45 m from any way, network islands, dead ends |
 
 FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
@@ -95,6 +95,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - passes the palace (never a crime site) and the fenced square, and finds the Island Motor Park's buses
   - walks over the Wharf Bridge to the Port, and takes an okada from the island's edge over the Long Bridge to Water Town and Food Gate
   - checks that both bridges land on a road, and that the island's edge roads lead somewhere
+- **Kunle, driver for a rich family, the Heights (on foot; okadas are banned there):**
+  - drives for a family on the Gold Island and sleeps in a boys' quarters off a gated close
+  - walks the closes past the gatehouses, runs errands to Pearl Towers and the Club Strip at night (valets and touts), and goes to Sunday Beach on his day off
+  - walks over the Cable Bridge's toll plaza, and across to Old Island's Cloth Market and the Island Motor Park
+  - checks that every gated close still lets him walk in, that the bridge lands on a road, and that the Heights' edge roads lead somewhere
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -134,6 +139,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Cloth Market → Container Yard | walk | Over the Wharf Bridge to the Port |
 | Cloth Market → Gidi Interchange | ride | The island into the city's bus hub (walk out of the ban, then the Long Bridge) |
 | Island Motor Park → Mile Market | ride | Over the Long Bridge to the food market |
+| Pearl Towers → Club Strip | walk | A night out in the Heights |
+| The Gold Island → Pearl Towers | walk | A driver's errand out of the enclave |
+| Cable Bridge → Sunday Beach | walk | The toll plaza to the beach, across the Heights |
+| Pearl Towers → Cloth Market | walk | The Heights to Old Island's market |
+| Club Strip → Gidi Interchange | ride | The Heights into the city's bus hub (walk out of two bans, then the Long Bridge) |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

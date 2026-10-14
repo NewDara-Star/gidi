@@ -135,6 +135,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
             elif "Canal" in p["name"] and F.get("canal"): pt=nearest_points(LineString(F["canal"]),pt)[0]
             else: pt=nearest_points(MultiLineString(F["streets"]+[m["pts"] for m in F["mains"]]),pt)[0]
         q={k:v for k,v in p.items() if k not in("u","v")}; q["d"]=id_; q["x"]=round(pt.x); q["y"]=round(pt.y)
+        if id_ in GEN and p["name"] in GEN[id_].get("poi_from",{}): q["_from"]=GEN[id_]["poi_from"][p["name"]]   # a pin moved to its gate
         out["pois"].append(q)
     land_all.append(land)
 # arterials (named), from map02 road calls, in map units
@@ -146,7 +147,8 @@ ART=[("Coastal Expressway","exp",[(0,1.35),(1.5,1.35),(2.9,1.3),(4.0,1.35),(5.0,
 ("Wharf Bridge","bridge",[(5.0,1.45),(5.5,1.45)]),
 ("Waterfront Drive","art",[(5.5,1.3),(6.0,1.3),(6.7,1.3),(8.0,1.35)]),
 ("Peninsula Expressway","exp",[(8.0,1.35),(9.2,1.4),(10.4,1.45)]),
-("Shore Road","art",[(6.4,6.5),(7.8,6.9),(9.2,7.0),(9.3,7.2)])]
+("Shore Road","art",[(6.4,6.5),(7.8,6.9),(9.2,7.0),(9.3,7.2)]),
+("Cable Bridge","bridge",[(7.625,2.18),(7.875,2.4125),(8.3125,2.4625),(8.625,2.33875)])]   # the Heights' tolled bridge over the lagoon to the Frontier
 out["rail"]={"name":"Gidi Rail","pts":[list(m(p)) for p in [(0.9,4.7),(1.3,3.9),(1.75,3.1),(2.2,2.6),(2.7,2.3),(3.3,2.15),(3.9,2.0),(4.5,1.9)]]}
 out["arterials"]=[{"name":n,"cls":c,"pts":[list(m(p)) for p in pts]} for n,c,pts in ART]
 out["ferries"]=[{"name":"Old Shore – Heights ferry","pts":[list(m((8.2,6.45))),list(m((7.4,2.4)))]},{"name":"Old Shore – Water Town ferry","pts":[list(m((8.2,6.45))),list(m((5.35,3.6)))]}]
@@ -176,7 +178,7 @@ def wpick(lst):
         if r<=0: return v
     return lst[0][0]
 ART_LINES=[LineString([m(p) for p in pts]) for _,_,pts in ART]
-allp=[Point(p["x"],p["y"]) for p in out["pois"]]
+allp=[Point(p.pop("_from",None) or (p["x"],p["y"])) for p in out["pois"]]   # spaced from where gate pins stood before, so no civic place moves
 # Everyday places in the built districts are placed by coverage (owner, Oct 2026): every house gets a school, a place of worship
 # and a chemist or clinic within 10 minutes' walk (833 m at 5 km/h); a house that can't be reached in 10 gets 15 (1250 m).
 # Same walking network as the living test (scripts/walknet.py). Names are still dealt at random.
@@ -283,6 +285,22 @@ for id_,ks in CIV.get("key_late",{}).items():
         if SL:
             q=min(SL,key=lambda q:Point(q["x"],q["y"]).distance(pt)); SL.remove(q); pt=Point(q["x"],q["y"])
         out["pois"].append({"name":k["name"],"type":k["type"],"note":k["note"],"d":id_,"x":round(pt.x),"y":round(pt.y),"civic":True})
+
+# Safe ground (README, the sacred list): churches, mosques, schools, hospitals and clinics, and any place the district model flags "safe"
+# (the Palace). Each is marked on its pin, and its plot (its parcel, or else the building its pin stands on) is listed for the game:
+# no crime is set there and no chase is routed through it.
+SAFE_TYPES={"church","mosque","school","hospital","clinic"}
+out["safe_ground"]=[]
+for p in out["pois"]:
+    if p["type"] in SAFE_TYPES or p.get("safe"): p["safe"]=True
+    else: continue
+    F=GEN.get(p["d"]); pts=None
+    if F and p["name"] in F.get("poi_plot",{}) and not p.get("civic"): pts=F["parcels"][F["poi_plot"][p["name"]]]["pts"]
+    elif F:
+        pt=Point(p["x"],p["y"]); b=next((b for b in F["buildings"] if Polygon(b[1:]).buffer(0.5).contains(pt)),None)
+        if b: pts=b[1:]+[b[1]]
+    if pts: out["safe_ground"].append({"name":p["name"],"d":p["d"],"type":p["type"],"pts":pts})
+print("safe ground:",sum(1 for p in out["pois"] if p.get("safe")),"places,",len(out["safe_ground"]),"plots")
 
 # Okada ban zones (district model: the Capital, the Port, Old Island, the Heights). The zone is the district less an 8 m band, so its
 # edge roads stay rideable: that is where the task force stands. For a built district, every point where a road an okada can use

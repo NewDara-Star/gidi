@@ -644,6 +644,7 @@ if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken
             parcel_u = unary_union([p["geom"] for p in parcels])
         streets = [g for g in streets if any(g is k for k in keep)] + \
                   [x for g in streets if not any(g is k for k in keep) for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
+GATE_PTS = []   # where each access road meets its parcel's fence: the gate
 DIRS = {"north": (0, -1), "south": (0, 1), "east": (1, 0), "west": (-1, 0)}   # y runs south
 for g, how in GATES:
     ways_u = unary_union([x for k, x in net_lines])
@@ -654,7 +655,7 @@ for g, how in GATES:
         a0 = nearest_points(g.exterior, far)[0]; ray = LineString([a0, (a0.x + dx * 300, a0.y + dy * 300)])
         x = ray.intersection(ways_u); hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point" and ray.project(h) > 0.5]
         gl = LineString([a0, min(hits, key=ray.project)]) if hits else None
-    if gl is not None and gl.length > 0.5: access.append(gl)
+    if gl is not None and gl.length > 0.5: access.append(gl); GATE_PTS.append(Point(gl.coords[0]))
 if GATES: net_lines = NET_LINES()
 def mostly_parcel(b): return b.intersection(parcel_u).area > 0.6 * b.area
 
@@ -918,12 +919,17 @@ if EG:
             if free(r, 1.0) and not r.intersects(parcel_u) and r.distance(others_) > 6.0:
                 add(r, "gatehouse"); break
         GATES_OUT.append({"pt": q, "bar": bar, "main": main})
+    ways_all = unary_union([x for k, x in net_lines])
+    def is_close(g, end_i):   # the street's far end touches nothing: a cul-de-sac
+        q = Point(g.coords[-1] if end_i == 0 else g.coords[0]); return ways_all.difference(g.buffer(0.5)).distance(q) > 1.5
     for g in streets:
         for end_i in (0, -1):
-            if Point(g.coords[end_i]).distance(public) > 1.5 or g.length < EG["in_m"] + 15: continue
+            if EG.get("closes_only"):   # the Heights: every cul-de-sac is gated at its mouth, whatever road it opens off
+                if ways_all.difference(g.buffer(0.5)).distance(Point(g.coords[end_i])) > 1.5 or not is_close(g, end_i) or g.length < EG["in_m"] + 15: continue
+            elif Point(g.coords[end_i]).distance(public) > 1.5 or g.length < EG["in_m"] + 15: continue
             gate_on(g, EG["in_m"] if end_i == 0 else g.length - EG["in_m"], WIDTH["street"], EG["house_m"], False)
     ring_ = unary_union([e for n, e, nb in edge_roads])
-    for n, ln in mains:
+    for n, ln in (mains if EG.get("main_gates", True) else []):
         for end_i in (0, -1):
             if Point(ln.coords[end_i]).distance(ring_) > 2 or ln.length < 3 * EG["main_in_m"]: continue
             gate_on(ln, EG["main_in_m"] if end_i == 0 else ln.length - EG["main_in_m"], WIDTH["main"], EG["main_house_m"], True)
@@ -1318,7 +1324,7 @@ for p in parcels:
                 cx, cy = q.x + ux * (22 + (k2 // 4) * 24) - uy * ((k2 % 4) * 6 - 9), q.y + uy * (22 + (k2 // 4) * 24) + ux * ((k2 % 4) * 6 - 9)
                 r = rect(cx, cy, 4, 20, math.atan2(uy, ux) + math.pi / 2)
                 if water.contains(r) and r.distance(unary_union([e for n, e, nb in edge_roads])) > CLEAR["main"]: bld.append((r, "raft"))
-    if p["kind"] in ("compound", "club", "palace", "square"):   # a big man's compound, the estate club, the palace, a square with fountains
+    if p["kind"] in ("compound", "club", "palace", "square", "enclave"):   # a big man's compound, the estate club, the palace, a square with fountains, an enclave
         CP = next(x for x in PROF["parcels"] if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a)
         for kind_, (bw_, bd_), (u_, v_) in CP.get("buildings", []):   # u_, v_: fractions of the parcel's half length and half width from its centre
             r = rect(ctr.x + ca * u_ * LL / 2 - sa * v_ * g.area / LL / 2, ctr.y + sa * u_ * LL / 2 + ca * v_ * g.area / LL / 2, bw_, bd_, a)
@@ -1377,13 +1383,24 @@ if H and H["poi"] in POIS:
             bld = [(r, k) for r, k in bld if not r.intersects(hr.buffer(1.5))]
             bld.append((hr, "hotel")); poi_pos[H["poi"]] = hr.centroid; break
 
+TL = PROF.get("toll")
+if TL:   # a tolled bridge: a booth either side of the bridge road just off the shore, the pin between them
+    br = next((LineString(a["pts"]) for a in G["arterials"] if a["name"] == TL["bridge"]), None)
+    if br is not None:
+        t0 = 0.0 if Point(br.coords[0]).distance(poly) < Point(br.coords[-1]).distance(poly) else br.length
+        q = br.interpolate(abs(t0 - TL.get("in_m", 25))); ux, uy = LMK.direction_at(br, abs(t0 - TL.get("in_m", 25)))
+        for side in (1, -1):
+            off = WIDTH["main"] / 2 + 2.0
+            bld.append((rect(q.x - uy * off * side, q.y + ux * off * side, 4.0, 2.5, math.atan2(uy, ux)), "toll booth"))
+        poi_pos[TL["poi"]] = q
 for HL in PROF.get("halls", []):   # a big named building on a main-road frontage near its pin (the Shrine's music hall); the houses it replaces are cleared
     if HL["poi"] not in POIS: continue
     hp = POIS[HL["poi"]]; hw_ = math.sqrt(HL["m2"] * HL.get("aspect", 1.3)); hd_ = HL["m2"] / hw_
     rd_ = unary_union([e for n, e, nb in edge_roads if nb is None]) if HL.get("shore") else mainU   # Bank Row: on the waterfront road
-    for r0, k0 in sorted([(r, k) for r, k in bld if k == "front" and r.distance(rd_) < CLEAR["main"] + 4], key=lambda rk: rk[0].centroid.distance(hp))[:200]:
+    for r0, k0 in sorted([(r, k) for r, k in bld if k == "front" and r.distance(rd_) < CLEAR["main"] + HL.get("front_m", 4) and r.centroid.distance(hp) < HL.get("within_m", 1e9)], key=lambda rk: rk[0].centroid.distance(hp))[:200]:
         q = rd_.interpolate(rd_.project(r0.centroid)); dxy = (r0.centroid.x - q.x, r0.centroid.y - q.y); L0 = math.hypot(*dxy) or 1
         ux2, uy2 = dxy[0] / L0, dxy[1] / L0; off3 = CLEAR["main"] + 3 + hd_ / 2
+        if HL.get("front_m"): off3 = max(off3 - hd_ / 2, r0.distance(rd_)) + hd_ / 2   # set back on the line of the house it replaces
         hr = rect(q.x + ux2 * off3, q.y + uy2 * off3, hw_, hd_, math.atan2(ux2, -uy2))
         if road_free.contains(hr) and not hr.intersects(parcel_u):
             bld = [(r, k) for r, k in bld if not r.intersects(hr.buffer(1.5))]; bld.append((hr, HL["kind"])); poi_pos[HL["poi"]] = hr.centroid; break
@@ -1468,8 +1485,8 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 # ---------- 7. storeys: match the inspiration area's height bands (share of built area), tallest on big plots near main roads ----------
 storeys = None
 if PROF:
-    srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2}
+    srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
@@ -1497,6 +1514,25 @@ if PROF:
     M["storeys_target_by_area"] = [round(x, 3) for x in bands]
 print(json.dumps({"seed": SEED, "scale": SCALE, "gidi": M, "real_median": {k: CORE["median"][k] for k in M if k in CORE["median"]}, "real_dense": {k: CORE["dense"][k] for k in M if k in CORE["dense"]}}, indent=1))
 
+# a named place inside a fenced or walled plot is entered by its gate, so its pin goes there (owner, Oct 2026): the gate if the plot
+# has an access road, else the middle of the fence side nearest a road, on the main road if one passes within 25 m. Locked pins stay.
+_locked = set(LOCK.get("buildings", {})) | set(LOCK.get("parcels", {}))
+_ways = unary_union([g for k, g in NET_LINES()] + lanes + [g for k, g in PATHS])   # a market's pin among its aisles stays
+_mains = unary_union([g for k, g in NET_LINES() if k != "street"])
+poi_from = {}   # where a moved pin stood before (the bake's civic layer still spaces its places from there, so none of them moves)
+poi_plot = {}   # the plot each named place stands on, by parcel number (the bake marks a safe place's whole plot as safe ground)
+for name, pt in list(poi_pos.items()):
+    i = next((i for i, p in enumerate(parcels) if p["geom"].contains(pt)), None)
+    if i is not None: poi_plot[name] = i
+    if name in _locked or _ways.distance(pt) <= 15 or i is None: continue
+    pp = parcels[i]["geom"]
+    gates = [q for q in GATE_PTS if pp.exterior.distance(q) < 2]
+    poi_from[name] = [round(pt.x), round(pt.y)]
+    if gates: poi_pos[name] = min(gates, key=lambda q: q.distance(pt)); continue
+    front = _mains if not _mains.is_empty and pp.distance(_mains) < 25 else _ways
+    edge = [pp.exterior.interpolate(t) for t in np.arange(0, pp.exterior.length, 2.0)]   # the middle of the side that faces it, not a corner
+    dmin = min(q.distance(front) for q in edge)
+    poi_pos[name] = min([q for q in edge if q.distance(front) <= dmin + 2], key=lambda q: q.distance(pt))
 R2 = lambda g: [[round(x, 1), round(y, 1)] for x, y in g.coords]
 out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM statistics of the inspiration area; no real geometry used",
        "streets": [R2(g) for g in streets + access],
@@ -1506,7 +1542,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        "canal": R2(canal) if canal else None,
        "buildings": [[k] + [[round(x, 1), round(y, 1)] for x, y in list(r.exterior.coords)[:-1]] for r, k in bld],
        "parcels": [{"kind": p["kind"], "pts": [[round(x, 1), round(y, 1)] for x, y in p["geom"].exterior.coords]} for p in parcels],
-       "poi_pos": {k: [round(v.x), round(v.y)] for k, v in poi_pos.items()}, "slots": slots[:400], "metrics": M,
+       "poi_pos": {k: [round(v.x), round(v.y)] for k, v in poi_pos.items()}, "poi_plot": poi_plot, "poi_from": poi_from, "slots": slots[:400], "metrics": M,
        **({"walls": [R2(g) for g in WALLS], "gates": [{"pts": [[round(x, 1), round(y, 1)] for x, y in q["bar"]], "main": q["main"]} for q in GATES_OUT]} if PW or EG or WALLS else {})}
 if PROF:
     out["storeys"] = storeys

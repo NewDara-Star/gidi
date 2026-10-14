@@ -443,6 +443,7 @@ def oldisland(ST, LM):
         "size_lo_u": 0.5, "back_row": 0.5, "courtyard_m": [0.5, 1.5], "big_front": 0.08, "vacant": 0.02,   # real typical house 142 m2, 4-8% over 400 m2; houses 0.7-1.0 m apart
         "internal_mains": 1,
         "bridge_links": True,   # the two bridges from the mainland land on the island's edge road
+        "keep_gateways": True,   # the Heights was built after it: its edge road and crossings are reused exactly
         "name_endings": ends,
         "reserve": [   # the cloth market: the island's big markets run 0.5-9.5 ha; this one is the upper quartile, on Waterfront Drive
             {"kind": "market", "poi": "Cloth Market", "m2": mk[3 * len(mk) // 4], "aspect": 1.6, "front": "art"},
@@ -469,7 +470,53 @@ def oldisland(ST, LM):
         "fence_parcels": True, "clear_access": True,
     }
 
+def heights(ST, LM):
+    """The Heights: Ikoyi, Victoria Island and Banana Island (study-heights*, three boxes inside Eti Osa, as the brief says). OSM traces
+    the buildings well in all three (90% of the 250 m cells), so every figure is measured on the study itself. Heights come from the boxes
+    too (Google Open Buildings 2.5D, scripts/study_boxheights.py): Eti Osa as a whole is mostly Lekki's low estates and would hide the
+    towers. The district model: glass towers, gated mansions on cul-de-sacs, a cable-stayed toll bridge, a club strip, a beach, leafy roads."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el * 0.6   # 109 x 2.7 = 295 m counts the long VI blocks; the closes and side streets of Ikoyi run shorter
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Close", "Road", "Avenue", "Crescent", "Drive")}
+    return {
+        "lgas": ["Eti Osa"],
+        # storeys 1, 2, 3, 4, 5-6, 7-13, 14+ by built area, measured on the three boxes (Eti Osa whole: 31/50/13/3/2/1/0)
+        "h_bands": [0.1884, 0.4511, 0.185, 0.0595, 0.0467, 0.0426, 0.0266],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.3,
+        "sector_split_ha": 40,
+        "spurs": {"spur_every_m": 150, "spur_m": [40, 90]},   # closes: real dead ends 0.33-0.41 per junction
+        "size_lo_u": 0.35, "plot_u": [0.5, 0.95], "back_row": 0.4, "courtyard_m": [1, 2.5], "big_front": 0.0, "vacant": 0.4,   # real typical 218-238 m2, 26-28% over 400 m2
+        "setback_m": [8, 16], "side_garden_m": [1.5, 4],   # real edge-to-street median 22 m, the deepest of any district
+        "kiosk_every_m": 500,
+        "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # real main roads 4.3-5.3 km per km2
+        "bridge_links": True,   # the Cable Bridge lands on the north shore's edge road
+        "toll": {"bridge": "Cable Bridge", "poi": "Cable Bridge", "in_m": 30},
+        "name_endings": ends,
+        "parcels": [
+            # The Gold Island: a walled enclave of billionaires' houses on reclaimed sand, one gate (real Banana Island: about 3 ha a street)
+            {"kind": "enclave", "poi": "The Gold Island", "ha": 3.5, "near_main": False, "gate": "nearest", "min_w": 120,
+             "buildings": [["mansion", [32, 20], [-0.55, -0.45]], ["mansion", [32, 20], [0.0, -0.45]], ["mansion", [32, 20], [0.55, -0.45]],
+                           ["mansion", [32, 20], [-0.35, 0.45]], ["mansion", [32, 20], [0.3, 0.45]], ["gatehouse", [6, 4], [0.85, 0.0]]],
+             "grounds": [["pool", [12, 6], [-0.55, -0.05]], ["pool", [12, 6], [0.0, -0.05]], ["pool", [12, 6], [0.55, -0.05]]]},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2) if LM.get("school_m2") else 1.0, "near_main": False, "gate": "nearest", "min_w": 70},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        # the gates: real 6.1 street gates per km2 mapped, the most of any area. Only the closes are gated here (district model:
+        # "gated mansions on cul-de-sacs"); the through streets stay open
+        "estate_gates": {"in_m": 13, "house_m": [3.5, 3.0], "main_in_m": 30, "main_house_m": [6, 4], "closes_only": True, "main_gates": False},
+        "plot_walls": {"gate_m": 4.0, "vacant_walled": 0.6, "parcels": ["enclave", "school"]},   # mansions behind walls (district model)
+        "yard_kit": {"generator": 0.85, "generator_m": [2.6, 1.6], "water tank": 0.5, "tank_m": [2.4, 2.4]},
+        # the club strip: the houses round the pin are clubs and lounges (district model: valets and touts)
+        "zone": {"poi": "Club Strip", "r_m": 80, "kind": "nightclub", "min_m2": 120, "storeys": [1, 3], "kiosk_every_m": 1000},
+        # Pearl Towers: luxury apartment towers on a main road (real: 2.7% of the boxes' built area is 14+ storeys, 4.3% 7-13)
+        "halls": [{"poi": "Pearl Towers", "kind": "apartment tower", "m2": 1100, "aspect": 1.3, "storeys": 20, "within_m": 250, "front_m": 20} for _ in range(3)],   # behind a front yard, like the houses
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]}, "lane_passages": False,
+        "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights}.get(did, lambda ST, LM: {})(ST, LM)
