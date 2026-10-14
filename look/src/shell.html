@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Ladi Lane Look Test</title>
+<style>
+  :root { --ink:#1b1712; --paper:rgba(250,246,238,0.92); --line:rgba(27,23,18,0.14); --accent:#f0c020; --on:#1b1712; --onInk:#fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#f3ede2; --paper:rgba(28,25,21,0.88); --line:rgba(243,237,226,0.16); --on:#f3ede2; --onInk:#111; } }
+  :root[data-theme="dark"] { --ink:#f3ede2; --paper:rgba(28,25,21,0.88); --line:rgba(243,237,226,0.16); --on:#f3ede2; --onInk:#111; }
+  html, body { margin:0; height:100%; overflow:hidden; background:#9cc7ea; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); touch-action:none; }
+  #app, canvas { position:fixed; inset:0; display:block; }
+  .card { position:fixed; left:12px; top:12px; max-width:min(360px, calc(100vw - 24px)); background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:10px 12px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .card h1 { margin:0; font-size:15px; letter-spacing:.2px; }
+  .card h1 b { background:var(--accent); color:#111; padding:0 5px; border-radius:3px; margin-right:6px; font-size:12px; vertical-align:2px; }
+  .card p { margin:4px 0 0; font-size:12px; opacity:.8; line-height:1.35; }
+  .seg { display:flex; gap:4px; margin-top:8px; }
+  .seg button { flex:1; }
+  .bar { position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); display:flex; gap:6px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+  .bar::-webkit-scrollbar { display:none; }
+  button { flex:none; font:600 13px/1 inherit; font-family:inherit; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:10px 14px; cursor:pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  button:active { transform:scale(.97); }
+  button.on { background:var(--on); color:var(--onInk); border-color:transparent; }
+  .seg button.on { background:var(--accent); color:#111; }
+  #walk { position:fixed; right:12px; bottom:70px; display:flex; flex-direction:column; gap:8px; }
+  #walk[hidden] { display:none !important; }
+  #walk button { width:52px; height:52px; padding:0; font-size:18px; border-radius:14px; }
+  #hint { position:fixed; right:12px; top:12px; font-size:11px; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:6px 8px; max-width:180px; opacity:.85; }
+  #fps { position:fixed; right:12px; top:52px; font:600 11px/1 ui-monospace, Menlo, monospace; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:4px 6px; opacity:.8; }
+  #labels { position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+  .lbl { position:absolute; left:0; top:0; white-space:nowrap; font-size:12px; font-weight:700; background:#111; color:#f6d23a; padding:4px 7px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,.3); }
+  .lbl::after { content:''; position:absolute; left:50%; bottom:-5px; margin-left:-5px; border:5px solid transparent; border-bottom:0; border-top-color:#111; }
+  .lbl.road { background:#fff; color:#111; }
+  .lbl.road::after { border-top-color:#fff; }
+  #loading { position:fixed; inset:0; display:grid; place-items:center; font-size:14px; background:#9cc7ea; color:#1b1712; }
+  body.bare .card, body.bare .bar, body.bare #hint, body.bare #fps, body.bare #walk, body.bare #labels { display:none !important; }
+  @media (max-width: 560px) { #hint { display:none; } .card p { font-size:11px; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="labels"></div>
+<div class="card">
+  <h1><b>GIDI</b>Ladi Lane: look test</h1>
+  <p>The same map data, kit and camera spots in two styles. Every model is built in code. Art-direction test, not production.</p>
+  <div class="seg"><button data-look="a">A · Clean</button><button data-look="b">B · Gritty</button></div>
+</div>
+<div id="hint"></div>
+<div id="fps"></div>
+<div id="walk" hidden><button id="fwd" aria-label="Walk forward">▲</button><button id="back" aria-label="Walk back">▼</button></div>
+<div class="bar">
+  <button data-view="overview">Overhead</button>
+  <button data-view="steal">The steal</button>
+  <button data-view="aisle">The aisle</button>
+  <button data-view="boss">Boss's post</button>
+  <button data-view="ring">Ring Road</button>
+  <button data-view="tunde">Tunde's room</button>
+  <button id="time">Dusk</button>
+  <button id="lbls">Hide labels</button>
+</div>
+<div id="loading">Building Ladi Lane…</div>
+<!--THREE-->
+<!--DATA-->
+<!--CODE-->
+</body>
+</html>
