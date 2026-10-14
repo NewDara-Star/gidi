@@ -3,3 +3,5 @@ __pycache__/
 *.part
 /out/
 .DS_Store
+blender/out/
+__pycache__/

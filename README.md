@@ -40,6 +40,7 @@ That master plan is what gets carried into Unreal.
 - **Safe ground in the data:** every church, mosque, school, hospital and clinic, and the Palace, carries `"safe": true` in `web/gidi-data.js`, and `safe_ground` lists each one's plot, so the game never sets a crime there or routes a chase through it.
 - **Pins at gates:** a named place inside a fenced or walled plot has its pin at the plot's gate on the street.
 - **Lagos-isms:** the real data's eccentricities, logged for the owner's "feel like Lagos" pass: `docs/LAGOS-ISMS.md`.
+- **Lagos look (in progress):** a seeded Blender kit that styles every building from its data (kind, storeys, district, street, main road), built on pattern research: `docs/LAGOS-LOOK.md`, code in `blender/`.
 - **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-14g.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
