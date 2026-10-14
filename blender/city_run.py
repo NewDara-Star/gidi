@@ -57,24 +57,41 @@ if __name__ == '__main__':
         todo = tiles_needed()
     print(len(todo), 'tiles', DETAILS, flush=True)
     t0 = time.time()
+    MISSING = {}
     for det in DETAILS:
         out = os.path.join(OUT, det)
         os.makedirs(os.path.join(out, 'tiles'), exist_ok=True)
         # the POI overrides are computed once, before the workers start
         subprocess.run(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--', '--tiles', '', '--out', out, '--detail', det, '--size', str(SIZE)], capture_output=True)
-        left = [t for t in todo if not os.path.exists(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))]  # resumable
-        chunks = [left[i::JOBS] for i in range(JOBS)]
-        procs = []
-        for c in chunks:
-            if not c:
-                continue
-            log = open(os.path.join(out, f'log_{len(procs)}.txt'), 'w')
-            procs.append(subprocess.Popen(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--',
-                                           '--tiles', ';'.join(f'{a},{b}' for a, b in c), '--out', out, '--detail', det, '--size', str(SIZE)], stdout=log, stderr=subprocess.STDOUT))
-        while any(p.poll() is None for p in procs):
-            done = len([f for f in os.listdir(os.path.join(out, 'tiles')) if f.endswith('.json')])
-            print(f'{det}: {done}/{len(todo)} tiles, {int(time.time() - t0)} s', flush=True)
-            time.sleep(30)
+        # a pool of short-lived workers: each Blender process builds a small batch and exits, so its
+        # memory is freed (a full tile peaks at ~3.5 GB and Blender keeps growing across tiles; two
+        # long-lived full workers got killed on a 16 GB machine). A batch that dies loses only itself;
+        # its tiles are retried once, and anything still missing is reported.
+        batch = 3 if det == 'full' else 12
+        for attempt in (1, 2):
+            left = [t for t in todo if not os.path.exists(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))]  # resumable
+            if not left:
+                break
+            queue = [left[i:i + batch] for i in range(0, len(left), batch)]
+            procs, n = [], 0
+            last = 0
+            while queue or any(p.poll() is None for p in procs):
+                procs = [p for p in procs if p.poll() is None]
+                while queue and len(procs) < JOBS:
+                    c = queue.pop(0)
+                    log = open(os.path.join(out, f'log_{n % 50}.txt'), 'w')
+                    n += 1
+                    procs.append(subprocess.Popen(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--',
+                                                   '--tiles', ';'.join(f'{a},{b}' for a, b in c), '--out', out, '--detail', det, '--size', str(SIZE)], stdout=log, stderr=subprocess.STDOUT))
+                if time.time() - last > 30:
+                    last = time.time()
+                    done = len([f for f in os.listdir(os.path.join(out, 'tiles')) if f.endswith('.json')])
+                    print(f'{det}: {done}/{len(todo)} tiles, {int(time.time() - t0)} s', flush=True)
+                time.sleep(2)
+        missing = [t for t in todo if not os.path.exists(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))]
+        MISSING[det] = len(missing)
+        if missing:
+            print(f'{det}: MISSING {len(missing)} tiles after a retry: ' + ';'.join(f'{a},{b}' for a, b in missing), flush=True)
     # manifest
     present = [d for d in ('full', 'web') if os.path.isdir(os.path.join(OUT, d, 'tiles'))]
     man = dict(size=SIZE, details=present, tiles={}, gaps={}, errors=[])
@@ -91,4 +108,4 @@ if __name__ == '__main__':
                 if k.startswith('error:'):
                     man['errors'].append(dict(tile=key, detail=det, kind=k, n=v))
     json.dump(man, open(os.path.join(OUT, 'manifest.json'), 'w'), indent=1)
-    print('DONE', len(man['tiles']), 'tiles; gaps', man['gaps'], 'errors', len(man['errors']), int(time.time() - t0), 's')
+    print('DONE' if not any(MISSING.values()) else 'INCOMPLETE', len(man['tiles']), 'tiles; missing', MISSING, 'gaps', man['gaps'], 'errors', len(man['errors']), int(time.time() - t0), 's')
