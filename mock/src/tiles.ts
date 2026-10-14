@@ -4,7 +4,7 @@
 // alpha carries the kit's wear value, so the weathering (stains, rain streaks, red mud splash,
 // chalky paint, rust on zinc and steel) is the same as in the Blender renders.
 import * as THREE from "three/webgpu";
-import { abs, attribute, float, mix, mx_noise_float, normalWorld, positionWorld, smoothstep, vec3 } from "three/tsl";
+import { abs, attribute, cameraPosition, float, mix, mx_noise_float, normalWorld, positionWorld, pow, smoothstep, time, vec3 } from "three/tsl";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { CENTRE } from "./world";
@@ -16,6 +16,27 @@ interface Manifest {
 }
 
 const n01 = (p: any, s: number) => mx_noise_float(p.mul(s)).mul(0.5).add(0.5);
+
+/** Lagoon water: murky green-brown looking down, the hazy sky's sheen at a grazing angle (fresnel),
+ * slow ripples and floating scum breaking it up. One material for the tiles' canals and pools and
+ * the Mock's own lagoon and sea. `tint` is the water's own colour (the kit's vertex colour). */
+export function waterMaterial(tint?: any) {
+  const m = new THREE.MeshStandardNodeMaterial({ roughness: 0.12, metalness: 0.0 });
+  const p = positionWorld;
+  const t = time.mul(0.35);
+  const rip = mx_noise_float(vec3(p.x.mul(0.18).add(t), p.z.mul(0.18).sub(t.mul(0.7)), t.mul(0.5))).mul(0.5).add(0.5);
+  const fine = mx_noise_float(vec3(p.x.mul(1.3).sub(t.mul(1.6)), p.z.mul(1.3), t)).mul(0.5).add(0.5);
+  const view = cameraPosition.sub(p).normalize();
+  const fres = pow(float(1).sub(abs(view.y)), 5).mul(0.55).add(0.03);
+  const deep = tint ? tint.mul(0.7) : vec3(0.1, 0.14, 0.1);
+  const sky = vec3(0.62, 0.7, 0.76);
+  const scum = smoothstep(0.72, 0.8, n01(p, 0.05)).mul(0.35); // patches of floating weed and scum
+  const base = mix(mix(deep, vec3(0.2, 0.23, 0.12), scum), deep.mul(1.25), rip.mul(0.5));
+  m.colorNode = base;
+  m.emissiveNode = sky.mul(fres.mul(rip.mul(0.5).add(fine.mul(0.3)).add(0.45))).mul(float(1).sub(scum));
+  m.roughnessNode = float(0.08).add(scum.mul(0.6)).add(fine.mul(0.06));
+  return m;
+}
 
 /** Kit material -> node material. `kind` is the Blender master material's name. */
 function makeMaterial(kind: string): THREE.Material {
@@ -31,12 +52,7 @@ function makeMaterial(kind: string): THREE.Material {
     m.colorNode = base.mul(1.6);
     return m;
   }
-  if (kind === "water") {
-    // muddy water: mostly its own colour, soft reflections
-    const m = new THREE.MeshStandardNodeMaterial({ roughness: 0.3, metalness: 0.0 });
-    m.colorNode = base.mul(0.8);
-    return m;
-  }
+  if (kind === "water") return waterMaterial(base);
   if (kind === "glass" || kind === "glass_lit") {
     const m = new THREE.MeshStandardNodeMaterial({ roughness: 0.06, metalness: 0.45 });
     m.colorNode = base;

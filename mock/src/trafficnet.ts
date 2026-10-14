@@ -326,6 +326,9 @@ export class NetTraffic {
   busy: ((x: number, z: number) => number) | null = null;
   blocked: ((x: number, z: number) => boolean) | null = null;
   private tick = 0;
+  /** Gidi: deck height under a point for a heading (World.deckHeight), so traffic rides the flyovers and bridges. */
+  heightAt: ((x: number, z: number, yaw?: number) => number) | null = null;
+  private eul = new THREE.Euler(0, 0, 0, "YXZ");
 
   update(dt: number, px: number, pz: number, player?: PlayerState) {
     dt = Math.min(dt, 0.1);
@@ -1100,7 +1103,11 @@ export class NetTraffic {
       // Wheels roll with the distance driven (all of a model's wheels share the first one's radius).
       const wheel = roles.find((r) => r.wheel)?.wheel;
       if (wheel) c.spin = (c.spin + (c.v * dt) / wheel.radius) % (Math.PI * 2);
-      this.m.compose(this.p3.set(c.x, 0.03, c.z), this.q.setFromAxisAngle(this.up, c.yaw), this.one);
+      if (this.heightAt) {  // on a deck: lift, and pitch along the ramp
+        const fx = Math.sin(c.yaw) * 2, fz = Math.cos(c.yaw) * 2;
+        const h = this.heightAt(c.x, c.z, c.yaw), hf = this.heightAt(c.x + fx, c.z + fz, c.yaw), hb = this.heightAt(c.x - fx, c.z - fz, c.yaw);
+        this.m.compose(this.p3.set(c.x, 0.03 + h, c.z), this.q.setFromEuler(this.eul.set(-Math.atan2(hf - hb, 4), c.yaw, 0)), this.one);
+      } else this.m.compose(this.p3.set(c.x, 0.03, c.z), this.q.setFromAxisAngle(this.up, c.yaw), this.one);
       parts.forEach((mesh, k) => {
         const role = roles[k];
         if (role.wheel) {
@@ -1129,7 +1136,7 @@ export class NetTraffic {
       list.length = 0;
       this.peds.forEach((p, i) => {
         if (!p.active) return;
-        const y = p.lane?.kind === LaneKind.Footpath || p.area ? 0.15 : 0.03;
+        const y = (p.lane?.kind === LaneKind.Footpath || p.area ? 0.15 : 0.03) + (this.heightAt?.(p.x, p.z, p.yaw) ?? 0);
         const standing = p.knocked > 0 || p.waiting !== 0;
         list.push({ key: i, x: p.x, y, z: p.z, yaw: p.yaw, speed: standing ? 0 : p.v, lying: p.knocked > 0 });
       });
@@ -1143,11 +1150,11 @@ export class NetTraffic {
       // Stride phase advances with distance walked, so legs keep pace at any frame rate.
       if (moving) p.phase += dt * p.v * 6;
       const mi = p.kind * 2 + (moving && Math.sin(p.phase) > 0 ? 1 : 0);
-      const y = p.lane?.kind === LaneKind.Footpath || p.area ? 0.15 : 0.03;
+      const y = (p.lane?.kind === LaneKind.Footpath || p.area ? 0.15 : 0.03) + (this.heightAt?.(p.x, p.z, p.yaw) ?? 0);
       if (p.knocked > 0) {
         // Knocked down: lying in the road.
         this.q.setFromEuler(new THREE.Euler(Math.PI / 2, p.yaw, 0, "YXZ"));
-        this.m.compose(this.p3.set(p.x, 0.2, p.z), this.q, this.one);
+        this.m.compose(this.p3.set(p.x, y + 0.17, p.z), this.q, this.one);
       } else this.m.compose(this.p3.set(p.x, y + (moving ? Math.abs(Math.sin(p.phase)) * 0.04 : 0), p.z), this.q.setFromAxisAngle(this.up, p.yaw), this.one);
       this.wMeshes[mi].setMatrixAt(wc[mi]++, this.m);
     }

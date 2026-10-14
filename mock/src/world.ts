@@ -4,6 +4,7 @@
 // building so the skyline is there before the detailed tiles stream in (tiles.ts).
 // Same interface the Real-world modules expect from their World (drive.ts, traffic.ts).
 import * as THREE from "three/webgpu";
+import { waterMaterial } from "./tiles";
 import { RoadNet } from "./roadnet";
 
 export interface Road {
@@ -23,6 +24,19 @@ export interface GidiData {
   walls?: Record<string, number[][][]>;
   pois: { name: string; type: string; d: string; x: number; y: number; note?: string }[];
   districts: { id: string; name: string; poly: number[][][] }[];
+  structures?: { kind: string; name: string; pts: number[][]; layer?: number; width: number }[];
+  arterials?: { cls: string; name: string; pts: number[][] }[];
+}
+
+/** A deck the traffic and the player ride on: a flyover, or a bridge over the water. */
+interface Deck { pts: number[]; cum: number[]; S: number; H: number; R: number; half: number; water: boolean; x0: number; z0: number; x1: number; z1: number }
+
+/** Same profile as blender/gidi_kit/structures.py deck_height: up from the road over R metres at
+ * each end with a smoothstep, H across the middle. */
+function deckProfile(s: number, S: number, H: number, R: number) {
+  R = Math.min(R, S * 0.45);
+  const u = R > 0 ? Math.max(0, Math.min(1, Math.min(s, S - s) / R)) : 1;
+  return 0.05 + (H - 0.05) * u * u * (3 - 2 * u);
 }
 
 export const CENTRE = { x: 4400, y: 3360 };
@@ -92,6 +106,7 @@ export class World {
       }
     }
     this.buildHoarding();
+    this.buildDecks();
     await this.monumentColliders(base);
     this.net = await RoadNet.load("gidi", `${base}web/city/net/`);
     this.buildWater();
@@ -106,6 +121,73 @@ export class World {
   /** Estate walls as colliders: flat [ax, az, bx, bz, height, thickness, ...]. */
   barrierColliders(): number[] {
     return this.walls;
+  }
+
+  decks: Deck[] = [];
+
+  /** Flyovers and the bridges, with the tile models' heights (blender/gidi_kit/structures.py):
+   * flyovers 6.5 m a layer with 60 m ramps, the Long Bridge 7 m and the Cable Bridge 9 m with 80 m
+   * ramps. Widths match blender/city.py (ART_W bridge 22 m). */
+  private buildDecks() {
+    const add = (raw: number[][], H: number, R: number, w: number, water: boolean) => {
+      const pts: number[] = [], cum = [0];
+      let x0 = Infinity, z0 = Infinity, x1 = -Infinity, z1 = -Infinity;
+      raw.forEach((p, i) => {
+        const q = toSim(p[0], p[1]);
+        pts.push(q.x, q.z);
+        x0 = Math.min(x0, q.x); z0 = Math.min(z0, q.z); x1 = Math.max(x1, q.x); z1 = Math.max(z1, q.z);
+        if (i) cum.push(cum[i - 1] + Math.hypot(q.x - pts[i * 2 - 2], q.z - pts[i * 2 - 1]));
+      });
+      const half = w / 2 + 0.3;
+      this.decks.push({ pts, cum, S: cum[cum.length - 1], H, R, half, water, x0: x0 - half, z0: z0 - half, x1: x1 + half, z1: z1 + half });
+    };
+    for (const st of this.data.structures ?? []) {
+      if (st.kind === "flyover" || st.kind === "ramp") add(st.pts, 6.5 * (st.kind === "ramp" ? 1 : st.layer ?? 1), 60, st.width, false);
+    }
+    for (const a of this.data.arterials ?? []) {
+      if (a.cls === "bridge") add(a.pts, /Cable/.test(a.name) ? 9 : 7, 80, 22, true);
+    }
+  }
+
+  /** Height of the deck under (x, z), or 0 on the ground. With a heading (radians, sim yaw: 0 = +z),
+   * a flyover only counts when travelling along it, so the road crossing underneath stays down. */
+  deckHeight(x: number, z: number, yaw?: number) {
+    let best = 0;
+    for (const d of this.decks) {
+      if (x < d.x0 || x > d.x1 || z < d.z0 || z > d.z1) continue;
+      for (let i = 0; i + 3 < d.pts.length; i += 2) {
+        const ax = d.pts[i], az = d.pts[i + 1], bx = d.pts[i + 2], bz = d.pts[i + 3];
+        const dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz || 1;
+        const t = Math.max(0, Math.min(1, ((x - ax) * dx + (z - az) * dz) / L2));
+        const ex = ax + dx * t - x, ez = az + dz * t - z;
+        if (ex * ex + ez * ez > d.half * d.half) continue;
+        if (!d.water && yaw !== undefined) {
+          const L = Math.sqrt(L2);
+          if (Math.abs((Math.sin(yaw) * dx + Math.cos(yaw) * dz) / L) < 0.6) continue; // crossing under it
+        }
+        const h = deckProfile(d.cum[i / 2] + t * Math.sqrt(L2), d.S, d.H, d.R);
+        if (h > best) best = h;
+      }
+    }
+    return best;
+  }
+
+  /** True on open water (the lagoon, the creeks, the sea) with no deck, lane or path to stand on:
+   * Water Town's boardwalks and the stilt lanes are lanes, so they stay walkable. */
+  onOpenWater(x: number, z: number) {
+    const gx = x + CENTRE.x, gy = z + CENTRE.y;
+    const inPoly = (poly: number[][]) => {
+      let ins = false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        if (yi > gy !== yj > gy && gx < ((xj - xi) * (gy - yi)) / (yj - yi) + xi) ins = !ins;
+      }
+      return ins;
+    };
+    if (![...this.data.water, ...this.data.ocean].some(inPoly)) return false;
+    if (this.deckHeight(x, z) > 0.1) return false;
+    const hit = this.net?.locate(x, z, null, 3);
+    return !(hit && Math.abs(hit.lat) < hit.lane.width / 2 + 1.5);
   }
 
   /** Corrugated hoarding round each unbuilt district, the kind that fences off a Lagos building site,
@@ -203,7 +285,7 @@ export class World {
   }
 
   private buildWater() {
-    const mat = new THREE.MeshStandardNodeMaterial({ color: 0x2f4a50, roughness: 0.08, metalness: 0.1 });
+    const mat = waterMaterial();
     for (const poly of [...this.data.water, ...this.data.ocean]) {
       const shape = new THREE.Shape(poly.map((p) => { const s = toSim(p[0], p[1]); return new THREE.Vector2(s.x, -s.z); }));
       const g = new THREE.ShapeGeometry(shape).rotateX(-Math.PI / 2);

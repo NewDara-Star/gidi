@@ -130,6 +130,8 @@ export class PlayerVehicle {
     const ps = base.physics;
     this.origin = originOf(ps);
     this.phys = new CarPhysics(ps, x - Math.sin(yaw) * this.origin.z, z - Math.cos(yaw) * this.origin.z, yaw, world.footprintList, (i) => world.gardenColliders(i));
+    const deckY = (world as any).deckHeight?.(x, z, yaw) ?? 0; // Gidi: starting on a flyover or bridge
+    if (deckY > 0.1) this.phys.reset(x - Math.sin(yaw) * this.origin.z, z - Math.cos(yaw) * this.origin.z, yaw, deckY + 0.03);
     if (world.meta) this.phys.addBounds(world.meta.half.x, world.meta.half.z);
     this.phys.addSegments(world.barrierColliders());
     const mat = createVertexColorMaterial(0.55, 0.15);
@@ -468,7 +470,10 @@ export class PlayerVehicle {
       this.steerCmd += Math.max(-rate * dt, Math.min(rate * dt, target - this.steerCmd));
     }
     const net = world.net;
+    const deck = (world as any).deckHeight as ((x: number, z: number, yaw?: number) => number) | undefined;
     const ground: GroundFn = (x, z) => {
+      const h = deck ? deck.call(world, x, z, this.yaw) : 0; // Gidi: flyovers and bridges
+      if (h > 0.1) return h + ROAD_Y;
       if (!net) return ROAD_Y;
       const hit = net.locate(x, z, null, ALLOW_PED);
       return hit && hit.lane.kind === LaneKind.Footpath && Math.abs(hit.lat) < hit.lane.width / 2 ? PATH_Y : ROAD_Y;

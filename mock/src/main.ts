@@ -52,6 +52,7 @@ if (world.net) {
   traffic = new NetTraffic(world.net, { honk: () => {} }, { vehicles: 130, walkers: 280 }, "right");
   traffic.busy = (x: number, z: number) => world.crowdAt(x, z);
   traffic.blocked = (x: number, z: number) => world.blocked(x, z);
+  traffic.heightAt = (x: number, z: number, yaw?: number) => world.deckHeight(x, z, yaw);
   scene.add(traffic.group);
   loadVehicleModels(VEHICLE_MODELS, MODELS).then((m) => traffic!.setVehicleModels(m));
   const loader = new GLTFLoader();
@@ -64,7 +65,7 @@ const signals = world.net ? new Signals(world.net) : null;
 if (signals) scene.add(signals.group);
 
 // the player: on foot, or in a danfo or a car
-const me = { x: 0, z: 0, yaw: 0, camYaw: 0, speed: 0 };
+const me = { x: 0, y: 0, z: 0, yaw: 0, camYaw: 0, speed: 0 };
 const xy = params.get("xy")?.split(",").map(Number);
 const spawn = xy ? world.spawnAt(xy[0], xy[1]) : world.spawn(params.get("at"));
 Object.assign(me, { x: spawn.x, z: spawn.z, yaw: spawn.yaw, camYaw: spawn.yaw + Math.PI });
@@ -187,6 +188,8 @@ addEventListener("pagehide", () => void g29.release());
 let last = performance.now();
 let lookOffset = 0;
 let lastWallToast = 0;
+let lastWaterToast = 0;
+const now = () => performance.now();
 const tmp = new THREE.Vector3();
 function frame(now: number) {
   requestAnimationFrame(frame);
@@ -220,14 +223,17 @@ function walkStep(dt: number) {
     const vx = Math.sin(fwd) * my - Math.cos(fwd) * mx, vz = Math.cos(fwd) * my + Math.sin(fwd) * mx;
     const l = Math.hypot(vx, vz) || 1;
     const nx = me.x + (vx / l) * sp * dt, nz = me.z + (vz / l) * sp * dt;
-    if (!world.blocked(nx, nz) && !world.footprintList.some((f, i) => i % 1 === 0 && Math.abs(f[0] - nx) < 60 && Math.abs(f[1] - nz) < 60 && inside(f, nx, nz))) {
+    const wet = world.onOpenWater(nx, nz) && !world.onOpenWater(me.x, me.z); // can't step off the shore (but can always get out)
+    if (wet && now() - lastWaterToast > 6000) { lastWaterToast = now(); toast("That's the lagoon: take a bridge, a boardwalk or a jetty"); }
+    if (!wet && !world.blocked(nx, nz) && !world.footprintList.some((f, i) => i % 1 === 0 && Math.abs(f[0] - nx) < 60 && Math.abs(f[1] - nz) < 60 && inside(f, nx, nz))) {
       me.x = nx;
       me.z = nz;
     }
     me.yaw = Math.atan2(vx, vz);
     me.speed = sp;
   } else me.speed = 0;
-  avatar.position.set(me.x, 0.05, me.z);
+  me.y += (world.deckHeight(me.x, me.z, me.yaw) - me.y) * Math.min(1, dt * 12);
+  avatar.position.set(me.x, 0.05 + me.y, me.z);
   avatar.rotation.y = me.yaw;
 }
 
@@ -294,13 +300,14 @@ function placeCamera(dt: number) {
     const want = car.yaw + Math.PI + lookOffset;
     me.camYaw += Math.atan2(Math.sin(want - me.camYaw), Math.cos(want - me.camYaw)) * Math.min(1, dt * 3.5);
     const dist = 10.5 + Math.min(6, car.speed * 0.15);
-    camera.position.set(car.x + Math.sin(me.camYaw) * dist, 4.4, car.z + Math.cos(me.camYaw) * dist);
-    camera.lookAt(tmp.set(car.x, 1.4, car.z));
+    const cy = Math.max(0, (car as any).root?.position.y ?? 0); // up on a flyover or bridge
+    camera.position.set(car.x + Math.sin(me.camYaw) * dist, 4.4 + cy, car.z + Math.cos(me.camYaw) * dist);
+    camera.lookAt(tmp.set(car.x, 1.4 + cy, car.z));
     return;
   }
   const dist = 5.5;
-  camera.position.set(me.x + Math.sin(me.camYaw) * dist, 2.6, me.z + Math.cos(me.camYaw) * dist);
-  camera.lookAt(tmp.set(me.x, 1.5, me.z));
+  camera.position.set(me.x + Math.sin(me.camYaw) * dist, 2.6 + me.y, me.z + Math.cos(me.camYaw) * dist);
+  camera.lookAt(tmp.set(me.x, 1.5 + me.y, me.z));
 }
 
 addEventListener("resize", () => gfx.resize());

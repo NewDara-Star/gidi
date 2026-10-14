@@ -459,11 +459,11 @@ def build_tile(tx, ty, overrides):
         pts = [P(p) for p in a_['pts']]
         w = ART_W.get(a_['cls'], 18)
         rng = Rng('arterial', a_['name'])
+        if a_['cls'] == 'bridge':  # the whole line, so the ramps sit at the real ends; this tile's slabs only
+            (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside)
+            continue
         for piece in clip_line_rect(pts, x0, y0, x1, y1):
-            if a_['cls'] == 'bridge':
-                (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, piece, w, rng)
-            else:
-                structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5))
+            structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5))
     for piece in clip_line_rect([P(p) for p in GD['rail']['pts']], x0, y0, x1, y1):
         structures.rail(tm, piece, Rng('rail'))
     for c in GD.get('canals', []):

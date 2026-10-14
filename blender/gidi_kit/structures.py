@@ -25,7 +25,7 @@ def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=
     A, d, L = _seg(a, b)
     n = max(2, int(L / 6))
     side = Vector((-d.y, d.x, 0))
-    hz = lambda t: z0 + (z1 - z0) * (min(1.0, min(t, 1 - t) / 0.25) if ramp else 1.0)
+    hz = lambda t: (z0 + (z1 - z0) * t) if ramp == 'linear' else z0 + (z1 - z0) * (min(1.0, min(t, 1 - t) / 0.25) if ramp else 1.0)
     for k in range(n):
         t0, t1 = k / n, (k + 1) / n
         p0, p1 = A + d * L * t0, A + d * L * t1
@@ -51,9 +51,56 @@ def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=
         k += piers
 
 
-def flyover(mb, pts, w, layer, rng):
+def deck_height(s, S, H, R):
+    """Deck height at s metres along a structure S long: up from the road at each end over R metres
+    (a smoothstep, so the car feels a vertical curve), H in the middle. The Mock uses the same
+    profile (mock/src/world.ts deckHeight) to put cars and walkers on the deck."""
+    R = min(R, S * 0.45)
+    u = max(0.0, min(1.0, min(s, S - s) / R)) if R > 0 else 1.0
+    return 0.05 + (H - 0.05) * u * u * (3 - 2 * u)
+
+
+RAMP = {'flyover': 60.0, 'bridge': 80.0}
+
+
+def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6):
+    """A whole deck along a polyline with deck_height's profile, in ~6 m slabs; only the slabs and
+    piers whose middle passes keep(p) (the tile being built) are made, so a bridge crossing many
+    tiles comes out seamless."""
+    S = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+    s0 = 0.0
     for i in range(len(pts) - 1):
-        deck(mb, pts[i], pts[i + 1], w, 0.05, 6.5 * layer, rng, ramp=(i == 0 or i == len(pts) - 2))
+        a, b = pts[i], pts[i + 1]
+        L = math.dist(a, b)
+        if L < 1e-6:
+            continue
+        n = max(1, int(math.ceil(L / 6)))
+        for k in range(n):
+            t0, t1 = k / n, (k + 1) / n
+            pa = (a[0] + (b[0] - a[0]) * t0, a[1] + (b[1] - a[1]) * t0)
+            pb = (a[0] + (b[0] - a[0]) * t1, a[1] + (b[1] - a[1]) * t1)
+            if keep(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2)):
+                deck(mb, pa, pb, w, deck_height(s0 + L * t0, S, H, R), deck_height(s0 + L * t1, S, H, R), rng, col=col, piers=1e9, wear=wear, ramp='linear')
+        s0 += L
+    # piers, every `piers` metres along the whole line
+    s0, nxt = 0.0, piers
+    for i in range(len(pts) - 1):
+        A, d, L = _seg(pts[i], pts[i + 1])
+        while nxt < s0 + L:
+            p = A + d * (nxt - s0)
+            z = deck_height(nxt, S, H, R) - 1.2
+            if z > 1.0 and keep((p.x, p.y)):
+                side = Vector((-d.y, d.x, 0))
+                for sg in ((-1, 1) if w > 8 else (0,)):
+                    c = p + side * sg * w * 0.28
+                    parts.cyl(mb, 'concrete', Matrix.Translation((c.x, c.y, -1.5)), 0.6 if w > 8 else 0.4, z + 1.5, hex_rgb(col), wear, seg=12)
+                mb.box('concrete', Matrix.Translation((p.x, p.y, z - 0.5)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'), shade(hex_rgb(col), 0.85), wear, size=(1.4, w * 0.9, 1.0))
+            nxt += piers
+        s0 += L
+
+
+def flyover(mb, pts, w, layer, rng):
+    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng)
 
 
 def skywalk(mb, pts, w, rng):
@@ -146,19 +193,23 @@ def expressway(mb, pts, w, rng, median=True):
                 k += 4
 
 
-def long_bridge(mb, pts, w, rng):
-    """The Long Bridge: an endless low concrete ribbon on pier pairs across the lagoon."""
-    for i in range(len(pts) - 1):
-        deck(mb, pts[i], pts[i + 1], w, 7.0, 7.0, rng, piers=30, ramp=False, wear=0.7)
+BRIDGE_H = {'long': 7.0, 'cable': 9.0}
 
 
-def cable_bridge(mb, pts, w, rng):
+def long_bridge(mb, pts, w, rng, keep=lambda p: True):
+    """The Long Bridge: an endless low concrete ribbon on pier pairs across the lagoon, ramping
+    down to the shore at both ends."""
+    deck_line(mb, pts, w, BRIDGE_H['long'], RAMP['bridge'], rng, keep, piers=30, wear=0.7)
+
+
+def cable_bridge(mb, pts, w, rng, keep=lambda p: True):
     """The Cable Bridge (invented): a single leaning paddle-blade pylon, a fan of stays, a white
     deck; the pylon is lit at night (research-landmarks 15, Gidi design)."""
-    for i in range(len(pts) - 1):
-        deck(mb, pts[i], pts[i + 1], w, 9.0, 9.0, rng, col='#e8e6df', piers=40, ramp=False, wear=0.15)
+    deck_line(mb, pts, w, BRIDGE_H['cable'], RAMP['bridge'], rng, keep, col='#e8e6df', piers=40, wear=0.15)
     A, d, L = _seg(pts[0], pts[-1])
     mid = A + d * L * 0.5
+    if not keep((mid.x, mid.y)):
+        return
     side = Vector((-d.y, d.x, 0))
     top = mid + Vector((0, 0, 85)) - d * 8
     for s in (-1, 1):  # the blade: two legs leaning together, joined into a paddle
