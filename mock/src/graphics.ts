@@ -117,6 +117,7 @@ export class Graphics {
     this.sun.target.position.set(sx, 0, sz);
     this.sun.position.set(sx + this.sunDir.x * 250, this.sunDir.y * 250, sz + this.sunDir.z * 250);
     this.sun.target.updateMatrixWorld();
+    this.sky.position.set(x, 0, z); // Gidi: the city is 9 km wide, so the dome goes with the player
   }
 
   render() {

@@ -15,6 +15,8 @@
   #connect { position: fixed; top: 12px; right: 12px; border: 0; border-radius: 10px; padding: 8px 12px; background: #f2c21b; color: #111; font-weight: 700; cursor: pointer; }
   #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 80vw; opacity: 0; transition: opacity .3s; }
   #toast.on { opacity: 1; }
+  #note { left: 50%; top: 40%; transform: translateX(-50%); z-index: 10; }
+  #note textarea { width: 100%; margin-top: 6px; font: inherit; background: #1b1f24; color: #eee; border: 1px solid #444; border-radius: 6px; padding: 6px; }
   #stick, #knob { display: none; }
 </style>
 </head>
@@ -24,6 +26,7 @@
 <div id="speedo" class="hud" hidden><b id="kmh">0</b> km/h <span id="gear">P</span></div>
 <button id="connect">🎮 Connect wheel</button>
 <div id="toast" class="hud"></div>
+<form id="note" class="hud" hidden><b>Note for the fix list</b> <small>(Enter saves, Esc cancels; your spot and a screenshot go with it)</small><br><textarea id="notetext" rows="3" cols="60" placeholder="What's wrong or missing here?"></textarea></form>
 <div id="stick"><div id="knob"></div></div>
 <div id="load">Loading…</div>
 <script type="module" src="./src/main.ts"></script>

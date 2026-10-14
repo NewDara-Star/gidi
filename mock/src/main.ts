@@ -49,7 +49,9 @@ scene.add(tiles.group);
 // traffic and pedestrians on the city's lane network
 let traffic: NetTraffic | null = null;
 if (world.net) {
-  traffic = new NetTraffic(world.net, { honk: () => {} }, { vehicles: 110, walkers: 140 }, "right");
+  traffic = new NetTraffic(world.net, { honk: () => {} }, { vehicles: 130, walkers: 280 }, "right");
+  traffic.busy = (x: number, z: number) => world.crowdAt(x, z);
+  traffic.blocked = (x: number, z: number) => world.blocked(x, z);
   scene.add(traffic.group);
   loadVehicleModels(VEHICLE_MODELS, MODELS).then((m) => traffic!.setVehicleModels(m));
   const loader = new GLTFLoader();
@@ -66,6 +68,7 @@ const me = { x: 0, z: 0, yaw: 0, camYaw: 0, speed: 0 };
 const xy = params.get("xy")?.split(",").map(Number);
 const spawn = xy ? world.spawnAt(xy[0], xy[1]) : world.spawn(params.get("at"));
 Object.assign(me, { x: spawn.x, z: spawn.z, yaw: spawn.yaw, camYaw: spawn.yaw + Math.PI });
+if (params.get("look")) { me.yaw = (Number(params.get("look")) * Math.PI) / 180; me.camYaw = me.yaw + Math.PI; } // degrees, 0 = south, 90 = east
 const avatar = new THREE.Group();
 new GLTFLoader().loadAsync(`${MODELS}gidi_person_ankara_0.glb`).then((g) => avatar.add(g.scene), () => {});
 scene.add(avatar);
@@ -107,6 +110,7 @@ async function enterVehicle(kind: VehicleKind) {
   const spot = laneSpot(me.x, me.z);
   if (!spot) return toast("No road near here. Walk to a street first");
   car = new PlayerVehicle(kind, spot.x, spot.z, spot.yaw, world as any, "right");
+  carKind = kind;
   const model = await bodyModels[kind];
   if (model) car.setBodyModel(model.clone(true));
   scene.add(car.root);
@@ -139,8 +143,36 @@ function setCockpit(on: boolean) {
   camera.updateProjectionMatrix();
 }
 
+// N: write a note for the fix list (desktop app: saved to mock/notes/NOTES.md with a screenshot)
+const noteBox = $("note") as HTMLFormElement, noteText = $("notetext") as HTMLTextAreaElement;
+let carKind = "";
+for (const t of ["keydown", "keyup"]) noteText.addEventListener(t, (e) => e.stopPropagation()); // typing doesn't walk or drive
+noteText.addEventListener("keydown", async (e) => {
+  if (e.key === "Escape") { noteBox.hidden = true; return; }
+  if (e.key !== "Enter" || e.shiftKey) return;
+  e.preventDefault();
+  const text = noteText.value.trim();
+  noteBox.hidden = true;
+  noteText.blur();
+  if (!text) return;
+  const gx = me.x + CENTRE.x, gy = me.z + CENTRE.y;
+  const body = { text, x: gx, y: gy, district: world.districtAt(me.x, me.z), driving: car ? carKind : "", hour: `${Math.floor(hours)}:00` };
+  await new Promise((r) => setTimeout(r, 120)); // let the box close before the screenshot
+  try {
+    const r = await fetch(`${BASE}__note`, { method: "POST", body: JSON.stringify(body) });
+    if (!r.ok) throw new Error();
+    toast("Saved to mock/notes/NOTES.md");
+  } catch {
+    const list = JSON.parse(localStorage.getItem("gidiNotes") || "[]");
+    list.push(body);
+    try { localStorage.setItem("gidiNotes", JSON.stringify(list)); } catch {}
+    toast("Saved in this browser (the desktop app writes them to mock/notes)");
+  }
+});
+
 addEventListener("keydown", (e) => {
   const k = e.key.toLowerCase();
+  if (k === "n" && noteBox.hidden) { e.preventDefault(); noteBox.hidden = false; noteText.value = ""; noteText.focus(); return; }
   if (k === "f" && !car) void enterVehicle("danfo");
   else if (k === "g" && !car) void enterVehicle("car");
   else if (k === "t") { hours = (hours + 1) % 24; gfx.setTime(hours); toast(`${Math.floor(hours)}:00`); }
@@ -154,6 +186,7 @@ addEventListener("pagehide", () => void g29.release());
 // ------------------------------------------------------------- loop
 let last = performance.now();
 let lookOffset = 0;
+let lastWallToast = 0;
 const tmp = new THREE.Vector3();
 function frame(now: number) {
   requestAnimationFrame(frame);
@@ -169,6 +202,10 @@ function frame(now: number) {
   gfx.render();
   const d = world.districtAt(me.x, me.z);
   $("where").textContent = d ?? "Outside the districts";
+  if (world.blocked(me.x + Math.sin(me.yaw) * 6, me.z + Math.cos(me.yaw) * 6) && now - lastWallToast > 8000) {
+    lastWallToast = now;
+    toast("Not built yet: this district opens when it's built out");
+  }
 }
 
 function walkStep(dt: number) {
@@ -183,7 +220,7 @@ function walkStep(dt: number) {
     const vx = Math.sin(fwd) * my - Math.cos(fwd) * mx, vz = Math.cos(fwd) * my + Math.sin(fwd) * mx;
     const l = Math.hypot(vx, vz) || 1;
     const nx = me.x + (vx / l) * sp * dt, nz = me.z + (vz / l) * sp * dt;
-    if (!world.footprintList.some((f, i) => i % 1 === 0 && Math.abs(f[0] - nx) < 60 && Math.abs(f[1] - nz) < 60 && inside(f, nx, nz))) {
+    if (!world.blocked(nx, nz) && !world.footprintList.some((f, i) => i % 1 === 0 && Math.abs(f[0] - nx) < 60 && Math.abs(f[1] - nz) < 60 && inside(f, nx, nz))) {
       me.x = nx;
       me.z = nz;
     }
@@ -270,6 +307,6 @@ addEventListener("resize", () => gfx.resize());
 $("load").remove();
 if (params.get("drive")) setTimeout(() => void enterVehicle(params.get("drive") as VehicleKind), 2500);
 (window as any).__gidiState = () => ({ x: me.x, z: me.z, driving: !!car, tiles: (tiles as any).loaded?.size, cars: traffic?.cars.filter((c: any) => c.active).length });
-toast("WASD to walk (Shift runs), drag to look · F: drive a danfo · G: drive a car · T: time of day · 🎮 Connect wheel for the G29");
+toast("WASD to walk (Shift runs), drag to look · F: drive a danfo · G: drive a car · T: time of day · N: write a note · 🎮 Connect wheel for the G29");
 requestAnimationFrame(frame);
 (window as any).__gidi = { world, tiles, traffic, me, CENTRE };

@@ -35,7 +35,7 @@ detail.LEVEL = opt.get('--detail', 'web')
 TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '') if opt.get('--tiles') is not True else '').split(';') if t]
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, parcels, places, registry, street, structures  # noqa: E402
+from gidi_kit import archetypes, monuments, parcels, places, registry, street, structures  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -205,6 +205,108 @@ def poi_overrides():
     return res
 
 
+def _seg_cross(a, b, c, d):
+    """Where segment ab crosses cd, or None."""
+    r = (b[0] - a[0], b[1] - a[1])
+    q = (d[0] - c[0], d[1] - c[1])
+    den = r[0] * q[1] - r[1] * q[0]
+    if abs(den) < 1e-9:
+        return None
+    t = ((c[0] - a[0]) * q[1] - (c[1] - a[1]) * q[0]) / den
+    u = ((c[0] - a[0]) * r[1] - (c[1] - a[1]) * r[0]) / den
+    return (a[0] + t * r[0], a[1] + t * r[1], r, q) if 0 <= t <= 1 and 0 <= u <= 1 else None
+
+
+def _unit(v):
+    L = math.hypot(*v) or 1
+    return (v[0] / L, v[1] / L)
+
+
+def _clear(p, pad=1.5):
+    return not any(math.dist(b['c'], p) < 40 and in_poly(p, offset(b['poly'], pad)) for b in BUILDINGS)
+
+
+BUILT = set(GD['buildings'])  # districts with buildings; the rest are walled off in the Mock
+
+
+def monument_sites():
+    """Where the monuments stand (blender/gidi_kit/monuments.py), the same for every tile and detail:
+    a corner of the main-road junctions (a statue, clock tower, sculpture or LED screen by the
+    district's character, up to four a district), a welcome arch on the main roads entering each
+    built district, and the lighthouse on the port mole. Written to web/city/monuments.json too,
+    so the Mock can give them colliders."""
+    mains = [r for r in ROADS if r['k'] == 'main']
+    sites, per = [], {}
+    for i, r1 in enumerate(mains):
+        for r2 in mains[i + 1:]:
+            for a, b in zip(r1['pts'], r1['pts'][1:]):
+                for c, d in zip(r2['pts'], r2['pts'][1:]):
+                    x = _seg_cross(a, b, c, d)
+                    if not x:
+                        continue
+                    j = (x[0], x[1])
+                    dist = district_at(j)
+                    if dist not in BUILT or any(math.dist(j, (s_['x'], s_['y'])) < 60 for s_ in sites):
+                        continue
+                    rng = Rng('monument', round(j[0]), round(j[1]))
+                    u1, u2 = _unit(x[2]), _unit(x[3])
+                    corners = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+                    rng.shuffle(corners)
+                    for sgn1, sgn2 in corners:
+                        bis = _unit((u1[0] * sgn1 + u2[0] * sgn2, u1[1] * sgn1 + u2[1] * sgn2))
+                        p = (j[0] + bis[0] * 16, j[1] + bis[1] * 16)
+                        if _clear(p, 3.0) and per.get(dist, 0) < 4:
+                            kinds = monuments.JUNCTION[CHARACTER.get(dist, 'dense')]
+                            kind = kinds[per.get(dist, 0) % len(kinds)]
+                            per[dist] = per.get(dist, 0) + 1
+                            sites.append(dict(kind=kind, x=p[0], y=p[1], ang=math.atan2(-bis[1], -bis[0]), d=dist, r=2.5 if kind != 'led_board' else 1.0))
+                            break
+    # welcome arches: main roads crossing into a built district, one or two a district
+    arches = {}
+    for r in mains:
+        for a, b in zip(r['pts'], r['pts'][1:]):
+            for dname, poly in DISTRICTS.items():
+                if dname not in BUILT or arches.get(dname, 0) >= 2:
+                    continue
+                for c, d in zip(poly, poly[1:] + poly[:1]):
+                    x = _seg_cross(a, b, c, d)
+                    if not x:
+                        continue
+                    u = _unit(x[2])
+                    # step 30 m inside the district along the road
+                    for sgn in (1, -1):
+                        p = (x[0] + u[0] * 30 * sgn, x[1] + u[1] * 30 * sgn)
+                        if in_poly(p, poly) and all(math.dist(p, (s_['x'], s_['y'])) > 50 for s_ in sites):
+                            sites.append(dict(kind='arch', x=p[0], y=p[1], ang=math.atan2(u[1], u[0]), d=dname, span=r['w'] + 2, name=next(dd['name'] for dd in GD['districts'] if dd['id'] == dname)))
+                            arches[dname] = arches.get(dname, 0) + 1
+                            break
+    sites.append(dict(kind='lighthouse', x=3975.0, y=-6330.0, ang=0.0, d='port', r=3.4))
+    path = os.path.join(ROOT, 'web', 'city', 'monuments.json')
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        tmp = path + f'.{os.getpid()}'
+        json.dump([dict(s_, y=-s_['y']) for s_ in sites], open(tmp, 'w'))  # in the data's frame (y south)
+        os.replace(tmp, path)
+    except OSError:
+        pass
+    return sites
+
+
+MONUMENTS = monument_sites()
+
+
+def build_monument(mb, s_):
+    M = Matrix.Translation((s_['x'], s_['y'], 0)) @ Matrix.Rotation(s_['ang'], 4, 'Z')
+    rng = Rng('monument', s_['kind'], round(s_['x']), round(s_['y']))
+    k = s_['kind']
+    if k.startswith('statue'):
+        monuments.statue(mb, M, rng, k.split(':')[1] if ':' in k else None)
+    elif k == 'arch':
+        monuments.arch(mb, M, rng, s_['span'], s_['name'], CHARACTER.get(s_['d'], 'dense'))
+    else:
+        monuments.BUILDERS[k](mb, M, rng)
+
+
 # ---------------------------------------------------------------- one tile
 def build_tile(tx, ty, overrides):
     x0, y0 = tx * SIZE, -(ty + 1) * SIZE  # tile ty counts southward in the data, northward is -y here
@@ -279,6 +381,10 @@ def build_tile(tx, ty, overrides):
         if poi['type'] == 'transit' and inside(P((poi['x'], poi['y']))):
             q = P((poi['x'], poi['y']))
             places.bus_shelter(pm, Matrix.Translation((q[0], q[1], 0)), Rng('stop', poi['name']))
+    for s_ in MONUMENTS:
+        if inside((s_['x'], s_['y'])):
+            build_monument(pm, s_)
+            built['monument:' + s_['kind']] = built.get('monument:' + s_['kind'], 0) + 1
 
     # roads and street life
     sm = MeshBuilder()

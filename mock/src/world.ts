@@ -38,6 +38,22 @@ export function pointInPoly(p: Float32Array, x: number, z: number): boolean {
   return inside;
 }
 
+/** Districts not built out yet: walled off with hoarding until they are (README, district status). */
+export const UNBUILT = new Set(["border", "oldshore", "frontier"]);
+
+/** How busy the streets are, 0..1, from each district's people per km² (docs/lagos-lgas-research.md):
+ * the ~80,000/km² markets and ghettos are 1, the GRAs and Ikoyi-like estates a handful of walkers. */
+export const DENSITY: Record<string, number> = {
+  jungle: 1.0, maze: 0.95, hub: 1.0, oldisland: 1.0, bazaar: 0.9, watertown: 0.85, foodgate: 0.85,
+  railside: 0.6, capital: 0.55, port: 0.45, heights: 0.2, estate: 0.15,
+  border: 0, oldshore: 0, frontier: 0,
+};
+/** Places that pull a crowd round them, metres of reach and the boost. */
+const CROWD_POIS: Record<string, [number, number]> = {
+  market: [220, 0.6], transit: [180, 0.6], church: [60, 0.25], mosque: [60, 0.25], school: [70, 0.3],
+  sport: [150, 0.4], night: [80, 0.3], hospital: [90, 0.3], betting: [40, 0.15], landmark: [100, 0.2],
+};
+
 export class World {
   group = new THREE.Group();
   data!: GidiData;
@@ -75,6 +91,8 @@ export class World {
         }
       }
     }
+    this.buildHoarding();
+    await this.monumentColliders(base);
     this.net = await RoadNet.load("gidi", `${base}web/city/net/`);
     this.buildWater();
     this.buildMassing();
@@ -88,6 +106,100 @@ export class World {
   /** Estate walls as colliders: flat [ax, az, bx, bz, height, thickness, ...]. */
   barrierColliders(): number[] {
     return this.walls;
+  }
+
+  /** Corrugated hoarding round each unbuilt district, the kind that fences off a Lagos building site,
+   * and a solid wall behind it for the car's physics. */
+  private buildHoarding() {
+    const segs: number[] = [];
+    for (const d of this.data.districts) {
+      if (!UNBUILT.has(d.id)) continue;
+      const poly = d.poly[0];
+      for (let k = 0; k + 1 < poly.length; k++) {
+        const a = toSim(poly[k][0], poly[k][1]), b = toSim(poly[k + 1][0], poly[k + 1][1]);
+        const len = Math.hypot(b.x - a.x, b.z - a.z);
+        const n = Math.max(1, Math.ceil(len / 40)); // keep each panel straight on long edges
+        for (let i = 0; i < n; i++) {
+          const t0 = i / n, t1 = (i + 1) / n;
+          segs.push(a.x + (b.x - a.x) * t0, a.z + (b.z - a.z) * t0, a.x + (b.x - a.x) * t1, a.z + (b.z - a.z) * t1);
+        }
+      }
+    }
+    const n = segs.length / 4;
+    if (!n) return;
+    const H = 3.2;
+    const mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, H, 0.12).translate(0, H / 2, 0), new THREE.MeshStandardNodeMaterial({ color: 0xb2b8b8, roughness: 0.45, metalness: 0.5 }), n);
+    const band = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 0.5, 0.16).translate(0, H - 0.6, 0), new THREE.MeshStandardNodeMaterial({ color: 0x1f5fa8, roughness: 0.6 }), n);
+    const m = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0);
+    for (let i = 0; i < n; i++) {
+      const [ax, az, bx, bz] = segs.slice(i * 4, i * 4 + 4);
+      const len = Math.hypot(bx - ax, bz - az);
+      q.setFromAxisAngle(up, Math.atan2(-(bz - az), bx - ax));
+      m.compose(new THREE.Vector3((ax + bx) / 2, 0, (az + bz) / 2), q, new THREE.Vector3(len, 1, 1));
+      mesh.setMatrixAt(i, m);
+      band.setMatrixAt(i, m);
+      this.walls.push(ax, az, bx, bz, H, 0.4);
+    }
+    mesh.castShadow = mesh.receiveShadow = true;
+    this.group.add(mesh, band);
+  }
+
+  /** Statues, clock towers, screens, arch pylons and the lighthouse (web/city/monuments.json,
+   * blender/city.py monument_sites) as solid posts for the car and for walking. */
+  private async monumentColliders(base: string) {
+    let sites: { kind: string; x: number; y: number; ang: number; r?: number; span?: number }[] = [];
+    try {
+      sites = await fetch(`${base}web/city/monuments.json`).then((r) => r.json());
+    } catch {
+      return;
+    }
+    const square = (cx: number, cz: number, r: number) => {
+      const f = new Float32Array([cx - r, cz - r, cx + r, cz - r, cx + r, cz + r, cx - r, cz + r]);
+      this.footprintList.push(f);
+      this.storeys.push(1);
+    };
+    for (const m of sites) {
+      const s = toSim(m.x, m.y);
+      if (m.kind === "arch") {
+        const h = (m.span ?? 16) / 2 + 1.2, nx = -Math.sin(m.ang), nz = -Math.cos(m.ang); // ang is in Blender's frame (y north)
+        for (const sg of [-1, 1]) square(s.x + nx * h * sg, s.z + nz * h * sg, 1.0);
+      } else square(s.x, s.z, m.r ?? 2);
+    }
+  }
+
+  /** The district's id at a point, or null outside them all. */
+  districtIdAt(x: number, z: number): string | null {
+    return this.districtWhere(x, z)?.id ?? null;
+  }
+
+  /** True where the player may not go yet (an unbuilt district). */
+  blocked(x: number, z: number) {
+    const id = this.districtIdAt(x, z);
+    return id !== null && UNBUILT.has(id);
+  }
+
+  /** Street crowd at a point, 0..1+: the district's density, lifted near markets, parks, stations,
+   * churches and mosques. */
+  crowdAt(x: number, z: number) {
+    const gx = Math.round(x / 40), gz = Math.round(z / 40), key = gx * 100000 + gz;
+    let v = this.crowdCache.get(key);
+    if (v === undefined) this.crowdCache.set(key, (v = this.crowdAtRaw(gx * 40, gz * 40)));
+    return v;
+  }
+  private crowdCache = new Map<number, number>();
+
+  private crowdAtRaw(x: number, z: number) {
+    const id = this.districtIdAt(x, z);
+    let d = id === null ? 0.1 : DENSITY[id] ?? 0.5;
+    if (d === 0) return 0;
+    const gx = x + CENTRE.x, gy = z + CENTRE.y;
+    for (const p of this.data.pois) {
+      const c = CROWD_POIS[p.type];
+      if (!c) continue;
+      const r = Math.hypot(p.x - gx, p.y - gy);
+      if (r < c[0]) d += c[1] * (1 - r / c[0]);
+    }
+    return d;
   }
 
   private buildWater() {
@@ -167,6 +279,10 @@ export class World {
   }
 
   districtAt(x: number, z: number): string | null {
+    return this.districtWhere(x, z)?.name ?? null;
+  }
+
+  private districtWhere(x: number, z: number) {
     const gx = x + CENTRE.x, gy = z + CENTRE.y;
     for (const d of this.data.districts) {
       const poly = d.poly[0];
@@ -175,7 +291,7 @@ export class World {
         const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
         if (yi > gy !== yj > gy && gx < ((xj - xi) * (gy - yi)) / (yj - yi) + xi) ins = !ins;
       }
-      if (ins) return d.name;
+      if (ins) return d;
     }
     return null;
   }

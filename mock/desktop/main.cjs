@@ -20,15 +20,40 @@ protocol.registerSchemesAsPrivileged([
 app.commandLine.appendSwitch("ignore-gpu-blocklist");
 app.commandLine.appendSwitch("enable-unsafe-webgpu");
 
+let mainWin = null;
+const NOTES = path.join(ROOT, "mock", "notes");
+
+// The Mock's N key: a play-tester's note, with where they were and a screenshot, appended to
+// mock/notes/NOTES.md (screenshots beside it).
+async function saveNote(req) {
+  const n = await req.json();
+  fs.mkdirSync(NOTES, { recursive: true });
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+  let shot = "";
+  if (mainWin) {
+    const img = await mainWin.webContents.capturePage();
+    shot = `${stamp}.jpg`;
+    fs.writeFileSync(path.join(NOTES, shot), img.toJPEG(80));
+  }
+  const file = path.join(NOTES, "NOTES.md");
+  if (!fs.existsSync(file)) fs.writeFileSync(file, "# Mock play-test notes\n\nWritten in the Mock with **N**. Each note has where you were (map metres, the Mock's `?xy=` link) and a screenshot.\n");
+  const where = `${n.district ?? "outside the districts"}, xy ${Math.round(n.x)},${Math.round(n.y)}${n.driving ? `, driving a ${n.driving}` : ", on foot"}, ${n.hour}`;
+  fs.appendFileSync(file, `\n- **${new Date().toLocaleString("en-GB")}**: ${String(n.text).replace(/\n/g, " ")}\n  - ${where}${shot ? ` · ![](${shot})` : ""}\n`);
+  return new Response(JSON.stringify({ ok: true, file: "mock/notes/NOTES.md" }), { headers: { "content-type": "application/json" } });
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1600, height: 950, backgroundColor: "#0d0f12", title: "Gidi", autoHideMenuBar: true,
     webPreferences: { preload: path.join(__dirname, "preload.cjs"), contextIsolation: true, sandbox: true, backgroundThrottling: false },
   });
+  mainWin = win;
   const env = process.env;
   if (env.GIDI_SHOT) {
     const q = new URLSearchParams({ base: "app://gidi/" });
     if (env.GIDI_AT) q.set("at", env.GIDI_AT);
+    if (env.GIDI_XY) q.set("xy", env.GIDI_XY);
+    if (env.GIDI_LOOK) q.set("look", env.GIDI_LOOK);
     if (env.GIDI_TIME) q.set("time", env.GIDI_TIME);
     if (env.GIDI_DRIVE) q.set("drive", env.GIDI_DRIVE);
     win.loadURL(`app://gidi/mock/dist/index.html?${q}`);
@@ -66,6 +91,7 @@ app.whenReady().then(() => {
   // app://gidi/<path> -> <repo>/<path>
   protocol.handle("app", (req) => {
     const { pathname } = new URL(req.url);
+    if (pathname === "/__note" && req.method === "POST") return saveNote(req);
     const file = path.normalize(path.join(ROOT, decodeURIComponent(pathname)));
     if (!file.startsWith(ROOT)) return new Response("forbidden", { status: 403 });
     // HTML and JS as UTF-8 (the map's labels use ² and ·); everything else as it comes

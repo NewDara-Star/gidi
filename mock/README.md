@@ -10,6 +10,13 @@ Walk and drive through the whole generated city. It's the **Mock** tab of the Gi
   - traffic on a SUMO lane network (signals, give-way, queues, overtaking a stopped player)
   - pedestrians on footpaths and crossings
 
+## Play it
+Double-click **`Play Gidi.command`** in the repo root, or run `cd mock && npm install && npm run desktop`. That opens the map; click the **Mock** tab (or a place on the map, then Mock) to drop in there.
+
+- **Unbuilt districts** (The Border, Old Shore, The Frontier) are fenced off with site hoarding. You can't walk or drive in until they're built.
+- **Crowds and traffic follow how busy a place is.** Each district has a people-per-km² figure from the research (`DENSITY` in `src/world.ts`): Jungle City, The Maze, The Hub and Old Island are packed, The Estate and The Heights are quiet. Markets, stations, pitches, churches, mosques and schools pull extra people round them.
+- **Press N to write a fix note.** It saves to `mock/notes/NOTES.md` with where you were (district, map coordinates, on foot or driving, the hour) and a screenshot. Open the Mock at that spot again with `?xy=x,y`.
+
 ## Build it (once, and after the city or the kit changes)
 1. **The city tiles.** Run `python3 blender/city_run.py`.
    - It takes about an hour on this Mac: the full detail runs two tiles at a time, because each one needs about 6 GB of RAM.
@@ -31,6 +38,7 @@ In a browser, serve the repo root (for example `python3 -m http.server` in `~/gi
   - WASD to walk, Shift to run, drag to look.
   - **F** gets you into a danfo, **G** into a car, on the nearest lane.
   - **T** steps the hour.
+  - **N** writes a note for the fix list.
 - **Driving (keyboard):**
   - W gas, S brake, A/D steer.
   - X/Z move the selector toward D/P (foot on the brake), B parking brake.

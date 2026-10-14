@@ -68,6 +68,13 @@ The kit pieces in `parts.py`:
 - signboards with 3D lettering and a phone number
 - zinc awnings on timber posts
 
+## Monuments
+`gidi_kit/monuments.py`, all invented (research-landmarks 4–9, 23, 24). The contact sheet is `blender/monuments_sheet.py`.
+- Statues on a stepped plinth with a plaque and railing: a founder in agbada and fila, a white-robed masquerade, a talking-drummer.
+- Welded scrap sculpture, a clock tower (stopped hands, pyramid cap), a big LED screen at the junction.
+- A "WELCOME TO …" arch on the main roads into each built district, and the lighthouse on the port mole.
+- `city.py` places them: corners of main-road junctions by district character (up to four a district), arches where main roads enter, the lighthouse fixed. The sites also go to `web/city/monuments.json`, so the Mock gives them colliders.
+
 ## The whole city, and the Mock
 - **The city:**
   - `python3 blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:

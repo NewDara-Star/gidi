@@ -321,6 +321,12 @@ export class NetTraffic {
 
   // ------------------------------------------------------------ public --
 
+  /** Gidi: how busy the street is at a point (0..1+, World.crowdAt) and where nobody may go yet
+   * (World.blocked). Each walker and car has a fixed rank, and only spawns where the crowd beats it. */
+  busy: ((x: number, z: number) => number) | null = null;
+  blocked: ((x: number, z: number) => boolean) | null = null;
+  private tick = 0;
+
   update(dt: number, px: number, pz: number, player?: PlayerState) {
     dt = Math.min(dt, 0.1);
     this.time += dt;
@@ -328,14 +334,19 @@ export class NetTraffic {
     this.locatePlayer();
     this.buildOccupancy();
     this.nearbyVehicles = 0;
-    for (const c of this.cars) {
-      if (!c.active || (c.x - px) ** 2 + (c.z - pz) ** 2 > SIM_RADIUS * SIM_RADIUS) this.spawnCar(c, px, pz);
+    this.tick++;
+    for (let i = 0; i < this.cars.length; i++) {
+      const c = this.cars[i];
+      if (!c.active && (this.tick + i) % 10) continue; // a spare car only looks for a spot now and then
+      if (!c.active || (c.x - px) ** 2 + (c.z - pz) ** 2 > SIM_RADIUS * SIM_RADIUS) this.spawnCar(c, px, pz, i / this.cars.length);
       if (!c.active) continue;
       this.stepCar(c, dt);
       if ((c.x - px) ** 2 + (c.z - pz) ** 2 < 60 * 60) this.nearbyVehicles++;
     }
-    for (const p of this.peds) {
-      if (!p.active || (p.x - px) ** 2 + (p.z - pz) ** 2 > PED_RADIUS * PED_RADIUS) this.spawnPed(p, px, pz);
+    for (let i = 0; i < this.peds.length; i++) {
+      const p = this.peds[i];
+      if (!p.active && (this.tick + i) % 10) continue;
+      if (!p.active || (p.x - px) ** 2 + (p.z - pz) ** 2 > PED_RADIUS * PED_RADIUS) this.spawnPed(p, px, pz, i / this.peds.length);
       if (!p.active) continue;
       this.stepPed(p, dt);
     }
@@ -433,7 +444,7 @@ export class NetTraffic {
 
   // ------------------------------------------------------------- cars --
 
-  private spawnCar(c: Car, px: number, pz: number) {
+  private spawnCar(c: Car, px: number, pz: number, rank = 0) {
     c.active = false;
     for (let tries = 0; tries < 25; tries++) {
       const l = this.spawnLanes[Math.floor(this.rand() * this.spawnLanes.length)];
@@ -442,6 +453,8 @@ export class NetTraffic {
       const p = this.net.at(l, s, this.pt);
       const d2 = (p.x - px) ** 2 + (p.z - pz) ** 2;
       if (d2 > (SIM_RADIUS * 0.9) ** 2 || d2 < SPAWN_MIN * SPAWN_MIN) continue;
+      if (this.blocked?.(p.x, p.z)) continue;
+      if (this.busy && rank > 0.3 + 0.7 * Math.min(1, this.busy(p.x, p.z))) continue; // quiet streets, fewer cars
       if ((this.onLane.get(l.id) ?? []).some((o) => Math.abs(o.s - s) < 14)) continue;
       // Buses only on bigger roads.
       if (KINDS[c.kind].bus && l.speed < 13) continue;
@@ -826,7 +839,7 @@ export class NetTraffic {
 
   // ---------------------------------------------------------- people --
 
-  private spawnPed(p: Ped, px: number, pz: number) {
+  private spawnPed(p: Ped, px: number, pz: number, rank = 0) {
     p.active = false;
     for (let tries = 0; tries < 20; tries++) {
       const l = this.footLanes[Math.floor(this.rand() * this.footLanes.length)];
@@ -835,6 +848,8 @@ export class NetTraffic {
       const q = this.net.at(l, s, this.pt);
       const d2 = (q.x - px) ** 2 + (q.z - pz) ** 2;
       if (d2 > (PED_RADIUS * 0.9) ** 2 || d2 < 25 * 25) continue;
+      if (this.blocked?.(q.x, q.z)) continue;
+      if (this.busy && rank >= this.busy(q.x, q.z) * 0.62) continue;
       p.lane = l;
       p.s = s;
       p.dir = this.rand() < 0.5 ? 1 : -1;
