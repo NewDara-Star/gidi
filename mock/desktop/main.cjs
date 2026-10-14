@@ -54,6 +54,7 @@ function createWindow() {
     if (env.GIDI_AT) q.set("at", env.GIDI_AT);
     if (env.GIDI_XY) q.set("xy", env.GIDI_XY);
     if (env.GIDI_LOOK) q.set("look", env.GIDI_LOOK);
+    if (env.GIDI_EXACT) q.set("exact", "1");
     if (env.GIDI_TIME) q.set("time", env.GIDI_TIME);
     if (env.GIDI_DRIVE) q.set("drive", env.GIDI_DRIVE);
     win.loadURL(`app://gidi/mock/dist/index.html?${q}`);

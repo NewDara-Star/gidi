@@ -129,21 +129,56 @@ def skywalk(mb, pts, w, rng):
             parts.cyl(mb, 'steel', Matrix.Translation((p.x, p.y, 0)), 0.3, z, hex_rgb('#8a8f92'), 0.4, seg=8)
 
 
+def snap_footbridge(pts, canals, gap=10.0):
+    """A footbridge in the data is drawn from somewhere near the canal; centre it on the canal's
+    line and make it span the channel and both banks (CANAL_W + 4 m), square across the flow.
+    Returns the new two-point line, or the original if no canal is near. The Mock does the same
+    (mock/src/world.ts) so walkers climb the same deck."""
+    m = ((pts[0][0] + pts[-1][0]) / 2, (pts[0][1] + pts[-1][1]) / 2)
+    best = None
+    for c in canals:
+        for a, b in zip(c, c[1:]):
+            dx, dy = b[0] - a[0], b[1] - a[1]
+            L2 = dx * dx + dy * dy or 1
+            t = max(0.0, min(1.0, ((m[0] - a[0]) * dx + (m[1] - a[1]) * dy) / L2))
+            q = (a[0] + dx * t, a[1] + dy * t)
+            d = math.dist(q, m)
+            if d < gap and (best is None or d < best[0]):
+                L = math.sqrt(L2)
+                best = (d, q, (-dy / L, dx / L))
+    if not best:
+        return pts
+    _, q, n = best
+    half = max(math.dist(pts[0], pts[-1]), CANAL_W + 4) / 2
+    return [(q[0] - n[0] * half, q[1] - n[1] * half), (q[0] + n[0] * half, q[1] + n[1] * half)]
+
+
+CANAL_W = 8.0
+FOOTBRIDGE_H = 1.3
+
+
 def footbridge(mb, pts, w, rng):
-    """A canal footbridge: a steel truss on block abutments, a little above the water."""
+    """A canal footbridge: a steel deck with handrails on block abutments, steps up at each end."""
+    z = FOOTBRIDGE_H
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
         side = Vector((-d.y, d.x, 0))
-        z = 1.6
-        for k in range(int(L / 0.4)):
-            p = A + d * (k * 0.4 + 0.2)
-            mb.box('steel', Matrix.Translation((p.x, p.y, z)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'), hex_rgb('#6a6a6a'), 0.8, size=(0.38, w, 0.05))
+        ang = math.atan2(d.y, d.x)
+        steps = 2.0  # metres of stair at each end
+        for k in range(int((L - 2 * steps) / 0.4)):
+            p = A + d * (steps + k * 0.4 + 0.2)
+            mb.box('steel', Matrix.Translation((p.x, p.y, z)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#6a6a6a'), 0.8, size=(0.38, w, 0.05))
+        for e in (0, 1):  # stairs and the block abutment under them
+            for k in range(5):
+                u = (k + 0.5) / 5 * steps
+                p = A + d * (u if e == 0 else L - u)
+                mb.box('concrete', Matrix.Translation((p.x, p.y, z * (k + 1) / 5 / 2)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#8a857a'), 0.7, size=(steps / 5 + 0.02, w, z * (k + 1) / 5))
         for s in (-1, 1):
-            pa, pb = A + side * s * w / 2, A + d * L + side * s * w / 2
-            parts.bar(mb, 'steel', (pa.x, pa.y, z + 1.1), (pb.x, pb.y, z + 1.1), 0.05, hex_rgb('#3a3a3a'), 0.7)
-            for k in range(int(L / 1.5) + 1):
-                p = A + d * min(L, k * 1.5) + side * s * w / 2
-                parts.bar(mb, 'steel', (p.x, p.y, z), (p.x, p.y, z + 1.1), 0.04, hex_rgb('#3a3a3a'), 0.7)
+            pa, pb = A + d * steps + side * s * w / 2, A + d * (L - steps) + side * s * w / 2
+            parts.bar(mb, 'steel', (pa.x, pa.y, z + 1.0), (pb.x, pb.y, z + 1.0), 0.05, hex_rgb('#3a3a3a'), 0.7)
+            for k in range(int((L - 2 * steps) / 1.5) + 1):
+                p = pa + d * min(L - 2 * steps, k * 1.5)
+                parts.bar(mb, 'steel', (p.x, p.y, z), (p.x, p.y, z + 1.0), 0.04, hex_rgb('#3a3a3a'), 0.7)
 
 
 def jetty(mb, pts, w, rng):
@@ -249,10 +284,13 @@ def canal(mb, pts, w, rng):
         side = Vector((-d.y, d.x, 0))
         ang = math.atan2(d.y, d.x)
         mid = A + d * L / 2
-        mb.face([A - side * w / 2 + Vector((0, 0, 0.02)), A + d * L - side * w / 2 + Vector((0, 0, 0.02)), A + d * L + side * w / 2 + Vector((0, 0, 0.02)), A + side * w / 2 + Vector((0, 0, 0.02))], 'water', hex_rgb('#3a4a30'), 0)
+        wz = Vector((0, 0, 0.1))  # clear of the ground, so it never flickers through it
+        mb.face([A - side * w / 2 + wz, A + d * L - side * w / 2 + wz, A + d * L + side * w / 2 + wz, A + side * w / 2 + wz], 'water', hex_rgb('#2a3a22'), 0)
         for s in (-1, 1):
             q = mid + side * s * (w / 2 + 0.2)
-            mb.box('concrete', Matrix.Translation((q.x, q.y, 0.3)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#8a857a'), 0.8, size=(L, 0.4, 0.6))
+            mb.box('concrete', Matrix.Translation((q.x, q.y, 0.3)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#8a857a'), 0.8, size=(L + 0.4, 0.4, 0.6))
+            qi = mid + side * s * (w / 2 - 0.01)  # stained inner face, the waterline's green-black tide mark
+            mb.box('concrete', Matrix.Translation((qi.x, qi.y, 0.35)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#3a3a2a'), 0.95, size=(L + 0.4, 0.02, 0.5))
         for k in range(int(L * w / 8)):
             p = A + d * rng.between(0, L) + side * rng.between(-w / 2.2, w / 2.2)
             if rng.chance(0.4):

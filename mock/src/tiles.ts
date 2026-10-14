@@ -33,7 +33,7 @@ export function waterMaterial(tint?: any) {
   const scum = smoothstep(0.72, 0.8, n01(p, 0.05)).mul(0.35); // patches of floating weed and scum
   const base = mix(mix(deep, vec3(0.2, 0.23, 0.12), scum), deep.mul(1.25), rip.mul(0.5));
   m.colorNode = base;
-  m.emissiveNode = sky.mul(fres.mul(rip.mul(0.5).add(fine.mul(0.3)).add(0.45))).mul(float(1).sub(scum));
+  m.emissiveNode = sky.mul(fres.mul(rip.mul(0.5).add(fine.mul(0.3)).add(0.45))).mul(float(1).sub(scum)).mul(tint ? 0.45 : 1); // canals and drains: barely a sheen
   m.roughnessNode = float(0.08).add(scum.mul(0.6)).add(fine.mul(0.06));
   return m;
 }

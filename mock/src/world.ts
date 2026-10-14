@@ -26,6 +26,7 @@ export interface GidiData {
   districts: { id: string; name: string; poly: number[][][] }[];
   structures?: { kind: string; name: string; pts: number[][]; layer?: number; width: number }[];
   arterials?: { cls: string; name: string; pts: number[][] }[];
+  canals?: { d: string; pts: number[][] }[];
 }
 
 /** A deck the traffic and the player ride on: a flyover, or a bridge over the water. */
@@ -146,6 +147,25 @@ export class World {
     }
     for (const a of this.data.arterials ?? []) {
       if (a.cls === "bridge") add(a.pts, /Cable/.test(a.name) ? 9 : 7, 80, 22, true);
+    }
+    // canal footbridges, centred across the canal as blender/gidi_kit/structures.py snap_footbridge
+    // does (CANAL_W 8 m + 4, deck FOOTBRIDGE_H 1.3 m, 2 m of steps at each end)
+    for (const st of this.data.structures ?? []) {
+      if (st.kind !== "footbridge") continue;
+      const a = st.pts[0], b = st.pts[st.pts.length - 1];
+      const m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      let best: { d: number; q: number[]; n: number[] } | null = null;
+      for (const c of this.data.canals ?? []) {
+        for (let i = 0; i + 1 < c.pts.length; i++) {
+          const p0 = c.pts[i], p1 = c.pts[i + 1], dx = p1[0] - p0[0], dy = p1[1] - p0[1], L2 = dx * dx + dy * dy || 1;
+          const t = Math.max(0, Math.min(1, ((m[0] - p0[0]) * dx + (m[1] - p0[1]) * dy) / L2));
+          const q = [p0[0] + dx * t, p0[1] + dy * t], d = Math.hypot(q[0] - m[0], q[1] - m[1]);
+          if (d < 10 && (!best || d < best.d)) best = { d, q, n: [-dy / Math.sqrt(L2), dx / Math.sqrt(L2)] };
+        }
+      }
+      if (!best) continue;
+      const half = Math.max(Math.hypot(b[0] - a[0], b[1] - a[1]), 12) / 2;
+      add([[best.q[0] - best.n[0] * half, best.q[1] - best.n[1] * half], [best.q[0] + best.n[0] * half, best.q[1] + best.n[1] * half]], 1.3, 2, st.width, true);
     }
   }
 

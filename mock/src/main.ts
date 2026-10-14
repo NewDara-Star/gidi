@@ -5,7 +5,8 @@
 import * as THREE from "three/webgpu";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Graphics, type Quality } from "./graphics";
-import { World, CENTRE } from "./world";
+import { World, CENTRE, toSim } from "./world";
+const toSimXY = (x: number, y: number) => { const s = toSim(x, y); return { x: s.x, z: s.z }; };
 import { TileStreamer } from "./tiles";
 import { NetTraffic, VEHICLE_MODELS, WALKER_MODELS } from "./trafficnet";
 import { loadVehicleModels } from "./models";
@@ -67,7 +68,7 @@ if (signals) scene.add(signals.group);
 // the player: on foot, or in a danfo or a car
 const me = { x: 0, y: 0, z: 0, yaw: 0, camYaw: 0, speed: 0 };
 const xy = params.get("xy")?.split(",").map(Number);
-const spawn = xy ? world.spawnAt(xy[0], xy[1]) : world.spawn(params.get("at"));
+const spawn = xy ? (params.has("exact") ? { ...toSimXY(xy[0], xy[1]), yaw: 0 } : world.spawnAt(xy[0], xy[1])) : world.spawn(params.get("at"));
 Object.assign(me, { x: spawn.x, z: spawn.z, yaw: spawn.yaw, camYaw: spawn.yaw + Math.PI });
 if (params.get("look")) { me.yaw = (Number(params.get("look")) * Math.PI) / 180; me.camYaw = me.yaw + Math.PI; } // degrees, 0 = south, 90 = east
 const avatar = new THREE.Group();

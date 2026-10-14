@@ -226,6 +226,7 @@ def _clear(p, pad=1.5):
     return not any(math.dist(b['c'], p) < 40 and in_poly(p, offset(b['poly'], pad)) for b in BUILDINGS)
 
 
+CANALS = [[P(p) for p in c['pts']] for c in GD.get('canals', [])]
 BUILT = set(GD['buildings'])  # districts with buildings; the rest are walled off in the Mock
 
 
@@ -452,7 +453,7 @@ def build_tile(tx, ty, overrides):
             continue
         rng = Rng('struct', s['name'], round(pts[0][0]))
         {'flyover': lambda: structures.flyover(tm, pts, s['width'], s.get('layer', 1), rng), 'skywalk': lambda: structures.skywalk(tm, pts, s['width'], rng),
-         'footbridge': lambda: structures.footbridge(tm, pts, s['width'], rng), 'jetty': lambda: structures.jetty(tm, pts, s['width'], rng),
+         'footbridge': lambda: structures.footbridge(tm, structures.snap_footbridge(pts, CANALS), s['width'], rng), 'jetty': lambda: structures.jetty(tm, pts, s['width'], rng),
          'ramp': lambda: structures.flyover(tm, pts, s['width'], 1, rng)}.get(s['kind'], lambda: None)()
         built['structure:' + s['kind']] = built.get('structure:' + s['kind'], 0) + 1
     for a_ in GD.get('arterials', []):
@@ -468,7 +469,7 @@ def build_tile(tx, ty, overrides):
         structures.rail(tm, piece, Rng('rail'))
     for c in GD.get('canals', []):
         for piece in clip_line_rect([P(p) for p in c['pts']], x0, y0, x1, y1):
-            structures.canal(tm, piece, 8.0, Rng('canal', c['d']))
+            structures.canal(tm, piece, structures.CANAL_W, Rng('canal', c['d']))
     for bw in GD.get('boardwalks', []):
         for piece in clip_line_rect([P(p) for p in bw], x0, y0, x1, y1):
             structures.boardwalk(tm, piece, Rng('boardwalk', round(bw[0][0])))
