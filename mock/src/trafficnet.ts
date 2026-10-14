@@ -182,7 +182,7 @@ const SHIRTS = [0xd7263d, 0x1b998b, 0xf46036, 0x2e294e, 0xf4f1ea, 0x1f3f8a, 0xbc
 
 const SIM_RADIUS = 420;
 const SPAWN_MIN = 70;
-const PED_RADIUS = 210;
+const PED_RADIUS = 160; // Gidi: tighter, so the walkers we have fill the streets you can see
 const LOOKAHEAD = 90;
 /**
  * The player counts as waiting at a junction within this of their lane's end,
@@ -351,6 +351,8 @@ export class NetTraffic {
       if (!p.active && (this.tick + i) % 10) continue;
       if (!p.active || (p.x - px) ** 2 + (p.z - pz) ** 2 > PED_RADIUS * PED_RADIUS) this.spawnPed(p, px, pz, i / this.peds.length);
       if (!p.active) continue;
+      // Gidi: a walker whose path runs over water (a lane drawn along a canal) goes elsewhere, out of sight
+      if (this.blocked && (this.tick + i) % 30 === 0 && (p.x - px) ** 2 + (p.z - pz) ** 2 > 45 * 45 && this.blocked(p.x, p.z)) { p.active = false; continue; }
       this.stepPed(p, dt);
     }
     this.render(dt);

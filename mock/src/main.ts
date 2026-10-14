@@ -52,9 +52,9 @@ scene.add(tiles.group);
 // traffic and pedestrians on the city's lane network
 let traffic: NetTraffic | null = null;
 if (world.net) {
-  traffic = new NetTraffic(world.net, { honk: () => {} }, { vehicles: 130, walkers: 280 }, "right");
+  traffic = new NetTraffic(world.net, { honk: () => {} }, { vehicles: 130, walkers: 520 }, "right");
   traffic.busy = (x: number, z: number) => world.crowdAt(x, z);
-  traffic.blocked = (x: number, z: number) => world.blocked(x, z);
+  traffic.blocked = (x: number, z: number) => world.blocked(x, z) || walkmap.at(x, z) === Walk.Water || walkmap.at(x, z) === Walk.Block;
   traffic.heightAt = (x: number, z: number, yaw?: number) => world.deckHeight(x, z, yaw);
   scene.add(traffic.group);
   loadVehicleModels(VEHICLE_MODELS, MODELS).then((m) => traffic!.setVehicleModels(m));
