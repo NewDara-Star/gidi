@@ -81,7 +81,7 @@ def render(sc, path, res=(1600, 1000), samples=32, engine='BLENDER_EEVEE'):
     sc.render.image_settings.file_format = 'JPEG'
     sc.render.image_settings.quality = 90
     sc.view_settings.view_transform = 'AgX'
-    sc.view_settings.look = 'AgX - Medium High Contrast'
+    sc.view_settings.look = 'AgX - Punchy'
     try:
         sc.eevee.taa_render_samples = samples
         sc.eevee.use_shadows = True

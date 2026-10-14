@@ -10,14 +10,23 @@
 
 Rules turn those attributes into parts and specs, and a seed per object gives variety that is stable: the same building always comes out the same.
 
-**Where it comes from.**
-- Pattern research on real Lagos, in two catalogues: [buildings and their parts](look/research-buildings.md) and [streets, vehicles, people, signage and props](look/research-street.md).
-- Both are patterns only (rule zero): no real building, name or brand is copied. Numbers marked [est] are estimates to tune by eye. Numbers marked [src] are sourced.
-- Visual target: bright, detailed stylized realism (owner's reference screenshots, 14 Oct 2026). That means:
-  - real proportions
-  - real materials, with Lagos wear
-  - glossy vehicles
-  - busy streets
+**Where it comes from.** Pattern research on real Lagos, in eleven catalogues (rule zero: patterns only, no real building, name or brand; [src] numbers are sourced, [est] are estimates to tune by eye):
+
+| Catalogue | Covers |
+|---|---|
+| [buildings](look/research-buildings.md) | front/back houses, façade parts, roofs, walls, unfinished buildings, shops, Brazilian and stilt houses, elite houses |
+| [housing](look/research-housing.md) | every other housing type: estate flats, mansions by style, colonial villas, towers, shanties, creek villages, conversions |
+| [civic](look/research-civic.md) | hospitals, clinics, police, fire, secretariat, customs, prison, barracks, courts, cemeteries, post, power offices |
+| [religious](look/research-religious.md) | mosques of every size, cathedrals, parish, warehouse, white-garment and estate churches, prayer camps, shrines |
+| [leisure](look/research-leisure.md) | schools, the decaying stadium, golf club, pitches, parks, beach, nightlife, hotels, viewing centres, bukas |
+| [commerce](look/research-commerce.md) | markets by type, plazas, phone malls, kiosks, bakeries, print shops, sawmill, fuel, tank farm, refinery, landfill |
+| [transport](look/research-transport.md) | interchanges, motor parks, rail, port, airport, jetties, bridges, toll plazas, checkpoints, power and masts, canals |
+| [roads](look/research-roads.md) | 14 road conditions down to mud and flood, potholes, drains, kerbs, ground, vegetation, refuse |
+| [street](look/research-street.md) | road widths and markings, street infrastructure, signage, props, people's clothing, crowd density |
+| [vehicles](look/research-vehicles.md) | keke, okada, danfo, korope ("Tambulu"), buses, cars, trucks, police, carts, boats; traffic mix by district |
+| [landmarks](look/research-landmarks.md) | 35 landmark types (stadium, bridges, towers, monuments) with invented Gidi designs |
+
+**What is built** is tracked in [look/COVERAGE.md](look/COVERAGE.md), generated from the data and the registry.
 
 ## How to run it (Blender 5.1, headless)
 | Command | What it does |
@@ -34,7 +43,13 @@ Output goes to `blender/out/`, which is not committed.
 | `materials.py` | Eight or so master materials. Each reads the mesh's `Col` and `Wear` attributes, so one material serves every paint colour and every age. Wear adds the Lagos weather: red-earth splash at the foot of walls, rain streaks, chalky sun-faded paint, zinc that goes dull and rusts in streaks down the ribs, stained concrete. The same two attributes can drive material instances in Unreal. |
 | `parts.py` | The kit pieces (see the list below). |
 | `rules.py` | District → character (dense mainland, sprawl, old island, elite, civic, waterfront, port). Per character: paint and roof palettes, wear and wealth ranges, window-type and bar-pattern shares, how often roofs are flat by storeys, and the odds of balconies, compound walls, shops, hand-painted signs, tanks, dishes, generators and tyres on the roof. `house_spec()` turns a building's attributes into every part's spec. |
-| `archetypes.py` | `house` (front, back and shed), `stall`, `kiosk`. Kinds without an archetype yet are built as plain houses. |
+| `archetypes.py` | `house` (front, back and shed), `stall`, `kiosk`. |
+| `kinds.py` | stilt houses, rafts, sawdust, Brazilian houses, gatehouses, generators, tank towers, container stacks, trailers, container shops, pens with cattle, scrap, checkpoints, landfill mounds |
+| `blocks.py`, `places.py` | a parametric block (govt, glass, shops, flats, shed, row) and 45 kinds on it: mosques, churches, schools, clinics, phone malls, plazas, bakeries, print shops, warehouses, tanks, cranes, flats, mansions by style, towers, offices, barracks, cellblocks, hotels, nightclubs, stadium stands, terminal, station, toll plaza, stage, canopy, bust, palace and more |
+| `street.py` | road surfaces in 8 conditions as real geometry (potholes and ruts hold rainwater), markings, kerbs, speed bumps, open drains, poles and wire spaghetti, transformers, litter, refuse heaps |
+| `vehicles.py` | danfo, korope ("Tambulu"), BRT bus, keke, okada, cars (saloon, SUV, pickup, taxi), police pickup, tipper, tanker, carts; four conditions each; the traffic mix by district and road class |
+| `people.py` | people by dress type (ankara, wrapper and gele, buba and fila, agbada, kaftan, T-shirt, office, school, hawker), standing or walking, riders |
+| `registry.py` | the data's kind → its builder (`coverage.py` reads it) |
 
 The kit pieces in `parts.py`:
 - walls: chamfered corners, plinth, floor bands
@@ -54,6 +69,11 @@ The kit pieces in `parts.py`:
 - zinc awnings on timber posts
 
 ## Previews
+| | |
+|---|---|
+| ![](look/img/showcase.jpg) | ![](look/img/vehicles-people.jpg) |
+| ![](look/img/kinds-1.jpg) | ![](look/img/kinds-2.jpg) |
+
 | | |
 |---|---|
 | ![](look/img/catalogue.jpg) | ![](look/img/shop-close.jpg) |

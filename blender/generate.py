@@ -324,8 +324,95 @@ for _ in range(int(ST['heaps'] * (R / 60) ** 2 * 2)):
         if 1.5 < near < 8 and not in_building(p, 1.0):
             street.refuse_heap(sm, p[0], p[1], rr.between(1.0, 2.6), rr)
             break
+# ---------------------------------------------------------------- traffic and people
+from gidi_kit import people, vehicles  # noqa: E402
+from mathutils import Matrix  # noqa: E402
+tm, pm = MeshBuilder(), MeshBuilder()
+rr = Rng(district, 'traffic')
+CROWD = {'dense': 30, 'old_island': 40, 'sprawl': 15, 'elite': 2, 'civic': 10, 'waterfront': 20, 'port': 10}  # people per 100 m of frontage, research-street 4.3
+
+
+def put_vehicle(kind, x, y, ang, cond, rng):
+    M = Matrix.Translation((x, y, 0)) @ Matrix.Rotation(ang, 4, 'Z')
+    fn = vehicles.BUILDERS[kind]
+    if kind == 'car':
+        fn(tm, M, rng, cond, kind=rng.pick({'saloon': 5, 'suv': 3 + 4 * wealth, 'pickup': 1}), taxi=ch == 'old_island' and rng.chance(0.15))
+    elif kind in ('cart', 'wheelbarrow'):
+        fn(tm, M, rng)
+        people.person(pm, M @ Matrix.Translation((-2.6 if kind == 'cart' else -1.3, 0, 0)), rng, kind='tshirt', ch=ch, pose=True)
+    else:
+        fn(tm, M, rng, cond)
+    if kind == 'okada':
+        people.seated_rider(tm, M @ Matrix.Translation((-0.25, 0, 0.92)), rng)
+        if rng.chance(0.5):
+            people.seated_rider(tm, M @ Matrix.Translation((-0.75, 0, 0.98)), rng, vest=rng.pick(['#f4f1ea', '#c62828', '#2e294e']), helmet=False)
+
+
+for r in roads:
+    if r['k'] not in ('main', 'street', 'lane'):
+        continue
+    for piece in clip_line(r['pts'], R + 10):
+        for i in range(len(piece) - 1):
+            a, b = piece[i], piece[i + 1]
+            Ls = math.dist(a, b)
+            if Ls < 1e-6:
+                continue
+            dx, dy = (b[0] - a[0]) / Ls, (b[1] - a[1]) / Ls
+            ang = math.atan2(dy, dx)
+            mixk = vehicles.mix(ch, r['k'])
+            # moving traffic, frozen: one per ~14 m per lane on main roads, ~30 m on streets
+            lanes = [(-r['w'] / 4, 1), (r['w'] / 4, -1)] if r['k'] != 'lane' else [(0, 1)]
+            gap = {'main': 14, 'street': 30, 'lane': 60}[r['k']]
+            for off, dirn in lanes:
+                k = rr.between(0, gap)
+                while k < Ls:
+                    kind = rr.pick(mixk)
+                    x, y = a[0] + dx * k - dy * off, a[1] + dy * k + dx * off
+                    if not in_building((x, y), 0.5):
+                        cond = vehicles.condition(wealth, rr, commercial=kind in vehicles.COMMERCIAL)
+                        put_vehicle(kind, x, y, ang if dirn > 0 else ang + math.pi, cond, rr)
+                    k += vehicles.LENGTH[kind] + rr.between(gap * 0.4, gap * 1.6)
+            # parked at the edge: cars, kekes, okadas, the odd wreck on blocks
+            if r['k'] in ('street', 'main'):
+                for side in (-1, 1):
+                    k = rr.between(0, 20)
+                    while k < Ls:
+                        kind = rr.pick({'car': 4, 'keke': 2, 'okada': 3, 'danfo': 1 if r['k'] == 'main' else 0.2})
+                        o = side * (r['w'] / 2 - 1.0)
+                        x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
+                        if not in_building((x, y), 0.6) and rr.chance(0.55):
+                            put_vehicle(kind, x, y, ang + (math.pi if rr.chance(0.5) else 0) + rr.between(-0.1, 0.1), vehicles.condition(wealth, rr, kind in vehicles.COMMERCIAL, parked=True), rr)
+                        k += vehicles.LENGTH[kind] + rr.between(2, 18)
+            # people along the frontage
+            n = int(Ls / 100 * CROWD.get(ch, 15) * (1.6 if r['k'] == 'main' else 1.0))
+            for _ in range(n):
+                k, side = rr.between(0, Ls), rr.pick([-1, 1])
+                o = side * (r['w'] / 2 + rr.between(0.3, 2.8))
+                x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
+                if not in_building((x, y), 0.2):
+                    walk_ang = ang + (0 if rr.chance(0.5) else math.pi) + rr.between(-0.3, 0.3) if rr.chance(0.6) else rr.between(0, math.tau)
+                    people.person(pm, Matrix.Translation((x, y, 0.03)) @ Matrix.Rotation(walk_ang, 4, 'Z'), rr, ch=ch)
+# market crowds
+for pc in D.get('parcels', []):
+    pts = [P(p) for p in pc['pts'][:-1]]
+    if pc['kind'] in ('market', 'motor park') and any(math.hypot(*p) < R + 40 for p in pts):
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        n = 0
+        for _ in range(4000):
+            if n > (400 if pc['kind'] == 'market' else 60):
+                break
+            p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
+            if in_poly(p, pts) and not in_building(p, 0.3):
+                people.person(pm, Matrix.Translation((p[0], p[1], 0.05)) @ Matrix.Rotation(rr.between(0, math.tau), 4, 'Z'), rr, ch=ch, kind=rr.pick({None: 4, 'hawker': 1, 'wrapper': 1}) or None)
+                n += 1
+        if pc['kind'] == 'motor park':  # danfos loading in rows
+            c = (sum(xs) / len(xs), sum(ys) / len(ys))
+            for k in range(12):
+                put_vehicle('danfo', c[0] + (k % 6 - 2.5) * 2.6, c[1] + (k // 6 - 0.5) * 7, math.pi / 2, vehicles.condition(wealth, rr, True), rr)
 mb.to_object('ground', col, master)
 sm.to_object('street', col, master)
+tm.to_object('traffic', col, master)
+pm.to_object('people', col, master)
 
 # ---------------------------------------------------------------- render and export
 scene.sky_and_sun(sc)

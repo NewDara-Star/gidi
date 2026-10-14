@@ -173,6 +173,22 @@ def master(name):
         rough = nt.math('ADD', 0.4 if name == 'zinc' else 0.5, nt.math('MULTIPLY', nt.math('ADD', rust_amt, wear), 0.3))
         metal = nt.math('SUBTRACT', 0.55 if name == 'zinc' else 0.3, nt.math('MULTIPLY', nt.math('ADD', rust_amt, wear), 0.3))
         nt.bsdf(base, rough=rough, metal=metal)
+    elif name == 'carpaint':
+        # glossy paint with a clear coat; wear chalks the roof and bonnet, dusts the lower body
+        # with red earth and rusts it at the arches and sills (research-vehicles 0.2)
+        pos = nt.world_pos()
+        wear = nt.attr('Wear').outputs['Fac']
+        z = nt.xyz(pos)[2]
+        nrm = nt.xyz(nt.add('ShaderNodeNewGeometry').outputs['Normal'])[2]
+        top = nt.ramp(nrm, 0.5, 0.9)
+        base = nt.mix(nt.math('MULTIPLY', nt.math('MULTIPLY', top, wear), 0.55), col, (0.85, 0.83, 0.78))
+        low = nt.math('SUBTRACT', 1.0, nt.ramp(z, 0.2, 0.75))
+        base = nt.mix(nt.math('MULTIPLY', nt.math('MULTIPLY', low, wear), 0.6, clamp=True), base, (0.45, 0.25, 0.14))
+        rust = nt.math('MULTIPLY', nt.math('MULTIPLY', nt.ramp(nt.noise(3.0, 3, pos), 0.55, 0.75), nt.math('SUBTRACT', 1.0, nt.ramp(z, 0.3, 0.9))), nt.ramp(wear, 0.5, 0.9))
+        base = nt.mix(rust, base, (0.28, 0.12, 0.05))
+        p = nt.bsdf(base, rough=nt.math('ADD', 0.18, nt.math('MULTIPLY', wear, 0.55)), metal=0.0)
+        p.inputs['Coat Weight'].default_value = 0.6
+        nt._in(nt.math('SUBTRACT', 0.8, nt.math('MULTIPLY', wear, 0.8), clamp=True), p.inputs['Coat Weight'])
     elif name == 'glass':
         nt.bsdf(col, rough=0.06, metal=0.4)
     elif name == 'glass_lit':
@@ -190,6 +206,22 @@ def master(name):
         nt.bsdf(col, rough=0.4)
     elif name == 'rubber':
         nt.bsdf(col, rough=0.9)
+    elif name == 'ankara':
+        # wax-print look: the cloth colour with rings and dots in its complement and cream
+        uv = nt.add('ShaderNodeTexCoord').outputs['Object']
+        vor = nt.add('ShaderNodeTexVoronoi')
+        vor.inputs['Scale'].default_value = 18.0
+        nt.link(uv, vor.inputs['Vector'])
+        d = vor.outputs['Distance']
+        ring = nt.math('MULTIPLY', nt.ramp(d, 0.18, 0.22), nt.math('SUBTRACT', 1.0, nt.ramp(d, 0.3, 0.34)))
+        dot = nt.math('SUBTRACT', 1.0, nt.ramp(d, 0.08, 0.11))
+        hs = nt.add('ShaderNodeHueSaturation')
+        hs.inputs['Hue'].default_value = 0.0
+        nt._in(col, hs.inputs['Color'])
+        hs.inputs['Value'].default_value = 0.35
+        base = nt.mix(ring, col, hs.outputs['Color'])
+        base = nt.mix(dot, base, (0.93, 0.85, 0.62))
+        nt.bsdf(base, rough=0.85)
     elif name == 'cloth':
         nt.bsdf(col, rough=0.95)
     elif name == 'skin':
