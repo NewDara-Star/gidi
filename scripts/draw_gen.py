@@ -15,10 +15,10 @@ COL = {"front": "#b9a48a", "back": "#a8977f", "shed": "#8f8577", "kiosk": "#6e8f
        "terminal": "#5d7fa3", "station": "#8a5d9e", "stands": "#9a8f80", "hotel": "#b0473a",
        "print": "#7d5ba6", "transformer": "#e0b000", "flats": "#c27c5a", "studio": "#7d5ba6", "cafe": "#2b6cb0",
        "stage": "#b0473a", "checkpoint": "#d93025", "stilt": "#8a6a4f", "stilt bar": "#b0473a", "raft": "#a0784a",
-       "saw shed": "#7a7f86", "canopy": "#8430ce", "phone mall": "#5d7fa3", "strip": "#b0473a", "hall": "#7d5ba6", "office": "#8c96a3", "barracks": "#7c8a5a", "bust": "#333333", "plaza": "#9a8f80", "unfinished": "#b5b5b5", "pen": "#8f8577", "scrap": "#6b4f3a", "container": "#3b78b8", "sawdust": "#d9c39a"}
+       "saw shed": "#7a7f86", "canopy": "#8430ce", "phone mall": "#5d7fa3", "strip": "#b0473a", "hall": "#7d5ba6", "office": "#8c96a3", "barracks": "#7c8a5a", "bust": "#333333", "plaza": "#9a8f80", "unfinished": "#b5b5b5", "pen": "#8f8577", "scrap": "#6b4f3a", "container": "#3b78b8", "crane": "#d9822b", "stack": "#4f8fc0", "tank": "#c8ccd2", "villa": "#c9b99a", "cellblock": "#7a7f86", "tower": "#555555", "trailer": "#9aa0a6", "sawdust": "#d9c39a"}
 PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch": "#bfe3b4", "motor park": "#d6dbe8",
       "bus terminal": "#d6dbe8", "station": "#e6d8ef", "stadium": "#e3e8d6", "under bridge": "#f6d7b0", "estate": "#e4ecd9",
-      "lorry park": "#d6dbe8", "park": "#cfe8c4", "sawmill": "#e8dcc8", "government": "#e6e1d3", "garden": "#cfe8c4", "barracks": "#dfe3d0", "airfield": "#d9e8c8", "plazas": "#dcdcdc", "livestock": "#ead9c0"}
+      "lorry park": "#d6dbe8", "park": "#cfe8c4", "sawmill": "#e8dcc8", "government": "#e6e1d3", "garden": "#cfe8c4", "barracks": "#dfe3d0", "airfield": "#d9e8c8", "plazas": "#dcdcdc", "livestock": "#ead9c0", "container yard": "#dcdcdc", "tank farm": "#e4e4e4", "villas": "#dfe8d0", "prison": "#d6d6d6", "truck park": "#d6dbe8"}
 for p in F["parcels"]: ax.fill(*zip(*p["pts"]), fc=PC[p["kind"]], ec="none")
 for b in F["buildings"]: ax.fill(*zip(*b[1:]), fc=COL[b[0]], ec="none", lw=0)
 for l in F["streets"]: ax.plot(*zip(*l), c="#ffffff", lw=2.2, solid_capstyle="round"); ax.plot(*zip(*l), c="#9aa0a6", lw=.4)

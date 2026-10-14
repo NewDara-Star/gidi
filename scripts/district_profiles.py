@@ -236,6 +236,7 @@ def watertown(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
         "lock": {"parcels": ["Okobaba Sawmill"]},   # the sawmill chase's ground stays put when the land fabric is rebuilt (web/locked.json)
+        "keep_gateways": True,   # rebuilt after the Port: its crossings with the Port (and all others) stay as agreed
     }
 
 def capital(ST, LM):
@@ -306,7 +307,48 @@ def bazaar(ST, LM):
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
     }
 
+def port(ST, LM):
+    """The Port: Apapa LGA (study-port*, the whole LGA: the port, Tincan Island, the reserve and the dense streets by the creek).
+    Heights from Apapa in lga_table.json. Most of the real port is open yard: few buildings, low cover, long main roads."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 75 x 2.4 = 179 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Road", "Street", "Avenue", "Crescent", "Lane", "Close")}
+    return {
+        "lgas": ["Apapa"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.3, "cross_scale": 2.0, "dead_end": 0.05,   # real dead ends only 0.06-0.08 per junction
+        "sector_split_ha": 80,        # few collector streets: the yards and the reserve already cut the land up
+        "size_lo_u": 0.7, "plot_u": [0.6, 0.99], "back_row": 0.4, "big_front": 0.4, "vacant": 0.35,   # bigger houses, many empty plots (real cover 16-23%)
+        "internal_mains": 0,          # the expressway, Ring Road and the edge roads already give more main road than real (3.3-4.2 km/km2)
+        "exp_bridge_m": LM["flyover_spans_m"]["p50"],
+        "exp_footbridges": {"m": LM["footbridges"]["length_m"]["p50"], "per_km": LM["footbridges"]["per_km_of_major_road"], "max_gap_m": 300},   # the owner's rule
+        "name_endings": ends,
+        "reserve": [
+            # the port: 16 ha of the real 281 ha, on the lagoon quay (the district model: container stacks, gantry cranes, customs sheds)
+            {"kind": "container yard", "poi": "Container Yard", "m2": 160000, "aspect": 1.8, "front": None, "near": "shore", "access_roads": 2},
+            # the tank farm, also on the quay: tanks of 14 m radius in a grid
+            {"kind": "tank farm", "poi": "Tank Farm", "m2": 50000, "aspect": 1.4, "front": None, "near": "shore", "tank_r_m": 14},
+            # the night market under the expressway's approach to the Wharf Bridge
+            {"kind": "under bridge", "poi": "Liverpool Under-Bridge", "m2": 9000, "aspect": 3.0, "front": "art"},
+        ],
+        "parcels": [
+            {"kind": "villas", "poi": "Old Reserve Avenue", "ha": 5.0, "near_main": False, "min_w": 110, "block_m": [18, 13], "gap_m": [24, 22], "margin_m": 10, "building": "villa", "avenue": True},   # bungalows either side of the reserve's own avenue   # bungalows in big gardens
+            {"kind": "prison", "poi": "Kiri Prison", "ha": 3.0, "near_main": False, "block_m": [42, 11], "gap_m": [10, 14], "margin_m": 14, "building": "cellblock", "gate": "nearest"},
+            {"kind": "truck park", "ha": round(LM["parking_lots_m2"]["p75"] / 1e4, 2), "near": "res:tank farm", "near_main": False,
+             "block_m": [16, 2.8], "gap_m": [3, 4], "building": "trailer", "gate": "nearest"},   # tankers queue here for days
+            {"kind": "school", "ha": 1.2, "near_main": False, "gate": "nearest", "min_w": 70},
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
+        ],
+        "spots": [{"poi": "Collector Row", "kind": "checkpoint", "w": 4.0, "d": 3.0, "shift_m": 0},   # police, traffic, union, area boys: pay each one
+                  {"poi": "Collector Row 2", "at": "Collector Row", "kind": "checkpoint", "w": 4.0, "d": 3.0, "shift_m": 100},
+                  {"poi": "Collector Row 3", "at": "Collector Row", "kind": "checkpoint", "w": 4.0, "d": 3.0, "shift_m": -100},
+                  {"poi": "Collector Row 4", "at": "Collector Row", "kind": "checkpoint", "w": 4.0, "d": 3.0, "shift_m": 150}],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port}.get(did, lambda ST, LM: {})(ST, LM)
