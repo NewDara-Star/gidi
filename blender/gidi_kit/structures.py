@@ -35,9 +35,14 @@ def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=
         mb.face([q(p0, 1, z_0 - 1.2), q(p1, 1, z_1 - 1.2), q(p1, -1, z_1 - 1.2), q(p0, -1, z_0 - 1.2)], 'concrete', shade(hex_rgb(col), 0.75), wear)
         for s in (-1, 1):
             mb.face([q(p0, s, z_0 - 1.2), q(p1, s, z_1 - 1.2), q(p1, s, z_1), q(p0, s, z_0)] if s > 0 else [q(p1, s, z_1 - 1.2), q(p0, s, z_0 - 1.2), q(p0, s, z_0), q(p1, s, z_1)], 'concrete', hex_rgb(col), wear)
-            if barrier:  # parapet
-                mid = (p0 + p1) / 2 + side * s * (w / 2 - 0.15)
-                mb.box('concrete', Matrix.Translation((mid.x, mid.y, (z_0 + z_1) / 2 + 0.5)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'), hex_rgb(col), wear, size=(L / n + 0.02, 0.3, 1.0))
+            if barrier:  # parapet, following the slope (no steps on the ramps)
+                o_in, o_out = w / 2 - 0.3, w / 2
+                P = lambda p, o, z: p + side * s * o + Vector((0, 0, z))
+                top0, top1 = z_0 + 1.0, z_1 + 1.0
+                for o in (o_in, o_out):  # inner and outer faces
+                    quad = [P(p0, o, z_0), P(p1, o, z_1), P(p1, o, top1), P(p0, o, top0)]
+                    mb.face(quad if (s > 0) == (o == o_out) else quad[::-1], 'concrete', hex_rgb(col), wear)
+                mb.face([P(p0, o_in, top0), P(p1, o_in, top1), P(p1, o_out, top1), P(p0, o_out, top0)][::(1 if s > 0 else -1)], 'concrete', shade(hex_rgb(col), 1.05), wear)
     k = piers
     while k < L - piers * 0.5:
         t = k / L
@@ -63,44 +68,104 @@ def deck_height(s, S, H, R):
 RAMP = {'flyover': 60.0, 'bridge': 80.0}
 
 
-def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6):
-    """A whole deck along a polyline with deck_height's profile, in ~6 m slabs; only the slabs and
+def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6, lamps=None, dead=0.1):
+    """A whole deck along a polyline with deck_height's profile, in 3 m slabs; only the slabs and
     piers whose middle passes keep(p) (the tile being built) are made, so a bridge crossing many
-    tiles comes out seamless."""
+    tiles comes out seamless. Dressed as Lagos decks are: yellow edge lines, white dashed lanes, on
+    wide decks (w >= 18) a chequered black-and-white median barrier with double-arm lamps on it,
+    otherwise lamps on alternate sides. Lamp heads are appended to `lamps` (for the Mock)."""
+    from . import roadside
     S = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+    median = w >= 18
+    half = w / 2 - 0.3  # inside the parapets
+    lanes = max(1, int(((half - (0.4 if median else 0)) - 1.0) / 3.5))  # per side (or in all, without a median)
+    if not median:
+        lanes = max(1, int((w - 0.6 - 1.0) / 3.5))
+    YEL, WHT = hex_rgb('#e8c21a'), hex_rgb('#e8e4d8')
     s0 = 0.0
     for i in range(len(pts) - 1):
         a, b = pts[i], pts[i + 1]
         L = math.dist(a, b)
         if L < 1e-6:
             continue
-        n = max(1, int(math.ceil(L / 6)))
+        A, d, _ = _seg(a, b)
+        side = Vector((-d.y, d.x, 0))
+        n = max(1, int(math.ceil(L / 3)))
         for k in range(n):
             t0, t1 = k / n, (k + 1) / n
             pa = (a[0] + (b[0] - a[0]) * t0, a[1] + (b[1] - a[1]) * t0)
             pb = (a[0] + (b[0] - a[0]) * t1, a[1] + (b[1] - a[1]) * t1)
-            if keep(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2)):
-                deck(mb, pa, pb, w, deck_height(s0 + L * t0, S, H, R), deck_height(s0 + L * t1, S, H, R), rng, col=col, piers=1e9, wear=wear, ramp='linear')
+            if not keep(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2)):
+                continue
+            za, zb = deck_height(s0 + L * t0, S, H, R), deck_height(s0 + L * t1, S, H, R)
+            deck(mb, pa, pb, w, za, zb, rng, col=col, piers=1e9, wear=wear, ramp='linear')
+            Pa, Pb = Vector((pa[0], pa[1], 0)), Vector((pb[0], pb[1], 0))
+
+            def strip(o0, o1, c, lift=0.012):
+                mb.face([Pa + side * o0 + Vector((0, 0, za + lift)), Pb + side * o0 + Vector((0, 0, zb + lift)),
+                         Pb + side * o1 + Vector((0, 0, zb + lift)), Pa + side * o1 + Vector((0, 0, za + lift))], 'paint', c, 0.35)
+            for sg in (-1, 1):  # yellow edge lines by the parapets
+                o = sg * (half - 0.5)
+                strip(o - 0.08, o + 0.08, YEL)
+            sm = s0 + L * (t0 + t1) / 2
+            dash = int(sm // 3) % 3 == 0
+            if median:
+                for sg in (-1, 1):
+                    strip(sg * 0.45 - 0.06, sg * 0.45 + 0.06, YEL)  # yellow by the median too
+                    for ln in range(1, lanes):
+                        o = sg * (0.6 + ln * 3.5)
+                        if dash:
+                            strip(o - 0.07, o + 0.07, WHT)
+                # the barrier: 1.5 m blocks, black and white in turn
+                for j in range(2):
+                    u0, u1 = t0 + (t1 - t0) * j / 2, t0 + (t1 - t0) * (j + 1) / 2
+                    q = A + d * L * (u0 + u1) / 2
+                    zq = deck_height(s0 + L * (u0 + u1) / 2, S, H, R)
+                    blk = (int((s0 + L * u0) // 1.5) % 2) == 0
+                    mb.box('concrete', Matrix.Translation((q.x, q.y, zq + 0.4)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'),
+                           hex_rgb('#1a1a1a') if blk else hex_rgb('#f2f2ee'), 0.5, size=(L * (u1 - u0) + 0.01, 0.5, 0.8))
+            else:
+                for ln in range(1, lanes):
+                    o = -(w / 2 - 0.3 - 0.5) + ln * ((w - 1.6) / lanes)
+                    if dash:
+                        strip(o - 0.07, o + 0.07, WHT)
         s0 += L
-    # piers, every `piers` metres along the whole line
-    s0, nxt = 0.0, piers
+    # piers, and lamps every 40 m, along the whole line
+    s0, nxt, nl = 0.0, piers, 20.0
+    li = 0
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
+        side = Vector((-d.y, d.x, 0))
         while nxt < s0 + L:
             p = A + d * (nxt - s0)
             z = deck_height(nxt, S, H, R) - 1.2
             if z > 1.0 and keep((p.x, p.y)):
-                side = Vector((-d.y, d.x, 0))
                 for sg in ((-1, 1) if w > 8 else (0,)):
                     c = p + side * sg * w * 0.28
                     parts.cyl(mb, 'concrete', Matrix.Translation((c.x, c.y, -1.5)), 0.6 if w > 8 else 0.4, z + 1.5, hex_rgb(col), wear, seg=12)
                 mb.box('concrete', Matrix.Translation((p.x, p.y, z - 0.5)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'), shade(hex_rgb(col), 0.85), wear, size=(1.4, w * 0.9, 1.0))
             nxt += piers
+        while nl < s0 + L:
+            p = A + d * (nl - s0)
+            if keep((p.x, p.y)):
+                lr = rng.child('lamp', round(p.x), round(p.y))
+                zd = deck_height(nl, S, H, R)
+                ang = math.atan2(side.y, side.x)  # arms reach across the road
+                if median:
+                    heads = roadside.street_light(mb, p.x, p.y, ang, lr, arms=2, h=10, working=not lr.chance(dead), z0=zd + 0.8)
+                else:
+                    sg = 1 if li % 2 else -1
+                    q = p + side * sg * (w / 2 - 0.35)
+                    heads = roadside.street_light(mb, q.x, q.y, ang + (math.pi if sg > 0 else 0), lr, arms=1, h=9, working=not lr.chance(dead), z0=zd + 1.0)
+                if lamps is not None:
+                    lamps.extend(heads)
+            li += 1
+            nl += 40.0
         s0 += L
 
 
-def flyover(mb, pts, w, layer, rng):
-    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng)
+def flyover(mb, pts, w, layer, rng, lamps=None):
+    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng, lamps=lamps, dead=0.3)
 
 
 def skywalk(mb, pts, w, rng):
@@ -200,8 +265,10 @@ def jetty(mb, pts, w, rng):
             canoe(mb, Matrix.Translation((p.x, p.y, 0.08)) @ Matrix.Rotation(ang + rng.between(-0.2, 0.2), 4, 'Z'), rng)
 
 
-def expressway(mb, pts, w, rng, median=True):
-    """A dual carriageway: asphalt, lane dashes, yellow edge lines, a Jersey barrier median."""
+def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True):
+    """A dual carriageway: asphalt, lane dashes, yellow edge lines, a Jersey barrier median painted
+    in black and white blocks, double-arm lamps on the median every 40 m (a share dead)."""
+    from . import roadside
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
         side = Vector((-d.y, d.x, 0))
@@ -224,23 +291,32 @@ def expressway(mb, pts, w, rng, median=True):
             k = 0.0
             while k < L:
                 q = A + d * (k + 2)
-                mb.box('concrete', Matrix.Translation((q.x, q.y, 0.47)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#a8a59c'), 0.6, size=(3.96, 0.5, 0.8))
+                mb.box('concrete', Matrix.Translation((q.x, q.y, 0.47)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#1a1a1a') if int(k // 4) % 2 else hex_rgb('#f2f2ee'), 0.6, size=(3.96, 0.5, 0.8))
                 k += 4
+            k = 20.0
+            while k < L:
+                q = A + d * k
+                if keep((q.x, q.y)):
+                    lr = rng.child('lamp', round(q.x), round(q.y))
+                    heads = roadside.street_light(mb, q.x, q.y, ang + math.pi / 2, lr, arms=2, h=10, working=not lr.chance(0.25), z0=0.87)
+                    if lamps is not None:
+                        lamps.extend(heads)
+                k += 40
 
 
 BRIDGE_H = {'long': 7.0, 'cable': 9.0}
 
 
-def long_bridge(mb, pts, w, rng, keep=lambda p: True):
+def long_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None):
     """The Long Bridge: an endless low concrete ribbon on pier pairs across the lagoon, ramping
     down to the shore at both ends."""
-    deck_line(mb, pts, w, BRIDGE_H['long'], RAMP['bridge'], rng, keep, piers=30, wear=0.7)
+    deck_line(mb, pts, w, BRIDGE_H['long'], RAMP['bridge'], rng, keep, piers=30, wear=0.7, lamps=lamps, dead=0.2)
 
 
-def cable_bridge(mb, pts, w, rng, keep=lambda p: True):
+def cable_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None):
     """The Cable Bridge (invented): a single leaning paddle-blade pylon, a fan of stays, a white
     deck; the pylon is lit at night (research-landmarks 15, Gidi design)."""
-    deck_line(mb, pts, w, BRIDGE_H['cable'], RAMP['bridge'], rng, keep, col='#e8e6df', piers=40, wear=0.15)
+    deck_line(mb, pts, w, BRIDGE_H['cable'], RAMP['bridge'], rng, keep, col='#e8e6df', piers=40, wear=0.15, lamps=lamps, dead=0.0)
     A, d, L = _seg(pts[0], pts[-1])
     mid = A + d * L * 0.5
     if not keep((mid.x, mid.y)):

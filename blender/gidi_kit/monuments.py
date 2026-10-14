@@ -182,10 +182,9 @@ def arch(mb, M, rng, span, name, ch):
     mb.box('paint', T(M, 0, 0, 8.85), band, 0.4, size=(1.6, half * 2 + 0.6, 0.3))
     parts.cyl(mb, 'paint', T(M, 0, 0, 8.7), 1.6, 0.6, band, 0.4, seg=16, r2=1.2)  # crest
     parts.cyl(mb, 'steel', T(M, 0, 0, 9.3), 0.9, 0.3, hex_rgb('#c9a13b'), 0.3, seg=12)
-    for side in (1, -1):  # the lettering on both faces
-        F = M @ Matrix.Translation((side * 0.72, 0, 7.6)) @ Matrix.Rotation(-side * math.pi / 2, 4, 'Z') @ Matrix.Rotation(math.pi / 2, 4, 'X')
-        F = F @ Matrix.Translation((-min(span * 0.42, len(name) * 0.42), -0.4, 0))
-        parts.text(mb, 'paint', F, 'WELCOME TO ' + name.upper(), 0.75, hex_rgb('#1a1a1a'), depth=0.04, max_w=half * 1.8)
+    for side in (1, -1):  # the lettering on both faces, read by traffic coming each way
+        F = M @ Matrix.Translation((side * 0.72, 0, 7.6)) @ Matrix.Rotation(-side * math.pi / 2 + math.pi, 4, 'Z')  # text reads from the side it faces
+        parts.text(mb, 'paint', F, 'WELCOME TO ' + name.upper(), 0.9, hex_rgb('#1a1a1a'), depth=0.04, max_w=half * 1.7)
 
 
 def led_board(mb, M, rng):

@@ -228,6 +228,8 @@ def master(name):
         nt.bsdf(col, rough=0.55)
     elif name == 'emit':
         nt.bsdf(col, rough=0.5, emit=col, emit_strength=2.0)
+    elif name == 'lamp':  # a street lamp's lens: faint by day (the Mock lights it after dusk)
+        nt.bsdf(col, rough=0.3, emit=col, emit_strength=0.4)
     elif name == 'asphalt':
         # grain, a web of fine cracks (voronoi edges) that opens up with wear, oil and dust
         pos = nt.world_pos()

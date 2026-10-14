@@ -35,7 +35,7 @@ detail.LEVEL = opt.get('--detail', 'web')
 TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '') if opt.get('--tiles') is not True else '').split(';') if t]
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, monuments, parcels, places, registry, street, structures  # noqa: E402
+from gidi_kit import archetypes, monuments, parcels, places, registry, roadside, street, structures  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -296,6 +296,165 @@ def monument_sites():
 MONUMENTS = monument_sites()
 
 
+DNAME = {d['id']: d['name'] for d in GD['districts']}
+SPEED = {'main': 50, 'art': 60, 'exp': 80, 'bridge': 80}
+
+
+def _ahead_name(road, end_pt, here):
+    """What a road leads to from a junction: the district at that end of it, or its own name when
+    that end is still in the district you're in."""
+    d = district_at(end_pt)
+    if d and d != here and d in BUILT:
+        return DNAME[d]
+    return road.get('name') or (DNAME.get(d) if d else None) or 'City Centre'
+
+
+def roadside_sites():
+    """Direction signs before every main-road and arterial junction (both ways along each road,
+    naming where the crossing road goes left and right), overhead gantries on the expressways and
+    bridges every 800 m, speed limits after each junction, no-parking discs by the markets."""
+    big = [dict(r, cls='main') for r in ROADS if r['k'] == 'main']
+    for a in GD.get('arterials', []):
+        big.append(dict(k='art', cls=a['cls'], pts=[P(p) for p in a['pts']], w=ART_W.get(a['cls'], 18.0), name=a['name'], d=None))
+    sites = []
+    # junctions: every crossing of two big roads, and every big road ending on another (a T)
+    junctions = []
+    for i, r1 in enumerate(big):
+        for r2 in big[i + 1:]:
+            for a, b in zip(r1['pts'], r1['pts'][1:]):
+                for c, d in zip(r2['pts'], r2['pts'][1:]):
+                    x = _seg_cross(a, b, c, d)
+                    if x:
+                        junctions.append(((x[0], x[1]), r1, r2))
+    for r in big:
+        for e in (r['pts'][0], r['pts'][-1]):
+            for o in big:
+                if o is r:
+                    continue
+                best = None
+                for a, b in zip(o['pts'], o['pts'][1:]):
+                    dx, dy = b[0] - a[0], b[1] - a[1]
+                    L2 = dx * dx + dy * dy or 1
+                    t = max(0.0, min(1.0, ((e[0] - a[0]) * dx + (e[1] - a[1]) * dy) / L2))
+                    q = (a[0] + dx * t, a[1] + dy * t)
+                    if math.dist(q, e) < 14 and 0.02 < t < 0.98:
+                        best = q
+                if best:
+                    junctions.append((best, r, o))
+    seen = []
+    for J, r1, r2 in junctions:
+        if any(math.dist(J, q) < 20 for q in seen):
+            continue
+        seen.append(J)
+        here = district_at(J)
+        if here not in BUILT:
+            continue
+        for r, other in ((r1, r2), (r2, r1)):
+            # the approach along r from each side: the point 30 m before J
+            pts = r['pts']
+            for sgn in (1, -1):
+                # walk back along r from J by 30 m in direction -sgn
+                k = min(range(len(pts) - 1), key=lambda i: dist_seg(J, pts[i], pts[i + 1]))
+                a, b = pts[k], pts[k + 1]
+                u = _unit((b[0] - a[0], b[1] - a[1]))
+                u = (u[0] * sgn, u[1] * sgn)  # travel direction towards J
+                p0 = (J[0] - u[0] * 30, J[1] - u[1] * 30)
+                if min(dist_seg(p0, pts[i], pts[i + 1]) for i in range(len(pts) - 1)) > 2.0:
+                    continue  # the road doesn't come from this side (J is its own end)
+                right = (u[1], -u[0])
+                off = r['w'] / 2 + 2.2
+                sp = (p0[0] + right[0] * off, p0[1] + right[1] * off)
+                if not _clear(sp, 1.0) or district_at(sp) not in BUILT:
+                    continue
+                lines = []
+                for end in (other['pts'][0], other['pts'][-1]):
+                    side = u[0] * (end[1] - J[1]) - u[1] * (end[0] - J[0])
+                    if math.dist(end, J) < 25:
+                        continue
+                    lines.append(('left' if side > 0 else 'right', _ahead_name(other, end, here)))
+                ahead = pts[-1] if sgn > 0 else pts[0]
+                if math.dist(ahead, J) > 60:
+                    lines.insert(0, ('up', _ahead_name(r, ahead, here)))
+                uniq = []
+                for ln in lines:
+                    if ln[1] not in [x[1] for x in uniq]:
+                        uniq.append(ln)
+                if uniq:
+                    sites.append(dict(kind='dir', x=sp[0], y=sp[1], face=math.atan2(-u[1], -u[0]), lines=uniq[:3]))
+                # a speed limit 25 m after the junction, going away from it
+                q = (J[0] + u[0] * 25 + right[0] * off, J[1] + u[1] * 25 + right[1] * off)
+                if _clear(q, 1.0) and district_at(q) in BUILT:
+                    sites.append(dict(kind='speed', x=q[0], y=q[1], face=math.atan2(-u[1], -u[0]), v=SPEED.get(r.get('cls', 'main'), 50)))
+    # gantries on the expressways and bridges: every 800 m, one per direction
+    for r in big:
+        if r.get('cls') not in ('exp', 'bridge'):
+            continue
+        S = sum(math.dist(r['pts'][i], r['pts'][i + 1]) for i in range(len(r['pts']) - 1))
+        s_ = 300.0
+        while s_ < S - 200:
+            acc = 0.0
+            for a, b in zip(r['pts'], r['pts'][1:]):
+                L = math.dist(a, b)
+                if acc + L >= s_:
+                    t = (s_ - acc) / L
+                    p = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
+                    u = _unit((b[0] - a[0], b[1] - a[1]))
+                    for sgn, end in ((1, r['pts'][-1]), (-1, r['pts'][0])):
+                        here = district_at(p)
+                        q = (p[0] + u[0] * 30 * sgn, p[1] + u[1] * 30 * sgn)
+                        panels = [[('up', _ahead_name(r, end, here))], [('up', r['name'])]]
+                        sites.append(dict(kind='gantry', x=q[0], y=q[1], ang=math.atan2(u[1] * sgn, u[0] * sgn), span=r['w'] + 1.0, panels=panels,
+                                          z0=structures.deck_height(s_ + 30 * sgn, S, structures.BRIDGE_H['cable' if 'Cable' in r['name'] else 'long'], structures.RAMP['bridge']) if r['cls'] == 'bridge' else 0.0))
+                    break
+                acc += L
+            s_ += 800
+    # no parking by the markets, on the nearest big road
+    for poi in GD['pois']:
+        if poi['type'] != 'market':
+            continue
+        p = P((poi['x'], poi['y']))
+        best = None
+        for r in big:
+            for a, b in zip(r['pts'], r['pts'][1:]):
+                d = dist_seg(p, a, b)
+                if d < 120 and (best is None or d < best[0]):
+                    best = (d, r, a, b)
+        if best:
+            _, r, a, b = best
+            dx, dy = b[0] - a[0], b[1] - a[1]
+            L2 = dx * dx + dy * dy or 1
+            t = max(0.0, min(1.0, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2))
+            u = _unit((dx, dy))
+            for sg in (1, -1):
+                q = (a[0] + dx * t + u[1] * sg * (r['w'] / 2 + 1.8), a[1] + dy * t - u[0] * sg * (r['w'] / 2 + 1.8))
+                if _clear(q, 0.8):
+                    sites.append(dict(kind='noparking', x=q[0], y=q[1], face=math.atan2(-u[1] * sg, -u[0] * sg)))
+    out = []
+    for s_ in sites:  # one sign of a kind at a spot (a junction found from both of its roads)
+        if not any(o['kind'] == s_['kind'] and math.dist((o['x'], o['y']), (s_['x'], s_['y'])) < 6 for o in out):
+            out.append(s_)
+    return out
+
+
+ROADSIDE = roadside_sites()
+
+
+def build_roadside(mb, s_):
+    rng = Rng('roadside', s_['kind'], round(s_['x']), round(s_['y']))
+    if s_['kind'] == 'dir':
+        roadside.direction_sign(mb, s_['x'], s_['y'], s_['face'], s_['lines'], rng)
+    elif s_['kind'] == 'speed':
+        roadside.disc_sign(mb, s_['x'], s_['y'], s_['face'], 'speed', rng, s_['v'])
+    elif s_['kind'] == 'noparking':
+        roadside.disc_sign(mb, s_['x'], s_['y'], s_['face'], 'noparking', rng)
+    elif s_['kind'] == 'gantry':
+        roadside.gantry(mb, s_['x'], s_['y'], s_['ang'], s_['span'], s_['panels'], rng, z0=s_.get('z0', 0.0))
+
+
+LAMPS = []  # this tile's working lamp heads (Blender frame), for the Mock's light pools
+DEAD_LAMPS = {'elite': 0.05, 'civic': 0.15, 'old_island': 0.3, 'dense': 0.45, 'sprawl': 0.4, 'port': 0.4, 'waterfront': 0.6}
+
+
 def build_monument(mb, s_):
     M = Matrix.Translation((s_['x'], s_['y'], 0)) @ Matrix.Rotation(s_['ang'], 4, 'Z')
     rng = Rng('monument', s_['kind'], round(s_['x']), round(s_['y']))
@@ -382,6 +541,10 @@ def build_tile(tx, ty, overrides):
         if poi['type'] == 'transit' and inside(P((poi['x'], poi['y']))):
             q = P((poi['x'], poi['y']))
             places.bus_shelter(pm, Matrix.Translation((q[0], q[1], 0)), Rng('stop', poi['name']))
+    for s_ in ROADSIDE:
+        if inside((s_['x'], s_['y'])):
+            build_roadside(pm, s_)
+            built['roadside:' + s_['kind']] = built.get('roadside:' + s_['kind'], 0) + 1
     for s_ in MONUMENTS:
         if inside((s_['x'], s_['y'])):
             build_monument(pm, s_)
@@ -390,6 +553,20 @@ def build_tile(tx, ty, overrides):
     # roads and street life
     sm = MeshBuilder()
     poles = []
+    # kerbs stop where they would cross another road's surface (side streets running into a main
+    # road, the mouths of junctions): a 20 m grid of carriageway segments
+    seg_grid = {}
+    for r in roads_near:
+        if r['k'] == 'path':
+            continue
+        for a, b in zip(r['pts'], r['pts'][1:]):
+            for gx in range(int(min(a[0], b[0]) // 20) - 1, int(max(a[0], b[0]) // 20) + 2):
+                for gy in range(int(min(a[1], b[1]) // 20) - 1, int(max(a[1], b[1]) // 20) + 2):
+                    seg_grid.setdefault((gx, gy), []).append((a, b, r['w'] / 2 + 0.25, r['id']))
+
+    def on_other_road(p, rid):
+        return any(dist_seg(p, a, b) < hw for a, b, hw, oid in seg_grid.get((int(p[0] // 20), int(p[1] // 20)), ()) if oid != rid)
+
     for r in roads_near:
         d = r.get('d') or dc
         rch = CHARACTER.get(d, 'dense')
@@ -402,7 +579,7 @@ def build_tile(tx, ty, overrides):
             street.road(sm, rc, cond, Rng('road', r['id'], round(piece[0][0]), round(piece[0][1])))
             street.markings(sm, rc, cond, rr)
             if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
-                street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p: in_building(p, 0.1))
+                street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p, rid=r['id']: on_other_road(p, rid) or in_building(p, 0.1))
             if r['k'] in ('main', 'street') and not (rch == 'elite' and r['k'] != 'main'):
                 off = (1 if hash(r['id']) % 2 else -1) * (r['w'] / 2 + 1.6)
                 prev = None
@@ -426,6 +603,28 @@ def build_tile(tx, ty, overrides):
                         else:
                             prev = None
                         k += 35
+            # street lights: main roads everywhere, streets in the elite and civic districts; opposite
+            # the electricity poles; a share dead, more in the poor districts, some solar
+            if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
+                pole_side = (1 if hash(r['id']) % 2 else -1)
+                loff = -pole_side * (r['w'] / 2 + 1.0)
+                for i in range(len(piece) - 1):
+                    a, b = piece[i], piece[i + 1]
+                    L = math.dist(a, b)
+                    if L < 1e-6:
+                        continue
+                    dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
+                    s0 = (sum(math.dist(piece[j], piece[j + 1]) for j in range(i)))
+                    k = (38 - (s0 + 19) % 38) % 38
+                    while k < L:
+                        p = (a[0] + dx * k - dy * loff, a[1] + dy * k + dx * loff)
+                        if not in_building(p, 0.3):
+                            lr = Rng('lamp', round(p[0]), round(p[1]))
+                            # the arm reaches back over the road
+                            ang = math.atan2(dx * (1 if loff < 0 else -1), -dy * (1 if loff < 0 else -1))
+                            LAMPS.extend(roadside.street_light(sm, p[0], p[1], ang, lr, h=9 if r['k'] == 'main' else 7.5,
+                                                               working=not lr.chance(DEAD_LAMPS.get(rch, 0.3)), solar=rch in ('dense', 'sprawl', 'waterfront') and lr.chance(0.3)))
+                        k += 38
             for i in range(len(piece) - 1):  # litter at the edges
                 a, b = piece[i], piece[i + 1]
                 L = math.dist(a, b)
@@ -452,19 +651,19 @@ def build_tile(tx, ty, overrides):
         if not inside(cent(pts)):
             continue
         rng = Rng('struct', s['name'], round(pts[0][0]))
-        {'flyover': lambda: structures.flyover(tm, pts, s['width'], s.get('layer', 1), rng), 'skywalk': lambda: structures.skywalk(tm, pts, s['width'], rng),
+        {'flyover': lambda: structures.flyover(tm, pts, s['width'], s.get('layer', 1), rng, lamps=LAMPS), 'skywalk': lambda: structures.skywalk(tm, pts, s['width'], rng),
          'footbridge': lambda: structures.footbridge(tm, structures.snap_footbridge(pts, CANALS), s['width'], rng), 'jetty': lambda: structures.jetty(tm, pts, s['width'], rng),
-         'ramp': lambda: structures.flyover(tm, pts, s['width'], 1, rng)}.get(s['kind'], lambda: None)()
+         'ramp': lambda: structures.flyover(tm, pts, s['width'], 1, rng, lamps=LAMPS)}.get(s['kind'], lambda: None)()
         built['structure:' + s['kind']] = built.get('structure:' + s['kind'], 0) + 1
     for a_ in GD.get('arterials', []):
         pts = [P(p) for p in a_['pts']]
         w = ART_W.get(a_['cls'], 18)
         rng = Rng('arterial', a_['name'])
         if a_['cls'] == 'bridge':  # the whole line, so the ramps sit at the real ends; this tile's slabs only
-            (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside)
+            (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside, lamps=LAMPS)
             continue
         for piece in clip_line_rect(pts, x0, y0, x1, y1):
-            structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5))
+            structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5), lamps=LAMPS, keep=inside)
     for piece in clip_line_rect([P(p) for p in GD['rail']['pts']], x0, y0, x1, y1):
         structures.rail(tm, piece, Rng('rail'))
     for c in GD.get('canals', []):
@@ -552,7 +751,9 @@ if __name__ == '__main__':
     for tx, ty in TILES:
         t0 = time.time()
         detail.SIGNS.clear()
+        LAMPS.clear()
         col, built, origin = build_tile(tx, ty, ov)
+        lamps = [[round(x - origin[0], 2), round(z, 2), round(-(y - origin[1]), 2)] for x, y, z in LAMPS]  # GLB frame, like signs
         signs = []
         for sg in detail.SIGNS:  # tile-relative, in the GLB's y-up frame: (x, z, -y)
             m = sg['m']
@@ -566,5 +767,5 @@ if __name__ == '__main__':
         nt = export(col, origin, path)
         size = os.path.getsize(path) if os.path.exists(path) else 0
         info = dict(tx=tx, ty=ty, faces=nt, bytes=size, seconds=round(time.time() - t0, 1), built=built, signs=len(signs))
-        json.dump(dict(info, origin=[origin[0], origin[1]], signs=signs), open(os.path.join(OUT, 'tiles', f'{tx}_{ty}.json'), 'w'), separators=(',', ':'))
+        json.dump(dict(info, origin=[origin[0], origin[1]], signs=signs, lamps=lamps), open(os.path.join(OUT, 'tiles', f'{tx}_{ty}.json'), 'w'), separators=(',', ':'))
         print('TILE', json.dumps(info))
