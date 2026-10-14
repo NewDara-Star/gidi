@@ -398,9 +398,178 @@ def wheelbarrow(mb, M, rng):
         parts.bar(mb, 'steel', M @ Vector((0.55, s * 0.05, 0.2)), M @ Vector((-0.9, s * 0.3, 0.75)), 0.035, hex_rgb('#2a2a2a'), 0.6)
 
 
+# ---------------------------------------------------------------- heavy goods
+CONTAINER_COLS = ['#8e2f22', '#1f4f8a', '#2f6b3a', '#7a7d80', '#5a1f2a', '#c8a020', '#e8e6df', '#b0551f']
+
+
+def container_box(mb, M, rng, length=12.2, col=None, wear=0.5):
+    """A shipping container (corrugated sides, end doors with locking bars), base at M's origin,
+    centred, x along. Plain: no line's name or mark (rule zero)."""
+    col = hex_rgb(col or rng.pick(CONTAINER_COLS))
+    H, W = 2.59, 2.44
+    mb.box('steel', L(M, 0, 0, H / 2), col, wear, size=(length, W, H))
+    k = -length / 2 + 0.3
+    while k < length / 2 - 0.2:  # corrugation ribs on both sides
+        for s_ in (-1, 1):
+            mb.box('steel', L(M, k, s_ * (W / 2 + 0.02), H / 2), shade(col, 0.85), wear, size=(0.12, 0.04, H - 0.2))
+        k += 0.3
+    for y in (-0.6, -0.2, 0.2, 0.6):  # door locking bars at the back
+        mb.box('steel', L(M, -length / 2 - 0.03, y, H / 2), hex_rgb('#3a3a3a'), wear, size=(0.04, 0.05, H - 0.3))
+    mb.box('steel', L(M, 0, 0, H + 0.02), shade(col, 0.8), wear + 0.2, size=(length, W, 0.04))
+
+
+def container_truck(mb, M, rng, cond='worn', loaded=None):
+    """An articulated container truck, 16.5 m: a cab-over tractor and a skeletal trailer carrying a
+    40 ft container (or empty), the Apapa queue's vehicle. Front at +x."""
+    wear = WEAR[cond]
+    cab = hex_rgb(rng.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc']))
+    # tractor: cab-over, 2.5 m wide, roof at 3.4 m, fuel tanks and air tanks below
+    mb.box('carpaint', L(M, 6.9, 0, 2.15), cab, wear, size=(2.2, 2.5, 2.5))
+    mb.box('carpaint', L(M, 6.6, 0, 3.55), shade(cab, 0.9), wear, size=(1.6, 2.3, 0.4))  # roof fairing
+    glass_panel(mb, M, [(8.01, -1.1, 2.3), (8.01, 1.1, 2.3), (8.01, 1.1, 3.25), (8.01, -1.1, 3.25)])
+    mb.box('plastic', L(M, 8.0, 0, 1.2), hex_rgb('#1d1d1d'), 0.4, size=(0.08, 2.3, 0.6))  # bumper and grille
+    mb.box('steel', L(M, 3.0, 0, 0.95), hex_rgb('#2a2a2a'), wear, size=(8.5, 1.0, 0.3))  # tractor chassis
+    for s_ in (-1, 1):
+        parts.cyl(mb, 'steel', L(M, 4.9, s_ * 1.0, 0.95, ry=math.pi / 2), 0.3, 1.4, hex_rgb('#b8bcbf'), wear, seg=10)
+    mb.box('steel', L(M, 4.4, 0, 1.25), hex_rgb('#3a3a3a'), wear, size=(1.2, 2.0, 0.12))  # fifth wheel
+    for x in (7.0, 3.6, 2.3):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.52, 0.32, cond)
+    for s_ in (-1, 1):
+        lamp(mb, M, 8.02, s_ * 0.95, 1.2, 0.25, 0.15, 'head')
+    # trailer: skeletal frame on three axles
+    mb.box('steel', L(M, -2.5, 0, 1.25), hex_rgb('#2a2a2a'), wear, size=(12.4, 0.9, 0.25))
+    for x in (-6.2, -7.5, -8.8):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+    for x in (2.0, -7.0):
+        mb.box('steel', L(M, x, 0, 1.3), hex_rgb('#2a2a2a'), wear, size=(0.3, 2.4, 0.2))
+    if loaded if loaded is not None else rng.chance(0.85):
+        container_box(mb, L(M, -2.5, 0, 1.42), rng, 12.2, wear=wear)
+    for s_ in (-1, 1):
+        lamp(mb, M, -8.95, s_ * 1.0, 1.1, 0.2, 0.12, 'tail')
+
+
+def lorry_911(mb, M, rng, cond='battered', load=None):
+    """The old bonneted food lorry of the big markets, 8.8 m: a long nose, a wooden cab, tall plank
+    sides painted in bands, loaded high with baskets of tomatoes or sacks of onions. Front at +x."""
+    wear = WEAR[cond]
+    cab = hex_rgb(rng.pick(['#e0b020', '#c62828', '#1f5fa8', '#2e7d4f', '#e8e6df']))
+    mb.box('carpaint', L(M, 3.55, 0, 1.25), cab, wear, size=(1.7, 1.7, 1.0))  # bonnet
+    mb.box('carpaint', L(M, 3.55, 0, 1.78), shade(cab, 0.85), wear, size=(1.6, 1.6, 0.06))
+    mb.box('plastic', L(M, 4.43, 0, 1.2), hex_rgb('#c9ced2'), wear, size=(0.06, 1.2, 0.7))  # grille
+    mb.box('wood', L(M, 2.0, 0, 1.95), shade(cab, 0.95), wear, size=(1.5, 2.3, 1.9))  # cab
+    glass_panel(mb, M, [(2.76, -0.95, 2.05), (2.76, 0.95, 2.05), (2.76, 0.95, 2.7), (2.76, -0.95, 2.7)])
+    mb.box('steel', L(M, -0.5, 0, 0.85), hex_rgb('#2a2a2a'), wear, size=(8.5, 1.0, 0.3))
+    body_len, x0 = 5.8, -2.0
+    mb.box('wood', L(M, x0, 0, 1.15), hex_rgb('#5a4030'), wear, size=(body_len, 2.4, 0.15))
+    bands = [hex_rgb(c) for c in rng.pick([('#c62828', '#e0b020', '#1f5fa8'), ('#2e7d4f', '#e8e6df', '#c62828'), ('#1f5fa8', '#e0b020', '#e8e6df')])]
+    for s_ in (-1, 1):  # tall plank sides, 2.2 m, in painted bands
+        for j, c in enumerate(bands):
+            mb.box('wood', L(M, x0, s_ * 1.2, 1.6 + j * 0.65), c, wear + 0.1, size=(body_len, 0.08, 0.6))
+    for x in (x0 - body_len / 2, x0 + body_len / 2):
+        for j, c in enumerate(bands):
+            mb.box('wood', L(M, x, 0, 1.6 + j * 0.65), c, wear + 0.1, size=(0.08, 2.4, 0.6))
+    load = load or rng.pick(['tomato', 'onion', 'yam'])
+    col = {'tomato': '#c8321e', 'onion': '#c89a5a', 'yam': '#7a5a3a'}[load]
+    for i in range(10):  # baskets or sacks heaped over the sides
+        for j in range(4):
+            x = x0 - body_len / 2 + 0.3 + i * (body_len - 0.6) / 9
+            y = -0.95 + j * 0.63
+            h = 3.25 + 0.25 * math.cos((i - 4.5) / 3)
+            if load == 'tomato':
+                parts.cyl(mb, 'cloth', L(M, x, y, h - 0.25), 0.3, 0.45, hex_rgb('#b08a4a'), 0.6, seg=8, r2=0.36)
+                parts.cyl(mb, 'plastic', L(M, x, y, h + 0.2), 0.34, 0.12, hex_rgb(col), 0.2, seg=8, r2=0.2)
+            else:
+                mb.box('cloth', L(M, x, y, h), hex_rgb(col), 0.5, size=(0.55, 0.55, 0.5))
+    for x in (3.5, -2.6, -3.9):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.0, 0.5, 0.3, cond)
+    for s_ in (-1, 1):
+        lamp(mb, M, 4.45, s_ * 0.7, 1.35, 0.2, 0.18, 'head')
+
+
+# ---------------------------------------------------------------- trains (on the rail: base 0.5 m, standard gauge)
+def bogie(mb, M, x, wear):
+    mb.box('steel', L(M, x, 0, 0.75), hex_rgb('#2a2a2a'), wear, size=(2.6, 2.0, 0.4))
+    for dx in (-0.9, 0.9):
+        for s_ in (-1, 1):
+            parts.cyl(mb, 'steel', L(M, x + dx, s_ * 0.72, 0.95, rx=math.pi / 2) @ Matrix.Translation((0, 0, -0.06)), 0.45, 0.12, hex_rgb('#3a3a3a'), wear, seg=12)
+
+
+def commuter_car(mb, M, rng, cab=False, livery=None):
+    """One car of an invented commuter train, 20 m: white with a coloured band, wide doors, a strip
+    of windows; cab=True gives it a sloped driver's nose at +x."""
+    wear = 0.25
+    body, band = livery or (hex_rgb('#eceae4'), hex_rgb(rng.pick(['#1f5fa8', '#c62828', '#2e7d4f'])))
+    Lc, Wc = 20.0, 3.0
+    mb.box('carpaint', L(M, 0, 0, 2.5), body, wear, size=(Lc, Wc, 2.8))
+    mb.box('carpaint', L(M, 0, 0, 1.25), band, wear, size=(Lc + 0.02, Wc + 0.02, 0.35))
+    for s_ in (-1, 1):
+        mb.box('glass', L(M, 0, s_ * (Wc / 2 + 0.01), 2.85), hex_rgb('#1c2830'), 0.1, size=(Lc - 2, 0.02, 0.9))
+        for x in (-6.5, 0, 6.5):  # doors
+            mb.box('steel', L(M, x, s_ * (Wc / 2 + 0.02), 2.3), shade(body, 0.8), wear, size=(1.6, 0.02, 2.2))
+    mb.box('steel', L(M, 0, 0, 3.95), hex_rgb('#9a9a98'), wear, size=(Lc - 1, 2.4, 0.15))  # roof equipment
+    if cab:
+        mb.box('glass', L(M, Lc / 2 + 0.01, 0, 2.95), hex_rgb('#1c2830'), 0.1, size=(0.04, 2.4, 1.0))
+        mb.box('carpaint', L(M, Lc / 2 + 0.02, 0, 1.25), band, wear, size=(0.04, 3.0, 0.35))
+        for s_ in (-1, 1):
+            lamp(mb, M, Lc / 2 + 0.03, s_ * 1.0, 1.7, 0.3, 0.15, 'head')
+    for x in (-7, 7):
+        bogie(mb, M, x, wear)
+
+
+def diesel_loco(mb, M, rng, cond='battered'):
+    """The old narrow-gauge diesel: a long hood with a cab at one end, green and yellow, rusted."""
+    wear = WEAR[cond]
+    col = hex_rgb(rng.pick(['#2f5a3a', '#7a2a1f', '#1f3f6a']))
+    mb.box('carpaint', L(M, -1.0, 0, 2.3), col, wear, size=(10.0, 2.2, 2.2))  # hood
+    mb.box('carpaint', L(M, 5.0, 0, 2.7), col, wear, size=(2.6, 2.8, 3.0))  # cab
+    glass_panel(mb, M, [(6.31, -1.1, 3.0), (6.31, 1.1, 3.0), (6.31, 1.1, 3.8), (6.31, -1.1, 3.8)])
+    for s_ in (-1, 1):
+        mb.box('carpaint', L(M, -1.0, s_ * 1.11, 1.5), hex_rgb('#e0b020'), wear, size=(10.0, 0.02, 0.25))
+    mb.box('steel', L(M, 0, 0, 1.1), hex_rgb('#2a2a2a'), wear, size=(13.5, 2.8, 0.4))
+    parts.cyl(mb, 'steel', L(M, -3.0, 0, 3.4), 0.25, 0.6, hex_rgb('#2a2a2a'), wear, seg=8)  # exhaust
+    lamp(mb, M, 6.33, 0, 3.95, 0.3, 0.2, 'head')
+    for x in (-4.5, 3.5):
+        bogie(mb, M, x, wear)
+
+
+def old_coach(mb, M, rng, cond='battered'):
+    """An old passenger coach, 18 m, cream over green, open windows, rust and fading."""
+    wear = WEAR[cond]
+    low, high = hex_rgb(rng.pick(['#2f5a3a', '#7a2a1f', '#1f3f6a'])), hex_rgb('#e8dcc0')
+    mb.box('carpaint', L(M, 0, 0, 1.75), low, wear, size=(18.0, 2.9, 1.3))
+    mb.box('carpaint', L(M, 0, 0, 3.0), high, wear, size=(18.0, 2.9, 1.2))
+    for s_ in (-1, 1):
+        for k in range(12):
+            mb.box('glass', L(M, -8.0 + k * 1.45, s_ * 1.46, 3.0), hex_rgb('#14181c'), 0.2, size=(0.9, 0.02, 0.75))
+    parts.cyl(mb, 'steel', L(M, -9.0, 0, 3.6, ry=math.pi / 2), 1.45, 18.0, hex_rgb('#6a6d6c'), wear, seg=12)  # curved roof
+    for x in (-6.5, 6.5):
+        bogie(mb, M, x, wear)
+
+
+def wagon(mb, M, rng, cond='battered'):
+    """An open freight wagon, 14 m, rusty, loaded or empty."""
+    wear = WEAR[cond]
+    col = hex_rgb(rng.pick(['#6b3a22', '#5a4636', '#4a4a48']))
+    mb.box('steel', L(M, 0, 0, 1.3), hex_rgb('#2a2a2a'), wear, size=(14.0, 2.8, 0.3))
+    for s_ in (-1, 1):
+        mb.box('steel', L(M, 0, s_ * 1.4, 2.1), col, wear, size=(14.0, 0.08, 1.4))
+    for x in (-7, 7):
+        mb.box('steel', L(M, x, 0, 2.1), col, wear, size=(0.08, 2.8, 1.4))
+    if rng.chance(0.6):
+        mb.box('mud', L(M, 0, 0, 2.3), hex_rgb(rng.pick(['#d8c9a3', '#3a3a3a', '#8f8a80'])), 0.3, size=(13.6, 2.6, 1.0))
+    for x in (-5, 5):
+        bogie(mb, M, x, wear)
+
+
+TRAIN = {'commuter': (commuter_car, 20.6), 'loco': (diesel_loco, 14.0), 'coach': (old_coach, 18.6), 'wagon': (wagon, 14.6)}
+
+
 BUILDERS = {'danfo': danfo, 'korope': korope, 'brt': brt, 'keke': keke, 'okada': okada, 'car': car, 'police': police_pickup,
-            'tipper': tipper, 'tanker': tanker, 'cart': pusher_cart, 'wheelbarrow': wheelbarrow}
-LENGTH = {'danfo': 4.8, 'korope': 3.6, 'brt': 12.2, 'keke': 2.8, 'okada': 2.1, 'car': 4.8, 'police': 5.3, 'tipper': 8.6, 'tanker': 11.5, 'cart': 3.6, 'wheelbarrow': 1.6}
+            'tipper': tipper, 'tanker': tanker, 'cart': pusher_cart, 'wheelbarrow': wheelbarrow, 'container': container_truck, 'lorry911': lorry_911}
+LENGTH = {'danfo': 4.8, 'korope': 3.6, 'brt': 12.2, 'keke': 2.8, 'okada': 2.1, 'car': 4.8, 'police': 5.3, 'tipper': 8.6, 'tanker': 11.5, 'cart': 3.6, 'wheelbarrow': 1.6, 'container': 17.2, 'lorry911': 8.9}
 # research-vehicles 8.6: shares of moving traffic by character and road class
 MIX = {
     ('dense', 'main'): {'danfo': 26, 'korope': 4, 'keke': 5, 'okada': 5, 'car': 40, 'brt': 5, 'tipper': 6, 'tanker': 6, 'cart': 3},
@@ -413,11 +582,11 @@ MIX = {
     ('elite', 'street'): {'car': 92, 'okada': 3, 'tipper': 5},
     ('civic', 'main'): {'danfo': 15, 'car': 60, 'brt': 10, 'police': 2, 'tanker': 5, 'tipper': 5, 'cart': 3},
     ('civic', 'street'): {'danfo': 5, 'car': 70, 'police': 3, 'keke': 5, 'okada': 2, 'tipper': 5, 'cart': 3},
-    ('port', 'main'): {'danfo': 10, 'car': 20, 'tanker': 35, 'tipper': 30, 'brt': 3, 'okada': 2},
-    ('port', 'street'): {'danfo': 10, 'car': 25, 'tanker': 25, 'tipper': 25, 'okada': 5, 'keke': 5, 'cart': 5},
+    ('port', 'main'): {'danfo': 10, 'car': 15, 'container': 35, 'tanker': 20, 'tipper': 15, 'brt': 3, 'okada': 2},
+    ('port', 'street'): {'danfo': 10, 'car': 25, 'container': 15, 'tanker': 15, 'tipper': 20, 'okada': 5, 'keke': 5, 'cart': 5},
     ('waterfront', 'street'): {'danfo': 5, 'keke': 20, 'okada': 30, 'car': 20, 'tipper': 10, 'cart': 15},
 }
-COMMERCIAL = {'danfo', 'korope', 'keke', 'okada', 'tipper', 'tanker', 'brt', 'cart'}
+COMMERCIAL = {'danfo', 'korope', 'keke', 'okada', 'tipper', 'tanker', 'brt', 'cart', 'container', 'lorry911'}
 
 
 def mix(ch, road):

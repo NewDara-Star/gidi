@@ -67,7 +67,7 @@ def deck_height(s, S, H, R):
 RAMP = {'flyover': 60.0, 'bridge': 80.0}
 
 
-def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6, lamps=None, dead=0.1):
+def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6, lamps=None, dead=0.1, murals=False):
     """A whole deck along a polyline with deck_height's profile, in 3 m slabs; only the slabs and
     piers whose middle passes keep(p) (the tile being built) are made, so a bridge crossing many
     tiles comes out seamless. Dressed as Lagos decks are: yellow edge lines, white dashed lanes, on
@@ -141,7 +141,10 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
             if z > 1.0 and keep((p.x, p.y)):
                 for sg in ((-1, 1) if w > 8 else (0,)):
                     c = p + side * sg * w * 0.28
-                    parts.cyl(mb, 'concrete', Matrix.Translation((c.x, c.y, -1.5)), 0.6 if w > 8 else 0.4, z + 1.5, hex_rgb(col), wear, seg=12)
+                    pr = 0.6 if w > 8 else 0.4
+                    parts.cyl(mb, 'concrete', Matrix.Translation((c.x, c.y, -1.5)), pr, z + 1.5, hex_rgb(col), wear, seg=12)
+                    if murals and z > 3 and rng.chance(0.75):
+                        mural_pier(mb, c, pr, z, rng.child('mural', round(c.x), round(c.y)))
                 mb.box('concrete', Matrix.Translation((p.x, p.y, z - 0.5)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'), shade(hex_rgb(col), 0.85), wear, size=(1.4, w * 0.9, 1.0))
             nxt += piers
         while nl < s0 + L:
@@ -163,8 +166,36 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
         s0 += L
 
 
+MURAL_PALETTES = [('#f2c230', '#1f5fa8', '#c62828', '#f4f1ea', '#1d1d1d'), ('#2e7d4f', '#f2c230', '#ff7a1a', '#3a2a6a', '#f4f1ea'),
+                  ('#e8467c', '#29a3c9', '#f2c230', '#1d1d1d', '#ffffff'), ('#6a1b9a', '#ffb000', '#00897b', '#f4f1ea', '#c62828')]
+
+
+def mural_pier(mb, c, r, h, rng):
+    """Paint a bridge pier the way Lagos under-bridges are painted: bold bands and shapes in a
+    few strong colours round all four faces, up to about two thirds of its height (research-
+    landmarks 25). c: the pier's base centre, r: its radius, h: its height."""
+    pal = [hex_rgb(x) for x in rng.pick(MURAL_PALETTES)]
+    top = h * rng.between(0.5, 0.75)
+    for q in range(4):  # four faces round the pier
+        a = q * math.pi / 2 + math.pi / 4
+        F = Matrix.Translation((c.x + math.cos(a) * (r + 0.02), c.y + math.sin(a) * (r + 0.02), 0)) @ Matrix.Rotation(a + math.pi / 2, 4, 'Z')
+        z = 0.3
+        while z < top:  # stacked bands of colour
+            bh = rng.between(0.5, 1.6)
+            mb.box('paint', F @ Matrix.Translation((0, 0, z + bh / 2)), rng.pick(pal), 0.3, size=(r * 1.45, 0.02, bh))
+            z += bh
+        for _ in range(rng.randrange(1, 4)):  # discs and diamonds over the bands
+            zz = rng.between(1.0, top)
+            sz = rng.between(0.3, r * 0.6)
+            D = F @ Matrix.Translation((rng.between(-r * 0.4, r * 0.4), -0.02, zz)) @ Matrix.Rotation(math.pi / 2, 4, 'X')
+            if rng.chance(0.5):
+                parts.cyl(mb, 'paint', D, sz, 0.01, rng.pick(pal), 0.2, seg=12)
+            else:
+                mb.box('paint', D @ Matrix.Rotation(math.pi / 4, 4, 'Z'), rng.pick(pal), 0.2, size=(sz * 1.4, sz * 1.4, 0.01))
+
+
 def flyover(mb, pts, w, layer, rng, lamps=None):
-    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng, lamps=lamps, dead=0.3)
+    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng, lamps=lamps, dead=0.3, murals=True)
 
 
 def skywalk(mb, pts, w, rng):

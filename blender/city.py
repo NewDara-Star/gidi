@@ -35,7 +35,7 @@ detail.LEVEL = opt.get('--detail', 'web')
 TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '') if opt.get('--tiles') is not True else '').split(';') if t]
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, monuments, parcels, places, registry, roadside, street, structures  # noqa: E402
+from gidi_kit import archetypes, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -181,6 +181,15 @@ PARCELS = [dict(d=d, kind=p['kind'], pts=[P(q) for q in p['pts'][:-1]]) for d, l
 CIVIC = [dict(type=s['type'], name=s['name'], d=s['d'], poly=ccw([P(p) for p in s['pts'][:-1]])) for s in GD.get('safe_ground', [])]
 for c in CIVIC:
     c['c'] = cent(c['poly'])
+# named places with a model of their own (landmarks.BY_NAME) stand on the nearest civic plot of
+# their type within 300 m; the ones with no such plot take over a building plot (poi_overrides)
+NAMED_PLOTS = {}  # civic plot name -> landmark name
+for _poi in GD['pois']:
+    if _poi['name'] in landmarks.BY_NAME:
+        _q = P((_poi['x'], _poi['y']))
+        _best = min((c for c in CIVIC if c['type'] == _poi['type'] and c['name'] not in NAMED_PLOTS), key=lambda c: math.dist(c['c'], _q), default=None)
+        if _best and math.dist(_best['c'], _q) < 300:
+            NAMED_PLOTS[_best['name']] = _poi['name']
 
 
 def poi_overrides():
@@ -191,7 +200,9 @@ def poi_overrides():
     res, used = {}, set()
     for poi in GD['pois']:
         t = poi['type']
-        if t not in registry.POI_PLACES:
+        if poi['name'] in landmarks.BY_NAME and poi['name'] not in NAMED_PLOTS.values():
+            t = 'named'
+        elif t not in registry.POI_PLACES:
             continue
         p = P((poi['x'], poi['y']))
         best = None
@@ -507,7 +518,7 @@ def build_tile(tx, ty, overrides):
         ov = overrides.get((b['d'], str(b['i'])))
         fn = registry.builder(b['kind'])
         if ov:
-            fn = registry.POI_PLACES[ov['type']]
+            fn = landmarks.BY_NAME[ov['name']] if ov['type'] == 'named' else registry.POI_PLACES[ov['type']]
             a['label'] = ov['name']
         elif b.get('style') and b['kind'] in ('front', 'back'):
             fn = places.mansion
@@ -522,9 +533,11 @@ def build_tile(tx, ty, overrides):
         built[b['kind']] = built.get(b['kind'], 0) + 1
     for c in civic_here:
         fn = registry.CIVIC_PLOTS.get(c['type'])
+        if c['name'] in NAMED_PLOTS:  # a named landmark stands on this plot
+            fn = landmarks.BY_NAME[NAMED_PLOTS[c['name']]]
         if fn and len(c['poly']) == 4:
             a = attributes(dict(i=0, d=c['d'], kind=c['type'], poly=c['poly'], c=c['c'], storeys=2), roads_near, polys_near)
-            a['label'] = c['name']
+            a['label'] = NAMED_PLOTS.get(c['name'], c['name'])
             try:
                 fn(a, Rng(c['d'], 'civic', c['name']), col)
             except Exception as e:
@@ -648,6 +661,146 @@ def build_tile(tx, ty, overrides):
             cn = b['poly'][hash((b['d'], b['i'])) % 4]
             street.wire(sm, (top[0], top[1], top[2] - 0.6), (cn[0], cn[1], min(b['storeys'] * 3.1, 6.5) - 0.3), 1.0, t=0.012, n=5)
 
+    # life: a still of the traffic (moving, frozen; parked at the edges), people along the frontages
+    # and in the markets, danfos loading in the motor parks, container trucks queued for the port,
+    # 911 lorries at the food markets, and the trains on the line. Half as thick in the web build.
+    vm, hm = MeshBuilder(), MeshBuilder()
+    thin = 0.5 if detail.web() else 1.0
+    WEALTH = {'elite': 0.85, 'civic': 0.55, 'dense': 0.3, 'sprawl': 0.35, 'old_island': 0.3, 'waterfront': 0.1, 'port': 0.3}
+    CROWD = {'dense': 30, 'old_island': 40, 'sprawl': 15, 'elite': 2, 'civic': 10, 'waterfront': 20, 'port': 10}  # per 100 m, research-street 4.3
+
+    def put_vehicle(kind, x, y, ang, cond, rng, rch, wealth):
+        M = Matrix.Translation((x, y, 0)) @ Matrix.Rotation(ang, 4, 'Z')
+        fn = vehicles.BUILDERS[kind]
+        if kind == 'car':
+            fn(vm, M, rng, cond, kind=rng.pick({'saloon': 5, 'suv': 3 + 4 * wealth, 'pickup': 1}), taxi=rch == 'old_island' and rng.chance(0.15))
+        elif kind in ('cart', 'wheelbarrow'):
+            fn(vm, M, rng)
+            people.person(hm, M @ Matrix.Translation((-2.6 if kind == 'cart' else -1.3, 0, 0)), rng, kind='tshirt', ch=rch, pose=True)
+        else:
+            fn(vm, M, rng, cond)
+        if kind == 'okada':
+            people.seated_rider(vm, M @ Matrix.Translation((-0.25, 0, 0.92)), rng)
+
+    for r in roads_near:
+        if r['k'] not in ('main', 'street', 'lane'):
+            continue
+        d = r.get('d') or dc
+        rch = CHARACTER.get(d, 'dense')
+        wealth = WEALTH[rch]
+        mixk = dict(vehicles.mix(rch, r['k']))
+        if d == 'foodgate' and r['k'] == 'main':
+            mixk['lorry911'] = 10  # the food lorries of the big market
+        for piece in clip_line_rect(r['pts'], x0, y0, x1, y1):
+            rr = Rng('life', r['id'], round(piece[0][0]), round(piece[0][1]))
+            for i in range(len(piece) - 1):
+                a, b = piece[i], piece[i + 1]
+                Ls = math.dist(a, b)
+                if Ls < 1e-6:
+                    continue
+                dx, dy = (b[0] - a[0]) / Ls, (b[1] - a[1]) / Ls
+                ang = math.atan2(dy, dx)
+                lanes = [(-r['w'] / 4, 1), (r['w'] / 4, -1)] if r['k'] != 'lane' else [(0, 1)]  # drive on the right
+                gap = {'main': 14, 'street': 30, 'lane': 60}[r['k']] / thin
+                for off, dirn in lanes:
+                    k = rr.between(0, gap)
+                    while k < Ls:
+                        kind = rr.pick(mixk)
+                        x, y = a[0] + dx * k - dy * off, a[1] + dy * k + dx * off
+                        if inside((x, y)) and not in_building((x, y), 0.5):
+                            put_vehicle(kind, x, y, ang if dirn > 0 else ang + math.pi, vehicles.condition(wealth, rr, commercial=kind in vehicles.COMMERCIAL), rr, rch, wealth)
+                            built['vehicle:' + kind] = built.get('vehicle:' + kind, 0) + 1
+                        k += vehicles.LENGTH[kind] + rr.between(gap * 0.4, gap * 1.6)
+                if r['k'] in ('street', 'main'):  # parked at the edge
+                    for side in (-1, 1):
+                        k = rr.between(0, 20)
+                        while k < Ls:
+                            kind = rr.pick({'car': 4, 'keke': 2, 'okada': 3, 'danfo': 1 if r['k'] == 'main' else 0.2})
+                            o = side * (r['w'] / 2 - 1.0)
+                            x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
+                            if inside((x, y)) and not in_building((x, y), 0.6) and rr.chance(0.55 * thin):
+                                put_vehicle(kind, x, y, ang + (math.pi if rr.chance(0.5) else 0) + rr.between(-0.1, 0.1), vehicles.condition(wealth, rr, kind in vehicles.COMMERCIAL, parked=True), rr, rch, wealth)
+                            k += vehicles.LENGTH[kind] + rr.between(2, 18)
+                n = int(Ls / 100 * CROWD.get(rch, 15) * (1.6 if r['k'] == 'main' else 1.0) * thin)
+                for _ in range(n):  # people along the frontage
+                    k, side = rr.between(0, Ls), rr.pick([-1, 1])
+                    o = side * (r['w'] / 2 + rr.between(0.3, 2.8))
+                    x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
+                    if inside((x, y)) and not in_building((x, y), 0.2):
+                        walk = ang + (0 if rr.chance(0.5) else math.pi) + rr.between(-0.3, 0.3) if rr.chance(0.6) else rr.between(0, math.tau)
+                        people.person(hm, Matrix.Translation((x, y, 0.03)) @ Matrix.Rotation(walk, 4, 'Z'), rr, ch=rch)
+    for pc in PARCELS:  # markets, motor parks, the port's truck park, the food lorries
+        if not inside(cent(pc['pts'])):
+            continue
+        pts, kind = pc['pts'], pc['kind']
+        rch = CHARACTER.get(pc['d'], 'dense')
+        rr = Rng('life', pc['d'], kind, round(cent(pts)[0]))
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        if kind in ('market', 'motor park', 'under bridge', 'under-bridge'):
+            n = 0
+            for _ in range(4000):
+                if n > (400 if kind == 'market' else 80) * thin:
+                    break
+                p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
+                if in_poly(p, pts) and not in_building(p, 0.3):
+                    people.person(hm, Matrix.Translation((p[0], p[1], 0.05)) @ Matrix.Rotation(rr.between(0, math.tau), 4, 'Z'), rr, ch=rch, kind=rr.pick({None: 4, 'hawker': 1, 'wrapper': 1}) or None)
+                    n += 1
+        rows = {'motor park': ('danfo', 2.6, 7.0, 12), 'truck park': ('container', 3.4, 18.5, 24), 'lorry park': ('lorry911', 3.2, 10.0, 16)}
+        if pc['d'] == 'foodgate' and kind == 'market':
+            rows['market'] = ('lorry911', 3.2, 10.0, 6)
+        if kind in rows:
+            vk, sx, sy, count = rows[kind]
+            c = cent(pts)
+            per = max(1, int(count ** 0.5 * 1.5))
+            for k in range(count):
+                x, y = c[0] + (k % per - (per - 1) / 2) * sx, c[1] + (k // per - 0.5) * sy
+                if in_poly((x, y), pts) and not in_building((x, y), 0.5):
+                    put_vehicle(vk, x, y, math.pi / 2, vehicles.condition(0.3, rr, True, parked=True), rr, rch, 0.3)
+                    built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+    # trains on the line: a commuter set at the Hub station, the old narrow-gauge train in Railside,
+    # a freight train at the port end
+    for name, at, consist in (('commuter', 'station', ['commuter'] * 4), ('old', 0.22, ['loco'] + ['coach'] * 4), ('freight', 0.9, ['loco'] + ['wagon'] * 8)):
+        line_pts = [P(p) for p in GD['rail']['pts']]
+        segl = [math.dist(line_pts[i], line_pts[i + 1]) for i in range(len(line_pts) - 1)]
+        S = sum(segl)
+        if at == 'station':
+            st = next((p for p in GD['pois'] if p['name'] == 'Hub Rail Station'), None)
+            if not st:
+                continue
+            q = P((st['x'], st['y']))
+            best, acc = (1e9, 0), 0.0
+            for i in range(len(line_pts) - 1):
+                A, B = line_pts[i], line_pts[i + 1]
+                for t in (j / 50 for j in range(51)):
+                    p = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t)
+                    if math.dist(p, q) < best[0]:
+                        best = (math.dist(p, q), acc + segl[i] * t)
+                acc += segl[i]
+            s0 = best[1]
+        else:
+            s0 = S * at
+        trng = Rng('train', name)
+        s = s0
+        for idx, kname in enumerate(consist):
+            fn, ln = vehicles.TRAIN[kname]
+            mid = s - ln / 2
+            acc = 0.0
+            for i in range(len(line_pts) - 1):
+                if acc + segl[i] >= mid:
+                    A, B = line_pts[i], line_pts[i + 1]
+                    t = (mid - acc) / segl[i]
+                    p = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t)
+                    if inside(p):
+                        M = Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(math.atan2(B[1] - A[1], B[0] - A[0]), 4, 'Z')
+                        if kname == 'commuter':
+                            fn(vm, M, trng, cab=idx == 0)  # the leading car has the driver's cab
+                        else:
+                            fn(vm, M, trng)
+                        built['train:' + kname] = built.get('train:' + kname, 0) + 1
+                    break
+                acc += segl[i]
+            s -= ln
+
     # structures, expressways, bridges, rail, canals, boardwalks, walls, gates
     tm = MeshBuilder()
     for s in GD.get('structures', []):
@@ -695,7 +848,7 @@ def build_tile(tx, ty, overrides):
             continue
         parcels.tree(pm, p[0], p[1], trng, kind=trng.pick({'palm': 2 if ch in ('old_island', 'elite', 'waterfront') else 1, 'broad': 2}))
 
-    for mb_, name in ((g, 'ground'), (pm, 'parcels'), (sm, 'street'), (tm, 'structures')):
+    for mb_, name in ((g, 'ground'), (pm, 'parcels'), (sm, 'street'), (tm, 'structures'), (vm, 'traffic'), (hm, 'people')):
         if mb_.faces:
             mb_.to_object(name, col, master)
     return col, built, (x0, y0)
