@@ -72,6 +72,10 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - walks to the Allen Roundabout strip at night, the Shrine, the Secretariat on protest day, and the airport fence for pickups
   - goes to the Hub's interchange and Food Gate's bus park for goods, on foot or by okada from the Capital's edge
   - checks that the Capital's edge roads lead into the Estate and Railside (still sketches) and into the Hub and Food Gate
+- **Emeka, electronics trader, the Bazaar (on foot and by okada):**
+  - has a lock-up in Alade Electronics Market and lives in a compound nearby
+  - deals with the market's own court (Container Court), buys scrap at Rago Yard, and takes stock to Fair Wholesale Plazas
+  - crosses the Coastal Expressway on foot, passes the barracks checkpoint, and rides to Jungle City, the Hub and the Capital (round its okada ban)
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -96,6 +100,9 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Jungle City 3017,5225 → 3029,5181 | walk | The Coastal Expressway as a barrier |
 | Gadget Village → Allen Roundabout Strip | walk | The Capital's trade to its night |
 | Gadget Village → Gidi Interchange | walk | The Capital to the city's bus hub (no okadas in the Capital) |
+| Ladi Lane Parts Market → Gadget Village | ride | Round the Capital's okada ban (and `--through`, metres inside) |
+| Alade Electronics Market → Gidi Interchange | ride | The Bazaar to the city's bus hub |
+| Bazaar house (1700,5600) → Alade Electronics Market | walk | A trader's way to work, across the expressway |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

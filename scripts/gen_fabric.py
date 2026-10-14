@@ -342,16 +342,17 @@ for P in secs2:
             if rnd.random() < RULE["dead_end"] and g.length > 110:  # stop short inside the block: a dead end
                 keep = rnd.uniform(.45, .8); g = substring(g, 0, g.length * keep) if rnd.random() < .5 else substring(g, g.length * (1 - keep), g.length)
             ribs.append(g)
-    if FG and FG.get("spur_every_m"):   # short side lanes off each finger, ending in the compounds (a fishbone: a T and a dead end each)
+    SPUR = FG if FG and FG.get("spur_every_m") else PROF.get("spurs")
+    if SPUR:   # short side streets off each rib (or finger), ending in the compounds (a fishbone: a T and a dead end each, no new block)
         spurs = []
         for g in ribs:
-            t = rnd.uniform(.3, 1) * FG["spur_every_m"]
+            t = rnd.uniform(.3, 1) * SPUR["spur_every_m"]
             while t < g.length - 25:
-                q = g.interpolate(t); sd = rnd.choice((1, -1)); L = rnd.uniform(*FG["spur_m"])
+                q = g.interpolate(t); sd = rnd.choice((1, -1)); L = rnd.uniform(*SPUR["spur_m"])
                 sp = LineString([(q.x, q.y), (q.x + sd * L, q.y)])
                 if Pr.buffer(-8).contains(sp.interpolate(1.0, normalized=True)) and all(sp.distance(o) > 18 for o in ribs + spurs if o is not g):
                     spurs.append(sp)
-                t += rnd.uniform(.6, 1.4) * FG["spur_every_m"]
+                t += rnd.uniform(.6, 1.4) * SPUR["spur_every_m"]
         streets += [rotate(g, th, origin=c, use_radians=True) for g in spurs]
     # cross streets between neighbouring ribs, staggered so most junctions are T's
     ribs.sort(key=lambda g: g.centroid.x)
@@ -951,7 +952,7 @@ for k, g in net_lines:
         if free(r, 0.2): add(r, "kiosk")
 # small named things on the street edge near their pins: a transformer, a food stall
 for sp in PROF.get("spots", []):
-    pin = POIS.get(sp["poi"])
+    pin = POIS.get(sp.get("at", sp["poi"]))   # "at": placed by another place's pin (the checkpoint outside the barracks)
     if pin is None: continue
     got = None
     for k, g in sorted(net_lines, key=lambda kg: kg[1].distance(pin)):
@@ -1122,6 +1123,22 @@ for p in parcels:
                 if abs(v) < BK["parade_m"] / 2 and abs(u) < BK["parade_m"]: continue
                 r = rect(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca, bl, bs, a)
                 if g.buffer(-4).contains(r) and road_free.contains(r): bld.append((r, "barracks"))
+    if p["kind"] == "plazas":   # wholesale plazas: big 3-storey blocks round a yard, some never finished (a concrete frame, no walls)
+        PZ = next(x for x in PROF["parcels"] if x["kind"] == "plazas"); ca, sa = math.cos(a), math.sin(a); bl, bs = PZ["block_m"]; i = 0
+        for v in (-1, 1):
+            for u in np.arange(-LL / 2 + bl / 2 + 6, LL / 2 - bl / 2 - 5, bl + 10):
+                r = rect(ctr.x + u * ca - v * sa * (bs / 2 + 9), ctr.y + u * sa + v * ca * (bs / 2 + 9), bl, bs, a)
+                if fit(r): bld.append((r, "unfinished" if i % PZ["unfinished_every"] == PZ["unfinished_every"] - 1 else "plaza")); i += 1
+    if p["kind"] == "livestock":   # a sinking livestock and scrap yard: rows of open pens, scrap piles along the back
+        LV = next(x for x in PROF["parcels"] if x["kind"] == "livestock"); ca, sa = math.cos(a), math.sin(a); pl, pw = LV["pen_m"]
+        for v in np.arange(-LL / 2, LL / 2, pw + LV["lane_m"]):
+            for u in np.arange(-LL / 2, LL / 2, pl + 2):
+                r = rect(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca, pl, pw, a)
+                if g.buffer(-14).contains(r) and road_free.contains(r): bld.append((r, "pen"))
+        edge = g.buffer(-5).exterior
+        for k2 in range(LV["scrap_piles"]):
+            q = edge.interpolate(k2 / LV["scrap_piles"], normalized=True); r = rect(q.x, q.y, 6, 6, a)
+            if g.contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-200:] if kk == "pen"): bld.append((r, "scrap"))
     if p["kind"] == "under bridge":   # rows of stalls between the slip road and the flyover
         for r in LMK.stall_rows(g, a): 
             if road_free.contains(r): bld.append((r, "stalls"))
@@ -1227,6 +1244,26 @@ for HL in PROF.get("halls", []):   # a big named building on a main-road frontag
 if RB_PT is not None:   # the night strip: the house fronts on the mains around the roundabout are bars, suya spots and small hotels
     bld = [(r, "strip" if k == "front" and r.distance(RB_PT) < RB["strip_m"] and r.distance(mainU) < CLEAR["main"] + 4 else k) for r, k in bld]
     bust = rect(RB_PT.x, RB_PT.y, 3, 3, 0); bld.append((bust, "bust")); poi_pos[RB["poi"]] = RB_PT
+# a dead-end lane that stops within 40 m of another way carries on to it as a footpath, where no house stands in the way
+# (a passage through the compounds: deep blocks no longer force the long way round). Drawn after the houses, so none moves;
+# a shed or a kiosk in its way is cleared.
+if W and PROF.get("lane_passages", True):
+    others = [g for k, g in net_lines] + lanes + [g for k, g in PATHS]; OT = STRtree(others)
+    SMALL = ("shed", "kiosk")   # a passage may clear a shed or a kiosk out of its way, never a house
+    BT_ = STRtree([r for r, k in bld]); BL_ = [r for r, k in bld]; BK_ = [k for r, k in bld]; gone = set()
+    def clear_(link): return not any(BK_[i] not in SMALL and BL_[i].intersects(link.buffer(0.6)) for i in BT_.query(link.buffer(0.6))) and not link.intersects(parcel_u)
+    for ln in lanes:
+        for end, prev in ((Point(ln.coords[0]), Point(ln.coords[1])), (Point(ln.coords[-1]), Point(ln.coords[-2]))):
+            near_ = [others[i] for i in OT.query(end.buffer(40)) if others[i] is not ln]
+            if not near_ or min(o.distance(end) for o in near_) < 1.0: continue   # this end already meets a way
+            L = end.distance(prev) or 1; ray = LineString([end, (end.x + (end.x - prev.x) / L * 40, end.y + (end.y - prev.y) / L * 40)])
+            hits = [h for o in near_ for x in [ray.intersection(o)] for h in getattr(x, "geoms", [x]) if h.geom_type == "Point" and h.distance(end) > 0.5]
+            tries = ([LineString([end, min(hits, key=end.distance)])] if hits else []) + \
+                    [LineString([end, nearest_points(o, end)[0]]) for o in sorted(near_, key=lambda o: o.distance(end))[:3]]   # straight on, else the nearest ways
+            link = next((t for t in tries if 1.0 < t.length <= 40 and clear_(t)), None)
+            if link is not None:
+                PATHS.append(("link", link)); gone |= {int(i) for i in BT_.query(link.buffer(0.6)) if BL_[i].intersects(link.buffer(0.6))}
+    if gone: bld = [rk for i, rk in enumerate(bld) if i not in gone]
 # ---------- 5. civic slots: real plots the civic layer can sit on ----------
 slots = []
 for r, kind in bld:
@@ -1256,7 +1293,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]

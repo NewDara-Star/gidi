@@ -53,7 +53,7 @@ def graph(ways, mode, ban=None, through=False):
         if ka == kb: continue   # a sliver shorter than the snap: its two ends are one junction (never drop a short link)
         m = seg.interpolate(0.5, normalized=True); i = int(np.atleast_1d(tr.query_nearest(m))[0]); k, n, _ = keep[i]
         inban = seg.intersection(ban).length if ban is not None and mode == "ride" and seg.intersects(ban) else 0.0
-        if inban > 0.5 and not through: continue
+        if (inban > 0.5 or (inban > 0 and ban.contains(seg.interpolate(0.5, normalized=True)))) and not through: continue   # tiny pieces too
         Gx.add_edge(ka, kb, w=seg.length, kind=k, name=n, geom=seg, inban=inban)
     # noding collinear streets can drop a sub-metre sliver between two pieces; a loose end within 1 m of another node joins it
     # (the same 1 m tolerance check_district.py uses)

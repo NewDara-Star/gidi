@@ -49,13 +49,17 @@ def graph(mode, through=False): return walknet.graph(ways, mode, BAN, through)
 def nearest_way(pt):
     i = int(np.atleast_1d(WT.query_nearest(pt))[0]); k, n, g = ways[i]; return k, n, g, g.distance(pt)
 def label(k, n): return f"{n} ({k})" if n else f"unnamed {k}"
-def resolve(arg):
+def resolve(arg, near=None):
+    """X,Y or part of a place name. Many names repeat across districts (a Fresh Life Pharmacy in the Maze and in the Hub):
+    of several matches, the one nearest `near` (the other end of the trip) is taken."""
     if "," in arg and arg.replace(",", "").replace(".", "").replace("-", "").isdigit():
         x, y = map(float, arg.split(",")); return Point(x, y), f"{x:.0f},{y:.0f}"
     hits = [p for p in POIS if arg.lower() in p["name"].lower()]
     if not hits: sys.exit(f"no place matching '{arg}'. Try: places")
-    p = hits[0]; return Point(p["x"], p["y"]), p["name"]
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
+    if near is None: hits = [p for p in hits if p["name"].lower() == arg.lower()] or hits   # alone: an exact name first
+    p = min(hits, key=lambda p: near.distance(Point(p["x"], p["y"]))) if near is not None else hits[0]
+    return Point(p["x"], p["y"]), p["name"] + (f" ({p['x']},{p['y']})" if len(hits) > 1 else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
 
 def overview():
     from collections import Counter
@@ -88,8 +92,11 @@ def look(x, y, r=60):
         if dd < 150: print(f"{'civic' if p.get('civic') else 'landmark'} {dd:.0f} m: {p['name']} ({p['type']})")
     print(f"rail: {RAIL.distance(pt):.0f} m away" + (f"; canal: {min(c.distance(pt) for c in CANALS):.0f} m" if CANALS else ""))
 def route(a, b, mode, through=False):
-    Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b)
-    EL = list(Gx.edges(data=True)); ET = STRtree([e[2]["geom"] for e in EL])
+    Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b, pa); pa, na = resolve(a, pb)   # repeated names: the nearest pair
+    EL = list(Gx.edges(data=True))
+    if mode == "ride" and BAN is not None and not through:   # round the ban: join the main network, not a sketch-road scrap at a border
+        main_ = max(nx.connected_components(Gx), key=len); EL = [e for e in EL if e[0] in main_]
+    ET = STRtree([e[2]["geom"] for e in EL])
     def attach(p, tag):   # step onto the nearest point of the nearest way (not the nearest junction), splitting that way there
         u, v, e = EL[int(np.atleast_1d(ET.query_nearest(p))[0])]; g = e["geom"]; t = g.project(p); q = g.interpolate(t)
         n = ("start" if tag == "a" else "end", round(q.x, 2), round(q.y, 2))
@@ -108,7 +115,9 @@ def route(a, b, mode, through=False):
         else: legs.append([lab, e["w"]])
     speed = 5 if mode == "walk" else 25
     dist = total + da + db; straight = pa.distance(pb)
-    print(f"{mode}: {na} -> {nb}: {dist:.0f} m ({dist/1000/speed*60:.1f} min at {speed} km/h); straight line {straight:.0f} m; detour ×{dist/max(1,straight):.2f}")
+    mins = dist / 1000 / speed * 60
+    if mode == "ride": mins = total / 1000 / speed * 60 + (da + db) / 1000 / 5 * 60   # the bits off the bike's network are on foot
+    print(f"{mode}: {na} -> {nb}: {dist:.0f} m ({mins:.1f} min" + (f", {da + db:.0f} m of it on foot" if mode == "ride" and da + db > 30 else f" at {speed} km/h") + f"); straight line {straight:.0f} m; detour ×{dist/max(1,straight):.2f}")
     print(f"off-network bits: {da:.0f} m at start, {db:.0f} m at end")
     if mode == "ride" and BAN is not None:
         if through: print(f"okada ban: {sum(Gx[u][v].get('inban', 0) for u, v in zip(path, path[1:])):.0f} m ridden inside the ban zone (--through)")
