@@ -80,6 +80,10 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - clears containers at the Container Yard and lives in the old reserve (Old Reserve Avenue) or the streets by the creek
   - walks past the Tank Farm and the truck park, pays his way along Collector Row, eats at the Liverpool Under-Bridge night market, visits a client at Kiri Prison
   - takes an okada from the Port's edge to Water Town's sawmill, Jungle City and the Bazaar, and checks the expressway footbridges
+- **Funmi, bread seller, Railside (on foot and by okada):**
+  - lives by the railway and buys bread before dawn at Ayo Bakery Row
+  - sells at the Ikotun-style Roundabout Market and the Bale Market, passes the cattle market, the waterworks, the landfill and the pipeline corridor
+  - crosses the railway on foot and rides to the Hub's interchange, the Capital's edge and the Bazaar
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -109,6 +113,8 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Bazaar house (1700,5600) → Alade Electronics Market | walk | A trader's way to work, across the expressway |
 | Old Reserve Avenue → Container Yard | walk | A clearing agent's way to work in the Port |
 | Container Yard → Gidi Interchange | ride | The oja's way from the port into the city (round the Port's okada ban) |
+| Ayo Bakery Row → Ikotun-style Roundabout Market | walk | The dawn bread run |
+| Ikotun-style Roundabout Market → Gidi Interchange | ride | Railside into the city's bus hub |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

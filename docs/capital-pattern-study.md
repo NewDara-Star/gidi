@@ -87,7 +87,7 @@ Data:
 - **Land use, whole LGA:** residential 1,937 ha, industrial 862 ha, commercial 165 ha, military 186 ha.
 
 ## 4. The generator: what is new for the Capital
-`scripts/gen_fabric.py capital 3 3.2` (v1.1: collector streets above 22 ha), with its settings in `scripts/district_profiles.py` (`capital`).
+`scripts/gen_fabric.py capital 3 3.8` (v1.1: collector streets above 22 ha), with its settings in `scripts/district_profiles.py` (`capital`).
 
 **Landmarks** (from the district model):
 1. **Gadget Village** (`zone`). The houses within 120 m of the pin (4.5 ha) are stacked into 3–4 storey phone malls, with a kiosk every ~9 m along the streets.
@@ -119,17 +119,19 @@ Data:
 
 | | Real, typical km² | Real, dense km² | **The Capital** |
 |---|---|---|---|
-| Streets, km/km² (edge roads half) | 11.3 | 15.9 | **14.7** |
-| Junctions/km² | 47 | 80 | **61** |
-| T-junctions | 83% | 88% | **84%** |
-| Dead ends per junction | 0.17 | 0.14 | **0.09** |
-| Blocks/km² (counted closed) | 31 | 49 | **46** |
-| Typical block | 1.6 ha | 0.8 ha | **2.2 ha** |
-| Buildings/km² (estimated) | 967 | 1,107 | **1,150** |
-| Ground built on (estimated) | 30% | 35% | **30%** |
-| Typical building | 187 m² | 187 m² | **219 m²** |
+| Streets, km/km² (edge roads half) | 11.3 | 15.9 | **13.8** |
+| Junctions/km² | 47 | 80 | **53** |
+| T-junctions | 83% | 88% | **97%** |
+| Dead ends per junction | 0.17 | 0.14 | **0.14** |
+| Blocks/km² (counted closed) | 31 | 49 | **35** |
+| Typical block | 1.6 ha | 0.8 ha | **3.1 ha** |
+| Buildings/km² (estimated) | 967 | 1,107 | **1,157** |
+| Ground built on (estimated) | 30% | 35% | **31%** |
+| Typical building | 187 m² | 187 m² | **228 m²** |
 | Over 400 m² | 16% | 16% | **19%** |
-| Gap between houses | 2.2 m | 2.2 m | **2.1 m** |
+| Gap between houses | 2.2 m | 2.2 m | **2.3 m** |
+
+**v1.2 (14 Oct 2026, with Railside):** the Capital now keeps its crossings (`keep_gateways`), so it stays the same when regenerated beside Railside. Kept that way, it needed a retune: seed 3, ×3.8, collector streets above 30 ha, and dead-end side streets every ~250 m. Streets, junctions, blocks and dead ends are inside the real range. T-junctions (97%) run high. The landmarks moved with the new streets. Streets also stop at the roundabout's ring now; before, one crossed its island.
 
 **v1.1 (14 Oct 2026):** blocks are now counted the fair way, with the real square's border closed as our edge roads close the district. Counted like that, the Capital had 59 blocks per km² against the real 31–49. Collector streets now start only above 22 ha, which brings blocks, streets and junctions inside the real range. Dead ends (0.09) stay a little under it.
 
@@ -152,5 +154,5 @@ Data:
   - `scripts/study_extract.py "Ikeja" capital 3.333,6.590,3.372,6.626`, then `study_analyse.py`, `study_connect.py`, `study_core.py` and `study_landmarks.py`, all with `capital`
   - `scripts/study_extract.py "Ikeja" ikeja` with the same steps, for context and sizes
   - then `scripts/study_undermapped.py capital Ikeja maze:Mushin,hub:Oshodi/Isolo,jungle:Ajeromi/Ifelodun ikeja`
-- **Generator:** `scripts/gen_fabric.py capital 3 3.2` → `web/gen-capital.json`. `web/network.json` gains 2 edges and 10 gateways.
+- **Generator:** `scripts/gen_fabric.py capital 3 3.8` → `web/gen-capital.json`. `web/network.json` gains 2 edges and 10 gateways.
 - **Picture:** `docs/img/capital-vs-real.png`

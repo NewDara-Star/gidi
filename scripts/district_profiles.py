@@ -252,7 +252,8 @@ def capital(ST, LM):
         "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.5, "cross_scale": 2.2, "dead_end": 0.1, "size_lo_u": 0.5, "plot_u": [0.55, 0.99],   # bigger houses (real typical 187 m2)
-        "sector_split_ha": 22,        # fewer collector streets: 59 blocks/km2 against the real 31-49 (counted closed)
+        "sector_split_ha": 30,        # fewer collector streets: 59 blocks/km2 against the real 31-49 (counted closed); 30 since Railside
+        "spurs": {"spur_every_m": 250, "spur_m": [25, 45]},   # a few dead-end side streets (real 0.14-0.17 dead ends per junction)
         "back_row": 0.55, "big_front": 0.5, "vacant": 0.08,   # offices, plazas and banks on the main roads (real: 16% over 400 m2)
         "internal_mains": 2,          # real main roads 4-5.5 km/km2: the most of any district so far
         "name_endings": ends,
@@ -269,6 +270,7 @@ def capital(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
         "t_into_done": True,     # built after the Hub and Food Gate: its main roads T into their edge roads instead of asking them for new crossings
+        "keep_gateways": True,   # rebuilt after Railside: its crossings with Railside (and all others) stay as agreed
     }
 
 def bazaar(ST, LM):
@@ -300,6 +302,7 @@ def bazaar(ST, LM):
             {"kind": "school", "ha": round(LM["school_m2"]["p25"] / 1e4, 2), "near_main": False, "gate": "nearest", "min_w": 70},
             {"kind": "pitch", "ha": 0.15, "near_main": False},
         ],
+        "keep_gateways": True,   # rebuilt after Railside: its crossings stay as agreed
         "spots": [{"poi": "Container Court", "kind": "container", "w": 12.2, "d": 2.5},                 # the shipping-container jail
                   {"poi": "Barracks checkpoint", "at": "Barracks", "kind": "checkpoint", "w": 4.0, "d": 3.0}],   # "checkpoint outside"
         "market_through_aisle": True,
@@ -348,7 +351,41 @@ def port(ST, LM):
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
     }
 
+def railside(ST, LM):
+    """Railside: Agege, Ifako/Ijaye and Alimosho (study-railside*, the three whole LGAs: commuter sprawl along the railway).
+    Heights from the three LGAs in lga_table.json. The district model: bakeries, the cattle market, the market roundabout,
+    the old waterworks, the pipeline, the landfill."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 83 x 2.1 = 174 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Avenue", "Crescent")}
+    return {
+        "lgas": ["Agege", "Ifako/Ijaye", "Alimosho"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.0, "cross_scale": 2.2, "dead_end": 0.6,   # real dead ends 0.25-0.40 per junction, 88-99% T
+        "sector_split_ha": 25,
+        "size_lo_u": 0.6, "plot_u": [0.5, 0.99], "back_row": 0.5, "big_front": 0.1, "vacant": 0.1,   # real typical house 127-175 m2
+        "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # the Capital's main road carries on in
+        "rail_bridge_m": LM["flyover_spans_m"]["p50"],   # ...and over the rail on a bridge (real: 4 of 6 major-road crossings bridged)
+        "roundabout": {"poi": "Ikotun-style Roundabout Market", "r_m": 26, "strip_m": 0, "name": "Market Roundabout"},   # four exits; the market sits on it
+        "name_endings": ends,
+        "parcels": [
+            {"kind": "market", "poi": "Ikotun-style Roundabout Market", "ha": 3.0, "near": "roundabout", "near_main": True},   # lock-ups on the roundabout
+            {"kind": "livestock", "poi": "Oko Cattle Market & Abattoir", "ha": 3.0, "near_main": False, "pen_m": [10, 6], "lane_m": 5, "scrap_piles": 0, "gate": "nearest", "min_w": 90},
+            {"kind": "waterworks", "poi": "Iju Waterworks (1915)", "ha": 2.0, "near_main": False, "works_m": [40, 18], "tanks": 2, "tank_r_m": 11, "gate": "nearest", "min_w": 80},
+            {"kind": "landfill", "poi": "Railside Landfill", "ha": round(ST["landuse_polygons_ha"]["landfill"][1] / ST["landuse_polygons_ha"]["landfill"][0], 1), "near_main": False,
+             "block_m": [14, 14], "gap_m": [12, 12], "margin_m": 8, "building": "mound", "gate": "nearest", "min_w": 90},   # real mean landfill ~8 ha
+            {"kind": "market", "poi": "Bale Market (Mon/Wed/Fri)", "ha": 1.5, "near_main": True},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2) if LM.get("school_m2") else 1.0, "near_main": False, "gate": "nearest", "min_w": 70},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "zone": {"poi": "Ayo Bakery Row", "r_m": 70, "kind": "bakery", "min_m2": 50, "storeys": [1, 2], "kiosk_every_m": 1000},   # house fronts turned into bakeries
+        "pipeline": {"poi": "Pipeline Corridor", "bearing_deg": 20, "width_m": 24},   # the line's cleared right of way
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside}.get(did, lambda ST, LM: {})(ST, LM)
