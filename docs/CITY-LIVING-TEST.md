@@ -71,7 +71,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - rents a counter in a phone mall in Gadget Village and lives in a back house nearby
   - walks to the Allen Roundabout strip at night, the Shrine, the Secretariat on protest day, and the airport fence for pickups
   - goes to the Hub's interchange and Food Gate's bus park for goods, on foot or by okada from the Capital's edge
-  - checks that the Capital's edge roads lead into the Estate and Railside (still sketches) and into the Hub and Food Gate
+  - checks that the Capital's edge roads lead into the Estate, Railside, the Hub and Food Gate
 - **Emeka, electronics trader, the Bazaar (on foot and by okada):**
   - has a lock-up in Alade Electronics Market and lives in a compound nearby
   - deals with the market's own court (Container Court), buys scrap at Rago Yard, and takes stock to Fair Wholesale Plazas
@@ -84,6 +84,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - lives by the railway and buys bread before dawn at Ayo Bakery Row
   - sells at the Ikotun-style Roundabout Market and the Bale Market, passes the cattle market, the waterworks, the landfill and the pipeline corridor
   - crosses the railway on foot and rides to the Hub's interchange, the Capital's edge and the Bazaar
+- **Musa, gateman and night-delivery rider, the Estate (on foot and by okada):**
+  - mans the Estate Gate on the main road from the Capital, and lives in a boys' quarters behind a big house
+  - delivers at night to The Senator's House and the Estate Club, "deliveries to men you don't question"
+  - walks the gated streets, counts the gates and gatehouses on his rounds, and checks that every street gate still lets people walk through
+  - rides out to the Capital's edge (round its okada ban), the Hub's interchange and Railside's market
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -115,6 +120,9 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Container Yard → Gidi Interchange | ride | The oja's way from the port into the city (round the Port's okada ban) |
 | Ayo Bakery Row → Ikotun-style Roundabout Market | walk | The dawn bread run |
 | Ikotun-style Roundabout Market → Gidi Interchange | ride | Railside into the city's bus hub |
+| Estate Gate → The Senator's House | walk | The gateman's round to the big house |
+| Estate Club → Gidi Interchange | ride | The Estate into the city's bus hub (round the Capital's okada ban) |
+| Estate Gate → Gadget Village | walk | The Estate's walk into the Capital |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

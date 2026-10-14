@@ -115,5 +115,19 @@ gaps.sort(key=lambda x: -x[0])
 out["pedestrians_on_expressways"] = {"expressway_km": round(sum(g.length for t, g in xp) / 1000, 1), "bus_stops_on_them": len(xstops),
                                      "ways_across_on_foot": len(crossings), "longest_stretch_without_crossing_m": round(gaps[0][0]) if gaps else 0,
                                      "examples": ex([p for d, p in gaps])}
+# 11. gates across streets: a gate or barrier mapped on a residential street (estates, closes and compounds gate the public street);
+# read straight from the OSM extract, since the study pickle keeps no barrier nodes
+import osmium
+from shapely.prepared import prep
+fwd = Transformer.from_crs(4326, 32631, always_xy=True).transform; PA = prep(AREA.buffer(5)); gts = []
+class _G(osmium.SimpleHandler):
+    def node(s, n):
+        if n.tags.get("barrier") in ("gate", "lift_gate", "swing_gate", "sliding_gate"):
+            p = Point(fwd(n.location.lon, n.location.lat))
+            if PA.contains(p): gts.append(p)
+_G().apply_file("lagos.osm.pbf")
+RES_ST = [g for t, g in roads if hw(t) in ("residential", "living_street", "unclassified", "tertiary")]; RST = STRtree(RES_ST)
+sg = [p for p in gts if any(RES_ST[j].distance(p) < 2 for j in RST.query(p.buffer(2)))]
+out["gates_across_streets"] = {"n": len(sg), "per_km2": round(len(sg) / A, 2), "examples": ex(sg), "rule": "a mapped gate or barrier on a residential, unclassified or tertiary street"}
 json.dump(out, open(f"study-{DID}-isms.json", "w"), indent=1)
 print(json.dumps({k: (v if not isinstance(v, dict) else {kk: vv for kk, vv in v.items() if kk != "examples"}) for k, v in out.items()}, indent=1)[:3000])

@@ -385,7 +385,48 @@ def railside(ST, LM):
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
     }
 
+def estate(ST, LM):
+    """The Estate: Ikeja GRA, Magodo and Omole (study-estate*, three boxes inside Ikeja and Kosofe: the estates only, as the brief says).
+    OSM maps the streets of all three but the buildings only in Ikeja GRA: building figures come from GRA's traced cells
+    (scripts/study_wellmapped.py). Heights from Ikeja and Kosofe in lga_table.json. The district model: gated streets, gatemen,
+    duplexes behind high walls, generators and water tanks, quiet tree-lined streets, a church and a mosque at the centre."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 84 x 2.1 = 176 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Way", "Close", "Crescent", "Avenue")}
+    return {
+        "lgas": ["Ikeja", "Kosofe"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.9,
+        "sector_split_ha": 40,        # few collector streets: real blocks 22-24 per km2 (counted closed), the fewest of any district
+        "spurs": {"spur_every_m": 45, "spur_m": [40, 90]},   # closes: real dead ends 0.52-0.65 per junction, the most of any district
+        "size_lo_u": 0.6, "plot_u": [0.6, 0.99], "back_row": 0.6, "courtyard_m": [1.5, 3], "big_front": 0.0, "vacant": 0.18,   # big houses, a boys' quarters behind; empty plots
+        "setback_m": [6, 12], "side_garden_m": [4, 10],   # a front yard behind the wall and a garden down the side (real edge-to-street median 15-19 m)
+        "kiosk_every_m": 400,         # quiet streets: few kiosks
+        "internal_mains": 1, "t_into_done": True, "continue_mains": True,   # the Capital's main road carries on in, through the main gate
+        "name_endings": ends,
+        "parcels": [
+            # where the men above the boss meet: a 0.6 ha compound, a three-storey house, boys' quarters, a gatehouse, generators, a pool
+            {"kind": "compound", "poi": "The Senator's House", "ha": 0.6, "near_main": False, "gate": "nearest", "min_w": 70,
+             "buildings": [["mansion", [30, 18], [0.0, 0.1]], ["back", [16, 6], [0.55, -0.6]], ["generator", [4, 2.5], [-0.6, -0.6]],
+                           ["generator", [4, 2.5], [-0.45, -0.6]], ["water tank", [3, 3], [0.75, 0.55]]],
+             "grounds": [["pool", [12, 5], [-0.45, 0.55]]]},
+            # the quiet bar for big men: a clubhouse, a pool and a tennis court behind the wall
+            {"kind": "club", "poi": "Estate Club", "ha": 0.8, "near_main": True, "gate": "nearest", "min_w": 70,
+             "buildings": [["clubhouse", [34, 20], [-0.35, 0.0]]],
+             "grounds": [["pool", [25, 12], [0.25, 0.45]], ["court", [36, 18], [0.45, -0.4]]]},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False, "gate": "nearest", "min_w": 70},   # a private school
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        # the gates (real: 5.1 street gates per km2 mapped, twice any other district; a median 13 m in from the main road)
+        "estate_gates": {"in_m": 13, "house_m": [3.5, 3.0], "main_in_m": 30, "main_house_m": [6, 4], "poi": "Estate Gate"},
+        "plot_walls": {"gate_m": 4.0, "vacant_walled": 0.5, "parcels": ["compound", "club", "school"]},   # high walls round every plot (the district model)
+        "yard_kit": {"generator": 0.85, "generator_m": [2.6, 1.6], "water tank": 0.6, "tank_m": [2.4, 2.4]},   # generators and water tanks (the district model)
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]}, "lane_passages": False,   # no short cuts through walled compounds
+        "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate}.get(did, lambda ST, LM: {})(ST, LM)
