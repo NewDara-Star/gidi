@@ -25,9 +25,10 @@ BUILDINGS = {
     'office block': places.office_block, 'beach bar': places.beach_bar, 'beach shack': places.beach_shack, 'horse shelter': places.horse_shelter,
 }
 # civic places in web/gidi-data.js 'safe_ground' (each with its own plot and name)
+from . import landmarks as _landmarks  # noqa: E402
 CIVIC_PLOTS = {
     'church': places.church, 'mosque': places.mosque, 'school': places.school, 'clinic': places.clinic,
-    'hospital': places.clinic, 'landmark': places.palace,
+    'hospital': places.clinic, 'landmark': _landmarks.build,  # by name (landmarks.BY_NAME), else a hall
 }
 # point places (web/gidi-data.js 'pois'): the nearest building plot becomes this
 POI_PLACES = {

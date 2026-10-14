@@ -163,7 +163,12 @@ for kind, src in (('street', 'streets'), ('lane', 'lanes'), ('path', 'paths')):
     for d, lines in GD.get(src, {}).items():
         for i, ln in enumerate(lines):
             ROADS.append(dict(k=kind, pts=[P(p) for p in ln], w=WIDTH[kind], d=d, id=f'{d}/{kind}/{i}'))
+_seen_mains = set()
 for i, m in enumerate(GD.get('mains', [])):
+    sig = tuple(tuple(round(c, 1) for c in p) for p in m['pts'])
+    if sig in _seen_mains or sig[::-1] in _seen_mains:
+        continue  # an edge road both its districts list: build it once (else double kerbs, poles and lamps)
+    _seen_mains.add(sig)
     ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=WIDTH['main'], d=m.get('d'), id=f'main/{i}', name=m.get('name')))
 BUILDINGS = []
 for d, lst in GD['buildings'].items():
