@@ -3,7 +3,7 @@
 Run from the repo root: python3 scripts/explore_city.py COMMAND ...
 Usage:
   explore_city.py overview                      what's here: size, counts, landmarks, parcels
-  explore_city.py home [n]                      pick resident house number n (default random) and describe it
+  explore_city.py home [n] [district]           pick the n-th resident house (default random), optionally in one district, and describe it
   explore_city.py look X Y [radius]             what you see standing at X,Y (metres)
   explore_city.py walk FROM TO                  walk on foot (5 km/h). FROM/TO = landmark name (part ok) or X,Y
   explore_city.py ride FROM TO                  okada ride (25 km/h, no lanes, arterials allowed)
@@ -30,8 +30,11 @@ WATER = {k: unary_union([Polygon(b[1:]) for b in G["buildings"][k] if b[0] in ("
 def where(pt):
     for k, p in DP.items():
         if p.buffer(2).contains(pt) or WATER[k].contains(pt): return DS[k]["name"]
+    for k, p in DP.items():   # edge roads are gently bent, up to 16 m off the outline: still that district's road
+        if p.buffer(20).contains(pt): return DS[k]["name"]
     return "outside the built districts"
 B = [(b[0], Polygon(b[1:]), st) for DID in DIDS for b, st in zip(G["buildings"][DID], G["storeys"][DID])]
+BD = [DID for DID in DIDS for b in G["buildings"][DID]]   # each building's district
 BT = STRtree([p for k, p, st in B])
 import walknet
 ways = walknet.ways_of(G, DIDS, AREA)   # (kind, name, LineString)
@@ -51,7 +54,7 @@ def resolve(arg):
     hits = [p for p in POIS if arg.lower() in p["name"].lower()]
     if not hits: sys.exit(f"no place matching '{arg}'. Try: places")
     p = hits[0]; return Point(p["x"], p["y"]), p["name"]
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
 
 def overview():
     from collections import Counter
@@ -119,8 +122,10 @@ def route(a, b, mode):
                 how = " (up on the deck)" if up else (f" (bridge: {over[0]})" if over else (" (worn path over the tracks)" if e["kind"] == "path" else " (at ground level)"))
                 print(f"you cross the rail on {label(e['kind'], e['name'])}{how}")
         print("districts on the way: " + " -> ".join(dict.fromkeys(where(P_(c)) for c in path[::max(1, len(path)//12)] + [path[-1]])))
-def home(n=None):
-    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt")]
+def home(n=None, dist=None):   # dist: a district id or part of its name ("hub", "Water"), to pick a house there
+    want = None if dist is None else next((k for k in DS if dist.lower() in (k + " " + DS[k]["name"]).lower()), None)
+    if dist is not None and want is None: print(f"no built district matching '{dist}'"); return
+    res = [i for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt") and (want is None or BD[i] == want)]
     i = res[n % len(res)] if n is not None else random.choice(res)   # n picks the n-th house; the printed id is its building index
     k, p, st = B[i]; c = p.centroid
     print(f"house #{i}: {bkind(k, st)}, footprint {p.area:.0f} m², at {c.x:.0f},{c.y:.0f}")
@@ -141,6 +146,6 @@ if __name__ == "__main__":
     elif a[0] == "places": places()
     elif a[0] == "look": look(float(a[1]), float(a[2]), float(a[3]) if len(a) > 3 else 60)
     elif a[0] in ("walk", "ride"): route(a[1], a[2], a[0])
-    elif a[0] == "home": home(int(a[1]) if len(a) > 1 else None)
+    elif a[0] == "home": home(int(a[1]) if len(a) > 1 else None, a[2] if len(a) > 2 else None)
     elif a[0] == "problems": problems()
     else: print(__doc__)

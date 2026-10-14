@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub, jungle, foodgate, watertown (in review)
-- **Then:** capital, bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
+- **Done:** maze, hub, jungle, foodgate, watertown, capital
+- **Then:** bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
 ## District → inspiration (OSM `name` of the LGA, as in `adm6.geojson`)
@@ -44,6 +44,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - `python3 scripts/study_extract.py "<LGA1>,<LGA2>" <id>`
    - then `study_analyse.py <id>`, `study_connect.py <id>` and `study_core.py <id>`
    - For neighbourhood-level districts, pass a box: `study_extract.py "<LGA>" <id> west,south,east,north` (degrees). Food Gate is the worked example; several boxes are separated by `;` (Water Town). For a waterfront, `scripts/study_village.py <id>` splits the stilt village off the land, and `study_core.py <id> --land` measures the land only.
+   - Where OSM maps the streets but few of the buildings (central Ikeja), `scripts/study_undermapped.py` estimates the building cover from WorldCover and the well-mapped districts. The Capital is the worked example.
    - Write `docs/<id>-pattern-study.md` in the same shape as the Maze study. It covers roads, buildings, land, water, rail, connections and the limits of the data, plus the height, people, tree and terrain numbers from `lga_table.json`.
 3. **Generate:**
    - Add the district to `scripts/district_profiles.py`. The Hub's and the Maze's profiles are the worked examples.
@@ -54,7 +55,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - storeys per building from the district's height bands
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, and Water Town seed 42, scale 3.5. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), and the Capital seed 3, scale 3.2. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.

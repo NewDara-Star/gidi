@@ -69,6 +69,7 @@ def hub(ST, LM):
                  "cut_every_m": 90, "cut_max_m": 130},   # owner's review: the rail-side blocks west of Ayinde Avenue were too deep (walks x2.6-3.5)
         "station_skywalk": {"name": "Station skywalk", "width": 4},   # over Ring Road and the rail, as at the real interchange
         "lock": {"parcels": ["Boss's motor park"]},   # the opening: the boss watches the chase from here (web/locked.json)
+        "keep_gateways": True,   # rebuilt after the Capital: its crossings with the Capital (and all others) stay as agreed
     }
 
 def maze(ST, LM):
@@ -235,7 +236,38 @@ def watertown(ST, LM):
         "lock": {"parcels": ["Okobaba Sawmill"]},   # the sawmill chase's ground stays put when the land fabric is rebuilt (web/locked.json)
     }
 
+def capital(ST, LM):
+    """The Capital: central Ikeja (study-capital*, a box round the phone market, Allen and the state secretariat; GRA is left to the
+    Estate). OSM maps Ikeja's streets well but few of its buildings: building density is estimated (scripts/study_undermapped.py)
+    and house sizes come from the whole LGA (study-ikeja*). Heights from Ikeja in lga_table.json, the tallest LGA so far."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Way", "Close", "Avenue", "Crescent", "Drive")}
+    return {
+        "lgas": ["Ikeja"],
+        "sizes_from": "ikeja",
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.5, "cross_scale": 2.2, "dead_end": 0.1, "size_lo_u": 0.5, "plot_u": [0.55, 0.99],   # bigger houses (real typical 187 m2)
+        "back_row": 0.55, "big_front": 0.5, "vacant": 0.08,   # offices, plazas and banks on the main roads (real: 16% over 400 m2)
+        "internal_mains": 2,          # real main roads 4-5.5 km/km2: the most of any district so far
+        "name_endings": ends,
+        "roundabout": {"poi": "Allen Roundabout Strip", "r_m": 22, "strip_m": 160},   # the all-night strip round a roundabout with a bust
+        "zone": {"poi": "Gadget Village", "r_m": 120, "kind": "phone mall", "min_m2": 80, "storeys": [3, 4], "kiosk_every_m": 9},   # 4.5 ha of the real 14 ha
+        "halls": [{"poi": "The Shrine", "kind": "hall", "m2": 1200, "storeys": 2}],   # the live-music hall (the real compound is 0.2 ha)
+        "parcels": [
+            {"kind": "government", "poi": "Secretariat", "ha": 3.0, "near_main": True, "storeys": 5, "slab_m": [90, 16], "slab_gap_m": 50},
+            {"kind": "barracks", "poi": "Cantonment", "ha": 4.0, "near_main": False, "block_m": [40, 9], "gap_m": 9, "parade_m": 44, "gate": "nearest"},
+            {"kind": "airfield", "poi": "Airport Fence", "ha": 3.5, "near_main": False},   # the airport's grass edge behind its fence
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "pitch", "ha": round(LM["pitch_m2"]["p75"] / 1e4, 2), "near_main": False},
+        ],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+        "t_into_done": True,     # built after the Hub and Food Gate: its main roads T into their edge roads instead of asking them for new crossings
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital}.get(did, lambda ST, LM: {})(ST, LM)
