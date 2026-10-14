@@ -122,7 +122,7 @@ def house_spec(a, rng):
     paint = _c(rng, ch['paints'])
     trim = _c(rng, ch['trims'])
     unfinished = a.get('unfinished', False)
-    flat = rng.chance(ch['flat_roof_p'].get(min(s, 4), 0.9)) or unfinished
+    flat = rng.chance(ch['flat_roof_p'].get(min(s, 4), 0.9)) or unfinished or len(a['poly']) != 4  # pitched roofs need a quad
     win_type = rng.pick(ch['window'])
     if wealth > 0.6 and win_type == 'louvre':
         win_type = 'sliding'

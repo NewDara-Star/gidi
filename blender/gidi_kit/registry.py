@@ -22,13 +22,21 @@ BUILDINGS = {
     'stage': places.stage, 'canopy': places.canopy, 'bust': places.bust, 'palace': places.palace,
     'stilt bar': places.stilt_bar, 'saw shed': places.saw_shed, 'hall': places.hall, 'clubhouse': places.clubhouse,
     'studio': places.studio, 'cafe': places.cafe,
+    'office block': places.office_block, 'beach bar': places.beach_bar, 'beach shack': places.beach_shack, 'horse shelter': places.horse_shelter,
 }
 # civic places in web/gidi-data.js 'safe_ground' (each with its own plot and name)
 CIVIC_PLOTS = {
     'church': places.church, 'mosque': places.mosque, 'school': places.school, 'clinic': places.clinic,
     'hospital': places.clinic, 'landmark': places.palace,
 }
-PARCELS = {}
+# point places (web/gidi-data.js 'pois'): the nearest building plot becomes this
+POI_PLACES = {
+    'police': places.police_station, 'fire': places.fire_station, 'fuel': places.fuel_station, 'bank': places.bank_branch,
+    'chemist': places.chemist, 'hospital': places.clinic, 'clinic': places.clinic, 'gov': places.office, 'council': places.office,
+    'night': places.nightclub, 'industry': places.warehouse, 'betting': places.cafe,
+}
+from . import parcels as _parcels  # noqa: E402
+PARCELS = {k: _parcels for k in _parcels.BUILDERS}
 STRUCTURES = {}
 CIVIC = {}
 

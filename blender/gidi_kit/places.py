@@ -636,3 +636,201 @@ def works(a, rng, collection=None):
 
 def unfinished_plaza(a, rng, collection=None):
     return plaza(a, rng, collection, unfinished=True)
+
+
+# ---------------------------------------------------------------- point places (web/gidi-data.js 'pois')
+def police_station(a, rng, collection=None):
+    """Divisional police station (research-civic 7): an invented two-tone block (pale blue, navy
+    band), a charge-room counter, a yard of rusting seized cars and an okada heap behind."""
+    poly = _poly(a)
+    mb = MeshBuilder()
+    fc = a.get('facing', 0)
+    block(mb, poly, max(1, min(2, a.get('storeys', 2))), dict(style='govt', wall=hex_rgb('#8db6d9'), band=hex_rgb('#1f2e5a'), trim=hex_rgb('#f2f2ee'), wear=_wear(a, rng), window='louvre', fins=False, roof='parapet', facing=fc, bars='grid',
+                                                           sign=(a.get('label') or 'GIDI POLICE • DIVISIONAL HQ').upper(), sign_bg=hex_rgb('#1f2e5a'), sign_fg=hex_rgb('#ffffff')), rng)
+    i, L, F = faces(poly)[(fc + 2) % 4]
+    from .vehicles import car, okada
+    for k in range(rng.randrange(3, 7)):  # the pound
+        car(mb, parts.at(F, rng.between(-L / 2.5, L / 2.5), rng.between(3, 9), 0, rz=rng.between(0, 6)), rng, 'wreck', kind=rng.pick(['saloon', 'suv', 'pickup']))
+    for k in range(rng.randrange(4, 10)):
+        okada(mb, parts.at(F, rng.between(-L / 3, L / 3), rng.between(1.5, 3), 0.1 * k % 0.6, rz=rng.between(0, 6), rx=rng.between(-1.4, 1.4)), rng, 'battered')
+    return _done(mb, a, collection)
+
+
+def fire_station(a, rng, collection=None):
+    """Fire station (research-civic 12): white with a signal-red band, red appliance bay doors,
+    a drill/hose tower."""
+    poly = _poly(a)
+    mb = MeshBuilder()
+    fc = a.get('facing', 0)
+    block(mb, poly, 2, dict(style='govt', wall=hex_rgb('#f2f0ea'), band=hex_rgb('#c8202a'), trim=hex_rgb('#c8202a'), wear=_wear(a, rng), window='sliding', fins=False, roof='parapet', facing=fc, entrance=False,
+                            sign=(a.get('label') or 'GIDI FIRE SERVICE').upper(), sign_bg=hex_rgb('#c8202a'), sign_fg=hex_rgb('#ffffff')), rng)
+    i, L, F = faces(poly)[fc]
+    for u in (-L / 4, L / 4):
+        parts.roller_shutter(mb, F, u, min(3.6, L / 2 - 0.6), dict(col=hex_rgb('#c8202a'), open=rng.between(0.0, 0.9), wear=0.3))
+    p = poly[(fc + 2) % 4]
+    mb.box('paint', Matrix.Translation((p[0], p[1], 7.5)), hex_rgb('#f2f0ea'), 0.4, size=(3, 3, 15))
+    mb.box('paint', Matrix.Translation((p[0], p[1], 14)), hex_rgb('#c8202a'), 0.4, size=(3.05, 3.05, 1.0))
+    return _done(mb, a, collection)
+
+
+def fuel_station(a, rng, collection=None):
+    """A fuel station (research-commerce; no real brands): a canopy on columns over 2-4 pump
+    islands, a small shop, a price board, an invented livery. Pumps at least 15 m from the road."""
+    poly = _poly(a)
+    mb = MeshBuilder()
+    lv = rng.pick([('#1f6f3a', '#f2c21b'), ('#c8202a', '#f2f2ee'), ('#1f4fa0', '#f2c21b'), ('#e07b1a', '#1f3f8a')])
+    c1, c2 = hex_rgb(lv[0]), hex_rgb(lv[1])
+    i, L, F = faces(poly)[a.get('facing', 0)]
+    mb.face([(p[0], p[1], 0.05) for p in offset(poly, 3)], 'concrete', hex_rgb('#a8a49a'), 0.5)
+    can = parts.at(F, 0, -4.0, 0)
+    for x in (-5, 5):
+        for y in (-3, 3):
+            mb.box('paint', can @ Matrix.Translation((x, y, 2.6)), hex_rgb('#f2f2ee'), 0.2, size=(0.5, 0.5, 5.2))
+    mb.box('paint', can @ Matrix.Translation((0, 0, 5.5)), c2, 0.2, size=(14, 9, 0.6))
+    mb.box('paint', can @ Matrix.Translation((0, 0, 5.85)), c1, 0.2, size=(14.2, 9.2, 0.25))
+    for x in (-5, 0, 5):
+        mb.box('concrete', can @ Matrix.Translation((x, 0, 0.12)), hex_rgb('#d8d2c6'), 0.4, size=(1.2, 3.5, 0.24))
+        for y in (-1, 1):
+            mb.box('steel', can @ Matrix.Translation((x, y * 0.9, 1.0)), c1, 0.3, size=(0.6, 0.45, 1.6))
+    block(mb, poly, 1, dict(style='govt', wall=hex_rgb('#f2f2ee'), band=c1, trim=c1, wear=0.3, window='sliding', fins=False, roof='parapet', facing=a.get('facing', 0), sign='MART • LUBRICANTS', sign_bg=c1, sign_fg=c2), rng)
+    pb = parts.at(F, L / 2 + 2, -6, 0)
+    mb.box('steel', pb @ Matrix.Translation((0, 0, 3)), hex_rgb('#3a3a3a'), 0.3, size=(0.3, 0.3, 6))
+    parts.signboard(mb, pb, 0, 5.0, 2.0, 2.0, dict(text='PMS 980\nAGO 1450', bg=c1, fg=c2, hand=False, wear=0.2))
+    return _done(mb, a, collection)
+
+
+def bank_branch(a, rng, collection=None):
+    """A bank branch: a clean 2-3 storey block, tinted glass, an aluminium-clad entrance, a
+    security post and an ATM gallery, an invented livery."""
+    poly = _poly(a)
+    mb = MeshBuilder()
+    lv = rng.pick([('#7a1f2f', '#f2f2ee'), ('#1f3f8a', '#f2c21b'), ('#e07b1a', '#f2f2ee'), ('#2e7d4f', '#f2f2ee'), ('#5a2a7a', '#f2c21b')])
+    block(mb, poly, max(2, min(3, a.get('storeys', 2))), dict(style='glass', wall=hex_rgb('#e9ecef'), band=hex_rgb(lv[0]), trim=hex_rgb('#c9ced2'), glass=hex_rgb('#2a3a4a'), wear=0.1, floor_h=3.6, ground_h=4.2, roof='parapet', facing=a.get('facing', 0),
+                                                           sign=rng.pick(['STEADY TRUST BANK', 'HARBOUR BANK', 'UNITY CAPITAL BANK', 'GREENLEAF BANK']), sign_bg=hex_rgb(lv[0]), sign_fg=hex_rgb(lv[1])), rng)
+    i, L, F = faces(poly)[a.get('facing', 0)]
+    for k in range(3):
+        mb.box('steel', parts.at(F, -L / 3 + k * 0.9, 0.3, 1.0), hex_rgb('#c9ced2'), 0.1, size=(0.7, 0.4, 2.0))
+        mb.box('emit', parts.at(F, -L / 3 + k * 0.9, 0.52, 1.3), hex_rgb('#4fd8ff'), 0, size=(0.4, 0.02, 0.3))
+    return _done(mb, a, collection)
+
+
+def chemist(a, rng, collection=None):
+    """A chemist / patent medicine store: a shop house with a green-cross sign."""
+    from .archetypes import house
+    ob, spec = house(dict(a, kind='front', frontage=0.0), rng, collection)
+    return ob, spec
+
+
+def cemetery(mb, c, r, rng):
+    """A public cemetery round a point: a wall, an iron gate, crowded tombs, weeds."""
+    pts = [(c[0] + math.cos(t) * r, c[1] + math.sin(t) * r) for t in (k / 8 * math.tau + 0.39 for k in range(8))]
+    mb.face([(p[0], p[1], 0.04) for p in pts], 'ground', hex_rgb('#8a8a4a'), 0.6)
+    perimeter(mb, ccw(pts), dict(paint=hex_rgb('#e8e2d2'), coping=hex_rgb('#3a3a3a'), gate=hex_rgb('#1d1d1d'), h=2.0, wear=0.8), rng)
+    for x in range(int(-r * 0.6), int(r * 0.6), 3):
+        for y in range(int(-r * 0.6), int(r * 0.6), 2):
+            if rng.chance(0.75):
+                m = Matrix.Translation((c[0] + x + rng.between(-0.3, 0.3), c[1] + y, 0)) @ Matrix.Rotation(rng.between(-0.08, 0.08), 4, 'Z')
+                col = hex_rgb(rng.pick(['#e8e2d2', '#d8d2c6', '#c9c3b6', '#f2efe6']))
+                mb.box('concrete', m @ Matrix.Translation((0, 0, 0.25)), col, 0.8, size=(2.0, 0.9, 0.5))
+                mb.box('concrete', m @ Matrix.Translation((-0.9, 0, 0.75)), col, 0.8, size=(0.12, 0.7, 0.9))
+
+
+def bus_shelter(mb, m, rng):
+    """A bus stop: a steel shelter with a bench and a route board, or just a pole (research-street 2.5)."""
+    for x in (-1.8, 1.8):
+        mb.box('steel', m @ Matrix.Translation((x, 0.6, 1.3)), hex_rgb('#3a3a3a'), 0.4, size=(0.1, 0.1, 2.6))
+    mb.box('steel', m @ Matrix.Translation((0, 0.4, 2.65)), hex_rgb('#1f4fa0'), 0.4, size=(4.0, 1.6, 0.1))
+    mb.box('wood', m @ Matrix.Translation((0, 0.8, 0.45)), hex_rgb('#6b4f36'), 0.6, size=(3.2, 0.35, 0.06))
+    parts.signboard(mb, m @ Matrix.Translation((0, 1.3, 0)), 0, 2.2, 1.6, 0.5, dict(text='BUS STOP', bg=hex_rgb('#f2c21b'), fg=hex_rgb('#1a1a1a'), hand=False, wear=0.4))
+
+
+# ---------------------------------------------------------------- the Heights' beach and office grid
+def office_block(a, rng, collection=None):
+    """Victoria-Island-style office and hotel grid: glass curtain walls or a clean concrete frame,
+    a podium, a generator, a security post."""
+    poly = _poly(a)
+    mb = MeshBuilder()
+    s = max(2, a.get('storeys', 3)) * rng.pick([1, 2, 2, 3])
+    if rng.chance(0.6):
+        block(mb, poly, s, dict(style='glass', wall=hex_rgb('#e9ecef'), band=hex_rgb('#3a3c3e'), trim=hex_rgb('#d0d4d8'), glass=hex_rgb(rng.pick(['#2a4a66', '#33504a', '#3a3f52', '#4a5a6a'])), wear=0.08, floor_h=3.6, ground_h=4.5, roof='parapet', crown=rng.between(1, 4), facing=a.get('facing', 0)), rng)
+    else:
+        block(mb, poly, s, dict(style='govt', wall=hex_rgb(rng.pick(['#f2f0ea', '#e8e2d2', '#d9d6cf'])), band=hex_rgb('#3a3c3e'), trim=hex_rgb('#f2f0ea'), wear=0.2, floor_h=3.5, window='sliding', fins=rng.chance(0.5), roof='parapet', tanks=2, facing=a.get('facing', 0)), rng)
+    return _done(mb, a, collection)
+
+
+def _thatch(mb, cx, cy, z, rx, ry, h, rng):
+    """A palm-thatch roof: a low pyramid of straw with a ragged fringe."""
+    corners = [(cx - rx, cy - ry), (cx + rx, cy - ry), (cx + rx, cy + ry), (cx - rx, cy + ry)]
+    straw = hex_rgb(rng.pick(['#c9a46a', '#b8925a', '#d8b878']))
+    for i in range(4):
+        a, b = corners[i], corners[(i + 1) % 4]
+        mb.face([(a[0], a[1], z), (b[0], b[1], z), (cx, cy, z + h)], 'cloth', straw, 0.5)
+        mb.face([(b[0], b[1], z), (a[0], a[1], z), (cx, cy, z + h)], 'cloth', shade(straw, 0.6), 0.5)
+        n = int(math.dist(a, b) / 0.3)
+        for k in range(n):  # fringe
+            t = (k + 0.5) / n
+            x, y = a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t
+            mb.box('cloth', Matrix.Translation((x, y, z - 0.18)), shade(straw, rng.between(0.8, 1.1)), 0.5, size=(0.3, 0.3, rng.between(0.2, 0.45)))
+
+
+def beach_bar(a, rng, collection=None):
+    """A Sunday-beach bar: a timber deck, a palm-thatch roof on poles, a bar counter with stools,
+    a cooler, plastic chairs and umbrellas on the sand."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    mb.box('wood', T(m, 0, 0, 0.25), hex_rgb('#8a6a4a'), 0.5, size=(L, W, 0.15))
+    for x in (-L / 2 + 0.3, 0, L / 2 - 0.3):
+        for y in (-W / 2 + 0.3, W / 2 - 0.3):
+            parts.cyl(mb, 'wood', T(m, x, y, 0.3), 0.1, 2.8, hex_rgb('#6b4f36'), 0.6, seg=8)
+    _thatch(mb, c[0], c[1], 3.1, L / 2 + 0.6, W / 2 + 0.6, 1.8, rng)
+    mb.box('wood', T(m, 0, -W / 4, 0.85), hex_rgb(rng.pick(['#2f6fae', '#c62828', '#2e7d4f'])), 0.5, size=(L * 0.6, 0.6, 1.1))
+    for k in range(5):
+        parts.cyl(mb, 'steel', T(m, -L * 0.25 + k * L * 0.12, -W / 4 - 0.7, 0.3), 0.18, 0.75, hex_rgb('#c9ced2'), 0.2, seg=10)
+    for k in range(rng.randrange(4, 9)):
+        _chair(mb, T(m, rng.between(-L, L), rng.between(W / 2 + 1, W / 2 + 6), 0, rz=rng.between(0, math.tau)), hex_rgb(rng.pick(['#d32f2f', '#eeeeee', '#1e88e5'])))
+    for k in range(rng.randrange(1, 3)):
+        p = T(m, rng.between(-L / 2, L / 2), W / 2 + rng.between(2, 5), 0)
+        parts.cyl(mb, 'steel', p, 0.03, 2.3, hex_rgb('#dddddd'), 0, seg=6)
+        parts.cyl(mb, 'cloth', p @ Matrix.Translation((0, 0, 2.0)), 1.4, 0.4, hex_rgb(rng.pick(['#e53935', '#1e88e5', '#fdd835'])), 0, seg=12, r2=0.02)
+    return _done(mb, a, collection)
+
+
+def beach_shack(a, rng, collection=None):
+    """A beach shack: painted plank walls, a zinc lean-to roof, a serving hatch, a cooler."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    col = hex_rgb(rng.pick(['#2f6fae', '#2e7d4f', '#d9b23a', '#c62828', '#e8e2d6']))
+    for (x, y, w, d) in ((0, -W / 2, L, 0.05), (0, W / 2, L, 0.05), (-L / 2, 0, 0.05, W), (L / 2, 0, 0.05, W)):
+        mb.box('wood', T(m, x, y, 1.15), col, rng.between(0.4, 0.9), size=(w, d, 2.3))
+    mb.box('paint', T(m, 0, -W / 2 - 0.02, 1.4), (0.03, 0.03, 0.03), 0, size=(L * 0.6, 0.02, 0.8))
+    parts.corrugated(mb, T(m, -L / 2 - 0.3, -W / 2 - 0.8, 2.3).translation, T(m, L / 2 + 0.3, -W / 2 - 0.8, 2.3).translation, T(m, L / 2 + 0.3, W / 2 + 0.2, 2.6).translation, T(m, -L / 2 - 0.3, W / 2 + 0.2, 2.6).translation,
+                     dict(profile='sine', pitch=0.076, depth=0.018, col=hex_rgb('#7a4524'), wear=0.9))
+    mb.box('plastic', T(m, L / 3, -W / 2 - 0.6, 0.3), hex_rgb('#1565c0'), 0.3, size=(0.6, 0.4, 0.45))
+    return _done(mb, a, collection)
+
+
+def horse(mb, m, rng):
+    """A beach horse for hire: slim body, long neck, a saddle cloth."""
+    col = hex_rgb(rng.pick(['#5a3a24', '#e8e2d6', '#2a2018', '#8a5a34']))
+    parts.cyl(mb, 'skin', m @ Matrix.Translation((-0.65, 0, 1.25)) @ Matrix.Rotation(math.pi / 2, 4, 'Y'), 0.3, 1.35, col, 0, seg=10, r2=0.28)
+    for x in (-0.5, 0.5):
+        for y in (-0.14, 0.14):
+            parts.cyl(mb, 'skin', m @ Matrix.Translation((x, y, 0)), 0.05, 1.1, col, 0, seg=6, r2=0.06)
+    neck = m @ Matrix.Translation((0.6, 0, 1.3)) @ Matrix.Rotation(-0.6, 4, 'Y')
+    parts.cyl(mb, 'skin', neck, 0.15, 0.8, col, 0, seg=8, r2=0.1)
+    mb.box('skin', m @ Matrix.Translation((1.0, 0, 1.95)) @ Matrix.Rotation(0.9, 4, 'Y'), col, 0, size=(0.55, 0.2, 0.22))
+    mb.box('cloth', m @ Matrix.Translation((-0.1, 0, 1.55)), hex_rgb(rng.pick(['#c62828', '#1f5fa8', '#c9a13b'])), 0, size=(0.6, 0.64, 0.05))
+
+
+def horse_shelter(a, rng, collection=None):
+    """Where the beach horses stand: thatch on posts, a rail, hay, two or three horses."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    for x in (-L / 2, 0, L / 2):
+        for y in (-W / 2, W / 2):
+            parts.cyl(mb, 'wood', T(m, x, y, 0), 0.1, 2.6, hex_rgb('#6b4f36'), 0.6, seg=8)
+    _thatch(mb, c[0], c[1], 2.6, L / 2 + 0.4, W / 2 + 0.4, 1.2, rng)
+    parts.bar(mb, 'wood', T(m, -L / 2, -W / 2, 1.1).translation, T(m, L / 2, -W / 2, 1.1).translation, 0.08, hex_rgb('#6b4f36'), 0.6)
+    for k in range(rng.randrange(2, 4)):
+        horse(mb, T(m, -L / 2 + 2 + k * 3, 0, 0, rz=math.pi / 2 + rng.between(-0.2, 0.2)), rng)
+    return _done(mb, a, collection)

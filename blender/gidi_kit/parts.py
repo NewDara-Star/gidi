@@ -6,6 +6,7 @@ import os
 import bpy
 from mathutils import Matrix, Vector
 
+from . import detail
 from .core import at, chamfer, edge_out, frame, offset, prism, shade
 
 STOREY = 3.1
@@ -15,6 +16,7 @@ STOREY = 3.1
 def cyl(mb, mat, m, r, h, col, wear=0.0, seg=12, caps=(True, True), r2=None):
     """Cylinder along local z from 0 to h (r2: top radius)."""
     r2 = r if r2 is None else r2
+    seg = detail.segs(seg)
     ring = lambda rad, z: [m @ Vector((math.cos(a) * rad, math.sin(a) * rad, z)) for a in (i / seg * math.tau for i in range(seg))]
     lo, hi = ring(r, 0), ring(r2, h)
     for i in range(seg):
@@ -67,10 +69,14 @@ def font():
 
 def text(mb, mat, m, s, size, col, depth=0.004, max_w=None, wobble=None):
     """3D lettering merged into the builder. m: frame whose x runs along the text, y out of the board."""
+    if detail.web():
+        detail.record_text(m, s, size, col, w=max_w)
+        return
     cu = bpy.data.curves.new('t', 'FONT')
     cu.body = s
     cu.size = size
-    cu.extrude = depth
+    cu.extrude = 0 if detail.web() else depth
+    cu.resolution_u = 1 if detail.web() else 12
     cu.align_x = 'CENTER'
     cu.align_y = 'CENTER'
     cu.space_line = 0.9
@@ -117,6 +123,10 @@ def burglar_bars(mb, F, u, z, w, h, pattern, col, wear):
     # the outer frame of flat bar
     for a, b in (((-hw, -hh), (hw, -hh)), ((hw, -hh), (hw, hh)), ((hw, hh), (-hw, hh)), ((-hw, hh), (-hw, -hh))):
         bar(mb, 'steel', p(*a), p(*b), 0.04, col, wear)
+    if detail.web():
+        for x in (-hw / 2, 0, hw / 2):
+            bar(mb, 'steel', p(x, -hh), p(x, hh), t, col, wear)
+        return
     if pattern in ('vertical', 'diamond', 'grid', 'sunray', 'scroll'):
         n = max(3, round(w / 0.13))
         for i in range(1, n):
@@ -150,6 +160,8 @@ def window(mb, F, u, z, spec):
     mb.box('paint', at(F, u, 0.01, z), trim, wear, size=(w + 0.16, 0.06, h + 0.16), skip=('-y',))
     mb.face([F @ Vector((u - w / 2, 0.045, z - h / 2)), F @ Vector((u + w / 2, 0.045, z - h / 2)), F @ Vector((u + w / 2, 0.045, z + h / 2)), F @ Vector((u - w / 2, 0.045, z + h / 2))], spec.get('glass_mat', 'glass'), glass, 0)
     kind = spec['type']
+    if kind == 'louvre' and detail.web():
+        kind = 'sliding'
     if kind == 'louvre':  # naco: glass blades in an aluminium frame, tilted open
         n = max(5, round(h / 0.11))
         for i in range(n):
@@ -208,7 +220,11 @@ def balcony(mb, F, u, z, w, spec):
     wear, d = spec['wear'], 1.1
     mb.box('concrete', at(F, u, d / 2, z), spec['slab'], wear, size=(w, d, 0.15))
     rail_h = 1.0
-    if spec['rail'] == 'balusters':
+    if spec['rail'] == 'balusters' and detail.web():
+        mb.box('paint', at(F, u, d - 0.06, z + rail_h / 2), spec['rail_col'], wear, size=(w, 0.14, rail_h))
+        for x in (-w / 2, w / 2):
+            mb.box('paint', at(F, u + x, d / 2, z + rail_h / 2), spec['rail_col'], wear, size=(0.14, d, rail_h))
+    elif spec['rail'] == 'balusters':
         n = int(w / 0.22)
         for side, (x0, y0, x1, y1) in enumerate(((-w / 2, d, w / 2, d), (-w / 2, 0.05, -w / 2, d), (w / 2, 0.05, w / 2, d))):
             L = math.hypot(x1 - x0, y1 - y0)
@@ -241,6 +257,11 @@ def corrugated(mb, A, B, C, D, spec, wear_of=None):
     gets its own wear, so old roofs read as a patchwork of replaced sheets."""
     A, B, C, D = (Vector(p) for p in (A, B, C, D))
     L = (B - A).length
+    if detail.web():  # one sheet face (and its underside); the ribs come from the web shader
+        w = spec['wear']
+        mb.face([A, B, C, D] if C != D else [A, B, C], 'zinc', spec['col'], w)
+        mb.face([D, C, B, A] if C != D else [C, B, A], 'zinc', shade(spec['col'], 0.6), w)
+        return
     pitch, depth, prof = spec['pitch'], spec['depth'], spec['profile']
     n = max(2, int(L / pitch * (4 if prof == 'sine' else 5)))
     nrm = (B - A).cross(D - A).normalized()
@@ -351,7 +372,7 @@ def water_tank(mb, x, y, z, spec):
         for (ax, ay), (bx, by) in ((((-1, -1), (1, -1))), (((1, -1), (1, 1))), (((1, 1), (-1, 1))), (((-1, 1), (-1, -1)))):
             bar(mb, 'steel', (x + ax * r * 0.85, y + ay * r * 0.85, zz), (x + bx * r * 0.85, y + by * r * 0.85, zz), 0.05, (0.18, 0.18, 0.18), spec['wear'])
     m = Matrix.Translation((x, y, z + stand))
-    ribs = 6
+    ribs = 1 if detail.web() else 6
     for k in range(ribs):  # the tank's horizontal ribs
         cyl(mb, 'plastic', m @ Matrix.Translation((0, 0, h * k / ribs)), r * (1.0 if k % 2 else 0.97), h / ribs, spec['col'], 0, seg=20, caps=(k == 0, False), r2=r * (0.97 if k % 2 else 1.0))
     cyl(mb, 'plastic', m @ Matrix.Translation((0, 0, h)), r, 0.25, spec['col'], 0, seg=20, caps=(False, True), r2=r * 0.55)
@@ -456,7 +477,9 @@ def compound_wall(mb, poly, spec, rng, skip_seg=None):
             mb.box('paint', m @ Matrix.Translation((0, 0, h / 2)), col, wear, size=(seg_len, 0.2, h))
             mb.box('paint', m @ Matrix.Translation((0, 0, h + 0.05)), spec['coping'], wear, size=(seg_len + 0.02, 0.28, 0.1))
             mb.box('paint', m @ Matrix.Translation((seg_len / 2, 0, (h + 0.25) / 2)), spec['coping'], wear, size=(0.3, 0.3, h + 0.25))
-            if spec['top'] == 'bottles':
+            if detail.web() and spec['top'] in ('bottles', 'razor'):  # one strip stands for shards or wire
+                mb.box('glass' if spec['top'] == 'bottles' else 'steel', m @ Matrix.Translation((0, 0, h + 0.15)), (0.15, 0.28, 0.12) if spec['top'] == 'bottles' else (0.6, 0.6, 0.6), 0.2, size=(seg_len, 0.06, 0.12))
+            elif spec['top'] == 'bottles':
                 for j in range(int(seg_len / 0.12)):
                     x = -seg_len / 2 + (j + 0.5) * 0.12
                     mb.box('glass', m @ Matrix.Translation((x, rng.between(-0.06, 0.06), h + 0.14)) @ Matrix.Rotation(rng.between(-0.6, 0.6), 4, 'Y'), rng.pick([(0.1, 0.25, 0.08), (0.3, 0.2, 0.05), (0.4, 0.5, 0.45)]), 0, size=(0.03, 0.02, 0.12))
@@ -472,6 +495,9 @@ def signboard(mb, F, u, z, w, h, spec):
     """A shop sign: a painted board on the wall with 3D lettering (and a phone number)."""
     mb.box('wood' if spec['hand'] else 'steel', at(F, u, 0.08, z), spec['bg'], spec['wear'], size=(w, 0.06, h))
     mb.box('steel', at(F, u, 0.08, z), (0.08, 0.08, 0.08), spec['wear'], size=(w + 0.08, 0.05, h + 0.08))
+    if detail.web():  # the browser paints the whole board: text, phone, colours
+        detail.record_text(at(F, u, 0.115, z), spec['text'] + ('\n' + spec['phone'] if spec.get('phone') else ''), h, spec['fg'], bg=spec['bg'], w=w, h=h, hand=spec.get('hand', False))
+        return
     lines = spec['text'].split('\n')
     fs = h * (0.38 if len(lines) > 1 else 0.55)
     text(mb, 'paint', at(F, u, 0.115, z + (0.06 if spec.get('phone') else 0)), spec['text'], fs, spec['fg'], max_w=w * 0.92, wobble=spec.get('wobble'))

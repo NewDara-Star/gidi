@@ -14,8 +14,11 @@ def section(name):
     return set(re.findall(r"'([^']+)':\s*(?:archetypes|kinds|places)\.", m.group(1))) if m else set()
 
 
-done = {k: section(k) for k in ('BUILDINGS', 'PARCELS', 'STRUCTURES', 'CIVIC_PLOTS')}
-done['CIVIC'] = done.pop('CIVIC_PLOTS')
+done = {k: section(k) for k in ('BUILDINGS', 'STRUCTURES', 'CIVIC_PLOTS')}
+pb = open(os.path.join(ROOT, 'blender', 'gidi_kit', 'parcels.py')).read()
+done['PARCELS'] = set(re.findall(r"'([^']+)':\s*(?:lambda|[a-z_]+[,\n])", pb[pb.index('BUILDERS = {'):]))
+done['STRUCTURES'] = {'flyover', 'skywalk', 'footbridge', 'jetty', 'ramp'}
+done['CIVIC'] = done.pop('CIVIC_PLOTS') | set(re.findall(r"'([^']+)':\s*places\.", reg[reg.index('POI_PLACES'):])) | {'cemetery', 'sport', 'market', 'transit'}
 tables = {'BUILDINGS': {}, 'PARCELS': {}, 'STRUCTURES': {}, 'CIVIC': {}}
 for f in sorted(glob.glob(os.path.join(ROOT, 'web', 'gen-*.json'))):
     d = json.load(open(f))

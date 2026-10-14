@@ -10,7 +10,7 @@ import math
 
 from mathutils import Matrix, Vector
 
-from . import parts
+from . import detail, parts
 from .core import hex_rgb, shade
 
 # ---------------------------------------------------------------- conditions
@@ -100,7 +100,7 @@ def road(mb, r, cond, rng, wet_season=True, clip=None):
                 d = max(d, hd * (1 - q * q))
         return d
 
-    step = C['step']
+    step = C['step'] * (2.2 if detail.web() else 1.0)
     s_acc = 0.0
     for i in range(len(pts) - 1):
         a, b = pts[i], pts[i + 1]
@@ -113,7 +113,7 @@ def road(mb, r, cond, rng, wet_season=True, clip=None):
             continue
         ext = w / 2
         nu = max(1, int((L + 2 * ext) / step))
-        nv = max(2, int(w / min(step, 0.6)))
+        nv = max(2, int(w / (min(step, 0.6) * (2.0 if detail.web() else 1.0))))
 
         def P(iu, iv):
             u = -ext + (L + 2 * ext) * iu / nu
@@ -189,6 +189,8 @@ def markings(mb, r, cond, rng):
     for i in range(len(pts) - 1):
         a, b = pts[i], pts[i + 1]
         L = math.dist(a, b)
+        if L < 1e-6:
+            continue
         dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
         rot = Matrix.Rotation(math.atan2(dy, dx), 4, 'Z')
         for off in lanes:
@@ -213,6 +215,8 @@ def kerbs(mb, r, scheme, rng, skip=None, clip=None):
         for i in range(len(pts) - 1):
             a, b = pts[i], pts[i + 1]
             L = math.dist(a, b)
+            if L < 1e-6:
+                continue
             dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
             rot = Matrix.Rotation(math.atan2(dy, dx), 4, 'Z')
             for k in range(int(L)):

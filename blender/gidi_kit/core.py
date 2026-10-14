@@ -103,7 +103,7 @@ class MeshBuilder:
         for fi, poly in enumerate(me.polygons):
             for k, loop in enumerate(poly.loop_indices):
                 c = self.cols[fi][k]
-                col.data[loop].color = (c[0], c[1], c[2], 1.0)
+                col.data[loop].color = (c[0], c[1], c[2], self.wears[fi])  # alpha carries wear for the web
                 wear.data[loop].value = self.wears[fi]
                 if self.uvs[fi]:
                     uv.data[loop].uv = self.uvs[fi][k]

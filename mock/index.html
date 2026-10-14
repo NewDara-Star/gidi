@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gidi Mock</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0d0f12; font: 14px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif; color: #f4f1ea; }
+  #c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  #load { position: fixed; inset: 0; display: grid; place-items: center; font-size: 18px; background: #0d0f12; }
+  .hud { position: fixed; background: rgba(13,15,18,.72); border-radius: 10px; padding: 8px 12px; }
+  #where { top: 12px; left: 12px; font-weight: 600; }
+  #speedo { right: 16px; bottom: 16px; text-align: right; }
+  #speedo b { font-size: 34px; font-variant-numeric: tabular-nums; } #gear { font-size: 18px; margin-left: 8px; color: #f2c21b; }
+  #connect { position: fixed; top: 12px; right: 12px; border: 0; border-radius: 10px; padding: 8px 12px; background: #f2c21b; color: #111; font-weight: 700; cursor: pointer; }
+  #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 80vw; opacity: 0; transition: opacity .3s; }
+  #toast.on { opacity: 1; }
+  #stick, #knob { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="where" class="hud">Gidi</div>
+<div id="speedo" class="hud" hidden><b id="kmh">0</b> km/h <span id="gear">P</span></div>
+<button id="connect">🎮 Connect wheel</button>
+<div id="toast" class="hud"></div>
+<div id="stick"><div id="knob"></div></div>
+<div id="load">Loading…</div>
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>

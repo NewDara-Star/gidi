@@ -56,7 +56,7 @@ def limb(mb, mat, a, b, r0, r1, col, seg=7):
     sphere(mb, mat, Matrix.Translation(b), r1, r1, r1, col, seg=seg, rings=4)
 
 
-def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None):
+def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None):
     """One person at M (facing +x). kind: a dress type from DRESS, or None to pick by character."""
     kind = kind or rng.pick(DRESS.get(ch, DRESS['dense']))
     woman = kind in ('wrapper',) or (kind in ('ankara', 'tshirt', 'office', 'hawker', 'school') and rng.chance(0.5))
@@ -74,8 +74,8 @@ def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None):
     bottom = {'ankara': print_col, 'buba': top, 'tshirt': hex_rgb(rng.pick(['#2f3d4c', '#1f3f8a', '#1d1d1d', '#6d5d44'])), 'school': hex_rgb(rng.pick(['#1f3f8a', '#6d5d44', '#2e7d4f'])),
               'office': hex_rgb(rng.pick(['#1d1d1d', '#2f3d4c'])), 'kaftan': top, 'agbada': top, 'wrapper': hex_rgb(rng.pick(ANKARA)), 'hawker': hex_rgb(rng.pick(ANKARA))}[kind]
     walk = pose if pose is not None else rng.chance(0.6)
-    sw = rng.between(0.25, 0.4) if walk else 0.03
-    ph = rng.pick([1, -1])
+    sw = (0.32 if phase is not None else rng.between(0.25, 0.4)) if walk else 0.03
+    ph = phase if phase is not None else rng.pick([1, -1])
     hip = 0.95 * k
     # legs (hidden by long dresses and robes, but feet show)
     long_dress = kind in ('wrapper', 'kaftan', 'agbada') or (woman and kind in ('ankara', 'hawker') and rng.chance(0.6))

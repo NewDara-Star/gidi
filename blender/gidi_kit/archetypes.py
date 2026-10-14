@@ -3,7 +3,7 @@ import math
 
 from mathutils import Vector
 
-from . import parts
+from . import detail, parts
 from .core import MeshBuilder, ccw, centroid, edge_out, frame, offset
 from .materials import master
 from .rules import house_spec
@@ -48,7 +48,7 @@ def house(a, rng, collection=None):
                     continue
                 w = dict(spec['window'])
                 w['glass_mat'] = 'glass_lit' if wr.chance(0.35) else 'glass'
-                if st > 0 and w['bars'] != 'none' and not wr.chance(0.6):
+                if st > 0 and w['bars'] != 'none' and (detail.web() or not wr.chance(0.6)):
                     w['bars'] = 'none'
                 parts.window(mb, F, u, z, w)
             if balcony_here and st >= 1:
