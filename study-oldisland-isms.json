@@ -1,0 +1,195 @@
+{
+ "id": "oldisland",
+ "area_km2": 9.4,
+ "note": "counts per km2 of the study area; examples are lon,lat",
+ "dead_end_at_water": {
+  "n": 3,
+  "per_km2": 0.32,
+  "examples": [
+   [
+    3.39386,
+    6.45974
+   ],
+   [
+    3.40414,
+    6.45812
+   ],
+   [
+    3.39867,
+    6.45822
+   ]
+  ]
+ },
+ "dead_end_at_rail": {
+  "n": 0,
+  "per_km2": 0.0,
+  "examples": []
+ },
+ "missing_links": {
+  "n": 13,
+  "per_km2": 1.39,
+  "examples": [
+   [
+    3.40146,
+    6.45338
+   ],
+   [
+    3.39319,
+    6.46354
+   ],
+   [
+    3.40386,
+    6.44418
+   ]
+  ],
+  "rule": "two dead ends of different streets < 25 m apart"
+ },
+ "buildings_on_drainage_setback": {
+  "n": 5,
+  "per_km2": 0.53,
+  "examples": [
+   [
+    3.40772,
+    6.45283
+   ],
+   [
+    3.40774,
+    6.45322
+   ],
+   [
+    3.40736,
+    6.45449
+   ]
+  ],
+  "rule": "footprint within 3 m of a canal, drain or stream line"
+ },
+ "buildings_in_road_reserve": {
+  "n": 665,
+  "per_km2": 70.86,
+  "by_road": {
+   "residential": 279,
+   "secondary": 101,
+   "unclassified": 94,
+   "motorway": 67,
+   "service": 63,
+   "primary": 49,
+   "tertiary": 11,
+   "trunk": 1
+  },
+  "examples": [
+   [
+    3.39775,
+    6.44649
+   ],
+   [
+    3.40644,
+    6.45215
+   ],
+   [
+    3.39988,
+    6.44724
+   ]
+  ],
+  "rule": "footprint closer to the road's centreline than its half-width (OSM class)"
+ },
+ "markets_on_carriageway": {
+  "n": 4,
+  "of_markets": 10,
+  "share": 0.4,
+  "examples": [
+   [
+    3.38467,
+    6.46267
+   ],
+   [
+    3.39323,
+    6.46086
+   ],
+   [
+    3.40465,
+    6.45594
+   ]
+  ]
+ },
+ "overloaded_main_roads": {
+  "main_km": 79.8,
+  "side_junctions_per_km": 2.9,
+  "bus_stops_per_km": 0.01,
+  "km_with_side_street_every_30m": 0.86,
+  "share_of_main_km": 0.011
+ },
+ "unfinished_buildings": {
+  "n": 0,
+  "per_km2": 0.0,
+  "share": 0.0,
+  "examples": []
+ },
+ "odd_junctions": {
+  "five_way_or_more": {
+   "n": 0,
+   "per_km2": 0.0,
+   "examples": []
+  },
+  "acute_under_25deg": {
+   "n": 29,
+   "per_km2": 3.09,
+   "examples": [
+    [
+     3.39912,
+     6.45948
+    ],
+    [
+     3.40807,
+     6.4557
+    ],
+    [
+     3.40745,
+     6.45586
+    ]
+   ]
+  }
+ },
+ "flood_prone": {
+  "wetland_ha": 0.0,
+  "wetland_touching_homes_ha": 0.0,
+  "buildings_in_wetland": 0,
+  "per_km2": 0.0,
+  "examples": [],
+  "note": "the 30 m DEM is not on this machine; the LGA's share of land below 3 m comes from data/results/lga_table.json"
+ },
+ "pedestrians_on_expressways": {
+  "expressway_km": 52.8,
+  "bus_stops_on_them": 0,
+  "ways_across_on_foot": 16,
+  "longest_stretch_without_crossing_m": 9499,
+  "examples": [
+   [
+    3.40233,
+    6.50244
+   ],
+   [
+    3.40253,
+    6.5025
+   ],
+   [
+    3.37613,
+    6.47428
+   ]
+  ]
+ },
+ "gates_across_streets": {
+  "n": 2,
+  "per_km2": 0.21,
+  "examples": [
+   [
+    3.4001,
+    6.45941
+   ],
+   [
+    3.39782,
+    6.46304
+   ]
+  ],
+  "rule": "a mapped gate or barrier on a residential, unclassified or tertiary street"
+ }
+}

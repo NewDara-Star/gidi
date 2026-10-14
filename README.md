@@ -23,7 +23,7 @@ That master plan is what gets carried into Unreal.
 | `data/results/lga_table.json` | Per local government area: building heights (storey bands), people per km², tree/built-up cover, surface height. |
 | `data/tools/` | Download scripts for the raw datasets. The raw files stay on the owner's Mac, about 17 GB. |
 | `lagos.osm.pbf`, `adm6.geojson` | OpenStreetMap extract of Lagos and admin boundaries (ODbL, © OpenStreetMap contributors). |
-| `docs/` | Districts v0.3, the Lagos LGA research, the data plan, the pattern studies (Maze, Hub, Jungle City, Food Gate, Water Town, the Capital, the Bazaar, the Port, Railside, the Estate) and the city living tests. |
+| `docs/` | Districts v0.3, the Lagos LGA research, the data plan, the pattern studies (Maze, Hub, Jungle City, Food Gate, Water Town, the Capital, the Bazaar, the Port, Railside, the Estate, Old Island) and the city living tests. |
 
 ## Status
 - **Done:** the Maze (Mushin + Shomolu). See `docs/maze-pattern-study.md`. v2 is in review: it was rebuilt with the current generator, and its edge roads and gateways are unchanged.
@@ -35,8 +35,9 @@ That master plan is what gets carried into Unreal.
 - **Done:** the Port (Apapa; okadas banned), see `docs/port-pattern-study.md`.
 - **Done:** Railside (Agege, Ifako/Ijaye, Alimosho), see `docs/railside-pattern-study.md`.
 - **Done:** the Estate (Ikeja GRA, Magodo, Omole: gated streets, walled compounds), see `docs/estate-pattern-study.md`.
+- **Done:** Old Island (Lagos Island: the old dense core, the cloth market, the palace, bank towers on the waterfront; reached by two bridges; okadas banned), see `docs/oldisland-pattern-study.md`.
 - **Lagos-isms:** the real data's eccentricities, logged for the owner's "feel like Lagos" pass: `docs/LAGOS-ISMS.md`.
-- **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-14e.md`.
+- **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-14f.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.
 - **Live map, 2D and 3D** (private artifact): https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP
 
