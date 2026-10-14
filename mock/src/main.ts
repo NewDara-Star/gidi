@@ -6,6 +6,7 @@ import * as THREE from "three/webgpu";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Graphics, type Quality } from "./graphics";
 import { World, CENTRE, toSim } from "./world";
+import { Walk, WalkMap } from "./walkmap";
 const toSimXY = (x: number, y: number) => { const s = toSim(x, y); return { x: s.x, z: s.z }; };
 import { TileStreamer } from "./tiles";
 import { NetTraffic, VEHICLE_MODELS, WALKER_MODELS } from "./trafficnet";
@@ -42,6 +43,7 @@ const scene = gfx.scene, camera = gfx.camera;
 $("load").textContent = "Loading Gidi…";
 const world = new World();
 await world.load(BASE);
+const walkmap = new WalkMap(BASE);
 scene.add(world.group);
 const tiles = new TileStreamer(BASE);
 await tiles.init(world.massingByTile);
@@ -174,6 +176,7 @@ noteText.addEventListener("keydown", async (e) => {
 
 addEventListener("keydown", (e) => {
   const k = e.key.toLowerCase();
+  if (k === "m") { minimap.hidden = !minimap.hidden; return; }
   if (k === "n" && noteBox.hidden) { e.preventDefault(); noteBox.hidden = false; noteText.value = ""; noteText.focus(); return; }
   if (k === "f" && !car) void enterVehicle("danfo");
   else if (k === "g" && !car) void enterVehicle("car");
@@ -189,6 +192,9 @@ addEventListener("pagehide", () => void g29.release());
 let last = performance.now();
 let lookOffset = 0;
 let lastWallToast = 0;
+let lastMap = 0;
+const minimap = $("minimap") as HTMLCanvasElement;
+if (params.get("map")) minimap.hidden = false;
 let lastWaterToast = 0;
 const now = () => performance.now();
 const tmp = new THREE.Vector3();
@@ -206,6 +212,7 @@ function frame(now: number) {
   gfx.render();
   const d = world.districtAt(me.x, me.z);
   $("where").textContent = d ?? "Outside the districts";
+  if (!minimap.hidden && now - lastMap > 250) { lastMap = now; walkmap.draw(minimap, me.x, me.z, car ? car.yaw : me.yaw); }
   if (world.blocked(me.x + Math.sin(me.yaw) * 6, me.z + Math.cos(me.yaw) * 6) && now - lastWallToast > 8000) {
     lastWallToast = now;
     toast("Not built yet: this district opens when it's built out");
@@ -224,11 +231,18 @@ function walkStep(dt: number) {
     const vx = Math.sin(fwd) * my - Math.cos(fwd) * mx, vz = Math.cos(fwd) * my + Math.sin(fwd) * mx;
     const l = Math.hypot(vx, vz) || 1;
     const nx = me.x + (vx / l) * sp * dt, nz = me.z + (vz / l) * sp * dt;
-    const wet = world.onOpenWater(nx, nz) && !world.onOpenWater(me.x, me.z); // can't step off the shore (but can always get out)
-    if (wet && now() - lastWaterToast > 6000) { lastWaterToast = now(); toast("That's the lagoon: take a bridge, a boardwalk or a jetty"); }
-    if (!wet && !world.blocked(nx, nz) && !world.footprintList.some((f, i) => i % 1 === 0 && Math.abs(f[0] - nx) < 60 && Math.abs(f[1] - nz) < 60 && inside(f, nx, nz))) {
-      me.x = nx;
-      me.z = nz;
+    // The walk map says where feet can go (roads too); blocked means you just stop, and you slide
+    // along a wall rather than sticking to it. Standing somewhere unwalkable, any step out is fine.
+    const stuck = !walkmap.walkable(me.x, me.z);
+    const ok = (x: number, z: number) =>
+      (stuck || walkmap.walkable(x, z)) && !world.blocked(x, z) &&
+      !world.footprintList.some((f) => Math.abs(f[0] - x) < 60 && Math.abs(f[1] - z) < 60 && inside(f, x, z));
+    if (ok(nx, nz)) { me.x = nx; me.z = nz; }
+    else if (ok(nx, me.z)) me.x = nx;
+    else if (ok(me.x, nz)) me.z = nz;
+    else if (walkmap.at(nx, nz) === Walk.Water && now() - lastWaterToast > 6000) {
+      lastWaterToast = now();
+      toast("That's the water: take a bridge, a boardwalk or a jetty");
     }
     me.yaw = Math.atan2(vx, vz);
     me.speed = sp;
@@ -315,6 +329,6 @@ addEventListener("resize", () => gfx.resize());
 $("load").remove();
 if (params.get("drive")) setTimeout(() => void enterVehicle(params.get("drive") as VehicleKind), 2500);
 (window as any).__gidiState = () => ({ x: me.x, z: me.z, driving: !!car, tiles: (tiles as any).loaded?.size, cars: traffic?.cars.filter((c: any) => c.active).length });
-toast("WASD to walk (Shift runs), drag to look · F: drive a danfo · G: drive a car · T: time of day · N: write a note · 🎮 Connect wheel for the G29");
+toast("WASD to walk (Shift runs), drag to look · F: drive a danfo · G: drive a car · T: time of day · M: walk map · N: write a note · 🎮 Connect wheel for the G29");
 requestAnimationFrame(frame);
 (window as any).__gidi = { world, tiles, traffic, me, CENTRE };

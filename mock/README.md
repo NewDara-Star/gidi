@@ -15,6 +15,7 @@ Double-click **`Play Gidi.command`** in the repo root, or run `cd mock && npm in
 
 - **Unbuilt districts** (The Border, Old Shore, The Frontier) are fenced off with site hoarding. You can't walk or drive in until they're built.
 - **Crowds and traffic follow how busy a place is.** Each district has a people-per-km² figure from the research (`DENSITY` in `src/world.ts`): Jungle City, The Maze, The Hub and Old Island are packed, The Estate and The Heights are quiet. Markets, stations, pitches, churches, mosques and schools pull extra people round them.
+- **Where you can go comes from the walk map** (`tools/walkmap/bake_walk.py`, 1 m cells in 400 m tiles). It marks every cell as blocked, ground, pavement or path, road, bridge deck, jetty or boardwalk, or water. On foot you can go anywhere but blocked cells and water, roads included. Where you can't go you stop, and you slide along walls. AI walkers keep to pavements and paths. Your car meets a low wall at the shore, open where roads, bridges and jetties reach the water. Bridges and flyovers carry everyone at the kit's deck heights. **M** shows the walk map round you.
 - **Press N to write a fix note.** It saves to `mock/notes/NOTES.md` with where you were (district, map coordinates, on foot or driving, the hour) and a screenshot. Open the Mock at that spot again with `?xy=x,y`.
 
 ## Build it (once, and after the city or the kit changes)
@@ -28,8 +29,9 @@ Double-click **`Play Gidi.command`** in the repo root, or run `cd mock && npm in
    PATH=$PWD/.venv/bin:$PATH sh tools/roadnet/build_net.sh web/city/net/gidi.osm web/city/net/gidi.net.xml right
    .venv/bin/python tools/roadnet/bake_net.py web/city/net/gidi.net.xml web/city/net/gidi.osm web/city/net/gidi.world.json web/city/net/gidi.net.bin
    ```
-3. **The fleet and people.** Run `blender -b --factory-startup -P blender/export_fleet.py`, which writes to `mock/public/models/`.
-4. **The app.** Run `cd mock && npm install && npm run desktop`. That builds `mock/dist` and opens Gidi (the map, with the Mock tab).
+3. **The walk map.** Run `python3 tools/walkmap/bake_walk.py` (2 seconds; it needs `web/city/monuments.json` from step 1).
+4. **The fleet and people.** Run `blender -b --factory-startup -P blender/export_fleet.py`, which writes to `mock/public/models/`.
+5. **The app.** Run `cd mock && npm install && npm run desktop`. That builds `mock/dist` and opens Gidi (the map, with the Mock tab).
 
 In a browser, serve the repo root (for example `python3 -m http.server` in `~/gidi`) and open `/web/gidi-maps.html`. The published map shows the Mock tab, but the city tiles aren't online, so use the desktop app for the Mock.
 
@@ -38,7 +40,7 @@ In a browser, serve the repo root (for example `python3 -m http.server` in `~/gi
   - WASD to walk, Shift to run, drag to look.
   - **F** gets you into a danfo, **G** into a car, on the nearest lane.
   - **T** steps the hour.
-  - **N** writes a note for the fix list.
+  - **N** writes a note for the fix list, **M** shows the walk map.
 - **Driving (keyboard):**
   - W gas, S brake, A/D steer.
   - X/Z move the selector toward D/P (foot on the brake), B parking brake.

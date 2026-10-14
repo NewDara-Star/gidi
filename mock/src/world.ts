@@ -109,6 +109,7 @@ export class World {
     this.buildHoarding();
     this.buildDecks();
     await this.monumentColliders(base);
+    await this.shoreWalls(base);
     this.net = await RoadNet.load("gidi", `${base}web/city/net/`);
     this.buildWater();
     this.buildMassing();
@@ -266,6 +267,20 @@ export class World {
         const h = (m.span ?? 16) / 2 + 1.2, nx = -Math.sin(m.ang), nz = -Math.cos(m.ang); // ang is in Blender's frame (y north)
         for (const sg of [-1, 1]) square(s.x + nx * h * sg, s.z + nz * h * sg, 1.0);
       } else square(s.x, s.z, m.r ?? 2);
+    }
+  }
+
+  /** The shore as a low wall for the car (tools/walkmap/bake_walk.py carwalls.json), open where
+   * roads, bridges and jetties meet the water: you stop at the edge instead of driving in. */
+  private async shoreWalls(base: string) {
+    try {
+      const w: number[] = await fetch(`${base}web/city/walk/carwalls.json`).then((r) => r.json());
+      for (let i = 0; i + 3 < w.length; i += 4) {
+        const a = toSim(w[i], w[i + 1]), b = toSim(w[i + 2], w[i + 3]);
+        this.walls.push(a.x, a.z, b.x, b.z, 1.0, 0.5);
+      }
+    } catch {
+      // no walk map baked yet
     }
   }
 
