@@ -60,7 +60,7 @@ def resolve(arg, near=None):
     if near is None: hits = [p for p in hits if p["name"].lower() == arg.lower()] or hits   # alone: an exact name first
     p = min(hits, key=lambda p: near.distance(Point(p["x"], p["y"]))) if near is not None else hits[0]
     return Point(p["x"], p["y"]), p["name"] + (f" ({p['x']},{p['y']})" if len(hits) > 1 else "")
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "works": "waterworks building", "mound": "landfill mound", "bakery": "bakery", "warehouse": "warehouse", "school": "school block", "gatehouse": "gatehouse", "generator": "generator house", "water tank": "water tank on a stand", "mansion": "big house", "clubhouse": "clubhouse", "palace": "the palace", "bank tower": "bank tower (glass)", "apartment tower": "apartment tower (glass)", "nightclub": "club or lounge", "toll booth": "toll booth", "office block": "office or hotel block", "beach shack": "beach shack", "beach bar": "beach bar", "horse shelter": "horse shelter (beach rides)", "brazilian house": "Brazilian house (brick, arches, shutters)"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse", "bank tower", "brazilian house") else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "works": "waterworks building", "mound": "landfill mound", "bakery": "bakery", "warehouse": "warehouse", "school": "school block", "gatehouse": "gatehouse", "generator": "generator house", "water tank": "water tank on a stand", "mansion": "big house", "clubhouse": "clubhouse", "palace": "the palace", "bank tower": "bank tower (glass)", "apartment tower": "apartment tower (glass)", "nightclub": "club or lounge", "toll booth": "toll booth", "office block": "office or hotel block", "beach shack": "beach shack", "beach bar": "beach bar", "horse shelter": "horse shelter (beach rides)", "column": "refinery column", "flare stack": "flare stack", "unfinished house": "half-built house (no roof, nobody living)", "toll canopy": "toll plaza canopy", "brazilian house": "Brazilian house (brick, arches, shutters)"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse", "bank tower", "brazilian house") else "")
 
 def overview():
     from collections import Counter
@@ -99,8 +99,15 @@ def look(x, y, r=60):
 def route(a, b, mode, through=False):
     Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b, pa); pa, na = resolve(a, pb)   # repeated names: the nearest pair
     EL = list(Gx.edges(data=True))
-    if mode == "ride" and BAN is not None and not through:   # round the ban: join the main network, not a sketch-road scrap at a border
-        main_ = max(nx.connected_components(Gx), key=len); EL = [e for e in EL if e[0] in main_]
+    if mode == "ride" and BAN is not None and not through:   # round the ban: join a real piece of the network, not a sketch-road scrap at a border
+        comps = sorted(nx.connected_components(Gx), key=len, reverse=True); keep_ = comps[0]
+        for c in comps[1:]:   # the bans can cut a district off (the Frontier, behind the Heights): a ride with both ends there stays there
+            if len(c) < 200: break
+            ELc = [e for e in EL if e[0] in c]; Tc = STRtree([e[2]["geom"] for e in ELc]); ELm = [e for e in EL if e[0] in comps[0]]; Tm = STRtree([e[2]["geom"] for e in ELm])
+            near_c = lambda p: ELc[int(np.atleast_1d(Tc.query_nearest(p))[0])][2]["geom"].distance(p)
+            near_m = lambda p: ELm[int(np.atleast_1d(Tm.query_nearest(p))[0])][2]["geom"].distance(p)
+            if near_c(pa) < near_m(pa) and near_c(pb) < near_m(pb): keep_ = c; break
+        EL = [e for e in EL if e[0] in keep_]
     ET = STRtree([e[2]["geom"] for e in EL])
     def attach(p, tag):   # step onto the nearest point of the nearest way (not the nearest junction), splitting that way there
         u, v, e = EL[int(np.atleast_1d(ET.query_nearest(p))[0])]; g = e["geom"]; t = g.project(p); q = g.interpolate(t)
@@ -112,7 +119,11 @@ def route(a, b, mode, through=False):
         return n, p.distance(q)
     sa, da = attach(pa, "a"); sb, db = attach(pb, "b")
     try: path = nx.shortest_path(Gx, sa, sb, weight="w")
-    except nx.NetworkXNoPath: print(f"NO ROUTE from {na} to {nb} by {mode} — the network is split"); return
+    except nx.NetworkXNoPath:
+        if mode == "ride" and BAN is not None and not through:
+            print(f"NO LEGAL OKADA ROUTE from {na} to {nb}: the okada ban zones cut one end off from the other (try --through, or walk)")
+        else: print(f"NO ROUTE from {na} to {nb} by {mode} — the network is split")
+        return
     legs = []; total = 0
     for u, v in zip(path, path[1:]):
         e = Gx[u][v]; total += e["w"]; lab = label(e["kind"], e["name"])
@@ -130,6 +141,7 @@ def route(a, b, mode, through=False):
         if through: print(f"okada ban: {sum(Gx[u][v].get('inban', 0) for u, v in zip(path, path[1:])):.0f} m ridden inside the ban zone (--through)")
         for p_, d_, w_ in ((pa, da, "starts"), (pb, db, "ends")):
             if BAN.contains(p_) and not through: print(f"okada ban: the trip {w_} inside the ban zone; {d_:.0f} m on foot to the nearest road a bike may use")
+            elif d_ > 150 and not through: print(f"okada ban: no legal road reaches where the trip {w_} (the ban zones cut it off); {d_:.0f} m on foot from the nearest road a bike may use")
     for lab, L in legs: print(f"  {L:5.0f} m  {lab}")
     P_ = lambda c: Point(c[1:] if isinstance(c[0], str) else c)   # route points: junctions, or the split points where a trip joins a way
     geo = LineString([P_(c) for c in path]) if len(path) > 1 else None

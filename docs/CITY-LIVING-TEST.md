@@ -100,6 +100,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - walks the closes past the gatehouses, runs errands to Pearl Towers and the Club Strip at night (valets and touts), and goes to Sunday Beach on his day off
   - walks over the Cable Bridge's toll plaza, and across to Old Island's Cloth Market and the Island Motor Park
   - checks that every gated close still lets him walk in, that the bridge lands on a road, and that the Heights' edge roads lead somewhere
+- **Femi, site security on the Frontier (on foot and by okada; okadas ride freely here):**
+  - guards an empty plot in the Disputed Plots and lives in a half-finished estate (New Estates)
+  - rides the Peninsula Expressway through the Toll Plaza, takes refinery workers to the Refinery's gate, and checks the Eroding Beach on ocean-surge nights
+  - rides west into the Heights (banned: where must he drop people?) and over the Cable Bridge
+  - checks that the empty tracts still have ways through them, and that every home has its everyday places within reach
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -144,6 +149,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Cable Bridge → Sunday Beach | walk | The toll plaza to the beach, across the Heights |
 | Pearl Towers → Cloth Market | walk | The Heights to Old Island's market |
 | Club Strip → Gidi Interchange | ride | The Heights into the city's bus hub (walk out of two bans, then the Long Bridge) |
+| New Estates → Disputed Plots | walk | A guard's way to his post |
+| Toll Plaza → Refinery | ride | Refinery workers from the expressway |
+| Eroding Beach → Toll Plaza | walk | From the sea to the road |
+| Toll Plaza → Pearl Towers | walk | The Frontier into the Heights |
+| Refinery → Gidi Interchange | ride | The convoy road into the city (round the bans) |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

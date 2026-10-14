@@ -493,6 +493,7 @@ def heights(ST, LM):
         "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # real main roads 4.3-5.3 km per km2
         "bridge_links": True,   # the Cable Bridge lands on the north shore's edge road
         "toll": {"bridge": "Cable Bridge", "poi": "Cable Bridge", "in_m": 30},
+        "keep_gateways": True,   # the Frontier was built after it: its edge roads and crossings are reused exactly
         "name_endings": ends,
         "parcels": [
             # The Gold Island: a walled enclave of billionaires' houses on reclaimed sand, one gate (real Banana Island: about 3 ha a street)
@@ -532,7 +533,51 @@ def heights(ST, LM):
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
     }
 
+def frontier(ST, LM):
+    """The Frontier: the Lekki peninsula (study-frontier*, three boxes: Lekki Phase 1 and Ajah-Sangotedo in Eti Osa, Awoyaya-Lakowe in
+    Ibeju-Lekki). OSM's extract stops short of the refinery end. Buildings are traced well in Lekki Phase 1 and Ajah but only in part
+    further out, where WorldCover shows the empty cells really are empty (laid-out estates, no houses yet): building figures come from
+    Ajah's traced cells (scripts/study_wellmapped.py), and the emptiness is built as walled, never-built plots. Heights from the boxes.
+    The district model: one long road past a toll plaza, half-built estates, fenced empty plots with two owners, a refinery, an eroding beach."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 83 x 2.2 = 183 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Crescent", "Way", "Avenue", "Drive")}
+    return {
+        "lgas": ["Eti Osa", "Ibeju Lekki"],
+        # storeys 1, 2, 3, 4, 5-6, 7-13, 14+ by built area, on the boxes (Open Buildings 2.5D): Lekki-Ajah 27/54/15/3/1/0/0, Awoyaya 49/45/5/1/0/0/0, by land
+        "h_bands": [0.384, 0.493, 0.094, 0.018, 0.0085, 0.0024, 0.0001],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.4,
+        "sector_split_ha": 40,
+        "spurs": {"spur_every_m": 120, "spur_m": [40, 90]},   # estate closes: real 0.23-0.44 dead ends per junction
+        "size_lo_u": 0.5, "plot_u": [0.5, 0.95], "back_row": 0.3, "courtyard_m": [1, 3], "big_front": 0.15,   # real (Ajah) typical 200 m2
+        "vacant": 0.55,   # more than half the plots never built: laid-out estates ahead of the houses (Awoyaya's street cells: 44% with no mapped buildings)
+        "vacant_blocks": {"share": 0.45, "vacant": 0.92, "built_vacant": 0.25},   # ...in tracts: 45% of blocks almost empty, the rest a quarter empty
+        "setback_m": [4, 10], "side_garden_m": [1.5, 4],   # real edge-to-street median 14-24 m
+        "kiosk_every_m": 200,
+        "unfinished_share": 0.06,   # half-built houses (real: 1.7% tagged under construction, a floor; the district model: "half-built estates")
+        "internal_mains": 1, "t_into_done": True, "continue_mains": True,
+        "bridge_links": True,   # the Cable Bridge from the Heights lands on the north shore's edge road
+        "name_endings": ends,
+        "reserve": [   # the refinery on the lagoon shore: tanks on one half, the process plant (columns, a flare stack) on the other
+            {"kind": "refinery", "poi": "Refinery", "m2": 120000, "aspect": 1.5, "front": None, "near": "shore", "tank_r_m": 16}],
+        "toll_plaza": {"poi": "Toll Plaza", "road": "Peninsula Expressway", "booths": 7},
+        # the disputed plots: round the pin, most plots are walled and empty ("this land is not for sale"; every plot has two owners)
+        "quarter": {"around": "Disputed Plots", "r_m": 180, "rules": {"vacant": 0.75, "back_row": 0.1}},
+        # the eroding beach: a few fishermen's shacks on what is left of the sand
+        "beach": {"poi": "Eroding Beach", "every_m": [40, 90], "depth_m": 6, "mix": [1, 0, 0]},
+        "parcels": [
+            {"kind": "school", "ha": 1.0, "near_main": False, "gate": "nearest", "min_w": 60},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "plot_walls": {"gate_m": 4.0, "vacant_walled": 0.4, "parcels": ["school"]},   # built plots walled, and a share of the empty ones: "every fence is a fight"
+        "yard_kit": {"generator": 0.6, "generator_m": [2.6, 1.6], "water tank": 0.3, "tank_m": [2.4, 2.4]},
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]}, "lane_passages": False,
+        "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier}.get(did, lambda ST, LM: {})(ST, LM)
