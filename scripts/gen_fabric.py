@@ -644,6 +644,7 @@ if PROF.get("fence_parcels"):   # dead-end streets that poked into a block taken
             parcel_u = unary_union([p["geom"] for p in parcels])
         streets = [g for g in streets if any(g is k for k in keep)] + \
                   [x for g in streets if not any(g is k for k in keep) for x in lines(g.difference(parcel_u)) if x.length > 18]; net_lines = NET_LINES()
+GATE_PTS = []   # where each access road meets its parcel's fence: the gate
 DIRS = {"north": (0, -1), "south": (0, 1), "east": (1, 0), "west": (-1, 0)}   # y runs south
 for g, how in GATES:
     ways_u = unary_union([x for k, x in net_lines])
@@ -654,7 +655,7 @@ for g, how in GATES:
         a0 = nearest_points(g.exterior, far)[0]; ray = LineString([a0, (a0.x + dx * 300, a0.y + dy * 300)])
         x = ray.intersection(ways_u); hits = [h for h in getattr(x, "geoms", [x]) if h.geom_type == "Point" and ray.project(h) > 0.5]
         gl = LineString([a0, min(hits, key=ray.project)]) if hits else None
-    if gl is not None and gl.length > 0.5: access.append(gl)
+    if gl is not None and gl.length > 0.5: access.append(gl); GATE_PTS.append(Point(gl.coords[0]))
 if GATES: net_lines = NET_LINES()
 def mostly_parcel(b): return b.intersection(parcel_u).area > 0.6 * b.area
 
@@ -1497,6 +1498,25 @@ if PROF:
     M["storeys_target_by_area"] = [round(x, 3) for x in bands]
 print(json.dumps({"seed": SEED, "scale": SCALE, "gidi": M, "real_median": {k: CORE["median"][k] for k in M if k in CORE["median"]}, "real_dense": {k: CORE["dense"][k] for k in M if k in CORE["dense"]}}, indent=1))
 
+# a named place inside a fenced or walled plot is entered by its gate, so its pin goes there (owner, Oct 2026): the gate if the plot
+# has an access road, else the middle of the fence side nearest a road, on the main road if one passes within 25 m. Locked pins stay.
+_locked = set(LOCK.get("buildings", {})) | set(LOCK.get("parcels", {}))
+_ways = unary_union([g for k, g in NET_LINES()] + lanes + [g for k, g in PATHS])   # a market's pin among its aisles stays
+_mains = unary_union([g for k, g in NET_LINES() if k != "street"])
+poi_from = {}   # where a moved pin stood before (the bake's civic layer still spaces its places from there, so none of them moves)
+poi_plot = {}   # the plot each named place stands on, by parcel number (the bake marks a safe place's whole plot as safe ground)
+for name, pt in list(poi_pos.items()):
+    i = next((i for i, p in enumerate(parcels) if p["geom"].contains(pt)), None)
+    if i is not None: poi_plot[name] = i
+    if name in _locked or _ways.distance(pt) <= 15 or i is None: continue
+    pp = parcels[i]["geom"]
+    gates = [q for q in GATE_PTS if pp.exterior.distance(q) < 2]
+    poi_from[name] = [round(pt.x), round(pt.y)]
+    if gates: poi_pos[name] = min(gates, key=lambda q: q.distance(pt)); continue
+    front = _mains if not _mains.is_empty and pp.distance(_mains) < 25 else _ways
+    edge = [pp.exterior.interpolate(t) for t in np.arange(0, pp.exterior.length, 2.0)]   # the middle of the side that faces it, not a corner
+    dmin = min(q.distance(front) for q in edge)
+    poi_pos[name] = min([q for q in edge if q.distance(front) <= dmin + 2], key=lambda q: q.distance(pt))
 R2 = lambda g: [[round(x, 1), round(y, 1)] for x, y in g.coords]
 out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM statistics of the inspiration area; no real geometry used",
        "streets": [R2(g) for g in streets + access],
@@ -1506,7 +1526,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        "canal": R2(canal) if canal else None,
        "buildings": [[k] + [[round(x, 1), round(y, 1)] for x, y in list(r.exterior.coords)[:-1]] for r, k in bld],
        "parcels": [{"kind": p["kind"], "pts": [[round(x, 1), round(y, 1)] for x, y in p["geom"].exterior.coords]} for p in parcels],
-       "poi_pos": {k: [round(v.x), round(v.y)] for k, v in poi_pos.items()}, "slots": slots[:400], "metrics": M,
+       "poi_pos": {k: [round(v.x), round(v.y)] for k, v in poi_pos.items()}, "poi_plot": poi_plot, "poi_from": poi_from, "slots": slots[:400], "metrics": M,
        **({"walls": [R2(g) for g in WALLS], "gates": [{"pts": [[round(x, 1), round(y, 1)] for x, y in q["bar"]], "main": q["main"]} for q in GATES_OUT]} if PW or EG or WALLS else {})}
 if PROF:
     out["storeys"] = storeys

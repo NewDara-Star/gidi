@@ -89,7 +89,9 @@ def look(x, y, r=60):
         if p.distance(pt) < 80: print(f"parcel: {kk} {p.distance(pt):.0f} m away")
     for p in POIS:
         dd = pt.distance(Point(p['x'], p['y']))
-        if dd < 150: print(f"{'civic' if p.get('civic') else 'landmark'} {dd:.0f} m: {p['name']} ({p['type']})")
+        if dd < 150: print(f"{'civic' if p.get('civic') else 'landmark'} {dd:.0f} m: {p['name']} ({p['type']}{', safe ground' if p.get('safe') else ''})")
+    for sg in G.get("safe_ground", []):
+        if sg["d"] in DIDS and Polygon(sg["pts"]).contains(pt): print(f"you are on SAFE GROUND: {sg['name']} (never a crime site or a chase route)")
     print(f"rail: {RAIL.distance(pt):.0f} m away" + (f"; canal: {min(c.distance(pt) for c in CANALS):.0f} m" if CANALS else ""))
 def route(a, b, mode, through=False):
     Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b, pa); pa, na = resolve(a, pb)   # repeated names: the nearest pair

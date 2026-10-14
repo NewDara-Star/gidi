@@ -355,7 +355,7 @@
         h("p", { className: "lead" }, p.note),
         h("button", { className: "link", onClick: () => select({ kind: "district", id: d.id }) }, "In " + d.name + " →"),
         h("div", { className: "chiprow" }, h("span", { className: "tag a" + d.act }, ACT_NAME[d.act]), h("span", { className: "tag ok-" + d.okada }, OKADA[d.okada].label),
-          TYPE[p.type].safe && h("span", { className: "tag safe" }, "Safe ground: never a crime location")));
+          p.safe && h("span", { className: "tag safe" }, "Safe ground: never a crime location")));
     } else if (sel.kind === "road") {
       const a = G.arterials[sel.id];
       body = h("div", { className: "card" }, h("div", { className: "eyebrow" }, "Main road"), h("h2", null, a.name),

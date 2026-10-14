@@ -169,7 +169,7 @@
  "model": ["Afro-Brazilian houses: brick, arches, wooden shutters, decaying", "Cloth market lanes 2–3 m wide, porters with head loads", "Bank towers on the waterfront", "The palace compound (shown with respect, never a crime site)", "Fenced square with fountains"],
  "pois": [
   {"name":"Cloth Market","type":"market","u":0.4,"v":0.5,"note":"Run by the market queen. Porter runs."},
-  {"name":"The Palace","type":"landmark","u":0.6,"v":0.65,"note":"Royal palace. Never a crime location."},
+  {"name":"The Palace","type":"landmark","safe":true,"u":0.6,"v":0.65,"note":"Royal palace. Never a crime location."},
   {"name":"Bank Row","type":"landmark","u":0.35,"v":0.15,"note":"Glass towers on the waterfront."},
   {"name":"Brazilian Quarter","type":"landmark","u":0.2,"v":0.7,"note":"Rotting returnee houses with arches and shutters."},
   {"name":"Island Motor Park","type":"park","u":0.75,"v":0.3,"note":"Union factions fight over this junction."}
