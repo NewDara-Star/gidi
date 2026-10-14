@@ -595,6 +595,72 @@
      3320.0
     ]
    ]
+  },
+  "capital|estate": {
+   "between": [
+    "capital",
+    "estate"
+   ],
+   "name": "Salami Road",
+   "pts": [
+    [
+     2560.0,
+     2760.0
+    ],
+    [
+     2343.5,
+     2766.1
+    ],
+    [
+     2127.4,
+     2759.3
+    ],
+    [
+     1911.5,
+     2749.7
+    ],
+    [
+     1696.1,
+     2726.2
+    ],
+    [
+     1480.0,
+     2720.0
+    ]
+   ]
+  },
+  "capital|railside": {
+   "between": [
+    "capital",
+    "railside"
+   ],
+   "name": "Eze Street",
+   "pts": [
+    [
+     1480.0,
+     2720.0
+    ],
+    [
+     1462.7,
+     2919.9
+    ],
+    [
+     1456.7,
+     3120.7
+    ],
+    [
+     1434.2,
+     3320.2
+    ],
+    [
+     1424.6,
+     3520.7
+    ],
+    [
+     1400.0,
+     3720.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -1022,10 +1088,114 @@
    "road": "",
    "kind": "street",
    "pt": [
-    3942.5,
-    4733.7
+    3964.6,
+    4728.4
    ],
    "bearing_deg": 166
+  },
+  {
+   "from": "capital",
+   "to": "railside",
+   "road": "Lawal Road",
+   "kind": "main",
+   "pt": [
+    1457.8,
+    3083.9
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "estate",
+   "road": "Balogun Road",
+   "kind": "main",
+   "pt": [
+    2060.9,
+    2756.3
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "hub",
+   "road": "Ayinde Avenue",
+   "kind": "arterial",
+   "pt": [
+    1877.3,
+    3803.6
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "estate",
+   "road": "Ayinde Avenue",
+   "kind": "arterial",
+   "pt": [
+    1957.6,
+    2751.7
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "hub",
+   "road": "Northern Road",
+   "kind": "arterial",
+   "pt": [
+    2332.7,
+    3869.3
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "foodgate",
+   "road": "Northern Road",
+   "kind": "arterial",
+   "pt": [
+    2406.5,
+    3819.2
+   ]
+  },
+  {
+   "from": "capital",
+   "to": "hub",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    1909.4,
+    3805.9
+   ],
+   "bearing_deg": 197
+  },
+  {
+   "from": "capital",
+   "to": "foodgate",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2443.6,
+    3524.3
+   ],
+   "bearing_deg": 90
+  },
+  {
+   "from": "capital",
+   "to": "estate",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    2203.1,
+    2761.7
+   ],
+   "bearing_deg": 357
+  },
+  {
+   "from": "capital",
+   "to": "railside",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    1456.9,
+    3113.3
+   ],
+   "bearing_deg": 270
   }
  ]
 }

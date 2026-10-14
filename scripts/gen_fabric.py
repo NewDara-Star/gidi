@@ -44,6 +44,9 @@ if PROF:
     ce = PROF["cross_every"]; RULE["cross_every"] = sampler({k: ce[k] for k in ("p25", "p50", "p75")}, ce["lo"], ce["hi"])
     RULE["x_junction"] = PROF["x_junction"]; RULE["dead_end"] = PROF.get("dead_end", RULE["dead_end"])
     RULE["back_row"] = PROF.get("back_row", RULE["back_row"]); RULE["big_front"] = PROF.get("big_front", 0.0); RULE["cross_scale"] = PROF.get("cross_scale", SCALE); RULE["size_lo_u"] = PROF.get("size_lo_u", 0.25)
+if PROF.get("sizes_from"):   # under-mapped area (central Ikeja): house sizes and gaps from the whole LGA's mapped buildings (see the study doc)
+    SZ = json.load(open(f"study-{PROF['sizes_from']}.json"))["buildings"]
+    RULE["short_side"] = sampler(SZ["short_side_m"], 3.0, 18); RULE["long_side"] = sampler(SZ["long_side_m"], 4.5, 34); RULE["gap"] = sampler(SZ["gap_to_nearest_neighbour_m"], 0.0, 6)
 CLEAR = {"lane": 2.2, "street": 3.4, "main": 6.5, "art": 12.5, "exp": 15, "rail": 6.0, "canal": 4.0}   # building edge to centreline, minimum
 WIDTH = {"street": 5.5, "main": 10, "art": 22}
 FIRST = ["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Folake","Agboola","Shonibare","Ilori","Durojaiye","Ogunleye","Aremu","Okonkwo","Nwosu","Danjuma"]
@@ -165,7 +168,7 @@ for n, e, nb in (edge_roads if INTERNAL_MAINS > 1 and big is not None else []):
     if e.distance(big) > 5: continue
     for t in range(30):
         p = e.interpolate(rnd.uniform(.25, .75), normalized=True)
-        q = nearest_points(best[1], p)[1]
+        q = nearest_points(best[1], p)[0]   # the point on the through-route (it was [1], p itself: no half-route was ever drawn)
         ln = LineString([p, q])
         if not big.buffer(1).contains(ln.interpolate(.5, normalized=True)) or ln.length < 250: continue
         # meet the through-route at a near-right angle
@@ -180,7 +183,7 @@ def add_gate(pt, nb, road, kind, bearing=None):
 for n, ln in mains:  # gateways where internal mains reach the district edge: the neighbour continues the road from here
     for en, e, nb in edge_roads:
         for end in (Point(ln.coords[0]), Point(ln.coords[-1])):
-            if nb and end.distance(e) < 2: add_gate(end, nb, n, "main")
+            if nb and end.distance(e) < 2 and not (PROF.get("t_into_done") and os.path.exists(f"web/gen-{nb}.json")): add_gate(end, nb, n, "main")   # a finished neighbour gets no new main road: ours T's into the edge road
 for n, k, a in arts:  # arterials crossing the edge
     for en, e, nb in edge_roads:
         x = a.intersection(e)
@@ -199,6 +202,12 @@ if PROF:  # the designed pins (districts_info.json), placed the way bake_web.py 
     for q in json.load(open("web/districts_info.json"))[DID]["pois"]:
         pt = Point(_b[0] + (_b[2] - _b[0]) * q["u"], _b[1] + (_b[3] - _b[1]) * (1 - q["v"]))
         POIS[q["name"]] = pt if _core.contains(pt) else nearest_points(_core, pt)[0]
+RB = PROF.get("roundabout"); RB_PT = None
+if RB and len(mains) > 1:   # a roundabout where the two internal mains meet, with a bust on its island (the night strip grows round it)
+    xs = [q for i, (n1, l1) in enumerate(mains) for n2, l2 in mains[i + 1:] for q in getattr(l1.intersection(l2.buffer(0.5)).centroid, "geoms", [l1.intersection(l2.buffer(0.5)).centroid]) if not q.is_empty]
+    if xs:
+        RB_PT = min(xs, key=lambda q: q.distance(POIS.get(RB["poi"], q))); circ = RB_PT.buffer(RB["r_m"], 32)
+        mains = [(n, x) for n, ln in mains for x in lines(ln.difference(circ.buffer(-0.01)))] + [(RB.get("name") or f"{mains[0][0]} Roundabout", circ.exterior)]
 # canal (real: ~0.76 km of canal/drain/stream per km2) - one open canal following the land, with culverts under streets
 canal = None
 gc = next((p for p in G["pois"] if p["d"] == DID and "Canal" in p["name"]), None)
@@ -300,10 +309,15 @@ def split_big(P):
     return out
 collectors = []
 secs2 = []
-for P in sectors: secs2 += split_big(P)
+for P in sectors: secs2 += [P] if PROF.get("fingers") else split_big(P)   # fingers run the whole way down to the shore: no collector across them
 streets = []
+FG = PROF.get("fingers")   # waterfront: long streets run down to the shore and end short of the water (real: about half the junctions are dead ends)
+SHORE = unary_union([e for n, e, nb in edge_roads if nb is None and e.distance(water) < 20]) if FG else None
+def shore_angle(P):   # bearing of the shore nearest the sector: fingers run square to it
+    q = nearest_points(SHORE, P.centroid)[0]; sh = min(lines(SHORE), key=lambda l: l.distance(q)); vx, vy = LMK.direction_at(sh, sh.project(q))
+    return math.atan2(vy, vx)
 for P in secs2:
-    th = frontage_angle(P) + math.radians(rnd.uniform(-6, 6))
+    th = (shore_angle(P) if FG else frontage_angle(P)) + math.radians(rnd.uniform(-6, 6))
     c = P.centroid; Pr = rotate(P, -th, origin=c, use_radians=True)  # frontage now runs along x; ribs run along y
     minx, miny, maxx, maxy = Pr.bounds
     xs = []; x = minx + rnd.uniform(20, 55)
@@ -316,9 +330,28 @@ for P in secs2:
         ln = LineString([ln.coords[0], (x + bow, (miny + maxy) / 2), ln.coords[1]])
         seg = [g for g in lines(ln.intersection(Pr)) if g.length > 30]
         for g in seg:
+            if FG:   # a finger: its shore end stops short of the water's edge; inland it meets the road
+                gr = rotate(g, th, origin=c, use_radians=True); a0, a1 = Point(gr.coords[0]), Point(gr.coords[-1])
+                fwd = a0.distance(SHORE) > a1.distance(SHORE)   # True: runs from inland (start) toward the shore (end)
+                if (P.distance(SHORE) < 15 and rnd.random() >= FG.get("through", 0)) or (P.distance(SHORE) >= 15 and rnd.random() < RULE["dead_end"]):   # a few run on to the shore road
+                    keep = g.length - rnd.uniform(*FG["stop_m"])
+                    if keep < 40: continue
+                    g = substring(g, 0, keep) if fwd else substring(g, g.length - keep, g.length)
+                ribs.append(g); continue
             if rnd.random() < RULE["dead_end"] and g.length > 110:  # stop short inside the block: a dead end
                 keep = rnd.uniform(.45, .8); g = substring(g, 0, g.length * keep) if rnd.random() < .5 else substring(g, g.length * (1 - keep), g.length)
             ribs.append(g)
+    if FG and FG.get("spur_every_m"):   # short side lanes off each finger, ending in the compounds (a fishbone: a T and a dead end each)
+        spurs = []
+        for g in ribs:
+            t = rnd.uniform(.3, 1) * FG["spur_every_m"]
+            while t < g.length - 25:
+                q = g.interpolate(t); sd = rnd.choice((1, -1)); L = rnd.uniform(*FG["spur_m"])
+                sp = LineString([(q.x, q.y), (q.x + sd * L, q.y)])
+                if Pr.buffer(-8).contains(sp.interpolate(1.0, normalized=True)) and all(sp.distance(o) > 18 for o in ribs + spurs if o is not g):
+                    spurs.append(sp)
+                t += rnd.uniform(.6, 1.4) * FG["spur_every_m"]
+        streets += [rotate(g, th, origin=c, use_radians=True) for g in spurs]
     # cross streets between neighbouring ribs, staggered so most junctions are T's
     ribs.sort(key=lambda g: g.centroid.x)
     walls = [Pr.exterior]  # the sector edge is a road: cross streets may run to it too
@@ -362,6 +395,8 @@ for g in incoming:
     if KEEP: stop = stop.union(unary_union(streets))   # a rebuilt district ties its kept crossings into the first street they meet
     x = ray.intersection(stop); hits = [] if x.is_empty else [q for q in getattr(x, "geoms", [x]) if q.geom_type == "Point"]
     cut = min([ray.project(q) for q in hits if ray.project(q) > (25 if KEEP else 5)] or [ray.length])
+    if FG and ray.interpolate(cut).distance(SHORE) < 2:   # a street that runs down to the shore stops short of it too (unless it is only a short link)
+        st_ = rnd.uniform(*FG["stop_m"]); cut = cut - st_ if cut - st_ > 60 else cut
     streets.append(substring(ray, 0, cut))
 if RES_U is not None:   # with "clear_access", streets also stop short of a big place's own road and snap onto it (no double road beside it)
     streets = [x for s0 in streets for x in lines(s0.difference(RES_U.buffer((GAP if PROF.get("clear_access") else 0) + CLEAR["street"] + 1))) if x.length > 18]
@@ -436,7 +471,8 @@ if PROF.get("clear_access"):   # a big place's own road joins the street grid at
             q = nearest_points(st_u, c)[0]
             if 0.5 < c.distance(q) <= 40: streets.append(LineString([c, q]))
 # no block bigger than the real 90th percentile (~3.2 ha): split oversize blocks with a street across their long axis
-for _ in range(3):
+# (not between fingers: the land between them opens onto the water, it is not a block)
+for _ in range(0 if FG else 3):
     big = [b for b in polygonize(noded(streets + hard + [rail] + ([rail_zone.exterior] if PROF.get("rail_frontage") else []))) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
     if not big: break
     for b in big:
@@ -938,6 +974,20 @@ if PR and PR["poi"] in POIS:
     row = substring(sg, max(0, t0 - PR["length_m"] / 2), min(sg.length, t0 + PR["length_m"] / 2))
     bld = [(r, "print" if k == "front" and r.distance(row) < CLEAR["street"] + 2 and 0 < row.project(r.centroid) < row.length else k) for r, k in bld]
     poi_pos[PR["poi"]] = row.interpolate(0.5, normalized=True)
+ZN = PROF.get("zone")
+if ZN and ZN["poi"] in POIS:   # a quarter whose houses have turned into a trade: Gadget Village, houses stacked into phone malls, kiosks in front
+    pin = POIS[ZN["poi"]]; zu = pin.buffer(ZN["r_m"])
+    bld = [(r, ZN["kind"] if k in ("front", "back") and zu.contains(r.centroid) and r.area >= ZN["min_m2"] else k) for r, k in bld]
+    zrnd = random.Random(SEED * 17 + 3)
+    for k, g in net_lines:
+        if k == "art" or not g.intersects(zu): continue
+        gz = g.intersection(zu)
+        for gg in lines(gz):
+            for t in np.arange(3, gg.length - 3, ZN["kiosk_every_m"]):
+                p = gg.interpolate(t); ux, uy = LMK.direction_at(gg, t); side = zrnd.choice((1, -1)); off = CLEAR.get(k, 3.4) + 1.4
+                r = rect(p.x - uy * off * side, p.y + ux * off * side, zrnd.uniform(2.2, 3.2), 2.0, math.atan2(uy, ux))
+                if free(r, 0.2): add(r, "kiosk")
+    poi_pos[ZN["poi"]] = pin
 for sp in [x for x in PROF.get("named", []) if set(x["from"]) & {"front", "back"}]:   # a house near the pin becomes the studio, the cafe, Tunde's room
     pin = POIS.get(sp["poi"])
     if pin is None: continue
@@ -953,7 +1003,7 @@ if SV:   # houses on stilts over the lagoon: plank boardwalks out from the shore
     anchor = POIS.get(SV["poi"], poly.centroid)
     if SV.get("near") == "bridge" and bridge is not None: anchor = Point(bridge.coords[0])   # "stilt houses under the Long Bridge"
     sh = min(shore, key=lambda e: e.distance(anchor)); t_a = sh.project(anchor) + SV.get("shift_m", 0)
-    bw = []; vrnd = random.Random(SEED * 13 + 1)
+    bw = []; vrnd = random.Random(SV.get("seed", SEED) * 13 + 1)   # the village keeps its own dice: rebuilding the land never moves a hut
     class _Grid:   # huts already built, by 20 m cell: where boardwalks converge, rows from two boardwalks must not overlap
         def __init__(self): self.c = {}
         def add(self, r): x, y = r.centroid.x, r.centroid.y; self.c.setdefault((int(x // 20), int(y // 20)), []).append(r)
@@ -1056,6 +1106,21 @@ for p in parcels:
                 bld.append((r, "flats"))
                 k = rect(cx - (bs / 2 + 5) * -sa, cy - (bs / 2 + 5) * ca, 3.5, 3.0, a)   # a lock-up shop in the front garden
                 if rnd.random() < ES["shop_share"] and g.buffer(-1).contains(k) and road_free.contains(k): bld.append((k, "kiosk"))
+    if p["kind"] == "government":   # the secretariat: office slabs along the long axis, a landscaped garden filling the rest
+        GV = next(x for x in PROF["parcels"] if x["kind"] == "government"); ca, sa = math.cos(a), math.sin(a)
+        for j in (-1, 1):
+            r = rect(ctr.x - sa * j * GV["slab_gap_m"] / 2, ctr.y + ca * j * GV["slab_gap_m"] / 2, min(GV["slab_m"][0], LL - 30), GV["slab_m"][1], a)
+            if fit(r): bld.append((r, "office"))
+        gd = g.buffer(-6).difference(unary_union([r.buffer(8) for r, k in bld if k == "office" and r.intersects(g)] or [Point(0, 0)]))
+        for x in getattr(gd, "geoms", [gd]):
+            if x.geom_type == "Polygon" and x.area > 1500: extra_parcels.append({"kind": "garden", "geom": x})
+    if p["kind"] == "barracks":   # rows of long single-storey barrack blocks behind the wall, a parade ground in the middle
+        BK = next(x for x in PROF["parcels"] if x["kind"] == "barracks"); ca, sa = math.cos(a), math.sin(a); bl, bs = BK["block_m"]
+        for v in np.arange(-LL, LL, bs + BK["gap_m"]):
+            for u in np.arange(-LL, LL, bl + BK["gap_m"]):
+                if abs(v) < BK["parade_m"] / 2 and abs(u) < BK["parade_m"]: continue
+                r = rect(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca, bl, bs, a)
+                if g.buffer(-4).contains(r) and road_free.contains(r): bld.append((r, "barracks"))
     if p["kind"] == "under bridge":   # rows of stalls between the slip road and the flyover
         for r in LMK.stall_rows(g, a): 
             if road_free.contains(r): bld.append((r, "stalls"))
@@ -1109,13 +1174,28 @@ parcels += extra_parcels
 for sp in NAMED_LATE:   # places inside a parcel, named after its buildings exist (The steal: the stall at the market's near end)
     pin = POIS.get(sp["poi"]); cands = [r for r, k in bld if k in sp["from"]]
     if pin is not None and cands: poi_pos[sp["poi"]] = min(cands, key=lambda r: r.distance(pin)).centroid
-for name in PROF.get("lock", {}).get("buildings", []):   # locked buildings: the stall where the story starts, Tunde's room
+PO = PROF.get("post")
+if PO:   # the boss's post: a canopy over a bench at the market's far mouth, where his boys collect the park's levy from the traders
+    mk = next((x for x in RES if x.get("poi") == PO["market"]), None); steal = poi_pos.get(PO["from"])
+    aisles = [x for k, x in PATHS if k == "market aisle" and mk is not None and x.intersects(mk["geom"])]
+    if aisles and steal is not None:
+        ai = max(aisles, key=lambda x: x.length)   # the through aisle, the chase route
+        e0, e1 = Point(ai.coords[0]), Point(ai.coords[-1]); far, near = (e0, e1) if e0.distance(steal) > e1.distance(steal) else (e1, e0)
+        mouth = ai.intersection(mk["geom"].exterior); mouth = min(getattr(mouth, "geoms", [mouth]), key=lambda q: q.distance(far))
+        L = far.distance(near); ux, uy = (near.x - far.x) / L, (near.y - far.y) / L   # into the market
+        w, d = PO["m"]; off = 1.75 + 0.6 + d / 2   # beside the aisle, clear of it
+        cx, cy = mouth.x + ux * (w / 2 + 1.5) - uy * off, mouth.y + uy * (w / 2 + 1.5) + ux * off
+        post = rect(cx, cy, w, d, math.atan2(uy, ux))
+        bld = [(r, k) for r, k in bld if not r.intersects(post.buffer(0.3))] + [(post, "canopy")]
+        poi_pos[PO["poi"]] = post.centroid
+for name in PROF.get("lock", {}).get("buildings", []):   # locked buildings: the stall where the story starts, Tunde's room, the boss's post
     LK = LOCK.get("buildings", {}).get(name)
     if LK:
         lp = Polygon(LK["poly"])
         if not any(r.equals_exact(lp, 0.01) for r, k in bld):
             bld = [(r, k) for r, k in bld if not r.intersects(lp.buffer(0.3))] + [(lp, LK["kind"])]
         poi_pos[name] = Point(LK["pt"])
+        if LOCK_WRITE: NEW_LOCK.setdefault("buildings", {})[name] = LK   # recording a new lock keeps the ones already there
     elif LOCK_WRITE and name in poi_pos:
         r0, k0 = min(bld, key=lambda rk: rk[0].centroid.distance(poi_pos[name]))
         NEW_LOCK.setdefault("buildings", {})[name] = {"poly": list(r0.exterior.coords), "kind": k0, "pt": [poi_pos[name].x, poi_pos[name].y]}
@@ -1134,6 +1214,18 @@ if H and H["poi"] in POIS:
             bld = [(r, k) for r, k in bld if not r.intersects(hr.buffer(1.5))]
             bld.append((hr, "hotel")); poi_pos[H["poi"]] = hr.centroid; break
 
+for HL in PROF.get("halls", []):   # a big named building on a main-road frontage near its pin (the Shrine's music hall); the houses it replaces are cleared
+    if HL["poi"] not in POIS: continue
+    hp = POIS[HL["poi"]]; hw_ = math.sqrt(HL["m2"] * HL.get("aspect", 1.3)); hd_ = HL["m2"] / hw_
+    for r0, k0 in sorted([(r, k) for r, k in bld if k == "front" and r.distance(mainU) < CLEAR["main"] + 4], key=lambda rk: rk[0].centroid.distance(hp))[:200]:
+        q = mainU.interpolate(mainU.project(r0.centroid)); dxy = (r0.centroid.x - q.x, r0.centroid.y - q.y); L0 = math.hypot(*dxy) or 1
+        ux2, uy2 = dxy[0] / L0, dxy[1] / L0; off3 = CLEAR["main"] + 3 + hd_ / 2
+        hr = rect(q.x + ux2 * off3, q.y + uy2 * off3, hw_, hd_, math.atan2(ux2, -uy2))
+        if road_free.contains(hr) and not hr.intersects(parcel_u):
+            bld = [(r, k) for r, k in bld if not r.intersects(hr.buffer(1.5))]; bld.append((hr, HL["kind"])); poi_pos[HL["poi"]] = hr.centroid; break
+if RB_PT is not None:   # the night strip: the house fronts on the mains around the roundabout are bars, suya spots and small hotels
+    bld = [(r, "strip" if k == "front" and r.distance(RB_PT) < RB["strip_m"] and r.distance(mainU) < CLEAR["main"] + 4 else k) for r, k in bld]
+    bust = rect(RB_PT.x, RB_PT.y, 3, 3, 0); bld.append((bust, "bust")); poi_pos[RB["poi"]] = RB_PT
 # ---------- 5. civic slots: real plots the civic layer can sit on ----------
 slots = []
 for r, kind in bld:
@@ -1163,10 +1255,12 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
+    FIXED.update({x["kind"]: x["storeys"] for x in PROF.get("halls", [])})
+    FIXED.update({"office": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "government"})   # the secretariat's office slabs
     storeys = [FIXED.get(k) for r, k in bld]
     def band_of(st): return next(i for i, (lo, hi) in enumerate(STOREY_BANDS) if lo <= st <= hi)
     tot = sum(r.area for r, k in bld); target = [b * tot for b in bands]
@@ -1181,6 +1275,8 @@ if PROF:
         while b > 0 and acc >= max(0, target[b]): b -= 1; acc = 0.0
         lo, hi = STOREY_BANDS[b]; storeys[i] = lo if lo == hi else min(hi, lo + int(srnd.expovariate(1.2)))
         acc += bld[i][0].area
+    if PROF.get("zone"):   # houses stacked up into phone malls (district model: 3-4 storeys)
+        lo, hi = PROF["zone"]["storeys"]; storeys = [min(hi, max(lo, st)) if k == PROF["zone"]["kind"] else st for st, (r, k) in zip(storeys, bld)]
     if PROF.get("print_row"):   # the presses sit in 2-3 storey houses (district model); the band shares barely move
         lo, hi = PROF["print_row"]["storeys"]; storeys = [min(hi, max(lo, st)) if k == "print" else st for st, (r, k) in zip(storeys, bld)]
     M["storeys_share_by_area"] = [round(sum(bld[i][0].area for i in range(len(bld)) if band_of(storeys[i]) == q) / tot, 3) for q in range(7)]

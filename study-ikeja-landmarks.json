@@ -1,0 +1,202 @@
+{
+ "area_km2": 48.8,
+ "flyover_spans_m": {
+  "n": 55,
+  "p25": 82.2,
+  "p50": 222.5,
+  "p75": 297.9,
+  "p90": 419.3,
+  "km_per_km2": 0.25
+ },
+ "interchanges": {
+  "n": 8,
+  "per_km2": 0.16,
+  "slip_roads_each": {
+   "p25": 4.0,
+   "p50": 6.0,
+   "p75": 8.5
+  },
+  "slip_road_m_each": {
+   "p25": 502.0,
+   "p50": 736.8,
+   "p75": 988.9
+  },
+  "slip_road_length_m": {
+   "p25": 22.5,
+   "p50": 43.7,
+   "p75": 70.6,
+   "p90": 194.8
+  }
+ },
+ "major_road_rail_crossings": {
+  "n": 7,
+  "share_bridged": 0.86
+ },
+ "footbridges": {
+  "n": 48,
+  "length_m": {
+   "p25": 24.3,
+   "p50": 42.6,
+   "p75": 54.6
+  },
+  "per_km_of_major_road": 0.4
+ },
+ "bus_stations": {
+  "n": 3,
+  "area_m2": {
+   "p25": 2988.7,
+   "p50": 5497.8,
+   "p75": 8079.8,
+   "p90": 9629.0
+  },
+  "max_m2": 10662,
+  "levels_tagged": [
+   "5"
+  ]
+ },
+ "parking_lots_m2": {
+  "p25": 1806.4,
+  "p50": 4529.3,
+  "p75": 8605.1
+ },
+ "stadium": {
+  "bowl_building_m2": [],
+  "stadium_ground_m2": [],
+  "sports_centre_m2": [],
+  "ground_dist_to_main_m": []
+ },
+ "rail_station_building_m2": [
+  5602
+ ],
+ "rail_stops_per_km_of_track": 0.16,
+ "hotels": [
+  {
+   "m2": 2767,
+   "height_m": "35"
+  },
+  {
+   "m2": 4078,
+   "height_m": "20"
+  },
+  {
+   "m2": 3382,
+   "height_m": "15"
+  },
+  {
+   "m2": 3045,
+   "height_m": "30"
+  },
+  {
+   "m2": 2278,
+   "height_m": "40"
+  },
+  {
+   "m2": 233,
+   "height_m": "35"
+  },
+  {
+   "m2": 96,
+   "height_m": "4"
+  },
+  {
+   "m2": 64,
+   "height_m": "4.3"
+  },
+  {
+   "m2": 106,
+   "height_m": "8.0"
+  },
+  {
+   "m2": 976,
+   "height_m": "10"
+  },
+  {
+   "m2": 3138,
+   "height_m": "32"
+  },
+  {
+   "m2": 854,
+   "height_m": "25"
+  },
+  {
+   "m2": 1306,
+   "height_m": "20"
+  },
+  {
+   "m2": 1688,
+   "height_m": "14"
+  },
+  {
+   "m2": 570,
+   "height_m": "9"
+  },
+  {
+   "m2": 526,
+   "height_m": "9"
+  },
+  {
+   "m2": 582,
+   "height_m": "9"
+  },
+  {
+   "m2": 796,
+   "height_m": null
+  },
+  {
+   "m2": 764,
+   "height_m": null
+  },
+  {
+   "m2": 938,
+   "height_m": null
+  },
+  {
+   "m2": 539,
+   "height_m": null
+  },
+  {
+   "m2": 1953,
+   "height_m": null
+  },
+  {
+   "m2": 864,
+   "height_m": null
+  },
+  {
+   "m2": 952,
+   "height_m": null
+  }
+ ],
+ "markets_m2": [
+  8664,
+  16335
+ ],
+ "markets_touching_major_road": 0,
+ "school_m2": {
+  "p25": 6327.1,
+  "p50": 14300.7,
+  "p75": 18207.5
+ },
+ "pitch_m2": {
+  "p25": 335.7,
+  "p50": 584.7,
+  "p75": 774.7
+ },
+ "rail_crossings_by_road": {
+  "secondary level": 1,
+  "motorway bridge": 2,
+  "primary bridge": 4,
+  "service level": 2,
+  "footway bridge": 5
+ },
+ "level_crossings_mapped": 1,
+ "water_crossings": {
+  "n": 35,
+  "share_bridged": 0.71
+ },
+ "power": {
+  "towers": 15,
+  "line_km_per_km2": 1.95,
+  "substations": 4
+ }
+}

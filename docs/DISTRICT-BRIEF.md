@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub, jungle, foodgate, watertown (in review)
-- **Then:** capital, bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
+- **Done:** maze, hub, jungle, foodgate, watertown, capital
+- **Then:** bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
 ## District → inspiration (OSM `name` of the LGA, as in `adm6.geojson`)
@@ -44,6 +44,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - `python3 scripts/study_extract.py "<LGA1>,<LGA2>" <id>`
    - then `study_analyse.py <id>`, `study_connect.py <id>` and `study_core.py <id>`
    - For neighbourhood-level districts, pass a box: `study_extract.py "<LGA>" <id> west,south,east,north` (degrees). Food Gate is the worked example; several boxes are separated by `;` (Water Town). For a waterfront, `scripts/study_village.py <id>` splits the stilt village off the land, and `study_core.py <id> --land` measures the land only.
+   - Where OSM maps the streets but few of the buildings (central Ikeja), `scripts/study_undermapped.py` estimates the building cover from WorldCover and the well-mapped districts. The Capital is the worked example.
    - Write `docs/<id>-pattern-study.md` in the same shape as the Maze study. It covers roads, buildings, land, water, rail, connections and the limits of the data, plus the height, people, tree and terrain numbers from `lga_table.json`.
 3. **Generate:**
    - Add the district to `scripts/district_profiles.py`. The Hub's and the Maze's profiles are the worked examples.
@@ -54,14 +55,18 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - storeys per building from the district's height bands
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, and Water Town seed 42, scale 3.5. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), and the Capital seed 3, scale 3.2. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.
    - Turn on `walk` in the profile (the Maze's is the example): it adds footpaths along the rail, along canal banks and across the rail, makes lanes start on streets, and keeps buildings within reach of a way.
    - Look at the knot or any landmark close up: `ZOOM=x0,y0,x1,y1 python3 scripts/draw_gen.py <id> out.png`.
    - **Everyday places are placed by coverage.** `bake_web.py` puts schools, places of worship and chemists/clinics on real plots so that every house has each within 10 min walk (15 at most). Check 13 fails otherwise; run it after baking.
-   - **The opening is locked** (`web/locked.json`): the Maze's parts market and its aisles, The steal's stall, Tunde's room and the Hub's boss's motor park. Regenerating keeps them exactly; check 12 fails if any of them moves. To re-record them on purpose, run the generator with `GIDI_LOCK=write`.
+   - **Locked places** (`web/locked.json`):
+     - **the opening:** the Maze's parts market and its aisles, The steal's stall, Tunde's room, the boss's post (a canopy at the market's west mouth), and the Hub's boss's motor park
+     - **Water Town:** the Okobaba Sawmill's plot
+     - Regenerating keeps them exactly, and check 12 fails if any of them moves.
+     - To re-record them on purpose, run the generator with `GIDI_LOCK=write`. Locks that already exist are kept.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
 6. **City living test:** every district ends with this test.
    - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.

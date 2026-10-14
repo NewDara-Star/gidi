@@ -1,6 +1,6 @@
 # Water Town pattern study: the Makoko–Iwaya and Bariga waterfront → Water Town (v1)
 
-Status: generated for review (13 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets, houses and stilt houses from the rules. **No real street, building or name is copied into Gidi.**
+Status: generated for review (13 Oct 2026; v2 the same day: the land is rebuilt as fingers running down to the shore). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets, houses and stilt houses from the rules. **No real street, building or name is copied into Gidi.**
 
 Data:
 - OpenStreetMap (ODbL), Lagos extract
@@ -88,47 +88,66 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
 - **No sawmill is mapped by name.** The Okobaba Sawmill's size (1.5 ha) is the district model's, not the data's.
 
 ## 4. The generator: what is new for Water Town
-`scripts/gen_fabric.py watertown 42 3.5`, with its settings in `scripts/district_profiles.py` (`watertown`).
+`scripts/gen_fabric.py watertown 21 2.1`, with its settings in `scripts/district_profiles.py` (`watertown`).
 
-1. **The stilt village** (`stilt_village`). It sits off the shore road, starting under the Long Bridge and running 300 m south.
+1. **Fingers down to the shore** (`fingers`, v2). The land is not a grid. Long streets run from the inland edge roads down toward the lagoon, square to the shore.
+   - About 6 in 10 stop 25–45 m short of the shore road, as dead ends. The rest run on to it.
+   - Every ~200 m a short side lane (30–55 m) branches off into the compounds and ends there.
+   - A few cross links tie neighbouring fingers together, always as T's.
+   - No collector street and no block split cuts across the fingers: the land between two fingers opens toward the water, so it is not a closed block.
+   - ![Water Town before (a grid) and after (fingers)](img/watertown-fingers.png)
+2. **The stilt village** (`stilt_village`). It sits off the shore road, starting under the Long Bridge and running 300 m south.
    - **Boardwalks:** plank walkways run out over the lagoon every 34 m, with a narrow canoe lane between each pair of hut rows. Cross-walkways about every 70 m tie them together.
    - **Huts:** the real size (4.1 × 6.4 m), 0.4 m apart. Every hut stands on a boardwalk, and 40% have a second hut behind.
+   - It has its own dice (seed 42), so rebuilding the land never moves a hut.
    - **The result:** 720 huts on 4.6 ha, about 15,700 per km², 40% covered (real: 14,300 per km² and 46%).
    - **The Stilt Bar:** a 10 × 12 m, 2-storey house on the boardwalks.
-2. **Okobaba Sawmill.** A 1.4 ha yard on the shore, with three saw sheds, six sawdust piles, and four log rafts (20 × 4 m) tied up in the water. Its driveway joins the nearest road.
-3. **The Canoe Jetty.** A 23 m pier from the shore road, with canoes to the creeks and Old Shore.
-4. **The rail bridges.** Okafor Road and Adeyemi Road go over the rail: an edge road that crosses the rail now gets a bridge.
-5. **Checks:**
+3. **Okobaba Sawmill.** A 1.4 ha yard on the shore, with three saw sheds, six sawdust piles, and four log rafts (20 × 4 m) tied up in the water. Its driveway joins the nearest road.
+4. **The Canoe Jetty.** A 23 m pier from the shore road, with canoes to the creeks and Old Shore.
+   - **Kept when the land was rebuilt (v2):** the stilt village, the Stilt Bar, the jetty, and the sawmill's yard, sheds and rafts are unchanged, building for building. The sawmill's plot is locked in `web/locked.json`, and `check_district.py` check 12 fails if it moves.
+5. **The rail bridges.** Okafor Road and Adeyemi Road go over the rail: an edge road that crosses the rail now gets a bridge.
+6. **Checks:**
    - Stilt huts, the stilt bar and rafts must stand over the lagoon, next to the district.
    - Stilt huts count as homes for the everyday-places test.
-6. **Everyday places:** the bake places them so every home, on land or on stilts, has a school, a place of worship and a chemist within 10 minutes. The worst is 7.9 minutes.
+7. **Everyday places:** the bake places them so every home, on land or on stilts, has a school, a place of worship and a chemist within 10 minutes. The worst is 9.6 minutes.
 
 **Calibration:**
-- **Values:** seed 42; rib spacing × 3.5; cross streets × 2.4; X-junction share 0.3; deliberate dead ends 90%; small houses; back-house chance 0.85; courtyards 0.5–1.5 m; vacant plots 25%.
-- **How we chose them:** three sweeps, about 150 runs in all.
+- **Values (v2):**
+  - seed 21; finger spacing × 2.1; cross links × 4.5, all T's
+  - 40% of fingers run on to the shore road, and side lanes every ~200 m
+  - small houses; back-house chance 0.9; courtyards 0.5–1.5 m; vacant plots 18%
+- **How we chose them:** v1 took three sweeps, about 150 runs. v2 took eleven sweeps, about 330 runs.
 
 ## 5. Result vs real (land fabric, the same measuring stick)
 
-| | Real, typical km² | Real, dense km² | **Water Town (land)** |
-|---|---|---|---|
-| Streets, km/km² | 9.7 | 11.3 | **17.0** |
-| Junctions/km² | 43 | 56 | **82** |
-| T-junctions | 88% | 93% | **92%** |
-| Dead ends per junction | 0.53 | 0.48 | **0.22** |
-| Typical block | 1.7 ha | 1.5 ha | **1.9 ha** |
-| Buildings/km² | 2,702 | 3,813 | **3,483** |
-| Ground built on | 30% | 36% | **29%** |
-| Typical house | 72 m² | 60 m² | **65 m²** |
-| Gap between houses | 0.7 m | 0.6 m | **0.8 m** |
+| | Real, typical km² | Real, dense km² | v1 (grid) | **v2 (fingers)** |
+|---|---|---|---|---|
+| Streets, km/km² (edge roads counted half) | 9.7 | 11.3 | 17.0 | **11.4** |
+| Streets, km/km² (edge roads counted in full) | 9.7 | 11.3 | 18.8 | **13.2** |
+| Junctions/km² | 43 | 56 | 82 | **43** |
+| T-junctions | 88% | 93% | 92% | **92%** |
+| Dead ends per junction | 0.53 | 0.48 | 0.22 | **0.61** |
+| Blocks/km² | 9 | 9 | 50 | **15** |
+| Typical block | 1.7 ha | 1.5 ha | 1.9 ha | **3.1 ha** |
+| Buildings/km² | 2,702 | 3,813 | 3,483 | **3,529** |
+| Ground built on | 30% | 36% | 29% | **31%** |
+| Typical house | 72 m² | 60 m² | 65 m² | **67 m²** |
+| Gap between houses | 0.7 m | 0.6 m | 0.8 m | **0.8 m** |
+
+**Which street count is fair?**
+- Water Town is only 0.85 km², but it is ringed by 4.1 km of edge roads, and the neighbours share most of them.
+- A real 1 km square has no road around its edge.
+- So the fair figure counts the edge roads half, as for every other district: 11.4 km. Counted in full it is 13.2 km.
 
 **Checks:** `check_district.py watertown` passes all its checks: 0 houses on roads, 0 overlaps, water buildings over the lagoon, edges and gateways, joined paths, reach, storeys and everyday places. Check 12 (the locked opening) does not apply to Water Town.
 
 **What doesn't match yet (honest):**
-- **Streets and junctions are far too many:** 17 km and 82 per km², against 10–11 and 43–56.
-  - Water Town is small (0.85 km²), with six edge roads and Ring Road.
-  - The rule that no block may be bigger than the real 90th percentile (3.1 ha) splits big blocks with new streets. Wider spacing just brings the splits back.
-  - The real waterfront land squares also include water edges, which have no streets.
-- **Dead ends:** 0.22 against about 0.5, even with 90% of long ribs stopping short.
+- **Dead ends overshoot:** 0.61 per junction, against about 0.5. Most come from the short side lanes. Fewer side lanes would cut the junctions below the real 43.
+- **Blocks:** 15 per km² against 9, and the typical block is 3.1 ha against 1.5–1.7.
+  - Our edge roads close blocks all round the district. A real 1 km square cut out of the city leaves its border blocks open, so it counts fewer.
+  - The land between two fingers stays open toward the water, as it should.
+- **Walking across the fingers takes longer:** going from one finger to the next means walking back to the inland road, ×1.6–1.7 (`walk 3750,3900 3750,4150`: 408 m for 250 m). Along the fingers it is ×1.1–1.2. This is what the real fingers are like.
+- **An empty pocket west of the sawmill** (about 3,650–3,900 by 4,550–4,700), between the last finger and Adeyemi Road. It can read as the sawmill's open stacking ground. If not, a lane can be added.
 - **The stilt village is less covered than real** (40% against 46%). The canoe lanes between rows are wider than real.
 
 ## 6. Questions for Daramola
@@ -141,5 +160,5 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
   - `scripts/study_extract.py "Lagos Mainland,Shomolu" watertown "3.383,6.486,3.401,6.511;3.392,6.521,3.409,6.537"`. Several boxes are separated by `;`.
   - then `study_analyse.py watertown`, `study_connect.py watertown`, `study_core.py watertown --land` and `study_landmarks.py watertown`
 - **Village:** `study-watertown-village.json`
-- **Generator:** `scripts/gen_fabric.py watertown 42 3.5` → `web/gen-watertown.json`. `web/network.json` gains 3 edges and 8 gateways.
-- **Pictures:** `docs/img/watertown-vs-real.png`, `docs/img/watertown-stilts.png`
+- **Generator:** `scripts/gen_fabric.py watertown 21 2.1` → `web/gen-watertown.json`. `web/network.json` gains 3 edges and 8 gateways (v2 moved only the Port's street gateway, by 22 m; the Port is not built yet).
+- **Pictures:** `docs/img/watertown-vs-real.png`, `docs/img/watertown-stilts.png`, `docs/img/watertown-fingers.png`

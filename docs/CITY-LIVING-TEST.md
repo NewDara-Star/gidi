@@ -12,7 +12,7 @@ houses with no way in, and whether districts feel like one city.
 |---|---|
 | `overview` | Districts, building counts by kind and storey, road lengths, parcels |
 | `places` | Every landmark and civic place with district and X,Y |
-| `home N` | Pick the N-th house and describe it |
+| `home N [district]` | Pick the N-th house (in one district, e.g. `home 3 hub`) and describe it; the printed #id is not N |
 | `look X Y [r]` | What's around a spot: buildings, nearest way, parcels, places, rail/canal distance |
 | `walk FROM TO` | Shortest walk at 5 km/h: distance, minutes, detour ×, roads used, places passed, rail crossings, districts crossed |
 | `ride FROM TO` | Same by okada at 25 km/h (no lanes, footpaths or footbridges) |
@@ -42,7 +42,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 ## Personas (rotate, and add one per new district)
 - **Tunde, okada rider:**
   - his home is set by the opening, not by a district. Tunde's room is a back room in a compound in the Maze, under 3 minutes' walk from Ladi Lane Parts Market.
-  - "The steal" is the stall at the market's near (east) end. The chase runs the length of the market and comes out on the west side. The boss's motor park is just across Idowu Street, in the Hub, and the boss sees the chase from there.
+  - "The steal" is the stall at the market's near (east) end. The chase runs the length of the market and comes out at the west mouth. The boss sits at his post there, a canopy where his boys collect the park's levy, and sees the chase come out. His motor park is about 200 m further west, across Ring Road, in the Hub.
   - starts the day at the boss's motor park
   - passenger runs between the interchange, markets, rail station, stadium and hotel
   - one oja run from a market to the hotel
@@ -67,15 +67,21 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - takes fish to the Canoe Jetty and timber from the Okobaba Sawmill
   - sells at Mile Market and goes into the Maze and the Hub by okada
   - checks that the boardwalks reach the shore roads, and that every hut has a school, a place of worship and a chemist within reach
+- **Ngozi, phone trader, the Capital (on foot; okadas are banned there):**
+  - rents a counter in a phone mall in Gadget Village and lives in a back house nearby
+  - walks to the Allen Roundabout strip at night, the Shrine, the Secretariat on protest day, and the airport fence for pickups
+  - goes to the Hub's interchange and Food Gate's bus park for goods, on foot or by okada from the Capital's edge
+  - checks that the Capital's edge roads lead into the Estate and Railside (still sketches) and into the Hub and Food Gate
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
-  - checks that the boss's end (the west side, toward the boss's motor park) can be reached, but is not the only way out
+  - checks that the boss's end (the west mouth, where the boss's post is) can be reached, but is not the only way out
 
 ## Standard trips (track these every test)
 | Trip | Mode | Why |
 |---|---|---|
 | Tunde's room → The steal | walk | His way to the opening scene (rule: under 3 min) |
+| The steal → boss's post | walk | The chase down the aisle to where the boss sits |
 | The steal → boss's motor park, through the market | walk | The opening chase, out of the market's far end to the boss's base |
 | The steal → Gang Canal | walk | Opening chase, gang line |
 | Maze house near the rail → Ladi Lane Parts Market | walk | Rail as a barrier |
@@ -88,6 +94,8 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Stilt Village → Canoe Jetty | walk | A paddler's way to work, over the boardwalks |
 | Stilt Village → Mile Market | walk | Water Town to the market district |
 | Jungle City 3017,5225 → 3029,5181 | walk | The Coastal Expressway as a barrier |
+| Gadget Village → Allen Roundabout Strip | walk | The Capital's trade to its night |
+| Gadget Village → Gidi Interchange | walk | The Capital to the city's bus hub (no okadas in the Capital) |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

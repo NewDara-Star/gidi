@@ -18,7 +18,7 @@ ocean=Polygon(mp([(0,-0.4),(11,-0.4),(11,0.6),(5.0,0.6),(5.0,0.05),(2.95,0.05),(
 BANDS={"maze":[22,57,13,7]}
 def derive_storeys(blds,id_):
     from shapely.geometry import Polygon as _P
-    fixed={"shed":1,"kiosk":1,"stalls":1,"warehouse":2,"school":2}
+    fixed={"shed":1,"kiosk":1,"stalls":1,"canopy":1,"warehouse":2,"school":2}
     st=[fixed.get(b[0]) for b in blds]
     free=sorted([i for i,b in enumerate(blds) if st[i] is None],key=lambda i:-_P(blds[i][1:]).area)
     b1,b2,b3,b4=BANDS.get(id_,[25,55,13,7]); n=len(free); cut4=n*b4/100; cut3=cut4+n*b3/100; cut2=cut3+n*b2/100

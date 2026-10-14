@@ -355,7 +355,7 @@ def run(did):
     add("8 storeys", check_storeys(gen, bg))
     add("9 lanes, paths, footbridges joined", check_connected(gen, G))
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
-    add("12 opening locked", check_locked(did, gen))
+    add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
