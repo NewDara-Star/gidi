@@ -35,7 +35,7 @@ detail.LEVEL = opt.get('--detail', 'web')
 TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '') if opt.get('--tiles') is not True else '').split(';') if t]
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
+from gidi_kit import archetypes, boats, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -183,6 +183,7 @@ for c in CIVIC:
     c['c'] = cent(c['poly'])
 # named places with a model of their own (landmarks.BY_NAME) stand on the nearest civic plot of
 # their type within 300 m; the ones with no such plot take over a building plot (poi_overrides)
+NAMED_PARCEL_POIS = [(p['name'], P((p['x'], p['y']))) for p in GD['pois'] if p['name'] in landmarks.PARCEL_BY_NAME]
 NAMED_PLOTS = {}  # civic plot name -> landmark name
 for _poi in GD['pois']:
     if _poi['name'] in landmarks.BY_NAME:
@@ -309,6 +310,81 @@ def monument_sites():
 
 
 MONUMENTS = monument_sites()
+POINT_LANDMARKS = {'Coconut Beach': ('beach_arch', -math.pi / 2), 'Hunter Roundabout': ('statue:hunter', 0.0)}  # name -> (kind, facing)
+for _poi in GD['pois']:
+    if _poi['name'] in POINT_LANDMARKS and _poi['d'] in BUILT:  # these wait for their districts to be built
+        _k, _a = POINT_LANDMARKS[_poi['name']]
+        _q = P((_poi['x'], _poi['y']))
+        MONUMENTS.append(dict(kind=_k, x=_q[0], y=_q[1], ang=_a, d=_poi['d'], r=3.0))
+
+
+def street_art_sites():
+    """Mural walls (four each in the Hub, the Maze and the Heights) and printed billboards on the
+    main roads and arterials (every ~350 m, one side or the other), beside the road and clear of
+    buildings."""
+    out = []
+    rng = Rng('street art')
+    per = {}
+    for r in ROADS:
+        if r['k'] != 'main':
+            continue
+        d = r.get('d')
+        if d not in BUILT:
+            continue
+        S, acc = 0.0, 0.0
+        for a, b in zip(r['pts'], r['pts'][1:]):
+            L = math.dist(a, b)
+            if L < 1e-6:
+                continue
+            u = _unit((b[0] - a[0], b[1] - a[1]))
+            k = (350 - acc % 350) % 350 + 60
+            while k < L:
+                side = rng.pick([-1, 1])
+                n = (-u[1] * side, u[0] * side)
+                if d in ('hub', 'maze', 'heights') and per.get(d, 0) < 4 and rng.chance(0.5):
+                    q = (a[0] + u[0] * k + n[0] * (r['w'] / 2 + 5), a[1] + u[1] * k + n[1] * (r['w'] / 2 + 5))
+                    if _clear(q, 14) and district_at(q) == d:
+                        out.append(dict(kind='mural_wall', x=q[0], y=q[1], ang=math.atan2(u[1], u[0]), d=d, r=0))
+                        per[d] = per.get(d, 0) + 1
+                elif d != 'estate' and rng.chance(0.55):
+                    q = (a[0] + u[0] * k + n[0] * (r['w'] / 2 + 7), a[1] + u[1] * k + n[1] * (r['w'] / 2 + 7))
+                    if _clear(q, 7) and district_at(q) == d:
+                        out.append(dict(kind='billboard', x=q[0], y=q[1], ang=math.atan2(u[1], u[0]), d=d, r=0.6))
+                k += 350
+            acc += L
+    return out
+
+
+MONUMENTS += street_art_sites()
+
+
+def boat_sites():
+    """Ferries and water buses on the ferry routes (one under way on each, a water bus at each
+    end), and sand dredgers off the shore by Agboyi Creek and the sawmill."""
+    out = []
+    wet = [[P(p) for p in w] for w in list(GD['water']) + list(GD['ocean'])]
+    on_water = lambda q: any(in_poly(q, w) for w in wet)
+    for f in GD.get('ferries', []):
+        a, b = P(f['pts'][0]), P(f['pts'][-1])
+        ang = math.atan2(b[1] - a[1], b[0] - a[0])
+        for t, kind, back in ((0.4, 'ferry', False), (0.06, 'water_bus', True), (0.94, 'water_bus', False)):
+            q = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
+            if on_water(q):
+                out.append(dict(kind=kind, x=q[0], y=q[1], ang=ang + (math.pi if back else 0)))
+    for name in ('Agboyi Creek Villages', 'Okobaba Sawmill', 'Canoe Jetty'):
+        poi = next((p for p in GD['pois'] if p['name'] == name), None)
+        if not poi:
+            continue
+        q0 = P((poi['x'], poi['y']))
+        for ang in [k * math.pi / 8 for k in range(16)]:
+            q = (q0[0] + math.cos(ang) * 160, q0[1] + math.sin(ang) * 160)
+            if on_water(q) and on_water((q0[0] + math.cos(ang) * 200, q0[1] + math.sin(ang) * 200)):
+                out.append(dict(kind='dredger', x=q[0], y=q[1], ang=ang + math.pi / 2))
+                break
+    return out
+
+
+BOATS = boat_sites()
 
 
 DNAME = {d['id']: d['name'] for d in GD['districts']}
@@ -470,6 +546,11 @@ LAMPS = []  # this tile's working lamp heads (Blender frame), saved in the tile'
 DEAD_LAMPS = {'elite': 0.05, 'civic': 0.15, 'old_island': 0.3, 'dense': 0.45, 'sprawl': 0.4, 'port': 0.4, 'waterfront': 0.6}
 
 
+def blocks_faces(poly):
+    from gidi_kit.blocks import faces
+    return faces(poly)
+
+
 def build_monument(mb, s_):
     M = Matrix.Translation((s_['x'], s_['y'], 0)) @ Matrix.Rotation(s_['ang'], 4, 'Z')
     rng = Rng('monument', s_['kind'], round(s_['x']), round(s_['y']))
@@ -497,6 +578,7 @@ def build_tile(tx, ty, overrides):
     polys_near = [b['poly'] for b in BUILDINGS if near(b['c'], 40)]
     in_building = lambda p, pad=0.3: any(in_poly(p, offset(q, pad)) for q in polys_near if math.dist(cent(q), p) < 40)
     civic_here = [c for c in CIVIC if inside(c['c'])]
+    SERVICE = []  # (vehicle kind, plot attributes): fire engines, ambulances, church buses to park out front
 
     # ground: district soil, bush outside districts; water and ocean on top
     g = MeshBuilder()
@@ -527,6 +609,8 @@ def build_tile(tx, ty, overrides):
             built['unknown:' + b['kind']] = built.get('unknown:' + b['kind'], 0) + 1
         try:
             fn(a, rng, col)
+            if ov and ov['type'] in ('fire', 'hospital', 'clinic'):
+                SERVICE.append(('fire' if ov['type'] == 'fire' else 'ambulance', a))
         except Exception as e:  # a builder that breaks on odd data must not stop the city
             built['error:' + b['kind']] = built.get('error:' + b['kind'], 0) + 1
             print('ERROR', b['kind'], b['d'], b['i'], repr(e))
@@ -538,6 +622,10 @@ def build_tile(tx, ty, overrides):
         if fn and len(c['poly']) == 4:
             a = attributes(dict(i=0, d=c['d'], kind=c['type'], poly=c['poly'], c=c['c'], storeys=2), roads_near, polys_near)
             a['label'] = NAMED_PLOTS.get(c['name'], c['name'])
+            if c['type'] in ('hospital', 'clinic'):
+                SERVICE.append(('ambulance', a))
+            elif c['type'] == 'church' and Rng('molue', c['name']).chance(0.25):
+                SERVICE.append(('molue', a))  # the church's own old bus
             try:
                 fn(a, Rng(c['d'], 'civic', c['name']), col)
             except Exception as e:
@@ -548,7 +636,12 @@ def build_tile(tx, ty, overrides):
     pm = MeshBuilder()
     for pc in PARCELS:
         if inside(cent(pc['pts'])):
-            ok = parcels.build(pm, pc['kind'], pc['pts'], Rng(pc['d'], 'parcel', pc['kind'], round(cent(pc['pts'])[0])), CHARACTER.get(pc['d'], 'dense'))
+            named = next((n for n, q in NAMED_PARCEL_POIS if in_poly(q, pc['pts']) or dist_line(q, pc['pts'] + pc['pts'][:1]) < 20), None)
+            if named:
+                landmarks.PARCEL_BY_NAME[named](pm, pc['pts'], Rng(pc['d'], 'parcel', named), CHARACTER.get(pc['d'], 'dense'))
+                ok = True
+            else:
+                ok = parcels.build(pm, pc['kind'], pc['pts'], Rng(pc['d'], 'parcel', pc['kind'], round(cent(pc['pts'])[0])), CHARACTER.get(pc['d'], 'dense'))
             built['parcel:' + pc['kind'] + ('' if ok else ':missing')] = built.get('parcel:' + pc['kind'], 0) + 1
     # cemeteries at their points
     for poi in GD['pois']:
@@ -715,11 +808,11 @@ def build_tile(tx, ty, overrides):
                     for side in (-1, 1):
                         k = rr.between(0, 20)
                         while k < Ls:
-                            kind = rr.pick({'car': 4, 'keke': 2, 'okada': 3, 'danfo': 1 if r['k'] == 'main' else 0.2})
+                            kind = rr.pick({'car': 4, 'keke': 2, 'okada': 3, 'danfo': 1 if r['k'] == 'main' else 0.2, 'molue': 0.06 if rch in ('dense', 'sprawl') else 0})
                             o = side * (r['w'] / 2 - 1.0)
                             x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
                             if inside((x, y)) and not in_building((x, y), 0.6) and rr.chance(0.55 * thin):
-                                put_vehicle(kind, x, y, ang + (math.pi if rr.chance(0.5) else 0) + rr.between(-0.1, 0.1), vehicles.condition(wealth, rr, kind in vehicles.COMMERCIAL, parked=True), rr, rch, wealth)
+                                put_vehicle(kind, x, y, ang + (math.pi if rr.chance(0.5) else 0) + rr.between(-0.1, 0.1), 'wreck' if kind == 'molue' else vehicles.condition(wealth, rr, kind in vehicles.COMMERCIAL, parked=True), rr, rch, wealth)
                             k += vehicles.LENGTH[kind] + rr.between(2, 18)
                 n = int(Ls / 100 * CROWD.get(rch, 15) * (1.6 if r['k'] == 'main' else 1.0) * thin)
                 for _ in range(n):  # people along the frontage
@@ -757,6 +850,56 @@ def build_tile(tx, ty, overrides):
                 if in_poly((x, y), pts) and not in_building((x, y), 0.5):
                     put_vehicle(vk, x, y, math.pi / 2, vehicles.condition(0.3, rr, True, parked=True), rr, rch, 0.3)
                     built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+    for vk, a in SERVICE:  # parked out front of their plots
+        try:
+            pl = ccw(a['poly'])
+            i_, Lf, F = blocks_faces(pl)[a.get('facing', 0)]
+            rr = Rng('service', vk, round(F.translation.x), round(F.translation.y))
+            n = 2 if vk == 'fire' else 1
+            for k in range(n):
+                M = F @ Matrix.Translation(((k - (n - 1) / 2) * 3.4, 4.5 if vk != 'molue' else 5.5, 0)) @ Matrix.Rotation(math.pi / 2, 4, 'Z')
+                if inside(M.translation.to_2d()):
+                    vehicles.BUILDERS[vk](vm, M, rr, 'worn')
+                    built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+        except Exception as e:
+            print('ERROR service', vk, repr(e))
+    for pc in PARCELS:  # reach stackers and forklifts among the containers
+        if pc['kind'] != 'container yard' or not inside(cent(pc['pts'])):
+            continue
+        rr = Rng('port machines', round(cent(pc['pts'])[0]))
+        xs, ys = [p[0] for p in pc['pts']], [p[1] for p in pc['pts']]
+        n = 0
+        for _ in range(400):
+            if n >= 16 * thin:
+                break
+            p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
+            if in_poly(p, pc['pts']) and inside(p) and not in_building(p, 4.0):
+                vk = rr.pick({'stacker': 1, 'forklift': 1})
+                vehicles.BUILDERS[vk](vm, Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(rr.between(0, math.tau), 4, 'Z'), rr, 'worn')
+                built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+                n += 1
+    for s_ in BOATS:  # ferries, water buses, dredgers on the lagoon
+        if inside((s_['x'], s_['y'])):
+            boats.BUILDERS[s_['kind']](vm, Matrix.Translation((s_['x'], s_['y'], 0.05)) @ Matrix.Rotation(s_['ang'], 4, 'Z'), Rng('boat', s_['kind'], round(s_['x'])))
+            built['boat:' + s_['kind']] = built.get('boat:' + s_['kind'], 0) + 1
+    for bw in GD.get('boardwalks', []):  # canoes tied along Water Town's boardwalks
+        pts = [P(p) for p in bw]
+        if not any(inside(p) for p in pts):
+            continue
+        rr = Rng('canoes', round(pts[0][0]), round(pts[0][1]))
+        for a_, b_ in zip(pts, pts[1:]):
+            Ls = math.dist(a_, b_)
+            if Ls < 1e-6:
+                continue
+            dx, dy = (b_[0] - a_[0]) / Ls, (b_[1] - a_[1]) / Ls
+            k = rr.between(4, 20)
+            while k < Ls:
+                o = rr.pick([-1, 1]) * rr.between(3.0, 8.0)
+                q = (a_[0] + dx * k - dy * o, a_[1] + dy * k + dx * o)
+                if inside(q) and not in_building(q, 1.0) and rr.chance(0.7 * thin):
+                    boats.outboard_canoe(vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(math.atan2(dy, dx) + rr.between(-0.4, 0.4), 4, 'Z'), rr, people=rr.chance(0.6))
+                    built['boat:canoe'] = built.get('boat:canoe', 0) + 1
+                k += rr.between(12, 30)
     # trains on the line: a commuter set at the Hub station, the old narrow-gauge train in Railside,
     # a freight train at the port end
     for name, at, consist in (('commuter', 'station', ['commuter'] * 4), ('old', 0.22, ['loco'] + ['coach'] * 4), ('freight', 0.9, ['loco'] + ['wagon'] * 8)):

@@ -567,26 +567,180 @@ def wagon(mb, M, rng, cond='battered'):
 TRAIN = {'commuter': (commuter_car, 20.6), 'loco': (diesel_loco, 14.0), 'coach': (old_coach, 18.6), 'wagon': (wagon, 14.6)}
 
 
+# ---------------------------------------------------------------- service vehicles, the molue, port machines
+def truck_cab(mb, M, rng, x, col, cond, h=2.4):
+    """A cab-over truck cab with its front at x, 2.4 m wide; returns the wear for the rest."""
+    wear = WEAR[cond]
+    mb.box('carpaint', L(M, x - 1.0, 0, 0.6 + h / 2), col, wear, size=(2.0, 2.4, h))
+    glass_panel(mb, M, [(x + 0.01, -1.0, 1.7), (x + 0.01, 1.0, 1.7), (x + 0.01, 1.0, 0.6 + h - 0.25), (x + 0.01, -1.0, 0.6 + h - 0.25)])
+    mb.box('plastic', L(M, x, 0, 0.75), hex_rgb('#1d1d1d'), 0.4, size=(0.08, 2.3, 0.5))
+    for s_ in (-1, 1):
+        lamp(mb, M, x + 0.02, s_ * 0.95, 0.95, 0.25, 0.15, 'head')
+    return wear
+
+
+def _beacons(mb, M, x, z, col):
+    for s_ in (-0.5, 0.5):
+        mb.box('emit', L(M, x, s_, z), hex_rgb(col), 0, size=(0.25, 0.3, 0.15))
+
+
+def fire_engine(mb, M, rng, cond='worn'):
+    """A red fire engine, 9 m: cab, lockers along the body, a ladder on the roof, blue beacons."""
+    red, white = hex_rgb('#c62828'), hex_rgb('#f2efe6')
+    wear = truck_cab(mb, M, rng, 4.4, red, cond, h=2.5)
+    mb.box('carpaint', L(M, -0.8, 0, 1.75), red, wear, size=(6.4, 2.45, 2.5))
+    for s_ in (-1, 1):
+        mb.box('carpaint', L(M, -0.8, s_ * 1.23, 1.15), white, wear, size=(6.4, 0.02, 0.2))
+        for k in range(4):  # locker doors
+            mb.box('steel', L(M, -3.6 + k * 1.6, s_ * 1.235, 2.1), hex_rgb('#b8bcbf'), wear, size=(1.4, 0.02, 1.2))
+    for s_ in (-0.55, 0.55):  # the ladder
+        mb.box('steel', L(M, -0.8, s_, 3.15), hex_rgb('#c9ced2'), wear, size=(7.0, 0.08, 0.1))
+    for k in range(18):
+        mb.box('steel', L(M, -4.2 + k * 0.4, 0, 3.15), hex_rgb('#c9ced2'), wear, size=(0.05, 1.1, 0.05))
+    _beacons(mb, M, 3.6, 3.15, '#2f6fff')
+    for x in (3.4, -2.2, -3.4):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+
+
+def ambulance(mb, M, rng, cond='worn'):
+    """A white ambulance van, 5.6 m, a high roof, a red-and-yellow band, blue beacons."""
+    wear = WEAR[cond]
+    white = hex_rgb('#f4f4f0')
+    mb.box('carpaint', L(M, 1.9, 0, 1.15), white, wear, size=(1.2, 2.0, 1.1))  # bonnet
+    mb.box('carpaint', L(M, -0.6, 0, 1.55), white, wear, size=(3.9, 2.05, 2.3))
+    glass_panel(mb, M, [(1.31, -0.9, 1.75), (1.31, 0.9, 1.75), (1.31, 0.9, 2.4), (1.31, -0.9, 2.4)])
+    for s_ in (-1, 1):
+        for k, c in enumerate(('#c62828', '#e0b020')):
+            mb.box('carpaint', L(M, 0.2, s_ * 1.03, 1.3 + k * 0.18), hex_rgb(c), wear, size=(5.0, 0.01, 0.15))
+    _beacons(mb, M, 1.2, 2.75, '#2f6fff')
+    for x in (1.9, -1.6):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 0.9, 0.36, 0.22, cond)
+    for s_ in (-1, 1):
+        lamp(mb, M, 2.51, s_ * 0.75, 0.9, 0.25, 0.15, 'head')
+
+
+def refuse_compactor(mb, M, rng, cond='worn'):
+    """A refuse compactor truck, 9 m: a boxy green-and-white body, the hopper at the back, bins on hooks."""
+    green = hex_rgb(rng.pick(['#2e7d4f', '#1f5f3a']))
+    wear = truck_cab(mb, M, rng, 4.4, hex_rgb('#f2efe6'), cond)
+    mb.box('carpaint', L(M, -0.9, 0, 2.0), green, wear + 0.2, size=(5.6, 2.45, 2.6))
+    mb.box('carpaint', L(M, -4.3, 0, 1.75), shade(green, 0.8), wear + 0.3, size=(1.4, 2.45, 2.2))  # hopper
+    mb.box('steel', L(M, -5.05, 0, 1.0), hex_rgb('#3a3a3a'), wear + 0.3, size=(0.15, 2.2, 0.6))
+    for s_ in (-1, 1):
+        mb.box('carpaint', L(M, -0.9, s_ * 1.23, 2.0), hex_rgb('#f2efe6'), wear, size=(5.6, 0.02, 0.4))
+    for x in (3.4, -2.0, -3.2):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+
+
+def cement_mixer(mb, M, rng, cond='battered'):
+    """A cement mixer truck, 9 m: the striped drum tilted back on its frame."""
+    wear = truck_cab(mb, M, rng, 4.4, hex_rgb(rng.pick(['#e8e6df', '#e0b020', '#c62828'])), cond)
+    mb.box('steel', L(M, -0.6, 0, 1.0), hex_rgb('#2a2a2a'), wear, size=(8.0, 1.0, 0.3))
+    drum = L(M, -1.2, 0, 2.3, ry=math.pi / 2 - 0.25)
+    col = hex_rgb(rng.pick(['#e0b020', '#e8e6df', '#ff7a1a']))
+    parts.cyl(mb, 'steel', drum @ Matrix.Translation((0, 0, -2.6)), 0.8, 1.2, col, wear, seg=16, r2=1.2)
+    parts.cyl(mb, 'steel', drum @ Matrix.Translation((0, 0, -1.4)), 1.2, 2.2, col, wear, seg=16, r2=1.1)
+    parts.cyl(mb, 'steel', drum @ Matrix.Translation((0, 0, 0.8)), 1.1, 1.4, col, wear, seg=16, r2=0.45)
+    for k in range(3):  # stripes round the drum
+        parts.cyl(mb, 'paint', drum @ Matrix.Translation((0, 0, -1.6 + k * 0.9)), 1.23, 0.2, hex_rgb('#c62828'), wear, seg=16)
+    for x in (3.4, -1.8, -3.0):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+
+
+def water_tanker(mb, M, rng, cond='worn'):
+    """A water tanker, 8.5 m: a blue round tank on a rigid truck, a tap and hose at the back."""
+    wear = truck_cab(mb, M, rng, 4.2, hex_rgb(rng.pick(['#e8e6df', '#1f5fa8'])), cond)
+    mb.box('steel', L(M, -0.6, 0, 1.0), hex_rgb('#2a2a2a'), wear, size=(7.8, 1.0, 0.3))
+    tank = L(M, -4.3, 0, 2.15, ry=math.pi / 2)
+    parts.cyl(mb, 'steel', tank, 1.05, 6.8, hex_rgb(rng.pick(['#1f5fa8', '#2f6fa6', '#e8e6df'])), wear, seg=18)
+    parts.cyl(mb, 'steel', L(M, -4.5, 0, 1.3, ry=math.pi / 2), 0.08, 0.4, hex_rgb('#3a3a3a'), wear, seg=8)
+    for x in (3.2, -2.2, -3.4):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+
+
+def molue(mb, M, rng, cond='wreck'):
+    """The molue, the old big yellow bus of the city before the BRT: 10.5 m, a bonneted lorry-chassis
+    body, two black bands, rows of open windows, the conductor's door always open. Retired; seen
+    as a wreck at the roadside or as a church's bus."""
+    wear = WEAR[cond]
+    yel = hex_rgb('#e0a800' if cond != 'wreck' else '#b8901a')
+    mb.box('carpaint', L(M, 4.6, 0, 1.15), yel, wear, size=(1.4, 1.9, 1.0))  # bonnet
+    mb.box('carpaint', L(M, -0.9, 0, 1.95), yel, wear, size=(9.6, 2.5, 2.6))
+    glass_panel(mb, M, [(3.91, -1.1, 2.1), (3.91, 1.1, 2.1), (3.91, 1.1, 3.0), (3.91, -1.1, 3.0)])
+    for s_ in (-1, 1):
+        for z in (1.2, 1.6):
+            mb.box('carpaint', L(M, -0.9, s_ * 1.26, z), hex_rgb('#111111'), wear, size=(9.6, 0.01, 0.12))
+        for k in range(9):
+            mb.box('glass', L(M, -5.0 + k * 1.0, s_ * 1.26, 2.6), hex_rgb('#14181c'), 0.2, size=(0.75, 0.01, 0.7))
+    if cond == 'wreck':
+        for x in (4.4, -3.4):
+            for s_ in (-1, 1):
+                mb.box('concrete', L(M, x, s_ * 1.0, 0.3), hex_rgb('#8f8a80'), 0.8, size=(0.5, 0.4, 0.6))  # up on blocks
+    else:
+        for x in (4.4, -3.0, -4.2):
+            for s_ in (-1, 1):
+                wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+        side_text(mb, M, -0.9, 1.27, 3.05, 'GOSPEL MISSION', 0.35, hex_rgb('#111111'))
+
+
+def reach_stacker(mb, M, rng, cond='worn'):
+    """A port reach stacker, 11 m: a yellow machine with a long telescopic boom and the container spreader."""
+    wear = WEAR[cond]
+    yel = hex_rgb('#e0b020')
+    mb.box('carpaint', L(M, 0, 0, 1.4), yel, wear, size=(8.0, 3.6, 1.6))
+    mb.box('carpaint', L(M, -1.2, 0, 2.9), yel, wear, size=(1.6, 1.4, 1.6))  # cab
+    glass_panel(mb, M, [(-0.39, -0.6, 2.4), (-0.39, 0.6, 2.4), (-0.39, 0.6, 3.4), (-0.39, -0.6, 3.4)])
+    a, b = L(M, -2.5, 0, 2.6).translation, L(M, 5.5, 0, 7.5).translation
+    parts.bar(mb, 'steel', a, b, 0.7, yel, wear)  # the boom
+    mb.box('steel', L(M, 6.0, 0, 7.0), hex_rgb('#2a2a2a'), wear, size=(1.0, 6.0, 0.4))  # spreader
+    for x in (2.8, -2.8):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 1.6, 0.8, 0.6, cond)
+
+
+def forklift(mb, M, rng, cond='worn'):
+    """A big port forklift, 5 m: a counterweighted body, an open cab, the mast and forks."""
+    wear = WEAR[cond]
+    col = hex_rgb(rng.pick(['#e0b020', '#c62828', '#ff7a1a']))
+    mb.box('carpaint', L(M, -0.4, 0, 1.0), col, wear, size=(3.2, 2.0, 1.2))
+    for x, y in ((0.6, -0.8), (0.6, 0.8), (-1.6, -0.8), (-1.6, 0.8)):
+        parts.bar(mb, 'steel', L(M, x, y, 1.6).translation, L(M, x, y, 3.2).translation, 0.08, hex_rgb('#2a2a2a'), wear)
+    mb.box('steel', L(M, -0.5, 0, 3.25), hex_rgb('#2a2a2a'), wear, size=(2.4, 1.8, 0.1))
+    for s_ in (-0.5, 0.5):
+        mb.box('steel', L(M, 1.6, s_, 2.4), hex_rgb('#3a3a3a'), wear, size=(0.15, 0.15, 4.0))  # mast
+        mb.box('steel', L(M, 2.3, s_, 0.5), hex_rgb('#3a3a3a'), wear, size=(1.4, 0.15, 0.08))  # forks
+    for x in (0.8, -1.4):
+        for s_ in (-1, 1):
+            wheel(mb, M, x, s_ * 0.9, 0.45, 0.35, cond)
+
+
 BUILDERS = {'danfo': danfo, 'korope': korope, 'brt': brt, 'keke': keke, 'okada': okada, 'car': car, 'police': police_pickup,
-            'tipper': tipper, 'tanker': tanker, 'cart': pusher_cart, 'wheelbarrow': wheelbarrow, 'container': container_truck, 'lorry911': lorry_911}
-LENGTH = {'danfo': 4.8, 'korope': 3.6, 'brt': 12.2, 'keke': 2.8, 'okada': 2.1, 'car': 4.8, 'police': 5.3, 'tipper': 8.6, 'tanker': 11.5, 'cart': 3.6, 'wheelbarrow': 1.6, 'container': 17.2, 'lorry911': 8.9}
+            'tipper': tipper, 'tanker': tanker, 'cart': pusher_cart, 'wheelbarrow': wheelbarrow, 'container': container_truck, 'lorry911': lorry_911,
+            'fire': fire_engine, 'ambulance': ambulance, 'refuse': refuse_compactor, 'mixer': cement_mixer, 'water': water_tanker, 'molue': molue,
+            'stacker': reach_stacker, 'forklift': forklift}
+LENGTH = {'danfo': 4.8, 'korope': 3.6, 'brt': 12.2, 'keke': 2.8, 'okada': 2.1, 'car': 4.8, 'police': 5.3, 'tipper': 8.6, 'tanker': 11.5, 'cart': 3.6, 'wheelbarrow': 1.6, 'container': 17.2, 'lorry911': 8.9, 'fire': 9.0, 'ambulance': 5.6, 'refuse': 9.4, 'mixer': 9.0, 'water': 8.6, 'molue': 11.0, 'stacker': 11.0, 'forklift': 5.0}
 # research-vehicles 8.6: shares of moving traffic by character and road class
 MIX = {
-    ('dense', 'main'): {'danfo': 26, 'korope': 4, 'keke': 5, 'okada': 5, 'car': 40, 'brt': 5, 'tipper': 6, 'tanker': 6, 'cart': 3},
-    ('dense', 'street'): {'danfo': 7, 'korope': 3, 'keke': 25, 'okada': 25, 'car': 30, 'tipper': 3, 'cart': 5, 'wheelbarrow': 2},
+    ('dense', 'main'): {'danfo': 26, 'korope': 4, 'keke': 5, 'okada': 5, 'car': 40, 'brt': 5, 'tipper': 6, 'tanker': 6, 'cart': 3, 'water': 1, 'refuse': 1, 'mixer': 1},
+    ('dense', 'street'): {'danfo': 7, 'korope': 3, 'keke': 25, 'okada': 25, 'car': 30, 'tipper': 3, 'cart': 5, 'wheelbarrow': 2, 'water': 1.5, 'refuse': 0.5},
     ('old_island', 'main'): {'danfo': 20, 'car': 55, 'brt': 5, 'tanker': 5, 'tipper': 5, 'cart': 10},
     ('old_island', 'street'): {'keke': 5, 'okada': 5, 'car': 40, 'tipper': 5, 'cart': 40, 'wheelbarrow': 5},
     ('sprawl', 'main'): {'danfo': 20, 'korope': 5, 'keke': 15, 'okada': 15, 'car': 30, 'brt': 3, 'tipper': 7, 'tanker': 3, 'cart': 2},
-    ('sprawl', 'street'): {'danfo': 2, 'korope': 3, 'keke': 30, 'okada': 30, 'car': 30, 'tipper': 3, 'cart': 2},
+    ('sprawl', 'street'): {'danfo': 2, 'korope': 3, 'keke': 30, 'okada': 30, 'car': 30, 'tipper': 3, 'cart': 2, 'mixer': 1.5, 'water': 2},
     ('elite', 'main'): {'danfo': 5, 'car': 80, 'brt': 5, 'tanker': 4, 'tipper': 4, 'okada': 2},
-    ('elite', 'street'): {'car': 92, 'okada': 3, 'tipper': 5},
+    ('elite', 'street'): {'car': 92, 'okada': 3, 'tipper': 5, 'mixer': 3, 'water': 3, 'refuse': 1},
     ('civic', 'main'): {'danfo': 15, 'car': 60, 'brt': 10, 'police': 2, 'tanker': 5, 'tipper': 5, 'cart': 3},
     ('civic', 'street'): {'danfo': 5, 'car': 70, 'police': 3, 'keke': 5, 'okada': 2, 'tipper': 5, 'cart': 3},
     ('port', 'main'): {'danfo': 10, 'car': 15, 'container': 35, 'tanker': 20, 'tipper': 15, 'brt': 3, 'okada': 2},
     ('port', 'street'): {'danfo': 10, 'car': 25, 'container': 15, 'tanker': 15, 'tipper': 20, 'okada': 5, 'keke': 5, 'cart': 5},
     ('waterfront', 'street'): {'danfo': 5, 'keke': 20, 'okada': 30, 'car': 20, 'tipper': 10, 'cart': 15},
 }
-COMMERCIAL = {'danfo', 'korope', 'keke', 'okada', 'tipper', 'tanker', 'brt', 'cart', 'container', 'lorry911'}
+COMMERCIAL = {'danfo', 'korope', 'keke', 'okada', 'tipper', 'tanker', 'brt', 'cart', 'container', 'lorry911', 'refuse', 'mixer', 'water', 'molue', 'stacker', 'forklift'}
 
 
 def mix(ch, road):

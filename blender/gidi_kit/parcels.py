@@ -258,6 +258,23 @@ def airfield(mb, pts, rng, ch):
             q = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
             parts.bar(mb, 'steel', (q[0], q[1], 0), (q[0], q[1], 3.2), 0.06, hex_rgb('#8a8f92'), 0.4)
         parts.bar(mb, 'steel', (a[0], a[1], 3.0), (b[0], b[1], 3.0), 0.03, hex_rgb('#8a8f92'), 0.4)
+    # the terminal and the control tower beside the runway (research-landmarks 29, invented): a long
+    # low concrete terminal with a glass front and a deep canopy, jet bridges, and the tower
+    ty = rw / 2 + min(60, (W / 2 - rw / 2) * 0.6)
+    if W / 2 - rw / 2 > 40:
+        tl = min(L * 0.45, 260)
+        tm = T(m, -L * 0.1, ty, 0)
+        mb.box('concrete', tm @ Matrix.Translation((0, 12, 6)), hex_rgb('#d8d4cc'), 0.4, size=(tl, 30, 12))
+        mb.box('glass', tm @ Matrix.Translation((0, -3.02, 6)), hex_rgb('#24343e'), 0.1, size=(tl - 4, 0.04, 9))
+        mb.box('concrete', tm @ Matrix.Translation((0, -1, 12.3)), hex_rgb('#c9c4ba'), 0.4, size=(tl + 6, 8, 0.6))  # canopy
+        for k in range(4):  # jet bridges reaching to the apron
+            x = -tl / 2 + (k + 0.5) * tl / 4
+            mb.box('steel', tm @ Matrix.Translation((x, -12, 5)), hex_rgb('#b8bcbf'), 0.3, size=(3, 18, 3))
+        tw = tm @ Matrix.Translation((tl / 2 + 25, 5, 0))
+        parts.cyl(mb, 'concrete', tw, 3.0, 38, hex_rgb('#d8d4cc'), 0.4, seg=14, r2=2.4)
+        parts.cyl(mb, 'glass', tw @ Matrix.Translation((0, 0, 38)), 5.5, 4.0, hex_rgb('#24343e'), 0.1, seg=14, r2=6.0)
+        parts.cyl(mb, 'concrete', tw @ Matrix.Translation((0, 0, 42)), 6.2, 1.2, hex_rgb('#c9c4ba'), 0.4, seg=14, r2=3.0)
+        parts.bar(mb, 'steel', (tw @ Vector((0, 0, 43))), (tw @ Vector((0, 0, 50))), 0.15, hex_rgb('#c62828'), 0.3)
 
 
 def tank_farm(mb, pts, rng, ch):
@@ -379,19 +396,35 @@ def green(mb, pts, rng, ch, trees=True):
 
 
 def square(mb, pts, rng, ch):
-    """Old island square, invented design: paving, an arcade gate with two canoe-and-paddler
-    pylons (research-landmarks 7, Gidi version), palms, benches, a railing."""
+    """The commemorative square, invented design: paving, a long arcade down one side, and the
+    gate: two white pylons, each crowned with a white horse, an arch between them carrying a
+    red eagle-like crest; palms. Research-landmarks 7 (a commemorative square with a gate, an
+    arcade and horse statues), Gidi version."""
+    from .monuments import horse
     p = ccw(pts)
     _flat(mb, p, 0.05, 'pavers', hex_rgb('#d8cfba'), 0.4)
     m, L, W = _bbox_frame(p)
-    for s in (-1, 1):
-        g = T(m, s * 6, -W / 2, 0)
-        mb.box('paint', g @ Matrix.Translation((0, 0, 4)), hex_rgb('#f2efe6'), 0.4, size=(2.2, 2.2, 8))
-        from .kinds import canoe
-        canoe(mb, g @ Matrix.Translation((0, 0, 8.2)), rng, length=4.0)
-        parts.cyl(mb, 'steel', g @ Matrix.Translation((0, 0, 8.4)), 0.2, 1.6, hex_rgb('#5a4a2a'), 0.4, seg=8)
-    mb.box('paint', T(m, 0, -W / 2, 8.5), hex_rgb('#f2efe6'), 0.4, size=(14, 1.2, 1.0))
-    for q in _scatter(p, int(_area(p) / 300), rng, pad=4):
+    white, red = hex_rgb('#f2efe6'), hex_rgb('#b0302a')
+    for s in (-1, 1):  # the gate pylons with a white horse on each
+        g = T(m, s * 7, -W / 2 + 2, 0)
+        mb.box('paint', g @ Matrix.Translation((0, 0, 4.5)), white, 0.4, size=(2.6, 2.6, 9))
+        horse(mb, g @ Matrix.Translation((0, 0, 9.0)) @ Matrix.Rotation(math.pi / 2, 4, 'Z'), white, 1.6, mat='paint', rearing=True)
+    mb.box('paint', T(m, 0, -W / 2 + 2, 7.8), white, 0.4, size=(16.6, 1.6, 1.6))  # the arch's lintel
+    parts.cyl(mb, 'paint', T(m, 0, -W / 2 + 1.15, 7.8) @ Matrix.Rotation(math.pi / 2, 4, 'X'), 1.1, 0.1, red, 0.3, seg=6)  # the crest
+    n = max(6, int(L * 0.8 / 4))  # the long arcade along the far side
+    ay = W / 2 - 4
+    for k in range(n + 1):
+        x = -L * 0.4 + k * L * 0.8 / n
+        mb.box('paint', T(m, x, ay, 2.4), white, 0.4, size=(0.7, 0.7, 4.8))
+    mb.box('paint', T(m, 0, ay, 5.1), white, 0.4, size=(L * 0.8 + 1, 4.0, 0.6))
+    mb.box('paint', T(m, 0, ay + 2.0, 2.6), shade(white, 0.92), 0.4, size=(L * 0.8 + 1, 0.3, 5.2))  # its back wall
+    if ch == 'old_island':  # The Reach, the owner's sculpture, stands in the middle of the square
+        from .monuments import the_reach
+        the_reach(mb, m @ Matrix.Translation((0, -W * 0.05, 0)), rng)
+    for q in _scatter(p, int(_area(p) / 300), rng, pad=6):
+        c0 = (m.inverted() @ Vector((q[0], q[1], 0))).to_2d()
+        if ch == 'old_island' and abs(c0.x) < 22 and abs(c0.y) < 14:
+            continue  # keep palms off the sculpture
         tree(mb, q[0], q[1], rng, kind='palm')
 
 

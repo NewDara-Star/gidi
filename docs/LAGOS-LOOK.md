@@ -85,6 +85,39 @@ The kit pieces in `parts.py`:
   - No-parking discs by the markets.
 - **Decks** (flyovers, the Long Bridge, the Cable Bridge): ramps at the real ends, yellow edge lines, white lane dashes, and a black-and-white chequered median with double lamps on the wide decks. The expressways have the same median and lamps.
 
+## Landmarks, vehicles and boats (second batch)
+Contact sheets: `blender/new_kit_sheet.py`, `blender/new_kit_sheet2.py --part vehicles|places`, `blender/reach_sheet.py`.
+- **Named landmarks** (`gidi_kit/landmarks.py`, by the name on the map; a named place takes the nearest civic plot of its type, else a plot):
+  - The Crown Hall, a cap-shaped cultural hall. It waits for a plot in the 2D map.
+  - Central mosques with gold domes: Railside Jumat Mosque now; Old Island's waits for its place in the map.
+  - The Cathedral of Christ, Gothic with a spire.
+  - The Heritage Strip: a colonial arcade with twin towers, or the oldest storey building on a small plot (The Border).
+  - The Secretariat as a tall civic tower with an antenna.
+  - The Cloth Market and Alade Electronics Market as five-level market blocks.
+  - The Refinery with its flare (The Frontier).
+  - Freedom Ground: an amphitheatre among the old prison-wall fragments.
+- **Parcels:** the commemorative square has a long arcade and a gate of white rearing horses. The airport has a terminal with jet bridges and a control tower.
+- **The Reach:** the owner's sculpture, after their artwork. A woman in a yellow wrapper on a dark rock reaches to a white-robed Eyo who floats in on his staff. It stands in the middle of Old Island's square.
+- **Statues and street pieces:**
+  - horse-and-rider statues at Old Island and Capital junctions
+  - the hunter with his dane gun and dog (Hunter Roundabout, Old Shore)
+  - the beach arch (Coconut Beach, The Border)
+  - painted flyover piers, and mural walls in the Hub, the Maze and the Heights
+  - printed billboards on unipoles along the main roads
+- **Vehicles:**
+  - container trucks queueing for the port and filling the truck park
+  - the 911 food lorry at Food Gate
+  - trains: the commuter set at the Hub station, the old diesel and coaches, freight wagons
+  - fire engines and ambulances parked at their stations and hospitals
+  - refuse compactors, cement mixers and water tankers in traffic
+  - the molue, as a church bus or a roadside wreck
+  - reach stackers and forklifts in the container yard
+- **Boats:**
+  - ferries and water buses on the ferry routes (their tiles are built now)
+  - outboard canoes along Water Town's boardwalks
+  - sand dredgers off the shore
+- **A traffic still in every tile:** moving traffic and parked vehicles by district, people along the frontages and in markets, danfos loading in motor parks. The web build has half the density.
+
 ## The whole city, in the map's 3D view
 - **The city:**
   - `python3 blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:

@@ -91,7 +91,7 @@ def statue(mb, M, rng, kind=None):
     kind = kind or rng.pick(['founder', 'masquerade', 'drummer'])
     top = plinth(mb, M, rng, h=rng.between(2.0, 3.0))
     S = M @ Matrix.Translation((0, 0, top))
-    {'founder': founder, 'masquerade': masquerade, 'drummer': drummer}[kind](mb, S, rng)
+    {'founder': founder, 'masquerade': masquerade, 'drummer': drummer, 'horse_rider': horse_rider, 'hunter': hunter}[kind](mb, S, rng)
     return kind
 
 
@@ -205,12 +205,174 @@ def led_board(mb, M, rng):
     mb.box('steel', T(M, -1.8, 0.6, 0.45), hex_rgb('#c9a13b'), 0.7, size=(1.6, 0.9, 0.9))  # its generator
 
 
-BUILDERS = {'statue': statue, 'sculpture': sculpture, 'clock_tower': clock_tower, 'lighthouse': lighthouse, 'led_board': led_board}
+def horse(mb, M, col, scale=1.0, mat='steel', rearing=False):
+    """A horse, standing (or rearing), facing +x; M at the ground under its middle."""
+    s = scale
+    v = lambda x, y, z: M @ Vector((x * s, y * s, z * s))
+    lift = 0.35 if rearing else 0.0
+    sphere(mb, mat, Matrix.Translation(v(0, 0, 1.45 + lift * 0.5)), 0.85 * s, 0.38 * s, 0.42 * s, col, seg=10, rings=6)  # barrel
+    limb(mb, mat, v(0.6, 0, 1.6 + lift), v(1.05, 0, 2.25 + lift * 1.5), 0.22 * s, 0.15 * s, col)  # neck
+    sphere(mb, mat, Matrix.Translation(v(1.25, 0, 2.2 + lift * 1.5)), 0.35 * s, 0.13 * s, 0.15 * s, col, seg=8, rings=5)  # head
+    for x, front in ((0.55, True), (-0.55, False)):
+        for y in (-0.18, 0.18):
+            if rearing and front:
+                limb(mb, mat, v(x, y, 1.3 + lift), v(x + 0.35, y, 1.0 + lift), 0.09 * s, 0.07 * s, col)
+            else:
+                limb(mb, mat, v(x, y, 1.25), v(x + (0.05 if front else -0.05), y, 0.05), 0.09 * s, 0.06 * s, col)
+    limb(mb, mat, v(-0.85, 0, 1.55), v(-1.15, 0, 0.9), 0.07 * s, 0.03 * s, col)  # tail
+
+
+def horse_rider(mb, M, rng, col=BRONZE, scale=1.7):
+    """A rider on a horse, sword raised: the equestrian statue of the big squares and roundabouts."""
+    horse(mb, M, col, scale, rearing=rng.chance(0.4))
+    s = scale
+    v = lambda x, y, z: M @ Vector((x * s, y * s, z * s))
+    limb(mb, 'steel', v(0, 0, 1.85), v(0.05, 0, 2.55), 0.2 * s, 0.17 * s, col)  # body
+    sphere(mb, 'steel', Matrix.Translation(v(0.08, 0, 2.75)), 0.11 * s, 0.1 * s, 0.13 * s, col, seg=8, rings=5)
+    limb(mb, 'steel', v(0.05, 0.18, 2.45), v(0.2, 0.3, 2.95), 0.06 * s, 0.05 * s, col)  # sword arm
+    parts.bar(mb, 'steel', v(0.2, 0.3, 2.95), v(0.3, 0.32, 3.7), 0.03 * s, col, 0.4)
+    for y in (-0.22, 0.22):
+        limb(mb, 'steel', v(0, y, 1.85), v(0.1, y * 1.3, 1.3), 0.08 * s, 0.07 * s, col)  # legs astride
+
+
+def hunter(mb, M, rng, col=BRONZE, scale=2.0):
+    """A hunter in a cap and smock with a long dane gun on his shoulder, his dog at his heel."""
+    s = scale
+    v = lambda x, y, z: M @ Vector((x * s, y * s, z * s))
+    for y in (-0.1, 0.1):
+        limb(mb, 'steel', v(0, y, 0.85), v(0.05 if y > 0 else -0.08, y, 0.0), 0.08 * s, 0.06 * s, col)
+    parts.cyl(mb, 'steel', M @ Matrix.Translation((0, 0, 0.75 * s)) @ Matrix.Scale(s, 4), 0.28, 0.75, col, 0.5, seg=12, r2=0.2)  # smock
+    sphere(mb, 'steel', Matrix.Translation(v(0.02, 0, 1.65)), 0.11 * s, 0.1 * s, 0.13 * s, col, seg=8, rings=5)
+    parts.cyl(mb, 'steel', M @ Matrix.Translation((0.02 * s, 0, 1.74 * s)) @ Matrix.Scale(s, 4), 0.12, 0.12, col, 0.5, seg=10, r2=0.05)  # cap
+    limb(mb, 'steel', v(0, 0.22, 1.45), v(0.15, 0.25, 1.62), 0.06 * s, 0.05 * s, col)
+    parts.bar(mb, 'steel', v(-0.5, 0.22, 1.3), v(0.9, 0.22, 1.85), 0.03 * s, col, 0.4)  # the long gun on his shoulder
+    dog = M @ Matrix.Translation((0.55 * s, -0.4 * s, 0))
+    sphere(mb, 'steel', Matrix.Translation(dog @ Vector((0, 0, 0.45 * s))), 0.35 * s, 0.13 * s, 0.15 * s, col, seg=8, rings=5)
+    sphere(mb, 'steel', Matrix.Translation(dog @ Vector((0.4 * s, 0, 0.62 * s))), 0.13 * s, 0.08 * s, 0.09 * s, col, seg=8, rings=5)
+    for x in (0.22, -0.22):
+        for y in (-0.08, 0.08):
+            limb(mb, 'steel', dog @ Vector((x * s, y * s, 0.4 * s)), dog @ Vector((x * s, y * s, 0)), 0.04 * s, 0.03 * s, col)
+
+
+def beach_arch(mb, M, rng):
+    """A memorial arch on the beach, facing the sea: two concrete legs and a deep lintel, a
+    plaque, and chains cast in relief on the legs. Research-landmarks 26, invented."""
+    conc = hex_rgb('#d8d4cc')
+    for s_ in (-1, 1):
+        mb.box('concrete', T(M, 0, s_ * 4.5, 5.0), conc, 0.5, size=(2.0, 2.0, 10.0))
+        for k in range(8):  # chain links in relief
+            mb.box('steel', T(M, 1.02, s_ * 4.5, 1.5 + k * 1.0), hex_rgb('#4a4a48'), 0.6, size=(0.1, 0.6 if k % 2 else 0.25, 0.7))
+    mb.box('concrete', T(M, 0, 0, 10.8), conc, 0.5, size=(2.4, 11.0, 1.6))
+    mb.box('steel', T(M, 1.21, 0, 10.8), hex_rgb('#c9a13b'), 0.3, size=(0.02, 5.0, 0.8))  # plaque
+    mb.box('concrete', T(M, 0, 0, 0.15), shade(conc, 0.9), 0.5, size=(4.0, 13.0, 0.3))
+
+
+def mural_wall(mb, M, rng, length=None):
+    """A free-standing painted wall, 20-30 m long, 4 m high: bold shapes, faces and bands in a
+    few strong colours on both sides (research-landmarks 25)."""
+    from .structures import MURAL_PALETTES
+    L = length or rng.between(20, 30)
+    pal = [hex_rgb(x) for x in rng.pick(MURAL_PALETTES)]
+    mb.box('block', T(M, 0, 0, 2.0), hex_rgb('#d8d4cc'), 0.5, size=(L, 0.3, 4.0))
+    for s_ in (-1, 1):
+        x = -L / 2
+        while x < L / 2:  # broad colour fields
+            w = min(L / 2 - x, rng.between(2.0, 5.0))
+            mb.box('paint', T(M, x + w / 2, s_ * 0.16, 2.0), rng.pick(pal), 0.3, size=(w, 0.01, 3.8))
+            x += w
+        for _ in range(int(L / 3)):  # shapes over them: discs, diamonds, a face in profile
+            cx, cz, r = rng.between(-L / 2 + 1, L / 2 - 1), rng.between(1.0, 3.2), rng.between(0.4, 1.4)
+            D = T(M, cx, s_ * 0.175, cz) @ Matrix.Rotation(-s_ * math.pi / 2, 4, 'X')
+            if rng.chance(0.5):
+                parts.cyl(mb, 'paint', D, r, 0.01, rng.pick(pal), 0.2, seg=14)
+            else:
+                mb.box('paint', D @ Matrix.Rotation(math.pi / 4, 4, 'Z'), rng.pick(pal), 0.2, size=(r * 1.4, r * 1.4, 0.01))
+    mb.box('concrete', T(M, 0, 0, 4.05), hex_rgb('#b8b2a6'), 0.5, size=(L + 0.2, 0.4, 0.15))  # coping
+
+
+def billboard(mb, M, rng):
+    """A printed billboard on a unipole, 12 x 4 m, both faces: a poster of colour fields and a
+    bold line of type; no brand (rule zero), invented messages."""
+    z0 = rng.between(9, 13)
+    parts.cyl(mb, 'steel', M, 0.55, z0, hex_rgb('#7a7d80'), 0.6, seg=12)
+    mb.box('steel', T(M, 0, 0, z0 + 2.0), hex_rgb('#3a3a3a'), 0.5, size=(0.5, 12.4, 4.4))
+    msgs = ['GIDI FM 101.1', 'SAVE SMALL SMALL', 'NEW ESTATE NOW SELLING', 'FRESH BREAD DAILY', 'WATER IS LIFE', 'MOVE GIDI FORWARD', 'BIG SALE THIS WEEK']
+    pals = [('#f2c230', '#1d1d1d', '#c62828'), ('#1f5fa8', '#ffffff', '#f2c230'), ('#2e7d4f', '#ffffff', '#ff7a1a'), ('#c62828', '#ffffff', '#1d1d1d')]
+    for s_ in (-1, 1):
+        bg, fg, acc = (hex_rgb(c) for c in rng.pick(pals))
+        F = T(M, s_ * 0.27, 0, z0 + 2.0) @ Matrix.Rotation(-s_ * math.pi / 2, 4, 'Z')  # a frame facing outwards
+        mb.box('paint', F @ Matrix.Translation((0, 0.01, 0)), bg, 0.3, size=(12.0, 0.02, 4.0))
+        mb.box('paint', F @ Matrix.Translation((-3.0, 0.025, -0.9)), acc, 0.3, size=(5.5, 0.01, 1.4))
+        parts.cyl(mb, 'paint', F @ Matrix.Translation((4.0, 0.025, 0.3)) @ Matrix.Rotation(-math.pi / 2, 4, 'X'), 1.4, 0.01, acc, 0.2, seg=16)
+        parts.text(mb, 'paint', F @ Matrix.Rotation(math.pi, 4, 'Z') @ Matrix.Translation((1.2, -0.035, 0.9)), rng.pick(msgs), 0.7, fg, depth=0.02, max_w=8.0)
+    mb.box('steel', T(M, 0.9, 0, z0 - 0.1), hex_rgb('#3a3a3a'), 0.6, size=(1.0, 12.0, 0.08))  # catwalk
+
+
+def the_reach(mb, M, rng, scale=2.4):
+    """The Reach: a painted sculpture group after the owner's own artwork. A woman in a yellow
+    wrapper and a green spotted blouse, beaded headgear, reclines on a dark rock and reaches out
+    with a striped sleeve. A white-robed Eyo-style masquerade, invented, floats in to meet her: wide
+    flat hat, black stripes on the robe, his robe streaming behind him. He holds a long staff, which
+    plants on the plinth and holds him up. Their fingertips almost touch. About 14 m across; M at
+    the plinth's middle, the woman at -x."""
+    s = scale
+    v = lambda x, y, z: M @ Vector((x * s, y * s, z * s))
+    skin = hex_rgb('#6b3e26')
+    yellow, green, white, ink = hex_rgb('#e8c43a'), hex_rgb('#2f7a3a'), hex_rgb('#f4f1e6'), hex_rgb('#1d1d1d')
+    # the plinth and the rock she lies on
+    mb.box('concrete', T(M, 0, 0, 0.3), hex_rgb('#d8d4cc'), 0.4, size=(7.2 * s, 3.0 * s, 0.6))
+    mb.box('steel', T(M, 0, -1.5 * s - 0.01, 0.3), hex_rgb('#c9a13b'), 0.3, size=(2.0 * s, 0.02, 0.35))  # plaque
+    rock = hex_rgb('#3a3346')
+    for k, (x, y, r, h) in enumerate(((-2.3, 0, 1.3, 1.15), (-1.3, 0.15, 1.0, 0.9), (-3.1, -0.3, 0.85, 1.0), (-0.6, -0.1, 0.7, 0.6))):
+        sphere(mb, 'concrete', Matrix.Translation(v(x, y, 0.0)), r * s, r * 0.75 * s, h * s, rock, seg=12, rings=6)  # sunk into the plinth
+    # her: legs under the wrapper along the rock, the body leaning back, the head tilted
+    limb(mb, 'paint', v(-2.2, 0, 1.25), v(-0.5, 0.05, 1.0), 0.42 * s, 0.22 * s, yellow)   # the wrapper over her legs
+    sphere(mb, 'paint', Matrix.Translation(v(-1.4, 0.05, 1.05)), 1.0 * s, 0.55 * s, 0.32 * s, yellow, seg=10, rings=5)  # its fall over the rock
+    limb(mb, 'paint', v(-2.25, 0, 1.25), v(-2.7, 0, 2.0), 0.3 * s, 0.24 * s, green)       # the blouse
+    for k in range(6):  # its white spots
+        q = v(-2.35 - k * 0.06, rng.between(-0.24, 0.24), 1.45 + k * 0.09)
+        sphere(mb, 'paint', Matrix.Translation(q), 0.03 * s, 0.03 * s, 0.03 * s, white, seg=6, rings=3)
+    sphere(mb, 'paint', Matrix.Translation(v(-2.82, 0, 2.3)), 0.13 * s, 0.12 * s, 0.16 * s, skin, seg=10, rings=6)  # her head
+    for k, c in enumerate(('#c62828', '#f2c230', '#1f5fa8', '#2e7d4f', '#ff7a1a')):  # beaded headgear, rising
+        sphere(mb, 'paint', Matrix.Translation(v(-2.88 - k * 0.025, 0, 2.45 + k * 0.07)), (0.12 - k * 0.015) * s, (0.12 - k * 0.015) * s, 0.05 * s, hex_rgb(c), seg=8, rings=3)
+    # the reaching arm, the sleeve striped
+    sh, el, wr = (-2.55, 0.22, 2.0), (-1.85, 0.3, 2.25), (-1.15, 0.32, 2.42)
+    for (a0, a1), c in zip(((sh, el), (el, wr)), (('#2f7a3a', '#f2c230'), ('#1f5fa8', '#f2c230'))):
+        for k in range(4):
+            t0, t1 = k / 4, (k + 1) / 4
+            pa = tuple(a0[i] + (a1[i] - a0[i]) * t0 for i in range(3))
+            pb = tuple(a0[i] + (a1[i] - a0[i]) * t1 for i in range(3))
+            limb(mb, 'paint', v(*pa), v(*pb), 0.075 * s, 0.07 * s, hex_rgb(c[k % 2]))
+    limb(mb, 'paint', v(*wr), v(-0.98, 0.33, 2.47), 0.05 * s, 0.035 * s, skin)  # her hand, the finger out
+    limb(mb, 'paint', v(-2.65, -0.24, 1.95), v(-2.85, -0.45, 1.35), 0.07 * s, 0.06 * s, green)  # the other arm, resting
+    # him: the Eyo, floating in from the right, leaning down to her
+    limb(mb, 'paint', v(1.0, 0, 3.25), v(2.6, 0.1, 2.35), 0.28 * s, 0.9 * s, white)  # the robe streaming back
+    limb(mb, 'paint', v(1.6, 0.1, 2.9), v(3.2, -0.2, 2.6), 0.5 * s, 0.25 * s, white)  # a flying fold
+    limb(mb, 'paint', v(1.5, -0.1, 2.7), v(2.9, 0.3, 1.9), 0.4 * s, 0.15 * s, white)
+    for k in range(4):  # the black stripes across the robe
+        t = 0.15 + k * 0.2
+        c = v(1.0 + 1.6 * t, 0, 3.25 - 0.9 * t)
+        sphere(mb, 'paint', Matrix.Translation(c), 0.06 * s, (0.3 + 0.6 * t) * s * 1.03, (0.3 + 0.6 * t) * s * 1.03, ink, seg=10, rings=4)
+    sphere(mb, 'paint', Matrix.Translation(v(0.82, 0, 3.55)), 0.15 * s, 0.14 * s, 0.17 * s, white, seg=10, rings=6)  # the veiled head
+    parts.cyl(mb, 'paint', M @ Matrix.Translation(v(0.8, 0, 3.66) - M.translation) @ Matrix.Scale(s, 4), 0.48, 0.03, white, 0.2, seg=18)  # the wide flat hat
+    parts.cyl(mb, 'paint', M @ Matrix.Translation(v(0.8, 0, 3.69) - M.translation) @ Matrix.Scale(s, 4), 0.17, 0.2, white, 0.2, seg=12, r2=0.12)
+    sphere(mb, 'paint', Matrix.Translation(v(0.8, -0.18, 3.8)), 0.05 * s, 0.01 * s, 0.05 * s, ink, seg=6, rings=3)  # the emblem on the crown
+    # his reaching arm: the fingertip stops a hand's breadth short of hers
+    limb(mb, 'paint', v(0.9, 0.25, 3.25), v(0.2, 0.32, 2.85), 0.09 * s, 0.07 * s, white)
+    limb(mb, 'paint', v(0.2, 0.32, 2.85), v(-0.62, 0.34, 2.52), 0.07 * s, 0.05 * s, white)
+    limb(mb, 'paint', v(-0.62, 0.34, 2.52), v(-0.8, 0.34, 2.49), 0.045 * s, 0.03 * s, skin)
+    # the staff, held high in his other hand and planted on the plinth: it holds him up
+    limb(mb, 'paint', v(1.1, -0.25, 3.2), v(1.75, -0.32, 3.45), 0.08 * s, 0.06 * s, white)
+    parts.bar(mb, 'steel', v(2.35, -0.32, 4.35), v(0.35, -0.32, 0.05), 0.07 * s, hex_rgb('#c9c4ba'), 0.3)
+
+
+BUILDERS = {'statue': statue, 'sculpture': sculpture, 'clock_tower': clock_tower, 'lighthouse': lighthouse, 'led_board': led_board,
+            'beach_arch': beach_arch, 'mural_wall': mural_wall, 'billboard': billboard, 'the_reach': the_reach}
 
 # what each district character puts on its junction corners (research-landmarks 4-9, 24)
 JUNCTION = {
-    'old_island': ['statue:masquerade', 'statue:founder', 'clock_tower', 'led_board'],
-    'civic': ['statue:founder', 'clock_tower', 'sculpture', 'led_board'],
+    'old_island': ['statue:masquerade', 'statue:horse_rider', 'clock_tower', 'led_board'],
+    'civic': ['statue:horse_rider', 'clock_tower', 'sculpture', 'led_board'],
     'elite': ['sculpture', 'statue:drummer', 'led_board'],
     'dense': ['led_board', 'statue:founder', 'statue:drummer', 'led_board'],
     'sprawl': ['led_board', 'statue:founder', 'clock_tower'],

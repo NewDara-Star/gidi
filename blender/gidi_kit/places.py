@@ -609,7 +609,7 @@ def hall(a, rng, collection=None):
     poly = _poly(a)
     mb = MeshBuilder()
     block(mb, poly, 1, dict(style='shed', wall=hex_rgb(rng.pick(['#2f2f6a', '#6a1b9a', '#c8a020'])), band=hex_rgb('#1a1a1a'), wear=_wear(a, rng), floor_h=9, roof='gable', pitch=10, roof_col=hex_rgb('#c3c7ca'), facing=a.get('facing', 0),
-                            sign=(a.get('label') or rng.pick(['THE SHRINE', 'AFRO HALL', 'EVENT CENTRE'])).upper(), sign_bg=hex_rgb('#1a1a1a'), sign_fg=hex_rgb('#f2c21b')), rng)
+                            sign=(a.get('label') or rng.pick(['THE GROOVE HALL', 'AFRO HALL', 'EVENT CENTRE'])).upper(), sign_bg=hex_rgb('#1a1a1a'), sign_fg=hex_rgb('#f2c21b')), rng)
     return _done(mb, a, collection)
 
 

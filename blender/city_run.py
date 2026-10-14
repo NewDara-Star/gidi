@@ -29,14 +29,14 @@ gd = json.loads(gd[gd.index('{'):gd.rindex('}') + 1])
 
 
 def tiles_needed():
-    """Every tile that holds a building, a road, a parcel or a structure."""
+    """Every tile that holds a building, a road, a parcel, a structure or a ferry route."""
     t = set()
     add = lambda x, y: t.add((int(x // SIZE), int(y // SIZE)))
     for lst in gd['buildings'].values():
         for b in lst:
             add(sum(p[0] for p in b[1:]) / 4, sum(p[1] for p in b[1:]) / 4)
     lines = [ln for v in (gd.get('streets', {}), gd.get('lanes', {}), gd.get('paths', {})) for lst in v.values() for ln in lst]
-    lines += [m['pts'] for m in gd.get('mains', [])] + [a['pts'] for a in gd.get('arterials', [])] + [s['pts'] for s in gd.get('structures', [])] + [gd['rail']['pts']]
+    lines += [m['pts'] for m in gd.get('mains', [])] + [a['pts'] for a in gd.get('arterials', [])] + [s['pts'] for s in gd.get('structures', [])] + [gd['rail']['pts']] + [f['pts'] for f in gd.get('ferries', [])]  # the ferry routes, so the boats on them have tiles
     for ln in lines:
         for i in range(len(ln) - 1):
             a, b = ln[i], ln[i + 1]
