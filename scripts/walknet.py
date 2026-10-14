@@ -4,7 +4,7 @@ G is the baked city (web/gidi-data.js) or the dict bake_web.py is building."""
 import math
 import networkx as nx, numpy as np
 from shapely.geometry import LineString, Point, Polygon
-from shapely.ops import unary_union
+from shapely.ops import unary_union, nearest_points
 from shapely.strtree import STRtree
 from fabric_metrics import noded, lines
 
@@ -20,8 +20,15 @@ def ways_of(G, dids, area=None):
         for l in G.get("paths", {}).get(did, []): ways.append(("path", "", LineString(l)))   # footpaths: rail side, canal banks, worn crossings
     for m in G["mains"]:
         for p in lines(LineString(m["pts"]).intersection(area)): ways.append(("main", m["name"], p))
+    bridges = []
     for a in G["arterials"]:
+        if a.get("cls") == "bridge" and all(area.contains(Point(q)) for q in (a["pts"][0], a["pts"][-1])):
+            bridges.append(LineString(a["pts"])); ways.append(("arterial", a["name"], bridges[-1])); continue   # over the lagoon between two built districts: whole
         for p in lines(LineString(a["pts"]).intersection(area)): ways.append(("arterial", a["name"], p))
+    for br in bridges:   # a bridge that lands a few metres short of the road on shore is joined to it
+        for end in (Point(br.coords[0]), Point(br.coords[-1])):
+            d, g = min(((g.distance(end), g) for k, n, g in ways if g is not br), key=lambda t: t[0])
+            if 0.5 < d <= 40: ways.append(("arterial", "", LineString([end, nearest_points(g, end)[0]])))
     for st in G.get("structures", []):
         if st.get("d") in dids and st["kind"] in ("footbridge", "skywalk"): ways.append((st["kind"], st.get("name", st["kind"]), LineString(st["pts"])))
     return ways

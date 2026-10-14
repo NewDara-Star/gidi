@@ -426,7 +426,50 @@ def estate(ST, LM):
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
     }
 
+def oldisland(ST, LM):
+    """Old Island: Lagos Island (study-oldisland*, the island itself: the LGA's outline is mostly lagoon, so the study is boxed to the
+    island). OSM maps the streets everywhere but traces the buildings fully only in the old core (Isale Eko): building figures come from
+    its traced cells (scripts/study_wellmapped.py). Heights from Lagos Island in lga_table.json. The district model: the palace, the cloth
+    market with lanes only porters can enter, decaying Brazilian houses, bank towers on the waterfront, a fenced square with fountains."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 79 x 1.8 = 143 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Way", "Square", "Avenue", "Lane")}
+    mk = sorted(LM["markets_m2"])
+    return {
+        "lgas": ["Lagos Island"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.95, "cross_scale": 1.3, "dead_end": 0.05,   # real: 67-81% T, the most X junctions of any district; 0.07-0.12 dead ends
+        "size_lo_u": 0.5, "back_row": 0.5, "courtyard_m": [0.5, 1.5], "big_front": 0.08, "vacant": 0.02,   # real typical house 142 m2, 4-8% over 400 m2; houses 0.7-1.0 m apart
+        "internal_mains": 1,
+        "bridge_links": True,   # the two bridges from the mainland land on the island's edge road
+        "name_endings": ends,
+        "reserve": [   # the cloth market: the island's big markets run 0.5-9.5 ha; this one is the upper quartile, on Waterfront Drive
+            {"kind": "market", "poi": "Cloth Market", "m2": mk[3 * len(mk) // 4], "aspect": 1.6, "front": "art"},
+        ],
+        "market_aisle_m": 2.5,   # cloth market lanes 2-3 m wide: porters with head loads, no barrows (district model)
+        "parcels": [
+            # the palace: a walled compound, the palace house round a forecourt, the chiefs' houses behind (never a crime site)
+            {"kind": "palace", "poi": "The Palace", "ha": 0.8, "near_main": False, "gate": "nearest", "min_w": 70,
+             "buildings": [["palace", [42, 22], [0.0, 0.25]], ["back", [18, 7], [0.6, -0.55]], ["back", [18, 7], [-0.6, -0.55]]],
+             "grounds": [["forecourt", [30, 18], [0.0, -0.45]]]},
+            {"kind": "motor park", "poi": "Island Motor Park", "ha": round(LM["bus_stations"]["area_m2"]["p50"] / 1e4, 2), "near_main": True, "gate": "nearest"},
+            # the fenced square with fountains (district model), on a main road
+            {"kind": "square", "ha": 0.35, "near_main": True, "gate": "nearest",
+             "grounds": [["fountain", [6, 6], [-0.4, 0.0]], ["fountain", [6, 6], [0.4, 0.0]]]},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False, "gate": "nearest", "min_w": 60},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "walled": ["palace", "square"],
+        # the Brazilian Quarter: the houses round the pin are the returnee houses, brick with arches and shutters, two storeys
+        "zone": {"poi": "Brazilian Quarter", "r_m": 90, "kind": "brazilian house", "min_m2": 60, "storeys": [2, 2], "kiosk_every_m": 1000},
+        # Bank Row: glass towers on the waterfront road (real: Lagos Island has 1% of its built area at 14+ storeys)
+        "halls": [{"poi": "Bank Row", "kind": "bank tower", "m2": 900, "aspect": 1.5, "storeys": 18, "shore": True} for _ in range(4)],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "clear_access": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland}.get(did, lambda ST, LM: {})(ST, LM)

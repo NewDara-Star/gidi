@@ -67,7 +67,15 @@ def street_name(kind="street", r=None):
         if PROF and (f in ART_FIRST or f in {u.split()[0] for u in used}): continue   # never "Ayinde Road" next to Ayinde Avenue, nor two Idowus
         n = f"{f} {e}"
         if n not in used: used.add(n); return n
+    for _ in range(200):   # the first list is used up by the districts already built (eleventh on): draw from the reserve
+        e = "Road" if kind == "main" and r.random() < .6 else r.choices([e for e, w in ENDS], [w for e, w in ENDS])[0]
+        f = r.choice(FIRST2)
+        if f in ART_FIRST or f in {u.split()[0] for u in used}: continue
+        n = f"{f} {e}"
+        if n not in used: used.add(n); return n
     return n
+FIRST2 = ["Adewale","Babatunde","Chukwuma","Ekpo","Gbadamosi","Ige","Jimoh","Kolawole","Lateef","Mbanefo","Popoola","Raji","Sanni","Tijani","Udoh",
+          "Wahab","Yusuf","Akinola","Bamidele","Egbe","Hassan","Ikenna","Kunle","Mojeed","Nwachukwu","Remi","Segun","Tokunbo","Uche","Yemi"]
 
 # ---------- 1. the network shared with the rest of Gidi ----------
 NET_F = "web/network.json"
@@ -114,6 +122,12 @@ for c in coords:
         d = a.distance(Point(c))
         if 20 < d < 170 and not poly.buffer(-5).contains(nearest_points(a, Point(c))[0]):
             links.append(LineString([c, nearest_points(a, Point(c))[0].coords[0]]))
+if PROF.get("bridge_links"):   # an island: each bridge over the lagoon lands on a short link road onto the edge road
+    ring_u = unary_union([e for n, e, nb in edge_roads])
+    for a in G["arterials"]:
+        if a["cls"] != "bridge": continue
+        for end in (Point(a["pts"][0]), Point(a["pts"][-1])):
+            if end.distance(poly) < 120 and end.distance(ring_u) > 0.5: links.append(LineString([end, nearest_points(ring_u, end)[0]]))
 
 import landmarks as LMK
 INTERNAL_MAINS = PROF.get("internal_mains", 2) if PROF else 2
@@ -1166,7 +1180,7 @@ for p in parcels:
             PATHS[:] = [(k2, x2) for k2, x2 in PATHS if not (k2 == "market aisle" and any(x2 is sp for sp in spines))]
             spines = [LineString(q) for q in LOCK["aisles"][lk]]; PATHS += [("market aisle", sp) for sp in spines]
         if LOCK_WRITE and lk in PROF["lock"].get("reserve", []): NEW_LOCK.setdefault("aisles", {})[lk] = [list(sp.coords) for sp in spines]
-        for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=3.5):   # each piece is a row of four lock-ups under one roof
+        for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=PROF.get("market_aisle_m", 3.5)):   # each piece is a row of four lock-ups under one roof
             if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))
     if p["kind"] == "estate":   # 1970s walk-up flats in rows, gardens between, shops built into the gardens
         ES = next(x for x in PROF["parcels"] if x["kind"] == "estate"); bl, bs, gap, garden = ES["block_m"][1], ES["block_m"][0], ES["gap_m"], ES["garden_m"]
@@ -1304,9 +1318,9 @@ for p in parcels:
                 cx, cy = q.x + ux * (22 + (k2 // 4) * 24) - uy * ((k2 % 4) * 6 - 9), q.y + uy * (22 + (k2 // 4) * 24) + ux * ((k2 % 4) * 6 - 9)
                 r = rect(cx, cy, 4, 20, math.atan2(uy, ux) + math.pi / 2)
                 if water.contains(r) and r.distance(unary_union([e for n, e, nb in edge_roads])) > CLEAR["main"]: bld.append((r, "raft"))
-    if p["kind"] in ("compound", "club"):   # a big man's compound (house, boys' quarters, generators, pool) or the estate club (clubhouse, pool, court)
+    if p["kind"] in ("compound", "club", "palace", "square"):   # a big man's compound, the estate club, the palace, a square with fountains
         CP = next(x for x in PROF["parcels"] if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a)
-        for kind_, (bw_, bd_), (u_, v_) in CP["buildings"]:   # u_, v_: fractions of the parcel's half length and half width from its centre
+        for kind_, (bw_, bd_), (u_, v_) in CP.get("buildings", []):   # u_, v_: fractions of the parcel's half length and half width from its centre
             r = rect(ctr.x + ca * u_ * LL / 2 - sa * v_ * g.area / LL / 2, ctr.y + sa * u_ * LL / 2 + ca * v_ * g.area / LL / 2, bw_, bd_, a)
             if g.buffer(-3).contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-20:]): bld.append((r, kind_))
         for kind_, (bw_, bd_), (u_, v_) in CP.get("grounds", []):   # pool, tennis court: flat, drawn as small parcels
@@ -1366,8 +1380,9 @@ if H and H["poi"] in POIS:
 for HL in PROF.get("halls", []):   # a big named building on a main-road frontage near its pin (the Shrine's music hall); the houses it replaces are cleared
     if HL["poi"] not in POIS: continue
     hp = POIS[HL["poi"]]; hw_ = math.sqrt(HL["m2"] * HL.get("aspect", 1.3)); hd_ = HL["m2"] / hw_
-    for r0, k0 in sorted([(r, k) for r, k in bld if k == "front" and r.distance(mainU) < CLEAR["main"] + 4], key=lambda rk: rk[0].centroid.distance(hp))[:200]:
-        q = mainU.interpolate(mainU.project(r0.centroid)); dxy = (r0.centroid.x - q.x, r0.centroid.y - q.y); L0 = math.hypot(*dxy) or 1
+    rd_ = unary_union([e for n, e, nb in edge_roads if nb is None]) if HL.get("shore") else mainU   # Bank Row: on the waterfront road
+    for r0, k0 in sorted([(r, k) for r, k in bld if k == "front" and r.distance(rd_) < CLEAR["main"] + 4], key=lambda rk: rk[0].centroid.distance(hp))[:200]:
+        q = rd_.interpolate(rd_.project(r0.centroid)); dxy = (r0.centroid.x - q.x, r0.centroid.y - q.y); L0 = math.hypot(*dxy) or 1
         ux2, uy2 = dxy[0] / L0, dxy[1] / L0; off3 = CLEAR["main"] + 3 + hd_ / 2
         hr = rect(q.x + ux2 * off3, q.y + uy2 * off3, hw_, hd_, math.atan2(ux2, -uy2))
         if road_free.contains(hr) and not hr.intersects(parcel_u):
@@ -1420,6 +1435,10 @@ if PW:   # the compound walls: each plot's edge, held back from every road, lane
     WALLS = [x for x in lines(linemerge(wl_) if wl_ is not None and wl_.geom_type == "MultiLineString" else wl_) if x.length > 0.8] if wl_ is not None else []
     inside = unary_union(comps) if comps else None   # a kiosk can't stand inside someone's compound
     if inside is not None: bld = [(r, k) for r, k in bld if not (k == "kiosk" and inside.contains(r.centroid))]
+elif PROF.get("walled"):   # only some parcels walled (the palace, the fenced square): a gap where each access road leaves
+    comps = [p["geom"] for p in parcels if p["kind"] in PROF["walled"]]
+    wl_ = unary_union([c.boundary for c in comps]).difference(unary_union([Point(g.coords[0]).buffer(3) for g in access] or [Point(0, 0).buffer(0.1)]))
+    WALLS = [x for x in lines(linemerge(wl_) if wl_.geom_type == "MultiLineString" else wl_) if x.length > 0.8]
 # ---------- 5. civic slots: real plots the civic layer can sit on ----------
 slots = []
 for r, kind in bld:
@@ -1450,7 +1469,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
@@ -1488,7 +1507,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        "buildings": [[k] + [[round(x, 1), round(y, 1)] for x, y in list(r.exterior.coords)[:-1]] for r, k in bld],
        "parcels": [{"kind": p["kind"], "pts": [[round(x, 1), round(y, 1)] for x, y in p["geom"].exterior.coords]} for p in parcels],
        "poi_pos": {k: [round(v.x), round(v.y)] for k, v in poi_pos.items()}, "slots": slots[:400], "metrics": M,
-       **({"walls": [R2(g) for g in WALLS], "gates": [{"pts": [[round(x, 1), round(y, 1)] for x, y in q["bar"]], "main": q["main"]} for q in GATES_OUT]} if PW or EG else {})}
+       **({"walls": [R2(g) for g in WALLS], "gates": [{"pts": [[round(x, 1), round(y, 1)] for x, y in q["bar"]], "main": q["main"]} for q in GATES_OUT]} if PW or EG or WALLS else {})}
 if PROF:
     out["storeys"] = storeys
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \

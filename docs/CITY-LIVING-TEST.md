@@ -15,7 +15,7 @@ houses with no way in, and whether districts feel like one city.
 | `home N [district]` | Pick the N-th house (in one district, e.g. `home 3 hub`) and describe it; the printed #id is not N |
 | `look X Y [r]` | What's around a spot: buildings, nearest way, parcels, places, rail/canal distance |
 | `walk FROM TO` | Shortest walk at 5 km/h: distance, minutes, detour ×, roads used, places passed, rail crossings, districts crossed |
-| `ride FROM TO [--through]` | Same by okada at 25 km/h (no lanes, footpaths or footbridges). It goes round okada ban zones (the Capital); `--through` rides through anyway and reports the metres ridden inside the ban |
+| `ride FROM TO [--through]` | Same by okada at 25 km/h (no lanes, footpaths or footbridges). It goes round okada ban zones (the Capital, the Port, Old Island); `--through` rides through anyway and reports the metres ridden inside the ban |
 | `problems` | Houses >45 m from any way, network islands, dead ends |
 
 FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
@@ -89,6 +89,12 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - delivers at night to The Senator's House and the Estate Club, "deliveries to men you don't question"
   - walks the gated streets, counts the gates and gatehouses on his rounds, and checks that every street gate still lets people walk through
   - rides out to the Capital's edge (round its okada ban), the Hub's interchange and Railside's market
+- **Bisi, cloth seller, Old Island (on foot; okadas are banned there):**
+  - keeps a stall in the Cloth Market and lives in a Brazilian house in the old quarter
+  - sends porters with head loads through the market's narrow lanes, and walks cash to Bank Row's towers on the waterfront
+  - passes the palace (never a crime site) and the fenced square, and finds the Island Motor Park's buses
+  - walks over the Wharf Bridge to the Port, and takes an okada from the island's edge over the Long Bridge to Water Town and Food Gate
+  - checks that both bridges land on a road, and that the island's edge roads lead somewhere
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -123,6 +129,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Estate Gate → The Senator's House | walk | The gateman's round to the big house |
 | Estate Club → Gidi Interchange | ride | The Estate into the city's bus hub (round the Capital's okada ban) |
 | Estate Gate → Gadget Village | walk | The Estate's walk into the Capital |
+| Brazilian Quarter → Cloth Market | walk | A cloth seller's way to work |
+| Bank Row → The Palace | walk | Across the island, waterfront to palace |
+| Cloth Market → Container Yard | walk | Over the Wharf Bridge to the Port |
+| Cloth Market → Gidi Interchange | ride | The island into the city's bus hub (walk out of the ban, then the Long Bridge) |
+| Island Motor Park → Mile Market | ride | Over the Long Bridge to the food market |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.
