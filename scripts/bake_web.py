@@ -147,7 +147,8 @@ ART=[("Coastal Expressway","exp",[(0,1.35),(1.5,1.35),(2.9,1.3),(4.0,1.35),(5.0,
 ("Wharf Bridge","bridge",[(5.0,1.45),(5.5,1.45)]),
 ("Waterfront Drive","art",[(5.5,1.3),(6.0,1.3),(6.7,1.3),(8.0,1.35)]),
 ("Peninsula Expressway","exp",[(8.0,1.35),(9.2,1.4),(10.4,1.45)]),
-("Shore Road","art",[(6.4,6.5),(7.8,6.9),(9.2,7.0),(9.3,7.2)])]
+("Shore Road","art",[(6.4,6.5),(7.8,6.9),(9.2,7.0),(9.3,7.2)]),
+("Cable Bridge","bridge",[(7.625,2.18),(7.875,2.4125),(8.3125,2.4625),(8.625,2.33875)])]   # the Heights' tolled bridge over the lagoon to the Frontier
 out["rail"]={"name":"Gidi Rail","pts":[list(m(p)) for p in [(0.9,4.7),(1.3,3.9),(1.75,3.1),(2.2,2.6),(2.7,2.3),(3.3,2.15),(3.9,2.0),(4.5,1.9)]]}
 out["arterials"]=[{"name":n,"cls":c,"pts":[list(m(p)) for p in pts]} for n,c,pts in ART]
 out["ferries"]=[{"name":"Old Shore – Heights ferry","pts":[list(m((8.2,6.45))),list(m((7.4,2.4)))]},{"name":"Old Shore – Water Town ferry","pts":[list(m((8.2,6.45))),list(m((5.35,3.6)))]}]

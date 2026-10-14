@@ -1181,6 +1181,109 @@
      5840.0
     ]
    ]
+  },
+  "heights|outer0": {
+   "between": [
+    "heights",
+    null
+   ],
+   "name": "Yusuf Road",
+   "pts": [
+    [
+     5280.0,
+     5840.0
+    ],
+    [
+     5504.0,
+     5833.4
+    ],
+    [
+     5728.0,
+     5843.1
+    ],
+    [
+     5952.0,
+     5844.2
+    ],
+    [
+     6176.0,
+     5839.2
+    ],
+    [
+     6400.0,
+     5840.0
+    ]
+   ]
+  },
+  "frontier|heights": {
+   "between": [
+    "heights",
+    "frontier"
+   ],
+   "name": "Mbanefo Road",
+   "pts": [
+    [
+     6400.0,
+     5840.0
+    ],
+    [
+     6405.5,
+     5626.7
+    ],
+    [
+     6415.8,
+     5413.3
+    ],
+    [
+     6390.7,
+     5200.0
+    ],
+    [
+     6414.6,
+     4986.7
+    ],
+    [
+     6410.7,
+     4773.3
+    ],
+    [
+     6400.0,
+     4560.0
+    ]
+   ]
+  },
+  "heights|outer2": {
+   "between": [
+    "heights",
+    null
+   ],
+   "name": "Uche Close",
+   "pts": [
+    [
+     6400.0,
+     4560.0
+    ],
+    [
+     6204.1,
+     4636.7
+    ],
+    [
+     6004.6,
+     4702.5
+    ],
+    [
+     5795.8,
+     4738.7
+    ],
+    [
+     5598.1,
+     4810.0
+    ],
+    [
+     5400.0,
+     4880.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -1926,6 +2029,58 @@
     5552.5
    ],
    "bearing_deg": 90
+  },
+  {
+   "from": "heights",
+   "to": "frontier",
+   "road": "Ekpo Street",
+   "kind": "main",
+   "pt": [
+    6409.1,
+    5356.2
+   ]
+  },
+  {
+   "from": "heights",
+   "to": "oldisland",
+   "road": "Waterfront Drive",
+   "kind": "arterial",
+   "pt": [
+    5324.0,
+    5360.0
+   ]
+  },
+  {
+   "from": "heights",
+   "to": "frontier",
+   "road": "Peninsula Expressway",
+   "kind": "arterial",
+   "pt": [
+    6404.8,
+    5319.8
+   ]
+  },
+  {
+   "from": "heights",
+   "to": "oldisland",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    5300.1,
+    5552.5
+   ],
+   "bearing_deg": 270
+  },
+  {
+   "from": "heights",
+   "to": "frontier",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    6400.0,
+    5278.8
+   ],
+   "bearing_deg": 83
   }
  ]
 }

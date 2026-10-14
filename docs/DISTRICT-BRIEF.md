@@ -5,7 +5,7 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 ## Owner's rules (non-negotiable)
 - **No copying real Lagos.** Study real Lagos, then generate original streets and buildings from the measured rules. Never trace or transplant real street layouts or building outlines.
 - **Invented names only.** No real brands, companies or people.
-- **Safe ground.** Churches, mosques, schools, hospitals and clinics are never crime locations. Sacred traditions (Eyo, Oro, Egungun, etc.) are never criminal.
+- **Safe ground.** Churches, mosques, schools, hospitals and clinics are never crime locations. Nor is any place the district model flags `"safe": true` in `web/districts_info.json` (the Palace); the bake marks them all, with their plots, in `safe_ground`. Sacred traditions (Eyo, Oro, Egungun, etc.) are never criminal.
 - **Never push to `main`.** Work on a branch `district/<id>` and open a pull request. Only the owner merges.
 - **Never fetch** Pinterest, Nominatim or Overpass. Never use Google Maps, Street View or 3D Tiles as data. If a site is blocked, say so; don't work around it.
 - **Never read or use the `gta5` folder** on the owner's Mac.
@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub, jungle, foodgate, watertown, capital, bazaar, port, railside, estate, oldisland
-- **Then:** heights, frontier, oldshore, border
+- **Done:** maze, hub, jungle, foodgate, watertown, capital, bazaar, port, railside, estate, oldisland, heights
+- **Then:** frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
 ## District → inspiration (OSM `name` of the LGA, as in `adm6.geojson`)
@@ -46,6 +46,7 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
    - For neighbourhood-level districts, pass a box: `study_extract.py "<LGA>" <id> west,south,east,north` (degrees). Food Gate is the worked example; several boxes are separated by `;` (Water Town). For a waterfront, `scripts/study_village.py <id>` splits the stilt village off the land, and `study_core.py <id> --land` measures the land only.
    - Where OSM maps the streets but few of the buildings (central Ikeja), `scripts/study_undermapped.py` estimates the building cover from WorldCover and the well-mapped districts. The Capital is the worked example.
    - Where OSM maps the buildings of only some neighbourhoods in the study area (the Estate: Ikeja GRA traced, Magodo and Omole not), `scripts/study_wellmapped.py <id> <box>` measures them on the traced 250 m cells of one box instead. Run it after `study_core.py`. Old Island used it too, on the old core: OSM's Lagos Island outline is mostly lagoon, so its study is also boxed to the island.
+   - For a neighbourhood-level study, measure the height bands on the boxes too: `scripts/study_boxheights.py "<LGA>" "<boxes>"`, and put them in the profile as `h_bands`. An LGA can mix very different places (Eti Osa: Ikoyi's towers and Lekki's bungalows).
    - **Log the Lagos-isms (every district from now on):** run `scripts/study_isms.py <id>` and add the district's column and anything new to `docs/LAGOS-ISMS.md`: the eccentricities in the real data (streets ending at canals or rail, buildings in road reserves or on drain banks, markets on the carriageway, roads doing too many jobs, missing links, unfinished buildings, odd junctions, flood-prone low spots, pedestrians forced onto expressways). For each: what it is, where (LGA and coordinates), how often per km², and which Gidi district it would suit. **Don't build any of it into Gidi yet:** that's the owner's "make it feel like Lagos" pass, after the whole map is done.
    - Write `docs/<id>-pattern-study.md` in the same shape as the Maze study. It covers roads, buildings, land, water, rail, connections and the limits of the data, plus the height, people, tree and terrain numbers from `lga_table.json`.
 3. **Generate:**
@@ -58,8 +59,8 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
    - **Compare blocks the fair way:** use `blocks_per_km2_closed` from `study_core.py`, which counts the real square's blocks with its border closed, as a Gidi district's edge roads close it. The old open count shows about half. `sector_split_ha` (collector streets) is the main lever; `spurs` adds dead-end side streets without new blocks.
-   - **When a neighbour of a finished district is built,** give the finished one `keep_gateways` and rebuild it, so it keeps regenerating byte-identical (the Hub, Jungle City, Food Gate, Water Town, the Capital and the Bazaar have it).
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), the Capital seed 3, scale 3.8, the Bazaar seed 9, scale 3.4, the Port seed 11, scale 4.5, Railside seed 7, scale 1.5, the Estate seed 3, scale 4.8, and Old Island seed 11, scale 1.6. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
+   - **When a neighbour of a finished district is built,** give the finished one `keep_gateways` and rebuild it, so it keeps regenerating byte-identical (the Hub, Jungle City, Food Gate, Water Town, the Capital, the Bazaar and Old Island have it).
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), the Capital seed 3, scale 3.8, the Bazaar seed 9, scale 3.4, the Port seed 11, scale 4.5, Railside seed 7, scale 1.5, the Estate seed 3, scale 4.8, Old Island seed 11, scale 1.6, and the Heights seed 9, scale 2.5. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.
