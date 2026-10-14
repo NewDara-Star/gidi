@@ -6,7 +6,7 @@ Usage:
   explore_city.py home [n] [district]           pick the n-th resident house (default random), optionally in one district, and describe it
   explore_city.py look X Y [radius]             what you see standing at X,Y (metres)
   explore_city.py walk FROM TO                  walk on foot (5 km/h). FROM/TO = landmark name (part ok) or X,Y
-  explore_city.py ride FROM TO                  okada ride (25 km/h, no lanes, arterials allowed)
+  explore_city.py ride FROM TO [--through]      okada ride (25 km/h, no lanes, arterials allowed); goes round okada ban zones unless --through
   explore_city.py places                        list landmarks and civic places with coordinates
   explore_city.py problems                      houses far from any street, dead-end counts, tiny blocks
 Explores every district that has generated buildings; set DISTRICTS=maze,hub to limit it.
@@ -44,7 +44,8 @@ PARCELS = [(p["kind"], Polygon(p["pts"])) for DID in DIDS for p in G.get("parcel
 FLY = [(st["name"], LineString(st["pts"])) for st in G.get("structures", []) if st.get("d") in DIDS and st["kind"] == "flyover"]
 WT = STRtree([g for k, n, g in ways])
 
-def graph(mode): return walknet.graph(ways, mode)
+BAN = walknet.ban_zone(G)   # okada ban zones (the Capital): rides go round them unless --through
+def graph(mode, through=False): return walknet.graph(ways, mode, BAN, through)
 def nearest_way(pt):
     i = int(np.atleast_1d(WT.query_nearest(pt))[0]); k, n, g = ways[i]; return k, n, g, g.distance(pt)
 def label(k, n): return f"{n} ({k})" if n else f"unnamed {k}"
@@ -86,15 +87,16 @@ def look(x, y, r=60):
         dd = pt.distance(Point(p['x'], p['y']))
         if dd < 150: print(f"{'civic' if p.get('civic') else 'landmark'} {dd:.0f} m: {p['name']} ({p['type']})")
     print(f"rail: {RAIL.distance(pt):.0f} m away" + (f"; canal: {min(c.distance(pt) for c in CANALS):.0f} m" if CANALS else ""))
-def route(a, b, mode):
-    Gx = graph(mode); pa, na = resolve(a); pb, nb = resolve(b)
+def route(a, b, mode, through=False):
+    Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b)
     EL = list(Gx.edges(data=True)); ET = STRtree([e[2]["geom"] for e in EL])
     def attach(p, tag):   # step onto the nearest point of the nearest way (not the nearest junction), splitting that way there
         u, v, e = EL[int(np.atleast_1d(ET.query_nearest(p))[0])]; g = e["geom"]; t = g.project(p); q = g.interpolate(t)
         n = ("start" if tag == "a" else "end", round(q.x, 2), round(q.y, 2))
         du, dv = (u, v) if Point(u).distance(Point(g.coords[0])) <= Point(v).distance(Point(g.coords[0])) else (v, u)
-        Gx.add_edge(du, n, w=t, kind=e["kind"], name=e["name"], geom=g)
-        Gx.add_edge(n, dv, w=g.length - t, kind=e["kind"], name=e["name"], geom=g)
+        ib = e.get("inban", 0.0); f = t / g.length if g.length else 0
+        Gx.add_edge(du, n, w=t, kind=e["kind"], name=e["name"], geom=g, inban=ib * f)
+        Gx.add_edge(n, dv, w=g.length - t, kind=e["kind"], name=e["name"], geom=g, inban=ib * (1 - f))
         return n, p.distance(q)
     sa, da = attach(pa, "a"); sb, db = attach(pb, "b")
     try: path = nx.shortest_path(Gx, sa, sb, weight="w")
@@ -108,6 +110,10 @@ def route(a, b, mode):
     dist = total + da + db; straight = pa.distance(pb)
     print(f"{mode}: {na} -> {nb}: {dist:.0f} m ({dist/1000/speed*60:.1f} min at {speed} km/h); straight line {straight:.0f} m; detour ×{dist/max(1,straight):.2f}")
     print(f"off-network bits: {da:.0f} m at start, {db:.0f} m at end")
+    if mode == "ride" and BAN is not None:
+        if through: print(f"okada ban: {sum(Gx[u][v].get('inban', 0) for u, v in zip(path, path[1:])):.0f} m ridden inside the ban zone (--through)")
+        for p_, d_, w_ in ((pa, da, "starts"), (pb, db, "ends")):
+            if BAN.contains(p_) and not through: print(f"okada ban: the trip {w_} inside the ban zone; {d_:.0f} m on foot to the nearest road a bike may use")
     for lab, L in legs: print(f"  {L:5.0f} m  {lab}")
     P_ = lambda c: Point(c[1:] if isinstance(c[0], str) else c)   # route points: junctions, or the split points where a trip joins a way
     geo = LineString([P_(c) for c in path]) if len(path) > 1 else None
@@ -145,7 +151,7 @@ if __name__ == "__main__":
     if a[0] == "overview": overview()
     elif a[0] == "places": places()
     elif a[0] == "look": look(float(a[1]), float(a[2]), float(a[3]) if len(a) > 3 else 60)
-    elif a[0] in ("walk", "ride"): route(a[1], a[2], a[0])
+    elif a[0] in ("walk", "ride"): route(a[1], a[2], a[0], "--through" in a[3:])
     elif a[0] == "home": home(int(a[1]) if len(a) > 1 else None, a[2] if len(a) > 2 else None)
     elif a[0] == "problems": problems()
     else: print(__doc__)

@@ -15,7 +15,7 @@ houses with no way in, and whether districts feel like one city.
 | `home N [district]` | Pick the N-th house (in one district, e.g. `home 3 hub`) and describe it; the printed #id is not N |
 | `look X Y [r]` | What's around a spot: buildings, nearest way, parcels, places, rail/canal distance |
 | `walk FROM TO` | Shortest walk at 5 km/h: distance, minutes, detour ×, roads used, places passed, rail crossings, districts crossed |
-| `ride FROM TO` | Same by okada at 25 km/h (no lanes, footpaths or footbridges) |
+| `ride FROM TO [--through]` | Same by okada at 25 km/h (no lanes, footpaths or footbridges). It goes round okada ban zones (the Capital); `--through` rides through anyway and reports the metres ridden inside the ban |
 | `problems` | Houses >45 m from any way, network islands, dead ends |
 
 FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
