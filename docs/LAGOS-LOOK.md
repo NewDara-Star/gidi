@@ -68,6 +68,18 @@ The kit pieces in `parts.py`:
 - signboards with 3D lettering and a phone number
 - zinc awnings on timber posts
 
+## The whole city, and the Mock
+- **The city:**
+  - `python3 blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:
+    - buildings by kind, the named civic plots
+    - point places (the nearest plot turns into the police station, the fuel station...)
+    - parcels, roads in their conditions with poles and wires
+    - structures, expressways and bridges, rail, canals, boardwalks, estate walls, water, trees
+  - It writes two detail levels to `web/city/` (not committed): `full` (the renders' detail) and `web` (lighter, for distance). Each tile is a Draco GLB that keeps its material names, with wear carried in the vertex colour's alpha.
+  - Kinds the kit can't build yet are listed in `web/city/manifest.json` → `gaps`.
+- **The lane network:** `tools/roadnet` turns Gidi's roads into OSM. SUMO's netconvert and the owner's `bake_net.py` from Real-world then give lanes, right of way, signals, crossings and walking areas (`web/city/net/gidi.net.bin`).
+- **The Mock:** `mock/` (see `mock/README.md`). This is the third tab of the map (2D · 3D · Mock), and also a desktop app. You walk and drive the generated city. The behaviour comes from Real-world: car physics, the G29 with force feedback, traffic with signals and give-way, pedestrians. The models are the kit's.
+
 ## Previews
 | | |
 |---|---|

@@ -68,6 +68,9 @@ app.whenReady().then(() => {
     const { pathname } = new URL(req.url);
     const file = path.normalize(path.join(ROOT, decodeURIComponent(pathname)));
     if (!file.startsWith(ROOT)) return new Response("forbidden", { status: 403 });
+    // HTML and JS as UTF-8 (the map's labels use ² and ·); everything else as it comes
+    const type = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8" }[path.extname(file)];
+    if (type) return net.fetch(pathToFileURL(file).toString()).then(async (r) => new Response(await r.arrayBuffer(), { status: r.status, headers: { "content-type": type } }));
     return net.fetch(pathToFileURL(file).toString());
   });
   const ses = session.defaultSession;

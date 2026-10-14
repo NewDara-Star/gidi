@@ -301,7 +301,7 @@
       const at = sel && sel.name ? `at=${encodeURIComponent(sel.name)}` : view ? `xy=${Math.round(view.cx)},${Math.round(view.cy)}` : "";
       return h("div", { ref: wrap, className: "map" },
         h("iframe", { className: "mock", src: `../mock/dist/index.html?${at}`, title: "Gidi Mock", allow: "hid; gamepad; fullscreen", style: { position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, background: "#0d0f12" } }),
-        h("div", { className: "mock-note ui", style: { position: "absolute", left: 12, bottom: 12, maxWidth: 360, padding: "8px 10px", borderRadius: 8, background: "var(--panel)", boxShadow: "var(--shadow)", fontSize: 12, color: "var(--fg2)" } },
+        h("div", { className: "mock-note ui", style: { position: "absolute", right: 64, bottom: 12, maxWidth: 360, padding: "8px 10px", borderRadius: 8, background: "var(--panel)", boxShadow: "var(--shadow)", fontSize: 12, color: "var(--fg2)" } },
           "Mock: the generated city to walk (WASD) and drive (F danfo, G car; G29 or pad). If it stays blank, open Gidi in the desktop app: cd mock && npm run desktop."),
         TOPBAR(),
         h(Panel, { sel, select, open: panelOpen, setOpen: setPanelOpen, close: () => setSel(null) }),

@@ -256,8 +256,8 @@ function placeCamera(dt: number) {
     }
     const want = car.yaw + Math.PI + lookOffset;
     me.camYaw += Math.atan2(Math.sin(want - me.camYaw), Math.cos(want - me.camYaw)) * Math.min(1, dt * 3.5);
-    const dist = 8 + Math.min(6, car.speed * 0.15);
-    camera.position.set(car.x + Math.sin(me.camYaw) * dist, 3.6, car.z + Math.cos(me.camYaw) * dist);
+    const dist = 10.5 + Math.min(6, car.speed * 0.15);
+    camera.position.set(car.x + Math.sin(me.camYaw) * dist, 4.4, car.z + Math.cos(me.camYaw) * dist);
     camera.lookAt(tmp.set(car.x, 1.4, car.z));
     return;
   }
