@@ -202,10 +202,13 @@ def master(name):
         wear = nt.attr('Wear').outputs['Fac']
         base = nt.mix(nt.math('MULTIPLY', nt.noise(40, 2, pos), 0.25), col, (0.5, 0.5, 0.5), 'MULTIPLY')
         vor = nt.add('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE')
-        vor.inputs['Scale'].default_value = 1.6
-        nt.link(pos, vor.inputs['Vector'])
-        crack = nt.math('MULTIPLY', nt.math('SUBTRACT', 1.0, nt.ramp(vor.outputs['Distance'], 0.0, 0.025)), nt.math('MULTIPLY', wear, 0.9))
-        base = nt.mix(crack, base, (0.03, 0.03, 0.03))
+        vor.inputs['Scale'].default_value = 2.5
+        vor.inputs['Randomness'].default_value = 1.0
+        nt.link(nt.scaled(pos, (1.0, 1.6, 1.0)), vor.inputs['Vector'])
+        # hairline cracks, only in patches, only on worn roads (no honeycomb at eye level)
+        patch = nt.ramp(nt.noise(0.25, 3, pos), 0.55, 0.75)
+        crack = nt.math('MULTIPLY', nt.math('SUBTRACT', 1.0, nt.ramp(vor.outputs['Distance'], 0.0, 0.008)), nt.math('MULTIPLY', nt.ramp(wear, 0.4, 0.95), patch))
+        base = nt.mix(nt.math('MULTIPLY', crack, 0.7), base, (0.05, 0.05, 0.05))
         oil = nt.ramp(nt.noise(0.6, 3, pos), 0.62, 0.8)
         base = nt.mix(nt.math('MULTIPLY', oil, 0.4), base, (0.05, 0.05, 0.05))
         nt.bsdf(base, rough=0.9)

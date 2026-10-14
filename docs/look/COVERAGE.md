@@ -2,7 +2,7 @@
 
 Made by `python3 blender/coverage.py` from `web/gen-*.json`, `web/civic.json` and `blender/gidi_kit/registry.py`. Do not edit by hand.
 
-**19 of 119 kinds built.**
+**61 of 119 kinds built.**
 
 ## Building kinds
 
@@ -20,54 +20,54 @@ Made by `python3 blender/coverage.py` from `web/gen-*.json`, `web/civic.json` an
 | pen | 209 | railside 127, bazaar 82 | yes |
 | trailer | 120 | port 120 | yes |
 | office block | 64 | heights 64 | — |
-| barracks | 55 | bazaar 29, capital 26 | — |
+| barracks | 55 | bazaar 29, capital 26 | yes |
 | brazilian house | 53 | oldisland 53 | yes |
-| phone mall | 36 | capital 36 | — |
+| phone mall | 36 | capital 36 | yes |
 | gatehouse | 27 | estate 21, heights 6 | yes |
-| school | 24 | bazaar 2, capital 2, estate 2, foodgate 2, heights 2, hub 2, jungle 2, maze 2, oldisland 2, port 2, railside 2, watertown 2 | — |
+| school | 24 | bazaar 2, capital 2, estate 2, foodgate 2, heights 2, hub 2, jungle 2, maze 2, oldisland 2, port 2, railside 2, watertown 2 | yes |
 | beach shack | 22 | heights 22 | — |
-| tank | 22 | port 20, railside 2 | — |
+| tank | 22 | port 20, railside 2 | yes |
 | beach bar | 20 | heights 20 | — |
-| bakery | 20 | railside 20 | — |
-| crane | 18 | port 18 | — |
-| flats | 16 | jungle 16 | — |
-| villa | 16 | port 16 | — |
-| print | 15 | maze 15 | — |
+| bakery | 20 | railside 20 | yes |
+| crane | 18 | port 18 | yes |
+| flats | 16 | jungle 16 | yes |
+| villa | 16 | port 16 | yes |
+| print | 15 | maze 15 | yes |
 | mound | 12 | railside 12 | yes |
-| strip | 10 | capital 10 | — |
-| cellblock | 10 | port 10 | — |
+| strip | 10 | capital 10 | yes |
+| cellblock | 10 | port 10 | yes |
 | scrap | 8 | bazaar 8 | yes |
 | raft | 8 | watertown 8 | yes |
 | checkpoint | 6 | port 4, bazaar 1, foodgate 1 | yes |
-| plaza | 6 | bazaar 6 | — |
-| mansion | 6 | heights 5, estate 1 | — |
+| plaza | 6 | bazaar 6 | yes |
+| mansion | 6 | heights 5, estate 1 | yes |
 | horse shelter | 6 | heights 6 | — |
-| warehouse | 6 | hub 2, maze 2, port 2 | — |
+| warehouse | 6 | hub 2, maze 2, port 2 | yes |
 | sawdust | 6 | watertown 6 | yes |
-| nightclub | 5 | heights 5 | — |
-| stands | 4 | hub 4 | — |
-| bank tower | 4 | oldisland 4 | — |
-| apartment tower | 3 | heights 3 | — |
-| saw shed | 3 | watertown 3 | — |
-| unfinished | 2 | bazaar 2 | — |
-| office | 2 | capital 2 | — |
-| bust | 2 | capital 1, railside 1 | — |
-| clubhouse | 2 | estate 1, heights 1 | — |
-| terminal | 2 | foodgate 1, hub 1 | — |
-| toll booth | 2 | heights 2 | — |
-| hotel | 2 | hub 1, jungle 1 | — |
-| tower | 2 | port 2 | — |
+| nightclub | 5 | heights 5 | yes |
+| stands | 4 | hub 4 | yes |
+| bank tower | 4 | oldisland 4 | yes |
+| apartment tower | 3 | heights 3 | yes |
+| saw shed | 3 | watertown 3 | yes |
+| unfinished | 2 | bazaar 2 | yes |
+| office | 2 | capital 2 | yes |
+| bust | 2 | capital 1, railside 1 | yes |
+| clubhouse | 2 | estate 1, heights 1 | yes |
+| terminal | 2 | foodgate 1, hub 1 | yes |
+| toll booth | 2 | heights 2 | yes |
+| hotel | 2 | hub 1, jungle 1 | yes |
+| tower | 2 | port 2 | yes |
 | container | 1 | bazaar 1 | yes |
-| hall | 1 | capital 1 | — |
-| stage | 1 | foodgate 1 | — |
-| station | 1 | hub 1 | — |
-| studio | 1 | jungle 1 | — |
-| cafe | 1 | jungle 1 | — |
-| transformer | 1 | maze 1 | — |
-| canopy | 1 | maze 1 | — |
-| palace | 1 | oldisland 1 | — |
-| works | 1 | railside 1 | — |
-| stilt bar | 1 | watertown 1 | — |
+| hall | 1 | capital 1 | yes |
+| stage | 1 | foodgate 1 | yes |
+| station | 1 | hub 1 | yes |
+| studio | 1 | jungle 1 | yes |
+| cafe | 1 | jungle 1 | yes |
+| transformer | 1 | maze 1 | yes |
+| canopy | 1 | maze 1 | yes |
+| palace | 1 | oldisland 1 | yes |
+| works | 1 | railside 1 | yes |
+| stilt bar | 1 | watertown 1 | yes |
 
 ## Parcels (plots and grounds)
 
@@ -128,16 +128,16 @@ Made by `python3 blender/coverage.py` from `web/gen-*.json`, `web/civic.json` an
 
 | Kind | Count | Districts | Built by the kit |
 |---|---|---|---|
-| church | 88 | jungle 11, maze 10, hub 8, border 7, railside 7, oldisland 6, estate 5, watertown 5, frontier 5, foodgate 5, bazaar 5, capital 5, port 3, oldshore 3, heights 3 | — |
+| church | 88 | jungle 11, maze 10, hub 8, border 7, railside 7, oldisland 6, estate 5, watertown 5, frontier 5, foodgate 5, bazaar 5, capital 5, port 3, oldshore 3, heights 3 | yes |
 | chemist | 78 | maze 10, jungle 9, hub 8, railside 8, foodgate 6, capital 6, oldisland 6, bazaar 5, oldshore 4, port 3, watertown 3, border 3, frontier 3, estate 2, heights 2 | — |
-| mosque | 68 | railside 9, oldshore 8, foodgate 7, oldisland 7, maze 6, bazaar 6, jungle 4, hub 4, port 3, capital 3, border 3, estate 2, watertown 2, heights 2, frontier 2 | — |
-| school | 61 | jungle 7, maze 6, railside 6, estate 5, heights 4, hub 4, foodgate 4, capital 4, oldshore 4, watertown 3, bazaar 3, border 3, oldisland 3, frontier 3, port 2 | — |
+| mosque | 68 | railside 9, oldshore 8, foodgate 7, oldisland 7, maze 6, bazaar 6, jungle 4, hub 4, port 3, capital 3, border 3, estate 2, watertown 2, heights 2, frontier 2 | yes |
+| school | 61 | jungle 7, maze 6, railside 6, estate 5, heights 4, hub 4, foodgate 4, capital 4, oldshore 4, watertown 3, bazaar 3, border 3, oldisland 3, frontier 3, port 2 | yes |
 | bank | 42 | heights 7, capital 6, oldisland 6, hub 3, port 3, bazaar 3, maze 2, railside 2, foodgate 2, estate 2, oldshore 2, frontier 2, jungle 1, border 1, watertown 0 | — |
 | fuel | 40 | railside 4, port 4, border 4, frontier 4, hub 3, foodgate 3, bazaar 3, capital 3, oldshore 3, heights 3, maze 2, estate 2, jungle 1, oldisland 1, watertown 0 | — |
-| clinic | 21 | port 2, maze 2, jungle 2, hub 2, railside 2, capital 2, foodgate 1, bazaar 1, estate 1, watertown 1, oldshore 1, border 1, oldisland 1, heights 1, frontier 1 | — |
+| clinic | 21 | port 2, maze 2, jungle 2, hub 2, railside 2, capital 2, foodgate 1, bazaar 1, estate 1, watertown 1, oldshore 1, border 1, oldisland 1, heights 1, frontier 1 | yes |
 | sport | 20 | maze 2, jungle 2, hub 2, railside 2, heights 2, foodgate 1, port 1, bazaar 1, capital 1, estate 1, watertown 1, oldshore 1, border 1, oldisland 1, frontier 1 | — |
 | police | 13 | maze 1, jungle 1, hub 1, railside 1, foodgate 1, port 1, bazaar 1, capital 1, oldshore 1, border 1, oldisland 1, heights 1, frontier 1 | — |
-| hospital | 7 | maze 1, jungle 1, railside 1, capital 1, oldshore 1, oldisland 1, heights 1 | — |
+| hospital | 7 | maze 1, jungle 1, railside 1, capital 1, oldshore 1, oldisland 1, heights 1 | yes |
 | fire | 6 | hub 1, railside 1, port 1, capital 1, oldisland 1, frontier 1 | — |
 | cemetery | 2 | railside 1, heights 1 | — |
 | council | 2 | capital 1, border 1 | — |

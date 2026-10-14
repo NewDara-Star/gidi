@@ -19,6 +19,14 @@ out = opt.get('--out', os.path.join(ROOT, 'blender', 'out', 'kinds.jpg'))
 want = opt['--kinds'].split(',') if '--kinds' in opt else [k for k in registry.BUILDINGS if k not in ('front', 'back', 'shed')]
 
 samples = {}
+gd = open(os.path.join(ROOT, 'web', 'gidi-data.js')).read()
+gd = json.loads(gd[gd.index('{'):gd.rindex('}') + 1])
+for sg in gd['safe_ground']:
+    k = 'civic:' + sg['type']
+    p = sg['pts'][:4]
+    if k in want and len(samples.setdefault(k, [])) < seeds and len(sg['pts']) == 5:
+        e0, e1 = math.dist(p[0], p[1]), math.dist(p[1], p[2])
+        samples[k].append((max(e0, e1), min(e0, e1), 2, sg['d'], sg['name']))
 for f in sorted(glob.glob(os.path.join(ROOT, 'web', 'gen-*.json'))):
     d = json.load(open(f))
     dist = os.path.basename(f)[4:-5]
@@ -40,9 +48,11 @@ for k in want:
     scene.ground(sc)
     y = 0.0
     obs = []
-    for i, (L, W, s, dist) in enumerate(samples[k]):
+    for i, smp in enumerate(samples[k]):
+        L, W, s, dist = smp[:4]
         poly = [(-L / 2, y - W / 2), (L / 2, y - W / 2), (L / 2, y + W / 2), (-L / 2, y + W / 2)]
-        ob, _ = registry.BUILDINGS[k](dict(kind=k, storeys=s, district=dist, poly=poly, facing=0, name=f'{k}_{i}'), Rng('sheet', k, i), sc.collection)
+        fn = registry.CIVIC_PLOTS[k[6:]] if k.startswith('civic:') else registry.BUILDINGS[k]
+        ob, _ = fn(dict(kind=k, storeys=s, district=dist, poly=poly, facing=0, name=f'{k}_{i}', label=smp[4] if len(smp) > 4 else None), Rng('sheet', k, i), sc.collection)
         obs.append(ob)
         y += max(W, 4) + max(6, W * 0.6)
     pts = [ob.matrix_world @ Vector(c) for ob in obs for c in ob.bound_box]

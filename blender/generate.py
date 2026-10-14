@@ -78,13 +78,24 @@ def near_road(p, pad=0.0, kinds=('main', 'street', 'lane', 'path')):
 
 
 # ---------------------------------------------------------------- buildings and their attributes
+GD = open(os.path.join(ROOT, 'web', 'gidi-data.js')).read()
+GD = json.loads(GD[GD.index('{'):GD.rindex('}') + 1])
+civic = []  # named civic plots (church, mosque, school, clinic, hospital, palace) in range
+for sg in GD.get('safe_ground', []):
+    pts = ccw([P(p) for p in sg['pts'][:-1]])
+    c = (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+    if math.hypot(*c) < R and len(pts) >= 4:
+        civic.append(dict(type=sg['type'], name=sg['name'], poly=pts, c=c))
+styles = (GD.get('styles') or {}).get(district) or []
 blds = []
 for i, b in enumerate(D['buildings']):
     poly = ccw([P(p) for p in b[1:]])
     c = (sum(p[0] for p in poly) / 4, sum(p[1] for p in poly) / 4)
     if math.hypot(*c) > R:
         continue
-    blds.append(dict(i=i, kind=b[0], poly=poly, c=c, storeys=D['storeys'][i]))
+    if any(in_poly(c, cv['poly']) for cv in civic):
+        continue  # the civic place stands here
+    blds.append(dict(i=i, kind=b[0], poly=poly, c=c, storeys=D['storeys'][i], style=styles[i] if i < len(styles) else None))
 print('buildings', len(blds))
 polys = [b['poly'] for b in blds]
 
@@ -102,7 +113,7 @@ def attributes(b):
     near_main = min((dist_line(b['c'], r['pts']) - 7 for r in mains), default=999)
     rng = Rng(district, 'unfinished', b['i'])
     a = dict(kind=b['kind'], storeys=b['storeys'], district=district, poly=poly, facing=facing, frontage=best, near_main=near_main,
-             name=f"{district}_{b['kind']}_{b['i']}", unfinished=b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(district, 0.01)))
+             name=f"{district}_{b['kind']}_{b['i']}", style=b.get('style'), unfinished=b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(district, 0.01)))
     others = [p for p in polys if p is not poly]
     a['wall_poly'] = offset(poly, 2.0)
     a['wall_skip'] = lambda m, others=others: near_road(m, 0.8) or any(in_poly(m, o) for o in others)
@@ -119,6 +130,9 @@ for b in blds:
     rng = Rng(district, b['i'])
     k = b['kind']
     fn = registry.builder(k)
+    if b.get('style') and k in ('front', 'back'):
+        from gidi_kit import places
+        fn = places.mansion
     if fn is None:  # kinds without an archetype yet: a plain house so the area is complete
         fn, a = archetypes.house, dict(a, kind='back')
     ob, spec = fn(a, rng, col)
@@ -129,6 +143,15 @@ for b in blds:
             pa, pb = a['poly'][e], a['poly'][(e + 1) % 4]
             shops.append(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2))
     counts[k] = counts.get(k, 0) + 1
+# elite houses with a named style get the style's builder
+for cv in civic:
+    fn = registry.CIVIC_PLOTS.get(cv['type'])
+    if not fn or len(cv['poly']) != 4:
+        continue
+    a = attributes(dict(i=hash(cv['name']) % 100000, kind=cv['type'], poly=cv['poly'], c=cv['c'], storeys=2))
+    a['label'] = cv['name']
+    fn(a, Rng(district, 'civic', cv['name']), col)
+    counts['civic:' + cv['type']] = counts.get('civic:' + cv['type'], 0) + 1
 print('built', counts)
 
 # ---------------------------------------------------------------- ground, roads and street life
@@ -284,7 +307,7 @@ for r in roads:
                 o = side * (r['w'] / 2 + rr.between(-0.8, 2.5))
                 p = (a[0] + dx * k - dy * o, a[1] + dy * k + dx * o)
                 if not in_building(p, 0.0):
-                    street.litter_piece(sm, p[0], p[1], 0.07, rr)
+                    street.litter_piece(sm, p[0], p[1], 0.02, rr)
 for pc in D.get('parcels', []):
     pts = [P(p) for p in pc['pts'][:-1]]
     if pc['kind'] == 'market' and any(math.hypot(*p) < R + 60 for p in pts):
@@ -293,7 +316,7 @@ for pc in D.get('parcels', []):
         for _ in range(int(ST['litter'] * 1500)):
             p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
             if in_poly(p, pts) and not in_building(p, 0.0):
-                street.litter_piece(sm, p[0], p[1], 0.06, rr)
+                street.litter_piece(sm, p[0], p[1], 0.05, rr)
 for _ in range(int(ST['heaps'] * (R / 60) ** 2 * 2)):
     for _try in range(30):
         p = (rr.between(-R, R), rr.between(-R, R))
@@ -321,6 +344,15 @@ if 'street' in renders:
             n = sum(1 for sp in shops if dist_seg(sp, a_, b_) < r['w'] / 2 + 6)
             if best is None or n > best[0]:
                 best = (n, a_, b_, r['w'])
+    if not best or best[0] == 0:  # no shop street: stand where the most buildings are and look at them
+        mid = (sum(b['c'][0] for b in blds) / max(1, len(blds)), sum(b['c'][1] for b in blds) / max(1, len(blds)))
+        best = None
+        for r in roads:
+            for i in range(len(r['pts']) - 1):
+                d = dist_seg(mid, r['pts'][i], r['pts'][i + 1])
+                if best is None or d < best[0]:
+                    best = (d, r['pts'][i], r['pts'][i + 1], r['w'])
+        shops = [mid]
     _, a_, b_, w = best
     L = math.dist(a_, b_)
     dx, dy = (b_[0] - a_[0]) / L, (b_[1] - a_[1]) / L

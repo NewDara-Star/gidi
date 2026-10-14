@@ -11,10 +11,11 @@ reg = open(os.path.join(ROOT, 'blender', 'gidi_kit', 'registry.py')).read()
 
 def section(name):
     m = re.search(name + r' = \{(.*?)\n\}', reg, re.S)
-    return set(re.findall(r"'([^']+)':\s*(?:archetypes|kinds)\.", m.group(1))) if m else set()
+    return set(re.findall(r"'([^']+)':\s*(?:archetypes|kinds|places)\.", m.group(1))) if m else set()
 
 
-done = {k: section(k) for k in ('BUILDINGS', 'PARCELS', 'STRUCTURES', 'CIVIC')}
+done = {k: section(k) for k in ('BUILDINGS', 'PARCELS', 'STRUCTURES', 'CIVIC_PLOTS')}
+done['CIVIC'] = done.pop('CIVIC_PLOTS')
 tables = {'BUILDINGS': {}, 'PARCELS': {}, 'STRUCTURES': {}, 'CIVIC': {}}
 for f in sorted(glob.glob(os.path.join(ROOT, 'web', 'gen-*.json'))):
     d = json.load(open(f))

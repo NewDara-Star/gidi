@@ -325,10 +325,15 @@ def roof_flat(mb, poly, H, spec):
     """Flat slab, parapet with coping, and the slab's spout."""
     oct_ = chamfer(poly, spec.get('chamfer', 0.18))
     ph = spec['parapet_h']
-    prism(mb, 'paint', oct_, H, H + ph, spec['paint'], spec['paint'], spec['wear'])
     inner = offset(oct_, -0.18)
+    prism(mb, 'paint', oct_, H, H + ph, spec['paint'], spec['paint'], spec['wear'])
     prism(mb, 'concrete', inner, H, H + ph, spec['slab'], spec['slab'], spec['wear'], inward=True)
-    prism(mb, 'paint', offset(oct_, 0.06), H + ph, H + ph + 0.12, spec['trim'], spec['trim'], spec['wear'], cap=True)
+    outer = offset(oct_, 0.06)
+    prism(mb, 'paint', outer, H + ph, H + ph + 0.12, spec['trim'], spec['trim'], spec['wear'])
+    z = H + ph + 0.12
+    for i in range(len(outer)):  # the coping's top: a ring from the outer edge to the inner face only
+        j = (i + 1) % len(outer)
+        mb.face([(outer[i][0], outer[i][1], z), (outer[j][0], outer[j][1], z), (inner[j][0], inner[j][1], z), (inner[i][0], inner[i][1], z)], 'paint', spec['trim'], spec['wear'])
     mb.face([(p[0], p[1], H + 0.02) for p in inner], 'concrete', spec['slab'], spec['wear'] + 0.2)
     return inner
 
