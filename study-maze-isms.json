@@ -1,0 +1,207 @@
+{
+ "id": "maze",
+ "area_km2": 33.7,
+ "note": "counts per km2 of the study area; examples are lon,lat",
+ "dead_end_at_water": {
+  "n": 55,
+  "per_km2": 1.63,
+  "examples": [
+   [
+    3.37699,
+    6.53909
+   ],
+   [
+    3.37732,
+    6.54197
+   ],
+   [
+    3.37477,
+    6.54023
+   ]
+  ]
+ },
+ "dead_end_at_rail": {
+  "n": 21,
+  "per_km2": 0.62,
+  "examples": [
+   [
+    3.36137,
+    6.53246
+   ],
+   [
+    3.3705,
+    6.50998
+   ],
+   [
+    3.36346,
+    6.52723
+   ]
+  ]
+ },
+ "missing_links": {
+  "n": 32,
+  "per_km2": 0.95,
+  "examples": [
+   [
+    3.33996,
+    6.5261
+   ],
+   [
+    3.37499,
+    6.51301
+   ],
+   [
+    3.39129,
+    6.52668
+   ]
+  ],
+  "rule": "two dead ends of different streets < 25 m apart"
+ },
+ "buildings_on_drainage_setback": {
+  "n": 112,
+  "per_km2": 3.33,
+  "examples": [
+   [
+    3.39893,
+    6.53506
+   ],
+   [
+    3.39932,
+    6.53492
+   ],
+   [
+    3.39929,
+    6.53497
+   ]
+  ],
+  "rule": "footprint within 3 m of a canal, drain or stream line"
+ },
+ "buildings_in_road_reserve": {
+  "n": 3433,
+  "per_km2": 101.99,
+  "by_road": {
+   "residential": 2216,
+   "service": 406,
+   "primary": 329,
+   "secondary": 190,
+   "tertiary": 169,
+   "trunk": 51,
+   "unclassified": 49,
+   "motorway": 19,
+   "living_street": 4
+  },
+  "examples": [
+   [
+    3.39656,
+    6.53442
+   ],
+   [
+    3.39908,
+    6.53395
+   ],
+   [
+    3.39641,
+    6.53435
+   ]
+  ],
+  "rule": "footprint closer to the road's centreline than its half-width (OSM class)"
+ },
+ "markets_on_carriageway": {
+  "n": 5,
+  "of_markets": 7,
+  "share": 0.71,
+  "examples": [
+   [
+    3.34127,
+    6.54445
+   ],
+   [
+    3.39298,
+    6.53847
+   ],
+   [
+    3.35819,
+    6.52728
+   ]
+  ]
+ },
+ "overloaded_main_roads": {
+  "main_km": 139.7,
+  "side_junctions_per_km": 5.0,
+  "bus_stops_per_km": 0.04,
+  "km_with_side_street_every_30m": 2.26,
+  "share_of_main_km": 0.016
+ },
+ "unfinished_buildings": {
+  "n": 313,
+  "per_km2": 9.3,
+  "share": 0.006,
+  "examples": [
+   [
+    3.35385,
+    6.54892
+   ],
+   [
+    3.36984,
+    6.53117
+   ],
+   [
+    3.34815,
+    6.53555
+   ]
+  ]
+ },
+ "odd_junctions": {
+  "five_way_or_more": {
+   "n": 0,
+   "per_km2": 0.0,
+   "examples": []
+  },
+  "acute_under_25deg": {
+   "n": 14,
+   "per_km2": 0.42,
+   "examples": [
+    [
+     3.36106,
+     6.55699
+    ],
+    [
+     3.34824,
+     6.53538
+    ],
+    [
+     3.37111,
+     6.52065
+    ]
+   ]
+  }
+ },
+ "flood_prone": {
+  "wetland_ha": 46.9,
+  "wetland_touching_homes_ha": 46.9,
+  "buildings_in_wetland": 0,
+  "per_km2": 0.0,
+  "examples": [],
+  "note": "the 30 m DEM is not on this machine; the LGA's share of land below 3 m comes from data/results/lga_table.json"
+ },
+ "pedestrians_on_expressways": {
+  "expressway_km": 62.5,
+  "bus_stops_on_them": 5,
+  "ways_across_on_foot": 10,
+  "longest_stretch_without_crossing_m": 9499,
+  "examples": [
+   [
+    3.40233,
+    6.50244
+   ],
+   [
+    3.40253,
+    6.5025
+   ],
+   [
+    3.35229,
+    6.53379
+   ]
+  ]
+ }
+}
