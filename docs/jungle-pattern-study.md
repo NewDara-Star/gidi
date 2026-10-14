@@ -173,17 +173,25 @@ Jungle City figures count the shared edge roads at half.
 
 | | Real, typical km² | Real, dense km² | **Jungle City** |
 |---|---|---|---|
-| Streets, km/km² | 14.8 | 16.3 | **16.4** |
-| Junctions/km² | 72 | 61 | **79** |
-| T-junctions | 83% | 92% | **87%** |
-| Dead ends per junction | 0.22 | 0.07 | **0.07** |
-| Typical block | 0.9 ha | 2.2 ha | **1.4 ha** |
-| Buildings/km² | 2,951 | 2,467 | **2,566** |
-| Ground built on | 41% | 43% | **39%** |
-| Typical house | 113 m² | 164 m² | **125 m²** |
+| Streets, km/km² | 14.8 | 16.3 | **14.9** |
+| Junctions/km² | 72 | 61 | **67** |
+| T-junctions | 83% | 92% | **92%** |
+| Dead ends per junction | 0.22 | 0.07 | **0.08** |
+| Blocks/km² (counted closed, see below) | 42 | 44 | **43** |
+| Typical block | 0.9 ha | 2.2 ha | **2.3 ha** |
+| Buildings/km² | 2,951 | 2,467 | **2,487** |
+| Ground built on | 41% | 43% | **37%** |
+| Typical house | 113 m² | 164 m² | **124 m²** |
 | Over 400 m² | 3% | 3% | **3%** |
-| Front row | 54% | 58% | **55%** |
-| Gap between houses | 0.8 m | 0.9 m | **0.9 m** |
+| Front row | 54% | 58% | **51%** |
+| Gap between houses | 0.8 m | 0.9 m | **1.0 m** |
+
+**v1.1 (14 Oct 2026): blocks counted the fair way.**
+- A real 1 km square leaves its border blocks open, so its old count only saw the middle. A Gidi district is closed all round by its edge roads.
+- Counted the same way, with the square's border closed, the real squares have 42–44 blocks per km². Jungle City had 57.
+- The extra blocks came from the collector streets that cut big sectors into patches. Collectors now start only above 19 ha (they used to start above 14).
+- Streets, junctions and blocks are now inside the real range.
+- The typical block (2.3 ha) is at the top of it, and the school now has a gate onto the nearest street.
 
 **Checks (`scripts/check_district.py jungle`): all 10 pass, plus the parcel report.**
 - 0 houses on roads, decks or footbridges

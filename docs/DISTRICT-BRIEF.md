@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub, jungle, foodgate, watertown, capital
-- **Then:** bazaar, port, railside, estate, oldisland, heights, frontier, oldshore, border
+- **Done:** maze, hub, jungle, foodgate, watertown, capital, bazaar
+- **Then:** port, railside, estate, oldisland, heights, frontier, oldshore, border
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
 ## District → inspiration (OSM `name` of the LGA, as in `adm6.geojson`)
@@ -55,7 +55,9 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - storeys per building from the district's height bands
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), and the Capital seed 3, scale 3.2. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
+   - **Compare blocks the fair way:** use `blocks_per_km2_closed` from `study_core.py`, which counts the real square's blocks with its border closed, as a Gidi district's edge roads close it. The old open count shows about half. `sector_split_ha` (collector streets) is the main lever; `spurs` adds dead-end side streets without new blocks.
+   - **When a neighbour of a finished district is built,** give the finished one `keep_gateways` and rebuild it, so it keeps regenerating byte-identical (the Hub, Jungle City and Food Gate have it).
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), the Capital seed 3, scale 3.2, and the Bazaar seed 9, scale 3.4. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.

@@ -133,6 +133,7 @@ def jungle(ST, LM):
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.5, "dead_end": 0.12,
         "cross_scale": 1.8,           # cross streets far apart: Ajegunle is long east-west streets with few cross streets
+        "sector_split_ha": 19,        # fewer collector streets: blocks counted like the real squares (closed) were 57/km2 against 42-44
         "size_lo_u": 0.65,            # house sizes from the upper 35% of the real range (plots shrink many of them)
         "back_row": 0.65,
         "courtyard_m": [0.8, 2.0],    # tighter compounds than Mushin's 1.5-4 m: real gaps 0.8-0.9 m, ground built on 41-43%
@@ -148,7 +149,7 @@ def jungle(ST, LM):
         "parcels": [
             {"kind": "estate", "ha": round(FE["blocks"]["area_m2"]["p75"] / 1e4, 2), "uv": [0.15, 0.35], "near_main": True, "min_w": 60,   # one Festac block (p75: room for a few rows)
              "block_m": [16, 24], "gap_m": 4.5, "garden_m": 20, "shop_share": 0.5, "storeys": 4},   # Festac flats: 16 x 24 m, 4.5 m apart (measured); 4 storeys is the district model's "1970s estate flats"
-            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},
+            {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False, "gate": "nearest"},   # a gate onto the nearest street (with fewer collectors, its block can be deep)
             {"kind": "pitch", "ha": round(LM["pitch_m2"]["p50"] / 1e4, 2), "near_main": False},
         ],
         "hotel": {"poi": "Ireti Hotel", "m2": ST["buildings"]["footprint_m2"]["p90"], "storeys": 3},   # "tiny hotels": a big house's footprint (p90), 3 storeys; no hotels mapped
@@ -158,6 +159,7 @@ def jungle(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True, "rail_frontage": True,
         "clear_access": True,           # living test (Oct 2026): streets join the market's own road instead of running beside it
+        "keep_gateways": True,          # rebuilt after the Bazaar: its crossings with the Bazaar (and all others) stay as agreed
     }
 
 def foodgate(ST, LM):
@@ -249,6 +251,7 @@ def capital(ST, LM):
         "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.5, "cross_scale": 2.2, "dead_end": 0.1, "size_lo_u": 0.5, "plot_u": [0.55, 0.99],   # bigger houses (real typical 187 m2)
+        "sector_split_ha": 22,        # fewer collector streets: 59 blocks/km2 against the real 31-49 (counted closed)
         "back_row": 0.55, "big_front": 0.5, "vacant": 0.08,   # offices, plazas and banks on the main roads (real: 16% over 400 m2)
         "internal_mains": 2,          # real main roads 4-5.5 km/km2: the most of any district so far
         "name_endings": ends,
@@ -267,7 +270,43 @@ def capital(ST, LM):
         "t_into_done": True,     # built after the Hub and Food Gate: its main roads T into their edge roads instead of asking them for new crossings
     }
 
+def bazaar(ST, LM):
+    """The Bazaar: Ojo round the electronics market (study-bazaar*, a box 3.175-3.240 E, 6.450-6.480 N: the market, Iyana-Iba,
+    Mami Market and the cantonment's edge; whole Ojo is in study-ojo*). Heights from Ojo in lga_table.json: mostly 1-2 storeys."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 82 x 1.8 = 149 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Way", "Lane")}
+    JL = json.load(open("study-jungle-landmarks.json"))   # no footbridge is mapped in the box; the Coastal Expressway's are Jungle City's
+    return {
+        "lgas": ["Ojo"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.0, "cross_scale": 6, "dead_end": 1.0,   # long streets, few cross streets, every long one stops short
+        "spurs": {"spur_every_m": 120, "spur_m": [30, 60]},   # short dead-end side streets: real dead ends 0.42-0.54 per junction, 92-97% T
+        "sector_split_ha": 45,        # few collector streets: real blocks 18-27 per km2 (counted closed)
+        "size_lo_u": 0.3, "back_row": 0.5, "big_front": 0.05, "vacant": 0.25,   # small houses (real typical 79-100 m2), a quarter of plots empty
+        "internal_mains": 1, "t_into_done": True,
+        "exp_bridge_m": LM["flyover_spans_m"]["p50"],
+        "exp_footbridges": {"m": JL["footbridges"]["length_m"]["p50"], "per_km": JL["footbridges"]["per_km_of_major_road"], "max_gap_m": 300},   # the owner's rule
+        "name_endings": ends,
+        "reserve": [   # the electronics market: 7 ha of lock-up rows (the real one is 23 ha, a fifth of this district), on the expressway
+            {"kind": "market", "poi": "Alade Electronics Market", "m2": 70000, "aspect": 1.6, "front": "art"},
+        ],
+        "parcels": [
+            {"kind": "plazas", "poi": "Fair Wholesale Plazas", "ha": 2.5, "near_main": True, "block_m": [36, 22], "unfinished_every": 3, "gate": "nearest"},   # every third plaza never finished
+            {"kind": "livestock", "poi": "Rago Yard", "ha": 1.5, "near_main": False, "pen_m": [8, 5], "lane_m": 4, "scrap_piles": 8, "gate": "nearest"},
+            {"kind": "barracks", "poi": "Barracks", "ha": 4.0, "near_main": True, "block_m": [40, 9], "gap_m": 9, "parade_m": 44, "gate": "nearest"},
+            {"kind": "school", "ha": round(LM["school_m2"]["p25"] / 1e4, 2), "near_main": False, "gate": "nearest", "min_w": 70},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "spots": [{"poi": "Container Court", "kind": "container", "w": 12.2, "d": 2.5},                 # the shipping-container jail
+                  {"poi": "Barracks checkpoint", "at": "Barracks", "kind": "checkpoint", "w": 4.0, "d": 3.0}],   # "checkpoint outside"
+        "market_through_aisle": True,
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar}.get(did, lambda ST, LM: {})(ST, LM)

@@ -30,4 +30,7 @@ for name, q in (("median", 50), ("dense", 75)):
     stb = [(c, st[k][1]) for k in rt.query(b) for c in [st[k][0]]]
     bb = [B[k] for k in bt.query(b) if b.contains(B[k].centroid)]
     out[name] = {"bounds": [round(v) for v in b.bounds], **measure(stb, bb, b)}
+    # blocks counted as in a Gidi district, whose edge roads close every block: here the square's border closes them.
+    # Left open (the line above), the border ring of blocks is never counted and a 1 km square shows about half its blocks.
+    out[name]["blocks_per_km2_closed"] = measure(stb + [("edge", b.exterior)], [], b)["blocks_per_km2"]
 json.dump(out, open(f"study-{DID}-core.json", "w"), indent=1); print(json.dumps(out, indent=1))

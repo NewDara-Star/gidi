@@ -56,6 +56,7 @@
    "p75": 3.3
   },
   "overlaps_with_streets": 0,
+  "blocks_per_km2_closed": 31,
   "osm": {
    "buildings_per_km2": 39,
    "coverage": 0.087,
@@ -119,6 +120,7 @@
    "p75": 3.3
   },
   "overlaps_with_streets": 3,
+  "blocks_per_km2_closed": 49,
   "osm": {
    "buildings_per_km2": 434,
    "coverage": 0.143,

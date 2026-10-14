@@ -282,6 +282,26 @@ for id_,ks in CIV.get("key_late",{}).items():
             q=min(SL,key=lambda q:Point(q["x"],q["y"]).distance(pt)); SL.remove(q); pt=Point(q["x"],q["y"])
         out["pois"].append({"name":k["name"],"type":k["type"],"note":k["note"],"d":id_,"x":round(pt.x),"y":round(pt.y),"civic":True})
 
+# Okada ban zones (district model: the Capital, the Port, Old Island, the Heights). The zone is the district less an 8 m band, so its
+# edge roads stay rideable: that is where the task force stands. For a built district, every point where a road an okada can use
+# enters the zone is a checkpoint site for the game.
+BAN_EDGE_M=8
+out["okada_ban"]=[]
+_ride=[(k,n,g) for k,n,g in walknet.ways_of(out,list(GEN)) if k in ("street","main","arterial")]
+for d in out["districts"]:
+    if d.get("okada")!="ban": continue
+    z=Polygon(d["poly"][0]).buffer(-BAN_EDGE_M); entry={"district":d["id"],"name":d["name"],"edge_m":BAN_EDGE_M,"poly":[list(c) for c in z.exterior.coords],"built":d["id"] in GEN,"checkpoints":[]}
+    if d["id"] in GEN:
+        cps=[]
+        for k,n,g in _ride:
+            x=g.intersection(z.exterior)
+            for q in getattr(x,"geoms",[x]):
+                if q.geom_type!="Point" or any(q.distance(Point(c["x"],c["y"]))<15 for c in cps): continue
+                cps.append({"x":round(q.x,1),"y":round(q.y,1),"road":n or k,"kind":k})
+        entry["checkpoints"]=sorted(cps,key=lambda c:(c["kind"]!="arterial",c["kind"]!="main",c["x"]))
+    out["okada_ban"].append(entry)
+print("okada ban zones:",[(e["district"],e["built"],len(e["checkpoints"])) for e in out["okada_ban"]])
+
 def rd(o):
     if isinstance(o,float): return round(o,1)
     if isinstance(o,list): return [rd(x) for x in o]

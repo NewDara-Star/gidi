@@ -27,8 +27,16 @@ def ways_of(G, dids, area=None):
     return ways
 
 
-def graph(ways, mode):
-    """walk: everything; ride: no lanes, footpaths, footbridges or skywalks."""
+def ban_zone(G):
+    """The okada ban zones of the built districts (bake_web.py records them), as one shape, or None."""
+    z = [Polygon(e["poly"]) for e in G.get("okada_ban", []) if e.get("built")]
+    return unary_union(z) if z else None
+
+
+def graph(ways, mode, ban=None, through=False):
+    """walk: everything; ride: no lanes, footpaths, footbridges or skywalks.
+    ban (ride only): the okada ban zone. Each edge records the metres it runs inside it ("inban"); unless `through`,
+    edges that run inside it are left out, so the ride goes round."""
     keep = [(k, n, g) for k, n, g in ways if not (mode == "ride" and k in ("lane", "path", "footbridge", "skywalk"))]
     U = noded([g for k, n, g in keep]); Gx = nx.Graph()
     snap = {}   # junctions closer than 25 cm are one node (rounding alone splits a junction that falls on a rounding boundary)
@@ -44,7 +52,9 @@ def graph(ways, mode):
         ka, kb = key(seg.coords[0]), key(seg.coords[-1])
         if ka == kb: continue   # a sliver shorter than the snap: its two ends are one junction (never drop a short link)
         m = seg.interpolate(0.5, normalized=True); i = int(np.atleast_1d(tr.query_nearest(m))[0]); k, n, _ = keep[i]
-        Gx.add_edge(ka, kb, w=seg.length, kind=k, name=n, geom=seg)
+        inban = seg.intersection(ban).length if ban is not None and mode == "ride" and seg.intersects(ban) else 0.0
+        if (inban > 0.5 or (inban > 0 and ban.contains(seg.interpolate(0.5, normalized=True)))) and not through: continue   # tiny pieces too
+        Gx.add_edge(ka, kb, w=seg.length, kind=k, name=n, geom=seg, inban=inban)
     # noding collinear streets can drop a sub-metre sliver between two pieces; a loose end within 1 m of another node joins it
     # (the same 1 m tolerance check_district.py uses)
     nodes = list(Gx.nodes); NT = STRtree([Point(q) for q in nodes])

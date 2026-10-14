@@ -127,7 +127,7 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
 | Junctions/km² | 43 | 56 | 82 | **43** |
 | T-junctions | 88% | 93% | 92% | **92%** |
 | Dead ends per junction | 0.53 | 0.48 | 0.22 | **0.61** |
-| Blocks/km² | 9 | 9 | 50 | **15** |
+| Blocks/km² (real counted closed: 19–23) | 9 | 9 | 50 | **15** |
 | Typical block | 1.7 ha | 1.5 ha | 1.9 ha | **3.1 ha** |
 | Buildings/km² | 2,702 | 3,813 | 3,483 | **3,529** |
 | Ground built on | 30% | 36% | 29% | **31%** |
@@ -143,8 +143,7 @@ For the rail-crossing decision we also measured Lagos Mainland + Shomolu as a wh
 
 **What doesn't match yet (honest):**
 - **Dead ends overshoot:** 0.61 per junction, against about 0.5. Most come from the short side lanes. Fewer side lanes would cut the junctions below the real 43.
-- **Blocks:** 15 per km² against 9, and the typical block is 3.1 ha against 1.5–1.7.
-  - Our edge roads close blocks all round the district. A real 1 km square cut out of the city leaves its border blocks open, so it counts fewer.
+- **Blocks:** 15 per km². Counted the fair way, with the real square's border closed as our edge roads close the district, the real waterfront has 19–23, so Water Town is now a little under. The typical block is 3.1 ha against 1.5–1.7.
   - The land between two fingers stays open toward the water, as it should.
 - **Walking across the fingers takes longer:** going from one finger to the next means walking back to the inland road, ×1.6–1.7 (`walk 3750,3900 3750,4150`: 408 m for 250 m). Along the fingers it is ×1.1–1.2. This is what the real fingers are like.
 - **An empty pocket west of the sawmill** (about 3,650–3,900 by 4,550–4,700), between the last finger and Adeyemi Road. It can read as the sawmill's open stacking ground. If not, a lane can be added.

@@ -146,6 +146,8 @@ Data:
 | Front row | 49% | 60% | **52%** |
 | Gap between houses | 1.7 m | 1.5 m | **1.8 m** |
 
+**Blocks (14 Oct 2026):** Food Gate has 39 blocks per km². The real squares' old count of 17–20 only saw the blocks in the middle, because a 1 km square cut out of the city leaves its border blocks open. Counted with the border closed, as Food Gate's edge roads close it, the real squares have 33–40, so Food Gate is in range and was not changed.
+
 **Checks (`scripts/check_district.py foodgate`): all 10 pass, plus the parcel report.**
 
 **What doesn't match yet (honest):**
