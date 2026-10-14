@@ -830,6 +830,125 @@
      4720.0
     ]
    ]
+  },
+  "border|railside": {
+   "between": [
+    "railside",
+    "border"
+   ],
+   "name": "Balogun Street",
+   "pts": [
+    [
+     160.0,
+     4560.0
+    ],
+    [
+     368.9,
+     4563.8
+    ],
+    [
+     575.2,
+     4602.2
+    ],
+    [
+     785.0,
+     4594.6
+    ],
+    [
+     991.3,
+     4633.3
+    ],
+    [
+     1200.0,
+     4640.0
+    ]
+   ]
+  },
+  "railside|outer4": {
+   "between": [
+    "railside",
+    null
+   ],
+   "name": "Kalejaiye Street",
+   "pts": [
+    [
+     1480.0,
+     2720.0
+    ],
+    [
+     1273.7,
+     2700.9
+    ],
+    [
+     1066.1,
+     2702.2
+    ],
+    [
+     860.4,
+     2674.4
+    ],
+    [
+     652.5,
+     2680.0
+    ],
+    [
+     447.5,
+     2640.5
+    ],
+    [
+     240.0,
+     2640.0
+    ]
+   ]
+  },
+  "railside|outer5": {
+   "between": [
+    "railside",
+    null
+   ],
+   "name": "Bankole Street",
+   "pts": [
+    [
+     240.0,
+     2640.0
+    ],
+    [
+     216.9,
+     2852.7
+    ],
+    [
+     219.5,
+     3066.6
+    ],
+    [
+     219.3,
+     3280.2
+    ],
+    [
+     192.9,
+     3492.9
+    ],
+    [
+     208.7,
+     3707.2
+    ],
+    [
+     176.9,
+     3919.6
+    ],
+    [
+     180.5,
+     4133.4
+    ],
+    [
+     180.8,
+     4347.2
+    ],
+    [
+     160.0,
+     4560.0
+    ]
+   ]
   }
  },
  "gateways": [
@@ -1480,6 +1599,59 @@
     5115.3
    ],
    "bearing_deg": 278
+  },
+  {
+   "from": "railside",
+   "to": "hub",
+   "road": "Ring Road",
+   "kind": "arterial",
+   "pt": [
+    1327.2,
+    4254.5
+   ]
+  },
+  {
+   "from": "railside",
+   "to": "hub",
+   "road": "Gidi Rail",
+   "kind": "rail",
+   "pt": [
+    1375.8,
+    3876.9
+   ]
+  },
+  {
+   "from": "railside",
+   "to": "hub",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    1279.8,
+    4570.2
+   ],
+   "bearing_deg": 92
+  },
+  {
+   "from": "railside",
+   "to": "capital",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    1442.6,
+    3246.2
+   ],
+   "bearing_deg": 27
+  },
+  {
+   "from": "railside",
+   "to": "border",
+   "road": "",
+   "kind": "street",
+   "pt": [
+    660.7,
+    4599.1
+   ],
+   "bearing_deg": 186
   }
  ]
 }

@@ -59,7 +59,7 @@ def resolve(arg, near=None):
     if near is None: hits = [p for p in hits if p["name"].lower() == arg.lower()] or hits   # alone: an exact name first
     p = min(hits, key=lambda p: near.distance(Point(p["x"], p["y"]))) if near is not None else hits[0]
     return Point(p["x"], p["y"]), p["name"] + (f" ({p['x']},{p['y']})" if len(hits) > 1 else "")
-def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
+def bkind(k, st): return {"front": "house on the street", "back": "back house in a compound", "shed": "shed", "kiosk": "kiosk", "stalls": "market stall", "canopy": "levy canopy", "phone mall": "phone mall", "strip": "bar or small hotel on the strip", "hall": "music hall", "office": "government office block", "barracks": "barrack block", "bust": "the bust on the roundabout", "plaza": "wholesale plaza", "unfinished": "half-built plaza", "pen": "livestock pen", "scrap": "scrap pile", "container": "shipping container", "crane": "gantry crane", "stack": "container stack", "tank": "fuel tank", "villa": "colonial bungalow", "cellblock": "prison cell block", "tower": "watchtower", "trailer": "parked trailer", "works": "waterworks building", "mound": "landfill mound", "bakery": "bakery", "warehouse": "warehouse", "school": "school block"}.get(k, k) + (f", {st} storey" + ("s" if st > 1 else "") if k in ("front", "back", "school", "warehouse") else "")
 
 def overview():
     from collections import Counter
@@ -119,6 +119,8 @@ def route(a, b, mode, through=False):
     if mode == "ride": mins = total / 1000 / speed * 60 + (da + db) / 1000 / 5 * 60   # the bits off the bike's network are on foot
     print(f"{mode}: {na} -> {nb}: {dist:.0f} m ({mins:.1f} min" + (f", {da + db:.0f} m of it on foot" if mode == "ride" and da + db > 30 else f" at {speed} km/h") + f"); straight line {straight:.0f} m; detour ×{dist/max(1,straight):.2f}")
     print(f"off-network bits: {da:.0f} m at start, {db:.0f} m at end")
+    if mode == "ride" and BAN is not None and not through and BAN.contains(pa) and BAN.contains(pb):
+        print("okada ban: both ends are inside the ban zone; on foot it is the walk between them (try: walk)")
     if mode == "ride" and BAN is not None:
         if through: print(f"okada ban: {sum(Gx[u][v].get('inban', 0) for u, v in zip(path, path[1:])):.0f} m ridden inside the ban zone (--through)")
         for p_, d_, w_ in ((pa, da, "starts"), (pb, db, "ends")):

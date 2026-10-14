@@ -411,6 +411,8 @@ if RES_U is not None:   # with "clear_access", streets also stop short of a big 
 LOCK_U = unary_union([Polygon(e["poly"]).buffer(CLEAR["street"] - 0.1) for e in LOCK.get("buildings", {}).values()] +
                      [Polygon(e["poly"]).buffer(1.5) for e in LOCK.get("parcels", {}).values()])
 if not LOCK_U.is_empty: streets = [x for s0 in streets for x in lines(s0.difference(LOCK_U)) if x.length > 18]
+if RB_PT is not None:   # nothing crosses a roundabout's island: streets stop at its ring
+    streets = [x for s0 in streets for x in lines(s0.difference(RB_PT.buffer(RB["r_m"] - 0.5, 32))) if x.length > 18]
 # keep residential streets off the rail (they stop short: people cross on foot) and clip to land
 streets = [g for s in streets for g in lines(s.difference(rail_zone)) if g.length > 18]
 # snap: dangling ends within 12 m of another line get extended to it (no near-misses)
@@ -572,6 +574,8 @@ for spec in PROF.get("parcels", []):
         hint = nearest_points(rin, pin)[0] if not rin.is_empty else pin
     elif str(spec.get("near", "")).startswith("res:"):   # next to a big place carved out earlier (the lorry park behind the market)
         rr = next((r for r in RES if r["kind"] == spec["near"][4:]), None); hint = rr["geom"].centroid if rr else c0
+    elif spec.get("near") == "roundabout" and RB_PT is not None:   # on the roundabout (the market roundabout's lock-ups)
+        hint = RB_PT
     elif spec.get("near") == "junction":   # where an internal main meets an arterial
         xs = [q for n, ln in mains for n2, k, a in arts for q in getattr(ln.intersection(a), "geoms", [ln.intersection(a)]) if q.geom_type == "Point"]
         hint = xs[0] if xs else c0
@@ -1165,13 +1169,20 @@ for p in parcels:
         for k2 in (-1, 1):   # customs sheds on the landward side
             r = rect(ctr.x + k2 * 40 * ca + sa * sgn * (D2 - 20), ctr.y + k2 * 40 * sa - ca * sgn * (D2 - 20), 50, 22, a)
             if fit(r) and not r.intersects(yu): bld = [(o, kk) for o, kk in bld if not (kk == "stack" and o.intersects(r.buffer(3)))] + [(r, "warehouse")]
+    if p["kind"] == "waterworks":   # the old brick works building, with its round settling tanks beside it
+        WW = next(x for x in PROF["parcels"] if x["kind"] == "waterworks"); ca, sa = math.cos(a), math.sin(a)
+        r = rect(ctr.x - ca * LL / 6, ctr.y - sa * LL / 6, WW["works_m"][0], WW["works_m"][1], a)
+        if fit(r): bld.append((r, "works"))
+        for k2 in range(WW["tanks"]):
+            c2 = Point(ctr.x + ca * (LL / 6 + k2 * (2 * WW["tank_r_m"] + 8)), ctr.y + sa * (LL / 6 + k2 * (2 * WW["tank_r_m"] + 8))); r = c2.buffer(WW["tank_r_m"], 24)
+            if g.buffer(-4).contains(r) and road_free.contains(r): bld.append((r, "tank"))
     if p["kind"] == "tank farm":   # round fuel tanks in a grid, each in its own bund
         TF = next(x for x in PROF["reserve"] if x["kind"] == "tank farm"); ca, sa = math.cos(a), math.sin(a); R2_ = TF["tank_r_m"]; step = 2 * R2_ + 14
         for v in np.arange(-LL, LL, step):
             for u in np.arange(-LL, LL, step):
                 c2 = Point(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca); r = c2.buffer(R2_, 24)
                 if g.buffer(-8).contains(r) and road_free.contains(r): bld.append((r, "tank"))
-    if p["kind"] in ("villas", "prison", "truck park"):   # grids of one building type: bungalows in gardens, cell blocks, parked trailers
+    if p["kind"] in ("villas", "prison", "truck park", "landfill"):   # grids of one building type: bungalows in gardens, cell blocks, parked trailers
         VS = next(x for x in PROF["parcels"] + PROF.get("reserve", []) if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a); bl, bs = VS["block_m"]
         av = None
         if VS.get("avenue"):   # the reserve's own avenue down its length, carried on to the first street at each end
@@ -1294,6 +1305,18 @@ for HL in PROF.get("halls", []):   # a big named building on a main-road frontag
 if RB_PT is not None:   # the night strip: the house fronts on the mains around the roundabout are bars, suya spots and small hotels
     bld = [(r, "strip" if k == "front" and r.distance(RB_PT) < RB["strip_m"] and r.distance(mainU) < CLEAR["main"] + 4 else k) for r, k in bld]
     bust = rect(RB_PT.x, RB_PT.y, 3, 3, 0); bld.append((bust, "bust")); poi_pos[RB["poi"]] = RB_PT
+PL = PROF.get("pipeline")
+if PL and PL["poi"] in POIS:   # a pipeline's right of way: a cleared strip straight across the district; streets cross it, nothing is built on it
+    pin = POIS[PL["poi"]]; b_ = math.radians(PL["bearing_deg"]); dx_, dy_ = math.sin(b_), -math.cos(b_)
+    ln = LineString([(pin.x - dx_ * 3000, pin.y - dy_ * 3000), (pin.x + dx_ * 3000, pin.y + dy_ * 3000)]).intersection(land.buffer(-2))
+    ln = max(lines(ln), key=lambda l: l.length, default=None)
+    if ln is not None:
+        strip = ln.buffer(PL["width_m"] / 2, cap_style=2)
+        bld = [(r, k) for r, k in bld if not r.intersects(strip)]
+        extra = strip.difference(unary_union([g2.buffer(CLEAR["street"]) for k2, g2 in net_lines] + [l.buffer(CLEAR["lane"]) for l in lanes]))
+        for x in getattr(extra, "geoms", [extra]):
+            if x.geom_type == "Polygon" and x.area > 200: parcels.append({"kind": "pipeline", "geom": x})
+        poi_pos[PL["poi"]] = ln.interpolate(ln.project(pin))
 # a dead-end lane that stops within 40 m of another way carries on to it as a footpath, where no house stands in the way
 # (a passage through the compounds: deep blocks no longer force the long way round). Drawn after the houses, so none moves;
 # a shed or a kiosk in its way is cleared.
@@ -1344,7 +1367,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = height_bands(PROF["lgas"])
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
