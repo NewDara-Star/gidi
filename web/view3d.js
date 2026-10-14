@@ -52,15 +52,16 @@
     const walls = T.dark ? ["#6d6a66", "#75706a", "#6a6f72", "#7a7369"] : ["#e9e2d6", "#e3d9c8", "#dcdcd6", "#e6dccd", "#d9d2c4"];
     const tin = T.dark ? ["#6e4a3a", "#5f4d42", "#6b6560"] : ["#a3684a", "#8f5f47", "#9a8f84", "#b07a58"];
     const flat = T.dark ? "#77746f" : "#cfcac0";
-    const special = { works: T.dark ? "#7a3f2e" : "#b05a3c", mound: T.dark ? "#4a4236" : "#9c8a6a", bakery: T.dark ? "#8a6a3a" : "#d9a85b", crane: T.dark ? "#8a5b2e" : "#d9822b", stack: T.dark ? "#3b6a8a" : "#4f8fc0", tank: T.dark ? "#8a8f96" : "#e6e8eb", villa: T.dark ? "#6b6250" : "#d8cfb8", cellblock: T.dark ? "#55595e" : "#9aa0a6", tower: T.dark ? "#55595e" : "#80868b", trailer: T.dark ? "#5b5650" : "#b0b4ba", plaza: T.dark ? "#5d6670" : "#c9c1b0", unfinished: T.dark ? "#4a4a4a" : "#b5b5b5", pen: T.dark ? "#5b5650" : "#a59d92", scrap: T.dark ? "#5a4636" : "#8a6a4f", container: T.dark ? "#2f5a8a" : "#3b78b8", "phone mall": T.dark ? "#4f6a86" : "#86a6c8", strip: T.dark ? "#8a3b33" : "#c8645a", hall: T.dark ? "#5e4a86" : "#9b7fc7", office: T.dark ? "#5d6670" : "#c3cad3", barracks: T.dark ? "#55603f" : "#a3ad84", bust: T.dark ? "#888" : "#555", canopy: T.dark ? "#7a4a8c" : "#a86cc1", warehouse: T.dark ? "#5d6670" : "#b9c0c8", stalls: T.dark ? "#8a5b2e" : "#d69a55", school: T.dark ? "#7b6a3c" : "#e1c46a", kiosk: T.dark ? "#4f6a86" : "#7ea2c6", shed: T.dark ? "#5b5650" : "#a59d92" };
-    let n = 0;
+    const special = { works: T.dark ? "#7a3f2e" : "#b05a3c", mound: T.dark ? "#4a4236" : "#9c8a6a", bakery: T.dark ? "#8a6a3a" : "#d9a85b", crane: T.dark ? "#8a5b2e" : "#d9822b", stack: T.dark ? "#3b6a8a" : "#4f8fc0", tank: T.dark ? "#8a8f96" : "#e6e8eb", villa: T.dark ? "#6b6250" : "#d8cfb8", cellblock: T.dark ? "#55595e" : "#9aa0a6", tower: T.dark ? "#55595e" : "#80868b", trailer: T.dark ? "#5b5650" : "#b0b4ba", plaza: T.dark ? "#5d6670" : "#c9c1b0", unfinished: T.dark ? "#4a4a4a" : "#b5b5b5", pen: T.dark ? "#5b5650" : "#a59d92", scrap: T.dark ? "#5a4636" : "#8a6a4f", container: T.dark ? "#2f5a8a" : "#3b78b8", "phone mall": T.dark ? "#4f6a86" : "#86a6c8", strip: T.dark ? "#8a3b33" : "#c8645a", hall: T.dark ? "#5e4a86" : "#9b7fc7", office: T.dark ? "#5d6670" : "#c3cad3", barracks: T.dark ? "#55603f" : "#a3ad84", bust: T.dark ? "#888" : "#555", canopy: T.dark ? "#7a4a8c" : "#a86cc1", warehouse: T.dark ? "#5d6670" : "#b9c0c8", stalls: T.dark ? "#8a5b2e" : "#d69a55", school: T.dark ? "#7b6a3c" : "#e1c46a", kiosk: T.dark ? "#4f6a86" : "#7ea2c6", shed: T.dark ? "#5b5650" : "#a59d92", gatehouse: T.dark ? "#8a3b33" : "#c8645a", generator: T.dark ? "#3f4348" : "#5f646a", "water tank": T.dark ? "#2f5a8a" : "#3b78b8", mansion: T.dark ? "#7a6a55" : "#efe6d2", clubhouse: T.dark ? "#5e4a86" : "#9b7fc7" };
+    let n = 0, count = 0;
     const tmp = new THREE.Color();
     for (const [id, list] of Object.entries(G.buildings || {})) {
       const st = (G.storeys || {})[id] || [];
       list.forEach((b, i) => {
         n++;
         const kind = b[0], ring = b.slice(1); const s = st[i] || 1;
-        const H = kind === "stalls" ? 3 : kind === "canopy" ? 2.8 : kind === "mound" ? 5 : kind === "crane" ? 32 : kind === "tank" ? 14 : kind === "stack" ? 7.8 : kind === "trailer" ? 4 : kind === "pen" ? 2.4 : kind === "scrap" ? 2.5 : kind === "container" ? 2.6 : kind === "bust" ? 4 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
+        if (kind !== "generator" && kind !== "water tank") count++;   // generator houses and tanks are not counted as buildings
+        const H = kind === "stalls" ? 3 : kind === "canopy" ? 2.8 : kind === "mound" ? 5 : kind === "crane" ? 32 : kind === "tank" ? 14 : kind === "stack" ? 7.8 : kind === "trailer" ? 4 : kind === "pen" ? 2.4 : kind === "scrap" ? 2.5 : kind === "container" ? 2.6 : kind === "bust" ? 4 : kind === "kiosk" ? 2.6 : kind === "shed" ? 2.6 : kind === "raft" ? 0.6 : kind === "sawdust" ? 2 : kind === "generator" ? 1.8 : kind === "water tank" ? 5.5 : kind === "stilt" || kind === "stilt bar" ? s * STOREY + 1.8 : s * STOREY + (s <= 2 ? 0.6 : 0.3);
         const wallC = special[kind] || walls[Math.floor(hash(n) * walls.length)];
         const roofC = special[kind] || (s <= 2 && hash(n + 7) < 0.62 ? tin[Math.floor(hash(n + 3) * tin.length)] : flat);
         const k = ring.length;
@@ -78,7 +79,7 @@
       });
     }
     const m = new THREE.Mesh(geomFrom(pos, col), new THREE.MeshLambertMaterial({ vertexColors: true, side: THREE.DoubleSide }));
-    m.userData.count = n; return m;
+    m.userData.count = count; return m;
   }
 
   // flyovers (decks on pillars), skywalks and canal footbridges
@@ -130,7 +131,7 @@
       const m = new THREE.Mesh(flatPoly(d.poly, 0.2), new THREE.MeshLambertMaterial({ color: tint, side: THREE.DoubleSide }));
       m.userData.district = d.id; scene.add(m); pick.push(m);
     }
-    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial, government: T.industrial, garden: T.pitch, barracks: T.pitch, airfield: T.pitch, plazas: T.industrial, livestock: T.market, "container yard": T.industrial, "tank farm": T.industrial, villas: T.pitch, prison: T.industrial, "truck park": T.park, waterworks: T.industrial, landfill: T.market, pipeline: T.pitch };
+    const PC = { market: T.market, "under-bridge": T.market, industrial: T.industrial, station: T.industrial, school: T.school, pitch: T.pitch, stadium: T.pitch, "motor park": T.park, "bus-terminal": T.park, "bus terminal": T.park, estate: T.pitch, "lorry park": T.park, park: T.pitch, sawmill: T.industrial, government: T.industrial, garden: T.pitch, barracks: T.pitch, airfield: T.pitch, plazas: T.industrial, livestock: T.market, "container yard": T.industrial, "tank farm": T.industrial, villas: T.pitch, prison: T.industrial, "truck park": T.park, waterworks: T.industrial, landfill: T.market, pipeline: T.pitch, compound: T.pitch, club: T.pitch, pool: T.water, court: T.market };
     for (const list of Object.values(G.parcels || {})) for (const p of list) scene.add(new THREE.Mesh(flatPoly([p.pts], 0.35), flatM(PC[p.kind] || T.industrial)));
 
     const lanes = [], streets = [], mains = [], arts = [];
@@ -154,6 +155,15 @@
     scene.add(new THREE.Mesh(geomFrom(foot), roadM(T.dark ? "#7a6a55" : "#c9b48f")));
     if (G.boardwalks) scene.add(new THREE.Mesh(geomFrom(ribbon(G.boardwalks, 2.5, 1.2, [])), roadM(T.dark ? "#7a6a55" : "#b59b76")));
 
+    // compound walls, 2.4 m high, and the estate gates' barriers (a red-and-white pole across the street, 1.1 m up)
+    const wallM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6d6a66" : "#d9d2c4"), side: THREE.DoubleSide }), wp = [];
+    for (const list of Object.values(G.walls || {})) for (const pts of list) for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, z0] = pts[i], [x1, z1] = pts[i + 1];
+      wp.push(x0, 0, z0, x1, 0, z1, x1, 2.4, z1, x0, 0, z0, x1, 2.4, z1, x0, 2.4, z0);
+    }
+    if (wp.length) scene.add(new THREE.Mesh(geomFrom(wp), wallM));
+    const gp = []; for (const q of G.gates || []) { const [[x0, z0], [x1, z1]] = q.pts; gp.push(x0, 1.0, z0, x1, 1.0, z1, x1, 1.25, z1, x0, 1.0, z0, x1, 1.25, z1, x0, 1.25, z0); }
+    if (gp.length) scene.add(new THREE.Mesh(geomFrom(gp), new THREE.MeshLambertMaterial({ color: C("#d93025"), side: THREE.DoubleSide })));
     const b = buildings(T); scene.add(b);
     scene.add(structures(T));
     return { scene, pick, buildingCount: b.userData.count };

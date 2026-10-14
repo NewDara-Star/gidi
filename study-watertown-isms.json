@@ -175,5 +175,24 @@
     6.50514
    ]
   ]
+ },
+ "gates_across_streets": {
+  "n": 13,
+  "per_km2": 1.79,
+  "examples": [
+   [
+    3.38817,
+    6.50773
+   ],
+   [
+    3.38811,
+    6.5083
+   ],
+   [
+    3.39983,
+    6.52835
+   ]
+  ],
+  "rule": "a mapped gate or barrier on a residential, unclassified or tertiary street"
  }
 }

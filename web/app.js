@@ -56,6 +56,8 @@
   const parcelPaths = Object.entries(G.parcels || {}).flatMap(([k, v]) => v.map((p, i) => ({ key: k + i, kind: p.kind.replace(" ", "-"), d: rectPath(p.pts) })));
   const lanePaths = Object.entries(G.lanes || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
   const footPaths = Object.entries(G.paths || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
+  const wallPaths = Object.entries(G.walls || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
+  const gatePath = (G.gates || []).map((q) => pts2d(q.pts)).join("");
   const mainsPath = G.mains.map((m, i) => ({ id: "main" + i, d: pts2d(m.pts), name: m.name, district: m.d }));
 
   // Search index
@@ -90,6 +92,7 @@
       showStreets && h("g", { pointerEvents: "none" }, parcelPaths.map((p) => h("path", { key: p.key, d: p.d, className: "parcel " + p.kind }))),
       z > 0.22 && h("g", { pointerEvents: "none" }, bldPaths.map(([k, d]) => h("path", { key: "b" + k, d, className: "bld", style: { strokeWidth: px(0.5) } }))),
       (G.canals || []).map((c, i) => h("path", { key: "cn" + i, d: pts2d(c.pts), className: "canal", style: { strokeWidth: w(6, 1.2) }, pointerEvents: "none" })),
+      z > 0.5 && h("g", { pointerEvents: "none" }, wallPaths.map(([k, d]) => h("path", { key: "w" + k, d, className: "wall", style: { strokeWidth: px(0.6) } }))),
       z > 0.3 && h("g", { pointerEvents: "none" }, lanePaths.map(([k, d]) => h("path", { key: "l" + k, d, className: "lane", style: { strokeWidth: w(3, 0.8) } }))),
       z > 0.5 && h("g", { pointerEvents: "none" }, footPaths.map(([k, d]) => h("path", { key: "fp" + k, d, className: "footpath", style: { strokeWidth: w(1.5, 0.6), strokeDasharray: px(3) + " " + px(2) } }))),
       showStreets && h("g", { pointerEvents: "none" },
@@ -104,6 +107,7 @@
       h("g", { pointerEvents: "none" },   // flyovers and rail bridges sit above the roads; skywalks above everything
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "fc" + i, d: pts2d(s.pts), className: "fly-case", style: { strokeWidth: w(s.width + 6, 5) } })),
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "f" + i, d: pts2d(s.pts), className: "fly", style: { strokeWidth: w(s.width, 3.6) } }))),
+      z > 0.3 && gatePath && h("path", { d: gatePath, className: "gate", style: { strokeWidth: w(1.4, 1.6) }, pointerEvents: "none" }),
       layers.rail && h("g", { pointerEvents: "none" },
         h("path", { d: pts2d(G.rail.pts), className: "rail-case", style: { strokeWidth: px(5) } }),
         h("path", { d: pts2d(G.rail.pts), className: "rail", style: { strokeWidth: px(2.5), strokeDasharray: px(7) + " " + px(5) } })),

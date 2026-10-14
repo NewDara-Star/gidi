@@ -1,0 +1,556 @@
+{
+ "road_km_by_class": {
+  "residential": 247.2,
+  "service": 53.2,
+  "tertiary": 23.5,
+  "primary": 19.3,
+  "unclassified": 9.6,
+  "motorway": 7.9,
+  "secondary": 2.7,
+  "path": 1.8,
+  "busway": 1.5,
+  "motorway_link": 1.3,
+  "footway": 1.1,
+  "track": 0.7,
+  "primary_link": 0.4,
+  "platform": 0.3,
+  "secondary_link": 0.2,
+  "steps": 0.1,
+  "tertiary_link": 0.0
+ },
+ "road_km_per_km2": {
+  "drive (no service)": 12.9,
+  "service": 2.2,
+  "foot/path": 0.1
+ },
+ "surface_tags": {
+  "paved": 114,
+  "unpaved": 90,
+  "asphalt": 23,
+  "gravel": 1,
+  "ground": 1,
+  "concrete": 1
+ },
+ "lanes_tags": {
+  "2": 60,
+  "1": 24,
+  "3": 4
+ },
+ "oneway_share_by_km": 0.164,
+ "named_share_minor": 0.24,
+ "street_name_endings": {
+  "Street": 251,
+  "Road": 62,
+  "Way": 20,
+  "Close": 20,
+  "St": 18,
+  "Crescent": 17,
+  "Avenue": 12,
+  "Expressway": 4,
+  "Lane": 3,
+  "Adelaja": 3,
+  "Cresent": 2,
+  "Morgan": 2
+ },
+ "junctions": {
+  "per_km2": 62,
+  "dead_ends_per_km2": 27,
+  "T_share": 0.9,
+  "X_share": 0.1,
+  "dead_end_to_junction_ratio": 0.43
+ },
+ "street_length_between_junctions_m": {
+  "minor": {
+   "p10": 25.1,
+   "p25": 51.2,
+   "p50": 83.4,
+   "p75": 130.6,
+   "p90": 209.5
+  },
+  "major+tertiary": {
+   "p10": 10.2,
+   "p25": 22.4,
+   "p50": 68.1,
+   "p75": 159.4,
+   "p90": 307.5
+  }
+ },
+ "sinuosity_segments_over_40m": {
+  "p50": 1.0,
+  "p75": 1.0,
+  "p90": 1.1,
+  "p97": 1.3
+ },
+ "orientation_whole_area": {
+  "entropy": 3.504,
+  "grid_order_0to1": 0.071,
+  "top_bearings_deg": [
+   155,
+   65,
+   90,
+   0
+  ]
+ },
+ "local_400m_cells": {
+  "n": 82,
+  "grid_order": {
+   "p25": 0.6,
+   "p50": 0.7,
+   "p75": 0.9
+  },
+  "turn_between_neighbour_cells_deg": {
+   "p25": 10.0,
+   "p50": 35.0,
+   "p75": 70.0,
+   "p90": 85.0
+  },
+  "share_neighbours_turned_over_20deg": 0.62
+ },
+ "parallel_street_spacing_m": {
+  "p10": 45.5,
+  "p25": 67.0,
+  "p50": 83.7,
+  "p75": 101.7,
+  "p90": 152.4
+ },
+ "blocks": {
+  "n": 436,
+  "area_m2": {
+   "p10": 939.9,
+   "p25": 5131.4,
+   "p50": 15814.3,
+   "p75": 33888.2,
+   "p90": 63917.6
+  },
+  "mean_m2": 26991,
+  "elongation_long_over_short": {
+   "p25": 1.4,
+   "p50": 2.1,
+   "p75": 3.2
+  },
+  "compactness_area_over_rect": {
+   "p25": 0.6,
+   "p50": 0.8,
+   "p75": 0.9
+  },
+  "width_short_side_m": {
+   "p10": 16.6,
+   "p25": 59.4,
+   "p50": 91.2,
+   "p75": 146.4,
+   "p90": 228.5
+  },
+  "building_coverage_share": {
+   "p25": 0.0,
+   "p50": 0.0,
+   "p75": 0.2
+  },
+  "buildings_per_block": {
+   "p25": 0.0,
+   "p50": 0.0,
+   "p75": 15.0
+  },
+  "buildings_per_hectare_of_block": {
+   "p25": 0.0,
+   "p50": 0.0,
+   "p75": 7.6
+  }
+ },
+ "main_road_mesh": {
+  "superblocks_fully_closed": 14,
+  "superblock_area_m2": {
+   "p25": 5960.6,
+   "p50": 8447.2,
+   "p75": 18668.6
+  },
+  "main_km_per_km2": 2.28
+ },
+ "side_streets_on_mains": {
+  "gap_between_side_junctions_m": {
+   "p10": 10.3,
+   "p25": 21.9,
+   "p50": 63.3,
+   "p75": 137.0,
+   "p90": 290.2
+  },
+  "T_vs_X": {
+   "T": 180,
+   "X+": 17
+  }
+ },
+ "buildings": {
+  "count": 9819,
+  "per_km2": 405,
+  "coverage_share_of_land": 0.093,
+  "footprint_m2": {
+   "p10": 37.6,
+   "p25": 90.3,
+   "p50": 170.5,
+   "p75": 291.7,
+   "p90": 435.4,
+   "p99": 967.8
+  },
+  "size_bands_share": {
+   "<60": 0.17,
+   "60-150": 0.27,
+   "150-400": 0.44,
+   "400-1500": 0.12,
+   "1500+": 0.004
+  },
+  "type_tags": {
+   "yes": 8694,
+   "bungalow": 854,
+   "residential": 108,
+   "commercial": 88,
+   "house": 21,
+   "roof": 21,
+   "construction": 14,
+   "hotel": 11,
+   "apartments": 3,
+   "shed": 1
+  },
+  "levels_tagged": {
+   "3": 44,
+   "2": 10,
+   "7": 9,
+   "1": 8,
+   "4": 7,
+   "6": 3,
+   "5": 2,
+   "apartments": 1
+  },
+  "roof_tags": {},
+  "long_side_m": {
+   "p10": 7.8,
+   "p25": 12.2,
+   "p50": 17.3,
+   "p75": 24.4,
+   "p90": 31.6
+  },
+  "short_side_m": {
+   "p10": 4.7,
+   "p25": 7.0,
+   "p50": 10.4,
+   "p75": 13.3,
+   "p90": 16.3
+  },
+  "aspect": {
+   "p25": 1.3,
+   "p50": 1.7,
+   "p75": 2.2
+  },
+  "rectangularity": {
+   "p10": 0.8,
+   "p50": 1.0
+  },
+  "edge_to_street_centreline_m": {
+   "p10": 4.6,
+   "p25": 8.2,
+   "p50": 14.6,
+   "p75": 27.8,
+   "p90": 43.2
+  },
+  "share_within_12m_of_street(front row)": 0.41,
+  "angle_to_nearest_street_deg": {
+   "p25": 5.0,
+   "p50": 73.9,
+   "p75": 86.9
+  },
+  "share_aligned_within_15deg_or_perp": 0.85,
+  "front_row_long_side_parallel_share": 0.33,
+  "gap_to_nearest_neighbour_m": {
+   "p10": 0.4,
+   "p25": 1.0,
+   "p50": 2.0,
+   "p75": 4.1,
+   "p90": 8.0
+  },
+  "share_touching(<0.5m)": 0.11
+ },
+ "big_buildings_over_1500m2": {
+  "count": 38,
+  "per_km2": 1.6,
+  "tags": {
+   "yes": 31,
+   "hotel": 5,
+   "commercial": 1,
+   "church": 1
+  },
+  "dist_to_main_road_m": {
+   "p25": 23.0,
+   "p50": 39.8,
+   "p75": 69.0
+  },
+  "all_buildings_dist_to_main_m": {
+   "p25": 77.8,
+   "p50": 180.9,
+   "p75": 472.1
+  }
+ },
+ "coverage_variation_250m_cells": {
+  "p10": 0.0,
+  "p25": 0.0,
+  "p50": 0.0,
+  "p75": 0.2,
+  "p90": 0.2
+ },
+ "landuse_polygons_ha": {
+  "residential": [
+   13,
+   1727.4
+  ],
+  "scrub": [
+   8,
+   116.5
+  ],
+  "wood": [
+   2,
+   73.6
+  ],
+  "commercial": [
+   8,
+   59.4
+  ],
+  "school": [
+   15,
+   49.0
+  ],
+  "retail": [
+   11,
+   25.5
+  ],
+  "golf_course": [
+   1,
+   13.3
+  ],
+  "industrial": [
+   6,
+   12.3
+  ],
+  "hospital": [
+   2,
+   11.6
+  ],
+  "farmland": [
+   1,
+   8.6
+  ],
+  "village_green": [
+   3,
+   4.6
+  ],
+  "construction": [
+   2,
+   3.8
+  ],
+  "religious": [
+   3,
+   3.3
+  ],
+  "grassland": [
+   9,
+   1.8
+  ],
+  "park": [
+   2,
+   1.6
+  ],
+  "bus_station": [
+   2,
+   1.2
+  ]
+ },
+ "waterways_km": {
+  "stream": 7.59,
+  "drain": 7.42,
+  "river": 0.65
+ },
+ "rail": {
+  "km_in_area": 0.0,
+  "types": {
+   "rail": 6,
+   "disused": 1,
+   "platform": 4
+  },
+  "drive_roads_crossing": 0,
+  "of_which_bridge_or_layer": 0,
+  "buildings_within_15m_of_track": 0,
+  "buildings_within_30m": 1
+ },
+ "power": {
+  "line": 1,
+  "generator": 1,
+  "plant": 4
+ },
+ "point_tags": {
+  "tree": 56,
+  "hw:traffic_signals": 18,
+  "power:tower": 16,
+  "hw:crossing": 9,
+  "restaurant": 8,
+  "office": 6,
+  "place_of_worship": 6,
+  "bank": 5,
+  "fuel": 5,
+  "fast_food": 3,
+  "bar": 2,
+  "shop:convenience": 2,
+  "hotel": 2,
+  "school": 2,
+  "hw:turning_circle": 1,
+  "cinema": 1,
+  "hw:bus_stop": 1,
+  "casino": 1,
+  "parking_entrance": 1,
+  "cafe": 1,
+  "shop:bed": 1,
+  "toilets": 1,
+  "tower": 1,
+  "hw:motorway_junction": 1,
+  "antenna": 1,
+  "shop:car": 1,
+  "shop:beauty": 1,
+  "mast": 1,
+  "parking": 1,
+  "craft": 1
+ },
+ "trees_mapped": 66,
+ "markets_and_retail": {
+  "n": 11,
+  "ha": {
+   "p25": 0.4,
+   "p50": 0.9,
+   "p75": 1.7
+  },
+  "dist_to_main_m": {
+   "p25": 4.7,
+   "p50": 8.7,
+   "p75": 16.3
+  }
+ },
+ "civic_mapped_note": {
+  "places_of_worship": 9,
+  "schools": 17,
+  "warning": "OSM civic coverage here is far below reality; use for placement rules only, not counts"
+ },
+ "civic_dist_to_main_m": {
+  "worship": {
+   "p25": 18.4,
+   "p50": 86.2,
+   "p75": 765.1
+  },
+  "schools": {
+   "p25": 14.2,
+   "p50": 140.6,
+   "p75": 438.4
+  }
+ },
+ "connections": {
+  "perimeter_km": 33.9,
+  "crossings": {
+   "major": 65,
+   "minor": 186,
+   "tertiary": 26
+  },
+  "per_km_of_edge": {
+   "major": 1.9,
+   "minor": 5.5,
+   "tertiary": 0.8
+  },
+  "major_crossings_by_neighbour": {
+   "Oshodi/Isolo": 38,
+   "Ifako/Ijaye": 27
+  },
+  "all_crossings_by_neighbour": {
+   "Oshodi/Isolo": 115,
+   "Ifako/Ijaye": 162
+  },
+  "gap_between_main_gateways_m": {
+   "p10": 8.5,
+   "p25": 12.7,
+   "p50": 36.2,
+   "p75": 279.2,
+   "p90": 1006.1
+  },
+  "edge_share_on_hard_line": 0.22
+ },
+ "through_routes_km": {
+  "Mobolaji Bank-Anthony Way": 7.08,
+  "Isheri Road": 6.49,
+  "Ikorodu Road": 5.27,
+  "Lagos-Ibadan Expressway": 3.4,
+  "Opebi Road": 2.58,
+  "Opebi Link Road": 1.49,
+  "Odozi Street": 1.07,
+  "Works Road": 0.69,
+  "Lateef Jakande Road": 0.39,
+  "Yaya Abatan Road": 0.37
+ },
+ "area_km2": 24.3,
+ "connections_dedup": {
+  "perimeter_km": 33.9,
+  "main_gateways": 35,
+  "minor_gateways": 90,
+  "main_gateways_per_km_edge": 1.03,
+  "minor_gateways_per_km_edge": 2.66,
+  "gap_between_main_gateways_m": {
+   "p25": 265,
+   "p50": 553,
+   "p75": 1185
+  },
+  "main_gateways_by_neighbour": {
+   "Oshodi/Isolo": 19,
+   "Ifako/Ijaye": 16
+  },
+  "minor_by_neighbour": {
+   "Oshodi/Isolo": 30,
+   "Ifako/Ijaye": 60
+  },
+  "main_gateway_roads": [
+   "Adegboyega Street",
+   "Admiral Oduwaiye Street",
+   "Alhaji Bakare Street",
+   "Babatunde Atere Street",
+   "CMD Avenue",
+   "Church Street",
+   "Davies Street",
+   "Durosimi Abokunwa Road",
+   "Ikorodu Road",
+   "Ikosi Road",
+   "Isheri Road",
+   "Kosoko Street",
+   "Lagos-Ibadan Expressway",
+   "Lateef Jakande Road",
+   "Maryland-Opebi-Ojota Link Bridge",
+   "Mobolaji Bank-Anthony Way",
+   "Mobolaji Johnson Way",
+   "Muiz Banire Street",
+   "Oba Akinjobi Street",
+   "Odozi Street",
+   "Old Olowora Road",
+   "Opebi Link Road",
+   "Opebi Road",
+   "Shonibare St",
+   "Shoyemi St",
+   "Works Road",
+   "Yaya Abatan Road",
+   "Zinsou St"
+  ],
+  "edge_share_on_hard_line": 0.22,
+  "one_km_squares": {
+   "n": 158,
+   "drive_km_p25": 9.7,
+   "drive_km_p50": 11.8,
+   "drive_km_p75": 14.0,
+   "drive_km_p90": 15.7,
+   "coverage_p25": 0.02,
+   "coverage_p50": 0.09,
+   "coverage_p75": 0.14,
+   "coverage_p90": 0.15,
+   "buildings_p25": 61,
+   "buildings_p50": 410,
+   "buildings_p75": 618,
+   "buildings_p90": 791
+  }
+ }
+}
