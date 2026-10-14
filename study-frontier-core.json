@@ -1,0 +1,120 @@
+{
+ "note": "Buildings under-mapped in most of the area: building figures measured on the 328 traced 250 m cells (of 403) in the box 3.55,6.455,3.65,6.48, median cell -> median, 75th percentile -> dense; sizes from its 11351 buildings. Street figures as measured. The measured building figures are under 'osm'.",
+ "box": "3.55,6.455,3.65,6.48",
+ "median": {
+  "bounds": [
+   574562,
+   711958,
+   575562,
+   712958
+  ],
+  "drive_km_per_km2": 8.9,
+  "main_km_per_km2": 0.0,
+  "junctions_per_km2": 40,
+  "T_share": 0.95,
+  "dead_end_ratio": 0.23,
+  "block_m2": {
+   "p25": 9034.8,
+   "p50": 31561.7,
+   "p75": 33720.4
+  },
+  "blocks_per_km2": 7,
+  "buildings_per_km2": 416,
+  "coverage": 0.115,
+  "footprint_m2": {
+   "p10": 41.3,
+   "p25": 107.5,
+   "p50": 199.9,
+   "p75": 342.8,
+   "p90": 482.4
+  },
+  "share_under_60m2": 0.14,
+  "share_over_400m2": 0.17,
+  "edge_to_street_m": {
+   "p10": 5.2,
+   "p25": 9.6,
+   "p50": 24.4,
+   "p75": 39.6,
+   "p90": 52.4
+  },
+  "front_row_share": 0.31,
+  "gap_m": {
+   "p25": 0.9,
+   "p50": 1.6,
+   "p75": 3.0
+  },
+  "overlaps_with_streets": 0,
+  "blocks_per_km2_closed": 23,
+  "osm": {
+   "buildings_per_km2": 308,
+   "coverage": 0.046,
+   "footprint_m2": {
+    "p10": 25.4,
+    "p25": 56.4,
+    "p50": 105.2,
+    "p75": 178.9,
+    "p90": 364.0
+   },
+   "share_under_60m2": 0.28,
+   "share_over_400m2": 0.04
+  }
+ },
+ "dense": {
+  "bounds": [
+   567312,
+   714458,
+   568312,
+   715458
+  ],
+  "drive_km_per_km2": 13.5,
+  "main_km_per_km2": 0.0,
+  "junctions_per_km2": 62,
+  "T_share": 0.92,
+  "dead_end_ratio": 0.44,
+  "block_m2": {
+   "p25": 4074.5,
+   "p50": 10702.1,
+   "p75": 19313.7
+  },
+  "blocks_per_km2": 17,
+  "buildings_per_km2": 640,
+  "coverage": 0.167,
+  "footprint_m2": {
+   "p10": 41.3,
+   "p25": 107.5,
+   "p50": 199.9,
+   "p75": 342.8,
+   "p90": 482.4
+  },
+  "share_under_60m2": 0.14,
+  "share_over_400m2": 0.17,
+  "edge_to_street_m": {
+   "p10": 4.5,
+   "p25": 8.0,
+   "p50": 14.1,
+   "p75": 28.9,
+   "p90": 49.8
+  },
+  "front_row_share": 0.42,
+  "gap_m": {
+   "p25": 1.7,
+   "p50": 3.3,
+   "p75": 4.7
+  },
+  "overlaps_with_streets": 1,
+  "blocks_per_km2_closed": 29,
+  "osm": {
+   "buildings_per_km2": 501,
+   "coverage": 0.107,
+   "footprint_m2": {
+    "p10": 18.2,
+    "p25": 44.5,
+    "p50": 192.6,
+    "p75": 334.6,
+    "p90": 484.9
+   },
+   "share_under_60m2": 0.28,
+   "share_over_400m2": 0.17
+  }
+ }
+}
