@@ -95,6 +95,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         for st in F.get("structures",[]):  # flyovers, rail bridges and skywalks drawn above the roads (slip roads are already in mains)
             if st["kind"]!="ramp": out.setdefault("structures",[]).append({"d":id_,**st})
         out.setdefault("storeys",{})[id_]=F.get("storeys") or derive_storeys(F["buildings"],id_)
+        if F.get("styles"): out.setdefault("styles",{})[id_]=F["styles"]   # house styles (the Heights)
         GEN[id_]=F
         core=json.load(open(f"study-{id_}-core.json")); M=F["metrics"]
         NETJ=json.load(open("web/network.json")) if os.path.exists("web/network.json") else {"gateways":[]}

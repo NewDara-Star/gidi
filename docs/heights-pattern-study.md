@@ -1,4 +1,4 @@
-# Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v2)
+# Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v3)
 
 Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
 
@@ -144,35 +144,61 @@ Each side against its own box:
 
 | | VI, real | **VI side** | Ikoyi, real | **Ikoyi side** |
 |---|---|---|---|---|
-| Buildings/km² | 264–410 | **355** | 520–619 | **598** |
-| Ground built on | 11–15% | **11%** | 13–15% | **12%** |
-| Typical building | 281–293 m² | **301 m²** | 140–146 m² | **162 m²** |
-| Over 400 m² | 29–33% | **31%** | 16–17% | **12%** |
+| Buildings/km² | 264–410 | **381** | 520–619 | **448** |
+| Ground built on | 11–15% | **12%** | 13–15% | **12%** |
+| Typical building | 281–293 m² | **296 m²** | 140–146 m² | **240 m²** (bigger on purpose, section 8) |
+| Over 400 m² | 29–33% | **32%** | 16–17% | **24%** |
 
 The whole district against all three boxes:
 
-| | Real, typical km² | Real, dense km² | **Heights v2** |
+| | Real, typical km² | Real, dense km² | **Heights v3** |
 |---|---|---|---|
-| Streets, km/km² (edge roads half) | 11.0 | 12.0 | **12.3** |
+| Streets, km/km² (edge roads half) | 11.0 | 12.0 | **11.8** |
 | Main roads, km/km² (edge roads half) | 5.3 | 4.3 | **4.0** |
-| Junctions/km² | 46 | 51 | **43** |
-| T-junctions | 91% | 92% | **83%** (VI alone 74–80%) |
-| Dead ends per junction | 0.41 | 0.33 | **0.35** |
-| Blocks/km² (counted closed) | 20 | 25 | **26** |
-| Gap between buildings | 3.4 m | 3.5 m | **5.3 m** |
-| Gated closes, per km² | 6.1 (mapped) | | **9** (the Ikoyi side only) |
+| Junctions/km² | 46 | 51 | **40** |
+| T-junctions | 91% | 92% | **90%** (VI alone 74–80%) |
+| Dead ends per junction | 0.41 | 0.33 | **0.29** |
+| Blocks/km² (counted closed) | 20 | 25 | **24** |
+| Gap between buildings | 3.4 m | 3.5 m | **6.7 m** (fine for our world, section 8) |
+| Gated closes, per km² | 6.1 (mapped) | | **4** (the Ikoyi side only; the golf course took some closes) |
 
 **Checks:** `check_district.py heights` passes all its checks. Beach buildings must stand on the sand, within 60 m of the district and never in the lagoon (a new rule in check 3).
 
 **What doesn't match yet (honest):**
-- **Gaps are too wide:** 5.3 m against 3.4–3.9. The VI side's side gardens and empty plots leave its blocks looser than real ones.
-- **Ikoyi's houses are a little big and too even:** typical 162 m² against 140–146, and only 12% over 400 m² against 16–17%. Its ground is a little empty (12% built on against 13–15%). The real place mixes small and big plots more than our size rule can.
-- **Ikoyi still reads tidy.** It still lacks curving roads, a golf course and big empty grounds.
+- **Ikoyi's streets are straight.** The real place curves round its creeks and the golf course; ours runs straight round the course.
+- **Junctions** (40 per km²) are a little below the real 46–51: the golf course takes the place of a block of streets.
 - **The one-way streets** (40%) are logged, not built.
 
-## 7. Questions for Daramola
-1. **The Ikoyi side:** should it get a golf course or a big open ground, the way real Ikoyi has?
-2. **The beach:** is a strip of shacks and bars right, or should it be a few bigger beach clubs (Lekki style)?
+## 7. v3: the owner's decisions (14 Oct 2026)
+- **The golf course:** Heights Golf Club, a 6 ha walled course on the Ikoyi side (real: two courses, 77 ha, in the Ikoyi box). It is carved out before the streets, so they run round it. It has a clubhouse, four greens, two bunkers and a pond, and its pin is at its gate.
+- **Okadas:** the Heights stays hard to reach by okada on purpose. "Nobody goes to the Heights by okada", so a rider who does is out of place. The beach, the club strip and the Gold Island are 470–870 m on foot from the nearest legal road.
+- **Gaps between buildings:** fine for our world as they are (6.7 m against the real 3.4–3.9).
+- **Houses can be big: it's a rich man's area.** The Ikoyi side's typical house is 240 m², against the real 140–146 m², and 24% are over 400 m².
+
+## 8. Architecture (v3)
+The owner asked for variety in architecture. Real Ikoyi has a layer from every era:
+- colonial bungalows from the old reservation
+- 1970s–80s duplexes
+- Mediterranean-style mansions from the oil boom
+- recent modern villas with flat roofs and glass
+
+The Ikoyi side's houses now come in five styles (`styles` in the profile). Each house keeps its kind, a home on the street, and the map draws its walls and roof by style:
+
+| Style | Which houses | In 3D | Count |
+|---|---|---|---|
+| **Colonial bungalow** | one-storey houses | white walls, a red hipped roof | 32 |
+| **Duplex** | most two-to-four-storey houses | cream walls, a brown hipped roof | 67 |
+| **Mediterranean villa** | a third of the rest | warm ochre walls, a terracotta hipped roof | 27 |
+| **Modern villa** | about a fifth of the houses, any size | L-shaped (a back corner left open as a terrace), white walls, a flat grey roof | 42 |
+| **Mansion** | houses over 450 m² | stone walls, a dark slate hipped roof | 38 |
+
+- **Rules:** the style comes from the house's size and its storeys, which still follow the measured height bands. Only the modern villas change shape. The houses on the Victoria Island side keep the plain look, beside its office blocks.
+- **New in the map:** hipped roofs on four-cornered houses, so the traditional styles read as pitched roofs. They are drawn in 3D only; 2D shows footprints.
+- **The walking tool** reports a house's style when you `look` around it.
+
+## 9. Questions for Daramola
+1. **The beach:** is a strip of shacks and bars right, or should it be a few bigger beach clubs?
+2. **More styles?** For example a 1970s concrete block of flats, or a Brazilian-style house like Old Island's. Or should a few of the mansions sit on bigger walled grounds?
 
 ## Files
 - **Study:** `scripts/study_extract.py "Eti Osa" heights "3.418,6.440,3.450,6.462;3.405,6.420,3.440,6.438;3.444,6.455,3.462,6.470"`, then `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_landmarks.py` and `study_isms.py`, all with `heights`. Then `scripts/study_boxheights.py "Eti Osa" "<the same boxes>"` for the height bands. For v2, the VI and Ikoyi boxes alone: `study_extract.py "Eti Osa" hvi "3.405,6.420,3.440,6.438"` and `... hikoyi "3.418,6.440,3.450,6.462"`, each then `study_analyse.py` and `study_core.py`.

@@ -22,7 +22,7 @@ COL = {"front": "#b9a48a", "back": "#a8977f", "shed": "#8f8577", "kiosk": "#6e8f
 PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch": "#bfe3b4", "motor park": "#d6dbe8",
       "bus terminal": "#d6dbe8", "station": "#e6d8ef", "stadium": "#e3e8d6", "under bridge": "#f6d7b0", "estate": "#e4ecd9",
       "lorry park": "#d6dbe8", "park": "#cfe8c4", "sawmill": "#e8dcc8", "government": "#e6e1d3", "garden": "#cfe8c4", "barracks": "#dfe3d0", "airfield": "#d9e8c8", "plazas": "#dcdcdc", "livestock": "#ead9c0", "container yard": "#dcdcdc", "tank farm": "#e4e4e4", "villas": "#dfe8d0", "prison": "#d6d6d6", "truck park": "#d6dbe8", "waterworks": "#dcdcdc", "landfill": "#e6d6bd", "pipeline": "#e3ead8",
-      "compound": "#e4ecd9", "club": "#e4ecd9", "pool": "#8fd0ea", "court": "#c9884f", "palace": "#efe3b8", "forecourt": "#e2d6a8", "square": "#d9ead0", "fountain": "#8fd0ea", "enclave": "#efe3c2"}
+      "compound": "#e4ecd9", "club": "#e4ecd9", "pool": "#8fd0ea", "court": "#c9884f", "palace": "#efe3b8", "forecourt": "#e2d6a8", "square": "#d9ead0", "fountain": "#8fd0ea", "enclave": "#efe3c2", "golf course": "#9fd18b", "green": "#c3ebb0", "bunker": "#efe0b0", "pond": "#8fd0ea"}
 for p in F["parcels"]: ax.fill(*zip(*p["pts"]), fc=PC[p["kind"]], ec="none")
 for b in F["buildings"]: ax.fill(*zip(*b[1:]), fc=COL[b[0]], ec="none", lw=0)
 for l in F["streets"]: ax.plot(*zip(*l), c="#ffffff", lw=2.2, solid_capstyle="round"); ax.plot(*zip(*l), c="#9aa0a6", lw=.4)
