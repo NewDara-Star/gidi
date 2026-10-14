@@ -1,4 +1,4 @@
-# Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v1)
+# Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v2)
 
 Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
 
@@ -110,40 +110,71 @@ OSM traces the buildings well in all three boxes: 121 of Ikoyi's 135 250 m cells
   - houses from the lower two-thirds of the size range; a boys' quarters behind 40%; 40% of plots empty (walled, never built)
 - **How we chose them:** six sweeps, about 100 runs.
 
-## 5. Result vs real (same measuring stick for both)
+## 5. v2: the owner's three answers (14 Oct 2026)
+1. **The Cable Bridge lands on the Frontier.** Kept as built.
+2. **The Victoria Island side.** South of Waterfront Drive, towards the beach, the Heights is now an office-and-hotel grid. North of it stays Ikoyi.
+   - **Measured on its own box,** VI and Ikoyi turn out to be different places:
 
-| | Real, typical km² | Real, dense km² | **Heights** |
+| | Victoria Island alone (typical–dense) | Ikoyi alone (typical–dense) |
+|---|---|---|
+| Buildings/km² | 264–410 | 520–619 |
+| Typical building | 281–293 m² | 140–146 m² |
+| Over 400 m² | 29–33% | 16–17% |
+| T-junctions | 74–80% (a grid: more crossroads) | 67–69% |
+| Main roads, km/km² | 8–10 | 5 |
+| Edge of building to street centreline | 24 m | 23–25 m |
+
+   - **The quarter's rules** (`quarter` in the profile, new in the generator):
+     - more crossroads, few dead ends, no closes
+     - bigger buildings, a few big ones on the main roads
+     - no compound walls and no boys' quarters
+     - its buildings over 400 m² on the street are office or hotel blocks
+   - **Not taller:** Open Buildings gives VI's box the same height bands as Ikoyi's (2% 14+ against 3%), so the quarter takes the district's bands and Pearl Towers stay its only towers.
+3. **Sunday Beach.** Shacks, bars and horse shelters on the sand beyond the shore road (`beach`, new): 22 shacks, 20 bars, 6 horse shelters. The pin is on the middle bar.
+
+The VI side has 59 office or hotel blocks and no compound walls; the Ikoyi side keeps the walls, the 11 gated closes and the Gold Island.
+
+**Calibration:**
+- seed 13, scale 2.5
+- **Ikoyi side:** houses from the whole size range, a third of plots empty
+- **VI side:** as listed under "The quarter's rules" above
+
+## 6. Result vs real (same measuring stick for both)
+Each side against its own box:
+
+| | VI, real | **VI side** | Ikoyi, real | **Ikoyi side** |
+|---|---|---|---|---|
+| Buildings/km² | 264–410 | **355** | 520–619 | **598** |
+| Ground built on | 11–15% | **11%** | 13–15% | **12%** |
+| Typical building | 281–293 m² | **301 m²** | 140–146 m² | **162 m²** |
+| Over 400 m² | 29–33% | **31%** | 16–17% | **12%** |
+
+The whole district against all three boxes:
+
+| | Real, typical km² | Real, dense km² | **Heights v2** |
 |---|---|---|---|
-| Streets, km/km² (edge roads half) | 11.0 | 12.0 | **12.4** |
+| Streets, km/km² (edge roads half) | 11.0 | 12.0 | **12.3** |
 | Main roads, km/km² (edge roads half) | 5.3 | 4.3 | **4.0** |
-| Junctions/km² | 46 | 51 | **49** |
-| T-junctions | 91% | 92% | **90%** |
-| Dead ends per junction | 0.41 | 0.33 | **0.37** |
-| Blocks/km² (counted closed) | 20 | 25 | **25** |
-| Buildings/km² | 378 | 503 | **485** |
-| Ground built on | 12% | 15% | **13%** |
-| Typical house | 218 m² | 239 m² | **252 m²** |
-| Over 400 m² | 28% | 26% | **24%** |
-| Gap between houses | 3.4 m | 3.5 m | **4.2 m** |
-| Front row | 21% | 19% | **16%** |
-| Gates across streets, per km² | 6.1 (mapped) | | **17** |
+| Junctions/km² | 46 | 51 | **43** |
+| T-junctions | 91% | 92% | **83%** (VI alone 74–80%) |
+| Dead ends per junction | 0.41 | 0.33 | **0.35** |
+| Blocks/km² (counted closed) | 20 | 25 | **26** |
+| Gap between buildings | 3.4 m | 3.5 m | **5.3 m** |
+| Gated closes, per km² | 6.1 (mapped) | | **9** (the Ikoyi side only) |
 
-**Checks:** `check_district.py heights` passes all its checks.
+**Checks:** `check_district.py heights` passes all its checks. Beach buildings must stand on the sand, within 60 m of the district and never in the lagoon (a new rule in check 3).
 
 **What doesn't match yet (honest):**
-- **It looks like the Estate.** The numbers match, but the picture is a tidy grid of walled plots. Real Ikoyi has curving roads, a golf course, big empty grounds, and big plots next to clusters of small ones. Ours has the same plot everywhere.
-- **Only one kind of place.** The real study area is three: Ikoyi's leafy compounds, Victoria Island's office and hotel blocks, and Banana Island's enclave. Ours is Ikoyi everywhere, with Victoria Island reduced to three towers and the club strip.
-- **The beach is bare.** It has no shacks and no horses.
-- **Houses** are a little big (252 m² against 218–239) and a little far apart (4.2 m against 3.5).
-- **Gates:** we gate every cul-de-sac (17 per km²); OSM maps 6.1. Mapped gates are a floor, and the model asks for gated cul-de-sacs, so this is a design choice.
+- **Gaps are too wide:** 5.3 m against 3.4–3.9. The VI side's side gardens and empty plots leave its blocks looser than real ones.
+- **Ikoyi's houses are a little big and too even:** typical 162 m² against 140–146, and only 12% over 400 m² against 16–17%. Its ground is a little empty (12% built on against 13–15%). The real place mixes small and big plots more than our size rule can.
+- **Ikoyi still reads tidy.** It still lacks curving roads, a golf course and big empty grounds.
 - **The one-way streets** (40%) are logged, not built.
 
-## 6. Questions for Daramola
-1. **The Cable Bridge** goes to the Frontier, like the real link bridge to Lekki. Is that the crossing you meant, or should it reach somewhere else (the Gold Island, Old Island)?
-2. **Victoria Island:** should part of the Heights become an office-and-hotel quarter (big blocks, towers on the main roads), rather than leafy compounds everywhere?
-3. **Sunday Beach:** a strip of shacks, bars and horse rides on the sand?
+## 7. Questions for Daramola
+1. **The Ikoyi side:** should it get a golf course or a big open ground, the way real Ikoyi has?
+2. **The beach:** is a strip of shacks and bars right, or should it be a few bigger beach clubs (Lekki style)?
 
 ## Files
-- **Study:** `scripts/study_extract.py "Eti Osa" heights "3.418,6.440,3.450,6.462;3.405,6.420,3.440,6.438;3.444,6.455,3.462,6.470"`, then `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_landmarks.py` and `study_isms.py`, all with `heights`. Then `scripts/study_boxheights.py "Eti Osa" "<the same boxes>"` for the height bands.
-- **Generator:** `scripts/gen_fabric.py heights 9 2.5` → `web/gen-heights.json`. `web/network.json` gains the Heights' edges and crossings.
+- **Study:** `scripts/study_extract.py "Eti Osa" heights "3.418,6.440,3.450,6.462;3.405,6.420,3.440,6.438;3.444,6.455,3.462,6.470"`, then `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_landmarks.py` and `study_isms.py`, all with `heights`. Then `scripts/study_boxheights.py "Eti Osa" "<the same boxes>"` for the height bands. For v2, the VI and Ikoyi boxes alone: `study_extract.py "Eti Osa" hvi "3.405,6.420,3.440,6.438"` and `... hikoyi "3.418,6.440,3.450,6.462"`, each then `study_analyse.py` and `study_core.py`.
+- **Generator:** `scripts/gen_fabric.py heights 13 2.5` → `web/gen-heights.json`. `web/network.json` gains the Heights' edges and crossings.
 - **Picture:** `docs/img/heights-vs-real.png`
