@@ -21,6 +21,19 @@
    - Back to the boss: the end of Act 1.
 9. **The reveal, at the end of Act 2.** The Alpha is the boss's associate: the boss set the whole thing up. This betrayal, after an act of exhausting work for the boss, drives the rest of Act 2 and Act 3.
 
+## The opening, in detail (owner, 15 Oct, later)
+- **It opens close to the market.** Tunde walks up to the market thinking about food. The walk-up teaches the basic controls: movement, running, and so on.
+- **The steal.** He steals something; the man he stole from tries to punch or hit him. Punching can be taught in a short mini-game.
+- **The chase is a Subway Surfers-style runner.** People shout "Ole! Ole!"; Tunde runs through the market, ducking things and leaning his head aside. If one person blocks the way, he can kick them, taught as a mini-game.
+- **The rescue.** At the end of the market, the boss pulls him out and rescues him. He says stealing isn't good, and that without the rescue Tunde could have died. Tunde tells his situation: an orphan, no work, nothing to eat, nothing to fall back on, and this is how he survives. The boss gives him an okada on hire purchase, to pay back. The journey starts there.
+- **The owner's doubt:** "I don't know if that story is lovely."
+
+**Claude's suggestions (15 Oct, for the owner):**
+- **Show the hunger in the walk-up; don't tell it.** Coins counted in his hand, slowing at food smells, shooed from a stall. Then the orphan speech isn't needed.
+- **Make the "Ole!" mob a real threat.** The crowd closes in at the end of the chase; someone fetches a tyre (jungle justice, shown with weight). It sets up "you could have died".
+- **Let the rescue show the boss's power.** He steps out and the mob stops dead; nobody argues. Add one hidden hint that he was watching from the start (a look from his canopy, or "I saw you from the start"). It pays off on a replay after the Act 2 reveal: he was recruiting, not saving.
+- **Settle who swings:** the draft says Mama Put (a woman), the owner said a man. Option: Mama Put shouts "Ole!" and her husband or son swings.
+
 ## Decisions (owner, 15 Oct)
 - Cap at 3 bikes.
 - Bribes and fines are easy to afford.
