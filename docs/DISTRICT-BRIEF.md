@@ -14,8 +14,8 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 
 ## Order
 Districts share edge roads through `web/network.json`. **Never work on two neighbouring districts at the same time.**
-- **Done:** maze, hub, jungle, foodgate, watertown, capital, bazaar, port, railside, estate, oldisland, heights, frontier, oldshore
-- **Then:** border
+- **Done:** maze, hub, jungle, foodgate, watertown, capital, bazaar, port, railside, estate, oldisland, heights, frontier, border, oldshore
+- **Then:** none: all fifteen districts are built
 - **Safe in parallel** (they don't touch each other): border + oldshore, or frontier + bazaar. Check `scripts/map02.py` polygons when unsure.
 
 ## District → inspiration (OSM `name` of the LGA, as in `adm6.geojson`)
@@ -59,8 +59,8 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - its own style
    - Keep the network rules: shared edge roads, gateways, arterials crossed at real angles, and no block bigger than the real 90th percentile.
    - **Compare blocks the fair way:** use `blocks_per_km2_closed` from `study_core.py`, which counts the real square's blocks with its border closed, as a Gidi district's edge roads close it. The old open count shows about half. `sector_split_ha` (collector streets) is the main lever; `spurs` adds dead-end side streets without new blocks.
-   - **When a neighbour of a finished district is built,** give the finished one `keep_gateways` and rebuild it, so it keeps regenerating byte-identical (the Hub, Jungle City, Food Gate, Water Town, the Capital, the Bazaar, Old Island and the Heights have it).
-   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), the Capital seed 3, scale 3.8, the Bazaar seed 9, scale 3.4, the Port seed 11, scale 4.5, Railside seed 7, scale 1.5, the Estate seed 3, scale 4.8, Old Island seed 11, scale 1.6, the Heights seed 13, scale 2.5, the Frontier seed 5, scale 3.8, and Old Shore seed 6, scale 4.4. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
+   - **When a neighbour of a finished district is built,** give the finished one `keep_gateways` and rebuild it, so it keeps regenerating byte-identical (the Hub, Jungle City, Food Gate, Water Town, the Capital, the Bazaar, Old Island, the Heights and Railside have it).
+   - Calibrate with the spacing scale and seeds until the metrics sit between the real "typical" and "dense" squares. The Maze v2 used seed 57, scale 1.8, the Hub seed 23, scale 2.4, Jungle City seed 71, scale 2.2, Food Gate seed 3, scale 1.4, Water Town seed 21, scale 2.1 (fingers to the shore), the Capital seed 3, scale 3.8, the Bazaar seed 9, scale 3.4, the Port seed 11, scale 4.5, Railside seed 7, scale 1.5, the Estate seed 3, scale 4.8, Old Island seed 11, scale 1.6, the Heights seed 13, scale 2.5, the Frontier seed 5, scale 3.8, the Border seed 1, scale 6.0, and Old Shore seed 6, scale 4.4. Sweep with `GIDI_TUNE='{"back_row": 0.45}'` and similar settings.
 4. **Check:**
    - Run `scripts/draw_gen.py <id> out.png real` and look at it.
    - Run `python3 scripts/check_district.py <id>`. All checks must pass: 0 houses on roads, 0 overlaps, 0 neighbour streets inside, edge roads match `network.json`, the neighbours' gateways are continued, every lane, path and footbridge is joined to the network, and every building is within 45 m of a way.
@@ -73,10 +73,27 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - Regenerating keeps them exactly, and check 12 fails if any of them moves.
      - To re-record them on purpose, run the generator with `GIDI_LOCK=write`. Locks that already exist are kept.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
-6. **City living test:** every district ends with this test.
+6. **3D pass:** the 3D view is the test of the 2D map. A new district gets its 3D automatically: the Blender kit styles every building, plot, road and place from the data by rule (`docs/LAGOS-LOOK.md`). Nothing is modelled by hand per district. The district's character (`CHARACTER` in `blender/gidi_kit/rules.py`: dense, sprawl, old_island, elite, civic, waterfront or port) picks its styles. All 15 districts have one already.
+   - Build its tiles: `python3 blender/city_run.py --detail web --only "<tx,ty;...>"` for the district's tiles, or the whole city. Add `--detail full` for the close-up build.
+   - Run the 3D audit: `.venv/bin/python scripts/audit3d.py <id>` (it needs shapely: `.venv/bin/pip install shapely numpy networkx`). It writes `docs/audit/<id>.md` and adds the district's row to `docs/audit/README.md`.
+   - **Map problems (R1 to R6, D) are fixed in the 2D map, in the generator, never patched in 3D:**
+     - roads running along each other
+     - ends that stop short of a road or run past it
+     - knife-edge crossings
+     - roads over water with no bridge
+     - decks with no road
+     - roads listed twice
+     If it looks wrong in 3D, the map is wrong in that spot.
+   - **Model gaps (M1 to M4) are kit work.** The 3D audit lists them:
+     - a building or parcel kind the kit has no builder for (M1, M2)
+     - a named landmark with no model of its own (M3: give it an entry in `blender/gidi_kit/landmarks.py`)
+     - a place on the map with nothing of its kind under it (M4: usually a map fix, such as a pitch drawn on a house)
+     Research the real thing (`docs/look/`), add the kit piece, render its contact sheet and check it, rebuild, and re-audit until M1 to M3 are 0.
+   - Open `web/gidi-maps.html` in 3D (serve the repo root), zoom into the district, and look at its markets, junctions, bridges and landmarks. It should read as Lagos.
+7. **City living test:** every district ends with this test.
    - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.
    - Verify every problem the agents report, fix the real ones, and write `docs/living-test-<date>.md` with the standard-trips table.
-7. **Report and PR:**
+8. **Report and PR:**
    - Commit, push the branch and open a PR. Show the owner the side-by-side picture and the match table: what matched, what didn't, and why.
    - After the owner merges, republish `web/gidi-maps.html` to the live map (https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP; read it first, then publish to that URL), so the city map grows district by district.
 

@@ -108,7 +108,7 @@
   {"name":"Border Post","type":"check","u":0.05,"v":0.35,"note":"The edge of the map. Rice and fuel come through."},
   {"name":"Checkpoint Mile","type":"check","u":0.45,"v":0.5,"note":"Different agencies, each wanting money."},
   {"name":"Coconut Beach","type":"water","u":0.6,"v":0.08,"note":"Palm beach. Weekend crowds."},
-  {"name":"Heritage Strip","type":"landmark","u":0.75,"v":0.7,"note":"Old colonial buildings with balconies. Quiet scenery, not crime turf."},
+  {"name":"Heritage Strip","type":"landmark","safe":true,"u":0.75,"v":0.7,"note":"Old colonial buildings with balconies. Quiet scenery, not crime turf."},
   {"name":"Bush Paths","type":"danger","u":0.3,"v":0.85,"note":"50+ paths around the checkpoints."}
  ]},
 "capital": {

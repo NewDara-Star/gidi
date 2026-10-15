@@ -382,6 +382,7 @@ def railside(ST, LM):
         "zone": {"poi": "Ayo Bakery Row", "r_m": 70, "kind": "bakery", "min_m2": 50, "storeys": [1, 2], "kiosk_every_m": 1000},   # house fronts turned into bakeries
         "pipeline": {"poi": "Pipeline Corridor", "bearing_deg": 20, "width_m": 24},   # the line's cleared right of way
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "keep_gateways": True,   # the Border was built after it: its crossings with the Border (and all others) stay as agreed
         "fence_parcels": True, "rail_frontage": True, "clear_access": True,
     }
 
@@ -623,7 +624,47 @@ def oldshore(ST, LM):
         "fence_parcels": True, "clear_access": True,
     }
 
+def border(ST, LM):
+    """The Border: Badagry (study-border*, a box on the Lagos-Badagry Expressway inside Badagry LGA, and a coastal box, bordercoast).
+    The local OSM extract starts at about 3.05 E, so Badagry town, its colonial quarter and the border at Seme are outside it: only the
+    LGA's eastern strip is studied. There OSM maps few streets and almost no buildings (27 in 25 km2), though WorldCover counts 47% of the
+    land built up: building figures are estimated (scripts/study_undermapped.py, with the box's own WorldCover share), sizes from Railside's
+    sprawl. Heights from the box (Open Buildings). The district model: a long road of checkpoints, bush paths round them, coconut beaches
+    and fishing villages, colonial two-storey houses with long balconies, a border post."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el
+    return {
+        "lgas": ["Badagry"],
+        # storeys 1, 2, 3, 4, 5-6, 7-13, 14+ by built area, on the expressway box (Open Buildings 2.5D): 68/31/1/0/0/0/0
+        "h_bands": [0.678, 0.311, 0.0098, 0.0011, 0.0003, 0.0003, 0.0],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.1, "cross_scale": 2.5, "dead_end": 0.9,
+        "sector_split_ha": 60,
+        "spurs": {"spur_every_m": 140, "spur_m": [40, 110]},   # sprawl: real 0.38-0.92 dead ends per junction
+        "size_lo_u": 0.0, "plot_u": [0.3, 0.8], "back_row": 0.8, "courtyard_m": [1, 2.5], "big_front": 0.02, "vacant": 0.2,   # estimated typical house 120 m2; compounds with back houses
+        "vacant_blocks": {"share": 0.25, "vacant": 0.95, "built_vacant": 0.12},   # a quarter of the blocks left as bush and coconut palms (WorldCover: 33% trees in the box)
+        "internal_mains": 1, "t_into_done": True,   # its main road meets the finished neighbours' edge roads in a T, no new crossing
+        "name_endings": {"Street": 6, "Road": 4, "Close": 1},
+        # the border post at the map's west edge: booths and a canopy across the expressway
+        "toll_plaza": {"poi": "Border Post", "road": "Coastal Expressway", "booths": 5, "booth": "border booth", "canopy": "border canopy"},
+        # Checkpoint Mile: a post every few hundred metres along the expressway, different agencies, drums across the road
+        "checkpoints": {"poi": "Checkpoint Mile", "road": "Coastal Expressway", "first_m": 120, "every_m": [140, 220]},
+        # the bush paths round them (district model: "50+ paths around the checkpoints")
+        "bush_paths": {"poi": "Bush Paths", "r_m": 700, "n": 14, "len_m": [150, 450]},
+        # the fishing village on the shore by the beach: the houses round the pin are fishermen's huts
+        "zone": {"poi": "Coconut Beach", "r_m": 170, "kind": "fishing hut", "min_m2": 0, "storeys": [1, 1], "kiosk_every_m": 80},
+        # the heritage strip: colonial two-storey houses with long balconies (scenery, never crime turf: safe ground)
+        "relabels": [{"poi": "Heritage Strip", "r_m": 110, "from": ["front"], "kind": "colonial house", "min_m2": 80}],
+        "parcels": [
+            {"kind": "school", "ha": 0.6, "near_main": False, "gate": "nearest", "min_w": 50},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier, "oldshore": oldshore}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier, "border": border, "oldshore": oldshore}.get(did, lambda ST, LM: {})(ST, LM)

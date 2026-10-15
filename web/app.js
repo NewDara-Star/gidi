@@ -286,7 +286,7 @@
     const is3d = dim === "3d";
     const dimBox = h("div", { className: "dim ui" },
       h("div", { className: "seg", role: "group", "aria-label": "Map view" },
-        h("button", { id: "dim2d", "aria-pressed": !is3d, onClick: () => setDim("2d") }, "2D"),
+        h("button", { id: "dim2d", "aria-pressed": dim === "2d", onClick: () => setDim("2d") }, "2D"),
         h("button", { id: "dim3d", "aria-pressed": is3d, onClick: () => setDim("3d") }, "3D")),
       is3d && h("button", { className: "compass", "aria-label": "Turn the map to face north", onClick: () => api3d.current && api3d.current.north() }, h("span", { id: "compass3d" })));
     const controls3d = h("div", { className: "controls ui" },
