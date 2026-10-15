@@ -58,6 +58,29 @@
   const footPaths = Object.entries(G.paths || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
   const wallPaths = Object.entries(G.walls || {}).map(([k, v]) => [k, v.map(pts2d).join("")]);
   const gatePath = (G.gates || []).map((q) => pts2d(q.pts)).join("");
+  // Open gutters (ism 15, scripts/isms.py): runs beside the roads, open or slab-covered, blocked stretches, and plank/slab crossings
+  const subPts = (pts, a, b) => {   // the part of a polyline between two distances along it
+    const res = []; let t = 0;
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const [x0, y0] = pts[i], [x1, y1] = pts[i + 1], L = Math.hypot(x1 - x0, y1 - y0);
+      if (t + L > a && t < b && L > 0) {
+        const u0 = Math.max(0, (a - t) / L), u1 = Math.min(1, (b - t) / L);
+        if (!res.length) res.push([x0 + (x1 - x0) * u0, y0 + (y1 - y0) * u0]);
+        res.push([x0 + (x1 - x0) * u1, y0 + (y1 - y0) * u1]);
+      }
+      t += L;
+    }
+    return res;
+  };
+  const gutterPath = { open: "", covered: "", rubbish: "", green_water: "", slab: "", plank: "" };
+  (G.gutters || []).forEach((r) => {
+    gutterPath[r.state] += pts2d(r.pts);
+    (r.blocked || []).forEach((b) => { const sp = subPts(r.pts, b.from, b.to); if (sp.length > 1) gutterPath[b.fill] += pts2d(sp); });
+  });
+  (G.gutter_crossings || []).forEach((c) => {
+    const a = c.ang * Math.PI / 180, dx = Math.cos(a) * c.w / 2, dy = Math.sin(a) * c.w / 2;
+    gutterPath[c.kind] += "M" + (c.pt[0] - dx).toFixed(1) + " " + (c.pt[1] - dy).toFixed(1) + "L" + (c.pt[0] + dx).toFixed(1) + " " + (c.pt[1] + dy).toFixed(1);
+  });
   const mainsPath = G.mains.map((m, i) => ({ id: "main" + i, d: pts2d(m.pts), name: m.name, district: m.d }));
 
   // Search index
@@ -100,6 +123,13 @@
         Object.entries(streetPaths).map(([k, d]) => h("path", { key: "s" + k, d, className: "st", style: { strokeWidth: w(6, 0.9) } })),
         mainsPath.map((m) => h("path", { key: m.id + "c", d: m.d, className: "mn-case", style: { strokeWidth: w(15, 2.6) } })),
         mainsPath.map((m) => h("path", { key: m.id, id: m.id, d: m.d, className: "mn", style: { strokeWidth: w(11, 1.8) } }))),
+      layers.gutters && z > 1.2 && h("g", { pointerEvents: "none", fill: "none", strokeLinecap: "butt", strokeLinejoin: "round" },
+        h("path", { d: gutterPath.covered, className: "gut-cov", style: { strokeWidth: w(0.8, 0.9) } }),
+        h("path", { d: gutterPath.open, className: "gut-open", style: { strokeWidth: w(0.8, 0.9) } }),
+        h("path", { d: gutterPath.rubbish, className: "gut-rubbish", style: { strokeWidth: w(0.8, 0.9) } }),
+        h("path", { d: gutterPath.green_water, className: "gut-green", style: { strokeWidth: w(0.8, 0.9) } }),
+        h("path", { d: gutterPath.plank, className: "gut-plank", style: { strokeWidth: w(1.3, 1.4) } }),
+        h("path", { d: gutterPath.slab, className: "gut-slab", style: { strokeWidth: w(1.5, 1.6) } })),
       G.boardwalks && h("g", { pointerEvents: "none" }, G.boardwalks.map((b, i) => h("path", { key: i, d: pts2d(b), className: "boardwalk", style: { strokeWidth: w(3, 1) } }))),
       h("g", { pointerEvents: "none" },
         G.arterials.map((a, i) => h("path", { key: "ac" + i, d: pts2d(a.pts), className: "ar-case " + a.cls, style: { strokeWidth: w(a.cls === "exp" ? 34 : 26, a.cls === "exp" ? 5.5 : 4.5) } })),
@@ -128,7 +158,7 @@
     const wrap = useRef(null);
     const [size, setSize] = useState({ w: 1000, h: 700 });
     const [view, setView] = useState(null); // {cx, cy, z} z = px per metre
-    const [layers, setLayers] = useState(() => ({ civic: true, ...load("gidi-layers", { acts: true, okada: true, rail: true, ferries: true, places: true, names: true, civic: true }) }));
+    const [layers, setLayers] = useState(() => ({ civic: true, gutters: true, ...load("gidi-layers", { acts: true, okada: true, rail: true, ferries: true, places: true, names: true, civic: true }) }));
     const [sel, setSel] = useState(null); // {kind, id}
     const [q, setQ] = useState("");
     const [focusSearch, setFocusSearch] = useState(false);
@@ -281,7 +311,7 @@
               h("button", { onMouseDown: (e) => e.preventDefault(), onClick: () => { select(r); setQ(""); document.activeElement.blur(); } },
                 h("span", { className: "rn" }, r.name), h("span", { className: "rs" }, r.sub)))))),
         h("div", { className: "chips" },
-          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"]].map(([k, t]) =>
+          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"], ["gutters", "Gutters"]].map(([k, t]) =>
             h("button", { key: k, className: "chip" + (layers[k] ? " on" : ""), "aria-pressed": layers[k], onClick: () => setLayers({ ...layers, [k]: !layers[k] }) }, t))));
     const is3d = dim === "3d";
     const dimBox = h("div", { className: "dim ui" },

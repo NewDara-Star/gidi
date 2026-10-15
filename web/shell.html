@@ -9,7 +9,7 @@
   --st:#ffffff; --st-case:#dcd8cf; --mn:#ffffff; --mn-case:#c9c3b6;
   --bld:#e2dccf; --bld-edge:#cfc7b6; --p-market:#f6dfc2; --p-industrial:#e3e3e6; --p-school:#f3ebc4; --p-pitch:#cfe8c4; --p-park:#d9dde8;
   --ar:#fde49b; --ar-case:#e7b64a; --exp:#f7c26b; --exp-case:#d9912b; --bridge:#ffffff; --bridge-case:#9aa0a6;
-  --rail:#7d7d7d; --rail-case:#ffffff; --ferry:#3b8fd9; --board:#a88a63;
+  --gut:#7b8794; --gut-rub:#9a7b4f; --gut-grn:#5f8a4a; --gut-slab:#b9b3a4; --rail:#7d7d7d; --rail-case:#ffffff; --ferry:#3b8fd9; --board:#a88a63;
   --a1:#1e8e3e; --a2:#e09b00; --a3:#d93025; --ban:#d93025; --sweep:#e37400;
   --fg:#202124; --fg2:#5f6368; --fg3:#80868b; --panel:#ffffff; --line:#e3e3e3; --hover:#f1f3f4; --accent:#1a73e8;
   --shadow:0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
@@ -21,7 +21,7 @@
   --st:#3b4350; --st-case:#232830; --mn:#4c5566; --mn-case:#1f242b;
   --bld:#3a3f47; --bld-edge:#2f343b; --p-market:#4a3f33; --p-industrial:#363a40; --p-school:#46432f; --p-pitch:#2f4232; --p-park:#333a48;
   --ar:#7d6a3f; --ar-case:#3d3322; --exp:#a07a33; --exp-case:#4a3816; --bridge:#c8ccd2; --bridge-case:#1d2127;
-  --rail:#9aa0a6; --rail-case:#2a2f36; --ferry:#6aa9e8; --board:#8a7458;
+  --gut:#6b7686; --gut-rub:#9a7b4f; --gut-grn:#6fa056; --gut-slab:#8a8678; --rail:#9aa0a6; --rail-case:#2a2f36; --ferry:#6aa9e8; --board:#8a7458;
   --a1:#5bb974; --a2:#f2bf42; --a3:#f28b82; --ban:#f28b82; --sweep:#fcad70;
   --fg:#e8eaed; --fg2:#bdc1c6; --fg3:#9aa0a6; --panel:#202124; --line:#3c4043; --hover:#2d2e31; --accent:#8ab4f8;
   --shadow:0 1px 3px rgba(0,0,0,.5),0 4px 10px rgba(0,0,0,.35); --label-halo:#202124; --water-label:#7fa8d6; color-scheme:dark;}}
@@ -30,7 +30,7 @@
   --st:#3b4350; --st-case:#232830; --mn:#4c5566; --mn-case:#1f242b;
   --bld:#3a3f47; --bld-edge:#2f343b; --p-market:#4a3f33; --p-industrial:#363a40; --p-school:#46432f; --p-pitch:#2f4232; --p-park:#333a48;
   --ar:#7d6a3f; --ar-case:#3d3322; --exp:#a07a33; --exp-case:#4a3816; --bridge:#c8ccd2; --bridge-case:#1d2127;
-  --rail:#9aa0a6; --rail-case:#2a2f36; --ferry:#6aa9e8; --board:#8a7458;
+  --gut:#6b7686; --gut-rub:#9a7b4f; --gut-grn:#6fa056; --gut-slab:#8a8678; --rail:#9aa0a6; --rail-case:#2a2f36; --ferry:#6aa9e8; --board:#8a7458;
   --a1:#5bb974; --a2:#f2bf42; --a3:#f28b82; --ban:#f28b82; --sweep:#fcad70;
   --fg:#e8eaed; --fg2:#bdc1c6; --fg3:#9aa0a6; --panel:#202124; --line:#3c4043; --hover:#2d2e31; --accent:#8ab4f8;
   --shadow:0 1px 3px rgba(0,0,0,.5),0 4px 10px rgba(0,0,0,.35); --label-halo:#202124; --water-label:#7fa8d6; color-scheme:dark;}
@@ -51,6 +51,7 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
 .parcel.bus-terminal{fill:var(--p-park)} .parcel.station{fill:var(--p-industrial)} .parcel.stadium{fill:color-mix(in srgb,var(--p-pitch) 45%,var(--land))} .parcel.under-bridge{fill:var(--p-market)} .parcel.estate{fill:color-mix(in srgb,var(--p-pitch) 35%,var(--land))} .parcel.lorry-park{fill:var(--p-park)} .parcel.park{fill:var(--p-pitch)} .parcel.sawmill{fill:var(--p-industrial)} .parcel.government{fill:var(--p-industrial)} .parcel.garden{fill:var(--p-pitch)} .parcel.barracks{fill:color-mix(in srgb,var(--p-pitch) 35%,var(--land))} .parcel.airfield{fill:color-mix(in srgb,var(--p-pitch) 60%,var(--land))} .parcel.plazas{fill:var(--p-industrial)} .parcel.livestock{fill:var(--p-market)} .parcel.container-yard{fill:var(--p-industrial)} .parcel.tank-farm{fill:var(--p-industrial)} .parcel.villas{fill:color-mix(in srgb,var(--p-pitch) 50%,var(--land))} .parcel.prison{fill:var(--p-industrial)} .parcel.truck-park{fill:var(--p-park)} .parcel.waterworks{fill:var(--p-industrial)} .parcel.landfill{fill:color-mix(in srgb,var(--p-market) 60%,var(--land))} .parcel.pipeline{fill:color-mix(in srgb,var(--p-pitch) 40%,var(--land))}
 .fly{stroke:var(--bridge);fill:none;stroke-linecap:butt} .fly-case{stroke:var(--bridge-case);fill:none;stroke-linecap:butt} .skywalk{stroke:var(--bridge-case);fill:none;stroke-linecap:butt}
 .wall{stroke:var(--bld-edge);fill:none;opacity:.8} .gate{stroke:#d93025;fill:none;stroke-linecap:butt} .parcel.compound,.parcel.club{fill:color-mix(in srgb,var(--p-pitch) 45%,var(--land))} .parcel.pool{fill:var(--water)} .parcel.court{fill:var(--p-market)} .parcel.refinery{fill:var(--p-industrial)} .parcel.golf-course{fill:color-mix(in srgb,#7cc46a 55%,var(--land))} .parcel.green{fill:color-mix(in srgb,#9be08a 70%,var(--land))} .parcel.bunker{fill:color-mix(in srgb,#e8d49a 70%,var(--land))} .parcel.pond{fill:var(--water)} .parcel.enclave{fill:color-mix(in srgb,#e8d9a8 55%,var(--land))} .parcel.barge-yard{fill:var(--p-industrial)} .parcel.palace,.parcel.square{fill:color-mix(in srgb,var(--p-pitch) 45%,var(--land))} .parcel.forecourt{fill:color-mix(in srgb,var(--p-market) 50%,var(--land))} .parcel.fountain{fill:var(--water)}
+.gut-open{stroke:var(--gut)} .gut-cov{stroke:var(--gut);opacity:.35;stroke-dasharray:2 1.5} .gut-rubbish{stroke:var(--gut-rub)} .gut-green{stroke:var(--gut-grn)} .gut-plank{stroke:var(--board)} .gut-slab{stroke:var(--gut-slab)}
 .lane{stroke:var(--st);fill:none;stroke-linecap:round;opacity:.9} .footpath{stroke:var(--board);fill:none;stroke-linecap:round} .canal{stroke:var(--water-edge);fill:none;stroke-linecap:round}
 .st{stroke:var(--st);fill:none;stroke-linecap:round;stroke-linejoin:round} .st-case{stroke:var(--st-case);fill:none;stroke-linecap:round;stroke-linejoin:round}
 .mn{stroke:var(--mn);fill:none;stroke-linecap:round} .mn-case{stroke:var(--mn-case);fill:none;stroke-linecap:round}

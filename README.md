@@ -18,6 +18,7 @@ That master plan is what gets carried into Unreal.
 | `scripts/landmarks.py` | Big pieces laid out before the street fabric: the interchange knot (flyovers, slip roads, skywalks), terminals, stations, stadiums. |
 | `scripts/check_district.py` | Checks a generated district: no house on a road, no overlaps, edges match `network.json`, neighbours' gateways continued, storeys valid. |
 | `scripts/draw_gen.py` | Side-by-side check picture: generated district vs a real 1 km square. |
+| `scripts/isms.py`, `web/isms-edits.json` | The Lagos-isms placed by rule, run inside the bake after the roads are final (one function per ism; so far open gutters with plank and slab crossings). Hand edits in `web/isms-edits.json` always win. Schema in `docs/ISMS-BUILD.md`. |
 | `scripts/bake_web.py` | Bakes everything into `web/gidi-data.js` for the 2D map (`web/shell.html` + `web/app.js`). |
 | `web/network.json` | **Shared state between districts:** edge roads and gateways. Always pull before working. |
 | `data/results/lga_table.json` | Per local government area: building heights (storey bands), people per km², tree/built-up cover, surface height. |
@@ -42,7 +43,7 @@ That master plan is what gets carried into Unreal.
 - **Done:** Old Shore (old Ikorodu across the lagoon: a fish market with smoking racks, a ferry jetty, a founder's statue on the garage roundabout, an old quarter with its king's palace, a barge yard), see `docs/oldshore-pattern-study.md`.
 - **Safe ground in the data:** every church, mosque, school, hospital and clinic, and the Palace, carries `"safe": true` in `web/gidi-data.js`, and `safe_ground` lists each one's plot, so the game never sets a crime there or routes a chase through it.
 - **Pins at gates:** a named place inside a fenced or walled plot has its pin at the plot's gate on the street.
-- **Lagos-isms:** the real data's eccentricities, logged for the owner's "feel like Lagos" pass: `docs/LAGOS-ISMS.md`.
+- **Lagos-isms:** the real data's eccentricities, logged for the owner's "feel like Lagos" pass: `docs/LAGOS-ISMS.md`. Being built in groups, plan in `docs/ISMS-BUILD.md`; group 1 (open gutters) is in the data and the 2D map.
 - **Lagos look:** a seeded Blender kit that builds the whole city from its data (every building, plot, road, landmark, vehicle and boat), shown in the map's 3D view: `docs/LAGOS-LOOK.md`, code in `blender/`. The 3D audit (`scripts/audit3d.py`, `docs/audit/`) checks each district.
 - **City living test:** `docs/CITY-LIVING-TEST.md`; latest run `docs/living-test-2026-10-15m.md`.
 - **Next:** one district per session. See `docs/DISTRICT-BRIEF.md`.

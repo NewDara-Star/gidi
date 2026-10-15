@@ -344,6 +344,37 @@ def check_everyday(did, G, limit=833, hard=1250):
     return bad, "; ".join(txt)
 
 
+def check_gutters(did, G, bg):
+    """14: open gutters (ism 15): nothing blocked within 12 m of safe ground; every crossing lies on an open run; no open run runs through a house;
+    blocked stretches lie inside their run; no gutter in the water."""
+    runs = [r for r in G.get("gutters", []) if r.get("d") == did]
+    if not G.get("gutters"):
+        return None, "not baked yet"
+    safe = unary_union([poly(s["pts"]).buffer(12) for s in G["safe_ground"] if s["d"] == did and len(s["pts"]) >= 3])
+    ids = {r["id"]: r for r in G["gutters"]}
+    water = unary_union([poly(w) for w in G["water"] + G["ocean"]])
+    tree = STRtree(bg)
+    bad = []
+    for r in runs:
+        ln = line(r["pts"])
+        for b in r.get("blocked", []):
+            if not (0 <= b["from"] < b["to"] <= r["len"] + 1):
+                bad.append((1, "blocked range outside %s" % r["id"]))
+            elif not safe.is_empty and ln.distance(safe) == 0 and line([ln.interpolate(b["from"]).coords[0], ln.interpolate(b["to"]).coords[0]]).intersects(safe):
+                bad.append((2, "blocked on safe ground %s" % r["id"]))
+        if r["state"] == "open":
+            if sum(bg[i].intersection(ln).length for i in tree.query(ln)) > 2.5 and not r.get("hand"):   # a corner clipped between two samples is not a house on the gutter
+                bad.append((2, "open gutter through a house %s" % r["id"]))
+        if ln.intersects(water):
+            bad.append((2, "gutter in water %s" % r["id"]))
+    for c in G.get("gutter_crossings", []):
+        r = ids.get(c["gutter"])
+        if r is not None and r.get("d") == did and r["state"] != "open":
+            bad.append((1, "crossing on a covered run %s" % c["id"]))
+    n = sum(1 for c in G.get("gutter_crossings", []) if ids.get(c["gutter"], {}).get("d") == did)
+    return len(bad), "%d runs, %d crossings. %s" % (len(runs), n, worst(bad))
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
@@ -364,6 +395,7 @@ def run(did):
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
     add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
+    add("14 gutters", check_gutters(did, G, bg))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

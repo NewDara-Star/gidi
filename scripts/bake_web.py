@@ -337,6 +337,12 @@ for d in out["districts"]:
     out["okada_ban"].append(entry)
 print("okada ban zones:",[(e["district"],e["built"],len(e["checkpoints"])) for e in out["okada_ban"]])
 
+# ---- Lagos-isms (scripts/isms.py, hand edits in web/isms-edits.json): placed by rule, after the roads are final and the safe ground is listed
+import isms
+_ir,_iw=isms.run(out)
+print("isms:",{k:{"km":round(sum(s["open_m"]+s["covered_m"] for s in v.values())/1000)} for k,v in _ir.items()},len(out["gutters"]),"gutter runs,",len(out["gutter_crossings"]),"crossings")
+for _s in _iw: print("  isms-edits warning:",_s)
+
 def rd(o):
     if isinstance(o,float): return round(o,1)
     if isinstance(o,list): return [rd(x) for x in o]
