@@ -408,7 +408,7 @@
       dimBox,
       layers.plan && z > 1.6 && planClip && h("div", { className: "plan-legend ui" },
         h("b", null, "Ground plan"),
-        [["walk", "walkway"], ["gutter", "gutter (open drain)"], ["spill", "market spill (on purpose)"], ["light", "street light"], ["pole", "electricity pole"],
+        [["walk", "walkway"], ["gutter", "gutter (open drain)"], ["spill", "market street: traders on the road (on purpose)"], ["light", "street light"], ["pole", "electricity pole"],
          ["transformer", "transformer"], ["signal", "traffic light"], ["bus", "bus stop"], ["lasma", "LASMA post"], ["island", "roundabout island"]].map(([k, t]) =>
           h("div", { key: k, className: "lg" }, h("i", { className: "sw-" + k }), t))),
       h("div", { className: "scale ui" },

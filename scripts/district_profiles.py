@@ -209,7 +209,7 @@ def foodgate(ST, LM):
         "infill": {"block_fill": 0.44, "touch": 0.85, "small_share": 0.18, "small_m2": [8, 38], "room_m2": [50, 170]},   # real block fill 46%, 23% under 40 m2
         "market_mass": {"fill": 0.74, "small_share": 0.2, "small_m2": [8, 40], "shed_m2": [60, 400], "skew_deg": 12, "aisle_m": 3.0,
                         "grow": 0.93, "alley_share": 0.15, "alley_m": 1.8,   # Mile 12: big sheds built onto each other, narrow alleys
-                        "spill_m": 90, "spill_density": 0.7},
+                        "spill_m": 90, "spill_density": 0.7, "market_density": 0.9},   # market streets: packed, table after table
     }
 
 def watertown(ST, LM):
