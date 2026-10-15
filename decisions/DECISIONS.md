@@ -1,7 +1,15 @@
 # Decisions (the owner's; newest first)
 
 ## The world
-- **Open world first; narrative optional** (15 Oct 2026). "The entire world right now feels more placeholder and open world for me than having a set narrative." Districts are defined by what a player can do and meet there. Story may come later as layers, or not at all. Don't push plot or characters.
+- **The story: Tunde's** (15 Oct 2026). The owner's confirmed story points live in `decisions/story/acts-2-3-draft.md`:
+  - oja is weed, carried as cargo
+  - the boss's 360 debt and the company bike
+  - "how did you not know how your bike got stolen?"
+  - freeing other boys from the same trap
+  - the standoff ending
+
+  Act 1 is the first build target, and the characters get written next.
+- **Open world first; narrative optional** (15 Oct 2026). "The entire world right now feels more placeholder and open world for me than having a set narrative." Districts are defined by what a player can do and meet there. The world comes first and is built to stand on its own; Tunde's story is layered on it. Don't push plot or characters beyond what the owner has confirmed.
 - **Gidi is our city.** Inspired by Lagos but our own. Data is a starting point; the owner's vision and the game's needs win.
 - **Invented names only.** No real Lagos names or geometry in the game; shapes are drawn fresh, never traced.
 - **Safe ground:** churches, mosques, schools, hospitals, clinics and places flagged `safe` are never crime sites. Sacred traditions are never criminal.

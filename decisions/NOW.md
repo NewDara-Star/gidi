@@ -14,6 +14,8 @@
 3. A renaming pass (parallel builds can clash on street names).
 4. Show the owner, then freeze each district.
 
+**Story (owner):** write the characters next (`decisions/story/`). Paste `gidi-act1-draft.md` and `gidi-performance-capture.md` into the repo from the other account.
+
 **Later:**
 - the look pass from the references
 - kerbs (roads pass 4)
