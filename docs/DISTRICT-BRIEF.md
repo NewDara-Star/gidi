@@ -73,10 +73,27 @@ Use `data/results/lga_table.json` for storeys, people, trees and terrain for eac
      - Regenerating keeps them exactly, and check 12 fails if any of them moves.
      - To re-record them on purpose, run the generator with `GIDI_LOCK=write`. Locks that already exist are kept.
 5. **Bake and look:** `python3 scripts/bake_web.py` then `python3 scripts/build_viewer.py`. This writes `web/gidi-maps.html`, the one-page map with the 2D/3D toggle. Open it, check your district in 2D and 3D, and look before publishing.
-6. **City living test:** every district ends with this test.
+6. **3D pass:** the 3D view is the test of the 2D map. A new district gets its 3D automatically: the Blender kit styles every building, plot, road and place from the data by rule (`docs/LAGOS-LOOK.md`). Nothing is modelled by hand per district. The district's character (`CHARACTER` in `blender/gidi_kit/rules.py`: dense, sprawl, old_island, elite, civic, waterfront or port) picks its styles. All 15 districts have one already.
+   - Build its tiles: `python3 blender/city_run.py --detail web --only "<tx,ty;...>"` for the district's tiles, or the whole city. Add `--detail full` for the close-up build.
+   - Run the 3D audit: `.venv/bin/python scripts/audit3d.py <id>` (it needs shapely: `.venv/bin/pip install shapely numpy networkx`). It writes `docs/audit/<id>.md` and adds the district's row to `docs/audit/README.md`.
+   - **Map problems (R1 to R6, D) are fixed in the 2D map, in the generator, never patched in 3D:**
+     - roads running along each other
+     - ends that stop short of a road or run past it
+     - knife-edge crossings
+     - roads over water with no bridge
+     - decks with no road
+     - roads listed twice
+     If it looks wrong in 3D, the map is wrong in that spot.
+   - **Model gaps (M1 to M4) are kit work.** The 3D audit lists them:
+     - a building or parcel kind the kit has no builder for (M1, M2)
+     - a named landmark with no model of its own (M3: give it an entry in `blender/gidi_kit/landmarks.py`)
+     - a place on the map with nothing of its kind under it (M4: usually a map fix, such as a pitch drawn on a house)
+     Research the real thing (`docs/look/`), add the kit piece, render its contact sheet and check it, rebuild, and re-audit until M1 to M3 are 0.
+   - Open `web/gidi-maps.html` in 3D (serve the repo root), zoom into the district, and look at its markets, junctions, bridges and landmarks. It should read as Lagos.
+7. **City living test:** every district ends with this test.
    - Run the test in `docs/CITY-LIVING-TEST.md` on the whole built city, including the new district. Use `scripts/explore_city.py` and Haiku sub-agents, one persona for each district and one more for the new district.
    - Verify every problem the agents report, fix the real ones, and write `docs/living-test-<date>.md` with the standard-trips table.
-7. **Report and PR:**
+8. **Report and PR:**
    - Commit, push the branch and open a PR. Show the owner the side-by-side picture and the match table: what matched, what didn't, and why.
    - After the owner merges, republish `web/gidi-maps.html` to the live map (https://claude.ai/artifact/GnebG5XRaJRdTC8edK3yqP; read it first, then publish to that URL), so the city map grows district by district.
 
