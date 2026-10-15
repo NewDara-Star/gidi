@@ -1,0 +1,1009 @@
+{
+ "id": "frontier",
+ "area_km2": 91.01,
+ "bounds_lonlat": [
+  3.455,
+  6.425,
+  3.76,
+  6.48
+ ],
+ "land_cover": {
+  "trees": 0.18,
+  "shrub": 0.001,
+  "grass": 0.228,
+  "crops": 0.006,
+  "built-up": 0.528,
+  "bare": 0.022,
+  "water": 0.023,
+  "wetland": 0.007,
+  "mangrove": 0.005
+ },
+ "land_km2": 88.92,
+ "sources": {
+  "google_all": 104970,
+  "google_conf70": 89762,
+  "microsoft": 44578,
+  "microsoft_with_height": 0,
+  "osm": 32055
+ },
+ "buildings": {
+  "per_km2_land": 1009.0,
+  "cover_land": 0.159,
+  "size_m2": {
+   "p5": 14.6,
+   "p10": 18.8,
+   "p25": 33.4,
+   "p50": 98.6,
+   "p75": 225.0,
+   "p90": 373.2,
+   "p95": 457.2,
+   "p99": 740.1
+  },
+  "size_bands_share": {
+   "0-15": 0.054,
+   "15-40": 0.242,
+   "40-100": 0.207,
+   "100-200": 0.205,
+   "200-500": 0.255,
+   "500-2000": 0.036,
+   "2000-+": 0.001
+  },
+  "long_side_m": {
+   "p10": 5.0,
+   "p25": 7.1,
+   "p50": 13.1,
+   "p75": 19.6,
+   "p90": 27.6
+  },
+  "aspect": {
+   "p10": 1.1,
+   "p25": 1.2,
+   "p50": 1.5,
+   "p75": 2.0,
+   "p90": 2.7
+  },
+  "rectangularity": {
+   "p10": 0.9,
+   "p25": 1.0,
+   "p50": 1.0,
+   "p75": 1.0,
+   "p90": 1.0
+  },
+  "touching_share": 0.536,
+  "nearest_gap_m": {
+   "p10": 0.0,
+   "p25": 0.0,
+   "p50": 0.3,
+   "p75": 2.3,
+   "p90": 4.1
+  },
+  "orientation_peak_deg": 2,
+  "orientation_share_within_10deg_of_peak": 0.694
+ },
+ "heights": {
+  "no_height_share": 0.065,
+  "height_m": {
+   "p10": 1.5,
+   "p25": 2.5,
+   "p50": 4.5,
+   "p75": 6.0,
+   "p90": 8.0
+  },
+  "storeys_share": {
+   "1": 0.475,
+   "2": 0.397,
+   "3": 0.106,
+   "4": 0.015,
+   "5": 0.004,
+   "6": 0.002,
+   "7": 0.001,
+   "8": 0.002
+  },
+  "storeys_by_size": {
+   "0-15 m2": 1.0,
+   "15-40 m2": 1.0,
+   "40-100 m2": 1.0,
+   "100-200 m2": 2.0,
+   "200-500 m2": 2.0,
+   "500-2000 m2": 3.0,
+   "2000-+ m2": 4.0
+  },
+  "tall_7plus_per_km2": 2.6,
+  "floor_area_ratio_land": 0.352
+ },
+ "streets": {
+  "km_per_km2_land": {
+   "residential": 8.42,
+   "service": 1.24,
+   "trunk": 0.74,
+   "unclassified": 0.47,
+   "tertiary": 0.4,
+   "secondary": 0.19,
+   "primary": 0.19,
+   "footway": 0.13,
+   "unknown": 0.04,
+   "motorway": 0.03,
+   "track": 0.03,
+   "path": 0.02,
+   "steps": 0.01,
+   "living_street": 0.0
+  },
+  "drivable_km_per_km2": 11.74,
+  "main_km_per_km2": 1.15,
+  "surface_km": {
+   "local: not recorded": 545.2,
+   "local: unpaved": 249.9,
+   "other: not recorded": 115.2,
+   "main: paved": 65.2,
+   "local: paved": 23.1,
+   "main: not recorded": 22.5,
+   "other: unpaved": 15.6,
+   "main: paving_stones": 13.9,
+   "local: paving_stones": 8.5,
+   "other: paved": 0.7,
+   "main: unpaved": 0.6,
+   "other: dirt": 0.4,
+   "local: dirt": 0.1
+  },
+  "junctions_per_km2": 65.2,
+  "T_share": 0.929,
+  "four_plus_share": 0.071,
+  "dead_ends_per_km2": 25.0,
+  "segment_m": {
+   "p10": 26.6,
+   "p25": 52.1,
+   "p50": 88.1,
+   "p75": 150.8,
+   "p90": 257.2
+  },
+  "block_ha": {
+   "p25": 0.1,
+   "p50": 1.0,
+   "p75": 2.8,
+   "p90": 5.2
+  },
+  "blocks": 1890,
+  "grain_entropy": 0.844,
+  "grain_peak_deg": 5,
+  "bridge_segments": 28,
+  "bridge_m": 4002.0,
+  "rail_km": 0.0,
+  "paths_km_per_km2": 0.19
+ },
+ "structure_built_squares": {
+  "squares": 207,
+  "per_km2": {
+   "p25": 1010.0,
+   "median": 1348.0,
+   "p75": 1794.0
+  },
+  "cover": {
+   "p25": 0.166,
+   "median": 0.228,
+   "p75": 0.286
+  },
+  "edge_cover": {
+   "p25": 0.189,
+   "median": 0.234,
+   "p75": 0.279
+  },
+  "back_cover": {
+   "p25": 0.168,
+   "median": 0.251,
+   "p75": 0.369
+  },
+  "front_occupied": {
+   "p25": 0.385,
+   "median": 0.473,
+   "p75": 0.572
+  },
+  "front_share_of_buildings": {
+   "p25": 0.4,
+   "median": 0.483,
+   "p75": 0.536
+  },
+  "touching": {
+   "p25": 0.429,
+   "median": 0.508,
+   "p75": 0.588
+  },
+  "under_40m2": {
+   "p25": 0.235,
+   "median": 0.274,
+   "p75": 0.328
+  },
+  "block_fill.median": 0.237,
+  "line_deg.median": 2.9,
+  "line_deg.share_within_10deg": 0.834,
+  "setback_m.median": 14.2,
+  "front_gap_m.median": 17.3,
+  "front_gap_m.share_under_3m": 0.101,
+  "size_m2.median": 106.2,
+  "long_side_m.median": 13.6
+ },
+ "places": {
+  "total_per_km2": 27.4,
+  "by_kind_per_km2": {
+   "offices & services": 7.91,
+   "market & shops": 3.64,
+   "food & drink": 2.52,
+   "church": 2.04,
+   "other": 1.97,
+   "school": 1.77,
+   "hotel": 1.45,
+   "events & music": 1.28,
+   "money": 0.84,
+   "health": 0.82,
+   "beauty": 0.78,
+   "transport": 0.73,
+   "industry & trade": 0.57,
+   "government & order": 0.48,
+   "motor trade": 0.35,
+   "fuel": 0.18,
+   "mosque": 0.03
+  },
+  "share_within_40m_of_main_road": {
+   "offices & services": 0.243,
+   "market & shops": 0.352,
+   "food & drink": 0.353,
+   "church": 0.249,
+   "other": 0.263,
+   "school": 0.21,
+   "hotel": 0.209,
+   "events & music": 0.202,
+   "money": 0.173,
+   "health": 0.274,
+   "beauty": 0.261,
+   "transport": 0.246,
+   "industry & trade": 0.294,
+   "government & order": 0.186,
+   "motor trade": 0.323,
+   "fuel": 0.562
+  },
+  "top_categories": [
+   [
+    "real_estate_service",
+    209
+   ],
+   [
+    "none",
+    107
+   ],
+   [
+    "hotel",
+    102
+   ],
+   [
+    "christian_place_of_worship",
+    89
+   ],
+   [
+    "professional_service",
+    86
+   ],
+   [
+    "religious_organization",
+    76
+   ],
+   [
+    "restaurant",
+    71
+   ],
+   [
+    "home_developer",
+    62
+   ],
+   [
+    "school",
+    59
+   ],
+   [
+    "party_and_event_planning",
+    59
+   ],
+   [
+    "beauty_salon",
+    52
+   ],
+   [
+    "shopping_mall",
+    31
+   ],
+   [
+    "spa",
+    30
+   ],
+   [
+    "clothing_store",
+    29
+   ],
+   [
+    "grocery_store",
+    27
+   ],
+   [
+    "shopping",
+    27
+   ],
+   [
+    "hospital",
+    26
+   ],
+   [
+    "building_or_construction_service",
+    26
+   ],
+   [
+    "real_estate_agent",
+    26
+   ],
+   [
+    "travel_service",
+    25
+   ],
+   [
+    "education",
+    23
+   ],
+   [
+    "auto_dealer",
+    22
+   ],
+   [
+    "lounge",
+    20
+   ],
+   [
+    "educational_service",
+    19
+   ],
+   [
+    "financial_service",
+    19
+   ],
+   [
+    "historic_site",
+    18
+   ],
+   [
+    "furniture_store",
+    18
+   ],
+   [
+    "information_technology_company",
+    18
+   ],
+   [
+    "social_or_community_service",
+    17
+   ],
+   [
+    "barber",
+    16
+   ]
+  ]
+ },
+ "street_things": {
+  "count_per_km2": {
+   "barrier: gate": 3.67,
+   "power: power_tower": 0.3,
+   "communication: communication_tower": 0.29,
+   "transit: parking": 0.26,
+   "pedestrian: vending_machine": 0.24,
+   "transportation: crossing": 0.16,
+   "transit: bus_stop": 0.15,
+   "barrier: block": 0.06,
+   "transportation: traffic_signals": 0.04,
+   "power: substation": 0.03,
+   "barrier: toll_booth": 0.03,
+   "transit: ferry_terminal": 0.02,
+   "power: portal": 0.02,
+   "barrier: lift_gate": 0.02,
+   "utility: storage_tank": 0.01,
+   "utility: water_tower": 0.01,
+   "barrier: wall": 0.01,
+   "water: fountain": 0.01,
+   "pedestrian: atm": 0.01
+  },
+  "km_per_km2": {
+   "barrier: wall": 0.39,
+   "power: power_line": 0.11,
+   "bridge: bridge": 0.05,
+   "barrier: fence": 0.02,
+   "barrier: gate": 0.0
+  },
+  "note": "Overture infrastructure is mostly OSM: street lamps, signals and bus stops are badly under-mapped in Lagos; read these as a floor"
+ },
+ "land_use_mapped_share": {
+  "residential: residential": 0.147,
+  "golf: golf_course": 0.0229,
+  "developed: retail": 0.0069,
+  "education: school": 0.0039,
+  "construction: construction": 0.0014,
+  "managed: grass": 0.0011,
+  "religious: religious": 0.0009,
+  "developed: commercial": 0.0007,
+  "developed: industrial": 0.0007,
+  "education: college": 0.0007,
+  "park: park": 0.0006,
+  "recreation: pitch": 0.0006,
+  "developed: brownfield": 0.0005,
+  "cemetery: cemetery": 0.0005,
+  "construction: greenfield": 0.0001,
+  "golf: green": 0.0001,
+  "recreation: track": 0.0,
+  "protected: nature_reserve": 0.0,
+  "recreation: playground": 0.0,
+  "medical: hospital": 0.0,
+  "recreation: recreation_ground": 0.0
+ },
+ "land_mapped_share": {
+  "forest: forest": 0.0159,
+  "shrub: scrub": 0.0083,
+  "forest: wood": 0.0017,
+  "land: island": 0.0004,
+  "grass: grassland": 0.0
+ },
+ "osm": {
+  "waterways_km": {
+   "ditch": 7.45,
+   "drain": 6.63,
+   "river": 1.41,
+   "stream": 1.36
+  },
+  "markets": 5,
+  "market_ha": [
+   1.8,
+   0.6,
+   0.6,
+   0.6,
+   0.2
+  ],
+  "power_km": 12.2,
+  "rail_km": 8.43,
+  "amenity_points": [
+   [
+    "other",
+    102
+   ],
+   [
+    "vending_machine",
+    21
+   ],
+   [
+    "restaurant",
+    13
+   ],
+   [
+    "clothes",
+    7
+   ],
+   [
+    "bank",
+    5
+   ],
+   [
+    "fuel",
+    4
+   ],
+   [
+    "hospital",
+    4
+   ],
+   [
+    "pharmacy",
+    3
+   ],
+   [
+    "marketplace",
+    3
+   ],
+   [
+    "school",
+    3
+   ],
+   [
+    "supermarket",
+    3
+   ],
+   [
+    "beauty",
+    3
+   ],
+   [
+    "ferry_terminal",
+    2
+   ],
+   [
+    "mall",
+    2
+   ],
+   [
+    "fast_food",
+    1
+   ],
+   [
+    "ice_cream",
+    1
+   ],
+   [
+    "electronics",
+    1
+   ],
+   [
+    "cafe",
+    1
+   ],
+   [
+    "hairdresser",
+    1
+   ],
+   [
+    "alcohol",
+    1
+   ]
+  ]
+ },
+ "people": {
+  "total": 161226,
+  "per_km2_land": 1813.0,
+  "per_building": 1.8,
+  "per_100m2_floor": 0.51
+ },
+ "ground": {
+  "height_m": {
+   "p10": 2.2,
+   "p25": 3.3,
+   "p50": 4.5,
+   "p75": 5.7,
+   "p90": 6.8
+  },
+  "below_3m_share": 0.193,
+  "slope_deg": {
+   "p50": 0.3,
+   "p90": 0.9,
+   "p99": 2.3
+  }
+ },
+ "away_from_main_roads": [
+  {
+   "band_m": "0-30",
+   "buildings_per_km2": 706.0,
+   "cover": 0.058,
+   "size_m2_median": 38.0,
+   "storeys_mean": 1.36,
+   "touching": 0.509,
+   "share_3plus_storeys": 0.061
+  },
+  {
+   "band_m": "30-80",
+   "buildings_per_km2": 1412.0,
+   "cover": 0.245,
+   "size_m2_median": 86.0,
+   "storeys_mean": 1.81,
+   "touching": 0.602,
+   "share_3plus_storeys": 0.178
+  },
+  {
+   "band_m": "80-150",
+   "buildings_per_km2": 1423.0,
+   "cover": 0.239,
+   "size_m2_median": 93.0,
+   "storeys_mean": 1.84,
+   "touching": 0.604,
+   "share_3plus_storeys": 0.176
+  },
+  {
+   "band_m": "150-300",
+   "buildings_per_km2": 1467.0,
+   "cover": 0.245,
+   "size_m2_median": 102.0,
+   "storeys_mean": 1.8,
+   "touching": 0.576,
+   "share_3plus_storeys": 0.169
+  },
+  {
+   "band_m": "300-600",
+   "buildings_per_km2": 1303.0,
+   "cover": 0.211,
+   "size_m2_median": 109.0,
+   "storeys_mean": 1.74,
+   "touching": 0.543,
+   "share_3plus_storeys": 0.144
+  },
+  {
+   "band_m": "600-+",
+   "buildings_per_km2": 700.0,
+   "cover": 0.104,
+   "size_m2_median": 104.0,
+   "storeys_mean": 1.57,
+   "touching": 0.479,
+   "share_3plus_storeys": 0.075
+  }
+ ],
+ "away_from_water": [
+  {
+   "band_m": "0-50",
+   "buildings_per_km2": 421.0,
+   "cover": 0.08,
+   "size_m2_median": 97.0,
+   "storeys_mean": 2.09,
+   "touching": 0.494,
+   "share_3plus_storeys": 0.273
+  },
+  {
+   "band_m": "50-150",
+   "buildings_per_km2": 502.0,
+   "cover": 0.099,
+   "size_m2_median": 111.0,
+   "storeys_mean": 1.96,
+   "touching": 0.564,
+   "share_3plus_storeys": 0.235
+  },
+  {
+   "band_m": "150-400",
+   "buildings_per_km2": 733.0,
+   "cover": 0.118,
+   "size_m2_median": 82.0,
+   "storeys_mean": 1.72,
+   "touching": 0.57,
+   "share_3plus_storeys": 0.164
+  },
+  {
+   "band_m": "400-1000",
+   "buildings_per_km2": 906.0,
+   "cover": 0.153,
+   "size_m2_median": 108.0,
+   "storeys_mean": 1.77,
+   "touching": 0.57,
+   "share_3plus_storeys": 0.145
+  },
+  {
+   "band_m": "1000-+",
+   "buildings_per_km2": 1134.0,
+   "cover": 0.172,
+   "size_m2_median": 96.0,
+   "storeys_mean": 1.65,
+   "touching": 0.519,
+   "share_3plus_storeys": 0.115
+  }
+ ],
+ "fabric_types": [
+  {
+   "type": 1,
+   "name": "denser, walls touching",
+   "share_of_built_cells": 0.251,
+   "cells": 248,
+   "buildings_per_km2": 1832.0,
+   "cover": 0.26,
+   "size_m2_median": 100.09,
+   "touching": 0.57,
+   "storeys_mean": 1.58,
+   "street_km_per_km2": 14.96,
+   "places_per_km2": 0.0,
+   "example_lonlat": [
+    3.72294,
+    6.47783
+   ]
+  },
+  {
+   "type": 2,
+   "name": "busier (shops, churches, services), more built over",
+   "share_of_built_cells": 0.286,
+   "cells": 283,
+   "buildings_per_km2": 1600.0,
+   "cover": 0.31,
+   "size_m2_median": 127.43,
+   "touching": 0.58,
+   "storeys_mean": 1.94,
+   "street_km_per_km2": 17.93,
+   "places_per_km2": 80.0,
+   "example_lonlat": [
+    3.55788,
+    6.46673
+   ]
+  },
+  {
+   "type": 3,
+   "name": "more open, smaller buildings",
+   "share_of_built_cells": 0.257,
+   "cells": 254,
+   "buildings_per_km2": 864.0,
+   "cover": 0.11,
+   "size_m2_median": 61.76,
+   "touching": 0.41,
+   "storeys_mean": 1.39,
+   "street_km_per_km2": 11.12,
+   "places_per_km2": 0.0,
+   "example_lonlat": [
+    3.5511,
+    6.469
+   ]
+  },
+  {
+   "type": 4,
+   "name": "sparser, spaced out",
+   "share_of_built_cells": 0.207,
+   "cells": 205,
+   "buildings_per_km2": 624.0,
+   "cover": 0.15,
+   "size_m2_median": 181.34,
+   "touching": 0.32,
+   "storeys_mean": 1.8,
+   "street_km_per_km2": 13.43,
+   "places_per_km2": 0.0,
+   "example_lonlat": [
+    3.55788,
+    6.46221
+   ]
+  }
+ ],
+ "built_cells_250m": {
+  "cells": 990,
+  "buildings_per_km2": {
+   "p10": 480.0,
+   "p25": 720.0,
+   "p50": 1216.0,
+   "p75": 1760.0,
+   "p90": 2177.6
+  },
+  "cover": {
+   "p10": 0.1,
+   "p25": 0.1,
+   "p50": 0.2,
+   "p75": 0.3,
+   "p90": 0.4
+  },
+  "size_m2_median": {
+   "p10": 47.7,
+   "p25": 72.1,
+   "p50": 109.1,
+   "p75": 154.7,
+   "p90": 214.0
+  },
+  "touching": {
+   "p10": 0.3,
+   "p25": 0.4,
+   "p50": 0.5,
+   "p75": 0.6,
+   "p90": 0.7
+  },
+  "storeys_mean": {
+   "p10": 1.3,
+   "p25": 1.5,
+   "p50": 1.7,
+   "p75": 1.9,
+   "p90": 2.1
+  },
+  "street_km_per_km2": {
+   "p10": 7.1,
+   "p25": 11.2,
+   "p50": 14.5,
+   "p75": 17.8,
+   "p90": 21.7
+  },
+  "places_per_km2": {
+   "p10": 0.0,
+   "p25": 0.0,
+   "p50": 0.0,
+   "p75": 32.0,
+   "p90": 128.0
+  }
+ },
+ "landmarks_biggest": [
+  {
+   "m2": 19387,
+   "storeys": 5,
+   "lonlat": [
+    3.4837,
+    6.43171
+   ],
+   "nearest_place": [
+    "Innovation Institute",
+    "party_and_event_planning"
+   ]
+  },
+  {
+   "m2": 9864,
+   "storeys": 5,
+   "lonlat": [
+    3.6964,
+    6.46388
+   ],
+   "nearest_place": [
+    "Coscharis Motors Plc",
+    "auto_dealer"
+   ]
+  },
+  {
+   "m2": 7839,
+   "storeys": 6,
+   "lonlat": [
+    3.69878,
+    6.46195
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 6782,
+   "storeys": 4,
+   "lonlat": [
+    3.60135,
+    6.47253
+   ],
+   "nearest_place": [
+    "Boardroom Apartments",
+    "hotel"
+   ]
+  },
+  {
+   "m2": 5655,
+   "storeys": 1,
+   "lonlat": [
+    3.48235,
+    6.44781
+   ],
+   "nearest_place": [
+    "This Present House",
+    "christian_place_of_worship"
+   ]
+  },
+  {
+   "m2": 5353,
+   "storeys": 15,
+   "lonlat": [
+    3.48311,
+    6.44787
+   ],
+   "nearest_place": [
+    "This Present House",
+    "christian_place_of_worship"
+   ]
+  },
+  {
+   "m2": 4648,
+   "storeys": 4,
+   "lonlat": [
+    3.55837,
+    6.46501
+   ],
+   "nearest_place": [
+    "Eti Osa Local Government Market",
+    "grocery_store"
+   ]
+  },
+  {
+   "m2": 4635,
+   "storeys": 1,
+   "lonlat": [
+    3.6884,
+    6.45631
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 4478,
+   "storeys": 8,
+   "lonlat": [
+    3.47063,
+    6.44031
+   ],
+   "nearest_place": [
+    "Popcentral TV",
+    "party_and_event_planning"
+   ]
+  },
+  {
+   "m2": 4377,
+   "storeys": 6,
+   "lonlat": [
+    3.6777,
+    6.4642
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 4118,
+   "storeys": 5,
+   "lonlat": [
+    3.63581,
+    6.46176
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 4114,
+   "storeys": 4,
+   "lonlat": [
+    3.48308,
+    6.44124
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 3737,
+   "storeys": 3,
+   "lonlat": [
+    3.55639,
+    6.46325
+   ],
+   "nearest_place": [
+    "Property Deport",
+    "real_estate_service"
+   ]
+  },
+  {
+   "m2": 3639,
+   "storeys": 4,
+   "lonlat": [
+    3.75191,
+    6.47355
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 3571,
+   "storeys": 3,
+   "lonlat": [
+    3.55454,
+    6.46852
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 3536,
+   "storeys": 5,
+   "lonlat": [
+    3.63953,
+    6.46772
+   ],
+   "nearest_place": [
+    "Ruff 'n' Tumble Kids",
+    null
+   ]
+  },
+  {
+   "m2": 3531,
+   "storeys": 5,
+   "lonlat": [
+    3.63845,
+    6.468
+   ],
+   "nearest_place": [
+    "Pizza Pasta",
+    "restaurant"
+   ]
+  },
+  {
+   "m2": 3528,
+   "storeys": 11,
+   "lonlat": [
+    3.71854,
+    6.47126
+   ],
+   "nearest_place": [
+    "Kandythrift",
+    "clothing_store"
+   ]
+  },
+  {
+   "m2": 3423,
+   "storeys": 6,
+   "lonlat": [
+    3.74973,
+    6.47658
+   ],
+   "nearest_place": null
+  },
+  {
+   "m2": 3413,
+   "storeys": 4,
+   "lonlat": [
+    3.68957,
+    6.45941
+   ],
+   "nearest_place": null
+  }
+ ],
+ "note": "Study only: names and positions here are for understanding the real place. Gidi takes numbers from this file, never an outline, a name or an image (CLAUDE.md, the Google rule)."
+}

@@ -126,6 +126,20 @@ for g in getattr(left, 'geoms', [left]):
         k = max(D, key=lambda k: g.buffer(2).intersection(D[k]).area)
         u = unary_union([D[k], g.buffer(0.5)])
         D[k] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
+# one planar partition: every district's outline is cut from the same set of faces, so neighbours share their border vertex for
+# vertex (the frame's border roads, scripts/frame_network.py, are those shared lines). Slivers between cells go to the district they
+# border most; overlaps go to the district holding most of the face.
+from shapely.ops import polygonize
+_faces = list(polygonize(unary_union([P.boundary for P in D.values()])))
+_own = {k: [] for k in D}
+for f in _faces:
+    k = max(D, key=lambda k: D[k].intersection(f).area)
+    if D[k].intersection(f).area > 0.5 * f.area:
+        _own[k].append(f)
+    elif f.area < 5000:
+        _own[max(D, key=lambda k: D[k].boundary.intersection(f.boundary).length)].append(f)
+for k, fs in _own.items():
+    u = unary_union(fs); D[k] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
 names = {'border': 'The Border', 'bazaar': 'The Bazaar', 'railside': 'Railside', 'airport': 'THE AIRPORT (new)', 'hub': 'The Hub', 'jungle': 'Jungle City',
          'capital': 'The Capital', 'port': 'The Port', 'maze': 'The Maze', 'estate': 'The Estate', 'yaba': 'YABA/AKOKA (new)', 'watertown': 'Water Town',
          'foodgate': 'Food Gate', 'oldisland': 'Old Island', 'heights': 'The Heights', 'oldshore': 'Old Shore', 'frontier': 'The Frontier'}

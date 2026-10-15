@@ -20,6 +20,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/Re
 | `worldcover/` | ESA WorldCover 10 m, 2021 | CC BY 4.0 | 271 MB | empty land vs untraced land | map final |
 | `worldpop/` | WorldPop 100 m population, 2020 | CC BY 4.0 | 59 MB | people per district | map final |
 | `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | map final |
+| `deep-cache/` | the buildings of each district's study area, cut once from Google's and Microsoft's files (`scripts/deep_prep.py`) | as above | ~250 MB | the deep study (`docs/DEEP-STUDY.md`) | map final |
 | `study-*.pkl` (scratch folders) | each district study's extract | from the above | small | regenerating districts | map final |
 
 **What can't be downloaded:**

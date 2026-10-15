@@ -87,19 +87,29 @@ FIRST2 = ["Adewale","Babatunde","Chukwuma","Ekpo","Gbadamosi","Ige","Jimoh","Kol
 # ---------- 1. the network shared with the rest of Gidi ----------
 NET_F = "web/network.json"
 NET = json.load(open(NET_F)) if os.path.exists(NET_F) else {"edges": {}, "gateways": []}
-if PROF: used |= {e["name"] for e in NET["edges"].values()}
+# the v2 frame (scripts/frame_network.py) draws every border road once, for all districts: a district takes its edges from it as they
+# are, picks its own crossings, and writes them into its own file, so districts can be generated side by side
+FRAME = NET.get("frame") == "v2"
+if PROF: used |= {e["name"] for e in NET["edges"].values() if e["name"]}
 # the opening is locked (owner, Oct 2026): web/locked.json holds the exact market, its aisles, The steal's stall, Tunde's room and the
 # boss's motor park; regenerating uses them as they are. GIDI_LOCK=write records them from this run (done once).
 LOCK_F = "web/locked.json"; LOCK_ALL = json.load(open(LOCK_F)) if os.path.exists(LOCK_F) else {}
 LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") else {}
 LOCK_WRITE = bool(PROF.get("lock")) and os.environ.get("GIDI_LOCK") == "write"; NEW_LOCK = {}
 # a district rebuilt after its neighbours keeps the crossings it already agreed with them (web/network.json), road for road
-KEEP = bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
+KEEP = not FRAME and bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
 arts = [(a["name"], a["cls"], LineString(a["pts"])) for a in G["arterials"] if a["cls"] != "bridge" and LineString(a["pts"]).distance(poly) < 160]
 rail = LineString(G["rail"]["pts"]); rail_in = rail.intersection(poly.buffer(30))
 coords = list(poly.exterior.coords)[:-1]
 edge_roads = []
-for i in range(len(coords)):
+EDGE_KIND = {}   # frame mode: id(line) -> "border" | "shore" | "edge" | "arterial"
+if FRAME:
+    for k, e in NET["edges"].items():
+        if DID in e["between"]:
+            nb = next((x for x in e["between"] if x and x != DID), None); ln = LineString(e["pts"])
+            edge_roads.append((e["name"] or "", ln, nb)); EDGE_KIND[id(ln)] = e["kind"]
+    coords = list({tuple(e.coords[i]) for n, e, nb in edge_roads for i in (0, -1)})   # the real corners: where the edges meet
+for i in (range(0) if FRAME else range(len(coords))):
     a, b = coords[i], coords[(i + 1) % len(coords)]; e = LineString([a, b])
     nb = max((k for k in POLY if k != DID), key=lambda k: POLY[k].buffer(25).intersection(e).length)
     if POLY[nb].buffer(25).intersection(e).length < 0.5 * e.length: nb = None
@@ -158,7 +168,7 @@ if PIN: pairs = [(None, None)]
 # a finished neighbour's main road that ends on our edge carries on as our through-route (it has no bearing: we pick the far end)
 PIN1 = None
 if not PIN and PROF.get("continue_mains"):
-    done = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
+    done = set() if FRAME else {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
     g1 = next((g for g in NET["gateways"] if g["to"] == DID and g["from"] in done and g["kind"] == "main"), None)
     if g1:
         PIN1 = (g1["road"], Point(g1["pt"])); pairs = [(None, j) for j in range(len(E)) if E[j][1].distance(PIN1[1]) > 300]
@@ -423,7 +433,7 @@ for P in secs2:
 QV.on = False
 streets += [g for c in collectors for g in lines(c)]
 # streets a finished neighbour started on the shared edge carry straight on into this district
-GEN_DONE = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
+GEN_DONE = set() if FRAME else {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
 incoming = [g for g in NET["gateways"] if g["to"] == DID and g["from"] in GEN_DONE and g["kind"] in ("street", "main") and "bearing_deg" in g] if PROF else []
 if PROF and not PIN1 and any(g["to"] == DID and g["kind"] == "main" and "bearing_deg" not in g for g in NET["gateways"]):
     print("note: a neighbour's main road gateway has no bearing; continue it by hand", file=sys.stderr)
@@ -1751,7 +1761,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        "streets": [R2(g) for g in streets + access],
        "lanes": [R2(g) for g in lanes],
        **({"paths": [{"kind": k, "pts": R2(g)} for k, g in PATHS]} if PATHS else {}),
-       "mains": [{"name": n, "pts": R2(e), "edge_with": nb} for n, e, nb in edge_roads] + [{"name": n, "pts": R2(ln)} for n, ln in mains] + [{"name": "", "pts": R2(l)} for l in links] + [{"name": "Interchange slip road", "pts": R2(r)} for r in ramps],
+       "mains": [{"name": n, "pts": R2(e), "edge_with": nb} for n, e, nb in edge_roads if EDGE_KIND.get(id(e), "border") == "border"] + [{"name": n, "pts": R2(ln)} for n, ln in mains] + [{"name": "", "pts": R2(l)} for l in links] + [{"name": "Interchange slip road", "pts": R2(r)} for r in ramps],
        "canal": R2(canal) if canal else None,
        "buildings": [[k] + [[round(x, 1), round(y, 1)] for x, y in list(r.exterior.coords)[:-1]] for r, k in bld],
        "parcels": [{"kind": p["kind"], "pts": [[round(x, 1), round(y, 1)] for x, y in p["geom"].exterior.coords]} for p in parcels],
@@ -1762,6 +1772,11 @@ if PROF:
     if STYLES: out["styles"] = STYLES
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
+if FRAME:   # shore and bush edges are a waterside footpath and a track, not roads; the district's crossings go in its own file
+    out["layout"] = "v2"
+    out.setdefault("paths", []).extend({"kind": {"shore": "shore path", "edge": "bush track"}[EDGE_KIND[id(e)]], "pts": R2(e)}
+                                       for n, e, nb in edge_roads if EDGE_KIND.get(id(e)) in ("shore", "edge"))
+    out["gateways"] = [g for g in NET["gateways"] if g["from"] == DID]
 if LAGOS: out["fabric"] = "lagos"   # built to the agreed cross-sections: checked against building lines, not carriageways
 if ENCROACH: out["encroach"] = [{"kind": z["kind"], "poi": z["poi"], "pts": [[round(x, 1), round(y, 1)] for x, y in z["geom"].exterior.coords]} for z in ENCROACH if z["geom"].geom_type == "Polygon"]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))
@@ -1769,4 +1784,4 @@ if LOCK_WRITE:
     LOCK_ALL[DID] = NEW_LOCK; json.dump(LOCK_ALL, open(LOCK_F, "w"), indent=1); print("locked:", {k: list(v) for k, v in NEW_LOCK.items()}, file=sys.stderr)
 _k = lambda L: sorted(json.dumps(g, sort_keys=True) for g in L)
 if _k(NET["gateways"]) == _k(NET_GW0): NET["gateways"] = NET_GW0
-if OUT == f"web/gen-{DID}.json": json.dump(NET, open(NET_F, "w"), indent=1)
+if OUT == f"web/gen-{DID}.json" and not FRAME: json.dump(NET, open(NET_F, "w"), indent=1)
