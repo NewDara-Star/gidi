@@ -25,6 +25,16 @@ The "feel like Lagos" pass. All fifteen districts are built from measured patter
 
 Also in the kit already: road condition and potholes, refuse heaps, litter, poles and tangled wires, transformers, kerbs.
 
+## Missing places (owner, 15 Oct 2026)
+Gidi is our city, so these are invented to fit it, not copied. They're built in the same hand pass.
+
+| Place | Now | Plan |
+|---|---|---|
+| **Betting shops** | 13 in the whole city | As common as chemists: small shopfront betting kiosks with viewing benches on main roads, by markets and motor parks. Most in the Maze, Jungle City, the Hub, Railside and the Bazaar; a few big viewing centres. Placed by the everyday-places layer, like chemists. |
+| **The airport** | only the "Airport Fence" pin at the Capital's edge | Gidi's front door, on the unbuilt land north of the Capital, behind the fence that's already there: a runway, a terminal, cargo sheds, an airport road, and a car park with touts. Its own zone, not squeezed into a district. Story: arrivals, cargo theft, the boys at the airport. **First of this group.** |
+| **A university** | none (the "colleges" are secondary schools) | A walled campus with faculties, hostels, a guarded gate and a bukateria strip outside, by the lagoon (near Water Town and the Maze) or beside the Bazaar. |
+| **Brothels** | none | Shown as places, never explicitly: "hotels" renting rooms by the hour, on the night strips (the Capital's roundabout strip, by the Hub's motor parks, Old Island, by the Port). Mostly story spots, never on safe ground. |
+
 ## How it should work
 - **The map stays the master copy** (`docs/UNREAL-PORT-PLAN.md`). An ism lives in the data first; the kit and later Unreal only draw it.
 - **By rule, then by hand:**
@@ -44,6 +54,7 @@ Also in the kit already: road condition and potholes, refuse heaps, litter, pole
 > 4. Hostile expressways (11) and roads doing too many jobs (7)
 > 5. One-way streets (13)
 > 6. Floods (10) and buildings on drain banks (4), once `web/terrain.json` is merged
+> 7. The missing places (the table above): the airport first, then betting shops, the university, the brothels
 >
 > For each one:
 > - Put it in the map data first: `scripts/isms.py` after the generator, with the rates per district from LAGOS-ISMS.md, plus `web/isms-edits.json` for hand edits.
