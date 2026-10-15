@@ -232,6 +232,19 @@ One-way streets: the share of the length of primary to residential streets tagge
 ### Also noted: old Ikorodu (Old Shore's study)
 - **In its real data:** bus stops crowded onto the expressway through town (7 on 12 km, 3.4760, 6.6193); markets on the carriageway (2 of its 3, 3.5017, 6.6148); homes in the lagoon-edge wetland (33 buildings, 3.4875, 6.5951); buildings in the road reserve (42 per km²), about Water Town's half.
 
+### 15. Open gutters (new: from the owner, not the data)
+- **What:** the owner's description. Open roadside drains, called "gutters" in Lagos:
+  - an open concrete U-channel, or dug earth, along the edge of residential streets, often on both sides
+  - mostly 40–100 cm wide and up to a metre deep
+  - every gate, shop and kiosk crosses it on its own slab, plank, old door or metal sheet; in front of a busy shop it disappears under a run of slabs
+  - the water is grey-black and slow or still, full of nylon bags, sachet-water ("pure water") wrappers, bottles and silt, with weeds; it smells and breeds mosquitoes
+  - falling into one at night is a classic Lagos misfortune
+- **On main roads** the drains are mostly covered by slabs under the walkway, or run as bigger channels set back from the road. Main roads don't read as "gutter streets"; side streets do.
+- **Flooding:** rain runs from the gutters into bigger channels, then the canals and the lagoon. When refuse and silt block the gutters, the street becomes the drain. With low ground near the lagoon, that is the classic Lagos flood (ism 10).
+- **Not measurable from OSM:** under 1.5% of streets in every studied area have a drain mapped beside them, though nearly every Lagos side street has one. OSM maps the bigger channels, not the gutters. Rates come from the owner's knowledge and the street research.
+- **Already in the 3D kit:** `blender/generate.py` draws open drains along road edges with slab covers, rubbish and green water. The share covered and the rubbish come from the district's character (`blender/gidi_kit/rules.py` STREET). The 2D map has no gutters yet.
+- **Suits:** every residential district; most of all the dense, waterfront and old-island characters (the Maze, Jungle City, Food Gate, Water Town, Old Island, Railside). Mostly covered in the Estate and the Heights.
+
 ## Per district: what to add in the "feel like Lagos" pass
 | Gidi district | Strongest isms in its real inspiration |
 |---|---|---|
@@ -252,6 +265,7 @@ One-way streets: the share of the length of primary to residential streets tagge
 | The Heights | one-way streets (40%); missing links where closes meet back to back; streets ending at the lagoon; the expressway with nowhere to cross on foot (gates themselves are built) |
 
 ## Log
+- **15 Oct 2026:** ism 15 (open gutters) added from the owner's description; OSM doesn't map them.
 - **15 Oct 2026:** the Border's study (Badagry LGA's eastern strip, the only part inside the OSM extract) added. Its buildings are almost unmapped, so most counts are unknown.
 - **15 Oct 2026:** Old Shore's study (old Ikorodu; Epe is not in the local OSM extract) added. No new ism.
 - **14 Oct 2026:** the Frontier's study (Lekki Phase 1, Ajah-Sangotedo, Awoyaya-Lakowe) added, and a new ism measured for every area: streets ahead of houses.
