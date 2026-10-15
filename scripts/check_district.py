@@ -68,7 +68,7 @@ def check_roads(gen, bgeoms, G):
         add(m["pts"], HALF["main"], "main " + m.get("name", ""))
     for a in G["arterials"]:
         if a["cls"] in ("art", "exp"):
-            add(a["pts"], HALF[a["cls"]], "arterial " + a["name"])
+            add(a["pts"], HALF[a["cls"]], "arterial " + a["name"], {"toll booth", "toll canopy"})   # a toll plaza stands on the carriageway
     add(G["rail"]["pts"], HALF["rail"], "rail")
     if gen.get("canal"):
         add(gen["canal"], HALF["canal"], "canal")
@@ -125,6 +125,8 @@ def check_land(bgeoms, land, kinds=None, G=None):
     bad = []
     lag = lagoon(G) if G is not None else None
     for i, b in enumerate(bgeoms):
+        if kinds and kinds[i] == "toll booth" and (lag is None or not b.intersects(lag) or lag.buffer(0.5).contains(b)):
+            continue   # a toll booth stands on its road: on land (a toll plaza) or over the lagoon (on a bridge)
         if kinds and kinds[i] in BEACH_KINDS:
             if (lag is not None and b.intersects(lag)) or b.distance(land) > 60:
                 bad.append((b.area, "%s %s not on the beach next to the district" % (kinds[i], xy(b))))

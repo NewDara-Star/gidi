@@ -202,5 +202,6 @@ The Ikoyi side's houses now come in five styles (`styles` in the profile). Each 
 
 ## Files
 - **Study:** `scripts/study_extract.py "Eti Osa" heights "3.418,6.440,3.450,6.462;3.405,6.420,3.440,6.438;3.444,6.455,3.462,6.470"`, then `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_landmarks.py` and `study_isms.py`, all with `heights`. Then `scripts/study_boxheights.py "Eti Osa" "<the same boxes>"` for the height bands. For v2, the VI and Ikoyi boxes alone: `study_extract.py "Eti Osa" hvi "3.405,6.420,3.440,6.438"` and `... hikoyi "3.418,6.440,3.450,6.462"`, each then `study_analyse.py` and `study_core.py`.
+- **Rebuilt once (14 Oct 2026)** with `keep_gateways` when the Frontier was built next to it, as the brief says. It regenerates byte-identical from then on.
 - **Generator:** `scripts/gen_fabric.py heights 13 2.5` → `web/gen-heights.json`. `web/network.json` gains the Heights' edges and crossings.
 - **Picture:** `docs/img/heights-vs-real.png`

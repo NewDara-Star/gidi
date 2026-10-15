@@ -301,8 +301,10 @@ RES_U = unary_union([r["geom"] for r in RES]) if RES else None
 # a quarter with its own rules (the Heights: the Victoria Island side, south of Waterfront Drive: an office grid, no walls)
 QP = PROF.get("quarter") or {}; QZ = None
 if QP:
-    qa = next(a for n, k, a in arts if n == QP["south_of"]); qc = sorted(qa.coords)
-    _b = poly.bounds; QZ = Polygon([(_b[0] - 500, qc[0][1])] + qc + [(_b[2] + 500, qc[-1][1]), (_b[2] + 500, _b[3] + 2000), (_b[0] - 500, _b[3] + 2000)]).intersection(poly.buffer(60))   # the edge roads bend up to 16 m outside the outline
+    if QP.get("around"): QZ = POIS[QP["around"]].buffer(QP["r_m"]).intersection(poly.buffer(60))   # a circle round a pin (the Frontier's disputed plots)
+    else:
+      qa = next(a for n, k, a in arts if n == QP["south_of"]); qc = sorted(qa.coords)
+      _b = poly.bounds; QZ = Polygon([(_b[0] - 500, qc[0][1])] + qc + [(_b[2] + 500, qc[-1][1]), (_b[2] + 500, _b[3] + 2000), (_b[0] - 500, _b[3] + 2000)]).intersection(poly.buffer(60))   # the edge roads bend up to 16 m outside the outline
 def in_q(pt): return QZ is not None and QZ.contains(pt)
 def QV(k, default): return QP["rules"][k] if QP and k in QP["rules"] and QV.on else default
 QV.on = False
@@ -1004,7 +1006,9 @@ for _, p, q, bi in fronts:
             t += w
             if plot is None or plot.area < 30: continue
             taken[bi] = plot if bi not in taken else taken[bi].union(plot).buffer(0); plot_count += 1
-            if rnd.random() < QV("vacant", PROF.get("vacant", 0.07)):          # vacant / abandoned plot
+            VB = PROF.get("vacant_blocks")   # the Frontier: whole blocks laid out and still empty, the rest built (empty land comes in tracts)
+            v_rate = PROF.get("vacant", 0.07) if not VB else (VB["vacant"] if random.Random(SEED * 29 + bi).random() < VB["share"] else VB["built_vacant"])
+            if rnd.random() < QV("vacant", v_rate):          # vacant / abandoned plot
                 vacant += 1
                 if PW and not QV("no_walls", False) and rnd.random() < PW["vacant_walled"]: COMPOUNDS.append((plot, None))   # a walled empty plot: bought, never built
                 continue
@@ -1046,6 +1050,9 @@ for _, p, q, bi in fronts:
                 r = at(dmax - od - 0.3, od, ow)
                 if not any(o.intersects(r) for o in near(r)): place(plot, r)   # fix: sheds used to land on top of back houses
 QV.on = False
+if PROF.get("unfinished_share"):   # half-built houses: walls up, no roof, nobody living there yet (real: 1.7% tagged under construction)
+    urnd = random.Random(SEED * 19 + 1)
+    bld = [(r, "unfinished house" if k == "front" and urnd.random() < PROF["unfinished_share"] else k) for r, k in bld]
 if QP.get("office_m2"):   # in the quarter, the big buildings on the street are offices and hotels, not houses
     bld = [(r, "office block" if k == "front" and r.area >= QP["office_m2"] and in_q(r.centroid) else k) for r, k in bld]
 # kiosks and sheds on leftover frontage (the many <60 m2 structures)
@@ -1273,12 +1280,21 @@ for p in parcels:
         for k2 in range(WW["tanks"]):
             c2 = Point(ctr.x + ca * (LL / 6 + k2 * (2 * WW["tank_r_m"] + 8)), ctr.y + sa * (LL / 6 + k2 * (2 * WW["tank_r_m"] + 8))); r = c2.buffer(WW["tank_r_m"], 24)
             if g.buffer(-4).contains(r) and road_free.contains(r): bld.append((r, "tank"))
-    if p["kind"] == "tank farm":   # round fuel tanks in a grid, each in its own bund
-        TF = next(x for x in PROF["reserve"] if x["kind"] == "tank farm"); ca, sa = math.cos(a), math.sin(a); R2_ = TF["tank_r_m"]; step = 2 * R2_ + 14
+    if p["kind"] in ("tank farm", "refinery"):   # round fuel tanks in a grid, each in its own bund
+        TF = next(x for x in PROF["reserve"] if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a); R2_ = TF["tank_r_m"]; step = 2 * R2_ + 14
         for v in np.arange(-LL, LL, step):
             for u in np.arange(-LL, LL, step):
+                if p["kind"] == "refinery" and u < 0: continue   # a refinery: tanks on one half, the process plant on the other
                 c2 = Point(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca); r = c2.buffer(R2_, 24)
                 if g.buffer(-8).contains(r) and road_free.contains(r): bld.append((r, "tank"))
+        if p["kind"] == "refinery":   # the process plant: distillation columns in rows, and the flare stack at the far corner
+            for v in np.arange(-LL / 2, LL / 2, 22):
+                for u in np.arange(-LL + 30, -20, 26):
+                    c2 = Point(ctr.x + u * ca - v * sa, ctr.y + u * sa + v * ca); r = c2.buffer(4, 16)
+                    if g.buffer(-12).contains(r) and road_free.contains(r): bld.append((r, "column"))
+            for fu, fv in ((-0.9, 0.8), (-0.9, -0.8), (-0.8, 0.0)):
+                c2 = Point(ctr.x + fu * LL / 2 * ca - fv * g.area / LL / 2 * sa, ctr.y + fu * LL / 2 * sa + fv * g.area / LL / 2 * ca); r = c2.buffer(2, 12)
+                if g.buffer(-6).contains(r) and not any(r.intersects(o) for o, k in bld[-60:]): bld.append((r, "flare stack")); break
     if p["kind"] in ("villas", "prison", "truck park", "landfill"):   # grids of one building type: bungalows in gardens, cell blocks, parked trailers
         VS = next(x for x in PROF["parcels"] + PROF.get("reserve", []) if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a); bl, bs = VS["block_m"]
         av = None
@@ -1398,6 +1414,14 @@ if H and H["poi"] in POIS:
             bld = [(r, k) for r, k in bld if not r.intersects(hr.buffer(1.5))]
             bld.append((hr, "hotel")); poi_pos[H["poi"]] = hr.centroid; break
 
+TP = PROF.get("toll_plaza")
+if TP and TP["poi"] in POIS:   # a toll plaza across an expressway: booths between the lanes under a canopy, the pin at the plaza
+    ex = next(a for n, k, a in arts if n == TP["road"]); tq = ex.project(POIS[TP["poi"]]); q = ex.interpolate(tq); ux, uy = LMK.direction_at(ex, tq)
+    W_ = WIDTH["art"]; n_ = TP["booths"]   # within the carriageway: houses stand clear of it
+    for j in range(n_):
+        o = -W_ / 2 + (j + 0.5) * W_ / n_
+        bld.append((rect(q.x - uy * o, q.y + ux * o, 3.0, 2.2, math.atan2(uy, ux)), "toll booth"))
+    bld.append((rect(q.x + ux * 9, q.y + uy * 9, W_ + 2, 6, math.atan2(ux, -uy)), "toll canopy")); poi_pos[TP["poi"]] = q
 TL = PROF.get("toll")
 if TL:   # a tolled bridge: a booth either side of the bridge road just off the shore, the pin between them
     br = next((LineString(a["pts"]) for a in G["arterials"] if a["name"] == TL["bridge"]), None)
@@ -1423,7 +1447,7 @@ if BC:   # the beach: shacks, bars and a horse shelter on the sand between the s
         if not r.intersects(ring_poly) and not r.intersects(water) and not any(r.distance(o) < 1.5 for o, k in sand):
             sand.append((r, kind_)); bld.append((r, kind_))
         t += br_.uniform(*BC["every_m"])
-    bars = [r for r, k in sand if k == "beach bar"]
+    bars = [r for r, k in sand if k == "beach bar"] or [r for r, k in sand]   # the pin on the middle bar (or shack, where there are no bars)
     if bars: poi_pos[BC["poi"]] = bars[len(bars) // 2].centroid
 for HL in PROF.get("halls", []):   # a big named building on a main-road frontage near its pin (the Shrine's music hall); the houses it replaces are cleared
     if HL["poi"] not in POIS: continue
@@ -1508,7 +1532,7 @@ if STY:   # architecture (owner, Oct 2026: "variety in architecture"): some hous
         q2 = (q1[0] + q3[0] - p0[0], q1[1] + q3[1] - p0[1])
         L_ = r.difference(Polygon([p0, q1, q2, q3]))
         if L_.geom_type == "Polygon": bld[i] = (L_, k); MODERN.add(i)
-NOT_BUILDINGS = ("stack", "trailer", "crane", "generator", "water tank")   # containers, parked trailers, gantry cranes, generator houses and tanks: not counted against the real ones
+NOT_BUILDINGS = ("stack", "trailer", "crane", "generator", "water tank", "column", "flare stack")   # containers, parked trailers, gantry cranes, generator houses and tanks: not counted against the real ones
 B = [r for r, k in bld if k not in WATER_KINDS + NOT_BUILDINGS]
 # a street left floating (a parcel cut it off from the rest) is tied to the nearest way by a short link, if that is clear of buildings
 _all = lambda: [g for k, g in NET_LINES()] + lanes + [g for k, g in PATHS]
@@ -1537,7 +1561,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
