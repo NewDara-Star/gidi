@@ -4,7 +4,7 @@ Run from the repo root: python3 scripts/explore_city.py COMMAND ...
 Usage:
   explore_city.py overview                      what's here: size, counts, landmarks, parcels
   explore_city.py home [n] [district]           pick the n-th resident house (default random), optionally in one district, and describe it
-  explore_city.py look X Y [radius]             what you see standing at X,Y (metres)
+  explore_city.py look X Y [radius]             what you see standing at X,Y (metres), gutters included
   explore_city.py walk FROM TO                  walk on foot (5 km/h). FROM/TO = landmark name (part ok) or X,Y
   explore_city.py ride FROM TO [--through]      okada ride (25 km/h, no lanes, arterials allowed); goes round okada ban zones unless --through
   explore_city.py places                        list landmarks and civic places with coordinates
@@ -44,6 +44,13 @@ POIS = [p for p in G["pois"] if p["d"] in DIDS]
 PARCELS = [(p["kind"], Polygon(p["pts"])) for DID in DIDS for p in G.get("parcels", {}).get(DID, [])]
 FLY = [(st["name"], LineString(st["pts"])) for st in G.get("structures", []) if st.get("d") in DIDS and st["kind"] == "flyover"]
 WT = STRtree([g for k, n, g in ways])
+
+# open gutters (ism 15): a gutter never blocks a walk (every door has its plank or slab), but a resident sees them, and rides past blocked ones
+GUT = [(r, LineString(r["pts"])) for r in G.get("gutters", []) if r.get("d") in DIDS]
+GUT_T = STRtree([g for r, g in GUT]) if GUT else None
+CROSS_OF = {tuple(c["bld"]): c for c in G.get("gutter_crossings", []) if c["of"] == "entrance"}
+B_AT = {}; _o = 0
+for DID in DIDS: B_AT[DID] = _o; _o += len(G["buildings"][DID])
 
 BAN = walknet.ban_zone(G)   # okada ban zones (the Capital): rides go round them unless --through
 def graph(mode, through=False): return walknet.graph(ways, mode, BAN, through)
@@ -95,6 +102,17 @@ def look(x, y, r=60):
         if dd < 150: print(f"{'civic' if p.get('civic') else 'landmark'} {dd:.0f} m: {p['name']} ({p['type']}{', safe ground' if p.get('safe') else ''})")
     for sg in G.get("safe_ground", []):
         if sg["d"] in DIDS and Polygon(sg["pts"]).contains(pt): print(f"you are on SAFE GROUND: {sg['name']} (never a crime site or a chase route)")
+    if GUT_T is not None:
+        gs = [GUT[i] for i in GUT_T.query(pt.buffer(25))]
+        if gs:
+            ln = {"open": 0.0, "covered": 0.0}; blk = {"rubbish": 0.0, "green_water": 0.0}
+            from shapely.ops import substring
+            disc = pt.buffer(25)
+            for rr, g in gs:
+                ln[rr["state"]] += g.intersection(disc).length
+                for b in rr.get("blocked", []): blk[b["fill"]] += substring(g, b["from"], min(b["to"], g.length)).intersection(disc).length
+            nc = sum(1 for c in G["gutter_crossings"] if c["gutter"] in {rr["id"] for rr, g in gs} and Point(c["pt"]).distance(pt) < 25)
+            print(f"gutters within 25 m: {ln['open']:.0f} m open, {ln['covered']:.0f} m under slabs; blocked: {blk['rubbish']:.0f} m of rubbish, {blk['green_water']:.0f} m of green water; {nc} plank/slab crossings")
     print(f"rail: {RAIL.distance(pt):.0f} m away" + (f"; canal: {min(c.distance(pt) for c in CANALS):.0f} m" if CANALS else ""))
 def route(a, b, mode, through=False):
     Gx = graph(mode, through); pa, na = resolve(a); pb, nb = resolve(b, pa); pa, na = resolve(a, pb)   # repeated names: the nearest pair
@@ -164,6 +182,9 @@ def home(n=None, dist=None):   # dist: a district id or part of its name ("hub",
     k, p, st = B[i]; c = p.centroid
     print(f"house #{i}: {bkind(k, st)}, footprint {p.area:.0f} m², at {c.x:.0f},{c.y:.0f}")
     look(c.x, c.y, 40)
+    c_ = CROSS_OF.get((BD[i], i - B_AT[BD[i]]))
+    if c_: print(f"its door crosses the gutter on a {c_['kind']} ({c_['mat']}, {c_['w']:.1f} m)")
+    elif GUT: print("no open gutter in front of its door")
 def problems():
     far = [(i, k) for i, (k, p, st) in enumerate(B) if k in ("front", "back", "stilt") and nearest_way(p.centroid)[3] > 45]
     print(f"houses more than 45 m from any street, lane or path: {len(far)} of {sum(1 for k,_,_ in B if k in ('front','back'))}")

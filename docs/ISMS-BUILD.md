@@ -21,7 +21,7 @@ The "feel like Lagos" pass. All fifteen districts are built from measured patter
 | 12 | Gates across streets | built (the Estate, the Heights) | gatehouses, barriers | done |
 | 13 | One-way streets | — | — | a direction on streets at each district's rate (the map, the tools, signs) |
 | 14 | Streets ahead of houses | built (the Frontier) | — | done |
-| 15 | Open gutters | — | open drains, slabs, rubbish, green water | gutters in the map data (which side, covered or open, blocked stretches), plank and slab crossings at entrances |
+| 15 | Open gutters | built (15 Oct: `scripts/isms.py`, drawn in the 2D map) | open drains, slabs, rubbish, green water, invented by the kit | done in the data; the kit should now read `gutters` and `gutter_crossings` instead of inventing them |
 
 Also in the kit already: road condition and potholes, refuse heaps, litter, poles and tangled wires, transformers, kerbs.
 
@@ -43,6 +43,53 @@ Gidi is our city, so these are invented to fit it, not copied. They're built in 
 - **Deterministic:** the same seed gives the same isms. A district's houses and streets only change where an ism needs them to (a missing link cuts a street; a market spill takes road space).
 - **Safe ground:** no ism that brings crime or danger goes on safe ground. That includes churches, mosques, schools, hospitals, clinics, palaces and the Heritage Strip.
 - **Checks and test:** `check_district.py` must still pass, with its rules extended where an ism breaks one on purpose. A short living test checks that the isms make life harder in the right places without cutting anyone off.
+
+## Data
+`scripts/isms.py` runs in the bake (`scripts/bake_web.py`) after the road clean-up and the road heights, once the safe ground is listed. It adds three keys to `web/gidi-data.js`. Units are metres, y down, like the rest of the data. The same seed (2026) gives the same gutters.
+
+**`gutters`**: one entry per run, which is an unbroken stretch of one gutter, open or covered.
+| Key | Meaning |
+|---|---|
+| `id` | `<road id>:<side>:<n>`, for example `maze/street/22:L:0`. Stable between bakes while the road is unchanged, so hand edits can name it. |
+| `road` | The road it runs beside, as the kit names roads: `<district>/street/<i>`, `<district>/lane/<i>`, `main/<i>` (index in `mains`), `art/<name>` (an arterial or expressway). |
+| `d` | District id; null for the odd stretch of arterial outside every district. |
+| `kind` | `lane`, `street`, `main`, `art` or `exp`. |
+| `side` | `L` or `R`: left or right when walking along the road's points on the map. |
+| `state` | `open` (a channel you can fall into) or `covered` (under slabs, a walkway). |
+| `w`, `depth` | Channel width and depth in metres. |
+| `pts` | The centre line, `[[x, y], ...]`, about 4 m out from the road's middle (half its width + 0.3 m + half the channel). |
+| `len` | Length in metres. |
+| `blocked` | Optional, open runs only: `[{"from", "to", "fill"}]`, metres along the run. `fill` is `rubbish` or `green_water`. |
+| `hand` | True on an item added or changed by hand. |
+
+A covered run is also where a gutter passes under a house front or a compound-wall gate, and where it passes safe ground. Where a gutter meets a bigger road it stops (it flows into that road's gutter); where a side street meets it, it carries on and a crossing sits over it.
+
+**`gutter_crossings`**: a plank or slab over an open run.
+| Key | Meaning |
+|---|---|
+| `id` | `<gutter id>:c<n>`. |
+| `gutter` | The run it crosses. |
+| `at` | Metres along that run to the middle of the crossing. |
+| `pt`, `ang` | Where it is `[x, y]`, and the run's heading there in degrees (0 = east, 90 = south on the map). The crossing's length runs along this heading; it spans the channel. |
+| `kind` | `plank` (home entrances in poorer districts) or `slab` (shops, gates, kiosks, stall rows, side streets, wealthier houses). |
+| `mat` | `plank`, `old door`, `metal sheet` for a plank; `concrete` for a slab. |
+| `w` | Length along the run, in metres. A stall row gets 5 to 10 m of slabs. |
+| `of` | `entrance` (then `bld`: `[district id, building index]`) or `street` (then `road`: the side street's id). |
+
+**`gutter_rates`**: the rates and class factors used, so the kit can see them.
+
+**Rates per district** (`RATES` in `scripts/isms.py`; `has` is the chance a side of a street has a gutter, `cover` the share under slabs, `blocked` the share of the open length that is blocked): the Maze 0.97 / 0.20 / 0.50, the Hub 0.95 / 0.30 / 0.40, Jungle City 0.95 / 0.15 / 0.60, Food Gate 0.93 / 0.25 / 0.50, the Bazaar 0.93 / 0.30 / 0.40, Water Town 0.90 / 0.08 / 0.65, Railside 0.90 / 0.25 / 0.40, the Frontier 0.75 / 0.35 / 0.15, the Border 0.75 / 0.25 / 0.35, Old Island 0.98 / 0.40 / 0.55, Old Shore 0.93 / 0.35 / 0.45, the Port 0.90 / 0.40 / 0.40, the Capital 0.95 / 0.60 / 0.25, the Estate 0.98 / 0.92 / 0.05, the Heights 0.98 / 0.95 / 0.03. Mains are covered more than streets (half of what is left, so about 60% in the Maze), arterials 88%, expressways 80%; a lane carries one gutter, on a random side, and is rarely covered.
+
+**Safe ground:** a gutter within 12 m of a church, mosque, school, clinic, hospital, palace or the Heritage Strip is covered, never open, and nothing is blocked within 30 m of one (a resident at the gate sees 25 m). `check_district.py` (check 14) fails if a blocked stretch touches the 12 m zone.
+
+**Hand edits** go in `web/isms-edits.json`, applied after the rules so they always win:
+```
+{"gutters": {"add": [<whole run>], "delete": ["<id>"], "edit": {"<id>": {"state": "covered", "blocked": []}}},
+ "gutter_crossings": {"add": [], "delete": [], "edit": {"<id>": {"pt": [x, y]}}}}
+```
+`edit` changes the named fields (to move an item, give a new `pts` or `pt`). Deleting a gutter takes its crossings with it. A name that no longer exists prints a warning in the bake.
+
+**Not in this data yet:** water levels, flooding (ism 10) and which stretches back up in the rain. The blocked stretches are where that will start.
 
 ## The prompt (paste into a new session)
 > Read README.md, docs/LAGOS-ISMS.md, docs/ISMS-BUILD.md, docs/LAGOS-LIGHT.md and docs/UNREAL-PORT-PLAN.md. Build the missing Lagos-isms into Gidi, following "How it should work" in docs/ISMS-BUILD.md.
