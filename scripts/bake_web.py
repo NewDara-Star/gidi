@@ -169,6 +169,11 @@ print("junctions:",dict(_jr))
 for _j in out["junctions"]:
     if _j["kind"]=="roundabout" and "roads" in _j: print("  new roundabout:",_j["name"],f"r {_j['r']} m at ({_j['x']:.0f}, {_j['y']:.0f}),","/".join(_j["roads"]))
 
+# ---- market streets (scripts/market_streets.py): traders on the walkways and the road round each market, a lane kept clear
+import market_streets
+_lagos_m=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
+print("market streets:",market_streets.market_streets(out,_lagos_m))
+
 # ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
 import roadz
 water,ocean,_hr=roadz.heights(out,water,ocean,json.load(open("web/terrain.json")))

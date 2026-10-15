@@ -91,7 +91,10 @@ def check_roads(gen, bgeoms, G):
         for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
         for a in G["arterials"]:
             if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums"})
-        enc = unary_union([Polygon(z["pts"]).buffer(0) for z in gen.get("encroach", [])])   # buffer(0): rounding can cross an edge if gen.get("encroach") else None
+        zs_ = [z for z in G.get("encroach", []) if z.get("d") == gen["id"]] + gen.get("encroach", [])   # market streets are placed in the bake
+        enc = unary_union([Polygon(z["pts"]).buffer(0) for z in zs_]) if zs_ else None   # buffer(0): rounding can cross an edge
+        bgeoms = [Polygon(b[1:]).buffer(0) for b in G["buildings"][gen["id"]] if len(b) > 3]   # the built city's buildings (with the tables)
+        gen = dict(gen, buildings=[b for b in G["buildings"][gen["id"]] if len(b) > 3])
     else:
         enc = None
     tree = STRtree([g for g, _, _ in shapes])

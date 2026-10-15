@@ -1313,26 +1313,7 @@ for p in parcels:
                 cc_ = list(r.exterior.coords)
                 if min(math.dist(cc_[0], cc_[1]), math.dist(cc_[1], cc_[2])) < 2.0 or not mfit(r): continue
                 bld.append((r, "stalls")); sheds.append((r, ang)); mg.setdefault((int(r.centroid.x // 15), int(r.centroid.y // 15)), []).append(r); mcov += r.area
-            # the spill: tables and sheds on the walkways of the roads round the market, a declared zone, never on the carriageway
-            for k2, x2 in net_lines:
-                if k2 not in ("main", "art", "street") or x2.distance(g) > MM["spill_m"]: continue
-                band = XS.walkway_band(k2)
-                if band[1] - band[0] < 0.7: continue
-                for seg in lines(x2.intersection(g.buffer(MM["spill_m"]))):
-                    outer = band[1] + 0.5 * (CLEAR[k2] - band[1])   # the walkway and halfway on to the building line, each side apart:
-                    sides_ = [seg.buffer(sg * outer, single_sided=True, cap_style=2).difference(seg.buffer(band[0], cap_style=2)) for sg in (1, -1)]   # a strip, never the road
-                    for zs in sides_:
-                        for zp in (getattr(zs, "geoms", [zs])):
-                            if zp.geom_type == "Polygon" and zp.area > 1:
-                                ENCROACH.append({"kind": "market spill", "poi": next((x.get("poi") for x in RES if x["geom"] is g), None), "geom": zp})
-                    zone = unary_union(sides_)
-                    for sd in (1, -1):
-                        for t in np.arange(1.5, seg.length - 1.5, mrnd.uniform(2.6, 3.6)):
-                            if mrnd.random() > MM["spill_density"]: continue
-                            q = seg.interpolate(t); ux, uy = LMK.direction_at(seg, t); off = (band[0] + band[1]) / 2
-                            r = rect(q.x - uy * off * sd, q.y + ux * off * sd, mrnd.uniform(1.6, 2.6), min(band[1] - band[0] - 0.1, 1.6), math.atan2(uy, ux) + math.radians(mrnd.gauss(0, 6)))
-                            if land.contains(r) and zone.contains(r) and not any(o.distance(r) < 0.1 for o in mnear(r)) and not any(r.intersects(rr) for rr, kk in bld[-400:]):
-                                bld.append((r, "stalls")); mg.setdefault((int(r.centroid.x // 15), int(r.centroid.y // 15)), []).append(r)
+            # the market streets round it (traders on the walkways and the road) are placed in the bake, on the final roads: scripts/market_streets.py
         else:
             for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=PROF.get("market_aisle_m", 3.5)):   # each piece is a row of four lock-ups under one roof
                 if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))

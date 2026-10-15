@@ -14,6 +14,11 @@ SECTIONS = {
 }
 SECTIONS['bridge'] = dict(SECTIONS['art'])
 
+# Market streets (owner, 15 Oct 2026, from Mile 12, Oshodi, Idumota): traders take the walkways and part of the carriageway
+# too, under umbrellas and on tables; the traffic squeezes through what is left. MARKET_CLEAR is the running lane kept clear
+# down the middle: one lane on a street or a main road, one each way on an arterial. Expressways are never market streets.
+MARKET_CLEAR = {'street': 3.0, 'main': 3.5, 'art': 7.0}
+
 
 def half(kind):
     """Half the carriageway: the road surface each side of the centre line."""
