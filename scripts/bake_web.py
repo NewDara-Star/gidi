@@ -170,9 +170,10 @@ for _j in out["junctions"]:
     if _j["kind"]=="roundabout" and "roads" in _j: print("  new roundabout:",_j["name"],f"r {_j['r']} m at ({_j['x']:.0f}, {_j['y']:.0f}),","/".join(_j["roads"]))
 
 # ---- market streets (scripts/market_streets.py): traders on the walkways and the road round each market, a lane kept clear
-import market_streets
-_lagos_m=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
-print("market streets:",market_streets.market_streets(out,_lagos_m))
+import market_streets, hand
+_frozen=hand.districts_frozen()   # districts frozen into their hand files: placed by hand from now on (scripts/hand.py)
+_lagos_m=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos" and d not in _frozen]
+print("market streets:",market_streets.market_streets(out,_lagos_m),"| frozen tables:",hand.apply_frozen(out,"tables"))
 
 # ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
 import roadz
@@ -187,7 +188,8 @@ import furniture
 import cross_sections
 out["cross_sections"]=cross_sections.SECTIONS   # one table of road widths for the generator, the checks and the kit
 _lagos=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
-print("street furniture:",_lagos,furniture.furniture(out,_lagos))
+print("street furniture:",_lagos,furniture.furniture(out,[d for d in _lagos if d not in _frozen]),"| frozen:",hand.apply_frozen(out,"furniture"))
+print("hand edits:",hand.apply_edits(out))
 for _d in out["districts"]:
     if _d["id"] in _lagos: _d["fabric"]="lagos"   # built to the cross-sections: the 2D ground plan draws its roads at true width
 
