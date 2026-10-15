@@ -19,7 +19,8 @@ COL = {"front": "#b9a48a", "back": "#a8977f", "shed": "#8f8577", "kiosk": "#6e8f
        "gatehouse": "#d93025", "generator": "#55595e", "water tank": "#2b6cb0", "mansion": "#a0784a", "clubhouse": "#7d5ba6", "palace": "#c9a227", "bank tower": "#5f8fb8", "brazilian house": "#c4704a",
        "apartment tower": "#4f7fa8", "nightclub": "#b0457a", "toll booth": "#d93025",
        "office block": "#8a9bb0", "beach shack": "#c9a46a", "beach bar": "#e07b39", "horse shelter": "#8a6a4f",
-       "column": "#6b7a8a", "flare stack": "#d93025", "unfinished house": "#9a9a9a", "toll canopy": "#c8645a"}
+       "column": "#6b7a8a", "flare stack": "#d93025", "unfinished house": "#9a9a9a", "toll canopy": "#c8645a",
+       "fishing hut": "#b8946a", "colonial house": "#e8d9a0", "drums": "#d93025", "border booth": "#2b6cb0", "border canopy": "#2b6cb0"}
 PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch": "#bfe3b4", "motor park": "#d6dbe8",
       "bus terminal": "#d6dbe8", "station": "#e6d8ef", "stadium": "#e3e8d6", "under bridge": "#f6d7b0", "estate": "#e4ecd9",
       "lorry park": "#d6dbe8", "park": "#cfe8c4", "sawmill": "#e8dcc8", "government": "#e6e1d3", "garden": "#cfe8c4", "barracks": "#dfe3d0", "airfield": "#d9e8c8", "plazas": "#dcdcdc", "livestock": "#ead9c0", "container yard": "#dcdcdc", "tank farm": "#e4e4e4", "villas": "#dfe8d0", "prison": "#d6d6d6", "truck park": "#d6dbe8", "waterworks": "#dcdcdc", "landfill": "#e6d6bd", "pipeline": "#e3ead8",

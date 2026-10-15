@@ -777,6 +777,22 @@ if W:
 paths_u = unary_union([g for k, g in PATHS]) if PATHS else None
 
 # ---------- 4. buildings: plots along every street frontage, compounds behind ----------
+BP = PROF.get("bush_paths")
+if BP and BP["poi"] in POIS:   # bush paths: footpaths through the bush round the checkpoints, street to street, a little crooked (the Border)
+    bprnd = random.Random(SEED * 23 + 5); pin = POIS[BP["poi"]]
+    ends = [g for k, g in net_lines if k in ("street", "main") and g.distance(pin) < BP["r_m"]]
+    hard_ = unary_union([g for k, g in net_lines if k == "art"] + [r["geom"] for r in RES] + [p["geom"] for p in parcels])
+    made = 0
+    for _ in range(BP["n"] * 30):
+        if made >= BP["n"] or not ends: break
+        g1, g2 = bprnd.choice(ends), bprnd.choice(ends)
+        a_, b_ = g1.interpolate(bprnd.random(), normalized=True), g2.interpolate(bprnd.random(), normalized=True)
+        if not BP["len_m"][0] < a_.distance(b_) < BP["len_m"][1]: continue
+        dx, dy = b_.x - a_.x, b_.y - a_.y; L_ = math.hypot(dx, dy); nx2, ny2 = -dy / L_, dx / L_
+        pts_ = [a_] + [Point(a_.x + dx * f + nx2 * bprnd.uniform(-1, 1) * L_ * 0.12, a_.y + dy * f + ny2 * bprnd.uniform(-1, 1) * L_ * 0.12) for f in (0.33, 0.66)] + [b_]
+        bp = LineString(pts_)
+        if not land.buffer(-3).contains(bp) or bp.intersects(hard_) or any(bp.distance(x) < 25 for k2, x in PATHS if k2 == "bush path"): continue
+        PATHS.append(("bush path", bp)); made += 1
 clear_geoms = [g.buffer(2.2) for g in lanes] + [g.buffer(CLEAR.get(k, 3.4)) for k, g in net_lines] + [rail.buffer(CLEAR["rail"])] + [g.buffer(1.2) for k, g in PATHS]
 if canal: clear_geoms.append(canal.buffer(CLEAR["canal"]))
 # skywalks: footbridges over the arterial in front of the bus terminal (Daramola's model: "terminal with skywalks"; real: ~45 m long)
@@ -1103,6 +1119,12 @@ if ZN and ZN["poi"] in POIS:   # a quarter whose houses have turned into a trade
                 r = rect(p.x - uy * off * side, p.y + ux * off * side, zrnd.uniform(2.2, 3.2), 2.0, math.atan2(uy, ux))
                 if free(r, 0.2): add(r, "kiosk")
     poi_pos[ZN["poi"]] = pin
+for RL in PROF.get("relabels", []):   # houses round a pin turned into a kind of their own (the Border's colonial heritage strip)
+    if RL["poi"] not in POIS: continue
+    pin = POIS[RL["poi"]]; zu = pin.buffer(RL["r_m"])
+    bld = [(r, RL["kind"] if k in RL["from"] and zu.contains(r.centroid) and r.area >= RL.get("min_m2", 0) else k) for r, k in bld]
+    hit = [r for r, k in bld if k == RL["kind"]]
+    if hit: poi_pos[RL["poi"]] = min(hit, key=lambda r: r.distance(pin)).centroid
 for sp in [x for x in PROF.get("named", []) if set(x["from"]) & {"front", "back"}]:   # a house near the pin becomes the studio, the cafe, Tunde's room
     pin = POIS.get(sp["poi"])
     if pin is None: continue
@@ -1420,8 +1442,25 @@ if TP and TP["poi"] in POIS:   # a toll plaza across an expressway: booths betwe
     W_ = WIDTH["art"]; n_ = TP["booths"]   # within the carriageway: houses stand clear of it
     for j in range(n_):
         o = -W_ / 2 + (j + 0.5) * W_ / n_
-        bld.append((rect(q.x - uy * o, q.y + ux * o, 3.0, 2.2, math.atan2(uy, ux)), "toll booth"))
-    bld.append((rect(q.x + ux * 9, q.y + uy * 9, W_ + 2, 6, math.atan2(ux, -uy)), "toll canopy")); poi_pos[TP["poi"]] = q
+        bld.append((rect(q.x - uy * o, q.y + ux * o, 3.0, 2.2, math.atan2(uy, ux)), TP.get("booth", "toll booth")))
+    bld.append((rect(q.x + ux * 9, q.y + uy * 9, W_ + 2, 6, math.atan2(ux, -uy)), TP.get("canopy", "toll canopy"))); poi_pos[TP["poi"]] = q
+CK = PROF.get("checkpoints")
+if CK and CK["poi"] in POIS:   # a road of checkpoints: every few hundred metres an agency's post, a shed beside the road and drums across half of it
+    ex = next(a for n, k, a in arts if n == CK["road"]); seg_ = ex.intersection(land.buffer(-30)); seg_ = max(lines(seg_), key=lambda l: l.length) if lines(seg_) else None
+    if seg_ is not None:
+        crnd2 = random.Random(SEED * 31 + 7); t = CK["first_m"]; kk = 0; posts = []
+        side_ = unary_union([g.buffer(WIDTH["street"] / 2 + 1) for k, g in net_lines if k not in ("art", "exp")])   # drums never across a side street's mouth
+        while t < seg_.length - 40:
+            q = seg_.interpolate(t); ux, uy = LMK.direction_at(seg_, t); sd = 1 if kk % 2 == 0 else -1; a2 = math.atan2(uy, ux)
+            drums_ = [rect(q.x - uy * sd * (2.5 + j * 3.0), q.y + ux * sd * (2.5 + j * 3.0), 1.2, 1.2, a2) for j in range(2)]   # across the near half of the carriageway
+            if any(d_.intersects(side_) for d_ in drums_): t += 15; continue
+            bld += [(d_, "drums") for d_ in drums_]
+            for off_ in (CLEAR["art"] + 2.5, CLEAR["art"] + 5, CLEAR["art"] + 8):   # the agency's shed at the roadside, where there is room
+                sh = rect(q.x - uy * sd * off_, q.y + ux * sd * off_, 4.0, 3.0, a2)
+                if land.buffer(-1).contains(sh) and not sh.intersects(parcel_u) and not any(sh.intersects(o) for o in near(sh)): bld.append((sh, "checkpoint")); add_ok = True; break
+            posts.append(q)
+            kk += 1; t += crnd2.uniform(*CK["every_m"])
+        if posts: poi_pos[CK["poi"]] = min(posts, key=lambda q: q.distance(POIS[CK["poi"]]))
 TL = PROF.get("toll")
 if TL:   # a tolled bridge: a booth either side of the bridge road just off the shore, the pin between them
     br = next((LineString(a["pts"]) for a in G["arterials"] if a["name"] == TL["bridge"]), None)
@@ -1532,7 +1571,7 @@ if STY:   # architecture (owner, Oct 2026: "variety in architecture"): some hous
         q2 = (q1[0] + q3[0] - p0[0], q1[1] + q3[1] - p0[1])
         L_ = r.difference(Polygon([p0, q1, q2, q3]))
         if L_.geom_type == "Polygon": bld[i] = (L_, k); MODERN.add(i)
-NOT_BUILDINGS = ("stack", "trailer", "crane", "generator", "water tank", "column", "flare stack")   # containers, parked trailers, gantry cranes, generator houses and tanks: not counted against the real ones
+NOT_BUILDINGS = ("stack", "trailer", "crane", "generator", "water tank", "column", "flare stack", "drums")   # containers, parked trailers, gantry cranes, generator houses and tanks: not counted against the real ones
 B = [r for r, k in bld if k not in WATER_KINDS + NOT_BUILDINGS]
 # a street left floating (a parcel cut it off from the rest) is tied to the nearest way by a short link, if that is clear of buildings
 _all = lambda: [g for k, g in NET_LINES()] + lanes + [g for k, g in PATHS]
@@ -1561,7 +1600,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1, "drums": 1, "border booth": 1, "border canopy": 1, "fishing hut": 1, "colonial house": 2}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
