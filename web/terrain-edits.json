@@ -1,1 +1,4 @@
-[]
+[
+ {"name": "Food Gate lowland (the flood-prone land behind the market, toward the river)", "type": "basin", "pts": [[3650, 2700], [3750, 3100], [3700, 3450]], "width_m": 380, "dz_m": 1.5},
+ {"name": "Food Gate drainage valley (ridge to lagoon)", "type": "valley", "pts": [[2700, 2560], [3150, 2780], [3550, 2900], [3880, 2960]], "width_m": 150, "dz_m": 2.5}
+]

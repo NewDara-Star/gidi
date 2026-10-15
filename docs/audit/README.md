@@ -15,9 +15,9 @@ R1 along each other, R2 near misses, R3 overshoots, R4 knife-edge crossings, R5 
 | [Railside](railside.md) | 9 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | [The Capital](capital.md) | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | [The Estate](estate.md) | 1 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| [Food Gate](foodgate.md) | 3 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| [Food Gate](foodgate.md) | 4 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | [Water Town](watertown.md) | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | [Old Shore](oldshore.md) | 4 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| [Old Island](oldisland.md) | 6 | 1 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| [The Heights](heights.md) | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+| [Old Island](oldisland.md) | 6 | 0 | 3 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| [The Heights](heights.md) | 5 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | [The Frontier](frontier.md) | 6 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 |

@@ -82,6 +82,20 @@
     gutterPath[c.kind] += "M" + (c.pt[0] - dx).toFixed(1) + " " + (c.pt[1] - dy).toFixed(1) + "L" + (c.pt[0] + dx).toFixed(1) + " " + (c.pt[1] + dy).toFixed(1);
   });
   const mainsPath = G.mains.map((m, i) => ({ id: "main" + i, d: pts2d(m.pts), name: m.name, district: m.d }));
+  // The ground plan (scripts/cross_sections.py, scripts/furniture.py): districts built to the agreed cross-sections show every
+  // road at true width - walkway, gutter, carriageway - and every piece of street furniture where it stands.
+  const XS = G.cross_sections || {};
+  const PLAN_D = G.districts.filter((d) => d.fabric === "lagos");
+  const planIds = new Set(PLAN_D.map((d) => d.id));
+  const planClip = PLAN_D.map((d) => poly2d(d.poly)).join("");
+  const planRoads = { lane: "", street: "", main: "", art: "", exp: "" };
+  Object.entries(G.streets || {}).forEach(([d, L]) => { if (planIds.has(d)) L.forEach((p) => { planRoads.street += pts2d(p); }); });
+  Object.entries(G.lanes || {}).forEach(([d, L]) => { if (planIds.has(d)) L.forEach((p) => { planRoads.lane += pts2d(p); }); });
+  G.mains.forEach((m) => { if (planIds.has(m.d)) planRoads.main += pts2d(m.pts); });
+  G.arterials.forEach((a) => { if (planRoads[a.cls] !== undefined) planRoads[a.cls] += pts2d(a.pts); });
+  const band = (k, part) => { const x = XS[k]; if (!x) return 0; const c = x.carriageway; return part === "c" ? c : part === "g" ? c + 2 * x.gutter : c + 2 * (x.gutter + x.walkway); };
+  const FURN = G.furniture || [];
+  const islands = (G.junctions || []).filter((j) => j.kind === "roundabout" && j.island_r > 0);
 
   // Search index
   const INDEX = [
@@ -93,6 +107,20 @@
 
   function load(key, def) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
   function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) {} }
+
+  function furnitureGlyph(f, i) {   // street furniture in metres, at its spot; f.ang (degrees) points at the road or the traffic
+    const t = `translate(${f.x} ${f.y}) rotate(${f.ang})`;
+    if (f.kind === "pole") return h("circle", { key: i, cx: f.x, cy: f.y, r: 0.35, className: "fu-pole" });
+    if (f.kind === "street light") return h("g", { key: i, transform: t }, h("line", { x1: 0, y1: 0, x2: 2.2, y2: 0, className: "fu-arm" }), h("circle", { r: 0.55, className: "fu-light" }));
+    if (f.kind === "transformer") return h("rect", { key: i, x: -0.8, y: -0.6, width: 1.6, height: 1.2, transform: t, className: "fu-transformer" });
+    if (f.kind === "traffic light") return h("g", { key: i, transform: t }, h("rect", { x: -0.35, y: -0.9, width: 0.7, height: 1.8, className: "fu-signal" }),
+      h("circle", { cx: 0, cy: -0.5, r: 0.22, fill: "#e53935" }), h("circle", { cx: 0, cy: 0, r: 0.22, fill: "#fbc02d" }), h("circle", { cx: 0, cy: 0.5, r: 0.22, fill: "#43a047" }));
+    if (f.kind === "bus stop") return h("g", { key: i, transform: t }, h("rect", { x: -0.6, y: -1.6, width: 1.2, height: 3.2, className: "fu-bus" }),
+      h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "B"));
+    if (f.kind === "lasma post") return h("g", { key: i, transform: t }, h("rect", { x: -0.8, y: -0.8, width: 1.6, height: 1.6, className: "fu-lasma" }),
+      h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "L"));
+    return null;
+  }
 
   /* ---------- static map layers (memoised by zoom bucket) ---------- */
   const Base = memo(function Base({ zb, layers, selected }) {
@@ -134,6 +162,15 @@
       h("g", { pointerEvents: "none" },
         G.arterials.map((a, i) => h("path", { key: "ac" + i, d: pts2d(a.pts), className: "ar-case " + a.cls, style: { strokeWidth: w(a.cls === "exp" ? 34 : 26, a.cls === "exp" ? 5.5 : 4.5) } })),
         G.arterials.map((a, i) => h("path", { key: "a" + i, id: "art" + i, d: pts2d(a.pts), className: "ar " + a.cls, style: { strokeWidth: w(a.cls === "exp" ? 26 : 19, a.cls === "exp" ? 3.8 : 3) } }))),
+      layers.plan && planClip && z > 0.8 && h("g", { pointerEvents: "none", clipPath: "url(#planclip)", fill: "none", strokeLinecap: "butt", strokeLinejoin: "round" },
+        ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pw" + k, d: planRoads[k], className: "plan-walk", style: { strokeWidth: band(k, "w") } })),
+        ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pg" + k, d: planRoads[k], className: "plan-gutter", style: { strokeWidth: band(k, "g") } })),
+        ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pc" + k, d: planRoads[k], className: "plan-road " + k, style: { strokeWidth: band(k, "c") } })),
+        (G.encroach || []).map((e, i) => h("path", { key: "en" + i, d: pts2d(e.pts) + "Z", className: "plan-spill" }))),
+      layers.plan && z > 0.8 && h("g", { pointerEvents: "none" },
+        islands.map((j, i) => h("circle", { key: "is" + i, cx: j.x, cy: j.y, r: j.island_r, className: "plan-island" })),
+        (G.quays || []).map((q, i) => h("path", { key: "q" + i, d: pts2d(q.pts), className: "plan-quay", style: { strokeWidth: w(1.2, 1.5) } }))),
+      layers.plan && z > 1.6 && h("g", { pointerEvents: "none" }, FURN.map((f, i) => furnitureGlyph(f, i))),
       h("g", { pointerEvents: "none" },   // flyovers and rail bridges sit above the roads; skywalks above everything
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "fc" + i, d: pts2d(s.pts), className: "fly-case", style: { strokeWidth: w(s.width + 6, 5) } })),
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "f" + i, d: pts2d(s.pts), className: "fly", style: { strokeWidth: w(s.width, 3.6) } }))),
@@ -158,7 +195,7 @@
     const wrap = useRef(null);
     const [size, setSize] = useState({ w: 1000, h: 700 });
     const [view, setView] = useState(null); // {cx, cy, z} z = px per metre
-    const [layers, setLayers] = useState(() => ({ civic: true, gutters: true, ...load("gidi-layers", { acts: true, okada: true, rail: true, ferries: true, places: true, names: true, civic: true }) }));
+    const [layers, setLayers] = useState(() => ({ civic: true, gutters: true, plan: true, ...load("gidi-layers", { acts: true, okada: true, rail: true, ferries: true, places: true, names: true, civic: true }) }));
     const [sel, setSel] = useState(null); // {kind, id}
     const [q, setQ] = useState("");
     const [focusSearch, setFocusSearch] = useState(false);
@@ -311,7 +348,7 @@
               h("button", { onMouseDown: (e) => e.preventDefault(), onClick: () => { select(r); setQ(""); document.activeElement.blur(); } },
                 h("span", { className: "rn" }, r.name), h("span", { className: "rs" }, r.sub)))))),
         h("div", { className: "chips" },
-          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"], ["gutters", "Gutters"]].map(([k, t]) =>
+          [["acts", "Acts"], ["okada", "Okada zones"], ["places", "Landmarks"], ["civic", "Civic"], ["rail", "Rail"], ["ferries", "Ferries"], ["names", "Street names"], ["gutters", "Gutters"], ["plan", "Ground plan"]].map(([k, t]) =>
             h("button", { key: k, className: "chip" + (layers[k] ? " on" : ""), "aria-pressed": layers[k], onClick: () => setLayers({ ...layers, [k]: !layers[k] }) }, t))));
     const is3d = dim === "3d";
     const dimBox = h("div", { className: "dim ui" },
@@ -333,7 +370,10 @@
       h("svg", { className: "canvas", width: size.w, height: size.h, role: "img", "aria-label": "Map of Gidi" },
         h("defs", null,
           h("pattern", { id: "hatch", width: 8, height: 8, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" },
-            h("rect", { width: 2.2, height: 8, className: "hatch-line" }))),
+            h("rect", { width: 2.2, height: 8, className: "hatch-line" })),
+          h("pattern", { id: "spill", width: 1.6, height: 1.6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" },
+            h("rect", { width: 0.6, height: 1.6, className: "spill-line" })),
+          h("clipPath", { id: "planclip" }, h("path", { d: planClip || "M0 0" }))),
         h("g", { transform: `translate(${size.w / 2} ${size.h / 2}) scale(${z}) translate(${-view.cx} ${-view.cy})` },
           h(Base, { zb, layers, selected: selDistrict }))),
       // overlay labels (constant pixel size)
@@ -366,6 +406,11 @@
         h("button", { "aria-label": "Zoom out", onClick: () => zoomAt(size.w / 2, size.h / 2, 1 / 1.6) }, "−"),
         h("button", { "aria-label": "Show all of Gidi", className: "fit", onClick: () => flyTo(fit([0, 0, MW, MH * 0.97], 24)) }, "⤢")),
       dimBox,
+      layers.plan && z > 1.6 && planClip && h("div", { className: "plan-legend ui" },
+        h("b", null, "Ground plan"),
+        [["walk", "walkway"], ["gutter", "gutter (open drain)"], ["spill", "market spill (on purpose)"], ["light", "street light"], ["pole", "electricity pole"],
+         ["transformer", "transformer"], ["signal", "traffic light"], ["bus", "bus stop"], ["lasma", "LASMA post"], ["island", "roundabout island"]].map(([k, t]) =>
+          h("div", { key: k, className: "lg" }, h("i", { className: "sw-" + k }), t))),
       h("div", { className: "scale ui" },
         h("div", { className: "bar", style: { width: metres * z } }), h("span", null, scaleLabel),
         cursor && h("span", { className: "coord" }, `${(cursor[0] / 1000).toFixed(2)} km E · ${((MH - cursor[1]) / 1000).toFixed(2)} km N`)),

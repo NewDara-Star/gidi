@@ -1,7 +1,7 @@
 """Archetypes: whole objects assembled from parts, driven by rules."""
 import math
 
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 from . import detail, parts
 from .core import MeshBuilder, ccw, centroid, edge_out, frame, offset
@@ -94,12 +94,96 @@ def house(a, rng, collection=None):
     return mb.to_object(a.get('name', 'house'), collection, master), spec
 
 
+def extension(a, rng, collection=None):
+    """A room built onto a house (the Google rebuild's infill, docs/KIT-GAPS.md): one storey against its neighbour, a door and
+    a window to the yard, a lean-to zinc roof falling away from the high side, or now and then a flat concrete slab."""
+    from .core import hex_rgb
+    poly = ccw([tuple(p) for p in a['poly']])
+    spec = house_spec(dict(a, storeys=1), rng)
+    spec.update(storeys=1, shop=False, balcony_p=0.0, generator=None, compound=None, tank=None, dish=False, unfinished=False, lift=0.0)
+    H = STOREY - 0.2
+    mb = MeshBuilder()
+    parts.walls(mb, poly, H, spec)
+    facing = a.get('facing', 0) % len(poly)
+    A, B = poly[facing], poly[(facing + 1) % len(poly)]
+    L = math.dist(A, B)
+    n = edge_out(poly, facing)
+    F = frame(((A[0] + B[0]) / 2, (A[1] + B[1]) / 2, 0), (B[0] - A[0], B[1] - A[1]), n)
+    if L > 1.6:
+        parts.door(mb, F, -L / 4 if L > 3.5 else 0, spec['door'])
+    if L > 3.5:
+        parts.window(mb, F, L / 4, 1.6, dict(spec['window'], glass_mat='glass'))
+    if rng.chance(0.3):   # a flat slab: the next storey will go on it one day
+        parts.roof_flat(mb, poly, H, spec['parapet'])
+    else:   # lean-to: low over the facing (yard) side, high at the back
+        C_, D_ = poly[(facing + 2) % len(poly)], poly[(facing + 3) % len(poly)]
+        ov = 0.35
+        lo, hi = H + 0.05, H + 0.75
+        roof = dict(profile='sine', pitch=0.076, depth=0.018, col=spec['roof'].get('col', hex_rgb('#7a5a40')), wear=min(1.0, spec['roof'].get('wear', 0.6) + 0.15))
+        parts.corrugated(mb, (A[0] + n[0] * ov, A[1] + n[1] * ov, lo), (B[0] + n[0] * ov, B[1] + n[1] * ov, lo), (C_[0], C_[1], hi), (D_[0], D_[1], hi), roof)
+    return mb.to_object(a.get('name', 'extension'), collection, master), spec
+
+
+def market_shed(a, rng, collection=None):
+    """A Lagos market shed (Mile 12, from Google's outlines): posts every 3-4 m, one zinc roof over the whole footprint (two
+    slopes on the big ones), tarpaulins hung down some sides, goods heaped underneath. 40 to 400 m2."""
+    from .core import hex_rgb, shade
+    from .rules import C, CHARACTER
+    ch = C[CHARACTER.get(a['district'], 'dense')]
+    poly = ccw([tuple(p) for p in a['poly']])
+    if len(poly) != 4:
+        return stall(dict(a, _small=True), rng, collection)
+    wear = rng.between(*ch['wear'])
+    e0, e1 = math.dist(poly[0], poly[1]), math.dist(poly[1], poly[2])
+    A, B, Cc, D = poly if e0 >= e1 else [poly[1], poly[2], poly[3], poly[0]]
+    L, Wd = math.dist(A, B), math.dist(B, Cc)
+    mb = MeshBuilder()
+    wood = hex_rgb('#5e4630')
+    eave = rng.between(2.8, 3.3)
+    big = L * Wd > 150
+    ridge = eave + (rng.between(0.9, 1.4) if big else 0.0)
+    roof = dict(profile='sine', pitch=0.076, depth=0.018, col=hex_rgb(rng.pick(ch['roof_cols'])), wear=min(1, wear + 0.2))
+    Av, Bv, Cv, Dv = (Vector((*p, 0)) for p in (A, B, Cc, D))
+    # posts along both long sides (and down the middle under a ridge)
+    nposts = max(2, int(L // rng.between(3.0, 4.0)) + 1)
+    for k in range(nposts):
+        t = k / (nposts - 1)
+        for side, h in ((Av.lerp(Bv, t), eave), (Dv.lerp(Cv, t), eave if big else eave - 0.5)):
+            parts.bar(mb, 'wood', (side.x, side.y, 0), (side.x, side.y, h), 0.09, wood, wear)
+        if big and 0 < k < nposts - 1:
+            m = Av.lerp(Bv, t).lerp(Dv.lerp(Cv, t), 0.5)
+            parts.bar(mb, 'wood', (m.x, m.y, 0), (m.x, m.y, ridge), 0.1, wood, wear)
+    if big:   # two slopes meeting at a ridge along the length
+        M1, M2 = Av.lerp(Dv, 0.5), Bv.lerp(Cv, 0.5)
+        parts.corrugated(mb, (A[0], A[1], eave), (B[0], B[1], eave), (M2.x, M2.y, ridge), (M1.x, M1.y, ridge), roof)
+        parts.corrugated(mb, (M1.x, M1.y, ridge), (M2.x, M2.y, ridge), (Cc[0], Cc[1], eave), (D[0], D[1], eave), dict(roof, col=shade(roof['col'], rng.between(0.85, 1.05))))
+    else:   # one slope, high at the front
+        parts.corrugated(mb, (D[0], D[1], eave - 0.5), (Cc[0], Cc[1], eave - 0.5), (B[0], B[1], eave), (A[0], A[1], eave), roof)
+    # tarpaulins down some sides
+    TARP = ['#1f5fa8', '#2b6cb0', '#e67e22', '#2e7d32', '#9e9e9e', '#c62828']
+    for P0, P1 in ((Av, Bv), (Bv, Cv), (Cv, Dv), (Dv, Av)):
+        if rng.chance(0.35):
+            h = rng.between(1.2, eave - 0.4)
+            parts.corrugated(mb, (P0.x, P0.y, eave - h), (P1.x, P1.y, eave - h), (P1.x, P1.y, eave - 0.05), (P0.x, P0.y, eave - 0.05),
+                             dict(profile='sine', pitch=0.5, depth=0.04, col=hex_rgb(rng.pick(TARP)), wear=wear))
+    # goods: heaps of sacks, baskets and crates under the roof
+    for _ in range(int(L * Wd / rng.between(6, 12))):
+        u, v = rng.between(0.1, 0.9), rng.between(0.15, 0.85)
+        p = Av.lerp(Bv, u).lerp(Dv.lerp(Cv, u), v)
+        mb.box('plastic' if rng.chance(0.4) else 'wood', Matrix.Translation((p.x, p.y, 0.35)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z'),
+               shade(hex_rgb(rng.pick(['#c9b37e', '#8d6e4a', '#d84315', '#f9a825', '#6d8b3a', '#b0a08a', '#3d3d3d'])), rng.between(0.8, 1.1)), wear,
+               size=(rng.between(0.5, 1.4), rng.between(0.5, 1.2), rng.between(0.3, 0.8)))
+    return mb.to_object(a.get('name', 'market shed'), collection, master), None
+
+
 def stall(a, rng, collection=None):
     """A market stall: timber posts, a lean-to zinc roof higher at the front, a counter, a back wall of old sheets."""
     from .core import hex_rgb, shade
     from .rules import C, CHARACTER
     ch = C[CHARACTER.get(a['district'], 'dense')]
     poly = ccw([tuple(p) for p in a['poly']])
+    if not a.get('_small') and len(poly) == 4 and abs(sum(poly[i][0] * poly[(i + 1) % 4][1] - poly[(i + 1) % 4][0] * poly[i][1] for i in range(4))) / 2 > 40:
+        return market_shed(a, rng, collection)   # a market shed, not a lock-up row
     wear = rng.between(*ch['wear'])
     e0, e1 = math.dist(poly[0], poly[1]), math.dist(poly[1], poly[2])
     A, B, Cc, D = poly if e0 >= e1 else [poly[1], poly[2], poly[3], poly[0]]

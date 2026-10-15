@@ -33,6 +33,7 @@ SIZE = float(opt.get('--size', 400))
 OUT = opt.get('--out', os.path.join(ROOT, 'web', 'city'))
 detail.LEVEL = opt.get('--detail', 'web')
 TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '') if opt.get('--tiles') is not True else '').split(';') if t]
+TERRAIN = bool(opt.get('--terrain'))   # stand the tile on web/terrain.json (the Google rebuild pilot); off: flat, as before
 
 import scene  # noqa: E402
 from gidi_kit import archetypes, boats, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
@@ -158,18 +159,28 @@ def district_at(p):
     return None
 
 
+# Districts built to the agreed cross-sections (docs/REBUILD-PLAN.md): the data holds their street furniture and their road
+# widths (GD["cross_sections"]); here the kit draws what the data says instead of placing its own poles and lamps.
+XS = GD.get('cross_sections') or {}
+if XS:   # the agreed arterial and expressway carriageways (bridges keep their deck width)
+    ART_W.update({k: XS[k]['carriageway'] for k in ('art', 'exp') if k in XS})
+LAGOS_D = {district_at(P((f['x'], f['y']))) for f in GD.get('furniture', [])} - {None}
+def road_w(kind, d):
+    return XS[kind]['carriageway'] if d in LAGOS_D and kind in XS else WIDTH[kind]
+
+
 ROADS = []  # {k, pts, w, d, id}
 for kind, src in (('street', 'streets'), ('lane', 'lanes'), ('path', 'paths')):
     for d, lines in GD.get(src, {}).items():
         for i, ln in enumerate(lines):
-            ROADS.append(dict(k=kind, pts=[P(p) for p in ln], w=WIDTH[kind], d=d, id=f'{d}/{kind}/{i}'))
+            ROADS.append(dict(k=kind, pts=[P(p) for p in ln], w=road_w(kind, d), d=d, id=f'{d}/{kind}/{i}'))
 _seen_mains = set()
 for i, m in enumerate(GD.get('mains', [])):
     sig = tuple(tuple(round(c, 1) for c in p) for p in m['pts'])
     if sig in _seen_mains or sig[::-1] in _seen_mains:
         continue  # an edge road both its districts list: build it once (else double kerbs, poles and lamps)
     _seen_mains.add(sig)
-    ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=WIDTH['main'], d=m.get('d'), id=f'main/{i}', name=m.get('name')))
+    ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f'main/{i}', name=m.get('name')))
 BUILDINGS = []
 for d, lst in GD['buildings'].items():
     st = GD['storeys'].get(d, [])
@@ -618,7 +629,14 @@ def build_tile(tx, ty, overrides):
     dc = district_at(((x0 + x1) / 2, (y0 + y1) / 2))
     ch = CHARACTER.get(dc, 'sprawl') if dc else None
     soil = hex_rgb('#d8c9a3' if ch in ('old_island', 'waterfront', 'elite') else ('#b5714a' if ch else '#7a8a45'))
-    g.face([(x0, y0, 0), (x1, y0, 0), (x1, y1, 0), (x0, y1, 0)], 'ground', soil, 0.5)
+    if TERRAIN:   # a 10 m grid, so the ground can take the terrain's shape (drape() lifts every point)
+        st_ = 10.0
+        for gx in range(int((x1 - x0) // st_)):
+            for gy in range(int((y1 - y0) // st_)):
+                a_, b_ = x0 + gx * st_, y0 + gy * st_
+                g.face([(a_, b_, 0), (a_ + st_, b_, 0), (a_ + st_, b_ + st_, 0), (a_, b_ + st_, 0)], 'ground', soil, 0.5)
+    else:
+        g.face([(x0, y0, 0), (x1, y0, 0), (x1, y1, 0), (x0, y1, 0)], 'ground', soil, 0.5)
     for wpoly in list(GD['water']) + list(GD['ocean']):
         cp = clip_poly_rect([P(p) for p in wpoly], x0, y0, x1, y1)
         if len(cp) >= 3:
@@ -640,8 +658,13 @@ def build_tile(tx, ty, overrides):
         if fn is None:
             fn, a = archetypes.house, dict(a, kind='back')
             built['unknown:' + b['kind']] = built.get('unknown:' + b['kind'], 0) + 1
+        n0 = len(col.objects)
         try:
             fn(a, rng, col)
+            if TERRAIN:   # the whole building stands level on the ground under its middle (a plinth takes up the slope)
+                gz = ground_at(b['c'][0], -b['c'][1])
+                for o_ in col.objects[n0:]:
+                    o_['lift'] = gz
             if ov and ov['type'] in ('fire', 'hospital', 'clinic'):
                 SERVICE.append(('fire' if ov['type'] == 'fire' else 'ambulance', a))
         except Exception as e:  # a builder that breaks on odd data must not stop the city
@@ -728,7 +751,7 @@ def build_tile(tx, ty, overrides):
             street.markings(sm, rc, cond, rr)
             if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
                 street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p, rid=r['id']: on_other_road(p, rid) or in_building(p, 0.1))
-            if r['k'] in ('main', 'street') and not (rch == 'elite' and r['k'] != 'main'):
+            if r['k'] in ('main', 'street') and not (rch == 'elite' and r['k'] != 'main') and d not in LAGOS_D:
                 off = (1 if hash(r['id']) % 2 else -1) * (r['w'] / 2 + 1.6)
                 prev = None
                 for i in range(len(piece) - 1):
@@ -753,7 +776,7 @@ def build_tile(tx, ty, overrides):
                         k += 35
             # street lights: main roads everywhere, streets in the elite and civic districts; opposite
             # the electricity poles; a share dead, more in the poor districts, some solar
-            if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
+            if (r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street')) and d not in LAGOS_D:
                 pole_side = (1 if hash(r['id']) % 2 else -1)
                 loff = -pole_side * (r['w'] / 2 + 1.0)
                 for i in range(len(piece) - 1):
@@ -785,6 +808,29 @@ def build_tile(tx, ty, overrides):
                     o = side * (r['w'] / 2 + rr.between(-0.6, 2.0))
                     p = (a[0] + dx * k - dy * o, a[1] + dy * k + dx * o)
                     street.litter_piece(sm, p[0], p[1], 0.02, rr)
+    # street furniture the data places (districts built to the cross-sections; scripts/furniture.py): drawn where it says.
+    # f['ang'] is on the map's axes (y south): toward the road, or a traffic light's face out along its arm; Blender's y runs
+    # north, so the angle flips sign here.
+    for f_ in GD.get('furniture', []):
+        q = P((f_['x'], f_['y']))
+        if not inside(q):
+            continue
+        ang = -math.radians(f_['ang'])
+        fr = Rng('furniture', f_['kind'], round(q[0]), round(q[1]))
+        if f_['kind'] == 'pole':
+            pts3, top = street.pole(sm, q[0], q[1], fr, wood=fr.chance(STREET[CHARACTER.get(district_at(q) or dc, 'dense')]['wood_pole']))
+            poles.append((q, top))
+        elif f_['kind'] == 'street light':
+            ch_ = CHARACTER.get(district_at(q) or dc, 'dense')
+            LAMPS.extend(roadside.street_light(sm, q[0], q[1], ang, fr, h=9, working=not fr.chance(DEAD_LAMPS.get(ch_, 0.3)), solar=ch_ in ('dense', 'sprawl', 'waterfront') and fr.chance(0.3)))
+        elif f_['kind'] == 'transformer':
+            street.transformer(sm, q[0], q[1], fr)
+        elif f_['kind'] == 'traffic light':
+            roadside.traffic_light(pm, q[0], q[1], ang, fr)
+        elif f_['kind'] == 'bus stop':   # the shelter's open side (its local -y) toward the road
+            dx, dy = math.cos(ang), math.sin(ang)
+            places.bus_shelter(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(math.atan2(dx, -dy), 4, 'Z'), fr)
+        built['furniture:' + f_['kind']] = built.get('furniture:' + f_['kind'], 0) + 1
     for b in blds_here:  # service drops to houses from the nearest pole
         if not poles or b['kind'] not in ('front', 'back'):
             continue
@@ -1088,11 +1134,56 @@ def attributes(b, roads, polys):
                 wall_poly=offset(poly, 2.0), wall_skip=lambda m, others=others: any(in_poly(m, o) for o in others))
 
 
+def drape(obs):
+    """--terrain: stand everything on the ground. A building's pieces (tagged 'lift') rise together, level; everything else
+    (ground, roads, kerbs, furniture, decks drawn at their height above the ground) follows the ground point by point."""
+    import numpy as np
+    Z = np.array(_TZ, float).reshape(_TH, _TW) / 10.0
+    for o in obs:
+        if 'lift' in o.keys():
+            o.data.transform(Matrix.Translation((0, 0, o['lift'])))
+            continue
+        n = len(o.data.vertices)
+        if not n:
+            continue
+        co = np.empty(n * 3)
+        o.data.vertices.foreach_get('co', co)
+        co = co.reshape(n, 3)
+        mw = np.array(o.matrix_world)
+        wx = co[:, 0] * mw[0, 0] + co[:, 1] * mw[0, 1] + co[:, 2] * mw[0, 2] + mw[0, 3]
+        wy = co[:, 0] * mw[1, 0] + co[:, 1] * mw[1, 1] + co[:, 2] * mw[1, 2] + mw[1, 3]
+        fx, fy = wx / _TC - 0.5, -wy / _TC - 0.5   # map y runs south
+        j0, i0 = np.floor(fx).astype(int), np.floor(fy).astype(int)
+        tx, ty = fx - j0, fy - i0
+        at = lambda i, j: Z[np.clip(i, 0, _TH - 1), np.clip(j, 0, _TW - 1)]
+        g = at(i0, j0) * (1 - tx) * (1 - ty) + at(i0, j0 + 1) * tx * (1 - ty) + at(i0 + 1, j0) * (1 - tx) * ty + at(i0 + 1, j0 + 1) * tx * ty
+        # on the water (and its edge) the ground stays at the water's level: the water is flat, so nothing pokes through it
+        mx, my = wx, -wy
+        for a_, b_, c_, d_, w in _WET:
+            box_ = (mx >= a_ - 1) & (mx <= c_ + 1) & (my >= b_ - 1) & (my <= d_ + 1)
+            if not box_.any():
+                continue
+            px, py = mx[box_], my[box_]
+            inside = np.zeros(px.shape, bool)
+            q = w if w[0] != w[-1] else w[:-1]
+            for (x1_, y1_), (x2_, y2_) in zip(q, q[1:] + q[:1]):   # ray casting
+                c = ((y1_ > py) != (y2_ > py)) & (px < (x2_ - x1_) * (py - y1_) / ((y2_ - y1_) or 1e-9) + x1_)
+                inside ^= c
+            gi = g[box_]
+            gi[inside] = 0.0
+            g[box_] = gi
+        co[:, 2] += g   # local z: the tile's objects carry no rotation or scale
+        o.data.vertices.foreach_set('co', co.ravel())
+        o.data.update()
+
+
 def export(col, origin, path):
     """Join the tile into one object, move it to the tile's corner, export Draco GLB."""
     obs = [o for o in col.all_objects if o.type == 'MESH']
     if not obs:
         return 0
+    if TERRAIN:
+        drape(obs)
     if os.environ.get('GIDI_FACES'):  # where the faces go, by object kind
         tally = {}
         for o in obs:
@@ -1126,11 +1217,11 @@ if __name__ == '__main__':
         detail.SIGNS.clear()
         LAMPS.clear()
         col, built, origin = build_tile(tx, ty, ov)
-        lamps = [[round(x - origin[0], 2), round(z, 2), round(-(y - origin[1]), 2)] for x, y, z in LAMPS]  # GLB frame, like signs
+        lamps = [[round(x - origin[0], 2), round(z + (ground_at(x, -y) if TERRAIN else 0), 2), round(-(y - origin[1]), 2)] for x, y, z in LAMPS]  # GLB frame, like signs
         signs = []
         for sg in detail.SIGNS:  # tile-relative, in the GLB's y-up frame: (x, z, -y)
             m = sg['m']
-            px, py, pz = m[0][3] - origin[0], m[1][3] - origin[1], m[2][3]
+            px, py, pz = m[0][3] - origin[0], m[1][3] - origin[1], m[2][3] + (ground_at(m[0][3], -m[1][3]) if TERRAIN else 0)
             along = (m[0][0], m[1][0])
             out = (m[0][1], m[1][1])
             signs.append(dict(p=[round(px, 3), round(pz, 3), round(-py, 3)], a=round(math.atan2(along[1], along[0]), 4), o=[round(out[0], 3), round(out[1], 3)],

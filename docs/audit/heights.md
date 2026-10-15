@@ -9,9 +9,9 @@
   - street heights/street/12 runs 38 m along street heights/street/15 at (5812, 5516)
   - art art/6 runs 35 m along street oldisland/street/185 at (4616, 5360)
   - street heights/street/50 runs 33 m along street heights/street/51 at (5919, 4888)
-- **R2 Near misses (ends short of a road): 1**
-  - street heights/street/78 stops 2.0 m short of main Uche Close at (6227, 4630)
-- **R3 Overshoots (ends past a road): 0**
+- **R2 Near misses (ends short of a road): 0**
+- **R3 Overshoots (ends past a road): 1**
+  - street heights/street/78 runs 2.0 m past street heights/street/65 at (6227, 4630)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
 - **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**

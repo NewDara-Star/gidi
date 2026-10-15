@@ -77,6 +77,10 @@ def heights(out, water, ocean, T):
         report['quay_m'] += on.length
     if walls:
         W = unary_union(walls)
+        # the wall works round what floats or stands in the water (rafts, stilt houses, stilt bars): they stay moored in it
+        afloat = [Polygon(b[1:]).buffer(1.5) for L in out.get('buildings', {}).values() for b in L if len(b) > 3 and b[0] in ('raft', 'stilt', 'stilt bar')]
+        if afloat:
+            W = W.difference(unary_union(afloat))
         new_w, new_o = water.difference(W), ocean.difference(W)
         def biggest(g):
             ps = sorted(pieces(g), key=lambda p: -p.area)
@@ -171,8 +175,8 @@ def heights(out, water, ocean, T):
                 need[i] = max(need[i], G_[i] - 1.5 + CLEAR['canal'] + dep)
         if any(wet.contains(p) for p in P):
             over.append('water')
-        # roads, rail and lower decks it crosses
-        for what, ln, w, zfun in below:
+        # roads, rail and lower decks it crosses (a jetty sits on the water at the shore road's end: nothing passes under it)
+        for what, ln, w, zfun in (below if kind != 'jetty' else []):
             if own is not None and ln.equals_exact(own, 0.5):
                 continue
             if not ln.intersects(g) or ln.intersection(g).geom_type not in ('Point', 'MultiPoint'):

@@ -79,6 +79,21 @@ def check_roads(gen, bgeoms, G):
         elif s["kind"] in ("flyover", "skywalk", "footbridge") and s.get("layer", 0) >= 1:
             add(s["pts"], (w / 2) if w else (6 if s["kind"] == "flyover" else 2),
                 s["kind"] + " " + s.get("name", ""), {"stalls", "kiosk"})
+    if gen.get("fabric") == "lagos":   # the Google rebuild: nothing past a road's building line (scripts/cross_sections.py) outside a
+        import cross_sections as XS     # declared encroachment zone, where only stalls and kiosks may stand (the market spill)
+        shapes = [x for x in shapes if not x[1].split(" ")[0] in ("street", "lane", "main", "arterial")]   # roads: by building line instead
+        def bl(pts, k, label, ok=None):
+            ln = line(pts)
+            if ln is not None:
+                shapes.append((ln.buffer(XS.building_line(k) - 0.1), label + " (building line)", ok))   # 10 cm: corners are rounded to 0.1 m
+        for p in gen.get("streets", []): bl(p, "street", "street")
+        for p in gen.get("lanes", []): bl(p, "lane", "lane")
+        for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
+        for a in G["arterials"]:
+            if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums"})
+        enc = unary_union([Polygon(z["pts"]).buffer(0) for z in gen.get("encroach", [])])   # buffer(0): rounding can cross an edge if gen.get("encroach") else None
+    else:
+        enc = None
     tree = STRtree([g for g, _, _ in shapes])
     bad = []
     for i, b in enumerate(bgeoms):
@@ -86,10 +101,38 @@ def check_roads(gen, bgeoms, G):
             g, lab, ok = shapes[j]
             if ok and gen["buildings"][i][0] in ok:
                 continue
+            if enc is not None and gen["buildings"][i][0] in ("stalls", "kiosk") and enc.buffer(0.1).contains(b) and "building line" in lab:
+                continue   # inside a declared market-spill zone: on purpose
             a = b.intersection(g).area
-            if a > 0:
+            if a > (0.05 if "building line" in lab else 0):   # building lines: corners are rounded to 0.1 m in the data
                 bad.append((a, "%s %s on %s (%.1f m2)" % (gen["buildings"][i][0], xy(b), lab, a)))
     return len(bad), worst(bad)
+
+
+def check_furniture(did, G):
+    """15 (districts built to the cross-sections): every pole, light, traffic light, transformer and bus stop stands clear of
+    every road's carriageway and gutter, and outside every building (the 3D kit draws them where the data says)."""
+    import cross_sections as XS
+    area = Polygon([d for d in G["districts"] if d["id"] == did][0]["poly"][0]).buffer(40)
+    F = [f for f in G.get("furniture", []) if area.contains(Point(f["x"], f["y"]))]
+    if not F:
+        return 1, "no street furniture in the data"
+    roads = [(k, line(p)) for k, key in (("street", "streets"), ("lane", "lanes")) for L in G.get(key, {}).values() for p in L]
+    roads += [("main", line(m["pts"])) for m in G["mains"]] + [(a["cls"] if a["cls"] in XS.SECTIONS else "art", line(a["pts"])) for a in G["arterials"]]
+    roads = [(k, g) for k, g in roads if g is not None and g.distance(area) < 50]
+    strip = [g.buffer(XS.walkway_band(k)[0]) for k, g in roads]
+    st = STRtree(strip)
+    B = [poly(b[1:]) for L in G["buildings"].values() for b in L if len(b) > 3]
+    B = [b for b in B if b.intersects(area)]
+    bt = STRtree(B)
+    bad = []
+    for f in F:
+        p = Point(f["x"], f["y"])
+        if any(strip[j].contains(p) for j in st.query(p)):
+            bad.append((1, "%s %s on a carriageway or gutter" % (f["kind"], xy(p))))
+        elif any(B[j].contains(p) for j in bt.query(p)):
+            bad.append((1, "%s %s inside a building" % (f["kind"], xy(p))))
+    return len(bad), worst(bad) + " (%d pieces checked)" % len(F)
 
 
 def check_overlaps(bgeoms):
@@ -396,6 +439,8 @@ def run(did):
     add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
     add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, [])]))   # the baked city's houses: the bake clears some (roundabouts)
+    if gen.get("fabric") == "lagos":
+        add("15 street furniture on walkways", check_furniture(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
