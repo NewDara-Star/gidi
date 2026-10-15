@@ -327,7 +327,7 @@ def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True):
                 q = A + d * k
                 if keep((q.x, q.y)):
                     lr = rng.child('lamp', round(q.x), round(q.y))
-                    heads = roadside.street_light(mb, q.x, q.y, ang + math.pi / 2, lr, arms=2, h=10, working=not lr.chance(0.25), z0=0.87)
+                    heads = roadside.street_light(mb, q.x, q.y, ang + math.pi / 2, lr, arms=2, h=10, working=not lr.chance(0.25), z0=0.87, banners=lr.chance(0.5))
                     if lamps is not None:
                         lamps.extend(heads)
                 k += 40
