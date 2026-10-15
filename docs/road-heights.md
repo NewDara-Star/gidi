@@ -49,13 +49,24 @@ Deck depths: flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m.
 - **`quays`:** [{`pts`, `top`}], one per sea wall.
 - **`canals`:** each has `width`.
 
-## For the 3D kit (paste into the kit session)
+## For the 3D kit (done 15 Oct 2026)
 > The map data now holds road heights (see `docs/road-heights.md`).
 > 1. In `blender/gidi_kit/structures.py` / `blender/city.py`, draw every deck from its own `z` list (deck top per point of `pts`) instead of `deck_height()` with the fixed `BRIDGE_H` / `6.5 * layer`. Keep the piers, lamps, lane paint and murals; the piers run from the ground (terrain, or 0 over water) up to `z - depth`.
 > 2. Draw the new kinds: `approach` (a ramp deck on an embankment or short viaduct, the road's width) and `culvert` (a slab with low parapets over the canal, level with the road).
 > 3. Draw `quays` as a concrete sea wall from the water up to `top`, with the land behind it made up to that height.
 > 4. Read the canal width from `canals[i].width` (4 m) instead of `CANAL_W = 8`.
 > 5. When the kit takes the terrain: ground roads sit on `web/terrain.json`; decks already carry absolute heights.
+
+**What the kit does now:**
+- Every deck is drawn from its own `z`. Flyovers, approaches and the three bridges are built whole, across every tile they cross.
+- **The kit still builds on flat ground.** So it draws each deck at its height above the ground under it: the map's `z` less the terrain from `web/terrain.json`, with 0 on water. The headroom is the map's, and every ramp lands on its road. When the kit takes the terrain, it draws `z` as it is (`ground_at` and `rel_z` in `blender/city.py`).
+- **Deck depths:** flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m. Piers run from the ground to the deck's underside.
+- **Approaches:** an embankment between retaining walls while under 4 m, then a viaduct on piers.
+- **Culverts:** a slab flush with the road, with low parapets only where the road crosses the water, once per crossing. The map can hold two or three culverts overlapping at a junction.
+- **Sea walls:** a concrete wall with a coping and a railing. The land behind is made up to the top, so on flat ground the top sits at the ground.
+- **Canals:** use each canal's own `width`.
+- **The Cable Bridge:** the pylon and stays now rise from the deck's real height.
+- **The browser 3D view:** its far-away stand-ins slope with the same heights.
 
 ## Checks
 - **`check_district.py`:** all fifteen districts pass.
@@ -68,7 +79,6 @@ Deck depths: flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m.
 - **Decks:** every deck meets its headroom, and every ramp ends on the ground.
 
 ## Not done (honest)
-- **The 3D view doesn't show any of this yet.** The kit still uses its fixed deck heights until the change above is made.
 - **The Hub interchange flyover** (Ayinde Avenue) climbs at 8% for a short stretch. It is boxed in by its slip roads.
 - **Approach ramps reach about 6% where the ground itself rises** under them.
 - **Junctions and roundabouts are pass 3.** That includes Wahab Road's jog along the Peninsula Expressway, and short overlaps left in R1.

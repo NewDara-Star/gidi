@@ -395,7 +395,7 @@ def run(did):
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
     add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
-    add("14 gutters", check_gutters(did, G, bg))
+    add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, [])]))   # the baked city's houses: the bake clears some (roundabouts)
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

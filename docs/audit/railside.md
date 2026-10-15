@@ -9,7 +9,7 @@
   - street railside/street/47 runs 35 m along main Market Roundabout at (465, 3681)
   - street railside/street/32 runs 34 m along main Market Roundabout at (457, 3708)
   - street railside/street/32 runs 33 m along street railside/street/47 at (457, 3708)
-  - main main/28 runs 29 m along main Fadipe Road at (219, 3262)
+  - main main/30 runs 29 m along main Fadipe Road at (219, 3262)
   - street railside/street/179 runs 26 m along street railside/street/195 at (1408, 3450)
   - street railside/street/95 runs 24 m along street railside/street/103 at (788, 3114)
   - street railside/street/115 runs 23 m along street railside/street/120 at (835, 3585)
@@ -29,4 +29,4 @@
 - **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
 
 ## Building kinds here
-front 2370, back 1014, stalls 330, shed 267, kiosk 143, pen 127, bakery 15, mound 14, tank 2, school 2, works 1, bust 1
+front 2369, back 1014, stalls 330, shed 267, kiosk 143, pen 127, bakery 15, mound 14, tank 2, school 2, works 1, bust 1
