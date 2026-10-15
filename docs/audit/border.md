@@ -7,13 +7,7 @@
 - **R2 Near misses (ends short of a road): 0**
 - **R3 Overshoots (ends past a road): 0**
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 6**
-  - main Chukwuma Street has 677 m on water with no bridge, from (200, 5935)
-  - main Danjuma Road has 467 m on water with no bridge, from (1848, 5924)
-  - street border/street/30 has 10 m on water with no bridge, from (239, 5930)
-  - street border/street/1 has 6 m on water with no bridge, from (81, 5920)
-  - path border/path/27 has 3 m on water with no bridge, from (298, 5920)
-  - street border/street/37 has 3 m on water with no bridge, from (890, 5920)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

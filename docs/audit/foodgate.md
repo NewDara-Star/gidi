@@ -11,13 +11,7 @@
   - street foodgate/street/218 stops 2.0 m short of street foodgate/street/216 at (3070, 3229)
 - **R3 Overshoots (ends past a road): 0**
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 6**
-  - main Adebayo Road has 537 m on water with no bridge, from (4003, 3950)
-  - main Folake Street has 432 m on water with no bridge, from (3998, 2869)
-  - street foodgate/street/212 has 10 m on water with no bridge, from (3993, 2841)
-  - street foodgate/street/199 has 7 m on water with no bridge, from (3972, 2956)
-  - lane foodgate/lane/63 has 5 m on water with no bridge, from (4014, 2750)
-  - street foodgate/street/196 has 3 m on water with no bridge, from (3954, 3021)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

@@ -14,12 +14,7 @@
 - **R3 Overshoots (ends past a road): 1**
   - street frontier/street/188 runs 7.9 m past main Kunle Road at (7263, 4518)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 5**
-  - main Kunle Road has 804 m on water with no bridge, from (7466, 4487)
-  - main Uche Close has 522 m on water with no bridge, from (5689, 4777)
-  - street frontier/street/19 has 14 m on water with no bridge, from (6815, 4533)
-  - street frontier/street/17 has 12 m on water with no bridge, from (6786, 4536)
-  - street frontier/street/42 has 4 m on water with no bridge, from (7418, 4496)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

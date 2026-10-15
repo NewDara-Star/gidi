@@ -225,10 +225,10 @@ def main():
     reg = kit_registry()
     roads = roads_of(G)
     tree = STRtree([r['g'] for r in roads])
-    decks = [LineString(s['pts']).buffer(s.get('width', 8) / 2) for s in G.get('structures', []) if s['kind'] in ('flyover', 'ramp', 'footbridge', 'skywalk', 'jetty')]
+    decks = [LineString(s['pts']).buffer(s.get('width', 8) / 2) for s in G.get('structures', []) if s['kind'] in ('flyover', 'ramp', 'footbridge', 'skywalk', 'jetty', 'approach', 'culvert')]
     decks += [LineString(a['pts']).buffer(WIDTH['bridge'] / 2) for a in G.get('arterials', []) if a['cls'] == 'bridge']
     decks += [LineString(b).buffer(1.5) for b in G.get('boardwalks', [])]
-    wet = unary_union([poly(w) for w in G['water'] + G['ocean']] + [LineString(c['pts']).buffer(4) for c in G.get('canals', [])])
+    wet = unary_union([poly(w) for w in G['water'] + G['ocean']] + [LineString(c['pts']).buffer(c.get('width', 4.0) / 2) for c in G.get('canals', [])])
     built_kinds = set()
     for f in glob.glob(os.path.join(ROOT, 'web', 'city', 'web', 'tiles', '*.json')):
         built_kinds |= set(json.load(open(f)).get('built', {}))

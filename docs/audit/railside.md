@@ -18,8 +18,7 @@
   - street railside/street/215 runs 2.0 m past street railside/street/14 at (206, 4372)
   - street railside/street/213 runs 1.9 m past street railside/street/18 at (365, 2942)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 1**
-  - art Ring Road has 8 m on water with no bridge, from (3001, 4515)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

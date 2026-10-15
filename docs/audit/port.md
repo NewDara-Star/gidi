@@ -12,18 +12,7 @@
   - street port/street/49 runs 2.0 m past street port/street/40 at (3294, 6335)
   - street port/street/51 runs 2.0 m past street port/street/34 at (3667, 6336)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 11**
-  - main Nwosu Road has 1178 m on water with no bridge, from (4006, 5565)
-  - main Durojaiye Road has 541 m on water with no bridge, from (4030, 4388)
-  - main Ogundipe Road has 374 m on water with no bridge, from (2560, 6367)
-  - main Musa Road has 333 m on water with no bridge, from (3790, 6376)
-  - street port/street/19 has 15 m on water with no bridge, from (4001, 5341)
-  - street port/street/26 has 14 m on water with no bridge, from (4000, 4929)
-  - street port/street/44 has 9 m on water with no bridge, from (3884, 6360)
-  - art Ring Road has 8 m on water with no bridge, from (3001, 4515)
-  - street port/street/24 has 6 m on water with no bridge, from (4006, 5565)
-  - street port/street/25 has 5 m on water with no bridge, from (4005, 4784)
-  - lane port/lane/23 has 4 m on water with no bridge, from (4003, 5968)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 
