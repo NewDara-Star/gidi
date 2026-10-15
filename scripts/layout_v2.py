@@ -37,11 +37,31 @@ OCEAN = chaikin([(-500, coast_y + 300), (X(10), coast_y + 150), (X(25), coast_y 
 # the lagoon: east of Yaba and Water Town, north of the Island strip, south of the north shore (Ikorodu)
 LAGOON = chaikin([(X(37.5), Y(1.9)), (X(37.0), Y(4.5)), (X(37.6), Y(8.5)), (X(38.4), Y(12.5)), (X(41), Y(15.2)), (X(46), Y(15.6)), (X(55), Y(14.2)),
                   (X(66), Y(12.5)), (W + 500, Y(12)), (W + 500, Y(4.2)), (X(62), Y(4.3)), (X(50), Y(3.6)), (X(43), Y(3.0)), (X(40.5), Y(2.6))])
-HARBOUR = chaikin([(X(33.4), Y(3.2)), (X(34.9), Y(3.4)), (X(35.1), Y(1.2)), (X(34.9), Y(-1.2)), (X(33.9), Y(-1.2)), (X(33.8), Y(0.6))])   # west of the Island
+HARBOUR = chaikin([(X(33.1), Y(3.3)), (X(34.3), Y(3.5)), (X(34.4), Y(1.2)), (X(34.3), Y(-1.2)), (X(33.5), Y(-1.2)), (X(33.4), Y(0.6))])   # west of the Island
+# Old Island (Lagos Island) is an island: drawn fresh as one kidney of land, then ringed by water on every side (the channel to
+# its north joins the harbour to the lagoon, as the real one does under the bridges). Larger than its inspiration: our own twist.
+ISLAND = Polygon(chaikin([(10120, 5900), (10300, 5700), (10650, 5640), (10950, 5690), (11120, 5850), (11170, 6150), (11140, 6550),
+                          (11060, 6900), (10700, 6990), (10380, 6960), (10180, 6700), (10100, 6300)])).buffer(0)
+MOAT = 170   # the channel's width round the island, metres
+# the bay between the Heights (Ikoyi, Victoria Island) and the peninsula (Lekki): the Link Bridge crosses it
+BAY = chaikin([(X(43.3), Y(3.9)), (X(45.5), Y(3.9)), (X(45.2), Y(2.0)), (X(44.7), Y(1.6)), (X(43.9), Y(1.7)), (X(43.5), Y(2.3))])
+BAY_X = X(44.4)   # the Heights end at the bay; the land east of it is the Frontier's (Lekki's) west end
 CREEK_E = chaikin([(X(38.8), Y(2.8)), (X(39.3), Y(2.8)), (X(39.2), Y(-1.0)), (X(38.7), Y(-1.0))])                                     # east of the Island
 CREEK_W = chaikin([(-500, Y(1.6)), (X(6), Y(2.6)), (X(14), Y(1.4)), (X(18), Y(0.9)), (X(14), Y(0.6)), (X(6), Y(1.4)), (-500, Y(0.4))])  # Badagry creek
-water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W)])
+water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND)
 land = box(0, 0, W, H).difference(water)
+
+
+def no_holes(g):
+    """The map keeps water as plain outlines, so a ring of water (round the island) is cut through the island's middle into pieces."""
+    out = []
+    for p in getattr(g, 'geoms', [g]):
+        if not p.interiors:
+            out.append(p); continue
+        c = Polygon(p.interiors[0]).centroid
+        for half in (box(-1, -1, c.x, H + 1), box(c.x, -1, W + 1, H + 1)):
+            out += no_holes(p.intersection(half))
+    return [q for q in out if q.geom_type == 'Polygon' and q.area > 1]
 # where the built city ends (bush and farms beyond): a fresh outline round the districts
 hull = MultiPoint([Point(*v) for v in anchor.values()]).convex_hull.buffer(2.6 * km, quad_segs=8)
 city = hull.intersection(land)
@@ -61,8 +81,26 @@ def bend(poly, amp, seed=7):
 
 D = {}
 for k in ids:
-    P = bend(cells[k], 0.18 * km).intersection(city)
+    P = bend(cells[k], 0.18 * km).intersection(city).difference(ISLAND)
     D[k] = max(getattr(P, 'geoms', [P]), key=lambda g: g.area)
+D['oldisland'] = ISLAND.intersection(city)
+# east of a bent line from the bay's foot down to the beach (where Victoria Island meets Lekki)
+east = Polygon([(BAY_X, 0), (W, 0), (W, H), (BAY_X + 260, H), (BAY_X + 200, Y(-0.4)), (BAY_X + 60, Y(0.6)), (BAY_X, Y(1.4))])
+D['frontier'] = unary_union([D['frontier'], D['heights'].intersection(east)])
+D['frontier'] = max(getattr(D['frontier'], 'geoms', [D['frontier']]), key=lambda g: g.area)
+D['heights'] = max(getattr(D['heights'].difference(east), 'geoms', [D['heights'].difference(east)]), key=lambda g: g.area)
+# Akoka's waterfront (the university's): Water Town's shore north of the Long Bridge's middle goes to Yaba/Akoka, as Akoka sits north of Makoko
+north = Polygon([(0, 0), (W, 0), (W, 4150), (0, 4250)])
+u = unary_union([D['yaba'], D['watertown'].intersection(north).buffer(0.5)])
+D['yaba'] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
+D['watertown'] = max(getattr(D['watertown'].difference(north), 'geoms', [D['watertown'].difference(north)]), key=lambda q: q.area)
+# land the cells left out (scraps cut off by the water) joins the district it shares the longest border with
+left = city.difference(unary_union(list(D.values())))
+for g in getattr(left, 'geoms', [left]):
+    if g.area > 1000:
+        k = max(D, key=lambda k: g.buffer(2).intersection(D[k]).area)
+        u = unary_union([D[k], g.buffer(0.5)])
+        D[k] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
 names = {'border': 'The Border', 'bazaar': 'The Bazaar', 'railside': 'Railside', 'airport': 'THE AIRPORT (new)', 'hub': 'The Hub', 'jungle': 'Jungle City',
          'capital': 'The Capital', 'port': 'The Port', 'maze': 'The Maze', 'estate': 'The Estate', 'yaba': 'YABA/AKOKA (new)', 'watertown': 'Water Town',
          'foodgate': 'Food Gate', 'oldisland': 'Old Island', 'heights': 'The Heights', 'oldshore': 'Old Shore', 'frontier': 'The Frontier'}
@@ -74,19 +112,23 @@ ART = [
     ('Ayinde Avenue', 'art', [P_('hub', 0, 0), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),
     ('Northern Road', 'art', [P_('yaba', -120, 80), (X(34.6), Y(12.6)), P_('foodgate', -200, 300), (X(38.5), Y(19.2)), (X(43), Y(19.6)), P_('oldshore', 0, 250), (X(56), Y(18.6))]),
     ('Agege Road', 'art', [P_('capital', -300, 500), (X(26), Y(15.8)), P_('railside', 0, 0), (X(16), Y(13.8))]),
-    ('The Long Bridge', 'bridge', [(X(36.3), Y(8.9)), (X(39.0), Y(8.6)), (X(40.4), Y(7.0)), (X(40.4), Y(4.6)), (X(39.0), Y(3.0)), (X(37.0), Y(2.3))]),   # out over the lagoon
-    ('Wharf Bridge', 'bridge', [(X(33.0), Y(2.3)), (X(34.4), Y(2.4)), (X(35.9), Y(2.2))]),   # across the harbour
-    ('Waterfront Drive', 'art', [(X(36.0), Y(1.6)), (X(38.4), Y(1.3))]),
-    ('Creek Bridge', 'bridge', [(X(38.4), Y(1.3)), (X(39.6), Y(1.1))]),   # over the creek between the Island and the Heights
-    ('Waterfront Drive East', 'art', [(X(39.6), Y(1.1)), P_('heights', 0, 0)]),
-    ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
+    ('Long Bridge Road', 'art', [(X(34.6), Y(12.6)), (10950, 3450)]),   # off the Northern Road to the bridge's foot
+    ('The Long Bridge', 'bridge', [(10950, 3450), (11300, 3700), (11260, 4400), (11160, 5100), (11000, 5450), (10850, 5760)]),   # Third Mainland: down the lagoon, past Water Town, onto the Island's north
+    ('Wharf Bridge', 'bridge', [(9500, 6080), (9800, 6085), (10200, 6080)]),   # Eko: from the Port side across the harbour to the Island
+    ('Channel Bridge', 'bridge', [(10380, 5330), (10420, 5520), (10450, 5720)]),   # Carter: from Yaba across the channel to the Island's north
+    ('Waterfront Drive', 'art', [(10250, 6300), (10700, 6380), (11080, 6380)]),
+    ('Creek Bridge', 'bridge', [(11080, 6380), (11250, 6400), (11430, 6420)]),   # Falomo: over the creek between the Island and the Heights
+    ('Waterfront Drive East', 'art', [(11430, 6420), P_('heights', 0, 0)]),
+    ('Link Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi: across the bay from the Heights to the peninsula
+    ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
+    ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(43), Y(0.4)), (X(45), Y(0.6)), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
 ]
-RAIL = [P_('railside', -300, -500), (X(26.5), Y(14)), (X(28.0), Y(10.5)), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.5), Y(4.2)), (X(34.6), Y(2.6))]
+RAIL = [P_('railside', -300, -500), (X(26.5), Y(14)), (X(28.0), Y(10.5)), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
 
 if __name__ == '__main__':
     import json as _json
     out = {'scale': SCALE, 'size': [W, H], 'note': 'Gidi v2 frame (scripts/layout_v2.py): positions from real Lagos at 1:4; all shapes drawn fresh',
-           'water': [[[round(x, 1), round(y, 1)] for x, y in g.exterior.coords] for g in getattr(water, 'geoms', [water])],
+           'water': [[[round(x, 1), round(y, 1)] for x, y in g.exterior.coords] for g in no_holes(water)],
            'districts': {k: [[round(x, 1), round(y, 1)] for x, y in v.exterior.coords] for k, v in D.items()},
            'anchors': {k: [round(v[0]), round(v[1])] for k, v in anchor.items()},
            'arterials': [{'name': n, 'cls': c, 'pts': [[round(x, 1), round(y, 1)] for x, y in pts]} for n, c, pts in ART],
