@@ -26,3 +26,25 @@ Once the map is final:
 - **Changes don't flow live.** A map change reaches Unreal only when the importer is re-run.
 - **Coordinates:** the map is in metres with y running south. Unreal uses centimetres and its own axes, so the importer scales and flips once.
 - **Not ported:** the browser 3D view (three.js) is a viewer only. Materials, lighting and weather are redone properly in Unreal.
+
+## Notes from the kit side
+Added after the porting conversation on 15 Oct 2026.
+- **Meshes: a variant library, or each building's own mesh.** The kit styles every building from its data, seeded, so it always comes out the same. The importer can take either:
+  - a library of variants per kind and style that Unreal instances. This is light, suits World Partition, and is what "houses by style" above means.
+  - each building's own mesh, exported from the kit. This matches the browser view exactly but is much heavier.
+  Pick per kind if needed: instance the common houses and shops, and export landmarks and hero buildings as their own meshes.
+- **Export format:** FBX or USD from Blender, without Draco compression. The browser tiles use Draco; it isn't certain Unreal's glTF importer reads it, and FBX/USD is the safer route. Weld vertices and make LODs, or rely on Nanite: the full-detail build runs to 5–7M triangles per 400 m tile, which Nanite handles.
+- **Materials:** about 20 master materials, rebuilt in Unreal by the kit's names (paint, concrete, block, zinc, steel, glass, glass_lit, wood, asphalt, mud, water, emit, lamp, …).
+  - Colour comes from the vertex colour, and the weathering amount from its alpha. This is how the browser view and the old Mock rebuilt them.
+  - At night, `glass_lit` windows and `lamp` heads switch on.
+- **Instanced assets and a placement file.** Export the repeated things once each: vehicles, boats, trains, people, street lights (and their banners), signs, gantries, billboards, traffic lights, trees, monuments. `blender/city.py` already computes where each one goes, so add a placement export (JSON: asset, position, heading, variant seed) for the importer.
+  - The site lists are `ROADSIDE`, `MONUMENTS`, `BOATS` and `LAMPS`, plus the traffic still per road.
+- **The browser tiles are not for Unreal.** `web/city/` holds merged 400 m meshes made for the three.js viewer. The importer places kit assets from the data instead.
+- **Behaviour is built in Unreal:**
+  - traffic and pedestrians (for example Mass AI and ZoneGraph, from the road data)
+  - signals from `signals` in the data, once the 2D pass adds them
+  - the day and night cycle
+- **Terrain:** when `web/terrain.json` lands, `blender/city.py` (and the browser view) should read it too, so the 3D view tests the terrain the same way it tests the 2D map before the port. The kit builds on flat ground today.
+- **Before porting:**
+  - run `scripts/audit3d.py` for the whole city, with the hand fixes done
+  - M1 to M3 must be at 0 for every district, so nothing the importer meets lacks a mesh
