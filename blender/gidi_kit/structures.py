@@ -19,9 +19,10 @@ def _seg(a, b):
     return a, d / L, L
 
 
-def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=0.6, ramp=True):
+def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=0.6, ramp=True, depth=1.2, solid=False):
     """A bridge deck from a to b, rising from z0 at the ends to z1 (ramps over the first and last
-    quarter when ramp), on pier pairs every `piers` metres, with parapets."""
+    quarter when ramp), on pier pairs every `piers` metres, with parapets. depth: the deck's
+    thickness; solid: an embankment, its retaining walls running down to the ground."""
     A, d, L = _seg(a, b)
     n = max(2, int(L / 6))
     side = Vector((-d.y, d.x, 0))
@@ -32,9 +33,11 @@ def deck(mb, a, b, w, z0, z1, rng, col=CONCRETE, barrier=True, piers=25.0, wear=
         z_0, z_1 = hz(t0), hz(t1)
         q = lambda p, s, z: p + side * s * w / 2 + Vector((0, 0, z))
         mb.face([q(p0, -1, z_0), q(p1, -1, z_1), q(p1, 1, z_1), q(p0, 1, z_0)], 'asphalt', hex_rgb('#4f5156'), wear)
-        mb.face([q(p0, 1, z_0 - 1.2), q(p1, 1, z_1 - 1.2), q(p1, -1, z_1 - 1.2), q(p0, -1, z_0 - 1.2)], 'concrete', shade(hex_rgb(col), 0.75), wear)
+        b0, b1 = (-0.2, -0.2) if solid else (z_0 - depth, z_1 - depth)
+        if not solid:
+            mb.face([q(p0, 1, b0), q(p1, 1, b1), q(p1, -1, b1), q(p0, -1, b0)], 'concrete', shade(hex_rgb(col), 0.75), wear)
         for s in (-1, 1):
-            mb.face([q(p0, s, z_0 - 1.2), q(p1, s, z_1 - 1.2), q(p1, s, z_1), q(p0, s, z_0)] if s > 0 else [q(p1, s, z_1 - 1.2), q(p0, s, z_0 - 1.2), q(p0, s, z_0), q(p1, s, z_1)], 'concrete', hex_rgb(col), wear)
+            mb.face([q(p0, s, b0), q(p1, s, b1), q(p1, s, z_1), q(p0, s, z_0)] if s > 0 else [q(p1, s, b1), q(p0, s, b0), q(p0, s, z_0), q(p1, s, z_1)], 'concrete', hex_rgb(col), wear)
             if barrier:  # parapet, following the slope (no steps on the ramps)
                 o_in, o_out = w / 2 - 0.3, w / 2
                 P = lambda p, o, z: p + side * s * o + Vector((0, 0, z))
@@ -65,16 +68,39 @@ def deck_height(s, S, H, R):
 
 
 RAMP = {'flyover': 60.0, 'bridge': 80.0}
+DEPTH = {'flyover': 1.2, 'bridge': 1.8, 'skywalk': 0.6}  # deck thickness, as the map's road pass sets it
 
 
-def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6, lamps=None, dead=0.1, murals=False):
-    """A whole deck along a polyline with deck_height's profile, in 3 m slabs; only the slabs and
+def profile(pts, zs=None, H=6.5, R=60.0):
+    """The deck top as a function of metres along pts. zs: the map's heights, one per point (above
+    the ground under the deck); without them, deck_height's smooth hump of height H."""
+    acc = [0.0]
+    for a, b in zip(pts, pts[1:]):
+        acc.append(acc[-1] + math.dist(a, b))
+    S = acc[-1]
+    if not zs:
+        return lambda s: deck_height(s, S, H, R)
+
+    def zf(s):
+        if s <= 0:
+            return zs[0]
+        for i in range(len(acc) - 1):
+            if s <= acc[i + 1]:
+                t = (s - acc[i]) / ((acc[i + 1] - acc[i]) or 1)
+                return zs[i] + (zs[i + 1] - zs[i]) * t
+        return zs[-1]
+    return zf
+
+
+def deck_line(mb, pts, w, zs, rng, keep=lambda p: True, col=CONCRETE, piers=25.0, wear=0.6, lamps=None, dead=0.1, murals=False, depth=1.2, solid=False):
+    """A whole deck along a polyline at its map heights (zs, one per point; a callable s -> z also
+    works), in 3 m slabs; only the slabs and
     piers whose middle passes keep(p) (the tile being built) are made, so a bridge crossing many
     tiles comes out seamless. Dressed as Lagos decks are: yellow edge lines, white dashed lanes, on
     wide decks (w >= 18) a chequered black-and-white median barrier with double-arm lamps on it,
     otherwise lamps on alternate sides. Lamp heads are appended to `lamps` (saved with the tile)."""
     from . import roadside
-    S = sum(math.dist(pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+    zf = zs if callable(zs) else profile(pts, zs)
     median = w >= 18
     half = w / 2 - 0.3  # inside the parapets
     lanes = max(1, int(((half - (0.4 if median else 0)) - 1.0) / 3.5))  # per side (or in all, without a median)
@@ -96,8 +122,8 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
             pb = (a[0] + (b[0] - a[0]) * t1, a[1] + (b[1] - a[1]) * t1)
             if not keep(((pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2)):
                 continue
-            za, zb = deck_height(s0 + L * t0, S, H, R), deck_height(s0 + L * t1, S, H, R)
-            deck(mb, pa, pb, w, za, zb, rng, col=col, piers=1e9, wear=wear, ramp='linear')
+            za, zb = zf(s0 + L * t0), zf(s0 + L * t1)
+            deck(mb, pa, pb, w, za, zb, rng, col=col, piers=1e9, wear=wear, ramp='linear', depth=depth, solid=solid and min(za, zb) < 4.0)
             Pa, Pb = Vector((pa[0], pa[1], 0)), Vector((pb[0], pb[1], 0))
 
             def strip(o0, o1, c, lift=0.012):
@@ -119,7 +145,7 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
                 for j in range(2):
                     u0, u1 = t0 + (t1 - t0) * j / 2, t0 + (t1 - t0) * (j + 1) / 2
                     q = A + d * L * (u0 + u1) / 2
-                    zq = deck_height(s0 + L * (u0 + u1) / 2, S, H, R)
+                    zq = zf(s0 + L * (u0 + u1) / 2)
                     blk = (int((s0 + L * u0) // 1.5) % 2) == 0
                     mb.box('concrete', Matrix.Translation((q.x, q.y, zq + 0.4)) @ Matrix.Rotation(math.atan2(d.y, d.x), 4, 'Z'),
                            hex_rgb('#1a1a1a') if blk else hex_rgb('#f2f2ee'), 0.5, size=(L * (u1 - u0) + 0.01, 0.5, 0.8))
@@ -137,8 +163,8 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
         side = Vector((-d.y, d.x, 0))
         while nxt < s0 + L:
             p = A + d * (nxt - s0)
-            z = deck_height(nxt, S, H, R) - 1.2
-            if z > 1.0 and keep((p.x, p.y)):
+            z = zf(nxt) - depth
+            if z > (4.0 - depth if solid else 1.0) and keep((p.x, p.y)):
                 for sg in ((-1, 1) if w > 8 else (0,)):
                     c = p + side * sg * w * 0.28
                     pr = 0.6 if w > 8 else 0.4
@@ -151,7 +177,7 @@ def deck_line(mb, pts, w, H, R, rng, keep=lambda p: True, col=CONCRETE, piers=25
             p = A + d * (nl - s0)
             if keep((p.x, p.y)):
                 lr = rng.child('lamp', round(p.x), round(p.y))
-                zd = deck_height(nl, S, H, R)
+                zd = zf(nl)
                 ang = math.atan2(side.y, side.x)  # arms reach across the road
                 if median:
                     heads = roadside.street_light(mb, p.x, p.y, ang, lr, arms=2, h=10, working=not lr.chance(dead), z0=zd + 0.8)
@@ -194,19 +220,28 @@ def mural_pier(mb, c, r, h, rng):
                 mb.box('paint', D @ Matrix.Rotation(math.pi / 4, 4, 'Z'), rng.pick(pal), 0.2, size=(sz * 1.4, sz * 1.4, 0.01))
 
 
-def flyover(mb, pts, w, layer, rng, lamps=None):
-    deck_line(mb, pts, w, 6.5 * layer, RAMP['flyover'], rng, lamps=lamps, dead=0.3, murals=True)
+def flyover(mb, pts, w, zs, rng, lamps=None, keep=lambda p: True):
+    """A flyover or rail bridge at its map heights (zs: list, or a callable s -> z)."""
+    deck_line(mb, pts, w, zs, rng, keep, lamps=lamps, dead=0.3, murals=True, depth=DEPTH['flyover'])
 
 
-def skywalk(mb, pts, w, rng):
-    """An enclosed footbridge over the expressway: a steel-framed tube with a roof, stair towers."""
+def approach(mb, pts, w, zs, rng, lamps=None, keep=lambda p: True):
+    """The ramp onto a bridge: an embankment between retaining walls where it is low (under 4 m),
+    a short viaduct on piers above that."""
+    deck_line(mb, pts, w, zs, rng, keep, lamps=lamps, dead=0.2, depth=DEPTH['bridge'], solid=True)
+
+
+def skywalk(mb, pts, w, rng, z=6.8):
+    """An enclosed footbridge over the expressway: a steel-framed tube with a roof, stair towers at
+    both ends. z: the deck top above the ground (from the map)."""
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
+        if L < 1e-6:
+            continue
         side = Vector((-d.y, d.x, 0))
-        z = 6.8
         ang = math.atan2(d.y, d.x)
         mid = A + d * L / 2
-        mb.box('concrete', Matrix.Translation((mid.x, mid.y, z)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#9c978c'), 0.5, size=(L, w, 0.3))
+        mb.box('concrete', Matrix.Translation((mid.x, mid.y, z)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#9c978c'), 0.5, size=(L + 0.05, w, DEPTH['skywalk']))
         for s in (-1, 1):
             for k in range(int(L / 2) + 1):
                 p = A + d * min(L, k * 2) + side * s * w / 2
@@ -214,19 +249,30 @@ def skywalk(mb, pts, w, rng):
             pa, pb = A + side * s * w / 2, A + d * L + side * s * w / 2
             parts.bar(mb, 'steel', (pa.x, pa.y, z + 1.1), (pb.x, pb.y, z + 1.1), 0.06, hex_rgb('#2f6fae'), 0.4)
         mb.box('zinc', Matrix.Translation((mid.x, mid.y, z + 2.7)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#c3c7ca'), 0.4, size=(L + 0.4, w + 0.6, 0.08))
-        for e, t in ((A, -1), (A + d * L, 1)):  # stair towers
-            c = e + d * t * 3
-            mb.box('steel', Matrix.Translation((c.x, c.y, z / 2)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#2f6fae'), 0.5, size=(5, w + 1, z))
-            for k in range(12):
-                mb.box('concrete', Matrix.Translation((c.x + d.x * t * (k * 0.25 - 1.5), c.y + d.y * t * (k * 0.25 - 1.5), z * k / 12)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#9c978c'), 0.5, size=(0.3, w, 0.15))
-        for k in range(int(L / 10) + 1):
-            p = A + d * min(L, k * 10)
-            parts.cyl(mb, 'steel', Matrix.Translation((p.x, p.y, 0)), 0.3, z, hex_rgb('#8a8f92'), 0.4, seg=8)
+    S = sum(math.dist(a, b) for a, b in zip(pts, pts[1:]))
+    k = 10.0
+    while k < S - 5:  # columns every 10 m
+        acc = 0.0
+        for a, b in zip(pts, pts[1:]):
+            L = math.dist(a, b)
+            if acc + L >= k and L > 0:
+                t = (k - acc) / L
+                parts.cyl(mb, 'steel', Matrix.Translation((a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, 0)), 0.3, z, hex_rgb('#8a8f92'), 0.4, seg=8)
+                break
+            acc += L
+        k += 10
+    for (A, d, L), e, t in ((_seg(pts[0], pts[1]), 0, -1), (_seg(pts[-2], pts[-1]), 1, 1)):  # stair towers
+        ang = math.atan2(d.y, d.x)
+        c = (A + d * L * e) + d * t * 3
+        mb.box('steel', Matrix.Translation((c.x, c.y, z / 2)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#2f6fae'), 0.5, size=(5, w + 1, z))
+        n = max(12, int(z / 0.18))
+        for k in range(n):
+            mb.box('concrete', Matrix.Translation((c.x + d.x * t * (k * 3.0 / n - 1.5), c.y + d.y * t * (k * 3.0 / n - 1.5), z * k / n)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#9c978c'), 0.5, size=(0.3, w, 0.15))
 
 
-def snap_footbridge(pts, canals, gap=10.0):
+def snap_footbridge(pts, canals, gap=10.0, width=None):
     """A footbridge in the data is drawn from somewhere near the canal; centre it on the canal's
-    line and make it span the channel and both banks (CANAL_W + 4 m), square across the flow.
+    line and make it span the channel and both banks (the canal's width + 4 m), square across the flow.
     Returns the new two-point line, or the original if no canal is near."""
     m = ((pts[0][0] + pts[-1][0]) / 2, (pts[0][1] + pts[-1][1]) / 2)
     best = None
@@ -243,17 +289,17 @@ def snap_footbridge(pts, canals, gap=10.0):
     if not best:
         return pts
     _, q, n = best
-    half = max(math.dist(pts[0], pts[-1]), CANAL_W + 4) / 2
+    half = max(math.dist(pts[0], pts[-1]), (width or CANAL_W) + 4) / 2
     return [(q[0] - n[0] * half, q[1] - n[1] * half), (q[0] + n[0] * half, q[1] + n[1] * half)]
 
 
-CANAL_W = 8.0
+CANAL_W = 4.0  # the default; each canal carries its own width in the map
 FOOTBRIDGE_H = 1.3
 
 
-def footbridge(mb, pts, w, rng):
-    """A canal footbridge: a steel deck with handrails on block abutments, steps up at each end."""
-    z = FOOTBRIDGE_H
+def footbridge(mb, pts, w, rng, z=FOOTBRIDGE_H):
+    """A canal footbridge: a steel deck with handrails on block abutments, steps up at each end.
+    z: the deck above the ground (from the map)."""
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
         side = Vector((-d.y, d.x, 0))
@@ -275,8 +321,8 @@ def footbridge(mb, pts, w, rng):
                 parts.bar(mb, 'steel', (p.x, p.y, z), (p.x, p.y, z + 1.0), 0.04, hex_rgb('#3a3a3a'), 0.7)
 
 
-def jetty(mb, pts, w, rng):
-    """A timber jetty on piles, canoes tied along it."""
+def jetty(mb, pts, w, rng, z=0.9):
+    """A timber jetty on piles at z over the water, canoes tied along it."""
     from .kinds import canoe
     for i in range(len(pts) - 1):
         A, d, L = _seg(pts[i], pts[i + 1])
@@ -284,12 +330,12 @@ def jetty(mb, pts, w, rng):
         ang = math.atan2(d.y, d.x)
         for k in range(int(L / 0.25)):
             p = A + d * (k * 0.25 + 0.12)
-            mb.box('wood', Matrix.Translation((p.x, p.y, 0.9)) @ Matrix.Rotation(ang, 4, 'Z'), shade(hex_rgb('#6e6152'), rng.between(0.8, 1.1)), 0.8, size=(0.22, w, 0.06))
+            mb.box('wood', Matrix.Translation((p.x, p.y, z)) @ Matrix.Rotation(ang, 4, 'Z'), shade(hex_rgb('#6e6152'), rng.between(0.8, 1.1)), 0.8, size=(0.22, w, 0.06))
         for k in range(int(L / 2) + 1):
             for s in (-1, 1):
                 p = A + d * min(L, k * 2) + side * s * w / 2
-                parts.bar(mb, 'wood', (p.x, p.y, -0.5), (p.x, p.y, 1.2), 0.16, hex_rgb('#4a4036'), 0.8)
-        for k in range(rng.randrange(2, 6)):
+                parts.bar(mb, 'wood', (p.x, p.y, -0.5), (p.x, p.y, z + 0.3), 0.16, hex_rgb('#4a4036'), 0.8)
+        for k in range(rng.randrange(0, 3) if len(pts) > 2 else rng.randrange(2, 6)):
             p = A + d * rng.between(2, L) + side * rng.pick([-1, 1]) * (w / 2 + 0.8)
             canoe(mb, Matrix.Translation((p.x, p.y, 0.08)) @ Matrix.Rotation(ang + rng.between(-0.2, 0.2), 4, 'Z'), rng)
 
@@ -336,22 +382,24 @@ def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True):
 BRIDGE_H = {'long': 7.0, 'cable': 9.0}
 
 
-def long_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None):
-    """The Long Bridge: an endless low concrete ribbon on pier pairs across the lagoon, ramping
-    down to the shore at both ends."""
-    deck_line(mb, pts, w, BRIDGE_H['long'], RAMP['bridge'], rng, keep, piers=30, wear=0.7, lamps=lamps, dead=0.2)
+def long_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None, zs=None):
+    """The Long Bridge: an endless low concrete ribbon on pier pairs across the lagoon, high over
+    the boat channel. zs: the map's deck heights (else a hump of BRIDGE_H)."""
+    deck_line(mb, pts, w, zs or profile(pts, None, BRIDGE_H['long'], RAMP['bridge']), rng, keep, piers=30, wear=0.7, lamps=lamps, dead=0.2, depth=DEPTH['bridge'])
 
 
-def cable_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None):
+def cable_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None, zs=None):
     """The Cable Bridge (invented): a single leaning paddle-blade pylon, a fan of stays, a white
     deck; the pylon is lit at night (research-landmarks 15, Gidi design)."""
-    deck_line(mb, pts, w, BRIDGE_H['cable'], RAMP['bridge'], rng, keep, col='#e8e6df', piers=40, wear=0.15, lamps=lamps, dead=0.0)
+    zf = profile(pts, zs) if zs else profile(pts, None, BRIDGE_H['cable'], RAMP['bridge'])
+    deck_line(mb, pts, w, zf, rng, keep, col='#e8e6df', piers=40, wear=0.15, lamps=lamps, dead=0.0, depth=DEPTH['bridge'])
     A, d, L = _seg(pts[0], pts[-1])
+    S = sum(math.dist(a, b) for a, b in zip(pts, pts[1:]))
     mid = A + d * L * 0.5
     if not keep((mid.x, mid.y)):
         return
     side = Vector((-d.y, d.x, 0))
-    top = mid + Vector((0, 0, 85)) - d * 8
+    top = mid + Vector((0, 0, zf(S / 2) + 76)) - d * 8
     for s in (-1, 1):  # the blade: two legs leaning together, joined into a paddle
         base = mid + side * s * (w / 2 + 1.5)
         parts.bar(mb, 'concrete', (base.x, base.y, 0), (top.x + side.x * s * 1.2, top.y + side.y * s * 1.2, top.z), 2.2, hex_rgb('#f2efe6'), 0.1)
@@ -359,9 +407,10 @@ def cable_bridge(mb, pts, w, rng, keep=lambda p: True, lamps=None):
         for e in (-1, 1):
             t = (k + 1) / 15
             p = mid + d * e * (L * 0.48) * t
+            zq = zf(S / 2 + e * (S * 0.48) * t) + 0.5
             for s in (-1, 1):
                 q = p + side * s * (w / 2 - 0.3)
-                parts.bar(mb, 'steel', (top.x, top.y, top.z - k * 2.5), (q.x, q.y, 9.5), 0.08, hex_rgb('#d8dcdf'), 0.1)
+                parts.bar(mb, 'steel', (top.x, top.y, top.z - k * 2.5), (q.x, q.y, zq), 0.08, hex_rgb('#d8dcdf'), 0.1)
     mb.box('emit', Matrix.Translation((top.x, top.y, top.z + 1)), hex_rgb('#ffffff'), 0, size=(2, 2, 2))
 
 
@@ -402,6 +451,50 @@ def canal(mb, pts, w, rng):
                 mb.box('leaf', Matrix.Translation((p.x, p.y, 0.05)) @ Matrix.Rotation(rng.between(0, 3), 4, 'Z'), hex_rgb('#4f8a34'), 0, size=(rng.between(0.6, 1.6), rng.between(0.5, 1.2), 0.05))
             else:
                 litter_piece(mb, p.x, p.y, 0.04, rng)
+
+
+def culvert(mb, pts, w, rng, z=0.12, cross=None):
+    """A road over a canal on a concrete slab flush with the road. cross: where the road crosses the
+    water, (x, y, canal direction (dx, dy), canal width); low parapets stand along the road edges
+    there, as long as the water is wide. Without it (the road runs along the canal) just the slab."""
+    for i in range(len(pts) - 1):
+        A, d, L = _seg(pts[i], pts[i + 1])
+        if L < 1e-6:
+            continue
+        ang = math.atan2(d.y, d.x)
+        mid = A + d * L / 2
+        mb.box('concrete', Matrix.Translation((mid.x, mid.y, (z - 0.6) / 2)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#8f8a80'), 0.7, size=(L + 0.05, w + 0.6, z + 0.6))
+    if not cross:
+        return
+    x, y, (cx, cy), cw = cross
+    c = Vector((x, y, 0))
+    u = Vector((cx, cy, 0)).normalized()  # along the canal = across the road
+    n = Vector((-u.y, u.x, 0))  # across the canal = along the road
+    ang = math.atan2(n.y, n.x)
+    for s in (-1, 1):
+        q = c + u * s * (w / 2 + 0.25)
+        mb.box('concrete', Matrix.Translation((q.x, q.y, z + 0.3)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#a8a49a'), 0.7, size=(cw + 1.2, 0.35, 0.6))
+
+
+def quay(mb, pts, top, rng):
+    """A sea wall: a concrete face down into the water, a coping along the top and a railing, with
+    the odd bollard. top: the coping above the ground behind it."""
+    for i in range(len(pts) - 1):
+        A, d, L = _seg(pts[i], pts[i + 1])
+        if L < 1e-6:
+            continue
+        ang = math.atan2(d.y, d.x)
+        mid = A + d * L / 2
+        M = Matrix.Translation((mid.x, mid.y, 0)) @ Matrix.Rotation(ang, 4, 'Z')
+        mb.box('concrete', M @ Matrix.Translation((0, 0, (top - 1.5) / 2)), hex_rgb('#8f8a80'), 0.75, size=(L + 0.05, 0.8, top + 1.5))
+        mb.box('concrete', M @ Matrix.Translation((0, 0, top + 0.06)), hex_rgb('#b8b3a8'), 0.5, size=(L + 0.05, 1.0, 0.12))
+        for k in range(int(L / 2.5) + 1):
+            p = A + d * min(L, k * 2.5)
+            parts.bar(mb, 'steel', (p.x, p.y, top), (p.x, p.y, top + 1.0), 0.04, hex_rgb('#3a5a6a'), 0.6)
+            if rng.chance(0.08):
+                parts.cyl(mb, 'steel', Matrix.Translation((p.x, p.y, top)), 0.18, 0.5, hex_rgb('#2a2a2a'), 0.6, seg=8)
+        a, b = A + Vector((0, 0, top + 1.0)), A + d * L + Vector((0, 0, top + 1.0))
+        parts.bar(mb, 'steel', tuple(a), tuple(b), 0.04, hex_rgb('#3a5a6a'), 0.6)
 
 
 def boardwalk(mb, pts, rng):

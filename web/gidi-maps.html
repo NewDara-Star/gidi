@@ -224,6 +224,20 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
     }
     return out;
   }
+  function ribbonZ(pts, width, ys, out) {   // like ribbon, one polyline whose height ys[i] varies point by point
+    const hw = width / 2;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, z0] = pts[i], [x1, z1] = pts[i + 1]; const L = Math.hypot(x1 - x0, z1 - z0); if (L < 0.01) continue;
+      const nx = -(z1 - z0) / L * hw, nz = (x1 - x0) / L * hw, y0 = ys[i], y1 = ys[i + 1];
+      out.push(x0 + nx, y0, z0 + nz, x0 - nx, y0, z0 - nz, x1 - nx, y1, z1 - nz, x0 + nx, y0, z0 + nz, x1 - nx, y1, z1 - nz, x1 + nx, y1, z1 + nz);
+    }
+    return out;
+  }
+  function deckYs(d) {   // a deck's heights above the ground under it: the map's z less a straight line between its two ends (both on the ground)
+    const acc = [0]; for (let i = 1; i < d.pts.length; i++) acc.push(acc[i - 1] + Math.hypot(d.pts[i][0] - d.pts[i - 1][0], d.pts[i][1] - d.pts[i - 1][1]));
+    const S = acc[acc.length - 1] || 1, a = d.z[0], b = d.z[d.z.length - 1];
+    return d.z.map((z, i) => Math.max(0.3, z - (a + (b - a) * acc[i] / S)));
+  }
   function geomFrom(pos, col) {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
@@ -305,9 +319,12 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
     const deckM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#6b6f75" : "#e4dfd5"), side: THREE.DoubleSide });
     const sideM = new THREE.MeshLambertMaterial({ color: C(T.dark ? "#4b4f55" : "#b9b3a8"), side: THREE.DoubleSide });
     for (const s of G.structures || []) {
-      const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : s.kind === "jetty" ? 0.9 : 7 * (s.layer || 1);
+      if (s.kind === "culvert") continue;   // flush with the road: nothing to stand in for
+      const sloped = (s.kind === "flyover" || s.kind === "approach") && s.z;
+      const ys = sloped ? deckYs(s) : null;
+      const y = s.kind === "skywalk" ? 6.5 : s.kind === "footbridge" ? 1.2 : s.kind === "jetty" ? 0.9 : sloped ? Math.max(...ys) : 7 * (s.layer || 1);
       const mid = s.pts[Math.floor(s.pts.length / 2)], tg = into(tileKey(mid[0], mid[1]));
-      const top = ribbon([s.pts], s.width, y, []);
+      const top = sloped ? ribbonZ(s.pts, s.width, ys, []) : ribbon([s.pts], s.width, y, []);
       tg.add(new THREE.Mesh(geomFrom(top), deckM));
       // deck edge (a strip hanging 1.2 m below each side) and pillars every ~28 m
       const pts = s.pts, edge = [];
@@ -316,12 +333,13 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
         const nx = -(z1 - z0) / L * s.width / 2, nz = (x1 - x0) / L * s.width / 2;
         for (const sg of [1, -1]) {
           const ax = x0 + nx * sg, az = z0 + nz * sg, bx = x1 + nx * sg, bz = z1 + nz * sg;
-          const lip = Math.min(1.2, y);
-          edge.push(ax, y, az, bx, y, bz, bx, y - lip, bz, ax, y, az, bx, y - lip, bz, ax, y - lip, az);
+          const ya = sloped ? ys[i] : y, yb = sloped ? ys[i + 1] : y, la = Math.min(1.2, ya), lb = Math.min(1.2, yb);
+          edge.push(ax, ya, az, bx, yb, bz, bx, yb - lb, bz, ax, ya, az, bx, yb - lb, bz, ax, ya - la, az);
         }
-        if (s.kind === "flyover") for (let t = 14; t < L; t += 28) {
-          const p = new THREE.Mesh(new THREE.BoxGeometry(2.2, y - 1.2, 2.2), sideM);
-          p.position.set(x0 + (x1 - x0) * t / L, (y - 1.2) / 2, z0 + (z1 - z0) * t / L); tg.add(p);
+        if (s.kind === "flyover" && (sloped ? i % 5 === 2 : true)) for (let t = sloped ? L / 2 : 14; t < L; t += 28) {
+          const yp = sloped ? (ys[i] + ys[i + 1]) / 2 : y; if (yp < 2.5) continue;
+          const p = new THREE.Mesh(new THREE.BoxGeometry(2.2, yp - 1.2, 2.2), sideM);
+          p.position.set(x0 + (x1 - x0) * t / L, (yp - 1.2) / 2, z0 + (z1 - z0) * t / L); tg.add(p);
         }
       }
       tg.add(new THREE.Mesh(geomFrom(edge), sideM));
@@ -387,13 +405,17 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
     flat.add(new THREE.Mesh(geomFrom(arts), roadM(T.ar)));
     // water bridges ride above the lagoon
     const brM = roadM(T.bridge), brTile = new Map();
-    for (const a of G.arterials.filter((a) => a.cls === "bridge")) for (let i = 0; i < a.pts.length - 1; i++) {   // in 40 m pieces, each in its tile
-      const [x0, z0] = a.pts[i], [x1, z1] = a.pts[i + 1], n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, z1 - z0) / 40));
-      for (let k = 0; k < n; k++) {
-        const p = [[x0 + (x1 - x0) * k / n, z0 + (z1 - z0) * k / n], [x0 + (x1 - x0) * (k + 1) / n, z0 + (z1 - z0) * (k + 1) / n]];
-        const key = tileKey((p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2);
-        if (!brTile.has(key)) brTile.set(key, []);
-        ribbon([p], 24, 9, brTile.get(key));
+    for (const a of G.arterials.filter((a) => a.cls === "bridge")) {
+      const ys = a.z ? deckYs(a) : null;
+      for (let i = 0; i < a.pts.length - 1; i++) {   // in 40 m pieces, each in its tile (the map's points are 5 m apart)
+        const [x0, z0] = a.pts[i], [x1, z1] = a.pts[i + 1], n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, z1 - z0) / 40));
+        for (let k = 0; k < n; k++) {
+          const p = [[x0 + (x1 - x0) * k / n, z0 + (z1 - z0) * k / n], [x0 + (x1 - x0) * (k + 1) / n, z0 + (z1 - z0) * (k + 1) / n]];
+          const key = tileKey((p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2);
+          if (!brTile.has(key)) brTile.set(key, []);
+          if (ys) { const y0 = ys[i] + (ys[i + 1] - ys[i]) * k / n, y1 = ys[i] + (ys[i + 1] - ys[i]) * (k + 1) / n; ribbonZ(p, 24, [y0, y1], brTile.get(key)); }
+          else ribbon([p], 24, 9, brTile.get(key));
+        }
       }
     }
     // rail: dark ballast with a light centre line

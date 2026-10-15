@@ -1,6 +1,8 @@
 """Generate the whole city as tiles, in parallel Blender processes, and write the manifest.
 
-python3 blender/city_run.py [--jobs 8] [--size 400] [--detail full,web] [--only 6,10;7,10]
+python3 blender/city_run.py [--jobs 8] [--size 400] [--detail full,web] [--only 6,10;7,10] [--fresh]
+
+--fresh rebuilds every tile, overwriting the old ones (otherwise a tile already built is skipped).
 
 Outputs web/city/<detail>/tiles/<tx>_<ty>.glb (+ .json with what was built and the signs), and
 web/city/manifest.json: tile size, which tiles exist at which detail, and every gap found (data
@@ -57,6 +59,8 @@ if __name__ == '__main__':
         todo = tiles_needed()
     print(len(todo), 'tiles', DETAILS, flush=True)
     t0 = time.time()
+    FRESH = bool(opt.get('--fresh'))
+    built = lambda out, t: (lambda f: os.path.exists(f) and (not FRESH or os.path.getmtime(f) >= t0))(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))
     MISSING = {}
     for det in DETAILS:
         out = os.path.join(OUT, det)
@@ -69,7 +73,7 @@ if __name__ == '__main__':
         # its tiles are retried once, and anything still missing is reported.
         batch = 3 if det == 'full' else 12
         for attempt in (1, 2):
-            left = [t for t in todo if not os.path.exists(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))]  # resumable
+            left = [t for t in todo if not built(out, t)]  # resumable
             if not left:
                 break
             queue = [left[i:i + batch] for i in range(0, len(left), batch)]
@@ -85,10 +89,10 @@ if __name__ == '__main__':
                                                    '--tiles', ';'.join(f'{a},{b}' for a, b in c), '--out', out, '--detail', det, '--size', str(SIZE)], stdout=log, stderr=subprocess.STDOUT))
                 if time.time() - last > 30:
                     last = time.time()
-                    done = len([f for f in os.listdir(os.path.join(out, 'tiles')) if f.endswith('.json')])
+                    done = len([t for t in todo if built(out, t)])
                     print(f'{det}: {done}/{len(todo)} tiles, {int(time.time() - t0)} s', flush=True)
                 time.sleep(2)
-        missing = [t for t in todo if not os.path.exists(os.path.join(out, 'tiles', f'{t[0]}_{t[1]}.json'))]
+        missing = [t for t in todo if not built(out, t)]
         MISSING[det] = len(missing)
         if missing:
             print(f'{det}: MISSING {len(missing)} tiles after a retry: ' + ';'.join(f'{a},{b}' for a, b in missing), flush=True)
