@@ -4,7 +4,7 @@
 
 ## Map problems
 - **R1 Roads running along each other: 14**
-  - main main/89 runs 175 m along exp Peninsula Expressway at (6691, 5323)
+  - main main/92 runs 175 m along exp Peninsula Expressway at (6691, 5323)
   - street frontier/street/81 runs 73 m along exp Peninsula Expressway at (6740, 5312)
   - street frontier/street/114 runs 58 m along street frontier/street/115 at (7746, 5777)
   - street frontier/street/182 runs 49 m along lane frontier/lane/83 at (8225, 5013)
@@ -37,7 +37,7 @@
   - street frontier/street/191 runs 7.8 m past main Kunle Road at (7263, 4518)
   - lane frontier/lane/36 runs 3.8 m past street frontier/street/173 at (7776, 4536)
 - **R4 Knife-edge crossings (under 25 degrees): 2**
-  - main main/89 crosses exp Peninsula Expressway at 10 degrees at (6776, 5304)
+  - main main/92 crosses exp Peninsula Expressway at 10 degrees at (6776, 5304)
   - street frontier/street/81 crosses main Wahab Road at 20 degrees at (6740, 5312)
 - **R5 Roads on water with no bridge: 4**
   - main Kunle Road has 804 m on water with no bridge, from (7466, 4487)
@@ -46,15 +46,16 @@
   - street frontier/street/42 has 4 m on water with no bridge, from (7418, 4496)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 1**
-  - main Mbanefo Road is listed twice (main/79, main/88)
+  - main Mbanefo Road is listed twice (main/82, main/91)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
-- **M4 places on the map with nothing of their own: 2** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
+- **M4 places on the map with nothing of their own: 3** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
   - danger (1): Disputed Plots (on bare ground, (7172, 4949))
   - landmark (1): New Estates (on bare ground, (6977, 5506))
+  - sport (1): Community Football Pitch (on a front house, (7887, 4982))
 
 ## Building kinds here
 front 813, back 167, generator 124, shed 100, kiosk 97, column 84, water tank 70, unfinished house 48, beach shack 30, tank 20, toll booth 7, school 2, flare stack 1, toll canopy 1

@@ -15,9 +15,9 @@
   - lane port/lane/19 stops 9.7 m short of street port/street/0 at (3485, 5168)
   - lane port/lane/20 stops 8.1 m short of street port/street/6 at (3528, 6118)
   - lane port/lane/17 stops 7.5 m short of street port/street/0 at (3279, 5119)
+  - street port/street/51 stops 4.8 m short of street port/street/47 at (3763, 5583)
   - lane jungle/lane/34 stops 4.2 m short of main Alaba Road at (3184, 5772)
   - lane port/lane/6 stops 2.9 m short of main Alaba Road at (3189, 5716)
-  - street port/street/51 stops 2.0 m short of street port/street/9 at (3763, 5583)
   - lane port/lane/9 stops 1.1 m short of street port/street/44 at (3658, 5756)
   - lane port/lane/22 stops 1.0 m short of street port/street/47 at (3767, 5484)
   - street port/street/22 stops 0.6 m short of street port/street/23 at (3962, 4782)
@@ -38,17 +38,16 @@
   - street port/street/25 has 5 m on water with no bridge, from (4005, 4784)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 4**
-  - main Alaba Road is listed twice (main/10, main/17)
-  - main Okafor Road is listed twice (main/19, main/67)
-  - main Afolabi Avenue is listed twice (main/11, main/18)
-  - main Adeyemi Road is listed twice (main/16, main/62)
+  - main Alaba Road is listed twice (main/13, main/20)
+  - main Okafor Road is listed twice (main/22, main/70)
+  - main Afolabi Avenue is listed twice (main/14, main/21)
+  - main Adeyemi Road is listed twice (main/19, main/65)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
-- **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
-  - sport (1): Community Football Pitch (on a front house, (3325, 6111))
+- **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
 
 ## Building kinds here
 front 727, stalls 504, back 229, stack 224, trailer 120, kiosk 111, shed 43, tank 20, crane 18, villa 16, cellblock 10, checkpoint 4, warehouse 2, tower 2, school 2

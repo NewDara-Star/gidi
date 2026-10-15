@@ -6,13 +6,13 @@
 - **R1 Roads running along each other: 15**
   - art art/1 runs 178 m along street maze/street/4 at (2366, 4445)
   - street hub/street/38 runs 74 m along art Ayinde Avenue at (1855, 4014)
-  - main main/26 runs 55 m along street capital/street/33 at (2042, 3820)
-  - main main/40 runs 55 m along street capital/street/33 at (2042, 3820)
-  - main main/29 runs 48 m along art Ayinde Avenue at (1844, 4522)
+  - main main/29 runs 55 m along street capital/street/33 at (2042, 3820)
+  - main main/43 runs 55 m along street capital/street/33 at (2042, 3820)
+  - main main/32 runs 48 m along art Ayinde Avenue at (1844, 4522)
   - street hub/street/70 runs 43 m along art Ring Road at (2270, 4444)
-  - art art/1 runs 42 m along street railside/street/117 at (840, 2815)
-  - main main/27 runs 41 m along art Ring Road at (1325, 4275)
-  - main main/32 runs 41 m along art Ring Road at (1325, 4275)
+  - art art/1 runs 42 m along street railside/street/115 at (840, 2815)
+  - main main/30 runs 41 m along art Ring Road at (1325, 4275)
+  - main main/35 runs 41 m along art Ring Road at (1325, 4275)
   - street hub/street/2 runs 38 m along main Kehinde Street at (1298, 4464)
   - street hub/street/42 runs 38 m along art Ayinde Avenue at (1880, 3902)
   - street hub/street/0 runs 37 m along main Kehinde Street at (1265, 4701)
@@ -37,26 +37,25 @@
   - art Ring Road has 8 m on water with no bridge, from (3001, 4515)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 14**
-  - main Ajasa Street is listed twice (main/41, main/59)
-  - main Kehinde Street is listed twice (main/27, main/32)
-  - main Oyelaran Road is listed twice (main/4, main/24)
-  - main Akande Road is listed twice (main/20, main/53)
-  - main Ireti Road is listed twice (main/3, main/12)
-  - main Agboola Street is listed twice (main/26, main/40)
-  - main Idowu Street is listed twice (main/21, main/25)
-  - main Eze Street is listed twice (main/33, main/43)
-  - main Afolabi Avenue is listed twice (main/11, main/18)
-  - main Bello Street is listed twice (main/5, main/31)
-  - main main/23 is listed twice (main/23, main/28)
-  - main main/23 is listed twice (main/23, main/61)
+  - main Ajasa Street is listed twice (main/44, main/62)
+  - main Kehinde Street is listed twice (main/30, main/35)
+  - main Oyelaran Road is listed twice (main/7, main/27)
+  - main Akande Road is listed twice (main/23, main/56)
+  - main Ireti Road is listed twice (main/6, main/15)
+  - main Agboola Street is listed twice (main/29, main/43)
+  - main Idowu Street is listed twice (main/24, main/28)
+  - main Eze Street is listed twice (main/36, main/46)
+  - main Afolabi Avenue is listed twice (main/14, main/21)
+  - main Bello Street is listed twice (main/8, main/34)
+  - main main/26 is listed twice (main/26, main/31)
+  - main main/26 is listed twice (main/26, main/64)
   - and 2 more
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
-- **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
-  - sport (1): Community Football Pitch (on a front house, (1590, 4722))
+- **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
 
 ## Building kinds here
 front 1057, back 884, shed 76, kiosk 66, stalls 48, stands 4, warehouse 2, school 2, terminal 1, station 1, hotel 1

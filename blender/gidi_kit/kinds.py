@@ -545,3 +545,91 @@ def flare_stack(a, rng, collection=None):
     parts.cyl(mb, 'emit', Matrix.Translation((c[0], c[1], h)), 1.4, 7.0, hex_rgb('#ff8a1a'), 0, seg=8, r2=0.15)  # the flame
     parts.cyl(mb, 'emit', Matrix.Translation((c[0], c[1], h + 1.0)), 0.8, 4.5, hex_rgb('#ffe08a'), 0, seg=8, r2=0.1)
     return _done(mb, a, collection)
+
+
+# ---------------------------------------------------------------- the Border: the old town, the beach, the post
+def colonial_house(a, rng, collection=None):
+    """An old colonial-era house of the border town: two storeys of lime-washed walls, a hipped
+    roof of rusted zinc or red tiles, a timber veranda on posts along the front, louvred shutters.
+    research-buildings (Badagry's colonial and returnee houses), invented."""
+    from .landmarks import first_storey_house
+    poly = ccw([tuple(p) for p in a['poly']])
+    mb = MeshBuilder()
+    wear = rng.between(0.5, 0.85)
+    first_storey_house(mb, poly, rng, wear)
+    return _done(mb, a, collection)
+
+
+def fishing_hut(a, rng, collection=None):
+    """A beach fishing hut: a pole frame with walls of palm-frond mats, a low thatched roof, nets
+    hung out to dry on poles, a canoe pulled up on the sand beside it."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    frond, thatch, pole = hex_rgb('#b59a5e'), hex_rgb('#8a6a3a'), hex_rgb('#5a4632')
+    h = rng.between(1.9, 2.4)
+    for x in (-L / 2 + 0.2, L / 2 - 0.2):
+        for y in (-W / 2 + 0.2, W / 2 - 0.2):
+            parts.bar(mb, 'wood', T(m, x, y, 0).translation, T(m, x, y, h + 0.3).translation, 0.1, pole, 0.7)
+    for s in (-1, 1):  # frond-mat walls, one side left open
+        mb.box('wood', T(m, 0, s * (W / 2 - 0.2), h / 2), frond, 0.7, size=(L - 0.4, 0.06, h))
+    mb.box('wood', T(m, -L / 2 + 0.2, 0, h / 2), frond, 0.7, size=(0.06, W - 0.4, h))
+    for s in (-1, 1):  # a low thatched gable roof
+        mb.face([T(m, -L / 2 - 0.4, s * (W / 2 + 0.4), h).translation, T(m, L / 2 + 0.4, s * (W / 2 + 0.4), h).translation,
+                 T(m, L / 2 + 0.4, 0, h + W * 0.45).translation, T(m, -L / 2 - 0.4, 0, h + W * 0.45).translation][::s], 'wood', thatch, 0.8)
+    for x in (L / 2 + 1.5, L / 2 + 4.0):  # nets drying on poles
+        parts.bar(mb, 'wood', T(m, x, 0, 0).translation, T(m, x, 0, 2.2).translation, 0.06, pole, 0.7)
+    mb.box('cloth', T(m, L / 2 + 2.75, 0, 1.4), hex_rgb(rng.pick(['#2f6fa6', '#2e7d4f', '#c8a020'])), 0.5, size=(2.5, 0.03, 1.6))
+    if rng.chance(0.6):
+        canoe(mb, T(m, 0, W / 2 + 2.0, 0.0, rng.between(-0.3, 0.3)), rng)
+    return _done(mb, a, collection)
+
+
+def border_booth(a, rng, collection=None):
+    """A booth at the border post: a small rendered cabin painted in two bands, a window with a
+    counter, a striped barrier pole across the lane beside it."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    wear = rng.between(0.4, 0.7)
+    band = hex_rgb(rng.pick(['#2e7d4f', '#1f5fa8', '#c8a020']))
+    mb.box('paint', T(m, 0, 0, 1.25), hex_rgb('#efe8d8'), wear, size=(L, W, 2.5))
+    mb.box('paint', T(m, 0, 0, 0.5), band, wear, size=(L + 0.02, W + 0.02, 1.0))
+    mb.box('zinc', T(m, 0, 0, 2.6), hex_rgb('#8a8d8c'), wear + 0.2, size=(L + 0.8, W + 0.8, 0.12))
+    mb.box('glass', T(m, L / 2 + 0.01, 0, 1.6), hex_rgb('#24343e'), 0.1, size=(0.02, W * 0.6, 0.9))
+    mb.box('wood', T(m, L / 2 + 0.25, 0, 1.05), hex_rgb('#6b4a30'), wear, size=(0.5, W * 0.6, 0.06))  # counter
+    parts.bar(mb, 'steel', T(m, L / 2 + 0.6, W / 2, 1.0).translation, T(m, L / 2 + 0.6, W / 2 + 6.0, 1.0).translation, 0.08, hex_rgb('#c62828'), 0.3)
+    for k in range(6):
+        mb.box('paint', T(m, L / 2 + 0.6, W / 2 + 0.5 + k, 1.0), hex_rgb('#f2f2ee'), 0.3, size=(0.1, 0.45, 0.1))
+    return _done(mb, a, collection)
+
+
+def border_canopy(a, rng, collection=None):
+    """The border post's big canopy over the lanes, like a toll plaza's, with an invented crest
+    and the words BORDER POST on its fascia."""
+    from .places import toll_canopy
+    poly, c, ang, L, W, m = footprint(a)
+    ob, spec = toll_canopy(a, rng, collection)
+    mb = MeshBuilder()
+    for s in (-1, 1):  # the fascia sign on both faces
+        F = T(m, s * (L / 2 + 1.05), 0, 7.2, -s * math.pi / 2 + math.pi)
+        mb.box('paint', F, hex_rgb('#2e7d4f'), 0.3, size=(W * 0.6, 0.05, 0.7))
+        parts.text(mb, 'paint', F @ Matrix.Translation((0, -0.05, 0)), 'BORDER POST', 0.5, hex_rgb('#f4f4f0'), depth=0.02, max_w=W * 0.5)
+    _done(mb, a, collection)
+    return ob, spec
+
+
+def drums(a, rng, collection=None):
+    """Drums and jerrycans of fuel stacked by the road, the border's smuggled fuel: blue and
+    rusty steel drums in rows, yellow jerrycans on top, a funnel and a hose."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    nx, ny = max(1, int(L / 0.7)), max(1, int(W / 0.7))
+    for i in range(nx):
+        for j in range(ny):
+            if rng.chance(0.15):
+                continue
+            x, y = -L / 2 + (i + 0.5) * L / nx, -W / 2 + (j + 0.5) * W / ny
+            parts.cyl(mb, 'steel', T(m, x, y, 0), 0.29, 0.88, hex_rgb(rng.pick(['#1f5fa8', '#2f6fa6', '#6b3a22', '#3a3a3a'])), 0.8, seg=10)
+            if rng.chance(0.4):
+                mb.box('plastic', T(m, x, y, 1.05), hex_rgb('#e0b020'), 0.5, size=(0.36, 0.2, 0.34))
+    parts.cyl(mb, 'plastic', T(m, L / 2 + 0.4, 0, 0), 0.15, 0.3, hex_rgb('#c62828'), 0.5, seg=8, r2=0.03)  # a funnel
+    return _done(mb, a, collection)
