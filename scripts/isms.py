@@ -87,6 +87,7 @@ class Ctx:
     def __init__(self, out):
         self.out = out
         self.districts = [(d["id"], ring(d["poly"])) for d in out["districts"]]
+        self.built = {d["id"] for d in out["districts"] if d.get("fabric") == "lagos"}   # built to the agreed cross-sections
         self.roads = []                                  # {id, k, w, d, pts, geom, key}
         for d, lines in out["streets"].items():
             for i, ln in enumerate(lines):
@@ -142,8 +143,10 @@ class Ctx:
         g = LineString(pts)
         if g.length < 4:
             return
-        w = WIDTH[k]
-        self.roads.append(dict(id=rid, k=k, w=w, d=d, pts=pts, geom=g, key=(RANK[k], g.length), zone=g.buffer(w / 2 + 0.3)))
+        XS = self.out.get("cross_sections") or {}
+        built = d in self.built or (d is None and k in ("art", "exp") and self.built)
+        w = XS[k]["carriageway"] if built and k in XS else WIDTH[k]   # districts built to the agreed cross-sections: their widths
+        self.roads.append(dict(id=rid, k=k, w=w, d=d, pts=pts, geom=g, key=(RANK[k], g.length), zone=g.buffer(w / 2 + 0.3), xs=XS.get(k) if built else None))
 
     def district_at(self, x, y):
         p = Point(x, y)
@@ -192,6 +195,8 @@ def gutters(ctx):
             gw = rs.uniform(*rate0["w"]) * cls["w"]
             depth = rs.uniform(*rate0["depth"])
             off = road["w"] / 2 + 0.3 + gw / 2
+            if road.get("xs") and road["xs"]["gutter"] > 0:   # the agreed cross-section: the gutter right beside the carriageway
+                gw = road["xs"]["gutter"]; off = road["w"] / 2 + gw / 2
             n = 0
             for curve in curves(road, side, off):
                 n = trace(ctx, road, side, curve, gw, depth, rs, runs, crossings, n)

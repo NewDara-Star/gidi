@@ -148,7 +148,7 @@ for cv in civic:
     fn = registry.CIVIC_PLOTS.get(cv['type'])
     if not fn or len(cv['poly']) != 4:
         continue
-    a = attributes(dict(i=hash(cv['name']) % 100000, kind=cv['type'], poly=cv['poly'], c=cv['c'], storeys=2))
+    a = attributes(dict(i=__import__('zlib').crc32(cv['name'].encode()) % 100000, kind=cv['type'], poly=cv['poly'], c=cv['c'], storeys=2))
     a['label'] = cv['name']
     fn(a, Rng(district, 'civic', cv['name']), col)
     counts['civic:' + cv['type']] = counts.get('civic:' + cv['type'], 0) + 1

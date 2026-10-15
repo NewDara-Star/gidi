@@ -16,6 +16,7 @@ import math
 import os
 import sys
 import time
+import zlib  # stable choices: Python's hash() changes every run, and the city must come out the same every time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
@@ -752,7 +753,7 @@ def build_tile(tx, ty, overrides):
             if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
                 street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p, rid=r['id']: on_other_road(p, rid) or in_building(p, 0.1))
             if r['k'] in ('main', 'street') and not (rch == 'elite' and r['k'] != 'main') and d not in LAGOS_D:
-                off = (1 if hash(r['id']) % 2 else -1) * (r['w'] / 2 + 1.6)
+                off = (1 if zlib.crc32(r['id'].encode()) % 2 else -1) * (r['w'] / 2 + 1.6)
                 prev = None
                 for i in range(len(piece) - 1):
                     a, b = piece[i], piece[i + 1]
@@ -777,7 +778,7 @@ def build_tile(tx, ty, overrides):
             # street lights: main roads everywhere, streets in the elite and civic districts; opposite
             # the electricity poles; a share dead, more in the poor districts, some solar
             if (r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street')) and d not in LAGOS_D:
-                pole_side = (1 if hash(r['id']) % 2 else -1)
+                pole_side = (1 if zlib.crc32(r['id'].encode()) % 2 else -1)
                 loff = -pole_side * (r['w'] / 2 + 1.0)
                 for i in range(len(piece) - 1):
                     a, b = piece[i], piece[i + 1]
@@ -836,7 +837,7 @@ def build_tile(tx, ty, overrides):
             continue
         p, top = min(poles, key=lambda q: math.dist(q[0], b['c']))
         if math.dist(p, b['c']) < 30:
-            cn = b['poly'][hash((b['d'], b['i'])) % 4]
+            cn = b['poly'][zlib.crc32(f"{b['d']}/{b['i']}".encode()) % 4]
             street.wire(sm, (top[0], top[1], top[2] - 0.6), (cn[0], cn[1], min(b['storeys'] * 3.1, 6.5) - 0.3), 1.0, t=0.012, n=5)
 
     # life: a still of the traffic (moving, frozen; parked at the edges), people along the frontages

@@ -138,6 +138,13 @@ def check_furniture(did, G):
     return len(bad), worst(bad) + " (%d pieces checked)" % len(F)
 
 
+def in_market_street(G, did, b, _cache={}):
+    """A table inside one of the district's declared market-street zones (scripts/market_streets.py)."""
+    if did not in _cache:
+        _cache[did] = unary_union([Polygon(z["pts"]).buffer(0) for z in G.get("encroach", []) if z.get("d") == did and z["kind"] == "market street"]).buffer(0.15)
+    return _cache[did].contains(Polygon(b[1:]).buffer(0))
+
+
 def check_overlaps(bgeoms):
     """2: pairs of buildings overlapping by more than 0.05 m2."""
     tree = STRtree(bgeoms)
@@ -441,7 +448,7 @@ def run(did):
     add("10 buildings within 45 m of a way", check_reach(gen, G, bg))
     add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
-    add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, [])]))   # the baked city's houses: the bake clears some (roundabouts)
+    add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, []) if not (b[0] == "stalls" and in_market_street(G, did, b))]))   # a market table stands across the gutter on purpose   # the baked city's houses: the bake clears some (roundabouts)
     if gen.get("fabric") == "lagos":
         add("15 street furniture on walkways", check_furniture(did, G))
     kinds = {}
