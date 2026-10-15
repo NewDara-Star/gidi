@@ -48,7 +48,12 @@ BAY = chaikin([(X(43.3), Y(3.9)), (X(45.5), Y(3.9)), (X(45.2), Y(2.0)), (X(44.7)
 BAY_X = X(44.4)   # the Heights end at the bay; the land east of it is the Frontier's (Lekki's) west end
 CREEK_E = chaikin([(X(38.8), Y(2.8)), (X(39.3), Y(2.8)), (X(39.2), Y(-1.0)), (X(38.7), Y(-1.0))])                                     # east of the Island
 CREEK_W = chaikin([(-500, Y(1.6)), (X(6), Y(2.6)), (X(14), Y(1.4)), (X(18), Y(0.9)), (X(14), Y(0.6)), (X(6), Y(1.4)), (-500, Y(0.4))])  # Badagry creek
-water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND)
+# Banana Island: a reclaimed crescent in the lagoon off the Heights' north shore, joined by a short causeway (gated, the richest
+# addresses in Gidi). Drawn fresh; bigger than its inspiration at 1:4, as Old Island is.
+BANANA = Polygon(chaikin([(11540, 5790), (11600, 5620), (11800, 5520), (12000, 5530), (12160, 5640), (12200, 5790), (12090, 5760),
+                          (11960, 5740), (11810, 5745), (11690, 5770), (11610, 5830)], 3)).buffer(0)
+CAUSEWAY = LineString([(11840, 5680), (11850, 6000)]).buffer(14, cap_style=2)   # 28 m of land: the road, a gatehouse at the shore
+water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND).difference(BANANA).difference(CAUSEWAY)
 land = box(0, 0, W, H).difference(water)
 sea = Polygon(OCEAN).buffer(0).intersection(box(0, 0, W, H))   # the open sea, kept apart from the inland water (the map build treats them differently)
 
@@ -109,6 +114,11 @@ north = Polygon([(0, 0), (W, 0), (W, 4150), (0, 4250)])
 u = unary_union([D['yaba'], D['watertown'].intersection(north).buffer(0.5)])
 D['yaba'] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
 D['watertown'] = max(getattr(D['watertown'].difference(north), 'geoms', [D['watertown'].difference(north)]), key=lambda q: q.area)
+u = unary_union([D['heights'], BANANA.buffer(0.5), CAUSEWAY.intersection(land).buffer(0.5)])   # Banana Island belongs to the Heights
+D['heights'] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
+for k in D:
+    if k != 'heights':
+        D[k] = max(getattr(D[k].difference(BANANA.buffer(1)), 'geoms', [D[k].difference(BANANA.buffer(1))]), key=lambda q: q.area)
 # land the cells left out (scraps cut off by the water) joins the district it shares the longest border with
 left = city.difference(unary_union(list(D.values())))
 for g in getattr(left, 'geoms', [left]):
