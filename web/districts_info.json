@@ -159,6 +159,7 @@
   {"name":"Ferry Jetty","type":"transit","u":0.45,"v":0.05,"note":"Ferries to the Heights and Water Town."},
   {"name":"Hunter Roundabout","type":"landmark","u":0.3,"v":0.5,"note":"Invented founder statue. Okada meeting point."},
   {"name":"Old Quarter","type":"landmark","u":0.7,"v":0.75,"note":"Old town with its own king. Curfew nights empty it."},
+  {"name":"Shore Palace","type":"landmark","safe":true,"u":0.66,"v":0.68,"note":"The old town king's palace. Never a crime location."},
   {"name":"Barge Yard","type":"industry","u":0.85,"v":0.3,"note":"Half-built barges. Boat chase."}
  ]},
 "oldisland": {

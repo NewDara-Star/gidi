@@ -25,6 +25,8 @@ def ways_of(G, dids, area=None):
         if a.get("cls") == "bridge" and all(area.contains(Point(q)) for q in (a["pts"][0], a["pts"][-1])):
             bridges.append(LineString(a["pts"])); ways.append(("arterial", a["name"], bridges[-1])); continue   # over the lagoon between two built districts: whole
         for p in lines(LineString(a["pts"]).intersection(area)): ways.append(("arterial", a["name"], p))
+        for p in lines(LineString(a["pts"]).difference(area)):   # a stretch across unbuilt land between two built areas (Northern Road to Old Shore): whole
+            if all(area.boundary.distance(Point(q)) < 1 for q in (p.coords[0], p.coords[-1])): ways.append(("arterial", a["name"], p))
     for br in bridges:   # a bridge that lands a few metres short of the road on shore is joined to it
         for end in (Point(br.coords[0]), Point(br.coords[-1])):
             d, g = min(((g.distance(end), g) for k, n, g in ways if g is not br), key=lambda t: t[0])
@@ -74,10 +76,12 @@ def graph(ways, mode, ban=None, through=False):
 
 
 class Reach:
-    """Walking distances on the main walking network. A point joins the network at the nearest point of its nearest way
-    (the way is split there), the same way explore_city.py starts and ends a trip."""
+    """Walking distances on the walking network. A point joins the network at the nearest point of its nearest way
+    (the way is split there), the same way explore_city.py starts and ends a trip. Every real piece of network counts (200+
+    junctions): a district with no built neighbour (Old Shore, across the lagoon) is a piece of its own; sketch-road scraps are not."""
     def __init__(self, Gx):
-        self.G = Gx.subgraph(max(nx.connected_components(Gx), key=len)).copy()
+        comps = [c for c in nx.connected_components(Gx) if len(c) >= 200] or [max(nx.connected_components(Gx), key=len)]
+        self.G = Gx.subgraph(set().union(*comps)).copy()
         self.E = list(self.G.edges(data=True)); self.T = STRtree([e[2]["geom"] for e in self.E])
     def attach(self, p):
         """(node_a, dist_a, node_b, dist_b, off): the two ends of the nearest way, how far along it each is, and the step onto it."""
