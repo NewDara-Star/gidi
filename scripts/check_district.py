@@ -109,6 +109,32 @@ def check_roads(gen, bgeoms, G):
     return len(bad), worst(bad)
 
 
+def check_furniture(did, G):
+    """15 (districts built to the cross-sections): every pole, light, traffic light, transformer and bus stop stands clear of
+    every road's carriageway and gutter, and outside every building (the 3D kit draws them where the data says)."""
+    import cross_sections as XS
+    area = Polygon([d for d in G["districts"] if d["id"] == did][0]["poly"][0]).buffer(40)
+    F = [f for f in G.get("furniture", []) if area.contains(Point(f["x"], f["y"]))]
+    if not F:
+        return 1, "no street furniture in the data"
+    roads = [(k, line(p)) for k, key in (("street", "streets"), ("lane", "lanes")) for L in G.get(key, {}).values() for p in L]
+    roads += [("main", line(m["pts"])) for m in G["mains"]] + [(a["cls"] if a["cls"] in XS.SECTIONS else "art", line(a["pts"])) for a in G["arterials"]]
+    roads = [(k, g) for k, g in roads if g is not None and g.distance(area) < 50]
+    strip = [g.buffer(XS.walkway_band(k)[0]) for k, g in roads]
+    st = STRtree(strip)
+    B = [poly(b[1:]) for L in G["buildings"].values() for b in L if len(b) > 3]
+    B = [b for b in B if b.intersects(area)]
+    bt = STRtree(B)
+    bad = []
+    for f in F:
+        p = Point(f["x"], f["y"])
+        if any(strip[j].contains(p) for j in st.query(p)):
+            bad.append((1, "%s %s on a carriageway or gutter" % (f["kind"], xy(p))))
+        elif any(B[j].contains(p) for j in bt.query(p)):
+            bad.append((1, "%s %s inside a building" % (f["kind"], xy(p))))
+    return len(bad), worst(bad) + " (%d pieces checked)" % len(F)
+
+
 def check_overlaps(bgeoms):
     """2: pairs of buildings overlapping by more than 0.05 m2."""
     tree = STRtree(bgeoms)
@@ -413,6 +439,8 @@ def run(did):
     add("12 locked places in place", check_locked(did, gen))
     add("13 everyday places in reach", check_everyday(did, G))
     add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, [])]))   # the baked city's houses: the bake clears some (roundabouts)
+    if gen.get("fabric") == "lagos":
+        add("15 street furniture on walkways", check_furniture(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

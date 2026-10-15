@@ -86,6 +86,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         out["streets"][id_]=F["streets"]; mains=[]
         for mm in F["mains"]: out["mains"].append({"d":id_,"name":mm["name"],"pts":mm["pts"]})
         out.setdefault("buildings",{})[id_]=F["buildings"]
+        if F.get("encroach"): out.setdefault("encroach",[]).extend(dict(z,d=id_) for z in F["encroach"])   # declared zones (market spill), see scripts/cross_sections.py
         out.setdefault("parcels",{})[id_]=F["parcels"]
         out.setdefault("lanes",{})[id_]=F.get("lanes",[])
         if F.get("paths"): out.setdefault("paths",{})[id_]=[p["pts"] for p in F["paths"]]   # footpaths: rail side, canal banks, worn crossings
@@ -175,6 +176,13 @@ print("road heights:",_hr["decks"],"decks,",_hr["culverts"],"culverts,",_hr.get(
 for _s in _hr["extended"]: print("  lengthened:",_s)
 for _s in _hr["low"]: print("  LOW:",_s)
 for _s in _hr["cleared"]: print("  cleared from a bridge landing:",_s)
+
+# ---- street furniture as data (scripts/furniture.py): on walkways only, for districts built to the cross-sections
+import furniture
+import cross_sections
+out["cross_sections"]=cross_sections.SECTIONS   # one table of road widths for the generator, the checks and the kit
+_lagos=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
+print("street furniture:",_lagos,furniture.furniture(out,_lagos))
 
 # ---- civic layer: churches, mosques, schools, health, order, daily life (invented names) ----
 CIV=json.load(open("web/civic.json")); ORDER=CIV["_counts_order"]
