@@ -244,6 +244,38 @@ def _clear(p, pad=1.5):
 
 
 CANALS = [[P(p) for p in c['pts']] for c in GD.get('canals', [])]
+CANAL_WIDTH = [c.get('width', structures.CANAL_W) for c in GD.get('canals', [])]
+
+# ---------------------------------------------------------------- deck heights
+# The map holds every deck's height (docs/road-heights.md): z per point, metres above the water. The
+# kit still builds on flat ground, so each deck is drawn at its height above the ground under it
+# (web/terrain.json; water is 0). That keeps the headroom, and the ramps land on the road. When the
+# kit takes the terrain, draw the map's z as it is.
+_T = json.load(open(os.path.join(ROOT, 'web', 'terrain.json')))
+_TZ, _TC, _TW, _TH = _T['z'], _T['cell_m'], _T['w'], _T['h']
+_WET = [(min(q[0] for q in w), min(q[1] for q in w), max(q[0] for q in w), max(q[1] for q in w), w) for w in list(GD['water']) + list(GD['ocean'])]
+
+
+def ground_at(x, y):
+    """The ground's height at map point x, y (y south): bilinear on the terrain grid, 0 on water."""
+    if any(a <= x <= c and b <= y <= d and in_poly((x, y), w) for a, b, c, d, w in _WET):
+        return 0.0
+    fx, fy = x / _TC - 0.5, y / _TC - 0.5
+    j0, i0 = math.floor(fx), math.floor(fy)
+    tx, ty = fx - j0, fy - i0
+    at = lambda i, j: _TZ[min(max(i, 0), _TH - 1) * _TW + min(max(j, 0), _TW - 1)] / 10.0
+    return (at(i0, j0) * (1 - tx) * (1 - ty) + at(i0, j0 + 1) * tx * (1 - ty) + at(i0 + 1, j0) * (1 - tx) * ty + at(i0 + 1, j0 + 1) * tx * ty)
+
+
+def rel_z(d):
+    """A deck's heights above the ground under it, one per point (None when the map has none)."""
+    if not d.get('z'):
+        return None
+    return [max(0.05, z - ground_at(p[0], p[1])) for p, z in zip(d['pts'], d['z'])]
+
+
+CULVERTS_DONE = []  # crossings already given parapets (the map can hold overlapping culverts at a junction)
+BRIDGE_Z = {a['name']: rel_z(a) for a in GD.get('arterials', []) if a['cls'] == 'bridge'}
 BUILT = set(GD['buildings'])  # districts with buildings (the others aren't built yet)
 
 
@@ -496,7 +528,7 @@ def roadside_sites():
                         q = (p[0] + u[0] * 30 * sgn, p[1] + u[1] * 30 * sgn)
                         panels = [[('up', _ahead_name(r, end, here))], [('up', r['name'])]]
                         sites.append(dict(kind='gantry', x=q[0], y=q[1], ang=math.atan2(u[1] * sgn, u[0] * sgn), span=r['w'] + 1.0, panels=panels,
-                                          z0=structures.deck_height(s_ + 30 * sgn, S, structures.BRIDGE_H['cable' if 'Cable' in r['name'] else 'long'], structures.RAMP['bridge']) if r['cls'] == 'bridge' else 0.0))
+                                          z0=structures.profile(r['pts'], BRIDGE_Z.get(r['name']), structures.BRIDGE_H['cable' if 'Cable' in r['name'] else 'long'], structures.RAMP['bridge'])(s_ + 30 * sgn) if r['cls'] == 'bridge' else 0.0))
                     break
                 acc += L
             s_ += 800
@@ -955,27 +987,60 @@ def build_tile(tx, ty, overrides):
     tm = MeshBuilder()
     for s in GD.get('structures', []):
         pts = [P(p) for p in s['pts']]
-        if not inside(cent(pts)):
-            continue
+        zs = rel_z(s)
         rng = Rng('struct', s['name'], round(pts[0][0]))
-        {'flyover': lambda: structures.flyover(tm, pts, s['width'], s.get('layer', 1), rng, lamps=LAMPS), 'skywalk': lambda: structures.skywalk(tm, pts, s['width'], rng),
-         'footbridge': lambda: structures.footbridge(tm, structures.snap_footbridge(pts, CANALS), s['width'], rng), 'jetty': lambda: structures.jetty(tm, pts, s['width'], rng),
-         'ramp': lambda: structures.flyover(tm, pts, s['width'], 1, rng, lamps=LAMPS)}.get(s['kind'], lambda: None)()
+        if s['kind'] in ('flyover', 'ramp', 'approach'):  # the whole line, so the ramps sit at the real ends; this tile's slabs only
+            if not any(inside(p) for p in pts):
+                continue
+            (structures.approach if s['kind'] == 'approach' else structures.flyover)(tm, pts, s['width'], zs or structures.profile(pts, None, 6.5 * s.get('layer', 1)), rng, lamps=LAMPS, keep=inside)
+        else:
+            if not inside(cent(pts)):
+                continue
+            zm = sum(zs) / len(zs) if zs else None
+            k = s['kind']
+            if k == 'skywalk':
+                structures.skywalk(tm, pts, s['width'], rng, **({'z': zm} if zm else {}))
+            elif k == 'footbridge':
+                near = min(range(len(CANALS)), key=lambda i: min(dist_seg(cent(pts), a, b) for a, b in zip(CANALS[i], CANALS[i][1:]))) if CANALS else None
+                structures.footbridge(tm, structures.snap_footbridge(pts, CANALS, width=CANAL_WIDTH[near] if near is not None else None), s['width'], rng, **({'z': zm} if zm else {}))
+            elif k == 'jetty':
+                structures.jetty(tm, pts, s['width'], rng, **({'z': zm} if zm else {}))
+            elif k == 'culvert':
+                cross = None
+                for ci, cn in enumerate(CANALS):
+                    for a, b in zip(pts, pts[1:]):
+                        for c0, c1 in zip(cn, cn[1:]):
+                            x = _seg_cross(a, b, c0, c1)
+                            if x and not any(math.dist(x[:2], q) < 6 for q in CULVERTS_DONE):
+                                cross = (x[0], x[1], x[3], CANAL_WIDTH[ci])
+                                break
+                        if cross:
+                            break
+                    if cross:
+                        break
+                if cross:
+                    CULVERTS_DONE.append(cross[:2])
+                structures.culvert(tm, pts, s['width'], rng, cross=cross)
+            else:
+                continue
         built['structure:' + s['kind']] = built.get('structure:' + s['kind'], 0) + 1
     for a_ in GD.get('arterials', []):
         pts = [P(p) for p in a_['pts']]
         w = ART_W.get(a_['cls'], 18)
         rng = Rng('arterial', a_['name'])
         if a_['cls'] == 'bridge':  # the whole line, so the ramps sit at the real ends; this tile's slabs only
-            (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside, lamps=LAMPS)
+            (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside, lamps=LAMPS, zs=BRIDGE_Z.get(a_['name']))
             continue
         for piece in clip_line_rect(pts, x0, y0, x1, y1):
             structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5), lamps=LAMPS, keep=inside)
+    for qy in GD.get('quays', []):  # sea walls; the land behind is made up to their top, so here the top is the ground
+        for piece in clip_line_rect([P(p) for p in qy['pts']], x0, y0, x1, y1):
+            structures.quay(tm, piece, 0.3, Rng('quay', round(qy['pts'][0][0])))
     for piece in clip_line_rect([P(p) for p in GD['rail']['pts']], x0, y0, x1, y1):
         structures.rail(tm, piece, Rng('rail'))
     for c in GD.get('canals', []):
         for piece in clip_line_rect([P(p) for p in c['pts']], x0, y0, x1, y1):
-            structures.canal(tm, piece, structures.CANAL_W, Rng('canal', c['d']))
+            structures.canal(tm, piece, c.get('width', structures.CANAL_W), Rng('canal', c['d']))
     for bw in GD.get('boardwalks', []):
         for piece in clip_line_rect([P(p) for p in bw], x0, y0, x1, y1):
             structures.boardwalk(tm, piece, Rng('boardwalk', round(bw[0][0])))

@@ -31,7 +31,7 @@ mb.to_object('vehicles', col, master)
 landmarks.crown_hall(dict(poly=[(40, 10), (110, 10), (110, 80), (40, 80)], facing=0, name='crown'), Rng('s', 'crown'), col)
 landmarks.central_mosque(dict(poly=[(-60, 10), (-20, 10), (-20, 50), (-60, 50)], facing=0, name='mosque', district='railside', kind='mosque'), Rng('s', 'mosque'), col)
 fm = MeshBuilder()
-structures.flyover(fm, [(-80, -60), (60, -60)], 12, 1, Rng('s', 'fly'))
+structures.flyover(fm, [(-80, -60), (60, -60)], 12, structures.profile([(-80, -60), (60, -60)], None, 6.5), Rng('s', 'fly'))
 fm.to_object('flyover', col, master)
 cam = [float(v) for v in opt.get('--cam', '10,-150,70,15,5,8').split(',')]
 scene.camera(sc, tuple(cam[:3]), tuple(cam[3:]), lens=float(opt.get('--lens', 30)))

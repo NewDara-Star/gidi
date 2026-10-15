@@ -20,7 +20,7 @@ roadside.direction_sign(mb, 10, 0, face, [('up', 'Food Gate'), ('left', 'The Est
 roadside.disc_sign(mb, 15, 0, face, 'speed', r, 50)
 roadside.disc_sign(mb, 17, 0, face, 'noparking', r)
 roadside.gantry(mb, 26, 6, math.pi / 2, 14, [[('up', 'Old Island')], [('up', 'Coastal Expressway')]], r)  # traffic drives +y, reads facing -y
-structures.deck_line(mb, [(36, -30), (36, 60)], 22, 3.0, 20, r)
+structures.deck_line(mb, [(36, -30), (36, 60)], 22, structures.profile([(36, -30), (36, 60)], None, 3.0, 20), r)
 mb.to_object('roadside', sc.collection, master)
 scene.camera(sc, (20, -26, 6), (20, 4, 3), lens=30)
 scene.render(sc, out, res=(2400, 1100))
