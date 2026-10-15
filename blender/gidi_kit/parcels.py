@@ -499,7 +499,32 @@ def refinery(mb, pts, rng, ch):
         parts.cyl(mb, 'steel', T(m, -L * 0.35 + k * 40, W * 0.35, 0), min(14, W * 0.12), 12, hex_rgb('#e8e6df'), 0.4, seg=24)
 
 
+def barge_yard(mb, pts, rng, ch):
+    """The barge yard: a sandy work yard at the waterside with stacked timber, coils of chain and
+    wire rope, oil drums, an old crawler crane and scrap plates."""
+    from .kinds import _mound
+    p = ccw(pts)
+    _flat(mb, p, 0.04, 'mud', hex_rgb('#b89a6a'), 0.8)
+    m, L, W = _bbox_frame(p)
+    for k in range(max(1, int(L / 30))):  # timber stacks
+        x = -L * 0.4 + k * 30
+        for j in range(5):
+            mb.box('wood', T(m, x, -W * 0.25, 0.2 + j * 0.3), hex_rgb('#6b4a30'), 0.7, size=(8.0, 2.4, 0.28))
+    for k in range(4):  # chain coils
+        parts.cyl(mb, 'steel', T(m, rng.between(-L * 0.3, L * 0.3), W * 0.2, 0), rng.between(0.6, 1.0), 0.5, hex_rgb('#4a3a30'), 0.9, seg=10)
+    for q in _scatter(p, max(4, int(_area(p) / 400)), rng, pad=4):  # drums and scrap plates
+        if rng.chance(0.5):
+            parts.cyl(mb, 'steel', Matrix.Translation((q[0], q[1], 0)), 0.3, 0.9, hex_rgb(rng.pick(['#1f5fa8', '#6b3a22'])), 0.8, seg=10)
+        else:
+            mb.box('steel', Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(rng.between(0, 3), 4, 'Z'), hex_rgb('#5a3a2a'), 0.95, size=(rng.between(1.5, 3), rng.between(1, 2), 0.06))
+    cm = T(m, L * 0.3, 0, 0)  # an old crawler crane
+    mb.box('steel', cm @ Matrix.Translation((0, 0, 0.6)), hex_rgb('#3a3a3a'), 0.8, size=(5, 3.4, 1.2))
+    mb.box('carpaint', cm @ Matrix.Translation((0, 0, 2.0)), hex_rgb('#c8a020'), 0.8, size=(3.6, 2.8, 1.6))
+    parts.bar(mb, 'steel', (cm @ Vector((1.5, 0, 2.6))), (cm @ Vector((10, 0, 14))), 0.4, hex_rgb('#c8a020'), 0.8)
+
+
 BUILDERS = {
+    'barge yard': barge_yard,
     'refinery': refinery,
     'pitch': pitch, 'court': court, 'pool': pool, 'golf course': golf_course, 'stadium': stadium, 'airfield': airfield,
     'tank farm': tank_farm, 'landfill': landfill, 'waterworks': waterworks, 'prison': prison, 'barracks': barracks_ground,

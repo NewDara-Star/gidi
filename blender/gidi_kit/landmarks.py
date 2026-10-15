@@ -315,6 +315,7 @@ def freedom_ground(mb, pts, rng, ch):
 # name -> builder(a, rng, collection), the same shape as the civic plot builders
 BY_NAME = {
     'The Palace': places.palace,
+    'Shore Palace': places.palace,
     'The Crown Hall': crown_hall,          # waits for its plot in the 2D map (the Hub / Food Gate edge)
     'Railside Jumat Mosque': central_mosque,
     'Old Island Central Mosque': central_mosque,  # waits for its place in the 2D map
