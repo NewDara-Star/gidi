@@ -161,6 +161,13 @@ _st,_skip=roadclean.clean(out,water.union(ocean))
 print("road clean:",dict(_st),"skipped",len(_skip))
 for _s in _skip: print("  skipped:",_s)
 
+# ---- junctions (scripts/junctions.py): roundabouts where main roads cross, traffic lights, give-way Ts
+import junctions
+_jr=junctions.junctions(out)
+print("junctions:",dict(_jr))
+for _j in out["junctions"]:
+    if _j["kind"]=="roundabout" and "roads" in _j: print("  new roundabout:",_j["name"],f"r {_j['r']} m at ({_j['x']:.0f}, {_j['y']:.0f}),","/".join(_j["roads"]))
+
 # ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
 import roadz
 water,ocean,_hr=roadz.heights(out,water,ocean,json.load(open("web/terrain.json")))
