@@ -49,5 +49,5 @@ The owner asked for this on 15 Oct 2026: "the research should look at everything
 - **Places and street things** are what people have mapped. They cluster on main roads, and lamps, signals and bus stops are badly under-mapped, so they're floors, not counts.
 - **Heights** are 2023 estimates at about 3 m a storey. A zinc roof on a high plinth can read as two storeys.
 - **Study areas** are the boxes and LGAs each district was first studied on (`docs/DISTRICT-BRIEF.md`). The two new ones:
-  - **The Campus:** Yaba, Sabo, Akoka and the university (Lagos Mainland and Shomolu, 3.368–3.405 E, 6.497–6.528 N)
+  - **Saba:** Yaba, Sabo, Akoka and the university (Lagos Mainland and Shomolu, 3.368–3.405 E, 6.497–6.528 N)
   - **The Airport:** the airport, its cargo side and hotel strip (Ikeja and Oshodi/Isolo, 3.295–3.345 E, 6.555–6.592 N)

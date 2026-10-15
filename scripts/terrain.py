@@ -36,7 +36,7 @@ def _pkl(did):
 
 _FIT = None
 def study_area(did):
-    """The district's study area (UTM 31N). A district with no study yet (the Airport, the Campus) takes the real ground under its own
+    """The district's study area (UTM 31N). A district with no study yet (the Airport, Saba) takes the real ground under its own
     outline: the layout placed every district at its inspiration's real position / 4, so a least-squares fit of the anchors to the study
     centroids maps the outline back onto Lagos."""
     a = _pkl(did)

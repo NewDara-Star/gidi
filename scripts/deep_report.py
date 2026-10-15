@@ -5,7 +5,7 @@ import json, os, sys
 NAMES = {'border': 'The Border', 'bazaar': 'The Bazaar', 'jungle': 'Jungle City', 'port': 'The Port', 'maze': 'The Maze', 'hub': 'The Hub',
          'railside': 'Railside', 'capital': 'The Capital', 'estate': 'The Estate', 'foodgate': 'Food Gate', 'watertown': 'Water Town',
          'oldshore': 'Old Shore', 'oldisland': 'Old Island', 'heights': 'The Heights', 'frontier': 'The Frontier', 'airport': 'The Airport',
-         'yaba': 'The Campus'}
+         'yaba': 'Saba'}
 INFO = json.load(open('web/districts_info.json'))
 pc = lambda v: f'{round(100 * v)}%'
 
