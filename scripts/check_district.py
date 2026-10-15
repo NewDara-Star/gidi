@@ -79,6 +79,21 @@ def check_roads(gen, bgeoms, G):
         elif s["kind"] in ("flyover", "skywalk", "footbridge") and s.get("layer", 0) >= 1:
             add(s["pts"], (w / 2) if w else (6 if s["kind"] == "flyover" else 2),
                 s["kind"] + " " + s.get("name", ""), {"stalls", "kiosk"})
+    if gen.get("fabric") == "lagos":   # the Google rebuild: nothing past a road's building line (scripts/cross_sections.py) outside a
+        import cross_sections as XS     # declared encroachment zone, where only stalls and kiosks may stand (the market spill)
+        shapes = [x for x in shapes if not x[1].split(" ")[0] in ("street", "lane", "main", "arterial")]   # roads: by building line instead
+        def bl(pts, k, label, ok=None):
+            ln = line(pts)
+            if ln is not None:
+                shapes.append((ln.buffer(XS.building_line(k) - 0.1), label + " (building line)", ok))   # 10 cm: corners are rounded to 0.1 m
+        for p in gen.get("streets", []): bl(p, "street", "street")
+        for p in gen.get("lanes", []): bl(p, "lane", "lane")
+        for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
+        for a in G["arterials"]:
+            if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums"})
+        enc = unary_union([Polygon(z["pts"]) for z in gen.get("encroach", [])]) if gen.get("encroach") else None
+    else:
+        enc = None
     tree = STRtree([g for g, _, _ in shapes])
     bad = []
     for i, b in enumerate(bgeoms):
@@ -86,8 +101,10 @@ def check_roads(gen, bgeoms, G):
             g, lab, ok = shapes[j]
             if ok and gen["buildings"][i][0] in ok:
                 continue
+            if enc is not None and gen["buildings"][i][0] in ("stalls", "kiosk") and enc.buffer(0.1).contains(b) and "building line" in lab:
+                continue   # inside a declared market-spill zone: on purpose
             a = b.intersection(g).area
-            if a > 0:
+            if a > (0.05 if "building line" in lab else 0):   # building lines: corners are rounded to 0.1 m in the data
                 bad.append((a, "%s %s on %s (%.1f m2)" % (gen["buildings"][i][0], xy(b), lab, a)))
     return len(bad), worst(bad)
 

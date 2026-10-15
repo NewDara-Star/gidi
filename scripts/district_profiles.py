@@ -201,6 +201,15 @@ def foodgate(ST, LM):
         "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
         "fence_parcels": True,
         "keep_gateways": True,   # rebuilt after Water Town: its crossings with Water Town (and all others) stay as agreed
+        # ---- the Google rebuild pilot (docs/REBUILD-PLAN.md, docs/data/structure-foodgate.json): real Food Gate from Google's outlines
+        "fabric": "lagos",
+        "vacant": 0.04, "back_row": 0.7, "courtyard_m": [0.8, 2.5],   # was 40% empty plots: OSM's untraced corridor read as empty land
+        "touch": 0.7, "gap_m": [0.6, 3.0],   # 75% of real buildings stand within 1 m of a neighbour
+        "wobble_deg": 9.0,                   # real median 4.8 deg off the street's square, a quarter more than 10
+        "infill": {"block_fill": 0.44, "touch": 0.85, "small_share": 0.18, "small_m2": [8, 38], "room_m2": [50, 170]},   # real block fill 46%, 23% under 40 m2
+        "market_mass": {"fill": 0.74, "small_share": 0.2, "small_m2": [8, 40], "shed_m2": [60, 400], "skew_deg": 12, "aisle_m": 3.0,
+                        "grow": 0.93, "alley_share": 0.15, "alley_m": 1.8,   # Mile 12: big sheds built onto each other, narrow alleys
+                        "spill_m": 90, "spill_density": 0.7},
     }
 
 def watertown(ST, LM):

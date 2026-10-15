@@ -171,8 +171,8 @@ def heights(out, water, ocean, T):
                 need[i] = max(need[i], G_[i] - 1.5 + CLEAR['canal'] + dep)
         if any(wet.contains(p) for p in P):
             over.append('water')
-        # roads, rail and lower decks it crosses
-        for what, ln, w, zfun in below:
+        # roads, rail and lower decks it crosses (a jetty sits on the water at the shore road's end: nothing passes under it)
+        for what, ln, w, zfun in (below if kind != 'jetty' else []):
             if own is not None and ln.equals_exact(own, 0.5):
                 continue
             if not ln.intersects(g) or ln.intersection(g).geom_type not in ('Point', 'MultiPoint'):

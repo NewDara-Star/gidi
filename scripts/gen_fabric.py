@@ -50,6 +50,13 @@ if PROF.get("sizes_from"):   # under-mapped area (central Ikeja): house sizes an
     RULE["short_side"] = sampler(SZ["short_side_m"], 3.0, 18); RULE["long_side"] = sampler(SZ["long_side_m"], 4.5, 34); RULE["gap"] = sampler(SZ["gap_to_nearest_neighbour_m"], 0.0, 6)
 CLEAR = {"lane": 2.2, "street": 3.4, "main": 6.5, "art": 12.5, "exp": 15, "rail": 6.0, "canal": 4.0}   # building edge to centreline, minimum
 WIDTH = {"street": 5.5, "main": 10, "art": 22}
+LAGOS = PROF.get("fabric") == "lagos"
+ENCROACH = []   # declared encroachment zones: where buildings may stand past the building line on purpose (market spill)
+if LAGOS:   # the Google rebuild (docs/REBUILD-PLAN.md): building lines from the agreed cross-sections (scripts/cross_sections.py),
+    import cross_sections as XS   # buildings that touch as often as real Lagos's (Google outlines: 75% within 1 m of a neighbour)
+    CLEAR.update({k: XS.building_line(k) for k in ("lane", "street", "main", "art", "exp")})
+    WIDTH.update({k: XS.SECTIONS[k]["carriageway"] for k in ("street", "main", "art")})
+    RULE["gap"] = lambda u=None: 0.0 if rnd.random() < PROF["touch"] else rnd.uniform(*PROF["gap_m"])
 FIRST = ["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Folake","Agboola","Shonibare","Ilori","Durojaiye","Ogunleye","Aremu","Okonkwo","Nwosu","Danjuma"]
 ENDS = [("Street", 60), ("Road", 13), ("Avenue", 4), ("Close", 4), ("Way", 4), ("Crescent", 2), ("Lane", 2)]   # from street_name_endings
 used = set()
@@ -931,7 +938,15 @@ REACH = STRtree([g for k, g in net_lines] + lanes + [g for k, g in PATHS]) if W 
 def reachable(r):   # someone has to walk to its door: no building more than 44 m from a street, lane or path
     return REACH is None or len(np.atleast_1d(REACH.query_nearest(r, max_distance=44))) > 0
 def place(plot, r):
+    if LAGOS and kind_now[0] in ("front", "back"):   # hand-built, not machine-set: a few degrees off square (real median 4.8 deg);
+        wb = rnd.gauss(0, PROF["wobble_deg"])         # if the turn won't fit the plot, less of it, then none: a house is never lost to it
+        return any(_place(plot, rotate(r, wb * f, origin="centroid")) for f in (1.0, 0.5, 0.0))
+    return _place(plot, r)
+def _place(plot, r):
     if not reachable(r): return False
+    if LAGOS:   # no slivers: at least 2 m wide, at most four times as long as wide
+        cc_ = list(r.minimum_rotated_rectangle.exterior.coords); s1, s2 = math.dist(cc_[0], cc_[1]), math.dist(cc_[1], cc_[2])
+        if min(s1, s2) < 2.0 or max(s1, s2) > 4 * min(s1, s2): return False
     cc = list(r.exterior.coords)
     if min(math.dist(cc[0], cc[1]), math.dist(cc[1], cc[2])) < 0.3: return False   # no zero-width slivers
     if plot.buffer(0.05).contains(r) and buildable.contains(r) and not any((o.distance(r) < 0.15) if PROF else (o.intersection(r).area > 0.05) for o in near(r)): add(r, kind_now[0]); return True   # 15 cm: survives rounding to 0.1 m
@@ -1070,6 +1085,41 @@ for _, p, q, bi in fronts:
                 r = at(dmax - od - 0.3, od, ow)
                 if not any(o.intersects(r) for o in near(r)): place(plot, r)   # fix: sheds used to land on top of back houses
 QV.on = False
+if LAGOS and PROF.get("infill"):   # the Lagos fill (Google outlines): rooms, extensions and shacks in the space the plots leave, built onto
+    IF = PROF["infill"]; irnd = random.Random(SEED * 31 + 7); n_inf = 0   # what is there, block by block, until the block is as built as real Lagos's
+    def side_rect(anchor, r_area, aspect):
+        """A small building against one side of anchor (touching or nearly), its long side along that side, a few degrees off."""
+        cc = list(anchor.minimum_rotated_rectangle.exterior.coords)
+        k = irnd.randrange(4); p, q = cc[k], cc[k + 1]; L = math.dist(p, q)
+        if L < 2: return None
+        ux, uy = (q[0] - p[0]) / L, (q[1] - p[1]) / L; nx_, ny_ = uy, -ux   # outward for a counter-clockwise ring
+        cx0, cy0 = anchor.centroid.x, anchor.centroid.y
+        mx, my = (p[0] + q[0]) / 2, (p[1] + q[1]) / 2
+        if (mx - cx0) * nx_ + (my - cy0) * ny_ < 0: nx_, ny_ = -nx_, -ny_
+        w = min(L, math.sqrt(r_area * aspect)); d = r_area / w
+        if w < 2.0 or d > 4 * w: return None   # no slivers
+        t = irnd.uniform(-(L - w) / 2, (L - w) / 2) if L > w else 0.0
+        gap = 0.0 if irnd.random() < IF["touch"] else irnd.uniform(0.6, 2.0)
+        cx = mx + ux * t + nx_ * (gap + d / 2 + 0.16); cy = my + uy * t + ny_ * (gap + d / 2 + 0.16)
+        return rotate(rect(cx, cy, w, d, math.atan2(uy, ux)), irnd.gauss(0, PROF["wobble_deg"]), origin="centroid")
+    for bi, b in enumerate(blocks):
+        if mostly_parcel(b) or b.area < 250: continue
+        land_b = b.buffer(-CLEAR["street"] + 1.5)   # the block's land inside the roads' edges
+        if land_b.is_empty: continue
+        target = IF["block_fill"] * land_b.area
+        have = [r for r in near_all(b)]
+        built = sum(r.area for r in have)
+        tries = 0
+        while built < target and tries < 60 + int(target / 6):
+            tries += 1
+            u = irnd.random()
+            r_area = irnd.uniform(*IF["small_m2"]) if u < IF["small_share"] else irnd.uniform(*IF["room_m2"])
+            if not have: break
+            r = side_rect(irnd.choice(have), r_area, irnd.uniform(1.0, 2.4))
+            if r is None or not b.contains(r.centroid) or not buildable.contains(r) or not reachable(r): continue
+            if any(o.distance(r) < 0.15 for o in near(r)): continue
+            add(r, "shed" if r.area < 15 else "back"); have.append(r); built += r.area; n_inf += 1
+    print(f"infill: {n_inf} rooms, extensions and shacks", file=sys.stderr)
 if PROF.get("unfinished_share"):   # half-built houses: walls up, no roof, nobody living there yet (real: 1.7% tagged under construction)
     urnd = random.Random(SEED * 19 + 1)
     bld = [(r, "unfinished house" if k == "front" and urnd.random() < PROF["unfinished_share"] else k) for r, k in bld]
@@ -1234,8 +1284,53 @@ for p in parcels:
             PATHS[:] = [(k2, x2) for k2, x2 in PATHS if not (k2 == "market aisle" and any(x2 is sp for sp in spines))]
             spines = [LineString(q) for q in LOCK["aisles"][lk]]; PATHS += [("market aisle", sp) for sp in spines]
         if LOCK_WRITE and lk in PROF["lock"].get("reserve", []): NEW_LOCK.setdefault("aisles", {})[lk] = [list(sp.coords) for sp in spines]
-        for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=PROF.get("market_aisle_m", 3.5)):   # each piece is a row of four lock-ups under one roof
-            if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))
+        if LAGOS and PROF.get("market_mass"):   # a Lagos market (Google outlines of Mile 12): not rows but a mass of sheds of every size, set
+            MM = PROF["market_mass"]; mrnd = random.Random(SEED * 37 + 11); mg = {}; mcov = 0.0   # a little off each other, touching, round crooked aisles
+            def mnear(r):
+                x, y = r.centroid.x, r.centroid.y; return [o for i in range(-3, 4) for j in range(-3, 4) for o in mg.get((int(x // 15) + i, int(y // 15) + j), [])]   # sheds up to ~40 m long
+            inner = g.buffer(-1.0); x0, y0, x1, y1 = inner.bounds; tries = 0; sheds = []
+            def mfit(r):
+                return inner.contains(r) and road_free.contains(r) and not any(r.distance(sp) < MM["aisle_m"] / 2 for sp in spines) and not any(o.distance(r) < 0.15 for o in mnear(r))   # 15 cm: survives rounding to 0.1 m
+            while mcov < MM["fill"] * g.area and tries < 120000:
+                tries += 1
+                big = mrnd.random() > MM["small_share"]
+                ar = mrnd.uniform(*MM["shed_m2"]) if big else mrnd.uniform(*MM["small_m2"])
+                asp = mrnd.uniform(1.2, 3.0); w = math.sqrt(ar * asp); d = ar / w
+                if sheds and mrnd.random() < MM["grow"]:   # built onto a shed already there: the market grows as one mass
+                    anc, ang0 = mrnd.choice(sheds)
+                    cc = list(anc.minimum_rotated_rectangle.exterior.coords); k = mrnd.randrange(4); p_, q_ = cc[k], cc[k + 1]; L_ = math.dist(p_, q_)
+                    if L_ < 2: continue
+                    ux, uy = (q_[0] - p_[0]) / L_, (q_[1] - p_[1]) / L_; nx_, ny_ = uy, -ux
+                    mx, my = (p_[0] + q_[0]) / 2, (p_[1] + q_[1]) / 2
+                    if (mx - anc.centroid.x) * nx_ + (my - anc.centroid.y) * ny_ < 0: nx_, ny_ = -nx_, -ny_
+                    gap = 0.2 if mrnd.random() > MM["alley_share"] else MM["alley_m"]   # mostly wall to wall; now and then an alley
+                    t_ = mrnd.uniform(-L_ / 2, L_ / 2)
+                    ang = math.atan2(uy, ux) + math.radians(mrnd.gauss(0, 3))
+                    r = rect(mx + ux * t_ + nx_ * (gap + d / 2), my + uy * t_ + ny_ * (gap + d / 2), w, d, ang)
+                else:   # a new cluster, at its own slight angle
+                    ang = a + math.radians(mrnd.gauss(0, MM["skew_deg"]))
+                    r = rect(mrnd.uniform(x0, x1), mrnd.uniform(y0, y1), w, d, ang)
+                cc_ = list(r.exterior.coords)
+                if min(math.dist(cc_[0], cc_[1]), math.dist(cc_[1], cc_[2])) < 2.0 or not mfit(r): continue
+                bld.append((r, "stalls")); sheds.append((r, ang)); mg.setdefault((int(r.centroid.x // 15), int(r.centroid.y // 15)), []).append(r); mcov += r.area
+            # the spill: tables and sheds on the walkways of the roads round the market, a declared zone, never on the carriageway
+            for k2, x2 in net_lines:
+                if k2 not in ("main", "art", "street") or x2.distance(g) > MM["spill_m"]: continue
+                band = XS.walkway_band(k2)
+                if band[1] - band[0] < 0.7: continue
+                for seg in lines(x2.intersection(g.buffer(MM["spill_m"]))):
+                    zone = seg.buffer(band[1] + 0.5 * (CLEAR[k2] - band[1])).difference(seg.buffer(band[0]))   # both walkways and halfway to the building line
+                    ENCROACH.append({"kind": "market spill", "poi": next((x.get("poi") for x in RES if x["geom"] is g), None), "geom": zone})
+                    for sd in (1, -1):
+                        for t in np.arange(1.5, seg.length - 1.5, mrnd.uniform(2.6, 3.6)):
+                            if mrnd.random() > MM["spill_density"]: continue
+                            q = seg.interpolate(t); ux, uy = LMK.direction_at(seg, t); off = (band[0] + band[1]) / 2
+                            r = rect(q.x - uy * off * sd, q.y + ux * off * sd, mrnd.uniform(1.6, 2.6), min(band[1] - band[0] - 0.1, 1.6), math.atan2(uy, ux) + math.radians(mrnd.gauss(0, 6)))
+                            if land.contains(r) and zone.contains(r) and not any(o.distance(r) < 0.1 for o in mnear(r)) and not any(r.intersects(rr) for rr, kk in bld[-400:]):
+                                bld.append((r, "stalls")); mg.setdefault((int(r.centroid.x // 15), int(r.centroid.y // 15)), []).append(r)
+        else:
+            for r in LMK.stall_rows(g.buffer(-2), a, w=16, d=4, aisle=PROF.get("market_aisle_m", 3.5)):   # each piece is a row of four lock-ups under one roof
+                if road_free.contains(r) and all(r.distance(sp) > 1.5 for sp in spines): bld.append((r, "stalls"))
     if p["kind"] == "estate":   # 1970s walk-up flats in rows, gardens between, shops built into the gardens
         ES = next(x for x in PROF["parcels"] if x["kind"] == "estate"); bl, bs, gap, garden = ES["block_m"][1], ES["block_m"][0], ES["gap_m"], ES["garden_m"]
         ca, sa = math.cos(a), math.sin(a); R = LL
@@ -1681,6 +1776,8 @@ if PROF:
     if STYLES: out["styles"] = STYLES
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
+if LAGOS: out["fabric"] = "lagos"   # built to the agreed cross-sections: checked against building lines, not carriageways
+if ENCROACH: out["encroach"] = [{"kind": z["kind"], "poi": z["poi"], "pts": [[round(x, 1), round(y, 1)] for x, y in z["geom"].exterior.coords]} for z in ENCROACH if z["geom"].geom_type == "Polygon"]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))
 if LOCK_WRITE:
     LOCK_ALL[DID] = NEW_LOCK; json.dump(LOCK_ALL, open(LOCK_F, "w"), indent=1); print("locked:", {k: list(v) for k, v in NEW_LOCK.items()}, file=sys.stderr)
