@@ -3,7 +3,7 @@
 # and on tables, and the traffic squeezes through a running lane kept clear down the middle (cross_sections.MARKET_CLEAR).
 # Each side of each market street is a declared zone in out["encroach"] (kind "market street"); the tables are buildings of
 # kind "stalls". Never in the running lane, never on a crossing road's carriageway, never on a building or the water.
-import math, random
+import math, random, zlib
 from shapely.geometry import LineString, Polygon, box
 from shapely.affinity import rotate, translate
 from shapely.ops import unary_union, substring
@@ -31,7 +31,7 @@ def market_streets(out, districts):
     ct = STRtree([c for g, c in carriage])
     wet = unary_union([Polygon(w) for w in out['water'] + out['ocean']])
     for d in districts:
-        rnd = random.Random(hash(d) % 100000 + 7)
+        rnd = random.Random(zlib.crc32(d.encode()) + 7)   # stable across runs (Python's hash() is not)
         markets = [Polygon(p['pts']) for p in (out.get('parcels') or {}).get(d, []) if p['kind'] == 'market']
         if not markets:
             continue
