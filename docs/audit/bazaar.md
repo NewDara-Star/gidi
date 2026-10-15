@@ -22,4 +22,4 @@
 - **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
 
 ## Building kinds here
-front 1010, stalls 641, back 502, shed 97, pen 82, kiosk 76, barracks 29, scrap 8, plaza 6, unfinished 2, school 2, container 1, checkpoint 1
+front 1009, stalls 641, back 502, shed 97, pen 82, kiosk 76, barracks 29, scrap 8, plaza 6, unfinished 2, school 2, container 1, checkpoint 1
