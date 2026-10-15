@@ -91,7 +91,8 @@ def statue(mb, M, rng, kind=None):
     kind = kind or rng.pick(['founder', 'masquerade', 'drummer'])
     top = plinth(mb, M, rng, h=rng.between(2.0, 3.0))
     S = M @ Matrix.Translation((0, 0, top))
-    {'founder': founder, 'masquerade': masquerade, 'drummer': drummer, 'horse_rider': horse_rider, 'hunter': hunter}[kind](mb, S, rng)
+    {'founder': founder, 'masquerade': masquerade, 'drummer': drummer, 'horse_rider': horse_rider, 'hunter': hunter,
+     'three_elders': three_elders, 'saxophonist': saxophonist}[kind](mb, S, rng)
     return kind
 
 
@@ -366,14 +367,44 @@ def the_reach(mb, M, rng, scale=2.4):
     parts.bar(mb, 'steel', v(2.35, -0.32, 4.35), v(0.35, -0.32, 0.05), 0.07 * s, hex_rgb('#c9c4ba'), 0.3)
 
 
+def three_elders(mb, M, rng, col=BRONZE, scale=1.7):
+    """Three elders in agbada and caps standing together on one plinth, the middle one a little
+    forward with a staff: an invented group in the spirit of the city's statues of elders."""
+    for k, (x, y, rz) in enumerate(((0.35, 0, 0), (-0.25, -1.05, 0.25), (-0.25, 1.05, -0.25))):
+        S = M @ Matrix.Translation((x * scale, y * scale, 0)) @ Matrix.Rotation(rz, 4, 'Z')
+        s = scale
+        parts.cyl(mb, 'steel', S @ Matrix.Scale(s, 4), 0.42, 1.45, col, 0.5, seg=14, r2=0.26)  # the agbada
+        parts.cyl(mb, 'steel', S @ Matrix.Translation((0, 0, 1.45 * s)) @ Matrix.Scale(s, 4), 0.26, 0.08, col, 0.5, seg=14, r2=0.07)  # shoulders to the neck
+        sphere(mb, 'steel', Matrix.Translation(S @ Vector((0, 0, 1.62 * s))), 0.11 * s, 0.1 * s, 0.13 * s, col, seg=10, rings=6)
+        parts.cyl(mb, 'steel', S @ Matrix.Translation((0, 0, 1.7 * s)) @ Matrix.Scale(s, 4), 0.12, 0.15, col, 0.5, seg=10, r2=0.09)  # cap
+        if k == 0:
+            parts.bar(mb, 'steel', S @ Vector((0.3 * s, -0.35 * s, 0)), S @ Vector((0.3 * s, -0.35 * s, 1.9 * s)), 0.035 * s, col, 0.5)
+
+
+def saxophonist(mb, M, rng, col=BRONZE, scale=2.2):
+    """A musician mid-solo, an invented bronze in the spirit of the city's music: open shirt, wide
+    trousers, the saxophone raised, one knee bent into the note."""
+    s = scale
+    v = lambda x, y, z: M @ Vector((x * s, y * s, z * s))
+    limb(mb, 'steel', v(0, -0.1, 0.9), v(0.05, -0.12, 0.0), 0.09 * s, 0.07 * s, col)
+    limb(mb, 'steel', v(0, 0.1, 0.9), v(0.18, 0.14, 0.45), 0.09 * s, 0.08 * s, col)  # the bent knee
+    limb(mb, 'steel', v(0.18, 0.14, 0.45), v(0.1, 0.16, 0.0), 0.08 * s, 0.06 * s, col)
+    limb(mb, 'steel', v(0, 0, 0.95), v(-0.06, 0, 1.5), 0.17 * s, 0.15 * s, col)  # body, leaning back
+    sphere(mb, 'steel', Matrix.Translation(v(-0.06, 0, 1.68)), 0.11 * s, 0.1 * s, 0.13 * s, col, seg=10, rings=6)
+    limb(mb, 'steel', v(-0.05, 0.18, 1.45), v(0.15, 0.2, 1.3), 0.05 * s, 0.045 * s, col)
+    limb(mb, 'steel', v(-0.05, -0.18, 1.45), v(0.18, -0.1, 1.15), 0.05 * s, 0.045 * s, col)
+    parts.bar(mb, 'steel', v(0.02, 0.0, 1.62), v(0.2, 0.05, 1.0), 0.035 * s, hex_rgb('#c9a13b'), 0.3)  # the sax
+    parts.cyl(mb, 'steel', M @ Matrix.Translation(v(0.2, 0.05, 1.0) - M.translation) @ Matrix.Scale(s, 4), 0.06, 0.18, hex_rgb('#c9a13b'), 0.3, seg=10, r2=0.1)
+
+
 BUILDERS = {'statue': statue, 'sculpture': sculpture, 'clock_tower': clock_tower, 'lighthouse': lighthouse, 'led_board': led_board,
             'beach_arch': beach_arch, 'mural_wall': mural_wall, 'billboard': billboard, 'the_reach': the_reach}
 
 # what each district character puts on its junction corners (research-landmarks 4-9, 24)
 JUNCTION = {
     'old_island': ['statue:masquerade', 'statue:horse_rider', 'clock_tower', 'led_board'],
-    'civic': ['statue:horse_rider', 'clock_tower', 'sculpture', 'led_board'],
-    'elite': ['sculpture', 'statue:drummer', 'led_board'],
+    'civic': ['statue:saxophonist', 'statue:horse_rider', 'clock_tower', 'led_board'],
+    'elite': ['statue:three_elders', 'sculpture', 'led_board'],
     'dense': ['led_board', 'statue:founder', 'statue:drummer', 'led_board'],
     'sprawl': ['led_board', 'statue:founder', 'clock_tower'],
     'waterfront': ['statue:masquerade', 'statue:drummer'],

@@ -11,7 +11,7 @@ import math
 from mathutils import Matrix, Vector
 
 from . import parts
-from .core import hex_rgb
+from .core import hex_rgb, shade
 from .kinds import T
 
 GALV = hex_rgb('#8a8f92')
@@ -21,7 +21,7 @@ LAMP = hex_rgb('#fff1d0')     # warm-white LED / high-pressure sodium is oranger
 SODIUM = hex_rgb('#ffb060')
 
 
-def street_light(mb, x, y, ang, rng, arms=1, h=None, working=True, solar=False, z0=0.0):
+def street_light(mb, x, y, ang, rng, arms=1, h=None, working=True, solar=False, z0=0.0, banners=False):
     """A galvanised tapered pole with one arm (reaching over the road along ang) or two (a median
     pole, arms both ways). Returns the lamp heads' positions [(x, y, z), ...] for the 3D view's night lights."""
     h = h or rng.between(8.5, 10.5)
@@ -42,6 +42,9 @@ def street_light(mb, x, y, ang, rng, arms=1, h=None, working=True, solar=False, 
         mb.box('lamp' if working else 'plastic', hm @ Matrix.Translation((0, 0, -0.075)), col if working else hex_rgb('#9a9a92'), 0, size=(0.62, 0.24, 0.02))
         if working:
             heads.append(tuple(hm.translation))
+    if banners:  # a pair of street-light ads hanging off the pole, one each way (research-street 2.6)
+        for s_ in ((1, -1) if arms == 2 else (1,)):
+            lamp_banner(mb, M, s_, h * 0.55, rng)
     if solar:  # the panel on top and a battery box halfway up
         mb.box('glass', T(M, 0, 0, h + 0.5) @ Matrix.Rotation(0.35, 4, 'X'), hex_rgb('#1e2a44'), 0.2, size=(1.0, 0.7, 0.04))
         mb.box('steel', T(M, 0.12, 0, h * 0.45), hex_rgb('#d8d8d2'), 0.4, size=(0.18, 0.3, 0.45))
@@ -132,3 +135,53 @@ def disc_sign(mb, x, y, face, kind, rng, value=None):
         parts.text(mb, 'paint', F @ Matrix.Rotation(math.pi, 4, 'Z') @ Matrix.Translation((0, -0.085, 2.6)), str(value), 0.3, hex_rgb('#111111'), depth=0.01, max_w=0.5)
     else:
         mb.box('paint', D @ Matrix.Translation((0, 0, 0.035)) @ Matrix.Rotation(math.pi / 4, 4, 'Z'), red, 0.2, size=(0.62, 0.08, 0.01))
+
+
+BANNER_POSTERS = [
+    # (background, accent, text colour, the message): invented, no party, face or brand of the real city
+    ('#c62828', '#f2c230', '#ffffff', 'VOTE FOR PROGRESS'), ('#1f5fa8', '#ffffff', '#ffffff', 'GIDI CARNIVAL'),
+    ('#2e7d4f', '#f2c230', '#ffffff', 'ONE GOOD TERM'), ('#6a1b9a', '#ff7a1a', '#ffffff', 'CONCERT FRIDAY'),
+    ('#f2c230', '#1d1d1d', '#1d1d1d', 'BIG SALE NOW'), ('#ffffff', '#c62828', '#1d1d1d', 'NEW CHURCH CRUSADE'),
+    ('#1d1d1d', '#f2c230', '#ffffff', 'GIDI FM 101.1'), ('#00897b', '#ffffff', '#ffffff', 'CLEAN GIDI'),
+]
+
+
+def lamp_banner(mb, M, side, z, rng):
+    """A vertical banner on two short arms off a lamp post, 1 x 2.6 m: a poster of colour fields,
+    a portrait shape and a line of type. M: the pole's base frame, side: which way it hangs."""
+    bg, acc, fg, msg = rng.pick(BANNER_POSTERS)
+    bg, acc, fg = hex_rgb(bg), hex_rgb(acc), hex_rgb(fg)
+    for dz in (1.3, -1.3):  # the two arms, reaching out across the road from the pole
+        parts.bar(mb, 'steel', T(M, 0, 0, z + dz).translation, T(M, side * 1.15, 0, z + dz).translation, 0.035, GALV, 0.4)
+    F = T(M, side * 0.7, 0, z)  # the banner, facing the traffic both ways along the road (local y)
+    mb.box('cloth', F, bg, 0.3, size=(1.0, 0.03, 2.6))
+    for fy in (1, -1):
+        mb.box('cloth', F @ Matrix.Translation((0, fy * 0.02, -0.75)), acc, 0.3, size=(0.9, 0.01, 0.6))
+        parts.cyl(mb, 'cloth', F @ Matrix.Translation((0, fy * 0.022, 0.45)) @ Matrix.Rotation(-fy * math.pi / 2, 4, 'X'), 0.28, 0.01, shade(acc, 0.8), 0.3, seg=12)  # a portrait shape
+        Fv = F @ Matrix.Rotation(0 if fy < 0 else math.pi, 4, 'Z')  # the reader's frame on each face
+        parts.text(mb, 'paint', Fv @ Matrix.Translation((0, -0.03, -0.1)), msg.replace(' ', '\n', 1), 0.16, fg, depth=0.005, max_w=0.85)
+
+
+def traffic_light(mb, x, y, face, rng, arm=0.0, z0=0.0):
+    """A Lagos traffic light: a grey pole, a black three-lamp head with visors, the red-digit
+    countdown box beside it, often a small solar panel on top. arm > 0 hangs the head out over the
+    road on a mast arm that long. face: the direction the lights face (towards the traffic coming)."""
+    F = Matrix.Translation((x, y, z0)) @ Matrix.Rotation(face - math.pi / 2, 4, 'Z')  # y towards the traffic
+    h = 4.2 if not arm else 6.2
+    parts.cyl(mb, 'steel', F, 0.1, h, hex_rgb('#8a8f92'), 0.5, seg=10)
+    mb.box('concrete', F @ Matrix.Translation((0, 0, 0.15)), hex_rgb('#a8a59c'), 0.6, size=(0.5, 0.5, 0.3))
+    H = F @ Matrix.Translation((0, 0, h - 0.6))
+    if arm:
+        parts.bar(mb, 'steel', (F @ Vector((0, 0, h - 0.3))), (F @ Vector((-arm, 0, h - 0.3))), 0.09, hex_rgb('#8a8f92'), 0.5)
+        H = F @ Matrix.Translation((-arm, 0, h - 1.0))
+    mb.box('steel', H, hex_rgb('#151515'), 0.4, size=(0.36, 0.3, 1.05))
+    lit = rng.randrange(3)  # one lamp on, the others dark
+    for k, col in enumerate(('#d02020', '#e0a010', '#20b050')):  # the lamps with visors
+        z = 0.33 - k * 0.33
+        mb.box('emit' if k == lit else 'plastic', H @ Matrix.Translation((0, 0.16, z)), hex_rgb(col) if k == lit else shade(hex_rgb(col), 0.25), 0, size=(0.22, 0.02, 0.22))
+        mb.box('steel', H @ Matrix.Translation((0, 0.24, z + 0.13)), hex_rgb('#151515'), 0.4, size=(0.28, 0.16, 0.03))
+    C = H @ Matrix.Translation((0.42, 0, 0.0))  # the countdown timer
+    mb.box('steel', C, hex_rgb('#151515'), 0.4, size=(0.46, 0.25, 0.4))
+    mb.box('emit', C @ Matrix.Translation((0, 0.13, 0)), hex_rgb('#e02020'), 0, size=(0.34, 0.01, 0.24))
+    if rng.chance(0.6):  # the solar panel
+        mb.box('glass', F @ Matrix.Translation((0, 0, h + 0.25)) @ Matrix.Rotation(0.4, 4, 'X'), hex_rgb('#1e2a44'), 0.2, size=(0.8, 0.6, 0.04))

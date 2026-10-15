@@ -325,10 +325,11 @@ def street_art_sites():
     out = []
     rng = Rng('street art')
     per = {}
-    for r in ROADS:
+    roads = list(ROADS) + [dict(k='main', pts=[P(p) for p in a_['pts']], w=ART_W.get(a_['cls'], 18.0), d=None, id='art/' + a_['name']) for a_ in GD.get('arterials', []) if a_['cls'] != 'bridge']
+    for r in roads:
         if r['k'] != 'main':
             continue
-        d = r.get('d')
+        d = r.get('d') or district_at(r['pts'][len(r['pts']) // 2])
         if d not in BUILT:
             continue
         S, acc = 0.0, 0.0
@@ -655,6 +656,11 @@ def build_tile(tx, ty, overrides):
         if inside((s_['x'], s_['y'])):
             build_roadside(pm, s_)
             built['roadside:' + s_['kind']] = built.get('roadside:' + s_['kind'], 0) + 1
+    for sg in GD.get('signals', []):  # traffic lights, where the 2D map marks a signalled approach: {x, y, ang (deg, the way they face), arm (m)}
+        q = P((sg['x'], sg['y']))
+        if inside(q):
+            roadside.traffic_light(pm, q[0], q[1], -math.radians(sg.get('ang', 0)), Rng('signal', round(q[0]), round(q[1])), arm=sg.get('arm', 0.0))
+            built['signal'] = built.get('signal', 0) + 1
     for s_ in MONUMENTS:
         if inside((s_['x'], s_['y'])):
             build_monument(pm, s_)
@@ -733,7 +739,8 @@ def build_tile(tx, ty, overrides):
                             # the arm reaches back over the road
                             ang = math.atan2(dx * (1 if loff < 0 else -1), -dy * (1 if loff < 0 else -1))
                             LAMPS.extend(roadside.street_light(sm, p[0], p[1], ang, lr, h=9 if r['k'] == 'main' else 7.5,
-                                                               working=not lr.chance(DEAD_LAMPS.get(rch, 0.3)), solar=rch in ('dense', 'sprawl', 'waterfront') and lr.chance(0.3)))
+                                                               working=not lr.chance(DEAD_LAMPS.get(rch, 0.3)), solar=rch in ('dense', 'sprawl', 'waterfront') and lr.chance(0.3),
+                                                               banners=r['k'] == 'main' and rch in ('civic', 'dense', 'old_island', 'sprawl') and lr.chance(0.45)))
                         k += 38
             for i in range(len(piece) - 1):  # litter at the edges
                 a, b = piece[i], piece[i + 1]
