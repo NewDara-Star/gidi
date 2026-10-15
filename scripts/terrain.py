@@ -29,11 +29,25 @@ sea = contains_xy(water.union(ocean), XX, YY)
 to_ll = Transformer.from_crs(32631, 4326, always_xy=True).transform
 dem = rasterio.open(DEM)
 
-def study_area(did):
+def _pkl(did):
     for d in STUDY_DIRS:
         f = os.path.join(d, f"study-{did}.pkl") if d else None
         if f and os.path.exists(f): return pickle.load(open(f, "rb"))["area"]
-    sys.exit(f"no study-{did}.pkl in {STUDY_DIRS}")
+
+_FIT = None
+def study_area(did):
+    """The district's study area (UTM 31N). A district with no study yet (the Airport, the Campus) takes the real ground under its own
+    outline: the layout placed every district at its inspiration's real position / 4, so a least-squares fit of the anchors to the study
+    centroids maps the outline back onto Lagos."""
+    a = _pkl(did)
+    if a is not None: return a
+    global _FIT
+    if _FIT is None:
+        rows = [(LAYOUT["anchors"][k], _pkl(k).centroid) for k in LAYOUT["anchors"] if _pkl(k) is not None]
+        A = np.array([[x, y, 1] for (x, y), c in rows]); _FIT = np.linalg.lstsq(A, np.array([[c.x, c.y] for _, c in rows]), rcond=None)[0]
+    from shapely.affinity import affine_transform
+    (a_, d_), (b_, e_), (xo, yo) = _FIT
+    return affine_transform(Polygon(LAYOUT["districts"][did]), [a_, b_, d_, e_, xo, yo])
 
 def ground(area):
     """The study area's ground on a ~90 m grid (north up), NaN over water and nodata."""
@@ -67,6 +81,7 @@ dist = ndimage.distance_transform_edt(~sea) * CELL
 t = np.clip(dist / 200.0, 0, 1); Z = np.where(sea, 0.0, 0.6 * (1 - t) + Z * t)
 # hand edits
 EDITS = json.load(open("web/terrain-edits.json")) if os.path.exists("web/terrain-edits.json") else []
+EDITS = [e for e in EDITS if e.get("layout", "v1") == "v2"]   # edits drawn in the v1 frame wait until their district is rebuilt in v2
 for ed in EDITS:
     pts = ed["pts"]; geom = LineString(pts) if len(pts) > 1 else Point(pts[0]); sig = ed["width_m"] / 2
     d = np.vectorize(lambda x, y: geom.distance(Point(x, y)))(XX, YY) if geom.length < 1e9 else 0

@@ -26,6 +26,16 @@ OWNED_BY_D = ('mains', 'pois', 'structures', 'canals', 'gates', 'encroach', 'saf
 OWNED_BY_PLACE = ('junctions', 'quays', 'boardwalks')
 
 
+LAYOUT = 'v2'   # hand files carry the frame they were placed in ("layout", v1 when missing); only the current frame's are applied
+
+
+def _files():
+    for f in sorted(glob.glob('web/hand/*.json')):
+        H = json.load(open(f))
+        if H.get('layout', 'v1') == LAYOUT:
+            yield f, H
+
+
 def _where(item):
     if isinstance(item, dict):
         if 'x' in item:
@@ -61,8 +71,7 @@ def restore(out, d, S):
 
 def apply_snapshots(out):
     rep = {}
-    for f in sorted(glob.glob('web/hand/*.json')):
-        H = json.load(open(f))
+    for f, H in _files():
         if H.get('snapshot'):
             restore(out, H['district'], H['snapshot'])
             rep[H['district']] = sum(len(v) if isinstance(v, list) else 0 for v in H['snapshot'].values())
@@ -71,8 +80,7 @@ def apply_snapshots(out):
 
 def districts_frozen():
     out = set()
-    for f in glob.glob('web/hand/*.json'):
-        H = json.load(open(f))
+    for f, H in _files():
         if H.get('frozen') or H.get('snapshot'):
             out.add(H['district'])
     return out
@@ -96,8 +104,8 @@ def _drop_building(out, d, i):
 def apply_frozen(out, stage):
     """stage 'tables' (with the market streets, before the heights) or 'furniture' (where the furniture is placed)."""
     rep = {}
-    for f in sorted(glob.glob('web/hand/*.json')):
-        H = json.load(open(f)); d = H['district']; F = H.get('frozen') or {}
+    for f, H in _files():
+        d = H['district']; F = H.get('frozen') or {}
         if stage == 'tables':
             for pts in F.get('tables', []):
                 _add_building(out, d, 'stalls', pts)
@@ -111,8 +119,8 @@ def apply_frozen(out, stage):
 
 def apply_edits(out):
     rep = {}
-    for f in sorted(glob.glob('web/hand/*.json')):
-        H = json.load(open(f)); d = H['district']
+    for f, H in _files():
+        d = H['district']
         for e in H.get('edits', []):
             op = e['op']
             if op == 'add building':

@@ -50,6 +50,7 @@ CREEK_E = chaikin([(X(38.8), Y(2.8)), (X(39.3), Y(2.8)), (X(39.2), Y(-1.0)), (X(
 CREEK_W = chaikin([(-500, Y(1.6)), (X(6), Y(2.6)), (X(14), Y(1.4)), (X(18), Y(0.9)), (X(14), Y(0.6)), (X(6), Y(1.4)), (-500, Y(0.4))])  # Badagry creek
 water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND)
 land = box(0, 0, W, H).difference(water)
+sea = Polygon(OCEAN).buffer(0).intersection(box(0, 0, W, H))   # the open sea, kept apart from the inland water (the map build treats them differently)
 
 
 def no_holes(g):
@@ -62,6 +63,20 @@ def no_holes(g):
         for half in (box(-1, -1, c.x, H + 1), box(c.x, -1, W + 1, H + 1)):
             out += no_holes(p.intersection(half))
     return [q for q in out if q.geom_type == 'Polygon' and q.area > 1]
+
+
+def rings(polys):
+    """Rounded outlines that are each a valid simple polygon (a piece pinched at a point is split there)."""
+    from shapely.validation import make_valid
+    out = []
+    for q in polys:
+        r = Polygon([(round(x, 1), round(y, 1)) for x, y in q.exterior.coords])
+        for g in getattr(make_valid(r), 'geoms', [make_valid(r)]):
+            if g.geom_type == 'Polygon' and g.area > 1:
+                out += [[[round(x, 1), round(y, 1)] for x, y in h.exterior.coords] for h in no_holes(g)]
+            elif g.geom_type == 'MultiPolygon':
+                out += rings(g.geoms)
+    return out
 # where the built city ends (bush and farms beyond): a fresh outline round the districts
 hull = MultiPoint([Point(*v) for v in anchor.values()]).convex_hull.buffer(2.6 * km, quad_segs=8)
 city = hull.intersection(land)
@@ -118,8 +133,15 @@ ART = [
     ('Channel Bridge', 'bridge', [(10380, 5330), (10420, 5520), (10450, 5720)]),   # Carter: from Yaba across the channel to the Island's north
     ('Waterfront Drive', 'art', [(10250, 6300), (10700, 6380), (11080, 6380)]),
     ('Creek Bridge', 'bridge', [(11080, 6380), (11250, 6400), (11430, 6420)]),   # Falomo: over the creek between the Island and the Heights
-    ('Waterfront Drive East', 'art', [(11430, 6420), P_('heights', 0, 0)]),
-    ('Link Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi: across the bay from the Heights to the peninsula
+    ('Waterfront Drive East', 'art', [(11430, 6420), (11650, 6450), (11800, 6556)]),   # on to the expressway
+    # the bridges' landing roads: each bridge comes down onto a road on the land (its ramp needs 100-170 m of road)
+    ('Wharf Road', 'art', [(9261, 6080), (9500, 6080)]),                                   # the Port side: off the Ring Road to the Wharf Bridge
+    ('Harbour Front', 'art', [(10200, 6080), (10360, 6100), (10468, 6180)]),                # the Island side of the Wharf Bridge, on to Channel Street
+    ('Campus Road', 'art', [(9930, 4555), (10150, 4700), (10300, 5000), (10380, 5330)]),    # Yaba down to the Channel Bridge
+    ('Channel Street', 'art', [(10450, 5720), (10455, 6000), (10480, 6341)]),               # the Island side of the Channel Bridge
+    ('Island Road', 'art', [(10850, 5760), (10760, 5950), (10700, 6150), (10700, 6380)]),   # the Long Bridge's foot on the Island
+    ('Heights Drive', 'art', [(12275, 5975), (12050, 6050), (11850, 6250), (11800, 6556)]),  # the Heights side of the Cable Bridge
+    ('Cable Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi (tolled, cable-stayed; v1's Cable Bridge): across the bay from the Heights to the peninsula
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
     ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(43), Y(0.4)), (X(45), Y(0.6)), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
 ]
@@ -128,7 +150,8 @@ RAIL = [P_('railside', -300, -500), (X(26.5), Y(14)), (X(28.0), Y(10.5)), P_('hu
 if __name__ == '__main__':
     import json as _json
     out = {'scale': SCALE, 'size': [W, H], 'note': 'Gidi v2 frame (scripts/layout_v2.py): positions from real Lagos at 1:4; all shapes drawn fresh',
-           'water': [[[round(x, 1), round(y, 1)] for x, y in g.exterior.coords] for g in no_holes(water)],
+           'water': rings(no_holes(water.difference(sea))),   # the lagoon, harbour, channel, creeks, bay
+           'ocean': max(rings([sea]), key=lambda r: Polygon(r).area),
            'districts': {k: [[round(x, 1), round(y, 1)] for x, y in v.exterior.coords] for k, v in D.items()},
            'anchors': {k: [round(v[0]), round(v[1])] for k, v in anchor.items()},
            'arterials': [{'name': n, 'cls': c, 'pts': [[round(x, 1), round(y, 1)] for x, y in pts]} for n, c, pts in ART],

@@ -45,8 +45,7 @@ def ring_of(G, did):
 
 
 def lagoon(G):
-    w = G["water"][0]
-    return poly(w if isinstance(w[0], (list, tuple)) else w["pts"])
+    return unary_union([poly(w if isinstance(w[0], (list, tuple)) else w["pts"]) for w in G["water"]])
 
 
 def edge_mains(gen):

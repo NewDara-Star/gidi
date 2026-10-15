@@ -22,7 +22,7 @@ Chosen by the owner on 15 Oct 2026: a fictional Lagos with its real shape first,
   - a creek to its east
   - the sea to its south
 
-  It's drawn larger than its inspiration (1.2 km²): our own twist. Four bridges reach it.
+  It's drawn larger than its inspiration (1.2 km²): our own twist. Three bridges reach it from the mainland (Long, Channel, Wharf) and one from the Heights (Creek).
 - **A bay** cuts in from the lagoon between the Heights (Ikoyi and Victoria Island) and the peninsula. The land east of the bay is the Frontier's west end (Lekki).
 - **Yaba/Akoka reaches the lagoon** north of Water Town, where the university's waterfront goes.
 
@@ -42,7 +42,7 @@ Chosen by the owner on 15 Oct 2026: a fictional Lagos with its real shape first,
 | Wharf Bridge | Eko Bridge | from the Port side across the harbour to the Island |
 | Channel Bridge | Carter Bridge | from Yaba across the channel to the Island's north |
 | Waterfront Drive, Creek Bridge | Marina and Falomo | across the Island, then over the creek to the Heights |
-| Link Bridge, Admiralty Way | Lekki–Ikoyi Link Bridge | across the bay from the Heights to the peninsula, down to the expressway |
+| Cable Bridge, Admiralty Way | Lekki–Ikoyi Link Bridge (tolled, as v1's Cable Bridge) | across the bay from the Heights to the peninsula, down to the expressway |
 | Peninsula Expressway | Lekki–Epe Expressway | the Heights east through the Frontier |
 | Rail | the Lagos–Ibadan line | Agege, Oshodi, Mushin, Yaba, ending on the mainland at the channel (Iddo) |
 

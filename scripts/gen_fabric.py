@@ -18,7 +18,7 @@ rnd = random.Random(SEED)
 ST = json.load(open(f"study-{DID}.json")); CORE = json.load(open(f"study-{DID}-core.json"))
 s = open("web/gidi-data.js").read(); G = json.loads(s[len("window.GIDI="):-1])
 DIST = {d["id"]: d for d in G["districts"]}; POLY = {k: Polygon(v["poly"][0]) for k, v in DIST.items()}
-poly = POLY[DID]; water = Polygon(G["water"][0]); land = poly.difference(water)
+poly = POLY[DID]; water = unary_union([Polygon(w).buffer(0) for w in G["water"]]); land = poly.difference(water)
 PROF = profile(DID, ST)   # empty for the Maze: it keeps the original v1 behaviour
 if PROF and os.environ.get("GIDI_TUNE"): PROF.update(json.loads(os.environ["GIDI_TUNE"]))   # calibration sweeps only
 nrnd = random.Random(SEED * 7919 + 1) if PROF else rnd   # edge roads get their own dice, so re-running a district gives the same result
@@ -219,7 +219,7 @@ for en, e, nb in edge_roads:  # rail crossing the edge
 STRUCT, ramps, access, RES = [], [], [], []   # RES: reserved parcels {"kind","geom","poi"} that ordinary streets and houses keep out of
 POIS = {p["name"]: Point(p["x"], p["y"]) for p in G["pois"] if p["d"] == DID}
 if PROF:  # the designed pins (districts_info.json), placed the way bake_web.py first places them - not the baked ones, which move onto what we generate
-    _land0 = poly.difference(water).difference(Polygon(G["ocean"][0])); _core = _land0.buffer(-40) if not _land0.buffer(-40).is_empty else _land0
+    _land0 = poly.difference(water).difference(unary_union([Polygon(w).buffer(0) for w in G["ocean"]])); _core = _land0.buffer(-40) if not _land0.buffer(-40).is_empty else _land0
     _b = _land0.bounds
     for q in json.load(open("web/districts_info.json"))[DID]["pois"]:
         pt = Point(_b[0] + (_b[2] - _b[0]) * q["u"], _b[1] + (_b[3] - _b[1]) * (1 - q["v"]))
@@ -1361,7 +1361,7 @@ for p in parcels:
             if g.contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-200:] if kk == "pen"): bld.append((r, "scrap"))
     if p["kind"] == "container yard":   # the port: stacks of containers in blocks, gantry cranes on the quay, customs sheds by the gate
         CY = next(x for x in PROF["reserve"] if x["kind"] == "container yard"); ca, sa = math.cos(a), math.sin(a)
-        shl = water.exterior.intersection(g.buffer(80)); quay = nearest_points(shl, ctr)[0] if not shl.is_empty else None
+        shl = water.boundary.intersection(g.buffer(80)); quay = nearest_points(shl, ctr)[0] if not shl.is_empty else None
         sgn = 1 if quay is None or ((quay.x - ctr.x) * -sa + (quay.y - ctr.y) * ca) >= 0 else -1   # which long side faces the water
         W2 = min(LL, math.sqrt(g.area * CY["aspect"])) / 2; D2 = g.area / (2 * W2) / 2
         yard = []   # yard lanes: one along the yard and one across it, out to its own road all round (the trucks' way in)
@@ -1455,7 +1455,7 @@ for p in parcels:
         for k2 in range(6):
             r = rect(ctr.x + math.cos(a) * (k2 * 16 - 40) - math.sin(a) * 26, ctr.y + math.sin(a) * (k2 * 16 - 40) + math.cos(a) * 26, 7, 7, a)
             if fit(r): bld.append((r, "sawdust"))
-        shl = water.exterior.intersection(g.buffer(60))
+        shl = water.boundary.intersection(g.buffer(60))
         if not shl.is_empty:
             q = nearest_points(shl, ctr)[0]; L = q.distance(ctr) or 1; ux, uy = (q.x - ctr.x) / L, (q.y - ctr.y) / L
             for k2 in range(8):   # rafts: 20 x 4 m bundles of logs, side by side off the shore
