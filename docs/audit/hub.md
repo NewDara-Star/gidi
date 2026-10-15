@@ -21,4 +21,4 @@
   - sport (1): Community Football Pitch (on a front house, (2167, 4785))
 
 ## Building kinds here
-front 1054, back 884, shed 76, kiosk 66, stalls 48, stands 4, warehouse 2, school 2, terminal 1, station 1, hotel 1
+front 1056, back 884, shed 76, kiosk 66, stalls 48, stands 4, warehouse 2, school 2, terminal 1, station 1, hotel 1

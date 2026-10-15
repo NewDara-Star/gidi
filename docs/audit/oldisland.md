@@ -10,11 +10,11 @@
   - street oldisland/street/64 runs 32 m along street oldisland/street/78 at (4788, 4774)
   - street oldisland/street/75 runs 29 m along main Remi Road at (4782, 5612)
   - street oldisland/street/79 runs 28 m along street oldisland/street/83 at (4807, 5742)
-- **R2 Near misses (ends short of a road): 1**
-  - street oldisland/street/188 stops 9.1 m short of street oldisland/street/73 at (4782, 4762)
-- **R3 Overshoots (ends past a road): 2**
+- **R2 Near misses (ends short of a road): 0**
+- **R3 Overshoots (ends past a road): 3**
   - street oldisland/street/186 runs 2.0 m past street oldisland/street/114 at (5054, 5081)
   - street oldisland/street/187 runs 2.0 m past street oldisland/street/141 at (5186, 5438)
+  - street oldisland/street/188 runs 2.0 m past street oldisland/street/64 at (4782, 4762)
 - **R4 Knife-edge crossings (under 25 degrees): 1**
   - street oldisland/street/111 crosses street oldisland/street/135 at 1 degrees at (5053, 4985)
 - **R5 Roads on water with no bridge: 0**
