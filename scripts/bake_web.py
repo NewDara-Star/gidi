@@ -155,6 +155,12 @@ out["arterials"]=[{"name":n,"cls":c,"pts":[list(m(p)) for p in pts]} for n,c,pts
 out["ferries"]=[{"name":"Old Shore – Heights ferry","pts":[list(m((8.2,6.45))),list(m((7.4,2.4)))]},{"name":"Old Shore – Water Town ferry","pts":[list(m((8.2,6.45))),list(m((5.35,3.6)))]}]
 out["labels"]=[{"t":"The Lagoon","x":m((7.9,4.6))[0],"y":m((7.9,4.6))[1],"k":"water"},{"t":"The Ocean","x":m((6.8,-0.1))[0],"y":m((6.8,-0.1))[1],"k":"water"},{"t":"Farms and bush","x":m((5.6,6.9))[0],"y":m((5.6,6.9))[1],"k":"bush"},{"t":"Farms and bush","x":m((0.7,6.4))[0],"y":m((0.7,6.4))[1],"k":"bush"}]
 
+# ---- clean the roads (rule-based pass, scripts/roadclean.py) before anything reads them
+import roadclean
+_st,_skip=roadclean.clean(out,water.union(ocean))
+print("road clean:",dict(_st),"skipped",len(_skip))
+for _s in _skip: print("  skipped:",_s)
+
 # ---- civic layer: churches, mosques, schools, health, order, daily life (invented names) ----
 CIV=json.load(open("web/civic.json")); ORDER=CIV["_counts_order"]
 crnd=random.Random(2026)

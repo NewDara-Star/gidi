@@ -3,43 +3,36 @@
 `.venv/bin/python scripts/audit3d.py oldisland` writes this. The checks are listed in the script. Coordinates are map metres (x east, y south).
 
 ## Map problems
-- **R1 Roads running along each other: 9**
-  - street oldisland/street/99 runs 65 m along main Remi Road at (4834, 5361)
-  - street oldisland/street/100 runs 46 m along street oldisland/street/109 at (4929, 4988)
-  - street oldisland/street/112 runs 36 m along main Tokunbo Road at (4962, 4704)
-  - street oldisland/street/111 runs 34 m along street oldisland/street/122 at (5056, 4984)
-  - street oldisland/street/115 runs 32 m along main Remi Road at (4893, 5145)
-  - street oldisland/street/75 runs 31 m along main Remi Road at (4786, 5591)
-  - street oldisland/street/64 runs 27 m along street oldisland/street/73 at (4796, 4799)
-  - street oldisland/street/79 runs 24 m along street oldisland/street/83 at (4802, 5742)
-  - street oldisland/street/175 runs 21 m along street oldisland/street/185 at (4813, 5220)
-- **R2 Near misses (ends short of a road): 3**
-  - street oldisland/street/189 stops 7.8 m short of street oldisland/street/112 at (4861, 4693)
-  - street oldisland/street/113 stops 3.9 m short of main main/86 at (4871, 4669)
-  - lane oldisland/lane/5 stops 1.0 m short of street oldisland/street/185 at (4628, 5219)
-- **R3 Overshoots (ends past a road): 3**
-  - street oldisland/street/187 runs 2.0 m past street oldisland/street/140 at (5186, 5438)
-  - street oldisland/street/188 runs 2.0 m past street oldisland/street/64 at (4782, 4762)
+- **R1 Roads running along each other: 6**
+  - street oldisland/street/100 runs 50 m along street oldisland/street/109 at (4884, 4984)
+  - street oldisland/street/99 runs 39 m along main Remi Road at (4828, 5392)
+  - street oldisland/street/111 runs 39 m along street oldisland/street/135 at (5022, 4990)
+  - street oldisland/street/64 runs 32 m along street oldisland/street/78 at (4788, 4774)
+  - street oldisland/street/75 runs 29 m along main Remi Road at (4782, 5612)
+  - street oldisland/street/79 runs 28 m along street oldisland/street/83 at (4807, 5742)
+- **R2 Near misses (ends short of a road): 1**
+  - street oldisland/street/188 stops 9.1 m short of street oldisland/street/73 at (4782, 4762)
+- **R3 Overshoots (ends past a road): 2**
   - street oldisland/street/186 runs 2.0 m past street oldisland/street/114 at (5054, 5081)
-- **R4 Knife-edge crossings (under 25 degrees): 2**
-  - street oldisland/street/99 crosses main Remi Road at 14 degrees at (4834, 5361)
-  - street oldisland/street/75 crosses main Remi Road at 18 degrees at (4786, 5590)
-- **R5 Roads on water with no bridge: 12**
-  - main Tokunbo Road has 647 m on water with no bridge, from (5004, 4710)
-  - main Uche Close has 522 m on water with no bridge, from (5598, 4810)
-  - main Tijani Road has 480 m on water with no bridge, from (4388, 5008)
-  - main Nwachukwu Road has 212 m on water with no bridge, from (4530, 4737)
-  - street oldisland/street/112 has 40 m on water with no bridge, from (4998, 4708)
-  - street oldisland/street/1 has 11 m on water with no bridge, from (4389, 4996)
-  - main Remi Road has 10 m on water with no bridge, from (5013, 4725)
-  - street oldisland/street/34 has 9 m on water with no bridge, from (4521, 4751)
-  - street oldisland/street/180 has 8 m on water with no bridge, from (5170, 4788)
-  - street oldisland/street/2 has 7 m on water with no bridge, from (4400, 5073)
+  - street oldisland/street/187 runs 2.0 m past street oldisland/street/141 at (5186, 5438)
+- **R4 Knife-edge crossings (under 25 degrees): 1**
+  - street oldisland/street/111 crosses street oldisland/street/135 at 1 degrees at (5053, 4985)
+- **R5 Roads on water with no bridge: 13**
+  - main Tokunbo Road has 647 m on water with no bridge, from (5172, 4781)
+  - main Uche Close has 522 m on water with no bridge, from (5689, 4777)
+  - main Tijani Road has 480 m on water with no bridge, from (4394, 5074)
+  - main Nwachukwu Road has 212 m on water with no bridge, from (4518, 4743)
+  - street oldisland/street/112 has 11 m on water with no bridge, from (4962, 4704)
+  - street oldisland/street/1 has 11 m on water with no bridge, from (4400, 4996)
+  - main Remi Road has 10 m on water with no bridge, from (5012, 4725)
+  - street oldisland/street/34 has 9 m on water with no bridge, from (4522, 4751)
+  - street oldisland/street/180 has 8 m on water with no bridge, from (5169, 4788)
+  - street oldisland/street/2 has 6 m on water with no bridge, from (4394, 5074)
   - path oldisland/path/2 has 6 m on water with no bridge, from (5242, 4817)
-  - street oldisland/street/5 has 5 m on water with no bridge, from (4461, 4776)
+  - street oldisland/street/5 has 5 m on water with no bridge, from (4462, 4775)
+  - and 1 more
 - **R6 Decks with no road: 0**
-- **D Roads listed twice: 1**
-  - main Yemi Road is listed twice (main/81, main/91)
+- **D Roads listed twice: 0**
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
