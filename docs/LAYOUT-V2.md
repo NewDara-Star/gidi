@@ -15,7 +15,18 @@ Chosen by the owner on 15 Oct 2026: a fictional Lagos with its real shape first,
 - **New districts:**
   - **The Airport,** where Murtala Muhammed sits between Ikeja (the Capital), Agege and Alimosho (Railside) and Oshodi (the Hub).
   - **Yaba/Akoka,** between Mushin (the Maze) and the lagoon, beside Bariga and Makoko (Water Town), with the university on the waterfront.
-- **Lagos Island is an island:** the harbour to its west, the lagoon to its north, a creek to the east.
+- **Old Island (Lagos Island) is a true island,** ringed by water on every side:
+  - the harbour to its west
+  - a channel to its north, joining the harbour to the lagoon
+  - the lagoon to its north-east
+  - a creek to its east
+  - the sea to its south
+
+  It's drawn larger than its inspiration (1.2 km²): our own twist. Four bridges reach it.
+- **A bay** cuts in from the lagoon between the Heights (Ikoyi and Victoria Island) and the peninsula. The land east of the bay is the Frontier's west end (Lekki).
+- **Yaba/Akoka reaches the lagoon** north of Water Town, where the university's waterfront goes.
+
+![Old Island and its bridges](img/layout-v2-island.png)
 - **Growing later:** 1:2.5 (29 × 12 km) is the same layout rescaled, if we ever want more room.
 
 ## The arterials and the rail (drawn by hand, each playing its real counterpart's part)
@@ -27,11 +38,13 @@ Chosen by the owner on 15 Oct 2026: a fictional Lagos with its real shape first,
 | Agege Road | Agege Motor Road (west) | the Capital to Railside |
 | Ayinde Avenue | Agege Motor Road / Obafemi Awolowo Way | the Hub, past the Airport, the Capital, the Estate |
 | Northern Road | Ikorodu Road | Yaba, Food Gate, round the lagoon to Old Shore |
-| The Long Bridge | Third Mainland Bridge | from Yaba, curving out over the lagoon, to the Island |
-| Wharf Bridge | Eko and Carter Bridges | across the harbour to the Island |
-| Waterfront Drive, Creek Bridge | Ozumba Mbadiwe and Falomo | the Island across the creek to the Heights |
+| Long Bridge Road, The Long Bridge | Third Mainland Bridge | off the Northern Road at Akoka, 2.6 km down the lagoon past Water Town, onto the Island's north end |
+| Wharf Bridge | Eko Bridge | from the Port side across the harbour to the Island |
+| Channel Bridge | Carter Bridge | from Yaba across the channel to the Island's north |
+| Waterfront Drive, Creek Bridge | Marina and Falomo | across the Island, then over the creek to the Heights |
+| Link Bridge, Admiralty Way | Lekki–Ikoyi Link Bridge | across the bay from the Heights to the peninsula, down to the expressway |
 | Peninsula Expressway | Lekki–Epe Expressway | the Heights east through the Frontier |
-| Rail | the Lagos–Ibadan line | Agege, Oshodi, Mushin, Yaba, to the harbour |
+| Rail | the Lagos–Ibadan line | Agege, Oshodi, Mushin, Yaba, ending on the mainland at the channel (Iddo) |
 
 ## Files
 - `scripts/layout_v2.py` writes `web/layout-v2.json`: size, water, districts, anchors, arterials and rail. It also writes the picture.
