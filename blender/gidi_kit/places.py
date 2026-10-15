@@ -499,6 +499,27 @@ def toll_booth(a, rng, collection=None):
     return _done(mb, a, collection)
 
 
+def toll_canopy(a, rng, collection=None):
+    """The toll plaza's canopy: a wide flat roof on steel columns over the lanes, the booths under
+    it as islands with yellow-and-black ends, lights under the eaves. research-landmarks 35."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    mb.box('steel', T(m, 0, 0, 7.2), hex_rgb('#1f5fa8'), 0.25, size=(L + 2, W + 2, 0.8))
+    mb.box('steel', T(m, 0, 0, 6.75), hex_rgb('#f2f2f2'), 0.2, size=(L, W, 0.1))
+    n = max(2, int(W / 4.5))
+    for k in range(n):  # rows of columns, the booth islands between the lanes
+        y = -W / 2 + (k + 0.5) * W / n
+        for x in (-L / 3, L / 3):
+            parts.cyl(mb, 'steel', T(m, x, y, 0), 0.25, 6.7, hex_rgb('#d8d8d8'), 0.2, seg=10)
+        mb.box('concrete', T(m, 0, y, 0.15), hex_rgb('#e8c21a'), 0.3, size=(L * 0.8, 1.2, 0.3))
+        mb.box('glass', T(m, 0, y, 1.5), hex_rgb('#24343e'), 0, size=(2.4, 1.0, 2.2))
+        for e in (-1, 1):
+            mb.box('paint', T(m, e * L * 0.4, y, 0.5), hex_rgb('#1d1d1d'), 0.3, size=(0.3, 1.2, 0.7))
+        for x in range(int(-L / 2) + 2, int(L / 2), 4):
+            mb.box('emit', T(m, x, y, 6.65), hex_rgb('#fff1d0'), 0, size=(1.2, 0.3, 0.05))
+    return _done(mb, a, collection)
+
+
 def cctv_tower(a, rng, collection=None):
     poly, c, ang, L, W, m = footprint(a)
     mb = MeshBuilder()

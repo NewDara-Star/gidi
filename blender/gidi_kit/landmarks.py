@@ -323,7 +323,6 @@ BY_NAME = {
     'Secretariat': civic_tower,
     'Cloth Market': market_block,
     'Alade Electronics Market': market_block,
-    'Refinery': refinery,                  # The Frontier, when it is built
 }
 
 # a named place lying in a parcel dresses that parcel: name -> builder(mb, pts, rng, ch)

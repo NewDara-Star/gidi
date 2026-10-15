@@ -466,3 +466,82 @@ def mound(a, rng, collection=None):
         x, y = c[0] + math.cos(q) * d * L / 2, c[1] + math.sin(q) * d * W / 2
         litter_piece(mb, x, y, (1 - d ** 1.5) * 4.0, rng)
     return _done(mb, a, collection)
+
+
+# ---------------------------------------------------------------- the Frontier: half-built land, the refinery
+def unfinished_house(a, rng, collection=None):
+    """A half-built house on the peninsula: bare grey block walls stopped at different heights,
+    concrete columns with rods waiting for the next floor, sometimes the first-floor slab and its
+    columns, a sand heap and stacked blocks, and the owner's warning painted on the wall.
+    research-housing (unfinished buildings), LAGOS-ISMS #8."""
+    poly = ccw([tuple(p) for p in a['poly']])
+    mb = MeshBuilder()
+    block = hex_rgb('#9c978c')
+    stage = rng.pick({'walls': 4, 'slab': 3, 'footing': 1})
+    if stage == 'footing':
+        for i in range(len(poly)):  # just the footing and the first courses
+            A, B = poly[i], poly[(i + 1) % len(poly)]
+            mb.box('block', Matrix.Translation(((A[0] + B[0]) / 2, (A[1] + B[1]) / 2, 0.3)) @ Matrix.Rotation(math.atan2(B[1] - A[1], B[0] - A[0]), 4, 'Z'), block, 0.7, size=(math.dist(A, B), 0.25, 0.6))
+    else:
+        for i in range(len(poly)):  # walls stopped at different heights, gaps for doors and windows
+            A, B = poly[i], poly[(i + 1) % len(poly)]
+            L = math.dist(A, B)
+            h = rng.between(1.2, 3.0)
+            n = max(1, int(L / 1.8))
+            for k in range(n):
+                if rng.chance(0.2):
+                    continue  # an opening
+                t = (k + 0.5) / n
+                mb.box('block', Matrix.Translation((A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t, h / 2)) @ Matrix.Rotation(math.atan2(B[1] - A[1], B[0] - A[0]), 4, 'Z'), block, 0.75, size=(L / n + 0.02, 0.22, h))
+        parts.unfinished_storey(mb, poly, 0.0, {}, rng)
+        if stage == 'slab':
+            pts = [(p[0], p[1], 3.2) for p in poly]
+            mb.face(pts, 'concrete', hex_rgb('#8f8a80'), 0.7)
+            mb.face([(p[0], p[1], 3.0) for p in poly][::-1], 'concrete', hex_rgb('#7a756c'), 0.7)
+            parts.unfinished_storey(mb, poly, 3.2, {}, rng)
+    c = centroid(poly)
+    if rng.chance(0.7):  # a sand heap and a stack of blocks by the wall
+        parts.cyl(mb, 'mud', Matrix.Translation((c[0] + 2.5, c[1] + 2.5, 0)), 1.6, 1.1, hex_rgb('#c9b07a'), 0.3, seg=10, r2=0.1)
+        mb.box('block', Matrix.Translation((c[0] - 2.0, c[1] + 2.0, 0.5)), block, 0.6, size=(1.6, 1.2, 1.0))
+    if rng.chance(0.5):  # the warning, painted on the first wall
+        A, B = poly[0], poly[1]
+        F = Matrix.Translation(((A[0] + B[0]) / 2, (A[1] + B[1]) / 2, 0.9)) @ Matrix.Rotation(math.atan2(B[1] - A[1], B[0] - A[0]) + math.pi, 4, 'Z') @ Matrix.Translation((0, -0.12, 0))
+        parts.text(mb, 'paint', F, rng.pick(['THIS LAND IS NOT FOR SALE', 'NOT FOR SALE', 'BEWARE OF 419']), 0.35, hex_rgb('#b0302a'), depth=0.01, max_w=math.dist(A, B) * 0.8)
+    return _done(mb, a, collection)
+
+
+def refinery_column(a, rng, collection=None):
+    """A refinery column: a tall steel cylinder sized to its footprint, platforms with railings
+    every 8 m, a caged ladder and pipes running down its side."""
+    poly = ccw([tuple(p) for p in a['poly']])
+    mb = MeshBuilder()
+    c = centroid(poly)
+    r = max(1.0, min(math.dist(poly[0], poly[1]), math.dist(poly[1], poly[2])) * 0.45)
+    h = rng.between(30, 48)
+    steel = hex_rgb(rng.pick(['#c9ced2', '#b8bcbf', '#e8e6df']))
+    parts.cyl(mb, 'steel', Matrix.Translation((c[0], c[1], 0)), r, h, steel, 0.35, seg=16)
+    parts.cyl(mb, 'steel', Matrix.Translation((c[0], c[1], h)), r, r * 0.5, steel, 0.35, seg=16, r2=0.3)
+    for z in range(8, int(h), 8):  # platforms and their railings
+        parts.cyl(mb, 'steel', Matrix.Translation((c[0], c[1], z)), r + 0.9, 0.12, hex_rgb('#5a5a5a'), 0.5, seg=16)
+        parts.cyl(mb, 'steel', Matrix.Translation((c[0], c[1], z + 1.0)), r + 0.9, 0.05, hex_rgb('#e0b020'), 0.4, seg=16, caps=(False, False))
+    parts.bar(mb, 'steel', (c[0] + r + 0.3, c[1], 0), (c[0] + r + 0.3, c[1], h), 0.12, hex_rgb('#5a5a5a'), 0.5)  # the ladder
+    for k in range(2):  # pipes down the side
+        q = (k + 1) * 2.0
+        parts.bar(mb, 'steel', (c[0] + math.cos(q) * (r + 0.4), c[1] + math.sin(q) * (r + 0.4), 0), (c[0] + math.cos(q) * (r + 0.4), c[1] + math.sin(q) * (r + 0.4), h * 0.85), 0.25, hex_rgb('#8a8f92'), 0.5)
+    return _done(mb, a, collection)
+
+
+def flare_stack(a, rng, collection=None):
+    """The refinery's flare: a red-and-white banded stack of 64 m with guy cables, and the flame on top."""
+    poly = ccw([tuple(p) for p in a['poly']])
+    mb = MeshBuilder()
+    c = centroid(poly)
+    h = 64.0
+    for k in range(8):  # red and white bands
+        parts.cyl(mb, 'steel', Matrix.Translation((c[0], c[1], k * h / 8)), 1.2 - k * 0.06, h / 8, hex_rgb('#c62828' if k % 2 else '#f4f4f0'), 0.4, seg=12, r2=1.2 - (k + 1) * 0.06)
+    for k in range(3):  # guy cables
+        q = k / 3 * math.tau
+        parts.bar(mb, 'steel', (c[0], c[1], h * 0.7), (c[0] + math.cos(q) * 30, c[1] + math.sin(q) * 30, 0), 0.04, hex_rgb('#3a3a3a'), 0.4)
+    parts.cyl(mb, 'emit', Matrix.Translation((c[0], c[1], h)), 1.4, 7.0, hex_rgb('#ff8a1a'), 0, seg=8, r2=0.15)  # the flame
+    parts.cyl(mb, 'emit', Matrix.Translation((c[0], c[1], h + 1.0)), 0.8, 4.5, hex_rgb('#ffe08a'), 0, seg=8, r2=0.1)
+    return _done(mb, a, collection)

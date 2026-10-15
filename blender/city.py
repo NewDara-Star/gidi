@@ -1027,8 +1027,9 @@ def export(col, origin, path):
             k = o.name.split('_')[1] if o.name.count('_') >= 2 else o.name
             tally[k] = tally.get(k, 0) + len(o.data.polygons)
         print('FACES', sorted(tally.items(), key=lambda kv: -kv[1])[:12])
-    for o in bpy.context.view_layer.objects:
-        o.select_set(False)
+    for o in list(bpy.context.view_layer.objects):
+        if o is not None:  # the temporary lettering objects can leave dead entries behind
+            o.select_set(False)
     for o in obs:
         o.select_set(True)
     bpy.context.view_layer.objects.active = obs[0]

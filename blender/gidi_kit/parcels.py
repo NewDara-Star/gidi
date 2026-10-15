@@ -479,7 +479,28 @@ def under_bridge(mb, pts, rng, ch):
     _flat(mb, pts, 0.04, 'asphalt', hex_rgb('#4f4d48'), 0.85)
 
 
+def refinery(mb, pts, rng, ch):
+    """The refinery ground: a concrete pad, bund walls round it, pipe racks crossing it on
+    trestles, a row of tanks. The columns and the flare are buildings of their own."""
+    p = ccw(pts)
+    _flat(mb, p, 0.04, 'concrete', hex_rgb('#9c978c'), 0.6)
+    m, L, W = _bbox_frame(p)
+    for i in range(len(p)):  # the bund wall
+        a, b = p[i], p[(i + 1) % len(p)]
+        mb.box('concrete', Matrix.Translation(((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 0.6)) @ Matrix.Rotation(math.atan2(b[1] - a[1], b[0] - a[0]), 4, 'Z'), hex_rgb('#b8b2a6'), 0.6, size=(math.dist(a, b), 0.4, 1.2))
+    for y in (-W * 0.15, W * 0.15):  # pipe racks
+        for k in range(int(L * 0.8 / 12) + 1):
+            x = -L * 0.4 + k * 12
+            for s_ in (-1, 1):
+                parts.bar(mb, 'steel', T(m, x, y + s_ * 1.5, 0).translation, T(m, x, y + s_ * 1.5, 6).translation, 0.25, hex_rgb('#5a5a5a'), 0.6)
+        for d in (-1.0, 0.0, 1.0):
+            parts.bar(mb, 'steel', T(m, -L * 0.4, y + d, 6.3).translation, T(m, L * 0.4, y + d, 6.3).translation, 0.35, hex_rgb(rng.pick(['#8a8f92', '#c9a13b', '#5a7a9a'])), 0.5)
+    for k in range(max(1, int(L / 40))):  # tanks along one side
+        parts.cyl(mb, 'steel', T(m, -L * 0.35 + k * 40, W * 0.35, 0), min(14, W * 0.12), 12, hex_rgb('#e8e6df'), 0.4, seg=24)
+
+
 BUILDERS = {
+    'refinery': refinery,
     'pitch': pitch, 'court': court, 'pool': pool, 'golf course': golf_course, 'stadium': stadium, 'airfield': airfield,
     'tank farm': tank_farm, 'landfill': landfill, 'waterworks': waterworks, 'prison': prison, 'barracks': barracks_ground,
     'market': market_ground, 'plazas': lambda mb, p, r, c: paved(mb, p, r, c, '#bdb5a8'), 'motor park': motor_park,
