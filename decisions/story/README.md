@@ -17,3 +17,5 @@ Tunde, an okada rider, in debt to the boss who runs the motor park. The city ope
 **One thing to settle:** `docs/gidi-districts-v0.3.md` puts Tunde's room in Jungle City; the locked opening puts it in the Maze.
 
 **Next (owner):** write the characters, using the character sheet in `acts-2-3-draft.md`.
+
+**Three story drafts to pick from:** `novels/` (Claude, 15 Oct): The Ledger, Union, The Phone.
