@@ -577,7 +577,53 @@ def frontier(ST, LM):
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
     }
 
+def oldshore(ST, LM):
+    """Old Shore: old Ikorodu (study-oldshore*, one box over the old town centre and the Ebute lagoon shore, inside Ikorodu LGA).
+    Epe is not in the local OSM extract, so it is not studied. OSM traces Ikorodu's buildings well. Heights from the box (Open
+    Buildings 2.5D). The district model: a fish market at a jetty with smoking racks and barges, a ferry jetty, a founder statue on
+    the garage roundabout, a low-rise old town with its own king, a barge yard."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el   # 84 x 1.9 = 160 m
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Close", "Crescent", "Avenue")}
+    return {
+        "lgas": ["Ìkòròdú"],
+        # storeys 1, 2, 3, 4, 5-6, 7-13, 14+ by built area, on the box (Open Buildings 2.5D); the whole LGA is 64/32/2/1/1/0/0
+        "h_bands": [0.4011, 0.5445, 0.0467, 0.0055, 0.0021, 0.0001, 0.0],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
+        "x_junction": 0.1, "cross_scale": 2.2, "dead_end": 0.7,
+        "sector_split_ha": 25,
+        "spurs": {"spur_every_m": 150, "spur_m": [30, 70]},   # real dead ends 0.21-0.42 per junction
+        "size_lo_u": 0.45, "plot_u": [0.4, 0.95], "back_row": 0.3, "big_front": 0.05, "vacant": 0.27,   # real typical house 160-167 m2, 1,090-1,263 per km2
+        "internal_mains": 2, "t_into_done": True, "continue_mains": True,
+        # the garage roundabout where the two mains meet, with the invented founder's statue on its island
+        "roundabout": {"poi": "Hunter Roundabout", "r_m": 22, "strip_m": 0, "name": "Hunter Roundabout"},
+        # the ferry jetty where the ferries from the Heights and Water Town come in, and the fish market's own jetty for the canoes
+        "jetty": [{"poi": "Ferry Jetty", "name": "Ferry Jetty", "m": 40, "ferry": True},
+                  {"poi": "Shore Fish Market", "name": "Fish Market Jetty", "m": 30, "pin": False}],
+        "fish_market": {"poi": "Shore Fish Market", "smoke_share": 0.3},   # a third of its stalls are smoking racks
+        "name_endings": ends,
+        "parcels": [
+            {"kind": "market", "poi": "Shore Fish Market", "ha": 1.2, "near": "shore", "near_main": False},
+            # the barge yard: half-built barges on the slipway and a workshop shed
+            {"kind": "barge yard", "poi": "Barge Yard", "ha": 1.5, "near": "shore", "near_main": False, "gate": "nearest",
+             "buildings": [["barge", [32, 8], [-0.35, -0.35]], ["barge", [32, 8], [-0.35, 0.3]], ["barge", [26, 7], [0.35, 0.3]], ["shed", [16, 10], [0.55, -0.45]]]},
+            # the old town king's palace (sacred list: never a crime site)
+            {"kind": "palace", "poi": "Shore Palace", "ha": 0.5, "near_main": False, "gate": "nearest", "min_w": 55,
+             "buildings": [["palace", [30, 16], [0.0, 0.25]], ["back", [14, 6], [0.55, -0.55]], ["back", [14, 6], [-0.55, -0.55]]],
+             "grounds": [["forecourt", [22, 14], [0.0, -0.45]]]},
+            {"kind": "motor park", "ha": round(LM["bus_stations"]["area_m2"]["p50"] / 1e4, 2) if LM.get("bus_stations", {}).get("n") else 0.4, "near": "roundabout", "near_main": True},   # the garage
+            {"kind": "school", "ha": 1.0, "near_main": False, "gate": "nearest", "min_w": 60},
+            {"kind": "pitch", "ha": 0.15, "near_main": False},
+        ],
+        "walled": ["palace", "barge yard"],
+        # the Old Quarter: low old houses with corrugated roofs round the pin (the district model's "low-rise old town")
+        "zone": {"poi": "Old Quarter", "r_m": 140, "kind": "old house", "min_m2": 40, "storeys": [1, 1], "kiosk_every_m": 1000},
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "clear_access": True,
+    }
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier}.get(did, lambda ST, LM: {})(ST, LM)
+    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier, "oldshore": oldshore}.get(did, lambda ST, LM: {})(ST, LM)

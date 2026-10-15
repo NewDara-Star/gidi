@@ -105,6 +105,11 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
   - rides the Peninsula Expressway through the Toll Plaza, takes refinery workers to the Refinery's gate, and checks the Eroding Beach on ocean-surge nights
   - rides west into the Heights (banned: where must he drop people?) and over the Cable Bridge
   - checks that the empty tracts still have ways through them, and that every home has its everyday places within reach
+- **Iya Sade, fish trader, Old Shore (on foot, by okada and by ferry):**
+  - buys the dawn catch at the Shore Fish Market (smoking racks, canoes at the market's jetty) and lives in a low old house in the Old Quarter
+  - races fish to Food Gate's Mile Market by okada along Northern Road before it spoils, and meets the ferry at the Ferry Jetty
+  - passes the Hunter Roundabout's statue and the garage, the Shore Palace (safe ground) and the Barge Yard
+  - checks that her everyday places are within reach, and that Old Shore's roads lead into the city
 - **The chase (the opening area is locked, see `web/locked.json`):**
   - runs "The steal" through Ladi Lane Parts Market, and out of the market by different routes
   - counts the escape routes out of the market (it needs 3–4 or more): how many different first turns, and where the dead ends are
@@ -154,6 +159,10 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Eroding Beach → Toll Plaza | walk | From the sea to the road |
 | Toll Plaza → Pearl Towers | walk | The Frontier into the Heights |
 | Refinery → Gidi Interchange | ride | The convoy road into the city (round the bans) |
+| Old Quarter → Shore Fish Market | walk | The fish trader's way to the dawn catch |
+| Ferry Jetty → Hunter Roundabout | walk | Off the ferry to the garage |
+| Shore Fish Market → Mile Market | ride | The fish run along Northern Road (freshness timer) |
+| Hunter Roundabout → Shore Palace | walk | Across the old town |
 
 ## Targets (what "feels right" means)
 - **Walks:** detour × under 1.6 for most walks under 1 km (real dense Lagos is roughly 1.3–1.6). Anything above 2 needs a reason, like a river or a highway.

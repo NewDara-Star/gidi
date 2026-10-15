@@ -19,11 +19,12 @@ COL = {"front": "#b9a48a", "back": "#a8977f", "shed": "#8f8577", "kiosk": "#6e8f
        "gatehouse": "#d93025", "generator": "#55595e", "water tank": "#2b6cb0", "mansion": "#a0784a", "clubhouse": "#7d5ba6", "palace": "#c9a227", "bank tower": "#5f8fb8", "brazilian house": "#c4704a",
        "apartment tower": "#4f7fa8", "nightclub": "#b0457a", "toll booth": "#d93025",
        "office block": "#8a9bb0", "beach shack": "#c9a46a", "beach bar": "#e07b39", "horse shelter": "#8a6a4f",
-       "column": "#6b7a8a", "flare stack": "#d93025", "unfinished house": "#9a9a9a", "toll canopy": "#c8645a"}
+       "column": "#6b7a8a", "flare stack": "#d93025", "unfinished house": "#9a9a9a", "toll canopy": "#c8645a",
+       "smoke rack": "#5a3d2b", "barge": "#4f6f8a", "old house": "#a8826a"}
 PC = {"market": "#f6d7b0", "industrial": "#dcdcdc", "school": "#f3e7a8", "pitch": "#bfe3b4", "motor park": "#d6dbe8",
       "bus terminal": "#d6dbe8", "station": "#e6d8ef", "stadium": "#e3e8d6", "under bridge": "#f6d7b0", "estate": "#e4ecd9",
       "lorry park": "#d6dbe8", "park": "#cfe8c4", "sawmill": "#e8dcc8", "government": "#e6e1d3", "garden": "#cfe8c4", "barracks": "#dfe3d0", "airfield": "#d9e8c8", "plazas": "#dcdcdc", "livestock": "#ead9c0", "container yard": "#dcdcdc", "tank farm": "#e4e4e4", "villas": "#dfe8d0", "prison": "#d6d6d6", "truck park": "#d6dbe8", "waterworks": "#dcdcdc", "landfill": "#e6d6bd", "pipeline": "#e3ead8",
-      "compound": "#e4ecd9", "club": "#e4ecd9", "pool": "#8fd0ea", "court": "#c9884f", "palace": "#efe3b8", "forecourt": "#e2d6a8", "square": "#d9ead0", "fountain": "#8fd0ea", "enclave": "#efe3c2", "golf course": "#9fd18b", "green": "#c3ebb0", "bunker": "#efe0b0", "pond": "#8fd0ea", "refinery": "#d9d4c7"}
+      "compound": "#e4ecd9", "club": "#e4ecd9", "pool": "#8fd0ea", "court": "#c9884f", "palace": "#efe3b8", "forecourt": "#e2d6a8", "square": "#d9ead0", "fountain": "#8fd0ea", "enclave": "#efe3c2", "golf course": "#9fd18b", "green": "#c3ebb0", "bunker": "#efe0b0", "pond": "#8fd0ea", "refinery": "#d9d4c7", "barge yard": "#d6cfc2"}
 for p in F["parcels"]: ax.fill(*zip(*p["pts"]), fc=PC[p["kind"]], ec="none")
 for b in F["buildings"]: ax.fill(*zip(*b[1:]), fc=COL[b[0]], ec="none", lw=0)
 for l in F["streets"]: ax.plot(*zip(*l), c="#ffffff", lw=2.2, solid_capstyle="round"); ax.plot(*zip(*l), c="#9aa0a6", lw=.4)

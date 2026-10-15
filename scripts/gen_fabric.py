@@ -854,16 +854,20 @@ for RF in PROF.get("road_footbridges", []):   # a footbridge over an arterial in
             o = walk_to.geometries[int(np.atleast_1d(walk_to.query_nearest(e))[0])]
             q = nearest_points(o, e)[0]
             if q.distance(e) > 0.5: lk = LineString([e, q]); PATHS.append(("link", lk)); clear_geoms.append(lk.buffer(1.2))
-JT = PROF.get("jetty")
-if JT and JT["poi"] in POIS:   # a canoe jetty: from the shore road straight out over the water, toward the creek villages
+JTS = PROF.get("jetty") or []
+for JT in ([JTS] if isinstance(JTS, dict) else JTS):   # a jetty: from the shore road straight out over the water (Water Town's canoe jetty; Old Shore's two)
+    if JT["poi"] not in POIS: continue
     pin = POIS[JT["poi"]]; shore = [e for n, e, nb in edge_roads if nb is None and e.distance(water) < 20]
+    if JT.get("ferry"):   # the ferry jetty: where the ferry lines from the other shores come in
+        ends_ = [Point(f["pts"][k]) for f in G.get("ferries", []) for k in (0, -1) if Point(f["pts"][k]).distance(poly) < 200]
+        if ends_: pin = min(ends_, key=lambda q: q.distance(pin))
     if shore:
         sh = min(shore, key=lambda e: e.distance(pin)); t = sh.project(pin); q = sh.interpolate(t)
         vx, vy = LMK.direction_at(sh, t); ux, uy = -vy, vx   # straight out from the shore road, on the water side
         if not water.contains(Point(q.x + ux * 8, q.y + uy * 8)): ux, uy = -ux, -uy
         end = Point(q.x + ux * (JT["m"] + 3), q.y + uy * (JT["m"] + 3))
         STRUCT.append({"kind": "jetty", "name": JT["name"], "geom": LineString([q, end]), "layer": 0, "width": 2.5})
-        poi_pos[JT["poi"]] = end
+        if JT.get("pin", True): poi_pos[JT["poi"]] = end   # (a market's own jetty leaves the market's pin on the market)
 SKY_CLEAR = [x["geom"].buffer(x["width"] / 2 + 1) for x in STRUCT if x["kind"] == "skywalk"]
 if PROF.get("station_skywalk") and RES_U is not None: SKY_CLEAR = [c.difference(RES_U) for c in SKY_CLEAR]   # the decks land inside the terminal and station plots
 clear_geoms += SKY_CLEAR
@@ -1355,7 +1359,7 @@ for p in parcels:
                 cx, cy = q.x + ux * (22 + (k2 // 4) * 24) - uy * ((k2 % 4) * 6 - 9), q.y + uy * (22 + (k2 // 4) * 24) + ux * ((k2 % 4) * 6 - 9)
                 r = rect(cx, cy, 4, 20, math.atan2(uy, ux) + math.pi / 2)
                 if water.contains(r) and r.distance(unary_union([e for n, e, nb in edge_roads])) > CLEAR["main"]: bld.append((r, "raft"))
-    if p["kind"] in ("compound", "club", "palace", "square", "enclave", "golf course"):   # a big man's compound, the estate club, the palace, a square with fountains, an enclave, a golf course
+    if p["kind"] in ("compound", "club", "palace", "square", "enclave", "golf course", "barge yard"):   # a big man's compound, the estate club, the palace, a square with fountains, an enclave, a golf course
         CP = next(x for x in PROF.get("parcels", []) + PROF.get("reserve", []) if x["kind"] == p["kind"]); ca, sa = math.cos(a), math.sin(a)
         for kind_, (bw_, bd_), (u_, v_) in CP.get("buildings", []):   # u_, v_: fractions of the parcel's half length and half width from its centre
             r = rect(ctr.x + ca * u_ * LL / 2 - sa * v_ * g.area / LL / 2, ctr.y + sa * u_ * LL / 2 + ca * v_ * g.area / LL / 2, bw_, bd_, a)
@@ -1371,6 +1375,11 @@ for p in parcels:
             r = rect(ctr.x + math.cos(a) * (k2 * 9 - 4), ctr.y + math.sin(a) * (k2 * 9 - 4), w2, d2, a)
             if fit(r): bld.append((r, "shed"))
 parcels += extra_parcels
+FM = PROF.get("fish_market")
+if FM:   # a fish market: some of its stalls are smoking racks (smoked fish, the district model's "smoking racks")
+    fp_ = next((p["geom"] for p in parcels if p["kind"] == "market" and p["geom"].contains(poi_pos.get(FM["poi"], Point(0, 0)))), None)
+    frnd = random.Random(SEED * 23 + 5)
+    if fp_ is not None: bld = [(r, "smoke rack" if k == "stalls" and fp_.contains(r.centroid) and frnd.random() < FM["smoke_share"] else k) for r, k in bld]
 for sp in NAMED_LATE:   # places inside a parcel, named after its buildings exist (The steal: the stall at the market's near end)
     pin = POIS.get(sp["poi"]); cands = [r for r, k in bld if k in sp["from"]]
     if pin is not None and cands: poi_pos[sp["poi"]] = min(cands, key=lambda r: r.distance(pin)).centroid
@@ -1561,7 +1570,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1, "smoke rack": 1, "barge": 1, "old house": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]
