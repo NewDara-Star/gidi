@@ -11,11 +11,7 @@
   - street bazaar/street/65 runs 2.0 m past street bazaar/street/9 at (1459, 4978)
   - street bazaar/street/64 runs 2.0 m past street bazaar/street/54 at (1962, 5647)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 4**
-  - main Chukwuma Street has 677 m on water with no bridge, from (200, 5935)
-  - main Danjuma Road has 467 m on water with no bridge, from (1848, 5924)
-  - main Okonkwo Road has 229 m on water with no bridge, from (2321, 6216)
-  - main Aremu Road has 4 m on water with no bridge, from (1714, 5924)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

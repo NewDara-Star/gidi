@@ -111,7 +111,7 @@ def clean(out, water_poly):
     decks = [g.buffer(w) for g, w in deck_base]
     wet = [water_poly]
     if CANALS:
-        wet += [LineString(c['pts']).buffer(4) for c in out.get('canals', [])]
+        wet += [LineString(c['pts']).buffer(c.get('width', 4.0) / 2) for c in out.get('canals', [])]
     wet = unary_union(wet)
     if stilts:  # the stilt village stands on the water: its roads are its boardwalks, not roads to clip
         wet = wet.difference(unary_union(stilts).buffer(STILT_REACH))

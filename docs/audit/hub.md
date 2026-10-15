@@ -9,8 +9,7 @@
 - **R2 Near misses (ends short of a road): 0**
 - **R3 Overshoots (ends past a road): 0**
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 1**
-  - art Ring Road has 8 m on water with no bridge, from (3001, 4515)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

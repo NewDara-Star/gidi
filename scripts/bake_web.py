@@ -89,7 +89,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         out.setdefault("parcels",{})[id_]=F["parcels"]
         out.setdefault("lanes",{})[id_]=F.get("lanes",[])
         if F.get("paths"): out.setdefault("paths",{})[id_]=[p["pts"] for p in F["paths"]]   # footpaths: rail side, canal banks, worn crossings
-        if F.get("canal"): out.setdefault("canals",[]).append({"d":id_,"pts":F["canal"]})
+        if F.get("canal"): out.setdefault("canals",[]).append({"d":id_,"pts":F["canal"],"width":4.0})   # the water: gen_fabric keeps 2 m a side, bank paths at 3 m, houses at 4 m
         if F.get("walls"): out.setdefault("walls",{})[id_]=F["walls"]   # compound walls (the Estate)
         for q in F.get("gates",[]): out.setdefault("gates",[]).append({"d":id_,**q})   # estate gates: a barrier across the street
         for st in F.get("structures",[]):  # flyovers, rail bridges and skywalks drawn above the roads (slip roads are already in mains)
@@ -160,6 +160,14 @@ import roadclean
 _st,_skip=roadclean.clean(out,water.union(ocean))
 print("road clean:",dict(_st),"skipped",len(_skip))
 for _s in _skip: print("  skipped:",_s)
+
+# ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
+import roadz
+water,ocean,_hr=roadz.heights(out,water,ocean,json.load(open("web/terrain.json")))
+print("road heights:",_hr["decks"],"decks,",_hr["culverts"],"culverts,",_hr.get("boardwalks",0),"paths made boardwalks,",_hr["quays"],"sea walls on",round(_hr["quay_m"]),"m of road")
+for _s in _hr["extended"]: print("  lengthened:",_s)
+for _s in _hr["low"]: print("  LOW:",_s)
+for _s in _hr["cleared"]: print("  cleared from a bridge landing:",_s)
 
 # ---- civic layer: churches, mosques, schools, health, order, daily life (invented names) ----
 CIV=json.load(open("web/civic.json")); ORDER=CIV["_counts_order"]

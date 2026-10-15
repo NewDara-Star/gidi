@@ -16,16 +16,7 @@
   - street oldshore/street/166 runs 2.0 m past street oldshore/street/0 at (5055, 425)
   - street oldshore/street/164 runs 1.9 m past street oldshore/street/160 at (7025, 1029)
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 9**
-  - main Popoola Street has 727 m on water with no bridge, from (6763, 1220)
-  - main Kolawole Street has 340 m on water with no bridge, from (5318, 1716)
-  - street oldshore/street/112 has 13 m on water with no bridge, from (5321, 1714)
-  - street oldshore/street/119 has 10 m on water with no bridge, from (6654, 1240)
-  - main Lateef Road has 8 m on water with no bridge, from (6519, 1251)
-  - street oldshore/street/67 has 8 m on water with no bridge, from (6519, 1259)
-  - street oldshore/street/159 has 7 m on water with no bridge, from (6761, 1214)
-  - lane oldshore/lane/66 has 7 m on water with no bridge, from (5223, 1756)
-  - street oldshore/street/123 has 6 m on water with no bridge, from (7212, 1143)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

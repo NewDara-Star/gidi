@@ -13,13 +13,7 @@
   - street heights/street/78 stops 2.0 m short of main Uche Close at (6227, 4630)
 - **R3 Overshoots (ends past a road): 0**
 - **R4 Knife-edge crossings (under 25 degrees): 0**
-- **R5 Roads on water with no bridge: 6**
-  - main Kunle Road has 804 m on water with no bridge, from (7466, 4487)
-  - main Tokunbo Road has 647 m on water with no bridge, from (5172, 4781)
-  - main Uche Close has 522 m on water with no bridge, from (5689, 4777)
-  - main Hassan Road has 12 m on water with no bridge, from (5808, 4737)
-  - lane heights/lane/19 has 10 m on water with no bridge, from (5689, 4777)
-  - lane heights/lane/18 has 4 m on water with no bridge, from (5525, 4840)
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 

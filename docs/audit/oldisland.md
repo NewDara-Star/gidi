@@ -17,20 +17,7 @@
   - street oldisland/street/187 runs 2.0 m past street oldisland/street/141 at (5186, 5438)
 - **R4 Knife-edge crossings (under 25 degrees): 1**
   - street oldisland/street/111 crosses street oldisland/street/135 at 1 degrees at (5053, 4985)
-- **R5 Roads on water with no bridge: 13**
-  - main Tokunbo Road has 647 m on water with no bridge, from (5172, 4781)
-  - main Uche Close has 522 m on water with no bridge, from (5689, 4777)
-  - main Tijani Road has 480 m on water with no bridge, from (4394, 5074)
-  - main Nwachukwu Road has 212 m on water with no bridge, from (4518, 4743)
-  - street oldisland/street/112 has 11 m on water with no bridge, from (4962, 4704)
-  - street oldisland/street/1 has 11 m on water with no bridge, from (4400, 4996)
-  - main Remi Road has 10 m on water with no bridge, from (5012, 4725)
-  - street oldisland/street/34 has 9 m on water with no bridge, from (4522, 4751)
-  - street oldisland/street/180 has 8 m on water with no bridge, from (5169, 4788)
-  - street oldisland/street/2 has 6 m on water with no bridge, from (4394, 5074)
-  - path oldisland/path/2 has 6 m on water with no bridge, from (5242, 4817)
-  - street oldisland/street/5 has 5 m on water with no bridge, from (4462, 4775)
-  - and 1 more
+- **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 0**
 
