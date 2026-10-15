@@ -246,11 +246,14 @@
   // ---------- the kit's models, streamed by tile ----------
   // Kit materials come back by name (blender/gidi_kit/materials.py); colours ride on the vertices.
   function kitMaterial(name, dark) {
-    const base = { vertexColors: true, roughness: 0.85, metalness: 0 };
+    // both sides: some kit faces are wound the other way (they look fine in Blender, which draws
+    // both sides), and three would show those as holes into the model. Back faces get their
+    // normal flipped, so they are lit as if built the right way round.
+    const base = { vertexColors: true, roughness: 0.85, metalness: 0, side: THREE.DoubleSide, shadowSide: THREE.FrontSide };
     if (name === "glass") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.08, metalness: 0.4 });
     if (name === "glass_lit") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.08, metalness: 0.4, emissive: dark ? 0xffc77a : 0x000000, emissiveIntensity: dark ? 0.9 : 0 });
-    if (name === "lamp") return new THREE.MeshBasicMaterial({ color: dark ? 0xffe2a8 : 0x9a9a92 });
-    if (name === "emit") return new THREE.MeshBasicMaterial({ vertexColors: true });
+    if (name === "lamp") return new THREE.MeshBasicMaterial({ color: dark ? 0xffe2a8 : 0x9a9a92, side: THREE.DoubleSide });
+    if (name === "emit") return new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide });
     if (name === "water") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.12, metalness: 0.1 });
     if (name === "zinc" || name === "steel") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.45, metalness: 0.45 });
     if (name === "asphalt") return new THREE.MeshStandardMaterial({ ...base, roughness: 0.95 });
