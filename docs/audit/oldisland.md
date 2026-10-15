@@ -39,14 +39,14 @@
   - street oldisland/street/5 has 5 m on water with no bridge, from (4461, 4776)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 1**
-  - main Yemi Road is listed twice (main/71, main/81)
+  - main Yemi Road is listed twice (main/74, main/84)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
 - **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
-  - sport (1): Community Football Pitch (on a front house, (4565, 5383))
+  - sport (1): Community Football Pitch (on a back house, (5249, 5290))
 
 ## Building kinds here
 front 1255, back 425, stalls 180, shed 131, kiosk 96, brazilian house 53, bank tower 4, school 2, palace 1

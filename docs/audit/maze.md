@@ -35,18 +35,18 @@
   - street maze/street/85 has 4 m on water with no bridge, from (2947, 4215)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 14**
-  - main Alaba Road is listed twice (main/10, main/17)
-  - main Ajasa Street is listed twice (main/41, main/59)
-  - main Oyelaran Road is listed twice (main/4, main/24)
-  - main Akande Road is listed twice (main/20, main/53)
-  - main Ireti Road is listed twice (main/3, main/12)
-  - main Agboola Street is listed twice (main/26, main/40)
-  - main Idowu Street is listed twice (main/21, main/25)
-  - main Okafor Road is listed twice (main/19, main/67)
-  - main Afolabi Avenue is listed twice (main/11, main/18)
-  - main Adeyemi Road is listed twice (main/16, main/62)
-  - main Ogunleye Road is listed twice (main/54, main/66)
-  - main main/23 is listed twice (main/23, main/28)
+  - main Alaba Road is listed twice (main/13, main/20)
+  - main Ajasa Street is listed twice (main/44, main/62)
+  - main Oyelaran Road is listed twice (main/7, main/27)
+  - main Akande Road is listed twice (main/23, main/56)
+  - main Ireti Road is listed twice (main/6, main/15)
+  - main Agboola Street is listed twice (main/29, main/43)
+  - main Idowu Street is listed twice (main/24, main/28)
+  - main Okafor Road is listed twice (main/22, main/70)
+  - main Afolabi Avenue is listed twice (main/14, main/21)
+  - main Adeyemi Road is listed twice (main/19, main/65)
+  - main Ogunleye Road is listed twice (main/57, main/69)
+  - main main/26 is listed twice (main/26, main/31)
   - and 2 more
 
 ## Model gaps
@@ -54,7 +54,7 @@
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
 - **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
-  - sport (1): Community Football Pitch (on a back house, (3276, 4469))
+  - sport (1): Community Football Pitch (on a back house, (3137, 4647))
 
 ## Building kinds here
 front 1199, back 433, shed 154, stalls 84, kiosk 68, print 15, warehouse 2, school 2, transformer 1, canopy 1

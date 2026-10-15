@@ -5,12 +5,12 @@
 ## Map problems
 - **R1 Roads running along each other: 9**
   - street jungle/street/56 runs 327 m along street jungle/street/59 at (2704, 6305)
-  - main main/11 runs 65 m along street maze/street/18 at (2660, 4895)
-  - main main/18 runs 65 m along street maze/street/18 at (2660, 4895)
+  - main main/14 runs 65 m along street maze/street/18 at (2660, 4895)
+  - main main/21 runs 65 m along street maze/street/18 at (2660, 4895)
   - street jungle/street/65 runs 65 m along main Adeleke Road at (2753, 5519)
   - street jungle/street/34 runs 37 m along main Ogundipe Road at (2595, 6358)
-  - main main/11 runs 36 m along street maze/street/67 at (2876, 4899)
-  - main main/18 runs 36 m along street maze/street/67 at (2876, 4899)
+  - main main/14 runs 36 m along street maze/street/67 at (2876, 4899)
+  - main main/21 runs 36 m along street maze/street/67 at (2876, 4899)
   - street jungle/street/15 runs 31 m along street jungle/street/17 at (2433, 5920)
   - street jungle/street/82 runs 18 m along street jungle/street/83 at (3037, 5687)
 - **R2 Near misses (ends short of a road): 5**
@@ -37,19 +37,20 @@
   - and 3 more
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 7**
-  - main Alaba Road is listed twice (main/10, main/17)
-  - main Oyelaran Road is listed twice (main/4, main/24)
-  - main Ireti Road is listed twice (main/3, main/12)
-  - main Idowu Street is listed twice (main/21, main/25)
-  - main Okafor Road is listed twice (main/19, main/67)
-  - main Afolabi Avenue is listed twice (main/11, main/18)
-  - main Adeyemi Road is listed twice (main/16, main/62)
+  - main Alaba Road is listed twice (main/13, main/20)
+  - main Oyelaran Road is listed twice (main/7, main/27)
+  - main Ireti Road is listed twice (main/6, main/15)
+  - main Idowu Street is listed twice (main/24, main/28)
+  - main Okafor Road is listed twice (main/22, main/70)
+  - main Afolabi Avenue is listed twice (main/14, main/21)
+  - main Adeyemi Road is listed twice (main/19, main/65)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
-- **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
+- **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
+  - sport (1): Community Football Pitch (on a front house, (2543, 5791))
 
 ## Building kinds here
 front 1758, back 1066, stalls 165, shed 125, kiosk 87, flats 16, school 2, studio 1, cafe 1, hotel 1

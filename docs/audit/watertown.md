@@ -31,13 +31,13 @@
   - lane watertown/lane/20 has 3 m on water with no bridge, from (4037, 4254)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 7**
-  - main Alaba Road is listed twice (main/10, main/17)
-  - main Akande Road is listed twice (main/20, main/53)
-  - main Okafor Road is listed twice (main/19, main/67)
-  - main Afolabi Avenue is listed twice (main/11, main/18)
-  - main Adeyemi Road is listed twice (main/16, main/62)
-  - main Ibrahim Road is listed twice (main/55, main/65)
-  - main Ogunleye Road is listed twice (main/54, main/66)
+  - main Alaba Road is listed twice (main/13, main/20)
+  - main Akande Road is listed twice (main/23, main/56)
+  - main Okafor Road is listed twice (main/22, main/70)
+  - main Afolabi Avenue is listed twice (main/14, main/21)
+  - main Adeyemi Road is listed twice (main/19, main/65)
+  - main Ibrahim Road is listed twice (main/58, main/68)
+  - main Ogunleye Road is listed twice (main/57, main/69)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**

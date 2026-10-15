@@ -27,12 +27,12 @@
 - **R5 Roads on water with no bridge: 0**
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 7**
-  - main Ajasa Street is listed twice (main/41, main/59)
-  - main Salami Road is listed twice (main/42, main/48)
-  - main Eze Street is listed twice (main/33, main/43)
+  - main Ajasa Street is listed twice (main/44, main/62)
+  - main Salami Road is listed twice (main/45, main/51)
+  - main Eze Street is listed twice (main/36, main/46)
   - street estate/street/49 is listed twice (estate/street/49, estate/street/50)
-  - street estate/street/38 is listed twice (estate/street/38, estate/street/40)
   - street estate/street/38 is listed twice (estate/street/38, estate/street/39)
+  - street estate/street/38 is listed twice (estate/street/38, estate/street/40)
   - street estate/street/39 is listed twice (estate/street/39, estate/street/40)
 
 ## Model gaps
