@@ -10,6 +10,7 @@
 #   streets: an electricity pole every POLE_M on one side, a transformer every TRANSFORMER_M of street
 #   traffic lights: at every "signals" junction, one per arm, on the corner to the right of the approach (Nigeria drives right)
 #   bus stops: on mains and arterials, about every BUS_M, near a junction, alternating sides
+#   LASMA posts: a traffic wardens' booth at every signalled junction, on a corner clear of the traffic lights
 import math
 from shapely.geometry import LineString, Point, Polygon
 from shapely.ops import unary_union
@@ -122,5 +123,26 @@ def furniture(out, districts):
                 if ok(p, edge):
                     put('traffic light', p, b, '')   # it faces out along the arm, toward the approaching traffic
                     break
+    # LASMA posts: the traffic wardens' booth (or umbrella and stand) at every signalled junction, on a corner clear of the lights
+    for j in out.get('junctions', []):
+        if j['kind'] != 'signals' or not area.buffer(5).contains(Point(j['x'], j['y'])):
+            continue
+        C = Point(j['x'], j['y'])
+        near = [(k, g) for k, g in roads if g.distance(C) < 3]
+        if not near:
+            continue
+        reach = max(XS.walkway_band(k)[1] for k, g in near) + 6.0
+        done = False
+        for bdeg in j.get('arms', []):
+            b = math.radians(bdeg); ux, uy = math.cos(b), math.sin(b)
+            arm_k = min(near, key=lambda kg: kg[1].distance(Point(C.x + ux * 20, C.y + uy * 20)))[0]
+            a_, b_ = XS.walkway_band(arm_k)
+            for side in (-1, 1):   # the left corner first: the lights stand on the right
+                rx, ry = uy * side, -ux * side
+                p = Point(C.x + ux * reach + rx * (a_ + b_) / 2, C.y + uy * reach + ry * (a_ + b_) / 2)
+                if ok(p, edge):
+                    put('lasma post', p, b + math.pi, ''); done = True; break
+            if done:
+                break
     out['furniture'] = placed
     return rep

@@ -1118,7 +1118,7 @@ if LAGOS and PROF.get("infill"):   # the Lagos fill (Google outlines): rooms, ex
             r = side_rect(irnd.choice(have), r_area, irnd.uniform(1.0, 2.4))
             if r is None or not b.contains(r.centroid) or not buildable.contains(r) or not reachable(r): continue
             if any(o.distance(r) < 0.15 for o in near(r)): continue
-            add(r, "shed" if r.area < 15 else "back"); have.append(r); built += r.area; n_inf += 1
+            add(r, "shed" if r.area < 15 else "extension"); have.append(r); built += r.area; n_inf += 1   # a room built onto what is there
     print(f"infill: {n_inf} rooms, extensions and shacks", file=sys.stderr)
 if PROF.get("unfinished_share"):   # half-built houses: walls up, no roof, nobody living there yet (real: 1.7% tagged under construction)
     urnd = random.Random(SEED * 19 + 1)
@@ -1319,8 +1319,13 @@ for p in parcels:
                 band = XS.walkway_band(k2)
                 if band[1] - band[0] < 0.7: continue
                 for seg in lines(x2.intersection(g.buffer(MM["spill_m"]))):
-                    zone = seg.buffer(band[1] + 0.5 * (CLEAR[k2] - band[1])).difference(seg.buffer(band[0]))   # both walkways and halfway to the building line
-                    ENCROACH.append({"kind": "market spill", "poi": next((x.get("poi") for x in RES if x["geom"] is g), None), "geom": zone})
+                    outer = band[1] + 0.5 * (CLEAR[k2] - band[1])   # the walkway and halfway on to the building line, each side apart:
+                    sides_ = [seg.buffer(sg * outer, single_sided=True, cap_style=2).difference(seg.buffer(band[0], cap_style=2)) for sg in (1, -1)]   # a strip, never the road
+                    for zs in sides_:
+                        for zp in (getattr(zs, "geoms", [zs])):
+                            if zp.geom_type == "Polygon" and zp.area > 1:
+                                ENCROACH.append({"kind": "market spill", "poi": next((x.get("poi") for x in RES if x["geom"] is g), None), "geom": zp})
+                    zone = unary_union(sides_)
                     for sd in (1, -1):
                         for t in np.arange(1.5, seg.length - 1.5, mrnd.uniform(2.6, 3.6)):
                             if mrnd.random() > MM["spill_density"]: continue
@@ -1704,7 +1709,7 @@ M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
-    FIXED = {"kiosk": 1, "shed": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1, "drums": 1, "border booth": 1, "border canopy": 1, "fishing hut": 1, "colonial house": 2, "smoke rack": 1, "barge": 1, "old house": 1}
+    FIXED = {"kiosk": 1, "shed": 1, "extension": 1, "stalls": 1, "canopy": 1, "bust": 1, "barracks": 1, "hangar": 2, "plaza": 3, "unfinished": 2, "pen": 1, "scrap": 1, "container": 1, "crane": 10, "stack": 2, "tank": 4, "villa": 2, "cellblock": 2, "tower": 4, "trailer": 1, "works": 2, "mound": 1, "abattoir": 1, "stage": 1, "checkpoint": 1, "stilt": 1, "stilt bar": 2, "raft": 1, "saw shed": 1, "sawdust": 1, "warehouse": 2, "school": 2, "stands": 4, "terminal": 3, "station": 2, "transformer": 1, "gatehouse": 1, "generator": 1, "water tank": 1, "mansion": 3, "clubhouse": 2, "palace": 2, "toll booth": 1, "beach shack": 1, "beach bar": 1, "horse shelter": 1, "column": 13, "flare stack": 20, "unfinished house": 1, "toll canopy": 1, "drums": 1, "border booth": 1, "border canopy": 1, "fishing hut": 1, "colonial house": 2, "smoke rack": 1, "barge": 1, "old house": 1}
     FIXED.update({"flats": x["storeys"] for x in PROF.get("parcels", []) if x["kind"] == "estate"})
     FIXED.update({k: x["spec"]["building"]["storeys"] for x in RES if x.get("spec", {}).get("building") for k in [x["spec"]["building"]["kind"]]})
     if PROF.get("hotel"): FIXED["hotel"] = PROF["hotel"]["storeys"]

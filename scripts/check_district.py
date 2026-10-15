@@ -91,7 +91,7 @@ def check_roads(gen, bgeoms, G):
         for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
         for a in G["arterials"]:
             if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums"})
-        enc = unary_union([Polygon(z["pts"]) for z in gen.get("encroach", [])]) if gen.get("encroach") else None
+        enc = unary_union([Polygon(z["pts"]).buffer(0) for z in gen.get("encroach", [])])   # buffer(0): rounding can cross an edge if gen.get("encroach") else None
     else:
         enc = None
     tree = STRtree([g for g, _, _ in shapes])

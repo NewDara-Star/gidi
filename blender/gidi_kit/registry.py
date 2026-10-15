@@ -7,7 +7,7 @@ from . import archetypes, kinds, places
 
 BUILDINGS = {
     'front': archetypes.house, 'back': archetypes.house, 'shed': archetypes.house,
-    'stalls': archetypes.stall, 'kiosk': archetypes.kiosk,
+    'stalls': archetypes.stall, 'kiosk': archetypes.kiosk, 'extension': archetypes.extension,
     'stilt': kinds.stilt, 'raft': kinds.raft, 'sawdust': kinds.sawdust, 'brazilian house': kinds.brazilian,
     'gatehouse': kinds.gatehouse, 'generator': kinds.generator, 'water tank': kinds.water_tank,
     'stack': kinds.stack, 'trailer': kinds.trailer, 'container': kinds.container_shop,

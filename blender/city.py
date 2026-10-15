@@ -162,6 +162,8 @@ def district_at(p):
 # Districts built to the agreed cross-sections (docs/REBUILD-PLAN.md): the data holds their street furniture and their road
 # widths (GD["cross_sections"]); here the kit draws what the data says instead of placing its own poles and lamps.
 XS = GD.get('cross_sections') or {}
+if XS:   # the agreed arterial and expressway carriageways (bridges keep their deck width)
+    ART_W.update({k: XS[k]['carriageway'] for k in ('art', 'exp') if k in XS})
 LAGOS_D = {district_at(P((f['x'], f['y']))) for f in GD.get('furniture', [])} - {None}
 def road_w(kind, d):
     return XS[kind]['carriageway'] if d in LAGOS_D and kind in XS else WIDTH[kind]

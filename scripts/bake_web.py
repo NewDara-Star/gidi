@@ -183,6 +183,8 @@ import cross_sections
 out["cross_sections"]=cross_sections.SECTIONS   # one table of road widths for the generator, the checks and the kit
 _lagos=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
 print("street furniture:",_lagos,furniture.furniture(out,_lagos))
+for _d in out["districts"]:
+    if _d["id"] in _lagos: _d["fabric"]="lagos"   # built to the cross-sections: the 2D ground plan draws its roads at true width
 
 # ---- civic layer: churches, mosques, schools, health, order, daily life (invented names) ----
 CIV=json.load(open("web/civic.json")); ORDER=CIV["_counts_order"]
