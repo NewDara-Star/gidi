@@ -1,6 +1,6 @@
 # Gidi Acts 2 and 3: working draft (updated 15 Oct 2026 after the owner's feedback)
 
-Builds on `gidi-act1-draft.md` (not in this repo yet: see `decisions/story/README.md`). The owner didn't like the pacing of Claude's first Acts 2–3 path (one run per district, the fake-revenge scapegoat, the finale structure). Only what the owner confirmed or asked for is kept below; Claude's proposals are marked as such.
+Builds on `act-1-draft.md`. The owner didn't like the pacing of Claude's first Acts 2–3 path (one run per district, the fake-revenge scapegoat, the finale structure). Only what the owner confirmed or asked for is kept below; Claude's proposals are marked as such.
 
 **Next step (owner):** write the characters first.
 
