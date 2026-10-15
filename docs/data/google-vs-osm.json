@@ -1,0 +1,486 @@
+{
+ "source": "Google Open Buildings v3 (CC BY 4.0), confidence >= 0.70; OSM from the study extracts",
+ "cell_m": 250.0,
+ "districts": {
+  "maze": {
+   "cells": 476,
+   "osm_per_km2": {
+    "median": 1616,
+    "dense": 2368
+   },
+   "google_per_km2": {
+    "median": 2544,
+    "dense": 3168
+   },
+   "osm_cover": {
+    "median": 0.324,
+    "dense": 0.402
+   },
+   "google_cover": {
+    "median": 0.449,
+    "dense": 0.515
+   },
+   "google_size_m2": {
+    "p10": 22.4,
+    "p25": 47.3,
+    "median": 122.7,
+    "p75": 238.1,
+    "p90": 333.1
+   },
+   "google_under_40m2": 0.213,
+   "osm_size_m2": {
+    "median": 135.5
+   },
+   "google_buildings": 77694,
+   "osm_buildings": 55198
+  },
+  "hub": {
+   "cells": 909,
+   "osm_per_km2": {
+    "median": 1808,
+    "dense": 2480
+   },
+   "google_per_km2": {
+    "median": 2336,
+    "dense": 2896
+   },
+   "osm_cover": {
+    "median": 0.346,
+    "dense": 0.416
+   },
+   "google_cover": {
+    "median": 0.393,
+    "dense": 0.47
+   },
+   "google_size_m2": {
+    "p10": 19.9,
+    "p25": 41.0,
+    "median": 114.1,
+    "p75": 236.7,
+    "p90": 352.6
+   },
+   "google_under_40m2": 0.245,
+   "osm_size_m2": {
+    "median": 134.4
+   },
+   "google_buildings": 139934,
+   "osm_buildings": 114904
+  },
+  "jungle": {
+   "cells": 167,
+   "osm_per_km2": {
+    "median": 2592,
+    "dense": 3224
+   },
+   "google_per_km2": {
+    "median": 2320,
+    "dense": 2688
+   },
+   "osm_cover": {
+    "median": 0.415,
+    "dense": 0.458
+   },
+   "google_cover": {
+    "median": 0.518,
+    "dense": 0.594
+   },
+   "google_size_m2": {
+    "p10": 28.1,
+    "p25": 63.2,
+    "median": 160.2,
+    "p75": 289.3,
+    "p90": 404.7
+   },
+   "google_under_40m2": 0.157,
+   "osm_size_m2": {
+    "median": 122.0
+   },
+   "google_buildings": 25888,
+   "osm_buildings": 28586
+  },
+  "foodgate": {
+   "cells": 253,
+   "osm_per_km2": {
+    "median": 592,
+    "dense": 1488
+   },
+   "google_per_km2": {
+    "median": 2464,
+    "dense": 2992
+   },
+   "osm_cover": {
+    "median": 0.122,
+    "dense": 0.269
+   },
+   "google_cover": {
+    "median": 0.357,
+    "dense": 0.462
+   },
+   "google_size_m2": {
+    "p10": 19.7,
+    "p25": 40.4,
+    "median": 106.0,
+    "p75": 214.9,
+    "p90": 321.3
+   },
+   "google_under_40m2": 0.248,
+   "osm_size_m2": {
+    "median": 161.9
+   },
+   "google_buildings": 40118,
+   "osm_buildings": 13802
+  },
+  "watertown": {
+   "cells": 65,
+   "osm_per_km2": {
+    "median": 2224,
+    "dense": 3536
+   },
+   "google_per_km2": {
+    "median": 2976,
+    "dense": 3808
+   },
+   "osm_cover": {
+    "median": 0.346,
+    "dense": 0.418
+   },
+   "google_cover": {
+    "median": 0.428,
+    "dense": 0.516
+   },
+   "google_size_m2": {
+    "p10": 17.7,
+    "p25": 29.7,
+    "median": 56.0,
+    "p75": 133.9,
+    "p90": 251.7
+   },
+   "google_under_40m2": 0.371,
+   "osm_size_m2": {
+    "median": 61.3
+   },
+   "google_buildings": 20759,
+   "osm_buildings": 13518
+  },
+  "capital": {
+   "cells": 239,
+   "osm_per_km2": {
+    "median": 64,
+    "dense": 176
+   },
+   "google_per_km2": {
+    "median": 1552,
+    "dense": 2224
+   },
+   "osm_cover": {
+    "median": 0.087,
+    "dense": 0.188
+   },
+   "google_cover": {
+    "median": 0.352,
+    "dense": 0.427
+   },
+   "google_size_m2": {
+    "p10": 18.8,
+    "p25": 34.9,
+    "median": 94.6,
+    "p75": 243.1,
+    "p90": 387.0
+   },
+   "google_under_40m2": 0.284,
+   "osm_size_m2": {
+    "median": 305.1
+   },
+   "google_buildings": 24836,
+   "osm_buildings": 2450
+  },
+  "bazaar": {
+   "cells": 265,
+   "osm_per_km2": {
+    "median": 1120,
+    "dense": 1808
+   },
+   "google_per_km2": {
+    "median": 1376,
+    "dense": 2336
+   },
+   "osm_cover": {
+    "median": 0.227,
+    "dense": 0.335
+   },
+   "google_cover": {
+    "median": 0.24,
+    "dense": 0.359
+   },
+   "google_size_m2": {
+    "p10": 19.7,
+    "p25": 39.8,
+    "median": 102.7,
+    "p75": 219.7,
+    "p90": 365.9
+   },
+   "google_under_40m2": 0.252,
+   "osm_size_m2": {
+    "median": 137.5
+   },
+   "google_buildings": 26564,
+   "osm_buildings": 21615
+  },
+  "port": {
+   "cells": 223,
+   "osm_per_km2": {
+    "median": 1008,
+    "dense": 1912
+   },
+   "google_per_km2": {
+    "median": 1104,
+    "dense": 1760
+   },
+   "osm_cover": {
+    "median": 0.211,
+    "dense": 0.286
+   },
+   "google_cover": {
+    "median": 0.213,
+    "dense": 0.307
+   },
+   "google_size_m2": {
+    "p10": 20.9,
+    "p25": 37.0,
+    "median": 81.1,
+    "p75": 185.3,
+    "p90": 328.1
+   },
+   "google_under_40m2": 0.274,
+   "osm_size_m2": {
+    "median": 87.1
+   },
+   "google_buildings": 26543,
+   "osm_buildings": 25320
+  },
+  "railside": {
+   "cells": 3035,
+   "osm_per_km2": {
+    "median": 2112,
+    "dense": 2624
+   },
+   "google_per_km2": {
+    "median": 2896,
+    "dense": 3408
+   },
+   "osm_cover": {
+    "median": 0.322,
+    "dense": 0.368
+   },
+   "google_cover": {
+    "median": 0.369,
+    "dense": 0.418
+   },
+   "google_size_m2": {
+    "p10": 17.3,
+    "p25": 33.2,
+    "median": 91.5,
+    "p75": 178.1,
+    "p90": 284.0
+   },
+   "google_under_40m2": 0.294,
+   "osm_size_m2": {
+    "median": 120.2
+   },
+   "google_buildings": 548325,
+   "osm_buildings": 408407
+  },
+  "estate": {
+   "cells": 320,
+   "osm_per_km2": {
+    "median": 208,
+    "dense": 704
+   },
+   "google_per_km2": {
+    "median": 2336,
+    "dense": 2944
+   },
+   "osm_cover": {
+    "median": 0.06,
+    "dense": 0.177
+   },
+   "google_cover": {
+    "median": 0.34,
+    "dense": 0.437
+   },
+   "google_size_m2": {
+    "p10": 18.5,
+    "p25": 36.4,
+    "median": 97.7,
+    "p75": 213.5,
+    "p90": 337.2
+   },
+   "google_under_40m2": 0.274,
+   "osm_size_m2": {
+    "median": 170.7
+   },
+   "google_buildings": 53855,
+   "osm_buildings": 9786
+  },
+  "oldisland": {
+   "cells": 88,
+   "osm_per_km2": {
+    "median": 648,
+    "dense": 1288
+   },
+   "google_per_km2": {
+    "median": 1344,
+    "dense": 2236
+   },
+   "osm_cover": {
+    "median": 0.202,
+    "dense": 0.296
+   },
+   "google_cover": {
+    "median": 0.272,
+    "dense": 0.372
+   },
+   "google_size_m2": {
+    "p10": 30.6,
+    "p25": 59.3,
+    "median": 112.6,
+    "p75": 194.7,
+    "p90": 318.7
+   },
+   "google_under_40m2": 0.147,
+   "osm_size_m2": {
+    "median": 148.6
+   },
+   "google_buildings": 9087,
+   "osm_buildings": 4903
+  },
+  "heights": {
+   "cells": 242,
+   "osm_per_km2": {
+    "median": 328,
+    "dense": 560
+   },
+   "google_per_km2": {
+    "median": 1184,
+    "dense": 1472
+   },
+   "osm_cover": {
+    "median": 0.124,
+    "dense": 0.17
+   },
+   "google_cover": {
+    "median": 0.23,
+    "dense": 0.287
+   },
+   "google_size_m2": {
+    "p10": 23.7,
+    "p25": 43.9,
+    "median": 107.4,
+    "p75": 257.4,
+    "p90": 448.8
+   },
+   "google_under_40m2": 0.224,
+   "osm_size_m2": {
+    "median": 230.3
+   },
+   "google_buildings": 19808,
+   "osm_buildings": 6433
+  },
+  "frontier": {
+   "cells": 767,
+   "osm_per_km2": {
+    "median": 448,
+    "dense": 880
+   },
+   "google_per_km2": {
+    "median": 1168,
+    "dense": 1712
+   },
+   "osm_cover": {
+    "median": 0.11,
+    "dense": 0.196
+   },
+   "google_cover": {
+    "median": 0.203,
+    "dense": 0.3
+   },
+   "google_size_m2": {
+    "p10": 18.8,
+    "p25": 33.5,
+    "median": 98.8,
+    "p75": 226.0,
+    "p90": 374.9
+   },
+   "google_under_40m2": 0.296,
+   "osm_size_m2": {
+    "median": 162.0
+   },
+   "google_buildings": 89851,
+   "osm_buildings": 31841
+  },
+  "border": {
+   "cells": 134,
+   "osm_per_km2": {
+    "median": 0,
+    "dense": 0
+   },
+   "google_per_km2": {
+    "median": 2160,
+    "dense": 2588
+   },
+   "osm_cover": {
+    "median": 0.0,
+    "dense": 0.0
+   },
+   "google_cover": {
+    "median": 0.248,
+    "dense": 0.298
+   },
+   "google_size_m2": {
+    "p10": 17.6,
+    "p25": 35.4,
+    "median": 91.4,
+    "p75": 159.1,
+    "p90": 231.6
+   },
+   "google_under_40m2": 0.278,
+   "osm_size_m2": {
+    "median": 231.3
+   },
+   "google_buildings": 28403,
+   "osm_buildings": 27
+  },
+  "oldshore": {
+   "cells": 276,
+   "osm_per_km2": {
+    "median": 992,
+    "dense": 1408
+   },
+   "google_per_km2": {
+    "median": 2080,
+    "dense": 2708
+   },
+   "osm_cover": {
+    "median": 0.201,
+    "dense": 0.274
+   },
+   "google_cover": {
+    "median": 0.294,
+    "dense": 0.374
+   },
+   "google_size_m2": {
+    "p10": 17.9,
+    "p25": 36.8,
+    "median": 98.3,
+    "p75": 201.6,
+    "p90": 316.1
+   },
+   "google_under_40m2": 0.269,
+   "osm_size_m2": {
+    "median": 167.7
+   },
+   "google_buildings": 39241,
+   "osm_buildings": 18718
+  }
+ }
+}
