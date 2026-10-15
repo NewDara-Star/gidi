@@ -19,6 +19,7 @@ BUILDINGS = {
     'bank tower': places.bank_tower, 'office': places.office, 'school': places.school, 'hotel': places.hotel,
     'nightclub': places.nightclub, 'stands': places.stands, 'terminal': places.terminal, 'station': places.station,
     'toll booth': places.toll_booth, 'toll canopy': places.toll_canopy,
+    'old house': kinds.old_house, 'smoke rack': kinds.smoke_rack, 'barge': kinds.barge,
     'colonial house': kinds.colonial_house, 'fishing hut': kinds.fishing_hut, 'border booth': kinds.border_booth, 'border canopy': kinds.border_canopy, 'drums': kinds.drums,
     'unfinished house': kinds.unfinished_house, 'column': kinds.refinery_column, 'flare stack': kinds.flare_stack, 'tower': places.cctv_tower, 'transformer': places.transformer_kind,
     'stage': places.stage, 'canopy': places.canopy, 'bust': places.bust, 'palace': places.palace,

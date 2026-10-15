@@ -633,3 +633,62 @@ def drums(a, rng, collection=None):
                 mb.box('plastic', T(m, x, y, 1.05), hex_rgb('#e0b020'), 0.5, size=(0.36, 0.2, 0.34))
     parts.cyl(mb, 'plastic', T(m, L / 2 + 0.4, 0, 0), 0.15, 0.3, hex_rgb('#c62828'), 0.5, seg=8, r2=0.03)  # a funnel
     return _done(mb, a, collection)
+
+
+# ---------------------------------------------------------------- Old Shore: the old lagoon towns
+def old_house(a, rng, collection=None):
+    """An old house of the lagoon towns: one or two storeys of faded lime-wash or ochre render
+    with red earth splashed up the walls, a low hipped roof of rusted zinc, a shaded veranda on
+    timber posts along the front, wooden shutters. research-housing (old town compounds)."""
+    from .blocks import block, faces
+    poly = ccw([tuple(p) for p in a['poly']])
+    mb = MeshBuilder()
+    wear = rng.between(0.6, 0.95)
+    wall = hex_rgb(rng.pick(['#e8dcc0', '#d9b88a', '#c99a6a', '#e6e0d2', '#b8c8b0']))
+    storeys = 2 if a.get('storeys', 1) >= 2 and rng.chance(0.6) else 1
+    inner = offset(poly, -1.2)
+    H = block(mb, inner, storeys, dict(style='govt', wall=wall, band=shade(wall, 0.8), trim=hex_rgb('#6b4a30'), wear=wear, floor_h=3.2, window='casement', win_h=1.4,
+                                       fins=False, roof='hip', pitch=18, overhang=1.4, roof_col=hex_rgb(rng.pick(['#7a4a2a', '#8a5a3a', '#6b6560'])), facing=a.get('facing', 0)), rng)
+    i, L, F = faces(inner)[a.get('facing', 0)]
+    for k in range(max(2, int(L / 2.6)) + 1):  # the veranda posts under the eaves
+        u = -L / 2 + k * L / max(2, int(L / 2.6))
+        parts.bar(mb, 'wood', F @ Vector((u, 1.0, 0)), F @ Vector((u, 1.0, 3.0)), 0.12, hex_rgb('#5a4030'), wear)
+    mb.box('concrete', F @ Matrix.Translation((0, 0.6, 0.12)), hex_rgb('#9c978c'), wear, size=(L, 1.4, 0.24))  # its raised floor
+    return _done(mb, a, collection)
+
+
+def smoke_rack(a, rng, collection=None):
+    """A fish-smoking rack: a long clay and block oven bench, a wire mesh over it with rows of
+    smoked fish, a zinc shade on poles, firewood stacked by it, the smoke rising."""
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    wear = rng.between(0.7, 0.95)
+    mb.box('block', T(m, 0, 0, 0.45), hex_rgb('#8a5a3a'), wear, size=(L * 0.9, W * 0.7, 0.9))  # the oven
+    mb.box('steel', T(m, 0, 0, 0.93), hex_rgb('#3a3a3a'), wear, size=(L * 0.88, W * 0.68, 0.03))  # the mesh
+    nx, ny = max(2, int(L * 0.9 / 0.45)), max(1, int(W * 0.7 / 0.5))
+    for i in range(nx):  # the fish
+        for j in range(ny):
+            x, y = -L * 0.43 + (i + 0.5) * L * 0.86 / nx, -W * 0.33 + (j + 0.5) * W * 0.66 / ny
+            mb.box('cloth', T(m, x, y, 0.98, rng.between(-0.3, 0.3)), hex_rgb(rng.pick(['#5a3a1e', '#7a4a22', '#4a2e18'])), 0.6, size=(0.35, 0.1, 0.05))
+    for x in (-L / 2, L / 2):
+        for y in (-W / 2, W / 2):
+            parts.bar(mb, 'wood', T(m, x, y, 0).translation, T(m, x, y, 2.6).translation, 0.08, hex_rgb('#5a4632'), wear)
+    mb.box('zinc', T(m, 0, 0, 2.65), hex_rgb('#7a5a3a'), wear, size=(L + 0.6, W + 0.6, 0.06))  # the shade
+    for k in range(3):  # smoke
+        parts.cyl(mb, 'cloth', T(m, -L * 0.3 + k * L * 0.3, 0, 2.7), 0.4 + k * 0.1, 1.6, hex_rgb('#b8b4ae'), 0.2, seg=8, r2=0.9)
+    for k in range(4):  # firewood
+        parts.bar(mb, 'wood', T(m, -L / 2 - 0.8, -W / 2 + k * 0.25, 0.15).translation, T(m, -L / 2 - 0.8 + 1.4, -W / 2 + k * 0.25, 0.15).translation, 0.09, hex_rgb('#6b4a30'), wear)
+    return _done(mb, a, collection)
+
+
+def barge(a, rng, collection=None):
+    """An old barge beached at the waterside: a rusted flat hull on the mud, a deckhouse, chains."""
+    from .boats import hull
+    poly, c, ang, L, W, m = footprint(a)
+    mb = MeshBuilder()
+    wear = rng.between(0.8, 1.0)
+    hull(mb, m @ Matrix.Translation((0, 0, 0.4)), L * 0.95, W * 0.9, 1.2, hex_rgb(rng.pick(['#6b3a22', '#4a4a48', '#5a3a2a'])), wear, bow=0.06)
+    mb.box('steel', T(m, -L * 0.3, 0, 2.6), hex_rgb('#8a8f92'), wear, size=(min(5, L * 0.2), W * 0.5, 2.2))  # deckhouse
+    for k in range(6):  # a chain down to the mud
+        mb.box('steel', T(m, L * 0.45 + k * 0.3, 0, 1.4 - k * 0.22), hex_rgb('#3a3a3a'), wear, size=(0.25, 0.1, 0.18))
+    return _done(mb, a, collection)

@@ -15,7 +15,7 @@
   - street oldisland/street/175 runs 21 m along street oldisland/street/185 at (4813, 5220)
 - **R2 Near misses (ends short of a road): 3**
   - street oldisland/street/189 stops 7.8 m short of street oldisland/street/112 at (4861, 4693)
-  - street oldisland/street/113 stops 3.7 m short of main Tokunbo Road at (4871, 4669)
+  - street oldisland/street/113 stops 3.9 m short of main main/86 at (4871, 4669)
   - lane oldisland/lane/5 stops 1.0 m short of street oldisland/street/185 at (4628, 5219)
 - **R3 Overshoots (ends past a road): 3**
   - street oldisland/street/187 runs 2.0 m past street oldisland/street/140 at (5186, 5438)
@@ -39,14 +39,13 @@
   - street oldisland/street/5 has 5 m on water with no bridge, from (4461, 4776)
 - **R6 Decks with no road: 0**
 - **D Roads listed twice: 1**
-  - main Yemi Road is listed twice (main/74, main/84)
+  - main Yemi Road is listed twice (main/81, main/91)
 
 ## Model gaps
 - **M1 building kinds with no builder: 0**
 - **M2 parcel kinds with no builder: 0**
 - **M3 civic plots: 0**
-- **M4 places on the map with nothing of their own: 1** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
-  - sport (1): Community Football Pitch (on a back house, (5249, 5290))
+- **M4 places on the map with nothing of their own: 0** (a pitch, market or landmark with no plot or building of its kind under it: give it one in the map)
 
 ## Building kinds here
 front 1255, back 425, stalls 180, shed 131, kiosk 96, brazilian house 53, bank tower 4, school 2, palace 1
