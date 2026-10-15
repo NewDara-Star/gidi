@@ -189,7 +189,7 @@ import cross_sections
 out["cross_sections"]=cross_sections.SECTIONS   # one table of road widths for the generator, the checks and the kit
 _lagos=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
 print("street furniture:",_lagos,furniture.furniture(out,[d for d in _lagos if d not in _frozen]),"| frozen:",hand.apply_frozen(out,"furniture"))
-print("hand edits:",hand.apply_edits(out))
+
 for _d in out["districts"]:
     if _d["id"] in _lagos: _d["fabric"]="lagos"   # built to the cross-sections: the 2D ground plan draws its roads at true width
 
@@ -373,6 +373,8 @@ def rd(o):
     if isinstance(o,tuple): return [rd(x) for x in o]
     if isinstance(o,dict): return {k:rd(v) for k,v in o.items()}
     return o
+# ---- frozen districts (web/hand/<id>.json): replaced by their snapshot, then their hand edits, last of all (scripts/hand.py)
+print("frozen districts:",hand.apply_snapshots(out),"| hand edits:",hand.apply_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)

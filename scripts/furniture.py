@@ -56,8 +56,11 @@ def furniture(out, districts):
         gx, gy = int(p.x // 10), int(p.y // 10)
         return not any(math.dist((p.x, p.y), q) < SPACE for i in (-1, 0, 1) for j in (-1, 0, 1) for q in grid.get((gx + i, gy + j), []))
 
+    def owner(p):   # the district it belongs to: the one it stands in, or the nearest (a light just over the line)
+        return min(polys, key=lambda k: polys[k].distance(p))
+
     def put(kind, p, ang, road):
-        placed.append({'kind': kind, 'x': round(p.x, 1), 'y': round(p.y, 1), 'ang': round(math.degrees(ang) % 360, 1), 'road': road})
+        placed.append({'kind': kind, 'x': round(p.x, 1), 'y': round(p.y, 1), 'ang': round(math.degrees(ang) % 360, 1), 'road': road, 'd': owner(p)})
         grid.setdefault((int(p.x // 10), int(p.y // 10)), []).append((p.x, p.y))
         rep[kind] = rep.get(kind, 0) + 1
 

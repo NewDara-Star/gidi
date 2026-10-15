@@ -18,11 +18,62 @@ import glob, json, os
 from shapely.geometry import Point, Polygon
 
 
+# Everything a district owns in the map data. A frozen district keeps all of it in "snapshot" (scripts/freeze_district.py):
+# the bake replaces the district with its snapshot at the very end, then applies its edits. Arterials, the rail, the water and
+# the ferries cross many districts and stay shared.
+OWNED_DICT = ('streets', 'lanes', 'paths', 'buildings', 'storeys', 'styles', 'parcels', 'walls', 'study')
+OWNED_BY_D = ('mains', 'pois', 'structures', 'canals', 'gates', 'encroach', 'safe_ground', 'gutters', 'furniture')
+OWNED_BY_PLACE = ('junctions', 'quays', 'boardwalks')
+
+
+def _where(item):
+    if isinstance(item, dict):
+        if 'x' in item:
+            return Point(item['x'], item['y'])
+        return Polygon(item['pts']).centroid if len(item['pts']) > 2 else Point(item['pts'][0])
+    return Point(item[len(item) // 2])   # a boardwalk: a list of points
+
+
+def snapshot(out, d):
+    P = Polygon([x for x in out['districts'] if x['id'] == d][0]['poly'][0])
+    S = {k: (out.get(k) or {}).get(d) for k in OWNED_DICT if (out.get(k) or {}).get(d) is not None}
+    for k in OWNED_BY_D:
+        S[k] = [x for x in out.get(k, []) if x.get('d') == d]
+    gids = {g['id'] for g in S.get('gutters', [])}
+    S['gutter_crossings'] = [c for c in out.get('gutter_crossings', []) if c.get('gutter') in gids]
+    for k in OWNED_BY_PLACE:
+        S[k] = [x for x in out.get(k, []) if P.contains(_where(x))]
+    return S
+
+
+def restore(out, d, S):
+    P = Polygon([x for x in out['districts'] if x['id'] == d][0]['poly'][0])
+    for k in OWNED_DICT:
+        if k in S:
+            out.setdefault(k, {})[d] = S[k]
+    for k in OWNED_BY_D:
+        out[k] = [x for x in out.get(k, []) if x.get('d') != d] + S.get(k, [])
+    gids = {g['id'] for g in S.get('gutters', [])}
+    out['gutter_crossings'] = [c for c in out.get('gutter_crossings', []) if not c.get('gutter') in gids and not str(c.get('gutter', '')).startswith(d + '/')] + S.get('gutter_crossings', [])
+    for k in OWNED_BY_PLACE:
+        out[k] = [x for x in out.get(k, []) if not P.contains(_where(x))] + S.get(k, [])
+
+
+def apply_snapshots(out):
+    rep = {}
+    for f in sorted(glob.glob('web/hand/*.json')):
+        H = json.load(open(f))
+        if H.get('snapshot'):
+            restore(out, H['district'], H['snapshot'])
+            rep[H['district']] = sum(len(v) if isinstance(v, list) else 0 for v in H['snapshot'].values())
+    return rep
+
+
 def districts_frozen():
     out = set()
     for f in glob.glob('web/hand/*.json'):
         H = json.load(open(f))
-        if H.get('frozen'):
+        if H.get('frozen') or H.get('snapshot'):
             out.add(H['district'])
     return out
 
@@ -53,7 +104,7 @@ def apply_frozen(out, stage):
             out.setdefault('encroach', []).extend(dict(z, d=d) for z in F.get('encroach', []))
             rep[d] = len(F.get('tables', []))
         else:
-            out.setdefault('furniture', []).extend(F.get('furniture', []))
+            out.setdefault('furniture', []).extend(dict(f_, d=d) for f_ in F.get('furniture', []))
             rep[d] = len(F.get('furniture', []))
     return rep
 
@@ -78,7 +129,7 @@ def apply_edits(out):
                     dx, dy = e['by']; b = out['buildings'][d][i]
                     out['buildings'][d][i] = [b[0]] + [[round(x + dx, 1), round(y + dy, 1)] for x, y in b[1:]]
             elif op == 'add furniture':
-                out.setdefault('furniture', []).append({k: e[k] for k in ('kind', 'x', 'y', 'ang')} | {'road': e.get('note', '')})
+                out.setdefault('furniture', []).append({k: e[k] for k in ('kind', 'x', 'y', 'ang')} | {'road': e.get('note', ''), 'd': d})
             elif op == 'delete furniture':
                 P = Point(e['at'])
                 c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if not e.get('kind') or f_['kind'] == e['kind']]
