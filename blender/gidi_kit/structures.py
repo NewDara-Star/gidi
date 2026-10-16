@@ -340,7 +340,7 @@ def jetty(mb, pts, w, rng, z=0.9):
             canoe(mb, Matrix.Translation((p.x, p.y, 0.08)) @ Matrix.Rotation(ang + rng.between(-0.2, 0.2), 4, 'Z'), rng)
 
 
-def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True):
+def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True, gap=lambda p: False):
     """A dual carriageway: asphalt, lane dashes, yellow edge lines, a Jersey barrier median painted
     in black and white blocks, double-arm lamps on the median every 40 m (a share dead)."""
     from . import roadside
@@ -366,12 +366,15 @@ def expressway(mb, pts, w, rng, median=True, lamps=None, keep=lambda p: True):
             k = 0.0
             while k < L:
                 q = A + d * (k + 2)
+                if gap((q.x, q.y)):   # a junction: the barrier opens for the crossing road
+                    k += 4
+                    continue
                 mb.box('concrete', Matrix.Translation((q.x, q.y, 0.47)) @ Matrix.Rotation(ang, 4, 'Z'), hex_rgb('#1a1a1a') if int(k // 4) % 2 else hex_rgb('#f2f2ee'), 0.6, size=(3.96, 0.5, 0.8))
                 k += 4
             k = 20.0
             while k < L:
                 q = A + d * k
-                if keep((q.x, q.y)):
+                if keep((q.x, q.y)) and not gap((q.x, q.y)):
                     lr = rng.child('lamp', round(q.x), round(q.y))
                     heads = roadside.street_light(mb, q.x, q.y, ang + math.pi / 2, lr, arms=2, h=10, working=not lr.chance(0.25), z0=0.87, banners=lr.chance(0.5))
                     if lamps is not None:

@@ -505,7 +505,7 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
       if (!this.manifest || now - this.lastAt < 250) return;
       this.lastAt = now;
       const close = d < 2600;
-      const ring = !close ? -1 : d < 1200 ? 1 : 2;   // a light tile is ~1M triangles: 9 to 25 of them
+      const ring = !close ? -1 : 1;   // the 9 light tiles round the view (~0.5M triangles each with terrain); 25 ran Safari out of memory
       const full = d < 450;                          // a full one is ~7M: only the tile you're over
       const tx = Math.floor(target.x / TILE), ty = Math.floor(target.z / TILE);
       const want = new Map();
@@ -647,7 +647,7 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
           vc.copy(v).applyMatrix4(camera.matrixWorldInverse);   // behind the camera: never show
           v.project(camera);
           if (!show || vc.z > -1 || v.z > 1 || v.x < -1.1 || v.x > 1.1 || v.y < -1.1 || v.y > 1.1) { e.hidden = true; return; }
-          if (l.kind === "p") { const dd = camera.position.distanceTo(new THREE.Vector3(l.x, 0, l.z)); if (dd > 3200) { e.hidden = true; return; } }
+          if (l.kind === "p") { const dd = camera.position.distanceTo(new THREE.Vector3(l.x, 0, l.z)); if (dd > Math.min(3200, Math.max(600, dist * 2.5))) { e.hidden = true; return; }   // at street level only the places near you, not a pile-up on the horizon }
           e.hidden = false; e.style.left = ((v.x + 1) / 2 * w) + "px"; e.style.top = ((1 - v.y) / 2 * hh) + "px";
         });
       };

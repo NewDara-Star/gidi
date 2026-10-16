@@ -794,6 +794,13 @@ def build_tile(tx, ty, overrides):
             for gx in range(int(min(a[0], b[0]) // 20) - 1, int(max(a[0], b[0]) // 20) + 2):
                 for gy in range(int(min(a[1], b[1]) // 20) - 1, int(max(a[1], b[1]) // 20) + 2):
                     seg_grid.setdefault((gx, gy), []).append((a, b, r['w'] / 2 + 0.25, r['id']))
+    for r in ARTS:   # the arterials too: a side road's kerb used to run straight across a four-lane road
+        if r['cls'] == 'bridge' or not any(near(p, 60) for p in r['pts']) and not any(dist_seg(((x0 + x1) / 2, (y0 + y1) / 2), r['pts'][i], r['pts'][i + 1]) < SIZE for i in range(len(r['pts']) - 1)):
+            continue
+        for a, b in zip(r['pts'], r['pts'][1:]):
+            for gx in range(int(min(a[0], b[0]) // 20) - 1, int(max(a[0], b[0]) // 20) + 2):
+                for gy in range(int(min(a[1], b[1]) // 20) - 1, int(max(a[1], b[1]) // 20) + 2):
+                    seg_grid.setdefault((gx, gy), []).append((a, b, r['w'] / 2 + 0.25, 'art/' + r['name']))
 
     def on_other_road(p, rid):
         return any(dist_seg(p, a, b) < hw for a, b, hw, oid in seg_grid.get((int(p[0] // 20), int(p[1] // 20)), ()) if oid != rid)
@@ -1201,7 +1208,8 @@ def build_tile(tx, ty, overrides):
             (structures.cable_bridge if 'Cable' in a_['name'] else structures.long_bridge)(tm, pts, w, rng, keep=inside, lamps=LAMPS, zs=BRIDGE_Z.get(a_['name']))
             continue
         for piece in clip_line_rect(pts, x0, y0, x1, y1):
-            structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5), lamps=LAMPS, keep=inside)
+            structures.expressway(tm, piece, w, rng, median=a_['cls'] == 'exp' or rng.chance(0.5), lamps=LAMPS, keep=inside,
+                                  gap=lambda p, rid='art/' + a_['name']: on_other_road(p, rid))   # the median opens where a road crosses
     for qy in GD.get('quays', []):  # sea walls; the land behind is made up to their top, so here the top is the ground
         for piece in clip_line_rect([P(p) for p in qy['pts']], x0, y0, x1, y1):
             structures.quay(tm, piece, 0.3, Rng('quay', round(qy['pts'][0][0])))
