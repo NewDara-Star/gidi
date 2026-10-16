@@ -19,6 +19,7 @@
   - thaw a frozen district (`GIDI_THAW`) for road work
 
 **Next, booked by the owner:**
+- **Hand-making happens on the drawing board** from now on (owner, 16 Oct): place and fix things there, then "bake the board".
 - **Saturday 18 Oct: the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
 - **The owner storyboards the first cutscene** (the boss's office) as comic panels.
 
@@ -40,6 +41,7 @@
 - **No trees in the sea** (#81). **Full builds cover the whole map** (#81): the runner had the v1 height hard-coded and skipped the Atlantic coast.
 - **77 beach huts out of the sea** (#82): the v2 coast has no beach strip yet.
 - **The 3D city rebuilt** with terrain, the new pieces and every fix: 443 tiles, copied into `~/gidi/web/city` on 16 Oct.
+- **The drawing board** (`docs/BOARD.md`): a clean plan of the city to scale (road edges, plots, walls, houses, furniture, places) where everything can be checked, moved, turned, deleted and added; edits save as hand edits. Start it with `python3 scripts/board_server.py`, open http://127.0.0.1:8777/web/board.html.
 - **Full builds can stand on the terrain** (`city_run.py --terrain`, #76). A full rebuild with terrain was started 16 Oct; the old 3D tiles (15 Oct, v1 map) explained the trees in the water and the poles in the road.
 - **Life in Gidi** (`world-life.md`): the owner's world-building ideas.
 

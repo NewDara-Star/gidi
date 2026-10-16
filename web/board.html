@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gidi Drawing Board</title>
+<style>
+:root {
+  --paper: #f5f3ed; --ink: #23262b; --muted: #6b6f76; --line: #d8d4c8; --panel: #ffffff; --panel-line: #e2ded3;
+  --accent: #1f6feb; --bad: #d1242f; --warn: #bf8700; --ok: #1a7f37; --water: #bcd9ec; --water-line: #8fb7d3;
+  --land: #f1eee6; --district: #a49e8f; --sel: #1f6feb; --ghost: rgba(31, 111, 235, .35);
+  --walk: #dcd8ce; --gutter: #9ba4a9; --tar: #6f7378; --worn: #898d91; --interlock: #a99a8b; --laterite: #c88d5e; --sand: #d9c69c; --mud: #7d6c57;
+  --home: #ebe5d8; --home-line: #4a4740; --trade: #f0e2c4; --civic: #dde7f2; --works: #e3ddd4; --water-b: #cfe0ea;
+  --plot: rgba(120, 160, 90, .12); --plot-line: #7f9a6b; --wall: #3b3a36; --zone: rgba(191, 135, 0, .10);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #15171a; --ink: #e8e6e1; --muted: #9a9ea6; --line: #33363b; --panel: #1d2024; --panel-line: #2e3137;
+  --accent: #4c9aff; --bad: #ff6b6b; --warn: #e3b341; --ok: #3fb950; --water: #1d3242; --water-line: #2f5068;
+  --land: #1a1c1f; --district: #5d5a52; --sel: #4c9aff; --ghost: rgba(76, 154, 255, .35);
+  --walk: #34363a; --gutter: #4b5257; --tar: #55595e; --worn: #62666b; --interlock: #6d6359; --laterite: #8a5f3f; --sand: #8e8063; --mud: #4f4537;
+  --home: #3a3732; --home-line: #b9b3a6; --trade: #4a4232; --civic: #2f3a46; --works: #3a3631; --water-b: #2a3a44;
+  --plot: rgba(120, 160, 90, .14); --plot-line: #6f8a5b; --wall: #c9c4b8; --zone: rgba(227, 179, 65, .10);
+} }
+:root[data-theme="dark"] {
+  --paper: #15171a; --ink: #e8e6e1; --muted: #9a9ea6; --line: #33363b; --panel: #1d2024; --panel-line: #2e3137;
+  --accent: #4c9aff; --bad: #ff6b6b; --warn: #e3b341; --ok: #3fb950; --water: #1d3242; --water-line: #2f5068;
+  --land: #1a1c1f; --district: #5d5a52; --sel: #4c9aff; --ghost: rgba(76, 154, 255, .35);
+  --walk: #34363a; --gutter: #4b5257; --tar: #55595e; --worn: #62666b; --interlock: #6d6359; --laterite: #8a5f3f; --sand: #8e8063; --mud: #4f4537;
+  --home: #3a3732; --home-line: #b9b3a6; --trade: #4a4232; --civic: #2f3a46; --works: #3a3631; --water-b: #2a3a44;
+  --plot: rgba(120, 160, 90, .14); --plot-line: #6f8a5b; --wall: #c9c4b8; --zone: rgba(227, 179, 65, .10);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--paper); color: var(--ink); font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; overflow: hidden; }
+#cv { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: default; }
+#cv.pan { cursor: grab; } #cv.panning { cursor: grabbing; } #cv.place { cursor: crosshair; } #cv.move { cursor: move; }
+.bar { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; pointer-events: none; }
+.bar > * { pointer-events: auto; }
+.group { display: flex; gap: 2px; background: var(--panel); border: 1px solid var(--panel-line); border-radius: 8px; padding: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.group button, .group select, .group label { font: inherit; color: var(--ink); background: transparent; border: 0; border-radius: 5px; padding: 5px 9px; cursor: pointer; white-space: nowrap; }
+.group select { background: var(--paper); border: 1px solid var(--panel-line); padding: 4px 6px; }
+.group button:hover { background: var(--line); }
+.group button.on { background: var(--accent); color: #fff; }
+.group label { display: flex; align-items: center; gap: 4px; padding: 5px 6px; }
+.title { font-weight: 650; padding: 5px 10px; }
+#panel { position: fixed; right: 12px; top: 64px; width: 300px; max-height: calc(100% - 140px); overflow: auto; background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px; padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+#panel h3 { margin: 0 0 6px; font-size: 14px; }
+#panel .k { color: var(--muted); }
+#panel table { width: 100%; border-collapse: collapse; margin: 6px 0; }
+#panel td { padding: 2px 0; vertical-align: top; }
+#panel td:first-child { color: var(--muted); width: 38%; }
+#panel .row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+#panel button, #panel input { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--panel-line); border-radius: 6px; padding: 4px 8px; }
+#panel button { cursor: pointer; } #panel button:hover { border-color: var(--accent); }
+#panel input { width: 100%; }
+#panel .bad { color: var(--bad); } #panel .ok { color: var(--ok); }
+#panel hr { border: 0; border-top: 1px solid var(--panel-line); margin: 10px 0; }
+#status { position: fixed; left: 12px; bottom: 12px; right: 12px; display: flex; gap: 10px; align-items: center; pointer-events: none; flex-wrap: wrap; }
+#status > div { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 7px; padding: 4px 9px; pointer-events: auto; }
+#toast { position: fixed; left: 50%; top: 64px; transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 7px 12px; border-radius: 7px; display: none; max-width: 80%; }
+#help { color: var(--muted); font-size: 12px; }
+kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; border: 1px solid var(--panel-line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--paper); }
+@media (max-width: 720px) { #panel { left: 12px; right: 12px; width: auto; top: auto; bottom: 56px; max-height: 40%; } }
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div class="bar">
+  <div class="group"><span class="title">Gidi drawing board</span><select id="district" aria-label="District"></select></div>
+  <div class="group" id="tools">
+    <button data-tool="select" class="on" title="Select, move, turn (V)">Select</button>
+    <button data-tool="furniture" title="Place street furniture (F)">Furniture</button>
+    <button data-tool="building" title="Draw a building: drag a box (B)">Building</button>
+    <button data-tool="street" title="Draw a street: click points, Enter to finish (S)">Street</button>
+    <button data-tool="surface" title="Paint a road's surface (U)">Surface</button>
+  </div>
+  <div class="group"><select id="kind" aria-label="Kind to place"></select></div>
+  <div class="group" id="layers"></div>
+  <div class="group"><button id="theme" title="Light or dark">◐</button></div>
+</div>
+<div id="panel"></div>
+<div id="status"><div id="where">–</div><div id="pending">–</div><div id="checks">–</div></div>
+<div id="toast"></div>
+<script src="gidi-data.js"></script>
+<script src="board.js"></script>
+</body>
+</html>

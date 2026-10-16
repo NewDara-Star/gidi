@@ -10,9 +10,13 @@
 # edits, each {"op": ..., "note": "why"}:
 #   {"op": "add building", "kind": "kiosk", "pts": [[x, y], ...]}          a footprint, storeys 1 unless "storeys"
 #   {"op": "delete building", "at": [x, y], "kind": "stalls" (optional)}  the building whose footprint holds the point
-#   {"op": "move building", "at": [x, y], "by": [dx, dy]}
+#   {"op": "move building", "at": [x, y], "by": [dx, dy], "rotate": deg (optional, about its middle, after the move)}
 #   {"op": "add furniture", "kind": "lasma post", "x": .., "y": .., "ang": ..}
 #   {"op": "delete furniture", "at": [x, y], "kind": "pole" (optional)}  the nearest within 2 m
+#   {"op": "move furniture", "at": [x, y], "kind": "pole" (optional), "to": [x, y], "ang": deg (optional)}  the nearest within 2 m
+#   {"op": "move monument", "at": [x, y], "to": [x, y], "ang": deg (optional)}  /  {"op": "delete monument", "at": [x, y]}  the nearest within 3 m
+#   {"op": "delete place", "name": "..."}
+# (scripts/board_server.py writes these from the drawing board, web/board.html)
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
 #   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
 #   {"op": "move place", "name": "...", "x": .., "y": ..}
@@ -29,7 +33,7 @@
 # labels and surfaces, applied after the surfaces are set:
 #   {"op": "set surface", "at": [x, y], "surface": "mud"}          tar, worn, interlock, laterite, sand or mud
 #   {"op": "name", "at": [x, y], "kind": "bus stop", "name": "..."}  a piece of furniture within 2 m gets a name (its label)
-import glob, json, os
+import glob, json, math, os
 from shapely.geometry import Point, Polygon
 
 
@@ -271,8 +275,13 @@ def apply_edits(out):
                 if op == 'delete building':
                     _drop_building(out, d, i)
                 else:
-                    dx, dy = e['by']; b = out['buildings'][d][i]
-                    out['buildings'][d][i] = [b[0]] + [[round(x + dx, 1), round(y + dy, 1)] for x, y in b[1:]]
+                    dx, dy = e.get('by', [0, 0]); b = out['buildings'][d][i]
+                    pts = [[x + dx, y + dy] for x, y in b[1:]]
+                    if e.get('rotate'):   # turned about its middle
+                        cx, cy = sum(q[0] for q in pts) / len(pts), sum(q[1] for q in pts) / len(pts)
+                        c, s_ = math.cos(math.radians(e['rotate'])), math.sin(math.radians(e['rotate']))
+                        pts = [[cx + (x - cx) * c - (y - cy) * s_, cy + (x - cx) * s_ + (y - cy) * c] for x, y in pts]
+                    out['buildings'][d][i] = [b[0]] + [[round(x, 1), round(y, 1)] for x, y in pts]
             elif op == 'add furniture':
                 out.setdefault('furniture', []).append({k: e[k] for k in ('kind', 'x', 'y', 'ang')} | {'road': e.get('note', ''), 'd': d})
             elif op == 'delete furniture':
@@ -283,6 +292,34 @@ def apply_edits(out):
                     out['furniture'].pop(min(c)[1])
                 else:
                     print('  hand edit found no furniture at', e['at'], e.get('note', ''))
+            elif op == 'move furniture':   # the nearest of its kind within 2 m goes to "to", turned to "ang"
+                P = Point(e['at'])
+                c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if not e.get('kind') or f_['kind'] == e['kind']]
+                c = [x for x in c if x[0] < 2.0]
+                if not c:
+                    print('  hand edit found no furniture at', e['at'], e.get('note', '')); continue
+                f_ = out['furniture'][min(c)[1]]
+                f_['x'], f_['y'] = e['to']
+                if 'ang' in e:
+                    f_['ang'] = e['ang']
+            elif op in ('move monument', 'delete monument'):   # the nearest within 3 m
+                P = Point(e['at'])
+                c = [(Point(m['x'], m['y']).distance(P), i) for i, m in enumerate(out.get('monuments', []))]
+                c = [x for x in c if x[0] < 3.0]
+                if not c:
+                    print('  hand edit found no monument at', e['at'], e.get('note', '')); continue
+                if op == 'delete monument':
+                    out['monuments'].pop(min(c)[1])
+                else:
+                    m = out['monuments'][min(c)[1]]
+                    m['x'], m['y'] = e['to']
+                    if 'ang' in e:
+                        m['ang'] = e['ang']
+            elif op == 'delete place':
+                n0 = len(out['pois'])
+                out['pois'] = [p for p in out['pois'] if p['name'] != e['name']]
+                if len(out['pois']) == n0:
+                    print('  hand edit found no place called', e['name']); continue
             elif op == 'add place':   # a named place (a pin): {"name", "type", "x", "y", "note"}
                 out['pois'].append({'name': e['name'], 'type': e['type'], 'note': e.get('note', ''), 'd': d, 'x': e['x'], 'y': e['y'], 'hand': True})
             elif op == 'move place':  # a named place moves: {"name", "x", "y"}
