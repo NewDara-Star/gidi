@@ -105,7 +105,7 @@
     "note": "Maze of tokunbo car parts. Chop-shop missions."
    },
    {
-    "name": "Pedro Print Row",
+    "name": "Press Row",
     "type": "industry",
     "u": 0.7,
     "v": 0.7,
@@ -119,7 +119,7 @@
     "note": "Canal that divides two street gangs. Crossing changes who chases you."
    },
    {
-    "name": "Daleko Grain Yard",
+    "name": "Gari Yard",
     "type": "market",
     "u": 0.15,
     "v": 0.2,

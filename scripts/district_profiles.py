@@ -98,7 +98,7 @@ def maze(ST, LM):
         ],
         # smaller places taken from finished blocks
         "parcels": [
-            {"kind": "industrial", "poi": "Daleko Grain Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False,   # houses and yards hug the line
+            {"kind": "industrial", "poi": "Gari Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False,   # houses and yards hug the line
              "gate": "north"},   # owner's review: a north entrance onto the nearest street (it only opened to the south)
             {"kind": "motor park", "ha": round(LM["bus_stations"]["area_m2"]["p25"] / 1e4, 2), "near": "junction", "near_main": True, "min_w": 35},  # small park where the through-road meets Ring Road
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
@@ -109,7 +109,7 @@ def maze(ST, LM):
         "rail_frontage": True,           # plots along the line are built 6 m from the track (real: 658 buildings within 30 m, 247 within 15 m); off for the Hub
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
-        "print_row": {"poi": "Pedro Print Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
+        "print_row": {"poi": "Press Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
         "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5}],   # one transformer feeding a whole block
         # the opening (owner, Oct 2026): Tunde's room is a short walk from the parts market; The steal is the stall at its near (east)
         # end; the chase runs the length of the market and comes out across Idowu Street from the boss's motor park in the Hub

@@ -79,7 +79,7 @@ free = land_local.difference(blocked).buffer(-0.3)
 P = {p["name"]: (p["x"] - cx, p["y"] - cy) for p in pois}
 reserve = {
  "Ladi Lane Parts Market": Point(P["Ladi Lane Parts Market"]).buffer(55),
- "Daleko Grain Yard": Point(P["Daleko Grain Yard"]).buffer(35),
+ "Gari Yard": Point(P["Gari Yard"]).buffer(35),
  "The steal": Point(P["The steal"]).buffer(22),
 }
 reserved = unary_union(list(reserve.values()))
@@ -170,7 +170,7 @@ for row in range(-4, 5):
         if Point(x, y).distance(Point(mx, my)) < 52 and free.buffer(6).contains(Point(x, y)):
             if rnd.random() < 0.18: continue
             stalls.append({"x": round(x + rnd.uniform(-1.5, 1.5), 1), "y": round(y + rnd.uniform(-1.5, 1.5), 1), "a": round(rnd.uniform(-0.12, 0.12), 3), "w": round(rnd.uniform(5, 7.5), 1), "d": round(rnd.uniform(3.5, 5), 1), "c": rnd.choice(["#4f79a8", "#b5574a", "#c99a45", "#5b8a6a", "#8d8a84", "#8d8a84", "#a8a39a"])})
-gx, gy = P["Daleko Grain Yard"]
+gx, gy = P["Gari Yard"]
 landmarks = {
  "stalls": stalls,
  "warehouse": {"x": round(gx, 1), "y": round(gy, 1), "w": 46, "d": 26, "a": 0.2, "h": 9},

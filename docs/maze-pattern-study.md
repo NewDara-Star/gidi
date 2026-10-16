@@ -117,7 +117,7 @@ Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 
    - Inside are 120 rows of lock-up shops, each 16 × 4 m (four lock-ups under one roof), with 3.5 m aisles: the maze of tokunbo parts.
    - v1's market was 35 loose stalls on a block taken after the streets were drawn.
 4. **Smaller places, taken from finished blocks:**
-   - **Daleko Grain Yard (industrial):** 2.7 ha, with two 46 × 30 m warehouses. It sits on the rail side of the district near its pin, one block back from the track (65 m).
+   - **Gari Yard (industrial):** 2.7 ha, with two 46 × 30 m warehouses. It sits on the rail side of the district near its pin, one block back from the track (65 m).
    - **Motor park:** 0.31 ha, at the junction of Adeleke Road and Ring Road. Its size is the real 25th percentile of bus parks, so a small park.
    - **School:** 1.1 ha, the real median compound. It goes in the quietest corner, off the arterials. The real mean is 2.4 ha, pulled up by campuses, so we used the median.
    - **Pitch:** 0.13 ha, next to the school. The real median is 0.07 ha, a small street-football pitch; the smallest block free there was a little bigger.
@@ -127,7 +127,7 @@ Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 
    - Streets cross it on culverts. It stops at the rail.
    - **One footbridge** sits in the longest stretch between street crossings. Daramola's model asks for "a canal with a footbridge".
 6. **Small named things:**
-   - **Pedro Print Row:** the front houses along 180 m of the street nearest the pin are presses and copy shops. That is 10 buildings, each 2–3 storeys, as in the district model.
+   - **Press Row:** the front houses along 180 m of the street nearest the pin are presses and copy shops. That is 10 buildings, each 2–3 storeys, as in the district model.
    - **Transformer 44:** a 3 × 2.5 m transformer plinth on the street edge near its pin.
    - **The steal:** a food stall on the street edge near its pin.
 7. **Houses back onto the rail.**
@@ -222,9 +222,9 @@ A separate check confirms that a Maze street or Adeleke Road reaches every one o
 ## 6. Public places
 - **Done:**
   - Ladi Lane Parts Market: carved out on Ring Road, with rows of lock-ups
-  - Daleko Grain Yard: two warehouses on the rail side
+  - Gari Yard: two warehouses on the rail side
   - Gang Canal: with one footbridge, the gang line
-  - Pedro Print Row: house-front presses
+  - Press Row: house-front presses
   - Transformer 44
   - The steal: the food stall
   - a school compound and pitch

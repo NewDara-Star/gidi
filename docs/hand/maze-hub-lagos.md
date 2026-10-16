@@ -1,4 +1,4 @@
-# The Maze and the Hub: what makes them unmistakably Lagos (draft for the owner to check)
+# The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026)
 
 The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from:
 - **photo:** the owner's reference photos (`~/Real-world/research/refs/REVIEW.md`)
@@ -7,9 +7,12 @@ The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md
 - **brief:** the district brief (`web/districts_info.json`)
 - **story:** the Act 1 draft
 
-Tick, cross out or add. Nothing here is placed until the owner has checked it.
+**Agreed (16 Oct):** the owner left the choice to Claude ("Decide. I trust your judgment"). All 23 items go in as written; the names are settled below.
 
-## Names to change first (they're real Lagos names)
+## Names (settled 16 Oct)
+- **Pedro Print Row becomes Press Row; Daleko Grain Yard becomes Gari Yard.** Ladi Lane stays (invented; a nod to Ladipo, not a copy), and so does National Bowl.
+
+**What was weighed:**
 - **"Pedro Print Row"** is the real Pedro Road print district in Shomolu. Suggestions: **Press Row**, **Ink Lane**, **Copier Street**.
 - **"Ladi Lane Parts Market"** is invented, but close to the real Ladipo auto-parts market in Mushin, its inspiration. It's in the locked opening and the story, so it's the owner's call: keep it (a nod, not a copy) or change it.
 - **"Daleko Grain Yard"** is the real Daleko market in Mushin. Suggestions: **Gari Yard**, **Sack Yard**, **Eleja Grain Yard** (an invented Yoruba-style name).
@@ -24,7 +27,7 @@ Tick, cross out or add. Nothing here is placed until the owner has checked it.
 
 **The streets:**
 6. **The parts trade spilling onto the road.** Engines and doors on the walkway, a mechanic under a car in the carriageway, the lane kept clear by shouting (ism 6, photo assets 8).
-7. **Press Row (renamed).** Print kiosks bolted onto the fronts of 2–3 storey houses: laminating machines, paper bales, ink drums, running at 4 a.m. (brief).
+7. **Press Row.** Print kiosks bolted onto the fronts of 2–3 storey houses: laminating machines, paper bales, ink drums, running at 4 a.m. (brief).
 8. **Gang Canal.** An open concrete channel with green-black water and plastic. One footbridge is the gang line; elsewhere, plank crossings. Streets that dead-end at the canal (brief; photo gutters 3, 9, 10; ism 1).
 9. **Transformer 44.** One transformer on a pole feeding a whole block, with a nest of wires and a generator beside it (brief).
 10. **The rail edge.** Streets that dead-end at the tracks, with people climbing over (ism 2: Mushin is the real place for it).
