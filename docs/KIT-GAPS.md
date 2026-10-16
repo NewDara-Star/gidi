@@ -40,3 +40,6 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
   - a wheelbarrow of phone cases and chargers, with a man in an earpiece
   - a fruit tray table
   - a parking boy's plastic chair and ticket book
+- **The motor park's union office** (kind `office`, the Hub: the boss's office). A one-room block shack with a door and a window to the yard, a painted sign, a bench outside. The inside is the first cutscene's set: desk, plastic chairs, standing fan, church calendar, small TV.
+- **Agberos** (furniture kind `agbero`): a man with a ticket book and a whip of notes, standing at the gate.
+- **The buka** (kind `buka`, the Maze: Flyover Buka): a lean-to kitchen, pots on a coal fire, benches.

@@ -16,6 +16,7 @@
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
 #   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
 #   {"op": "move place", "name": "...", "x": .., "y": ..}
+#   {"op": "add parcel", "kind": "motor park", "pts": [[x, y], ...]}  /  {"op": "delete parcel", "at": [x, y]}
 # road edits (owner, 16 Oct: hand placement covers roads, streets and labels), applied early in the bake, before the clean-up, so a
 # road placed by hand gets its junctions, gutters, furniture and surface like any other:
 #   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
@@ -277,6 +278,15 @@ def apply_edits(out):
                 if q is None:
                     print('  hand edit found no place called', e['name']); continue
                 q['x'], q['y'] = e['x'], e['y']
+            elif op == 'add parcel':   # a plot (yard, park, market...): {"kind", "pts", "name"}
+                out.setdefault('parcels', {}).setdefault(d, []).append({'kind': e['kind'], 'pts': e['pts']})
+            elif op == 'delete parcel':   # the plot holding the point
+                P = Point(e['at']); L_ = (out.get('parcels') or {}).get(d, [])
+                hit = [i for i, q in enumerate(L_) if Polygon(q['pts']).buffer(0.5).contains(P)]
+                if hit:
+                    L_.pop(hit[0])
+                else:
+                    print('  hand edit found no plot at', e['at'], e.get('note', ''))
             elif op == 'add zone':
                 out.setdefault('encroach', []).append({'kind': e['kind'], 'd': d, 'pts': e['pts']})
             rep[d] = rep.get(d, 0) + 1
