@@ -1,61 +1,61 @@
 {
  "id": "watertown",
  "squares": 1,
- "buildings": 4508,
+ "buildings": 4981,
  "land_km2": 0.915,
  "storeys_by_area": {
-  "1": 0.323,
-  "2": 0.412,
+  "1": 0.234,
+  "2": 0.503,
   "3": 0.181,
   "4": 0.044,
-  "5": 0.023,
-  "6": 0.007,
-  "7": 0.008,
-  "8": 0.001
+  "5": 0.016,
+  "6": 0.013,
+  "7": 0.005,
+  "8": 0.004
  },
  "measures": {
   "buildings per km2 (built squares)": {
-   "gidi": 4660.0,
+   "gidi": 5352.0,
    "real": 3434.0
   },
   "ground built over": {
-   "gidi": 0.31,
+   "gidi": 0.371,
    "real": 0.391
   },
   "touching": {
-   "gidi": 0.638,
+   "gidi": 0.76,
    "real": 0.844
   },
   "under 40 m2": {
-   "gidi": 0.367,
+   "gidi": 0.315,
    "real": 0.284
   },
   "street front occupied": {
-   "gidi": 0.821,
+   "gidi": 0.857,
    "real": 0.846
   },
   "block fill": {
-   "gidi": 0.36,
+   "gidi": 0.45,
    "real": 0.544
   },
   "line to the street, deg": {
-   "gidi": 1.7,
+   "gidi": 2.1,
    "real": 4.5
   },
   "footprint median m2": {
-   "gidi": 49.1225,
+   "gidi": 49.205,
    "real": 55.9
   },
   "storeys 1 (by area)": {
-   "gidi": 0.3234,
+   "gidi": 0.2335,
    "real": 0.14
   },
   "storeys 2 (by area)": {
-   "gidi": 0.4124,
+   "gidi": 0.5031,
    "real": 0.597
   },
   "storeys 3+ (by area)": {
-   "gidi": 0.2643,
+   "gidi": 0.2634,
    "real": 0.263
   },
   "drivable km per km2 (whole land)": {

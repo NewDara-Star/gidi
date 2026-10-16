@@ -1,65 +1,65 @@
 {
  "id": "maze",
  "squares": 8,
- "buildings": 4935,
+ "buildings": 4838,
  "land_km2": 1.556,
  "storeys_by_area": {
-  "1": 0.224,
-  "2": 0.419,
-  "3": 0.212,
-  "4": 0.062,
-  "5": 0.052,
-  "6": 0.014,
-  "7": 0.011,
-  "8": 0.006
+  "1": 0.158,
+  "2": 0.485,
+  "3": 0.211,
+  "4": 0.063,
+  "5": 0.048,
+  "6": 0.018,
+  "7": 0.01,
+  "8": 0.007
  },
  "measures": {
   "buildings per km2 (built squares)": {
-   "gidi": 3102.0,
+   "gidi": 3050.0,
    "real": 2556.0
   },
   "ground built over": {
-   "gidi": 0.356,
+   "gidi": 0.4145,
    "real": 0.442
   },
   "touching": {
-   "gidi": 0.676,
+   "gidi": 0.718,
    "real": 0.777
   },
   "under 40 m2": {
-   "gidi": 0.238,
+   "gidi": 0.166,
    "real": 0.205
   },
   "street front occupied": {
-   "gidi": 0.727,
+   "gidi": 0.701,
    "real": 0.767
   },
   "block fill": {
-   "gidi": 0.3825,
+   "gidi": 0.406,
    "real": 0.52
   },
   "line to the street, deg": {
-   "gidi": 1.75,
+   "gidi": 2.5,
    "real": 3.8
   },
   "footprint median m2": {
-   "gidi": 93.245,
+   "gidi": 108.19,
    "real": 122.3
   },
   "storeys 1 (by area)": {
-   "gidi": 0.2237,
+   "gidi": 0.1577,
    "real": 0.111
   },
   "storeys 2 (by area)": {
-   "gidi": 0.4187,
+   "gidi": 0.4847,
    "real": 0.536
   },
   "storeys 3+ (by area)": {
-   "gidi": 0.3576,
+   "gidi": 0.3577,
    "real": 0.353
   },
   "drivable km per km2 (whole land)": {
-   "gidi": 20.3474,
+   "gidi": 19.1074,
    "real": 17.7
   }
  }

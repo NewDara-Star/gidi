@@ -378,6 +378,12 @@ _ir,_iw=isms.run(out)
 print("isms:",{k:{"km":round(sum(s["open_m"]+s["covered_m"] for s in v.values())/1000)} for k,v in _ir.items()},len(out["gutters"]),"gutter runs,",len(out["gutter_crossings"]),"crossings")
 for _s in _iw: print("  isms-edits warning:",_s)
 
+# ---- road surfaces (scripts/surfaces.py): tar, worn, interlock, laterite, sand, mud, on the final roads
+import surfaces
+_SZ={d:[(Polygon(z["pts"]),any(w in z["type"] for w in ("open","sparser","spaced"))) for z in F.get("zones",[])] for d,F in GEN.items()}
+_st=surfaces.surfaces(out,json.load(open("web/terrain.json")),_SZ)
+print("road surfaces:",{k:round(sum(v for (d,kk),v in _st.items() if kk==k)/1000) for k in surfaces.KINDS},"km")
+
 def rd(o):
     if isinstance(o,float): return round(o,1)
     if isinstance(o,list): return [rd(x) for x in o]

@@ -6,7 +6,7 @@ import json, math, random, sys, os
 import numpy as np
 from shapely.geometry import Polygon, LineString, Point, box, MultiLineString
 from shapely.ops import unary_union, polygonize, nearest_points, substring, linemerge
-from shapely.affinity import rotate, translate
+from shapely.affinity import rotate, translate, scale
 from shapely.strtree import STRtree
 sys.path.insert(0, "scripts"); from fabric_metrics import measure, lines, extend, noded
 from district_profiles import profile, height_bands, STOREY_BANDS
@@ -385,7 +385,7 @@ for P in secs2:
     c = P.centroid; Pr = rotate(P, -th, origin=c, use_radians=True)  # frontage now runs along x; ribs run along y
     minx, miny, maxx, maxy = Pr.bounds
     xs = []; x = minx + rnd.uniform(20, 55)
-    while x < maxx - 25: xs.append(x); x += SCALE * RULE["rib_spacing"](rnd.uniform(0.2, 0.97))
+    while x < maxx - 25: xs.append(x); x += SCALE * PROF.get("rib_scale", 1.0) * RULE["rib_spacing"](rnd.uniform(0.2, 0.97))   # rib_scale: the calibration's street spacing
     ribs = []
     for x in xs:
         tilt = math.radians(rnd.uniform(-3.5, 3.5)); H = maxy - miny + 80
@@ -965,7 +965,8 @@ def reachable(r):   # someone has to walk to its door: no building more than 44 
 def place(plot, r):
     if LAGOS and kind_now[0] in ("front", "back"):   # hand-built, not machine-set: a few degrees off square (real median 4.8 deg);
         wb = rnd.gauss(0, PROF["wobble_deg"])         # if the turn won't fit the plot, less of it, then none: a house is never lost to it
-        return any(_place(plot, rotate(r, wb * f, origin="centroid")) for f in (1.0, 0.5, 0.0))
+        # a tight plot: the turned house a little smaller first (real Lagos houses both sit off square and squeeze in), then less turn
+        return any(_place(plot, scale(rotate(r, wb * f, origin="centroid"), k, k, origin="centroid")) for f, k in ((1.0, 1.0), (1.0, 0.92), (0.5, 1.0), (0.0, 1.0)))
     return _place(plot, r)
 def _place(plot, r):
     if not reachable(r): return False
@@ -1052,7 +1053,7 @@ for _, p, q, bi in fronts:
         big_ok = PROF and cl >= CLEAR["main"]   # big shops, plazas and warehouses face the main roads (real: 73 m from a main vs 183 m for all)
         while t < L - 4:
             big = big_ok and rnd.random() < QV("big_front", RULE["big_front"])
-            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97))))) * math.sqrt(QV("size_scale", 1.0))) + RULE["gap"]()
+            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97))))) * math.sqrt(PROF.get("size_scale", 1.0) * QV("size_scale", 1.0))) + RULE["gap"]()
             side = rnd.uniform(*QV("side_garden_m", PROF.get("side_garden_m"))) if QV("side_garden_m", PROF.get("side_garden_m")) else 0.0   # estates: a garden down each side of the house
             w = min(w + side, L - t)
             P0 = (p[0] + ux * t, p[1] + uy * t); P1 = (p[0] + ux * (t + w), p[1] + uy * (t + w))

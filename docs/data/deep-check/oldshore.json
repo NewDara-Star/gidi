@@ -1,65 +1,65 @@
 {
  "id": "oldshore",
  "squares": 37,
- "buildings": 8227,
+ "buildings": 9022,
  "land_km2": 4.075,
  "storeys_by_area": {
-  "1": 0.248,
-  "2": 0.636,
-  "3": 0.101,
+  "1": 0.249,
+  "2": 0.635,
+  "3": 0.1,
   "4": 0.01,
-  "5": 0.003,
-  "6": 0.002,
+  "5": 0.004,
+  "6": 0.001,
   "7": 0.0,
   "8": 0.0
  },
  "measures": {
   "buildings per km2 (built squares)": {
-   "gidi": 2172.0,
+   "gidi": 2404.0,
    "real": 2128.0
   },
   "ground built over": {
-   "gidi": 0.3,
+   "gidi": 0.325,
    "real": 0.296
   },
   "touching": {
-   "gidi": 0.567,
+   "gidi": 0.592,
    "real": 0.653
   },
   "under 40 m2": {
-   "gidi": 0.227,
+   "gidi": 0.174,
    "real": 0.265
   },
   "street front occupied": {
-   "gidi": 0.627,
+   "gidi": 0.672,
    "real": 0.671
   },
   "block fill": {
-   "gidi": 0.311,
+   "gidi": 0.327,
    "real": 0.378
   },
   "line to the street, deg": {
-   "gidi": 2.0,
+   "gidi": 2.1,
    "real": 4.2
   },
   "footprint median m2": {
-   "gidi": 119.86,
+   "gidi": 115.6625,
    "real": 98.0
   },
   "storeys 1 (by area)": {
-   "gidi": 0.2482,
+   "gidi": 0.2489,
    "real": 0.252
   },
   "storeys 2 (by area)": {
-   "gidi": 0.6355,
+   "gidi": 0.6353,
    "real": 0.633
   },
   "storeys 3+ (by area)": {
-   "gidi": 0.1163,
+   "gidi": 0.1158,
    "real": 0.115
   },
   "drivable km per km2 (whole land)": {
-   "gidi": 17.2213,
+   "gidi": 15.8948,
    "real": 13.66
   }
  }

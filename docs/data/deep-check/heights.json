@@ -1,65 +1,65 @@
 {
  "id": "heights",
  "squares": 10,
- "buildings": 2047,
+ "buildings": 1951,
  "land_km2": 1.61,
  "storeys_by_area": {
-  "1": 0.25,
-  "2": 0.242,
-  "3": 0.266,
-  "4": 0.084,
-  "5": 0.048,
-  "6": 0.011,
-  "7": 0.063,
-  "8": 0.036
+  "1": 0.27,
+  "2": 0.22,
+  "3": 0.269,
+  "4": 0.082,
+  "5": 0.043,
+  "6": 0.016,
+  "7": 0.059,
+  "8": 0.04
  },
  "measures": {
   "buildings per km2 (built squares)": {
-   "gidi": 1496.0,
+   "gidi": 1470.0,
    "real": 1212.0
   },
   "ground built over": {
-   "gidi": 0.226,
+   "gidi": 0.2265,
    "real": 0.226
   },
   "touching": {
-   "gidi": 0.504,
+   "gidi": 0.4155,
    "real": 0.562
   },
   "under 40 m2": {
-   "gidi": 0.3335,
+   "gidi": 0.267,
    "real": 0.22
   },
   "street front occupied": {
-   "gidi": 0.2705,
+   "gidi": 0.2835,
    "real": 0.363
   },
   "block fill": {
-   "gidi": 0.247,
+   "gidi": 0.23,
    "real": 0.197
   },
   "line to the street, deg": {
-   "gidi": 3.55,
+   "gidi": 2.8,
    "real": 2.85
   },
   "footprint median m2": {
-   "gidi": 106.195,
+   "gidi": 116.96,
    "real": 107.0
   },
   "storeys 1 (by area)": {
-   "gidi": 0.2499,
+   "gidi": 0.2695,
    "real": 0.136
   },
   "storeys 2 (by area)": {
-   "gidi": 0.2424,
+   "gidi": 0.2204,
    "real": 0.368
   },
   "storeys 3+ (by area)": {
-   "gidi": 0.5077,
+   "gidi": 0.5101,
    "real": 0.496
   },
   "drivable km per km2 (whole land)": {
-   "gidi": 13.6464,
+   "gidi": 14.8182,
    "real": 16.01
   }
  }

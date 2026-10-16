@@ -4,6 +4,7 @@
 #   buildings per km2 too high  -> more plots left empty        ground built over too high -> less infill
 #   touching too low            -> more houses wall to wall     too many streets           -> streets further apart
 #   too square to the street    -> more wobble                  too many small buildings   -> fewer small rooms and shacks
+#   houses too big or too small -> plots narrower or wider
 # A district with fewer than 5 built squares has too small a sample: only its streets are tuned.
 # Usage: python3 scripts/deep_tune.py [ids...]
 import json, os, sys
@@ -36,9 +37,12 @@ for did in ids:
         r = ratio('line to the street, deg')
         if r:
             t['wobble_deg'] = round(clamp(step(P['wobble_deg'], P['wobble_deg'] / max(r, 0.25)), 2, 15), 1)
+        r = ratio('footprint median m2')
+        if r:   # house size apart from density: plots narrower or wider (a footprint scales with the plot's width, roughly squared)
+            t['size_scale'] = round(clamp(step(P.get('size_scale', 1.0), P.get('size_scale', 1.0) / r), 0.4, 2.5), 3)
     r = ratio('drivable km per km2 (whole land)')
-    if r and abs(r - 1) > 0.1:
-        t['cross_scale'] = round(clamp(step(P.get('cross_scale', 1.0), P.get('cross_scale', 1.0) * r ** 0.7), 0.5, 4.0), 3)
+    if r and abs(r - 1) > 0.1:   # parallel streets further apart (cross-street spacing barely moves it: pass 1, 16 Oct)
+        t['rib_scale'] = round(clamp(step(P.get('rib_scale', 1.0), P.get('rib_scale', 1.0) * r), 0.5, 3.0), 3)
     T[did] = t
     print(did, t)
 json.dump(T, open('web/deep-tune.json', 'w'), indent=1, sort_keys=True)

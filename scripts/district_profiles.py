@@ -736,7 +736,7 @@ def _deep(did, P):
     P["infill"] = {**P.get("infill", {}), **R["infill"]}
     # the calibration pass (scripts/deep_tune.py): this district's own corrections from its last build's check
     T = json.load(open("web/deep-tune.json")).get(did, {}) if os.path.exists("web/deep-tune.json") else {}
-    for k in ("vacant", "touch", "wobble_deg", "cross_scale"):
+    for k in ("vacant", "touch", "wobble_deg", "cross_scale", "rib_scale", "size_scale"):
         if k in T: P[k] = T[k]
     for k in ("block_fill", "small_share"):
         if k in T: P["infill"][k] = T[k]

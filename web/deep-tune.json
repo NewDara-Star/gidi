@@ -1,107 +1,135 @@
 {
  "airport": {
-  "block_fill": 0.356,
+  "block_fill": 0.45,
   "cross_scale": 2.134,
-  "small_share": 0.214,
-  "touch": 0.726,
-  "vacant": 0.161,
-  "wobble_deg": 9.0
+  "rib_scale": 1.493,
+  "size_scale": 0.934,
+  "small_share": 0.201,
+  "touch": 0.792,
+  "vacant": 0.241,
+  "wobble_deg": 12.3
  },
  "bazaar": {
-  "block_fill": 0.238,
+  "block_fill": 0.216,
   "cross_scale": 4.0,
-  "small_share": 0.176,
-  "touch": 0.662,
-  "vacant": 0.183,
-  "wobble_deg": 11.0
+  "rib_scale": 1.362,
+  "size_scale": 1.183,
+  "small_share": 0.179,
+  "touch": 0.73,
+  "vacant": 0.274,
+  "wobble_deg": 14.5
  },
  "border": {
-  "block_fill": 0.186,
+  "block_fill": 0.181,
   "cross_scale": 3.75,
-  "small_share": 0.246,
-  "touch": 0.673,
-  "vacant": 0.226,
-  "wobble_deg": 13.2
+  "rib_scale": 1.5,
+  "size_scale": 0.864,
+  "small_share": 0.303,
+  "touch": 0.823,
+  "vacant": 0.151,
+  "wobble_deg": 15
  },
  "capital": {},
  "estate": {
-  "cross_scale": 2.259
+  "cross_scale": 2.259,
+  "rib_scale": 1.228
  },
  "foodgate": {
-  "block_fill": 0.455,
+  "block_fill": 0.484,
   "cross_scale": 1.494,
-  "small_share": 0.155,
-  "touch": 0.803,
-  "vacant": 0.038,
-  "wobble_deg": 13.4
+  "rib_scale": 1.141,
+  "size_scale": 0.965,
+  "small_share": 0.146,
+  "touch": 0.871,
+  "vacant": 0.025,
+  "wobble_deg": 15
  },
  "frontier": {
-  "block_fill": 0.177,
+  "block_fill": 0.167,
   "cross_scale": 2.489,
-  "small_share": 0.316,
-  "touch": 0.52,
-  "vacant": 0.197,
-  "wobble_deg": 5.1
+  "rib_scale": 1.361,
+  "size_scale": 0.67,
+  "small_share": 0.474,
+  "touch": 0.641,
+  "vacant": 0.204,
+  "wobble_deg": 4.8
  },
  "heights": {
   "block_fill": 0.194,
   "cross_scale": 1.81,
-  "small_share": 0.249,
-  "touch": 0.575,
-  "vacant": 0.088,
-  "wobble_deg": 4.1
+  "rib_scale": 0.852,
+  "size_scale": 1.008,
+  "small_share": 0.167,
+  "touch": 0.621,
+  "vacant": 0.132,
+  "wobble_deg": 3.3
  },
  "hub": {
-  "block_fill": 0.521,
+  "block_fill": 0.571,
   "cross_scale": 1.699,
-  "small_share": 0.236,
-  "touch": 0.745,
-  "vacant": 0.051,
-  "wobble_deg": 9.1
+  "rib_scale": 1.17,
+  "size_scale": 1.281,
+  "small_share": 0.202,
+  "touch": 0.785,
+  "vacant": 0.076,
+  "wobble_deg": 9.9
  },
  "jungle": {
-  "block_fill": 0.837,
+  "block_fill": 0.85,
   "cross_scale": 2.021,
-  "small_share": 0.075,
+  "rib_scale": 1.106,
+  "size_scale": 1.5,
+  "small_share": 0.055,
   "touch": 0.95,
-  "vacant": 0.03,
-  "wobble_deg": 10.1
+  "vacant": 0.045,
+  "wobble_deg": 15
  },
  "maze": {
-  "block_fill": 0.627,
+  "block_fill": 0.778,
   "cross_scale": 1.458,
-  "small_share": 0.152,
-  "touch": 0.858,
-  "vacant": 0.03,
-  "wobble_deg": 10.8
+  "rib_scale": 1.15,
+  "size_scale": 1.312,
+  "small_share": 0.131,
+  "touch": 0.939,
+  "vacant": 0.045,
+  "wobble_deg": 15
  },
  "oldisland": {
-  "block_fill": 0.351,
+  "block_fill": 0.39,
   "cross_scale": 1.08,
-  "small_share": 0.083,
-  "touch": 0.879,
-  "vacant": 0.126,
-  "wobble_deg": 12.6
+  "rib_scale": 0.748,
+  "size_scale": 0.989,
+  "small_share": 0.067,
+  "touch": 0.95,
+  "vacant": 0.189,
+  "wobble_deg": 15
  },
  "oldshore": {
-  "block_fill": 0.306,
+  "block_fill": 0.302,
   "cross_scale": 2.526,
-  "small_share": 0.243,
-  "touch": 0.639,
-  "vacant": 0.135,
-  "wobble_deg": 12.0
+  "rib_scale": 1.261,
+  "size_scale": 0.818,
+  "small_share": 0.284,
+  "touch": 0.708,
+  "vacant": 0.149,
+  "wobble_deg": 15
  },
  "port": {
-  "cross_scale": 2.194
+  "cross_scale": 2.194,
+  "rib_scale": 1.119
  },
  "railside": {
-  "block_fill": 0.444,
+  "block_fill": 0.474,
   "cross_scale": 2.407,
-  "small_share": 0.305,
-  "touch": 0.784,
-  "vacant": 0.035,
-  "wobble_deg": 11.4
+  "rib_scale": 1.119,
+  "size_scale": 0.945,
+  "small_share": 0.31,
+  "touch": 0.854,
+  "vacant": 0.053,
+  "wobble_deg": 15
  },
  "watertown": {},
- "yaba": {}
+ "yaba": {
+  "rib_scale": 1.158
+ }
 }
