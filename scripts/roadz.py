@@ -229,6 +229,8 @@ def heights(out, water, ocean, T):
                     continue
                 roof = (0.0 if bk == 'stilt' else ground_at(bp.representative_point())) + h + 1.0
                 for i, p in enumerate(P):
+                    if span is not None and not (span[0] - s0 - 3 <= S[i] <= span[1] - s0 + 3):
+                        continue   # under a ramp it's a house on the road, for the checks to catch, not something to fly over
                     if bp.distance(p) < (WIDTH['bridge'] if kind != 'flyover' else 10.0) / 2:
                         need[i] = max(need[i], roof + dep)
                 over.append('buildings')
@@ -318,7 +320,10 @@ def heights(out, water, ocean, T):
     hosts = mains + [(a['name'], LineString(a['pts'])) for a in out['arterials'] if a['cls'] != 'bridge']
     order = sorted([s for s in out.get('structures', []) if s['kind'] == 'flyover'], key=lambda s: s.get('layer', 1))
     for s in order:
-        g = LineString(s['pts'])
+        # its line as drawn (`base`), never last bake's ramps: a frozen district hands its decks back with their ramps on,
+        # and measuring from those grew the ramps a little more every bake (Folake Road's 78 m rail bridge had reached 538 m)
+        s.setdefault('base', s['pts'])
+        g = LineString(s['base'])
         host = max(hosts, key=lambda m: m[1].intersection(g.buffer(3)).length)[1]
         if host.intersection(g.buffer(3)).length < g.length * 0.6:
             host = g   # not along a main (an interchange deck): it keeps its own line
