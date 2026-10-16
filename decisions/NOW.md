@@ -18,12 +18,25 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**Done since (16 Oct, night):**
+- **Monuments by hand,** the modeler's pieces (`docs/hand/borrowed-lagos.md`): the Founder, the Marigold Screen, the welcome arch, the Saxophonist, the Scrap Rider, the Port Light, the Hunter, the Market Clock, the Masquerade.
+- **Parade Square on Old Island,** with **The Reach** at its centre (the owner's choice) and gate riders.
+- **The Crown Hall** (after the National Theatre) in the Port.
+- **Atlantic Reclaim** (after Eko Atlantic): new land in front of the Heights, a sea wall promenade, glass towers.
+- **The Railside bakeries:** a bread depot and hawkers.
+- **A name audit:** every real Lagos name out.
+- **The boss's office:** dingy and makeshift (the first cutscene, confirmed).
+
 **Next:**
-1. The rest of the borrowed list, district by district:
-   - the Railside bakeries (Mama Bisi's bread)
-   - The Crown (after the National Theatre)
-   - Atlantic Reclaim (after Eko Atlantic)
+1. The rest of the borrowed list:
    - the Northern Road BRT
+   - Saba's market tower and Costa Circle
+   - the Channel Terminal and the Railway Compound
+   - Eastgate Park and Creekside Plaza
+   - the Canopy Walk, Ajara Market
+   - the Fairground and Carnival Avenue
+   - the Cattle Ground
+   - the Border's Heritage Museum and beach arch (with care)
 2. Each district's "unmistakably Lagos" list (like the Maze and the Hub), placed by hand.
 
 **Later:**
