@@ -8,6 +8,7 @@ from . import archetypes, kinds, places
 BUILDINGS = {
     'front': archetypes.house, 'back': archetypes.house, 'shed': archetypes.house,
     'stalls': archetypes.stall, 'kiosk': archetypes.kiosk, 'extension': archetypes.extension,
+    'face-me': archetypes.face_me, 'buka': archetypes.buka, 'lock-up': archetypes.lockup_open,
     'stilt': kinds.stilt, 'raft': kinds.raft, 'sawdust': kinds.sawdust, 'brazilian house': kinds.brazilian,
     'gatehouse': kinds.gatehouse, 'generator': kinds.generator, 'water tank': kinds.water_tank,
     'stack': kinds.stack, 'trailer': kinds.trailer, 'container': kinds.container_shop,
@@ -16,7 +17,7 @@ BUILDINGS = {
     'unfinished': places.unfinished_plaza, 'strip': places.strip, 'bakery': places.bakery, 'print': places.print_shop,
     'warehouse': places.warehouse, 'works': places.works, 'tank': places.tank, 'crane': places.crane,
     'flats': places.flats, 'villa': places.villa, 'mansion': places.mansion, 'apartment tower': places.tower,
-    'bank tower': places.bank_tower, 'office': places.office, 'school': places.school, 'hotel': places.hotel,
+    'bank tower': places.bank_tower, 'office': archetypes.office, 'school': places.school, 'hotel': places.hotel,
     'nightclub': places.nightclub, 'stands': places.stands, 'terminal': places.terminal, 'station': places.station,
     'toll booth': places.toll_booth, 'toll canopy': places.toll_canopy,
     'old house': kinds.old_house, 'smoke rack': kinds.smoke_rack, 'barge': kinds.barge,

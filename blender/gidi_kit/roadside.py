@@ -185,3 +185,24 @@ def traffic_light(mb, x, y, face, rng, arm=0.0, z0=0.0):
     mb.box('emit', C @ Matrix.Translation((0, 0.13, 0)), hex_rgb('#e02020'), 0, size=(0.34, 0.01, 0.24))
     if rng.chance(0.6):  # the solar panel
         mb.box('glass', F @ Matrix.Translation((0, 0, h + 0.25)) @ Matrix.Rotation(0.4, 4, 'X'), hex_rgb('#1e2a44'), 0.2, size=(0.8, 0.6, 0.04))
+
+
+def police_kiosk(mb, M, rng):
+    """A small red-and-white police booth at a bus stop (M facing the road, +x): a tiny window, a door at the side,
+    a slab roof, a plastic chair outside. Lettering in the browser on the web build, as for shop signs."""
+    from . import props
+    from .core import at
+    wear = rng.between(0.5, 0.85)
+    red, white = hex_rgb('#b3261e'), hex_rgb('#ecebe4')
+    mb.box('concrete', at(M, 0, 0, 0.06), hex_rgb('#8a857a'), 0.7, size=(1.7, 1.7, 0.12))
+    mb.box('steel', at(M, 0, 0, 0.12 + 0.55), red, wear, size=(1.4, 1.4, 1.1))
+    mb.box('steel', at(M, 0, 0, 1.22 + 0.55), white, wear, size=(1.4, 1.4, 1.1))
+    mb.box('concrete', at(M, 0, 0, 2.38), hex_rgb('#c9c3b6'), wear, size=(1.9, 1.9, 0.12))
+    F = M @ Matrix.Translation((0.7, 0, 0)) @ Matrix.Rotation(-math.pi / 2, 4, 'Z')   # the front, x along it, y out to the road
+    mb.face([F @ Vector((-0.2, 0.012, 1.45)), F @ Vector((0.2, 0.012, 1.45)), F @ Vector((0.2, 0.012, 1.75)), F @ Vector((-0.2, 0.012, 1.75))], 'glass', hex_rgb('#24343e'), 0)
+    parts.burglar_bars(mb, F, 0, 1.6, 0.4, 0.3, 'vertical', hex_rgb('#3a3a3a'), wear)
+    props.board(mb, F, 'POLICE', 1.1, 0.25, white, hex_rgb('#1f3f8a'), wear=0.5, hand=False, z=2.08)
+    Fs = M @ Matrix.Translation((0, -0.7, 0)) @ Matrix.Rotation(math.pi, 4, 'Z')   # the door on the side
+    mb.box('steel', at(Fs, 0, 0.02, 1.1), shade(red, 0.8), wear, size=(0.7, 0.03, 1.95))
+    mb.box('steel', at(Fs, 0.25, 0.05, 1.05), hex_rgb('#b0a070'), 0.3, size=(0.04, 0.04, 0.12))
+    props.chair(mb, at(M, 1.1, -0.9, 0, rz=rng.between(-0.6, 0.6)), hex_rgb(rng.pick(props.CHAIR_COLS)), 0.6)

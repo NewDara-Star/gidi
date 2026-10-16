@@ -287,7 +287,7 @@ def _car_profile(kind):
     return [(-2.25, 0.3), (2.2, 0.3), (2.3, 0.5), (2.3, 0.72), (1.6, 0.9), (1.0, 0.93), (0.35, 1.4), (-0.95, 1.42), (-1.65, 0.98), (-2.3, 0.92), (-2.3, 0.5)], 1.75, 0.32, 1.35, 'steel'
 
 
-def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False):
+def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False, bed_load=True):
     """Private cars: saloon, SUV, pickup (research-vehicles 10). Taxi: yellow with a roof sign."""
     prof, W, r, wb, rim = _car_profile(kind)
     wear = WEAR[cond]
@@ -323,7 +323,7 @@ def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False):
         mb.box('plastic', L(M, -0.3, 0, max(p[1] for p in prof) + 0.08), hex_rgb('#ffffff'), 0, size=(0.4, 0.15, 0.15))
         for s in (-1, 1):
             mb.box('carpaint', L(M, -0.2, s * (W / 2 + 0.005), 0.65), hex_rgb('#141414'), 0, size=(3.4, 0.01, 0.06))
-    if kind == 'pickup' and rng.chance(0.6):  # a load in the bed
+    if kind == 'pickup' and bed_load and rng.chance(0.6):  # a load in the bed
         mb.box('cloth', L(M, -1.6, 0, 1.25), hex_rgb(rng.pick(['#c8a96e', '#2f5fa8', '#3a3a3a'])), 0.5, size=(1.6, 1.5, 0.5))
 
 
@@ -335,6 +335,23 @@ def police_pickup(mb, M, rng, cond='worn'):
     for s in (-1, 1):
         mb.box('wood', L(M, -1.5, s * 0.6, 1.3), hex_rgb('#3a3a3a'), 0.5, size=(1.8, 0.3, 0.06))
     mb.box('emit', L(M, -0.2, 0, 1.75), hex_rgb('#2050ff'), 0, size=(0.2, 1.0, 0.1))
+
+
+def task_force_truck(mb, M, rng):
+    """The task force truck: a battered pickup in faded government green and white, seized okadas piled in the back,
+    one standing up against the cab with its front wheel over the side."""
+    car(mb, M, rng, 'battered', kind='pickup', colour='#5d7a4a', bed_load=False)
+    for s in (-1, 1):
+        mb.box('carpaint', L(M, 0.4, s * 0.915, 0.82), hex_rgb('#e8e6df'), 0.6, size=(4.4, 0.01, 0.16))
+        mb.box('carpaint', L(M, -1.6, s * 0.92, 1.06), hex_rgb('#4a6a3a'), 0.8, size=(2.1, 0.03, 0.12))   # the bed's top rail
+    from . import props
+    for s in (-1, 1):   # the agency's name on the doors (invented, generic)
+        F = M @ Matrix.Translation((0.35, s * 0.93, 0.62)) @ Matrix.Rotation(0 if s > 0 else math.pi, 4, 'Z')
+        props.board(mb, F, 'TASK FORCE', 1.2, 0.2, hex_rgb('#e8e6df'), hex_rgb('#2e4a2a'), wear=0.6, hand=False)
+    bed = 1.1
+    okada(mb, L(M, -1.55, 0.05, bed + 0.37, rx=math.pi / 2), rng.child('seized', 0), 'battered')   # on its side
+    okada(mb, L(M, -1.65, -0.1, bed + 0.95, rz=0.25, rx=-math.pi / 2 + 0.2), rng.child('seized', 1), 'wreck')   # thrown on top
+    okada(mb, L(M, -1.0, 0.55, bed, rz=math.pi / 2 + 0.1, ry=-0.35), rng.child('seized', 2), 'battered')   # stood against the cab, wheel over the side
 
 
 # ---------------------------------------------------------------- trucks

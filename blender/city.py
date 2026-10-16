@@ -292,6 +292,42 @@ CULVERTS_DONE = []  # crossings already given parapets (the map can hold overlap
 BRIDGE_Z = {a['name']: rel_z(a) for a in GD.get('arterials', []) if a['cls'] == 'bridge'}
 BUILT = set(GD['buildings'])  # districts with buildings (the others aren't built yet)
 
+# Act 1 (docs/KIT-GAPS.md, "New in the v2 layout"): Ladi Lane's lock-ups stand open along its aisle (the chase line);
+# a buka takes the name of the food place on it; overhead signs find the road they span.
+LADI = [((q[0], q[1] - 78), (q[0], q[1] + 78)) for q in (P((p_['x'], p_['y'])) for p_ in GD['pois'] if p_['name'] == 'Ladi Lane')]
+FOOD_POIS = [(p_['name'], P((p_['x'], p_['y']))) for p_ in GD['pois'] if p_['type'] == 'food']
+ARTS = [dict(k='art', cls=a_['cls'], pts=[P(p) for p in a_['pts']], w=ART_W.get(a_['cls'], 18.0), name=a_['name'], d=None) for a_ in GD.get('arterials', [])]
+
+
+def ladi_lockup(b):
+    """A small stall on Ladi Lane's aisle: the edge facing the aisle, or None."""
+    if b['kind'] != 'stalls' or len(b['poly']) != 4:
+        return None
+    area = abs(sum(b['poly'][i][0] * b['poly'][(i + 1) % 4][1] - b['poly'][(i + 1) % 4][0] * b['poly'][i][1] for i in range(4))) / 2
+    for a_, b_ in LADI:
+        if area < 25 and dist_seg(b['c'], a_, b_) < 14:
+            mids = [((b['poly'][i][0] + b['poly'][(i + 1) % 4][0]) / 2, (b['poly'][i][1] + b['poly'][(i + 1) % 4][1]) / 2) for i in range(4)]
+            return min(range(4), key=lambda i: dist_seg(mids[i], a_, b_))
+    return None
+
+
+def span_road(q):
+    """The road an overhead sign spans: (road, the nearest point on its middle, its direction there)."""
+    best = None
+    for r in list(ROADS) + ARTS:
+        if r['k'] not in ('main', 'art'):
+            continue
+        for a_, b_ in zip(r['pts'], r['pts'][1:]):
+            d = dist_seg(q, a_, b_)
+            if best is None or d < best[0]:
+                best = (d, r, a_, b_)
+    if not best or best[0] > 40:
+        return None
+    _, r, a_, b_ = best
+    u = _unit((b_[0] - a_[0], b_[1] - a_[1]))
+    t = (q[0] - a_[0]) * u[0] + (q[1] - a_[1]) * u[1]
+    return r, (a_[0] + u[0] * t, a_[1] + u[1] * t), u
+
 
 def monument_sites():
     """Where the monuments stand (blender/gidi_kit/monuments.py), the same for every tile and detail:
@@ -661,6 +697,14 @@ def build_tile(tx, ty, overrides):
         rng = Rng(b['d'], b['i'])
         ov = overrides.get((b['d'], str(b['i'])))
         fn = registry.builder(b['kind'])
+        lf = ladi_lockup(b) if LADI else None
+        if lf is not None:
+            fn, a['facing'] = archetypes.lockup_open, lf
+            built['lock-up'] = built.get('lock-up', 0) + 1
+        if b['kind'] == 'buka':
+            nm = min(FOOD_POIS, key=lambda np_: math.dist(np_[1], b['c']), default=None)
+            if nm and math.dist(nm[1], b['c']) < 30:
+                a['label'] = nm[0]
         if ov:
             fn = landmarks.BY_NAME[ov['name']] if ov['type'] == 'named' else registry.POI_PLACES[ov['type']]
             a['label'] = ov['name']
@@ -838,10 +882,48 @@ def build_tile(tx, ty, overrides):
             street.transformer(sm, q[0], q[1], fr)
         elif f_['kind'] == 'traffic light':
             roadside.traffic_light(pm, q[0], q[1], ang, fr)
+        elif f_['kind'] in ('agbero', 'wheelbarrow vendor', 'fruit seller', 'parking boy', 'bread hawker'):   # people placed by hand, facing the road
+            getattr(street, f_['kind'].replace(' ', '_'))(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), fr)
+        elif f_['kind'] == 'police kiosk':
+            roadside.police_kiosk(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), fr)
+        elif f_['kind'] == 'task force truck':   # parked along the road it's beside
+            sr = span_road(q)
+            ha = math.atan2(sr[2][1], sr[2][0]) if sr else ang
+            vehicles.task_force_truck(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ha, 4, 'Z'), fr)
+        elif f_['kind'] == 'overhead sign':   # a gantry across the road, facing the traffic toward the road's far end
+            sr = span_road(q)
+            if sr:
+                r_, c_, u_ = sr
+                end = r_['pts'][-1]
+                panels = [[('up', _ahead_name(r_, end, district_at(c_)))], [('up', r_.get('name') or 'City Centre')]]
+                roadside.gantry(sm, c_[0], c_[1], math.atan2(u_[1], u_[0]), r_['w'] + 1.0, panels, fr)
         elif f_['kind'] == 'bus stop':   # the shelter's open side (its local -y) toward the road
             dx, dy = math.cos(ang), math.sin(ang)
             places.bus_shelter(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(math.atan2(dx, -dy), 4, 'Z'), fr)
         built['furniture:' + f_['kind']] = built.get('furniture:' + f_['kind'], 0) + 1
+    rail_pts = [P(p) for p in GD['rail']['pts']] if GD.get('rail') else []
+    for e_ in GD.get('encroach', []):
+        if e_['kind'] != 'rail market' or not rail_pts:
+            continue
+        zone = [P(p) for p in e_['pts']]
+        bx0, by0 = max(x0, min(p[0] for p in zone)), max(y0, min(p[1] for p in zone))
+        bx1, by1 = min(x1, max(p[0] for p in zone)), min(y1, max(p[1] for p in zone))
+        rmb = MeshBuilder()
+        gx = bx0 + 0.9
+        while gx < bx1:
+            gy = by0 + 0.9
+            while gy < by1:
+                p = (gx, gy)
+                rr = Rng('rail market', round(gx * 2), round(gy * 2))
+                if in_poly(p, zone) and dist_line(p, rail_pts) > 2.4 and not rr.chance(0.3):
+                    k = min(range(len(rail_pts) - 1), key=lambda i: dist_seg(p, rail_pts[i], rail_pts[i + 1]))
+                    ra = math.atan2(rail_pts[k + 1][1] - rail_pts[k][1], rail_pts[k + 1][0] - rail_pts[k][0])
+                    street.rail_market(rmb, Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(ra, 4, 'Z'), rr)
+                    built['rail market'] = built.get('rail market', 0) + 1
+                gy += 1.9
+            gx += 1.9
+        if rmb.faces:
+            rmb.to_object('rail market', col, master)   # its own object: the pitches clear as one when a train comes
     for b in blds_here:  # service drops to houses from the nearest pole
         if not poles or b['kind'] not in ('front', 'back'):
             continue
