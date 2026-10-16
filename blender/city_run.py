@@ -50,7 +50,7 @@ def tiles_needed():
     for lst in gd['parcels'].values():
         for p in lst:
             add(sum(q[0] for q in p['pts']) / len(p['pts']), sum(q[1] for q in p['pts']) / len(p['pts']))
-    W, H = gd['size'][0], 6720.0
+    W, H = gd['size']   # the whole map (v1 hard-coded 6720 m here, which cut v2's Atlantic coast off)
     return sorted(k for k in t if 0 <= k[0] <= W // SIZE and 0 <= k[1] <= H // SIZE)  # only the map: stray points in the data are not tiles
 
 
