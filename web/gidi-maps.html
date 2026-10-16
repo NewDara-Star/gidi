@@ -1152,7 +1152,7 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
       h("div", { className: "scale ui" },
         h("div", { className: "bar", style: { width: metres * z } }), h("span", null, scaleLabel),
         cursor && h("span", { className: "coord" }, `${(cursor[0] / 1000).toFixed(2)} km E · ${((MH - cursor[1]) / 1000).toFixed(2)} km N`)),
-      h("div", { className: "credit ui" }, "Gidi map v0.3 · invented city inspired by Lagos · schematic, not to build from street by street"));
+      h("div", { className: "credit ui" }, "Gidi map v2 · invented city inspired by Lagos"));
   }
 
   /* ---------- side panel ---------- */
@@ -1198,11 +1198,11 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
   function Overview({ select }) {
     const total = G.districts.reduce((s, d) => s + d.area, 0);
     return h("div", { className: "card" },
-      h("div", { className: "eyebrow" }, "Map v0.3"),
+      h("div", { className: "eyebrow" }, "Map v2"),
       h("h2", null, "Gidi"),
-      h("p", { className: "lead" }, "An invented city with the feeling of Lagos. 15 districts merged from Lagos's 20 local governments, " + total.toFixed(1) + " km² of land around a lagoon. Click a district to see what we model there."),
+      h("p", { className: "lead" }, "An invented city with the feeling of Lagos. " + G.districts.length + " districts, " + total.toFixed(1) + " km² of land around a lagoon, at a quarter of Lagos's size. Click a district to see what we model there."),
       h("div", { className: "stats" },
-        h("div", null, h("b", null, "15"), h("span", null, "districts")),
+        h("div", null, h("b", null, G.districts.length), h("span", null, "districts")),
         h("div", null, h("b", null, total.toFixed(1)), h("span", null, "km² of land")),
         h("div", null, h("b", null, G.pois.length), h("span", null, "places on the map"))),
       ACT_ORDER.map((a) => h("section", { key: a },
