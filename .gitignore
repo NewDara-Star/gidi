@@ -7,3 +7,4 @@ blender/out/
 __pycache__/
 web/city/
 .venv/
+web/board-pending.json
