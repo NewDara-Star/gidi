@@ -23,6 +23,19 @@
 - **Regenerate, don't move the old frozen Food Gate block.** The new map leads. The pilot's value lives in the generator rules; the old file is kept as a record.
 - **One shared generator, one profile per district, run in parallel.** Not 17 separate generators.
 - **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`).
+- **The hand pass covers infrastructure and labels** (16 Oct). Hand placement must place infrastructure properly and label it properly: bus stops, traffic lights, street lights, roads, streets, everything. The hand files already add, move and delete buildings and furniture. They need:
+  - road and street edits (add, move, delete, with the width class)
+  - names and labels on everything
+  - checks that nothing stands on a carriageway
+- **Roads have surfaces; poorer areas have unpaved and marshy ones** (16 Oct). Some Lagos roads barely look like roads: marshy ground, grime and mud, a truck driving through (the owner's photo). Every road and street carries a surface:
+  - tarred
+  - worn tar (potholes, broken edges)
+  - unpaved laterite or sand
+  - mud (waterlogged, standing water, grime)
+
+  Main roads stay tarred, even when broken. Mud goes to the poorer, wetter places: low ground, near water, back streets, the open fabric types.
+
+  **Data caution:** Overture tags most of Lagos's local streets "unpaved" where it tags them at all (98% even in Yaba, which is mostly tarred), so the tags are checked against Street View and the owner's photos before they set anything.
 - **Hand-place, not tune.** The generator gives the base; then exact hand placement and clean-up through hand files (`web/hand/<id>.json`).
 - **Freeze everything** once a district is built, so any spot can be quizzed (`scripts/whats_here.py`). The map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths: `scripts/cross_sections.py`.

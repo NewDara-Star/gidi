@@ -8,6 +8,11 @@
 - Generator frame mode (`scripts/gen_fabric.py`); a Food Gate test build works.
 - Deep studies of all 17 districts (`docs/studies/`).
 
+**16 Oct:**
+- Profiles now come from the deep studies, with fabric-type zones (`scripts/deep_profile.py`); Saba and the Airport have profiles.
+- All 17 districts are generated side by side and baked into one city.
+- Checks against the studies run per district (`scripts/deep_check.py`, `scripts/deep_summary.py`); calibration passes are running (`scripts/deep_tune.py`).
+
 **Next, in order** (detail in `docs/LAYOUT-V2.md`, "Where the rebuild stands"):
 1. Profiles from the deep studies, with fabric-type zones; profiles for the Airport and Saba.
 2. Generate all 17 side by side; check each against its study's targets.
