@@ -31,6 +31,15 @@
 - **A name audit:** every real Lagos name out.
 - **The boss's office:** dingy and makeshift (the first cutscene, confirmed).
 
+**Done since (16 Oct, afternoon):**
+- **The Act 1 kit pieces** by the modeller (#73): the face-me block, the boss's office with its cutscene interior, agberos, the buka, the vendors, bread hawkers, the police kiosk, the rail market, the task force truck, overhead signs, and Ladi Lane's open lock-ups. Brief: `docs/kit/MODELLER-BRIEF-ACT1.md`.
+- **Big tiles split** so the browser can load close-ups (#71).
+- **Motor parks packed** with buses, yard to yard (#69).
+- **The map page** no longer goes blank (#70) and counts its 17 districts (#75).
+- **Bridge ramps stop growing every bake** (#75): Folake Road's rail bridge is back from 538 m to 343 m and lands.
+- **Full builds can stand on the terrain** (`city_run.py --terrain`, #76). A full rebuild with terrain was started 16 Oct; the old 3D tiles (15 Oct, v1 map) explained the trees in the water and the poles in the road.
+- **Life in Gidi** (`world-life.md`): the owner's world-building ideas.
+
 **Next:**
 1. The rest of the borrowed list:
    - the Northern Road BRT
@@ -48,4 +57,5 @@
 - kerbs (roads pass 4)
 - isms groups
 - the data delete-later list
-- small fixes: two flyover ramp ends 0.3 m short (Musa Road, Ring Road), and the Rail Bridge's road ending 6.1 m up
+- small fix: the Ring Road Flyover ends 0.3 m up (roadz's 4 ramp passes aren't enough there)
+- after the full rebuild: look for anything still standing in water or in the road
