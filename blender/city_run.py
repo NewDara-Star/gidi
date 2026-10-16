@@ -1,6 +1,8 @@
 """Generate the whole city as tiles, in parallel Blender processes, and write the manifest.
 
-python3 blender/city_run.py [--jobs 8] [--size 400] [--detail full,web] [--only 6,10;7,10] [--fresh]
+python3 blender/city_run.py [--jobs 8] [--size 400] [--detail full,web] [--only 6,10;7,10] [--fresh] [--terrain]
+
+--terrain stands every tile on the ground heights (web/terrain.json), as the slice renders do.
 
 --fresh rebuilds every tile, overwriting the old ones (otherwise a tile already built is skipped).
 
@@ -66,7 +68,7 @@ if __name__ == '__main__':
         out = os.path.join(OUT, det)
         os.makedirs(os.path.join(out, 'tiles'), exist_ok=True)
         # the POI overrides are computed once, before the workers start
-        subprocess.run(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--', '--tiles', '', '--out', out, '--detail', det, '--size', str(SIZE)], capture_output=True)
+        subprocess.run(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--', '--tiles', '', '--out', out, '--detail', det, '--size', str(SIZE)] + (['--terrain'] if opt.get('--terrain') else []), capture_output=True)
         # a pool of short-lived workers: each Blender process builds a small batch and exits, so its
         # memory is freed (a full tile peaks at ~3.5 GB and Blender keeps growing across tiles; two
         # long-lived full workers got killed on a 16 GB machine). A batch that dies loses only itself;
