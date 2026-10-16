@@ -18,7 +18,7 @@
     check: { label: "Checkpoint", glyph: "✕" }, night: { label: "Nightlife", glyph: "☾" },
     landmark: { label: "Landmark", glyph: "◆" }, industry: { label: "Industry", glyph: "▲" },
     water: { label: "Water", glyph: "≈" }, gov: { label: "Government", glyph: "▣" },
-    park: { label: "Motor park", glyph: "≡" },
+    park: { label: "Motor park", glyph: "≡" }, shopping: { label: "Shopping", glyph: "S" }, food: { label: "Food", glyph: "♨" },
     church: { label: "Church", glyph: "✝", civic: 1, safe: 1 }, mosque: { label: "Mosque", glyph: "☪", civic: 1, safe: 1 },
     school: { label: "School", glyph: "✎", civic: 1, safe: 1 }, hospital: { label: "Hospital", glyph: "H", civic: 1, safe: 1 },
     clinic: { label: "Clinic", glyph: "+", civic: 1, safe: 1 }, chemist: { label: "Chemist", glyph: "℞", civic: 1 },
