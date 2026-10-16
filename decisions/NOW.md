@@ -1,6 +1,6 @@
 # Where the work stands (update at the end of every session)
 
-**16 Oct 2026, evening.** Branch `layout/wire-v2`, PR open, not merged. The live map is still v1 until it merges.
+**16 Oct 2026, evening.** Gidi v2 is merged (PR #54): it's the live map.
 
 **Done: Gidi v2 is built and frozen.**
 - **The v2 layout:**
@@ -21,9 +21,9 @@
 - **Road surfaces** on every road (tar, worn, interlock, laterite, sand, mud), drawn in the 2D ground plan.
 - **Hand files can now:** add, delete or name roads; set surfaces; label furniture; plus the building and furniture edits.
 
-**Next (owner first):**
-1. The owner checks the Maze and Hub list, `docs/hand/maze-hub-lagos.md` (on the branch): what makes them unmistakably Lagos, plus three real names to replace (Pedro, Daleko, and Ladi Lane's closeness to Ladipo).
-2. Hand-make the Maze and the Hub from that list. Rebuild and lock the opening.
+**Next:**
+1. ~~The Maze and Hub list~~: agreed 16 Oct (`docs/hand/maze-hub-lagos.md`); names settled (Press Row, Gari Yard).
+2. Hand-make the Maze and the Hub from that list (in progress). Rebuild and lock the opening.
 3. The next districts, one by one, the same way.
 
 **Later:**
