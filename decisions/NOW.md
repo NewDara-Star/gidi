@@ -1,27 +1,30 @@
 # Where the work stands (update at the end of every session)
 
-**15 Oct 2026, late.** Branch `layout/wire-v2` (not merged; the live map is still v1).
+**16 Oct 2026, evening.** Branch `layout/wire-v2`, PR open, not merged. The live map is still v1 until it merges.
 
-**Done:**
-- The map build runs on the v2 frame (`web/layout-v2.json`, terrain rebuilt).
-- Border roads drawn once in the frame (`scripts/frame_network.py` writes `web/network.json`).
-- Generator frame mode (`scripts/gen_fabric.py`); a Food Gate test build works.
-- Deep studies of all 17 districts (`docs/studies/`).
+**Done: Gidi v2 is built and frozen.**
+- **The v2 layout:**
+  - 17 districts at 1:4, about 133,000 buildings
+  - Old Island as an island, with Banana Island
+  - the Long, Channel, Wharf, Creek, Cable and Fishermen's bridges
+- **Every district came from its deep study** (`docs/studies/`), with fabric-type zones. Two calibration passes, then the generator stopped (the stop line, `DECISIONS.md`).
+- **Hand fixes:**
+  - link streets for cut-off clusters
+  - Creekside Road for the Bazaar's creek strip
+  - Banana Island's causeway road
+  - houses off building lines, overlaps and stranded tables cleared
 
-**16 Oct:**
-- Profiles now come from the deep studies, with fabric-type zones (`scripts/deep_profile.py`); Saba and the Airport have profiles.
-- All 17 districts are generated side by side and baked into one city.
-- Checks against the studies run per district (`scripts/deep_check.py`, `scripts/deep_summary.py`); calibration passes are running (`scripts/deep_tune.py`).
+  All are recorded as edits in `web/hand/<id>.json`.
+- **All 17 frozen** (`web/hand/<id>.json`, `"layout": "v2"`). The frozen bake reproduces the city exactly and is byte-identical run to run.
+- **Checks:** 16 of 17 districts pass every check (`scripts/check_district.py`, now on the finished map). The Bazaar still needs chemists near the creek strip, a hand-placing job.
+- **Fit to real Lagos:** 64% of measures within 20% (`docs/data/deep-check/SUMMARY.md`).
+- **Road surfaces** on every road (tar, worn, interlock, laterite, sand, mud), drawn in the 2D ground plan.
+- **Hand files can now:** add, delete or name roads; set surfaces; label furniture; plus the building and furniture edits.
 
-**The stop line (16 Oct):** the generator's last run is the 16 Oct build. From here Gidi is hand-made, district by district; see `DECISIONS.md`.
-
-**Next, in order** (detail in `docs/LAYOUT-V2.md`, "Where the rebuild stands"):
-1. Profiles from the deep studies, with fabric-type zones; profiles for the Airport and Saba.
-2. Generate all 17 side by side; check each against its study's targets.
-3. A renaming pass (parallel builds can clash on street names).
-4. Show the owner, then freeze each district.
-
-**Story (owner):** write the characters next (`decisions/story/`). Paste `gidi-act1-draft.md` and `gidi-performance-capture.md` into the repo from the other account.
+**Next (owner first):**
+1. The owner checks the Maze and Hub list, `docs/hand/maze-hub-lagos.md` (on the branch): what makes them unmistakably Lagos, plus three real names to replace (Pedro, Daleko, and Ladi Lane's closeness to Ladipo).
+2. Hand-make the Maze and the Hub from that list. Rebuild and lock the opening.
+3. The next districts, one by one, the same way.
 
 **Later:**
 - the look pass from the references
