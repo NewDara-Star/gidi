@@ -35,3 +35,15 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
 - **The airport terminal.** For now it's stored as a `bus terminal` reserve with a two-storey `terminal` building, a stand-in. The kit needs a **terminal**: a long hall, a forecourt and drop-off lane, a car park, a control tower nearby.
 - **The campus.** Saba's Lagoon University is a reserved `campus` with a ring road and nothing inside yet. The kit needs **campus buildings**: lecture halls, hostels, a senate building, sports fields, by hand.
 - **Banana Island's causeway gate.** A gatehouse and barrier where the causeway meets the Heights' shore.
+- **Face-me-I-face-you** (kind `face-me`, the Maze: Tunde's block). One storey, about 22 by 9.5 m, a corridor down the middle with five rooms a side, a shared toilet and kitchen at the back, washing lines, a bench at the door.
+- **People placed by hand on the walkways** (furniture kinds `wheelbarrow vendor`, `fruit seller`, `parking boy`: the Maze's approach to Ladi Lane). The kit needs:
+  - a wheelbarrow of phone cases and chargers, with a man in an earpiece
+  - a fruit tray table
+  - a parking boy's plastic chair and ticket book
+- **The motor park's union office** (kind `office`, the Hub: the boss's office). A one-room block shack with a door and a window to the yard, a painted sign, a bench outside. The inside is the first cutscene's set: desk, plastic chairs, standing fan, church calendar, small TV.
+- **Agberos** (furniture kind `agbero`): a man with a ticket book and a whip of notes, standing at the gate.
+- **The buka** (kind `buka`, the Maze: Flyover Buka): a lean-to kitchen, pots on a coal fire, benches.
+- **Police kiosk** (furniture `police kiosk`): a small red-and-white booth at a bus stop.
+- **Overhead direction sign** (furniture `overhead sign`): a green gantry across an arterial.
+- **Task force truck** (furniture `task force truck`): a pickup with seized okadas in the back, parked at a junction.
+- **Rail market** (zone `rail market`, the Hub): traders' tables on the ballast beside the tracks, lifted when a train comes.

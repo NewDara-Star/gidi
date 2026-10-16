@@ -105,6 +105,8 @@ def check_roads(gen, bgeoms, G):
                 continue
             if enc is not None and gen["buildings"][i][0] in ("stalls", "kiosk") and enc.buffer(0.1).contains(b) and "building line" in lab:
                 continue   # inside a declared market-spill zone: on purpose
+            if enc is not None and gen["buildings"][i][0] == "stalls" and lab == "rail" and enc.buffer(0.1).contains(b):
+                continue   # a rail market (Oshodi): traders' tables on the ballast, declared, on purpose
             a = b.intersection(g).area
             if a > (0.05 if "building line" in lab else 0):   # building lines: corners are rounded to 0.1 m in the data
                 bad.append((a, "%s %s on %s (%.1f m2)" % (gen["buildings"][i][0], xy(b), lab, a)))
@@ -130,6 +132,8 @@ def check_furniture(did, G):
     bad = []
     for f in F:
         p = Point(f["x"], f["y"])
+        if f["kind"] == "overhead sign":
+            continue   # a gantry spans the carriageway by design; its posts stand on the walkways
         if any(strip[j].contains(p) for j in st.query(p)):
             bad.append((1, "%s %s on a carriageway or gutter" % (f["kind"], xy(p))))
         elif any(B[j].contains(p) for j in bt.query(p)):

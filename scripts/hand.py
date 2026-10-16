@@ -14,11 +14,15 @@
 #   {"op": "add furniture", "kind": "lasma post", "x": .., "y": .., "ang": ..}
 #   {"op": "delete furniture", "at": [x, y], "kind": "pole" (optional)}  the nearest within 2 m
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
+#   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
+#   {"op": "move place", "name": "...", "x": .., "y": ..}
+#   {"op": "add parcel", "kind": "motor park", "pts": [[x, y], ...]}  /  {"op": "delete parcel", "at": [x, y]}
 # road edits (owner, 16 Oct: hand placement covers roads, streets and labels), applied early in the bake, before the clean-up, so a
 # road placed by hand gets its junctions, gutters, furniture and surface like any other:
 #   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
 #   {"op": "delete street", "at": [x, y]}                          the street or lane piece nearest the point (within 3 m)
 #   {"op": "name road", "at": [x, y], "name": "..."}               the main road nearest the point (within 3 m) takes the name
+#   {"op": "cut street", "at": [x, y], "gap": 10}                   the street stops short both sides of the point (a dead end at a canal or the tracks)
 #   {"op": "delete building", ..., "early": true}                   cleared for a road placed by hand: removed with the road edits
 # labels and surfaces, applied after the surfaces are set:
 #   {"op": "set surface", "at": [x, y], "surface": "mud"}          tar, worn, interlock, laterite, sand or mud
@@ -38,10 +42,17 @@ OWNED_BY_PLACE = ('junctions', 'quays', 'boardwalks')
 LAYOUT = 'v2'   # hand files carry the frame they were placed in ("layout", v1 when missing); only the current frame's are applied
 
 
+THAW = {x for x in os.environ.get('GIDI_THAW', '').split(',') if x}   # districts rebuilt from their base and every hand edit, to be frozen again
+
+
 def _files():
+    """The current frame's hand files. A thawed district (GIDI_THAW) comes back without its snapshot, with every edit it ever had (those
+    filed as applied when it was frozen, then the new ones) applied in their stages: the frozen state again, plus the new edits."""
     for f in sorted(glob.glob('web/hand/*.json')):
         H = json.load(open(f))
         if H.get('layout', 'v1') == LAYOUT:
+            if H['district'] in THAW:
+                H = dict(H); H.pop('snapshot', None); H['edits'] = H.get('applied', []) + H.get('edits', [])
             yield f, H
 
 
@@ -126,7 +137,7 @@ def apply_frozen(out, stage):
     return rep
 
 
-ROAD_OPS = ('add street', 'delete street', 'name road')
+ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street')
 LABEL_OPS = ('set surface', 'name')
 
 
@@ -165,6 +176,22 @@ def apply_road_edits(out):
                     out[best[1]][d].pop(best[2])
                 else:
                     print('  hand edit found no street at', e['at'], e.get('note', ''))
+            elif op == 'cut street':   # a street stops short on both sides of a point: it dead-ends at a canal bank or the tracks
+                from shapely.ops import substring
+                P = Point(e['at']); gap = e.get('gap', 10.0); cut = 0
+                for k in ('streets', 'lanes'):   # every piece through the point (two pieces often meet right at a crossing)
+                    L_ = (out.get(k) or {}).get(d, []); new = []
+                    for p in L_:
+                        g = LineString(p) if len(p) > 1 else None
+                        if g is None or g.distance(P) > 4.0:   # cut points come from the finished map; before the clean-up a street can sit a little off
+                            new.append(p); continue
+                        t = g.project(P); cut += 1
+                        parts = [substring(g, 0, t - gap / 2) if t > gap / 2 else None, substring(g, t + gap / 2, g.length) if t + gap / 2 < g.length else None]
+                        new += [[[round(x, 1), round(y, 1)] for x, y in q.coords] for q in parts if q is not None and q.length > 3]
+                    if L_:
+                        out[k][d] = new
+                if not cut:
+                    print('  hand edit found no street to cut at', e['at'], e.get('note', ''))
             elif op == 'name road':
                 P = Point(e['at'])
                 c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if len(m['pts']) > 1]
@@ -204,7 +231,7 @@ def apply_label_edits(out):
                     S[best[1]][d][best[2]] = e['surface']
             else:
                 c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if f_['kind'] == e.get('kind', f_['kind'])]
-                c = [x for x in c if x[0] < 2.0]
+                c = [x for x in c if x[0] < 15.0]   # the nearest of its kind: furniture is placed again when a district is thawed
                 if c:
                     out['furniture'][min(c)[1]]['name'] = e['name']
                 else:
@@ -244,6 +271,22 @@ def apply_edits(out):
                     out['furniture'].pop(min(c)[1])
                 else:
                     print('  hand edit found no furniture at', e['at'], e.get('note', ''))
+            elif op == 'add place':   # a named place (a pin): {"name", "type", "x", "y", "note"}
+                out['pois'].append({'name': e['name'], 'type': e['type'], 'note': e.get('note', ''), 'd': d, 'x': e['x'], 'y': e['y'], 'hand': True})
+            elif op == 'move place':  # a named place moves: {"name", "x", "y"}
+                q = next((p for p in out['pois'] if p['name'] == e['name']), None)
+                if q is None:
+                    print('  hand edit found no place called', e['name']); continue
+                q['x'], q['y'] = e['x'], e['y']
+            elif op == 'add parcel':   # a plot (yard, park, market...): {"kind", "pts", "name"}
+                out.setdefault('parcels', {}).setdefault(d, []).append({'kind': e['kind'], 'pts': e['pts']})
+            elif op == 'delete parcel':   # the plot holding the point
+                P = Point(e['at']); L_ = (out.get('parcels') or {}).get(d, [])
+                hit = [i for i, q in enumerate(L_) if Polygon(q['pts']).buffer(0.5).contains(P)]
+                if hit:
+                    L_.pop(hit[0])
+                else:
+                    print('  hand edit found no plot at', e['at'], e.get('note', ''))
             elif op == 'add zone':
                 out.setdefault('encroach', []).append({'kind': e['kind'], 'd': d, 'pts': e['pts']})
             rep[d] = rep.get(d, 0) + 1

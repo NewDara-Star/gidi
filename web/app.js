@@ -127,6 +127,8 @@
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "B"));
     if (f.kind === "lasma post") return h("g", { key: i, transform: t }, h("rect", { x: -0.8, y: -0.8, width: 1.6, height: 1.6, className: "fu-lasma" }),
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "L"));
+    if (["wheelbarrow vendor", "fruit seller", "parking boy", "agbero", "police kiosk", "overhead sign", "task force truck"].includes(f.kind))   // people placed by hand on the walkway
+      return h("g", { key: i }, h("circle", { cx: f.x, cy: f.y, r: 0.6, className: "fu-person" }), h("title", null, f.kind + (f.name ? ": " + f.name : "")));
     return null;
   }
 
@@ -419,7 +421,7 @@
         h("b", null, "Ground plan"),
         [["walk", "walkway"], ["gutter", "gutter (open drain)"], ["spill", "market street: traders on the road (on purpose)"], ["light", "street light"], ["pole", "electricity pole"],
          ["transformer", "transformer"], ["signal", "traffic light"], ["bus", "bus stop"], ["lasma", "LASMA post"], ["island", "roundabout island"],
-         ["s-worn", "road: worn tar"], ["s-interlock", "road: interlock paving"], ["s-laterite", "road: unpaved red earth"], ["s-sand", "road: unpaved sand"], ["s-mud", "road: mud, waterlogged"]].map(([k, t]) =>
+         ["person", "a trader or a boy, placed by hand"], ["s-worn", "road: worn tar"], ["s-interlock", "road: interlock paving"], ["s-laterite", "road: unpaved red earth"], ["s-sand", "road: unpaved sand"], ["s-mud", "road: mud, waterlogged"]].map(([k, t]) =>
           h("div", { key: k, className: "lg" }, h("i", { className: "sw-" + k }), t))),
       h("div", { className: "scale ui" },
         h("div", { className: "bar", style: { width: metres * z } }), h("span", null, scaleLabel),
