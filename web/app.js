@@ -127,7 +127,7 @@
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "B"));
     if (f.kind === "lasma post") return h("g", { key: i, transform: t }, h("rect", { x: -0.8, y: -0.8, width: 1.6, height: 1.6, className: "fu-lasma" }),
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "L"));
-    if (["wheelbarrow vendor", "fruit seller", "parking boy", "agbero"].includes(f.kind))   // people placed by hand on the walkway
+    if (["wheelbarrow vendor", "fruit seller", "parking boy", "agbero", "police kiosk", "overhead sign", "task force truck"].includes(f.kind))   // people placed by hand on the walkway
       return h("g", { key: i }, h("circle", { cx: f.x, cy: f.y, r: 0.6, className: "fu-person" }), h("title", null, f.kind + (f.name ? ": " + f.name : "")));
     return null;
   }

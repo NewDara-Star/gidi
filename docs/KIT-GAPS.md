@@ -43,3 +43,7 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
 - **The motor park's union office** (kind `office`, the Hub: the boss's office). A one-room block shack with a door and a window to the yard, a painted sign, a bench outside. The inside is the first cutscene's set: desk, plastic chairs, standing fan, church calendar, small TV.
 - **Agberos** (furniture kind `agbero`): a man with a ticket book and a whip of notes, standing at the gate.
 - **The buka** (kind `buka`, the Maze: Flyover Buka): a lean-to kitchen, pots on a coal fire, benches.
+- **Police kiosk** (furniture `police kiosk`): a small red-and-white booth at a bus stop.
+- **Overhead direction sign** (furniture `overhead sign`): a green gantry across an arterial.
+- **Task force truck** (furniture `task force truck`): a pickup with seized okadas in the back, parked at a junction.
+- **Rail market** (zone `rail market`, the Hub): traders' tables on the ballast beside the tracks, lifted when a train comes.
