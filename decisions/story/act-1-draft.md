@@ -24,7 +24,7 @@
 ## Changes (owner, 16 Oct)
 - **The steal is at a provision shop, not a Mama Put.** A Mama Put is a buka, a small local restaurant. Tunde steals **bread** from a provision shop's table. In the map: **Mama Bisi Provisions**, inside the south mouth of Ladi Lane market. Her son swings first; then "Ole!"
 - **North to south:** Tunde's room, then Mama Bisi's kiosk, then the boss's post. He walks south to the market's north mouth, grabs the bread, and the chase runs south down Ladi Lane into the boss at the south mouth.
-- **The first cutscene (Claude's proposal, for the owner to confirm):** the boss's office at the motor park in the Hub: a single room, a union office shack at the edge of the yard (desk, plastic chairs, standing fan, church calendar, small TV).
+- **The first cutscene (confirmed by the owner, 16 Oct):** the boss's office at the motor park in the Hub. "Office works, like a dingy bus park makeshift office." A converted container or a zinc-walled shed: a desk with the ledger, plastic chairs, a standing fan that rattles, a bare bulb, a peeling church calendar, a padlock on the door.
   - It's as easy to build as a living room, it's the boss's world (Tunde signs the book where the money is made), and it's reused all game: remittances, "Abeg, this money is not going down", the debt line by line, freeing Small.
   - The yard is the hardest choice (crowds, danfos) and stays for in-game moments.
   - The boss's house is saved for a later reveal of what the debts have bought.

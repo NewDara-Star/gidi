@@ -25,7 +25,6 @@
    - Atlantic Reclaim (after Eko Atlantic)
    - the Northern Road BRT
 2. Each district's "unmistakably Lagos" list (like the Maze and the Hub), placed by hand.
-3. The owner to confirm: the first cutscene in the boss's park office (`decisions/story/act-1-draft.md`).
 
 **Later:**
 - the look pass from the references
