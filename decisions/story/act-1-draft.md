@@ -21,6 +21,10 @@
    - Back to the boss: the end of Act 1.
 9. **The reveal, at the end of Act 2.** The Alpha is the boss's associate: the boss set the whole thing up. This betrayal, after an act of exhausting work for the boss, drives the rest of Act 2 and Act 3.
 
+## Changes (owner, 16 Oct)
+- **The steal is at a provision shop, not a Mama Put.** A Mama Put is a buka, a small local restaurant. Tunde steals **bread** from a provision shop's table. In the map: **Mama Bisi Provisions**, inside the south mouth of Ladi Lane market. Her son swings first; then "Ole!"
+- **Tunde's room is in a face-me-I-face-you block:** one storey, a corridor down the middle, rooms facing each other. In the map it stands 172 m from the provision shop, just past the market's north end, in sight of the boss's canopy.
+
 ## The opening, in detail (owner, 15 Oct, later)
 - **It opens close to the market.** Tunde walks up to the market thinking about food. The walk-up teaches the basic controls: movement, running, and so on.
 - **The steal.** He steals something; the man he stole from tries to punch or hit him. Punching can be taught in a short mini-game.
