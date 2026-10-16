@@ -367,3 +367,135 @@ def refuse_heap(mb, x, y, r, rng):
         a, d = rng.between(0, math.tau), rng.between(0, r)
         zz = h * max(0, 1 - (d / r) ** 1.6) * 0.9
         litter_piece(mb, x + math.cos(a) * d, y + math.sin(a) * d, zz, rng)
+
+
+# ---------------------------------------------------------------- people placed by hand (docs/KIT-GAPS.md, "New in the v2 layout")
+# Each takes M at the spot, facing the road (+x), and the spot's Rng. Arms are poses for people.person (1.75 m frame;
+# -1 is the right arm, 1 the left).
+AGBERO_POSES = {
+    'collect': {-1: ((0.25, -0.26, 1.16), (0.5, -0.2, 1.22)), 1: ((0.06, 0.25, 1.1), (0.2, 0.2, 0.93))},   # notes held out to the driver
+    'count': {-1: ((0.16, -0.24, 1.08), (0.32, -0.07, 1.12)), 1: ((0.16, 0.24, 1.08), (0.32, 0.07, 1.1))},     # counting the float at the chest
+    'wave': {-1: ((0.1, -0.36, 1.5), (0.16, -0.34, 1.86))},                                                 # waving the bus in with the notes
+}
+
+
+def agbero(mb, M, rng, pose=None):
+    """An agbero at the park gate: a ticket book in one hand, a fan of notes folded lengthways in the other."""
+    from . import people, props
+    pose = pose or rng.pick(list(AGBERO_POSES))
+    who = people.person(mb, M, rng, kind=rng.pick({'tshirt': 3, 'buba': 1}), pose=False, arms=AGBERO_POSES[pose], man=True)
+    R, Lh = who['hands'][-1], who['hands'][1]
+    yaw = Matrix.Rotation(math.atan2(M[1][0], M[0][0]), 4, 'Z')
+    props.notes_fan(mb, Matrix.Translation(R) @ yaw, rng.child('notes'))
+    props.ticket_book(mb, Matrix.Translation(Lh) @ yaw @ Matrix.Rotation(0.4, 4, 'Y'))
+    if rng.chance(0.4):   # a cap
+        parts.cyl(mb, 'cloth', who['head'] @ Matrix.Translation((0, 0, 0.08)), 0.105, 0.07, hex_rgb(rng.pick(['#1d1d1d', '#c62828', '#1f3f8a'])), 0.4, seg=10)
+    return pose
+
+
+def wheelbarrow_vendor(mb, M, rng):
+    """Phone cases and chargers on a board across a wheelbarrow under an umbrella; the man behind it in an earpiece."""
+    from . import people, props
+    from .core import at
+    tray = props.wheelbarrow(mb, M, hex_rgb(rng.pick(['#3f6b8a', '#6b6b66', '#8a3a2a'])))
+    mb.box('wood', at(tray, 0, 0, 0.28), hex_rgb('#8a6a48'), 0.7, size=(1.05, 0.8, 0.03))
+    for i in range(6):   # rows of cases lying on the board
+        for j in range(4):
+            mb.box('plastic', at(tray, -0.42 + i * 0.17, -0.27 + j * 0.18, 0.31, rz=rng.between(-0.08, 0.08)),
+                   hex_rgb(rng.pick(['#1d1d1d', '#c62828', '#1f5fa8', '#f4f1ea', '#e91e63', '#f9a825', '#2e7d32', '#9e9e9e'])), 0.2, size=(0.15, 0.08, 0.012))
+    parts.bar(mb, 'steel', at(tray, -0.5, 0, 0.3).translation, at(tray, -0.5, 0, 1.15).translation, 0.025, hex_rgb('#8a8d8c'), 0.6)   # the charger rail
+    parts.bar(mb, 'steel', at(tray, -0.5, -0.4, 1.1).translation, at(tray, -0.5, 0.4, 1.1).translation, 0.02, hex_rgb('#8a8d8c'), 0.6)
+    for k in range(7):
+        y = -0.36 + k * 0.12
+        parts.bar(mb, 'plastic', at(tray, -0.5, y, 1.1).translation, at(tray, -0.5, y, 0.75).translation, 0.008, hex_rgb('#f4f1ea'), 0.2)
+        mb.box('plastic', at(tray, -0.5, y, 0.72), hex_rgb(rng.pick(['#f4f1ea', '#1d1d1d'])), 0.2, size=(0.04, 0.05, 0.06))
+    props.umbrella(mb, at(M, -0.6, 0.3, 0), r=1.0, h=2.0, cols=rng.pick(props.UMBRELLA_COLS))
+    who = people.person(mb, at(M, -1.3, -0.1, 0), rng, kind='tshirt', pose=False, man=True)
+    parts.cyl(mb, 'plastic', who['head'] @ Matrix.Translation((0, -0.095 * who['k'], 0)) @ Matrix.Rotation(math.pi / 2, 4, 'X'), 0.018, 0.02, hex_rgb('#1d1d1d'), 0, seg=8)   # the earpiece
+
+
+def fruit_seller(mb, M, rng):
+    """Oranges, pineapples and bananas on a round tray on a folding table; the seller beside it."""
+    from . import people, props
+    from .core import at
+    props.table(mb, M, 0.8, 0.8, 0.72, hex_rgb('#b0a08a'), 0.7, steel=True)
+    T0 = at(M, 0, 0, 0.74)
+    parts.cyl(mb, 'steel', T0, 0.42, 0.05, hex_rgb(rng.pick(['#c9ced2', '#2f6fae', '#c62828'])), 0.5, seg=16, r2=0.45)
+    from .people import sphere
+    for k in range(rng.randrange(14, 24)):   # oranges in a heap (greenish-orange, as they come)
+        t, r = rng.between(0, math.tau), rng.between(0, 0.28)
+        sphere(mb, 'plastic', at(T0, math.cos(t) * r - 0.05, math.sin(t) * r, 0.1 + (0.28 - r) * 0.4), 0.045, 0.045, 0.045, hex_rgb(rng.pick(['#f08a24', '#e8a33a', '#b8b23a'])), seg=6, rings=4)
+    for k in range(2):   # pineapples
+        P0 = at(T0, 0.22, -0.18 + k * 0.32, 0.05)
+        parts.cyl(mb, 'plastic', P0, 0.07, 0.2, hex_rgb('#b8892e'), 0.5, seg=8, r2=0.06)
+        parts.cyl(mb, 'plastic', at(P0, 0, 0, 0.2), 0.06, 0.14, hex_rgb('#3f6b2a'), 0.4, seg=6, r2=0.005)
+    for k in range(3):   # bananas, a bunch of curved bars
+        for j in range(4):
+            a = at(T0, -0.3 + j * 0.03, 0.15 + k * 0.06, 0.07)
+            parts.bar(mb, 'plastic', a.translation, at(a, 0.08, 0.14, 0.04).translation, 0.035, hex_rgb('#e8c430'), 0.3)
+    people.person(mb, at(M, -0.7, 0.4, 0, rz=-0.4), rng, kind=rng.pick({'wrapper': 2, 'ankara': 1}), pose=False)
+    if rng.chance(0.5):
+        props.umbrella(mb, at(M, -0.3, -0.4, 0), r=1.0, h=2.0, cols=rng.pick(props.UMBRELLA_COLS))
+
+
+def parking_boy(mb, M, rng):
+    """A parking boy: his plastic chair with the ticket book on the seat, him beside it in a reflective vest."""
+    from . import people, props
+    from .core import at
+    props.chair(mb, at(M, -0.4, 0.4, 0, rz=rng.between(-0.3, 0.3)), hex_rgb(rng.pick(props.CHAIR_COLS)), 0.6)
+    props.ticket_book(mb, at(M, -0.4, 0.4, 0.47, rz=0.5))
+    who = people.person(mb, M, rng, kind='tshirt', pose=False, arms={-1: ((0.2, -0.3, 1.25), (0.38, -0.3, 1.45))}, man=True)   # "Oga, park here"
+    k, T0 = who['k'], who['torso']
+    orange, silver = hex_rgb('#f26b1d'), hex_rgb('#d8dde0')
+    parts.cyl(mb, 'cloth', T0 @ Matrix.Translation((0, 0, 0.04 * k)), 0.178 * k, 0.44 * k, orange, 0.5, seg=12, caps=(False, False), r2=0.205 * k)
+    for z in (0.14, 0.3):
+        parts.cyl(mb, 'cloth', T0 @ Matrix.Translation((0, 0, z * k)), 0.186 * k + z * 0.05, 0.035 * k, silver, 0.3, seg=12, caps=(False, False))
+
+
+def bread_hawker(mb, M, rng, kind=None):
+    """A bread hawker: loaves in nylon on a head tray, or a wheelbarrow of them pushed along (both versions)."""
+    from . import people, props
+    from .core import at
+    kind = kind or rng.pick({'barrow': 1, 'tray': 1})
+    if kind == 'barrow':
+        tray = props.wheelbarrow(mb, M, hex_rgb(rng.pick(['#3f6b8a', '#6b6b66', '#2e6b45'])))
+        props.loaves(mb, tray, rng.randrange(14, 24), rng.child('loaves'), rows=3)
+        arms = {s: ((0.25, s * 0.26, 1.0), (0.5, s * 0.28, 0.8)) for s in (-1, 1)}   # on the handles
+        people.person(mb, at(M, -1.45, 0, 0), rng, kind='tshirt', pose=False, arms=arms)
+    else:
+        who = people.person(mb, M, rng, kind=rng.pick({'ankara': 1, 'wrapper': 1}), pose=False, arms={1: ((0.05, 0.3, 1.55), (0.02, 0.25, 1.88))}, man=False)
+        T0 = who['head'] @ Matrix.Translation((0, 0, 0.24 * who['k']))
+        parts.cyl(mb, 'steel', T0, 0.36, 0.05, hex_rgb(rng.pick(['#c9ced2', '#2f6fae'])), 0.4, seg=16, r2=0.4)
+        props.loaves(mb, at(T0, 0, 0, 0.0), rng.randrange(8, 13), rng.child('loaves'), rows=2)
+    return kind
+
+
+def rail_market(mb, M, rng):
+    """One trader's pitch on the ballast beside the rails (the Hub's rail market): a low table or a mat of goods,
+    basins, sometimes an umbrella. M: on the ballast, x along the track."""
+    from . import props
+    from .core import at
+    from .people import sphere
+    goods = rng.pick({'tomato': 3, 'pepper': 2, 'onion': 2, 'clothes': 2, 'plastic': 1, 'yam': 1})
+    col = {'tomato': '#c62828', 'pepper': '#d84315', 'onion': '#b07a5a', 'clothes': None, 'plastic': None, 'yam': '#8a6a48'}[goods]
+    if rng.chance(0.55):
+        props.table(mb, M, rng.between(0.9, 1.4), 0.6, 0.45, shade(hex_rgb('#8a6a48'), rng.between(0.8, 1.1)), 0.8)
+        top = at(M, 0, 0, 0.47)
+    else:
+        mb.box('cloth', at(M, 0, 0, 0.01), hex_rgb(rng.pick(['#1f5fa8', '#c62828', '#3a3a3a', '#7a6a4a'])), 0.7, size=(rng.between(1.0, 1.5), 0.9, 0.01))
+        top = at(M, 0, 0, 0.02)
+    for k in range(rng.randrange(2, 5)):
+        B = at(top, -0.45 + k * 0.3, rng.between(-0.12, 0.12), 0)
+        if goods in ('clothes', 'plastic'):
+            for j in range(rng.randrange(2, 5)):
+                mb.box('cloth' if goods == 'clothes' else 'plastic', at(B, 0, 0, 0.03 + j * 0.04, rz=rng.between(-0.3, 0.3)),
+                       hex_rgb(rng.pick(['#d7263d', '#1b998b', '#f46036', '#2e294e', '#f2c14e', '#f4f1ea'])), 0.3, size=(0.3, 0.25, 0.04))
+            continue
+        props.basin(mb, B, hex_rgb(rng.pick(['#c9ced2', '#2f6fae', '#c62828', '#e8e2d6'])), r=0.17, h=0.1)
+        for j in range(rng.randrange(4, 8)):
+            sphere(mb, 'plastic', at(B, rng.between(-0.08, 0.08), rng.between(-0.08, 0.08), 0.1 + rng.between(0, 0.05)), 0.045, 0.045, 0.04,
+                   shade(hex_rgb(col), rng.between(0.8, 1.1)), seg=6, rings=4)
+    if rng.chance(0.3):
+        props.umbrella(mb, at(M, -0.5, 0.5, 0), r=1.1, h=2.0, cols=rng.pick(props.UMBRELLA_COLS))
+    if rng.chance(0.5):
+        props.chair(mb, at(M, 0, -0.75, 0, rz=math.pi / 2), hex_rgb(rng.pick(props.CHAIR_COLS)), 0.6) if rng.chance(0.5) else props.bench(mb, at(M, 0, -0.75, 0, rz=math.pi / 2), 0.9, h=0.3)

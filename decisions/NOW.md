@@ -18,6 +18,10 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**Next, booked by the owner:**
+- **Saturday 18 Oct: the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
+- **The owner storyboards the first cutscene** (the boss's office) as comic panels.
+
 **Done since (16 Oct, night):**
 - **Monuments by hand,** the modeler's pieces (`docs/hand/borrowed-lagos.md`): the Founder, the Marigold Screen, the welcome arch, the Saxophonist, the Scrap Rider, the Port Light, the Hunter, the Market Clock, the Masquerade.
 - **Parade Square on Old Island,** with **The Reach** at its centre (the owner's choice) and gate riders.

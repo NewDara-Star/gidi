@@ -485,11 +485,15 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
       this.group = new THREE.Group(); world.scene.add(this.group);
       this.loaded = new Map();   // key -> { detail, obj } | "loading"
       this.mats = new Map(); this.manifest = null; this.busy = 0; this.lastKey = ""; this.lastAt = 0;
-      const draco = new THREE.DRACOLoader();
-      draco.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");   // decoder 1.5.6: the full tiles are too big for r147's
-      draco.setWorkerLimit(1);
-      this.loader = new THREE.GLTFLoader(); this.loader.setDRACOLoader(draco);
+      this.failed = new Set();   // "k/detail" that wouldn't load: use the other detail there
+      this.newLoader();
       fetch(TILES_BASE + "manifest.json").then((r) => (r.ok ? r.json() : null)).then((m) => { this.manifest = m; }, () => {});
+    }
+    newLoader() {   // again after a failed decode: an aborted decoder fails every tile after it (the old one isn't disposed: another tile may still be decoding on it)
+      this.draco = new THREE.DRACOLoader();
+      this.draco.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");   // decoder 1.5.6: the full tiles are too big for r147's
+      this.draco.setWorkerLimit(1);
+      this.loader = new THREE.GLTFLoader(); this.loader.setDRACOLoader(this.draco);
     }
     material(name) {
       if (!this.mats.has(name)) this.mats.set(name, kitMaterial(name, this.dark));
@@ -509,7 +513,8 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
         const k = `${tx + dx}_${ty + dy}`, have = this.manifest.tiles[k];
         if (!have) continue;
         const r = Math.max(Math.abs(dx), Math.abs(dy));
-        const det = full && r === 0 && have.full ? "full" : have.web ? "web" : have.full ? "full" : "";
+        const ok = (d) => have[d] && !this.failed.has(k + "/" + d);
+        const det = full && r === 0 && ok("full") ? "full" : ok("web") ? "web" : ok("full") ? "full" : "";
         if (det) want.set(k, [det, r]);
       }
       for (const [k, v] of [...this.loaded]) {   // drop what's out of range (a change of detail swaps when the new one arrives)
@@ -536,8 +541,12 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
       const slot = upgrade ? k + "#next" : k;
       this.loaded.set(slot, "loading"); this.busy++;
       const [ax, ay] = k.split("_").map(Number);
+      let over = false;
+      const fail = () => { if (over) return; over = true; this.busy--; this.loaded.delete(slot); this.failed.add(k + "/" + det); this.newLoader(); };
+      const timer = setTimeout(fail, det === "full" ? 60000 : 30000);   // an aborted decoder never calls back
       this.loader.load(TILES_BASE + det + "/tiles/" + k + ".glb", (gltf) => {
-        this.busy--;
+        if (over) return;
+        over = true; clearTimeout(timer); this.busy--;
         const obj = gltf.scene;
         obj.position.set(ax * TILE, 0, (ay + 1) * TILE);   // the tile's corner (Blender's y north is the map's y south)
         obj.traverse((o) => {
@@ -550,7 +559,7 @@ body{background:var(--bush);color:var(--fg);font-family:var(--font);font-size:14
         if (upgrade) { this.drop(k); this.loaded.delete(slot); }
         else this.loaded.delete(slot);
         this.group.add(obj); this.loaded.set(k, { detail: det, obj });
-      }, undefined, () => { this.busy--; this.loaded.delete(slot); });
+      }, undefined, () => { clearTimeout(timer); fail(); });
     }
     drop(k) {
       const v = this.loaded.get(k);
