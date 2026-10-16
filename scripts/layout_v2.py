@@ -53,9 +53,12 @@ CREEK_W = chaikin([(-500, Y(1.6)), (X(6), Y(2.6)), (X(14), Y(1.4)), (X(18), Y(0.
 BANANA = Polygon(chaikin([(11540, 5790), (11600, 5620), (11800, 5520), (12000, 5530), (12160, 5640), (12200, 5790), (12090, 5760),
                           (11960, 5740), (11810, 5745), (11690, 5770), (11610, 5830)], 3)).buffer(0)
 CAUSEWAY = LineString([(11840, 5680), (11850, 6000)]).buffer(14, cap_style=2)   # 28 m of land: the road, a gatehouse at the shore
-water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND).difference(BANANA).difference(CAUSEWAY)
+# Atlantic Reclaim (after Eko Atlantic, docs/hand/borrowed-lagos.md #15): new land won from the sea in front of the Heights, behind a
+# long straight sea wall; about 0.6 km2 (the real one is ~10 km2, at 1:4). It joins the Heights; the old shore path stays as the old seafront.
+RECLAIM = Polygon(chaikin([(11380, 7020), (12000, 6980), (12660, 6950), (12680, 7300), (12640, 7460), (12000, 7500), (11420, 7520), (11360, 7300)], 2)).buffer(0)
+water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND).difference(BANANA).difference(CAUSEWAY).difference(RECLAIM)
 land = box(0, 0, W, H).difference(water)
-sea = Polygon(OCEAN).buffer(0).intersection(box(0, 0, W, H))   # the open sea, kept apart from the inland water (the map build treats them differently)
+sea = Polygon(OCEAN).buffer(0).intersection(box(0, 0, W, H)).difference(RECLAIM)   # the open sea, kept apart from the inland water (the map build treats them differently)
 
 
 def no_holes(g):
@@ -84,7 +87,7 @@ def rings(polys):
     return out
 # where the built city ends (bush and farms beyond): a fresh outline round the districts
 hull = MultiPoint([Point(*v) for v in anchor.values()]).convex_hull.buffer(2.6 * km, quad_segs=8)
-city = hull.intersection(land)
+city = hull.intersection(land).union(RECLAIM)   # the reclaimed land is city by definition (the hull would cut it)
 
 ids = list(anchor)
 vd = voronoi_diagram(MultiPoint([Point(*anchor[k]) for k in ids]), envelope=box(-W, -H, 2 * W, 2 * H))
@@ -171,6 +174,9 @@ ART = [
     ('Beach Road', 'art', [(3300, 6640), (3800, 6630), (4300, 6650), (4800, 6690), (5300, 6730)]),
     # Banana Island's causeway road, off Heights Drive
     ('Crescent Causeway', 'art', [(11850, 6250), (11848, 6000), (11842, 5700)]),
+    # Atlantic Reclaim's two roads: the promenade along the sea wall, the boulevard down from the expressway
+    ('Atlantic Promenade', 'art', [(11450, 7470), (12000, 7452), (12600, 7418)]),
+    ('Atlantic Boulevard', 'art', [(12000, 7010), (12000, 7452)]),   # from the old shore down to the sea wall; joined to the Heights by hand
     ('Heights Drive', 'art', [(12275, 5975), (12050, 6050), (11850, 6250), (11800, 6556)]),  # the Heights side of the Cable Bridge
     ('Cable Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi (tolled, cable-stayed; v1's Cable Bridge): across the bay from the Heights to the peninsula
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
