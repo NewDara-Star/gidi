@@ -93,6 +93,9 @@
   function addB(o) { o.bb = bboxOf(o.pts); M.B.push(o); gadd(M.gB, o, o.bb); }
   function delB(o) { gdel(M.gB, o, o.bb); M.B.splice(M.B.indexOf(o), 1); }
   function moveB(o, fn) { gdel(M.gB, o, o.bb); o.pts = o.pts.map(fn); o.bb = bboxOf(o.pts); gadd(M.gB, o, o.bb); }
+  function setPts(b, pts) { gdel(M.gB, b, b.bb); b.pts = pts.map((q) => [q[0], q[1]]); b.bb = bboxOf(b.pts); gadd(M.gB, b, b.bb); }
+  const closeRing = (pts) => { const q = pts.map((p) => [p[0], p[1]]); const a = q[0], z = q[q.length - 1]; if (a[0] !== z[0] || a[1] !== z[1]) q.push([a[0], a[1]]); return q; };
+  const openRing = (pts) => { const a = pts[0], z = pts[pts.length - 1]; return a[0] === z[0] && a[1] === z[1] ? pts.slice(0, -1) : pts.slice(); };
   function addF(o) { M.F.push(o); gadd(M.gF, o, [o.x, o.y, o.x, o.y]); }
   function delF(o) { gdel(M.gF, o, [o.x, o.y, o.x, o.y]); M.F.splice(M.F.indexOf(o), 1); }
   function moveF(o, x, y) { gdel(M.gF, o, [o.x, o.y, o.x, o.y]); o.x = x; o.y = y; gadd(M.gF, o, [x, y, x, y]); }
@@ -112,6 +115,9 @@
       const [dx, dy] = e.by || [0, 0]; moveB(b, ([x, y]) => [x + dx, y + dy]);
       if (e.rotate) { const c = centroid(b.pts), a = e.rotate * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a); moveB(b, ([x, y]) => [c[0] + (x - c[0]) * cs - (y - c[1]) * sn, c[1] + (x - c[0]) * sn + (y - c[1]) * cs]); }
     }
+    else if (op === "reshape building") { const b = findB(e.at, e.kind); if (b) setPts(b, e.pts); }
+    else if (op === "reshape parcel" || op === "reshape zone") { const L = op === "reshape parcel" ? M.PAR : M.ZONE; const q = L.find((z) => z.d === d && inPoly(e.at, z.pts)); if (q) { if (op === "reshape zone") gdel(M.gZ, q, q.bb); q.pts = closeRing(e.pts); q.bb = bboxOf(q.pts); if (op === "reshape zone") gadd(M.gZ, q, q.bb); } }
+    else if (op === "reshape street") { let best = null, bd = 4; for (const r of gquery(M.gR, [e.at[0] - 4, e.at[1] - 4, e.at[0] + 4, e.at[1] + 4])) if ((r.cls === "street" || r.cls === "lane" || r.cls === "main" || r.cls === "path") && r.d === d) { const dd = lineDist(e.at, r.pts); if (dd < bd) { best = r; bd = dd; } } if (best) { delR(best); best.pts = e.pts.map((q) => [q[0], q[1]]); addR(best); } }
     else if (op === "add furniture") addF({ t: "f", d, kind: e.kind, x: e.x, y: e.y, ang: e.ang || 0, name: "" });
     else if (op === "delete furniture") { const f = findF(e.at, e.kind); if (f) delF(f); }
     else if (op === "move furniture") { const f = findF(e.at, e.kind); if (f) { moveF(f, e.to[0], e.to[1]); if ("ang" in e) f.ang = e.ang; } }
@@ -133,11 +139,11 @@
   }
 
   // ------------------------------------------------------------------ the view
-  let W = 0, H = 0, DPR = 1, s = 1, ox = 0, oy = 0;   // screen = world * s + o
+  let W = 0, H = 0, DPR = 1, s = 1, ox = 0, oy = 0, lastHash = "";   // screen = world * s + o
   const toW = (X, Y) => [(X - ox) / s, (Y - oy) / s];
   function resize() { DPR = window.devicePixelRatio || 1; W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; draw(); }
   function fit(bb) { const pad = 40; s = Math.min((W - 2 * pad) / (bb[2] - bb[0]), (H - 2 * pad) / (bb[3] - bb[1])); ox = W / 2 - s * (bb[0] + bb[2]) / 2; oy = H / 2 - s * (bb[1] + bb[3]) / 2; saveView(); draw(); }
-  function saveView() { try { const c = toW(W / 2, H / 2); history.replaceState(null, "", `#${r1(c[0])},${r1(c[1])},${s.toFixed(3)}`); } catch (e) {} }
+  function saveView() { try { const c = toW(W / 2, H / 2); lastHash = `#${r1(c[0])},${r1(c[1])},${s.toFixed(3)}`; history.replaceState(null, "", lastHash); } catch (e) {} }
   function viewBB(m = 0) { const a = toW(0, 0), b = toW(W, H); return [a[0] - m, a[1] - m, b[0] + m, b[1] + m]; }
   const hit = (bb, v) => !(bb[2] < v[0] || bb[0] > v[2] || bb[3] < v[1] || bb[1] > v[3]);
 
@@ -236,6 +242,13 @@
     const outline = (o, col, w) => { ctx.strokeStyle = col; ctx.lineWidth = w * px; if (o.t === "b" || o.t === "plot" || o.t === "zone") { path(o.pts, true); ctx.stroke(); } else if (o.t === "r") { path(o.pts); ctx.lineWidth = o.wd.c + 6 * px; ctx.globalAlpha = 0.25; ctx.stroke(); ctx.globalAlpha = 1; } else { ctx.beginPath(); ctx.arc(o.x, o.y, Math.max(1.2, 9 * px), 0, 7); ctx.stroke(); } };
     if (hover && hover !== sel) outline(hover, css("--sel"), 1.5);
     if (sel) outline(sel, bad.has(sel) ? css("--bad") : css("--sel"), 3);
+    const eh = tool === "select" && editPts(sel);
+    if (eh) {
+      const P = eh.pts, n = P.length, hs = 5 * px;
+      ctx.lineWidth = 1.5 * px;
+      for (let i = 0; i < (eh.closed ? n : n - 1); i++) { const a = P[i], b = P[(i + 1) % n]; ctx.beginPath(); ctx.arc((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, 3.5 * px, 0, 7); ctx.fillStyle = css("--panel"); ctx.fill(); ctx.strokeStyle = css("--sel"); ctx.stroke(); }
+      for (const q of P) { ctx.fillStyle = css("--panel"); ctx.fillRect(q[0] - hs, q[1] - hs, 2 * hs, 2 * hs); ctx.strokeStyle = css("--sel"); ctx.strokeRect(q[0] - hs, q[1] - hs, 2 * hs, 2 * hs); }
+    }
     if (ghost) { ctx.fillStyle = css("--ghost"); ctx.strokeStyle = css("--sel"); ctx.lineWidth = 2 * px; path(ghost, true); ctx.fill(); ctx.stroke(); }
     if (streetPts.length) { path(streetPts); ctx.strokeStyle = css("--sel"); ctx.lineWidth = Math.max(WID(kindSel.value).c, 3 * px); ctx.globalAlpha = 0.5; ctx.stroke(); ctx.globalAlpha = 1; for (const p of streetPts) { ctx.beginPath(); ctx.arc(p[0], p[1], 4 * px, 0, 7); ctx.fillStyle = css("--sel"); ctx.fill(); } }
     // labels in screen space
@@ -288,6 +301,43 @@
     ctx.font = "11px -apple-system, sans-serif"; ctx.fillText(m >= 1000 ? m / 1000 + " km" : m + " m", X + L + 6, Y + 3);
   }
 
+  // ------------------------------------------------------------------ reshaping: corner handles (drag), midpoint handles (drag to add a corner)
+  const RESHAPE_R = new Set(["street", "lane", "main", "path"]);
+  function editPts(o) {   // the points a handle edits, and whether they close
+    if (!o) return null;
+    if (o.t === "b") return { pts: o.pts, closed: true };
+    if (o.t === "plot" || o.t === "zone") return { pts: openRing(o.pts), closed: true };
+    if (o.t === "r" && RESHAPE_R.has(o.cls) && o.d) return { pts: o.pts, closed: false };
+    return null;
+  }
+  function handleAt(X, Y) {   // a handle of the selection under the screen point
+    const e = editPts(sel); if (!e || tool !== "select") return null;
+    const P = e.pts, n = P.length;
+    for (let i = 0; i < n; i++) if (Math.hypot(P[i][0] * s + ox - X, P[i][1] * s + oy - Y) < 8) return { i, mid: false };
+    for (let i = 0; i < (e.closed ? n : n - 1); i++) { const a = P[i], b = P[(i + 1) % n]; const mx = (a[0] + b[0]) / 2 * s + ox, my = (a[1] + b[1]) / 2 * s + oy; if (Math.hypot(mx - X, my - Y) < 7) return { i, mid: true }; }
+    return null;
+  }
+  function setEditPts(o, pts) {   // write edited points back to the object (and its index)
+    if (o.t === "b") setPts(o, pts);
+    else if (o.t === "plot") { o.pts = closeRing(pts); o.bb = bboxOf(o.pts); }
+    else if (o.t === "zone") { gdel(M.gZ, o, o.bb); o.pts = closeRing(pts); o.bb = bboxOf(o.pts); gadd(M.gZ, o, o.bb); }
+    else if (o.t === "r") { delR(o); o.pts = pts.map((q) => [q[0], q[1]]); addR(o); }
+    M.version++;
+  }
+  function reshapeEdit(o, before, after) {   // the hand edit for a new outline; "at" is a point on the old one
+    const pts = after.map((q) => [r1(q[0]), r1(q[1])]);
+    if (o.t === "b") return { op: "reshape building", at: insidePt(before).map(r1), kind: o.kind, pts };
+    if (o.t === "plot") return { op: "reshape parcel", at: insidePt(before).map(r1), pts };
+    if (o.t === "zone") return { op: "reshape zone", at: insidePt(before).map(r1), pts };
+    if (o.t === "r") { let bi = 0, bl = 0; for (let i = 0; i < before.length - 1; i++) { const L = dist(before[i], before[i + 1]); if (L > bl) { bl = L; bi = i; } } const a = before[bi], b = before[bi + 1]; return { op: "reshape street", at: [r1((a[0] + b[0]) / 2), r1((a[1] + b[1]) / 2)], pts }; }
+    return null;
+  }
+  // a rectangle-ish building set to an exact size, angle and middle (from the panel)
+  function rectFrom(o, w, dep, angDeg, cx, cy) {
+    const a = angDeg * Math.PI / 180, u = [Math.cos(a), Math.sin(a)], v = [-u[1], u[0]];
+    return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [cx + u[0] * i * w / 2 + v[0] * j * dep / 2, cy + u[1] * i * w / 2 + v[1] * j * dep / 2]);
+  }
+
   // ------------------------------------------------------------------ picking
   function pick(p) {
     const tol = Math.max(0.6, 8 / s);
@@ -314,7 +364,7 @@
     try {
       const r = await fetch("/api/edit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ d, edit }) });
       const j = await r.json(); if (!r.ok) { toast(j.error || "Not saved"); return false; }
-      pendingN = j.pending; if (["add street", "delete street", "cut street", "name road"].includes(edit.op)) thawN++;
+      pendingN = j.pending; if (["add street", "delete street", "cut street", "name road", "reshape street"].includes(edit.op)) thawN++;
       return true;
     } catch (e) { SERVER = false; toast("The board server isn't running, so this edit wasn't saved"); return false; }
   }
@@ -340,9 +390,10 @@
   document.querySelectorAll("#tools button").forEach((b) => b.addEventListener("click", () => setTool(b.dataset.tool)));
 
   // snap a point to the nearest road's centre line or end within 3 m (streets drawn by hand join the network exactly)
-  function snapToRoad(p) {
+  function snapToRoad(p, skip) {
     let best = null, bd = Math.max(3, 10 / s);
     for (const r of gquery(M.gR, [p[0] - 10, p[1] - 10, p[0] + 10, p[1] + 10])) {
+      if (r === skip) continue;
       for (const e of [r.pts[0], r.pts[r.pts.length - 1]]) { const d = dist(p, e); if (d < bd) { bd = d; best = e.slice(); } }
       for (let i = 0; i < r.pts.length - 1; i++) { const q = nearestOnSeg(p, r.pts[i], r.pts[i + 1]); const d = dist(p, q); if (d < bd * 0.7) { bd = d; best = q; } }
     }
@@ -373,6 +424,19 @@
     const p = toW(ev.offsetX, ev.offsetY);
     if (ev.button === 1 || ev.button === 2 || spaceDown) { probList = null; panning = { x: ev.clientX, y: ev.clientY, ox, oy }; cv.classList.add("panning"); return; }
     if (tool === "select") {
+      const hnd = handleAt(ev.offsetX, ev.offsetY);
+      if (hnd) {
+        const e = editPts(sel), before = e.pts.map((q) => q.slice());
+        let pts = before.map((q) => q.slice()), i = hnd.i;
+        if (hnd.mid) { i = hnd.i + 1; pts.splice(i, 0, [(before[hnd.i][0] + before[(hnd.i + 1) % before.length][0]) / 2, (before[hnd.i][1] + before[(hnd.i + 1) % before.length][1]) / 2]); }
+        if (ev.altKey && !hnd.mid) {   // Option/Alt-click a corner: remove it
+          if (pts.length <= (e.closed ? 3 : 2)) { toast("It needs at least " + (e.closed ? 3 : 2) + " points"); return; }
+          pts.splice(i, 1); const o = sel; setEditPts(o, pts); draw();
+          send(o.d, reshapeEdit(o, before, pts)).then((ok) => { if (!ok) { setEditPts(o, before); draw(); } showPanel(); });
+          return;
+        }
+        drag = { vtx: i, o: null, obj: sel, before, pts }; cv.classList.add("move"); return;
+      }
       const o = pick(p);
       if (o && (o.t === "b" || o.t === "f" || o.t === "m" || o.t === "p")) { sel = o; drag = { o, start: p, last: p, moved: false }; showPanel(); draw(); return; }
       sel = o; showPanel(); probList = null; panning = { x: ev.clientX, y: ev.clientY, ox, oy, click: true }; draw(); return;
@@ -386,6 +450,15 @@
     const p = toW(ev.offsetX, ev.offsetY);
     $("where").textContent = `x ${p[0].toFixed(1)} m · y ${p[1].toFixed(1)} m · ${districtName(districtAt(p))}`;
     if (panning) { if (Math.hypot(ev.clientX - panning.x, ev.clientY - panning.y) > 3) panning.click = false; ox = panning.ox + ev.clientX - panning.x; oy = panning.oy + ev.clientY - panning.y; draw(); return; }
+    if (drag && drag.vtx !== undefined) {
+      let q = p;
+      if (drag.obj.t === "r" && !ev.shiftKey && (drag.vtx === 0 || drag.vtx === drag.pts.length - 1)) {   // a street's end snaps onto another road
+        const sn = snapToRoad(p, drag.obj); if (sn) q = sn;
+      } else if (!ev.shiftKey) {   // corners snap to other corners nearby
+        let bd = 6 / s; for (const b of gquery(M.gB, [p[0] - 1, p[1] - 1, p[0] + 1, p[1] + 1])) if (b !== drag.obj) for (const c of b.pts) { const d = dist(c, p); if (d < bd) { bd = d; q = c.slice(); } }
+      }
+      drag.pts[drag.vtx] = [q[0], q[1]]; setEditPts(drag.obj, drag.pts); draw(); return;
+    }
     if (drag && drag.o) {
       const o = drag.o; let dx = p[0] - drag.last[0], dy = p[1] - drag.last[1];
       if (!drag.moved && dist(p, drag.start) * s < 4) return;
@@ -396,11 +469,17 @@
       drag.last = p; M.version++; draw(); return;
     }
     if (drag && drag.box) { const a = drag.box; ghost = [[a[0], a[1]], [p[0], a[1]], [p[0], p[1]], [a[0], p[1]]]; draw(); return; }
-    if (tool === "select") { const o = pick(p); if (o !== hover) { hover = o; draw(); } }
+    if (tool === "select") { cv.style.cursor = handleAt(ev.offsetX, ev.offsetY) ? "pointer" : ""; const o = pick(p); if (o !== hover) { hover = o; draw(); } }
   });
   cv.addEventListener("pointerup", async (ev) => {
     cv.classList.remove("panning", "move");
     if (panning) { const wasClick = panning.click; panning = null; saveView(); if (wasClick && tool === "select") { /* selection already set */ } return; }
+    if (drag && drag.vtx !== undefined) {
+      const { obj, before, pts } = drag; drag = null;
+      const ok = await send(obj.d || districtAt(centroid(before)), reshapeEdit(obj, before, pts));
+      if (!ok) setEditPts(obj, before);
+      draw(); showPanel(); return;
+    }
     if (drag && drag.o) {
       const { o, moved } = drag; drag = null;
       if (!moved) return;
@@ -494,7 +573,7 @@
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function showPanel() {
     const P = $("panel"), o = sel;
-    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road.<br><br>Red outlines are problems the built city would have: a house on a road, overlapping buildings, a pole in the carriageway.</div>`;
+    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Selected buildings, plots, zones and streets show handles: drag a square to move a corner, a circle to add one, <kbd>⌥</kbd>-click to remove one; exact sizes in the panel. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road.<br><br>Red outlines are problems the built city would have: a house on a road, overlapping buildings, a pole in the carriageway.</div>`;
     if (!o) { P.innerHTML = `<h3>${tool === "select" ? "Nothing selected" : "Placing: " + tool}</h3>` + help; return; }
     const bad = runChecks(viewBB(0)).get(o);
     let h = "";
@@ -504,11 +583,32 @@
     else if (o.t === "p") h = `<h3>${esc(o.name)}</h3><table>${row("Type", esc(o.kind))}${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table><p class="k">${esc(o.note)}</p>`;
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
     else if (o.t === "plot" || o.t === "zone") h = `<h3>${o.t === "plot" ? "Plot" : "Zone"}: ${esc(o.kind)}</h3><table>${row("District", districtName(o.d))}${row("Area", area(o.pts).toFixed(0) + " m²")}</table>`;
+    if (o.t === "b") { const c = centroid(o.pts), w = dist(o.pts[0], o.pts[1]), dep = dist(o.pts[1], o.pts[2] || o.pts[0]), ang = Math.atan2(o.pts[1][1] - o.pts[0][1], o.pts[1][0] - o.pts[0][0]) * 180 / Math.PI;
+      h += `<hr><b>Exact size and place</b>${o.pts.length !== 4 ? '<p class="k">Setting a size makes it a rectangle.</p>' : ""}<table>${row("Width (m)", `<input id="nw" type="number" step="0.1" value="${w.toFixed(1)}">`)}${row("Depth (m)", `<input id="nd" type="number" step="0.1" value="${dep.toFixed(1)}">`)}${row("Angle (°)", `<input id="na" type="number" step="1" value="${ang.toFixed(0)}">`)}${row("Middle x", `<input id="nx" type="number" step="0.1" value="${c[0].toFixed(1)}">`)}${row("Middle y", `<input id="ny" type="number" step="0.1" value="${c[1].toFixed(1)}">`)}</table><p class="k">Or drag a corner square; drag a round handle to add a corner; ⌥-click a corner to remove it.</p>`; }
+    if (o.t === "f" || o.t === "m") h += `<hr><b>Exact place</b><table>${row("x", `<input id="fx" type="number" step="0.1" value="${o.x.toFixed(1)}">`)}${row("y", `<input id="fy" type="number" step="0.1" value="${o.y.toFixed(1)}">`)}${row("Angle (°)", `<input id="fa" type="number" step="1" value="${Math.round(o.ang)}">`)}</table>`;
+    if (o.t === "plot" || o.t === "zone" || (o.t === "r" && RESHAPE_R.has(o.cls) && o.d)) h += `<p class="k">Drag a corner square to reshape; drag a round handle to add a point; ⌥-click a point to remove it.${o.t === "r" ? " A street's ends snap onto other roads." : ""}</p>`;
     h += bad ? `<p class="bad">⚠ ${esc(bad)}</p>` : (o.t === "b" || o.t === "f") ? `<p class="ok">No problems found</p>` : "";
     h += `<div class="row">${["b", "f", "m"].includes(o.t) ? `<button id="rl">⟲ 15°</button><button id="rr">⟳ 15°</button>` : ""}<button id="del">Delete</button></div><hr>` + help;
     P.innerHTML = h;
     const on = (id, fn) => { const e = $(id); if (e) e.addEventListener("click", fn); };
     on("rl", () => rotateSel(-15)); on("rr", () => rotateSel(15)); on("del", deleteSel);
+    const num = (id) => parseFloat(($(id) || {}).value);
+    if (o.t === "b" && $("nw")) ["nw", "nd", "na", "nx", "ny"].forEach((id) => $(id).addEventListener("change", async () => {
+      const w = num("nw"), dep = num("nd"), a = num("na"), x = num("nx"), y = num("ny");
+      if (![w, dep, a, x, y].every(isFinite) || w < 0.5 || dep < 0.5) { toast("Size needs numbers of at least 0.5 m"); showPanel(); return; }
+      const before = o.pts.map((q) => q.slice()), after = rectFrom(o, w, dep, a, x, y);
+      setEditPts(o, after); draw();
+      if (!(await send(o.d, reshapeEdit(o, before, after)))) setEditPts(o, before);
+      draw(); showPanel();
+    }));
+    if ((o.t === "f" || o.t === "m") && $("fx")) ["fx", "fy", "fa"].forEach((id) => $(id).addEventListener("change", async () => {
+      const x = num("fx"), y = num("fy"), a = num("fa"); if (![x, y, a].every(isFinite)) return;
+      const at = [r1(o.x), r1(o.y)], was = [o.x, o.y, o.ang];
+      if (o.t === "f") moveF(o, x, y); else { o.x = x; o.y = y; } o.ang = a; M.version++; draw();
+      const edit = o.t === "f" ? { op: "move furniture", at, kind: o.kind, to: [r1(x), r1(y)], ang: Math.round(a) } : { op: "move monument", at, to: [r1(x), r1(y)], ang: Math.round(a) };
+      if (!(await send(o.d, edit))) { if (o.t === "f") moveF(o, was[0], was[1]); else { o.x = was[0]; o.y = was[1]; } o.ang = was[2]; M.version++; }
+      draw(); showPanel();
+    }));
     const nm = $("nm"); if (nm) nm.addEventListener("change", () => commit(o.d, { op: "name", at: [r1(o.x), r1(o.y)], kind: o.kind, name: nm.value }));
   }
   function renderStatus(bad) {
@@ -551,8 +651,15 @@
   }
   window.addEventListener("resize", resize);
   W = cv.clientWidth; H = cv.clientHeight; DPR = window.devicePixelRatio || 1; cv.width = W * DPR; cv.height = H * DPR;
+
+  function viewFromHash() {   // #x,y,zoom: a spot to bookmark or share; changing it moves the view
+    const hv = location.hash.slice(1).split(",").map(Number);
+    if (hv.length !== 3 || !hv.every(isFinite)) return false;
+    s = hv[2]; ox = W / 2 - hv[0] * s; oy = H / 2 - hv[1] * s; return true;
+  }
+  window.addEventListener("hashchange", () => { if (location.hash !== lastHash && viewFromHash()) draw(); });
   const hv = location.hash.slice(1).split(",").map(Number);
-  if (hv.length === 3 && hv.every(isFinite)) { s = hv[2]; ox = W / 2 - hv[0] * s; oy = H / 2 - hv[1] * s; }
+  if (viewFromHash()) {}
   else { const d = DIST.find((x) => x.id === "maze"); s = 1; fit(d.bb); }
   setTool("select");
   loadPending();

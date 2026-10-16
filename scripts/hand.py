@@ -16,6 +16,8 @@
 #   {"op": "move furniture", "at": [x, y], "kind": "pole" (optional), "to": [x, y], "ang": deg (optional)}  the nearest within 2 m
 #   {"op": "move monument", "at": [x, y], "to": [x, y], "ang": deg (optional)}  /  {"op": "delete monument", "at": [x, y]}  the nearest within 3 m
 #   {"op": "delete place", "name": "..."}
+#   {"op": "reshape building", "at": [x, y], "kind": .., "pts": [...]}  /  {"op": "reshape parcel" | "reshape zone", "at", "pts"}   a new outline
+#   {"op": "reshape street", "at": [x, y], "pts": [...]}   a road edit: the street, lane or district main nearest the point takes a new line
 # (scripts/board_server.py writes these from the drawing board, web/board.html)
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
 #   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
@@ -150,7 +152,7 @@ def apply_frozen(out, stage):
     return rep
 
 
-ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street', 'add structure')
+ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street', 'add structure', 'reshape street')
 LABEL_OPS = ('set surface', 'name')
 
 
@@ -205,6 +207,26 @@ def apply_road_edits(out):
                         out[k][d] = new
                 if not cut:
                     print('  hand edit found no street to cut at', e['at'], e.get('note', ''))
+            elif op == 'reshape street':   # the street, lane or main nearest the point (within 4 m) takes a new line: {"at", "pts"}
+                P = Point(e['at']); best = None
+                for k in ('streets', 'lanes'):
+                    for i, p in enumerate((out.get(k) or {}).get(d, [])):
+                        if len(p) > 1:
+                            dd = LineString(p).distance(P)
+                            if dd < 4 and (best is None or dd < best[0]):
+                                best = (dd, k, i)
+                for i, m in enumerate(out['mains']):
+                    if m.get('d') == d and len(m['pts']) > 1:
+                        dd = LineString(m['pts']).distance(P)
+                        if dd < 4 and (best is None or dd < best[0]):
+                            best = (dd, 'mains', i)
+                pts = [[round(x, 1), round(y, 1)] for x, y in e['pts']]
+                if not best:
+                    print('  hand edit found no street to reshape at', e['at'], e.get('note', ''))
+                elif best[1] == 'mains':
+                    out['mains'][best[2]]['pts'] = pts
+                else:
+                    out[best[1]][d][best[2]] = pts
             elif op == 'add structure':   # a deck over the ground: {"kind": "skywalk" | "flyover" | "footbridge", "name", "pts", "width", "layer"}
                 out.setdefault('structures', []).append({'d': d, 'kind': e['kind'], 'name': e.get('name', ''), 'pts': e['pts'],
                                                          'width': e.get('width', 3), 'layer': e.get('layer', 1)})
@@ -282,6 +304,19 @@ def apply_edits(out):
                         c, s_ = math.cos(math.radians(e['rotate'])), math.sin(math.radians(e['rotate']))
                         pts = [[cx + (x - cx) * c - (y - cy) * s_, cy + (x - cx) * s_ + (y - cy) * c] for x, y in pts]
                     out['buildings'][d][i] = [b[0]] + [[round(x, 1), round(y, 1)] for x, y in pts]
+            elif op == 'reshape building':   # the building holding the point takes a new outline: {"at", "kind", "pts"}
+                P = Point(e['at'])
+                hit = [i for i, b in enumerate(out['buildings'][d]) if len(b) > 3 and (not e.get('kind') or b[0] == e['kind']) and Polygon(b[1:]).buffer(0.3).contains(P)]
+                if not hit:
+                    print('  hand edit found nothing at', e['at'], op, e.get('note', '')); continue
+                out['buildings'][d][hit[0]] = [out['buildings'][d][hit[0]][0]] + [[round(x, 1), round(y, 1)] for x, y in e['pts']]
+            elif op in ('reshape parcel', 'reshape zone'):   # the plot (or market zone) holding the point takes a new outline
+                P = Point(e['at']); pts = [[round(x, 1), round(y, 1)] for x, y in e['pts']]
+                L_ = (out.get('parcels') or {}).get(d, []) if op == 'reshape parcel' else [z for z in out.get('encroach', []) if z.get('d') == d]
+                hit = [q for q in L_ if Polygon(q['pts']).buffer(0.5).contains(P)]
+                if not hit:
+                    print('  hand edit found nothing at', e['at'], op, e.get('note', '')); continue
+                hit[0]['pts'] = pts + ([pts[0]] if pts[0] != pts[-1] else [])   # plots and zones are closed rings
             elif op == 'add furniture':
                 out.setdefault('furniture', []).append({k: e[k] for k in ('kind', 'x', 'y', 'ang')} | {'road': e.get('note', ''), 'd': d})
             elif op == 'delete furniture':

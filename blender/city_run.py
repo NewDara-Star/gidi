@@ -1,6 +1,9 @@
 """Generate the whole city as tiles, in parallel Blender processes, and write the manifest.
 
-python3 blender/city_run.py [--jobs 8] [--size 400] [--detail full,web] [--only 6,10;7,10] [--fresh] [--terrain]
+python3 blender/city_run.py [--jobs 8] [--size 400] [--detail web] [--only 6,10;7,10] [--fresh] [--terrain]
+
+--detail: "web" (the light build, the default) or "full,web". The browser view is a quick preview and loads only the light
+tiles (owner, 16 Oct: "the full scene can be viewed in Unreal"); full tiles are for close test renders.
 
 --terrain stands every tile on the ground heights (web/terrain.json), as the slice renders do.
 
@@ -25,7 +28,7 @@ for i, a in enumerate(args):
         opt[a] = args[i + 1] if i + 1 < len(args) and not args[i + 1].startswith('--') else True
 JOBS = int(opt.get('--jobs', 8))
 SIZE = float(opt.get('--size', 400))
-DETAILS = str(opt.get('--detail', 'full,web')).split(',')
+DETAILS = str(opt.get('--detail', 'web')).split(',')
 OUT = os.path.join(ROOT, 'web', 'city')
 
 gd = open(os.path.join(ROOT, 'web', 'gidi-data.js')).read()
