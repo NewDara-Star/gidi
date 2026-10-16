@@ -86,12 +86,35 @@ def surfaces(out, terrain=None, zones=None):
     for i, m in enumerate(out['mains']):
         d = m.get('d', '')
         S['mains'].append('worn' if _u(f'main/{d}/{i}') < MAIN_WORN.get(d, 0.25) else 'tar')
-    from collections import Counter
+    from collections import Counter, defaultdict
     tally = Counter()
+
+    def chains(L):
+        """Street pieces that carry straight on through a junction (within 30 deg) share one chain id: one street, one dice roll."""
+        par = list(range(len(L)))
+        def find(i):
+            while par[i] != i:
+                par[i] = par[par[i]]; i = par[i]
+            return i
+        ends = defaultdict(list)   # node -> [(piece, heading away from the node)]
+        for i, p in enumerate(L):
+            if len(p) < 2:
+                continue
+            for e, (a, b) in ((0, (p[0], p[1])), (1, (p[-1], p[-2]))):
+                ends[(round(a[0]), round(a[1]))].append((i, math.atan2(b[1] - a[1], b[0] - a[0])))
+        for node, es in ends.items():
+            used = set()
+            pairs = sorted(((abs(abs(math.remainder(h1 - h2, 2 * math.pi)) - math.pi), i, j) for x, (i, h1) in enumerate(es) for (j, h2) in es[x + 1:] if i != j))
+            for dev, i, j in pairs:   # straightest pairs first; each piece carries on into one other at most
+                if dev < math.radians(30) and i not in used and j not in used:
+                    par[find(i)] = find(j); used |= {i, j}
+        return [find(i) for i in range(len(L))]
+
     for kind in ('streets', 'lanes'):
         for d, L in out.get(kind, {}).items():
             mix = MIX.get(d, [.3, .3, .05, .2, .05, .1])
             zs = (zones or {}).get(d, [])
+            ch = chains(L)
             res = []
             for i, p in enumerate(L):
                 if len(p) < 2:
@@ -103,7 +126,7 @@ def surfaces(out, terrain=None, zones=None):
                 sh = lean(mix, wet, nm, op)
                 if kind == 'lanes':   # lanes are rarely tarred
                     sh = lean([sh[0] * .3, sh[1] * .6, sh[2], sh[3] + .1, sh[4], sh[5] * 1.3], False, False, False)
-                k = pick(sh, _u(f'{kind}/{d}/{i}'))
+                k = pick(sh, _u(f'{kind}/{d}/chain{ch[i]}'))   # the street's own roll; its ground still leans each piece
                 res.append(k); tally[(d, k)] += g.length
             S[kind][d] = res
     out['surfaces'] = S

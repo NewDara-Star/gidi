@@ -166,6 +166,10 @@ _lag=max(getattr(water,"geoms",[water]),key=lambda g:g.area).representative_poin
 out["labels"]=[{"t":"The Lagoon","x":round(_lag.x),"y":round(_lag.y),"k":"water"},{"t":"The Ocean","x":round(W*0.45),"y":round(H-600),"k":"water"},
                {"t":"Farms and bush","x":round(W*0.2),"y":900,"k":"bush"},{"t":"Farms and bush","x":round(W*0.85),"y":700,"k":"bush"}]
 
+# ---- roads placed by hand (web/hand/<id>.json, scripts/hand.py): before the clean-up, so they get junctions, gutters and the rest
+import hand
+print("hand road edits:",hand.apply_road_edits(out))
+
 # ---- clean the roads (rule-based pass, scripts/roadclean.py) before anything reads them
 import roadclean
 _st,_skip=roadclean.clean(out,water.union(ocean))
@@ -382,6 +386,7 @@ for _s in _iw: print("  isms-edits warning:",_s)
 import surfaces
 _SZ={d:[(Polygon(z["pts"]),any(w in z["type"] for w in ("open","sparser","spaced"))) for z in F.get("zones",[])] for d,F in GEN.items()}
 _st=surfaces.surfaces(out,json.load(open("web/terrain.json")),_SZ)
+print("hand labels and surfaces:",hand.apply_label_edits(out))
 print("road surfaces:",{k:round(sum(v for (d,kk),v in _st.items() if kk==k)/1000) for k in surfaces.KINDS},"km")
 
 def rd(o):

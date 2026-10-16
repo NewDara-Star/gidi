@@ -1715,6 +1715,12 @@ if PROF.get("level_crossings"): M["level_crossings"] = len(LX)
 M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b) if j > i and b.intersection(B[j]).area > 0.05))
 
 # ---------- 7. storeys: match the inspiration area's height bands (share of built area), tallest on big plots near main roads ----------
+# the sawmill's log rafts (a sight of the place) went down before the stilt village was built round them: a stilt house that
+# stands on a raft gives way to it
+_rafts = [r for r, k in bld if k == "raft"]
+if _rafts:
+    _rf_t = STRtree(_rafts)
+    bld = [(r, k) for r, k in bld if k not in ("stilt", "stilt bar") or not any(_rafts[j].intersection(r).area > 0.5 for j in _rf_t.query(r))]
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)

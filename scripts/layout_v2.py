@@ -164,6 +164,13 @@ ART = [
     ('Campus Road', 'art', [(9930, 4555), (10150, 4700), (10300, 5000), (10380, 5330)]),    # Yaba down to the Channel Bridge
     ('Channel Street', 'art', [(10450, 5720), (10455, 6000), (10480, 6341)]),               # the Island side of the Channel Bridge
     ('Island Road', 'art', [(10850, 5760), (10760, 5950), (10700, 6150), (10700, 6380)]),   # the Long Bridge's foot on the Island
+    # the Bazaar's creek strip (land between the creek and the sea, its only road was the shore edge): a bridge off the expressway, a beach road
+    ('Fishermen\'s Bridge Road', 'art', [(4300, 5812), (4300, 6100)]),
+    ('Fishermen\'s Bridge', 'bridge', [(4300, 6100), (4300, 6290), (4300, 6480)]),
+    ('Fishermen\'s Landing', 'art', [(4300, 6480), (4300, 6650)]),   # the bridge's foot down to the beach road
+    ('Beach Road', 'art', [(3300, 6640), (3800, 6630), (4300, 6650), (4800, 6690), (5300, 6730)]),
+    # Banana Island's causeway road, off Heights Drive
+    ('Crescent Causeway', 'art', [(11850, 6250), (11848, 6000), (11842, 5700)]),
     ('Heights Drive', 'art', [(12275, 5975), (12050, 6050), (11850, 6250), (11800, 6556)]),  # the Heights side of the Cable Bridge
     ('Cable Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi (tolled, cable-stayed; v1's Cable Bridge): across the bay from the Heights to the peninsula
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway

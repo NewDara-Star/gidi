@@ -14,6 +14,15 @@
 #   {"op": "add furniture", "kind": "lasma post", "x": .., "y": .., "ang": ..}
 #   {"op": "delete furniture", "at": [x, y], "kind": "pole" (optional)}  the nearest within 2 m
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
+# road edits (owner, 16 Oct: hand placement covers roads, streets and labels), applied early in the bake, before the clean-up, so a
+# road placed by hand gets its junctions, gutters, furniture and surface like any other:
+#   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
+#   {"op": "delete street", "at": [x, y]}                          the street or lane piece nearest the point (within 3 m)
+#   {"op": "name road", "at": [x, y], "name": "..."}               the main road nearest the point (within 3 m) takes the name
+#   {"op": "delete building", ..., "early": true}                   cleared for a road placed by hand: removed with the road edits
+# labels and surfaces, applied after the surfaces are set:
+#   {"op": "set surface", "at": [x, y], "surface": "mud"}          tar, worn, interlock, laterite, sand or mud
+#   {"op": "name", "at": [x, y], "kind": "bus stop", "name": "..."}  a piece of furniture within 2 m gets a name (its label)
 import glob, json, os
 from shapely.geometry import Point, Polygon
 
@@ -117,12 +126,101 @@ def apply_frozen(out, stage):
     return rep
 
 
+ROAD_OPS = ('add street', 'delete street', 'name road')
+LABEL_OPS = ('set surface', 'name')
+
+
+def apply_road_edits(out):
+    from shapely.geometry import LineString
+    rep = {}
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            op = e['op']
+            if op == 'delete building' and e.get('early'):   # cleared for a road placed by hand: gone before the clean-up sees the road
+                P = Point(e['at'])
+                hit = [i for i, b in enumerate(out['buildings'].get(d, [])) if len(b) > 3 and Polygon(b[1:]).buffer(0.3).contains(P)]
+                if hit:
+                    _drop_building(out, d, hit[0]); rep[d] = rep.get(d, 0) + 1
+                else:
+                    print('  hand edit found nothing at', e['at'], op, e.get('note', ''))
+                continue
+            if op not in ROAD_OPS:
+                continue
+            if op == 'add street':
+                pts = [[round(x, 1), round(y, 1)] for x, y in e['pts']]
+                if e.get('kind', 'street') == 'main':
+                    out['mains'].append({'d': d, 'name': e.get('name', ''), 'pts': pts, 'hand': True})
+                else:
+                    out.setdefault('lanes' if e.get('kind') == 'lane' else 'streets', {}).setdefault(d, []).append(pts)
+            elif op == 'delete street':
+                P = Point(e['at']); best = None
+                for k in ('streets', 'lanes'):
+                    for i, p in enumerate((out.get(k) or {}).get(d, [])):
+                        if len(p) > 1:
+                            dd = LineString(p).distance(P)
+                            if dd < 3 and (best is None or dd < best[0]):
+                                best = (dd, k, i)
+                if best:
+                    out[best[1]][d].pop(best[2])
+                else:
+                    print('  hand edit found no street at', e['at'], e.get('note', ''))
+            elif op == 'name road':
+                P = Point(e['at'])
+                c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if len(m['pts']) > 1]
+                c = [x for x in c if x[0] < 3]
+                if c:
+                    out['mains'][min(c)[1]]['name'] = e['name']
+                else:
+                    print('  hand edit found no main road at', e['at'], e.get('note', ''))
+            rep[d] = rep.get(d, 0) + 1
+    return rep
+
+
+def apply_label_edits(out):
+    from shapely.geometry import LineString
+    rep = {}
+    S = out.get('surfaces') or {}
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            if e['op'] not in LABEL_OPS:
+                continue
+            P = Point(e['at'])
+            if e['op'] == 'set surface':
+                best = None
+                for k in ('streets', 'lanes'):
+                    for i, p in enumerate((out.get(k) or {}).get(d, [])):
+                        if len(p) > 1 and LineString(p).distance(P) < 3 and (best is None or LineString(p).distance(P) < best[0]):
+                            best = (LineString(p).distance(P), k, i)
+                for i, m in enumerate(out['mains']):
+                    if len(m['pts']) > 1 and LineString(m['pts']).distance(P) < 3 and (best is None or LineString(m['pts']).distance(P) < best[0]):
+                        best = (LineString(m['pts']).distance(P), 'mains', i)
+                if not best:
+                    print('  hand edit found no road at', e['at'], e.get('note', '')); continue
+                if best[1] == 'mains':
+                    S['mains'][best[2]] = e['surface']
+                else:
+                    S[best[1]][d][best[2]] = e['surface']
+            else:
+                c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if f_['kind'] == e.get('kind', f_['kind'])]
+                c = [x for x in c if x[0] < 2.0]
+                if c:
+                    out['furniture'][min(c)[1]]['name'] = e['name']
+                else:
+                    print('  hand edit found no', e.get('kind', 'furniture'), 'at', e['at'], e.get('note', '')); continue
+            rep[d] = rep.get(d, 0) + 1
+    return rep
+
+
 def apply_edits(out):
     rep = {}
     for f, H in _files():
         d = H['district']
         for e in H.get('edits', []):
             op = e['op']
+            if op in ROAD_OPS or op in LABEL_OPS or e.get('early'):
+                continue   # applied earlier in the bake (apply_road_edits, apply_label_edits)
             if op == 'add building':
                 _add_building(out, d, e['kind'], e['pts'], e.get('storeys', 1))
             elif op in ('delete building', 'move building'):

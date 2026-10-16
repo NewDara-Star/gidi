@@ -59,6 +59,18 @@ def pieces(g):
     return [g] if g.geom_type == 'Polygon' else [p for p in getattr(g, 'geoms', []) if p.geom_type == 'Polygon']
 
 
+def no_holes(p):
+    """A polygon with holes (water round an island) as plain pieces, cut through each hole's middle (as scripts/layout_v2.py does)."""
+    from shapely.geometry import box as _box
+    if p.geom_type != 'Polygon' or not p.interiors:
+        return [p] if p.geom_type == 'Polygon' else [q for g in getattr(p, 'geoms', []) for q in no_holes(g)]
+    c = Polygon(p.interiors[0]).centroid; x0, y0, x1, y1 = p.bounds
+    out_ = []
+    for half in (_box(x0 - 1, y0 - 1, c.x, y1 + 1), _box(c.x, y0 - 1, x1 + 1, y1 + 1)):
+        out_ += no_holes(p.intersection(half))
+    return [q for q in out_ if q.geom_type == 'Polygon' and q.area > 1]
+
+
 def heights(out, water, ocean, T):
     ground = Ground(T)
     report = {'quays': 0, 'quay_m': 0, 'extended': [], 'low': [], 'decks': 0}
@@ -86,8 +98,8 @@ def heights(out, water, ocean, T):
             ps = sorted(pieces(g), key=lambda p: -p.area)
             return [p for p in ps if p.area > 2000] or ps[:1]
         ws, os_ = biggest(new_w), biggest(new_o)
-        out['water'] = [[[round(x, 1), round(y, 1)] for x, y in p.exterior.coords] for p in ws]
-        out['ocean'] = [[[round(x, 1), round(y, 1)] for x, y in p.exterior.coords] for p in os_]
+        out['water'] = [[[round(x, 1), round(y, 1)] for x, y in q.exterior.coords] for p in ws for q in no_holes(p)]   # the map keeps plain
+        out['ocean'] = [[[round(x, 1), round(y, 1)] for x, y in q.exterior.coords] for p in os_ for q in no_holes(p)]  # outlines: an island's water is cut, not holed
         water, ocean = unary_union(ws), unary_union(os_)
         wet_new = water.union(ocean)
         # the wall: where the new shore runs along a carved road
@@ -99,7 +111,7 @@ def heights(out, water, ocean, T):
                     quays.append({'pts': [[round(x, 1), round(y, 1)] for x, y in ln.simplify(0.5).coords], 'top': QUAY_TOP})
         out['quays'] = quays
     wet = water.union(ocean)
-    shore = unary_union([w.exterior for w in pieces(wet)])
+    shore = unary_union([w.boundary for w in pieces(wet)])   # every shore, an island's too (its hole's ring)
     canals = unary_union([LineString(c['pts']).buffer(c.get('width', 4.0) / 2) for c in out.get('canals', [])]) if out.get('canals') else None
 
     # ---- what a deck can pass over: roads at the ground, the rail, and other decks (filled in as they get heights)
