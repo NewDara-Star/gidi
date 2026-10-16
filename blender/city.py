@@ -1213,8 +1213,11 @@ def drape(obs):
         o.data.update()
 
 
+CHUNK_LOOPS = 6_000_000
+
+
 def export(col, origin, path):
-    """Join the tile into one object, move it to the tile's corner, export Draco GLB."""
+    """Join the tile into a few objects, move them to the tile's corner, export Draco GLB."""
     obs = [o for o in col.all_objects if o.type == 'MESH']
     if not obs:
         return 0
@@ -1226,18 +1229,34 @@ def export(col, origin, path):
             k = o.name.split('_')[1] if o.name.count('_') >= 2 else o.name
             tally[k] = tally.get(k, 0) + len(o.data.polygons)
         print('FACES', sorted(tally.items(), key=lambda kv: -kv[1])[:12])
-    for o in list(bpy.context.view_layer.objects):
-        if o is not None:  # the temporary lettering objects can leave dead entries behind
-            o.select_set(False)
+    # join into parts of at most CHUNK_LOOPS corners each: the browser's Draco decoder aborts on a mesh
+    # of more than ~8M vertices (one material of a full tile could reach 14M as a single mesh)
+    parts, cur, n = [], [], 0
     for o in obs:
+        k = len(o.data.loops)
+        if cur and n + k > CHUNK_LOOPS:
+            parts.append(cur)
+            cur, n = [], 0
+        cur.append(o)
+        n += k
+    parts.append(cur)
+    nt, joined = 0, []
+    for i, part in enumerate(parts):
+        for o in list(bpy.context.view_layer.objects):
+            if o is not None:  # the temporary lettering objects can leave dead entries behind
+                o.select_set(False)
+        for o in part:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = part[0]
+        if len(part) > 1:
+            bpy.ops.object.join()
+        ob = bpy.context.view_layer.objects.active
+        ob.data.transform(Matrix.Translation((-origin[0], -origin[1], 0)))
+        ob.name = os.path.basename(path)[:-4] + (f'_{i}' if i else '')
+        nt += len(ob.data.polygons)
+        joined.append(ob)
+    for o in joined:
         o.select_set(True)
-    bpy.context.view_layer.objects.active = obs[0]
-    if len(obs) > 1:
-        bpy.ops.object.join()
-    ob = bpy.context.view_layer.objects.active
-    ob.data.transform(Matrix.Translation((-origin[0], -origin[1], 0)))
-    ob.name = os.path.basename(path)[:-4]
-    nt = len(ob.data.polygons)
     bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=True, export_apply=True, export_vertex_color='ACTIVE', export_all_vertex_colors=False,
                               export_draco_mesh_compression_enable=True, export_draco_mesh_compression_level=6, export_draco_position_quantization=16,
                               export_draco_normal_quantization=8, export_draco_color_quantization=8, export_draco_texcoord_quantization=10,
