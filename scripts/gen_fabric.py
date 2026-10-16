@@ -56,7 +56,7 @@ if LAGOS:   # the Google rebuild (docs/REBUILD-PLAN.md): building lines from the
     import cross_sections as XS   # buildings that touch as often as real Lagos's (Google outlines: 75% within 1 m of a neighbour)
     CLEAR.update({k: XS.building_line(k) for k in ("lane", "street", "main", "art", "exp")})
     WIDTH.update({k: XS.SECTIONS[k]["carriageway"] for k in ("street", "main", "art")})
-    RULE["gap"] = lambda u=None: 0.0 if rnd.random() < PROF["touch"] else rnd.uniform(*PROF["gap_m"])
+    RULE["gap"] = lambda u=None: 0.0 if rnd.random() < QV("touch", PROF["touch"]) else rnd.uniform(*PROF["gap_m"])   # the fabric type's own touching
 FIRST = ["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Folake","Agboola","Shonibare","Ilori","Durojaiye","Ogunleye","Aremu","Okonkwo","Nwosu","Danjuma"]
 ENDS = [("Street", 60), ("Road", 13), ("Avenue", 4), ("Close", 4), ("Way", 4), ("Crescent", 2), ("Lane", 2)]   # from street_name_endings
 used = set()
@@ -94,7 +94,7 @@ if PROF: used |= {e["name"] for e in NET["edges"].values() if e["name"]}
 # the opening is locked (owner, Oct 2026): web/locked.json holds the exact market, its aisles, The steal's stall, Tunde's room and the
 # boss's motor park; regenerating uses them as they are. GIDI_LOCK=write records them from this run (done once).
 LOCK_F = "web/locked.json"; LOCK_ALL = json.load(open(LOCK_F)) if os.path.exists(LOCK_F) else {}
-LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") else {}
+LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") and not FRAME else {}   # locks were recorded in the v1 frame: the v2 opening is rebuilt by hand
 LOCK_WRITE = bool(PROF.get("lock")) and os.environ.get("GIDI_LOCK") == "write"; NEW_LOCK = {}
 # a district rebuilt after its neighbours keeps the crossings it already agreed with them (web/network.json), road for road
 KEEP = not FRAME and bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
@@ -323,8 +323,23 @@ if QP:
       qa = next(a for n, k, a in arts if n == QP["south_of"]); qc = sorted(qa.coords)
       _b = poly.bounds; QZ = Polygon([(_b[0] - 500, qc[0][1])] + qc + [(_b[2] + 500, qc[-1][1]), (_b[2] + 500, _b[3] + 2000), (_b[0] - 500, _b[3] + 2000)]).intersection(poly.buffer(60))   # the edge roads bend up to 16 m outside the outline
 def in_q(pt): return QZ is not None and QZ.contains(pt)
-def QV(k, default): return QP["rules"][k] if QP and k in QP["rules"] and QV.on else default
-QV.on = False
+def QV(k, default):
+    if QP and k in QP["rules"] and QV.on: return QP["rules"][k]
+    if QV.z and k in QV.z: return QV.z[k]
+    return default
+QV.on = False; QV.z = None
+# fabric types (the deep study, scripts/deep_profile.py): the district cut into zones, each with its own vacancy, touching, back rows,
+# block fill, house size and height; QV.z is the zone of the plot being built
+FZ = []
+if LAGOS and PROF.get("deep"):
+    import deep_profile
+    _mainU = unary_union([a for n, k, a in arts] + [ln for n, ln in mains] + [e for n, e, nb in edge_roads if EDGE_KIND.get(id(e), "border") == "border"])
+    FZ = deep_profile.zones(DID, land, _mainU, water, seed=SEED, base=PROF)
+    print("fabric zones:", [(t["name"], round(z.area / 1e4, 1)) for z, t, r in FZ], file=sys.stderr)
+def zone_at(pt):
+    for z, t, r in FZ:
+        if z.contains(pt): return r
+    return None
 # ---------- 2. sectors and residential streets ----------
 hard = [e for n, e, nb in edge_roads] + [a for n, k, a in arts] + [ln for n, ln in mains] + links + ramps + access
 sector_lines = unary_union(hard + [rail])
@@ -1033,11 +1048,11 @@ for _, p, q, bi in fronts:
         if not b.contains(mid): nx_, ny_ = -nx_, -ny_
         cl = CLEAR.get(edge_class(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)), 3.4)
         if PROF.get("rail_frontage") and rail.distance(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)) < 1: cl = CLEAR["rail"]   # houses back onto the line
-        a = math.atan2(uy, ux); t = 0.0; QV.on = in_q(Point(mid.x + nx_ * 15, mid.y + ny_ * 15))   # 15 m into the plot: plots facing the dividing road count on their own side
+        a = math.atan2(uy, ux); t = 0.0; QV.on = in_q(Point(mid.x + nx_ * 15, mid.y + ny_ * 15)); QV.z = zone_at(Point(mid.x + nx_ * 15, mid.y + ny_ * 15))   # 15 m into the plot: plots facing the dividing road count on their own side
         big_ok = PROF and cl >= CLEAR["main"]   # big shops, plazas and warehouses face the main roads (real: 73 m from a main vs 183 m for all)
         while t < L - 4:
             big = big_ok and rnd.random() < QV("big_front", RULE["big_front"])
-            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97)))))) + RULE["gap"]()
+            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97))))) * math.sqrt(QV("size_scale", 1.0))) + RULE["gap"]()
             side = rnd.uniform(*QV("side_garden_m", PROF.get("side_garden_m"))) if QV("side_garden_m", PROF.get("side_garden_m")) else 0.0   # estates: a garden down each side of the house
             w = min(w + side, L - t)
             P0 = (p[0] + ux * t, p[1] + uy * t); P1 = (p[0] + ux * (t + w), p[1] + uy * (t + w))
@@ -1109,14 +1124,16 @@ if LAGOS and PROF.get("infill"):   # the Lagos fill (Google outlines): rooms, ex
         w = min(L, math.sqrt(r_area * aspect)); d = r_area / w
         if w < 2.0 or d > 4 * w: return None   # no slivers
         t = irnd.uniform(-(L - w) / 2, (L - w) / 2) if L > w else 0.0
-        gap = 0.0 if irnd.random() < IF["touch"] else irnd.uniform(0.6, 2.0)
+        gap = 0.0 if irnd.random() < side_rect.touch else irnd.uniform(0.6, 2.0)
         cx = mx + ux * t + nx_ * (gap + d / 2 + 0.16); cy = my + uy * t + ny_ * (gap + d / 2 + 0.16)
         return rotate(rect(cx, cy, w, d, math.atan2(uy, ux)), irnd.gauss(0, PROF["wobble_deg"]), origin="centroid")
     for bi, b in enumerate(blocks):
         if mostly_parcel(b) or b.area < 250: continue
         land_b = b.buffer(-CLEAR["street"] + 1.5)   # the block's land inside the roads' edges
         if land_b.is_empty: continue
-        target = IF["block_fill"] * land_b.area
+        zr = zone_at(b.representative_point()) or {}   # the block's fabric type
+        target = zr.get("block_fill", IF["block_fill"]) * land_b.area
+        side_rect.touch = min(0.95, zr["touch"] + 0.15) if "touch" in zr else IF["touch"]
         have = [r for r in near_all(b)]
         built = sum(r.area for r in have)
         tries = 0
@@ -1713,7 +1730,12 @@ if PROF:
         if st: target[band_of(st)] -= r.area
     free_i = [i for i, st in enumerate(storeys) if st is None]
     # tallness: bigger footprint, nearer a main road, plus noise (real: big buildings sit nearer mains, 73 m vs 183 m)
-    score = {i: math.log(bld[i][0].area) - bld[i][0].distance(mainU) / 120 + srnd.gauss(0, .6) for i in free_i}
+    # (Lagos fabric: size counts for half, so small houses go up a floor too, as real Lagos's do: Google's 2.5D heights)
+    score = {i: (0.5 if LAGOS else 1.0) * math.log(bld[i][0].area) - bld[i][0].distance(mainU) / 120 + srnd.gauss(0, .6) for i in free_i}
+    if FZ:   # the taller fabric types take more of the tall buildings; the district's bands stay as the study measured
+        for i in free_i:
+            zr = zone_at(bld[i][0].centroid)
+            if zr: score[i] += 2.0 * math.log(zr["storeys_scale"])
     order = sorted(free_i, key=lambda i: -score[i])   # tallest first, so the rare tall bands are filled exactly and rounding lands in the big 1-storey band
     b = 6; acc = 0.0
     for i in order:
@@ -1772,6 +1794,8 @@ if PROF:
     if STYLES: out["styles"] = STYLES
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
+if FZ: out["zones"] = [{"type": t["name"], "share": t["share_of_built_cells"], "rules": r, "pts": [[round(x, 1), round(y, 1)] for x, y in g.exterior.coords]}
+                        for z, t, r in FZ for g in getattr(z, "geoms", [z]) if g.geom_type == "Polygon" and g.area > 400]
 if FRAME:   # shore and bush edges are a waterside footpath and a track, not roads; the district's crossings go in its own file
     out["layout"] = "v2"
     out.setdefault("paths", []).extend({"kind": {"shore": "shore path", "edge": "bush track"}[EDGE_KIND[id(e)]], "pts": R2(e)}

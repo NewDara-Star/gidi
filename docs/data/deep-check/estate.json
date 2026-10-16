@@ -1,0 +1,66 @@
+{
+ "id": "estate",
+ "squares": 4,
+ "buildings": 2333,
+ "land_km2": 0.904,
+ "storeys_by_area": {
+  "1": 0.31,
+  "2": 0.362,
+  "3": 0.257,
+  "4": 0.042,
+  "5": 0.009,
+  "6": 0.009,
+  "7": 0.008,
+  "8": 0.002
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 2584.0,
+   "real": 2160.0
+  },
+  "ground built over": {
+   "gidi": 0.2725,
+   "real": 0.316
+  },
+  "touching": {
+   "gidi": 0.627,
+   "real": 0.656
+  },
+  "under 40 m2": {
+   "gidi": 0.4145,
+   "real": 0.285
+  },
+  "street front occupied": {
+   "gidi": 0.522,
+   "real": 0.649
+  },
+  "block fill": {
+   "gidi": 0.237,
+   "real": 0.359
+  },
+  "line to the street, deg": {
+   "gidi": 5.95,
+   "real": 4.45
+  },
+  "footprint median m2": {
+   "gidi": 67.21,
+   "real": 97.5
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.3102,
+   "real": 0.163
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.3623,
+   "real": 0.511
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.3275,
+   "real": 0.326
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 18.5389,
+   "real": 15.1
+  }
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "area_km2": 15.8,
+ "flyover_spans_m": {
+  "n": 9,
+  "p25": 59.1,
+  "p50": 271.6,
+  "p75": 419.6,
+  "p90": 620.0,
+  "km_per_km2": 0.16
+ },
+ "interchanges": {
+  "n": 1,
+  "per_km2": 0.06,
+  "slip_roads_each": {
+   "p25": 6.0,
+   "p50": 6.0,
+   "p75": 6.0
+  },
+  "slip_road_m_each": {
+   "p25": 1281.1,
+   "p50": 1281.1,
+   "p75": 1281.1
+  },
+  "slip_road_length_m": {
+   "p25": 22.3,
+   "p50": 31.2,
+   "p75": 59.6,
+   "p90": 293.5
+  }
+ },
+ "major_road_rail_crossings": {
+  "n": 3,
+  "share_bridged": 0.67
+ },
+ "footbridges": {
+  "n": 37,
+  "length_m": {
+   "p25": 23.5,
+   "p50": 38.9,
+   "p75": 47.8
+  },
+  "per_km_of_major_road": 1.23
+ },
+ "bus_stations": {
+  "n": 5,
+  "area_m2": {
+   "p25": 295.7,
+   "p50": 370.1,
+   "p75": 7624.0,
+   "p90": 9446.7
+  },
+  "max_m2": 10662,
+  "levels_tagged": []
+ },
+ "parking_lots_m2": {
+  "p25": 4987.5,
+  "p50": 7773.6,
+  "p75": 13485.7
+ },
+ "stadium": {
+  "bowl_building_m2": [],
+  "stadium_ground_m2": [],
+  "sports_centre_m2": [],
+  "ground_dist_to_main_m": []
+ },
+ "rail_station_building_m2": [
+  5602
+ ],
+ "rail_stops_per_km_of_track": 0.15,
+ "hotels": [
+  {
+   "m2": 4078,
+   "height_m": "20"
+  }
+ ],
+ "markets_m2": [],
+ "markets_touching_major_road": 0,
+ "school_m2": {
+  "p25": 6763.3,
+  "p50": 11588.6,
+  "p75": 15467.8
+ },
+ "pitch_m2": {
+  "p25": 717.7,
+  "p50": 2126.4,
+  "p75": 7407.3
+ },
+ "rail_crossings_by_road": {
+  "secondary level": 1,
+  "primary bridge": 2
+ },
+ "level_crossings_mapped": 3,
+ "water_crossings": {
+  "n": 24,
+  "share_bridged": 0.33
+ },
+ "power": {
+  "towers": 0,
+  "line_km_per_km2": 0.0,
+  "substations": 0
+ }
+}

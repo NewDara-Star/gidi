@@ -1,0 +1,66 @@
+{
+ "id": "airport",
+ "squares": 13,
+ "buildings": 3791,
+ "land_km2": 2.552,
+ "storeys_by_area": {
+  "1": 0.172,
+  "2": 0.469,
+  "3": 0.236,
+  "4": 0.053,
+  "5": 0.028,
+  "6": 0.012,
+  "7": 0.019,
+  "8": 0.011
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 1704.0,
+   "real": 1386.0
+  },
+  "ground built over": {
+   "gidi": 0.212,
+   "real": 0.268
+  },
+  "touching": {
+   "gidi": 0.585,
+   "real": 0.668
+  },
+  "under 40 m2": {
+   "gidi": 0.257,
+   "real": 0.241
+  },
+  "street front occupied": {
+   "gidi": 0.504,
+   "real": 0.464
+  },
+  "block fill": {
+   "gidi": 0.262,
+   "real": 0.305
+  },
+  "line to the street, deg": {
+   "gidi": 2.3,
+   "real": 3.15
+  },
+  "footprint median m2": {
+   "gidi": 112.14,
+   "real": 104.7
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.1721,
+   "real": 0.11
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.4689,
+   "real": 0.533
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.359,
+   "real": 0.357
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 15.7917,
+   "real": 10.58
+  }
+ }
+}

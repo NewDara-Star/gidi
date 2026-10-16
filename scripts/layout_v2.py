@@ -150,7 +150,7 @@ ART = [
     ('Ring Road', 'exp', [(X(31.6), Y(0.4)), (X(30.6), Y(3.6)), P_('hub', 150, 300), (X(28.6), Y(11.5)), P_('airport', 300, 450)]),
     ('Ayinde Avenue', 'art', [P_('hub', 0, 0), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),
     ('Northern Road', 'art', [P_('yaba', -120, 80), (X(34.6), Y(12.6)), P_('foodgate', -200, 300), (X(38.5), Y(19.2)), (X(43), Y(19.6)), P_('oldshore', 0, 250), (X(56), Y(18.6))]),
-    ('Agege Road', 'art', [P_('capital', -300, 500), (X(26), Y(15.8)), P_('railside', 0, 0), (X(16), Y(13.8))]),
+    ('Agege Road', 'art', [(9175, 2375), (8500, 2000), (7700, 2000), P_('railside', 0, 0), (X(16), Y(13.8))]),   # round the airport's north fence, beside the rail, as Agege Motor Road runs
     ('Long Bridge Road', 'art', [(X(34.6), Y(12.6)), (10950, 3450)]),   # off the Northern Road to the bridge's foot
     ('The Long Bridge', 'bridge', [(10950, 3450), (11300, 3700), (11260, 4400), (11160, 5100), (11000, 5450), (10850, 5760)]),   # Third Mainland: down the lagoon, past Water Town, onto the Island's north
     ('Wharf Bridge', 'bridge', [(9500, 6080), (9800, 6085), (10200, 6080)]),   # Eko: from the Port side across the harbour to the Island
@@ -169,7 +169,7 @@ ART = [
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
     ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(43), Y(0.4)), (X(45), Y(0.6)), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
 ]
-RAIL = [P_('railside', -300, -500), (X(26.5), Y(14)), (X(28.0), Y(10.5)), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
+RAIL = [P_('railside', -300, -500), (7600, 1880), (8500, 1880), (9150, 2250), (9450, 2900), (9250, 3600), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
 
 if __name__ == '__main__':
     import json as _json

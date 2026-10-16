@@ -1,0 +1,66 @@
+{
+ "id": "oldshore",
+ "squares": 37,
+ "buildings": 8227,
+ "land_km2": 4.075,
+ "storeys_by_area": {
+  "1": 0.248,
+  "2": 0.636,
+  "3": 0.101,
+  "4": 0.01,
+  "5": 0.003,
+  "6": 0.002,
+  "7": 0.0,
+  "8": 0.0
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 2172.0,
+   "real": 2128.0
+  },
+  "ground built over": {
+   "gidi": 0.3,
+   "real": 0.296
+  },
+  "touching": {
+   "gidi": 0.567,
+   "real": 0.653
+  },
+  "under 40 m2": {
+   "gidi": 0.227,
+   "real": 0.265
+  },
+  "street front occupied": {
+   "gidi": 0.627,
+   "real": 0.671
+  },
+  "block fill": {
+   "gidi": 0.311,
+   "real": 0.378
+  },
+  "line to the street, deg": {
+   "gidi": 2.0,
+   "real": 4.2
+  },
+  "footprint median m2": {
+   "gidi": 119.86,
+   "real": 98.0
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.2482,
+   "real": 0.252
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.6355,
+   "real": 0.633
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.1163,
+   "real": 0.115
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 17.2213,
+   "real": 13.66
+  }
+ }
+}

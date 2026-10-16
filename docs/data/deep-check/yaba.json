@@ -1,0 +1,66 @@
+{
+ "id": "yaba",
+ "squares": 4,
+ "buildings": 4210,
+ "land_km2": 1.539,
+ "storeys_by_area": {
+  "1": 0.186,
+  "2": 0.502,
+  "3": 0.211,
+  "4": 0.056,
+  "5": 0.022,
+  "6": 0.014,
+  "7": 0.006,
+  "8": 0.003
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 2994.0,
+   "real": 1852.0
+  },
+  "ground built over": {
+   "gidi": 0.278,
+   "real": 0.335
+  },
+  "touching": {
+   "gidi": 0.603,
+   "real": 0.667
+  },
+  "under 40 m2": {
+   "gidi": 0.2595,
+   "real": 0.254
+  },
+  "street front occupied": {
+   "gidi": 0.6885,
+   "real": 0.621
+  },
+  "block fill": {
+   "gidi": 0.353,
+   "real": 0.395
+  },
+  "line to the street, deg": {
+   "gidi": 2.8,
+   "real": 4.3
+  },
+  "footprint median m2": {
+   "gidi": 77.9725,
+   "real": 82.5
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.1861,
+   "real": 0.142
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.5022,
+   "real": 0.549
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.3117,
+   "real": 0.309
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 17.9102,
+   "real": 15.47
+  }
+ }
+}

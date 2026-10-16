@@ -45,7 +45,7 @@ GENZONE=None
 for _id in IDS:  # generated districts own the land inside their edge roads; neighbours' sketch streets stay out of it
     if gen_ok(_id):
         _F=json.load(open(f"web/gen-{_id}.json"))
-        _ring=max(polygonize(unary_union([LineString(m["pts"]) for m in _F["mains"] if "edge_with" in m])),key=lambda p:p.area).buffer(8)
+        _ring=DPOLY[_id].buffer(8)   # v2: the frame's outline (shore and bush edges are paths, so the edge roads alone don't close)
         GENZONE=_ring if GENZONE is None else GENZONE.union(_ring)
 PAT={"border":("sprawl",170,30,.45,8),"bazaar":("grid",95,10,.15,-4),"jungle":("organic",62,16,.18,12),"port":("grid",150,0,.25,0),
 "maze":("organic",55,18,.2,-20),"hub":("grid",90,14,.15,25),"railside":("sprawl",150,30,.4,-12),"capital":("grid",120,4,.12,0),

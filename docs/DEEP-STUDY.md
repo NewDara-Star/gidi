@@ -51,3 +51,14 @@ The owner asked for this on 15 Oct 2026: "the research should look at everything
 - **Study areas** are the boxes and LGAs each district was first studied on (`docs/DISTRICT-BRIEF.md`). The two new ones:
   - **Saba:** Yaba, Sabo, Akoka and the university (Lagos Mainland and Shomolu, 3.368–3.405 E, 6.497–6.528 N)
   - **The Airport:** the airport, its cargo side and hotel strip (Ikeja and Oshodi/Isolo, 3.295–3.345 E, 6.555–6.592 N)
+
+## From the study to the generator (`scripts/deep_profile.py`)
+- **District-wide settings.** Every district with a study gets the Lagos fabric. Its touching, gaps, empty plots, back rows, block fill, small buildings, wobble and height bands come from the study (`district_profiles._deep`). The district keeps its own landmarks, parcels and models. The conversions are calibrated on the Food Gate pilot: fed real Food Gate's numbers, they give back the pilot's hand-tuned settings.
+- **Fabric types.** The district is cut into its types in the study's shares (`deep_profile.zones`).
+  - **Where each type goes:**
+    - the busiest, most built-over types along the main roads
+    - the open ones toward the water and the city's edge
+    - a slow wobble, so the zones read as neighbourhoods
+  - **Each zone's own settings:** its empty plots follow its real cover, plus its touching, back rows, block fill, house size and a lean on height. Taller types take more of the tall buildings, and the district's bands stay as measured.
+- **The check.** `scripts/deep_check.py <id> [gen.json] [picture.png]` measures a generated district the way the study measured real Lagos, and flags anything more than 20% off.
+- **Names.** `scripts/rename_mains.py` runs after a side-by-side build: no two roads share a first name, and none uses the name of a famous real person or street.

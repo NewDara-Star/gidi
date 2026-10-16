@@ -17,9 +17,10 @@ P = {k: Polygon(v) for k, v in L['districts'].items()}
 water = unary_union([Polygon(w).buffer(0) for w in L['water']] + [Polygon(L['ocean']).buffer(0)])
 ARTS = [(a['name'], LineString(a['pts'])) for a in L['arterials'] if a['cls'] != 'bridge']
 rnd = random.Random(2610)
-FIRST = ['Adewale', 'Babatunde', 'Chukwuma', 'Ekpo', 'Gbadamosi', 'Ige', 'Jimoh', 'Kolawole', 'Lateef', 'Mbanefo', 'Popoola', 'Raji', 'Sanni',
+FIRST = [   # invented: common surnames, never famous Lagos people or streets
+         'Adewale', 'Babatunde', 'Chukwuma', 'Ekpo', 'Gbadamosi', 'Ige', 'Jimoh', 'Kolawole', 'Lateef', 'Mbanefo', 'Popoola', 'Raji', 'Sanni',
          'Tijani', 'Udoh', 'Wahab', 'Yusuf', 'Akinola', 'Bamidele', 'Egbe', 'Hassan', 'Ikenna', 'Kunle', 'Mojeed', 'Nwachukwu', 'Remi', 'Segun',
-         'Tokunbo', 'Uche', 'Yemi', 'Aremu', 'Bolaji', 'Dosunmu', 'Fashola', 'Gbenga', 'Ilesanmi', 'Jaiyeola', 'Kasumu', 'Laniyan', 'Makinde',
+         'Tokunbo', 'Uche', 'Yemi', 'Aremu', 'Bolaji', 'Gbenga', 'Ilesanmi', 'Jaiyeola', 'Kasumu', 'Laniyan', 'Makinde',
          'Odunsi', 'Pedro', 'Quadri', 'Sowande', 'Taiwo', 'Usman', 'Vaughan', 'Williams', 'Animashaun', 'Coker']
 ART_FIRST = {n.split()[0] for n, g in ARTS}
 used = set()

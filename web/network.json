@@ -79,7 +79,7 @@
     "hub"
    ],
    "kind": "border",
-   "name": "Quadri Avenue",
+   "name": "Taiwo Avenue",
    "pts": [
     [
      7547.0,
@@ -137,7 +137,7 @@
     "maze"
    ],
    "kind": "border",
-   "name": "Animashaun Road",
+   "name": "Jimoh Way",
    "pts": [
     [
      8931.5,
@@ -171,7 +171,7 @@
     "capital"
    ],
    "kind": "border",
-   "name": "Dosunmu Road",
+   "name": "Mojeed Road",
    "pts": [
     [
      9559.9,
@@ -507,7 +507,7 @@
     "jungle"
    ],
    "kind": "border",
-   "name": "Jimoh Avenue",
+   "name": "Williams Street",
    "pts": [
     [
      7945.5,
@@ -549,7 +549,7 @@
     "hub"
    ],
    "kind": "border",
-   "name": "Wahab Road",
+   "name": "Mbanefo Road",
    "pts": [
     [
      7082.1,
@@ -599,7 +599,7 @@
     "railside"
    ],
    "kind": "border",
-   "name": "Tijani Street",
+   "name": "Coker Road",
    "pts": [
     [
      6574.3,
@@ -799,7 +799,7 @@
     "maze"
    ],
    "kind": "border",
-   "name": "Taiwo Street",
+   "name": "Usman Avenue",
    "pts": [
     [
      9559.9,
@@ -821,7 +821,7 @@
     "foodgate"
    ],
    "kind": "border",
-   "name": "Sowande Avenue",
+   "name": "Uche Street",
    "pts": [
     [
      9799.0,
@@ -843,7 +843,7 @@
     "estate"
    ],
    "kind": "border",
-   "name": "Uche Street",
+   "name": "Makinde Street",
    "pts": [
     [
      9818.5,
@@ -897,7 +897,7 @@
     "foodgate"
    ],
    "kind": "border",
-   "name": "Kasumu Street",
+   "name": "Babatunde Way",
    "pts": [
     [
      9818.5,
@@ -991,7 +991,7 @@
     "maze"
    ],
    "kind": "border",
-   "name": "Babatunde Way",
+   "name": "Chukwuma Road",
    "pts": [
     [
      9799.0,
@@ -1025,7 +1025,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Chukwuma Road",
+   "name": "Segun Road",
    "pts": [
     [
      10604.9,
@@ -1137,7 +1137,7 @@
     "oldshore"
    ],
    "kind": "border",
-   "name": "Segun Road",
+   "name": "Raji Avenue",
    "pts": [
     [
      12052.8,
@@ -1375,7 +1375,7 @@
     "heights"
    ],
    "kind": "border",
-   "name": "Raji Avenue",
+   "name": "Sanni Avenue",
    "pts": [
     [
      12600.0,
@@ -1841,7 +1841,7 @@
     "railside"
    ],
    "kind": "border",
-   "name": "Sanni Avenue",
+   "name": "Quadri Road",
    "pts": [
     [
      7547.0,
@@ -1891,7 +1891,7 @@
     "jungle"
    ],
    "kind": "border",
-   "name": "Williams Road",
+   "name": "Nwachukwu Road",
    "pts": [
     [
      7082.1,
@@ -1965,7 +1965,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Odunsi Road",
+   "name": "Hassan Street",
    "pts": [
     [
      9300.8,
@@ -1987,7 +1987,7 @@
     "maze"
    ],
    "kind": "border",
-   "name": "Nwachukwu Road",
+   "name": "Animashaun Street",
    "pts": [
     [
      9268.8,
@@ -2075,7 +2075,7 @@
     "port"
    ],
    "kind": "border",
-   "name": "Hassan Street",
+   "name": "Kolawole Avenue",
    "pts": [
     [
      9014.6,
@@ -2125,7 +2125,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Vaughan Street",
+   "name": "Aremu Road",
    "pts": [
     [
      9666.7,
@@ -2155,7 +2155,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Kolawole Avenue",
+   "name": "Udoh Road",
    "pts": [
     [
      9268.8,
@@ -2805,7 +2805,7 @@
     "watertown"
    ],
    "kind": "border",
-   "name": "Aremu Road",
+   "name": "Vaughan Road",
    "pts": [
     [
      9830.6,
@@ -2827,7 +2827,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Udoh Road",
+   "name": "Yemi Street",
    "pts": [
     [
      9720.9,
@@ -3025,7 +3025,7 @@
     "yaba"
    ],
    "kind": "border",
-   "name": "Gbadamosi Road",
+   "name": "Kunle Street",
    "pts": [
     [
      10962.0,

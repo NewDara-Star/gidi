@@ -1,0 +1,107 @@
+{
+ "airport": {
+  "block_fill": 0.356,
+  "cross_scale": 2.134,
+  "small_share": 0.214,
+  "touch": 0.726,
+  "vacant": 0.161,
+  "wobble_deg": 9.0
+ },
+ "bazaar": {
+  "block_fill": 0.238,
+  "cross_scale": 4.0,
+  "small_share": 0.176,
+  "touch": 0.662,
+  "vacant": 0.183,
+  "wobble_deg": 11.0
+ },
+ "border": {
+  "block_fill": 0.186,
+  "cross_scale": 3.75,
+  "small_share": 0.246,
+  "touch": 0.673,
+  "vacant": 0.226,
+  "wobble_deg": 13.2
+ },
+ "capital": {},
+ "estate": {
+  "cross_scale": 2.259
+ },
+ "foodgate": {
+  "block_fill": 0.455,
+  "cross_scale": 1.494,
+  "small_share": 0.155,
+  "touch": 0.803,
+  "vacant": 0.038,
+  "wobble_deg": 13.4
+ },
+ "frontier": {
+  "block_fill": 0.177,
+  "cross_scale": 2.489,
+  "small_share": 0.316,
+  "touch": 0.52,
+  "vacant": 0.197,
+  "wobble_deg": 5.1
+ },
+ "heights": {
+  "block_fill": 0.194,
+  "cross_scale": 1.81,
+  "small_share": 0.249,
+  "touch": 0.575,
+  "vacant": 0.088,
+  "wobble_deg": 4.1
+ },
+ "hub": {
+  "block_fill": 0.521,
+  "cross_scale": 1.699,
+  "small_share": 0.236,
+  "touch": 0.745,
+  "vacant": 0.051,
+  "wobble_deg": 9.1
+ },
+ "jungle": {
+  "block_fill": 0.837,
+  "cross_scale": 2.021,
+  "small_share": 0.075,
+  "touch": 0.95,
+  "vacant": 0.03,
+  "wobble_deg": 10.1
+ },
+ "maze": {
+  "block_fill": 0.627,
+  "cross_scale": 1.458,
+  "small_share": 0.152,
+  "touch": 0.858,
+  "vacant": 0.03,
+  "wobble_deg": 10.8
+ },
+ "oldisland": {
+  "block_fill": 0.351,
+  "cross_scale": 1.08,
+  "small_share": 0.083,
+  "touch": 0.879,
+  "vacant": 0.126,
+  "wobble_deg": 12.6
+ },
+ "oldshore": {
+  "block_fill": 0.306,
+  "cross_scale": 2.526,
+  "small_share": 0.243,
+  "touch": 0.639,
+  "vacant": 0.135,
+  "wobble_deg": 12.0
+ },
+ "port": {
+  "cross_scale": 2.194
+ },
+ "railside": {
+  "block_fill": 0.444,
+  "cross_scale": 2.407,
+  "small_share": 0.305,
+  "touch": 0.784,
+  "vacant": 0.035,
+  "wobble_deg": 11.4
+ },
+ "watertown": {},
+ "yaba": {}
+}

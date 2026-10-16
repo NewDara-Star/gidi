@@ -148,6 +148,7 @@ def storeys(hh):
 st = storeys(hb)
 J['heights'] = {'no_height_share': R((hb <= 0).mean()), 'height_m': pct(hb[hb > 0]),
                 'storeys_share': {str(k): R((np.minimum(st, 8) == k).mean()) for k in range(1, 9)},
+                'storeys_share_by_area': {str(k): R(fp[np.minimum(st, 8) == k].sum() / fp.sum()) for k in range(1, 9)},   # as the generator's height bands
                 'storeys_by_size': {f'{SB[i]}-{SB[i + 1] if SB[i + 1] < 1e9 else "+"} m2': R(np.median(st[(fp >= SB[i]) & (fp < SB[i + 1])]), 1)
                                     for i in range(len(SB) - 1) if ((fp >= SB[i]) & (fp < SB[i + 1])).sum() >= 20},
                 'tall_7plus_per_km2': R((st >= 7).sum() / land_km2, 1), 'floor_area_ratio_land': R((fp * st).sum() / 1e6 / land_km2)}
