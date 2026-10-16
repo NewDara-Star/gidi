@@ -22,6 +22,7 @@
 #   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
 #   {"op": "delete street", "at": [x, y]}                          the street or lane piece nearest the point (within 3 m)
 #   {"op": "name road", "at": [x, y], "name": "..."}               the main road nearest the point (within 3 m) takes the name
+#   {"op": "add structure", "kind": "skywalk", "name": "...", "pts": [...], "width": 3, "layer": 1}   a deck: the bake gives it heights
 #   {"op": "cut street", "at": [x, y], "gap": 10}                   the street stops short both sides of the point (a dead end at a canal or the tracks)
 #   {"op": "delete building", ..., "early": true}                   cleared for a road placed by hand: removed with the road edits
 # labels and surfaces, applied after the surfaces are set:
@@ -137,7 +138,7 @@ def apply_frozen(out, stage):
     return rep
 
 
-ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street')
+ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street', 'add structure')
 LABEL_OPS = ('set surface', 'name')
 
 
@@ -192,6 +193,9 @@ def apply_road_edits(out):
                         out[k][d] = new
                 if not cut:
                     print('  hand edit found no street to cut at', e['at'], e.get('note', ''))
+            elif op == 'add structure':   # a deck over the ground: {"kind": "skywalk" | "flyover" | "footbridge", "name", "pts", "width", "layer"}
+                out.setdefault('structures', []).append({'d': d, 'kind': e['kind'], 'name': e.get('name', ''), 'pts': e['pts'],
+                                                         'width': e.get('width', 3), 'layer': e.get('layer', 1)})
             elif op == 'name road':
                 P = Point(e['at'])
                 c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if len(m['pts']) > 1]

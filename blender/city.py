@@ -176,12 +176,14 @@ for kind, src in (('street', 'streets'), ('lane', 'lanes'), ('path', 'paths')):
         for i, ln in enumerate(lines):
             ROADS.append(dict(k=kind, pts=[P(p) for p in ln], w=road_w(kind, d), d=d, id=f'{d}/{kind}/{i}'))
 _seen_mains = set()
+_main_n = {}
 for i, m in enumerate(GD.get('mains', [])):
     sig = tuple(tuple(round(c, 1) for c in p) for p in m['pts'])
     if sig in _seen_mains or sig[::-1] in _seen_mains:
         continue  # an edge road both its districts list: build it once (else double kerbs, poles and lamps)
     _seen_mains.add(sig)
-    ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f'main/{i}', name=m.get('name')))
+    _mk = _main_n.get(m.get('d'), 0); _main_n[m.get('d')] = _mk + 1   # named within its district, as scripts/isms.py names their gutters
+    ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f"{m.get('d')}/main/{_mk}", name=m.get('name')))
 BUILDINGS = []
 for d, lst in GD['buildings'].items():
     st = GD['storeys'].get(d, [])

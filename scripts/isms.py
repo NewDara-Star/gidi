@@ -95,13 +95,14 @@ class Ctx:
         for d, lines in out.get("lanes", {}).items():
             for i, ln in enumerate(lines):
                 self.add_road(f"{d}/lane/{i}", "lane", d, ln)
-        seen = set()
+        seen = set(); _n = {}
         for i, m in enumerate(out["mains"]):
             sig = tuple(tuple(round(c, 1) for c in p) for p in m["pts"])
             if sig in seen or sig[::-1] in seen:
                 continue   # an edge road both its districts list: once
             seen.add(sig)
-            self.add_road(f"main/{i}", "main", m.get("d"), m["pts"])
+            k = _n.get(m.get("d"), 0); _n[m.get("d")] = k + 1
+            self.add_road(f"{m.get('d')}/main/{k}", "main", m.get("d"), m["pts"])   # named within its district: unique across districts frozen at different times
         for a in out["arterials"]:
             if a["cls"] in ("art", "exp"):
                 self.add_road("art/" + a["name"], a["cls"], None, a["pts"])
