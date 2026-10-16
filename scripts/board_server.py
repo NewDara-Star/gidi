@@ -23,9 +23,10 @@ PENDING = os.path.join(ROOT, 'web', 'board-pending.json')
 DATA = os.path.join(ROOT, 'web', 'gidi-data.js')
 OPS = {'add building', 'delete building', 'move building', 'add furniture', 'delete furniture', 'move furniture',
        'add place', 'move place', 'delete place', 'add parcel', 'delete parcel', 'add monument', 'move monument',
-       'delete monument', 'add zone', 'add street', 'delete street', 'cut street', 'name road', 'set surface', 'name'}
+       'delete monument', 'add zone', 'add street', 'delete street', 'cut street', 'name road', 'set surface', 'name',
+       'reshape building', 'reshape parcel', 'reshape zone', 'reshape street'}
 LOCK = threading.Lock()   # one edit at a time: two quick saves must not overwrite each other
-ROAD_OPS = {'add street', 'delete street', 'cut street', 'name road'}   # a frozen district needs a thaw bake for these
+ROAD_OPS = {'add street', 'delete street', 'cut street', 'name road', 'reshape street'}   # a frozen district needs a thaw bake for these
 
 
 def districts():

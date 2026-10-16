@@ -309,7 +309,7 @@
       this.lastAt = now;
       const close = d < 2600;
       const ring = !close ? -1 : 1;   // the 9 light tiles round the view (~0.5M triangles each with terrain); 25 ran Safari out of memory
-      const full = d < 450;                          // a full one is ~7M: only the tile you're over
+      const full = false;   // the browser is a quick preview (owner, 16 Oct): light tiles only; the full scene is for Unreal
       const tx = Math.floor(target.x / TILE), ty = Math.floor(target.z / TILE);
       const want = new Map();
       for (let dx = -ring; dx <= ring; dx++) for (let dy = -ring; dy <= ring; dy++) {
