@@ -227,7 +227,7 @@
   ],
   "pois": [
    {
-    "name": "Oko Cattle Market & Abattoir",
+    "name": "Cattle Ground & Abattoir",
     "type": "industry",
     "u": 0.3,
     "v": 0.45,
@@ -241,14 +241,14 @@
     "note": "Dawn bread runs start here."
    },
    {
-    "name": "Ikotun-style Roundabout Market",
+    "name": "Roundabout Market",
     "type": "market",
     "u": 0.5,
     "v": 0.2,
     "note": "Four exits, 8,000 lock-ups. Rush-hour gridlock puzzle."
    },
    {
-    "name": "Iju Waterworks (1915)",
+    "name": "Old Waterworks (1915)",
     "type": "landmark",
     "u": 0.2,
     "v": 0.85,
@@ -548,7 +548,7 @@
     "note": "Government quarter. Protest-day closures."
    },
    {
-    "name": "Allen Roundabout Strip",
+    "name": "The Strip",
     "type": "night",
     "u": 0.7,
     "v": 0.6,

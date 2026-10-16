@@ -35,7 +35,7 @@ Chosen by the owner on 15 Oct 2026: a fictional Lagos with its real shape first,
 |---|---|---|
 | Coastal Expressway | Lagos–Badagry Expressway | the Border, the Bazaar, Jungle City, to the Port, inland of the creek |
 | Ring Road | Apapa–Oshodi Expressway | the Port, the Hub, the Airport |
-| Agege Road | Agege Motor Road (west) | the Capital to Railside |
+| Old Motor Road | Agege Motor Road (west) | the Capital to Railside |
 | Ayinde Avenue | Agege Motor Road / Obafemi Awolowo Way | the Hub, past the Airport, the Capital, the Estate |
 | Northern Road | Ikorodu Road | Yaba, Food Gate, round the lagoon to Old Shore |
 | Long Bridge Road, The Long Bridge | Third Mainland Bridge | off the Northern Road at Akoka, 2.6 km down the lagoon past Water Town, onto the Island's north end |

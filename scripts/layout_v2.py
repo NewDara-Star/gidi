@@ -150,7 +150,7 @@ ART = [
     ('Ring Road', 'exp', [(X(31.6), Y(0.4)), (X(30.6), Y(3.6)), P_('hub', 150, 300), (X(28.6), Y(11.5)), P_('airport', 300, 450)]),
     ('Ayinde Avenue', 'art', [P_('hub', 0, 0), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),
     ('Northern Road', 'art', [P_('yaba', -120, 80), (X(34.6), Y(12.6)), P_('foodgate', -200, 300), (X(38.5), Y(19.2)), (X(43), Y(19.6)), P_('oldshore', 0, 250), (X(56), Y(18.6))]),
-    ('Agege Road', 'art', [(9175, 2375), (8500, 2000), (7700, 2000), P_('railside', 0, 0), (X(16), Y(13.8))]),   # round the airport's north fence, beside the rail, as Agege Motor Road runs
+    ('Old Motor Road', 'art', [(9175, 2375), (8500, 2000), (7700, 2000), P_('railside', 0, 0), (X(16), Y(13.8))]),   # round the airport's north fence, beside the rail, as Agege Motor Road runs
     ('Long Bridge Road', 'art', [(X(34.6), Y(12.6)), (10950, 3450)]),   # off the Northern Road to the bridge's foot
     ('The Long Bridge', 'bridge', [(10950, 3450), (11300, 3700), (11260, 4400), (11160, 5100), (11000, 5450), (10850, 5760)]),   # Third Mainland: down the lagoon, past Water Town, onto the Island's north
     ('Wharf Bridge', 'bridge', [(9500, 6080), (9800, 6085), (10200, 6080)]),   # Eko: from the Port side across the harbour to the Island
