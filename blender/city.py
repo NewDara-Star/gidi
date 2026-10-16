@@ -270,9 +270,14 @@ _TZ, _TC, _TW, _TH = _T['z'], _T['cell_m'], _T['w'], _T['h']
 _WET = [(min(q[0] for q in w), min(q[1] for q in w), max(q[0] for q in w), max(q[1] for q in w), w) for w in list(GD['water']) + list(GD['ocean'])]
 
 
+def wet_at(x, y):
+    """Map point x, y (y south) on water: the lagoon, creeks, harbour or the ocean."""
+    return any(a <= x <= c and b <= y <= d and in_poly((x, y), w) for a, b, c, d, w in _WET)
+
+
 def ground_at(x, y):
     """The ground's height at map point x, y (y south): bilinear on the terrain grid, 0 on water."""
-    if any(a <= x <= c and b <= y <= d and in_poly((x, y), w) for a, b, c, d, w in _WET):
+    if wet_at(x, y):
         return 0.0
     fx, fy = x / _TC - 0.5, y / _TC - 0.5
     j0, i0 = math.floor(fx), math.floor(fy)
@@ -1223,7 +1228,7 @@ def build_tile(tx, ty, overrides):
     trng = Rng('trees', tx, ty)
     for _ in range(tree_n):
         p = (trng.between(x0, x1), trng.between(y0, y1))
-        if in_building(p, 2.0) or any(dist_line(p, r['pts']) < r['w'] / 2 + 2 for r in roads_near) or any(in_poly(p, [P(q) for q in wp]) for wp in GD['water']):
+        if in_building(p, 2.0) or any(dist_line(p, r['pts']) < r['w'] / 2 + 2 for r in roads_near) or wet_at(p[0], -p[1]):   # the lagoon, creeks and the ocean (v2 keeps the ocean apart: trees stood in the sea)
             continue
         parcels.tree(pm, p[0], p[1], trng, kind=trng.pick({'palm': 2 if ch in ('old_island', 'elite', 'waterfront') else 1, 'broad': 2}))
 
