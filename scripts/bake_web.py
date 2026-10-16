@@ -189,6 +189,10 @@ _frozen=hand.districts_frozen()   # districts frozen into their hand files: plac
 _lagos_m=[d for d in IDS if gen_ok(d) and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos" and d not in _frozen]
 print("market streets:",market_streets.market_streets(out,_lagos_m),"| frozen tables:",hand.apply_frozen(out,"tables"))
 
+# ---- frozen districts laid in once before the heights, so shared things (bridges, decks, sea walls) see their final roads
+# (the Fishermen's Bridge lands on the Bazaar's frozen Creekside Road); they are laid in again at the end, last of all
+print("frozen districts (before the heights):",len(hand.apply_snapshots(out)))
+
 # ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
 import roadz
 water,ocean,_hr=roadz.heights(out,water,ocean,json.load(open("web/terrain.json")))
