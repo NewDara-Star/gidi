@@ -14,6 +14,8 @@
 #   {"op": "add furniture", "kind": "lasma post", "x": .., "y": .., "ang": ..}
 #   {"op": "delete furniture", "at": [x, y], "kind": "pole" (optional)}  the nearest within 2 m
 #   {"op": "add zone", "kind": "market street", "pts": [[x, y], ...]}
+#   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
+#   {"op": "move place", "name": "...", "x": .., "y": ..}
 # road edits (owner, 16 Oct: hand placement covers roads, streets and labels), applied early in the bake, before the clean-up, so a
 # road placed by hand gets its junctions, gutters, furniture and surface like any other:
 #   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
@@ -244,6 +246,13 @@ def apply_edits(out):
                     out['furniture'].pop(min(c)[1])
                 else:
                     print('  hand edit found no furniture at', e['at'], e.get('note', ''))
+            elif op == 'add place':   # a named place (a pin): {"name", "type", "x", "y", "note"}
+                out['pois'].append({'name': e['name'], 'type': e['type'], 'note': e.get('note', ''), 'd': d, 'x': e['x'], 'y': e['y'], 'hand': True})
+            elif op == 'move place':  # a named place moves: {"name", "x", "y"}
+                q = next((p for p in out['pois'] if p['name'] == e['name']), None)
+                if q is None:
+                    print('  hand edit found no place called', e['name']); continue
+                q['x'], q['y'] = e['x'], e['y']
             elif op == 'add zone':
                 out.setdefault('encroach', []).append({'kind': e['kind'], 'd': d, 'pts': e['pts']})
             rep[d] = rep.get(d, 0) + 1
