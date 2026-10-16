@@ -34,7 +34,7 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
   - grass behind a security fence
 - **The airport terminal.** For now it's stored as a `bus terminal` reserve with a two-storey `terminal` building, a stand-in. The kit needs a **terminal**: a long hall, a forecourt and drop-off lane, a car park, a control tower nearby.
 - **The campus.** Saba's Lagoon University is a reserved `campus` with a ring road and nothing inside yet. The kit needs **campus buildings**: lecture halls, hostels, a senate building, sports fields, by hand.
-- **Banana Island's causeway gate.** A gatehouse and barrier where the causeway meets the Heights' shore.
+- **The Gold Island's causeway gate** (after Banana Island). A gatehouse and barrier where the causeway meets the Heights' shore.
 - **Face-me-I-face-you** (kind `face-me`, the Maze: Tunde's block). *(First version done 16 Oct: `archetypes.face_me`: the corridor doors at each end, the front one open; five small barred windows a side; a low rusted gable roof. Behind it are the toilet and bathroom block, the kitchen corner with soot, washing lines and the generator in its cage; a bench and chairs at the door.)* One storey, about 22 by 9.5 m, a corridor down the middle with five rooms a side, a shared toilet and kitchen at the back, washing lines, a bench at the door.
 - **People placed by hand on the walkways** (furniture kinds `wheelbarrow vendor`, `fruit seller`, `parking boy`: the Maze's approach to Ladi Lane). *(First version done 16 Oct: `street.wheelbarrow_vendor`, `street.fruit_seller`, `street.parking_boy`.)* The kit needs:
   - a wheelbarrow of phone cases and chargers, with a man in an earpiece

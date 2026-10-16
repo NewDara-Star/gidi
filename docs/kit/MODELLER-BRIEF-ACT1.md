@@ -33,7 +33,7 @@ You're building new pieces for the Gidi 3D kit in Blender: `blender/gidi_kit/`, 
 - The Glasshouse mall (kind `mall`): a three-storey black-glass box with a car park in front.
 - The airport terminal and control tower; the runway with its markings and lights.
 - Campus buildings: lecture halls, hostels, a senate building.
-- The Banana Island causeway gatehouse.
+- The Gold Island's gatehouse, where the Crescent Causeway meets the Heights' shore.
 - The informal bus stop: a sign on a pole and a worn patch, for the side streets.
 
 When you're done, list in the PR what you built and which kinds now draw.
