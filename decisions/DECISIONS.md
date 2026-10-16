@@ -23,6 +23,13 @@
 - **Regenerate, don't move the old frozen Food Gate block.** The new map leads. The pilot's value lives in the generator rules; the old file is kept as a record.
 - **One shared generator, one profile per district, run in parallel.** Not 17 separate generators.
 - **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`).
+- **Know when to stop generating; then hand-make Gidi** (16 Oct). "It's important to know when to stop generating and start hand making Gidi, including checking out what makes Lagos unmistakably Lagos and working with them on the map... so we are not in generator hell."
+  - **The stop line:** the 16 Oct build (all 17 districts from the deep studies, calibration pass 2, link roads) is the last generated base. Remaining check failures are fixed by hand, then every district is frozen. No more calibration passes or rebuilds.
+  - **Then, district by district** (the Maze and the Hub first: Act 1 opens there):
+    1. a list of what makes the place unmistakably Lagos, from the owner's photos, the deep study and `docs/LAGOS-ISMS.md`, checked by the owner
+    2. placed by hand at exact spots through the hand files, labelled and noted
+    3. the opening rebuilt and locked (the Maze and the Hub)
+    4. freeze, show the owner, next district
 - **The hand pass covers infrastructure and labels** (16 Oct). Hand placement must place infrastructure properly and label it properly: bus stops, traffic lights, street lights, roads, streets, everything. The hand files already add, move and delete buildings and furniture. They need:
   - road and street edits (add, move, delete, with the width class)
   - names and labels on everything
