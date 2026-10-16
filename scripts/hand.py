@@ -177,19 +177,20 @@ def apply_road_edits(out):
                     print('  hand edit found no street at', e['at'], e.get('note', ''))
             elif op == 'cut street':   # a street stops short on both sides of a point: it dead-ends at a canal bank or the tracks
                 from shapely.ops import substring
-                P = Point(e['at']); gap = e.get('gap', 10.0); best = None
-                for k in ('streets', 'lanes'):
-                    for i, p in enumerate((out.get(k) or {}).get(d, [])):
-                        if len(p) > 1:
-                            dd = LineString(p).distance(P)
-                            if dd < 3 and (best is None or dd < best[0]):
-                                best = (dd, k, i)
-                if not best:
-                    print('  hand edit found no street to cut at', e['at'], e.get('note', '')); continue
-                g = LineString(out[best[1]][d][best[2]]); t = g.project(P)
-                parts = [substring(g, 0, t - gap / 2), substring(g, t + gap / 2, g.length)]
-                parts = [[[round(x, 1), round(y, 1)] for x, y in q.coords] for q in parts if q.length > 3]
-                out[best[1]][d][best[2]:best[2] + 1] = parts
+                P = Point(e['at']); gap = e.get('gap', 10.0); cut = 0
+                for k in ('streets', 'lanes'):   # every piece through the point (two pieces often meet right at a crossing)
+                    L_ = (out.get(k) or {}).get(d, []); new = []
+                    for p in L_:
+                        g = LineString(p) if len(p) > 1 else None
+                        if g is None or g.distance(P) > 4.0:   # cut points come from the finished map; before the clean-up a street can sit a little off
+                            new.append(p); continue
+                        t = g.project(P); cut += 1
+                        parts = [substring(g, 0, t - gap / 2) if t > gap / 2 else None, substring(g, t + gap / 2, g.length) if t + gap / 2 < g.length else None]
+                        new += [[[round(x, 1), round(y, 1)] for x, y in q.coords] for q in parts if q is not None and q.length > 3]
+                    if L_:
+                        out[k][d] = new
+                if not cut:
+                    print('  hand edit found no street to cut at', e['at'], e.get('note', ''))
             elif op == 'name road':
                 P = Point(e['at'])
                 c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if len(m['pts']) > 1]
@@ -229,7 +230,7 @@ def apply_label_edits(out):
                     S[best[1]][d][best[2]] = e['surface']
             else:
                 c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if f_['kind'] == e.get('kind', f_['kind'])]
-                c = [x for x in c if x[0] < 2.0]
+                c = [x for x in c if x[0] < 15.0]   # the nearest of its kind: furniture is placed again when a district is thawed
                 if c:
                     out['furniture'][min(c)[1]]['name'] = e['name']
                 else:
