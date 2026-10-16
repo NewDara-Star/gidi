@@ -21,7 +21,7 @@ FIRST = [   # invented: common surnames, never famous Lagos people or streets
          'Adewale', 'Babatunde', 'Chukwuma', 'Ekpo', 'Gbadamosi', 'Ige', 'Jimoh', 'Kolawole', 'Lateef', 'Mbanefo', 'Popoola', 'Raji', 'Sanni',
          'Tijani', 'Udoh', 'Wahab', 'Yusuf', 'Akinola', 'Bamidele', 'Egbe', 'Hassan', 'Ikenna', 'Kunle', 'Mojeed', 'Nwachukwu', 'Remi', 'Segun',
          'Tokunbo', 'Uche', 'Yemi', 'Aremu', 'Bolaji', 'Gbenga', 'Ilesanmi', 'Jaiyeola', 'Kasumu', 'Laniyan', 'Makinde',
-         'Odunsi', 'Pedro', 'Quadri', 'Sowande', 'Taiwo', 'Usman', 'Vaughan', 'Williams', 'Animashaun', 'Coker']
+         'Odunsi', 'Pedro', 'Quadri', 'Sowande', 'Taiwo', 'Usman', 'Vaughan', 'Williams', 'Animashaun', 'Kolade']
 ART_FIRST = {n.split()[0] for n, g in ARTS}
 used = set()
 

@@ -127,7 +127,7 @@
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "B"));
     if (f.kind === "lasma post") return h("g", { key: i, transform: t }, h("rect", { x: -0.8, y: -0.8, width: 1.6, height: 1.6, className: "fu-lasma" }),
       h("text", { x: 0, y: 0.45, className: "fu-label", transform: `rotate(${-f.ang})` }, "L"));
-    if (["wheelbarrow vendor", "fruit seller", "parking boy", "agbero", "police kiosk", "overhead sign", "task force truck"].includes(f.kind))   // people placed by hand on the walkway
+    if (["wheelbarrow vendor", "fruit seller", "parking boy", "agbero", "police kiosk", "overhead sign", "task force truck", "bread hawker"].includes(f.kind))   // people placed by hand on the walkway
       return h("g", { key: i }, h("circle", { cx: f.x, cy: f.y, r: 0.6, className: "fu-person" }), h("title", null, f.kind + (f.name ? ": " + f.name : "")));
     return null;
   }
@@ -182,6 +182,13 @@
         islands.map((j, i) => h("circle", { key: "is" + i, cx: j.x, cy: j.y, r: j.island_r, className: "plan-island" })),
         (G.quays || []).map((q, i) => h("path", { key: "q" + i, d: pts2d(q.pts), className: "plan-quay", style: { strokeWidth: w(1.2, 1.5) } }))),
       layers.plan && z > 1.6 && h("g", { pointerEvents: "none" }, FURN.map((f, i) => furnitureGlyph(f, i))),
+      // monuments placed by hand (blender/gidi_kit/monuments.py): a marker and its name; an arch is a bar across its road
+      z > 0.5 && h("g", { pointerEvents: "none" }, (G.monuments || []).map((m, i) => m.model === "arch"
+        ? h("g", { key: "mo" + i, transform: `translate(${m.x} ${m.y}) rotate(${m.ang + 90})` },
+            h("rect", { x: -(m.span || 16) / 2, y: -0.8, width: m.span || 16, height: 1.6, className: "mon-arch" }))
+        : h("g", { key: "mo" + i },
+            h("circle", { cx: m.x, cy: m.y, r: w(2.2, 4), className: "mon" }),
+            z > 1 && h("text", { x: m.x + w(3, 6), y: m.y, className: "mon-label", style: { fontSize: w(4, 10) } }, m.name || m.model)))),
       h("g", { pointerEvents: "none" },   // flyovers and rail bridges sit above the roads; skywalks above everything
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "fc" + i, d: pts2d(s.pts), className: "fly-case", style: { strokeWidth: w(s.width + 6, 5) } })),
         (G.structures || []).filter((s) => s.kind === "flyover").map((s, i) => h("path", { key: "f" + i, d: pts2d(s.pts), className: "fly", style: { strokeWidth: w(s.width, 3.6) } }))),

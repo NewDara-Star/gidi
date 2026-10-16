@@ -266,7 +266,7 @@ def capital(ST, LM):
         "back_row": 0.55, "big_front": 0.5, "vacant": 0.08,   # offices, plazas and banks on the main roads (real: 16% over 400 m2)
         "internal_mains": 2,          # real main roads 4-5.5 km/km2: the most of any district so far
         "name_endings": ends,
-        "roundabout": {"poi": "Allen Roundabout Strip", "r_m": 22, "strip_m": 160},   # the all-night strip round a roundabout with a bust
+        "roundabout": {"poi": "The Strip", "r_m": 22, "strip_m": 160},   # the all-night strip round a roundabout with a bust
         "zone": {"poi": "Gadget Village", "r_m": 120, "kind": "phone mall", "min_m2": 80, "storeys": [3, 4], "kiosk_every_m": 9},   # 4.5 ha of the real 14 ha
         "halls": [{"poi": "The Shrine", "kind": "hall", "m2": 1200, "storeys": 2}],   # the live-music hall (the real compound is 0.2 ha)
         "parcels": [
@@ -376,12 +376,12 @@ def railside(ST, LM):
         "size_lo_u": 0.6, "plot_u": [0.5, 0.99], "back_row": 0.5, "big_front": 0.1, "vacant": 0.1,   # real typical house 127-175 m2
         "internal_mains": 2, "t_into_done": True, "continue_mains": True,   # the Capital's main road carries on in
         "rail_bridge_m": LM["flyover_spans_m"]["p50"],   # ...and over the rail on a bridge (real: 4 of 6 major-road crossings bridged)
-        "roundabout": {"poi": "Ikotun-style Roundabout Market", "r_m": 26, "strip_m": 0, "name": "Market Roundabout"},   # four exits; the market sits on it
+        "roundabout": {"poi": "Roundabout Market", "r_m": 26, "strip_m": 0, "name": "Market Roundabout"},   # four exits; the market sits on it
         "name_endings": ends,
         "parcels": [
-            {"kind": "market", "poi": "Ikotun-style Roundabout Market", "ha": 3.0, "near": "roundabout", "near_main": True},   # lock-ups on the roundabout
-            {"kind": "livestock", "poi": "Oko Cattle Market & Abattoir", "ha": 3.0, "near_main": False, "pen_m": [10, 6], "lane_m": 5, "scrap_piles": 0, "gate": "nearest", "min_w": 90},
-            {"kind": "waterworks", "poi": "Iju Waterworks (1915)", "ha": 2.0, "near_main": False, "works_m": [40, 18], "tanks": 2, "tank_r_m": 11, "gate": "nearest", "min_w": 80},
+            {"kind": "market", "poi": "Roundabout Market", "ha": 3.0, "near": "roundabout", "near_main": True},   # lock-ups on the roundabout
+            {"kind": "livestock", "poi": "Cattle Ground & Abattoir", "ha": 3.0, "near_main": False, "pen_m": [10, 6], "lane_m": 5, "scrap_piles": 0, "gate": "nearest", "min_w": 90},
+            {"kind": "waterworks", "poi": "Old Waterworks (1915)", "ha": 2.0, "near_main": False, "works_m": [40, 18], "tanks": 2, "tank_r_m": 11, "gate": "nearest", "min_w": 80},
             {"kind": "landfill", "poi": "Railside Landfill", "ha": round(ST["landuse_polygons_ha"]["landfill"][1] / ST["landuse_polygons_ha"]["landfill"][0], 1), "near_main": False,
              "block_m": [14, 14], "gap_m": [12, 12], "margin_m": 8, "building": "mound", "gate": "nearest", "min_w": 90},   # real mean landfill ~8 ha
             {"kind": "market", "poi": "Bale Market (Mon/Wed/Fri)", "ha": 1.5, "near_main": True},

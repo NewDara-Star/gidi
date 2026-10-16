@@ -17,6 +17,7 @@
 #   {"op": "add place", "name": "...", "type": "story", "x": .., "y": .., "note": "..."}   a named place (pin)
 #   {"op": "move place", "name": "...", "x": .., "y": ..}
 #   {"op": "add parcel", "kind": "motor park", "pts": [[x, y], ...]}  /  {"op": "delete parcel", "at": [x, y]}
+#   {"op": "add monument", "model": "statue:founder" | "clock_tower" | "led_board" | "sculpture" | "lighthouse" | "arch" ..., "x", "y", "ang" (deg), "name", "span" (arch)}
 # road edits (owner, 16 Oct: hand placement covers roads, streets and labels), applied early in the bake, before the clean-up, so a
 # road placed by hand gets its junctions, gutters, furniture and surface like any other:
 #   {"op": "add street", "kind": "street" | "lane" | "main", "pts": [[x, y], ...], "name": "..." (mains)}
@@ -36,7 +37,7 @@ from shapely.geometry import Point, Polygon
 # the bake replaces the district with its snapshot at the very end, then applies its edits. Arterials, the rail, the water and
 # the ferries cross many districts and stay shared.
 OWNED_DICT = ('streets', 'lanes', 'paths', 'buildings', 'storeys', 'styles', 'parcels', 'walls', 'study')
-OWNED_BY_D = ('mains', 'pois', 'structures', 'canals', 'gates', 'encroach', 'safe_ground', 'gutters', 'furniture')
+OWNED_BY_D = ('mains', 'pois', 'structures', 'canals', 'gates', 'encroach', 'safe_ground', 'gutters', 'furniture', 'monuments')
 OWNED_BY_PLACE = ('junctions', 'quays', 'boardwalks')
 
 
@@ -282,6 +283,8 @@ def apply_edits(out):
                 if q is None:
                     print('  hand edit found no place called', e['name']); continue
                 q['x'], q['y'] = e['x'], e['y']
+                if e.get('describe'):   # the place's description changes too
+                    q['note'] = e['describe']
             elif op == 'add parcel':   # a plot (yard, park, market...): {"kind", "pts", "name"}
                 out.setdefault('parcels', {}).setdefault(d, []).append({'kind': e['kind'], 'pts': e['pts']})
             elif op == 'delete parcel':   # the plot holding the point
@@ -291,6 +294,8 @@ def apply_edits(out):
                     L_.pop(hit[0])
                 else:
                     print('  hand edit found no plot at', e['at'], e.get('note', ''))
+            elif op == 'add monument':   # placed by hand (blender/gidi_kit/monuments.py): {"model", "x", "y", "ang", "name", "span"}
+                out.setdefault('monuments', []).append({k: e[k] for k in ('model', 'x', 'y', 'ang') if k in e} | {'d': d, 'name': e.get('name', ''), **({'span': e['span']} if 'span' in e else {})})
             elif op == 'add zone':
                 out.setdefault('encroach', []).append({'kind': e['kind'], 'd': d, 'pts': e['pts']})
             rep[d] = rep.get(d, 0) + 1
