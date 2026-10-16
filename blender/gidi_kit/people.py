@@ -56,10 +56,14 @@ def limb(mb, mat, a, b, r0, r1, col, seg=7):
     sphere(mb, mat, Matrix.Translation(b), r1, r1, r1, col, seg=seg, rings=4)
 
 
-def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None):
-    """One person at M (facing +x). kind: a dress type from DRESS, or None to pick by character."""
+def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None, arms=None, man=None):
+    """One person at M (facing +x). kind: a dress type from DRESS, or None to pick by character.
+    arms: {side (-1 right, 1 left): (elbow, wrist)} in M's frame at 1.75 m tall (scaled to the height), for a pose
+    other than hanging or swinging; man: True or False to fix it. Returns where the hands and head are, so props can go in them."""
     kind = kind or rng.pick(DRESS.get(ch, DRESS['dense']))
     woman = kind in ('wrapper',) or (kind in ('ankara', 'tshirt', 'office', 'hawker', 'school') and rng.chance(0.5))
+    if man is not None:   # a part that has to be one or the other (an agbero, a parking boy)
+        woman = not man
     h = h or (rng.between(1.55, 1.72) if woman else rng.between(1.65, 1.85))
     if kind == 'school':
         h = rng.between(1.2, 1.55)
@@ -110,11 +114,15 @@ def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None):
     else:
         sphere(mb, 'rubber', head @ Matrix.Translation((-0.005, 0, 0.012)), 0.104 * k, 0.094 * k, 0.122 * k, hair, seg=12, rings=8, top=0.62)
     # arms swing against the legs
+    hands = {}
     for s in (-1, 1):
         a = -ph * s * sw * 0.9
         sh = M @ Vector((0, s * 0.2 * k, 1.38 * k))
         el = M @ Vector((math.sin(a) * 0.3 * k, s * 0.23 * k, 1.1 * k))
         wr = M @ Vector((math.sin(a) * 0.3 * k + math.sin(a + 0.25) * 0.26 * k, s * 0.22 * k, 0.86 * k))
+        if arms and s in arms:
+            el, wr = (M @ (Vector(v) * k) for v in arms[s])
+        hands[s] = wr + (wr - el).normalized() * 0.06 * k
         sleeve_long = kind in ('kaftan', 'agbada', 'office', 'buba')
         limb(mb, top_mat, sh, el, 0.055 * k, 0.05 * k, top)
         limb(mb, top_mat if sleeve_long else 'skin', el, wr, 0.048 * k, 0.04 * k, top if sleeve_long else skin)
@@ -126,6 +134,7 @@ def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None):
             sphere(mb, 'plastic', t @ Matrix.Translation((rng.between(-0.22, 0.22), rng.between(-0.22, 0.22), 0.12)), 0.06, 0.06, 0.06, hex_rgb(rng.pick(['#ff7043', '#fdd835', '#7cb342', '#ffffff', '#e8f0f4', '#c62828'])), seg=6, rings=4)
     if kind == 'school':  # a satchel
         mb.box('cloth', torso_m @ Matrix.Translation((-0.2 * k, 0, 0.25 * k)), hex_rgb(rng.pick(['#c62828', '#1f5fa8', '#3a3a3a'])), 0, size=(0.12, 0.28 * k, 0.32 * k))
+    return dict(hands=hands, head=head, k=k, torso=torso_m, top=top)
 
 
 def seated_rider(mb, M, rng, vest=None, helmet=True):

@@ -174,6 +174,9 @@ def offset(poly, d):
         a = edge_out(poly, (i - 1) % n)
         b = edge_out(poly, i)
         k = 1 + a[0] * b[0] + a[1] * b[1]
+        if k < 1e-6:   # the outline doubles back here (a spike in the data): move straight out along one edge
+            out.append((poly[i][0] + b[0] * d, poly[i][1] + b[1] * d))
+            continue
         out.append((poly[i][0] + (a[0] + b[0]) / k * d, poly[i][1] + (a[1] + b[1]) / k * d))
     return out
 
