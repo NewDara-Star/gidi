@@ -3,17 +3,20 @@
 Agreed with the owner on 15 Oct 2026.
 
 ## When
-Once the map is final:
-- all fifteen districts are built (done)
-- the terrain and the hand-made Lagos-isms are in
-- the 3D models we need have been touched up
+**Updated 16 Oct 2026 (owner): the map will never be final.** Gidi gets tweaked until the game ships, so Unreal can't wait for a final map. It's one more view of the same data, rebuilt whenever the data changes. The loop is:
+1. **Change the data.** The map, the hand files, the kit.
+2. **Look in the browser first.** The 2D map and the three.js 3D view: fast, to try things.
+3. **Mock up in Blender.** Renders of new looks and buildings.
+4. **Reimport into Unreal.** That's where the real game is built.
 
-**Wait until then.** The Unreal ground and road layout depend on the terrain and the isms.
+Unreal work still starts only when the owner says go (`decisions/DECISIONS.md`). When it does, the importer must be re-runnable from day one, not a one-time port.
+
+*Superseded (15 Oct): "Once the map is final… wait until then."*
 
 ## How
 - **The data stays the master copy.** The generator and its files remain the source of truth: `web/gidi-data.js`, `web/gen-*.json`, and the terrain grid (`web/terrain.json`, in progress). Unreal assembles the world from them.
 - **Meshes come from the Blender kit** (`blender/`), exported for Unreal: houses by style, kiosks, tanks, booths, vehicles, boats.
-- **A one-time Unreal importer** (Unreal's PCG tools, or an editor Python script) reads the JSON and places the meshes:
+- **A re-runnable Unreal importer** (Unreal's PCG tools, or an editor Python script) reads the JSON and places the meshes, every time the data changes:
   - buildings: footprint, kind, storeys and style
   - streets, lanes, paths, bridges and flyovers become splines
   - parcels and pins
@@ -23,7 +26,9 @@ Once the map is final:
 - **Hand work in Unreal goes on top:** hero buildings, interiors, set pieces. The city itself is not placed by hand.
 
 ## Things to remember
-- **Changes don't flow live.** A map change reaches Unreal only when the importer is re-run.
+- **Changes reach Unreal on reimport.** Make that one click, or automatic when the data files change.
+- **Never hand-edit in Unreal what the data owns.** A reimport wipes it. Map fixes go into the data (the hand files); Unreal-only work goes on its own layers that a reimport never touches: lighting, mission triggers, cutscene sets, interiors.
+- **Materials:** Unreal owns them once we move. Models carry only a material name, and Unreal looks it up in its library. Until then, Blender's materials are the reference.
 - **Coordinates:** the map is in metres with y running south. Unreal uses centimetres and its own axes, so the importer scales and flips once.
 - **Not ported:** the browser 3D view (three.js) is a viewer only. Materials, lighting and weather are redone properly in Unreal.
 
