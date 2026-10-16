@@ -937,7 +937,32 @@ def build_tile(tx, ty, overrides):
         rows = {'motor park': ('danfo', 2.6, 7.0, 12), 'truck park': ('container', 3.4, 18.5, 24), 'lorry park': ('lorry911', 3.2, 10.0, 16)}
         if pc['d'] == 'foodgate' and kind == 'market':
             rows['market'] = ('lorry911', 3.2, 10.0, 6)
-        if kind in rows:
+        if kind in rows and kind != 'market':  # packed yard to yard, as Lagos parks are: rows nose to nose, a drive lane every two rows
+            vk, sx, sy, _ = rows[kind]
+            best = []
+            for i in range(len(pts)):  # line the rows up with the yard's longest straight side
+                a, b = pts[i], pts[(i + 1) % len(pts)]
+                ang = math.atan2(b[1] - a[1], b[0] - a[0])
+                ux, uy, vx, vy = math.cos(ang), math.sin(ang), -math.sin(ang), math.cos(ang)
+                us, vs = [p[0] * ux + p[1] * uy for p in pts], [p[0] * vx + p[1] * vy for p in pts]
+                got, v, row = [], min(vs) + sy / 2 + 1.0, 0
+                while v < max(vs) - sy / 2:
+                    u = min(us) + sx / 2 + 1.0
+                    while u < max(us) - sx / 2:
+                        x, y = u * ux + v * vx, u * uy + v * vy
+                        if all(in_poly(q, pts) for q in ((x + dx * ux + dy * vx, y + dx * uy + dy * vy) for dx in (-sx / 2, sx / 2) for dy in (-sy / 2, sy / 2))) and not in_building((x, y), 1.0):
+                            got.append((x, y, ang + math.pi / 2 + (math.pi if row % 2 else 0)))
+                        u += sx
+                    v += sy + (6.0 if row % 2 else 0)
+                    row += 1
+                if len(got) > len(best):
+                    best = got
+            for x, y, h in best:
+                if rr.chance(0.1):  # a gap here and there: a bus out on the road
+                    continue
+                put_vehicle(vk, x, y, h, vehicles.condition(0.3, rr, True, parked=True), rr, rch, 0.3)
+                built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+        elif kind in rows:
             vk, sx, sy, count = rows[kind]
             c = cent(pts)
             per = max(1, int(count ** 0.5 * 1.5))
