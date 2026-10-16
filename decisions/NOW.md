@@ -36,7 +36,10 @@
 - **Big tiles split** so the browser can load close-ups (#71).
 - **Motor parks packed** with buses, yard to yard (#69).
 - **The map page** no longer goes blank (#70) and counts its 17 districts (#75).
-- **Bridge ramps stop growing every bake** (#75): Folake Road's rail bridge is back from 538 m to 343 m and lands.
+- **Bridge ramps fixed** (#75, #80): they stopped growing every bake, and the bake's last step no longer puts the old frozen ramps back. Folake Road's rail bridge is 343 m (was 538) and lands; no ramp ends in the air.
+- **No trees in the sea** (#81). **Full builds cover the whole map** (#81): the runner had the v1 height hard-coded and skipped the Atlantic coast.
+- **77 beach huts out of the sea** (#82): the v2 coast has no beach strip yet.
+- **The 3D city rebuilt** with terrain, the new pieces and every fix: 443 tiles, copied into `~/gidi/web/city` on 16 Oct.
 - **Full builds can stand on the terrain** (`city_run.py --terrain`, #76). A full rebuild with terrain was started 16 Oct; the old 3D tiles (15 Oct, v1 map) explained the trees in the water and the poles in the road.
 - **Life in Gidi** (`world-life.md`): the owner's world-building ideas.
 
@@ -57,5 +60,5 @@
 - kerbs (roads pass 4)
 - isms groups
 - the data delete-later list
-- small fix: the Ring Road Flyover ends 0.3 m up (roadz's 4 ramp passes aren't enough there)
-- after the full rebuild: look for anything still standing in water or in the road
+- **Gidi's Atlantic beach:** a sand strip along the Frontier and Heights coast, with the beach huts back on it (hand pass)
+- the Glasshouse mall and the campus have no kit builders yet (the full build lists them as gaps)
