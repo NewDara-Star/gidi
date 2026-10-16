@@ -1,5 +1,6 @@
 # Ideas (not decided; newest first)
 
+- **Life in Gidi** (16 Oct): what makes the world feel like it exists. Rhythm, systems (NEPA, fuel, go-slow), moments (the bus preacher), texture, bus stop names the Lagos way, invented brands, Bet Gidi, naira, a radio made for Gidi, life after the story, online later, face scans. In full: `world-life.md`.
 - **Story as a tour of the map** (15 Oct). In GTA III, IV and V the story mostly walks the player through the city district by district. If Gidi ever gets a story, it can be layers of jobs and people that open the districts one by one.
   - GTA III: a revenge ladder through gangs.
   - GTA IV: the immigrant's lie of the dream.
