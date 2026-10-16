@@ -43,3 +43,29 @@ The owner's direction: "take inspiration from the places to build the area... al
 
 ## First up
 Marigold Junction (1), because the owner named it, and the Railside bakeries (18), because Tunde steals bread. Then the Heights' Atlantic Reclaim (15) and The Crown (5), the two biggest silhouettes.
+
+## The kit's monuments and landmarks, placed by hand (16 Oct)
+The modeler's pieces (`blender/gidi_kit/monuments.py`, `landmarks.py`), all invented, matched to places. They're placed with the `add monument` hand edit. A district with any hand-placed monument keeps only those, and the kit's automatic corner monuments stay only where no hand pass has been yet.
+
+| Piece | Where in Gidi | Why | Status |
+|---|---|---|---|
+| The Crown Hall (cap-shaped national hall) | by the channel near the Channel Bridge | it's our National Theatre (#5) | with The Crown |
+| The Reach (after the owner's own artwork) | Parade Square, Old Island (proposed; owner to confirm) | the great civic square; Eyo belongs to the Island | waiting for the owner |
+| Horse riders | Parade Square's gates | the real square has its horses | with Old Island |
+| Saxophonist | the Strip, the Capital, near the Shrine | the music of the strip | placed |
+| Founder | the junction by Ladi Lane's south mouth (the Maze) | he watches the chase end | placed |
+| LED screen | Marigold Junction (the Capital) | after Maryland | placed |
+| Welcome arch | Ayinde Avenue into the Capital | | placed |
+| Scrap-metal sculpture | by Gidi Interchange (the Hub) | the mechanics made it | placed |
+| Lighthouse | the Port's sea edge | | placed |
+| Hunter | Railside | the old road's hunter | placed |
+| Clock tower | Old Island's market crossroads | after Idumota's clock | with Old Island |
+| Masquerade | Old Island | | with Old Island |
+| Three elders | the Heights or the Estate | old money, quiet | with those districts |
+| Drummer | Old Shore's market square | | with Old Shore |
+| Beach arch (the chains memorial) | the Border's coast at the Heritage Museum | **with care:** a memorial facing the sea, safe ground | with the Border |
+| Mural wall | Saba | the creative, student side | with Saba |
+
+**Real names to change in the kit:**
+- "Alade Electronics Market": Alade is a real Ikeja market.
+- "Cathedral of Christ": the real cathedral on Lagos Island.

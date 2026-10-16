@@ -48,3 +48,4 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
 - **Task force truck** (furniture `task force truck`): a pickup with seized okadas in the back, parked at a junction.
 - **Rail market** (zone `rail market`, the Hub): traders' tables on the ballast beside the tracks, lifted when a train comes.
 - **The Glasshouse** (kind `mall`, Marigold Junction in the Capital, after the Maryland mall): a black-glass box, three storeys, a car park in front, signage on the glass.
+- **Bread hawker** (furniture `bread hawker`, Railside's Ayo Bakery Row, after Agege): a wheelbarrow or head tray of loaves in nylon, a hawker calling out.

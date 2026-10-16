@@ -343,7 +343,15 @@ def monument_sites():
                             sites.append(dict(kind='arch', x=p[0], y=p[1], ang=math.atan2(u[1], u[0]), d=dname, span=r['w'] + 2, name=next(dd['name'] for dd in GD['districts'] if dd['id'] == dname)))
                             arches[dname] = arches.get(dname, 0) + 1
                             break
-    sites.append(dict(kind='lighthouse', x=3975.0, y=-6330.0, ang=0.0, d='port', r=3.4))
+    # monuments placed by hand (the data's "monuments", scripts/hand.py "add monument"): a district with any keeps only those; the
+    # lighthouse stands only where it is placed (its old spot was the v1 port)
+    hand = GD.get('monuments') or []
+    hand_d = {m_['d'] for m_ in hand}
+    sites = [s_ for s_ in sites if s_['d'] not in hand_d]
+    for m_ in hand:
+        x_, y_ = P((m_['x'], m_['y']))
+        sites.append(dict(kind=m_['model'], x=x_, y=y_, ang=-math.radians(m_.get('ang', 0)), d=m_['d'], r=3.4 if m_['model'] == 'lighthouse' else 2.5 if m_['model'] != 'led_board' else 1.0,
+                          **({'span': m_.get('span', 16), 'name': m_.get('name') or next(dd['name'] for dd in GD['districts'] if dd['id'] == m_['d'])} if m_['model'] == 'arch' else {})))
     path = os.path.join(ROOT, 'web', 'city', 'monuments.json')
     try:
         os.makedirs(os.path.dirname(path), exist_ok=True)
