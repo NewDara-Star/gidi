@@ -13,6 +13,8 @@
 - All 17 districts are generated side by side and baked into one city.
 - Checks against the studies run per district (`scripts/deep_check.py`, `scripts/deep_summary.py`); calibration passes are running (`scripts/deep_tune.py`).
 
+**The stop line (16 Oct):** the generator's last run is the 16 Oct build. From here Gidi is hand-made, district by district; see `DECISIONS.md`.
+
 **Next, in order** (detail in `docs/LAYOUT-V2.md`, "Where the rebuild stands"):
 1. Profiles from the deep studies, with fabric-type zones; profiles for the Airport and Saba.
 2. Generate all 17 side by side; check each against its study's targets.
