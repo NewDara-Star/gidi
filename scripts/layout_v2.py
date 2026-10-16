@@ -48,8 +48,14 @@ BAY = chaikin([(X(43.3), Y(3.9)), (X(45.5), Y(3.9)), (X(45.2), Y(2.0)), (X(44.7)
 BAY_X = X(44.4)   # the Heights end at the bay; the land east of it is the Frontier's (Lekki's) west end
 CREEK_E = chaikin([(X(38.8), Y(2.8)), (X(39.3), Y(2.8)), (X(39.2), Y(-1.0)), (X(38.7), Y(-1.0))])                                     # east of the Island
 CREEK_W = chaikin([(-500, Y(1.6)), (X(6), Y(2.6)), (X(14), Y(1.4)), (X(18), Y(0.9)), (X(14), Y(0.6)), (X(6), Y(1.4)), (-500, Y(0.4))])  # Badagry creek
-water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND)
+# Banana Island: a reclaimed crescent in the lagoon off the Heights' north shore, joined by a short causeway (gated, the richest
+# addresses in Gidi). Drawn fresh; bigger than its inspiration at 1:4, as Old Island is.
+BANANA = Polygon(chaikin([(11540, 5790), (11600, 5620), (11800, 5520), (12000, 5530), (12160, 5640), (12200, 5790), (12090, 5760),
+                          (11960, 5740), (11810, 5745), (11690, 5770), (11610, 5830)], 3)).buffer(0)
+CAUSEWAY = LineString([(11840, 5680), (11850, 6000)]).buffer(14, cap_style=2)   # 28 m of land: the road, a gatehouse at the shore
+water = unary_union([Polygon(x).buffer(0) for x in (OCEAN, LAGOON, HARBOUR, CREEK_E, CREEK_W, BAY)] + [ISLAND.buffer(MOAT)]).difference(ISLAND).difference(BANANA).difference(CAUSEWAY)
 land = box(0, 0, W, H).difference(water)
+sea = Polygon(OCEAN).buffer(0).intersection(box(0, 0, W, H))   # the open sea, kept apart from the inland water (the map build treats them differently)
 
 
 def no_holes(g):
@@ -62,6 +68,20 @@ def no_holes(g):
         for half in (box(-1, -1, c.x, H + 1), box(c.x, -1, W + 1, H + 1)):
             out += no_holes(p.intersection(half))
     return [q for q in out if q.geom_type == 'Polygon' and q.area > 1]
+
+
+def rings(polys):
+    """Rounded outlines that are each a valid simple polygon (a piece pinched at a point is split there)."""
+    from shapely.validation import make_valid
+    out = []
+    for q in polys:
+        r = Polygon([(round(x, 1), round(y, 1)) for x, y in q.exterior.coords])
+        for g in getattr(make_valid(r), 'geoms', [make_valid(r)]):
+            if g.geom_type == 'Polygon' and g.area > 1:
+                out += [[[round(x, 1), round(y, 1)] for x, y in h.exterior.coords] for h in no_holes(g)]
+            elif g.geom_type == 'MultiPolygon':
+                out += rings(g.geoms)
+    return out
 # where the built city ends (bush and farms beyond): a fresh outline round the districts
 hull = MultiPoint([Point(*v) for v in anchor.values()]).convex_hull.buffer(2.6 * km, quad_segs=8)
 city = hull.intersection(land)
@@ -94,6 +114,11 @@ north = Polygon([(0, 0), (W, 0), (W, 4150), (0, 4250)])
 u = unary_union([D['yaba'], D['watertown'].intersection(north).buffer(0.5)])
 D['yaba'] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
 D['watertown'] = max(getattr(D['watertown'].difference(north), 'geoms', [D['watertown'].difference(north)]), key=lambda q: q.area)
+u = unary_union([D['heights'], BANANA.buffer(0.5), CAUSEWAY.intersection(land).buffer(0.5)])   # Banana Island belongs to the Heights
+D['heights'] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
+for k in D:
+    if k != 'heights':
+        D[k] = max(getattr(D[k].difference(BANANA.buffer(1)), 'geoms', [D[k].difference(BANANA.buffer(1))]), key=lambda q: q.area)
 # land the cells left out (scraps cut off by the water) joins the district it shares the longest border with
 left = city.difference(unary_union(list(D.values())))
 for g in getattr(left, 'geoms', [left]):
@@ -101,6 +126,20 @@ for g in getattr(left, 'geoms', [left]):
         k = max(D, key=lambda k: g.buffer(2).intersection(D[k]).area)
         u = unary_union([D[k], g.buffer(0.5)])
         D[k] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
+# one planar partition: every district's outline is cut from the same set of faces, so neighbours share their border vertex for
+# vertex (the frame's border roads, scripts/frame_network.py, are those shared lines). Slivers between cells go to the district they
+# border most; overlaps go to the district holding most of the face.
+from shapely.ops import polygonize
+_faces = list(polygonize(unary_union([P.boundary for P in D.values()])))
+_own = {k: [] for k in D}
+for f in _faces:
+    k = max(D, key=lambda k: D[k].intersection(f).area)
+    if D[k].intersection(f).area > 0.5 * f.area:
+        _own[k].append(f)
+    elif f.area < 5000:
+        _own[max(D, key=lambda k: D[k].boundary.intersection(f.boundary).length)].append(f)
+for k, fs in _own.items():
+    u = unary_union(fs); D[k] = max(getattr(u, 'geoms', [u]), key=lambda q: q.area)
 names = {'border': 'The Border', 'bazaar': 'The Bazaar', 'railside': 'Railside', 'airport': 'THE AIRPORT (new)', 'hub': 'The Hub', 'jungle': 'Jungle City',
          'capital': 'The Capital', 'port': 'The Port', 'maze': 'The Maze', 'estate': 'The Estate', 'yaba': 'YABA/AKOKA (new)', 'watertown': 'Water Town',
          'foodgate': 'Food Gate', 'oldisland': 'Old Island', 'heights': 'The Heights', 'oldshore': 'Old Shore', 'frontier': 'The Frontier'}
@@ -111,24 +150,39 @@ ART = [
     ('Ring Road', 'exp', [(X(31.6), Y(0.4)), (X(30.6), Y(3.6)), P_('hub', 150, 300), (X(28.6), Y(11.5)), P_('airport', 300, 450)]),
     ('Ayinde Avenue', 'art', [P_('hub', 0, 0), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),
     ('Northern Road', 'art', [P_('yaba', -120, 80), (X(34.6), Y(12.6)), P_('foodgate', -200, 300), (X(38.5), Y(19.2)), (X(43), Y(19.6)), P_('oldshore', 0, 250), (X(56), Y(18.6))]),
-    ('Agege Road', 'art', [P_('capital', -300, 500), (X(26), Y(15.8)), P_('railside', 0, 0), (X(16), Y(13.8))]),
+    ('Agege Road', 'art', [(9175, 2375), (8500, 2000), (7700, 2000), P_('railside', 0, 0), (X(16), Y(13.8))]),   # round the airport's north fence, beside the rail, as Agege Motor Road runs
     ('Long Bridge Road', 'art', [(X(34.6), Y(12.6)), (10950, 3450)]),   # off the Northern Road to the bridge's foot
     ('The Long Bridge', 'bridge', [(10950, 3450), (11300, 3700), (11260, 4400), (11160, 5100), (11000, 5450), (10850, 5760)]),   # Third Mainland: down the lagoon, past Water Town, onto the Island's north
     ('Wharf Bridge', 'bridge', [(9500, 6080), (9800, 6085), (10200, 6080)]),   # Eko: from the Port side across the harbour to the Island
     ('Channel Bridge', 'bridge', [(10380, 5330), (10420, 5520), (10450, 5720)]),   # Carter: from Yaba across the channel to the Island's north
     ('Waterfront Drive', 'art', [(10250, 6300), (10700, 6380), (11080, 6380)]),
     ('Creek Bridge', 'bridge', [(11080, 6380), (11250, 6400), (11430, 6420)]),   # Falomo: over the creek between the Island and the Heights
-    ('Waterfront Drive East', 'art', [(11430, 6420), P_('heights', 0, 0)]),
-    ('Link Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi: across the bay from the Heights to the peninsula
+    ('Waterfront Drive East', 'art', [(11430, 6420), (11650, 6450), (11800, 6556)]),   # on to the expressway
+    # the bridges' landing roads: each bridge comes down onto a road on the land (its ramp needs 100-170 m of road)
+    ('Wharf Road', 'art', [(9261, 6080), (9500, 6080)]),                                   # the Port side: off the Ring Road to the Wharf Bridge
+    ('Harbour Front', 'art', [(10200, 6080), (10360, 6100), (10468, 6180)]),                # the Island side of the Wharf Bridge, on to Channel Street
+    ('Campus Road', 'art', [(9930, 4555), (10150, 4700), (10300, 5000), (10380, 5330)]),    # Yaba down to the Channel Bridge
+    ('Channel Street', 'art', [(10450, 5720), (10455, 6000), (10480, 6341)]),               # the Island side of the Channel Bridge
+    ('Island Road', 'art', [(10850, 5760), (10760, 5950), (10700, 6150), (10700, 6380)]),   # the Long Bridge's foot on the Island
+    # the Bazaar's creek strip (land between the creek and the sea, its only road was the shore edge): a bridge off the expressway, a beach road
+    ('Fishermen\'s Bridge Road', 'art', [(4300, 5812), (4300, 6100)]),
+    ('Fishermen\'s Bridge', 'bridge', [(4300, 6100), (4300, 6290), (4300, 6480)]),
+    ('Fishermen\'s Landing', 'art', [(4300, 6480), (4300, 6650)]),   # the bridge's foot down to the beach road
+    ('Beach Road', 'art', [(3300, 6640), (3800, 6630), (4300, 6650), (4800, 6690), (5300, 6730)]),
+    # Banana Island's causeway road, off Heights Drive
+    ('Crescent Causeway', 'art', [(11850, 6250), (11848, 6000), (11842, 5700)]),
+    ('Heights Drive', 'art', [(12275, 5975), (12050, 6050), (11850, 6250), (11800, 6556)]),  # the Heights side of the Cable Bridge
+    ('Cable Bridge', 'bridge', [(X(43.1), Y(2.6)), (X(44.4), Y(2.75)), (X(45.7), Y(2.6))]),   # Lekki-Ikoyi (tolled, cable-stayed; v1's Cable Bridge): across the bay from the Heights to the peninsula
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
     ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(43), Y(0.4)), (X(45), Y(0.6)), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
 ]
-RAIL = [P_('railside', -300, -500), (X(26.5), Y(14)), (X(28.0), Y(10.5)), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
+RAIL = [P_('railside', -300, -500), (7600, 1880), (8500, 1880), (9150, 2250), (9450, 2900), (9250, 3600), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
 
 if __name__ == '__main__':
     import json as _json
     out = {'scale': SCALE, 'size': [W, H], 'note': 'Gidi v2 frame (scripts/layout_v2.py): positions from real Lagos at 1:4; all shapes drawn fresh',
-           'water': [[[round(x, 1), round(y, 1)] for x, y in g.exterior.coords] for g in no_holes(water)],
+           'water': rings(no_holes(water.difference(sea))),   # the lagoon, harbour, channel, creeks, bay
+           'ocean': max(rings([sea]), key=lambda r: Polygon(r).area),
            'districts': {k: [[round(x, 1), round(y, 1)] for x, y in v.exterior.coords] for k, v in D.items()},
            'anchors': {k: [round(v[0]), round(v[1])] for k, v in anchor.items()},
            'arterials': [{'name': n, 'cls': c, 'pts': [[round(x, 1), round(y, 1)] for x, y in pts]} for n, c, pts in ART],

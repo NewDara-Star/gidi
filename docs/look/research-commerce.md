@@ -18,7 +18,7 @@ Rule zero: every brand, name and livery below is generic. Real places appear onl
 | 4 | Half-built wholesale plazas | Fair Wholesale Plazas | Ojo/Trade-Fair dense mainland | 30×60 m blocks, 2–5 st | high |
 | 5 | Produce / food wholesale market | Mile Market | Kosofe dense mainland | 20–40 ha; lorry bays | high |
 | 6 | Cloth market | Cloth Market | old island | lanes 2–3 m; plazas 3–6 st | high |
-| 7 | Grain yard | Daleko Grain Yard | dense mainland | 2–5 ha; sack warehouses | med |
+| 7 | Grain yard | Gari Yard | dense mainland | 2–5 ha; sack warehouses | med |
 | 8 | Plank / timber market on a canal | Boundary Plank Market | waterfront | 200–600 m canal edge | med |
 | 9 | Livestock market and abattoir | Oko Cattle Market & Abattoir, pen | sprawl edge | 10–20 ha; pens 10×20 m | med |
 | 10 | Fish market at a jetty with smoking racks | (fish market) | waterfront / old town | jetty 30–80 m | med |
@@ -28,7 +28,7 @@ Rule zero: every brand, name and livery below is generic. Real places appear onl
 | 14 | Shopping plaza (generic) | plaza | dense mainland, sprawl | 20×40 m, 2–4 st | high |
 | 15 | Container shops and container jail | Container Court | all mainland, port | 6.06×2.44×2.59 m | high |
 | 16 | Kiosk types | kiosk | all | 1.2–2.4 m boxes | **core** |
-| 17 | Print shops and kiosks on house fronts | Pedro Print Row | dense mainland (Shomolu-type) | 2×2 m bolt-ons | med |
+| 17 | Print shops and kiosks on house fronts | Press Row | dense mainland (Shomolu-type) | 2×2 m bolt-ons | med |
 | 18 | Bakeries | Ayo Bakery Row | sprawl (Agege-type) | 8×15 m shed | med |
 | 19 | Sawmill | Okobaba Sawmill, saw shed, sawdust | waterfront | 6–15 ha | med |
 | 20 | Scrap yards | scrap yard | dense mainland, port | 0.2–3 ha | med |
@@ -256,7 +256,7 @@ Rule zero: every brand, name and livery below is generic. Real places appear onl
 
 ---
 
-## 7. Grain yard — "Daleko Grain Yard"
+## 7. Grain yard — "Gari Yard"
 
 **Looks like:**
 - A wholesale market for bags of rice, beans, groundnut oil, palm oil, semolina and sugar [src: Legit.ng] arranged as walled warehouse lock-ups opening onto a yard.
@@ -280,7 +280,7 @@ Rule zero: every brand, name and livery below is generic. Real places appear onl
 
 **SELECT BY:** `market_type=grain`; dense_mainland near the produce/food market cluster; industrial edge.
 
-**Gidi mapping:** Daleko Grain Yard.
+**Gidi mapping:** Gari Yard.
 
 ---
 
@@ -493,7 +493,7 @@ Base: B§6.3. Specific types:
 
 ---
 
-## 17. Print shops and kiosks — "Pedro Print Row"
+## 17. Print shops and kiosks — "Press Row"
 
 **Looks like:** a residential street in a print district where most houses have small print kiosks bolted on as afterthoughts [src: TechCabal; "about 200 print shops"]. Lean-to rooms 2×2 to 3×4 m against house fronts, holding small offset presses, guillotines, screen-printing tables; ream boxes, wedding invitation cards, calendars drying on lines; colourful banners outside.
 
@@ -507,7 +507,7 @@ Base: B§6.3. Specific types:
 
 **SELECT BY:** dense_mainland (Shomolu type); back streets; 1–2 storey houses.
 
-**Gidi mapping:** Pedro Print Row.
+**Gidi mapping:** Press Row.
 
 ---
 

@@ -1,0 +1,66 @@
+{
+ "id": "foodgate",
+ "squares": 36,
+ "buildings": 9109,
+ "land_km2": 3.722,
+ "storeys_by_area": {
+  "1": 0.158,
+  "2": 0.601,
+  "3": 0.202,
+  "4": 0.026,
+  "5": 0.008,
+  "6": 0.003,
+  "7": 0.002,
+  "8": 0.001
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 2558.0,
+   "real": 2552.0
+  },
+  "ground built over": {
+   "gidi": 0.397,
+   "real": 0.378
+  },
+  "touching": {
+   "gidi": 0.699,
+   "real": 0.753
+  },
+  "under 40 m2": {
+   "gidi": 0.19,
+   "real": 0.231
+  },
+  "street front occupied": {
+   "gidi": 0.663,
+   "real": 0.766
+  },
+  "block fill": {
+   "gidi": 0.416,
+   "real": 0.45
+  },
+  "line to the street, deg": {
+   "gidi": 2.85,
+   "real": 4.7
+  },
+  "footprint median m2": {
+   "gidi": 126.89,
+   "real": 105.7
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.1585,
+   "real": 0.176
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.6012,
+   "real": 0.592
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.2403,
+   "real": 0.232
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 16.0153,
+   "real": 14.52
+  }
+ }
+}

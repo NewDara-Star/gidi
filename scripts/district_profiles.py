@@ -98,7 +98,7 @@ def maze(ST, LM):
         ],
         # smaller places taken from finished blocks
         "parcels": [
-            {"kind": "industrial", "poi": "Daleko Grain Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False,   # houses and yards hug the line
+            {"kind": "industrial", "poi": "Gari Yard", "ha": "from_study", "cap_ha": 3.0, "near": "rail", "near_main": False,   # houses and yards hug the line
              "gate": "north"},   # owner's review: a north entrance onto the nearest street (it only opened to the south)
             {"kind": "motor park", "ha": round(LM["bus_stations"]["area_m2"]["p25"] / 1e4, 2), "near": "junction", "near_main": True, "min_w": 35},  # small park where the through-road meets Ring Road
             {"kind": "school", "ha": round(LM["school_m2"]["p50"] / 1e4, 2), "near_main": False},   # median compound: the mean (2.4 ha) is pulled up by campuses
@@ -109,7 +109,7 @@ def maze(ST, LM):
         "rail_frontage": True,           # plots along the line are built 6 m from the track (real: 658 buildings within 30 m, 247 within 15 m); off for the Hub
         "fence_parcels": True,           # dead ends stop at a parcel's fence (off for the Hub, so its merged result stays as reviewed)
         "canal_footbridges": 1,         # Daramola's model: "a canal with a footbridge (the gang line)"; streets cross it on culverts
-        "print_row": {"poi": "Pedro Print Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
+        "print_row": {"poi": "Press Row", "length_m": 180, "storeys": [2, 3]},   # house-front presses on 2-3 storey houses (district model)
         "spots": [{"poi": "Transformer 44", "kind": "transformer", "w": 3.0, "d": 2.5}],   # one transformer feeding a whole block
         # the opening (owner, Oct 2026): Tunde's room is a short walk from the parts market; The steal is the stall at its near (east)
         # end; the chase runs the length of the market and comes out across Idowu Street from the boss's motor park in the Hub
@@ -525,7 +525,7 @@ def heights(ST, LM):
         # the Victoria Island side (owner, Oct 2026): south of Waterfront Drive, towards the beach, an office-and-hotel grid with no compound
         # walls. Measured on the VI box alone (study-hvi-core): 264-410 buildings per km2, typical 281-293 m2, 29-33% over 400 m2, 74-80% T
         # (a grid: more crossroads), 0.32 dead ends per junction; Ikoyi's box alone: 520-619 per km2, typical 140-146 m2, 16-17% over 400
-        "quarter": {"south_of": "Waterfront Drive", "office_m2": 400,
+        "quarter": {"south_of": "Peninsula Expressway", "office_m2": 400,
                     "rules": {"x_junction": 0.6, "dead_end": 0.1, "spurs": None, "size_lo_u": 0.35, "plot_u": [0.7, 0.99], "back_row": 0.15,
                               "vacant": 0.42, "setback_m": [8, 16], "side_garden_m": [3, 8], "big_front": 0.08, "no_walls": True}},
         # the Ikoyi side's houses in five styles (owner, Oct 2026: "variety in architecture"; see the study, section 8)
@@ -673,7 +673,78 @@ def border(ST, LM):
         "fence_parcels": True, "clear_access": True, "drop_doubled_streets": True,
     }
 
+def yaba(ST, LM):
+    """Saba: Yaba and Akoka (study-yaba*, a box over Yaba, Sabo, Akoka and the university, inside Lagos Mainland and Shomolu). New in the
+    v2 layout (docs/LAYOUT-V2.md). Density, touching and heights come from its deep study (docs/studies/yaba.md); this sets the shape."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Avenue", "Way", "Close", "Drive", "Crescent")}
+    return {
+        "lgas": ["Lagos Mainland", "Shomolu"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        "x_junction": 0.5, "cross_scale": 1.3, "dead_end": 0.3, "size_lo_u": 0.45, "plot_u": [0.45, 0.97], "big_front": 0.25,
+        "internal_mains": 1, "name_endings": ends,
+        "reserve": [
+            # the university on the lagoon front: Lagoon University (the real campus is far bigger; this is its town-side half at Gidi's scale)
+            {"kind": "campus", "poi": "Lagoon University", "m2": 220000, "aspect": 1.6, "front": None, "near": "shore"},
+        ],
+        "parcels": [
+            {"kind": "market", "poi": "Under the Bridge", "ha": 0.8, "near_main": True},   # the junction market under the flyover
+            {"kind": "school", "ha": 0.6, "near_main": False},
+            {"kind": "pitch", "ha": 0.5, "near_main": False},
+        ],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+    }
+
+
+def airport(ST, LM):
+    """The Airport: the airfield and its edge (study-airport*, a box over the real airport, its cargo side and the hotel strip, in Ikeja and
+    Oshodi/Isolo). New in the v2 layout. Most of the land is the fenced airfield; the town round it is built from the deep study."""
+    sp = ST["parallel_street_spacing_m"]["p50"]; el = ST["blocks"]["elongation_long_over_short"]["p50"]
+    p50 = sp * el
+    ends = {k: v for k, v in ST["street_name_endings"].items() if k in ("Street", "Road", "Avenue", "Way", "Close", "Drive", "Crescent")}
+    return {
+        "lgas": ["Ikeja", "Oshodi/Isolo"],
+        "cross_every": {"p25": p50 * 0.8, "p50": p50, "p75": p50 * 1.233, "lo": p50 * 0.633, "hi": p50 * 1.6},
+        "x_junction": 0.5, "cross_scale": 1.6, "dead_end": 0.2, "size_lo_u": 0.5, "plot_u": [0.5, 0.99], "big_front": 0.4,
+        "internal_mains": 0, "name_endings": ends,
+        "reserve": [
+            # the airfield behind its fence: one runway and its grass (the runway itself is a hand-placing job, docs/KIT-GAPS.md)
+            {"kind": "airfield", "poi": "Gidi International Airport", "m2": 600000, "aspect": 4.5, "front": None},
+            # the terminal on the road side, its forecourt and car park
+            {"kind": "bus terminal", "poi": "Gidi International Airport", "m2": 45000, "aspect": 2.4, "front": "art",
+             "building": {"kind": "terminal", "share": 0.35, "storeys": 2}},
+        ],
+        "parcels": [
+            {"kind": "industrial", "poi": "Cargo Village", "ha": 2.5, "near_main": True},   # the cargo sheds and clearing agents
+            {"kind": "school", "ha": 0.5, "near_main": False},
+        ],
+        "walk": {"rail_path_m": 4.5, "cross_every_m": [150, 200]},
+        "fence_parcels": True, "rail_frontage": True, "clear_access": True,
+    }
+
+
+def _deep(did, P):
+    """The Google treatment (docs/DEEP-STUDY.md): the deep study's settings over the district's hand-tuned ones, for every district
+    with a study. The district keeps its landmarks, parcels and models; density, touching, back rows, fill and heights come from the study."""
+    import deep_profile
+    R = deep_profile.rules(did)
+    if not R or os.environ.get("GIDI_NO_DEEP"):
+        return P
+    P = dict(P); P.update({k: v for k, v in R.items() if k != "infill"})
+    P["infill"] = {**P.get("infill", {}), **R["infill"]}
+    # the calibration pass (scripts/deep_tune.py): this district's own corrections from its last build's check
+    T = json.load(open("web/deep-tune.json")).get(did, {}) if os.path.exists("web/deep-tune.json") else {}
+    for k in ("vacant", "touch", "wobble_deg", "cross_scale", "rib_scale", "size_scale"):
+        if k in T: P[k] = T[k]
+    for k in ("block_fill", "small_share"):
+        if k in T: P["infill"][k] = T[k]
+    if "touch" in T: P["infill"]["touch"] = min(0.95, T["touch"] + 0.15)
+    return P
+
+
 def profile(did, ST):
     f = f"study-{did}-landmarks.json"
     LM = json.load(open(f)) if os.path.exists(f) else {}
-    return {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier, "border": border, "oldshore": oldshore}.get(did, lambda ST, LM: {})(ST, LM)
+    return _deep(did, {"hub": hub, "maze": maze, "jungle": jungle, "foodgate": foodgate, "watertown": watertown, "capital": capital, "bazaar": bazaar, "port": port, "railside": railside, "estate": estate, "oldisland": oldisland, "heights": heights, "frontier": frontier, "border": border, "oldshore": oldshore, "yaba": yaba, "airport": airport}.get(did, lambda ST, LM: {})(ST, LM))

@@ -30,6 +30,7 @@ def market_streets(out, districts):
     carriage = [(g, g.buffer(XS.half(k), cap_style=2)) for k, g in roads]
     ct = STRtree([c for g, c in carriage])
     wet = unary_union([Polygon(w) for w in out['water'] + out['ocean']])
+    rail = LineString(out['rail']['pts']).buffer(6.0) if out.get('rail') else box(0, 0, 0, 0)   # 6 m clear of the line (cross_sections CLEAR rail)
     for d in districts:
         rnd = random.Random(zlib.crc32(d.encode()) + 7)   # stable across runs (Python's hash() is not)
         markets = [Polygon(p['pts']) for p in (out.get('parcels') or {}).get(d, []) if p['kind'] == 'market']
@@ -52,7 +53,7 @@ def market_streets(out, districts):
                         continue
                     own = g.buffer(1.0)   # the same road listed again (an edge road both districts keep) is not a crossing road
                     others = unary_union([carriage[j][1] for j in ct.query(seg.buffer(outer + 1)) if carriage[j][0] is not g and not own.contains(carriage[j][0].intersection(seg.buffer(outer + 1)))] or [box(0, 0, 0, 0)])
-                    sides = [seg.buffer(sg * outer, single_sided=True, cap_style=2).difference(seg.buffer(clear, cap_style=2)).difference(others) for sg in (1, -1)]
+                    sides = [seg.buffer(sg * outer, single_sided=True, cap_style=2).difference(seg.buffer(clear, cap_style=2)).difference(others).difference(rail) for sg in (1, -1)]
                     for zs in sides:
                         for zp in getattr(zs, 'geoms', [zs]):
                             if zp.geom_type == 'Polygon' and zp.area > 1:

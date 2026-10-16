@@ -130,7 +130,7 @@ FROM/TO is part of a place name or `X,Y` in metres (x east, y **south**).
 | Maze house near the rail → Ladi Lane Parts Market | walk | Rail as a barrier |
 | Gidi Interchange → Hub Rail Station | walk | Bus–rail transfer |
 | Boss's motor park → Ladi Lane Parts Market | ride | Tunde's core run |
-| Under the Bridge → Daleko Grain Yard | walk | Trader supply run |
+| Under the Bridge → Gari Yard | walk | Trader supply run |
 | Newest district centre → Gidi Interchange | ride | Joins the city? |
 | Food Gate house (3100,3884) → Mile Market | walk | A porter's way to work |
 | Mile Market → Ladi Lane Parts Market | ride | The produce run into the Maze |

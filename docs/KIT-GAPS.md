@@ -26,3 +26,12 @@ Started 15 Oct 2026 with the Food Gate pilot (`docs/REBUILD-PLAN.md`). Each line
 
 ## Roads
 - **Road widths from the data.** The kit now reads `cross_sections` for districts built to them (the pilot). The other districts still use the kit's own widths (a 7 m street) until they're rebuilt.
+
+## New in the v2 layout (16 Oct 2026)
+- **The airfield.** The Airport reserves a fenced airfield, about 1.6 km by 370 m, stored as a reserve of kind `airfield` with nothing built on it. The kit needs:
+  - a runway (a hand-placing job first: the line, the markings, the lights)
+  - taxiways and an apron
+  - grass behind a security fence
+- **The airport terminal.** For now it's stored as a `bus terminal` reserve with a two-storey `terminal` building, a stand-in. The kit needs a **terminal**: a long hall, a forecourt and drop-off lane, a car park, a control tower nearby.
+- **The campus.** Saba's Lagoon University is a reserved `campus` with a ring road and nothing inside yet. The kit needs **campus buildings**: lecture halls, hostels, a senate building, sports fields, by hand.
+- **Banana Island's causeway gate.** A gatehouse and barrier where the causeway meets the Heights' shore.

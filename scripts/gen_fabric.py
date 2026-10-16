@@ -6,7 +6,7 @@ import json, math, random, sys, os
 import numpy as np
 from shapely.geometry import Polygon, LineString, Point, box, MultiLineString
 from shapely.ops import unary_union, polygonize, nearest_points, substring, linemerge
-from shapely.affinity import rotate, translate
+from shapely.affinity import rotate, translate, scale
 from shapely.strtree import STRtree
 sys.path.insert(0, "scripts"); from fabric_metrics import measure, lines, extend, noded
 from district_profiles import profile, height_bands, STOREY_BANDS
@@ -18,7 +18,7 @@ rnd = random.Random(SEED)
 ST = json.load(open(f"study-{DID}.json")); CORE = json.load(open(f"study-{DID}-core.json"))
 s = open("web/gidi-data.js").read(); G = json.loads(s[len("window.GIDI="):-1])
 DIST = {d["id"]: d for d in G["districts"]}; POLY = {k: Polygon(v["poly"][0]) for k, v in DIST.items()}
-poly = POLY[DID]; water = Polygon(G["water"][0]); land = poly.difference(water)
+poly = POLY[DID]; water = unary_union([Polygon(w).buffer(0) for w in G["water"]]); land = poly.difference(water)
 PROF = profile(DID, ST)   # empty for the Maze: it keeps the original v1 behaviour
 if PROF and os.environ.get("GIDI_TUNE"): PROF.update(json.loads(os.environ["GIDI_TUNE"]))   # calibration sweeps only
 nrnd = random.Random(SEED * 7919 + 1) if PROF else rnd   # edge roads get their own dice, so re-running a district gives the same result
@@ -56,7 +56,7 @@ if LAGOS:   # the Google rebuild (docs/REBUILD-PLAN.md): building lines from the
     import cross_sections as XS   # buildings that touch as often as real Lagos's (Google outlines: 75% within 1 m of a neighbour)
     CLEAR.update({k: XS.building_line(k) for k in ("lane", "street", "main", "art", "exp")})
     WIDTH.update({k: XS.SECTIONS[k]["carriageway"] for k in ("street", "main", "art")})
-    RULE["gap"] = lambda u=None: 0.0 if rnd.random() < PROF["touch"] else rnd.uniform(*PROF["gap_m"])
+    RULE["gap"] = lambda u=None: 0.0 if rnd.random() < QV("touch", PROF["touch"]) else rnd.uniform(*PROF["gap_m"])   # the fabric type's own touching
 FIRST = ["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Folake","Agboola","Shonibare","Ilori","Durojaiye","Ogunleye","Aremu","Okonkwo","Nwosu","Danjuma"]
 ENDS = [("Street", 60), ("Road", 13), ("Avenue", 4), ("Close", 4), ("Way", 4), ("Crescent", 2), ("Lane", 2)]   # from street_name_endings
 used = set()
@@ -87,19 +87,29 @@ FIRST2 = ["Adewale","Babatunde","Chukwuma","Ekpo","Gbadamosi","Ige","Jimoh","Kol
 # ---------- 1. the network shared with the rest of Gidi ----------
 NET_F = "web/network.json"
 NET = json.load(open(NET_F)) if os.path.exists(NET_F) else {"edges": {}, "gateways": []}
-if PROF: used |= {e["name"] for e in NET["edges"].values()}
+# the v2 frame (scripts/frame_network.py) draws every border road once, for all districts: a district takes its edges from it as they
+# are, picks its own crossings, and writes them into its own file, so districts can be generated side by side
+FRAME = NET.get("frame") == "v2"
+if PROF: used |= {e["name"] for e in NET["edges"].values() if e["name"]}
 # the opening is locked (owner, Oct 2026): web/locked.json holds the exact market, its aisles, The steal's stall, Tunde's room and the
 # boss's motor park; regenerating uses them as they are. GIDI_LOCK=write records them from this run (done once).
 LOCK_F = "web/locked.json"; LOCK_ALL = json.load(open(LOCK_F)) if os.path.exists(LOCK_F) else {}
-LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") else {}
+LOCK = LOCK_ALL.get(DID, {}) if PROF.get("lock") and not FRAME else {}   # locks were recorded in the v1 frame: the v2 opening is rebuilt by hand
 LOCK_WRITE = bool(PROF.get("lock")) and os.environ.get("GIDI_LOCK") == "write"; NEW_LOCK = {}
 # a district rebuilt after its neighbours keeps the crossings it already agreed with them (web/network.json), road for road
-KEEP = bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
+KEEP = not FRAME and bool(PROF.get("keep_gateways")) and any(g["from"] == DID for g in NET["gateways"])
 arts = [(a["name"], a["cls"], LineString(a["pts"])) for a in G["arterials"] if a["cls"] != "bridge" and LineString(a["pts"]).distance(poly) < 160]
 rail = LineString(G["rail"]["pts"]); rail_in = rail.intersection(poly.buffer(30))
 coords = list(poly.exterior.coords)[:-1]
 edge_roads = []
-for i in range(len(coords)):
+EDGE_KIND = {}   # frame mode: id(line) -> "border" | "shore" | "edge" | "arterial"
+if FRAME:
+    for k, e in NET["edges"].items():
+        if DID in e["between"]:
+            nb = next((x for x in e["between"] if x and x != DID), None); ln = LineString(e["pts"])
+            edge_roads.append((e["name"] or "", ln, nb)); EDGE_KIND[id(ln)] = e["kind"]
+    coords = list({tuple(e.coords[i]) for n, e, nb in edge_roads for i in (0, -1)})   # the real corners: where the edges meet
+for i in (range(0) if FRAME else range(len(coords))):
     a, b = coords[i], coords[(i + 1) % len(coords)]; e = LineString([a, b])
     nb = max((k for k in POLY if k != DID), key=lambda k: POLY[k].buffer(25).intersection(e).length)
     if POLY[nb].buffer(25).intersection(e).length < 0.5 * e.length: nb = None
@@ -158,7 +168,7 @@ if PIN: pairs = [(None, None)]
 # a finished neighbour's main road that ends on our edge carries on as our through-route (it has no bearing: we pick the far end)
 PIN1 = None
 if not PIN and PROF.get("continue_mains"):
-    done = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
+    done = set() if FRAME else {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
     g1 = next((g for g in NET["gateways"] if g["to"] == DID and g["from"] in done and g["kind"] == "main"), None)
     if g1:
         PIN1 = (g1["road"], Point(g1["pt"])); pairs = [(None, j) for j in range(len(E)) if E[j][1].distance(PIN1[1]) > 300]
@@ -219,7 +229,7 @@ for en, e, nb in edge_roads:  # rail crossing the edge
 STRUCT, ramps, access, RES = [], [], [], []   # RES: reserved parcels {"kind","geom","poi"} that ordinary streets and houses keep out of
 POIS = {p["name"]: Point(p["x"], p["y"]) for p in G["pois"] if p["d"] == DID}
 if PROF:  # the designed pins (districts_info.json), placed the way bake_web.py first places them - not the baked ones, which move onto what we generate
-    _land0 = poly.difference(water).difference(Polygon(G["ocean"][0])); _core = _land0.buffer(-40) if not _land0.buffer(-40).is_empty else _land0
+    _land0 = poly.difference(water).difference(unary_union([Polygon(w).buffer(0) for w in G["ocean"]])); _core = _land0.buffer(-40) if not _land0.buffer(-40).is_empty else _land0
     _b = _land0.bounds
     for q in json.load(open("web/districts_info.json"))[DID]["pois"]:
         pt = Point(_b[0] + (_b[2] - _b[0]) * q["u"], _b[1] + (_b[3] - _b[1]) * (1 - q["v"]))
@@ -313,8 +323,23 @@ if QP:
       qa = next(a for n, k, a in arts if n == QP["south_of"]); qc = sorted(qa.coords)
       _b = poly.bounds; QZ = Polygon([(_b[0] - 500, qc[0][1])] + qc + [(_b[2] + 500, qc[-1][1]), (_b[2] + 500, _b[3] + 2000), (_b[0] - 500, _b[3] + 2000)]).intersection(poly.buffer(60))   # the edge roads bend up to 16 m outside the outline
 def in_q(pt): return QZ is not None and QZ.contains(pt)
-def QV(k, default): return QP["rules"][k] if QP and k in QP["rules"] and QV.on else default
-QV.on = False
+def QV(k, default):
+    if QP and k in QP["rules"] and QV.on: return QP["rules"][k]
+    if QV.z and k in QV.z: return QV.z[k]
+    return default
+QV.on = False; QV.z = None
+# fabric types (the deep study, scripts/deep_profile.py): the district cut into zones, each with its own vacancy, touching, back rows,
+# block fill, house size and height; QV.z is the zone of the plot being built
+FZ = []
+if LAGOS and PROF.get("deep"):
+    import deep_profile
+    _mainU = unary_union([a for n, k, a in arts] + [ln for n, ln in mains] + [e for n, e, nb in edge_roads if EDGE_KIND.get(id(e), "border") == "border"])
+    FZ = deep_profile.zones(DID, land, _mainU, water, seed=SEED, base=PROF)
+    print("fabric zones:", [(t["name"], round(z.area / 1e4, 1)) for z, t, r in FZ], file=sys.stderr)
+def zone_at(pt):
+    for z, t, r in FZ:
+        if z.contains(pt): return r
+    return None
 # ---------- 2. sectors and residential streets ----------
 hard = [e for n, e, nb in edge_roads] + [a for n, k, a in arts] + [ln for n, ln in mains] + links + ramps + access
 sector_lines = unary_union(hard + [rail])
@@ -360,7 +385,7 @@ for P in secs2:
     c = P.centroid; Pr = rotate(P, -th, origin=c, use_radians=True)  # frontage now runs along x; ribs run along y
     minx, miny, maxx, maxy = Pr.bounds
     xs = []; x = minx + rnd.uniform(20, 55)
-    while x < maxx - 25: xs.append(x); x += SCALE * RULE["rib_spacing"](rnd.uniform(0.2, 0.97))
+    while x < maxx - 25: xs.append(x); x += SCALE * PROF.get("rib_scale", 1.0) * RULE["rib_spacing"](rnd.uniform(0.2, 0.97))   # rib_scale: the calibration's street spacing
     ribs = []
     for x in xs:
         tilt = math.radians(rnd.uniform(-3.5, 3.5)); H = maxy - miny + 80
@@ -423,7 +448,7 @@ for P in secs2:
 QV.on = False
 streets += [g for c in collectors for g in lines(c)]
 # streets a finished neighbour started on the shared edge carry straight on into this district
-GEN_DONE = {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
+GEN_DONE = set() if FRAME else {k for k in POLY if k != DID and os.path.exists(f"web/gen-{k}.json")}
 incoming = [g for g in NET["gateways"] if g["to"] == DID and g["from"] in GEN_DONE and g["kind"] in ("street", "main") and "bearing_deg" in g] if PROF else []
 if PROF and not PIN1 and any(g["to"] == DID and g["kind"] == "main" and "bearing_deg" not in g for g in NET["gateways"]):
     print("note: a neighbour's main road gateway has no bearing; continue it by hand", file=sys.stderr)
@@ -940,7 +965,8 @@ def reachable(r):   # someone has to walk to its door: no building more than 44 
 def place(plot, r):
     if LAGOS and kind_now[0] in ("front", "back"):   # hand-built, not machine-set: a few degrees off square (real median 4.8 deg);
         wb = rnd.gauss(0, PROF["wobble_deg"])         # if the turn won't fit the plot, less of it, then none: a house is never lost to it
-        return any(_place(plot, rotate(r, wb * f, origin="centroid")) for f in (1.0, 0.5, 0.0))
+        # a tight plot: the turned house a little smaller first (real Lagos houses both sit off square and squeeze in), then less turn
+        return any(_place(plot, scale(rotate(r, wb * f, origin="centroid"), k, k, origin="centroid")) for f, k in ((1.0, 1.0), (1.0, 0.92), (0.5, 1.0), (0.0, 1.0)))
     return _place(plot, r)
 def _place(plot, r):
     if not reachable(r): return False
@@ -1023,11 +1049,11 @@ for _, p, q, bi in fronts:
         if not b.contains(mid): nx_, ny_ = -nx_, -ny_
         cl = CLEAR.get(edge_class(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)), 3.4)
         if PROF.get("rail_frontage") and rail.distance(Point((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)) < 1: cl = CLEAR["rail"]   # houses back onto the line
-        a = math.atan2(uy, ux); t = 0.0; QV.on = in_q(Point(mid.x + nx_ * 15, mid.y + ny_ * 15))   # 15 m into the plot: plots facing the dividing road count on their own side
+        a = math.atan2(uy, ux); t = 0.0; QV.on = in_q(Point(mid.x + nx_ * 15, mid.y + ny_ * 15)); QV.z = zone_at(Point(mid.x + nx_ * 15, mid.y + ny_ * 15))   # 15 m into the plot: plots facing the dividing road count on their own side
         big_ok = PROF and cl >= CLEAR["main"]   # big shops, plazas and warehouses face the main roads (real: 73 m from a main vs 183 m for all)
         while t < L - 4:
             big = big_ok and rnd.random() < QV("big_front", RULE["big_front"])
-            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97)))))) + RULE["gap"]()
+            w = (rnd.uniform(18, 34) if big else RULE["short_side"](rnd.uniform(*QV("plot_u", PROF.get("plot_u", (.35, .97))))) * math.sqrt(PROF.get("size_scale", 1.0) * QV("size_scale", 1.0))) + RULE["gap"]()
             side = rnd.uniform(*QV("side_garden_m", PROF.get("side_garden_m"))) if QV("side_garden_m", PROF.get("side_garden_m")) else 0.0   # estates: a garden down each side of the house
             w = min(w + side, L - t)
             P0 = (p[0] + ux * t, p[1] + uy * t); P1 = (p[0] + ux * (t + w), p[1] + uy * (t + w))
@@ -1099,14 +1125,16 @@ if LAGOS and PROF.get("infill"):   # the Lagos fill (Google outlines): rooms, ex
         w = min(L, math.sqrt(r_area * aspect)); d = r_area / w
         if w < 2.0 or d > 4 * w: return None   # no slivers
         t = irnd.uniform(-(L - w) / 2, (L - w) / 2) if L > w else 0.0
-        gap = 0.0 if irnd.random() < IF["touch"] else irnd.uniform(0.6, 2.0)
+        gap = 0.0 if irnd.random() < side_rect.touch else irnd.uniform(0.6, 2.0)
         cx = mx + ux * t + nx_ * (gap + d / 2 + 0.16); cy = my + uy * t + ny_ * (gap + d / 2 + 0.16)
         return rotate(rect(cx, cy, w, d, math.atan2(uy, ux)), irnd.gauss(0, PROF["wobble_deg"]), origin="centroid")
     for bi, b in enumerate(blocks):
         if mostly_parcel(b) or b.area < 250: continue
         land_b = b.buffer(-CLEAR["street"] + 1.5)   # the block's land inside the roads' edges
         if land_b.is_empty: continue
-        target = IF["block_fill"] * land_b.area
+        zr = zone_at(b.representative_point()) or {}   # the block's fabric type
+        target = zr.get("block_fill", IF["block_fill"]) * land_b.area
+        side_rect.touch = min(0.95, zr["touch"] + 0.15) if "touch" in zr else IF["touch"]
         have = [r for r in near_all(b)]
         built = sum(r.area for r in have)
         tries = 0
@@ -1361,7 +1389,7 @@ for p in parcels:
             if g.contains(r) and road_free.contains(r) and not any(r.intersects(o) for o, kk in bld[-200:] if kk == "pen"): bld.append((r, "scrap"))
     if p["kind"] == "container yard":   # the port: stacks of containers in blocks, gantry cranes on the quay, customs sheds by the gate
         CY = next(x for x in PROF["reserve"] if x["kind"] == "container yard"); ca, sa = math.cos(a), math.sin(a)
-        shl = water.exterior.intersection(g.buffer(80)); quay = nearest_points(shl, ctr)[0] if not shl.is_empty else None
+        shl = water.boundary.intersection(g.buffer(80)); quay = nearest_points(shl, ctr)[0] if not shl.is_empty else None
         sgn = 1 if quay is None or ((quay.x - ctr.x) * -sa + (quay.y - ctr.y) * ca) >= 0 else -1   # which long side faces the water
         W2 = min(LL, math.sqrt(g.area * CY["aspect"])) / 2; D2 = g.area / (2 * W2) / 2
         yard = []   # yard lanes: one along the yard and one across it, out to its own road all round (the trucks' way in)
@@ -1455,7 +1483,7 @@ for p in parcels:
         for k2 in range(6):
             r = rect(ctr.x + math.cos(a) * (k2 * 16 - 40) - math.sin(a) * 26, ctr.y + math.sin(a) * (k2 * 16 - 40) + math.cos(a) * 26, 7, 7, a)
             if fit(r): bld.append((r, "sawdust"))
-        shl = water.exterior.intersection(g.buffer(60))
+        shl = water.boundary.intersection(g.buffer(60))
         if not shl.is_empty:
             q = nearest_points(shl, ctr)[0]; L = q.distance(ctr) or 1; ux, uy = (q.x - ctr.x) / L, (q.y - ctr.y) / L
             for k2 in range(8):   # rafts: 20 x 4 m bundles of logs, side by side off the shore
@@ -1687,6 +1715,12 @@ if PROF.get("level_crossings"): M["level_crossings"] = len(LX)
 M["building_overlaps"] = int(sum(1 for i, b in enumerate(B) for j in _bt.query(b) if j > i and b.intersection(B[j]).area > 0.05))
 
 # ---------- 7. storeys: match the inspiration area's height bands (share of built area), tallest on big plots near main roads ----------
+# the sawmill's log rafts (a sight of the place) went down before the stilt village was built round them: a stilt house that
+# stands on a raft gives way to it
+_rafts = [r for r, k in bld if k == "raft"]
+if _rafts:
+    _rf_t = STRtree(_rafts)
+    bld = [(r, k) for r, k in bld if k not in ("stilt", "stilt bar") or not any(_rafts[j].intersection(r).area > 0.5 for j in _rf_t.query(r))]
 storeys = None
 if PROF:
     srnd = random.Random(SEED * 31 + 5); bands = PROF.get("h_bands") or height_bands(PROF["lgas"])   # a neighbourhood's own bands where the LGA's would mislead (the Heights)
@@ -1703,7 +1737,12 @@ if PROF:
         if st: target[band_of(st)] -= r.area
     free_i = [i for i, st in enumerate(storeys) if st is None]
     # tallness: bigger footprint, nearer a main road, plus noise (real: big buildings sit nearer mains, 73 m vs 183 m)
-    score = {i: math.log(bld[i][0].area) - bld[i][0].distance(mainU) / 120 + srnd.gauss(0, .6) for i in free_i}
+    # (Lagos fabric: size counts for half, so small houses go up a floor too, as real Lagos's do: Google's 2.5D heights)
+    score = {i: (0.5 if LAGOS else 1.0) * math.log(bld[i][0].area) - bld[i][0].distance(mainU) / 120 + srnd.gauss(0, .6) for i in free_i}
+    if FZ:   # the taller fabric types take more of the tall buildings; the district's bands stay as the study measured
+        for i in free_i:
+            zr = zone_at(bld[i][0].centroid)
+            if zr: score[i] += 2.0 * math.log(zr["storeys_scale"])
     order = sorted(free_i, key=lambda i: -score[i])   # tallest first, so the rare tall bands are filled exactly and rounding lands in the big 1-storey band
     b = 6; acc = 0.0
     for i in order:
@@ -1751,7 +1790,7 @@ out = {"id": DID, "seed": SEED, "method": "original generator calibrated on OSM 
        "streets": [R2(g) for g in streets + access],
        "lanes": [R2(g) for g in lanes],
        **({"paths": [{"kind": k, "pts": R2(g)} for k, g in PATHS]} if PATHS else {}),
-       "mains": [{"name": n, "pts": R2(e), "edge_with": nb} for n, e, nb in edge_roads] + [{"name": n, "pts": R2(ln)} for n, ln in mains] + [{"name": "", "pts": R2(l)} for l in links] + [{"name": "Interchange slip road", "pts": R2(r)} for r in ramps],
+       "mains": [{"name": n, "pts": R2(e), "edge_with": nb} for n, e, nb in edge_roads if EDGE_KIND.get(id(e), "border") == "border"] + [{"name": n, "pts": R2(ln)} for n, ln in mains] + [{"name": "", "pts": R2(l)} for l in links] + [{"name": "Interchange slip road", "pts": R2(r)} for r in ramps],
        "canal": R2(canal) if canal else None,
        "buildings": [[k] + [[round(x, 1), round(y, 1)] for x, y in list(r.exterior.coords)[:-1]] for r, k in bld],
        "parcels": [{"kind": p["kind"], "pts": [[round(x, 1), round(y, 1)] for x, y in p["geom"].exterior.coords]} for p in parcels],
@@ -1762,6 +1801,13 @@ if PROF:
     if STYLES: out["styles"] = STYLES
     out["structures"] = [{"kind": x["kind"], "name": x["name"], "pts": R2(x["geom"]), "layer": x["layer"], "width": x["width"]} for x in STRUCT] \
         + [{"kind": "ramp", "name": "Interchange slip road", "pts": R2(r), "layer": 0, "width": 8} for r in ramps]
+if FZ: out["zones"] = [{"type": t["name"], "share": t["share_of_built_cells"], "rules": r, "pts": [[round(x, 1), round(y, 1)] for x, y in g.exterior.coords]}
+                        for z, t, r in FZ for g in getattr(z, "geoms", [z]) if g.geom_type == "Polygon" and g.area > 400]
+if FRAME:   # shore and bush edges are a waterside footpath and a track, not roads; the district's crossings go in its own file
+    out["layout"] = "v2"
+    out.setdefault("paths", []).extend({"kind": {"shore": "shore path", "edge": "bush track"}[EDGE_KIND[id(e)]], "pts": R2(e)}
+                                       for n, e, nb in edge_roads if EDGE_KIND.get(id(e)) in ("shore", "edge"))
+    out["gateways"] = [g for g in NET["gateways"] if g["from"] == DID]
 if LAGOS: out["fabric"] = "lagos"   # built to the agreed cross-sections: checked against building lines, not carriageways
 if ENCROACH: out["encroach"] = [{"kind": z["kind"], "poi": z["poi"], "pts": [[round(x, 1), round(y, 1)] for x, y in z["geom"].exterior.coords]} for z in ENCROACH if z["geom"].geom_type == "Polygon"]
 json.dump(out, open(OUT, "w"), separators=(",", ":"))
@@ -1769,4 +1815,4 @@ if LOCK_WRITE:
     LOCK_ALL[DID] = NEW_LOCK; json.dump(LOCK_ALL, open(LOCK_F, "w"), indent=1); print("locked:", {k: list(v) for k, v in NEW_LOCK.items()}, file=sys.stderr)
 _k = lambda L: sorted(json.dumps(g, sort_keys=True) for g in L)
 if _k(NET["gateways"]) == _k(NET_GW0): NET["gateways"] = NET_GW0
-if OUT == f"web/gen-{DID}.json": json.dump(NET, open(NET_F, "w"), indent=1)
+if OUT == f"web/gen-{DID}.json" and not FRAME: json.dump(NET, open(NET_F, "w"), indent=1)

@@ -45,8 +45,7 @@ def ring_of(G, did):
 
 
 def lagoon(G):
-    w = G["water"][0]
-    return poly(w if isinstance(w[0], (list, tuple)) else w["pts"])
+    return unary_union([poly(w if isinstance(w[0], (list, tuple)) else w["pts"]) for w in G["water"]])
 
 
 def edge_mains(gen):
@@ -90,7 +89,7 @@ def check_roads(gen, bgeoms, G):
         for p in gen.get("lanes", []): bl(p, "lane", "lane")
         for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
         for a in G["arterials"]:
-            if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums"})
+            if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums", "checkpoint"})   # a task force checkpoint stands on the shoulder (still never on the carriageway)
         zs_ = [z for z in G.get("encroach", []) if z.get("d") == gen["id"]] + gen.get("encroach", [])   # market streets are placed in the bake
         enc = unary_union([Polygon(z["pts"]).buffer(0) for z in zs_]) if zs_ else None   # buffer(0): rounding can cross an edge
         bgeoms = [Polygon(b[1:]).buffer(0) for b in G["buildings"][gen["id"]] if len(b) > 3]   # the built city's buildings (with the tables)
@@ -200,7 +199,7 @@ def same(p, q, tol=0.05):
 
 def check_edges(did, gen, net):
     """4: edge roads equal network.json edges, both ways."""
-    mine = {k: e for k, e in net["edges"].items() if did in e["between"]}
+    mine = {k: e for k, e in net["edges"].items() if did in e["between"] and e.get("kind", "border") in ("border", "arterial")}   # v2 frame: shore and bush edges are paths
     probs = []
     for m in edge_mains(gen):
         nb = m["edge_with"]
@@ -218,9 +217,12 @@ def check_neighbours(did, gen, G):
     The ring is the loop of the district's own edge roads (its real outline: the edge roads bend up to ~16 m off the drawn polygon)."""
     loops = list(polygonize(unary_union([line(m["pts"]) for m in edge_mains(gen)])))
     ring = max(loops, key=lambda p: p.area) if loops else ring_of(G, did)
-    own = [line(p) for k in ("streets", "lanes") for p in gen.get(k, [])]
+    # a road placed by hand (web/hand) may cross a district line on purpose (a link to the street next door): it is not checked here
+    hand_pts = {json.dumps([[round(x, 1), round(y, 1)] for x, y in e["pts"]]) for f in glob.glob(os.path.join(ROOT, "hand", "*.json"))
+                for e in json.load(open(f)).get("edits", []) if e.get("op") == "add street"}
+    own = [line(p) for k in ("streets", "lanes") for p in gen.get(k, []) if json.dumps([[round(x, 1), round(y, 1)] for x, y in p]) not in hand_pts]
     out_a = [(l.difference(ring.buffer(2)).length, xy(l.difference(ring.buffer(2))))
-             for l in own if l is not None and l.difference(ring.buffer(2)).length > 0]
+             for l in own if l is not None and l.difference(ring.buffer(2)).length > 5]   # a few metres past the line is drawing noise
     inner = ring.buffer(-2)
     out_b = []
     for f in glob.glob(os.path.join(ROOT, "gen-*.json")):
@@ -334,6 +336,9 @@ def check_reach(gen, G, bgeoms, limit=45.0):
     """10: every building is within 45 m of a street, lane, path or road (someone has to walk to its door).
     Buildings inside a parcel (yard, market, school) count from the parcel, which must be within 10 m of a way."""
     W = [l for _, l in ways_of(gen, G)]
+    # a building on the district's edge can be reached from the street next door: every district's streets, lanes and paths count
+    W += [line(p) for k in ("streets", "lanes", "paths") for L in (G.get(k) or {}).values() for p in L if len(p) > 1]
+    W = [l for l in W if l is not None]
     tree = STRtree(W)
     parcels = [poly(p["pts"]) for p in gen.get("parcels", [])]
     bad = []
@@ -352,6 +357,8 @@ def check_reach(gen, G, bgeoms, limit=45.0):
 
 def check_locked(did, gen, tol=0.15):
     """12: the locked opening (web/locked.json) is exactly where it was recorded: market, aisles, The steal, Tunde's room, the boss's park."""
+    if gen.get("layout") == "v2":
+        return None, "the v1 locks don't apply in the v2 frame: the opening is rebuilt and locked again in the hand pass"
     p = os.path.join(ROOT, "locked.json")
     L = json.load(open(p)).get(did) if os.path.exists(p) else None
     if not L:
@@ -430,6 +437,12 @@ def check_gutters(did, G, bg):
 
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
+    if gen.get("layout") == "v2":   # Gidi is hand-made from here: check the finished map (hand edits applied), not the raw generated file
+        gen = dict(gen)
+        for k in ("buildings", "streets", "lanes", "storeys"):
+            if (G.get(k) or {}).get(did) is not None:
+                gen[k] = G[k][did]
+        gen["mains"] = gen["mains"] + [{"name": m.get("name", ""), "pts": m["pts"]} for m in G["mains"] if m.get("d") == did and m.get("hand")]
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
     land = land_of(gen, G)
     res = []

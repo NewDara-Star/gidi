@@ -9,9 +9,22 @@ lagoon=eval(src.split("lagoon=",1)[1].split("\n",1)[0])
 S=800.0; YT=8.0
 def m(p): return (round(p[0]*S,1), round((YT-p[1])*S,1))
 def mp(pts): return [m(p) for p in pts]
-W,H=11*S,(8+0.4)*S
-water=Polygon(mp(lagoon)).union(Polygon(mp([(5.0,0.05),(5.5,0.05),(5.5,2.0),(5.0,2.1)])))
-ocean=Polygon(mp([(0,-0.4),(11,-0.4),(11,0.6),(5.0,0.6),(5.0,0.05),(2.95,0.05),(2.85,0.6),(0,0.6)]))
+# ---- Gidi v2 frame (owner, 15 Oct 2026: one even scale 1:4, docs/LAYOUT-V2.md): size, water, districts, arterials and rail come from
+# web/layout-v2.json (scripts/layout_v2.py). map02.py still gives the districts' names, inspirations and acts.
+LAYOUT=json.load(open("web/layout-v2.json"))
+W,H=LAYOUT["size"]
+water=unary_union([Polygon(w).buffer(0) for w in LAYOUT["water"]])   # the lagoon, the harbour, the channel round Old Island, the creeks, the bay
+ocean=Polygon(LAYOUT["ocean"]).buffer(0)
+IDS_V1=["border","bazaar","jungle","port","maze","hub","railside","capital","estate","foodgate","watertown","oldshore","oldisland","heights","frontier"]
+NEW_D={"airport":("THE AIRPORT","Murtala Muhammed International Airport (Ikeja)",2),"yaba":("SABA","Yaba + Akoka (the university, Sabo, Ojuelegba)",2)}   # names to be settled with the owner
+IDS=IDS_V1+list(NEW_D)
+_NM={i:(n,ins,act) for (n,ins,act,pts),i in zip(D,IDS_V1)}; _NM.update(NEW_D)
+D=[(_NM[i][0],_NM[i][1],_NM[i][2],i) for i in IDS]   # the last slot is now the district id: its outline is DPOLY[id]
+DPOLY={k:Polygon(v).buffer(0) for k,v in LAYOUT["districts"].items()}
+def gen_ok(i):
+    """A district's generated file counts only once it is built in the v2 frame (older files sit at the v1 positions)."""
+    f=f"web/gen-{i}.json"
+    return os.path.exists(f) and json.load(open(f)).get("layout")=="v2"
 
 # Storeys for any district file generated before the generator wrote them (v1): bigger footprints go taller,
 # matched to the real height bands of the district's inspiration (data/results/lga_table.json, built-area shares).
@@ -26,19 +39,19 @@ def derive_storeys(blds,id_):
         st[i]=(4 if r<cut4*0.7 else 5) if r<cut4 else 3 if r<cut3 else 2 if r<cut2 else 1
     return st
 GEN={}
-IDS=["border","bazaar","jungle","port","maze","hub","railside","capital","estate","foodgate","watertown","oldshore","oldisland","heights","frontier"]
 INFO=json.load(open("web/districts_info.json"))
 from shapely.ops import polygonize
 GENZONE=None
 for _id in IDS:  # generated districts own the land inside their edge roads; neighbours' sketch streets stay out of it
-    if os.path.exists(f"web/gen-{_id}.json"):
+    if gen_ok(_id):
         _F=json.load(open(f"web/gen-{_id}.json"))
-        _ring=max(polygonize(unary_union([LineString(m["pts"]) for m in _F["mains"] if "edge_with" in m])),key=lambda p:p.area).buffer(8)
+        _ring=DPOLY[_id].buffer(8)   # v2: the frame's outline (shore and bush edges are paths, so the edge roads alone don't close)
         GENZONE=_ring if GENZONE is None else GENZONE.union(_ring)
 PAT={"border":("sprawl",170,30,.45,8),"bazaar":("grid",95,10,.15,-4),"jungle":("organic",62,16,.18,12),"port":("grid",150,0,.25,0),
 "maze":("organic",55,18,.2,-20),"hub":("grid",90,14,.15,25),"railside":("sprawl",150,30,.4,-12),"capital":("grid",120,4,.12,0),
 "estate":("estate",140,22,.35,10),"foodgate":("sprawl",120,22,.3,30),"watertown":("organic",60,18,.22,-35),"oldshore":("sprawl",140,28,.4,5),
-"oldisland":("organic",52,16,.15,-10),"heights":("estate",120,14,.25,-8),"frontier":("sprawl",190,30,.5,2)}
+"oldisland":("organic",52,16,.15,-10),"heights":("estate",120,14,.25,-8),"frontier":("sprawl",190,30,.5,2),
+"airport":("grid",220,0,.55,0),"yaba":("grid",85,10,.15,-15)}
 FIRST=["Adeyemi","Okafor","Bello","Ayinde","Ogundipe","Balogun","Lawal","Adebayo","Eze","Musa","Akande","Oladipo","Afolabi","Ibrahim","Adeleke","Oyelaran","Kalejaiye","Bankole","Odusanya","Mama Ronke","Iya Oloja","Ajasa","Fadipe","Oshinowo","Salami","Olatunji","Abeni","Taiwo","Kehinde","Idowu","Alaba","Ireti","Ayo","Folake"]
 SUF=["Street","Road","Close","Lane","Crescent","Avenue","Way","Street","Street","Road"]
 rnd=random.Random(1977)
@@ -63,17 +76,17 @@ def grid_lines(poly,sp,jit,drop,ang,pat):
     for k in (0,):
         mains.append(LineString([rot(-R,0),rot(R,0)])); mains.append(LineString([rot(0,-R),rot(0,R)]))
     return segs,mains
-out={"size":[W,H],"districts":[],"water":[list(water.exterior.coords)],"ocean":[list(ocean.exterior.coords)],"streets":{},"mains":[],"pois":[]}
+out={"size":[W,H],"districts":[],"water":[list(map(tuple,w)) for w in LAYOUT["water"]],"ocean":[list(map(tuple,LAYOUT["ocean"]))],"streets":{},"mains":[],"pois":[],"buildings":{},"parcels":{},"lanes":{},"storeys":{}}   # empty until a district is built
 land_all=[]
 for (name,ins,act,pts),id_ in zip(D,IDS):
-    poly=Polygon(mp(pts)).buffer(0)
+    poly=DPOLY[id_]
     land=poly.difference(water).difference(ocean)
     info=INFO[id_]
     out["districts"].append({"id":id_,"name":name.title().replace("The ","The "),"act":act,"area":round(poly.area*1e-6,2),"poly":[list(map(list,poly.exterior.coords))],**info})
     pat,sp,jit,drop,ang=PAT[id_]
     segs,mains=grid_lines(land,sp,jit,drop,ang,pat)
     inner=land.buffer(-6)
-    if GENZONE is not None and not os.path.exists(f"web/gen-{id_}.json"): inner=inner.difference(GENZONE)
+    if GENZONE is not None and not gen_ok(id_): inner=inner.difference(GENZONE)
     lines=[]
     for p,q in segs:
         g=LineString([p,q]).intersection(inner)
@@ -81,7 +94,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
             if s.geom_type=="LineString" and s.length>8: lines.append([[round(c[0]),round(c[1])] for c in s.coords])
     out["streets"][id_]=lines
     gen=f"web/gen-{id_}.json"
-    if os.path.exists(gen):  # original street + building generator, calibrated on a pattern study (scripts/gen_fabric.py)
+    if gen_ok(id_):  # original street + building generator, calibrated on a pattern study (scripts/gen_fabric.py)
         F=json.load(open(gen))
         out["streets"][id_]=F["streets"]; mains=[]
         for mm in F["mains"]: out["mains"].append({"d":id_,"name":mm["name"],"pts":mm["pts"]})
@@ -118,10 +131,11 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
     # boardwalks for Water Town on the lagoon
     if id_=="watertown":
         bw=[]
+        _bx=poly.buffer(160).bounds
         for i in range(26):
-            x=rnd.uniform(m((5.05,0))[0],m((5.45,0))[0]); y=rnd.uniform(m((0,3.6))[1],m((0,2.6))[1])
+            x=rnd.uniform(_bx[0],_bx[2]); y=rnd.uniform(_bx[1],_bx[3])
             pt=Point(x,y)
-            if water.contains(pt):
+            if water.contains(pt) and pt.distance(poly)<160:
                 L=rnd.uniform(25,60); a=rnd.choice([0,math.pi/2])+rnd.uniform(-.2,.2)
                 bw.append([[round(x),round(y)],[round(x+L*math.cos(a)),round(y+L*math.sin(a))]])
         out["boardwalks"]=bw
@@ -141,20 +155,20 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         out["pois"].append(q)
     land_all.append(land)
 # arterials (named), from map02 road calls, in map units
-ART=[("Coastal Expressway","exp",[(0,1.35),(1.5,1.35),(2.9,1.3),(4.0,1.35),(5.0,1.45)]),
-("Ring Road","art",[(1.0,4.7),(1.3,3.4),(1.7,2.6),(2.4,2.5),(3.4,2.4),(4.2,2.3),(4.6,1.6)]),
-("Ayinde Avenue","art",[(2.5,5.75),(2.45,4.6),(2.35,3.3),(2.3,2.5),(2.4,1.3)]),
-("Northern Road","art",[(2.4,2.5),(2.96,3.22),(3.6,3.3),(4.4,4.2),(5.0,5.0),(6.4,6.2),(7.8,6.9),(9.2,7.0)]),
-("The Long Bridge","bridge",[(4.85,3.75),(5.4,3.3),(5.8,2.8),(6.1,2.2)]),
-("Wharf Bridge","bridge",[(5.0,1.45),(5.5,1.45)]),
-("Waterfront Drive","art",[(5.5,1.3),(6.0,1.3),(6.7,1.3),(8.0,1.35)]),
-("Peninsula Expressway","exp",[(8.0,1.35),(9.2,1.4),(10.4,1.45)]),
-("Shore Road","art",[(6.4,6.5),(7.8,6.9),(9.2,7.0),(9.3,7.2)]),
-("Cable Bridge","bridge",[(7.625,2.18),(7.875,2.4125),(8.3125,2.4625),(8.625,2.33875)])]   # the Heights' tolled bridge over the lagoon to the Frontier
-out["rail"]={"name":"Gidi Rail","pts":[list(m(p)) for p in [(0.9,4.7),(1.3,3.9),(1.75,3.1),(2.2,2.6),(2.7,2.3),(3.3,2.15),(3.9,2.0),(4.5,1.9)]]}
-out["arterials"]=[{"name":n,"cls":c,"pts":[list(m(p)) for p in pts]} for n,c,pts in ART]
-out["ferries"]=[{"name":"Old Shore – Heights ferry","pts":[list(m((8.2,6.45))),list(m((7.4,2.4)))]},{"name":"Old Shore – Water Town ferry","pts":[list(m((8.2,6.45))),list(m((5.35,3.6)))]}]
-out["labels"]=[{"t":"The Lagoon","x":m((7.9,4.6))[0],"y":m((7.9,4.6))[1],"k":"water"},{"t":"The Ocean","x":m((6.8,-0.1))[0],"y":m((6.8,-0.1))[1],"k":"water"},{"t":"Farms and bush","x":m((5.6,6.9))[0],"y":m((5.6,6.9))[1],"k":"bush"},{"t":"Farms and bush","x":m((0.7,6.4))[0],"y":m((0.7,6.4))[1],"k":"bush"}]
+ART=[(a["name"],a["cls"],[tuple(p) for p in a["pts"]]) for a in LAYOUT["arterials"]]   # in metres (layout v2)
+out["rail"]={"name":LAYOUT["rail"]["name"],"pts":LAYOUT["rail"]["pts"]}
+out["arterials"]=[{"name":n,"cls":c,"pts":[list(p) for p in pts]} for n,c,pts in ART]
+_LAG0=Point(12500,4000)   # open lagoon: each ferry pier is the point of its district's shore nearest to it, so the crossing stays on the water
+def _ferry(a,b):
+    p,q=(nearest_points(DPOLY[k].exterior,_LAG0)[0] for k in (a,b)); return [[round(p.x),round(p.y)],[round(q.x),round(q.y)]]
+out["ferries"]=[{"name":"Old Shore – Heights ferry","pts":_ferry("oldshore","heights")},{"name":"Old Shore – Water Town ferry","pts":_ferry("oldshore","watertown")}]
+_lag=max(getattr(water,"geoms",[water]),key=lambda g:g.area).representative_point()
+out["labels"]=[{"t":"The Lagoon","x":round(_lag.x),"y":round(_lag.y),"k":"water"},{"t":"The Ocean","x":round(W*0.45),"y":round(H-600),"k":"water"},
+               {"t":"Farms and bush","x":round(W*0.2),"y":900,"k":"bush"},{"t":"Farms and bush","x":round(W*0.85),"y":700,"k":"bush"}]
+
+# ---- roads placed by hand (web/hand/<id>.json, scripts/hand.py): before the clean-up, so they get junctions, gutters and the rest
+import hand
+print("hand road edits:",hand.apply_road_edits(out))
 
 # ---- clean the roads (rule-based pass, scripts/roadclean.py) before anything reads them
 import roadclean
@@ -172,7 +186,7 @@ for _j in out["junctions"]:
 # ---- market streets (scripts/market_streets.py): traders on the walkways and the road round each market, a lane kept clear
 import market_streets, hand
 _frozen=hand.districts_frozen()   # districts frozen into their hand files: placed by hand from now on (scripts/hand.py)
-_lagos_m=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos" and d not in _frozen]
+_lagos_m=[d for d in IDS if gen_ok(d) and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos" and d not in _frozen]
 print("market streets:",market_streets.market_streets(out,_lagos_m),"| frozen tables:",hand.apply_frozen(out,"tables"))
 
 # ---- road heights (scripts/roadz.py): decks and bridges get height profiles from the terrain, waterfront roads a sea wall
@@ -187,7 +201,7 @@ for _s in _hr["cleared"]: print("  cleared from a bridge landing:",_s)
 import furniture
 import cross_sections
 out["cross_sections"]=cross_sections.SECTIONS   # one table of road widths for the generator, the checks and the kit
-_lagos=[d for d in IDS if os.path.exists(f"web/gen-{d}.json") and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
+_lagos=[d for d in IDS if gen_ok(d) and json.load(open(f"web/gen-{d}.json")).get("fabric")=="lagos"]
 print("street furniture:",_lagos,furniture.furniture(out,[d for d in _lagos if d not in _frozen]),"| frozen:",hand.apply_frozen(out,"furniture"))
 
 for _d in out["districts"]:
@@ -216,7 +230,7 @@ def wpick(lst):
         r-=w
         if r<=0: return v
     return lst[0][0]
-ART_LINES=[LineString([m(p) for p in pts]) for _,_,pts in ART]
+ART_LINES=[LineString(pts) for _,_,pts in ART]
 allp=[Point(p.pop("_from",None) or (p["x"],p["y"])) for p in out["pois"]]   # spaced from where gate pins stood before, so no civic place moves
 # Everyday places in the built districts are placed by coverage (owner, Oct 2026): every house gets a school, a place of worship
 # and a chemist or clinic within 10 minutes' walk (833 m at 5 km/h); a house that can't be reached in 10 gets 15 (1250 m).
@@ -259,7 +273,7 @@ def coverage_plan(id_):
     return plan
 LEFT={}   # each district's unused civic slots, for the late places
 for (name,ins,act,pts),id_ in zip(D,IDS):
-    poly=Polygon(mp(pts)).buffer(0); land=poly.difference(water).difference(ocean); core=land.buffer(-35)
+    poly=DPOLY[id_]; land=poly.difference(water).difference(ocean); core=land.buffer(-35)
     if core.is_empty: core=land
     roads=[LineString(mm["pts"]) for mm in out["mains"] if mm["d"]==id_]+[a for a in ART_LINES if a.intersects(poly)]
     minx,miny,maxx,maxy=core.bounds
@@ -288,7 +302,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
         if SL:
             q=min([q for q in SL if q["main"]] or SL,key=lambda q:Point(q["x"],q["y"]).distance(pt)); SL.remove(q); pt=Point(q["x"],q["y"])
         allp.append(pt); add(k["type"],k["name"],k["note"],pt)
-    cnt=dict(zip(ORDER,CIV["counts"][id_]))
+    cnt=dict(zip(ORDER,CIV["counts"].get(id_,[0]*len(ORDER))))   # a new district has no civic counts until it is built
     keyed={}
     for k in CIV["key"].get(id_,[]): keyed[k["type"]]=keyed.get(k["type"],0)+1
     dn=name.title()
@@ -318,6 +332,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
 
 # places added after review ("key_late"): placed after every district's random ones, on the nearest free real plot, so no other civic pin moves
 for id_,ks in CIV.get("key_late",{}).items():
+    if not gen_ok(id_): continue   # placed at v1 positions: they come back when the district is rebuilt in the v2 frame
     SL=LEFT.get(id_)
     for k in ks:
         pt=Point(k["x"],k["y"])
@@ -366,6 +381,13 @@ import isms
 _ir,_iw=isms.run(out)
 print("isms:",{k:{"km":round(sum(s["open_m"]+s["covered_m"] for s in v.values())/1000)} for k,v in _ir.items()},len(out["gutters"]),"gutter runs,",len(out["gutter_crossings"]),"crossings")
 for _s in _iw: print("  isms-edits warning:",_s)
+
+# ---- road surfaces (scripts/surfaces.py): tar, worn, interlock, laterite, sand, mud, on the final roads
+import surfaces
+_SZ={d:[(Polygon(z["pts"]),any(w in z["type"] for w in ("open","sparser","spaced"))) for z in F.get("zones",[])] for d,F in GEN.items()}
+_st=surfaces.surfaces(out,json.load(open("web/terrain.json")),_SZ)
+print("hand labels and surfaces:",hand.apply_label_edits(out))
+print("road surfaces:",{k:round(sum(v for (d,kk),v in _st.items() if kk==k)/1000) for k in surfaces.KINDS},"km")
 
 def rd(o):
     if isinstance(o,float): return round(o,1)

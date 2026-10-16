@@ -93,6 +93,14 @@
   Object.entries(G.lanes || {}).forEach(([d, L]) => { if (planIds.has(d)) L.forEach((p) => { planRoads.lane += pts2d(p); }); });
   G.mains.forEach((m) => { if (planIds.has(m.d)) planRoads.main += pts2d(m.pts); });
   G.arterials.forEach((a) => { if (planRoads[a.cls] !== undefined) planRoads[a.cls] += pts2d(a.pts); });
+  // road surfaces (scripts/surfaces.py): each street's carriageway in its own surface; tar stays the plain road colour
+  const SURF = G.surfaces || {};
+  const planSurf = {};
+  const addSurf = (cls, s, p) => { if (s && s !== "tar") { const k = cls + "|" + s; planSurf[k] = (planSurf[k] || "") + pts2d(p); } };
+  Object.entries(G.streets || {}).forEach(([d, L]) => { if (planIds.has(d)) L.forEach((p, i) => addSurf("street", ((SURF.streets || {})[d] || [])[i], p)); });
+  Object.entries(G.lanes || {}).forEach(([d, L]) => { if (planIds.has(d)) L.forEach((p, i) => addSurf("lane", ((SURF.lanes || {})[d] || [])[i], p)); });
+  G.mains.forEach((m, i) => { if (planIds.has(m.d)) addSurf("main", (SURF.mains || [])[i], m.pts); });
+  G.arterials.forEach((a, i) => { if (planRoads[a.cls] !== undefined) addSurf(a.cls, (SURF.arterials || [])[i], a.pts); });
   const band = (k, part) => { const x = XS[k]; if (!x) return 0; const c = x.carriageway; return part === "c" ? c : part === "g" ? c + 2 * x.gutter : c + 2 * (x.gutter + x.walkway); };
   const FURN = G.furniture || [];
   const islands = (G.junctions || []).filter((j) => j.kind === "roundabout" && j.island_r > 0);
@@ -166,6 +174,7 @@
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pw" + k, d: planRoads[k], className: "plan-walk", style: { strokeWidth: band(k, "w") } })),
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pg" + k, d: planRoads[k], className: "plan-gutter", style: { strokeWidth: band(k, "g") } })),
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pc" + k, d: planRoads[k], className: "plan-road " + k, style: { strokeWidth: band(k, "c") } })),
+        Object.entries(planSurf).map(([k, d]) => h("path", { key: "ps" + k, d, className: "surf-" + k.split("|")[1], style: { strokeWidth: band(k.split("|")[0], "c") } })),
         (G.encroach || []).map((e, i) => h("path", { key: "en" + i, d: pts2d(e.pts) + "Z", className: "plan-spill" }))),
       layers.plan && z > 0.8 && h("g", { pointerEvents: "none" },
         islands.map((j, i) => h("circle", { key: "is" + i, cx: j.x, cy: j.y, r: j.island_r, className: "plan-island" })),
@@ -409,7 +418,8 @@
       layers.plan && z > 1.6 && planClip && h("div", { className: "plan-legend ui" },
         h("b", null, "Ground plan"),
         [["walk", "walkway"], ["gutter", "gutter (open drain)"], ["spill", "market street: traders on the road (on purpose)"], ["light", "street light"], ["pole", "electricity pole"],
-         ["transformer", "transformer"], ["signal", "traffic light"], ["bus", "bus stop"], ["lasma", "LASMA post"], ["island", "roundabout island"]].map(([k, t]) =>
+         ["transformer", "transformer"], ["signal", "traffic light"], ["bus", "bus stop"], ["lasma", "LASMA post"], ["island", "roundabout island"],
+         ["s-worn", "road: worn tar"], ["s-interlock", "road: interlock paving"], ["s-laterite", "road: unpaved red earth"], ["s-sand", "road: unpaved sand"], ["s-mud", "road: mud, waterlogged"]].map(([k, t]) =>
           h("div", { key: k, className: "lg" }, h("i", { className: "sw-" + k }), t))),
       h("div", { className: "scale ui" },
         h("div", { className: "bar", style: { width: metres * z } }), h("span", null, scaleLabel),

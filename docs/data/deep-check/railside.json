@@ -1,0 +1,66 @@
+{
+ "id": "railside",
+ "squares": 53,
+ "buildings": 15870,
+ "land_km2": 5.366,
+ "storeys_by_area": {
+  "1": 0.186,
+  "2": 0.645,
+  "3": 0.142,
+  "4": 0.017,
+  "5": 0.005,
+  "6": 0.002,
+  "7": 0.002,
+  "8": 0.001
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 3152.0,
+   "real": 2868.0
+  },
+  "ground built over": {
+   "gidi": 0.365,
+   "real": 0.36
+  },
+  "touching": {
+   "gidi": 0.675,
+   "real": 0.716
+  },
+  "under 40 m2": {
+   "gidi": 0.239,
+   "real": 0.288
+  },
+  "street front occupied": {
+   "gidi": 0.7,
+   "real": 0.768
+  },
+  "block fill": {
+   "gidi": 0.393,
+   "real": 0.413
+  },
+  "line to the street, deg": {
+   "gidi": 3.1,
+   "real": 4.0
+  },
+  "footprint median m2": {
+   "gidi": 97.22,
+   "real": 91.3
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.1863,
+   "real": 0.197
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.645,
+   "real": 0.637
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.1688,
+   "real": 0.166
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 16.1824,
+   "real": 14.82
+  }
+ }
+}

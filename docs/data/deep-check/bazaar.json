@@ -1,0 +1,66 @@
+{
+ "id": "bazaar",
+ "squares": 98,
+ "buildings": 20285,
+ "land_km2": 9.176,
+ "storeys_by_area": {
+  "1": 0.21,
+  "2": 0.55,
+  "3": 0.166,
+  "4": 0.043,
+  "5": 0.016,
+  "6": 0.006,
+  "7": 0.006,
+  "8": 0.003
+ },
+ "measures": {
+  "buildings per km2 (built squares)": {
+   "gidi": 2298.0,
+   "real": 1676.0
+  },
+  "ground built over": {
+   "gidi": 0.263,
+   "real": 0.244
+  },
+  "touching": {
+   "gidi": 0.614,
+   "real": 0.662
+  },
+  "under 40 m2": {
+   "gidi": 0.199,
+   "real": 0.241
+  },
+  "street front occupied": {
+   "gidi": 0.5715,
+   "real": 0.635
+  },
+  "block fill": {
+   "gidi": 0.273,
+   "real": 0.311
+  },
+  "line to the street, deg": {
+   "gidi": 3.2,
+   "real": 4.1
+  },
+  "footprint median m2": {
+   "gidi": 96.95,
+   "real": 102.4
+  },
+  "storeys 1 (by area)": {
+   "gidi": 0.2096,
+   "real": 0.223
+  },
+  "storeys 2 (by area)": {
+   "gidi": 0.5503,
+   "real": 0.541
+  },
+  "storeys 3+ (by area)": {
+   "gidi": 0.2402,
+   "real": 0.236
+  },
+  "drivable km per km2 (whole land)": {
+   "gidi": 14.488,
+   "real": 11.85
+  }
+ }
+}
