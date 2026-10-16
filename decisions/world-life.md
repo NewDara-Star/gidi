@@ -1,6 +1,6 @@
 # Life in Gidi: what makes the world feel like it exists
 
-The owner's thinking from 16 Oct 2026, and Claude's proposals. **Ideas, not decided**, unless marked as decided.
+The owner's thinking from 16 Oct 2026, and Claude's proposals. The research behind it: `docs/research/LIFE-IN-LAGOS.md`. **Ideas, not decided**, unless marked as decided.
 
 The owner's examples were examples, not the list:
 - a preacher standing up in a bus
