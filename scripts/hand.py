@@ -78,8 +78,15 @@ def snapshot(out, d):
     return S
 
 
-def restore(out, d, S):
+DECK_KEYS = ('pts', 'z', 'over', 'clear')   # what roadz.py works out for a deck: its line with the ramps on, its heights
+
+
+def restore(out, d, S, keep_decks=False):
     P = Polygon([x for x in out['districts'] if x['id'] == d][0]['poly'][0])
+    if keep_decks:   # the decks as this bake's roadz just made them, not as they were frozen (or every ramp fix is undone at the end)
+        now = {(x.get('kind'), x.get('name')): x for x in out.get('structures', []) if x.get('d') == d and 'z' in x}
+        S = dict(S, structures=[dict(x, **{k: now[(x.get('kind'), x.get('name'))][k] for k in DECK_KEYS if k in now[(x.get('kind'), x.get('name'))]})
+                                if (x.get('kind'), x.get('name')) in now else x for x in S.get('structures', [])])
     for k in OWNED_DICT:
         if k in S:
             out.setdefault(k, {})[d] = S[k]
@@ -91,11 +98,11 @@ def restore(out, d, S):
         out[k] = [x for x in out.get(k, []) if not P.contains(_where(x))] + S.get(k, [])
 
 
-def apply_snapshots(out):
+def apply_snapshots(out, keep_decks=False):
     rep = {}
     for f, H in _files():
         if H.get('snapshot'):
-            restore(out, H['district'], H['snapshot'])
+            restore(out, H['district'], H['snapshot'], keep_decks)
             rep[H['district']] = sum(len(v) if isinstance(v, list) else 0 for v in H['snapshot'].values())
     return rep
 

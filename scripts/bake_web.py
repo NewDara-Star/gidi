@@ -400,7 +400,7 @@ def rd(o):
     if isinstance(o,dict): return {k:rd(v) for k,v in o.items()}
     return o
 # ---- frozen districts (web/hand/<id>.json): replaced by their snapshot, then their hand edits, last of all (scripts/hand.py)
-print("frozen districts:",hand.apply_snapshots(out),"| hand edits:",hand.apply_edits(out))
+print("frozen districts:",hand.apply_snapshots(out,keep_decks=True),"| hand edits:",hand.apply_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)

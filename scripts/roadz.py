@@ -334,7 +334,7 @@ def heights(out, water, ocean, T):
         host = LineString((list(back.coords)[::-1][:-1] if back else []) + hc + (list(fwd.coords)[1:] if fwd else []))
         s0, s1 = sorted((host.project(Point(g.coords[0])), host.project(Point(g.coords[-1]))))
         a0, a1 = s0, s1
-        for _ in range(4):
+        for _ in range(8):   # each pass lengthens by what the last one lacked; a long ramp on rising ground needs a few more
             P, z, needs, over, S, need = profile(host, a0, a1, 'flyover', own=host, span=(s0, s1))
             if needs[0] < 1 and needs[1] < 1:
                 break
