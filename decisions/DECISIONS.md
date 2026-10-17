@@ -64,6 +64,7 @@
 - **Every road end is something** (17 Oct): a junction, a close with a turning space, a gate or house, the water, or the edge of the map. A road never just stops (`scripts/roadends.py`; the board flags loose ends).
 
 ## Data and research
+- **Claude builds Gidi** (17 Oct: "you can build Gidi all by yourself... have an opinion. Build it based off the Lagos you see from the screenshots"). Claude makes the design calls from what it sees of Lagos; the owner reviews in Unreal and adds their own ideas after. Hundreds of Google Earth screenshots are fine (the owner accepted the risk under Google's terms); they stay in `~/Real-world/research/google/<district>/`, never in the repo, and are deleted when Gidi is done. Each district gets a short "what I changed and why".
 - **Google: study yes, lift no.** Studying Lagos with Google (Earth, Maps, Street View, Open Buildings) is fair game. Never copy Google's imagery or geometry into Gidi. Numbers only.
 - **Never fetch:** Pinterest, Nominatim, Overpass. Never read or use the `gta5` folder. Mapillary: no access.
 - **Look first:** every look decision comes from reference images the owner recognises by place (`~/Real-world/research/refs/REVIEW.md`).
