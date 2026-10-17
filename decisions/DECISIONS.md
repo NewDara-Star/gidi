@@ -15,11 +15,15 @@
 - **Safe ground:** churches, mosques, schools, hospitals, clinics and places flagged `safe` are never crime sites. Sacred traditions are never criminal.
 
 ## The map
+- **If it's in the 3D, it's in the 2D** (owner, 16 Oct 2026). The map data describes everything that takes up ground: roads, plots, houses, walls, furniture. The 3D only dresses it: windows, roofs, paint, wear. It never places things of its own. Compound walls moved into the data (`scripts/compounds.py`); balconies, canopies, trees and parked vehicles follow the same way.
+- **Hand-making happens on the drawing board** (16 Oct). A clean plan of the city to scale where everything can be checked, moved, resized, reshaped, added and deleted (`docs/BOARD.md`). Edits save as hand edits; "bake the board" makes them real.
+- **The browser 3D is a quick preview; the full scene is for Unreal** (owner, 16 Oct): "the only reason I want a 3d view is to quickly see what the world will look like... speed is important." Light tiles only.
+- **The map is never final** (owner, 16 Oct). Gidi is tweaked until the game ships. Unreal will be one more view of the data, rebuilt by a re-runnable importer (`docs/UNREAL-PORT-PLAN.md`).
 - **Layout v2 at 1:4** (15 Oct). A fictional Lagos at one even scale, about 19.6 × 9.3 km. Each district sits where its inspiration really is; coasts and borders drawn fresh. See `docs/LAYOUT-V2.md`.
 - **New districts:**
   - **The Airport,** where the real airport sits.
   - **Saba** (the owner's name), the Yaba/Akoka district, with **Lagoon University** on the lagoon.
-- **Old Island is a true island,** with Gidi's versions of Third Mainland (the Long Bridge), Carter (Channel Bridge), Eko (Wharf Bridge) and the Lekki–Ikoyi Link (Cable Bridge, tolled). Banana Island sits off the Heights on a causeway.
+- **Old Island is a true island,** with Gidi's versions of Third Mainland (the Long Bridge), Carter (Channel Bridge), Eko (Wharf Bridge) and the Lekki–Ikoyi Link (Cable Bridge, tolled). The Gold Island (after Banana Island) sits off the Heights on the Crescent Causeway.
 - **Regenerate, don't move the old frozen Food Gate block.** The new map leads. The pilot's value lives in the generator rules; the old file is kept as a record.
 - **One shared generator, one profile per district, run in parallel.** Not 17 separate generators.
 - **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`).
