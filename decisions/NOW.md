@@ -1,6 +1,6 @@
 # Where the work stands (update at the end of every session)
 
-**16 Oct 2026, late.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
+**17 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
 
 **Done:**
 - **All 17 districts frozen,** and all 17 pass every check (`scripts/check_district.py`, on the finished map). The bake is byte-identical run to run.
@@ -42,6 +42,8 @@
 - **77 beach huts out of the sea** (#82): the v2 coast has no beach strip yet.
 - **The 3D city rebuilt** with terrain, the new pieces and every fix: 443 tiles, copied into `~/gidi/web/city` on 16 Oct.
 - **The drawing board** (`docs/BOARD.md`): a clean plan of the city to scale (road edges, plots, walls, houses, furniture, places) where everything can be checked, moved, turned, deleted and added; edits save as hand edits. Start it with `python3 scripts/board_server.py`, open http://127.0.0.1:8777/web/board.html.
+- **The board reshapes and resizes everything** (#86): drag corners and road points, exact sizes and angles. **Compound walls are in the data** (#87): the board shows and edits them, the 3D only draws them (55,666 pieces, none on a road).
+- **The browser 3D is light tiles only** (#86): faster builds and no Safari memory crashes.
 - **Full builds can stand on the terrain** (`city_run.py --terrain`, #76). A full rebuild with terrain was started 16 Oct; the old 3D tiles (15 Oct, v1 map) explained the trees in the water and the poles in the road.
 - **Life in Gidi** (`world-life.md`): the owner's world-building ideas.
 
