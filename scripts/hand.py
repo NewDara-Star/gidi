@@ -279,6 +279,45 @@ def apply_label_edits(out):
 
 
 WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
+DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
+
+
+def apply_detail_edits(out):
+    """Edits to the house fronts and trees (scripts/fronts.py, scripts/trees.py), after they are worked out:
+    {"op": "set front", "at": [x, y], "kind": .., "e": side, "shop": 0/1, "aw": canopy m, "bal": [sides]}   any of e/shop/aw/bal
+    {"op": "add tree", "x", "y", "kind": "palm"|"broad"}  /  {"op": "move tree", "at", "to"}  /  {"op": "delete tree", "at"} (within 2 m)"""
+    rep = {}
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            op = e['op']
+            if op not in DETAIL_OPS:
+                continue
+            if op == 'set front':
+                P = Point(e['at'])
+                hit = [i for i, b in enumerate(out['buildings'][d]) if len(b) > 3 and (not e.get('kind') or b[0] == e['kind']) and Polygon(b[1:]).buffer(0.3).contains(P)]
+                if not hit:
+                    print('  hand edit found no house at', e['at'], e.get('note', '')); continue
+                F = out.setdefault('fronts', {}).setdefault(d, {}).setdefault(str(hit[0]), {'e': 0, 'shop': 0, 'aw': 0.0, 'bal': []})
+                for k in ('e', 'shop', 'aw', 'bal'):
+                    if k in e:
+                        F[k] = e[k]
+            else:
+                T = out.setdefault('trees', {}).setdefault(e.get('d', d), [])
+                if op == 'add tree':
+                    T.append([round(e['x'], 1), round(e['y'], 1), e.get('kind', 'broad')])
+                else:
+                    P = Point(e['at'])
+                    c = [(Point(t[0], t[1]).distance(P), i) for i, t in enumerate(T)]
+                    c = [x for x in c if x[0] < 2.0]
+                    if not c:
+                        print('  hand edit found no tree at', e['at'], e.get('note', '')); continue
+                    if op == 'delete tree':
+                        T.pop(min(c)[1])
+                    else:
+                        T[min(c)[1]][0:2] = [round(e['to'][0], 1), round(e['to'][1], 1)]
+            rep[d] = rep.get(d, 0) + 1
+    return rep
 
 
 def apply_wall_edits(out):
@@ -332,7 +371,7 @@ def apply_edits(out):
         d = H['district']
         for e in H.get('edits', []):
             op = e['op']
-            if op in ROAD_OPS or op in LABEL_OPS or op in WALL_OPS or e.get('early'):
+            if op in ROAD_OPS or op in LABEL_OPS or op in WALL_OPS or op in DETAIL_OPS or e.get('early'):
                 continue   # applied earlier in the bake (apply_road_edits, apply_label_edits)
             if op == 'add building':
                 _add_building(out, d, e['kind'], e['pts'], e.get('storeys', 1))

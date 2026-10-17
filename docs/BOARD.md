@@ -21,6 +21,8 @@ Then open http://127.0.0.1:8777/web/board.html.
 - **Decks:** flyovers, bridges and ramps, with a dashed outline.
 - **Gutters:** open or covered.
 - **Plots and walls:** plots dashed green, estate walls as dark lines, market-street zones in amber.
+- **Shops, canopies and balconies:** a shop's front side in thick orange, its canopy as an orange box, balconies as dashed blue boxes, all to scale. The bake works them out (`scripts/fronts.py`): a shop at the kit's share for its district, half the shops with a canopy cut short of the carriageway, balconies only where the 1.1 m slab clears neighbours and roads.
+- **Trees:** green circles, about the size of the crown; palms with spokes. The bake plants them (`scripts/trees.py`) at the kit's densities, clear of roads, buildings, walls, furniture and water, including the bush outside the districts.
 - **Compound walls and gates:** brick-red lines and blue squares. The bake works them out (`scripts/compounds.py`): a share of houses is walled by district (a third in the dense districts, nearly all in the estates), each compound reaches 2 m round its house, stops at the walkway and at other buildings, and neighbours share one wall line. The 3D draws exactly these walls.
 - **Buildings:** each footprint, tinted by use: homes, trade, civic, works, water.
 - **Street furniture,** each kind with its own symbol:
@@ -33,6 +35,8 @@ Then open http://127.0.0.1:8777/web/board.html.
 ## The checks (red outlines)
 
 Problems the built city would have, found live as you work:
+- **A canopy over the carriageway, or a balcony or canopy into a neighbour.**
+- **A tree in the road or inside a building.**
 - **A building or a compound wall on a road:** inside the carriageway or gutter. Stalls and kiosks in a declared market-street zone are the market spill and are allowed, as `scripts/check_district.py` allows them.
 - **Overlapping buildings:** an edge crossing, or a corner well inside another.
 - **Furniture in the carriageway, or inside a building.**
@@ -50,9 +54,11 @@ The bar at the bottom counts the problems in view. **Click the count to go to ea
 | Street | `S` | Pick street, lane or main, then click points. Points snap onto existing roads, ends first, so a new street joins the network exactly. `Enter` finishes, `Backspace` takes back a point, `Esc` cancels. |
 | Surface | `U` | Pick a surface, click a road. |
 | Wall | `W` | Draw a compound wall: click points, `Enter` to finish. Select a wall to delete the piece or cut a 3 m opening where you clicked. |
+| Tree | `T` | Pick broad or palm, click to plant. Drag a tree to move it; `Delete` removes it. |
 | Gate | `G` | Click a wall to put a gate in it; select a gate and press `Delete` to remove it. |
 
 - **Pan:** drag empty ground, hold `Space`, or use the right button. Scroll to zoom.
+- **A house's front:** select a front or back house. The panel sets its front side, whether it's a shop, its canopy depth, and which sides have a balcony.
 - **Name:** bus stops, traffic lights, LASMA posts and police kiosks can be named in the side panel. That's the label they carry, such as a bus stop's name.
 - **Not deletable here:** main roads and arterials. They're the city's frame, from the layout.
 
@@ -71,6 +77,7 @@ The bar at the bottom counts the problems in view. **Click the count to go to ea
 - `move furniture`: `{at, kind, to, ang}`. The nearest of its kind within 2 m.
 - `move monument` / `delete monument`: `{at, to, ang}` / `{at}`. The nearest within 3 m.
 - `delete place`: `{name}`.
+- Fronts and trees (applied after `scripts/fronts.py` and `scripts/trees.py`): `set front` `{at, kind, e, shop, aw, bal}` (any of them), `add tree` `{x, y, kind}`, `move tree` `{at, to}`, `delete tree` `{at}`. A tree in the bush is edited through the nearest district's hand file with `"d": "bush"`.
 - Compound walls (applied after `scripts/compounds.py`): `cut wall` `{at, gap}`, `delete wall` `{at}`, `add wall` `{pts}`, `add gate` `{x, y}`, `delete gate` `{at}`.
 - `reshape building`: `{at, kind, pts}`; `reshape parcel` / `reshape zone`: `{at, pts}`. A new outline.
 - `reshape street`: `{at, pts}`. A road edit: the street, lane or district main nearest the point takes a new line.

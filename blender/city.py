@@ -192,7 +192,8 @@ for d, lst in GD['buildings'].items():
     for i, b in enumerate(lst):
         poly = ccw([P(p) for p in b[1:]])
         BUILDINGS.append(dict(d=d, i=i, kind=b[0], poly=poly, c=cent(poly), storeys=st[i] if i < len(st) else 1, style=sty[i] if i < len(sty) else None))
-WALLED = {d: set(v) for d, v in (GD.get('walled') or {}).items()}   # houses with a compound wall in the data: no shop front
+WALLED = {d: set(v) for d, v in (GD.get('walled') or {}).items()}
+FRONTS = GD.get('fronts') or {}   # house fronts from the data (scripts/fronts.py): the street side, shop, canopy, balconies   # houses with a compound wall in the data: no shop front
 PARCELS = [dict(d=d, kind=p['kind'], pts=[P(q) for q in p['pts'][:-1]]) for d, lst in GD['parcels'].items() for p in lst]
 CIVIC = [dict(type=s['type'], name=s['name'], d=s['d'], poly=ccw([P(p) for p in s['pts'][:-1]])) for s in GD.get('safe_ground', [])]
 for c in CIVIC:
@@ -1243,19 +1244,35 @@ def build_tile(tx, ty, overrides):
         if inside(cent(pts)):
             structures.estate_gate(tm, pts, gt.get('main'), Rng('gate'))
 
-    # trees on open ground, by character
-    tree_n = {'elite': 60, 'civic': 30, 'sprawl': 25, 'dense': 8, 'old_island': 6, 'waterfront': 10, 'port': 6, None: 80}.get(ch, 15)
-    trng = Rng('trees', tx, ty)
-    for _ in range(tree_n):
-        p = (trng.between(x0, x1), trng.between(y0, y1))
-        if in_building(p, 2.0) or any(dist_line(p, r['pts']) < r['w'] / 2 + 2 for r in roads_near) or wet_at(p[0], -p[1]):   # the lagoon, creeks and the ocean (v2 keeps the ocean apart: trees stood in the sea)
-            continue
-        parcels.tree(pm, p[0], p[1], trng, kind=trng.pick({'palm': 2 if ch in ('old_island', 'elite', 'waterfront') else 1, 'broad': 2}))
+    # trees from the data (scripts/trees.py): the board shows and moves them
+    for d_, L_ in (GD.get('trees') or {}).items():
+        for t_ in L_:
+            p = P((t_[0], t_[1]))
+            if x0 <= p[0] < x1 and y0 <= p[1] < y1:
+                parcels.tree(pm, p[0], p[1], Rng('tree', round(t_[0]), round(t_[1])), kind=t_[2])
 
     for mb_, name in ((g, 'ground'), (pm, 'parcels'), (sm, 'street'), (tm, 'structures'), (vm, 'traffic'), (hm, 'people')):
         if mb_.faces:
             mb_.to_object(name, col, master)
     return col, built, (x0, y0)
+
+
+def data_front(b, poly):
+    """The data's front for a house (scripts/fronts.py), with its sides renumbered for the kit's ring (the kit turns rings
+    counter-clockwise in Blender space, which can reverse them)."""
+    f = (FRONTS.get(b['d']) or {}).get(str(b['i']))
+    if not f:
+        return {}
+    pts = [P(p) for p in GD['buildings'][b['d']][b['i']][1:]]
+    n = len(pts)
+    key = lambda p, q: frozenset(((round(p[0], 2), round(p[1], 2)), (round(q[0], 2), round(q[1], 2))))
+    kit = {key(poly[k], poly[(k + 1) % n]): k for k in range(n)}
+    side = lambda j: kit.get(key(pts[j % n], pts[(j + 1) % n]))
+    e = side(f['e'])
+    out = dict(front=dict(shop=bool(f['shop']), aw=f['aw'], bal={side(j) for j in f['bal']} - {None}))
+    if e is not None:
+        out['facing'] = e
+    return out
 
 
 def attributes(b, roads, polys):
@@ -1271,10 +1288,10 @@ def attributes(b, roads, polys):
     near_main = min((dist_line(b['c'], r['pts']) - 7 for r in roads if r['k'] == 'main'), default=999)
     rng = Rng(b['d'], 'unfinished', b['i'])
     others = [p for p in polys if p is not poly and math.dist(cent(p), b['c']) < 30]
-    return dict(kind=b['kind'], storeys=b['storeys'], district=b['d'], poly=poly, facing=facing, frontage=best, near_main=near_main,
+    return {**dict(kind=b['kind'], storeys=b['storeys'], district=b['d'], poly=poly, facing=facing, frontage=best, near_main=near_main,
                 name=f"{b['d']}_{b['kind']}_{b['i']}", style=b.get('style'),
                 unfinished=b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(b['d'], 0.01)),
-                walled=b['i'] in WALLED.get(b['d'], ()))   # compound walls come from the data now (scripts/compounds.py), not from here
+                walled=b['i'] in WALLED.get(b['d'], ())), **data_front(b, poly)}   # walls and fronts come from the data now (the data's facing wins)
 
 
 def drape(obs):

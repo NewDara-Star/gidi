@@ -404,6 +404,9 @@ print("frozen districts:",hand.apply_snapshots(out,keep_decks=True),"| hand edit
 # ---- compound walls (scripts/compounds.py): worked out from the finished houses and roads, then the hand edits to them
 import compounds
 print("compound walls (pieces, km, walled houses):",compounds.compounds(out),"| wall edits:",hand.apply_wall_edits(out))
+# ---- house fronts (shops, canopies, balconies) and trees (scripts/fronts.py, scripts/trees.py), then the hand edits to them
+import fronts, trees
+print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees.trees(out),"| edits:",hand.apply_detail_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)
