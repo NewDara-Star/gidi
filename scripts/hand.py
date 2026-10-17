@@ -278,13 +278,61 @@ def apply_label_edits(out):
     return rep
 
 
+WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
+
+
+def apply_wall_edits(out):
+    """Edits to the compound walls (scripts/compounds.py), after they are worked out:
+    {"op": "cut wall", "at": [x, y], "gap": 3}   an opening in the wall nearest the point (within 2 m)
+    {"op": "delete wall", "at": [x, y]}          the whole wall piece nearest the point (within 2 m)
+    {"op": "add wall", "pts": [...]}  /  {"op": "add gate", "x", "y"}  /  {"op": "delete gate", "at": [x, y]} (within 2 m)"""
+    from shapely.geometry import LineString
+    from shapely.ops import substring
+    rep = {}
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            op = e['op']
+            if op not in WALL_OPS:
+                continue
+            W = out.setdefault('compound_walls', {}).setdefault(d, [])
+            Gt = out.setdefault('compound_gates', {}).setdefault(d, [])
+            if op in ('cut wall', 'delete wall'):
+                P = Point(e['at'])
+                c = [(LineString(w).distance(P), i) for i, w in enumerate(W) if len(w) > 1]
+                c = [x for x in c if x[0] < 2.0]
+                if not c:
+                    print('  hand edit found no wall at', e['at'], e.get('note', '')); continue
+                i = min(c)[1]
+                if op == 'delete wall':
+                    W.pop(i)
+                else:
+                    g = LineString(W[i]); t = g.project(P); gap = e.get('gap', 3.0)
+                    keep = [q for q in (substring(g, 0, t - gap / 2) if t > gap / 2 else None, substring(g, t + gap / 2, g.length) if t + gap / 2 < g.length else None) if q is not None and q.length >= 0.5]
+                    W[i:i + 1] = [[[round(x, 1), round(y, 1)] for x, y in q.coords] for q in keep]
+            elif op == 'add wall':
+                W.append([[round(x, 1), round(y, 1)] for x, y in e['pts']])
+            elif op == 'add gate':
+                Gt.append([round(e['x'], 1), round(e['y'], 1)])
+            elif op == 'delete gate':
+                P = Point(e['at'])
+                c = [(Point(q).distance(P), i) for i, q in enumerate(Gt)]
+                c = [x for x in c if x[0] < 2.0]
+                if c:
+                    Gt.pop(min(c)[1])
+                else:
+                    print('  hand edit found no gate at', e['at'], e.get('note', '')); continue
+            rep[d] = rep.get(d, 0) + 1
+    return rep
+
+
 def apply_edits(out):
     rep = {}
     for f, H in _files():
         d = H['district']
         for e in H.get('edits', []):
             op = e['op']
-            if op in ROAD_OPS or op in LABEL_OPS or e.get('early'):
+            if op in ROAD_OPS or op in LABEL_OPS or op in WALL_OPS or e.get('early'):
                 continue   # applied earlier in the bake (apply_road_edits, apply_label_edits)
             if op == 'add building':
                 _add_building(out, d, e['kind'], e['pts'], e.get('storeys', 1))

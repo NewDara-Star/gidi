@@ -20,7 +20,8 @@ Then open http://127.0.0.1:8777/web/board.html.
 - **Roads at true width, in bands:** the walkway, the gutter, then the carriageway in its surface colour (tar, worn, interlock, laterite, sand, mud), from the agreed cross-sections. Junctions merge where the bands overlap. Dashed lines run down the main roads and arterials, and named roads carry their names.
 - **Decks:** flyovers, bridges and ramps, with a dashed outline.
 - **Gutters:** open or covered.
-- **Plots and walls:** plots dashed green, walls as dark lines, market-street zones in amber.
+- **Plots and walls:** plots dashed green, estate walls as dark lines, market-street zones in amber.
+- **Compound walls and gates:** brick-red lines and blue squares. The bake works them out (`scripts/compounds.py`): a share of houses is walled by district (a third in the dense districts, nearly all in the estates), each compound reaches 2 m round its house, stops at the walkway and at other buildings, and neighbours share one wall line. The 3D draws exactly these walls.
 - **Buildings:** each footprint, tinted by use: homes, trade, civic, works, water.
 - **Street furniture,** each kind with its own symbol:
   - poles, street lights (with the arm), traffic lights
@@ -32,7 +33,7 @@ Then open http://127.0.0.1:8777/web/board.html.
 ## The checks (red outlines)
 
 Problems the built city would have, found live as you work:
-- **A building on a road:** inside the carriageway or gutter. Stalls and kiosks in a declared market-street zone are the market spill and are allowed, as `scripts/check_district.py` allows them.
+- **A building or a compound wall on a road:** inside the carriageway or gutter. Stalls and kiosks in a declared market-street zone are the market spill and are allowed, as `scripts/check_district.py` allows them.
 - **Overlapping buildings:** an edge crossing, or a corner well inside another.
 - **Furniture in the carriageway, or inside a building.**
 
@@ -48,6 +49,8 @@ The bar at the bottom counts the problems in view. **Click the count to go to ea
 | Building | `B` | Pick a kind, drag a box. Turn it afterwards with `R`. |
 | Street | `S` | Pick street, lane or main, then click points. Points snap onto existing roads, ends first, so a new street joins the network exactly. `Enter` finishes, `Backspace` takes back a point, `Esc` cancels. |
 | Surface | `U` | Pick a surface, click a road. |
+| Wall | `W` | Draw a compound wall: click points, `Enter` to finish. Select a wall to delete the piece or cut a 3 m opening where you clicked. |
+| Gate | `G` | Click a wall to put a gate in it; select a gate and press `Delete` to remove it. |
 
 - **Pan:** drag empty ground, hold `Space`, or use the right button. Scroll to zoom.
 - **Name:** bus stops, traffic lights, LASMA posts and police kiosks can be named in the side panel. That's the label they carry, such as a bus stop's name.
@@ -68,6 +71,7 @@ The bar at the bottom counts the problems in view. **Click the count to go to ea
 - `move furniture`: `{at, kind, to, ang}`. The nearest of its kind within 2 m.
 - `move monument` / `delete monument`: `{at, to, ang}` / `{at}`. The nearest within 3 m.
 - `delete place`: `{name}`.
+- Compound walls (applied after `scripts/compounds.py`): `cut wall` `{at, gap}`, `delete wall` `{at}`, `add wall` `{pts}`, `add gate` `{x, y}`, `delete gate` `{at}`.
 - `reshape building`: `{at, kind, pts}`; `reshape parcel` / `reshape zone`: `{at, pts}`. A new outline.
 - `reshape street`: `{at, pts}`. A road edit: the street, lane or district main nearest the point takes a new line.
 

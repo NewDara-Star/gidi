@@ -451,11 +451,11 @@ def unfinished_storey(mb, poly, z, spec, rng):
             mb.box('block', Matrix.Translation((x, y, z + hgt / 2)) @ Matrix.Rotation(math.atan2(b[1] - a[1], b[0] - a[0]), 4, 'Z'), (1, 1, 1), 0.5, size=(L / n - 0.01, 0.2, hgt))
 
 
-def compound_wall(mb, poly, spec, rng, skip_seg=None):
+def compound_wall(mb, poly, spec, rng, skip_seg=None, closed=True, gates=None):
     """A block wall round a compound: pillars, coping, broken bottles or razor wire, a steel gate."""
     h, col, wear = spec['h'], spec['paint'], spec['wear']
-    gate_i = spec.get('gate_edge', 0)
-    for i in range(len(poly)):
+    gate_i = spec.get('gate_edge', 0) if gates is None else -1   # gates=[points]: a gate wherever one stands on the line
+    for i in range(len(poly) if closed else len(poly) - 1):
         a, b = poly[i], poly[(i + 1) % len(poly)]
         L = math.dist(a, b)
         ang = math.atan2(b[1] - a[1], b[0] - a[0])
@@ -466,7 +466,7 @@ def compound_wall(mb, poly, spec, rng, skip_seg=None):
             seg_len = L / n
             if skip_seg and skip_seg(mid):
                 continue
-            if i == gate_i and k == n // 2:  # the gate
+            if (i == gate_i and k == n // 2) or (gates and any(math.dist(mid, g) < seg_len / 2 + 0.3 for g in gates)):  # the gate
                 m = Matrix.Translation((mid[0], mid[1], 0)) @ Matrix.Rotation(ang, 4, 'Z')
                 for s in (-0.5, 0.5):
                     mb.box('steel', m @ Matrix.Translation((s * seg_len / 2, 0, h * 0.95 / 2)), spec['gate'], wear, size=(seg_len / 2 - 0.04, 0.06, h * 0.95))
