@@ -75,13 +75,15 @@
   function gquery(g, bb) { const out = new Set(); for (let x = Math.floor(bb[0] / CELL); x <= Math.floor(bb[2] / CELL); x++) for (let y = Math.floor(bb[1] / CELL); y <= Math.floor(bb[3] / CELL); y++) { const c = g.get(x + "," + y); if (c) for (const it of c) out.add(it); } return out; }
 
   function build() {
-    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), gT: grid(), CW: [], GATE: [], TR: [], version: 0 };
+    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), gT: grid(), gH: grid(), CW: [], GATE: [], TR: [], TH: [], version: 0 };
     for (const [d, L] of Object.entries(G.buildings)) {
       const st = (G.storeys || {})[d] || [];
       const FR = (G.fronts || {})[d] || {};
       L.forEach((b, i) => { const f = FR[String(i)]; const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1, front: f ? { e: f.e, shop: f.shop, aw: f.aw, bal: f.bal.slice() } : null }; addB(o); });
     }
-    (G.furniture || []).forEach((f) => addF({ t: "f", d: f.d, kind: f.kind, x: f.x, y: f.y, ang: f.ang || 0, name: f.name || "" }));
+    (G.furniture || []).forEach((f) => addF({ t: "f", d: f.d, kind: f.kind, x: f.x, y: f.y, ang: f.ang || 0, name: f.name || "", span: f.span || 0 }));
+    // the things the bake places (scripts/things.py): parked vehicles, the parks, people standing, boats, trains, stalls
+    (G.things || []).forEach((q) => addH({ t: "th", d: q.d, kind: q.k, x: q.x, y: q.y, ang: q.a || 0, c: q.c, s: q.s }));
     (G.monuments || []).forEach((m) => M.MON.push({ t: "m", d: m.d, kind: m.model, x: m.x, y: m.y, ang: m.ang || 0, name: m.name || "" }));
     (G.pois || []).forEach((p) => M.P.push({ t: "p", d: p.d, kind: p.type, x: p.x, y: p.y, name: p.name, note: p.note || "" }));
     const S = G.surfaces || {};
@@ -104,6 +106,58 @@
     M.END = (G.road_ends || []).filter((e) => e.t === "close" || e.t === "loose").map((e) => ({ t: "end", ...e, surf: SID[e.road] || "tar", bb: [e.x - (e.r || 3), e.y - (e.r || 3), e.x + (e.r || 3), e.y + (e.r || 3)] }));
   }
   function addT(o) { M.TR.push(o); gadd(M.gT, o, [o.x, o.y, o.x, o.y]); }
+  function addH(o) { M.TH.push(o); gadd(M.gH, o, [o.x, o.y, o.x, o.y]); }
+  function delH(o) { gdel(M.gH, o, [o.x, o.y, o.x, o.y]); M.TH.splice(M.TH.indexOf(o), 1); }
+  function moveH(o, x, y) { gdel(M.gH, o, [o.x, o.y, o.x, o.y]); o.x = x; o.y = y; gadd(M.gH, o, [x, y, x, y]); }
+  // a thing's footprint, length along its heading by width (m): scripts/things.py's sizes
+  const TSIZE = { danfo: [4.8, 2.0], korope: [3.6, 1.7], brt: [12.2, 2.6], keke: [2.8, 1.3], okada: [2.1, 0.8], car: [4.8, 1.8], police: [5.3, 1.9], tipper: [8.6, 2.5], tanker: [11.5, 2.5], cart: [3.6, 1.4], wheelbarrow: [1.6, 0.7], container: [17.2, 2.5], lorry911: [8.9, 2.4], fire: [9, 2.5], ambulance: [5.6, 2], refuse: [9.4, 2.5], mixer: [9, 2.5], water: [8.6, 2.5], molue: [11, 2.5], stacker: [11, 4], forklift: [5, 1.4], ferry: [32, 9], water_bus: [14, 3.5], dredger: [24, 7], canoe: [8, 1.4], "train:commuter": [20.6, 3], "train:loco": [14, 3], "train:coach": [18.6, 3], "train:wagon": [14.6, 3], "rail stall": [1.6, 1.6], person: [0.5, 0.5] };
+  const tsize = (o) => TSIZE[o.kind] || [1, 1];
+  // ground use (scripts/ground.py, the same rules): what a point of ground is for, and who may be on it
+  const GU = G.ground_use || { classes: {}, park_w: 2.4, junction_m: 12, plots: { park: [], yard: [], market: ["market"] } };
+  const GU_PLOT = (k) => GU.plots.park.includes(k) ? "park" : GU.plots.market.includes(k) ? "market" : GU.plots.yard.includes(k) ? "yard" : "plot";
+  const MARKET_CLEAR = { street: 3.0, main: 3.5, art: 7.0 };
+  const RAIL = G.rail ? G.rail.pts : null;
+  function carriesOn(a, b) {   // b is the same street carrying straight on as its next piece (scripts/ground.py _carries_on)
+    for (const [e, e2] of [[a[0], a[1]], [a[a.length - 1], a[a.length - 2]]]) for (const [f, f2] of [[b[0], b[1]], [b[b.length - 1], b[b.length - 2]]]) {
+      if (dist(e, f) < 1.0) { const u = [e[0] - e2[0], e[1] - e2[1]], v = [f2[0] - f[0], f2[1] - f[1]], lu = Math.hypot(...u) || 1, lv = Math.hypot(...v) || 1; if ((u[0] * v[0] + u[1] * v[1]) / (lu * lv) > 0.87) return true; }
+    }
+    return false;
+  }
+  const sameLine = (a, b) => a.length === b.length && ((dist(a[0], b[0]) < 0.05 && dist(a[a.length - 1], b[b.length - 1]) < 0.05) || (dist(a[0], b[b.length - 1]) < 0.05 && dist(a[a.length - 1], b[0]) < 0.05));
+  function segDir(pts, p) { let bi = 0, bd = 1e9; for (let i = 0; i < pts.length - 1; i++) { const d = segDist(p, pts[i], pts[i + 1]); if (d < bd) { bd = d; bi = i; } } const a = pts[bi], b = pts[bi + 1], L = dist(a, b) || 1; return [(b[0] - a[0]) / L, (b[1] - a[1]) / L]; }
+  function groundAt(p) {
+    if (M.WATER.some((w) => p[0] >= w.bb[0] && p[0] <= w.bb[2] && p[1] >= w.bb[1] && p[1] <= w.bb[3] && inPoly(p, w.pts))) return "water";
+    if (RAIL && lineDist(p, RAIL) <= 2.4) return "rail";
+    if (M.ZONE.some((z) => z.kind === "rail market" && inPoly(p, z.pts))) return "rail market";
+    let best = null;
+    for (const r of gquery(M.gR, [p[0] - 1, p[1] - 1, p[0] + 1, p[1] + 1])) {
+      if (r.cls === "path" || r.cls === "bridge") continue;
+      const d = lineDist(p, r.pts), half = r.wd.c / 2;
+      const rank = d <= half ? 0 : d <= half + r.wd.g ? 1 : d <= half + r.wd.g + r.wd.w ? 2 : -1;
+      if (rank < 0) continue;
+      if (!best || rank < best.rank || (rank === best.rank && d - half < best.edge)) best = { rank, r, edge: d - half, d };
+    }
+    if (best) {
+      const r = best.r;
+      if ([...gquery(M.gZ, [p[0], p[1], p[0], p[1]])].some((z) => z.kind === "market street" && inPoly(p, z.pts)) && (MARKET_CLEAR[r.cls] === undefined || best.d > MARKET_CLEAR[r.cls] / 2)) return "market road";
+      if (best.rank === 0) {
+        if (r.cls === "lane") return "lane";
+        if ((r.cls === "street" || r.cls === "main") && best.edge > -GU.park_w) {
+          const nearJ = [...gquery(M.gR, [p[0] - 32, p[1] - 32, p[0] + 32, p[1] + 32])].some((o) => o !== r && o.cls !== "path" && o.cls !== "bridge" && lineDist(p, o.pts) < o.wd.c / 2 + GU.junction_m && !carriesOn(r.pts, o.pts) && !sameLine(r.pts, o.pts));
+          if (!nearJ) return "parking";
+        }
+        return "carriageway";
+      }
+      return best.rank === 1 ? "gutter" : "walkway";
+    }
+    if ([...gquery(M.gB, [p[0], p[1], p[0], p[1]])].some((b) => inPoly(p, b.pts))) return "building";
+    const pl = M.PAR.find((q) => p[0] >= q.bb[0] && p[0] <= q.bb[2] && p[1] >= q.bb[1] && p[1] <= q.bb[3] && inPoly(p, q.pts));
+    if (pl) return GU_PLOT(pl.kind);
+    return districtAt(p) ? "ground" : "bush";
+  }
+  const thingRole = (k) => k === "person" ? "person" : /^(ferry|water_bus|dredger|canoe)$/.test(k) ? "boat" : k.startsWith("train") ? "train" : k === "rail stall" ? "stall" : (k === "stacker" || k === "forklift") ? "machine" : "parked vehicle";
+  function groundAllows(cls, k) { const who = GU.classes[cls] || [], r = thingRole(k); return who.includes(r) || (k === "okada" && who.includes("parked okada")) || (r === "machine" && who.includes("parked vehicle")); }
+  function thingPts(o) { const [L, W] = tsize(o), a = o.ang * Math.PI / 180, u = [Math.cos(a), Math.sin(a)], v = [-u[1], u[0]]; return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [o.x + u[0] * i * L / 2 + v[0] * j * W / 2, o.y + u[1] * i * L / 2 + v[1] * j * W / 2]); }
   function delT(o) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); M.TR.splice(M.TR.indexOf(o), 1); }
   function moveT(o, x, y) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); o.x = x; o.y = y; gadd(M.gT, o, [x, y, x, y]); }
   const treeR = (o) => (o.kind === "palm" ? 1.6 : 2.6);
@@ -166,6 +220,8 @@
     else if (op === "delete furniture") { const f = findF(e.at, e.kind); if (f) delF(f); }
     else if (op === "move furniture") { const f = findF(e.at, e.kind); if (f) { moveF(f, e.to[0], e.to[1]); if ("ang" in e) f.ang = e.ang; } }
     else if (op === "name") { const f = findF(e.at, e.kind); if (f) f.name = e.name; }
+    else if (op === "add thing") addH({ t: "th", d: e.d || d, kind: e.k, x: e.x, y: e.y, ang: e.a || 0, c: e.c, s: e.s });
+    else if (op === "move thing" || op === "delete thing") { let best = null, bd = 2; for (const q of gquery(M.gH, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) { const dd = dist(e.at, [q.x, q.y]); if ((!e.k || q.kind === e.k) && dd < bd) { bd = dd; best = q; } } if (best) { if (op === "delete thing") delH(best); else { moveH(best, e.to[0], e.to[1]); if ("a" in e) best.ang = e.a; } } }
     else if (op === "add monument") M.MON.push({ t: "m", d, kind: e.model, x: e.x, y: e.y, ang: e.ang || 0, name: e.name || "" });
     else if (op === "move monument") { const m = findM(e.at); if (m) { m.x = e.to[0]; m.y = e.to[1]; if ("ang" in e) m.ang = e.ang; } }
     else if (op === "delete monument") { const m = findM(e.at); if (m) M.MON.splice(M.MON.indexOf(m), 1); }
@@ -192,7 +248,7 @@
   const hit = (bb, v) => !(bb[2] < v[0] || bb[0] > v[2] || bb[3] < v[1] || bb[1] > v[3]);
 
   // ------------------------------------------------------------------ checks (what would be wrong in the built city)
-  const OK_ON_ROAD = new Set(["overhead sign", "task force truck"]);
+  const OK_ON_ROAD = new Set(["overhead sign", "gantry", "task force truck"]);
   const ON_ART = new Set(["toll booth", "toll canopy", "border booth", "border canopy", "drums", "checkpoint"]);   // they stand on the arterial on purpose
   let checkCache = { v: -1, key: "", bad: new Map() };
   function runChecks(v) {
@@ -243,13 +299,14 @@
       for (const r of gquery(M.gR, [f.x - 1, f.y - 1, f.x + 1, f.y + 1])) if (r.cls !== "path" && r.cls !== "bridge" && lineDist(p, r.pts) < r.wd.c / 2 - 0.2) { bad.set(f, "in the carriageway: " + (r.name || r.cls)); break; }
       if (!bad.has(f)) for (const b of gquery(M.gB, [f.x, f.y, f.x, f.y])) if (inPoly(p, b.pts) && edgeDist(p, b.pts) > 0.3) { bad.set(f, "inside a " + b.kind); break; }
     }
+    if (G.ground_use) for (const o of gquery(M.gH, v)) { const cl = groundAt([o.x, o.y]); if (!groundAllows(cl, o.kind)) bad.set(o, `a ${o.kind} on the ${cl}: the ${cl} is for ${(GU.classes[cl] || []).join(", ") || "nobody"}`); }
     for (const e of M.END) if (e.t === "loose" && hit(e.bb, v)) bad.set(e, "a road that stops short: it meets no road, house, gate or water");
     checkCache = { v: M.version, key, bad };
     return bad;
   }
 
   // ------------------------------------------------------------------ drawing
-  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, places: true, labels: true, checks: true };
+  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, things: true, ground: false, places: true, labels: true, checks: true };
   const KIND_FILL = (k) => ({ front: "--home", back: "--home", extension: "--home", "face-me": "--home", "old house": "--home", "brazilian house": "--home", villa: "--home", mansion: "--home", flats: "--home",
     stalls: "--trade", shed: "--trade", kiosk: "--trade", canopy: "--trade", "phone mall": "--trade", bakery: "--trade", buka: "--trade", office: "--trade",
     school: "--civic", barracks: "--civic", cellblock: "--civic", gatehouse: "--civic", checkpoint: "--civic", palace: "--civic", "office block": "--civic", "bank tower": "--civic", hotel: "--civic",
@@ -271,7 +328,7 @@
     ctx.setLineDash([6 * px, 4 * px]); ctx.strokeStyle = css("--district"); ctx.lineWidth = 1.2 * px;
     for (const d of DIST) if (hit(d.bb, v)) { path(d.poly, true); ctx.stroke(); }
     ctx.setLineDash([]);
-    if (LAYERS.plots) for (const p of M.PAR) { if (!hit(p.bb, v)) continue; path(p.pts, true); ctx.fillStyle = css("--plot"); ctx.fill(); ctx.setLineDash([4 * px, 3 * px]); ctx.strokeStyle = css("--plot-line"); ctx.lineWidth = px; ctx.stroke(); ctx.setLineDash([]); }
+    if (LAYERS.plots) for (const p of M.PAR) { if (!hit(p.bb, v)) continue; path(p.pts, true); ctx.fillStyle = LAYERS.ground ? { park: "rgba(58,143,214,.25)", market: "rgba(224,150,40,.3)", yard: "rgba(120,120,120,.3)", plot: "rgba(90,160,90,.2)" }[GU_PLOT(p.kind)] : css("--plot"); ctx.fill(); ctx.setLineDash([4 * px, 3 * px]); ctx.strokeStyle = css("--plot-line"); ctx.lineWidth = px; ctx.stroke(); ctx.setLineDash([]); }
     if (LAYERS.plots) for (const z of M.ZONE) { if (!hit(z.bb, v)) continue; path(z.pts, true); ctx.fillStyle = css("--zone"); ctx.fill(); ctx.strokeStyle = css("--warn"); ctx.lineWidth = px; ctx.stroke(); }
     // roads, in bands so junctions merge cleanly: walkway, then gutter, then carriageway, then markings
     const R = [...gquery(M.gR, v)].filter((r) => hit(r.bb, v));
@@ -281,6 +338,11 @@
       band((r) => r.wd.c + 2 * (r.wd.g + r.wd.w), css("--walk"));
       band((r) => r.wd.g > 0 ? r.wd.c + 2 * r.wd.g : 0, css("--gutter"));
       band((r) => r.wd.c, (r) => SURF(r.surf));
+      if (LAYERS.ground) {   // ground use: the parking strips at the carriageway's edges, then the rail corridor
+        ctx.globalAlpha = 0.45; band((r) => (r.cls === "street" || r.cls === "main") ? r.wd.c : 0, "#3a8fd6");
+        ctx.globalAlpha = 1; band((r) => (r.cls === "street" || r.cls === "main") ? Math.max(0, r.wd.c - 2 * GU.park_w) : 0, (r) => SURF(r.surf));
+        if (RAIL) { path(RAIL); ctx.strokeStyle = "rgba(120,60,140,.35)"; ctx.lineWidth = 4.8; ctx.stroke(); }
+      }
       for (const e of M.END) if (e.t === "close" && hit(e.bb, v)) { ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, 7); ctx.fillStyle = SURF(e.surf); ctx.fill(); }
       if (s > 1.2) {   // edge lines: where the carriageway meets the gutter, to the centimetre the kit uses
         ctx.setLineDash([3, 6]); ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = Math.max(0.12, px);
@@ -313,6 +375,13 @@
     if (LAYERS.trees && s > 0.3) for (const t of gquery(M.gT, v)) { const r = treeR(t); ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, 7); ctx.fillStyle = bad.has(t) ? "rgba(209,36,47,.35)" : t.kind === "palm" ? "rgba(70,140,60,.35)" : "rgba(50,120,50,.30)"; ctx.fill(); ctx.strokeStyle = bad.has(t) ? css("--bad") : "#3d7a32"; ctx.lineWidth = bad.has(t) ? 2.5 * px : Math.max(px, 0.08); ctx.stroke(); if (t.kind === "palm" && s > 2) { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = k * 2 * Math.PI / 5; ctx.moveTo(t.x, t.y); ctx.lineTo(t.x + r * Math.cos(a), t.y + r * Math.sin(a)); } ctx.stroke(); } }
     // furniture, to true size where it has one, never smaller than a few pixels
     if (LAYERS.furniture && s > 0.9) for (const f of gquery(M.gF, v)) drawFurniture(f, bad.has(f), px);
+    if (LAYERS.things && s > 1.2) for (const o of gquery(M.gH, [v[0] - 20, v[1] - 20, v[2] + 20, v[3] + 20])) {
+      const isBad = bad.has(o);
+      if (o.kind === "person") { ctx.beginPath(); ctx.arc(o.x, o.y, Math.max(0.25, 1.2 * px), 0, 7); ctx.fillStyle = isBad ? css("--bad") : "#b0507a"; ctx.fill(); continue; }
+      path(thingPts(o), true);
+      ctx.fillStyle = isBad ? css("--bad") : o.kind === "rail stall" ? "#c9a227" : /^(ferry|water_bus|dredger|canoe)$/.test(o.kind) ? "#2e6f95" : o.kind.startsWith("train") ? "#555" : o.c === "wreck" ? "#7a5a48" : "#4a7fbf";
+      ctx.globalAlpha = 0.75; ctx.fill(); ctx.globalAlpha = 1; ctx.strokeStyle = o === sel ? css("--accent") : css("--ink"); ctx.lineWidth = o === sel ? 2.5 * px : px; ctx.stroke();
+    }
     for (const e of M.END) if (bad.has(e)) { ctx.beginPath(); ctx.arc(e.x, e.y, Math.max(4, 10 * px), 0, 7); ctx.strokeStyle = css("--bad"); ctx.lineWidth = 2.5 * px; ctx.stroke(); }
     for (const m of M.MON) if (m.x >= v[0] && m.x <= v[2] && m.y >= v[1] && m.y <= v[3]) { ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ang * Math.PI / 180); const r = Math.max(2, 6 * px); ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; ctx.lineTo(rr * Math.sin(a), -rr * Math.cos(a)); } ctx.closePath(); ctx.fillStyle = "#c08a00"; ctx.fill(); ctx.restore(); }
     // selection, hover, ghosts
@@ -349,6 +418,10 @@
       case "lasma post": box(1.6, 1.6, "#e0b400"); break;
       case "police kiosk": box(1.8, 1.8, "#c62828"); break;
       case "overhead sign": box(0.5, 16, "#2e7d32"); break;
+      case "gantry": box(0.5, f.span || 16, "#2e7d32"); break;
+      case "direction sign": box(0.3, 2.4, "#2e7d32"); break;
+      case "speed sign": dot(Math.max(0.35, 2 * px), "#ffffff"); ctx.strokeStyle = col || "#c62828"; ctx.lineWidth = Math.max(0.1, px); ctx.stroke(); break;
+      case "no parking sign": dot(Math.max(0.35, 2 * px), "#1e5bb8"); ctx.strokeStyle = col || "#c62828"; ctx.lineWidth = Math.max(0.1, px); ctx.stroke(); break;
       case "task force truck": box(5.2, 2.0, "#5d7a3a"); break;
       default: dot(Math.max(0.4, 2.5 * px), "#8e44ad");   // people placed by hand: agberos, hawkers, vendors
     }
@@ -421,6 +494,7 @@
     let best = null, bd = tol;
     for (const f of gquery(M.gF, [p[0] - tol, p[1] - tol, p[0] + tol, p[1] + tol])) { const d = dist(p, [f.x, f.y]); if (d < bd) { bd = d; best = f; } }
     if (best) return best;
+    if (LAYERS.things && s > 1.2) for (const o of gquery(M.gH, [p[0] - 9, p[1] - 9, p[0] + 9, p[1] + 9])) if (o.kind === "person" ? dist(p, [o.x, o.y]) < Math.max(0.5, tol / 2) : inPoly(p, thingPts(o))) return o;
     for (const m of M.MON) if (dist(p, [m.x, m.y]) < Math.max(2, tol)) return m;
     if (LAYERS.trees) { let tb = null, td = 1e9; for (const t of gquery(M.gT, [p[0] - 3, p[1] - 3, p[0] + 3, p[1] + 3])) { const d = dist(p, [t.x, t.y]); if (d < Math.max(0.8, treeR(t) * 0.6) && d < td) { td = d; tb = t; } } if (tb) return tb; }
     for (const q of M.P) if (dist(p, [q.x, q.y]) < Math.max(2, 6 / s)) return q;
@@ -519,7 +593,7 @@
         drag = { vtx: i, o: null, obj: sel, before, pts }; cv.classList.add("move"); return;
       }
       const o = pick(p);
-      if (o && (o.t === "b" || o.t === "f" || o.t === "m" || o.t === "p" || o.t === "t")) { sel = o; drag = { o, start: p, last: p, moved: false }; showPanel(); draw(); return; }
+      if (o && (o.t === "b" || o.t === "f" || o.t === "m" || o.t === "p" || o.t === "t" || o.t === "th")) { sel = o; drag = { o, start: p, last: p, moved: false }; showPanel(); draw(); return; }
       sel = o; showPanel(); probList = null; panning = { x: ev.clientX, y: ev.clientY, ox, oy, click: true }; draw(); return;
     }
     if (tool === "furniture") { const k = kindSel.value; const sn = ev.shiftKey ? null : snapToKerb(p); const at = sn || { x: p[0], y: p[1], ang: 0 }; commit(districtAt([at.x, at.y]), { op: "add furniture", kind: k, x: r1(at.x), y: r1(at.y), ang: Math.round(at.ang) }); return; }
@@ -532,7 +606,7 @@
   });
   cv.addEventListener("pointermove", (ev) => {
     const p = toW(ev.offsetX, ev.offsetY);
-    $("where").textContent = `x ${p[0].toFixed(1)} m · y ${p[1].toFixed(1)} m · ${districtName(districtAt(p))}`;
+    $("where").textContent = `x ${p[0].toFixed(1)} m · y ${p[1].toFixed(1)} m · ${districtName(districtAt(p))}` + (s > 1 && G.ground_use ? ` · ${(() => { const c = groundAt(p); return c + ": " + ((GU.classes[c] || []).join(", ") || "nobody"); })()}` : "");
     if (panning) { if (Math.hypot(ev.clientX - panning.x, ev.clientY - panning.y) > 3) panning.click = false; ox = panning.ox + ev.clientX - panning.x; oy = panning.oy + ev.clientY - panning.y; draw(); return; }
     if (drag && drag.vtx !== undefined) {
       let q = p;
@@ -549,7 +623,8 @@
       if (!drag.moved) { drag.moved = true; drag.orig = o.t === "b" ? o.pts.map((q) => q.slice()) : [o.x, o.y, o.ang]; drag.at = o.t === "b" ? insidePt(o.pts) : [o.x, o.y]; cv.classList.add("move"); }
       if (o.t === "b") moveB(o, ([x, y]) => [x + dx, y + dy]);
       else if (o.t === "t") moveT(o, o.x + dx, o.y + dy);
-      else if (o.t === "f") { const sn = !ev.shiftKey && o.kind !== "overhead sign" ? snapToKerb(p) : null; if (sn) { moveF(o, sn.x, sn.y); o.ang = sn.ang; } else moveF(o, o.x + dx, o.y + dy); }
+      else if (o.t === "th") moveH(o, o.x + dx, o.y + dy);
+      else if (o.t === "f") { const sn = !ev.shiftKey && o.kind !== "overhead sign" && o.kind !== "gantry" ? snapToKerb(p) : null; if (sn) { moveF(o, sn.x, sn.y); o.ang = sn.ang; } else moveF(o, o.x + dx, o.y + dy); }
       else { o.x += dx; o.y += dy; }
       drag.last = p; M.version++; draw(); return;
     }
@@ -574,6 +649,7 @@
       else if (o.t === "m") edit = { op: "move monument", at: [r1(dragOrig[0]), r1(dragOrig[1])], to: [r1(o.x), r1(o.y)] };
       else if (o.t === "t") { edit = { op: "move tree", at: [r1(dragOrig[0]), r1(dragOrig[1])], to: [r1(o.x), r1(o.y)] }; if (o.d === "bush") edit.d = "bush"; }
       else if (o.t === "p") edit = { op: "move place", name: o.name, x: r1(o.x), y: r1(o.y) };
+      else if (o.t === "th") edit = { op: "move thing", at: [r1(dragOrig[0]), r1(dragOrig[1])], k: o.kind, to: [r1(o.x), r1(o.y)] };
       const ok = await send(o.d === "bush" ? nearestDistrict([o.x, o.y]) : (o.d || districtAt([o.x, o.y])), edit);
       if (!ok) revert(o);
       draw(); showPanel(); return;
@@ -592,6 +668,7 @@
     if (o.t === "b" && dragPts) { moveB(o, (q, i) => dragPts[i]); }
     else if (o.t === "f" && dragOrig) { moveF(o, dragOrig[0], dragOrig[1]); o.ang = dragOrig[2]; }
     else if (o.t === "t" && dragOrig) moveT(o, dragOrig[0], dragOrig[1]);
+    else if (o.t === "th" && dragOrig) moveH(o, dragOrig[0], dragOrig[1]);
     else if (dragOrig) { o.x = dragOrig[0]; o.y = dragOrig[1]; }
     M.version++;
   }
@@ -615,6 +692,7 @@
       moveB(o, ([x, y]) => [c[0] + (x - c[0]) * cs - (y - c[1]) * sn, c[1] + (x - c[0]) * sn + (y - c[1]) * cs]); M.version++; draw();
       if (!(await send(o.d, { op: "move building", at: [r1(at[0]), r1(at[1])], kind: o.kind, by: [0, 0], rotate: deg }))) { moveB(o, (q, i) => before[i]); M.version++; } }
     else if (o.t === "f") { const a0 = o.ang; o.ang = Math.round(o.ang + deg); M.version++; draw(); if (!(await send(o.d, { op: "move furniture", at: [r1(o.x), r1(o.y)], kind: o.kind, to: [r1(o.x), r1(o.y)], ang: o.ang }))) { o.ang = a0; M.version++; } }
+    else if (o.t === "th") { const a0 = o.ang; o.ang = Math.round(o.ang + deg); M.version++; draw(); if (!(await send(o.d === "bush" ? nearestDistrict([o.x, o.y]) : o.d, { op: "move thing", at: [r1(o.x), r1(o.y)], k: o.kind, to: [r1(o.x), r1(o.y)], a: o.ang }))) { o.ang = a0; M.version++; } }
     else if (o.t === "m") { const a0 = o.ang; o.ang = Math.round(o.ang + deg); draw(); if (!(await send(o.d, { op: "move monument", at: [r1(o.x), r1(o.y)], to: [r1(o.x), r1(o.y)], ang: o.ang }))) o.ang = a0; }
     draw(); showPanel();
   }
@@ -629,6 +707,7 @@
     else if (o.t === "t") { edit = { op: "delete tree", at: [r1(o.x), r1(o.y)] }; if (o.d === "bush") { edit.d = "bush"; d = nearestDistrict([o.x, o.y]); } }
     else if (o.t === "w") edit = { op: "delete wall", at: (o.clickAt || o.pts[0]).map(r1) };
     else if (o.t === "g") edit = { op: "delete gate", at: [r1(o.x), r1(o.y)] };
+    else if (o.t === "th") { edit = { op: "delete thing", at: [r1(o.x), r1(o.y)], k: o.kind }; if (o.d === "bush") d = nearestDistrict([o.x, o.y]); }
     else if (o.t === "r") {
       if (o.cls !== "street" && o.cls !== "lane") { toast("Main roads and arterials are the city's frame: they can't be deleted here"); return; }
       const mid = o.pts[Math.floor(o.pts.length / 2)], prev = o.pts[Math.floor(o.pts.length / 2) - 1] || o.pts[0];
@@ -676,6 +755,7 @@
     else if (o.t === "p") h = `<h3>${esc(o.name)}</h3><table>${row("Type", esc(o.kind))}${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table><p class="k">${esc(o.note)}</p>`;
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
     else if (o.t === "w") { const L = o.pts.reduce((a, q, i) => i ? a + dist(o.pts[i - 1], q) : 0, 0); h = `<h3>Compound wall</h3><table>${row("District", districtName(o.d))}${row("Length", L.toFixed(1) + " m")}</table><p class="k">Worked out by the bake round walled houses (scripts/compounds.py). Delete the piece, or cut a 3 m opening where you clicked.</p><div class="row"><button id="cutw">Cut an opening here</button></div>`; }
+    else if (o.t === "th") h = `<h3>${esc(o.kind === "person" ? "A person" + (o.s ? " (" + o.s + ")" : "") : o.kind)}</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Heading", Math.round(o.ang) + "°")}${o.c ? row("Condition", esc(o.c)) : ""}${o.s && o.kind !== "person" ? row("Style", esc(o.s)) : ""}</table><p class="k">Placed by the bake (scripts/things.py). Drag to move, <kbd>R</kbd> to turn, <kbd>Delete</kbd> removes.</p>`;
     else if (o.t === "end") h = `<h3>${o.t === "end" && o.r ? "The end of a close" : "A road that stops short"}</h3><table>${row("Road", esc(o.road))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${o.r ? row("Turning space", (o.r * 2).toFixed(1) + " m across") : ""}</table><p class="k">${o.r ? "Worked out by the bake (scripts/roadends.py): a round of tar at the end so cars can turn." : "It meets no other road, no house or gate, and no water. Join it on with the Street tool, or cut it back."}</p>`;
     else if (o.t === "t") h = `<h3>Tree: ${esc(o.kind)}</h3><table>${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Crown", "about " + (treeR(o) * 2).toFixed(1) + " m across")}</table><p class="k">Drag to move; Delete removes.</p>`;
     else if (o.t === "g") h = `<h3>Gate</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table>`;
@@ -723,7 +803,7 @@
   }
   function renderStatus(bad) {
     const n = { road: 0, overlap: 0, furn: 0, ends: 0 };
-    for (const [o, why] of bad) { if (typeof o === "string") continue; if (o.t === "end") n.ends++; else if (o.t === "f" || o.t === "t") n.furn++; else if (why.startsWith("on the road") || why.startsWith("a wall on")) n.road++; else n.overlap++; }
+    for (const [o, why] of bad) { if (typeof o === "string") continue; if (o.t === "end") n.ends++; else if (o.t === "f" || o.t === "t" || o.t === "th") n.furn++; else if (why.startsWith("on the road") || why.startsWith("a wall on")) n.road++; else n.overlap++; }
     $("checks").innerHTML = s < 0.6 ? "Zoom in to check" : `In view: <b style="color:${n.road ? css("--bad") : "inherit"}">${n.road}</b> on a road · <b style="color:${n.overlap ? css("--bad") : "inherit"}">${n.overlap}</b> overlapping · <b style="color:${n.furn ? css("--bad") : "inherit"}">${n.furn}</b> furniture or trees misplaced${n.ends ? ` · <b style="color:${css("--bad")}">${n.ends}</b> road${n.ends > 1 ? "s" : ""} stopping short` : ""}`;
     $("pending").textContent = !SERVER ? "Read-only (no board server)" : pendingN ? `${pendingN} edit${pendingN > 1 ? "s" : ""} not baked yet${thawN ? ` (${thawN} road edit${thawN > 1 ? "s" : ""}: needs a thaw bake)` : ""}` : "Everything is baked";
   }
@@ -739,7 +819,7 @@
   let toastT; function toast(t) { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => (e.style.display = "none"), 3500); }
 
   // ------------------------------------------------------------------ layers, districts, theme
-  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", places: "Places", labels: "Labels", checks: "Checks" };
+  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", things: "Vehicles & people", ground: "Ground use", places: "Places", labels: "Labels", checks: "Checks" };
   for (const k of Object.keys(LAYERS)) { const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" ${LAYERS[k] ? "checked" : ""}> ${LNAME[k]}`; l.querySelector("input").addEventListener("change", (e) => { LAYERS[k] = e.target.checked; draw(); }); $("layers").appendChild(l); }
   const dsel = $("district");
   dsel.innerHTML = `<option value="">Go to a district…</option>` + DIST.map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("");

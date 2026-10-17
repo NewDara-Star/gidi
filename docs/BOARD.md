@@ -29,6 +29,10 @@ Then open http://127.0.0.1:8777/web/board.html.
   - poles, street lights (with the arm), traffic lights
   - bus stops, LASMA posts, transformers, police kiosks
   - overhead signs, the task force truck, people placed by hand
+- **Road signs:** direction signs before the big junctions, speed limits after them, no-parking discs by the markets, gantries over the expressways and bridges (`scripts/things.py`, the rules the kit used to run itself).
+- **Road ends:** a close's round turning space, in its road's surface. A road that stops short of anything is ringed in red (`scripts/roadends.py`).
+- **Vehicles and people** (layer "Vehicles & people"): every parked car, keke, okada and bus at the road edges and in the parks, the people standing in the markets and parks, the port's machines, the boats, canoes, trains and rail stalls, each to scale and turned the way it faces. The bake places them (`scripts/things.py`); traffic and walkers move in the game, so the data holds how many and what kind ("life"), not where each one is.
+- **Ground use** (layer, off at first): what each piece of ground is for (`scripts/ground.py`): the parking strips at the carriageway's edges in blue, motor parks, markets, yards and other plots tinted, the rail corridor. The bottom bar names the ground under the mouse and who may be on it.
 - **Monuments** (stars) and **named places** (pins).
 - **Layers:** each of the above can be switched off in the top bar.
 
@@ -40,6 +44,8 @@ Problems the built city would have, found live as you work:
 - **A building or a compound wall on a road:** inside the carriageway or gutter. Stalls and kiosks in a declared market-street zone are the market spill and are allowed, as `scripts/check_district.py` allows them.
 - **Overlapping buildings:** an edge crossing, or a corner well inside another.
 - **Furniture in the carriageway, or inside a building.**
+- **A thing on the wrong ground:** a car on a junction's carriageway, the tracks or the water, a person in the road or the gutter, a boat on land. Each kind of ground says who may be on it (`scripts/ground.py`), and `check_district.py` check 16 tests the same.
+- **A road that stops short:** it meets no road, house, gate or water.
 
 The bar at the bottom counts the problems in view. **Click the count to go to each problem in turn.** Zoom in past about 0.6 px per metre for the checks to run.
 

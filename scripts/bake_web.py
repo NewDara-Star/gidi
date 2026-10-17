@@ -404,13 +404,18 @@ print("frozen districts:",hand.apply_snapshots(out,keep_decks=True),"| hand edit
 # ---- road ends (scripts/roadends.py): every road that stops short is joined on, cut back, turned into a close or left at a
 # gate or the water; then the roads out in the bush get their poles and lights (scripts/furniture.py), not the kit
 import roadends
-print("road ends:",roadends.road_ends(out),"| bush furniture:",furniture.furniture(out,[],bush=True),"| late furniture edits:",hand.apply_late_furniture(out))
+print("road ends:",roadends.road_ends(out),"| bush furniture:",furniture.furniture(out,[],bush=True))
+# ---- things the kit used to invent (scripts/things.py): monuments and road signs by rule, parked vehicles, the parks, people
+# standing, boats, trains, the rail stalls; the traffic and walkers as densities ("life"). Then the furniture and monument edits
+# that wait for them
+import things
+print("things:",things.place(out),"| late furniture and monument edits:",hand.apply_late_furniture(out))
 # ---- compound walls (scripts/compounds.py): worked out from the finished houses and roads, then the hand edits to them
 import compounds
 print("compound walls (pieces, km, walled houses):",compounds.compounds(out),"| wall edits:",hand.apply_wall_edits(out))
 # ---- house fronts (shops, canopies, balconies) and trees (scripts/fronts.py, scripts/trees.py), then the hand edits to them
 import fronts, trees
-print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees.trees(out),"| edits:",hand.apply_detail_edits(out))
+print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees.trees(out),"| edits:",hand.apply_detail_edits(out),"| thing edits:",hand.apply_thing_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)

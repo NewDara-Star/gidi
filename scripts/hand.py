@@ -280,6 +280,38 @@ def apply_label_edits(out):
 
 WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
 DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
+THING_OPS = ('add thing', 'move thing', 'delete thing')
+
+
+def apply_thing_edits(out):
+    """Edits to the things the bake places (scripts/things.py): parked vehicles, people standing, boats, trains, stalls.
+    {"op": "add thing", "k": kind, "x", "y", "a": degrees, ...}  /  {"op": "move thing", "at", "k" (optional), "to", "a" (optional)}
+    /  {"op": "delete thing", "at", "k" (optional)}: the nearest within 2 m."""
+    rep = {}
+    T = out.setdefault('things', [])
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            op = e['op']
+            if op not in THING_OPS:
+                continue
+            if op == 'add thing':
+                T.append({k: v for k, v in e.items() if k not in ('op', 'note')} | {'d': e.get('d', d)})
+            else:
+                P = Point(e['at'])
+                c = [(Point(t['x'], t['y']).distance(P), i) for i, t in enumerate(T) if not e.get('k') or t['k'] == e['k']]
+                c = [x for x in c if x[0] < 2.0]
+                if not c:
+                    print('  hand edit found no', e.get('k', 'thing'), 'at', e['at'], e.get('note', '')); continue
+                if op == 'delete thing':
+                    T.pop(min(c)[1])
+                else:
+                    t = T[min(c)[1]]
+                    t['x'], t['y'] = e['to']
+                    if 'a' in e:
+                        t['a'] = e['a']
+            rep[d] = rep.get(d, 0) + 1
+    return rep
 
 
 LATE = []   # furniture edits that found nothing in apply_edits: tried again once the bush furniture is placed
@@ -290,14 +322,15 @@ def apply_late_furniture(out):
     n = 0
     for d, e in LATE:
         P = Point(e['at'])
-        c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if not e.get('kind') or f_['kind'] == e['kind']]
-        c = [x for x in c if x[0] < 2.0]
+        key, lim = ('monuments', 3.0) if e['op'].endswith('monument') else ('furniture', 2.0)
+        c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get(key, [])) if key == 'monuments' or not e.get('kind') or f_['kind'] == e['kind']]
+        c = [x for x in c if x[0] < lim]
         if not c:
-            print('  hand edit found no furniture at', e['at'], e.get('note', '')); continue
-        if e['op'] == 'delete furniture':
-            out['furniture'].pop(min(c)[1])
+            print('  hand edit found no', key[:-1] if key == 'monuments' else 'furniture', 'at', e['at'], e.get('note', '')); continue
+        if e['op'].startswith('delete'):
+            out[key].pop(min(c)[1])
         else:
-            f_ = out['furniture'][min(c)[1]]
+            f_ = out[key][min(c)[1]]
             f_['x'], f_['y'] = e['to']
             if 'ang' in e:
                 f_['ang'] = e['ang']
@@ -453,7 +486,7 @@ def apply_edits(out):
                 c = [(Point(m['x'], m['y']).distance(P), i) for i, m in enumerate(out.get('monuments', []))]
                 c = [x for x in c if x[0] < 3.0]
                 if not c:
-                    print('  hand edit found no monument at', e['at'], e.get('note', '')); continue
+                    LATE.append((d, e)); continue   # one the bake places by rule (scripts/things.py): after it is placed
                 if op == 'delete monument':
                     out['monuments'].pop(min(c)[1])
                 else:
