@@ -52,6 +52,12 @@
     }
     return m;
   }
+  function cutLine(pts, at, gap) {   // a line with an opening of gap metres round the point nearest at (as scripts/hand.py cuts)
+    let t = 0, best = 1e9, acc = 0;
+    for (let i = 0; i < pts.length - 1; i++) { const q = nearestOnSeg(at, pts[i], pts[i + 1]), d = dist(at, q); if (d < best) { best = d; t = acc + dist(pts[i], q); } acc += dist(pts[i], pts[i + 1]); }
+    const sub = (a, b) => { const out = []; let s0 = 0; for (let i = 0; i < pts.length - 1; i++) { const L = dist(pts[i], pts[i + 1]), s1 = s0 + L; const lo = Math.max(a, s0), hi = Math.min(b, s1); if (hi > lo) { const f = (x) => [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * (x - s0) / L, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * (x - s0) / L]; if (!out.length) out.push(f(lo)); out.push(f(hi)); } s0 = s1; } return out; };
+    return [sub(0, t - gap / 2), sub(t + gap / 2, acc)].filter((p) => p.length > 1 && p.reduce((a, q, i) => i ? a + dist(p[i - 1], q) : 0, 0) >= 0.5);
+  }
   const bboxOf = (pts) => { let b = [1e9, 1e9, -1e9, -1e9]; for (const [x, y] of pts) { b[0] = Math.min(b[0], x); b[1] = Math.min(b[1], y); b[2] = Math.max(b[2], x); b[3] = Math.max(b[3], y); } return b; };
   const r1 = (v) => Math.round(v * 10) / 10;
 
@@ -69,7 +75,7 @@
   function gquery(g, bb) { const out = new Set(); for (let x = Math.floor(bb[0] / CELL); x <= Math.floor(bb[2] / CELL); x++) for (let y = Math.floor(bb[1] / CELL); y <= Math.floor(bb[3] / CELL); y++) { const c = g.get(x + "," + y); if (c) for (const it of c) out.add(it); } return out; }
 
   function build() {
-    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), version: 0 };
+    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), CW: [], GATE: [], version: 0 };
     for (const [d, L] of Object.entries(G.buildings)) {
       const st = (G.storeys || {})[d] || [];
       L.forEach((b, i) => { const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1 }; addB(o); });
@@ -87,8 +93,12 @@
     (G.encroach || []).forEach((z) => addZ({ t: "zone", d: z.d, kind: z.kind, pts: z.pts }));
     (G.structures || []).forEach((s) => M.DECK.push({ t: "deck", d: s.d, kind: s.kind, name: s.name, pts: s.pts, w: s.width || 8, bb: bboxOf(s.pts) }));
     (G.gutters || []).forEach((g) => M.GUT.push({ pts: g.pts, w: g.w || 0.8, state: g.state, bb: bboxOf(g.pts) }));
+    for (const [d, L] of Object.entries(G.compound_walls || {})) L.forEach((w) => addW({ t: "w", d, pts: w.map((q) => [q[0], q[1]]) }));
+    for (const [d, L] of Object.entries(G.compound_gates || {})) L.forEach((q) => M.GATE.push({ t: "g", d, x: q[0], y: q[1] }));
     M.WATER = [...(G.water || []), ...(G.ocean || [])].map((r) => ({ pts: r, bb: bboxOf(r) }));
   }
+  function addW(o) { o.bb = bboxOf(o.pts); M.CW.push(o); gadd(M.gW, o, o.bb); }
+  function delW(o) { gdel(M.gW, o, o.bb); M.CW.splice(M.CW.indexOf(o), 1); }
   function addZ(o) { o.bb = bboxOf(o.pts); M.ZONE.push(o); gadd(M.gZ, o, o.bb); }
   function addB(o) { o.bb = bboxOf(o.pts); M.B.push(o); gadd(M.gB, o, o.bb); }
   function delB(o) { gdel(M.gB, o, o.bb); M.B.splice(M.B.indexOf(o), 1); }
@@ -118,6 +128,13 @@
     else if (op === "reshape building") { const b = findB(e.at, e.kind); if (b) setPts(b, e.pts); }
     else if (op === "reshape parcel" || op === "reshape zone") { const L = op === "reshape parcel" ? M.PAR : M.ZONE; const q = L.find((z) => z.d === d && inPoly(e.at, z.pts)); if (q) { if (op === "reshape zone") gdel(M.gZ, q, q.bb); q.pts = closeRing(e.pts); q.bb = bboxOf(q.pts); if (op === "reshape zone") gadd(M.gZ, q, q.bb); } }
     else if (op === "reshape street") { let best = null, bd = 4; for (const r of gquery(M.gR, [e.at[0] - 4, e.at[1] - 4, e.at[0] + 4, e.at[1] + 4])) if ((r.cls === "street" || r.cls === "lane" || r.cls === "main" || r.cls === "path") && r.d === d) { const dd = lineDist(e.at, r.pts); if (dd < bd) { best = r; bd = dd; } } if (best) { delR(best); best.pts = e.pts.map((q) => [q[0], q[1]]); addR(best); } }
+    else if (op === "delete wall" || op === "cut wall") {
+      let best = null, bd = 2; for (const w of gquery(M.gW, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) if (w.d === d) { const dd = lineDist(e.at, w.pts); if (dd < bd) { best = w; bd = dd; } }
+      if (best) { delW(best); if (op === "cut wall") for (const piece of cutLine(best.pts, e.at, e.gap || 3)) addW({ t: "w", d, pts: piece }); }
+    }
+    else if (op === "add wall") addW({ t: "w", d, pts: e.pts.map((q) => [q[0], q[1]]) });
+    else if (op === "add gate") M.GATE.push({ t: "g", d, x: e.x, y: e.y });
+    else if (op === "delete gate") { let bi = -1, bd = 2; M.GATE.forEach((g, i) => { const dd = dist(e.at, [g.x, g.y]); if (g.d === d && dd < bd) { bd = dd; bi = i; } }); if (bi >= 0) M.GATE.splice(bi, 1); }
     else if (op === "add furniture") addF({ t: "f", d, kind: e.kind, x: e.x, y: e.y, ang: e.ang || 0, name: "" });
     else if (op === "delete furniture") { const f = findF(e.at, e.kind); if (f) delF(f); }
     else if (op === "move furniture") { const f = findF(e.at, e.kind); if (f) { moveF(f, e.to[0], e.to[1]); if ("ang" in e) f.ang = e.ang; } }
@@ -174,6 +191,14 @@
       if (bad.has(b)) continue;
       for (const o of gquery(M.gB, b.bb)) if (o !== b && hit(o.bb, b.bb) && polysOverlap(b.pts, o.pts)) { bad.set(b, "overlaps a " + o.kind); break; }
     }
+    for (const w of gquery(M.gW, v)) {   // a compound wall across a road
+      for (const r of gquery(M.gR, w.bb)) {
+        if (r.cls === "path" || r.cls === "bridge") continue;
+        const lim = r.wd.c / 2 + r.wd.g - 0.05; let hitR = false;
+        for (let i = 0; i < w.pts.length - 1 && !hitR; i++) for (let j = 0; j < r.pts.length - 1; j++) { const a = w.pts[i], b = w.pts[i + 1], c = r.pts[j], dd = r.pts[j + 1]; if (segsCross(a, b, c, dd) || Math.min(segDist(a, c, dd), segDist(b, c, dd), segDist(c, a, b), segDist(dd, a, b)) < lim) { hitR = true; break; } }
+        if (hitR) { bad.set(w, "a wall on the road: " + (r.name || r.cls)); break; }
+      }
+    }
     for (const f of gquery(M.gF, v)) {
       if (OK_ON_ROAD.has(f.kind)) continue;
       const p = [f.x, f.y];
@@ -185,7 +210,7 @@
   }
 
   // ------------------------------------------------------------------ drawing
-  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, furniture: true, places: true, labels: true, checks: true };
+  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, walls: true, furniture: true, places: true, labels: true, checks: true };
   const KIND_FILL = (k) => ({ front: "--home", back: "--home", extension: "--home", "face-me": "--home", "old house": "--home", "brazilian house": "--home", villa: "--home", mansion: "--home", flats: "--home",
     stalls: "--trade", shed: "--trade", kiosk: "--trade", canopy: "--trade", "phone mall": "--trade", bakery: "--trade", buka: "--trade", office: "--trade",
     school: "--civic", barracks: "--civic", cellblock: "--civic", gatehouse: "--civic", checkpoint: "--civic", palace: "--civic", "office block": "--civic", "bank tower": "--civic", hotel: "--civic",
@@ -235,6 +260,11 @@
         ctx.lineWidth = bad.has(b) ? 3 * px : lw; ctx.strokeStyle = bad.has(b) ? css("--bad") : css("--home-line"); ctx.stroke();
       }
     }
+    if (LAYERS.walls && s > 0.6) {
+      ctx.strokeStyle = css("--wall"); ctx.lineWidth = Math.max(0.25, 1.4 * px); ctx.lineCap = "butt";
+      for (const w of gquery(M.gW, v)) { path(w.pts); ctx.strokeStyle = bad.has(w) ? css("--bad") : "#8a3b2e"; ctx.lineWidth = bad.has(w) ? 3 * px : Math.max(0.25, 1.4 * px); ctx.stroke(); }
+      for (const g of M.GATE) if (g.x > v[0] && g.x < v[2] && g.y > v[1] && g.y < v[3]) { const r = Math.max(0.7, 3 * px); ctx.fillStyle = "#1565c0"; ctx.fillRect(g.x - r, g.y - r, 2 * r, 2 * r); }
+    }
     // furniture, to true size where it has one, never smaller than a few pixels
     if (LAYERS.furniture && s > 0.9) for (const f of gquery(M.gF, v)) drawFurniture(f, bad.has(f), px);
     for (const m of M.MON) if (m.x >= v[0] && m.x <= v[2] && m.y >= v[1] && m.y <= v[3]) { ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ang * Math.PI / 180); const r = Math.max(2, 6 * px); ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; ctx.lineTo(rr * Math.sin(a), -rr * Math.cos(a)); } ctx.closePath(); ctx.fillStyle = "#c08a00"; ctx.fill(); ctx.restore(); }
@@ -250,7 +280,7 @@
       for (const q of P) { ctx.fillStyle = css("--panel"); ctx.fillRect(q[0] - hs, q[1] - hs, 2 * hs, 2 * hs); ctx.strokeStyle = css("--sel"); ctx.strokeRect(q[0] - hs, q[1] - hs, 2 * hs, 2 * hs); }
     }
     if (ghost) { ctx.fillStyle = css("--ghost"); ctx.strokeStyle = css("--sel"); ctx.lineWidth = 2 * px; path(ghost, true); ctx.fill(); ctx.stroke(); }
-    if (streetPts.length) { path(streetPts); ctx.strokeStyle = css("--sel"); ctx.lineWidth = Math.max(WID(kindSel.value).c, 3 * px); ctx.globalAlpha = 0.5; ctx.stroke(); ctx.globalAlpha = 1; for (const p of streetPts) { ctx.beginPath(); ctx.arc(p[0], p[1], 4 * px, 0, 7); ctx.fillStyle = css("--sel"); ctx.fill(); } }
+    if (streetPts.length) { path(streetPts); ctx.strokeStyle = css("--sel"); ctx.lineWidth = tool === "wall" ? Math.max(0.3, 2 * px) : Math.max(WID(kindSel.value).c, 3 * px); ctx.globalAlpha = 0.5; ctx.stroke(); ctx.globalAlpha = 1; for (const p of streetPts) { ctx.beginPath(); ctx.arc(p[0], p[1], 4 * px, 0, 7); ctx.fillStyle = css("--sel"); ctx.fill(); } }
     // labels in screen space
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     if (LAYERS.labels) drawLabels(R, v);
@@ -346,8 +376,10 @@
     if (best) return best;
     for (const m of M.MON) if (dist(p, [m.x, m.y]) < Math.max(2, tol)) return m;
     for (const q of M.P) if (dist(p, [q.x, q.y]) < Math.max(2, 6 / s)) return q;
+    for (const g of M.GATE) if (dist(p, [g.x, g.y]) < Math.max(1, 6 / s)) return g;
     const bs = [...gquery(M.gB, [p[0], p[1], p[0], p[1]])].filter((b) => inPoly(p, b.pts));
     if (bs.length) return bs.sort((a, b) => area(a.pts) - area(b.pts))[0];
+    if (LAYERS.walls) { let wb = null, wd = Math.max(0.4, 5 / s); for (const w of gquery(M.gW, [p[0] - 2, p[1] - 2, p[0] + 2, p[1] + 2])) { const d = lineDist(p, w.pts); if (d < wd) { wd = d; wb = w; } } if (wb) { wb.clickAt = [p[0], p[1]]; return wb; } }
     let rb = null, rd = 1e9;
     for (const r of gquery(M.gR, [p[0] - 5, p[1] - 5, p[0] + 5, p[1] + 5])) { const d = lineDist(p, r.pts); if (d < r.wd.c / 2 + r.wd.g + 0.5 && d < rd) { rd = d; rb = r; } }
     if (rb) return rb;
@@ -444,6 +476,8 @@
     if (tool === "furniture") { const k = kindSel.value; const sn = ev.shiftKey ? null : snapToKerb(p); const at = sn || { x: p[0], y: p[1], ang: 0 }; commit(districtAt([at.x, at.y]), { op: "add furniture", kind: k, x: r1(at.x), y: r1(at.y), ang: Math.round(at.ang) }); return; }
     if (tool === "building") { drag = { box: p }; return; }
     if (tool === "street") { const q = (!ev.shiftKey && snapToRoad(p)) || p; streetPts.push([r1(q[0]), r1(q[1])]); if (ev.detail >= 2) finishStreet(); draw(); return; }
+    if (tool === "wall") { streetPts.push([r1(p[0]), r1(p[1])]); if (ev.detail >= 2) finishWall(); draw(); return; }
+    if (tool === "gate") { let wb = null, wd = 2; for (const w of gquery(M.gW, [p[0] - 2, p[1] - 2, p[0] + 2, p[1] + 2])) { const d = lineDist(p, w.pts); if (d < wd) { wd = d; wb = w; } } if (!wb) { toast("Click on a wall"); return; } let q = p, bd = 1e9; for (let i = 0; i < wb.pts.length - 1; i++) { const c = nearestOnSeg(p, wb.pts[i], wb.pts[i + 1]); if (dist(p, c) < bd) { bd = dist(p, c); q = c; } } commit(wb.d, { op: "add gate", x: r1(q[0]), y: r1(q[1]) }); return; }
     if (tool === "surface") { const o = pick(p); if (!o || o.t !== "r") { toast("Click on a road"); return; } commit(o.d || districtAt(p), { op: "set surface", at: [r1(p[0]), r1(p[1])], surface: kindSel.value }); return; }
   });
   cv.addEventListener("pointermove", (ev) => {
@@ -514,6 +548,7 @@
     s = Math.min(80, Math.max(0.02, s * k)); ox = ev.offsetX - p[0] * s; oy = ev.offsetY - p[1] * s; draw(); clearTimeout(cv._t); cv._t = setTimeout(saveView, 300);
   }, { passive: false });
   cv.addEventListener("contextmenu", (e) => e.preventDefault());
+  function finishWall() { const pts = streetPts; streetPts = []; if (pts.length < 2) { draw(); return; } commit(districtAt(pts[0]), { op: "add wall", pts }); }
   function finishStreet() {
     const pts = streetPts; streetPts = [];
     if (pts.length < 2) { draw(); return; }
@@ -538,6 +573,8 @@
     else if (o.t === "m") edit = { op: "delete monument", at: [r1(o.x), r1(o.y)] };
     else if (o.t === "p") edit = { op: "delete place", name: o.name };
     else if (o.t === "plot") edit = { op: "delete parcel", at: insidePt(o.pts).map(r1) };
+    else if (o.t === "w") edit = { op: "delete wall", at: (o.clickAt || o.pts[0]).map(r1) };
+    else if (o.t === "g") edit = { op: "delete gate", at: [r1(o.x), r1(o.y)] };
     else if (o.t === "r") {
       if (o.cls !== "street" && o.cls !== "lane") { toast("Main roads and arterials are the city's frame: they can't be deleted here"); return; }
       const mid = o.pts[Math.floor(o.pts.length / 2)], prev = o.pts[Math.floor(o.pts.length / 2) - 1] || o.pts[0];
@@ -553,10 +590,11 @@
     const k = ev.key.toLowerCase();
     if (k === "escape") { streetPts = []; ghost = null; drag = null; if (tool !== "select") setTool("select"); else { sel = null; showPanel(); } draw(); }
     else if (k === "enter" && tool === "street") finishStreet();
-    else if (k === "backspace" || k === "delete") { ev.preventDefault(); if (tool === "street" && streetPts.length) { streetPts.pop(); draw(); } else deleteSel(); }
+    else if (k === "enter" && tool === "wall") finishWall();
+    else if (k === "backspace" || k === "delete") { ev.preventDefault(); if ((tool === "street" || tool === "wall") && streetPts.length) { streetPts.pop(); draw(); } else deleteSel(); }
     else if (k === "r") rotateSel(ev.shiftKey ? -15 : 15);
     else if (k === "[" ) rotateSel(-1); else if (k === "]") rotateSel(1);
-    else if (k === "v") setTool("select"); else if (k === "f") setTool("furniture"); else if (k === "b") setTool("building"); else if (k === "s") setTool("street"); else if (k === "u") setTool("surface");
+    else if (k === "v") setTool("select"); else if (k === "f") setTool("furniture"); else if (k === "b") setTool("building"); else if (k === "s") setTool("street"); else if (k === "u") setTool("surface"); else if (k === "w") setTool("wall"); else if (k === "g") setTool("gate");
   });
   window.addEventListener("keyup", (ev) => { if (ev.key === " ") { spaceDown = false; cv.classList.remove("pan"); } });
 
@@ -573,7 +611,7 @@
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function showPanel() {
     const P = $("panel"), o = sel;
-    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Selected buildings, plots, zones and streets show handles: drag a square to move a corner, a circle to add one, <kbd>⌥</kbd>-click to remove one; exact sizes in the panel. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road.<br><br>Red outlines are problems the built city would have: a house on a road, overlapping buildings, a pole in the carriageway.</div>`;
+    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Selected buildings, plots, zones and streets show handles: drag a square to move a corner, a circle to add one, <kbd>⌥</kbd>-click to remove one; exact sizes in the panel. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road. <b>Wall</b>: click points, <kbd>Enter</kbd> to finish. <b>Gate</b>: click a wall.<br><br>Red outlines are problems the built city would have: a house or a wall on a road, overlapping buildings, a pole in the carriageway.</div>`;
     if (!o) { P.innerHTML = `<h3>${tool === "select" ? "Nothing selected" : "Placing: " + tool}</h3>` + help; return; }
     const bad = runChecks(viewBB(0)).get(o);
     let h = "";
@@ -582,6 +620,8 @@
     else if (o.t === "m") h = `<h3>Monument: ${esc(o.name || o.kind)}</h3><table>${row("Model", esc(o.kind))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Turned", Math.round(o.ang) + "°")}</table>`;
     else if (o.t === "p") h = `<h3>${esc(o.name)}</h3><table>${row("Type", esc(o.kind))}${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table><p class="k">${esc(o.note)}</p>`;
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
+    else if (o.t === "w") { const L = o.pts.reduce((a, q, i) => i ? a + dist(o.pts[i - 1], q) : 0, 0); h = `<h3>Compound wall</h3><table>${row("District", districtName(o.d))}${row("Length", L.toFixed(1) + " m")}</table><p class="k">Worked out by the bake round walled houses (scripts/compounds.py). Delete the piece, or cut a 3 m opening where you clicked.</p><div class="row"><button id="cutw">Cut an opening here</button></div>`; }
+    else if (o.t === "g") h = `<h3>Gate</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table>`;
     else if (o.t === "plot" || o.t === "zone") h = `<h3>${o.t === "plot" ? "Plot" : "Zone"}: ${esc(o.kind)}</h3><table>${row("District", districtName(o.d))}${row("Area", area(o.pts).toFixed(0) + " m²")}</table>`;
     if (o.t === "b") { const c = centroid(o.pts), w = dist(o.pts[0], o.pts[1]), dep = dist(o.pts[1], o.pts[2] || o.pts[0]), ang = Math.atan2(o.pts[1][1] - o.pts[0][1], o.pts[1][0] - o.pts[0][0]) * 180 / Math.PI;
       h += `<hr><b>Exact size and place</b>${o.pts.length !== 4 ? '<p class="k">Setting a size makes it a rectangle.</p>' : ""}<table>${row("Width (m)", `<input id="nw" type="number" step="0.1" value="${w.toFixed(1)}">`)}${row("Depth (m)", `<input id="nd" type="number" step="0.1" value="${dep.toFixed(1)}">`)}${row("Angle (°)", `<input id="na" type="number" step="1" value="${ang.toFixed(0)}">`)}${row("Middle x", `<input id="nx" type="number" step="0.1" value="${c[0].toFixed(1)}">`)}${row("Middle y", `<input id="ny" type="number" step="0.1" value="${c[1].toFixed(1)}">`)}</table><p class="k">Or drag a corner square; drag a round handle to add a corner; ⌥-click a corner to remove it.</p>`; }
@@ -592,6 +632,7 @@
     P.innerHTML = h;
     const on = (id, fn) => { const e = $(id); if (e) e.addEventListener("click", fn); };
     on("rl", () => rotateSel(-15)); on("rr", () => rotateSel(15)); on("del", deleteSel);
+    on("cutw", () => { const at = (o.clickAt || o.pts[0]).map(r1); sel = null; commit(o.d, { op: "cut wall", at, gap: 3 }); });
     const num = (id) => parseFloat(($(id) || {}).value);
     if (o.t === "b" && $("nw")) ["nw", "nd", "na", "nx", "ny"].forEach((id) => $(id).addEventListener("change", async () => {
       const w = num("nw"), dep = num("nd"), a = num("na"), x = num("nx"), y = num("ny");
@@ -629,7 +670,7 @@
   let toastT; function toast(t) { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => (e.style.display = "none"), 3500); }
 
   // ------------------------------------------------------------------ layers, districts, theme
-  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", furniture: "Furniture", places: "Places", labels: "Labels", checks: "Checks" };
+  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", walls: "Walls", furniture: "Furniture", places: "Places", labels: "Labels", checks: "Checks" };
   for (const k of Object.keys(LAYERS)) { const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" ${LAYERS[k] ? "checked" : ""}> ${LNAME[k]}`; l.querySelector("input").addEventListener("change", (e) => { LAYERS[k] = e.target.checked; draw(); }); $("layers").appendChild(l); }
   const dsel = $("district");
   dsel.innerHTML = `<option value="">Go to a district…</option>` + DIST.map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("");

@@ -23,6 +23,7 @@ import bpy  # noqa: E402
 from mathutils import Matrix, Vector  # noqa: E402
 
 from gidi_kit import detail  # noqa: E402
+from gidi_kit import parts as kit_parts  # noqa: E402   (compound walls from the data)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
@@ -37,7 +38,7 @@ TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '')
 TERRAIN = bool(opt.get('--terrain'))   # stand the tile on web/terrain.json (the Google rebuild pilot); off: flat, as before
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, boats, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
+from gidi_kit import archetypes, rules, boats, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -191,6 +192,7 @@ for d, lst in GD['buildings'].items():
     for i, b in enumerate(lst):
         poly = ccw([P(p) for p in b[1:]])
         BUILDINGS.append(dict(d=d, i=i, kind=b[0], poly=poly, c=cent(poly), storeys=st[i] if i < len(st) else 1, style=sty[i] if i < len(sty) else None))
+WALLED = {d: set(v) for d, v in (GD.get('walled') or {}).items()}   # houses with a compound wall in the data: no shop front
 PARCELS = [dict(d=d, kind=p['kind'], pts=[P(q) for q in p['pts'][:-1]]) for d, lst in GD['parcels'].items() for p in lst]
 CIVIC = [dict(type=s['type'], name=s['name'], d=s['d'], poly=ccw([P(p) for p in s['pts'][:-1]])) for s in GD.get('safe_ground', [])]
 for c in CIVIC:
@@ -1226,6 +1228,16 @@ def build_tile(tx, ty, overrides):
             pts = [P(p) for p in w]
             if inside(cent(pts)):
                 structures.estate_wall(tm, pts, Rng('wall', d))
+    for d, ws in (GD.get('compound_walls') or {}).items():   # compound walls from the data (scripts/compounds.py), dressed by character
+        rch = CHARACTER.get(d, 'dense')
+        gts = [P(q) for q in (GD.get('compound_gates') or {}).get(d, [])]
+        for w in ws:
+            pts = [P(p) for p in w]
+            if not inside(cent(pts)):
+                continue
+            wr = Rng('compound', d, round(w[0][0]), round(w[0][1]))
+            kit_parts.compound_wall(sm, pts, rules.compound_spec(rch, wr), wr, closed=False, gates=[g for g in gts if near(g, 4)])
+            built['compound wall'] = built.get('compound wall', 0) + 1
     for gt in GD.get('gates', []):
         pts = [P(p) for p in gt['pts']]
         if inside(cent(pts)):
@@ -1262,7 +1274,7 @@ def attributes(b, roads, polys):
     return dict(kind=b['kind'], storeys=b['storeys'], district=b['d'], poly=poly, facing=facing, frontage=best, near_main=near_main,
                 name=f"{b['d']}_{b['kind']}_{b['i']}", style=b.get('style'),
                 unfinished=b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(b['d'], 0.01)),
-                wall_poly=offset(poly, 2.0), wall_skip=lambda m, others=others: any(in_poly(m, o) for o in others))
+                walled=b['i'] in WALLED.get(b['d'], ()))   # compound walls come from the data now (scripts/compounds.py), not from here
 
 
 def drape(obs):

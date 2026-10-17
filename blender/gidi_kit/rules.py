@@ -112,6 +112,14 @@ def _c(rng, table):
     return hex_rgb(rng.pick(table))
 
 
+def compound_spec(character, rng):
+    """How a compound wall from the data looks, by the district's character (the same ranges the houses' own walls used)."""
+    ch = C.get(character, C['dense'])
+    wealth = rng.between(*ch['wealth'])
+    return dict(h=rng.between(1.9, 2.6) + 0.6 * wealth, paint=_c(rng, ch['paints']), coping=hex_rgb('#f2efe6'), top=rng.pick(ch['wall_top']),
+                gate=_c(rng, {'#2b4a66': 2, '#3a3a3a': 2, '#7a2a2a': 1, '#2e6b4a': 1}), wear=rng.between(*ch['wear']), gap=rng.between(1.6, 3.0))
+
+
 def house_spec(a, rng):
     """Everything about a house's look, from its attributes `a`:
     kind, storeys, district, near_main (m), frontage (m to the street it faces)."""
@@ -143,7 +151,7 @@ def house_spec(a, rng):
         parapet=dict(parapet_h=rng.between(0.6, 1.0), paint=paint, trim=trim, slab=hex_rgb('#8f8a80'), wear=wear),
         balcony_p=ch['balcony_p'] if s > 1 else 0,
         balcony=dict(slab=hex_rgb('#c9c3b6'), rail=rng.pick(ch['rail']), rail_col=trim if rng.chance(0.6) else paint, wear=wear),
-        shop=a['kind'] == 'front' and a.get('frontage', 99) < 9 and rng.chance(ch['shop_p']),
+        shop=a['kind'] == 'front' and a.get('frontage', 99) < 9 and rng.chance(ch['shop_p']) and not a.get('walled'),   # a walled compound has a gate, not a shop front
         shutter=dict(col=_c(rng, {'#9aa3a8': 3, '#2f6fae': 1, '#2e7d4f': 1, '#c0c4c6': 2}), open=rng.between(0.4, 0.9), wear=wear),
         sign=None,
         compound=None,
