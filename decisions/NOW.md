@@ -27,7 +27,8 @@
 
 **Next, booked by the owner:**
 - **Hand-making happens on the drawing board** from now on (owner, 16 Oct): place and fix things there, then "bake the board".
-- **Saturday 17 Oct (today): the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
+- **The Google Earth study waits until the city is in Unreal** (owner, 17 Oct): first the Maze importer, then the study.
+- **Later: the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
 - **The owner storyboards the first cutscene** (the boss's office) as comic panels.
 
 **Done since (16 Oct, night):**
