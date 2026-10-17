@@ -1180,8 +1180,8 @@ def build_tile(tx, ty, overrides):
             if k == 'skywalk':
                 structures.skywalk(tm, pts, s['width'], rng, **({'z': zm} if zm else {}))
             elif k == 'footbridge':
-                near = min(range(len(CANALS)), key=lambda i: min(dist_seg(cent(pts), a, b) for a, b in zip(CANALS[i], CANALS[i][1:]))) if CANALS else None
-                structures.footbridge(tm, structures.snap_footbridge(pts, CANALS, width=CANAL_WIDTH[near] if near is not None else None), s['width'], rng, **({'z': zm} if zm else {}))
+                near_canal = min(range(len(CANALS)), key=lambda i: min(dist_seg(cent(pts), a, b) for a, b in zip(CANALS[i], CANALS[i][1:]))) if CANALS else None   # not "near": that's the tile's own test, used below
+                structures.footbridge(tm, structures.snap_footbridge(pts, CANALS, width=CANAL_WIDTH[near_canal] if near_canal is not None else None), s['width'], rng, **({'z': zm} if zm else {}))
             elif k == 'jetty':
                 structures.jetty(tm, pts, s['width'], rng, **({'z': zm} if zm else {}))
             elif k == 'culvert':
