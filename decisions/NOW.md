@@ -18,9 +18,16 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**Done 17 Oct:**
+- **The map page went blank again** (#91): a comment swallowed a closing brace in the 3D labels. Fixed; the page is now loaded in a browser after every viewer change, not only rebuilt.
+- **Unreal: go.** The owner installed Unreal Engine 5.8.3. The game lives in its own private repo, **`~/gidi-game`** (NewDara-Star/gidi-game): an empty Blueprint project with Python, the editor scripting tools and Epic's experimental MCP plugin (it starts with the editor on http://localhost:8000/mcp). The rules: nothing the importer makes is committed (`Content/Gidi/Generated/`, rebuilt from the gidi data every import); hand-made assets go through Git LFS and are listed in `ASSETS.md`. First goal: walk the Maze in Unreal, move a house on the board, re-import, see it move.
+- **Road ends** (`scripts/roadends.py`): 2,725 road ends touched nothing. Every end is now one of: joined on to the road it was heading for, cut back (it served nobody), a close with a turning space (drawn in 2D, on the board and in 3D), at a house or gate, at the water, or loose (the board flags it). The Northern Road runs on out of the map instead of stopping in the bush.
+- **No more kit-placed poles and lights.** Out in the bush the kit still put up its own poles and street lights (one stood in the middle of a road). They are in the data now like everywhere else (`furniture.py`, bush pass).
+- **Meshy** (the owner's paid plan): fine for props and placeholders, not for the city's buildings (those come from the data). Private ownership on paid plans; no real brands or logos; every Meshy asset listed in `gidi-game/ASSETS.md`.
+
 **Next, booked by the owner:**
 - **Hand-making happens on the drawing board** from now on (owner, 16 Oct): place and fix things there, then "bake the board".
-- **Saturday 18 Oct: the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
+- **Saturday 17 Oct (today): the Google Earth study.** The owner sends screenshots of each inspired place: straight down from about 300 m (keep the scale bar and coordinates), a tilted 3D view, and Street View. They live outside the repo (`~/Real-world/research/google/<district>/`); only measurements go into the data (study yes, lift no). Start with the Maze and the Hub.
 - **The owner storyboards the first cutscene** (the boss's office) as comic panels.
 
 **Done since (16 Oct, night):**
