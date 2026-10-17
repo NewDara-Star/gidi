@@ -60,6 +60,7 @@
 - **Freeze everything** once a district is built, so any spot can be quizzed (`scripts/whats_here.py`). The map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths: `scripts/cross_sections.py`.
 - **Markets spill onto the road:** traders take the carriageway, with a lane kept clear.
+- **Every road end is something** (17 Oct): a junction, a close with a turning space, a gate or house, the water, or the edge of the map. A road never just stops (`scripts/roadends.py`; the board flags loose ends).
 
 ## Data and research
 - **Google: study yes, lift no.** Studying Lagos with Google (Earth, Maps, Street View, Open Buildings) is fair game. Never copy Google's imagery or geometry into Gidi. Numbers only.
@@ -70,5 +71,6 @@
 ## How to work
 - **Git:** never push to main; branches and PRs. Self-merge is fine when the checks or living test pass. Docs-only PRs can merge directly.
 - **Writing:** plain words for a designer, honest critique, one recommendation. Look at what you make before showing it.
-- **Hold-offs:** don't publish to the live artifact link (a different account). Don't start Unreal work until the owner says go.
+- **Hold-offs:** don't publish to the live artifact link (a different account).
+- **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`.
 - **Cost:** use cheaper models where possible (Pro plan).
