@@ -401,6 +401,10 @@ def rd(o):
     return o
 # ---- frozen districts (web/hand/<id>.json): replaced by their snapshot, then their hand edits, last of all (scripts/hand.py)
 print("frozen districts:",hand.apply_snapshots(out,keep_decks=True),"| hand edits:",hand.apply_edits(out))
+# ---- road ends (scripts/roadends.py): every road that stops short is joined on, cut back, turned into a close or left at a
+# gate or the water; then the roads out in the bush get their poles and lights (scripts/furniture.py), not the kit
+import roadends
+print("road ends:",roadends.road_ends(out),"| bush furniture:",furniture.furniture(out,[],bush=True),"| late furniture edits:",hand.apply_late_furniture(out))
 # ---- compound walls (scripts/compounds.py): worked out from the finished houses and roads, then the hand edits to them
 import compounds
 print("compound walls (pieces, km, walled houses):",compounds.compounds(out),"| wall edits:",hand.apply_wall_edits(out))

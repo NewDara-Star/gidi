@@ -282,6 +282,30 @@ WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
 DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
 
 
+LATE = []   # furniture edits that found nothing in apply_edits: tried again once the bush furniture is placed
+
+
+def apply_late_furniture(out):
+    """The furniture edits apply_edits could not place: the poles and lights out in the bush are placed after it."""
+    n = 0
+    for d, e in LATE:
+        P = Point(e['at'])
+        c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if not e.get('kind') or f_['kind'] == e['kind']]
+        c = [x for x in c if x[0] < 2.0]
+        if not c:
+            print('  hand edit found no furniture at', e['at'], e.get('note', '')); continue
+        if e['op'] == 'delete furniture':
+            out['furniture'].pop(min(c)[1])
+        else:
+            f_ = out['furniture'][min(c)[1]]
+            f_['x'], f_['y'] = e['to']
+            if 'ang' in e:
+                f_['ang'] = e['ang']
+        n += 1
+    LATE.clear()
+    return n
+
+
 def apply_detail_edits(out):
     """Edits to the house fronts and trees (scripts/fronts.py, scripts/trees.py), after they are worked out:
     {"op": "set front", "at": [x, y], "kind": .., "e": side, "shop": 0/1, "aw": canopy m, "bal": [sides]}   any of e/shop/aw/bal
@@ -413,13 +437,13 @@ def apply_edits(out):
                 if c:
                     out['furniture'].pop(min(c)[1])
                 else:
-                    print('  hand edit found no furniture at', e['at'], e.get('note', ''))
+                    LATE.append((d, e))   # out in the bush: its furniture is placed after the road ends (apply_late_furniture)
             elif op == 'move furniture':   # the nearest of its kind within 2 m goes to "to", turned to "ang"
                 P = Point(e['at'])
                 c = [(Point(f_['x'], f_['y']).distance(P), i) for i, f_ in enumerate(out.get('furniture', [])) if not e.get('kind') or f_['kind'] == e['kind']]
                 c = [x for x in c if x[0] < 2.0]
                 if not c:
-                    print('  hand edit found no furniture at', e['at'], e.get('note', '')); continue
+                    LATE.append((d, e)); continue
                 f_ = out['furniture'][min(c)[1]]
                 f_['x'], f_['y'] = e['to']
                 if 'ang' in e:

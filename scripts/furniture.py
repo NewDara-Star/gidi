@@ -21,9 +21,16 @@ LIGHT_M, POLE_M, TRANSFORMER_M, BUS_M = 38.0, 36.0, 260.0, 450.0
 SPACE = 1.5   # nothing within this of another piece of furniture
 
 
-def furniture(out, districts):
-    """districts: ids built to the cross-sections. Returns a report."""
-    polys = {d['id']: Polygon(d['poly'][0]) for d in out['districts'] if d['id'] in districts}
+def furniture(out, districts, bush=False):
+    """districts: ids built to the cross-sections. Returns a report. bush=True: the roads outside every district instead
+    (owner, 17 Oct 2026: if it's in the 3D, it's in the 2D; the kit used to put up its own poles and lamps out there, and
+    one stood in the middle of a road). Those are added to what is already placed, with d "bush"."""
+    if bush:
+        from shapely.geometry import box
+        W, H = out['size']
+        polys = {'bush': box(0, 0, W, H).difference(unary_union([Polygon(d['poly'][0]).buffer(0) for d in out['districts']]))}
+    else:
+        polys = {d['id']: Polygon(d['poly'][0]) for d in out['districts'] if d['id'] in districts}
     if not polys:
         return {}
     area = unary_union(list(polys.values()))
@@ -42,8 +49,10 @@ def furniture(out, districts):
     B = [p for L in out['buildings'].values() for b in L if len(b) > 3 for p in [Polygon(b[1:]).buffer(0)] if near_area.intersects(p)]   # neighbours' too
     bt = STRtree(B)
     wet = unary_union([Polygon(w) for w in out['water'] + out['ocean']])
-    placed = []
+    placed = list(out.get('furniture', [])) if bush else []
     grid = {}
+    for f in placed:   # nothing too close to what the districts already have
+        grid.setdefault((int(f['x'] // 10), int(f['y'] // 10)), []).append((f['x'], f['y']))
     rep = {}
 
     edge = area.buffer(40)   # a junction on the district's edge gets all its lights, on both sides of the line

@@ -98,6 +98,10 @@
     for (const [d, L] of Object.entries(G.trees || {})) L.forEach((q) => addT({ t: "t", d, x: q[0], y: q[1], kind: q[2] }));
     for (const [d, L] of Object.entries(G.compound_gates || {})) L.forEach((q) => M.GATE.push({ t: "g", d, x: q[0], y: q[1] }));
     M.WATER = [...(G.water || []), ...(G.ocean || [])].map((r) => ({ pts: r, bb: bboxOf(r) }));
+    // road ends that meet no other road (scripts/roadends.py): a close's turning space is drawn, a loose end is a problem
+    const SID = {};
+    for (const [src, cls] of [["streets", "street"], ["lanes", "lane"]]) for (const [d, L] of Object.entries(S[src] || {})) L.forEach((x, i) => (SID[`${d}/${cls}/${i}`] = x));
+    M.END = (G.road_ends || []).filter((e) => e.t === "close" || e.t === "loose").map((e) => ({ t: "end", ...e, surf: SID[e.road] || "tar", bb: [e.x - (e.r || 3), e.y - (e.r || 3), e.x + (e.r || 3), e.y + (e.r || 3)] }));
   }
   function addT(o) { M.TR.push(o); gadd(M.gT, o, [o.x, o.y, o.x, o.y]); }
   function delT(o) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); M.TR.splice(M.TR.indexOf(o), 1); }
@@ -239,6 +243,7 @@
       for (const r of gquery(M.gR, [f.x - 1, f.y - 1, f.x + 1, f.y + 1])) if (r.cls !== "path" && r.cls !== "bridge" && lineDist(p, r.pts) < r.wd.c / 2 - 0.2) { bad.set(f, "in the carriageway: " + (r.name || r.cls)); break; }
       if (!bad.has(f)) for (const b of gquery(M.gB, [f.x, f.y, f.x, f.y])) if (inPoly(p, b.pts) && edgeDist(p, b.pts) > 0.3) { bad.set(f, "inside a " + b.kind); break; }
     }
+    for (const e of M.END) if (e.t === "loose" && hit(e.bb, v)) bad.set(e, "a road that stops short: it meets no road, house, gate or water");
     checkCache = { v: M.version, key, bad };
     return bad;
   }
@@ -276,6 +281,7 @@
       band((r) => r.wd.c + 2 * (r.wd.g + r.wd.w), css("--walk"));
       band((r) => r.wd.g > 0 ? r.wd.c + 2 * r.wd.g : 0, css("--gutter"));
       band((r) => r.wd.c, (r) => SURF(r.surf));
+      for (const e of M.END) if (e.t === "close" && hit(e.bb, v)) { ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, 7); ctx.fillStyle = SURF(e.surf); ctx.fill(); }
       if (s > 1.2) {   // edge lines: where the carriageway meets the gutter, to the centimetre the kit uses
         ctx.setLineDash([3, 6]); ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = Math.max(0.12, px);
         for (const r of R) if (r.cls === "main" || r.cls === "art" || r.cls === "exp") { path(r.pts); ctx.stroke(); }
@@ -307,6 +313,7 @@
     if (LAYERS.trees && s > 0.3) for (const t of gquery(M.gT, v)) { const r = treeR(t); ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, 7); ctx.fillStyle = bad.has(t) ? "rgba(209,36,47,.35)" : t.kind === "palm" ? "rgba(70,140,60,.35)" : "rgba(50,120,50,.30)"; ctx.fill(); ctx.strokeStyle = bad.has(t) ? css("--bad") : "#3d7a32"; ctx.lineWidth = bad.has(t) ? 2.5 * px : Math.max(px, 0.08); ctx.stroke(); if (t.kind === "palm" && s > 2) { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = k * 2 * Math.PI / 5; ctx.moveTo(t.x, t.y); ctx.lineTo(t.x + r * Math.cos(a), t.y + r * Math.sin(a)); } ctx.stroke(); } }
     // furniture, to true size where it has one, never smaller than a few pixels
     if (LAYERS.furniture && s > 0.9) for (const f of gquery(M.gF, v)) drawFurniture(f, bad.has(f), px);
+    for (const e of M.END) if (bad.has(e)) { ctx.beginPath(); ctx.arc(e.x, e.y, Math.max(4, 10 * px), 0, 7); ctx.strokeStyle = css("--bad"); ctx.lineWidth = 2.5 * px; ctx.stroke(); }
     for (const m of M.MON) if (m.x >= v[0] && m.x <= v[2] && m.y >= v[1] && m.y <= v[3]) { ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ang * Math.PI / 180); const r = Math.max(2, 6 * px); ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; ctx.lineTo(rr * Math.sin(a), -rr * Math.cos(a)); } ctx.closePath(); ctx.fillStyle = "#c08a00"; ctx.fill(); ctx.restore(); }
     // selection, hover, ghosts
     const outline = (o, col, w) => { ctx.strokeStyle = col; ctx.lineWidth = w * px; if (o.t === "b" || o.t === "plot" || o.t === "zone") { path(o.pts, true); ctx.stroke(); } else if (o.t === "r") { path(o.pts); ctx.lineWidth = o.wd.c + 6 * px; ctx.globalAlpha = 0.25; ctx.stroke(); ctx.globalAlpha = 1; } else { ctx.beginPath(); ctx.arc(o.x, o.y, Math.max(1.2, 9 * px), 0, 7); ctx.stroke(); } };
@@ -669,6 +676,7 @@
     else if (o.t === "p") h = `<h3>${esc(o.name)}</h3><table>${row("Type", esc(o.kind))}${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table><p class="k">${esc(o.note)}</p>`;
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
     else if (o.t === "w") { const L = o.pts.reduce((a, q, i) => i ? a + dist(o.pts[i - 1], q) : 0, 0); h = `<h3>Compound wall</h3><table>${row("District", districtName(o.d))}${row("Length", L.toFixed(1) + " m")}</table><p class="k">Worked out by the bake round walled houses (scripts/compounds.py). Delete the piece, or cut a 3 m opening where you clicked.</p><div class="row"><button id="cutw">Cut an opening here</button></div>`; }
+    else if (o.t === "end") h = `<h3>${o.t === "end" && o.r ? "The end of a close" : "A road that stops short"}</h3><table>${row("Road", esc(o.road))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${o.r ? row("Turning space", (o.r * 2).toFixed(1) + " m across") : ""}</table><p class="k">${o.r ? "Worked out by the bake (scripts/roadends.py): a round of tar at the end so cars can turn." : "It meets no other road, no house or gate, and no water. Join it on with the Street tool, or cut it back."}</p>`;
     else if (o.t === "t") h = `<h3>Tree: ${esc(o.kind)}</h3><table>${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Crown", "about " + (treeR(o) * 2).toFixed(1) + " m across")}</table><p class="k">Drag to move; Delete removes.</p>`;
     else if (o.t === "g") h = `<h3>Gate</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table>`;
     else if (o.t === "plot" || o.t === "zone") h = `<h3>${o.t === "plot" ? "Plot" : "Zone"}: ${esc(o.kind)}</h3><table>${row("District", districtName(o.d))}${row("Area", area(o.pts).toFixed(0) + " m²")}</table>`;
@@ -714,9 +722,9 @@
     const nm = $("nm"); if (nm) nm.addEventListener("change", () => commit(o.d, { op: "name", at: [r1(o.x), r1(o.y)], kind: o.kind, name: nm.value }));
   }
   function renderStatus(bad) {
-    const n = { road: 0, overlap: 0, furn: 0 };
-    for (const [o, why] of bad) { if (typeof o === "string") continue; if (o.t === "f" || o.t === "t") n.furn++; else if (why.startsWith("on the road") || why.startsWith("a wall on")) n.road++; else n.overlap++; }
-    $("checks").innerHTML = s < 0.6 ? "Zoom in to check" : `In view: <b style="color:${n.road ? css("--bad") : "inherit"}">${n.road}</b> on a road · <b style="color:${n.overlap ? css("--bad") : "inherit"}">${n.overlap}</b> overlapping · <b style="color:${n.furn ? css("--bad") : "inherit"}">${n.furn}</b> furniture or trees misplaced`;
+    const n = { road: 0, overlap: 0, furn: 0, ends: 0 };
+    for (const [o, why] of bad) { if (typeof o === "string") continue; if (o.t === "end") n.ends++; else if (o.t === "f" || o.t === "t") n.furn++; else if (why.startsWith("on the road") || why.startsWith("a wall on")) n.road++; else n.overlap++; }
+    $("checks").innerHTML = s < 0.6 ? "Zoom in to check" : `In view: <b style="color:${n.road ? css("--bad") : "inherit"}">${n.road}</b> on a road · <b style="color:${n.overlap ? css("--bad") : "inherit"}">${n.overlap}</b> overlapping · <b style="color:${n.furn ? css("--bad") : "inherit"}">${n.furn}</b> furniture or trees misplaced${n.ends ? ` · <b style="color:${css("--bad")}">${n.ends}</b> road${n.ends > 1 ? "s" : ""} stopping short` : ""}`;
     $("pending").textContent = !SERVER ? "Read-only (no board server)" : pendingN ? `${pendingN} edit${pendingN > 1 ? "s" : ""} not baked yet${thawN ? ` (${thawN} road edit${thawN > 1 ? "s" : ""}: needs a thaw bake)` : ""}` : "Everything is baked";
   }
   // click the problem count to go to each problem in view in turn
