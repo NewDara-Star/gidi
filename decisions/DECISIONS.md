@@ -60,6 +60,7 @@
 - **Freeze everything** once a district is built, so any spot can be quizzed (`scripts/whats_here.py`). The map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths: `scripts/cross_sections.py`.
 - **Markets spill onto the road:** traders take the carriageway, with a lane kept clear.
+- **Everything is in the data** (17 Oct: "even the grain of sand on the ground... if everything is in the data, we'll be able to better place stuff"). Anything that stands somewhere is an object in the data, with its own position (parked cars, stalls, water tanks, signs, people's spots). What is too fine to place one by one (sand, grass, litter, stains) is in the data as painted areas with a kind, a density and a seed, so it can be seen, checked and changed on the board. The kit and Unreal only dress what the data says; they invent nothing.
 - **Every road end is something** (17 Oct): a junction, a close with a turning space, a gate or house, the water, or the edge of the map. A road never just stops (`scripts/roadends.py`; the board flags loose ends).
 
 ## Data and research
