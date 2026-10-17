@@ -132,13 +132,29 @@ def check_furniture(did, G):
     bad = []
     for f in F:
         p = Point(f["x"], f["y"])
-        if f["kind"] == "overhead sign":
+        if f["kind"] in ("overhead sign", "gantry"):
             continue   # a gantry spans the carriageway by design; its posts stand on the walkways
         if any(strip[j].contains(p) for j in st.query(p)):
             bad.append((1, "%s %s on a carriageway or gutter" % (f["kind"], xy(p))))
         elif any(B[j].contains(p) for j in bt.query(p)):
             bad.append((1, "%s %s inside a building" % (f["kind"], xy(p))))
     return len(bad), worst(bad) + " (%d pieces checked)" % len(F)
+
+
+def check_things(did, G, _cache={}):
+    """16: every thing the bake places (scripts/things.py) stands on ground that allows it (scripts/ground.py): no parked car
+    on a junction's carriageway, the rails or the water, no person in the road or the gutter, no boat on land."""
+    import ground as GU
+    if "g" not in _cache:
+        _cache["g"] = GU.Ground(G)
+    g = _cache["g"]
+    T = [t for t in G.get("things", []) if t.get("d") == did]
+    bad = []
+    for t in T:
+        cl = g(t["x"], t["y"])
+        if not GU.allowed(cl, t["k"]):
+            bad.append((1, "%s (%.0f,%.0f) on %s" % (t["k"], t["x"], t["y"], cl)))
+    return len(bad), worst(bad) + " (%d things checked)" % len(T)
 
 
 def in_market_street(G, did, b, _cache={}):
@@ -468,6 +484,7 @@ def run(did):
     add("14 gutters", check_gutters(did, G, [poly(b[1:]) for b in G["buildings"].get(did, []) if not (b[0] == "stalls" and in_market_street(G, did, b))]))   # a market table stands across the gutter on purpose   # the baked city's houses: the bake clears some (roundabouts)
     if gen.get("fabric") == "lagos":
         add("15 street furniture on walkways", check_furniture(did, G))
+    add("16 things on their ground", check_things(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1

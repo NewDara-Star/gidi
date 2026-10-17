@@ -185,6 +185,9 @@ for i, m in enumerate(GD.get('mains', [])):
     _seen_mains.add(sig)
     _mk = _main_n.get(m.get('d'), 0); _main_n[m.get('d')] = _mk + 1   # named within its district, as scripts/isms.py names their gutters
     ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f"{m.get('d')}/main/{_mk}", name=m.get('name')))
+THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py), on the map's axes
+for _t in GD.get('things', []):
+    THINGS.setdefault((int(_t['x'] // SIZE), int(_t['y'] // SIZE)), []).append(_t)
 CLOSES = {}   # road id: [(x, y, radius)] the turning spaces at the ends of the closes (scripts/roadends.py)
 for e_ in GD.get('road_ends', []):
     if e_['t'] == 'close':
@@ -342,64 +345,16 @@ def span_road(q):
 
 
 def monument_sites():
-    """Where the monuments stand (blender/gidi_kit/monuments.py), the same for every tile and detail:
-    a corner of the main-road junctions (a statue, clock tower, sculpture or LED screen by the
-    district's character, up to four a district), a welcome arch on the main roads entering each
-    built district, and the lighthouse on the port mole. Also written to web/city/monuments.json."""
-    mains = [r for r in ROADS if r['k'] == 'main']
-    sites, per = [], {}
-    for i, r1 in enumerate(mains):
-        for r2 in mains[i + 1:]:
-            for a, b in zip(r1['pts'], r1['pts'][1:]):
-                for c, d in zip(r2['pts'], r2['pts'][1:]):
-                    x = _seg_cross(a, b, c, d)
-                    if not x:
-                        continue
-                    j = (x[0], x[1])
-                    dist = district_at(j)
-                    if dist not in BUILT or any(math.dist(j, (s_['x'], s_['y'])) < 60 for s_ in sites):
-                        continue
-                    rng = Rng('monument', round(j[0]), round(j[1]))
-                    u1, u2 = _unit(x[2]), _unit(x[3])
-                    corners = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
-                    rng.shuffle(corners)
-                    for sgn1, sgn2 in corners:
-                        bis = _unit((u1[0] * sgn1 + u2[0] * sgn2, u1[1] * sgn1 + u2[1] * sgn2))
-                        p = (j[0] + bis[0] * 16, j[1] + bis[1] * 16)
-                        if _clear(p, 3.0) and per.get(dist, 0) < 4:
-                            kinds = monuments.JUNCTION[CHARACTER.get(dist, 'dense')]
-                            kind = kinds[per.get(dist, 0) % len(kinds)]
-                            per[dist] = per.get(dist, 0) + 1
-                            sites.append(dict(kind=kind, x=p[0], y=p[1], ang=math.atan2(-bis[1], -bis[0]), d=dist, r=2.5 if kind != 'led_board' else 1.0))
-                            break
-    # welcome arches: main roads crossing into a built district, one or two a district
-    arches = {}
-    for r in mains:
-        for a, b in zip(r['pts'], r['pts'][1:]):
-            for dname, poly in DISTRICTS.items():
-                if dname not in BUILT or arches.get(dname, 0) >= 2:
-                    continue
-                for c, d in zip(poly, poly[1:] + poly[:1]):
-                    x = _seg_cross(a, b, c, d)
-                    if not x:
-                        continue
-                    u = _unit(x[2])
-                    # step 30 m inside the district along the road
-                    for sgn in (1, -1):
-                        p = (x[0] + u[0] * 30 * sgn, x[1] + u[1] * 30 * sgn)
-                        if in_poly(p, poly) and all(math.dist(p, (s_['x'], s_['y'])) > 50 for s_ in sites):
-                            sites.append(dict(kind='arch', x=p[0], y=p[1], ang=math.atan2(u[1], u[0]), d=dname, span=r['w'] + 2, name=next(dd['name'] for dd in GD['districts'] if dd['id'] == dname)))
-                            arches[dname] = arches.get(dname, 0) + 1
-                            break
-    # monuments placed by hand (the data's "monuments", scripts/hand.py "add monument"): a district with any keeps only those; the
-    # lighthouse stands only where it is placed (its old spot was the v1 port)
-    hand = GD.get('monuments') or []
-    hand_d = {m_['d'] for m_ in hand}
-    sites = [s_ for s_ in sites if s_['d'] not in hand_d]
-    for m_ in hand:
+    """Every monument from the data (scripts/things.py places the junction statues, welcome arches, point landmarks, murals
+    and billboards by rule; the rest are placed by hand): the kit draws them where the data says. Also written to
+    web/city/monuments.json."""
+    sites = []
+    for m_ in GD.get('monuments') or []:
         x_, y_ = P((m_['x'], m_['y']))
-        sites.append(dict(kind=m_['model'], x=x_, y=y_, ang=-math.radians(m_.get('ang', 0)), d=m_['d'], r=3.4 if m_['model'] == 'lighthouse' else 2.5 if m_['model'] != 'led_board' else 1.0,
-                          **({'span': m_.get('span', 16), 'name': m_.get('name') or next(dd['name'] for dd in GD['districts'] if dd['id'] == m_['d'])} if m_['model'] == 'arch' else {})))
+        k = m_['model']
+        sites.append(dict(kind=k, x=x_, y=y_, ang=-math.radians(m_.get('ang', 0)), d=m_['d'],
+                          r=3.4 if k == 'lighthouse' else 1.0 if k == 'led_board' else 0.6 if k == 'billboard' else 0 if k == 'mural_wall' else 2.5,
+                          **({'span': m_.get('span', 16), 'name': m_.get('name') or next(dd['name'] for dd in GD['districts'] if dd['id'] == m_['d'])} if k == 'arch' else {})))
     path = os.path.join(ROOT, 'web', 'city', 'monuments.json')
     try:
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -412,82 +367,8 @@ def monument_sites():
 
 
 MONUMENTS = monument_sites()
-POINT_LANDMARKS = {'Coconut Beach': ('beach_arch', -math.pi / 2), 'Hunter Roundabout': ('statue:hunter', 0.0)}  # name -> (kind, facing)
-for _poi in GD['pois']:
-    if _poi['name'] in POINT_LANDMARKS and _poi['d'] in BUILT:  # these wait for their districts to be built
-        _k, _a = POINT_LANDMARKS[_poi['name']]
-        _q = P((_poi['x'], _poi['y']))
-        MONUMENTS.append(dict(kind=_k, x=_q[0], y=_q[1], ang=_a, d=_poi['d'], r=3.0))
 
 
-def street_art_sites():
-    """Mural walls (four each in the Hub, the Maze and the Heights) and printed billboards on the
-    main roads and arterials (every ~350 m, one side or the other), beside the road and clear of
-    buildings."""
-    out = []
-    rng = Rng('street art')
-    per = {}
-    roads = list(ROADS) + [dict(k='main', pts=[P(p) for p in a_['pts']], w=ART_W.get(a_['cls'], 18.0), d=None, id='art/' + a_['name']) for a_ in GD.get('arterials', []) if a_['cls'] != 'bridge']
-    for r in roads:
-        if r['k'] != 'main':
-            continue
-        d = r.get('d') or district_at(r['pts'][len(r['pts']) // 2])
-        if d not in BUILT:
-            continue
-        S, acc = 0.0, 0.0
-        for a, b in zip(r['pts'], r['pts'][1:]):
-            L = math.dist(a, b)
-            if L < 1e-6:
-                continue
-            u = _unit((b[0] - a[0], b[1] - a[1]))
-            k = (350 - acc % 350) % 350 + 60
-            while k < L:
-                side = rng.pick([-1, 1])
-                n = (-u[1] * side, u[0] * side)
-                if d in ('hub', 'maze', 'heights') and per.get(d, 0) < 4 and rng.chance(0.5):
-                    q = (a[0] + u[0] * k + n[0] * (r['w'] / 2 + 5), a[1] + u[1] * k + n[1] * (r['w'] / 2 + 5))
-                    if _clear(q, 14) and district_at(q) == d:
-                        out.append(dict(kind='mural_wall', x=q[0], y=q[1], ang=math.atan2(u[1], u[0]), d=d, r=0))
-                        per[d] = per.get(d, 0) + 1
-                elif d != 'estate' and rng.chance(0.55):
-                    q = (a[0] + u[0] * k + n[0] * (r['w'] / 2 + 7), a[1] + u[1] * k + n[1] * (r['w'] / 2 + 7))
-                    if _clear(q, 7) and district_at(q) == d:
-                        out.append(dict(kind='billboard', x=q[0], y=q[1], ang=math.atan2(u[1], u[0]), d=d, r=0.6))
-                k += 350
-            acc += L
-    return out
-
-
-MONUMENTS += street_art_sites()
-
-
-def boat_sites():
-    """Ferries and water buses on the ferry routes (one under way on each, a water bus at each
-    end), and sand dredgers off the shore by Agboyi Creek and the sawmill."""
-    out = []
-    wet = [[P(p) for p in w] for w in list(GD['water']) + list(GD['ocean'])]
-    on_water = lambda q: any(in_poly(q, w) for w in wet)
-    for f in GD.get('ferries', []):
-        a, b = P(f['pts'][0]), P(f['pts'][-1])
-        ang = math.atan2(b[1] - a[1], b[0] - a[0])
-        for t, kind, back in ((0.4, 'ferry', False), (0.06, 'water_bus', True), (0.94, 'water_bus', False)):
-            q = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
-            if on_water(q):
-                out.append(dict(kind=kind, x=q[0], y=q[1], ang=ang + (math.pi if back else 0)))
-    for name in ('Agboyi Creek Villages', 'Okobaba Sawmill', 'Canoe Jetty'):
-        poi = next((p for p in GD['pois'] if p['name'] == name), None)
-        if not poi:
-            continue
-        q0 = P((poi['x'], poi['y']))
-        for ang in [k * math.pi / 8 for k in range(16)]:
-            q = (q0[0] + math.cos(ang) * 160, q0[1] + math.sin(ang) * 160)
-            if on_water(q) and on_water((q0[0] + math.cos(ang) * 200, q0[1] + math.sin(ang) * 200)):
-                out.append(dict(kind='dredger', x=q[0], y=q[1], ang=ang + math.pi / 2))
-                break
-    return out
-
-
-BOATS = boat_sites()
 
 
 DNAME = {d['id']: d['name'] for d in GD['districts']}
@@ -504,129 +385,28 @@ def _ahead_name(road, end_pt, here):
 
 
 def roadside_sites():
-    """Direction signs before every main-road and arterial junction (both ways along each road,
-    naming where the crossing road goes left and right), overhead gantries on the expressways and
-    bridges every 800 m, speed limits after each junction, no-parking discs by the markets."""
-    big = [dict(r, cls='main') for r in ROADS if r['k'] == 'main']
-    for a in GD.get('arterials', []):
-        big.append(dict(k='art', cls=a['cls'], pts=[P(p) for p in a['pts']], w=ART_W.get(a['cls'], 18.0), name=a['name'], d=None))
-    sites = []
-    # junctions: every crossing of two big roads, and every big road ending on another (a T)
-    junctions = []
-    for i, r1 in enumerate(big):
-        for r2 in big[i + 1:]:
-            for a, b in zip(r1['pts'], r1['pts'][1:]):
-                for c, d in zip(r2['pts'], r2['pts'][1:]):
-                    x = _seg_cross(a, b, c, d)
-                    if x:
-                        junctions.append(((x[0], x[1]), r1, r2))
-    for r in big:
-        for e in (r['pts'][0], r['pts'][-1]):
-            for o in big:
-                if o is r:
-                    continue
-                best = None
-                for a, b in zip(o['pts'], o['pts'][1:]):
-                    dx, dy = b[0] - a[0], b[1] - a[1]
-                    L2 = dx * dx + dy * dy or 1
-                    t = max(0.0, min(1.0, ((e[0] - a[0]) * dx + (e[1] - a[1]) * dy) / L2))
-                    q = (a[0] + dx * t, a[1] + dy * t)
-                    if math.dist(q, e) < 14 and 0.02 < t < 0.98:
-                        best = q
-                if best:
-                    junctions.append((best, r, o))
-    seen = []
-    for J, r1, r2 in junctions:
-        if any(math.dist(J, q) < 20 for q in seen):
-            continue
-        seen.append(J)
-        here = district_at(J)
-        if here not in BUILT:
-            continue
-        for r, other in ((r1, r2), (r2, r1)):
-            # the approach along r from each side: the point 30 m before J
-            pts = r['pts']
-            for sgn in (1, -1):
-                # walk back along r from J by 30 m in direction -sgn
-                k = min(range(len(pts) - 1), key=lambda i: dist_seg(J, pts[i], pts[i + 1]))
-                a, b = pts[k], pts[k + 1]
-                u = _unit((b[0] - a[0], b[1] - a[1]))
-                u = (u[0] * sgn, u[1] * sgn)  # travel direction towards J
-                p0 = (J[0] - u[0] * 30, J[1] - u[1] * 30)
-                if min(dist_seg(p0, pts[i], pts[i + 1]) for i in range(len(pts) - 1)) > 2.0:
-                    continue  # the road doesn't come from this side (J is its own end)
-                right = (u[1], -u[0])
-                off = r['w'] / 2 + 2.2
-                sp = (p0[0] + right[0] * off, p0[1] + right[1] * off)
-                if not _clear(sp, 1.0) or district_at(sp) not in BUILT:
-                    continue
-                lines = []
-                for end in (other['pts'][0], other['pts'][-1]):
-                    side = u[0] * (end[1] - J[1]) - u[1] * (end[0] - J[0])
-                    if math.dist(end, J) < 25:
-                        continue
-                    lines.append(('left' if side > 0 else 'right', _ahead_name(other, end, here)))
-                ahead = pts[-1] if sgn > 0 else pts[0]
-                if math.dist(ahead, J) > 60:
-                    lines.insert(0, ('up', _ahead_name(r, ahead, here)))
-                uniq = []
-                for ln in lines:
-                    if ln[1] not in [x[1] for x in uniq]:
-                        uniq.append(ln)
-                if uniq:
-                    sites.append(dict(kind='dir', x=sp[0], y=sp[1], face=math.atan2(-u[1], -u[0]), lines=uniq[:3]))
-                # a speed limit 25 m after the junction, going away from it
-                q = (J[0] + u[0] * 25 + right[0] * off, J[1] + u[1] * 25 + right[1] * off)
-                if _clear(q, 1.0) and district_at(q) in BUILT:
-                    sites.append(dict(kind='speed', x=q[0], y=q[1], face=math.atan2(-u[1], -u[0]), v=SPEED.get(r.get('cls', 'main'), 50)))
-    # gantries on the expressways and bridges: every 800 m, one per direction
-    for r in big:
-        if r.get('cls') not in ('exp', 'bridge'):
-            continue
-        S = sum(math.dist(r['pts'][i], r['pts'][i + 1]) for i in range(len(r['pts']) - 1))
-        s_ = 300.0
-        while s_ < S - 200:
-            acc = 0.0
-            for a, b in zip(r['pts'], r['pts'][1:]):
-                L = math.dist(a, b)
-                if acc + L >= s_:
-                    t = (s_ - acc) / L
-                    p = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
-                    u = _unit((b[0] - a[0], b[1] - a[1]))
-                    for sgn, end in ((1, r['pts'][-1]), (-1, r['pts'][0])):
-                        here = district_at(p)
-                        q = (p[0] + u[0] * 30 * sgn, p[1] + u[1] * 30 * sgn)
-                        panels = [[('up', _ahead_name(r, end, here))], [('up', r['name'])]]
-                        sites.append(dict(kind='gantry', x=q[0], y=q[1], ang=math.atan2(u[1] * sgn, u[0] * sgn), span=r['w'] + 1.0, panels=panels,
-                                          z0=structures.profile(r['pts'], BRIDGE_Z.get(r['name']), structures.BRIDGE_H['cable' if 'Cable' in r['name'] else 'long'], structures.RAMP['bridge'])(s_ + 30 * sgn) if r['cls'] == 'bridge' else 0.0))
-                    break
-                acc += L
-            s_ += 800
-    # no parking by the markets, on the nearest big road
-    for poi in GD['pois']:
-        if poi['type'] != 'market':
-            continue
-        p = P((poi['x'], poi['y']))
-        best = None
-        for r in big:
-            for a, b in zip(r['pts'], r['pts'][1:]):
-                d = dist_seg(p, a, b)
-                if d < 120 and (best is None or d < best[0]):
-                    best = (d, r, a, b)
-        if best:
-            _, r, a, b = best
-            dx, dy = b[0] - a[0], b[1] - a[1]
-            L2 = dx * dx + dy * dy or 1
-            t = max(0.0, min(1.0, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2))
-            u = _unit((dx, dy))
-            for sg in (1, -1):
-                q = (a[0] + dx * t + u[1] * sg * (r['w'] / 2 + 1.8), a[1] + dy * t - u[0] * sg * (r['w'] / 2 + 1.8))
-                if _clear(q, 0.8):
-                    sites.append(dict(kind='noparking', x=q[0], y=q[1], face=math.atan2(-u[1] * sg, -u[0] * sg)))
+    """The road signs from the data (scripts/things.py: direction signs before the big junctions, speed limits after them,
+    no-parking discs by the markets, gantries over the expressways and bridges), in the kit's frame."""
+    KIND = {'direction sign': 'dir', 'speed sign': 'speed', 'no parking sign': 'noparking', 'gantry': 'gantry'}
+    by_name = {a_['name']: a_ for a_ in ARTS}
     out = []
-    for s_ in sites:  # one sign of a kind at a spot (a junction found from both of its roads)
-        if not any(o['kind'] == s_['kind'] and math.dist((o['x'], o['y']), (s_['x'], s_['y'])) < 6 for o in out):
-            out.append(s_)
+    for f in GD.get('furniture', []):
+        k = KIND.get(f['kind'])
+        if not k:
+            continue
+        x, y = P((f['x'], f['y']))
+        a = -math.radians(f['ang'])
+        s_ = dict(kind=k, x=x, y=y, face=a)
+        if k == 'dir':
+            s_['lines'] = [tuple(ln) for ln in f['lines']]
+        elif k == 'speed':
+            s_['v'] = f['v']
+        elif k == 'gantry':
+            r = by_name.get(f['road'])
+            s_.update(ang=a, span=f['span'], panels=[[tuple(ln) for ln in p_] for p_ in f['panels']],
+                      z0=structures.profile(r['pts'], BRIDGE_Z.get(r['name']), structures.BRIDGE_H['cable' if 'Cable' in r['name'] else 'long'], structures.RAMP['bridge'])(f['s'])
+                      if r and r['cls'] == 'bridge' else 0.0)
+        out.append(s_)
     return out
 
 
@@ -671,6 +451,8 @@ def build_tile(tx, ty, overrides):
     x0, y0 = tx * SIZE, -(ty + 1) * SIZE  # tile ty counts southward in the data, northward is -y here
     x1, y1 = x0 + SIZE, y0 + SIZE
     inside = lambda p: x0 <= p[0] < x1 and y0 <= p[1] < y1
+    things_here = lambda kind=None: [t for i in (-1, 0, 1) for j in (-1, 0, 1) for t in THINGS.get((tx + i, ty + j), ())
+                                     if inside(P((t['x'], t['y']))) and (t['k'] == kind if kind else t['k'] != 'rail stall')]
     near = lambda p, m: x0 - m <= p[0] < x1 + m and y0 - m <= p[1] < y1 + m
     sc = scene.reset()
     col = bpy.data.collections.new(f'tile_{tx}_{ty}')
@@ -880,29 +662,13 @@ def build_tile(tx, ty, overrides):
             dx, dy = math.cos(ang), math.sin(ang)
             places.bus_shelter(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(math.atan2(dx, -dy), 4, 'Z'), fr)
         built['furniture:' + f_['kind']] = built.get('furniture:' + f_['kind'], 0) + 1
-    rail_pts = [P(p) for p in GD['rail']['pts']] if GD.get('rail') else []
-    for e_ in GD.get('encroach', []):
-        if e_['kind'] != 'rail market' or not rail_pts:
-            continue
-        zone = [P(p) for p in e_['pts']]
-        bx0, by0 = max(x0, min(p[0] for p in zone)), max(y0, min(p[1] for p in zone))
-        bx1, by1 = min(x1, max(p[0] for p in zone)), min(y1, max(p[1] for p in zone))
-        rmb = MeshBuilder()
-        gx = bx0 + 0.9
-        while gx < bx1:
-            gy = by0 + 0.9
-            while gy < by1:
-                p = (gx, gy)
-                rr = Rng('rail market', round(gx * 2), round(gy * 2))
-                if in_poly(p, zone) and dist_line(p, rail_pts) > 2.4 and not rr.chance(0.3):
-                    k = min(range(len(rail_pts) - 1), key=lambda i: dist_seg(p, rail_pts[i], rail_pts[i + 1]))
-                    ra = math.atan2(rail_pts[k + 1][1] - rail_pts[k][1], rail_pts[k + 1][0] - rail_pts[k][0])
-                    street.rail_market(rmb, Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(ra, 4, 'Z'), rr)
-                    built['rail market'] = built.get('rail market', 0) + 1
-                gy += 1.9
-            gx += 1.9
-        if rmb.faces:
-            rmb.to_object('rail market', col, master)   # its own object: the pitches clear as one when a train comes
+    rmb = MeshBuilder()   # the rail market's stalls, from the data (scripts/things.py)
+    for t in things_here('rail stall'):
+        q = P((t['x'], t['y']))
+        street.rail_market(rmb, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(-math.radians(t['a']), 4, 'Z'), Rng('rail market', round(q[0] * 2), round(q[1] * 2)))
+        built['rail market'] = built.get('rail market', 0) + 1
+    if rmb.faces:
+        rmb.to_object('rail market', col, master)   # its own object: the pitches clear as one when a train comes
     for b in blds_here:  # service drops to houses from the nearest pole
         if not poles or b['kind'] not in ('front', 'back'):
             continue
@@ -916,14 +682,21 @@ def build_tile(tx, ty, overrides):
     # 911 lorries at the food markets, and the trains on the line. Half as thick in the web build.
     vm, hm = MeshBuilder(), MeshBuilder()
     thin = 0.5 if detail.web() else 1.0
-    WEALTH = {'elite': 0.85, 'civic': 0.55, 'dense': 0.3, 'sprawl': 0.35, 'old_island': 0.3, 'waterfront': 0.1, 'port': 0.3}
-    CROWD = {'dense': 30, 'old_island': 40, 'sprawl': 15, 'elite': 2, 'civic': 10, 'waterfront': 20, 'port': 10}  # per 100 m, research-street 4.3
+    PARKED = {}   # the parked vehicles the data places in and around this tile (scripts/things.py), on a 10 m grid
+    for t in [t for i in (-1, 0, 1) for j in (-1, 0, 1) for t in THINGS.get((tx + i, ty + j), ())]:
+        if t['k'] in vehicles.BUILDERS:
+            q = P((t['x'], t['y']))
+            PARKED.setdefault((int(q[0] // 10), int(q[1] // 10)), []).append(q)
+    parked_near = lambda p, m: any(math.dist(p, q) < m for i in (-1, 0, 1) for j in (-1, 0, 1) for q in PARKED.get((int(p[0] // 10) + i, int(p[1] // 10) + j), ()))
+    LIFE = GD.get('life') or {}   # what moves, from the data (scripts/things.py): crowds, traffic mix, gaps, wealth; per-road overrides
+    WEALTH, CROWD, GAPS = LIFE.get('wealth', {}), LIFE.get('crowd', {}), LIFE.get('gap', {'main': 14, 'street': 30, 'lane': 60})
 
-    def put_vehicle(kind, x, y, ang, cond, rng, rch, wealth):
+    def put_vehicle(kind, x, y, ang, cond, rng, rch, wealth, style=None, taxi=None):
         M = Matrix.Translation((x, y, 0)) @ Matrix.Rotation(ang, 4, 'Z')
         fn = vehicles.BUILDERS[kind]
         if kind == 'car':
-            fn(vm, M, rng, cond, kind=rng.pick({'saloon': 5, 'suv': 3 + 4 * wealth, 'pickup': 1}), taxi=rch == 'old_island' and rng.chance(0.15))
+            fn(vm, M, rng, cond, kind=style or rng.pick({'saloon': 5, 'suv': 3 + 4 * wealth, 'pickup': 1}),
+               taxi=bool(taxi) if taxi is not None else (rch == 'old_island' and rng.chance(0.15)))
         elif kind in ('cart', 'wheelbarrow'):
             fn(vm, M, rng)
             people.person(hm, M @ Matrix.Translation((-2.6 if kind == 'cart' else -1.3, 0, 0)), rng, kind='tshirt', ch=rch, pose=True)
@@ -937,10 +710,10 @@ def build_tile(tx, ty, overrides):
             continue
         d = r.get('d') or dc
         rch = CHARACTER.get(d, 'dense')
-        wealth = WEALTH[rch]
-        mixk = dict(vehicles.mix(rch, r['k']))
-        if d == 'foodgate' and r['k'] == 'main':
-            mixk['lorry911'] = 10  # the food lorries of the big market
+        rk = 'main' if r['k'] == 'main' else 'street'
+        RO = LIFE.get('roads', {}).get(r['id'], {})   # this road's own, set on the board
+        wealth = RO.get('wealth', WEALTH.get(rch, 0.3))
+        mixk = dict(RO.get('mix') or LIFE.get('mix_d', {}).get(f'{d}|{rk}') or LIFE.get('mix', {}).get(f'{rch}|{rk}') or LIFE.get('mix', {}).get(f'dense|{rk}'))
         for piece in clip_line_rect(r['pts'], x0, y0, x1, y1):
             rr = Rng('life', r['id'], round(piece[0][0]), round(piece[0][1]))
             for i in range(len(piece) - 1):
@@ -951,87 +724,57 @@ def build_tile(tx, ty, overrides):
                 dx, dy = (b[0] - a[0]) / Ls, (b[1] - a[1]) / Ls
                 ang = math.atan2(dy, dx)
                 lanes = [(-r['w'] / 4, 1), (r['w'] / 4, -1)] if r['k'] != 'lane' else [(0, 1)]  # drive on the right
-                gap = {'main': 14, 'street': 30, 'lane': 60}[r['k']] / thin
+                gap = RO.get('gap', GAPS[r['k']]) / thin
+                xs_ = XS.get(r['k'], {})   # people walk on the walkway (scripts/ground.py), never in the gutter or the road
+                walk_band = (r['w'] / 2 + xs_.get('gutter', 0) + 0.15, r['w'] / 2 + xs_.get('gutter', 0) + xs_.get('walkway', 0) - 0.15)
                 for off, dirn in lanes:
                     k = rr.between(0, gap)
                     while k < Ls:
                         kind = rr.pick(mixk)
                         x, y = a[0] + dx * k - dy * off, a[1] + dy * k + dx * off
-                        if inside((x, y)) and not in_building((x, y), 0.5):
+                        if inside((x, y)) and not in_building((x, y), 0.5) and not parked_near((x, y), vehicles.LENGTH[kind] / 2 + 2.5):
                             put_vehicle(kind, x, y, ang if dirn > 0 else ang + math.pi, vehicles.condition(wealth, rr, commercial=kind in vehicles.COMMERCIAL), rr, rch, wealth)
                             built['vehicle:' + kind] = built.get('vehicle:' + kind, 0) + 1
                         k += vehicles.LENGTH[kind] + rr.between(gap * 0.4, gap * 1.6)
-                if r['k'] in ('street', 'main'):  # parked at the edge
-                    for side in (-1, 1):
-                        k = rr.between(0, 20)
-                        while k < Ls:
-                            kind = rr.pick({'car': 4, 'keke': 2, 'okada': 3, 'danfo': 1 if r['k'] == 'main' else 0.2, 'molue': 0.06 if rch in ('dense', 'sprawl') else 0})
-                            o = side * (r['w'] / 2 - 1.0)
-                            x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
-                            if inside((x, y)) and not in_building((x, y), 0.6) and rr.chance(0.55 * thin):
-                                put_vehicle(kind, x, y, ang + (math.pi if rr.chance(0.5) else 0) + rr.between(-0.1, 0.1), 'wreck' if kind == 'molue' else vehicles.condition(wealth, rr, kind in vehicles.COMMERCIAL, parked=True), rr, rch, wealth)
-                            k += vehicles.LENGTH[kind] + rr.between(2, 18)
-                n = int(Ls / 100 * CROWD.get(rch, 15) * (1.6 if r['k'] == 'main' else 1.0) * thin)
+                # parked at the edge: in the data now (scripts/things.py), drawn with the other things below
+                n = int(Ls / 100 * RO.get('crowd', CROWD.get(rch, 15)) * (1.6 if r['k'] == 'main' else 1.0) * thin)
                 for _ in range(n):  # people along the frontage
                     k, side = rr.between(0, Ls), rr.pick([-1, 1])
-                    o = side * (r['w'] / 2 + rr.between(0.3, 2.8))
+                    o = side * (rr.between(*walk_band) if walk_band[1] > walk_band[0] else rr.between(0.3, r['w'] / 2 - 0.3))   # the walkway (a lane: the lane itself)
                     x, y = a[0] + dx * k - dy * o, a[1] + dy * k + dx * o
                     if inside((x, y)) and not in_building((x, y), 0.2):
                         walk = ang + (0 if rr.chance(0.5) else math.pi) + rr.between(-0.3, 0.3) if rr.chance(0.6) else rr.between(0, math.tau)
                         people.person(hm, Matrix.Translation((x, y, 0.03)) @ Matrix.Rotation(walk, 4, 'Z'), rr, ch=rch)
-    for pc in PARCELS:  # markets, motor parks, the port's truck park, the food lorries
-        if not inside(cent(pc['pts'])):
+    # the things the data places (scripts/things.py): parked vehicles, buses and lorries in their parks, people standing in the
+    # markets and parks, port machines, boats, canoes, the trains. The web build draws every other parked car and person.
+    for t in things_here():
+        k = t['k']
+        q = P((t['x'], t['y']))
+        ang = -math.radians(t['a'])
+        tr = Rng('thing', k, round(q[0] * 10), round(q[1] * 10))
+        if detail.web() and k in ('person', 'car', 'keke', 'okada') and tr.chance(0.5):
             continue
-        pts, kind = pc['pts'], pc['kind']
-        rch = CHARACTER.get(pc['d'], 'dense')
-        rr = Rng('life', pc['d'], kind, round(cent(pts)[0]))
-        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
-        if kind in ('market', 'motor park', 'under bridge', 'under-bridge'):
-            n = 0
-            for _ in range(4000):
-                if n > (400 if kind == 'market' else 80) * thin:
-                    break
-                p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
-                if in_poly(p, pts) and not in_building(p, 0.3):
-                    people.person(hm, Matrix.Translation((p[0], p[1], 0.05)) @ Matrix.Rotation(rr.between(0, math.tau), 4, 'Z'), rr, ch=rch, kind=rr.pick({None: 4, 'hawker': 1, 'wrapper': 1}) or None)
-                    n += 1
-        rows = {'motor park': ('danfo', 2.6, 7.0, 12), 'truck park': ('container', 3.4, 18.5, 24), 'lorry park': ('lorry911', 3.2, 10.0, 16)}
-        if pc['d'] == 'foodgate' and kind == 'market':
-            rows['market'] = ('lorry911', 3.2, 10.0, 6)
-        if kind in rows and kind != 'market':  # packed yard to yard, as Lagos parks are: rows nose to nose, a drive lane every two rows
-            vk, sx, sy, _ = rows[kind]
-            best = []
-            for i in range(len(pts)):  # line the rows up with the yard's longest straight side
-                a, b = pts[i], pts[(i + 1) % len(pts)]
-                ang = math.atan2(b[1] - a[1], b[0] - a[0])
-                ux, uy, vx, vy = math.cos(ang), math.sin(ang), -math.sin(ang), math.cos(ang)
-                us, vs = [p[0] * ux + p[1] * uy for p in pts], [p[0] * vx + p[1] * vy for p in pts]
-                got, v, row = [], min(vs) + sy / 2 + 1.0, 0
-                while v < max(vs) - sy / 2:
-                    u = min(us) + sx / 2 + 1.0
-                    while u < max(us) - sx / 2:
-                        x, y = u * ux + v * vx, u * uy + v * vy
-                        if all(in_poly(q, pts) for q in ((x + dx * ux + dy * vx, y + dx * uy + dy * vy) for dx in (-sx / 2, sx / 2) for dy in (-sy / 2, sy / 2))) and not in_building((x, y), 1.0):
-                            got.append((x, y, ang + math.pi / 2 + (math.pi if row % 2 else 0)))
-                        u += sx
-                    v += sy + (6.0 if row % 2 else 0)
-                    row += 1
-                if len(got) > len(best):
-                    best = got
-            for x, y, h in best:
-                if rr.chance(0.1):  # a gap here and there: a bus out on the road
-                    continue
-                put_vehicle(vk, x, y, h, vehicles.condition(0.3, rr, True, parked=True), rr, rch, 0.3)
-                built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
-        elif kind in rows:
-            vk, sx, sy, count = rows[kind]
-            c = cent(pts)
-            per = max(1, int(count ** 0.5 * 1.5))
-            for k in range(count):
-                x, y = c[0] + (k % per - (per - 1) / 2) * sx, c[1] + (k // per - 0.5) * sy
-                if in_poly((x, y), pts) and not in_building((x, y), 0.5):
-                    put_vehicle(vk, x, y, math.pi / 2, vehicles.condition(0.3, rr, True, parked=True), rr, rch, 0.3)
-                    built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
+        rch = CHARACTER.get(t['d'], 'dense')
+        if k == 'person':
+            people.person(hm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(ang, 4, 'Z'), tr, ch=rch, kind=t.get('s'))
+        elif k in vehicles.BUILDERS:
+            if k in ('stacker', 'forklift'):
+                vehicles.BUILDERS[k](vm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), tr, t.get('c', 'worn'))
+            else:
+                put_vehicle(k, q[0], q[1], ang, t.get('c', 'worn'), tr, rch, WEALTH.get(rch, 0.3), style=t.get('s'), taxi=t.get('taxi', 0))
+            built['vehicle:' + k] = built.get('vehicle:' + k, 0) + 1
+        elif k == 'canoe':
+            boats.outboard_canoe(vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(ang, 4, 'Z'), tr, people=bool(t.get('p')))
+            built['boat:canoe'] = built.get('boat:canoe', 0) + 1
+        elif k in boats.BUILDERS:
+            boats.BUILDERS[k](vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(ang, 4, 'Z'), Rng('boat', k, round(q[0])))
+            built['boat:' + k] = built.get('boat:' + k, 0) + 1
+        elif k.startswith('train:'):
+            fn, _ = vehicles.TRAIN[k[6:]]
+            M = Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z')
+            trng = Rng('train', t.get('train', ''), round(q[0]))
+            fn(vm, M, trng, cab=bool(t.get('cab'))) if k == 'train:commuter' else fn(vm, M, trng)
+            built[k] = built.get(k, 0) + 1
     for vk, a in SERVICE:  # parked out front of their plots
         try:
             pl = ccw(a['poly'])
@@ -1045,87 +788,6 @@ def build_tile(tx, ty, overrides):
                     built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
         except Exception as e:
             print('ERROR service', vk, repr(e))
-    for pc in PARCELS:  # reach stackers and forklifts among the containers
-        if pc['kind'] != 'container yard' or not inside(cent(pc['pts'])):
-            continue
-        rr = Rng('port machines', round(cent(pc['pts'])[0]))
-        xs, ys = [p[0] for p in pc['pts']], [p[1] for p in pc['pts']]
-        n = 0
-        for _ in range(400):
-            if n >= 16 * thin:
-                break
-            p = (rr.between(min(xs), max(xs)), rr.between(min(ys), max(ys)))
-            if in_poly(p, pc['pts']) and inside(p) and not in_building(p, 4.0):
-                vk = rr.pick({'stacker': 1, 'forklift': 1})
-                vehicles.BUILDERS[vk](vm, Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(rr.between(0, math.tau), 4, 'Z'), rr, 'worn')
-                built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
-                n += 1
-    for s_ in BOATS:  # ferries, water buses, dredgers on the lagoon
-        if inside((s_['x'], s_['y'])):
-            boats.BUILDERS[s_['kind']](vm, Matrix.Translation((s_['x'], s_['y'], 0.05)) @ Matrix.Rotation(s_['ang'], 4, 'Z'), Rng('boat', s_['kind'], round(s_['x'])))
-            built['boat:' + s_['kind']] = built.get('boat:' + s_['kind'], 0) + 1
-    for bw in GD.get('boardwalks', []):  # canoes tied along Water Town's boardwalks
-        pts = [P(p) for p in bw]
-        if not any(inside(p) for p in pts):
-            continue
-        rr = Rng('canoes', round(pts[0][0]), round(pts[0][1]))
-        for a_, b_ in zip(pts, pts[1:]):
-            Ls = math.dist(a_, b_)
-            if Ls < 1e-6:
-                continue
-            dx, dy = (b_[0] - a_[0]) / Ls, (b_[1] - a_[1]) / Ls
-            k = rr.between(4, 20)
-            while k < Ls:
-                o = rr.pick([-1, 1]) * rr.between(3.0, 8.0)
-                q = (a_[0] + dx * k - dy * o, a_[1] + dy * k + dx * o)
-                if inside(q) and not in_building(q, 1.0) and rr.chance(0.7 * thin):
-                    boats.outboard_canoe(vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(math.atan2(dy, dx) + rr.between(-0.4, 0.4), 4, 'Z'), rr, people=rr.chance(0.6))
-                    built['boat:canoe'] = built.get('boat:canoe', 0) + 1
-                k += rr.between(12, 30)
-    # trains on the line: a commuter set at the Hub station, the old narrow-gauge train in Railside,
-    # a freight train at the port end
-    for name, at, consist in (('commuter', 'station', ['commuter'] * 4), ('old', 0.22, ['loco'] + ['coach'] * 4), ('freight', 0.9, ['loco'] + ['wagon'] * 8)):
-        line_pts = [P(p) for p in GD['rail']['pts']]
-        segl = [math.dist(line_pts[i], line_pts[i + 1]) for i in range(len(line_pts) - 1)]
-        S = sum(segl)
-        if at == 'station':
-            st = next((p for p in GD['pois'] if p['name'] == 'Hub Rail Station'), None)
-            if not st:
-                continue
-            q = P((st['x'], st['y']))
-            best, acc = (1e9, 0), 0.0
-            for i in range(len(line_pts) - 1):
-                A, B = line_pts[i], line_pts[i + 1]
-                for t in (j / 50 for j in range(51)):
-                    p = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t)
-                    if math.dist(p, q) < best[0]:
-                        best = (math.dist(p, q), acc + segl[i] * t)
-                acc += segl[i]
-            s0 = best[1]
-        else:
-            s0 = S * at
-        trng = Rng('train', name)
-        s = s0
-        for idx, kname in enumerate(consist):
-            fn, ln = vehicles.TRAIN[kname]
-            mid = s - ln / 2
-            acc = 0.0
-            for i in range(len(line_pts) - 1):
-                if acc + segl[i] >= mid:
-                    A, B = line_pts[i], line_pts[i + 1]
-                    t = (mid - acc) / segl[i]
-                    p = (A[0] + (B[0] - A[0]) * t, A[1] + (B[1] - A[1]) * t)
-                    if inside(p):
-                        M = Matrix.Translation((p[0], p[1], 0)) @ Matrix.Rotation(math.atan2(B[1] - A[1], B[0] - A[0]), 4, 'Z')
-                        if kname == 'commuter':
-                            fn(vm, M, trng, cab=idx == 0)  # the leading car has the driver's cab
-                        else:
-                            fn(vm, M, trng)
-                        built['train:' + kname] = built.get('train:' + kname, 0) + 1
-                    break
-                acc += segl[i]
-            s -= ln
-
     # structures, expressways, bridges, rail, canals, boardwalks, walls, gates
     tm = MeshBuilder()
     for s in GD.get('structures', []):
