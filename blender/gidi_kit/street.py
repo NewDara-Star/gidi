@@ -50,6 +50,21 @@ def _lerp(c0, c1, t):
 
 
 # ---------------------------------------------------------------- road surface
+def turning_head(mb, x, y, rad, kind, cond, rng):
+    """The turning space at the end of a close (scripts/roadends.py): a round of the road's own surface, a hair under the
+    road so the two meet without flicker, its rim crumbling to the shoulder like the road's edges."""
+    C = COND[cond]
+    z = BASE_Z.get(kind, 0.05) - 0.003
+    col = hex_rgb(C['col'])
+    rim = _lerp(col, hex_rgb('#c9926a'), 0.5) if not C.get('pavers') else col
+    mat = 'mud' if C.get('soil') else ('pavers' if C.get('pavers') else 'asphalt')
+    n = 20
+    ring = [(x + math.cos(t) * rad * rng.between(0.97, 1.03), y + math.sin(t) * rad * rng.between(0.97, 1.03)) for t in (k / n * math.tau for k in range(n))]
+    for k in range(n):
+        a, b = ring[k], ring[(k + 1) % n]
+        mb.face([Vector((x, y, z)), Vector((a[0], a[1], z)), Vector((b[0], b[1], z))], mat, [col, rim, rim], C['wear'])
+
+
 def road(mb, r, cond, rng, wet_season=True, clip=None):
     """A road as a displaced grid. r: {k, pts, w}. Returns the potholes it made (for water faces)."""
     C = COND[cond]

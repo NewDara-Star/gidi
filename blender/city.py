@@ -185,6 +185,10 @@ for i, m in enumerate(GD.get('mains', [])):
     _seen_mains.add(sig)
     _mk = _main_n.get(m.get('d'), 0); _main_n[m.get('d')] = _mk + 1   # named within its district, as scripts/isms.py names their gutters
     ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f"{m.get('d')}/main/{_mk}", name=m.get('name')))
+CLOSES = {}   # road id: [(x, y, radius)] the turning spaces at the ends of the closes (scripts/roadends.py)
+for e_ in GD.get('road_ends', []):
+    if e_['t'] == 'close':
+        CLOSES.setdefault(e_['road'], []).append((e_['x'], e_['y'], e_['r']))
 BUILDINGS = []
 for d, lst in GD['buildings'].items():
     st = GD['storeys'].get(d, [])
@@ -815,58 +819,18 @@ def build_tile(tx, ty, overrides):
         wealth = {'elite': 0.85, 'civic': 0.55, 'dense': 0.3, 'sprawl': 0.35, 'old_island': 0.3, 'waterfront': 0.1, 'port': 0.3}[rch]
         rr = Rng('road', r['id'])
         cond = street.road_condition(r, rch, wealth, flood, rr)
+        for ex, ey, er in CLOSES.get(r['id'], ()):   # a close's turning space (scripts/roadends.py)
+            q = P((ex, ey))
+            if inside(q):
+                street.turning_head(sm, q[0], q[1], er, r['k'], cond, Rng('close', r['id'], round(ex), round(ey)))
         for piece in clip_line_rect(r['pts'], x0, y0, x1, y1):
             rc = dict(r, pts=piece)
             street.road(sm, rc, cond, Rng('road', r['id'], round(piece[0][0]), round(piece[0][1])))
             street.markings(sm, rc, cond, rr)
             if r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street'):
-                street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p, rid=r['id']: on_other_road(p, rid) or in_building(p, 0.1))
-            if r['k'] in ('main', 'street') and not (rch == 'elite' and r['k'] != 'main') and d not in LAGOS_D:
-                off = (1 if zlib.crc32(r['id'].encode()) % 2 else -1) * (r['w'] / 2 + 1.6)
-                prev = None
-                for i in range(len(piece) - 1):
-                    a, b = piece[i], piece[i + 1]
-                    L = math.dist(a, b)
-                    if L < 1e-6:
-                        continue
-                    dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
-                    s0 = (sum(math.dist(piece[j], piece[j + 1]) for j in range(i)))
-                    k = (35 - s0 % 35) % 35
-                    while k < L:
-                        p = (a[0] + dx * k - dy * off, a[1] + dy * k + dx * off)
-                        if not in_building(p, 0.3):
-                            pts3, top = street.pole(sm, p[0], p[1], Rng('pole', round(p[0]), round(p[1])), wood=rr.chance(ST['wood_pole']))
-                            if prev:
-                                for w0, w1 in zip(prev, pts3):
-                                    street.wire(sm, w0, w1, 0.9, n=6)
-                            prev = pts3
-                            poles.append((p, top))
-                        else:
-                            prev = None
-                        k += 35
-            # street lights: main roads everywhere, streets in the elite and civic districts; opposite
-            # the electricity poles; a share dead, more in the poor districts, some solar
-            if (r['k'] == 'main' or (rch in ('elite', 'civic') and r['k'] == 'street')) and d not in LAGOS_D:
-                pole_side = (1 if zlib.crc32(r['id'].encode()) % 2 else -1)
-                loff = -pole_side * (r['w'] / 2 + 1.0)
-                for i in range(len(piece) - 1):
-                    a, b = piece[i], piece[i + 1]
-                    L = math.dist(a, b)
-                    if L < 1e-6:
-                        continue
-                    dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
-                    s0 = (sum(math.dist(piece[j], piece[j + 1]) for j in range(i)))
-                    k = (38 - (s0 + 19) % 38) % 38
-                    while k < L:
-                        p = (a[0] + dx * k - dy * loff, a[1] + dy * k + dx * loff)
-                        if not in_building(p, 0.3):
-                            lr = Rng('lamp', round(p[0]), round(p[1]))
-                            # the arm reaches back over the road
-                            ang = math.atan2(dx * (1 if loff < 0 else -1), -dy * (1 if loff < 0 else -1))
-                            LAMPS.extend(roadside.street_light(sm, p[0], p[1], ang, lr, h=9 if r['k'] == 'main' else 7.5,
-                                                               working=not lr.chance(DEAD_LAMPS.get(rch, 0.3)), solar=rch in ('dense', 'sprawl', 'waterfront') and lr.chance(0.3),
-                                                               banners=r['k'] == 'main' and rch in ('civic', 'dense', 'old_island', 'sprawl') and lr.chance(0.45)))
-                        k += 38
+                street.kerbs(sm, rc, ST['kerb'] if r['k'] == 'main' else 'white', rr, skip=lambda p, rid=r['id']: on_other_road(p, rid) or in_building(p, 0.1)
+                             or any(math.dist(p, P((ex, ey))) < er - 0.3 for ex, ey, er in CLOSES.get(rid, ())))
+            # poles, wires and street lights: all in the data now (scripts/furniture.py, the bush too), drawn below
             for i in range(len(piece) - 1):  # litter at the edges
                 a, b = piece[i], piece[i + 1]
                 L = math.dist(a, b)

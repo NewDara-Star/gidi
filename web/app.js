@@ -102,6 +102,10 @@
   G.mains.forEach((m, i) => { if (planIds.has(m.d)) addSurf("main", (SURF.mains || [])[i], m.pts); });
   G.arterials.forEach((a, i) => { if (planRoads[a.cls] !== undefined) addSurf(a.cls, (SURF.arterials || [])[i], a.pts); });
   const band = (k, part) => { const x = XS[k]; if (!x) return 0; const c = x.carriageway; return part === "c" ? c : part === "g" ? c + 2 * x.gutter : c + 2 * (x.gutter + x.walkway); };
+  // the turning spaces at the ends of the closes (scripts/roadends.py)
+  const circ = (e) => `M${e.x - e.r} ${e.y}a${e.r} ${e.r} 0 1 0 ${2 * e.r} 0a${e.r} ${e.r} 0 1 0 ${-2 * e.r} 0`;
+  const closes = (G.road_ends || []).filter((e) => e.t === "close");
+  const closePaths = { street: closes.filter((e) => e.k !== "main").map(circ).join(""), main: closes.filter((e) => e.k === "main").map(circ).join("") };
   const FURN = G.furniture || [];
   const islands = (G.junctions || []).filter((j) => j.kind === "roundabout" && j.island_r > 0);
 
@@ -176,6 +180,7 @@
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pw" + k, d: planRoads[k], className: "plan-walk", style: { strokeWidth: band(k, "w") } })),
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pg" + k, d: planRoads[k], className: "plan-gutter", style: { strokeWidth: band(k, "g") } })),
         ["exp", "art", "main", "street", "lane"].map((k) => planRoads[k] && h("path", { key: "pc" + k, d: planRoads[k], className: "plan-road " + k, style: { strokeWidth: band(k, "c") } })),
+        ["street", "main"].map((k) => closePaths[k] && h("path", { key: "pk" + k, d: closePaths[k], className: "plan-close " + k })),
         Object.entries(planSurf).map(([k, d]) => h("path", { key: "ps" + k, d, className: "surf-" + k.split("|")[1], style: { strokeWidth: band(k.split("|")[0], "c") } })),
         (G.encroach || []).map((e, i) => h("path", { key: "en" + i, d: pts2d(e.pts) + "Z", className: "plan-spill" }))),
       layers.plan && z > 0.8 && h("g", { pointerEvents: "none" },
