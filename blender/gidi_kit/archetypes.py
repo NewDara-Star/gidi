@@ -34,7 +34,7 @@ def house(a, rng, collection=None):
         k = max(1 if use > 1.2 else 0, int(use / spec['bay']))
         us = [(j - (k - 1) / 2) * use / max(1, k) for j in range(k)]
         wr = rng.child('face', i)
-        balcony_here = s > 1 and wr.chance(spec['balcony_p']) and L > 4
+        balcony_here = (i in spec['bal_faces']) if spec.get('bal_faces') is not None else (s > 1 and wr.chance(spec['balcony_p']) and L > 4)
         for st in range(s):
             z = st * STOREY + 1.6 + (lift if st else 0)
             for j, u in enumerate(us):

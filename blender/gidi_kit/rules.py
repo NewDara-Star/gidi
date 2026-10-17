@@ -150,8 +150,9 @@ def house_spec(a, rng):
             wear=min(1, wear + rng.between(0, 0.25)), wall_wear=wear, gable_col=paint, fascia=trim, fascia_wood=rng.chance(0.4)),
         parapet=dict(parapet_h=rng.between(0.6, 1.0), paint=paint, trim=trim, slab=hex_rgb('#8f8a80'), wear=wear),
         balcony_p=ch['balcony_p'] if s > 1 else 0,
+        bal_faces=a['front']['bal'] if a.get('front') else None,   # the data's balconies (scripts/fronts.py): only where they clear neighbours and roads
         balcony=dict(slab=hex_rgb('#c9c3b6'), rail=rng.pick(ch['rail']), rail_col=trim if rng.chance(0.6) else paint, wear=wear),
-        shop=a['kind'] == 'front' and a.get('frontage', 99) < 9 and rng.chance(ch['shop_p']) and not a.get('walled'),   # a walled compound has a gate, not a shop front
+        shop=a['front']['shop'] if a.get('front') else (a['kind'] == 'front' and a.get('frontage', 99) < 9 and rng.chance(ch['shop_p']) and not a.get('walled')),   # the data decides (scripts/fronts.py)
         shutter=dict(col=_c(rng, {'#9aa3a8': 3, '#2f6fae': 1, '#2e7d4f': 1, '#c0c4c6': 2}), open=rng.between(0.4, 0.9), wear=wear),
         sign=None,
         compound=None,
@@ -168,7 +169,8 @@ def house_spec(a, rng):
         spec['sign'] = dict(text=rng.pick(SHOP_NAMES), bg=hex_rgb(bg), fg=hex_rgb(fg), hand=hand, wear=wear if hand else wear * 0.4,
                             phone='080' + str(rng.randrange(3, 9)) + ' ' + str(rng.randrange(100, 999)) + ' ' + str(rng.randrange(1000, 9999)),
                             wobble=rng.between(-0.03, 0.03) if hand else None)
-        spec['awning'] = dict(depth=rng.between(1.2, 1.8), col=spec['roof']['col'] if not flat else _c(rng, ch['roof_cols']), wear=min(1, wear + 0.1)) if rng.chance(0.5) else None
+        aw = a['front']['aw'] if a.get('front') else (rng.between(1.2, 1.8) if rng.chance(0.5) else 0)   # the data's canopy depth, clear of the road
+        spec['awning'] = dict(depth=aw, col=spec['roof']['col'] if not flat else _c(rng, ch['roof_cols']), wear=min(1, wear + 0.1)) if aw else None
     if rng.chance(ch['compound_p']) and a['kind'] != 'shed' and not spec['shop']:  # shops open straight onto the street
         spec['compound'] = dict(h=rng.between(1.9, 2.6) + 0.6 * wealth, paint=_c(rng, ch['paints']), coping=trim, top=rng.pick(ch['wall_top']),
                                 gate=_c(rng, {'#2b4a66': 2, '#3a3a3a': 2, '#7a2a2a': 1, '#2e6b4a': 1}), wear=wear, gap=rng.between(1.6, 3.0))

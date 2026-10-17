@@ -75,10 +75,11 @@
   function gquery(g, bb) { const out = new Set(); for (let x = Math.floor(bb[0] / CELL); x <= Math.floor(bb[2] / CELL); x++) for (let y = Math.floor(bb[1] / CELL); y <= Math.floor(bb[3] / CELL); y++) { const c = g.get(x + "," + y); if (c) for (const it of c) out.add(it); } return out; }
 
   function build() {
-    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), CW: [], GATE: [], version: 0 };
+    M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), gT: grid(), CW: [], GATE: [], TR: [], version: 0 };
     for (const [d, L] of Object.entries(G.buildings)) {
       const st = (G.storeys || {})[d] || [];
-      L.forEach((b, i) => { const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1 }; addB(o); });
+      const FR = (G.fronts || {})[d] || {};
+      L.forEach((b, i) => { const f = FR[String(i)]; const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1, front: f ? { e: f.e, shop: f.shop, aw: f.aw, bal: f.bal.slice() } : null }; addB(o); });
     }
     (G.furniture || []).forEach((f) => addF({ t: "f", d: f.d, kind: f.kind, x: f.x, y: f.y, ang: f.ang || 0, name: f.name || "" }));
     (G.monuments || []).forEach((m) => M.MON.push({ t: "m", d: m.d, kind: m.model, x: m.x, y: m.y, ang: m.ang || 0, name: m.name || "" }));
@@ -94,8 +95,27 @@
     (G.structures || []).forEach((s) => M.DECK.push({ t: "deck", d: s.d, kind: s.kind, name: s.name, pts: s.pts, w: s.width || 8, bb: bboxOf(s.pts) }));
     (G.gutters || []).forEach((g) => M.GUT.push({ pts: g.pts, w: g.w || 0.8, state: g.state, bb: bboxOf(g.pts) }));
     for (const [d, L] of Object.entries(G.compound_walls || {})) L.forEach((w) => addW({ t: "w", d, pts: w.map((q) => [q[0], q[1]]) }));
+    for (const [d, L] of Object.entries(G.trees || {})) L.forEach((q) => addT({ t: "t", d, x: q[0], y: q[1], kind: q[2] }));
     for (const [d, L] of Object.entries(G.compound_gates || {})) L.forEach((q) => M.GATE.push({ t: "g", d, x: q[0], y: q[1] }));
     M.WATER = [...(G.water || []), ...(G.ocean || [])].map((r) => ({ pts: r, bb: bboxOf(r) }));
+  }
+  function addT(o) { M.TR.push(o); gadd(M.gT, o, [o.x, o.y, o.x, o.y]); }
+  function delT(o) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); M.TR.splice(M.TR.indexOf(o), 1); }
+  function moveT(o, x, y) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); o.x = x; o.y = y; gadd(M.gT, o, [x, y, x, y]); }
+  const treeR = (o) => (o.kind === "palm" ? 1.6 : 2.6);
+  // a canopy or balcony: `depth` out from side j of a building, `width` wide, centred (as scripts/fronts.py)
+  function slab(pts, j, depth, width) {
+    const n = pts.length, p = pts[j], q = pts[(j + 1) % n], L = dist(p, q); if (L < 0.1) return null;
+    const ux = (q[0] - p[0]) / L, uy = (q[1] - p[1]) / L, sa = pts.reduce((a, c, k) => { const z = pts[(k + 1) % n]; return a + c[0] * z[1] - z[0] * c[1]; }, 0);
+    const [nx, ny] = sa > 0 ? [uy, -ux] : [-uy, ux], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2, w = width / 2;
+    return [[mx - ux * w, my - uy * w], [mx + ux * w, my + uy * w], [mx + ux * w + nx * depth, my + uy * w + ny * depth], [mx - ux * w + nx * depth, my - uy * w + ny * depth]];
+  }
+  function frontSlabs(b) {   // [{kind: "canopy"|"balcony", pts}]
+    const f = b.front; if (!f) return [];
+    const out = [], n = b.pts.length;
+    if (f.shop && f.aw > 0 && f.e < n) { const L = dist(b.pts[f.e], b.pts[(f.e + 1) % n]); const sl = slab(b.pts, f.e, f.aw, Math.min(L, 5)); if (sl) out.push({ kind: "canopy", pts: sl }); }
+    for (const j of f.bal) if (j < n) { const L = dist(b.pts[j], b.pts[(j + 1) % n]); const sl = slab(b.pts, j, 1.1, Math.min(L - 1, 4.5)); if (sl) out.push({ kind: "balcony", pts: sl }); }
+    return out;
   }
   function addW(o) { o.bb = bboxOf(o.pts); M.CW.push(o); gadd(M.gW, o, o.bb); }
   function delW(o) { gdel(M.gW, o, o.bb); M.CW.splice(M.CW.indexOf(o), 1); }
@@ -132,6 +152,9 @@
       let best = null, bd = 2; for (const w of gquery(M.gW, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) if (w.d === d) { const dd = lineDist(e.at, w.pts); if (dd < bd) { best = w; bd = dd; } }
       if (best) { delW(best); if (op === "cut wall") for (const piece of cutLine(best.pts, e.at, e.gap || 3)) addW({ t: "w", d, pts: piece }); }
     }
+    else if (op === "set front") { const b = findB(e.at, e.kind); if (b) { b.front = b.front || { e: 0, shop: 0, aw: 0, bal: [] }; for (const k of ["e", "shop", "aw", "bal"]) if (k in e) b.front[k] = Array.isArray(e[k]) ? e[k].slice() : e[k]; } }
+    else if (op === "add tree") addT({ t: "t", d: e.d || d, x: e.x, y: e.y, kind: e.kind || "broad" });
+    else if (op === "move tree" || op === "delete tree") { let best = null, bd = 2; for (const t of gquery(M.gT, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) { const dd = dist(e.at, [t.x, t.y]); if (dd < bd) { bd = dd; best = t; } } if (best) { if (op === "delete tree") delT(best); else moveT(best, e.to[0], e.to[1]); } }
     else if (op === "add wall") addW({ t: "w", d, pts: e.pts.map((q) => [q[0], q[1]]) });
     else if (op === "add gate") M.GATE.push({ t: "g", d, x: e.x, y: e.y });
     else if (op === "delete gate") { let bi = -1, bd = 2; M.GATE.forEach((g, i) => { const dd = dist(e.at, [g.x, g.y]); if (g.d === d && dd < bd) { bd = dd; bi = i; } }); if (bi >= 0) M.GATE.splice(bi, 1); }
@@ -199,6 +222,17 @@
         if (hitR) { bad.set(w, "a wall on the road: " + (r.name || r.cls)); break; }
       }
     }
+    for (const t of gquery(M.gT, v)) {   // a tree in the road or inside a building
+      const p = [t.x, t.y];
+      for (const r of gquery(M.gR, [t.x - 1, t.y - 1, t.x + 1, t.y + 1])) if (r.cls !== "path" && r.cls !== "bridge" && lineDist(p, r.pts) < r.wd.c / 2 + r.wd.g) { bad.set(t, "a tree in the road: " + (r.name || r.cls)); break; }
+      if (!bad.has(t)) for (const b of gquery(M.gB, [t.x, t.y, t.x, t.y])) if (inPoly(p, b.pts)) { bad.set(t, "a tree inside a " + b.kind); break; }
+    }
+    for (const b of B) for (const sl of frontSlabs(b)) {   // a canopy over the carriageway, a balcony into a neighbour
+      const k = b.d + ":" + sl.kind + ":" + sl.pts[0].join(), sbb = bboxOf(sl.pts); let why = null;
+      for (const r of gquery(M.gR, sbb)) { if (r.cls === "path" || r.cls === "bridge") continue; for (let i = 0; i < r.pts.length - 1 && !why; i++) for (let j = 0; j < 4; j++) { if (segDist(sl.pts[j], r.pts[i], r.pts[i + 1]) < r.wd.c / 2 || segsCross(sl.pts[j], sl.pts[(j + 1) % 4], r.pts[i], r.pts[i + 1])) { why = "over the road: " + (r.name || r.cls); break; } } if (why) break; }
+      if (!why) for (const o of gquery(M.gB, sbb)) if (o !== b && polysOverlap(sl.pts, o.pts)) { why = "into a " + o.kind; break; }
+      if (why) { bad.set(k, why); if (!bad.has(b)) bad.set(b, "its " + sl.kind + " sticks out " + why); }
+    }
     for (const f of gquery(M.gF, v)) {
       if (OK_ON_ROAD.has(f.kind)) continue;
       const p = [f.x, f.y];
@@ -210,7 +244,7 @@
   }
 
   // ------------------------------------------------------------------ drawing
-  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, walls: true, furniture: true, places: true, labels: true, checks: true };
+  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, places: true, labels: true, checks: true };
   const KIND_FILL = (k) => ({ front: "--home", back: "--home", extension: "--home", "face-me": "--home", "old house": "--home", "brazilian house": "--home", villa: "--home", mansion: "--home", flats: "--home",
     stalls: "--trade", shed: "--trade", kiosk: "--trade", canopy: "--trade", "phone mall": "--trade", bakery: "--trade", buka: "--trade", office: "--trade",
     school: "--civic", barracks: "--civic", cellblock: "--civic", gatehouse: "--civic", checkpoint: "--civic", palace: "--civic", "office block": "--civic", "bank tower": "--civic", hotel: "--civic",
@@ -260,11 +294,17 @@
         ctx.lineWidth = bad.has(b) ? 3 * px : lw; ctx.strokeStyle = bad.has(b) ? css("--bad") : css("--home-line"); ctx.stroke();
       }
     }
+    if (LAYERS.fronts && s > 1.2) for (const b of gquery(M.gB, v)) {
+      if (!b.front) continue;
+      for (const sl of frontSlabs(b)) { path(sl.pts, true); const isBad = bad.has(sl.key = b.d + ":" + sl.kind + ":" + sl.pts[0].join()); ctx.fillStyle = sl.kind === "canopy" ? "rgba(214,120,40,.45)" : "rgba(60,110,190,.18)"; ctx.fill(); ctx.setLineDash(sl.kind === "balcony" ? [3 * px, 2 * px] : []); ctx.strokeStyle = sl.kind === "canopy" ? "#b45f1b" : "#3c6ebe"; ctx.lineWidth = Math.max(px, 0.06); ctx.stroke(); ctx.setLineDash([]); }
+      if (b.front.shop && b.front.e < b.pts.length) { const p = b.pts[b.front.e], q = b.pts[(b.front.e + 1) % b.pts.length]; ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.strokeStyle = "#d4731c"; ctx.lineWidth = Math.max(0.35, 2.5 * px); ctx.stroke(); }
+    }
     if (LAYERS.walls && s > 0.6) {
       ctx.strokeStyle = css("--wall"); ctx.lineWidth = Math.max(0.25, 1.4 * px); ctx.lineCap = "butt";
       for (const w of gquery(M.gW, v)) { path(w.pts); ctx.strokeStyle = bad.has(w) ? css("--bad") : "#8a3b2e"; ctx.lineWidth = bad.has(w) ? 3 * px : Math.max(0.25, 1.4 * px); ctx.stroke(); }
       for (const g of M.GATE) if (g.x > v[0] && g.x < v[2] && g.y > v[1] && g.y < v[3]) { const r = Math.max(0.7, 3 * px); ctx.fillStyle = "#1565c0"; ctx.fillRect(g.x - r, g.y - r, 2 * r, 2 * r); }
     }
+    if (LAYERS.trees && s > 0.3) for (const t of gquery(M.gT, v)) { const r = treeR(t); ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, 7); ctx.fillStyle = bad.has(t) ? "rgba(209,36,47,.35)" : t.kind === "palm" ? "rgba(70,140,60,.35)" : "rgba(50,120,50,.30)"; ctx.fill(); ctx.strokeStyle = bad.has(t) ? css("--bad") : "#3d7a32"; ctx.lineWidth = bad.has(t) ? 2.5 * px : Math.max(px, 0.08); ctx.stroke(); if (t.kind === "palm" && s > 2) { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = k * 2 * Math.PI / 5; ctx.moveTo(t.x, t.y); ctx.lineTo(t.x + r * Math.cos(a), t.y + r * Math.sin(a)); } ctx.stroke(); } }
     // furniture, to true size where it has one, never smaller than a few pixels
     if (LAYERS.furniture && s > 0.9) for (const f of gquery(M.gF, v)) drawFurniture(f, bad.has(f), px);
     for (const m of M.MON) if (m.x >= v[0] && m.x <= v[2] && m.y >= v[1] && m.y <= v[3]) { ctx.save(); ctx.translate(m.x, m.y); ctx.rotate(m.ang * Math.PI / 180); const r = Math.max(2, 6 * px); ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; ctx.lineTo(rr * Math.sin(a), -rr * Math.cos(a)); } ctx.closePath(); ctx.fillStyle = "#c08a00"; ctx.fill(); ctx.restore(); }
@@ -375,6 +415,7 @@
     for (const f of gquery(M.gF, [p[0] - tol, p[1] - tol, p[0] + tol, p[1] + tol])) { const d = dist(p, [f.x, f.y]); if (d < bd) { bd = d; best = f; } }
     if (best) return best;
     for (const m of M.MON) if (dist(p, [m.x, m.y]) < Math.max(2, tol)) return m;
+    if (LAYERS.trees) { let tb = null, td = 1e9; for (const t of gquery(M.gT, [p[0] - 3, p[1] - 3, p[0] + 3, p[1] + 3])) { const d = dist(p, [t.x, t.y]); if (d < Math.max(0.8, treeR(t) * 0.6) && d < td) { td = d; tb = t; } } if (tb) return tb; }
     for (const q of M.P) if (dist(p, [q.x, q.y]) < Math.max(2, 6 / s)) return q;
     for (const g of M.GATE) if (dist(p, [g.x, g.y]) < Math.max(1, 6 / s)) return g;
     const bs = [...gquery(M.gB, [p[0], p[1], p[0], p[1]])].filter((b) => inPoly(p, b.pts));
@@ -408,6 +449,7 @@
     building: ["front", "back", "extension", "shed", "kiosk", "stalls", "face-me", "buka", "office", "school", "flats", "office block", "canopy"],
     street: ["street", "lane", "main"],
     surface: ["tar", "worn", "interlock", "laterite", "sand", "mud"],
+    tree: ["broad", "palm"],
   };
   let tool = "select";
   const kindSel = $("kind");
@@ -470,12 +512,13 @@
         drag = { vtx: i, o: null, obj: sel, before, pts }; cv.classList.add("move"); return;
       }
       const o = pick(p);
-      if (o && (o.t === "b" || o.t === "f" || o.t === "m" || o.t === "p")) { sel = o; drag = { o, start: p, last: p, moved: false }; showPanel(); draw(); return; }
+      if (o && (o.t === "b" || o.t === "f" || o.t === "m" || o.t === "p" || o.t === "t")) { sel = o; drag = { o, start: p, last: p, moved: false }; showPanel(); draw(); return; }
       sel = o; showPanel(); probList = null; panning = { x: ev.clientX, y: ev.clientY, ox, oy, click: true }; draw(); return;
     }
     if (tool === "furniture") { const k = kindSel.value; const sn = ev.shiftKey ? null : snapToKerb(p); const at = sn || { x: p[0], y: p[1], ang: 0 }; commit(districtAt([at.x, at.y]), { op: "add furniture", kind: k, x: r1(at.x), y: r1(at.y), ang: Math.round(at.ang) }); return; }
     if (tool === "building") { drag = { box: p }; return; }
     if (tool === "street") { const q = (!ev.shiftKey && snapToRoad(p)) || p; streetPts.push([r1(q[0]), r1(q[1])]); if (ev.detail >= 2) finishStreet(); draw(); return; }
+    if (tool === "tree") { const dd = districtAt(p); const e = { op: "add tree", x: r1(p[0]), y: r1(p[1]), kind: kindSel.value }; if (!dd) e.d = "bush"; commit(dd || nearestDistrict(p), e); return; }
     if (tool === "wall") { streetPts.push([r1(p[0]), r1(p[1])]); if (ev.detail >= 2) finishWall(); draw(); return; }
     if (tool === "gate") { let wb = null, wd = 2; for (const w of gquery(M.gW, [p[0] - 2, p[1] - 2, p[0] + 2, p[1] + 2])) { const d = lineDist(p, w.pts); if (d < wd) { wd = d; wb = w; } } if (!wb) { toast("Click on a wall"); return; } let q = p, bd = 1e9; for (let i = 0; i < wb.pts.length - 1; i++) { const c = nearestOnSeg(p, wb.pts[i], wb.pts[i + 1]); if (dist(p, c) < bd) { bd = dist(p, c); q = c; } } commit(wb.d, { op: "add gate", x: r1(q[0]), y: r1(q[1]) }); return; }
     if (tool === "surface") { const o = pick(p); if (!o || o.t !== "r") { toast("Click on a road"); return; } commit(o.d || districtAt(p), { op: "set surface", at: [r1(p[0]), r1(p[1])], surface: kindSel.value }); return; }
@@ -498,6 +541,7 @@
       if (!drag.moved && dist(p, drag.start) * s < 4) return;
       if (!drag.moved) { drag.moved = true; drag.orig = o.t === "b" ? o.pts.map((q) => q.slice()) : [o.x, o.y, o.ang]; drag.at = o.t === "b" ? insidePt(o.pts) : [o.x, o.y]; cv.classList.add("move"); }
       if (o.t === "b") moveB(o, ([x, y]) => [x + dx, y + dy]);
+      else if (o.t === "t") moveT(o, o.x + dx, o.y + dy);
       else if (o.t === "f") { const sn = !ev.shiftKey && o.kind !== "overhead sign" ? snapToKerb(p) : null; if (sn) { moveF(o, sn.x, sn.y); o.ang = sn.ang; } else moveF(o, o.x + dx, o.y + dy); }
       else { o.x += dx; o.y += dy; }
       drag.last = p; M.version++; draw(); return;
@@ -521,8 +565,9 @@
       if (o.t === "b") { const c0 = centroid(drag_orig(o)), c1 = centroid(o.pts); edit = { op: "move building", at: [r1(dragAt[0]), r1(dragAt[1])], kind: o.kind, by: [r1(c1[0] - c0[0]), r1(c1[1] - c0[1])] }; }
       else if (o.t === "f") edit = { op: "move furniture", at: [r1(dragOrig[0]), r1(dragOrig[1])], kind: o.kind, to: [r1(o.x), r1(o.y)], ang: Math.round(o.ang) };
       else if (o.t === "m") edit = { op: "move monument", at: [r1(dragOrig[0]), r1(dragOrig[1])], to: [r1(o.x), r1(o.y)] };
+      else if (o.t === "t") { edit = { op: "move tree", at: [r1(dragOrig[0]), r1(dragOrig[1])], to: [r1(o.x), r1(o.y)] }; if (o.d === "bush") edit.d = "bush"; }
       else if (o.t === "p") edit = { op: "move place", name: o.name, x: r1(o.x), y: r1(o.y) };
-      const ok = await send(o.d || districtAt([o.x, o.y]), edit);
+      const ok = await send(o.d === "bush" ? nearestDistrict([o.x, o.y]) : (o.d || districtAt([o.x, o.y])), edit);
       if (!ok) revert(o);
       draw(); showPanel(); return;
     }
@@ -539,6 +584,7 @@
   function revert(o) {
     if (o.t === "b" && dragPts) { moveB(o, (q, i) => dragPts[i]); }
     else if (o.t === "f" && dragOrig) { moveF(o, dragOrig[0], dragOrig[1]); o.ang = dragOrig[2]; }
+    else if (o.t === "t" && dragOrig) moveT(o, dragOrig[0], dragOrig[1]);
     else if (dragOrig) { o.x = dragOrig[0]; o.y = dragOrig[1]; }
     M.version++;
   }
@@ -573,6 +619,7 @@
     else if (o.t === "m") edit = { op: "delete monument", at: [r1(o.x), r1(o.y)] };
     else if (o.t === "p") edit = { op: "delete place", name: o.name };
     else if (o.t === "plot") edit = { op: "delete parcel", at: insidePt(o.pts).map(r1) };
+    else if (o.t === "t") { edit = { op: "delete tree", at: [r1(o.x), r1(o.y)] }; if (o.d === "bush") { edit.d = "bush"; d = nearestDistrict([o.x, o.y]); } }
     else if (o.t === "w") edit = { op: "delete wall", at: (o.clickAt || o.pts[0]).map(r1) };
     else if (o.t === "g") edit = { op: "delete gate", at: [r1(o.x), r1(o.y)] };
     else if (o.t === "r") {
@@ -594,7 +641,7 @@
     else if (k === "backspace" || k === "delete") { ev.preventDefault(); if ((tool === "street" || tool === "wall") && streetPts.length) { streetPts.pop(); draw(); } else deleteSel(); }
     else if (k === "r") rotateSel(ev.shiftKey ? -15 : 15);
     else if (k === "[" ) rotateSel(-1); else if (k === "]") rotateSel(1);
-    else if (k === "v") setTool("select"); else if (k === "f") setTool("furniture"); else if (k === "b") setTool("building"); else if (k === "s") setTool("street"); else if (k === "u") setTool("surface"); else if (k === "w") setTool("wall"); else if (k === "g") setTool("gate");
+    else if (k === "v") setTool("select"); else if (k === "f") setTool("furniture"); else if (k === "b") setTool("building"); else if (k === "s") setTool("street"); else if (k === "u") setTool("surface"); else if (k === "w") setTool("wall"); else if (k === "g") setTool("gate"); else if (k === "t") setTool("tree");
   });
   window.addEventListener("keyup", (ev) => { if (ev.key === " ") { spaceDown = false; cv.classList.remove("pan"); } });
 
@@ -606,12 +653,13 @@
   }
 
   // ------------------------------------------------------------------ panel and status
+  const nearestDistrict = (p) => DIST.reduce((best, d) => { const m = Math.min(...d.poly.map((q) => dist(p, q))); return m < best[0] ? [m, d.id] : best; }, [1e18, null])[1];   // the bush belongs to no district: its edits go in the nearest one's hand file
   const districtName = (id) => (DIST.find((d) => d.id === id) || {}).name || "outside the districts";
   function row(k, v) { return `<tr><td>${k}</td><td>${v}</td></tr>`; }
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function showPanel() {
     const P = $("panel"), o = sel;
-    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Selected buildings, plots, zones and streets show handles: drag a square to move a corner, a circle to add one, <kbd>⌥</kbd>-click to remove one; exact sizes in the panel. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road. <b>Wall</b>: click points, <kbd>Enter</kbd> to finish. <b>Gate</b>: click a wall.<br><br>Red outlines are problems the built city would have: a house or a wall on a road, overlapping buildings, a pole in the carriageway.</div>`;
+    const help = `<div id="help"><b>Select</b>: click a thing; drag it to move (furniture snaps to the walkway; hold <kbd>Shift</kbd> to place freely). <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> turn 1°, <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Selected buildings, plots, zones and streets show handles: drag a square to move a corner, a circle to add one, <kbd>⌥</kbd>-click to remove one; exact sizes in the panel. Drag empty ground or hold <kbd>Space</kbd> to pan; scroll to zoom.<br><br><b>Furniture</b>: click to place. <b>Building</b>: drag a box. <b>Street</b>: click points (they snap onto roads to join them), <kbd>Enter</kbd> to finish. <b>Surface</b>: click a road. <b>Wall</b>: click points, <kbd>Enter</kbd> to finish. <b>Gate</b>: click a wall. <b>Tree</b>: click to plant.<br><br>Red outlines are problems the built city would have: a house or a wall on a road, overlapping buildings, a pole in the carriageway.</div>`;
     if (!o) { P.innerHTML = `<h3>${tool === "select" ? "Nothing selected" : "Placing: " + tool}</h3>` + help; return; }
     const bad = runChecks(viewBB(0)).get(o);
     let h = "";
@@ -621,10 +669,16 @@
     else if (o.t === "p") h = `<h3>${esc(o.name)}</h3><table>${row("Type", esc(o.kind))}${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table><p class="k">${esc(o.note)}</p>`;
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
     else if (o.t === "w") { const L = o.pts.reduce((a, q, i) => i ? a + dist(o.pts[i - 1], q) : 0, 0); h = `<h3>Compound wall</h3><table>${row("District", districtName(o.d))}${row("Length", L.toFixed(1) + " m")}</table><p class="k">Worked out by the bake round walled houses (scripts/compounds.py). Delete the piece, or cut a 3 m opening where you clicked.</p><div class="row"><button id="cutw">Cut an opening here</button></div>`; }
+    else if (o.t === "t") h = `<h3>Tree: ${esc(o.kind)}</h3><table>${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Crown", "about " + (treeR(o) * 2).toFixed(1) + " m across")}</table><p class="k">Drag to move; Delete removes.</p>`;
     else if (o.t === "g") h = `<h3>Gate</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table>`;
     else if (o.t === "plot" || o.t === "zone") h = `<h3>${o.t === "plot" ? "Plot" : "Zone"}: ${esc(o.kind)}</h3><table>${row("District", districtName(o.d))}${row("Area", area(o.pts).toFixed(0) + " m²")}</table>`;
     if (o.t === "b") { const c = centroid(o.pts), w = dist(o.pts[0], o.pts[1]), dep = dist(o.pts[1], o.pts[2] || o.pts[0]), ang = Math.atan2(o.pts[1][1] - o.pts[0][1], o.pts[1][0] - o.pts[0][0]) * 180 / Math.PI;
       h += `<hr><b>Exact size and place</b>${o.pts.length !== 4 ? '<p class="k">Setting a size makes it a rectangle.</p>' : ""}<table>${row("Width (m)", `<input id="nw" type="number" step="0.1" value="${w.toFixed(1)}">`)}${row("Depth (m)", `<input id="nd" type="number" step="0.1" value="${dep.toFixed(1)}">`)}${row("Angle (°)", `<input id="na" type="number" step="1" value="${ang.toFixed(0)}">`)}${row("Middle x", `<input id="nx" type="number" step="0.1" value="${c[0].toFixed(1)}">`)}${row("Middle y", `<input id="ny" type="number" step="0.1" value="${c[1].toFixed(1)}">`)}</table><p class="k">Or drag a corner square; drag a round handle to add a corner; ⌥-click a corner to remove it.</p>`; }
+    if (o.t === "b" && (o.kind === "front" || o.kind === "back")) {
+      const f = o.front || { e: 0, shop: 0, aw: 0, bal: [] }, n = o.pts.length;
+      const sides = o.pts.map((p, j) => `<label style="display:inline-flex;gap:3px;margin-right:8px"><input type="checkbox" class="balj" data-j="${j}" ${f.bal.includes(j) ? "checked" : ""}${o.st < 2 ? " disabled" : ""}> ${j + 1} (${dist(p, o.pts[(j + 1) % n]).toFixed(1)} m)</label>`).join("");
+      h += `<hr><b>Front, shop and balconies</b><table>${row("Front side", `${f.e + 1} of ${n} <button id="fturn">next side</button>`)}${row("Shop", `<input type="checkbox" id="fshop" ${f.shop ? "checked" : ""} style="width:auto">`)}${row("Canopy (m)", `<input id="faw" type="number" step="0.1" min="0" max="3" value="${(f.aw || 0).toFixed(1)}">`)}</table><div class="k">Balconies (from the 2nd storey), by side:</div><div>${sides}</div><p class="k">The bake works these out (scripts/fronts.py); setting them here overrides it. The front side is drawn thick orange on a shop; canopies orange, balconies dashed blue.</p>`;
+    }
     if (o.t === "f" || o.t === "m") h += `<hr><b>Exact place</b><table>${row("x", `<input id="fx" type="number" step="0.1" value="${o.x.toFixed(1)}">`)}${row("y", `<input id="fy" type="number" step="0.1" value="${o.y.toFixed(1)}">`)}${row("Angle (°)", `<input id="fa" type="number" step="1" value="${Math.round(o.ang)}">`)}</table>`;
     if (o.t === "plot" || o.t === "zone" || (o.t === "r" && RESHAPE_R.has(o.cls) && o.d)) h += `<p class="k">Drag a corner square to reshape; drag a round handle to add a point; ⌥-click a point to remove it.${o.t === "r" ? " A street's ends snap onto other roads." : ""}</p>`;
     h += bad ? `<p class="bad">⚠ ${esc(bad)}</p>` : (o.t === "b" || o.t === "f") ? `<p class="ok">No problems found</p>` : "";
@@ -650,19 +704,26 @@
       if (!(await send(o.d, edit))) { if (o.t === "f") moveF(o, was[0], was[1]); else { o.x = was[0]; o.y = was[1]; } o.ang = was[2]; M.version++; }
       draw(); showPanel();
     }));
+    if (o.t === "b" && $("fshop")) {
+      const setF = async (patch) => { const at = insidePt(o.pts).map(r1); const was = o.front ? { ...o.front, bal: o.front.bal.slice() } : null; o.front = { ...(o.front || { e: 0, shop: 0, aw: 0, bal: [] }), ...patch }; M.version++; draw(); if (!(await send(o.d, { op: "set front", at, kind: o.kind, ...patch }))) { o.front = was; M.version++; } draw(); showPanel(); };
+      $("fturn").addEventListener("click", () => setF({ e: ((o.front ? o.front.e : 0) + 1) % o.pts.length }));
+      $("fshop").addEventListener("change", (ev) => setF({ shop: ev.target.checked ? 1 : 0 }));
+      $("faw").addEventListener("change", (ev) => { const v = parseFloat(ev.target.value); if (isFinite(v) && v >= 0 && v <= 3) setF({ aw: Math.round(v * 10) / 10 }); });
+      document.querySelectorAll(".balj").forEach((c) => c.addEventListener("change", () => setF({ bal: [...document.querySelectorAll(".balj")].filter((x) => x.checked).map((x) => +x.dataset.j) })));
+    }
     const nm = $("nm"); if (nm) nm.addEventListener("change", () => commit(o.d, { op: "name", at: [r1(o.x), r1(o.y)], kind: o.kind, name: nm.value }));
   }
   function renderStatus(bad) {
     const n = { road: 0, overlap: 0, furn: 0 };
-    for (const [o, why] of bad) { if (o.t === "f") n.furn++; else if (why.startsWith("on the road")) n.road++; else n.overlap++; }
-    $("checks").innerHTML = s < 0.6 ? "Zoom in to check" : `In view: <b style="color:${n.road ? css("--bad") : "inherit"}">${n.road}</b> on a road · <b style="color:${n.overlap ? css("--bad") : "inherit"}">${n.overlap}</b> overlapping · <b style="color:${n.furn ? css("--bad") : "inherit"}">${n.furn}</b> furniture misplaced`;
+    for (const [o, why] of bad) { if (typeof o === "string") continue; if (o.t === "f" || o.t === "t") n.furn++; else if (why.startsWith("on the road") || why.startsWith("a wall on")) n.road++; else n.overlap++; }
+    $("checks").innerHTML = s < 0.6 ? "Zoom in to check" : `In view: <b style="color:${n.road ? css("--bad") : "inherit"}">${n.road}</b> on a road · <b style="color:${n.overlap ? css("--bad") : "inherit"}">${n.overlap}</b> overlapping · <b style="color:${n.furn ? css("--bad") : "inherit"}">${n.furn}</b> furniture or trees misplaced`;
     $("pending").textContent = !SERVER ? "Read-only (no board server)" : pendingN ? `${pendingN} edit${pendingN > 1 ? "s" : ""} not baked yet${thawN ? ` (${thawN} road edit${thawN > 1 ? "s" : ""}: needs a thaw bake)` : ""}` : "Everything is baked";
   }
   // click the problem count to go to each problem in view in turn
   let probI = 0, probList = null;   // the problems in view when you first click; panning or zooming starts a new list
   $("checks").style.cursor = "pointer"; $("checks").title = "Go to the next problem";
   $("checks").addEventListener("click", () => {
-    if (!probList) { probList = [...runChecks(viewBB(0)).keys()]; probI = 0; }
+    if (!probList) { probList = [...runChecks(viewBB(0)).keys()].filter((o) => typeof o !== "string"); probI = 0; }
     const list = probList; if (!list.length) { probList = null; toast("No problems in view"); return; }
     const o = list[probI++ % list.length]; toast(`Problem ${((probI - 1) % list.length) + 1} of ${list.length}`); const c = o.t === "b" ? centroid(o.pts) : [o.x, o.y];
     sel = o; s = Math.max(s, 6); ox = W / 2 - c[0] * s; oy = H / 2 - c[1] * s; saveView(); draw(); showPanel();
@@ -670,7 +731,7 @@
   let toastT; function toast(t) { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => (e.style.display = "none"), 3500); }
 
   // ------------------------------------------------------------------ layers, districts, theme
-  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", walls: "Walls", furniture: "Furniture", places: "Places", labels: "Labels", checks: "Checks" };
+  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", places: "Places", labels: "Labels", checks: "Checks" };
   for (const k of Object.keys(LAYERS)) { const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" ${LAYERS[k] ? "checked" : ""}> ${LNAME[k]}`; l.querySelector("input").addEventListener("change", (e) => { LAYERS[k] = e.target.checked; draw(); }); $("layers").appendChild(l); }
   const dsel = $("district");
   dsel.innerHTML = `<option value="">Go to a district…</option>` + DIST.map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("");

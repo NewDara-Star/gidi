@@ -25,7 +25,8 @@ OPS = {'add building', 'delete building', 'move building', 'add furniture', 'del
        'add place', 'move place', 'delete place', 'add parcel', 'delete parcel', 'add monument', 'move monument',
        'delete monument', 'add zone', 'add street', 'delete street', 'cut street', 'name road', 'set surface', 'name',
        'reshape building', 'reshape parcel', 'reshape zone', 'reshape street',
-       'cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate'}
+       'cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate',
+       'set front', 'add tree', 'move tree', 'delete tree'}
 LOCK = threading.Lock()   # one edit at a time: two quick saves must not overwrite each other
 ROAD_OPS = {'add street', 'delete street', 'cut street', 'name road', 'reshape street'}   # a frozen district needs a thaw bake for these
 
