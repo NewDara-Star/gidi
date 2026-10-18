@@ -33,7 +33,7 @@ for side in (0, 1):
         poly = [(x, y0 - d), (x + w, y0 - d), (x + w, y0), (x, y0)] if side == 0 else [(x + w, y0 + d), (x, y0 + d), (x, y0), (x + w, y0)]
         cx, cy = x + w / 2, y0 - d / 2 if side == 0 else y0 + d / 2
         a = dict(kind='front', storeys=s, district=D, poly=poly, facing=2, frontage=3, near_main=80, name=f'h{side}{k}',
-                 house=dict(flat=flat, tank=[cx - 2, -(cy - 2)] if tank else None, dish=[cx + 2, -(cy + 1)] if dish else None, tyres=tyres, unf=False),
+                 house=dict(flat=flat, tank=[cx - 2, -(cy - 2)] if tank else None, dish=[cx + 2, -(cy + 1)] if dish else None, tyres=tyres, unf=False, ac=k % 3 == 1 and s),
                  front=dict(shop=shop, aw=1.4 if shop else 0, bal={2} if s > 1 and not shop else set()))
         archetypes.house(a, Rng(D, 'sheet', side, k), col)
         if k % 2 == 0:   # a service drop on every other house, as the tile's drop loop would land it

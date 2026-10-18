@@ -28,9 +28,9 @@ def house(a, rng, collection=None):
     bands = [k * STOREY + lift for k in range(1, s)]
     flat = spec['roof']['form'] == 'flat'
     z_top = H + spec['parapet']['parapet_h'] + 0.12 if flat else H
-    # split AC units: the better-off the house and the more storeys, the more of them (none in most of the Maze)
+    # split AC units: only where the data counts them (a house field 'ac', not in the data yet: none until it is)
     ar = rng.child('ac')
-    n_ac = int(max(0.0, spec['wealth'] - 0.15) * 3 * max(1, s - 0.5) + ar.random()) if a['kind'] != 'shed' else 0
+    n_ac = int((a.get('house') or {}).get('ac') or 0)
     ac_faces = [(facing + 1 + k) % len(poly) if ar.chance(0.55) else facing for k in range(n_ac)]
 
     # windows, doors, shop front, balconies: face by face

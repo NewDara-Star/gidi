@@ -29,7 +29,7 @@
 - Notes: the bake's Python is `~/.venvs/gidi`; worktrees live in `~/gidi-worktrees` (macOS clears /tmp). A locked Mac locks the keychain, and git can't push until it's unlocked.
 
 **The kit session (18 Oct, Claude; one branch and PR per topic, single-tile tests only):**
-- **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, AC units, meter boxes. Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
+- **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, meter boxes on the data's service drops. AC units are drawn only where a house's data counts them (`ac`, not in the data yet). Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
 - **Inside-out boxes fixed:** the kit's wall frames are mirrors, so sills, frames, doors, signboards and balconies came out inside out; Unreal culls back faces, which is why shop signboards showed black.
 
 **Done 17 Oct:**
