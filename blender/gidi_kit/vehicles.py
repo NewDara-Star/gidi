@@ -9,7 +9,7 @@ from mathutils import Matrix, Vector
 from . import parts
 from .core import hex_rgb, shade
 
-YELLOW = {'new': '#f2c200', 'worn': '#e0b43a', 'battered': '#d6b867', 'wreck': '#9c7a3a'}
+YELLOW = {'new': '#f5c400', 'worn': '#ecb810', 'battered': '#dca81c', 'wreck': '#a87a22'}   # danfo yellow fades to mustard, never to beige
 WEAR = {'new': 0.05, 'worn': 0.4, 'battered': 0.75, 'wreck': 1.0}
 SLOGANS = ['STILL STANDING BY GRACE', 'PATIENCE PAYS THE FARE', 'NO SHAKING, NA STEADY WHEEL', "MAMA'S PRAYER NA MY AIRBAG", 'WHO KNOWS TOMORROW?',
            'SLOW ROAD, SURE ARRIVAL', 'ENVY ME IN SILENCE', 'GIDI NO DEY SLEEP', 'IRON SHARPENS IRON', 'SMALL SMALL, BIG BIG', 'DESTINY HAS NO HOLIDAY',
