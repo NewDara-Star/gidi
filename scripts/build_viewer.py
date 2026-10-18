@@ -9,7 +9,7 @@ def map_data():
     import json
     s = rd("gidi-data.js")
     G = json.loads(s[s.index("{"):s.rstrip().rstrip(";").rindex("}") + 1])
-    for k in ("things", "life"):
+    for k in ("things", "life", "ground_paint"):
         G.pop(k, None)
     return "window.GIDI=" + json.dumps(G, separators=(",", ":"), ensure_ascii=False) + ";"
 

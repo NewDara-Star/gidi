@@ -189,6 +189,18 @@ THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py),
 for _t in GD.get('things', []):
     THINGS.setdefault((int(_t['x'] // SIZE), int(_t['y'] // SIZE)), []).append(_t)
 HOUSE_D = GD.get('houses') or {}   # each house's roof, unfinished top, tank, dish, tyres (scripts/houses.py)
+GP = GD.get('ground_paint') or {}
+GP_RULES = GP.get('rules') or {}
+SOIL = {k: hex_rgb(v['soil']) for k, v in GP_RULES.items()} or {'bush': hex_rgb('#7a8a45')}
+SOIL.setdefault('bush', hex_rgb('#7a8a45'))
+PAINT_COL = {'grass': hex_rgb('#6d8a3a'), 'dry grass': hex_rgb('#a39a5c'), 'mud': hex_rgb('#5a4634'), 'dirt': hex_rgb('#a7754e'),
+             'sand': hex_rgb('#d7c49a'), 'concrete': hex_rgb('#9a958d')}
+PAINT_AREAS = []   # the painted ground, in the kit's frame, with bounding boxes
+for _a in GP.get('areas', []):
+    _p = [P(q) for q in _a['pts'][:-1]] if _a['pts'][0] == _a['pts'][-1] else [P(q) for q in _a['pts']]
+    PAINT_AREAS.append(dict(k=_a['k'], pts=_p, bb=(min(q[0] for q in _p), min(q[1] for q in _p), max(q[0] for q in _p), max(q[1] for q in _p))))
+WEEDS = hex_rgb('#5f7233')
+DUST = hex_rgb('#c79f78')
 CLOSES = {}   # road id: [(x, y, radius)] the turning spaces at the ends of the closes (scripts/roadends.py)
 for e_ in GD.get('road_ends', []):
     if e_['t'] == 'close':
@@ -470,15 +482,26 @@ def build_tile(tx, ty, overrides):
     g = MeshBuilder()
     dc = district_at(((x0 + x1) / 2, (y0 + y1) / 2))
     ch = CHARACTER.get(dc, 'sprawl') if dc else None
-    soil = hex_rgb('#d8c9a3' if ch in ('old_island', 'waterfront', 'elite') else ('#b5714a' if ch else '#7a8a45'))
-    if TERRAIN:   # a 10 m grid, so the ground can take the terrain's shape (drape() lifts every point)
-        st_ = 10.0
-        for gx in range(int((x1 - x0) // st_)):
-            for gy in range(int((y1 - y0) // st_)):
-                a_, b_ = x0 + gx * st_, y0 + gy * st_
-                g.face([(a_, b_, 0), (a_ + st_, b_, 0), (a_ + st_, b_ + st_, 0), (a_, b_ + st_, 0)], 'ground', soil, 0.5)
-    else:
-        g.face([(x0, y0, 0), (x1, y0, 0), (x1, y1, 0), (x0, y1, 0)], 'ground', soil, 0.5)
+    # the bare ground, cell by cell, in its district's soil (scripts/groundpaint.py rules), so the colour changes where the
+    # district does, not at the tile's edge; a 10 m grid, so the ground can take the terrain's shape (drape() lifts every point)
+    st_ = 10.0
+    for gx in range(int((x1 - x0) // st_)):
+        for gy in range(int((y1 - y0) // st_)):
+            a_, b_ = x0 + gx * st_, y0 + gy * st_
+            dd = district_at((a_ + st_ / 2, b_ + st_ / 2))
+            g.face([(a_, b_, 0), (a_ + st_, b_, 0), (a_ + st_, b_ + st_, 0), (a_, b_ + st_, 0)], 'ground', SOIL.get(CHARACTER.get(dd, 'dense') if dd else 'bush', SOIL['bush']), 0.5)
+    # the painted ground (scripts/groundpaint.py): grass lots, mud by the gutters, worn paths, sandy shores, a hair above the soil,
+    # cut into the same 10 m cells so they follow the terrain too
+    for ar in PAINT_AREAS:
+        bx = ar['bb']
+        if bx[2] < x0 or bx[0] > x1 or bx[3] < y0 or bx[1] > y1:
+            continue
+        pcol = PAINT_COL.get(ar['k'], SOIL['bush'])
+        for gx in range(int(max(x0, bx[0]) // st_), int(min(x1 - 0.01, bx[2]) // st_) + 1):
+            for gy in range(int(max(y0, bx[1]) // st_), int(min(y1 - 0.01, bx[3]) // st_) + 1):
+                cp = clip_poly_rect(ar['pts'], gx * st_, gy * st_, gx * st_ + st_, gy * st_ + st_)
+                if len(cp) >= 3:
+                    triangulate_fill(g, cp, 0.02, 'ground', pcol, 0.6)
     for wpoly in list(GD['water']) + list(GD['ocean']):
         cp = clip_poly_rect([P(p) for p in wpoly], x0, y0, x1, y1)
         if len(cp) >= 3:
@@ -620,7 +643,16 @@ def build_tile(tx, ty, overrides):
                 if L < 1e-6:
                     continue
                 dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
-                for _ in range(int(L * ST['litter'] * 0.5)):
+                rule = GP_RULES.get(rch, {})
+                dust = rule.get('dust', 0.0)
+                if dust > 0.05 and r['k'] in ('main', 'street'):   # dust spilt from the road edge onto the ground beside it
+                    edge = r['w'] / 2 + (XS.get(r['k'], {}).get('gutter', 0) + XS.get(r['k'], {}).get('walkway', 0))
+                    for side in (-1, 1):
+                        o0, o1 = side * edge, side * (edge + dust)
+                        q0 = (a[0] - dy * o0, a[1] + dx * o0); q1 = (b[0] - dy * o0, b[1] + dx * o0)
+                        q2 = (b[0] - dy * o1, b[1] + dx * o1); q3 = (a[0] - dy * o1, a[1] + dx * o1)
+                        g.face([(q[0], q[1], 0.012) for q in ccw([q0, q1, q2, q3])], 'ground', DUST, 0.6)
+                for _ in range(int(L * rule.get('litter', ST['litter'] * 50) / 100)):
                     k, side = rr.between(0, L), rr.pick([-1, 1])
                     o = side * (r['w'] / 2 + rr.between(-0.6, 2.0))
                     p = (a[0] + dx * k - dy * o, a[1] + dy * k + dx * o)
@@ -670,6 +702,21 @@ def build_tile(tx, ty, overrides):
         built['rail market'] = built.get('rail market', 0) + 1
     if rmb.faces:
         rmb.to_object('rail market', col, master)   # its own object: the pitches clear as one when a train comes
+    for b in blds_here:  # weeds at the foot of the walls, at the district's share (scripts/groundpaint.py rules)
+        share = GP_RULES.get(CHARACTER.get(b['d'], 'dense'), {}).get('weeds', 0.0)
+        wr = Rng('weeds', b['d'], b['i'])
+        pl = b['poly']
+        for e in range(len(pl)):
+            if not wr.chance(share):
+                continue
+            a_, b_ = pl[e], pl[(e + 1) % len(pl)]
+            L = math.dist(a_, b_)
+            if L < 1.0:
+                continue
+            nx, ny = (b_[1] - a_[1]) / L, -(b_[0] - a_[0]) / L   # outward on a ccw ring
+            w = wr.between(0.3, 0.7)
+            q = [a_, b_, (b_[0] + nx * w, b_[1] + ny * w), (a_[0] + nx * w, a_[1] + ny * w)]
+            g.face([(x, y, 0.015) for x, y in ccw(q)], 'ground', WEEDS, 0.7)
     for b in blds_here:  # service drops to houses from the nearest pole
         if not poles or b['kind'] not in ('front', 'back'):
             continue

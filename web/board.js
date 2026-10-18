@@ -100,6 +100,7 @@
     for (const [d, L] of Object.entries(G.trees || {})) L.forEach((q) => addT({ t: "t", d, x: q[0], y: q[1], kind: q[2] }));
     for (const [d, L] of Object.entries(G.compound_gates || {})) L.forEach((q) => M.GATE.push({ t: "g", d, x: q[0], y: q[1] }));
     M.WATER = [...(G.water || []), ...(G.ocean || [])].map((r) => ({ pts: r, bb: bboxOf(r) }));
+    M.GP = ((G.ground_paint || {}).areas || []).map((a) => ({ t: "gp", d: a.d, kind: a.k, pts: a.pts, bb: bboxOf(a.pts) }));   // the painted ground (scripts/groundpaint.py)
     // road ends that meet no other road (scripts/roadends.py): a close's turning space is drawn, a loose end is a problem
     const SID = {};
     for (const [src, cls] of [["streets", "street"], ["lanes", "lane"]]) for (const [d, L] of Object.entries(S[src] || {})) L.forEach((x, i) => (SID[`${d}/${cls}/${i}`] = x));
@@ -221,6 +222,8 @@
     else if (op === "move furniture") { const f = findF(e.at, e.kind); if (f) { moveF(f, e.to[0], e.to[1]); if ("ang" in e) f.ang = e.ang; } }
     else if (op === "name") { const f = findF(e.at, e.kind); if (f) f.name = e.name; }
     else if (op === "set house") { const b = findB(e.at, e.kind); if (b) { b.house = b.house || { flat: 1, unf: 0, tank: 0, dish: 0, tyres: 0 }; for (const k of ["flat", "unf", "tank", "dish", "tyres"]) if (k in e) b.house[k] = e[k]; } }
+    else if (op === "add paint") M.GP.push({ t: "gp", d, kind: e.k, pts: e.pts, bb: bboxOf(e.pts) });
+    else if (op === "delete paint") { const i = M.GP.findIndex((a) => (!e.k || a.kind === e.k) && inPoly(e.at, a.pts)); if (i >= 0) M.GP.splice(i, 1); }
     else if (op === "add thing") addH({ t: "th", d: e.d || d, kind: e.k, x: e.x, y: e.y, ang: e.a || 0, c: e.c, s: e.s });
     else if (op === "move thing" || op === "delete thing") { let best = null, bd = 2; for (const q of gquery(M.gH, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) { const dd = dist(e.at, [q.x, q.y]); if ((!e.k || q.kind === e.k) && dd < bd) { bd = dd; best = q; } } if (best) { if (op === "delete thing") delH(best); else { moveH(best, e.to[0], e.to[1]); if ("a" in e) best.ang = e.a; } } }
     else if (op === "add monument") M.MON.push({ t: "m", d, kind: e.model, x: e.x, y: e.y, ang: e.ang || 0, name: e.name || "" });
@@ -307,7 +310,7 @@
   }
 
   // ------------------------------------------------------------------ drawing
-  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, things: true, ground: false, places: true, labels: true, checks: true };
+  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, things: true, ground: false, paint: true, places: true, labels: true, checks: true };
   const KIND_FILL = (k) => ({ front: "--home", back: "--home", extension: "--home", "face-me": "--home", "old house": "--home", "brazilian house": "--home", villa: "--home", mansion: "--home", flats: "--home",
     stalls: "--trade", shed: "--trade", kiosk: "--trade", canopy: "--trade", "phone mall": "--trade", bakery: "--trade", buka: "--trade", office: "--trade",
     school: "--civic", barracks: "--civic", cellblock: "--civic", gatehouse: "--civic", checkpoint: "--civic", palace: "--civic", "office block": "--civic", "bank tower": "--civic", hotel: "--civic",
@@ -329,6 +332,8 @@
     ctx.setLineDash([6 * px, 4 * px]); ctx.strokeStyle = css("--district"); ctx.lineWidth = 1.2 * px;
     for (const d of DIST) if (hit(d.bb, v)) { path(d.poly, true); ctx.stroke(); }
     ctx.setLineDash([]);
+    const GPCOL = { grass: "rgba(109,138,58,.55)", "dry grass": "rgba(163,154,92,.55)", mud: "rgba(90,70,52,.6)", dirt: "rgba(167,117,78,.45)", sand: "rgba(215,196,154,.6)", concrete: "rgba(154,149,141,.5)" };
+    if (LAYERS.paint) for (const a of M.GP) { if (!hit(a.bb, v)) continue; path(a.pts, true); ctx.fillStyle = GPCOL[a.kind] || "rgba(0,0,0,.1)"; ctx.fill(); if (a === sel) { ctx.strokeStyle = css("--accent"); ctx.lineWidth = 2.5 * px; ctx.stroke(); } }
     if (LAYERS.plots) for (const p of M.PAR) { if (!hit(p.bb, v)) continue; path(p.pts, true); ctx.fillStyle = LAYERS.ground ? { park: "rgba(58,143,214,.25)", market: "rgba(224,150,40,.3)", yard: "rgba(120,120,120,.3)", plot: "rgba(90,160,90,.2)" }[GU_PLOT(p.kind)] : css("--plot"); ctx.fill(); ctx.setLineDash([4 * px, 3 * px]); ctx.strokeStyle = css("--plot-line"); ctx.lineWidth = px; ctx.stroke(); ctx.setLineDash([]); }
     if (LAYERS.plots) for (const z of M.ZONE) { if (!hit(z.bb, v)) continue; path(z.pts, true); ctx.fillStyle = css("--zone"); ctx.fill(); ctx.strokeStyle = css("--warn"); ctx.lineWidth = px; ctx.stroke(); }
     // roads, in bands so junctions merge cleanly: walkway, then gutter, then carriageway, then markings
@@ -511,7 +516,8 @@
     for (const r of gquery(M.gR, [p[0] - 5, p[1] - 5, p[0] + 5, p[1] + 5])) { const d = lineDist(p, r.pts); if (d < r.wd.c / 2 + r.wd.g + 0.5 && d < rd) { rd = d; rb = r; } }
     if (rb) return rb;
     const pl = M.PAR.find((q) => hit(q.bb, [p[0], p[1], p[0], p[1]]) && inPoly(p, q.pts));
-    return pl || M.ZONE.find((q) => hit(q.bb, [p[0], p[1], p[0], p[1]]) && inPoly(p, q.pts)) || null;
+    const gp = LAYERS.paint ? M.GP.find((q) => hit(q.bb, [p[0], p[1], p[0], p[1]]) && inPoly(p, q.pts)) : null;
+    return gp || pl || M.ZONE.find((q) => hit(q.bb, [p[0], p[1], p[0], p[1]]) && inPoly(p, q.pts)) || null;
   }
   const area = (pts) => Math.abs(pts.reduce((a, p, i) => { const q = pts[(i + 1) % pts.length]; return a + p[0] * q[1] - q[0] * p[1]; }, 0)) / 2;
   const insidePt = (pts) => { const c = centroid(pts); if (inPoly(c, pts)) return c; for (let i = 0; i < pts.length; i++) { const a = pts[i], b = pts[(i + 2) % pts.length]; const m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; if (inPoly(m, pts)) return m; } return pts[0]; };
@@ -712,6 +718,7 @@
     else if (o.t === "t") { edit = { op: "delete tree", at: [r1(o.x), r1(o.y)] }; if (o.d === "bush") { edit.d = "bush"; d = nearestDistrict([o.x, o.y]); } }
     else if (o.t === "w") edit = { op: "delete wall", at: (o.clickAt || o.pts[0]).map(r1) };
     else if (o.t === "g") edit = { op: "delete gate", at: [r1(o.x), r1(o.y)] };
+    else if (o.t === "gp") edit = { op: "delete paint", at: insidePt(o.pts).map(r1), k: o.kind };
     else if (o.t === "th") { edit = { op: "delete thing", at: [r1(o.x), r1(o.y)], k: o.kind }; if (o.d === "bush") d = nearestDistrict([o.x, o.y]); }
     else if (o.t === "r") {
       if (o.cls !== "street" && o.cls !== "lane") { toast("Main roads and arterials are the city's frame: they can't be deleted here"); return; }
@@ -761,6 +768,7 @@
     else if (o.t === "r") { const L = o.pts.reduce((a, p, i) => i ? a + dist(o.pts[i - 1], p) : 0, 0); h = `<h3>${esc(o.name || "A " + o.cls)}</h3><table>${row("Kind", o.cls)}${row("District", districtName(o.d) )}${row("Length", L.toFixed(0) + " m")}${row("Carriageway", o.wd.c + " m")}${row("Gutters", o.wd.g + " m each side")}${row("Walkways", o.wd.w + " m each side")}${row("Surface", o.surf)}${row("Starts", `${o.pts[0][0].toFixed(1)}, ${o.pts[0][1].toFixed(1)}`)}${row("Ends", `${o.pts[o.pts.length - 1][0].toFixed(1)}, ${o.pts[o.pts.length - 1][1].toFixed(1)}`)}</table>`; }
     else if (o.t === "w") { const L = o.pts.reduce((a, q, i) => i ? a + dist(o.pts[i - 1], q) : 0, 0); h = `<h3>Compound wall</h3><table>${row("District", districtName(o.d))}${row("Length", L.toFixed(1) + " m")}</table><p class="k">Worked out by the bake round walled houses (scripts/compounds.py). Delete the piece, or cut a 3 m opening where you clicked.</p><div class="row"><button id="cutw">Cut an opening here</button></div>`; }
     else if (o.t === "th") h = `<h3>${esc(o.kind === "person" ? "A person" + (o.s ? " (" + o.s + ")" : "") : o.kind)}</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Heading", Math.round(o.ang) + "°")}${o.c ? row("Condition", esc(o.c)) : ""}${o.s && o.kind !== "person" ? row("Style", esc(o.s)) : ""}</table><p class="k">Placed by the bake (scripts/things.py). Drag to move, <kbd>R</kbd> to turn, <kbd>Delete</kbd> removes.</p>`;
+    else if (o.t === "gp") h = `<h3>Ground: ${esc(o.kind)}</h3><table>${row("District", districtName(o.d))}${row("Area", Math.round(Math.abs(o.pts.reduce((s_, p, i) => { const q = o.pts[(i + 1) % o.pts.length]; return s_ + p[0] * q[1] - q[0] * p[1]; }, 0)) / 2) + " m²")}</table><p class="k">Painted by the bake (scripts/groundpaint.py). <kbd>Delete</kbd> removes it.</p>`;
     else if (o.t === "end") h = `<h3>${o.t === "end" && o.r ? "The end of a close" : "A road that stops short"}</h3><table>${row("Road", esc(o.road))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${o.r ? row("Turning space", (o.r * 2).toFixed(1) + " m across") : ""}</table><p class="k">${o.r ? "Worked out by the bake (scripts/roadends.py): a round of tar at the end so cars can turn." : "It meets no other road, no house or gate, and no water. Join it on with the Street tool, or cut it back."}</p>`;
     else if (o.t === "t") h = `<h3>Tree: ${esc(o.kind)}</h3><table>${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}${row("Crown", "about " + (treeR(o) * 2).toFixed(1) + " m across")}</table><p class="k">Drag to move; Delete removes.</p>`;
     else if (o.t === "g") h = `<h3>Gate</h3><table>${row("District", districtName(o.d))}${row("At", `${o.x.toFixed(1)}, ${o.y.toFixed(1)} m`)}</table>`;
@@ -834,7 +842,7 @@
   let toastT; function toast(t) { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => (e.style.display = "none"), 3500); }
 
   // ------------------------------------------------------------------ layers, districts, theme
-  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", things: "Vehicles & people", ground: "Ground use", places: "Places", labels: "Labels", checks: "Checks" };
+  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", things: "Vehicles & people", ground: "Ground use", paint: "Ground paint", places: "Places", labels: "Labels", checks: "Checks" };
   for (const k of Object.keys(LAYERS)) { const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" ${LAYERS[k] ? "checked" : ""}> ${LNAME[k]}`; l.querySelector("input").addEventListener("change", (e) => { LAYERS[k] = e.target.checked; draw(); }); $("layers").appendChild(l); }
   const dsel = $("district");
   dsel.innerHTML = `<option value="">Go to a district…</option>` + DIST.map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("");
