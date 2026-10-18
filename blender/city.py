@@ -38,7 +38,7 @@ TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '')
 TERRAIN = bool(opt.get('--terrain'))   # stand the tile on web/terrain.json (the Google rebuild pilot); off: flat, as before
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, rules, boats, wear, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
+from gidi_kit import archetypes, rules, boats, gutters, wear, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -185,6 +185,10 @@ for i, m in enumerate(GD.get('mains', [])):
     _seen_mains.add(sig)
     _mk = _main_n.get(m.get('d'), 0); _main_n[m.get('d')] = _mk + 1   # named within its district, as scripts/isms.py names their gutters
     ROADS.append(dict(k='main', pts=[P(p) for p in m['pts']], w=road_w('main', m.get('d')), d=m.get('d'), id=f"{m.get('d')}/main/{_mk}", name=m.get('name')))
+GUTTERS = []   # the gutters (scripts/isms.py), in the kit's frame, with bounding boxes
+for _g in GD.get('gutters', []):
+    _gp = [P(p) for p in _g['pts']]
+    GUTTERS.append((_g, _gp, (min(p[0] for p in _gp), min(p[1] for p in _gp), max(p[0] for p in _gp), max(p[1] for p in _gp))))
 THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py), on the map's axes
 for _t in GD.get('things', []):
     THINGS.setdefault((int(_t['x'] // SIZE), int(_t['y'] // SIZE)), []).append(_t)
@@ -659,6 +663,13 @@ def build_tile(tx, ty, overrides):
                     o = side * (r['w'] / 2 + rr.between(-0.6, 2.0))
                     p = (a[0] + dx * k - dy * o, a[1] + dy * k + dx * o)
                     street.litter_piece(sm, p[0], p[1], 0.02, rr)
+    # the gutters the data lays (scripts/isms.py): open, covered with slabs, blocked with green water or rubbish (gidi_kit/gutters.py)
+    for g_, gp_, bb in GUTTERS:
+        if bb[2] < x0 or bb[0] > x1 or bb[3] < y0 or bb[1] > y1:
+            continue
+        gw = sum(rules.C.get(CHARACTER.get(g_.get('d') or dc, 'sprawl'), rules.C['dense'])['wear']) / 2
+        gutters.gutter(sm, gp_, g_, inside, wear=gw)
+        built['gutter:' + g_['state']] = built.get('gutter:' + g_['state'], 0) + 1
     # street furniture the data places (districts built to the cross-sections; scripts/furniture.py): drawn where it says.
     # f['ang'] is on the map's axes (y south): toward the road, or a traffic light's face out along its arm; Blender's y runs
     # north, so the angle flips sign here.
@@ -682,6 +693,8 @@ def build_tile(tx, ty, overrides):
             getattr(street, f_['kind'].replace(' ', '_'))(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), fr)
         elif f_['kind'] == 'police kiosk':
             roadside.police_kiosk(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), fr)
+        elif f_['kind'] == 'lasma post':   # the traffic wardens' post at a signalled junction, its front to the road
+            roadside.warden_post(pm, Matrix.Translation((q[0], q[1], 0)) @ Matrix.Rotation(ang, 4, 'Z'), fr)
         elif f_['kind'] == 'task force truck':   # parked along the road it's beside
             sr = span_road(q)
             ha = math.atan2(sr[2][1], sr[2][0]) if sr else ang
@@ -818,7 +831,7 @@ def build_tile(tx, ty, overrides):
             built['vehicle:' + k] = built.get('vehicle:' + k, 0) + 1
         elif k == 'generator':   # beside its house, caged, facing out (scripts/houses.py)
             F = Matrix.Translation((q[0] - math.cos(ang) * 0.9, q[1] - math.sin(ang) * 0.9, 0)) @ Matrix.Rotation(ang - math.pi / 2, 4, 'Z')
-            kit_parts.generator(vm, F, 0, dict(col=hex_rgb(tr.pick({'#c62828': 2, '#2e7d32': 2, '#f9a825': 2, '#37474f': 1})), wear=tr.between(0.3, 0.8)))
+            kit_parts.generator(vm, F, 0, dict(col=hex_rgb(tr.pick({'#c62828': 2, '#2e7d32': 2, '#f9a825': 2, '#37474f': 1})), wear=tr.between(0.3, 0.8)), tr.child('set'))
             built['generator'] = built.get('generator', 0) + 1
         elif k == 'canoe':
             boats.outboard_canoe(vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(ang, 4, 'Z'), tr, people=bool(t.get('p')))

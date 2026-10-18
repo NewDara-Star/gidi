@@ -428,20 +428,64 @@ def tyre(mb, x, y, z, r=0.32, w=0.2):
             mb.face([a, b, c, d], 'rubber', (0.02, 0.02, 0.02))
 
 
-def generator(mb, F, u, spec):
-    """A petrol generator in a welded cage, beside the wall."""
+def generator(mb, F, u, spec, rng=None):
+    """A generator beside the wall (F: x along the wall, y out, z up; it stands 0.9 m out at u). Most are the small petrol
+    sets every house runs: a tubular frame, the tank on top in its maker's colour, the engine and alternator, a rusty
+    muffler and exhaust, all in a welded rebar cage with a padlocked door, an oil stain under it, often a jerrycan by it.
+    Now and then a bigger soundproof diesel box instead."""
+    from .core import Rng, hex_rgb
     col, wear = spec['col'], spec['wear']
-    mb.box('steel', at(F, u, 0.9, 0.35), col, wear, size=(0.75, 0.55, 0.5))
-    mb.box('steel', at(F, u + 0.2, 0.9, 0.68), shade(col, 0.8), wear, size=(0.3, 0.4, 0.16))
-    cyl(mb, 'steel', at(F, u - 0.3, 0.9, 0.55, rx=math.pi / 2), 0.05, 0.25, (0.25, 0.25, 0.25), wear + 0.3, seg=8)
-    cage = (0.2, 0.2, 0.2)
-    for k in range(9):
-        x = -0.55 + k * 1.1 / 8
-        for yy in (0.5, 1.3):
-            bar(mb, 'steel', F @ Vector((u + x, yy, 0)), F @ Vector((u + x, yy, 1.05)), 0.025, cage, wear)
-    for zz in (0.02, 1.05):
-        for (a, b) in (((-0.55, 0.5), (0.55, 0.5)), ((0.55, 0.5), (0.55, 1.3)), ((0.55, 1.3), (-0.55, 1.3)), ((-0.55, 1.3), (-0.55, 0.5))):
-            bar(mb, 'steel', F @ Vector((u + a[0], a[1], zz)), F @ Vector((u + b[0], b[1], zz)), 0.035, cage, wear)
+    rng = rng or Rng('generator', round(F[0][3], 1), round(F[1][3], 1), u)
+    P = lambda x, y, z: F @ Vector((u + x, 0.9 + y, z))
+    dark, steel, rust = (0.06, 0.06, 0.06), (0.32, 0.33, 0.34), hex_rgb('#5a3a26')
+    stain = [P(-0.7, -0.45, 0.012), P(0.75, -0.5, 0.012), P(0.8, 0.5, 0.012), P(-0.65, 0.55, 0.012)]   # oil and soot on the ground
+    mb.face(stain, 'ground', (0.08, 0.07, 0.06), 0.8)
+    if rng.chance(0.12):   # the soundproof box: louvres along the side, a door, the exhaust up the back
+        body = hex_rgb(rng.pick(['#3f6b8a', '#2e7d32', '#c9c3b6', '#8a8d8c']))
+        mb.box('steel', at(F, u, 0.9, 0.62), body, wear, size=(1.6, 0.8, 1.05))
+        mb.box('steel', at(F, u, 0.9, 0.08), dark, wear, size=(1.65, 0.85, 0.16))
+        for k in range(6):
+            mb.box('steel', at(F, u - 0.4 + k * 0.16, 1.305, 0.75), shade(body, 0.6), wear, size=(0.1, 0.012, 0.45))
+        cyl(mb, 'steel', at(F, u + 0.6, 0.65, 1.15), 0.05, 0.6, rust, min(1, wear + 0.3), seg=8)
+        return
+    # the cage: rebar welded in a box round it, rusty, a door on the front with its padlock
+    cw, cd, ch = 1.1, 0.8, 1.05
+    cage = shade(rust, rng.between(0.7, 1.1)) if rng.chance(0.6) else (0.16, 0.17, 0.16)
+    for zz in (0.03, ch):
+        for a, b in (((-cw / 2, -cd / 2), (cw / 2, -cd / 2)), ((cw / 2, -cd / 2), (cw / 2, cd / 2)), ((cw / 2, cd / 2), (-cw / 2, cd / 2)), ((-cw / 2, cd / 2), (-cw / 2, -cd / 2))):
+            bar(mb, 'steel', P(a[0], a[1], zz), P(b[0], b[1], zz), 0.035, cage, wear)
+    n = 8 if not detail.web() else 5
+    for k in range(n + 1):
+        x = -cw / 2 + k * cw / n
+        for yy in (-cd / 2, cd / 2):
+            bar(mb, 'steel', P(x, yy, 0.03), P(x, yy, ch), 0.022, cage, wear)
+    for k in range(1, (5 if not detail.web() else 3)):
+        y = -cd / 2 + k * cd / (5 if not detail.web() else 3)
+        for xx in (-cw / 2, cw / 2):
+            bar(mb, 'steel', P(xx, y, 0.03), P(xx, y, ch), 0.022, cage, wear)
+        bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
+    mb.box('steel', at(F, u + 0.05, 0.9 + cd / 2 + 0.03, 0.55), (0.55, 0.5, 0.2), 0.3, size=(0.07, 0.04, 0.09))   # the padlock
+    # the set: a tubular frame on the ground, the engine at one end, the alternator at the other, the tank over both
+    fw, fd, fh = 0.62, 0.46, 0.5
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            bar(mb, 'steel', P(sx * fw / 2, sy * fd / 2, 0.02), P(sx * fw / 2, sy * fd / 2, fh), 0.03, dark, wear)
+        bar(mb, 'steel', P(sx * fw / 2, -fd / 2, 0.03), P(sx * fw / 2, fd / 2, 0.03), 0.03, dark, wear)
+        bar(mb, 'steel', P(sx * fw / 2, -fd / 2, fh), P(sx * fw / 2, fd / 2, fh), 0.03, dark, wear)
+    mb.box('steel', at(F, u - 0.12, 0.9, 0.24), steel, wear, size=(0.3, 0.3, 0.32))                       # the engine
+    mb.box('steel', at(F, u - 0.12, 0.9 - 0.17, 0.3), shade(steel, 0.6), wear, size=(0.22, 0.04, 0.18))   # its recoil start
+    cyl(mb, 'steel', at(F, u + 0.08, 0.9, 0.24, ry=math.pi / 2), 0.12, 0.2, col, wear, seg=12)            # the alternator
+    mb.box('steel', at(F, u + 0.22, 0.9, 0.24), shade(col, 0.8), wear, size=(0.08, 0.24, 0.24))           # its panel: sockets, switch
+    mb.face([P(0.265, -0.08, 0.16), P(0.265, 0.08, 0.16), P(0.265, 0.08, 0.32), P(0.265, -0.08, 0.32)], 'plastic', dark, 0)
+    mb.box('plastic', at(F, u, 0.9, fh + 0.09), col, wear, size=(0.5, 0.36, 0.17))                       # the tank
+    mb.box('plastic', at(F, u, 0.9, fh + 0.19), shade(col, 1.08), wear, size=(0.4, 0.28, 0.04))
+    cyl(mb, 'plastic', at(F, u - 0.1, 0.9, fh + 0.21), 0.04, 0.04, dark, 0, seg=8)                         # the cap
+    mb.box('steel', at(F, u - 0.12, 0.9 + 0.2, 0.42), rust, min(1, wear + 0.3), size=(0.24, 0.1, 0.14))   # the muffler
+    cyl(mb, 'steel', at(F, u - 0.2, 0.9 + 0.25, 0.42, rx=-math.pi / 2), 0.025, 0.55, (0.05, 0.04, 0.035), 0.9, seg=6)   # the exhaust out through the cage
+    if rng.chance(0.55):   # the fuel, in a jerrycan by the cage
+        jc = hex_rgb(rng.pick(['#e8b923', '#2e7d32', '#c62828', '#d9d4c8']))
+        mb.box('plastic', at(F, u + cw / 2 + 0.22, 0.75 + rng.between(-0.1, 0.2), 0.19, rz=rng.between(-0.4, 0.4)), jc, 0.6, size=(0.18, 0.3, 0.38))
+        cyl(mb, 'plastic', at(F, u + cw / 2 + 0.22, 0.68, 0.38), 0.025, 0.05, shade(jc, 0.7), 0.6, seg=6)
 
 
 # ---------------------------------------------------------------- unfinished work and walls
