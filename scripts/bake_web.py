@@ -420,6 +420,9 @@ print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees
 # service vehicles and the police pound as things. Then the hand edits to houses and things
 import houses
 print("houses:",houses.place(out),"| house edits:",hand.apply_house_edits(out),"| thing edits:",hand.apply_thing_edits(out))
+# ---- the ground itself (scripts/groundpaint.py): grass lots, mud, worn paths, sandy shores; the soil and what's too fine to outline
+import groundpaint
+print("ground paint:",groundpaint.paint(out),"| paint edits:",hand.apply_paint_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)

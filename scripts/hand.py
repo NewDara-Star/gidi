@@ -282,6 +282,29 @@ WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
 DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
 THING_OPS = ('add thing', 'move thing', 'delete thing')
 HOUSE_OPS = ('set house',)
+PAINT_OPS = ('add paint', 'delete paint')
+
+
+def apply_paint_edits(out):
+    """{"op": "add paint", "k": "grass" | "dry grass" | "mud" | "dirt" | "sand" | "concrete", "pts": ring}  /
+    {"op": "delete paint", "at": [x, y], "k" (optional)}: the painted area holding the point (scripts/groundpaint.py)."""
+    rep = {}
+    A = out.setdefault('ground_paint', {}).setdefault('areas', [])
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            if e['op'] not in PAINT_OPS:
+                continue
+            if e['op'] == 'add paint':
+                A.append({'k': e['k'], 'pts': [[round(x, 1), round(y, 1)] for x, y in e['pts']], 'd': d, 's': 0})
+            else:
+                P = Point(e['at'])
+                hit = [i for i, a in enumerate(A) if (not e.get('k') or a['k'] == e['k']) and len(a['pts']) > 2 and Polygon(a['pts']).buffer(0).contains(P)]
+                if not hit:
+                    print('  hand edit found no paint at', e['at'], e.get('note', '')); continue
+                A.pop(hit[-1])
+            rep[d] = rep.get(d, 0) + 1
+    return rep
 
 
 def apply_house_edits(out):

@@ -33,6 +33,7 @@ Then open http://127.0.0.1:8777/web/board.html.
 - **Road ends:** a close's round turning space, in its road's surface. A road that stops short of anything is ringed in red (`scripts/roadends.py`).
 - **Vehicles and people** (layer "Vehicles & people"): every parked car, keke, okada and bus at the road edges and in the parks, the people standing in the markets and parks, the port's machines, the boats, canoes, trains and rail stalls, each to scale and turned the way it faces. The bake places them (`scripts/things.py`); traffic and walkers move in the game, so the data holds how many and what kind ("life"), not where each one is.
 - **Ground use** (layer, off at first): what each piece of ground is for (`scripts/ground.py`): the parking strips at the carriageway's edges in blue, motor parks, markets, yards and other plots tinted, the rail corridor. The bottom bar names the ground under the mouse and who may be on it.
+- **Ground paint** (layer): grass lots, dry grass, mud by the gutters, worn dirt paths, sandy shores (`scripts/groundpaint.py`). Click one to see it; `Delete` removes it. The soil colour, weeds at the walls, dust at the road edges and litter are district rules in the data (`ground_paint.rules`), drawn by the kit.
 - **Monuments** (stars) and **named places** (pins).
 - **Layers:** each of the above can be switched off in the top bar.
 
