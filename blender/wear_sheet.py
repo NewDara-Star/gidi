@@ -44,6 +44,7 @@ if opt.get('--vc'):   # Unreal's view: the vertex colour alone, rough, no proced
     m = bpy.data.materials.new('vc'); m.use_nodes = True; nt = m.node_tree; bs = nt.nodes['Principled BSDF']
     at_ = nt.nodes.new('ShaderNodeVertexColor'); at_.layer_name = 'Col'; nt.links.new(at_.outputs['Color'], bs.inputs['Base Color'])
     bs.inputs['Roughness'].default_value = 0.85
+    m.use_backface_culling = True   # as Unreal's master materials do: a face wound the wrong way vanishes here too
     for ob in col.objects:
         if ob.type == 'MESH' and ob.name != 'ground':
             for s_ in ob.material_slots:

@@ -82,15 +82,18 @@ class MeshBuilder:
         c = [m @ Vector((x * sx, y * sy, z * sz)) for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)]
         # corner index = xi*4 + yi*2 + zi
         quads = {'-x': (0, 1, 3, 2), '+x': (4, 6, 7, 5), '-y': (0, 4, 5, 1), '+y': (2, 3, 7, 6), '-z': (0, 2, 6, 4), '+z': (1, 5, 7, 3)}
+        mirrored = m.to_3x3().determinant() < 0   # a wall frame (frame()) is a mirror: keep the faces facing out
         for k, q in quads.items():
             if k in skip:
                 continue
-            self.face([c[i] for i in q], mat, col, wear)
+            self.face([c[i] for i in (q[::-1] if mirrored else q)], mat, col, wear)
 
     def merge_mesh(self, mesh_data, m, mat, col, wear=0.0):
         """Add faces from a bpy mesh (e.g. a text or a primitive) transformed by m."""
+        mirrored = m.to_3x3().determinant() < 0
         for p in mesh_data.polygons:
-            self.face([m @ mesh_data.vertices[i].co for i in p.vertices], mat, col, wear)
+            vs = [m @ mesh_data.vertices[i].co for i in p.vertices]
+            self.face(vs[::-1] if mirrored else vs, mat, col, wear)
 
     def to_object(self, name, collection=None, materials=None, smooth_angle=None):
         me = bpy.data.meshes.new(name)
@@ -130,7 +133,9 @@ class MeshBuilder:
 
 # ---------------------------------------------------------------- frames and polygons
 def frame(origin, along, out):
-    """Matrix for a local frame on a wall: x along the wall, y out of the wall, z up."""
+    """Matrix for a local frame on a wall: x along the wall, y out of the wall, z up. On a counter-clockwise ring this is a
+    mirror (left-handed): MeshBuilder.box, parts.cyl and merge_mesh turn their faces round under it, and a face laid by
+    hand in it reads x then z to face out of the wall."""
     a = Vector((along[0], along[1], 0)).normalized()
     o = Vector((out[0], out[1], 0)).normalized()
     m = Matrix((

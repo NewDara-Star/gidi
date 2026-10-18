@@ -20,13 +20,14 @@ def cyl(mb, mat, m, r, h, col, wear=0.0, seg=12, caps=(True, True), r2=None):
     seg = detail.segs(seg)
     ring = lambda rad, z: [m @ Vector((math.cos(a) * rad, math.sin(a) * rad, z)) for a in (i / seg * math.tau for i in range(seg))]
     lo, hi = ring(r, 0), ring(r2, h)
+    fix = (lambda q: q[::-1]) if m.to_3x3().determinant() < 0 else (lambda q: q)   # under a mirror (a wall frame) keep them facing out
     for i in range(seg):
         j = (i + 1) % seg
-        mb.face([lo[i], lo[j], hi[j], hi[i]], mat, col, wear)
+        mb.face(fix([lo[i], lo[j], hi[j], hi[i]]), mat, col, wear)
     if caps[0]:
-        mb.face(list(reversed(lo)), mat, col, wear)
+        mb.face(fix(list(reversed(lo))), mat, col, wear)
     if caps[1]:
-        mb.face(hi, mat, col, wear)
+        mb.face(fix(hi), mat, col, wear)
 
 
 def bar(mb, mat, a, b, t, col, wear=0.0):
