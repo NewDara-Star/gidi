@@ -91,9 +91,9 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             v0e = max(0.0, v0 - (0.12 / hgt if r else 0.0))   # ...and reaches 12 cm down over it
             # the purlins the sheet is nailed to, about a metre apart: a row at each nail line (rust starts there and runs
             # down the slope) and one just above it (clean), so the colour can break sharply at the nails
-            npur = max(1, round(hgt * (v1 - v0e) / 1.0))
+            npur = 0 if web else max(1, round(hgt * (v1 - v0e) / 1.0))   # the web tiles: no nail rows (Unreal's material carries the fine rust)
             nails = [v0e + (v1 - v0e) * (i + 0.5) / npur for i in range(npur)]
-            nail_k = {i: rng.random() ** 2 for i in range(npur)}     # how badly each nail line has rusted: most a little
+            nail_k = {i: rng.random() ** 2 for i in range(max(1, npur))}   # how badly each nail line has rusted: most a little
             edge_k = rng.random() ** 2                                  # and this sheet's lapped edge
             vs = sorted({v0e, v1, *nails, *([] if web else [min(v1, v + 0.03 / hgt) for v in nails])})   # the web tiles: no crisp break, the rust fades both ways
             if sag > 0.005 and len(vs) < 3:

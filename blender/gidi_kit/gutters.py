@@ -10,6 +10,7 @@ import math
 
 from mathutils import Matrix
 
+from . import detail
 from .core import Rng, hex_rgb, shade
 
 WALL = hex_rgb('#8a857a')
@@ -28,12 +29,12 @@ def _mix(a, b, t):
     return tuple(x + (y - x) * t for x, y in zip(a, b))
 
 
-def pieces(pts, keep):
+def pieces(pts, keep, piece=PIECE):
     """The gutter's line cut into pieces of about PIECE metres: (a, b, distance along the gutter at a) for those keep() wants."""
     d = 0.0
     for p, q in zip(pts, pts[1:]):
         L = math.dist(p, q)
-        n = max(1, math.ceil(L / PIECE))
+        n = max(1, math.ceil(L / piece))
         for i in range(n):
             a = (p[0] + (q[0] - p[0]) * i / n, p[1] + (q[1] - p[1]) * i / n)
             b = (p[0] + (q[0] - p[0]) * (i + 1) / n, p[1] + (q[1] - p[1]) * (i + 1) / n)
@@ -50,7 +51,7 @@ def gutter(mb, pts, g, keep, wear=0.6):
     t = 0.12
     blocked = g.get('blocked') or []
     covered = g['state'] == 'covered'
-    for a, b, s in pieces(pts, keep):
+    for a, b, s in pieces(pts, keep, 4.0 if detail.web() else PIECE):
         L = math.dist(a, b)
         if L < 0.05:
             continue
@@ -70,7 +71,8 @@ def gutter(mb, pts, g, keep, wear=0.6):
                 mb.face(q if side < 0 else q[::-1], 'concrete', cs if side < 0 else cs[::-1], ww)
         fill = next((bk['fill'] for bk in blocked if bk['from'] <= s + L / 2 < bk['to']), None)
         # inside: silt, then water (high and green where it's blocked), or rubbish heaped to the rim
-        mb.face([P(0, -w / 2, 0.02), P(L, -w / 2, 0.02), P(L, w / 2, 0.02), P(0, w / 2, 0.02)], 'mud', SILT, 0.7)
+        if fill == 'rubbish' or not detail.web():   # under water the silt doesn't show in the web tiles
+            mb.face([P(0, -w / 2, 0.02), P(L, -w / 2, 0.02), P(L, w / 2, 0.02), P(0, w / 2, 0.02)], 'mud', SILT, 0.7)
         if fill == 'rubbish':
             mb.face([P(0, -w / 2, proud * 0.7), P(L, -w / 2, proud * 0.85), P(L, w / 2, proud * 0.75), P(0, w / 2, proud * 0.8)], 'mud',
                     [shade(SILT, 1.6), shade(SILT, 1.3), shade(SILT, 1.8), shade(SILT, 1.4)], 0.8)
@@ -95,7 +97,7 @@ def gutter(mb, pts, g, keep, wear=0.6):
                     mb.box('plastic', Matrix.Translation(P(u, o, zw + 0.02)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z'), rng.pick(RUBBISH), 0.5,
                            size=(rng.between(0.1, 0.25), rng.between(0.06, 0.15), 0.04))
         if covered:   # precast slabs across it, 0.6 m each, gaps between; some cracked and tipped, some sunk
-            n = max(1, round(L / 0.6))
+            n = max(1, round(L / (1.2 if detail.web() else 0.6)))   # the web tiles: slabs in pairs
             for k in range(n):
                 u = (k + 0.5) * L / n
                 tip = rng.between(-0.08, 0.08) if rng.chance(0.15 + 0.3 * wear) else 0.0
