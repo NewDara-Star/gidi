@@ -3,7 +3,7 @@ import math
 
 from mathutils import Matrix, Vector
 
-from . import detail, parts
+from . import detail, parts, wear
 from .core import MeshBuilder, at, ccw, centroid, edge_out, frame, offset, shade
 from .materials import master
 from .rules import house_spec
@@ -23,6 +23,15 @@ def house(a, rng, collection=None):
     mb = MeshBuilder()
     oct_ = parts.walls(mb, poly, H, spec)
     facing = a.get('facing', 0)
+    wx = spec['_wx']
+    spec['parapet']['_wx'] = wx
+    bands = [k * STOREY + lift for k in range(1, s)]
+    flat = spec['roof']['form'] == 'flat'
+    z_top = H + spec['parapet']['parapet_h'] + 0.12 if flat else H
+    # split AC units: the better-off the house and the more storeys, the more of them (none in most of the Maze)
+    ar = rng.child('ac')
+    n_ac = int(max(0.0, spec['wealth'] - 0.15) * 3 * max(1, s - 0.5) + ar.random()) if a['kind'] != 'shed' else 0
+    ac_faces = [(facing + 1 + k) % len(poly) if ar.chance(0.55) else facing for k in range(n_ac)]
 
     # windows, doors, shop front, balconies: face by face
     for i in range(len(poly)):
@@ -35,6 +44,7 @@ def house(a, rng, collection=None):
         us = [(j - (k - 1) / 2) * use / max(1, k) for j in range(k)]
         wr = rng.child('face', i)
         balcony_here = (i in spec['bal_faces']) if spec.get('bal_faces') is not None else (s > 1 and wr.chance(spec['balcony_p']) and L > 4)
+        opens = []   # what's on this face, so the weathering keeps off it
         for st in range(s):
             z = st * STOREY + 1.6 + (lift if st else 0)
             for j, u in enumerate(us):
@@ -43,6 +53,7 @@ def house(a, rng, collection=None):
                         continue
                     if not spec['shop'] and j == (k - 1) // 2:
                         parts.door(mb, F, u, spec['door'])
+                        opens.append(('door', u, 1.12, 1.16, 2.3, False))
                         continue
                 if a['kind'] == 'shed' and wr.chance(0.5):
                     continue
@@ -51,17 +62,22 @@ def house(a, rng, collection=None):
                 if st > 0 and w['bars'] != 'none' and (detail.web() or not wr.chance(0.6)):
                     w['bars'] = 'none'
                 parts.window(mb, F, u, z, w)
+                opens.append(('window', u, z, w['w'], w['h'], w['bars'] != 'none'))
             if balcony_here and st >= 1:
                 parts.balcony(mb, F, 0, st * STOREY + lift + 0.05, min(L - 1.0, 4.5), spec['balcony'])
+                opens.append(('balcony', 0, st * STOREY + lift + 0.5, min(L - 1.0, 4.5), 1.3, False))
         if spec['shop'] and i == facing:
             w = min(L - 1.4, 3.4)
             parts.roller_shutter(mb, F, 0, w, spec['shutter'])
+            opens.append(('shop', 0, 1.45, w + 0.2, 2.9, False))
             if spec['sign']:
                 parts.signboard(mb, F, 0, 3.12, min(L - 0.4, 4.2), 0.72, spec['sign'])
+                opens.append(('sign', 0, 3.12, min(L - 0.4, 4.2), 0.8, False))
             if spec.get('awning'):
                 parts.awning(mb, F, 0, min(L, 5.0), spec['awning'])
         if spec['generator'] and i == (facing + 2) % len(poly):
             parts.generator(mb, F, rng.between(-L / 4, L / 4), spec['generator'])
+        wear.age_face(mb, F, L, z_top, wx, opens, bands, rng.child('wear', i), flat_top=flat, ac=ac_faces.count(i))
 
     # roof
     if spec['roof']['form'] == 'flat':
@@ -72,7 +88,9 @@ def house(a, rng, collection=None):
             parts.water_tank(mb, t[0], t[1], H, spec['tank'])
         if spec['dish']:
             dx, dy = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else (poly[2][0] * 0.8 + c[0] * 0.2, poly[2][1] * 0.8 + c[1] * 0.2)
-            parts.satellite_dish(mb, dx, dy, H + 0.05, rng.between(0, 6), (0.92, 0.92, 0.92))
+            rz = rng.between(0, 6)
+            parts.satellite_dish(mb, dx, dy, H + 0.05, rz, (0.92, 0.92, 0.92))
+            wear.lnb_arm(mb, dx, dy, H + 0.05, rz)
         if spec['unfinished']:
             parts.unfinished_storey(mb, poly, H + 0.05, spec, rng.child('unfinished'))
     else:
@@ -86,7 +104,9 @@ def house(a, rng, collection=None):
                 parts.tyre(mb, p.x, p.y, p.z + 0.12)
         if spec['dish'] and (spec.get('dish_at') is not None or rng.chance(0.5)):
             c = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else centroid(poly)
-            parts.satellite_dish(mb, c[0], c[1], r['zr'] - 0.4, rng.between(0, 6), (0.92, 0.92, 0.92))
+            rz = rng.between(0, 6)
+            parts.satellite_dish(mb, c[0], c[1], r['zr'] - 0.4, rz, (0.92, 0.92, 0.92))
+            wear.lnb_arm(mb, c[0], c[1], r['zr'] - 0.4, rz)
 
     # compound wall around it, open where the street is
     if spec['compound'] and a.get('wall_poly'):
@@ -110,11 +130,17 @@ def extension(a, rng, collection=None):
     L = math.dist(A, B)
     n = edge_out(poly, facing)
     F = frame(((A[0] + B[0]) / 2, (A[1] + B[1]) / 2, 0), (B[0] - A[0], B[1] - A[1]), n)
+    opens = []
     if L > 1.6:
         parts.door(mb, F, -L / 4 if L > 3.5 else 0, spec['door'])
+        opens.append(('door', -L / 4 if L > 3.5 else 0, 1.12, 1.16, 2.3, False))
     if L > 3.5:
         parts.window(mb, F, L / 4, 1.6, dict(spec['window'], glass_mat='glass'))
-    if rng.chance(0.3):   # a flat slab: the next storey will go on it one day
+        opens.append(('window', L / 4, 1.6, spec['window']['w'], spec['window']['h'], spec['window']['bars'] != 'none'))
+    spec['parapet']['_wx'] = spec['_wx']
+    flat = rng.chance(0.3)
+    wear.age_face(mb, F, L, H + (spec['parapet']['parapet_h'] + 0.12 if flat else 0), spec['_wx'], opens, [], rng.child('wear'), flat_top=flat)
+    if flat:   # a flat slab: the next storey will go on it one day
         parts.roof_flat(mb, poly, H, spec['parapet'])
     else:   # lean-to: low over the facing (yard) side, high at the back
         C_, D_ = poly[(facing + 2) % len(poly)], poly[(facing + 3) % len(poly)]

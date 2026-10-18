@@ -7,6 +7,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 from . import detail
+from . import wear as wear_
 from .core import at, chamfer, edge_out, frame, offset, prism, shade
 
 STOREY = 3.1
@@ -106,9 +107,16 @@ def walls(mb, poly, H, spec):
     """Rendered walls with chamfered corners, a plinth, floor bands. Darker at the foot (baked occlusion)."""
     col, wear = spec['paint'], spec['wear']
     oct_ = chamfer(poly, spec.get('chamfer', 0.18))
-    prism(mb, 'block' if spec.get('bare') else 'paint', oct_, 0, H, shade(col, 0.82), col, wear)
-    prism(mb, 'paint', offset(oct_, 0.04), 0, spec.get('plinth_h', 0.45), spec['plinth'], spec['plinth'], wear + 0.1)
     lift = spec.get('lift', 0.0)
+    bands = [k * STOREY + lift for k in range(1, spec['storeys'])]
+    # the paint, weathered (gidi_kit/wear.py): cut into columns and bands so it can fade, blotch and take the red splash at the foot
+    wx = spec.get('_wx') or wear_.Weather(col, wear, H, (round(poly[0][0], 1), round(poly[0][1], 1)))
+    spec['_wx'] = wx
+    if spec.get('roof', {}).get('form') == 'flat':   # rain off a parapet's coping streaks the wall under it most
+        wx.top, wx.top_k = H + spec['parapet']['parapet_h'] + 0.12, 0.4
+    wx.prism(mb, 'block' if spec.get('bare') else 'paint', oct_, 0, H, rows=[0.45, 0.8, 1.15, wx.top - 1.8, wx.top - 0.9] + [z + d for z in bands for d in (-0.6, 0.6)])
+    ph = spec.get('plinth_h', 0.45)
+    prism(mb, 'paint', offset(oct_, 0.04), 0, ph, wx.foot(spec['plinth'], 0), wx.foot(spec['plinth'], ph), wear + 0.1)
     for k in range(1, spec['storeys']):
         prism(mb, 'paint', offset(oct_, 0.07), k * STOREY + lift - 0.1, k * STOREY + lift + 0.08, spec['trim'], spec['trim'], wear)
     return oct_
@@ -347,7 +355,10 @@ def roof_flat(mb, poly, H, spec):
     oct_ = chamfer(poly, spec.get('chamfer', 0.18))
     ph = spec['parapet_h']
     inner = offset(oct_, -0.18)
-    prism(mb, 'paint', oct_, H, H + ph, spec['paint'], spec['paint'], spec['wear'])
+    if spec.get('_wx'):   # the house's weathering runs on up the parapet
+        spec['_wx'].prism(mb, 'paint', oct_, H, H + ph)
+    else:
+        prism(mb, 'paint', oct_, H, H + ph, spec['paint'], spec['paint'], spec['wear'])
     prism(mb, 'concrete', inner, H, H + ph, spec['slab'], spec['slab'], spec['wear'], inward=True)
     outer = offset(oct_, 0.06)
     prism(mb, 'paint', outer, H + ph, H + ph + 0.12, spec['trim'], spec['trim'], spec['wear'])
