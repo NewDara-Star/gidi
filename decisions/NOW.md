@@ -28,6 +28,10 @@
 - **Next:** batch 2b (inside the plots: stalls, graves, pumps, cows, the parks' trees), batch 3 (the ground painted: road wear, potholes, litter, sand, mud), shop signs in Unreal (`gidi_signs.py` is written), the rest of Act 1 in Unreal, then the Google study and Claude's design pass.
 - Notes: the bake's Python is `~/.venvs/gidi`; worktrees live in `~/gidi-worktrees` (macOS clears /tmp). A locked Mac locks the keychain, and git can't push until it's unlocked.
 
+**The kit session (18 Oct, Claude; one branch and PR per topic, single-tile tests only):**
+- **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, meter boxes on the data's service drops. AC units are drawn only where a house's data counts them (`ac`, not in the data yet). Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
+- **Inside-out boxes fixed:** the kit's wall frames are mirrors, so sills, frames, doors, signboards and balconies came out inside out; Unreal culls back faces, which is why shop signboards showed black.
+
 **Done 17 Oct:**
 - **The map page went blank again** (#91): a comment swallowed a closing brace in the 3D labels. Fixed; the page is now loaded in a browser after every viewer change, not only rebuilt.
 - **Unreal: go.** The owner installed Unreal Engine 5.8.3. The game lives in its own private repo, **`~/gidi-game`** (NewDara-Star/gidi-game): an empty Blueprint project with Python, the editor scripting tools and Epic's experimental MCP plugin (it starts with the editor on http://localhost:8000/mcp). The rules: nothing the importer makes is committed (`Content/Gidi/Generated/`, rebuilt from the gidi data every import); hand-made assets go through Git LFS and are listed in `ASSETS.md`. First goal: walk the Maze in Unreal, move a house on the board, re-import, see it move.

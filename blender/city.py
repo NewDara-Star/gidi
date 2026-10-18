@@ -38,7 +38,7 @@ TILES = [tuple(int(v) for v in t.split(',')) for t in str(opt.get('--tiles', '')
 TERRAIN = bool(opt.get('--terrain'))   # stand the tile on web/terrain.json (the Google rebuild pilot); off: flat, as before
 
 import scene  # noqa: E402
-from gidi_kit import archetypes, rules, boats, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
+from gidi_kit import archetypes, rules, boats, wear, landmarks, monuments, parcels, people, places, registry, roadside, street, structures, vehicles  # noqa: E402
 from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # noqa: E402
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import CHARACTER, FLOOD, STREET, UNFINISHED_SHARE  # noqa: E402
@@ -724,8 +724,11 @@ def build_tile(tx, ty, overrides):
             continue
         p, top = min(poles, key=lambda q: math.dist(q[0], b['c']))
         if math.dist(p, b['c']) < 30:
-            cn = b['poly'][zlib.crc32(f"{b['d']}/{b['i']}".encode()) % 4]
+            ci = zlib.crc32(f"{b['d']}/{b['i']}".encode()) % 4
+            cn = b['poly'][ci]
             street.wire(sm, (top[0], top[1], top[2] - 0.6), (cn[0], cn[1], min(b['storeys'] * 3.1, 6.5) - 0.3), 1.0, t=0.012, n=5)
+            if len(b['poly']) > 2:   # the cable down the wall to the meter (gidi_kit/wear.py)
+                wear.meter_drop(sm, cn, b['poly'][(ci + 1) % len(b['poly'])], b['c'], min(b['storeys'] * 3.1, 6.5) - 0.3, Rng('meter', b['d'], b['i']))
 
     # life: a still of the traffic (moving, frozen; parked at the edges), people along the frontages
     # and in the markets, danfos loading in the motor parks, container trucks queued for the port,
