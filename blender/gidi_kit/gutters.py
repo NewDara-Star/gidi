@@ -74,11 +74,11 @@ def gutter(mb, pts, g, keep, wear=0.6):
         if fill == 'rubbish':
             mb.face([P(0, -w / 2, proud * 0.7), P(L, -w / 2, proud * 0.85), P(L, w / 2, proud * 0.75), P(0, w / 2, proud * 0.8)], 'mud',
                     [shade(SILT, 1.6), shade(SILT, 1.3), shade(SILT, 1.8), shade(SILT, 1.4)], 0.8)
-            for _ in range(int(L * 4)):   # bottles, nylon, sachets, a slipper
+            for _ in range(int(L * 6)):   # bottles, nylon, sachets, a slipper
                 u, o = rng.between(0, L), rng.between(-w / 2, w / 2)
                 z = proud * rng.between(0.7, 1.15)
                 c = rng.pick(RUBBISH)
-                sz = (rng.between(0.08, 0.3), rng.between(0.06, 0.2), rng.between(0.03, 0.1))
+                sz = (rng.between(0.06, 0.2), rng.between(0.04, 0.14), rng.between(0.01, 0.05))   # flat: sachets, bags, crushed bottles
                 mb.box('plastic', Matrix.Translation(P(u, o, z)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z') @ Matrix.Rotation(rng.between(-0.6, 0.6), 4, 'X'), c, 0.5, size=sz)
         else:
             green = fill == 'green_water'
