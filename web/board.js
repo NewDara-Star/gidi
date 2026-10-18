@@ -78,8 +78,8 @@
     M = { B: [], F: [], MON: [], P: [], R: [], PAR: [], WALL: [], ZONE: [], DECK: [], GUT: [], gB: grid(), gF: grid(), gR: grid(), gZ: grid(), gW: grid(), gT: grid(), gH: grid(), CW: [], GATE: [], TR: [], TH: [], version: 0 };
     for (const [d, L] of Object.entries(G.buildings)) {
       const st = (G.storeys || {})[d] || [];
-      const FR = (G.fronts || {})[d] || {};
-      L.forEach((b, i) => { const f = FR[String(i)]; const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1, front: f ? { e: f.e, shop: f.shop, aw: f.aw, bal: f.bal.slice() } : null }; addB(o); });
+      const FR = (G.fronts || {})[d] || {}, HO = (G.houses || {})[d] || {}, RO = (G.roles || {})[d] || {};
+      L.forEach((b, i) => { const f = FR[String(i)], hh = HO[String(i)]; const o = { t: "b", d, kind: b[0], pts: b.slice(1).map((q) => [q[0], q[1]]), st: st[i] || 1, front: f ? { e: f.e, shop: f.shop, aw: f.aw, bal: f.bal.slice() } : null, house: hh ? { ...hh } : null, role: RO[String(i)] || null }; addB(o); });
     }
     (G.furniture || []).forEach((f) => addF({ t: "f", d: f.d, kind: f.kind, x: f.x, y: f.y, ang: f.ang || 0, name: f.name || "", span: f.span || 0 }));
     // the things the bake places (scripts/things.py): parked vehicles, the parks, people standing, boats, trains, stalls
@@ -110,7 +110,7 @@
   function delH(o) { gdel(M.gH, o, [o.x, o.y, o.x, o.y]); M.TH.splice(M.TH.indexOf(o), 1); }
   function moveH(o, x, y) { gdel(M.gH, o, [o.x, o.y, o.x, o.y]); o.x = x; o.y = y; gadd(M.gH, o, [x, y, x, y]); }
   // a thing's footprint, length along its heading by width (m): scripts/things.py's sizes
-  const TSIZE = { danfo: [4.8, 2.0], korope: [3.6, 1.7], brt: [12.2, 2.6], keke: [2.8, 1.3], okada: [2.1, 0.8], car: [4.8, 1.8], police: [5.3, 1.9], tipper: [8.6, 2.5], tanker: [11.5, 2.5], cart: [3.6, 1.4], wheelbarrow: [1.6, 0.7], container: [17.2, 2.5], lorry911: [8.9, 2.4], fire: [9, 2.5], ambulance: [5.6, 2], refuse: [9.4, 2.5], mixer: [9, 2.5], water: [8.6, 2.5], molue: [11, 2.5], stacker: [11, 4], forklift: [5, 1.4], ferry: [32, 9], water_bus: [14, 3.5], dredger: [24, 7], canoe: [8, 1.4], "train:commuter": [20.6, 3], "train:loco": [14, 3], "train:coach": [18.6, 3], "train:wagon": [14.6, 3], "rail stall": [1.6, 1.6], person: [0.5, 0.5] };
+  const TSIZE = { danfo: [4.8, 2.0], korope: [3.6, 1.7], brt: [12.2, 2.6], keke: [2.8, 1.3], okada: [2.1, 0.8], car: [4.8, 1.8], police: [5.3, 1.9], tipper: [8.6, 2.5], tanker: [11.5, 2.5], cart: [3.6, 1.4], wheelbarrow: [1.6, 0.7], container: [17.2, 2.5], lorry911: [8.9, 2.4], fire: [9, 2.5], ambulance: [5.6, 2], refuse: [9.4, 2.5], mixer: [9, 2.5], water: [8.6, 2.5], molue: [11, 2.5], stacker: [11, 4], forklift: [5, 1.4], ferry: [32, 9], water_bus: [14, 3.5], dredger: [24, 7], canoe: [8, 1.4], "train:commuter": [20.6, 3], "train:loco": [14, 3], "train:coach": [18.6, 3], "train:wagon": [14.6, 3], "rail stall": [1.6, 1.6], person: [0.5, 0.5], generator: [0.8, 0.6] };
   const tsize = (o) => TSIZE[o.kind] || [1, 1];
   // ground use (scripts/ground.py, the same rules): what a point of ground is for, and who may be on it
   const GU = G.ground_use || { classes: {}, park_w: 2.4, junction_m: 12, plots: { park: [], yard: [], market: ["market"] } };
@@ -155,7 +155,7 @@
     if (pl) return GU_PLOT(pl.kind);
     return districtAt(p) ? "ground" : "bush";
   }
-  const thingRole = (k) => k === "person" ? "person" : /^(ferry|water_bus|dredger|canoe)$/.test(k) ? "boat" : k.startsWith("train") ? "train" : k === "rail stall" ? "stall" : (k === "stacker" || k === "forklift") ? "machine" : "parked vehicle";
+  const thingRole = (k) => k === "person" ? "person" : /^(ferry|water_bus|dredger|canoe)$/.test(k) ? "boat" : k.startsWith("train") ? "train" : k === "rail stall" ? "stall" : (k === "stacker" || k === "forklift") ? "machine" : k === "generator" ? "equipment" : "parked vehicle";
   function groundAllows(cls, k) { const who = GU.classes[cls] || [], r = thingRole(k); return who.includes(r) || (k === "okada" && who.includes("parked okada")) || (r === "machine" && who.includes("parked vehicle")); }
   function thingPts(o) { const [L, W] = tsize(o), a = o.ang * Math.PI / 180, u = [Math.cos(a), Math.sin(a)], v = [-u[1], u[0]]; return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [o.x + u[0] * i * L / 2 + v[0] * j * W / 2, o.y + u[1] * i * L / 2 + v[1] * j * W / 2]); }
   function delT(o) { gdel(M.gT, o, [o.x, o.y, o.x, o.y]); M.TR.splice(M.TR.indexOf(o), 1); }
@@ -220,6 +220,7 @@
     else if (op === "delete furniture") { const f = findF(e.at, e.kind); if (f) delF(f); }
     else if (op === "move furniture") { const f = findF(e.at, e.kind); if (f) { moveF(f, e.to[0], e.to[1]); if ("ang" in e) f.ang = e.ang; } }
     else if (op === "name") { const f = findF(e.at, e.kind); if (f) f.name = e.name; }
+    else if (op === "set house") { const b = findB(e.at, e.kind); if (b) { b.house = b.house || { flat: 1, unf: 0, tank: 0, dish: 0, tyres: 0 }; for (const k of ["flat", "unf", "tank", "dish", "tyres"]) if (k in e) b.house[k] = e[k]; } }
     else if (op === "add thing") addH({ t: "th", d: e.d || d, kind: e.k, x: e.x, y: e.y, ang: e.a || 0, c: e.c, s: e.s });
     else if (op === "move thing" || op === "delete thing") { let best = null, bd = 2; for (const q of gquery(M.gH, [e.at[0] - 2, e.at[1] - 2, e.at[0] + 2, e.at[1] + 2])) { const dd = dist(e.at, [q.x, q.y]); if ((!e.k || q.kind === e.k) && dd < bd) { bd = dd; best = q; } } if (best) { if (op === "delete thing") delH(best); else { moveH(best, e.to[0], e.to[1]); if ("a" in e) best.ang = e.a; } } }
     else if (op === "add monument") M.MON.push({ t: "m", d, kind: e.model, x: e.x, y: e.y, ang: e.ang || 0, name: e.name || "" });
@@ -375,6 +376,10 @@
     if (LAYERS.trees && s > 0.3) for (const t of gquery(M.gT, v)) { const r = treeR(t); ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, 7); ctx.fillStyle = bad.has(t) ? "rgba(209,36,47,.35)" : t.kind === "palm" ? "rgba(70,140,60,.35)" : "rgba(50,120,50,.30)"; ctx.fill(); ctx.strokeStyle = bad.has(t) ? css("--bad") : "#3d7a32"; ctx.lineWidth = bad.has(t) ? 2.5 * px : Math.max(px, 0.08); ctx.stroke(); if (t.kind === "palm" && s > 2) { ctx.beginPath(); for (let k = 0; k < 5; k++) { const a = k * 2 * Math.PI / 5; ctx.moveTo(t.x, t.y); ctx.lineTo(t.x + r * Math.cos(a), t.y + r * Math.sin(a)); } ctx.stroke(); } }
     // furniture, to true size where it has one, never smaller than a few pixels
     if (LAYERS.furniture && s > 0.9) for (const f of gquery(M.gF, v)) drawFurniture(f, bad.has(f), px);
+    if (LAYERS.fronts && s > 2) for (const b of gquery(M.gB, v)) { const hh = b.house; if (!hh) continue;   // tanks and dishes on the roofs (scripts/houses.py)
+      if (hh.tank) { ctx.beginPath(); ctx.arc(hh.tank[0], hh.tank[1], 0.7, 0, 7); ctx.fillStyle = "#2f5f9f"; ctx.fill(); }
+      if (hh.dish) { ctx.beginPath(); ctx.arc(hh.dish[0], hh.dish[1], 0.4, 0, 7); ctx.fillStyle = "#e8e8e8"; ctx.fill(); ctx.strokeStyle = "#777"; ctx.lineWidth = px; ctx.stroke(); }
+    }
     if (LAYERS.things && s > 1.2) for (const o of gquery(M.gH, [v[0] - 20, v[1] - 20, v[2] + 20, v[3] + 20])) {
       const isBad = bad.has(o);
       if (o.kind === "person") { ctx.beginPath(); ctx.arc(o.x, o.y, Math.max(0.25, 1.2 * px), 0, 7); ctx.fillStyle = isBad ? css("--bad") : "#b0507a"; ctx.fill(); continue; }
@@ -767,6 +772,8 @@
       const sides = o.pts.map((p, j) => `<label style="display:inline-flex;gap:3px;margin-right:8px"><input type="checkbox" class="balj" data-j="${j}" ${f.bal.includes(j) ? "checked" : ""}${o.st < 2 ? " disabled" : ""}> ${j + 1} (${dist(p, o.pts[(j + 1) % n]).toFixed(1)} m)</label>`).join("");
       h += `<hr><b>Front, shop and balconies</b><table>${row("Front side", `${f.e + 1} of ${n} <button id="fturn">next side</button>`)}${row("Shop", `<input type="checkbox" id="fshop" ${f.shop ? "checked" : ""} style="width:auto">`)}${row("Canopy (m)", `<input id="faw" type="number" step="0.1" min="0" max="3" value="${(f.aw || 0).toFixed(1)}">`)}</table><div class="k">Balconies (from the 2nd storey), by side:</div><div>${sides}</div><p class="k">The bake works these out (scripts/fronts.py); setting them here overrides it. The front side is drawn thick orange on a shop; canopies orange, balconies dashed blue.</p>`;
     }
+    if (o.t === "b" && o.role) h += `<p class="k">Taken over by: <b>${esc(o.role.name)}</b> (${esc(o.role.type)})</p>`;
+    if (o.t === "b" && o.house) { const hh = o.house; h += `<hr><b>Roof and top</b><table>${row("Roof", `<select id="hroof"><option value="1" ${hh.flat ? "selected" : ""}>flat</option><option value="0" ${hh.flat ? "" : "selected"}>pitched</option></select>`)}${row("Water tank", `<input type="checkbox" id="htank" ${hh.tank ? "checked" : ""} style="width:auto">`)}${row("Satellite dish", `<input type="checkbox" id="hdish" ${hh.dish ? "checked" : ""} style="width:auto">`)}${row("Unfinished top", `<input type="checkbox" id="hunf" ${hh.unf ? "checked" : ""} style="width:auto">`)}</table>`; }
     if (o.t === "f" || o.t === "m") h += `<hr><b>Exact place</b><table>${row("x", `<input id="fx" type="number" step="0.1" value="${o.x.toFixed(1)}">`)}${row("y", `<input id="fy" type="number" step="0.1" value="${o.y.toFixed(1)}">`)}${row("Angle (°)", `<input id="fa" type="number" step="1" value="${Math.round(o.ang)}">`)}</table>`;
     if (o.t === "plot" || o.t === "zone" || (o.t === "r" && RESHAPE_R.has(o.cls) && o.d)) h += `<p class="k">Drag a corner square to reshape; drag a round handle to add a point; ⌥-click a point to remove it.${o.t === "r" ? " A street's ends snap onto other roads." : ""}</p>`;
     h += bad ? `<p class="bad">⚠ ${esc(bad)}</p>` : (o.t === "b" || o.t === "f") ? `<p class="ok">No problems found</p>` : "";
@@ -792,6 +799,14 @@
       if (!(await send(o.d, edit))) { if (o.t === "f") moveF(o, was[0], was[1]); else { o.x = was[0]; o.y = was[1]; } o.ang = was[2]; M.version++; }
       draw(); showPanel();
     }));
+    if (o.t === "b" && $("hroof")) {
+      const c = centroid(o.pts), spot = (k) => [r1(o.pts[k % o.pts.length][0] * (k ? 0.8 : 0.6) + c[0] * (k ? 0.2 : 0.4)), r1(o.pts[k % o.pts.length][1] * (k ? 0.8 : 0.6) + c[1] * (k ? 0.2 : 0.4))];
+      const setH = async (patch) => { const at = insidePt(o.pts).map(r1); const was = { ...o.house }; Object.assign(o.house, patch); M.version++; draw(); if (!(await send(o.d, { op: "set house", at, kind: o.kind, ...patch }))) { o.house = was; M.version++; } draw(); showPanel(); };
+      $("hroof").addEventListener("change", (ev) => setH({ flat: +ev.target.value, ...(+ev.target.value ? {} : { tank: 0 }) }));
+      $("htank").addEventListener("change", (ev) => setH({ tank: ev.target.checked ? spot(0) : 0 }));
+      $("hdish").addEventListener("change", (ev) => setH({ dish: ev.target.checked ? spot(2) : 0 }));
+      $("hunf").addEventListener("change", (ev) => setH({ unf: ev.target.checked ? 1 : 0 }));
+    }
     if (o.t === "b" && $("fshop")) {
       const setF = async (patch) => { const at = insidePt(o.pts).map(r1); const was = o.front ? { ...o.front, bal: o.front.bal.slice() } : null; o.front = { ...(o.front || { e: 0, shop: 0, aw: 0, bal: [] }), ...patch }; M.version++; draw(); if (!(await send(o.d, { op: "set front", at, kind: o.kind, ...patch }))) { o.front = was; M.version++; } draw(); showPanel(); };
       $("fturn").addEventListener("click", () => setF({ e: ((o.front ? o.front.e : 0) + 1) % o.pts.length }));

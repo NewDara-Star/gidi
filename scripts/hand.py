@@ -281,6 +281,28 @@ def apply_label_edits(out):
 WALL_OPS = ('cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate')
 DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
 THING_OPS = ('add thing', 'move thing', 'delete thing')
+HOUSE_OPS = ('set house',)
+
+
+def apply_house_edits(out):
+    """{"op": "set house", "at": [x, y], "kind" (optional), "flat": 0/1, "unf": 0/1, "tank": [x, y] | 0, "dish": [x, y] | 0, "tyres": n}:
+    the house holding the point takes any of these (scripts/houses.py)."""
+    rep = {}
+    for f, H in _files():
+        d = H['district']
+        for e in H.get('edits', []):
+            if e['op'] not in HOUSE_OPS:
+                continue
+            P = Point(e['at'])
+            hit = [i for i, b in enumerate(out['buildings'].get(d, [])) if len(b) > 3 and (not e.get('kind') or b[0] == e['kind']) and Polygon(b[1:]).buffer(0.3).contains(P)]
+            if not hit:
+                print('  hand edit found no house at', e['at'], e.get('note', '')); continue
+            h = out.setdefault('houses', {}).setdefault(d, {}).setdefault(str(hit[0]), {'flat': 1, 'unf': 0, 'tank': 0, 'dish': 0, 'tyres': 0})
+            for k in ('flat', 'unf', 'tank', 'dish', 'tyres'):
+                if k in e:
+                    h[k] = e[k]
+            rep[d] = rep.get(d, 0) + 1
+    return rep
 
 
 def apply_thing_edits(out):

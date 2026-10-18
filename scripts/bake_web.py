@@ -415,7 +415,11 @@ import compounds
 print("compound walls (pieces, km, walled houses):",compounds.compounds(out),"| wall edits:",hand.apply_wall_edits(out))
 # ---- house fronts (shops, canopies, balconies) and trees (scripts/fronts.py, scripts/trees.py), then the hand edits to them
 import fronts, trees
-print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees.trees(out),"| edits:",hand.apply_detail_edits(out),"| thing edits:",hand.apply_thing_edits(out))
+print("fronts (shops, canopies, balconies):",fronts.fronts(out),"| trees:",trees.trees(out),"| edits:",hand.apply_detail_edits(out))
+# ---- houses (scripts/houses.py): which building each place takes over; each house's roof, tank, dish, tyres; generators, the
+# service vehicles and the police pound as things. Then the hand edits to houses and things
+import houses
+print("houses:",houses.place(out),"| house edits:",hand.apply_house_edits(out),"| thing edits:",hand.apply_thing_edits(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)

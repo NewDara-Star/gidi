@@ -52,13 +52,13 @@ WHO = {
     'parking': ['parked vehicle', 'moving vehicle'],
     'lane': ['person', 'parked vehicle', 'moving vehicle', 'stall'],
     'gutter': [],
-    'walkway': ['person', 'furniture', 'parked okada', 'stall'],
+    'walkway': ['person', 'furniture', 'parked okada', 'stall', 'equipment'],
     'building': [],
-    'park': ['parked vehicle', 'moving vehicle', 'person', 'stall'],
-    'market': ['stall', 'person', 'parked vehicle'],
-    'yard': ['parked vehicle', 'machine', 'person'],
-    'plot': ['person'],
-    'ground': ['person', 'parked vehicle', 'stall'],
+    'park': ['parked vehicle', 'moving vehicle', 'person', 'stall', 'equipment'],
+    'market': ['stall', 'person', 'parked vehicle', 'equipment'],
+    'yard': ['parked vehicle', 'machine', 'person', 'equipment'],
+    'plot': ['person', 'equipment'],
+    'ground': ['person', 'parked vehicle', 'stall', 'equipment'],
     'bush': ['person'],
 }
 ORDER = list(WHO)
@@ -80,6 +80,8 @@ def role(kind):
         return 'stall'
     if kind in ('stacker', 'forklift'):
         return 'machine'
+    if kind == 'generator':
+        return 'equipment'
     return 'parked vehicle'
 
 

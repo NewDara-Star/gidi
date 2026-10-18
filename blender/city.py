@@ -188,6 +188,7 @@ for i, m in enumerate(GD.get('mains', [])):
 THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py), on the map's axes
 for _t in GD.get('things', []):
     THINGS.setdefault((int(_t['x'] // SIZE), int(_t['y'] // SIZE)), []).append(_t)
+HOUSE_D = GD.get('houses') or {}   # each house's roof, unfinished top, tank, dish, tyres (scripts/houses.py)
 CLOSES = {}   # road id: [(x, y, radius)] the turning spaces at the ends of the closes (scripts/roadends.py)
 for e_ in GD.get('road_ends', []):
     if e_['t'] == 'close':
@@ -515,7 +516,7 @@ def build_tile(tx, ty, overrides):
                 for o_ in col.objects[n0:]:
                     o_['lift'] = gz
             if ov and ov['type'] in ('fire', 'hospital', 'clinic'):
-                SERVICE.append(('fire' if ov['type'] == 'fire' else 'ambulance', a))
+                pass   # its service vehicles are things in the data (scripts/houses.py)
         except Exception as e:  # a builder that breaks on odd data must not stop the city
             built['error:' + b['kind']] = built.get('error:' + b['kind'], 0) + 1
             print('ERROR', b['kind'], b['d'], b['i'], repr(e))
@@ -528,9 +529,9 @@ def build_tile(tx, ty, overrides):
             a = attributes(dict(i=0, d=c['d'], kind=c['type'], poly=c['poly'], c=c['c'], storeys=2), roads_near, polys_near)
             a['label'] = NAMED_PLOTS.get(c['name'], c['name'])
             if c['type'] in ('hospital', 'clinic'):
-                SERVICE.append(('ambulance', a))
+                pass   # its service vehicles are things in the data (scripts/houses.py)
             elif c['type'] == 'church' and Rng('molue', c['name']).chance(0.25):
-                SERVICE.append(('molue', a))  # the church's own old bus
+                pass   # the church's own old bus: a thing in the data (scripts/houses.py)
             try:
                 fn(a, Rng(c['d'], 'civic', c['name']), col)
             except Exception as e:
@@ -763,6 +764,10 @@ def build_tile(tx, ty, overrides):
             else:
                 put_vehicle(k, q[0], q[1], ang, t.get('c', 'worn'), tr, rch, WEALTH.get(rch, 0.3), style=t.get('s'), taxi=t.get('taxi', 0))
             built['vehicle:' + k] = built.get('vehicle:' + k, 0) + 1
+        elif k == 'generator':   # beside its house, caged, facing out (scripts/houses.py)
+            F = Matrix.Translation((q[0] - math.cos(ang) * 0.9, q[1] - math.sin(ang) * 0.9, 0)) @ Matrix.Rotation(ang - math.pi / 2, 4, 'Z')
+            kit_parts.generator(vm, F, 0, dict(col=hex_rgb(tr.pick({'#c62828': 2, '#2e7d32': 2, '#f9a825': 2, '#37474f': 1})), wear=tr.between(0.3, 0.8)))
+            built['generator'] = built.get('generator', 0) + 1
         elif k == 'canoe':
             boats.outboard_canoe(vm, Matrix.Translation((q[0], q[1], 0.05)) @ Matrix.Rotation(ang, 4, 'Z'), tr, people=bool(t.get('p')))
             built['boat:canoe'] = built.get('boat:canoe', 0) + 1
@@ -775,19 +780,7 @@ def build_tile(tx, ty, overrides):
             trng = Rng('train', t.get('train', ''), round(q[0]))
             fn(vm, M, trng, cab=bool(t.get('cab'))) if k == 'train:commuter' else fn(vm, M, trng)
             built[k] = built.get(k, 0) + 1
-    for vk, a in SERVICE:  # parked out front of their plots
-        try:
-            pl = ccw(a['poly'])
-            i_, Lf, F = blocks_faces(pl)[a.get('facing', 0)]
-            rr = Rng('service', vk, round(F.translation.x), round(F.translation.y))
-            n = 2 if vk == 'fire' else 1
-            for k in range(n):
-                M = F @ Matrix.Translation(((k - (n - 1) / 2) * 3.4, 4.5 if vk != 'molue' else 5.5, 0)) @ Matrix.Rotation(math.pi / 2, 4, 'Z')
-                if inside(M.translation.to_2d()):
-                    vehicles.BUILDERS[vk](vm, M, rr, 'worn')
-                    built['vehicle:' + vk] = built.get('vehicle:' + vk, 0) + 1
-        except Exception as e:
-            print('ERROR service', vk, repr(e))
+    # fire engines, ambulances, a church's molue and the police pound: things in the data now (scripts/houses.py)
     # structures, expressways, bridges, rail, canals, boardwalks, walls, gates
     tm = MeshBuilder()
     for s in GD.get('structures', []):
@@ -916,7 +909,8 @@ def attributes(b, roads, polys):
     others = [p for p in polys if p is not poly and math.dist(cent(p), b['c']) < 30]
     return {**dict(kind=b['kind'], storeys=b['storeys'], district=b['d'], poly=poly, facing=facing, frontage=best, near_main=near_main,
                 name=f"{b['d']}_{b['kind']}_{b['i']}", style=b.get('style'),
-                unfinished=b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(b['d'], 0.01)),
+                unfinished=bool(HOUSE_D.get(b['d'], {}).get(str(b['i']), {}).get('unf')) if HOUSE_D and b['kind'] in ('front', 'back', 'shed') else b['storeys'] >= 2 and rng.chance(UNFINISHED_SHARE.get(b['d'], 0.01)),
+                house=HOUSE_D.get(b['d'], {}).get(str(b['i'])) if b['kind'] in ('front', 'back', 'shed') else None,   # roof, tank, dish, tyres from the data (scripts/houses.py)
                 walled=b['i'] in WALLED.get(b['d'], ())), **data_front(b, poly)}   # walls and fronts come from the data now (the data's facing wins)
 
 
@@ -1016,7 +1010,7 @@ def export(col, origin, path):
 
 if __name__ == '__main__':
     os.makedirs(os.path.join(OUT, 'tiles'), exist_ok=True)
-    ov = poi_overrides()
+    ov = {(d, i): r for d, R in (GD.get('roles') or {}).items() for i, r in R.items()} if GD.get('roles') is not None else poi_overrides()   # which building each place takes over (scripts/houses.py)
     for tx, ty in TILES:
         t0 = time.time()
         detail.SIGNS.clear()

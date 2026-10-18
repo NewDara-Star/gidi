@@ -131,6 +131,9 @@ def house_spec(a, rng):
     trim = _c(rng, ch['trims'])
     unfinished = a.get('unfinished', False)
     flat = rng.chance(ch['flat_roof_p'].get(min(s, 4), 0.9)) or unfinished or len(a['poly']) != 4  # pitched roofs need a quad
+    H = a.get('house')   # the data's roof, tank, dish and tyres (scripts/houses.py): the draws still happen, so the looks stay put
+    if H is not None:
+        flat = bool(H['flat']) or len(a['poly']) != 4
     win_type = rng.pick(ch['window'])
     if wealth > 0.6 and win_type == 'louvre':
         win_type = 'sliding'
@@ -160,6 +163,15 @@ def house_spec(a, rng):
         dish=rng.chance(ch['dish_p']), generator=dict(col=_c(rng, {'#c62828': 2, '#2e7d32': 2, '#f9a825': 2, '#37474f': 1}), wear=wear) if rng.chance(ch['gen_p']) else None,
         roof_tyres=rng.chance(ch['roof_tyres_p']),
     )
+    if H is not None:
+        if H['tank'] and not spec['tank']:
+            spec['tank'] = dict(r=0.7, h=1.4, stand=1.2, col=hex_rgb('#1d1d1d'), wear=wear)
+        if not H['tank']:
+            spec['tank'] = None
+        spec['tank_at'] = H['tank'] or None
+        spec['dish'], spec['dish_at'] = bool(H['dish']), H['dish'] or None
+        spec['generator'] = None   # a thing in the data, drawn with the other things
+        spec['roof_tyres'] = H['tyres']
     if spec['roof']['form'] != 'flat':  # corrugated zinc: 76 mm sine; long-span aluminium: ~200 mm trapezoid ribs
         sine = spec['roof']['profile'] == 'sine'
         spec['roof'].update(pitch=0.076 if sine else 0.2, depth=0.018 if sine else 0.032)

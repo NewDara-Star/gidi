@@ -459,11 +459,11 @@ def things(W):
     T = []
     REFUSED.clear()
 
-    def put(k, x, y, ang, **kw):   # only where the ground allows it (scripts/ground.py)
-        if not W.fits(k, (x, y), ang):
+    def put(k, x, y, ang, **kw):   # only where the ground allows it (scripts/ground.py), tested where it will be written
+        X, Y, A = _back(x, y, ang)
+        if not W.fits(k, (X, -Y), ang):
             REFUSED[k] = REFUSED.get(k, 0) + 1
             return
-        X, Y, A = _back(x, y, ang)
         T.append(dict({'k': k, 'x': X, 'y': Y, 'a': A, 'd': W.district_at((x, y)) or 'bush'}, **kw))
 
     def vehicle(k, x, y, ang, cond, rng, rch):
