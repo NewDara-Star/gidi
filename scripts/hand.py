@@ -477,6 +477,12 @@ def apply_edits(out):
                 continue   # applied earlier in the bake (apply_road_edits, apply_label_edits)
             if op == 'add building':
                 _add_building(out, d, e['kind'], e['pts'], e.get('storeys', 1))
+            elif op == 'set storeys':   # the building holding the point gets this many storeys: {"at", "kind" (optional), "storeys"}
+                P = Point(e['at'])
+                hit = [i for i, b in enumerate(out['buildings'][d]) if len(b) > 3 and (not e.get('kind') or b[0] == e['kind']) and Polygon(b[1:]).buffer(0.3).contains(P)]
+                if not hit:
+                    print('  hand edit found nothing at', e['at'], op, e.get('note', '')); continue
+                out['storeys'][d][hit[0]] = int(e['storeys'])
             elif op in ('delete building', 'move building'):
                 P = Point(e['at'])
                 hit = [i for i, b in enumerate(out['buildings'][d]) if len(b) > 3 and (not e.get('kind') or b[0] == e['kind']) and Polygon(b[1:]).buffer(0.3).contains(P)]

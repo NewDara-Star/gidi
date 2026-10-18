@@ -193,6 +193,7 @@ GP = GD.get('ground_paint') or {}
 GP_RULES = GP.get('rules') or {}
 SOIL = {k: hex_rgb(v['soil']) for k, v in GP_RULES.items()} or {'bush': hex_rgb('#7a8a45')}
 SOIL.setdefault('bush', hex_rgb('#7a8a45'))
+SOIL_D = {k: hex_rgb(v) for k, v in (GP.get('soil_d') or {}).items()}   # a district's own soil, measured from its study
 PAINT_COL = {'grass': hex_rgb('#6d8a3a'), 'dry grass': hex_rgb('#a39a5c'), 'mud': hex_rgb('#5a4634'), 'dirt': hex_rgb('#a7754e'),
              'sand': hex_rgb('#d7c49a'), 'concrete': hex_rgb('#9a958d')}
 PAINT_AREAS = []   # the painted ground, in the kit's frame, with bounding boxes
@@ -489,7 +490,7 @@ def build_tile(tx, ty, overrides):
         for gy in range(int((y1 - y0) // st_)):
             a_, b_ = x0 + gx * st_, y0 + gy * st_
             dd = district_at((a_ + st_ / 2, b_ + st_ / 2))
-            g.face([(a_, b_, 0), (a_ + st_, b_, 0), (a_ + st_, b_ + st_, 0), (a_, b_ + st_, 0)], 'ground', SOIL.get(CHARACTER.get(dd, 'dense') if dd else 'bush', SOIL['bush']), 0.5)
+            g.face([(a_, b_, 0), (a_ + st_, b_, 0), (a_ + st_, b_ + st_, 0), (a_, b_ + st_, 0)], 'ground', SOIL_D.get(dd) or SOIL.get(CHARACTER.get(dd, 'dense') if dd else 'bush', SOIL['bush']), 0.5)
     # the painted ground (scripts/groundpaint.py): grass lots, mud by the gutters, worn paths, sandy shores, a hair above the soil,
     # cut into the same 10 m cells so they follow the terrain too
     for ar in PAINT_AREAS:
