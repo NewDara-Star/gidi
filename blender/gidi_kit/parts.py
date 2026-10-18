@@ -431,7 +431,7 @@ def tyre(mb, x, y, z, r=0.32, w=0.2):
 def generator(mb, F, u, spec, rng=None):
     """A generator beside the wall (F: x along the wall, y out, z up; it stands 0.9 m out at u). Most are the small petrol
     sets every house runs: a tubular frame, the tank on top in its maker's colour, the engine and alternator, a rusty
-    muffler and exhaust, all in a welded rebar cage with a padlocked door, an oil stain under it.
+    muffler and exhaust, all in a welded rebar cage with a padlocked door, an oil stain under it, often a jerrycan by it.
     Now and then a bigger soundproof diesel box instead."""
     from .core import Rng, hex_rgb
     col, wear = spec['col'], spec['wear']
@@ -482,6 +482,10 @@ def generator(mb, F, u, spec, rng=None):
     cyl(mb, 'plastic', at(F, u - 0.1, 0.9, fh + 0.21), 0.04, 0.04, dark, 0, seg=8)                         # the cap
     mb.box('steel', at(F, u - 0.12, 0.9 + 0.2, 0.42), rust, min(1, wear + 0.3), size=(0.24, 0.1, 0.14))   # the muffler
     cyl(mb, 'steel', at(F, u - 0.2, 0.9 + 0.25, 0.42, rx=-math.pi / 2), 0.025, 0.55, (0.05, 0.04, 0.035), 0.9, seg=6)   # the exhaust out through the cage
+    if rng.chance(0.55):   # the fuel, in a jerrycan by the cage
+        jc = hex_rgb(rng.pick(['#e8b923', '#2e7d32', '#c62828', '#d9d4c8']))
+        mb.box('plastic', at(F, u + cw / 2 + 0.22, 0.75 + rng.between(-0.1, 0.2), 0.19, rz=rng.between(-0.4, 0.4)), jc, 0.6, size=(0.18, 0.3, 0.38))
+        cyl(mb, 'plastic', at(F, u + cw / 2 + 0.22, 0.68, 0.38), 0.025, 0.05, shade(jc, 0.7), 0.6, seg=6)
 
 
 # ---------------------------------------------------------------- unfinished work and walls
