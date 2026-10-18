@@ -1,6 +1,6 @@
 # Where the work stands (update at the end of every session)
 
-**17 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
+**18 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
 
 **Done:**
 - **All 17 districts frozen,** and all 17 pass every check (`scripts/check_district.py`, on the finished map). The bake is byte-identical run to run.
@@ -18,6 +18,14 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**18 Oct (main session, Claude):**
+- **The Estate's streets redrawn from the study** (Magodo, Omole, Ikeja GRA; #103): a spine drive, parallel streets two plot rows apart ending in closes, two crescents, 8 gated links to the main roads instead of 17. Frozen again; all 17 districts pass.
+- **Road types in the data** (#102, #103): close, crescent, drive, avenue, street, lane (`scripts/roadtypes.py`), on the board's road panel.
+- **Unreal looks like the study now** (gidi-game #6, #7): the city was washed out by auto exposure and an extra gamma node (both gone; `gidi_look.py` sets the light). Textured surfaces (`gidi_surfaces.py`): detail, normals, rain streaks, grime from each face's wear, corrugated zinc, laid on from the world position (the web tiles' Draco packing ruins the kit's UVs). Noise textures for now (`tools/make_textures.py`); the owner is adding Megascans surfaces (`tools/fab_list.sh` lists what's in). Shots need time for new shaders (the grey checkerboard is Unreal's stand-in while they compile).
+- **A kit session runs alongside** (Claude, its own worktree, `blender/` only, single-tile tests; it waits while `~/gidi-worktrees/out/LOCK` exists, which `tools/bake.sh` holds).
+- **Next:** rebuild and import the Maze (walls, fixes) once the owner closes Unreal; swap the Megascans surfaces in, capped at 2K; measure frames per second on the laptop; a house `ac` count in the data; then real models for what repeats and the City Sample crowd at the data's people; then the next district's network from its study.
+- Research: estate network notes in `~/Real-world/research/google/estate/NOTES.md`; the two reference videos in `~/Real-world/research/games/`.
+
 **Overnight 17–18 Oct (Claude, on its own; the owner reviews in Unreal):**
 - **The Maze is in Unreal.** `~/gidi-game`: open `Content/Gidi/Generated/Maps/Gidi_City`, press Play, fly with WASD. 22 tiles, each its own level streamed into the city; sun, sky, fog; every surface on four master materials that read the kit's colours. Pictures from inside Unreal: `~/gidi-game/Saved/Shots/` (mat3 from above, street1 at eye level).
   - Import: `tools/import.sh maze` (or `all`, or a tile list), editor closed. Only changed tiles come back in. A 16 GB Mac can't hold full-detail tiles (27 GB in one process), so Unreal takes the light web tiles, a few per Unreal run.
@@ -31,7 +39,6 @@
 **The kit session (18 Oct, Claude; one branch and PR per topic, single-tile tests only):**
 - **Houses age in Unreal too** (`gidi_kit/wear.py`): the Blender shader's wear never reached Unreal (its material read the vertex colour alone; it now adds fine grime from the wear in the vertex alpha). The walls now carry the big shapes in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, meter boxes on the data's service drops. AC units are drawn only where a house's data counts them (`ac`, not in the data yet). Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
 - **Zinc roofs sheet by sheet** (`gidi_kit/zinc.py`): Unreal used to get one flat face per roof slope. Now sheets, rust toward the eave, new sheets among old, laps, sag, rust run from the nail lines and sheet edges (the ribs come from Unreal's material); flat concrete roofs stained.
-- **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, AC units, meter boxes. Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
 - **Street clutter from the data:** the gutters are drawn at last (open, slabs, blocked); the generators are real petrol sets in rebar cages; the traffic wardens' post has a builder.
 - **Compound walls weathered, the light tiles back on budget:** tile 25,9 is 1.38M faces (main before the kit work: 1.31M; at the peak: 1.77M). The light tiles pair zinc sheets, drop thin bars' end caps and hidden gutter faces, and draw fewer streaks; the full build keeps it all. Grime strips no longer hang in the air at wall corners.
 - **Inside-out boxes fixed:** the kit's wall frames are mirrors, so sills, frames, doors, signboards and balconies came out inside out; Unreal culls back faces, which is why shop signboards showed black.
