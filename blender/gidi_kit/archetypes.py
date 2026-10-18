@@ -3,7 +3,7 @@ import math
 
 from mathutils import Matrix, Vector
 
-from . import detail, parts, wear
+from . import detail, parts, wear, zinc
 from .core import MeshBuilder, at, ccw, centroid, edge_out, frame, offset, shade
 from .materials import master
 from .rules import house_spec
@@ -94,14 +94,15 @@ def house(a, rng, collection=None):
         if spec['unfinished']:
             parts.unfinished_storey(mb, poly, H + 0.05, spec, rng.child('unfinished'))
     else:
-        r = parts.roof_pitched(mb, poly, H, dict(spec['roof']), rng.child('roof'))
-        if spec['roof_tyres']:
+        rs = dict(spec['roof'])
+        r = parts.roof_pitched(mb, poly, H, rs, rng.child('roof'))
+        if spec['roof_tyres']:   # the data's tyres weigh the sheets down, sitting on the sagged sheets
             for k in range(spec['roof_tyres'] if spec['roof_tyres'] is not True and spec['roof_tyres'] > 1 else rng.randrange(2, 5)):
                 t, u = rng.between(0.15, 0.85), rng.between(0.3, 0.7)
                 e = Vector((*r['A'], r['y0'])).lerp(Vector((*r['B'], r['y0'])), t)
                 top = Vector((*r['m1'], r['zr'])).lerp(Vector((*r['m2'], r['zr'])), t)
                 p = e.lerp(top, u)
-                parts.tyre(mb, p.x, p.y, p.z + 0.12)
+                parts.tyre(mb, p.x, p.y, p.z + 0.12 - zinc.sag_at(rs, t, u))
         if spec['dish'] and (spec.get('dish_at') is not None or rng.chance(0.5)):
             c = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else centroid(poly)
             rz = rng.between(0, 6)

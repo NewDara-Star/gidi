@@ -8,6 +8,7 @@ from mathutils import Matrix, Vector
 
 from . import detail
 from . import wear as wear_
+from . import zinc
 from .core import at, chamfer, edge_out, frame, offset, prism, shade
 
 STOREY = 3.1
@@ -264,9 +265,11 @@ def corrugated(mb, A, B, C, D, spec, wear_of=None):
     """A corrugated sheet surface: eave edge A->B, top edge D->C (C == D for a hip end).
     Ribs run up the slope; the profile varies along A->B. Sheets are ~0.9 m wide and each
     gets its own wear, so old roofs read as a patchwork of replaced sheets."""
+    if spec['pitch'] < 0.3:   # zinc: sheet by sheet, rusted, lapped, sagging (gidi_kit/zinc.py)
+        return zinc.sheets(mb, A, B, C, D, spec, wear_of)
     A, B, C, D = (Vector(p) for p in (A, B, C, D))
     L = (B - A).length
-    if detail.web():  # one sheet face (and its underside); the ribs come from the web shader
+    if detail.web():  # tarpaulin: one face (and its underside)
         w = spec['wear']
         mb.face([A, B, C, D] if C != D else [A, B, C], 'zinc', spec['col'], w)
         mb.face([D, C, B, A] if C != D else [C, B, A], 'zinc', shade(spec['col'], 0.6), w)
@@ -332,6 +335,8 @@ def roof_pitched(mb, poly, H, spec, rng):
         m1, m2 = (m1[0] + dx * k, m1[1] + dy * k), (m2[0] - dx * k, m2[1] - dy * k)
     P = lambda p, z: (p[0], p[1], z)
     zr = H + rise
+    if 'sag' not in spec:   # old roofs sink between the eave and the ridge
+        spec['sag'] = max(0.0, spec['wear'] - 0.45) * rng.child('sag').between(0.05, 0.3) * min(1.0, short / 5)
     sheet_wear = lambda i: max(0.0, min(1.0, spec['wear'] + rng.child('sheet', i).between(-0.35, 0.35)))
     corrugated(mb, P(A, y0), P(B, y0), P(m2, zr), P(m1, zr), spec, sheet_wear)
     corrugated(mb, P(C, y0), P(D, y0), P(m1, zr), P(m2, zr), spec, sheet_wear)
@@ -345,7 +350,8 @@ def roof_pitched(mb, poly, H, spec, rng):
             mb.face(tri, 'paint', spec['gable_col'], spec['wall_wear'])
             mb.face(list(reversed(tri)), 'paint', spec['gable_col'], spec['wall_wear'])
     # ridge cap and fascia boards
-    bar(mb, 'zinc', (m1[0], m1[1], zr + 0.05), (m2[0], m2[1], zr + 0.05), 0.16, shade(spec['col'], 0.8), spec['wear'])
+    rc = zinc._mix(shade(spec['col'], 0.8), zinc.RUST, spec['wear'] * 0.8)   # the ridge cap rusts first: water and nails
+    bar(mb, 'zinc', (m1[0], m1[1], zr + 0.05), (m2[0], m2[1], zr + 0.05), 0.16, rc, spec['wear'])
     for a, b in ((A, B), (C, D)) + (((B, C), (D, A)) if spec['form'] == 'hip' else ()):
         bar(mb, 'wood' if spec['fascia_wood'] else 'paint', (a[0], a[1], y0 - 0.08), (b[0], b[1], y0 - 0.08), 0.16, spec['fascia'], spec['wall_wear'])
     return dict(A=A, B=B, C=C, D=D, m1=m1, m2=m2, y0=y0, zr=zr)
@@ -367,7 +373,7 @@ def roof_flat(mb, poly, H, spec):
     for i in range(len(outer)):  # the coping's top: a ring from the outer edge to the inner face only
         j = (i + 1) % len(outer)
         mb.face([(outer[i][0], outer[i][1], z), (outer[j][0], outer[j][1], z), (inner[j][0], inner[j][1], z), (inner[i][0], inner[i][1], z)], 'paint', spec['trim'], spec['wear'])
-    mb.face([(p[0], p[1], H + 0.02) for p in inner], 'concrete', spec['slab'], spec['wear'] + 0.2)
+    zinc.slab(mb, inner, H + 0.02, spec['slab'], spec['wear'])
     return inner
 
 
