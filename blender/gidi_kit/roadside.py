@@ -210,8 +210,7 @@ def police_kiosk(mb, M, rng):
 
 def warden_post(mb, M, rng):
     """The traffic wardens' post at a signalled junction (furniture 'lasma post'; M facing the road, +x): most often a small
-    yellow-and-green booth on a step, its window to the junction; else a big umbrella over a painted podium. A plastic chair
-    either way. Lettering in the browser on the web build. (The warden is a person in the data, not part of the post.)"""
+    yellow-and-green booth on a step, its window to the junction; else a big umbrella over a painted podium. Lettering in the browser on the web build. (The warden is a person in the data, not part of the post.)"""
     from . import props
     from .core import at
     wear = rng.between(0.45, 0.8)
@@ -236,4 +235,3 @@ def warden_post(mb, M, rng):
         mb.box('concrete', at(M, 0, 0, 0.2), yellow, wear, size=(0.9, 0.9, 0.4))   # the podium, painted in bands
         mb.box('concrete', at(M, 0, 0, 0.42), green, wear, size=(0.92, 0.92, 0.06))
         props.umbrella(mb, at(M, -0.5, -0.5, 0), r=1.3, h=2.3, cols=('#e8b923', '#1f6b3a'), wear=wear)
-    props.chair(mb, at(M, -0.6, 0.9, 0, rz=rng.between(-0.6, 0.6)), hex_rgb(rng.pick(props.CHAIR_COLS)), 0.6)
