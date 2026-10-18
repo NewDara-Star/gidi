@@ -202,6 +202,7 @@ for _a in GP.get('areas', []):
     PAINT_AREAS.append(dict(k=_a['k'], pts=_p, bb=(min(q[0] for q in _p), min(q[1] for q in _p), max(q[0] for q in _p), max(q[1] for q in _p))))
 WEEDS = hex_rgb('#5f7233')
 DUST = hex_rgb('#c79f78')
+DUST_D = {k: tuple(min(1.0, c * 1.3) for c in v) for k, v in SOIL_D.items()}   # a district with its own measured soil gets its own dust: that soil, paler
 CLOSES = {}   # road id: [(x, y, radius)] the turning spaces at the ends of the closes (scripts/roadends.py)
 for e_ in GD.get('road_ends', []):
     if e_['t'] == 'close':
@@ -652,7 +653,7 @@ def build_tile(tx, ty, overrides):
                         o0, o1 = side * edge, side * (edge + dust)
                         q0 = (a[0] - dy * o0, a[1] + dx * o0); q1 = (b[0] - dy * o0, b[1] + dx * o0)
                         q2 = (b[0] - dy * o1, b[1] + dx * o1); q3 = (a[0] - dy * o1, a[1] + dx * o1)
-                        g.face([(q[0], q[1], 0.012) for q in ccw([q0, q1, q2, q3])], 'ground', DUST, 0.6)
+                        g.face([(q[0], q[1], 0.012) for q in ccw([q0, q1, q2, q3])], 'ground', DUST_D.get(d, DUST), 0.6)
                 for _ in range(int(L * rule.get('litter', ST['litter'] * 50) / 100)):
                     k, side = rr.between(0, L), rr.pick([-1, 1])
                     o = side * (r['w'] / 2 + rr.between(-0.6, 2.0))
