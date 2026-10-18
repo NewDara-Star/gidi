@@ -409,7 +409,10 @@ def estate(ST, LM):
         # calibration knobs, tuned by sweeping seeds until the metrics sit between the real typical and dense squares (see the study doc)
         "x_junction": 0.1, "cross_scale": 2.0, "dead_end": 0.9,
         "sector_split_ha": 40,        # few collector streets: real blocks 22-24 per km2 (counted closed), the fewest of any district
-        "spurs": {"spur_every_m": 45, "spur_m": [40, 90]},   # closes: real dead ends 0.52-0.65 per junction, the most of any district
+        # the network as the estates are laid out (Google Earth study, 18 Oct 2026, ~/Real-world/research/google/estate/NOTES.md):
+        # a spine drive; parallel streets off it 60-90 m apart (two rows of plots back to back), 200-300 m long, ending in closes at
+        # the estate's edge or bent round into crescents; only a few run through to the boundary roads, each behind a gate
+        "estate_net": {"close_gap_m": 26, "through": 0.15, "crescent": 0.4, "crescent_max_m": 130, "bulge_m": 16},
         "size_lo_u": 0.6, "plot_u": [0.6, 0.99], "back_row": 0.6, "courtyard_m": [1.5, 3], "big_front": 0.0, "vacant": 0.18,   # big houses, a boys' quarters behind; empty plots
         "setback_m": [6, 12], "side_garden_m": [4, 10],   # a front yard behind the wall and a garden down the side (real edge-to-street median 15-19 m)
         "kiosk_every_m": 400,         # quiet streets: few kiosks

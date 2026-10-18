@@ -26,6 +26,64 @@ CRESCENT_BEND = 1.15
 DRIVE_MIN = 500.0
 AVENUE_MIN = 600.0
 TOUCH = 3.0
+STRAIGHT = 35.0   # degrees: a street carries on through a junction along the piece that turns least, if it turns less than this
+
+
+def _chains(U):
+    """Whole streets from the noded network: at every junction a street carries straight on (the piece that turns least,
+    under STRAIGHT degrees), so a spine crossed by side streets stays one street."""
+    segs = list(getattr(U, 'geoms', [U]))
+    key = lambda c: (round(c[0], 1), round(c[1], 1))
+    at = {}
+    for i, g in enumerate(segs):
+        c = list(g.coords)
+        for end, (p, q) in ((0, (c[0], c[1])), (1, (c[-1], c[-2]))):
+            at.setdefault(key(p), []).append((i, end, math.atan2(q[1] - p[1], q[0] - p[0])))
+    nxt = {}   # (segment, end) -> (segment, end) it carries straight on into
+    for node, es in at.items():
+        pairs = sorted(((abs(math.degrees(math.pi - abs((a[2] - b[2] + math.pi) % (2 * math.pi) - math.pi))), a, b)
+                        for k, a in enumerate(es) for b in es[k + 1:] if a[0] != b[0]), key=lambda x: x[0])
+        used = set()
+        for turn, a, b in pairs:
+            if turn < STRAIGHT and a[:2] not in used and b[:2] not in used:
+                nxt[a[:2]] = b[:2]; nxt[b[:2]] = a[:2]; used |= {a[:2], b[:2]}
+    seen, out = set(), []
+    for i in range(len(segs)):
+        if i in seen:
+            continue
+        start, e = i, 0   # walk back to the start of this street, then forward to its end
+        while (start, e) in nxt and nxt[(start, e)][0] != i:
+            j, ej = nxt[(start, e)]
+            if j in seen or j == start:
+                break
+            start, e = j, 1 - ej
+            if start == i:
+                break
+        cur, ce, line = start, e, []
+        while True:
+            seen.add(cur)
+            c = list(segs[cur].coords)
+            c = c if ce == 0 else c[::-1]
+            line += c if not line else c[1:]
+            n = nxt.get((cur, 1 - ce))
+            if n is None or n[0] in seen:
+                break
+            cur, ce = n
+        out.append(LineString(line))
+    return out
+
+
+def _typed(lines, big, rule):
+    """Type each line by rule(line, meets at start, meets at end, chord); returns (lines, types, tree)."""
+    others = lines + big
+    T = STRtree(others)
+    ts = []
+    for k, c in enumerate(lines):
+        e0, e1 = Point(c.coords[0]), Point(c.coords[-1])
+        m0 = [j for j in T.query(e0.buffer(TOUCH)) if j != k and others[j].distance(e0) < TOUCH]
+        m1 = [j for j in T.query(e1.buffer(TOUCH)) if j != k and others[j].distance(e1) < TOUCH]
+        ts.append(rule(c, m0, m1, e0.distance(e1) or 1.0))
+    return lines, ts, STRtree(lines)
 
 
 def types(out):
@@ -40,33 +98,32 @@ def types(out):
                 res[f'{d}/lane/{i}'] = 'lane'
         if not pieces:
             continue
-        merged = linemerge(unary_union([g for _, g in pieces]))
-        chains = list(getattr(merged, 'geoms', [merged]))
-        others = chains + big
-        T = STRtree(others)
-        CT = STRtree(chains)
-        ctype = []
-        for k, c in enumerate(chains):
-            ends = [Point(c.coords[0]), Point(c.coords[-1])]
+        U = unary_union([g for _, g in pieces])
+        cmax = CLOSE_MAX * (2 if ch == 'elite' else 1)   # an estate's closes run the depth of a block of plots
 
-            def meets(q):   # the roads an end touches, other than its own chain
-                return [j for j in T.query(q.buffer(TOUCH)) if j != k and others[j].distance(q) < TOUCH]
-            m0, m1 = meets(ends[0]), meets(ends[1])
-            chord = ends[0].distance(ends[1]) or 1.0
-            t = 'street'
-            if (not m0 or not m1) and c.length < CLOSE_MAX:
-                t = 'close'
-            elif m0 and m1 and set(m0) & set(m1) and c.length > 50 and c.length / chord > CRESCENT_BEND:
-                t = 'crescent'
-            elif ch == 'elite' and m0 and m1 and c.length >= DRIVE_MIN:
-                t = 'drive'
-            elif ch in ('civic', 'elite') and m0 and m1 and c.length >= AVENUE_MIN and c.length / chord < 1.08:
-                t = 'avenue'
-            ctype.append(t)
-        for i, g in pieces:   # each piece takes the type of the chain it lies on
+        def short(c, m0, m1, chord):   # junction to junction: closes and crescents
+            if (not m0 or not m1) and c.length < cmax:
+                return 'close'
+            if m0 and m1 and set(m0) & set(m1) and c.length > 50 and c.length / chord > CRESCENT_BEND:
+                return 'crescent'
+            return None
+
+        def long(c, m0, m1, chord):   # straight on through the junctions: drives and avenues
+            if ch == 'elite' and m0 and m1 and c.length >= DRIVE_MIN:
+                return 'drive'
+            if ch in ('civic', 'elite') and m0 and m1 and c.length >= AVENUE_MIN and c.length / chord < 1.08:
+                return 'avenue'
+            return None
+        m = linemerge(U)
+        passes = [_typed(list(getattr(m, 'geoms', [m])), big, short), _typed(_chains(U), big, long)]
+        for i, g in pieces:   # a piece is a close or crescent if its junction-to-junction run is; else a drive or avenue if its street is
             mid = g.interpolate(0.5, normalized=True)
-            ks = [k for k in CT.query(mid.buffer(0.5)) if chains[k].distance(mid) < 0.5]
-            t = ctype[ks[0]] if ks else 'street'
+            t = 'street'
+            for lines, ts, tree in passes:
+                ks = [k for k in tree.query(mid.buffer(0.5)) if lines[k].distance(mid) < 0.5 and ts[k]]
+                if ks:
+                    t = ts[ks[0]]
+                    break
             res[f'{d}/street/{i}'] = t
             rep[t] = rep.get(t, 0) + 1
     out['road_types'] = dict(sorted(res.items()))
