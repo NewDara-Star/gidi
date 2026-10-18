@@ -116,8 +116,13 @@ def compound_spec(character, rng):
     """How a compound wall from the data looks, by the district's character (the same ranges the houses' own walls used)."""
     ch = C.get(character, C['dense'])
     wealth = rng.between(*ch['wealth'])
-    return dict(h=rng.between(1.9, 2.6) + 0.6 * wealth, paint=_c(rng, ch['paints']), coping=hex_rgb('#f2efe6'), top=rng.pick(ch['wall_top']),
+    spec = dict(h=rng.between(1.9, 2.6) + 0.6 * wealth, paint=_c(rng, ch['paints']), coping=hex_rgb('#f2efe6'), top=rng.pick(ch['wall_top']),
                 gate=_c(rng, {'#2b4a66': 2, '#3a3a3a': 2, '#7a2a2a': 1, '#2e6b4a': 1}), wear=rng.between(*ch['wear']), gap=rng.between(1.6, 3.0))
+    rough = character in ('dense', 'sprawl', 'waterfront', 'port')
+    if spec['top'] == 'bottles' and not rough:   # bottle shards only on the dense and sprawl districts' walls (the draws stay put)
+        spec['top'] = 'plain'
+    spec['rough'] = rough   # their walls also break at the top here and there
+    return spec
 
 
 # A district's own colours, measured from the Google Earth study of the places it is drawn from (study yes, lift no: only the

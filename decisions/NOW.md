@@ -33,6 +33,7 @@
 - **Zinc roofs sheet by sheet** (`gidi_kit/zinc.py`): Unreal used to get one flat face per roof slope. Now sheets, rust toward the eave, new sheets among old, laps, sag, rust run from the nail lines and sheet edges (the ribs come from Unreal's material); flat concrete roofs stained.
 - **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, AC units, meter boxes. Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
 - **Street clutter from the data:** the gutters are drawn at last (open, slabs, blocked); the generators are real petrol sets in rebar cages; the traffic wardens' post has a builder.
+- **Compound walls weathered, the light tiles back on budget:** tile 25,9 is 1.38M faces (main before the kit work: 1.31M; at the peak: 1.77M). The light tiles pair zinc sheets, drop thin bars' end caps and hidden gutter faces, and draw fewer streaks; the full build keeps it all. Grime strips no longer hang in the air at wall corners.
 - **Inside-out boxes fixed:** the kit's wall frames are mirrors, so sills, frames, doors, signboards and balconies came out inside out; Unreal culls back faces, which is why shop signboards showed black.
 
 **Done 17 Oct:**

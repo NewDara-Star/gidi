@@ -54,6 +54,13 @@ for k, x in enumerate((4.0, 20.0, 34.0, 46.0)):   # generators in front of the f
     parts.generator(wires, F, 0, dict(col=[(0.5, 0.05, 0.04), (0.05, 0.3, 0.06), (0.8, 0.55, 0.03), (0.2, 0.25, 0.28)][k], wear=0.6), Rng('gen', k))
 roadside.warden_post(wires, Matrix.Translation((10, 12, 0)) @ Matrix.Rotation(-math.pi / 2, 4, 'Z'), Rng('wp', 1))
 roadside.warden_post(wires, Matrix.Translation((40, 12, 0)) @ Matrix.Rotation(-math.pi / 2, 4, 'Z'), Rng('wp', 4))
+from gidi_kit import rules  # noqa: E402
+for k, (ch, y) in enumerate((('dense', 2.0), ('dense', 10.0), ('elite', 18.0))):   # compound walls as the data draws them: open lines, gates at points
+    wr_ = Rng('sheetwall', k)
+    sp = rules.compound_spec(ch, wr_)
+    if k < 2:
+        sp.update(top='bottles', wear=0.8)
+    parts.compound_wall(wires, [(62, y), (92, y), (92, y + 6)], sp, wr_, closed=False, gates=[(77.0 + k * 3, y)])
 wires.to_object('wires', col, master)
 if opt.get('--vc'):   # Unreal's view: the vertex colour alone, rough, no procedural wear
     m = bpy.data.materials.new('vc'); m.use_nodes = True; nt = m.node_tree; bs = nt.nodes['Principled BSDF']
@@ -65,7 +72,7 @@ if opt.get('--vc'):   # Unreal's view: the vertex colour alone, rough, no proced
             for s_ in ob.material_slots:
                 if s_.material and 'glass' not in s_.material.name:
                     s_.material = m
-cams = {'street': ((22, 12, 1.7), (14, -2, 3.0), 24), 'close': ((30, 8, 1.7), (30, -1, 2.6), 22), 'lit': ((24, 13, 1.7), (24, 25, 3.0), 22), 'high': ((-14, 40, 22), (24, 6, 2), 26), 'roofs': ((26, 34, 30), (26, 6, 4), 30)}
+cams = {'street': ((22, 12, 1.7), (14, -2, 3.0), 24), 'close': ((30, 8, 1.7), (30, -1, 2.6), 22), 'lit': ((24, 13, 1.7), (24, 25, 3.0), 22), 'high': ((-14, 40, 22), (24, 6, 2), 26), 'roofs': ((26, 34, 30), (26, 6, 4), 30), 'walls': ((70, -8, 2.2), (78, 6, 1.2), 26)}
 loc, tgt, lens = cams[view] if '--cam' not in opt else (tuple(float(v) for v in opt['--cam'].split(',')[:3]), tuple(float(v) for v in opt['--cam'].split(',')[3:6]), 24)
 scene.camera(sc, loc, tgt, lens=lens)
 scene.render(sc, out, res=(1800, 1100))

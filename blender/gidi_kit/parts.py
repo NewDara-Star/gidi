@@ -46,7 +46,7 @@ def bar(mb, mat, a, b, t, col, wear=0.0):
         (x.y, y.y, z.y, (a.y + b.y) / 2),
         (x.z, y.z, z.z, (a.z + b.z) / 2),
         (0, 0, 0, 1)))
-    mb.box(mat, m, col, wear, size=(t, t, l))
+    mb.box(mat, m, col, wear, size=(t, t, l), skip=('-z', '+z') if detail.web() else ())   # the web tiles: no end caps on a thin bar
 
 
 _FONT = None
@@ -116,7 +116,7 @@ def walls(mb, poly, H, spec):
     spec['_wx'] = wx
     if spec.get('roof', {}).get('form') == 'flat':   # rain off a parapet's coping streaks the wall under it most
         wx.top, wx.top_k = H + spec['parapet']['parapet_h'] + 0.12, 0.4
-    wx.prism(mb, 'block' if spec.get('bare') else 'paint', oct_, 0, H, rows=[0.45, 0.8, 1.15, wx.top - 1.8, wx.top - 0.9] + [z + d for z in bands for d in (-0.6, 0.6)])
+    wx.prism(mb, 'block' if spec.get('bare') else 'paint', oct_, 0, H, rows=[0.45, 1.15, wx.top - 1.8] + ([] if detail.web() else [0.8, wx.top - 0.9] + [z + d for z in bands for d in (-0.6, 0.6)]))
     ph = spec.get('plinth_h', 0.45)
     prism(mb, 'paint', offset(oct_, 0.04), 0, ph, wx.foot(spec['plinth'], 0), wx.foot(spec['plinth'], ph), wear + 0.1)
     for k in range(1, spec['storeys']):
@@ -463,11 +463,12 @@ def generator(mb, F, u, spec, rng=None):
         y = -cd / 2 + k * cd / (5 if not detail.web() else 2)
         for xx in (-cw / 2, cw / 2):
             bar(mb, 'steel', P(xx, y, 0.03), P(xx, y, ch), 0.022, cage, wear)
-        bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
+        if not detail.web():
+            bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
     mb.box('steel', at(F, u + 0.05, 0.9 + cd / 2 + 0.03, 0.55), (0.55, 0.5, 0.2), 0.3, size=(0.07, 0.04, 0.09))   # the padlock
     # the set: a tubular frame on the ground, the engine at one end, the alternator at the other, the tank over both
     fw, fd, fh = 0.62, 0.46, 0.5
-    for sx in (-1, 1):
+    for sx in ((-1, 1) if not detail.web() else ()):   # the tube frame (inside the cage: the web tiles leave it out)
         for sy in (-1, 1):
             bar(mb, 'steel', P(sx * fw / 2, sy * fd / 2, 0.02), P(sx * fw / 2, sy * fd / 2, fh), 0.03, dark, wear)
         bar(mb, 'steel', P(sx * fw / 2, -fd / 2, 0.03), P(sx * fw / 2, fd / 2, 0.03), 0.03, dark, wear)
@@ -513,10 +514,31 @@ def unfinished_storey(mb, poly, z, spec, rng):
             mb.box('block', Matrix.Translation((x, y, z + hgt / 2)) @ Matrix.Rotation(math.atan2(b[1] - a[1], b[0] - a[0]), 4, 'Z'), (1, 1, 1), 0.5, size=(L / n - 0.01, 0.2, hgt))
 
 
+def _band_face(mb, m, side, x0, x1, zs, cols, mat='paint', wear=0.0, y=0.1, cols_r=None):
+    """One side of a thin wall in its frame m (x along, y across, z up): quads up the bands zs, coloured cols[k] at zs[k]
+    (cols_r: the right-hand end's, if it differs). side +1 faces +y, -1 faces -y."""
+    cr = cols_r or cols
+    for k in range(len(zs) - 1):
+        q = [m @ Vector((x0, side * y, zs[k])), m @ Vector((x1, side * y, zs[k])), m @ Vector((x1, side * y, zs[k + 1])), m @ Vector((x0, side * y, zs[k + 1]))]
+        c = [cols[k], cr[k], cr[k + 1], cols[k + 1]]
+        mb.face(q[::-1] if side > 0 else q, mat, c[::-1] if side > 0 else c, wear)
+
+
 def compound_wall(mb, poly, spec, rng, skip_seg=None, closed=True, gates=None):
-    """A block wall round a compound: pillars, coping, broken bottles or razor wire, a steel gate."""
+    """A block wall round a compound, weathered: red earth up its foot and grime run down from the coping, painted in
+    3 m panels between pillars; on the dense and sprawl districts' walls (spec['rough']) a stretch now and then where the
+    top has broken off down to the block, and broken bottles set in the coping; razor wire on the better-off ones. Gates:
+    two painted steel leaves, rust rising from their foot. All colour and geometry, so Unreal sees it too."""
+    from . import wear as W
     h, col, wear = spec['h'], spec['paint'], spec['wear']
     gate_i = spec.get('gate_edge', 0) if gates is None else -1   # gates=[points]: a gate wherever one stands on the line
+    wr = rng.child('weather')
+    mix = W.mix
+
+    def tone(c, z, top, k=1.0):   # the wall's colour at z: splash at the foot, grime under the top
+        c = mix(c, W.DIRT, min(1.0, wear * 1.15 * k) * (1 - W.smooth(0.0, 0.95, z)))
+        return mix(c, W.GRIME, wear * 0.7 * k * W.smooth(top - 0.8, top, z))
+
     for i in range(len(poly) if closed else len(poly) - 1):
         a, b = poly[i], poly[(i + 1) % len(poly)]
         L = math.dist(a, b)
@@ -528,28 +550,108 @@ def compound_wall(mb, poly, spec, rng, skip_seg=None, closed=True, gates=None):
             seg_len = L / n
             if skip_seg and skip_seg(mid):
                 continue
-            if (i == gate_i and k == n // 2) or (gates and any(math.dist(mid, g) < seg_len / 2 + 0.3 for g in gates)):  # the gate
-                m = Matrix.Translation((mid[0], mid[1], 0)) @ Matrix.Rotation(ang, 4, 'Z')
-                for s in (-0.5, 0.5):
-                    mb.box('steel', m @ Matrix.Translation((s * seg_len / 2, 0, h * 0.95 / 2)), spec['gate'], wear, size=(seg_len / 2 - 0.04, 0.06, h * 0.95))
-                    for z in (0.5, 1.2):
-                        mb.box('steel', m @ Matrix.Translation((s * seg_len / 2, 0.04, z)), shade(spec['gate'], 0.8), wear, size=(seg_len / 2 - 0.3, 0.02, 0.5))
-                continue
             m = Matrix.Translation((mid[0], mid[1], 0)) @ Matrix.Rotation(ang, 4, 'Z')
-            mb.box('paint', m @ Matrix.Translation((0, 0, h / 2)), col, wear, size=(seg_len, 0.2, h))
-            mb.box('paint', m @ Matrix.Translation((0, 0, h + 0.05)), spec['coping'], wear, size=(seg_len + 0.02, 0.28, 0.1))
-            mb.box('paint', m @ Matrix.Translation((seg_len / 2, 0, (h + 0.25) / 2)), spec['coping'], wear, size=(0.3, 0.3, h + 0.25))
-            if detail.web() and spec['top'] in ('bottles', 'razor'):  # one strip stands for shards or wire
-                mb.box('glass' if spec['top'] == 'bottles' else 'steel', m @ Matrix.Translation((0, 0, h + 0.15)), (0.15, 0.28, 0.12) if spec['top'] == 'bottles' else (0.6, 0.6, 0.6), 0.2, size=(seg_len, 0.06, 0.12))
-            elif spec['top'] == 'bottles':
-                for j in range(int(seg_len / 0.12)):
-                    x = -seg_len / 2 + (j + 0.5) * 0.12
-                    mb.box('glass', m @ Matrix.Translation((x, rng.between(-0.06, 0.06), h + 0.14)) @ Matrix.Rotation(rng.between(-0.6, 0.6), 4, 'Y'), rng.pick([(0.1, 0.25, 0.08), (0.3, 0.2, 0.05), (0.4, 0.5, 0.45)]), 0, size=(0.03, 0.02, 0.12))
-            elif spec['top'] == 'razor':
-                for j in range(int(seg_len / 0.1)):
-                    a0 = j * 1.3
-                    x0 = -seg_len / 2 + j * 0.1
-                    bar(mb, 'steel', m @ Vector((x0, math.cos(a0) * 0.15, h + 0.3 + math.sin(a0) * 0.15)), m @ Vector((x0 + 0.1, math.cos(a0 + 1.3) * 0.15, h + 0.3 + math.sin(a0 + 1.3) * 0.15)), 0.012, (0.65, 0.65, 0.65), 0.2)
+            pillar = lambda x: mb.box('paint', m @ Matrix.Translation((x, 0, (h + 0.25) / 2)), tone(spec['coping'], 0.3, h, 0.8), wear, size=(0.3, 0.3, h + 0.25), skip=('-z',))
+            if i == 0 and k == 0 and not closed:   # the line's own end
+                pillar(-seg_len / 2)
+            if (i == gate_i and k == n // 2) or (gates and any(math.dist(mid, g) < seg_len / 2 + 0.3 for g in gates)):  # the gate
+                pillar(-seg_len / 2)   # the gate posts
+                pillar(seg_len / 2)
+                gc = spec['gate']
+                rust = W.RUST
+                lh = h * 0.95
+                for s_ in (-0.5, 0.5):
+                    lm = m @ Matrix.Translation((s_ * seg_len / 2, 0, 0))
+                    lw = seg_len / 2 - 0.04
+                    zs = [0.0, 0.3, 0.8, lh]
+                    cs = [mix(gc, rust, wear * 1.1), mix(gc, rust, wear * 0.55), mix(gc, rust, wear * 0.15), shade(gc, 1.05)]
+                    for side in (-1, 1):
+                        _band_face(mb, lm, side, -lw / 2, lw / 2, zs, cs, 'steel', wear, y=0.03)
+                    mb.box('steel', lm @ Matrix.Translation((0, 0, lh)), shade(gc, 0.8), wear, size=(lw, 0.08, 0.06))   # the top rail
+                    for z in (0.5, 1.2):   # pressed panels
+                        mb.box('steel', lm @ Matrix.Translation((0, 0.04, z)), mix(shade(gc, 0.8), rust, wear * (0.6 if z < 1 else 0.2)), wear, size=(lw - 0.3, 0.02, 0.5))
+                    if wr.chance(0.3 + 0.6 * wear):   # rust run down from a hinge or a bolt
+                        x = wr.between(-lw / 2 + 0.1, lw / 2 - 0.1)
+                        z0 = wr.between(0.9, lh - 0.2)
+                        q = [lm @ Vector((x - 0.03, 0.035, z0 - 0.7)), lm @ Vector((x + 0.03, 0.035, z0 - 0.7)), lm @ Vector((x + 0.04, 0.035, z0)), lm @ Vector((x - 0.04, 0.035, z0))]
+                        mb.face(q[::-1], 'steel', [mix(gc, rust, 0.3)] * 2 + [rust] * 2, wear)
+                continue
+            # a broken stretch: the top gone down to the block over part of the panel
+            broken = spec.get('rough') and wr.chance(0.12 * wear)
+            bx0 = wr.between(-seg_len / 2, 0) if broken else 0.0
+            bx1 = min(seg_len / 2, bx0 + wr.between(0.6, 1.6)) if broken else 0.0
+            drop = wr.between(0.25, 0.7) if broken else 0.0
+            pc = shade(col, wr.between(0.9, 1.06))   # each panel painted its own time
+            dirty_r = wr.chance(0.5)
+            bands = None   # set by the panel's unbroken stretch, if it has one
+            parts_x = [(-seg_len / 2, bx0, h), (bx0, bx1, h - drop), (bx1, seg_len / 2, h)] if broken else [(-seg_len / 2, seg_len / 2, h)]
+            if broken:   # the broken edges: block showing where the wall steps down
+                for x, sgn in ((bx0, 1), (bx1, -1)):
+                    q = [m @ Vector((x, -0.1, h - drop)), m @ Vector((x, 0.1, h - drop)), m @ Vector((x, 0.1, h)), m @ Vector((x, -0.1, h))]
+                    mb.face(q if sgn > 0 else q[::-1], 'block', W.BLOCK, wear)
+            for x0, x1, top in parts_x:
+                if x1 - x0 < 0.02:
+                    continue
+                zs = sorted({0.0, 0.45, 0.95, max(1.0, top - 0.8), top})
+                cs = [tone(pc, z, h) for z in zs]
+                if top < h:   # the broken top shows the block for a course or two
+                    zs = sorted({0.0, 0.45, 0.95, max(1.0, top - 0.25), top})
+                    cs = [tone(pc, z, h) for z in zs[:-2]] + [W.BLOCK, shade(W.BLOCK, 0.9)]
+                fade = lambda x: 1.0 - 0.35 * wear * max(0.0, min(1.0, (x - (-seg_len / 2)) / seg_len if dirty_r else (seg_len / 2 - x) / seg_len))
+                csl = [mix(c, W.GRIME, 1 - fade(x0)) for c in cs]   # dirtier toward one end of the panel
+                csr = [mix(c, W.GRIME, 1 - fade(x1)) for c in cs]
+                for side in (-1, 1):
+                    _band_face(mb, m, side, x0, x1, zs, csl, 'paint', wear, cols_r=csr)
+                cs = None
+                if top >= h:
+                    bands = (zs, csl, csr, x0, x1)   # what the wall shows, so a streak can fade into it exactly
+                mb.face([m @ Vector((x0, -0.1, top)), m @ Vector((x1, -0.1, top)), m @ Vector((x1, 0.1, top)), m @ Vector((x0, 0.1, top))],
+                        'block' if top < h else 'paint', shade(W.BLOCK, 0.85) if top < h else spec['coping'], wear)
+                if top < h:
+                    continue
+                cop = mix(spec['coping'], W.GRIME, wear * 0.5)
+                mb.box('paint', m @ Matrix.Translation(((x0 + x1) / 2, 0, h + 0.05)), cop, wear, size=(x1 - x0 + 0.02, 0.28, 0.1), skip=('-z',))
+                if spec['top'] == 'bottles':   # shards set in the coping: green, brown and clear, jagged
+                    cnt = max(1, int((x1 - x0) / 0.28))
+                    for j in range(cnt):
+                        xa, xb = x0 + (x1 - x0) * j / cnt, x0 + (x1 - x0) * (j + 1) / cnt
+                        c = wr.pick([(0.1, 0.25, 0.08), (0.3, 0.17, 0.05), (0.45, 0.52, 0.48), (0.08, 0.2, 0.12)])
+                        yy = wr.between(-0.06, 0.06)
+                        tip = h + 0.1 + wr.between(0.06, 0.16)
+                        for sgn in (1, -1):   # a thin blade, seen from both sides
+                            tri = [m @ Vector((xa, yy, h + 0.1)), m @ Vector((xb, yy, h + 0.1)), m @ Vector(((xa + xb) / 2 + wr.between(-0.03, 0.03), yy, tip))]
+                            mb.face(tri if sgn > 0 else tri[::-1], 'glass', c, 0)
+                elif spec['top'] == 'razor':
+                    if detail.web():
+                        mb.box('steel', m @ Matrix.Translation(((x0 + x1) / 2, 0, h + 0.3)), (0.6, 0.6, 0.6), 0.2, size=(x1 - x0, 0.06, 0.12))
+                    else:
+                        for j in range(int((x1 - x0) / 0.1)):
+                            a0 = j * 1.3
+                            xx = x0 + j * 0.1
+                            bar(mb, 'steel', m @ Vector((xx, math.cos(a0) * 0.15, h + 0.3 + math.sin(a0) * 0.15)), m @ Vector((xx + 0.1, math.cos(a0 + 1.3) * 0.15, h + 0.3 + math.sin(a0 + 1.3) * 0.15)), 0.012, (0.65, 0.65, 0.65), 0.2)
+            # the pillar at the panel's end, and a run of grime down from the coping now and then
+            pillar(seg_len / 2)
+            for _ in range(2 if wr.chance(0.7 * wear) else (1 if wr.chance(0.5) else 0)):
+                side = wr.pick([-1, 1])
+                x = wr.between(-seg_len / 2 + 0.3, seg_len / 2 - 0.5)
+                w_ = wr.between(0.2, 0.6)
+                l_ = wr.between(0.6, h - 0.5)
+                if bands is None or (broken and x + w_ / 2 > bx0 and x - w_ / 2 < bx1):   # no top to run from here
+                    continue
+                def seen(z, xx):
+                    zs_, cl, cr, bx_0, bx_1 = bands
+                    t = max(0.0, min(1.0, (xx - bx_0) / (bx_1 - bx_0)))
+                    j = next(j for j in range(len(zs_) - 1) if zs_[j] <= z <= zs_[j + 1])
+                    f = (z - zs_[j]) / (zs_[j + 1] - zs_[j])
+                    return mix(mix(cl[j], cr[j], t), mix(cl[j + 1], cr[j + 1], t), f)
+                zt, zb = h - 0.02, h - l_
+                rows = [zb] + [z for z in bands[0] if zb < z < zt] + [zt]   # cut where the wall is cut, so the sides match it
+                dark = lambda z: mix(seen(z, x), W.GRIME, (0.5 * wear + 0.2) * (z - zb) / (zt - zb))   # strongest at the top
+                for za, zc in zip(rows, rows[1:]):
+                    for xa, xb, ca, cb in ((x - w_ / 2, x, lambda z: seen(z, x - w_ / 2), dark), (x, x + w_ / 2, dark, lambda z: seen(z, x + w_ / 2))):
+                        q = [m @ Vector((xa, side * 0.103, za)), m @ Vector((xb, side * 0.103, za)), m @ Vector((xb, side * 0.103, zc)), m @ Vector((xa, side * 0.103, zc))]
+                        c = [ca(za), cb(za), cb(zc), ca(zc)]
+                        mb.face(q[::-1] if side > 0 else q, 'paint', c[::-1] if side > 0 else c, wear)
 
 
 # ---------------------------------------------------------------- signs and awnings

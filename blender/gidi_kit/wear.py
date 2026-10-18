@@ -59,7 +59,7 @@ class Weather:
 
     def prism(self, mb, mat, poly, z0, z1, rows=None, col_w=None):
         """Walls around a counter-clockwise polygon, cut into columns and bands so the colour can change along and up them."""
-        col_w = col_w or (4.0 if detail.web() else 2.0)
+        col_w = col_w or (6.0 if detail.web() else 2.0)
         zs = sorted({z0, z1, *[z for z in (rows or ()) if z0 < z < z1]})
         n = len(poly)
         for i in range(n):
@@ -113,12 +113,14 @@ def _pt(F, u, z, y=OFF):
 
 def streak(mb, F, wx, u, z_top, length, w, dark, k, y=OFF, taper=0.9):
     """A run of grime (or rust) from z_top down: strongest at the top, gone at the foot, soft at the sides."""
-    if w > 0.35 and length > 0.4:   # a wide run is never even: a few narrower runs, each its own length and strength
+    if w > 0.35 and length > 0.4 and taper < 1.0 and not detail.web():   # a wide run is never even: a few narrower runs (never a band under a coping)
         r = Rng('streak', round(u, 2), round(z_top, 2), round(length, 2))
-        n = 2 if detail.web() else 2 + int(w / 0.6)
+        n = 2 + int(w / 0.6)
         for j in range(n):
             ww = w / n * r.between(0.6, 1.7)
             uu = u - w / 2 + (j + 0.5) * w / n + r.between(-0.3, 0.3) * w / n
+            lo, hi = max(u - w / 2, uu - ww / 2), min(u + w / 2, uu + ww / 2)   # inside the run it splits, never past the wall's end
+            uu, ww = (lo + hi) / 2, hi - lo
             streak(mb, F, wx, uu, z_top, length * r.between(0.45, 1.05), ww, dark, k * r.between(0.65, 1.0), y + j * 0.0005, taper)
         return
     z_bot = z_top - length
@@ -212,7 +214,7 @@ def lnb_arm(mb, x, y, z, rz):
 
 
 # ---------------------------------------------------------------- one house's walls
-def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=True, ac=0):
+def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=True, ac=0, few=False):
     """Weather one wall face: openings [(kind, u, z, w, h, barred)], bands [z of the storey bands], z_top the wall's top
     (the parapet's top on a flat roof). Strength follows the house's wear."""
     w_ = wx.wear
@@ -227,7 +229,7 @@ def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=Tru
         if kind != 'window':
             continue
         sill = z - h / 2 - 0.16
-        if rng.chance(0.35 + 0.6 * w_):   # grime from the sill: across it, or from its two ends
+        if rng.chance((0.35 + 0.6 * w_) * (0.5 if few else 1.0)):   # grime from the sill: across it, or from its two ends
             ln = min(sill - below(sill), rng.between(0.7, 2.0) * (0.6 + w_))
             if ln > 0.2:
                 if rng.chance(0.5):
@@ -253,7 +255,7 @@ def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=Tru
                 uu = u + rng.between(-w / 2, w / 2)
                 streak(mb, F, wx, uu, zb, min(zb - below(zb), rng.between(0.6, 2.0)), rng.between(0.2, 0.7), GRIME, min(0.9, rng.between(0.5, 0.85) * (0.5 + w_)), taper=0.8)
     for b in bands:
-        for k in range(int(rng.between(0, 3) * w_ * L / 8)):
+        for k in range(int(rng.between(0, 3) * w_ * L / 8 * (0.5 if detail.web() else 1.0) * (0.5 if few else 1.0))):
             uu, zb = rng.between(-half, half), b - 0.11
             if free(uu - 0.2, uu + 0.2, zb - 0.5, zb):
                 streak(mb, F, wx, uu, zb, min(zb - below(zb), rng.between(0.4, 1.6)), rng.between(0.15, 0.5), GRIME, min(0.85, rng.between(0.4, 0.75) * (0.5 + w_)), taper=0.8)
@@ -261,11 +263,13 @@ def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=Tru
     # down from the top: a band of mould under a flat roof's coping, and streaks from it (fewer under a roof's overhang)
     if flat_top and rng.chance(0.3 + 0.7 * w_):
         streak(mb, F, wx, 0, z_top - 0.13, rng.between(0.3, 0.8), 2 * half + 0.4, GRIME, min(0.8, rng.between(0.4, 0.65) * (0.4 + w_)), y=OFF - 0.003, taper=1.0)
-    n_top = int(L / 2.5 * (0.4 + w_) * (1.6 if flat_top else 0.6) * rng.between(0.6, 1.3))
+    n_top = int(L / 2.5 * (0.4 + w_) * (1.6 if flat_top else 0.6) * rng.between(0.6, 1.3) * (0.5 if detail.web() else 1.0) * (0.5 if few else 1.0))
     for k in range(n_top):
         uu = rng.between(-half, half)
         ln = rng.between(0.6, 2.8 if flat_top else 1.4) * (0.5 + w_)
-        streak(mb, F, wx, uu, z_top - 0.13, ln, rng.between(0.2, 0.9), GRIME, min(0.95, rng.between(0.5, 0.9) * (0.4 + w_)), taper=rng.between(0.6, 1.0))
+        sw_ = rng.between(0.2, 0.9)
+        uu = max(-half + sw_ / 2, min(half - sw_ / 2, uu))   # on the wall, not past its corner
+        streak(mb, F, wx, uu, z_top - 0.13, ln, sw_, GRIME, min(0.95, rng.between(0.5, 0.9) * (0.4 + w_)), taper=rng.between(0.6, 1.0))
 
     # patches of new cement, and render broken off to the block
     for k in range(int(rng.between(0, 2.5) * w_ * L / 6 + 0.5)):
@@ -274,12 +278,12 @@ def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=Tru
         if free(uu - pw / 2, uu + pw / 2, zz - ph / 2, zz + ph / 2):
             pc = CEMENT if rng.chance(0.6) else mix(tuple(v * rng.between(1.03, 1.1) for v in wx.paint), CEMENT, 0.25)   # bare cement, or a touch-up in new paint
             patch(mb, F, wx, uu, zz, pw, ph, pc, rng, y=OFF - 0.004)
-    if foot and rng.chance(0.1 + 0.6 * w_):   # at the foot, where the splash and the damp eat it first
+    if foot and not few and rng.chance(0.1 + 0.6 * w_):   # at the foot, where the splash and the damp eat it first
         bw, z0, nc = rng.between(0.9, 2.2), rng.between(0.0, 0.3), rng.randrange(2, 6)
         uu = rng.pick([-half + bw / 2, half - bw / 2, rng.between(-half + bw / 2, half - bw / 2)]) if half > bw / 2 else 0
         if half > bw / 2 and free(uu - bw / 2 - 0.25, uu + bw / 2 + 0.25, z0, z0 + nc * 0.225):
             bare_block(mb, F, wx, uu, z0, bw, nc, rng.child('block'))
-    if rng.chance(0.25 * w_):   # and now and then higher up, where a pipe or a sign came off
+    if not few and rng.chance(0.25 * w_):   # and now and then higher up, where a pipe or a sign came off
         bw, nc = rng.between(0.9, 1.6), rng.randrange(2, 5)
         uu, zz = rng.between(-half + bw / 2, half - bw / 2), rng.between(1.2, max(1.3, z_top - 1.4))
         if half > bw / 2 and free(uu - bw / 2 - 0.25, uu + bw / 2 + 0.25, zz, zz + nc * 0.225):
@@ -319,7 +323,7 @@ def meter_drop(mb, corner, nxt, centre, z, rng):
     q = box + e * rng.between(0.3, 1.2)                # on into the house
     bar(mb, 'rubber', Vector((box.x, box.y, 1.47)), Vector((box.x, box.y, 1.3)), 0.012, black)
     bar(mb, 'rubber', Vector((box.x, box.y, 1.3)), Vector((q.x - out.x * 0.07, q.y - out.y * 0.07, 1.3)), 0.012, black)
-    if rng.chance(0.4):   # a loose loop of spare cable hung on the hook
+    if rng.chance(0.4) and not detail.web():   # a loose loop of spare cable hung on the hook
         for k in range(8):
             a0, a1 = k / 8 * math.tau, (k + 1) / 8 * math.tau
             bar(mb, 'rubber', top + out * 0.08 + Vector((0, 0, -0.2)) + e * math.cos(a0) * 0.12 + Vector((0, 0, math.sin(a0) * 0.07)),
