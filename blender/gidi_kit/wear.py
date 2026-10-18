@@ -115,7 +115,7 @@ def streak(mb, F, wx, u, z_top, length, w, dark, k, y=OFF, taper=0.9):
     """A run of grime (or rust) from z_top down: strongest at the top, gone at the foot, soft at the sides."""
     if w > 0.35 and length > 0.4:   # a wide run is never even: a few narrower runs, each its own length and strength
         r = Rng('streak', round(u, 2), round(z_top, 2), round(length, 2))
-        n = 2 + int(w / 0.6)
+        n = 2 if detail.web() else 2 + int(w / 0.6)
         for j in range(n):
             ww = w / n * r.between(0.6, 1.7)
             uu = u - w / 2 + (j + 0.5) * w / n + r.between(-0.3, 0.3) * w / n
@@ -129,6 +129,12 @@ def streak(mb, F, wx, u, z_top, length, w, dark, k, y=OFF, taper=0.9):
         q = [(u - wb / 2, z_bot), (u + wb / 2, z_bot), (u + w / 2, z_top), (u - w / 2, z_top)]
         cols = [wc(q[0]), wc(q[1]), top_c(q[2][0]), top_c(q[3][0])]
         mb.face([_pt(F, a, b, y) for a, b in q], 'paint', cols, wx.wear)
+        return
+    if detail.web():   # two quads: soft at both sides, darkest down its middle
+        q = [(u - wb / 2, z_bot), (u, z_bot), (u, z_top), (u - w / 2, z_top)]
+        mb.face([_pt(F, a, b, y) for a, b in q], 'paint', [wc(q[0]), wc(q[1]), top_c(u), wc(q[3])], wx.wear)
+        q = [(u, z_bot), (u + wb / 2, z_bot), (u + w / 2, z_top), (u, z_top)]
+        mb.face([_pt(F, a, b, y) for a, b in q], 'paint', [wc(q[0]), wc(q[1]), wc(q[2]), top_c(u)], wx.wear)
         return
     tops = [u - w / 2, u - w / 4, u + w / 4, u + w / 2]
     bots = [u - wb / 2, u - wb / 4, u + wb / 4, u + wb / 2]
