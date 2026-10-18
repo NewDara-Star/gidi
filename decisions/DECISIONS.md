@@ -76,3 +76,8 @@
 - **Hold-offs:** don't publish to the live artifact link (a different account).
 - **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`.
 - **Cost:** use cheaper models where possible (Pro plan).
+
+## Look and machine
+- **The look target** (18 Oct, from two videos the owner sent): Gidi should look like the stilt-town Unreal game (every surface a real scanned material, every prop a proper model) in the places that matter, and feel like the Lagos street video (danfos three deep, crowds on the verge, stalls, wet dirty ground, haze) everywhere. The street video is AI-made: its photo-real people are not a game target. The whole city is generated from the data with Megascans materials and real models for what repeats (danfo, keke, okada, stall, drum, generator, shutter); the hero places (Ladi Lane, the markets, where the story is) are finished by hand to the higher level.
+- **The laptop is the target machine** (18 Oct): the owner's M4 MacBook, 16 GB. At least 30 frames a second at 1080p on it, memory kept in check; every new piece fits the budget, and the high-end look is a higher setting, never the floor. Measure, don't guess (frame counters in the game). Textures at 2K in the project (8K downloads are capped in Unreal). Nothing runs beside the editor: bakes, Blender builds and Unreal take turns.
+- **Consoles later:** a PS5 build needs Sony's PlayStation Partners programme (an application, an agreement, a dev kit). Build for Mac and PC first; apply when there's a playable piece of Gidi to show.
