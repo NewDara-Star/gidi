@@ -16,8 +16,8 @@ WALL = hex_rgb('#8a857a')
 WALL_DIRTY = hex_rgb('#4a4a40')
 SILT = hex_rgb('#26251f')
 WATER = hex_rgb('#24301f')       # the usual: black-green, barely moving
-GREEN = hex_rgb('#3e5a24')       # blocked: standing green water with scum
-SCUM = hex_rgb('#7a8a3c')
+GREEN = hex_rgb('#2f3d1e')       # blocked: standing green water with scum
+SCUM = hex_rgb('#58613a')
 SLAB = hex_rgb('#9a958b')
 RUBBISH = [hex_rgb(c) for c in ('#d9d4c8', '#cfc9bb', '#e2ddd2', '#1c1c1c', '#262626', '#3d5f86', '#8a3a30', '#b8ad8c', '#6b5b45', '#5d7a8c')]   # sachets, black nylon, faded bottles
 PIECE = 2.4
@@ -88,7 +88,7 @@ def gutter(mb, pts, g, keep, wear=0.6):
                 cols = [_mix(GREEN, SCUM, rng.between(0.2, 0.7)) for _ in range(4)]
             else:
                 cols = [_mix(WATER, SILT, rng.between(0.0, 0.5)) for _ in range(4)]
-            mb.face(q, 'water' if not green else 'mud', cols, 0.2)
+            mb.face(q, 'mud', cols, 0.2)   # not 'water': that slot is the lagoon's one colour in Unreal
             if not covered and rng.chance(0.25 * wear):   # something caught in an open drain
                 for _ in range(rng.randrange(1, 4)):
                     u, o = rng.between(0.2, L - 0.2), rng.between(-w / 3, w / 3)
