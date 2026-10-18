@@ -4,7 +4,9 @@ Seen from above (the Mushin and Shomolu study) a roof is a patchwork: every shee
 the eave where the water sits, now and then one bright new sheet among the old, the laps showing as lines, and on old roofs
 a sag between the eave and the ridge. From the street the ribs show along the eave. All of it is geometry and vertex colour,
 so Unreal (which shows the vertex colour alone) sees it too. The web tiles get a coarser rib (two to a sheet) than the full
-build's real 76 mm corrugation, to keep the tiles light.
+build's real 76 mm corrugation. The web tiles carry no ribs: Unreal lays its own corrugation on 'zinc' faces and the
+browser's shader draws them, so the tiles spend their faces on colour instead: rust run down from each nail line and
+along the sheet edges, where the water gets under.
 """
 import math
 
@@ -62,9 +64,8 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
         return max(0.0, min(1.0, k))
 
     def rib(s, s0, s1):
-        if web:   # two coarse ribs to a sheet
-            q = ((s - s0) / (s1 - s0) * 2) % 1.0
-            return 0.035 * (1 - abs(q * 2 - 1))
+        if web:   # flat: the ribs come from the material
+            return 0.0
         t = (s / pitch) % 1.0
         if prof == 'sine':
             return depth * 0.5 * (1 - math.cos(t * math.tau))
@@ -82,13 +83,21 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
         if new:
             sw *= 0.15
         side = 0.006 * (j % 2)   # each sheet laps over the one before by a rib
-        m = 4 if web else max(2, round((s1 - s0) / pitch * (4 if prof == 'sine' else 5)))
+        m = 2 if web else max(2, round((s1 - s0) / pitch * (4 if prof == 'sine' else 5)))
         ss = [s0 + (s1 - s0) * i / m for i in range(m + 1)]
         for r in range(nr):
             v0, v1 = r / nr, (r + 1) / nr
             lap = 0.012 * r                                   # an upper sheet lies on the one below...
             v0e = max(0.0, v0 - (0.12 / hgt if r else 0.0))   # ...and reaches 12 cm down over it
-            vs = [v0e, (v0e + v1) / 2, v1] if sag > 0.005 else [v0e, v1]
+            # the purlins the sheet is nailed to, about a metre apart: a row at each nail line (rust starts there and runs
+            # down the slope) and one just above it (clean), so the colour can break sharply at the nails
+            npur = max(1, round(hgt * (v1 - v0e) / 1.0))
+            nails = [v0e + (v1 - v0e) * (i + 0.5) / npur for i in range(npur)]
+            nail_k = {i: rng.random() ** 2 for i in range(npur)}     # how badly each nail line has rusted: most a little
+            edge_k = rng.random() ** 2                                  # and this sheet's lapped edge
+            vs = sorted({v0e, v1, *nails, *[min(v1, v + 0.03 / hgt) for v in nails]})
+            if sag > 0.005 and len(vs) < 3:
+                vs = [v0e, (v0e + v1) / 2, v1]
 
             def P(s, v, under=0.0):
                 base_pt = A + ab * s + up * hgt * reach(s) * v
@@ -98,7 +107,9 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             def col(s, v):
                 low = (1 - v) ** 1.5   # the water sits longest at the eave
                 blot = 0.55 + 0.45 * math.sin(s * 1.7 + ph[0] + v * 2.3) * math.sin(s * 0.6 - v * 3.1 + ph[1])
-                k = sw * (0.25 + 0.75 * low) * (0.5 + blot)
+                nail = next((nail_k[i] for i, n in enumerate(nails) if abs(v - n) < 1e-6), 0.0)   # just under a nail line
+                edge = edge_k if abs(s - s0) < 1e-6 else 0.0                                  # the sheet's lapped edge
+                k = sw * (0.15 + 0.6 * low + 0.5 * nail + 0.35 * edge) * (0.5 + blot)
                 c = _mix(base, RUST, k * 0.9)
                 return _mix(c, RUST_DARK, (k - 0.75) * 2.5)
 

@@ -96,24 +96,13 @@ def house(a, rng, collection=None):
     else:
         rs = dict(spec['roof'])
         r = parts.roof_pitched(mb, poly, H, rs, rng.child('roof'))
-        if spec['roof_tyres']:   # the data's tyres weigh the sheets down; stones and broken blocks go with them
+        if spec['roof_tyres']:   # the data's tyres weigh the sheets down, sitting on the sagged sheets
             for k in range(spec['roof_tyres'] if spec['roof_tyres'] is not True and spec['roof_tyres'] > 1 else rng.randrange(2, 5)):
                 t, u = rng.between(0.15, 0.85), rng.between(0.3, 0.7)
                 e = Vector((*r['A'], r['y0'])).lerp(Vector((*r['B'], r['y0'])), t)
                 top = Vector((*r['m1'], r['zr'])).lerp(Vector((*r['m2'], r['zr'])), t)
                 p = e.lerp(top, u)
                 parts.tyre(mb, p.x, p.y, p.z + 0.12 - zinc.sag_at(rs, t, u))
-            sr = rng.child('stones')
-            for k in range(sr.randrange(2, 7)):
-                t, u = sr.between(0.1, 0.9), sr.pick([0.08, 0.5, 0.92]) + sr.between(-0.04, 0.04)   # along the laps and the eave
-                e = Vector((*r['A'], r['y0'])).lerp(Vector((*r['B'], r['y0'])), t)
-                top = Vector((*r['m1'], r['zr'])).lerp(Vector((*r['m2'], r['zr'])), t)
-                p = e.lerp(top, u)
-                sz = sr.between(0.18, 0.4)
-                block = sr.chance(0.4)
-                mb.box('concrete', Matrix.Translation((p.x, p.y, p.z + 0.05 + sz * 0.25 - zinc.sag_at(rs, t, u))) @ Matrix.Rotation(sr.between(0, 3.14), 4, 'Z'),
-                       (0.42, 0.4, 0.37) if block else shade((0.45, 0.36, 0.28), sr.between(0.8, 1.2)), 0.6,
-                       size=(0.45 if block else sz, 0.2 if block else sz * 0.8, 0.2 if block else sz * 0.55))
         if spec['dish'] and (spec.get('dish_at') is not None or rng.chance(0.5)):
             c = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else centroid(poly)
             rz = rng.between(0, 6)

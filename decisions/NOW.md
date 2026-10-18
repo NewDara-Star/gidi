@@ -30,7 +30,7 @@
 
 **The kit session (18 Oct, Claude; one branch and PR per topic, single-tile tests only):**
 - **Houses age in Unreal too** (`gidi_kit/wear.py`): Unreal's master material shows the vertex colour alone, so the Blender shader's wear never reached it. Now the walls carry it in their colours and in thin overlays: splash, fading, grime runs, rust from the bars, patches, broken render, meter boxes on the data's service drops. AC units are drawn only where a house's data counts them (`ac`, not in the data yet). Pictures: `blender/wear_sheet.py -- --vc` (Unreal's view, back faces culled).
-- **Zinc roofs sheet by sheet** (`gidi_kit/zinc.py`): Unreal used to get one flat face per roof slope. Now sheets, rust toward the eave, new sheets among old, laps, ribs, sag, stones with the data's tyres; flat concrete roofs stained.
+- **Zinc roofs sheet by sheet** (`gidi_kit/zinc.py`): Unreal used to get one flat face per roof slope. Now sheets, rust toward the eave, new sheets among old, laps, sag, rust run from the nail lines and sheet edges (the ribs come from Unreal's material); flat concrete roofs stained.
 - **Inside-out boxes fixed:** the kit's wall frames are mirrors, so sills, frames, doors, signboards and balconies came out inside out; Unreal culls back faces, which is why shop signboards showed black.
 
 **Done 17 Oct:**
