@@ -423,6 +423,9 @@ print("houses:",houses.place(out),"| house edits:",hand.apply_house_edits(out),"
 # ---- the ground itself (scripts/groundpaint.py): grass lots, mud, worn paths, sandy shores; the soil and what's too fine to outline
 import groundpaint
 print("ground paint:",groundpaint.paint(out),"| paint edits:",hand.apply_paint_edits(out))
+# ---- what kind of road each street is (scripts/roadtypes.py): close, crescent, drive, avenue, street, lane
+import roadtypes
+print("road types:",roadtypes.types(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)
