@@ -669,11 +669,7 @@ def police_station(a, rng, collection=None):
     block(mb, poly, max(1, min(2, a.get('storeys', 2))), dict(style='govt', wall=hex_rgb('#8db6d9'), band=hex_rgb('#1f2e5a'), trim=hex_rgb('#f2f2ee'), wear=_wear(a, rng), window='louvre', fins=False, roof='parapet', facing=fc, bars='grid',
                                                            sign=(a.get('label') or 'GIDI POLICE • DIVISIONAL HQ').upper(), sign_bg=hex_rgb('#1f2e5a'), sign_fg=hex_rgb('#ffffff')), rng)
     i, L, F = faces(poly)[(fc + 2) % 4]
-    from .vehicles import car, okada
-    for k in range(rng.randrange(3, 7)):  # the pound
-        car(mb, parts.at(F, rng.between(-L / 2.5, L / 2.5), rng.between(3, 9), 0, rz=rng.between(0, 6)), rng, 'wreck', kind=rng.pick(['saloon', 'suv', 'pickup']))
-    for k in range(rng.randrange(4, 10)):
-        okada(mb, parts.at(F, rng.between(-L / 3, L / 3), rng.between(1.5, 3), 0.1 * k % 0.6, rz=rng.between(0, 6), rx=rng.between(-1.4, 1.4)), rng, 'battered')
+    # the pound behind (seized cars, an okada heap): things in the data (scripts/houses.py)
     return _done(mb, a, collection)
 
 

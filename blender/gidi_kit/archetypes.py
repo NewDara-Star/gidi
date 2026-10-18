@@ -68,23 +68,24 @@ def house(a, rng, collection=None):
         inner = parts.roof_flat(mb, poly, H, spec['parapet'])
         c = centroid(poly)
         if spec['tank']:
-            t = (poly[0][0] * 0.6 + c[0] * 0.4, poly[0][1] * 0.6 + c[1] * 0.4)
+            t = (spec['tank_at'][0], -spec['tank_at'][1]) if spec.get('tank_at') else (poly[0][0] * 0.6 + c[0] * 0.4, poly[0][1] * 0.6 + c[1] * 0.4)
             parts.water_tank(mb, t[0], t[1], H, spec['tank'])
         if spec['dish']:
-            parts.satellite_dish(mb, poly[2][0] * 0.8 + c[0] * 0.2, poly[2][1] * 0.8 + c[1] * 0.2, H + 0.05, rng.between(0, 6), (0.92, 0.92, 0.92))
+            dx, dy = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else (poly[2][0] * 0.8 + c[0] * 0.2, poly[2][1] * 0.8 + c[1] * 0.2)
+            parts.satellite_dish(mb, dx, dy, H + 0.05, rng.between(0, 6), (0.92, 0.92, 0.92))
         if spec['unfinished']:
             parts.unfinished_storey(mb, poly, H + 0.05, spec, rng.child('unfinished'))
     else:
         r = parts.roof_pitched(mb, poly, H, dict(spec['roof']), rng.child('roof'))
         if spec['roof_tyres']:
-            for k in range(rng.randrange(2, 5)):
+            for k in range(spec['roof_tyres'] if spec['roof_tyres'] is not True and spec['roof_tyres'] > 1 else rng.randrange(2, 5)):
                 t, u = rng.between(0.15, 0.85), rng.between(0.3, 0.7)
                 e = Vector((*r['A'], r['y0'])).lerp(Vector((*r['B'], r['y0'])), t)
                 top = Vector((*r['m1'], r['zr'])).lerp(Vector((*r['m2'], r['zr'])), t)
                 p = e.lerp(top, u)
                 parts.tyre(mb, p.x, p.y, p.z + 0.12)
-        if spec['dish'] and rng.chance(0.5):
-            c = centroid(poly)
+        if spec['dish'] and (spec.get('dish_at') is not None or rng.chance(0.5)):
+            c = (spec['dish_at'][0], -spec['dish_at'][1]) if spec.get('dish_at') else centroid(poly)
             parts.satellite_dish(mb, c[0], c[1], r['zr'] - 0.4, rng.between(0, 6), (0.92, 0.92, 0.92))
 
     # compound wall around it, open where the street is
