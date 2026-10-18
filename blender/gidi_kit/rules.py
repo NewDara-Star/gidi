@@ -120,10 +120,22 @@ def compound_spec(character, rng):
                 gate=_c(rng, {'#2b4a66': 2, '#3a3a3a': 2, '#7a2a2a': 1, '#2e6b4a': 1}), wear=rng.between(*ch['wear']), gap=rng.between(1.6, 3.0))
 
 
+# A district's own colours, measured from the Google Earth study of the places it is drawn from (study yes, lift no: only the
+# numbers). They override its character's. The Maze, from Mushin and Shomolu close up (18 Oct 2026): rusty zinc most of all,
+# grey zinc, a painted roof now and then; dusty cream, off-white and bare block walls, a few faded pastels.
+DISTRICT_LOOK = {
+    'maze': dict(
+        roof_cols={'#6e4f40': 5, '#7c5c4b': 4, '#5b4237': 3, '#8f8a84': 3, '#a49c93': 2, '#4a63a0': 0.6, '#9c4a36': 0.4, '#4b6b55': 0.3},
+        paints={'#cdbba2': 4, '#d8cfbf': 3, '#b7a58e': 2, '#9d968b': 2, '#c9b8a8': 1, '#b9c2c0': 1, '#c7c19a': 1},
+        trims={'#ffffff': 2, '#3a3a3a': 2, '#2f5f8f': 1, '#7a3b2a': 1},
+        mixed_sheets_p=0.6, wear=(0.55, 0.9)),
+}
+
+
 def house_spec(a, rng):
     """Everything about a house's look, from its attributes `a`:
     kind, storeys, district, near_main (m), frontage (m to the street it faces)."""
-    ch = C[CHARACTER.get(a['district'], 'dense')]
+    ch = dict(C[CHARACTER.get(a['district'], 'dense')], **DISTRICT_LOOK.get(a['district'], {}))
     s = a['storeys']
     wealth = rng.between(*ch['wealth']) + (0.15 if a.get('near_main', 99) < 25 else 0) + 0.05 * (s - 1)
     wear = min(1.0, max(0.0, rng.between(*ch['wear']) - 0.25 * (wealth - 0.3)))

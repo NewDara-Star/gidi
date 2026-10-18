@@ -45,6 +45,7 @@ RULES = {   # the colour of bare ground (sRGB), and what is too fine to outline
     'port':       {'soil': '#8e8579', 'yard': 'concrete', 'weeds': 0.2, 'dust': 1.0, 'litter': 50.0, 'puddles': 3.0},
     'bush':       {'soil': '#8a8a4e', 'yard': 'dirt', 'weeds': 0.6, 'dust': 1.0, 'litter': 5.0, 'puddles': 1.0},
 }
+SOIL_D = {'maze': '#9a8572'}   # a district's own bare-ground colour, measured (the Maze: Mushin and Shomolu's dusty grey-brown)
 GREEN_PLOTS = {'green', 'garden', 'park', 'golf course', 'club', 'enclave', 'villas', 'estate'}
 SELF_DRESSED = {'market', 'motor park', 'lorry park', 'truck park', 'bus terminal', 'container yard', 'barge yard', 'tank farm',
                 'refinery', 'landfill', 'sawmill', 'waterworks', 'stadium', 'airfield', 'pitch', 'court', 'pool', 'school',
@@ -124,7 +125,7 @@ def paint(out):
             for p in _pieces(shore.simplify(1.0)):
                 if p.area > 30:
                     areas.append({'k': 'sand', 'pts': _ring(p), 'd': did, 's': rng.randrange(1 << 20)})
-    out['ground_paint'] = {'rules': RULES, 'areas': areas}
+    out['ground_paint'] = {'rules': RULES, 'soil_d': SOIL_D, 'areas': areas}
     rep = {}
     for a in areas:
         rep[a['k']] = rep.get(a['k'], 0) + 1
