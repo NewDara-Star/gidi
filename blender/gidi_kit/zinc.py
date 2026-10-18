@@ -44,7 +44,8 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
     up = up / hgt
     sD, sC = (D - A).dot(ab), (C - A).dot(ab)
     nrm = (B - A).cross(D - A).normalized()
-    if nrm.z < 0:
+    flip = nrm.z < 0   # the slope was given the other way round: turn the faces so the tops face up (Unreal culls back faces)
+    if flip:
         nrm = -nrm
     rng = Rng('zinc', round(A.x, 1), round(A.y, 1), round(A.z, 1), round(B.x, 1), round(B.y, 1))
     web = detail.web()
@@ -106,10 +107,12 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
                     q = [(s_a, a), (s_b, a), (s_b, b), (s_a, b)]
                     if reach(s_a) <= 1e-4 and reach(s_b) <= 1e-4:
                         continue
+                    if flip:
+                        q = q[::-1]
                     mb.face([P(*p) for p in q], 'zinc', [col(*p) for p in q], sw)
                 # the underside, sheet by sheet: dark, a little under the ribs
                 q = [(s1, a), (s0, a), (s0, b), (s1, b)]
-                mb.face([P(*p, under=0.012) for p in q], 'zinc', shade(base, 0.45), sw)
+                mb.face([P(*p, under=0.012) for p in (q[::-1] if flip else q)], 'zinc', shade(base, 0.45), sw)
 
 
 GRIME = hex_rgb('#36342f')
