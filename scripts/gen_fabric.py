@@ -386,6 +386,36 @@ for P in secs2:
     minx, miny, maxx, maxy = Pr.bounds
     xs = []; x = minx + rnd.uniform(20, 55)
     while x < maxx - 25: xs.append(x); x += SCALE * PROF.get("rib_scale", 1.0) * RULE["rib_spacing"](rnd.uniform(0.2, 0.97))   # rib_scale: the calibration's street spacing
+    EN = PROF.get("estate_net")
+    if EN:   # a planned estate (Magodo, Omole, Ikeja GRA): a spine drive across the sector, parallel streets off it two plot rows apart,
+        # ending as closes short of the boundary roads (the estate's back walls face them); a few run through to a gate; neighbouring
+        # closes joined round their far ends become crescents. No cross streets, no spurs: the estate is entered at its gates.
+        ymid = (miny + maxy) / 2 + rnd.uniform(-0.12, 0.12) * (maxy - miny)
+        spine = [g for g in lines(LineString([(minx - 60, ymid), (maxx + 60, ymid)]).intersection(Pr)) if g.length > 40]
+        ribs, ends = [], []
+        for x in xs:
+            bow = rnd.uniform(-1, 1) * rnd.choice([0, 4, 8])
+            ln = LineString([(x, miny - 60), (x + bow, ymid), (x, maxy + 60)])
+            for g in lines(ln.intersection(Pr)):
+                if g.length < 70 or not any(g.intersects(sp_) for sp_ in spine): continue
+                if rnd.random() >= EN["through"]:   # a close at each end (unless it is short enough to stay a single close off the spine)
+                    g = substring(g, EN["close_gap_m"], g.length - EN["close_gap_m"])
+                    c0, c1 = Point(g.coords[0]), Point(g.coords[-1])
+                    lo, hi = (c0, c1) if c0.y < c1.y else (c1, c0)
+                    ends += [(x, -1, lo), (x, 1, hi)]
+                ribs.append(g)
+        cres, used = [], set()
+        for side in (-1, 1):   # crescents: two neighbouring closes on the same side, joined by a bend that bulges toward the boundary
+            row = sorted([e for e in ends if e[1] == side], key=lambda e: e[0])
+            for (xa, _, pa), (xb, _, pb) in zip(row, row[1:]):
+                if (xa, side) in used or (xb, side) in used or xb - xa > EN["crescent_max_m"] or rnd.random() >= EN["crescent"]: continue
+                yb = (max if side > 0 else min)(pa.y, pb.y)
+                arc = LineString([pa] + [((xa + xb) / 2 - (xb - xa) / 2 * math.cos(math.pi * i / 10), yb + side * EN["bulge_m"] * math.sin(math.pi * i / 10)) for i in range(1, 10)] + [pb])
+                if Pr.buffer(-8).contains(arc):
+                    cres.append(arc); used |= {(xa, side), (xb, side)}
+        streets += [rotate(g, th, origin=c, use_radians=True) for g in spine + ribs + cres]
+        RULE["x_junction"], RULE["dead_end"] = RULE_X, RULE_D
+        continue
     ribs = []
     for x in xs:
         tilt = math.radians(rnd.uniform(-3.5, 3.5)); H = maxy - miny + 80
@@ -541,7 +571,7 @@ if PROF.get("clear_access"):   # a big place's own road joins the street grid at
             if 0.5 < c.distance(q) <= 40: streets.append(LineString([c, q]))
 # no block bigger than the real 90th percentile (~3.2 ha): split oversize blocks with a street across their long axis
 # (not between fingers: the land between them opens onto the water, it is not a block)
-for _ in range(0 if FG else 3):
+for _ in range(0 if FG or PROF.get("estate_net") else 3):   # (an estate's closes leave big blocks on purpose: entered from its spine)
     big = [b for b in polygonize(noded(streets + hard + [rail] + ([rail_zone.exterior] if PROF.get("rail_frontage") else []))) if land.buffer(1).contains(b.representative_point()) and b.area > ST["blocks"]["area_m2"]["p90"]]
     if not big: break
     for b in big:
