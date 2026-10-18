@@ -454,13 +454,13 @@ def generator(mb, F, u, spec, rng=None):
     for zz in (0.03, ch):
         for a, b in (((-cw / 2, -cd / 2), (cw / 2, -cd / 2)), ((cw / 2, -cd / 2), (cw / 2, cd / 2)), ((cw / 2, cd / 2), (-cw / 2, cd / 2)), ((-cw / 2, cd / 2), (-cw / 2, -cd / 2))):
             bar(mb, 'steel', P(a[0], a[1], zz), P(b[0], b[1], zz), 0.035, cage, wear)
-    n = 8 if not detail.web() else 5
+    n = 8 if not detail.web() else 3
     for k in range(n + 1):
         x = -cw / 2 + k * cw / n
         for yy in (-cd / 2, cd / 2):
             bar(mb, 'steel', P(x, yy, 0.03), P(x, yy, ch), 0.022, cage, wear)
-    for k in range(1, (5 if not detail.web() else 3)):
-        y = -cd / 2 + k * cd / (5 if not detail.web() else 3)
+    for k in range(1, (5 if not detail.web() else 2)):
+        y = -cd / 2 + k * cd / (5 if not detail.web() else 2)
         for xx in (-cw / 2, cw / 2):
             bar(mb, 'steel', P(xx, y, 0.03), P(xx, y, ch), 0.022, cage, wear)
         bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
