@@ -51,7 +51,7 @@ if opt.get('--vc'):   # Unreal's view: the vertex colour alone, rough, no proced
                 if s_.material and 'glass' not in s_.material.name:
                     s_.material = m
 cams = {'street': ((22, 12, 1.7), (14, -2, 3.0), 24), 'close': ((30, 8, 1.7), (30, -1, 2.6), 22), 'lit': ((24, 13, 1.7), (24, 25, 3.0), 22), 'high': ((-14, 40, 22), (24, 6, 2), 26), 'roofs': ((26, 34, 30), (26, 6, 4), 30)}
-loc, tgt, lens = cams[view]
+loc, tgt, lens = cams[view] if '--cam' not in opt else (tuple(float(v) for v in opt['--cam'].split(',')[:3]), tuple(float(v) for v in opt['--cam'].split(',')[3:6]), 24)
 scene.camera(sc, loc, tgt, lens=lens)
 scene.render(sc, out, res=(1800, 1100))
 print('WROTE', out)
