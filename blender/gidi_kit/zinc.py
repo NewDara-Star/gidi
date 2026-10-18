@@ -83,7 +83,7 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
         if new:
             sw *= 0.15
         side = 0.006 * (j % 2)   # each sheet laps over the one before by a rib
-        m = 2 if web else max(2, round((s1 - s0) / pitch * (4 if prof == 'sine' else 5)))
+        m = 1 if web else max(2, round((s1 - s0) / pitch * (4 if prof == 'sine' else 5)))
         ss = [s0 + (s1 - s0) * i / m for i in range(m + 1)]
         for r in range(nr):
             v0, v1 = r / nr, (r + 1) / nr
@@ -95,7 +95,7 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             nails = [v0e + (v1 - v0e) * (i + 0.5) / npur for i in range(npur)]
             nail_k = {i: rng.random() ** 2 for i in range(npur)}     # how badly each nail line has rusted: most a little
             edge_k = rng.random() ** 2                                  # and this sheet's lapped edge
-            vs = sorted({v0e, v1, *nails, *[min(v1, v + 0.03 / hgt) for v in nails]})
+            vs = sorted({v0e, v1, *nails, *([] if web else [min(v1, v + 0.03 / hgt) for v in nails])})   # the web tiles: no crisp break, the rust fades both ways
             if sag > 0.005 and len(vs) < 3:
                 vs = [v0e, (v0e + v1) / 2, v1]
 
@@ -121,9 +121,9 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
                     if flip:
                         q = q[::-1]
                     mb.face([P(*p) for p in q], 'zinc', [col(*p) for p in q], sw)
-                # the underside, sheet by sheet: dark, a little under the ribs
-                q = [(s1, a), (s0, a), (s0, b), (s1, b)]
-                mb.face([P(*p, under=0.012) for p in (q[::-1] if flip else q)], 'zinc', shade(base, 0.45), sw)
+                if not web or (a, b) == (vs[0], vs[1]) or sag > 0.005:   # the underside: dark, a little under the ribs (web: once a run)
+                    q = [(s1, a), (s0, a), (s0, b if not web or sag > 0.005 else vs[-1]), (s1, b if not web or sag > 0.005 else vs[-1])]
+                    mb.face([P(*p, under=0.012) for p in (q[::-1] if flip else q)], 'zinc', shade(base, 0.45), sw)
 
 
 GRIME = hex_rgb('#36342f')
