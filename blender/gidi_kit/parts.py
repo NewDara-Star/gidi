@@ -463,11 +463,12 @@ def generator(mb, F, u, spec, rng=None):
         y = -cd / 2 + k * cd / (5 if not detail.web() else 2)
         for xx in (-cw / 2, cw / 2):
             bar(mb, 'steel', P(xx, y, 0.03), P(xx, y, ch), 0.022, cage, wear)
-        bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
+        if not detail.web():
+            bar(mb, 'steel', P(-cw / 2, y, ch), P(cw / 2, y, ch), 0.022, cage, wear)   # the top
     mb.box('steel', at(F, u + 0.05, 0.9 + cd / 2 + 0.03, 0.55), (0.55, 0.5, 0.2), 0.3, size=(0.07, 0.04, 0.09))   # the padlock
     # the set: a tubular frame on the ground, the engine at one end, the alternator at the other, the tank over both
     fw, fd, fh = 0.62, 0.46, 0.5
-    for sx in (-1, 1):
+    for sx in ((-1, 1) if not detail.web() else ()):   # the tube frame (inside the cage: the web tiles leave it out)
         for sy in (-1, 1):
             bar(mb, 'steel', P(sx * fw / 2, sy * fd / 2, 0.02), P(sx * fw / 2, sy * fd / 2, fh), 0.03, dark, wear)
         bar(mb, 'steel', P(sx * fw / 2, -fd / 2, 0.03), P(sx * fw / 2, fd / 2, 0.03), 0.03, dark, wear)
@@ -582,6 +583,7 @@ def compound_wall(mb, poly, spec, rng, skip_seg=None, closed=True, gates=None):
             drop = wr.between(0.25, 0.7) if broken else 0.0
             pc = shade(col, wr.between(0.9, 1.06))   # each panel painted its own time
             dirty_r = wr.chance(0.5)
+            bands = None   # set by the panel's unbroken stretch, if it has one
             parts_x = [(-seg_len / 2, bx0, h), (bx0, bx1, h - drop), (bx1, seg_len / 2, h)] if broken else [(-seg_len / 2, seg_len / 2, h)]
             if broken:   # the broken edges: block showing where the wall steps down
                 for x, sgn in ((bx0, 1), (bx1, -1)):
@@ -634,7 +636,7 @@ def compound_wall(mb, poly, spec, rng, skip_seg=None, closed=True, gates=None):
                 x = wr.between(-seg_len / 2 + 0.3, seg_len / 2 - 0.5)
                 w_ = wr.between(0.2, 0.6)
                 l_ = wr.between(0.6, h - 0.5)
-                if broken and x + w_ / 2 > bx0 and x - w_ / 2 < bx1:   # no top to run from here
+                if bands is None or (broken and x + w_ / 2 > bx0 and x - w_ / 2 < bx1):   # no top to run from here
                     continue
                 def seen(z, xx):
                     zs_, cl, cr, bx_0, bx_1 = bands

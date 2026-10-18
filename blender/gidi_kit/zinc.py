@@ -71,7 +71,7 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             return depth * 0.5 * (1 - math.cos(t * math.tau))
         return depth if 0.08 < t < 0.24 else (depth * (t / 0.08) if t <= 0.08 else (depth * (1 - (t - 0.24) / 0.08) if t < 0.32 else 0.0))
 
-    ns = max(1, round(L / COVER))
+    ns = max(1, round(L / (COVER * 2 if web else COVER)))   # the web tiles: sheets in pairs, one face each
     nr = max(1, math.ceil(hgt / rng.between(2.4, 3.4)))   # sheets come 2.4-3.6 m long: a long slope has end laps
     ph = [rng.between(0, math.tau) for _ in range(3)]
     for j in range(ns):

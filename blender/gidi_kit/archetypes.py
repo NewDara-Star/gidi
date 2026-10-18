@@ -77,7 +77,8 @@ def house(a, rng, collection=None):
                 parts.awning(mb, F, 0, min(L, 5.0), spec['awning'])
         if spec['generator'] and i == (facing + 2) % len(poly):
             parts.generator(mb, F, rng.between(-L / 4, L / 4), spec['generator'])
-        wear.age_face(mb, F, L, z_top, wx, opens, bands, rng.child('wear', i), flat_top=flat, ac=ac_faces.count(i))
+        wear.age_face(mb, F, L, z_top, wx, opens, bands, rng.child('wear', i), flat_top=flat, ac=ac_faces.count(i),
+                      few=detail.web() and a['kind'] in ('back', 'shed'))   # inside the block: seen less, half the streaks in the web tiles
 
     # roof
     if spec['roof']['form'] == 'flat':
