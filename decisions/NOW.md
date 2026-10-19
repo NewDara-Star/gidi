@@ -138,3 +138,7 @@
 - the data delete-later list
 - **Gidi's Atlantic beach:** a sand strip along the Frontier and Heights coast, with the beach huts back on it (hand pass)
 - the Glasshouse mall and the campus have no kit builders yet (the full build lists them as gaps)
+
+## 19 Oct (late): Ìbùdó as a district
+- Market Road is now a plain street (#133, merged).
+- Ìbùdó judged as a whole: it doesn't make sense as a district. Plan v2 is proposed in IDEAS.md (`docs/hand/ibudo/plan_v2_proposal.png`): two cores (Oshodi and Ojuelegba), three crossing roads, five belts, several markets. **Next:** the owner says yes or changes it, then rebuild the district plan (thaw the hub, hand ops), keep spot 1, then go on to the match passes. Still to do: delete the stray school pin at (8528, 4096).

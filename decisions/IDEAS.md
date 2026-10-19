@@ -33,3 +33,11 @@
   for it before drawing. Montserrat's full family (OFL) is a candidate base for the UI face.
 - **People** (owner, 19 Oct): first the hawker with the basin of drinks, built with MakeHuman in Blender (MPFB, CC0 assets) and judged in a render; then the full frame (refs/lagos-life 09, the motor park) and what it shows is missing; **then try MetaHuman** (Unreal), above all for animation: faces driven from a phone video (MetaHuman Animator), which suits the owner voice-acting the characters himself. If MakeHuman people don't hold up, MetaHuman replaces them.
 
+
+## Ìbùdó plan v2 (proposal, 19 Oct, awaiting the owner)
+Ìbùdó as it is (`docs/hand/ibudo/district_as_is.png`) doesn't read as a district: the Oshodi things are packed into the north-east corner, the stadium sits alone in the north-west, and 4 km² of the same houses lie between them; the main roads only run round the edge. From a Google study of real Oshodi and Ojuelegba (screenshots in `~/Real-world/research/google/ibudo/10-13`), proposal `docs/hand/ibudo/plan_v2_proposal.png`:
+- two cores: Oshodi in the north-east (stays, beside the airport, as in life), Ojuelegba in the south-east (beside Saba, as in life): flyover junction, under-bridge market, stadium, a Shitta-type roundabout, a teaching hospital;
+- three roads that cross the district: an expressway west from the Oshodi crossing (Airport Rd type), the Ojuelegba cross road (Itire Rd type, on to Saba), and a north-south link road (Ikorodu Rd type);
+- five belts between them, each with its own grain: Mafoluku (densest), an Ajao-type estate (walled, bigger plots), Ilupeju-type industry, a Papa Ajao mix (houses and workshops, a spare-parts market), and a Surulere grid;
+- several markets instead of one (an Arena-type set of sheds, a strip along the rail, spare parts, textiles, under the bridge), and walled institutions next to the Oshodi crossing (barracks, hospital, council).
+Open question: real Oshodi has the railway running through the crossing; Gidi's rail only clips the corner. Moving it changes the whole city.
