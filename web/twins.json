@@ -5,14 +5,18 @@
   "pics": [
    "google/ibudo/03_sv_oshodi_rd_east.jpg",
    "google/ibudo/04_sv_oshodi_rd_west.jpg",
-   "google/ibudo/06_sv_shops_south.jpg"
+   "google/ibudo/06_sv_shops_south.jpg",
+   "google/ibudo/25_sv_ayilara_st_ojuelegba_kiosk_shops.jpg",
+   "google/ibudo/28_sv_adekoya_st_sandy_market_street.jpg"
   ]
  },
  "building/shed": {
   "twin": "market stall shed, red rusted roof",
   "where": "Oshodi Market, Oshodi",
   "pics": [
-   "google/ibudo/02_market_and_bridge_top_250m.jpg"
+   "google/ibudo/02_market_and_bridge_top_250m.jpg",
+   "google/ibudo/23_sv_alh_rafiu_st_zinc_shop_clothes.jpg",
+   "google/twins/ikorodu_kokoro_abu_st_sprawl_stalls.jpg"
   ]
  },
  "building/stalls": {
@@ -28,7 +32,8 @@
   "where": "Oshodi Rd, Oshodi; Alapere, Ketu",
   "pics": [
    "google/ibudo/06_sv_shops_south.jpg",
-   "refs/roadside/local-kiosk-used-in-lagos-jpg.jpg"
+   "refs/roadside/local-kiosk-used-in-lagos-jpg.jpg",
+   "google/ibudo/25_sv_ayilara_st_ojuelegba_kiosk_shops.jpg"
   ]
  },
  "building/terminal": {
@@ -51,7 +56,8 @@
   "where": "Oshodi Market; Mile 12; Mushin market",
   "pics": [
    "refs/markets/mile-12-market-lagos-jpg.jpg",
-   "refs/streets/market-in-mushin-lagos-jpg.jpg"
+   "refs/streets/market-in-mushin-lagos-jpg.jpg",
+   "google/ibudo/27_sv_adekoya_st_market_block_umbrellas.jpg"
   ]
  },
  "plot/bus terminal": {
@@ -67,7 +73,9 @@
   "pics": [
    "google/ibudo/03_sv_oshodi_rd_east.jpg",
    "google/ibudo/04_sv_oshodi_rd_west.jpg",
-   "google/ibudo/05_sv_market_gate_north.jpg"
+   "google/ibudo/05_sv_market_gate_north.jpg",
+   "google/ibudo/27_sv_adekoya_st_market_block_umbrellas.jpg",
+   "google/ibudo/28_sv_adekoya_st_sandy_market_street.jpg"
   ]
  },
  "market zone/rail market": {
@@ -82,7 +90,8 @@
   "where": "Oshodi, by the terminal and over the expressway",
   "pics": [
    "google/ibudo/07_sv_footbridge_danfos.jpg",
-   "google/ibudo/08_sv_expressway_danfos_billboards.jpg"
+   "google/ibudo/08_sv_expressway_danfos_billboards.jpg",
+   "google/ibudo/22_sv_apapa_expwy_service_lane_trailers_truss_bridge.jpg"
   ]
  },
  "deck/flyover": {
@@ -157,28 +166,33 @@
   "twin": "keke (tricycle)",
   "where": "everywhere",
   "pics": [
-   "refs/vehicles/keke_views_stock.jpg"
+   "refs/vehicles/keke_views_stock.jpg",
+   "google/ibudo/21_sv_adekoya_st_park_danfos_kekes.jpg"
   ]
  },
  "road/exp": {
   "twin": "expressway with BRT lanes, double-arm lights",
   "where": "Ketu–Ikorodu Road at Mile 12",
   "pics": [
-   "refs/assets/Historic_Link_Between_Mile_12_and_Outer_Lagos._Ketu_-_Ikorudu_Road-scaled.jpg"
+   "refs/assets/Historic_Link_Between_Mile_12_and_Outer_Lagos._Ketu_-_Ikorudu_Road-scaled.jpg",
+   "google/ibudo/22_sv_apapa_expwy_service_lane_trailers_truss_bridge.jpg"
   ]
  },
  "road/main": {
   "twin": "main road, undivided, danfos stop in the lane",
   "where": "Herbert Macaulay Way, Yaba (from the air)",
   "pics": [
-   "refs/assets/images-5.jpeg"
+   "refs/assets/images-5.jpeg",
+   "google/ibudo/29_sv_agege_motor_rd_ladipo_main_road.jpg"
   ]
  },
  "road/street": {
   "twin": "residential street, no centre line, crumbling edges",
   "where": "Mushin",
   "pics": [
-   "refs/streets/a-road-in-mushin-lagos-jpg.jpg"
+   "refs/streets/a-road-in-mushin-lagos-jpg.jpg",
+   "google/ibudo/20_sv_boladale_st_mafoluku_side_street.jpg",
+   "google/twins/ikorodu_kokoro_abu_st_sprawl_stalls.jpg"
   ]
  },
  "road surface/mud": {
@@ -229,7 +243,9 @@
   "where": "Ibereko, Badagry; Agbara",
   "pics": [
    "refs/gutters/a-drainage-at-ibereko-badagry-lagos-state-nigeria-jpg.jpg",
-   "refs/gutters/black-water-in-a-gulter-jpg.jpg"
+   "refs/gutters/black-water-in-a-gulter-jpg.jpg",
+   "google/ibudo/20_sv_boladale_st_mafoluku_side_street.jpg",
+   "google/twins/ikorodu_kokoro_abu_st_sprawl_stalls.jpg"
   ]
  },
  "gutter/gutter crossing": {
@@ -251,6 +267,76 @@
   "where": "Lagos",
   "pics": [
    "refs/mud-and-rain/2010-statue-lagos-nigeria-by-rainer-wozny-5343218670-jpg.jpg"
+  ]
+ },
+ "road surface/sand": {
+  "twin": "unpaved sandy street",
+  "where": "Adekoya St, Oshodi",
+  "pics": [
+   "google/ibudo/28_sv_adekoya_st_sandy_market_street.jpg"
+  ]
+ },
+ "road surface/worn": {
+  "twin": "tar with crumbling edges and sandy shoulders",
+  "where": "Agege Motor Road at Ladipo, Mushin",
+  "pics": [
+   "google/ibudo/29_sv_agege_motor_rd_ladipo_main_road.jpg"
+  ]
+ },
+ "plot/motor park": {
+  "twin": "loose park of danfos and kekes on packed earth",
+  "where": "Adekoya St, Oshodi",
+  "pics": [
+   "google/ibudo/21_sv_adekoya_st_park_danfos_kekes.jpg"
+  ]
+ },
+ "vehicle and thing/lorry911": {
+  "twin": "trailers and old lorries parked on the shoulder",
+  "where": "Oshodi-Apapa Expressway, Oshodi",
+  "pics": [
+   "google/ibudo/22_sv_apapa_expwy_service_lane_trailers_truss_bridge.jpg"
+  ]
+ },
+ "plot/barracks": {
+  "twin": "walled compound, razor wire, steel gates",
+  "where": "Jibowu St, Yaba",
+  "pics": [
+   "google/ibudo/26_sv_jibowu_st_compound_walls_office.jpg"
+  ]
+ },
+ "plot/government": {
+  "twin": "walled compound with an office tower",
+  "where": "Jibowu St, Yaba",
+  "pics": [
+   "google/ibudo/26_sv_jibowu_st_compound_walls_office.jpg"
+  ]
+ },
+ "building/gatehouse": {
+  "twin": "compound gate in a high painted wall",
+  "where": "Olabode St, Ajao Estate",
+  "pics": [
+   "google/ibudo/24_sv_olabode_st_ajao_estate_gates.jpg"
+  ]
+ },
+ "street item/street light": {
+  "twin": "double-arm street light on the main road",
+  "where": "Agege Motor Road at Ladipo, Mushin",
+  "pics": [
+   "google/ibudo/29_sv_agege_motor_rd_ladipo_main_road.jpg"
+  ]
+ },
+ "house detail/satellite dish": {
+  "twin": "satellite dishes on walls and roofs",
+  "where": "Alh Rafiu St, Orile Oshodi",
+  "pics": [
+   "google/ibudo/23_sv_alh_rafiu_st_zinc_shop_clothes.jpg"
+  ]
+ },
+ "tree/palm": {
+  "twin": "palms in compounds and along streets",
+  "where": "Olabode St, Ajao Estate",
+  "pics": [
+   "google/ibudo/24_sv_olabode_st_ajao_estate_gates.jpg"
   ]
  }
 }
