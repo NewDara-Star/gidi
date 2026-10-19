@@ -91,4 +91,6 @@
 - **Meshy's place** (19 Oct): statues and monuments (nobody walks into The Reach); for anything people will walk into (the stadium, Crown Hall) Meshy designs the look and we build it ourselves in Blender, part by part. Not for general kit.
 - **Matching Lagos** (19 Oct): the owner finds pictures of real Lagos places; we match each as closely as we can and let the data carry the look to the rest of the city (study yes, lift no). The Google Earth study stays for the layouts.
 - **The kit session gets exact lists** (19 Oct): what kit to build, piece by piece, not open briefs.
+- **The Lagos pass** (19 Oct): a place is "Lagos" only when the owner has looked at it rendered and said so. One spot first, all the way (the Àdàrú motor park on its main road), to learn the technique; decisions made there become rules that help other places, but each place earns its own pass. Years of work; places improve in updates. Method and spot 1's shot list: `docs/hand/lagos-pass.md`.
+- **Light by default on the laptop** (19 Oct): everyday building light (web tiles, one Blender job at a time); full-detail renders, full reimports and photo mode only when the owner asks or is away from the laptop.
 
