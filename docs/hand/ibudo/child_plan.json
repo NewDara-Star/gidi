@@ -1,0 +1,512 @@
+{
+ "district": "hub",
+ "note": "Ìbùdó plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (anchor_real, lat/lon) sits on a Gidi point (anchor_gidi, map metres, y south). Any Gidi point in an area maps back to the real point under it: that real street is its twin, photographed there. Study in ~/Real-world/research/google/ibudo/study/.",
+ "areas": [
+  {
+   "id": "oshodi_core",
+   "name": "Oshodi core",
+   "real": "Oshodi: the interchange, Oshodi Market (red sheds, the mosque inside), Oshodi Rd, the Brown St grid of shop houses, the rail and the trunk road side by side",
+   "anchor_real": [
+    6.5572,
+    3.3488
+   ],
+   "anchor_gidi": [
+    8558,
+    4028
+   ],
+   "streets": [
+    "Oshodi Rd",
+    "Brown St",
+    "Adekoya St",
+    "Araromi St",
+    "Banjoko St",
+    "Ogunlana St",
+    "Oredeyin St",
+    "Church St",
+    "Boladale St",
+    "Kunle Akinosi St",
+    "Macarthy Ln"
+   ],
+   "pts": [
+    [
+     8300,
+     3728
+    ],
+    [
+     8930,
+     3712
+    ],
+    [
+     9060,
+     4080
+    ],
+    [
+     9150,
+     4500
+    ],
+    [
+     8740,
+     4560
+    ],
+    [
+     8300,
+     4440
+    ]
+   ]
+  },
+  {
+   "id": "arena",
+   "name": "Arena market",
+   "real": "the Nigerian Army Shopping Arena: about 40 long parallel sheds on one axis, a central spine, stalls along the track edge",
+   "anchor_real": [
+    6.5635,
+    3.3505
+   ],
+   "anchor_gidi": [
+    8950,
+    3900
+   ],
+   "streets": [
+    "Arena spine",
+    "the track-edge stalls"
+   ],
+   "pts": [
+    [
+     8830,
+     3740
+    ],
+    [
+     8950,
+     3735
+    ],
+    [
+     9035,
+     4000
+    ],
+    [
+     8870,
+     4060
+    ],
+    [
+     8810,
+     3900
+    ]
+   ]
+  },
+  {
+   "id": "civic",
+   "name": "Civic quarter",
+   "real": "Bolade, Oshodi: the Oshodi-Isolo LGA Secretariat, Bolade Grammar, Oshodi Comprehensive, Kuhul Islam school on open sand; Adeyemi St bus route",
+   "anchor_real": [
+    6.5645,
+    3.343
+   ],
+   "anchor_gidi": [
+    7930,
+    3940
+   ],
+   "streets": [
+    "Arowojobe St",
+    "Adeyemi St",
+    "Olatunji St",
+    "Daodu St",
+    "Akinpelu St"
+   ],
+   "pts": [
+    [
+     7560,
+     3722
+    ],
+    [
+     8300,
+     3728
+    ],
+    [
+     8300,
+     4100
+    ],
+    [
+     7560,
+     4100
+    ]
+   ]
+  },
+  {
+   "id": "church_st",
+   "name": "Church St grid",
+   "real": "Oshodi west of the market: Church St and Oshodi Rd, a regular grid of 2-4 storey shop houses and compounds, a school on a sandy yard, the Methodist church, hotels, carpenters and truck-pushers working on the street",
+   "anchor_real": [
+    6.5565,
+    3.3445
+   ],
+   "anchor_gidi": [
+    7930,
+    4270
+   ],
+   "streets": [
+    "Church St",
+    "Oshodi Rd (west)",
+    "Alimi Oke St",
+    "Ajenifuja St",
+    "Owoseni St",
+    "Mosaku St",
+    "Ago-Ijaye St"
+   ],
+   "pts": [
+    [
+     7560,
+     4100
+    ],
+    [
+     8300,
+     4100
+    ],
+    [
+     8300,
+     4440
+    ],
+    [
+     7560,
+     4440
+    ]
+   ]
+  },
+  {
+   "id": "mafoluku",
+   "name": "Mafoluku",
+   "real": "Mafoluku core: the densest grain, long thin blocks on a tilted grid, sand streets, open drains with plank bridges, zinc kiosks, Oja Oke market, churches in the grid",
+   "anchor_real": [
+    6.558,
+    3.3335
+   ],
+   "anchor_gidi": [
+    7300,
+    4250
+   ],
+   "streets": [
+    "Mafoluku Rd",
+    "Makinde St",
+    "Old Ewu Rd",
+    "Agbelekale St",
+    "Adesanya St",
+    "Baderin St",
+    "Olaiya St",
+    "Saubana St",
+    "Oja Oke"
+   ],
+   "pts": [
+    [
+     7560,
+     3722
+    ],
+    [
+     7560,
+     4440
+    ],
+    [
+     6650,
+     4440
+    ],
+    [
+     7100,
+     4090
+    ]
+   ]
+  },
+  {
+   "id": "airport_rd",
+   "name": "Airport Road strip",
+   "real": "Airport Rd, Mafoluku: a wide divided road with the hotel and bank strip on both sides",
+   "anchor_real": [
+    6.552,
+    3.333
+   ],
+   "anchor_gidi": [
+    7300,
+    4520
+   ],
+   "streets": [
+    "Airport Rd"
+   ],
+   "pts": [
+    [
+     6620,
+     4440
+    ],
+    [
+     8300,
+     4440
+    ],
+    [
+     8300,
+     4600
+    ],
+    [
+     6640,
+     4600
+    ]
+   ]
+  },
+  {
+   "id": "nafrc_ladipo",
+   "name": "Barracks and spare parts",
+   "real": "Matori: the NAFRC resettlement barracks (slab rows, courtyard blocks, open sandy field) and Ladipo / Paramo spare-parts markets against the rail",
+   "anchor_real": [
+    6.5465,
+    3.344
+   ],
+   "anchor_gidi": [
+    8000,
+    4870
+   ],
+   "streets": [
+    "Ladipo St",
+    "FIIRO Rd",
+    "Jimade St",
+    "Unity Cl"
+   ],
+   "pts": [
+    [
+     7600,
+     4600
+    ],
+    [
+     8740,
+     4560
+    ],
+    [
+     8740,
+     5000
+    ],
+    [
+     7600,
+     5100
+    ]
+   ]
+  },
+  {
+   "id": "ajao",
+   "name": "Ajao-type estate",
+   "real": "Ajao Estate / Osolo Way: walled bigger plots, gates, palms, the canal with a green verge, a mechanic village",
+   "anchor_real": [
+    6.546,
+    3.332
+   ],
+   "anchor_gidi": [
+    7150,
+    4900
+   ],
+   "streets": [
+    "Osolo Way",
+    "Olabode St",
+    "Joy Ave",
+    "Canal Cl",
+    "Seriki Abass Cres"
+   ],
+   "pts": [
+    [
+     6640,
+     4600
+    ],
+    [
+     7600,
+     4600
+    ],
+    [
+     7600,
+     5150
+    ],
+    [
+     6860,
+     5150
+    ]
+   ]
+  },
+  {
+   "id": "ilupeju",
+   "name": "Ilupeju-type industry",
+   "real": "Ilupeju industrial estate east of the trunk road: factory sheds 100-200 m, truck yards, a big church in a shed",
+   "anchor_real": [
+    6.552,
+    3.357
+   ],
+   "anchor_gidi": [
+    9000,
+    4760
+   ],
+   "streets": [
+    "Ilupeju Industrial Ave",
+    "Industrial St",
+    "Industrial Cres",
+    "Oduwobi St"
+   ],
+   "pts": [
+    [
+     8740,
+     4560
+    ],
+    [
+     9150,
+     4500
+    ],
+    [
+     9272,
+     4990
+    ],
+    [
+     8800,
+     4990
+    ]
+   ]
+  },
+  {
+   "id": "ojuelegba",
+   "name": "Ìkòríta (Ojuelegba)",
+   "real": "the Ojuelegba junction: two flyover decks, five roads meeting, bare earth under the bridge with danfos and traders, Tejuosho market block, dense irregular small plots",
+   "anchor_real": [
+    6.5107,
+    3.363
+   ],
+   "anchor_gidi": [
+    8869,
+    5130
+   ],
+   "streets": [
+    "Ikorodu Rd / Funsho Williams Ave",
+    "Ojuelegba Rd",
+    "Itire Rd",
+    "Tejuosho Rd",
+    "Ishaga Rd",
+    "Ayilara St",
+    "Clegg St"
+   ],
+   "pts": [
+    [
+     8560,
+     4990
+    ],
+    [
+     9272,
+     4990
+    ],
+    [
+     9301,
+     5269
+    ],
+    [
+     8560,
+     5390
+    ]
+   ]
+  },
+  {
+   "id": "stadium",
+   "name": "Stadium and slab estates",
+   "real": "Surulere stadiums: Teslim Balogun / National Stadium with the long panel fence and the BRT stop; Rabiatu Thompson-type 5-storey slab blocks ringed with shacks",
+   "anchor_real": [
+    6.501,
+    3.361
+   ],
+   "anchor_gidi": [
+    8400,
+    5280
+   ],
+   "streets": [
+    "Rabiatu Thompson Cres",
+    "Stadium BRT stop"
+   ],
+   "pts": [
+    [
+     8150,
+     5130
+    ],
+    [
+     8560,
+     5130
+    ],
+    [
+     8560,
+     5390
+    ],
+    [
+     8170,
+     5466
+    ]
+   ]
+  },
+  {
+   "id": "surulere",
+   "name": "Surulere closes",
+   "real": "Surulere's planned layout: crescents, closes and cul-de-sacs with barrier gates, old rooming houses beside new duplexes, the tree-lined canal, Akerele St's night strip",
+   "anchor_real": [
+    6.506,
+    3.356
+   ],
+   "anchor_gidi": [
+    7650,
+    5380
+   ],
+   "streets": [
+    "Akerele St",
+    "Ogunlana Dr",
+    "Randle Ave",
+    "Adebayo St",
+    "Akpan Cres",
+    "Abina St",
+    "the canal"
+   ],
+   "pts": [
+    [
+     6860,
+     5150
+    ],
+    [
+     8150,
+     5130
+    ],
+    [
+     8170,
+     5466
+    ],
+    [
+     7082,
+     5720
+    ]
+   ]
+  }
+ ],
+ "roads": [
+  {
+   "gidi": "Ring Road (north of Ìkòríta)",
+   "real": "Agege Motor Rd (A5) at Oshodi, the rail beside it; the kerb lane a danfo rank"
+  },
+  {
+   "gidi": "Ring Road at Ìkòríta",
+   "real": "Ikorodu Rd / Funsho Williams Ave at Ojuelegba, on the flyover decks"
+  },
+  {
+   "gidi": "Ayinde Avenue",
+   "real": "Apapa-Oworonshoki Expressway on its raised deck, terminals inside its loop ramps (our angle differs from the real one)"
+  },
+  {
+   "gidi": "Gidi Rail",
+   "real": "the Lagos rail beside Agege Motor Rd at Oshodi, stalls on the track edge"
+  },
+  {
+   "gidi": "Market Road (spot 1)",
+   "real": "Oshodi Rd at the market gate"
+  },
+  {
+   "gidi": "the west road (now 'Adekoya Road', to be renamed)",
+   "real": "Airport Rd, Mafoluku"
+  },
+  {
+   "gidi": "the cross road at Ìkòríta (now 'Akande Road')",
+   "real": "Itire Rd (west) and Ojuelegba Rd (east)"
+  },
+  {
+   "gidi": "the north-south road (now 'Kalejaiye Avenue')",
+   "real": "Church St, Oshodi (north) into Osolo Way (south)"
+  }
+ ]
+}
