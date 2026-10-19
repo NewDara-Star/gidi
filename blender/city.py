@@ -189,6 +189,8 @@ GUTTERS = []   # the gutters (scripts/isms.py), in the kit's frame, with boundin
 for _g in GD.get('gutters', []):
     _gp = [P(p) for p in _g['pts']]
     GUTTERS.append((_g, _gp, (min(p[0] for p in _gp), min(p[1] for p in _gp), max(p[0] for p in _gp), max(p[1] for p in _gp))))
+HEROES = set(filter(None, os.environ.get('GIDI_HEROES', 'danfo,okada').split(',')))   # kinds Unreal draws as real models
+# (gidi-game Art/Vehicles), left out of the tiles; GIDI_HEROES= (empty) keeps the kit's own for a browser-only build
 THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py), on the map's axes
 for _t in GD.get('things', []):
     THINGS.setdefault((int(_t['x'] // SIZE), int(_t['y'] // SIZE)), []).append(_t)
@@ -815,6 +817,8 @@ def build_tile(tx, ty, overrides):
     # markets and parks, port machines, boats, canoes, the trains. The web build draws every other parked car and person.
     for t in things_here():
         k = t['k']
+        if k in HEROES:   # Unreal places its own model there (gidi-game gidi_heroes.py)
+            continue
         q = P((t['x'], t['y']))
         ang = -math.radians(t['a'])
         tr = Rng('thing', k, round(q[0] * 10), round(q[1] * 10))
