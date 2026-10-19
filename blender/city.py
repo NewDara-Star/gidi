@@ -189,7 +189,7 @@ GUTTERS = []   # the gutters (scripts/isms.py), in the kit's frame, with boundin
 for _g in GD.get('gutters', []):
     _gp = [P(p) for p in _g['pts']]
     GUTTERS.append((_g, _gp, (min(p[0] for p in _gp), min(p[1] for p in _gp), max(p[0] for p in _gp), max(p[1] for p in _gp))))
-HEROES = set(filter(None, os.environ.get('GIDI_HEROES', 'danfo,okada').split(',')))   # kinds Unreal draws as real models
+HEROES = set(filter(None, os.environ.get('GIDI_HEROES', 'danfo,okada,keke,molue').split(',')))   # kinds Unreal draws as real models
 # (gidi-game Art/Vehicles), left out of the tiles; GIDI_HEROES= (empty) keeps the kit's own for a browser-only build
 THINGS = {}   # (tile x, tile y): the things standing there (scripts/things.py), on the map's axes
 for _t in GD.get('things', []):
