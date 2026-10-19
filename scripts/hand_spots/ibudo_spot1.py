@@ -45,8 +45,8 @@ for k in ('streets', 'lanes'):   # streets into the cleared ground: cut back to 
             if part.geom_type == 'LineString' and part.length > 8:
                 E.append({'op': 'add street', 'kind': 'lane' if k == 'lanes' else 'street', 'pts': [[round(x, 1), round(y, 1)] for x, y in part.coords],
                           'note': 'the part outside the market, kept', 'by_who': WHO})
-E.append({'op': 'add street', 'kind': 'main', 'name': 'Market Road', 'pts': [M(0, 144), M(320, 144)],
-          'note': 'after Oshodi Road: 10 m of mud, no kerb, under the flyover', 'by_who': WHO})
+E.append({'op': 'add street', 'kind': 'street', 'pts': [M(0, 144), M(320, 144)],   # a plain street: the kit draws mains as tarred
+          'note': 'Market Road, after Oshodi Road: mud, no kerb, under the flyover (named by its place pin)', 'by_who': WHO})   # highways
 for line in ([M(*a), M(*b)] for a, b in ALLEYS):
     E.append({'op': 'add street', 'kind': 'lane', 'pts': line, 'note': 'the market\'s alleys: from the gate in, and across', 'by_who': WHO})
 for f in G['furniture']:   # poles and posts that would stand inside the new shops and sheds
