@@ -21,3 +21,6 @@
 - Gidi number plates (outline of Gidi, a slogan, district codes) on every vehicle the data places.
 - Danfo backs as data: each danfo its own window slogan and pictograms, from an invented list.
 - Proposed order: a one-page brand sheet; coat-of-arms options; the brush font; plates and slogans into the data and kit.
+- **Gidi UI** (owner, 19 Oct): "something beautiful and unique, our own style": the illustration style, plus stickers, plus a
+  legible but stylised font for the interfaces (custom, like the rest). The owner is collecting inspiration to send; wait
+  for it before drawing. Montserrat's full family (OFL) is a candidate base for the UI face.
