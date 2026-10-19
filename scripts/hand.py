@@ -15,7 +15,7 @@
 #   {"op": "delete furniture", "at": [x, y], "kind": "pole" (optional)}  the nearest within 2 m
 #   {"op": "move furniture", "at": [x, y], "kind": "pole" (optional), "to": [x, y], "ang": deg (optional)}  the nearest within 2 m
 #   {"op": "move monument", "at": [x, y], "to": [x, y], "ang": deg (optional)}  /  {"op": "delete monument", "at": [x, y]}  the nearest within 3 m
-#   {"op": "delete place", "name": "..."}
+#   {"op": "delete place", "name": "...", "at": [x, y] (optional: only the one within 5 m)}
 #   {"op": "reshape building", "at": [x, y], "kind": .., "pts": [...]}  /  {"op": "reshape parcel" | "reshape zone", "at", "pts"}   a new outline
 #   {"op": "reshape street", "at": [x, y], "pts": [...]}   a road edit: the street, lane or district main nearest the point takes a new line
 # (scripts/board_server.py writes these from the drawing board, web/board.html)
@@ -61,6 +61,9 @@ def _files():
         if H.get('layout', 'v1') == LAYOUT:
             if H['district'] in THAW:
                 H = dict(H); H.pop('snapshot', None); H['edits'] = H.get('applied', []) + H.get('edits', [])
+            elif H.get('snapshot'):   # edits whose result the snapshot doesn't hold (things, surfaces, houses, paint, fronts, walls are
+                # made again every bake): replayed from those already applied, or freezing would drop them
+                H = dict(H); H['edits'] = [e for e in H.get('applied', []) if e['op'] in REPLAY] + H.get('edits', [])
             yield f, H
 
 
@@ -283,6 +286,7 @@ DETAIL_OPS = ('set front', 'add tree', 'move tree', 'delete tree')
 THING_OPS = ('add thing', 'move thing', 'delete thing')
 HOUSE_OPS = ('set house',)
 PAINT_OPS = ('add paint', 'delete paint')
+REPLAY = ('set surface',) + WALL_OPS + DETAIL_OPS + THING_OPS + HOUSE_OPS + PAINT_OPS   # see _files
 
 
 def apply_paint_edits(out):
@@ -545,9 +549,9 @@ def apply_edits(out):
                     m['x'], m['y'] = e['to']
                     if 'ang' in e:
                         m['ang'] = e['ang']
-            elif op == 'delete place':
+            elif op == 'delete place':   # every place of that name, or with "at" only the one within 5 m of it
                 n0 = len(out['pois'])
-                out['pois'] = [p for p in out['pois'] if p['name'] != e['name']]
+                out['pois'] = [p for p in out['pois'] if p['name'] != e['name'] or ('at' in e and Point(p['x'], p['y']).distance(Point(e['at'])) > 5)]
                 if len(out['pois']) == n0:
                     print('  hand edit found no place called', e['name']); continue
             elif op == 'add place':   # a named place (a pin): {"name", "type", "x", "y", "note"}
