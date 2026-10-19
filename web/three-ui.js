@@ -1,9 +1,10 @@
 /* Panel, district switcher and controls for Gidi 3D. */
 (function () {
   const D = window.DISTRICT, G3 = window.GIDI3D;
-  const ORDER = [["jungle", "Jungle City"], ["maze", "The Maze"], ["hub", "The Hub"], ["railside", "Railside"], ["foodgate", "Food Gate"],
-    ["port", "The Port"], ["bazaar", "The Bazaar"], ["capital", "The Capital"], ["estate", "The Estate"], ["oldisland", "Old Island"],
-    ["oldshore", "Old Shore"], ["border", "The Border"], ["watertown", "Water Town"], ["heights", "The Heights"], ["frontier", "The Frontier"]];
+  const ORDER = [["jungle", "Igbó-Ọ̀la"], ["maze", "Àdàrú"], ["hub", "Ìbùdó"], ["railside", "Ẹ̀gbẹ́-Irin"], ["foodgate", "Ẹnu-Ọjà"],
+    ["port", "Èbúté-Ńlá"], ["bazaar", "Ọjà-Ńlá"], ["capital", "The Capital"], ["estate", "The Estate"], ["oldisland", "Old Island"],
+    ["oldshore", "Etí-Òkun"], ["border", "Ààlà"], ["watertown", "Ìlú-Omi"], ["heights", "Òkè-Ọlà"], ["frontier", "Ọ̀dàn"],
+    ["airport", "Pápákọ̀"], ["yaba", "Saba"]];   // the owner's names (19 Oct 2026)
   const GLYPH = { story: "★", market: "M", transit: "T", danger: "!", check: "✕", night: "☾", landmark: "◆", industry: "▲", water: "≈", gov: "▣", park: "≡" };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 

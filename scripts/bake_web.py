@@ -20,6 +20,15 @@ NEW_D={"airport":("THE AIRPORT","Murtala Muhammed International Airport (Ikeja)"
 IDS=IDS_V1+list(NEW_D)
 _NM={i:(n,ins,act) for (n,ins,act,pts),i in zip(D,IDS_V1)}; _NM.update(NEW_D)
 D=[(_NM[i][0],_NM[i][1],_NM[i][2],i) for i in IDS]   # the last slot is now the district id: its outline is DPOLY[id]
+# The districts' names (owner, 19 Oct 2026): names a conductor can shout, Lagos-style, mostly Yoruba, each saying something about
+# the place; invented, never a real Lagos name. Where the English is what people say (Old Island, as "Lagos Island"), it stays.
+# The old English names live on as nicknames. Written as given (tone marks and all; .title() would break them).
+NAMES={"maze":"Àdàrú","hub":"Ìbùdó","railside":"Ẹ̀gbẹ́-Irin","bazaar":"Ọjà-Ńlá","oldshore":"Etí-Òkun","heights":"Òkè-Ọlà",
+       "port":"Èbúté-Ńlá","watertown":"Ìlú-Omi","foodgate":"Ẹnu-Ọjà","jungle":"Igbó-Ọ̀la","border":"Ààlà","frontier":"Ọ̀dàn",
+       "airport":"Pápákọ̀","yaba":"Saba","oldisland":"Old Island","estate":"The Estate","capital":"The Capital"}
+NICKS={"maze":"The Maze","hub":"The Hub","railside":"Railside","bazaar":"The Bazaar","oldshore":"Old Shore","heights":"The Heights",
+       "port":"The Port","watertown":"Water Town","foodgate":"Food Gate","jungle":"Jungle City","border":"The Border",
+       "frontier":"The Frontier","airport":"The Airport"}
 DPOLY={k:Polygon(v).buffer(0) for k,v in LAYOUT["districts"].items()}
 def gen_ok(i):
     """A district's generated file counts only once it is built in the v2 frame (older files sit at the v1 positions)."""
@@ -82,7 +91,7 @@ for (name,ins,act,pts),id_ in zip(D,IDS):
     poly=DPOLY[id_]
     land=poly.difference(water).difference(ocean)
     info=INFO[id_]
-    out["districts"].append({"id":id_,"name":name.title().replace("The ","The "),"act":act,"area":round(poly.area*1e-6,2),"poly":[list(map(list,poly.exterior.coords))],**info})
+    out["districts"].append({"id":id_,"name":NAMES.get(id_,name.title()),**({"nick":NICKS[id_]} if id_ in NICKS else {}),"act":act,"area":round(poly.area*1e-6,2),"poly":[list(map(list,poly.exterior.coords))],**info})
     pat,sp,jit,drop,ang=PAT[id_]
     segs,mains=grid_lines(land,sp,jit,drop,ang,pat)
     inner=land.buffer(-6)
