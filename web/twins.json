@@ -1,0 +1,256 @@
+{
+ "building/front": {
+  "twin": "two-storey shop row: lock-ups with roller shutters below, balconies with doors above",
+  "where": "Oshodi Rd by Oshodi Market gate, Oshodi",
+  "pics": [
+   "google/ibudo/03_sv_oshodi_rd_east.jpg",
+   "google/ibudo/04_sv_oshodi_rd_west.jpg",
+   "google/ibudo/06_sv_shops_south.jpg"
+  ]
+ },
+ "building/shed": {
+  "twin": "market stall shed, red rusted roof",
+  "where": "Oshodi Market, Oshodi",
+  "pics": [
+   "google/ibudo/02_market_and_bridge_top_250m.jpg"
+  ]
+ },
+ "building/stalls": {
+  "twin": "trader's low wooden table / lock-up stall",
+  "where": "Oshodi Market, Oshodi; rail market at Oshodi",
+  "pics": [
+   "refs/markets/oshodi-market-lagos-jpg.jpg",
+   "refs/markets/rail-market-jpg.jpg"
+  ]
+ },
+ "building/kiosk": {
+  "twin": "roadside kiosk on stilts / under an umbrella",
+  "where": "Oshodi Rd, Oshodi; Alapere, Ketu",
+  "pics": [
+   "google/ibudo/06_sv_shops_south.jpg",
+   "refs/roadside/local-kiosk-used-in-lagos-jpg.jpg"
+  ]
+ },
+ "building/terminal": {
+  "twin": "Oshodi Transport Interchange terminal",
+  "where": "Oshodi Interchange Terminal 3, Oshodi",
+  "pics": [
+   "google/ibudo/01_interchange_top_300m.jpg"
+  ]
+ },
+ "plot/under bridge": {
+  "twin": "under-bridge market and bus stop",
+  "where": "Ojuelegba under bridge, Yaba; Oshodi under bridge",
+  "pics": [
+   "refs/assets/A_view_of_Ojuelegba_Under_bridge,_Yaba,_Lagos-Nigeria.jpg",
+   "refs/markets/oshodi-underbrigde-market-jpg.jpg"
+  ]
+ },
+ "plot/market": {
+  "twin": "open market: umbrellas, basins and sacks on the ground, sheds round the edge",
+  "where": "Oshodi Market; Mile 12; Mushin market",
+  "pics": [
+   "refs/markets/mile-12-market-lagos-jpg.jpg",
+   "refs/streets/market-in-mushin-lagos-jpg.jpg"
+  ]
+ },
+ "plot/bus terminal": {
+  "twin": "Oshodi bus terminal",
+  "where": "Oshodi Interchange, Oshodi",
+  "pics": [
+   "google/ibudo/01_interchange_top_300m.jpg"
+  ]
+ },
+ "market zone/market street": {
+  "twin": "traders on planks and tarps on the road edge, parasols",
+  "where": "Oshodi Rd by the market gate, Oshodi",
+  "pics": [
+   "google/ibudo/03_sv_oshodi_rd_east.jpg",
+   "google/ibudo/04_sv_oshodi_rd_west.jpg",
+   "google/ibudo/05_sv_market_gate_north.jpg"
+  ]
+ },
+ "market zone/rail market": {
+  "twin": "traders on the railway tracks",
+  "where": "Oshodi, on the line",
+  "pics": [
+   "refs/markets/rail-market-jpg.jpg"
+  ]
+ },
+ "deck/footbridge": {
+  "twin": "pedestrian footbridge: concrete deck on pillars / steel truss",
+  "where": "Oshodi, by the terminal and over the expressway",
+  "pics": [
+   "google/ibudo/07_sv_footbridge_danfos.jpg",
+   "google/ibudo/08_sv_expressway_danfos_billboards.jpg"
+  ]
+ },
+ "deck/flyover": {
+  "twin": "flyover over a road and the rail, pillars every 30 m",
+  "where": "Oshodi Interchange; Ojuelegba bridge",
+  "pics": [
+   "google/ibudo/01_interchange_top_300m.jpg",
+   "refs/assets/A_view_of_Ojuelegba_Under_bridge,_Yaba,_Lagos-Nigeria.jpg"
+  ]
+ },
+ "street item/pole": {
+  "twin": "concrete electricity pole, sagging wires",
+  "where": "Oshodi Rd, Oshodi; Mushin",
+  "pics": [
+   "google/ibudo/05_sv_market_gate_north.jpg",
+   "refs/streets/2010-mushin-lagos-nigeria-5019122384-jpg.jpg"
+  ]
+ },
+ "street item/bus stop": {
+  "twin": "bus stop on the road edge (no lay-by)",
+  "where": "Ikeja; Marina, Lagos Island",
+  "pics": [
+   "refs/roadside/a-bus-stop-in-lagos-jpg.jpg",
+   "refs/roadside/marina-bus-stop-lagos-island-jpg.jpg"
+  ]
+ },
+ "street item/police kiosk": {
+  "twin": "red-and-white police post",
+  "where": "Ogba bus stop, Ikeja",
+  "pics": [
+   "refs/assets/4plots-for-sale-on-ogba-bus-stop-Ggx6qGxNfSdL3py9GFPF.jpg"
+  ]
+ },
+ "street item/direction sign": {
+  "twin": "green overhead direction sign",
+  "where": "Sabo, Yaba",
+  "pics": [
+   "refs/assets/Road_directional_at_Sabo_Yaba.jpg"
+  ]
+ },
+ "street item/overhead sign": {
+  "twin": "green overhead direction sign",
+  "where": "Sabo, Yaba",
+  "pics": [
+   "refs/assets/Road_directional_at_Sabo_Yaba.jpg"
+  ]
+ },
+ "street item/bread hawker": {
+  "twin": "bread seller",
+  "where": "Ketu",
+  "pics": [
+   "refs/streets/a-bread-seller-at-ketu-lagos-nigeria-jpg.jpg"
+  ]
+ },
+ "street item/wheelbarrow vendor": {
+  "twin": "fruit seller on a wheelbarrow",
+  "where": "Palm Grove bus stop",
+  "pics": [
+   "refs/streets/fruit-seller-on-wheel-bairo-at-palm-grove-bus-stop-jan-2017-jpg.jpg"
+  ]
+ },
+ "vehicle and thing/danfo": {
+  "twin": "danfo (yellow minibus)",
+  "where": "everywhere; Oshodi expressway",
+  "pics": [
+   "refs/roadside/lagos-danfo-bus-jpg.jpg",
+   "refs/roadside/the-danfo-of-lagos-jpg.jpg",
+   "google/ibudo/08_sv_expressway_danfos_billboards.jpg"
+  ]
+ },
+ "vehicle and thing/keke": {
+  "twin": "keke (tricycle)",
+  "where": "everywhere",
+  "pics": [
+   "refs/vehicles/keke_views_stock.jpg"
+  ]
+ },
+ "road/exp": {
+  "twin": "expressway with BRT lanes, double-arm lights",
+  "where": "Ketu–Ikorodu Road at Mile 12",
+  "pics": [
+   "refs/assets/Historic_Link_Between_Mile_12_and_Outer_Lagos._Ketu_-_Ikorudu_Road-scaled.jpg"
+  ]
+ },
+ "road/main": {
+  "twin": "main road, undivided, danfos stop in the lane",
+  "where": "Herbert Macaulay Way, Yaba (from the air)",
+  "pics": [
+   "refs/assets/images-5.jpeg"
+  ]
+ },
+ "road/street": {
+  "twin": "residential street, no centre line, crumbling edges",
+  "where": "Mushin",
+  "pics": [
+   "refs/streets/a-road-in-mushin-lagos-jpg.jpg"
+  ]
+ },
+ "road surface/mud": {
+  "twin": "muddy road strip, no kerb",
+  "where": "Oshodi Rd, Oshodi",
+  "pics": [
+   "google/ibudo/03_sv_oshodi_rd_east.jpg",
+   "google/ibudo/04_sv_oshodi_rd_west.jpg"
+  ]
+ },
+ "road surface/interlock": {
+  "twin": "interlocking paving bricks",
+  "where": "Lagos Island (Idumota, Balogun)",
+  "pics": [
+   "refs/assets/1*MpuldZHBNlCW2RddEunQnw.jpg"
+  ]
+ },
+ "ground/mud": {
+  "twin": "dark grey-brown mud, green-black puddles",
+  "where": "Agege by the railway",
+  "pics": [
+   "refs/assets/images-4.jpeg"
+  ]
+ },
+ "ground/puddles": {
+  "twin": "green-black puddles",
+  "where": "Agege by the railway",
+  "pics": [
+   "refs/assets/images-4.jpeg"
+  ]
+ },
+ "ground/sand": {
+  "twin": "pale sandy grey-beige open ground",
+  "where": "Ogba bus stop; Agbara",
+  "pics": [
+   "refs/assets/4plots-for-sale-on-ogba-bus-stop-Ggx6qGxNfSdL3py9GFPF.jpg"
+  ]
+ },
+ "ground/laterite": {
+  "twin": "red-brown laterite verge",
+  "where": "Mushin",
+  "pics": [
+   "refs/streets/2007-mushin-lagos-nigeria-492374760-jpg.jpg"
+  ]
+ },
+ "gutter/open gutter": {
+  "twin": "concrete V-drain, green or black water, rubbish",
+  "where": "Ibereko, Badagry; Agbara",
+  "pics": [
+   "refs/gutters/a-drainage-at-ibereko-badagry-lagos-state-nigeria-jpg.jpg",
+   "refs/gutters/black-water-in-a-gulter-jpg.jpg"
+  ]
+ },
+ "gutter/gutter crossing": {
+  "twin": "slab bridge over a drain",
+  "where": "Morogbo, Badagry",
+  "pics": [
+   "refs/gutters/blocked-drainage-in-morogbo-badagry-jpg.jpg"
+  ]
+ },
+ "house detail/flat roof": {
+  "twin": "rusted brown and grey zinc roofs",
+  "where": "mainland from the air",
+  "pics": [
+   "refs/streets/rusted-roof-top-jpg.jpg"
+  ]
+ },
+ "monument/statue": {
+  "twin": "the LAWMA sweeper statue (street statue)",
+  "where": "Lagos",
+  "pics": [
+   "refs/mud-and-rain/2010-statue-lagos-nigeria-by-rainer-wozny-5343218670-jpg.jpg"
+  ]
+ }
+}
