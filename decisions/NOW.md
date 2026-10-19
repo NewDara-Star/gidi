@@ -18,6 +18,15 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**19 Oct, later (main session, Claude, with two helper agents):**
+- **Vehicles built part by part** (gidi-game): the danfo (#22-#25, twelve recipes #32, wearing paint and photo mode #33), the keke (#29), the molue (#30, from memory: needs the owner's photo), the BRT blue and red (#31). Shared helpers: `tools/vehicle_kit.py`, renders `tools/vehicle_look.py`, game models `tools/vehicle_export.py`.
+- **In the game:** built danfos at every danfo spot in Àdàrú (a recipe per spot, its own plate, paint worn by the data's condition through `M_GidiPaint`); kekes and molues being added (branch vehicles/keke-molue-game, kit/heroes-keke-molue). After a full reimport the game needs ~20 minutes to compile and settle before a shot is fair.
+- **Gidi Brush** is a real font (#28): four drawn copies of every glyph, rotated by `calt` so repeats differ.
+- **Photo mode** (`tools/photo.sh`): the GOD IS THE GREATEST danfo, plate ADR-777GD; take 2 sent to the owner; take 3 running (no letterbox, rust in clusters). Still reads as a game: flat road and buildings, paint without reflections; a tight shot is the realistic target for now.
+- **UI:** the main menu mock (https://claude.ai/artifact/UeeKiehnc3JQUkpfeiDs5V): Danfo Basic menu, a Gidi vehicle and the district's name beside it, black and white or colour, crumpled-paper texture (ambientCG Paper003, CC0) on the background only. The brand sheet is updated (draft 2).
+- **Monuments:** `docs/hand/monument-briefs.md`: seven to Meshy from words (concept picture first, 6 credits each, then 3D on approval), The Reach from the owner's picture, the structures built in Blender. Waiting on the owner's yes for the 42-credit concept round.
+- **Owner's asks pending from him:** a molue photo, The Reach picture, Fab wear textures (chipped paint, rusty paint, grime streaks), the Capital's name, black and white or colour for the menu.
+
 **19 Oct, afternoon (main session, Claude):**
 - **Districts renamed** (#118): names a conductor can shout, mostly Yoruba: Àdàrú (the Maze), Ìbùdó (the Hub), Ẹ̀gbẹ́-Irin, Ọjà-Ńlá, Etí-Òkun, Òkè-Ọlà, Èbúté-Ńlá, Ìlú-Omi, Ẹnu-Ọjà, Igbó-Ọ̀la, Ààlà, Ọ̀dàn, Pápákọ̀, Saba; Old Island, The Estate, The Capital stay English (the Capital not yet discussed). The old English names are nicknames (`nick` in the data).
 - **Plates on the Lagos base** (gidi-game #26, #27): flag, GIDI, NO DEY SLEEP, Gidi's outline, palms, the district's name; ADR-123KD; embossed and glossy in the game.
