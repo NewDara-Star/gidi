@@ -142,3 +142,11 @@
 ## 19 Oct (late): Ìbùdó as a district
 - Market Road is now a plain street (#133, merged).
 - Ìbùdó judged as a whole: it doesn't make sense as a district. Plan v2 is proposed in IDEAS.md (`docs/hand/ibudo/plan_v2_proposal.png`): two cores (Oshodi and Ojuelegba), three crossing roads, five belts, several markets. **Next:** the owner says yes or changes it, then rebuild the district plan (thaw the hub, hand ops), keep spot 1, then go on to the match passes. Still to do: delete the stray school pin at (8528, 4096).
+
+## 19 Oct (night): Ìbùdó, the child-district method
+- **Rule (DECISIONS.md, #137):** a district is the child of its real inspirations. Ìbùdó = Oshodi + Ojuelegba: study both whole, see what Ìbùdó can hold, then place every street and place from a real one, each with its own pictures. Nothing invented.
+- **Running:** a study agent is covering both places (tiles, inventory, ~30 Street View streets) into `~/Real-world/research/google/ibudo/study/` (INVENTORY.md).
+- **Next:** from the inventory, the capacity of Ìbùdó's 4 km², then a child plan with every street labelled by its real source (owner checks), then build by hand, then pictures per street (thousands).
+- **Kept on branch `hand/ibudo-plan-v2` (not merged):** the big-pieces version (rail through the crossing, three roads, stadium moved, markets, barracks); all checks pass. Only the rail move is decided; the rest gets checked against the study. "Adekoya Road" there is a real Oshodi street name: rename it.
+- **Twins (docs/TWINS.md, #135, #136):** every type has a real twin; 44 of 210 have pictures. Generic "near the area" pictures are type references only, not street twins.
+- New hand ops in that branch: `add path`, `delete path`, `delete structure` (scripts/hand.py); checker reads hand-edited paths.
