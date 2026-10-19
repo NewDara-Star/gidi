@@ -27,7 +27,7 @@
 - **Regenerate, don't move the old frozen Food Gate block.** The new map leads. The pilot's value lives in the generator rules; the old file is kept as a record.
 - **One shared generator, one profile per district, run in parallel.** Not 17 separate generators.
 - **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`).
-- **The Reach stands in Parade Square, Old Island** (16 Oct). The Reach is the kit's sculpture after the owner's own artwork: a woman reaching out to an Eyo-style masquerade, about 14 m across. It stands at the centre of Parade Square, Gidi's great civic square (after Tafawa Balewa Square), with horse riders at the square's gates.
+- **The Reach moves to Jungle City, on Carnival Avenue** (19 Oct; it stood in Parade Square, Old Island, from 16 Oct). The Reach is the kit's sculpture after the owner's own artwork: a woman reaching out to an Eyo-style masquerade, about 14 m across. The owner drew it in 2020 for a FESTAC '77 event (never used), so it is FESTAC-coded and belongs in the district that takes from Festac: Jungle City's Carnival Avenue (after Festac's Seventh Avenue; `docs/hand/borrowed-lagos.md` row 23). Parade Square keeps its gate riders and needs a new centrepiece.
 - **Monuments are placed by hand** (16 Oct). The kit's pieces (`blender/gidi_kit/monuments.py`, `landmarks.py`) are placed with the `add monument` hand edit. The plan is in `docs/hand/borrowed-lagos.md`. A district with any hand-placed monument keeps only those.
 - **Claude decides when the owner says so** (16 Oct). "Decide. I trust your judgment." On 16 Oct Claude:
   - merged Gidi v2 (PR #54)
