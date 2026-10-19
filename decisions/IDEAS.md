@@ -31,3 +31,5 @@
 - **Gidi UI** (owner, 19 Oct): "something beautiful and unique, our own style": the illustration style, plus stickers, plus a
   legible but stylised font for the interfaces (custom, like the rest). The owner is collecting inspiration to send; wait
   for it before drawing. Montserrat's full family (OFL) is a candidate base for the UI face.
+- **People** (owner, 19 Oct): first the hawker with the basin of drinks, built with MakeHuman in Blender (MPFB, CC0 assets) and judged in a render; then the full frame (refs/lagos-life 09, the motor park) and what it shows is missing; **then try MetaHuman** (Unreal), above all for animation: faces driven from a phone video (MetaHuman Animator), which suits the owner voice-acting the characters himself. If MakeHuman people don't hold up, MetaHuman replaces them.
+
