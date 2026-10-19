@@ -1,6 +1,6 @@
 # Where the work stands (update at the end of every session)
 
-**18 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
+**19 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
 
 **Done:**
 - **All 17 districts frozen,** and all 17 pass every check (`scripts/check_district.py`, on the finished map). The bake is byte-identical run to run.
@@ -17,6 +17,13 @@
   - add, move and name places and furniture
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
+
+**19 Oct (main session, Claude):**
+- **The Danfo font is done** (gidi-game `Art/Fonts/DanfoBasic.ttf`, OFL): the owner's 2022 font on Alfa Slab One, spaced and kerned, with punctuation; X and Y redrawn. Brand sheet draft (colours approved): https://claude.ai/artifact/MxjXim5sLv27pNv1m5PCH3. Still to build: the wobbly brush font (no two letters alike), the Gidi plate system and its font (study Lagos plates first), a coat of arms, organic illustrations from the image model. The owner is still deciding the back-window lettering.
+- **Real vehicle models, pipeline proven on the danfo** (gidi-game #14, #16): a Meshy reference sheet (no brand, the owner's D mark is the badge) → Meshy 3D (36 credits) → `tools/vehicle_prep.py` + a `spec.json` (true size, 80k faces, wheels on axles, the sliding door its own part, a cabin with benches, real glass, windscreen squared off). Rebuildable. Renders: `~/Real-world/research/models/danfo/`.
+- **Danfos in Unreal at the data's 1,374 spots** (`gidi_heroes.py`, branch vehicles/heroes-in-unreal): the parked model (`danfo_static.glb`) imported once as Nanite, placed in each tile's level. The kit session is asked to stop drawing those danfos in the tiles Unreal imports.
+- **Keke and okada reference sheets made** (`~/Real-world/research/models/keke`, `okada`; 12 credits). Their 3D step (30 credits each) waits on the owner allowing Meshy's 3D tool in Claude Code's auto mode.
+- **Next:** wear per danfo (from the data's condition), D badge and plates as decals, keke and okada 3D, then korope, molue, BRT blue and red; plate study; brush font; run `tools/perf.sh`.
 
 **18 Oct (main session, Claude):**
 - **The Estate's streets redrawn from the study** (Magodo, Omole, Ikeja GRA; #103): a spine drive, parallel streets two plot rows apart ending in closes, two crescents, 8 gated links to the main roads instead of 17. Frozen again; all 17 districts pass.
