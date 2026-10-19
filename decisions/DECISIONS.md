@@ -93,4 +93,5 @@
 - **The kit session gets exact lists** (19 Oct): what kit to build, piece by piece, not open briefs.
 - **The Lagos pass** (19 Oct): a place is "Lagos" only when the owner has looked at it rendered and said so. One spot first, all the way (the Àdàrú motor park on its main road), to learn the technique; decisions made there become rules that help other places, but each place earns its own pass. Years of work; places improve in updates. Method and spot 1's shot list: `docs/hand/lagos-pass.md`.
 - **Light by default on the laptop** (19 Oct): everyday building light (web tiles, one Blender job at a time); full-detail renders, full reimports and photo mode only when the owner asks or is away from the laptop.
+- **People** (19 Oct): **MakeHuman for NPCs** (the crowd: hawkers, passengers, conductors in the background; built from a short spec with MPFB in Blender, `gidi-game/tools/person_build.py`, CC0 assets), **MetaHuman for characters you interact with** (story characters, close-ups, faces animated from the owner's phone video). Both animated in Unreal from retargeted motion.
 
