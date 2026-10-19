@@ -34,3 +34,18 @@ with slabs; litter, sachet-water bags, puddles; overhead power and phone wires e
 signboards; posters on walls; satellite dishes, AC units, water tanks on the buildings; sun-faded paint.
 **Air and light:** haze, dust kicked up, exhaust smoke from a danfo, low warm sun or overcast grey (09 is overcast).
 **Sound later:** conductors calling stops (the district names, said aloud).
+
+## Spot 1, frame v1 (19 Oct): what it shows is missing
+`gidi-game/Art/Frames/motorpark_v1.png` beside the owner's photo 09. In order of how much each would change the picture:
+1. **People, many more:** photo 09 has dozens in the aisles and between the buses; we have eleven. A crowd generator (many
+   MakeHuman variants, walking, sitting on benches, leaning on buses, carrying bags), conductors at open doors.
+2. **The mess of life:** tables, plastic chairs, coolers, buckets, nylon bags, trays, food pots, a wheelbarrow; danfos with
+   sliding doors open, passengers boarding.
+3. **The danfos look new:** in the frame they're clean and identical in this light; their wear (M_GidiPaint), dents, faded
+   paint, rust runs and the lettering need to show in renders too.
+4. **The ground is too clean:** dirt, oil stains, puddles, worn and broken pavers, a gutter with slabs, sand drifts at the edges.
+5. **The buildings are boxes:** real Lagos fronts (balconies, AC units, signboards, burglary bars, rusty roofs, water tanks);
+   the city's kit houses exist (in Unreal), not yet here.
+6. **The sky:** clean and bright; Lagos in photo 09 is overcast and heavy. Weather options (overcast, harmattan haze, rain).
+7. **Signs and life on the road:** billboards with invented ads, street lights, traffic on the expressway, trees.
+8. **The camera:** a phone photo's look (wider lens, a little noise and sharpening).
