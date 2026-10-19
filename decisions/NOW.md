@@ -18,6 +18,27 @@
   - add and delete plots
   - thaw a frozen district (`GIDI_THAW`) for road work
 
+**19 Oct, afternoon (main session, Claude):**
+- **Districts renamed** (#118): names a conductor can shout, mostly Yoruba: Àdàrú (the Maze), Ìbùdó (the Hub), Ẹ̀gbẹ́-Irin, Ọjà-Ńlá, Etí-Òkun, Òkè-Ọlà, Èbúté-Ńlá, Ìlú-Omi, Ẹnu-Ọjà, Igbó-Ọ̀la, Ààlà, Ọ̀dàn, Pápákọ̀, Saba; Old Island, The Estate, The Capital stay English (the Capital not yet discussed). The old English names are nicknames (`nick` in the data).
+- **Plates on the Lagos base** (gidi-game #26, #27): flag, GIDI, NO DEY SLEEP, Gidi's outline, palms, the district's name; ADR-123KD; embossed and glossy in the game.
+- **The danfo built part by part** (gidi-game #22-#25, `tools/danfo_build.py`): the T3 base measured, Gidi's tweaks listed; the owner's D in 3D; lettering in the brush style (Titan One wobbled, white flecks) and printed stickers as thin 3D pieces.
+- **The kit leaves danfos and okadas out** (#117); Unreal places real models (Meshy danfo and okada for now, each with its own embossed plate).
+
+**Parked, to come back to (the owner asked, 19 Oct):**
+1. **The build order's main line: one Maze (Àdàrú) street to the look target, end to end** (real models, the crowd, a walkable character, measured on the laptop). Everything vehicle-side feeds this.
+2. Unreal look fixes from 18 Oct: a building's paint lost under its scan, orange dust strips, blue ground patches, plain flat roofs.
+3. `tools/perf.sh`: the laptop frame-rate test, never run.
+4. The built danfo: recipes (a dozen variants), the wear material (needs Fab: chipped painted metal, rusty painted metal, grime/leak decals), into the game in place of the Meshy one.
+5. The other vehicles the danfo way: keke (its Meshy 3D blocked by auto mode; may not need it), korope, molue, BRT blue and red.
+6. Gidi Brush as a real font file (lettering exists only as a layout tool).
+7. Coat of arms options; organic illustrations from the image model; the brand sheet artifact to bring up to date.
+8. The main menu (God of War style, a monument beside the menu: black and white or colour, open) and the wider Gidi UI (the owner is collecting references).
+9. The Reach to Igbó-Ọ̀la's Carnival Avenue (decided, not yet in the data); Parade Square needs a new centrepiece.
+10. Bus stops and junctions named the Lagos way, for the conductors' calls.
+11. Data: a house `ac` count; the ground cut along gutters.
+12. The kit session stalled since 03:00 on kit/lockups (lock-ups and shop fronts weathered, unpushed); shop signs in Unreal (`gidi_signs.py` written, not run).
+13. The Google Earth study of the next districts.
+
 **19 Oct (main session, Claude):**
 - **The Danfo font is done** (gidi-game `Art/Fonts/DanfoBasic.ttf`, OFL): the owner's 2022 font on Alfa Slab One, spaced and kerned, with punctuation; X and Y redrawn. Brand sheet draft (colours approved): https://claude.ai/artifact/MxjXim5sLv27pNv1m5PCH3. Still to build: the wobbly brush font (no two letters alike), the Gidi plate system and its font (study Lagos plates first), a coat of arms, organic illustrations from the image model. The owner is still deciding the back-window lettering.
 - **Real vehicle models, pipeline proven on the danfo** (gidi-game #14, #16): a Meshy reference sheet (no brand, the owner's D mark is the badge) → Meshy 3D (36 credits) → `tools/vehicle_prep.py` + a `spec.json` (true size, 80k faces, wheels on axles, the sliding door its own part, a cabin with benches, real glass, windscreen squared off). Rebuildable. Renders: `~/Real-world/research/models/danfo/`.
