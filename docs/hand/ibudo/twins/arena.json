@@ -1,0 +1,114 @@
+{
+"area": "arena",
+"real": "the Nigerian Army Shopping Arena: about 40 long parallel sheds on one axis, a central spine, stalls along the track edge",
+"anchor_real": [
+6.5635,
+3.3505
+],
+"anchor_gidi": [
+8950,
+3900
+],
+"streets": [
+{
+"gidi": [
+[
+8853.0,
+3739.0
+],
+[
+8865.9,
+3765.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "e623fd36-d8e2-4ab5-b246-10212422dd80",
+"photo_at": [
+6.564836,
+3.349676
+],
+"length_m": 29,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8873.7,
+3781.5
+],
+[
+8883.5,
+3801.8
+],
+[
+8887.4,
+3800.3
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "e623fd36-d8e2-4ab5-b246-10212422dd80",
+"photo_at": [
+6.564463,
+3.349859
+],
+"length_m": 27,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8912.5,
+3790.3
+],
+[
+8941.0,
+3779.0
+],
+[
+8926.5,
+3748.6
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "e623fd36-d8e2-4ab5-b246-10212422dd80",
+"photo_at": [
+6.564606,
+3.350413
+],
+"length_m": 64,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8932.4,
+4037.3
+],
+[
+8944.4,
+4032.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "578d805e-8707-40d1-8f3b-8d99cb59c72f",
+"photo_at": [
+6.562282,
+3.350394
+],
+"length_m": 13,
+"status": "red",
+"pics": []
+}
+]
+}
