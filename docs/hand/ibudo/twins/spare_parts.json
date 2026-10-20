@@ -34,8 +34,11 @@
 3.342087
 ],
 "length_m": 51,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_000_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -61,8 +64,13 @@
 3.34197
 ],
 "length_m": 48,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_001_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_001_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_001_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_001_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -88,8 +96,13 @@
 3.342154
 ],
 "length_m": 21,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_002_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_002_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_002_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_002_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -115,8 +128,15 @@
 3.342204
 ],
 "length_m": 82,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_003_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_003_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_003_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_003_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_003_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_003_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -150,8 +170,15 @@
 3.34209
 ],
 "length_m": 120,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_004_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_004_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_004_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_004_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_004_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_004_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -177,8 +204,13 @@
 3.342013
 ],
 "length_m": 79,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_005_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_005_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_005_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_005_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -200,8 +232,13 @@
 3.342307
 ],
 "length_m": 10,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_006_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_006_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_006_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_006_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -231,8 +268,13 @@
 3.342196
 ],
 "length_m": 25,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_007_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_007_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_007_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_007_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -266,8 +308,21 @@
 3.342817
 ],
 "length_m": 215,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_008_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_008_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_008_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_008_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_008_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_008_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_008_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -297,8 +352,21 @@
 3.342769
 ],
 "length_m": 212,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_009_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_009_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_009_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_009_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_009_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_009_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_009_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -332,8 +400,15 @@
 3.343163
 ],
 "length_m": 97,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_010_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_010_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_010_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_010_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_010_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_010_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -367,8 +442,11 @@
 3.343344
 ],
 "length_m": 51,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_011_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_011_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -394,8 +472,15 @@
 3.342683
 ],
 "length_m": 89,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_012_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_012_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_012_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_012_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_012_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_012_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -425,8 +510,13 @@
 3.343048
 ],
 "length_m": 56,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_013_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_013_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_013_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_013_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -476,8 +566,13 @@
 3.343884
 ],
 "length_m": 175,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_014_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_014_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_014_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_014_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -535,8 +630,13 @@
 3.343957
 ],
 "length_m": 298,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_015_07_a.jpg",
+"google/ibudo/twins/spare_parts/street_015_07_b.jpg",
+"google/ibudo/twins/spare_parts/street_015_08_a.jpg",
+"google/ibudo/twins/spare_parts/street_015_08_b.jpg"
+]
 },
 {
 "gidi": [
@@ -598,8 +698,21 @@
 3.343363
 ],
 "length_m": 365,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_016_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_016_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_016_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_016_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_06_b.jpg",
+"google/ibudo/twins/spare_parts/street_016_07_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_07_b.jpg",
+"google/ibudo/twins/spare_parts/street_016_08_a.jpg",
+"google/ibudo/twins/spare_parts/street_016_08_b.jpg"
+]
 },
 {
 "gidi": [
@@ -731,8 +844,13 @@
 3.347626
 ],
 "length_m": 377,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_019_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_019_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_019_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_019_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -822,8 +940,15 @@
 3.348355
 ],
 "length_m": 384,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_020_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_020_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_020_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_020_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_020_10_a.jpg",
+"google/ibudo/twins/spare_parts/street_020_10_b.jpg"
+]
 },
 {
 "gidi": [
@@ -849,8 +974,11 @@
 3.348532
 ],
 "length_m": 59,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_021_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_021_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -872,8 +1000,13 @@
 3.348611
 ],
 "length_m": 45,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_022_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_022_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_022_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -915,8 +1048,21 @@
 3.349276
 ],
 "length_m": 217,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_023_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_023_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_023_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_023_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_023_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_023_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_023_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -946,8 +1092,13 @@
 3.349353
 ],
 "length_m": 42,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_024_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_024_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_024_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_024_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -969,8 +1120,11 @@
 3.349271
 ],
 "length_m": 80,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_025_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_025_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1004,8 +1158,15 @@
 3.349119
 ],
 "length_m": 104,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_026_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_026_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_026_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_026_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_026_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_026_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1031,8 +1192,13 @@
 3.349406
 ],
 "length_m": 33,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_027_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_027_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_027_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_027_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1058,8 +1224,13 @@
 3.349425
 ],
 "length_m": 25,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_028_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_028_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_028_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_028_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1085,8 +1256,13 @@
 3.348469
 ],
 "length_m": 28,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_029_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_029_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_029_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_029_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1112,8 +1288,13 @@
 3.348557
 ],
 "length_m": 28,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_030_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_030_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_030_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_030_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1183,8 +1364,15 @@
 3.348339
 ],
 "length_m": 87,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_031_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_031_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_031_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_031_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_031_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_031_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1206,8 +1394,11 @@
 3.348694
 ],
 "length_m": 48,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_032_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_032_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1273,8 +1464,23 @@
 3.348545
 ],
 "length_m": 268,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_033_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_06_b.jpg",
+"google/ibudo/twins/spare_parts/street_033_07_a.jpg",
+"google/ibudo/twins/spare_parts/street_033_07_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1312,8 +1518,13 @@
 3.34808
 ],
 "length_m": 57,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_034_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_034_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_034_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_034_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1411,8 +1622,13 @@
 3.346237
 ],
 "length_m": 391,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_035_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_035_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_035_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_035_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1450,8 +1666,13 @@
 3.346962
 ],
 "length_m": 27,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_036_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_036_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_036_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_036_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1477,8 +1698,13 @@
 3.343612
 ],
 "length_m": 67,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_037_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_037_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_037_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_037_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1500,8 +1726,13 @@
 3.342993
 ],
 "length_m": 34,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_038_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_038_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_038_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_038_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1523,8 +1754,13 @@
 3.343191
 ],
 "length_m": 69,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_039_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_039_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_039_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_039_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1585,8 +1821,13 @@
 3.343902
 ],
 "length_m": 83,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_041_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_041_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_041_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_041_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1612,8 +1853,13 @@
 3.34334
 ],
 "length_m": 55,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_042_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_042_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_042_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_042_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1639,8 +1885,21 @@
 3.342431
 ],
 "length_m": 209,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_043_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_043_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_02_b.jpg",
+"google/ibudo/twins/spare_parts/street_043_03_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_03_b.jpg",
+"google/ibudo/twins/spare_parts/street_043_04_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_04_b.jpg",
+"google/ibudo/twins/spare_parts/street_043_05_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_05_b.jpg",
+"google/ibudo/twins/spare_parts/street_043_06_a.jpg",
+"google/ibudo/twins/spare_parts/street_043_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1662,8 +1921,13 @@
 3.34198
 ],
 "length_m": 50,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_044_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_044_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_044_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_044_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1685,8 +1949,13 @@
 3.34198
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_045_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_045_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_045_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_045_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1712,8 +1981,13 @@
 3.341973
 ],
 "length_m": 58,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_046_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_046_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_046_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_046_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1739,8 +2013,13 @@
 3.342217
 ],
 "length_m": 47,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/spare_parts/street_047_01_a.jpg",
+"google/ibudo/twins/spare_parts/street_047_01_b.jpg",
+"google/ibudo/twins/spare_parts/street_047_02_a.jpg",
+"google/ibudo/twins/spare_parts/street_047_02_b.jpg"
+]
 }
 ]
 }
