@@ -34,8 +34,13 @@
 3.328663
 ],
 "length_m": 22,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_000_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_000_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_000_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -85,8 +90,17 @@
 3.34156
 ],
 "length_m": 123,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_001_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_001_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_001_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_001_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_001_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_001_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_001_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_001_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -112,8 +126,13 @@
 3.341661
 ],
 "length_m": 33,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_002_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_002_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_002_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_002_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -139,8 +158,13 @@
 3.341407
 ],
 "length_m": 29,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_003_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_003_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_003_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_003_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -190,8 +214,11 @@
 3.340672
 ],
 "length_m": 169,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_004_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_004_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -244,8 +271,13 @@
 3.338511
 ],
 "length_m": 71,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_006_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_006_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_006_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_006_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -267,8 +299,13 @@
 3.339017
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_007_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_007_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_007_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_007_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -290,8 +327,11 @@
 3.339794
 ],
 "length_m": 68,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_008_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_008_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -313,8 +353,13 @@
 3.339427
 ],
 "length_m": 41,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_009_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_009_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_009_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_009_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -336,8 +381,13 @@
 3.33959
 ],
 "length_m": 25,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_010_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_010_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_010_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_010_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -359,8 +409,13 @@
 3.339432
 ],
 "length_m": 69,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_011_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_011_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_011_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_011_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -382,8 +437,13 @@
 3.339248
 ],
 "length_m": 30,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_012_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_012_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_012_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_012_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -409,8 +469,15 @@
 3.338916
 ],
 "length_m": 98,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_013_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_013_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_013_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_013_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_013_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_013_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -432,8 +499,13 @@
 3.339567
 ],
 "length_m": 49,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_014_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_014_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_014_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_014_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -463,8 +535,13 @@
 3.33995
 ],
 "length_m": 68,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_015_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_015_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_015_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_015_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -490,8 +567,17 @@
 3.341235
 ],
 "length_m": 134,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_016_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_016_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_016_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_016_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_016_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_016_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_016_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_016_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -540,8 +626,13 @@
 3.341302
 ],
 "length_m": 41,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_018_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_018_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_018_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_018_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -610,8 +701,13 @@
 3.341575
 ],
 "length_m": 38,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_020_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_020_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_020_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_020_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -637,8 +733,13 @@
 3.341878
 ],
 "length_m": 54,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_021_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_021_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_021_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_021_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -672,8 +773,13 @@
 3.333987
 ],
 "length_m": 59,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_022_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_022_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_022_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -695,8 +801,13 @@
 3.337855
 ],
 "length_m": 25,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_023_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_023_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_023_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_023_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -722,8 +833,13 @@
 3.337601
 ],
 "length_m": 65,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_024_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_024_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_024_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_024_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -749,8 +865,13 @@
 3.338111
 ],
 "length_m": 78,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_025_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_025_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_025_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_025_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -780,8 +901,15 @@
 3.33729
 ],
 "length_m": 113,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_026_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_026_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_026_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_026_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_026_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_026_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -827,8 +955,21 @@
 3.336619
 ],
 "length_m": 207,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_027_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_027_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_027_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_027_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_027_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_05_b.jpg",
+"google/ibudo/twins/airport_rd/street_027_06_a.jpg",
+"google/ibudo/twins/airport_rd/street_027_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -862,8 +1003,17 @@
 3.33614
 ],
 "length_m": 159,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_028_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_028_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_028_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_028_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_028_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_028_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_028_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_028_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -889,8 +1039,17 @@
 3.337825
 ],
 "length_m": 120,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_029_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_029_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_029_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_029_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_029_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_029_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_029_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_029_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -912,8 +1071,13 @@
 3.337131
 ],
 "length_m": 48,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_030_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_030_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_030_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_030_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -939,8 +1103,13 @@
 3.338549
 ],
 "length_m": 40,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_031_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_031_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_031_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_031_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -986,8 +1155,17 @@
 3.335393
 ],
 "length_m": 132,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_032_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_032_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_032_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_032_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_032_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_032_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_032_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_032_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1029,8 +1207,21 @@
 3.334877
 ],
 "length_m": 221,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_033_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_033_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_033_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_033_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_033_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_05_b.jpg",
+"google/ibudo/twins/airport_rd/street_033_06_a.jpg",
+"google/ibudo/twins/airport_rd/street_033_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1056,8 +1247,19 @@
 3.334356
 ],
 "length_m": 194,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_034_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_034_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_034_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_034_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_034_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_034_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_034_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_034_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_034_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_034_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1079,8 +1281,13 @@
 3.331536
 ],
 "length_m": 8,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_035_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_035_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_035_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_035_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1102,8 +1309,13 @@
 3.331502
 ],
 "length_m": 24,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_036_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_036_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_036_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_036_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1153,8 +1365,21 @@
 3.333024
 ],
 "length_m": 200,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_037_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_037_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_037_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_037_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_037_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_05_b.jpg",
+"google/ibudo/twins/airport_rd/street_037_06_a.jpg",
+"google/ibudo/twins/airport_rd/street_037_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1196,8 +1421,17 @@
 3.33343
 ],
 "length_m": 151,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_038_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_038_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_038_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_038_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_038_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_038_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_038_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_038_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1219,8 +1453,13 @@
 3.332918
 ],
 "length_m": 79,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_039_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_039_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_039_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_039_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1242,8 +1481,13 @@
 3.331363
 ],
 "length_m": 21,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_040_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_040_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_040_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_040_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1301,8 +1545,19 @@
 3.332098
 ],
 "length_m": 172,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_041_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_041_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_041_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_041_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_041_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_041_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_041_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_041_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_041_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_041_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1328,8 +1583,17 @@
 3.331382
 ],
 "length_m": 122,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_042_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_042_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_042_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_042_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_042_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_042_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_042_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_042_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1351,8 +1615,11 @@
 3.330983
 ],
 "length_m": 40,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_043_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_043_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1374,8 +1641,15 @@
 3.330882
 ],
 "length_m": 96,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_044_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_044_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_044_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_044_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_044_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_044_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1401,8 +1675,15 @@
 3.329919
 ],
 "length_m": 100,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_045_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_045_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_045_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_045_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_045_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_045_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1428,8 +1709,11 @@
 3.329394
 ],
 "length_m": 15,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_046_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_046_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1455,8 +1739,13 @@
 3.329548
 ],
 "length_m": 35,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_047_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_047_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_047_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_047_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1486,8 +1775,13 @@
 3.329194
 ],
 "length_m": 74,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_048_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_048_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_048_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_048_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1517,8 +1811,13 @@
 3.329481
 ],
 "length_m": 43,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_049_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_049_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_049_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_049_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1548,8 +1847,13 @@
 3.329562
 ],
 "length_m": 43,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_050_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_050_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_050_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_050_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1579,8 +1883,21 @@
 3.329755
 ],
 "length_m": 202,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_051_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_051_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_051_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_051_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_051_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_05_b.jpg",
+"google/ibudo/twins/airport_rd/street_051_06_a.jpg",
+"google/ibudo/twins/airport_rd/street_051_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1610,8 +1927,21 @@
 3.329554
 ],
 "length_m": 224,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_052_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_052_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_052_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_052_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_052_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_05_b.jpg",
+"google/ibudo/twins/airport_rd/street_052_06_a.jpg",
+"google/ibudo/twins/airport_rd/street_052_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1641,8 +1971,11 @@
 3.331182
 ],
 "length_m": 66,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_053_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_053_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1691,8 +2024,13 @@
 3.331474
 ],
 "length_m": 13,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_055_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_055_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_055_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_055_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1734,8 +2072,17 @@
 3.328251
 ],
 "length_m": 133,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_056_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_056_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_056_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_056_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_056_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_056_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_056_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_056_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1757,8 +2104,17 @@
 3.328329
 ],
 "length_m": 143,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_057_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_057_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_057_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_057_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_057_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_057_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_057_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_057_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1788,8 +2144,13 @@
 3.327782
 ],
 "length_m": 39,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_058_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_058_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_058_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_058_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1819,8 +2180,13 @@
 3.32755
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_059_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_059_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_059_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_059_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1842,8 +2208,13 @@
 3.327126
 ],
 "length_m": 52,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_060_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_060_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_060_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_060_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1869,8 +2240,13 @@
 3.327607
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_061_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_061_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_061_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_061_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1896,8 +2272,13 @@
 3.32842
 ],
 "length_m": 49,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_062_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_062_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_062_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_062_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1923,8 +2304,13 @@
 3.326888
 ],
 "length_m": 24,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_063_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_063_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_063_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_063_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1950,8 +2336,19 @@
 3.327782
 ],
 "length_m": 177,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_064_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_064_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_064_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_064_02_b.jpg",
+"google/ibudo/twins/airport_rd/street_064_03_a.jpg",
+"google/ibudo/twins/airport_rd/street_064_03_b.jpg",
+"google/ibudo/twins/airport_rd/street_064_04_a.jpg",
+"google/ibudo/twins/airport_rd/street_064_04_b.jpg",
+"google/ibudo/twins/airport_rd/street_064_05_a.jpg",
+"google/ibudo/twins/airport_rd/street_064_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1985,8 +2382,13 @@
 3.32742
 ],
 "length_m": 42,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_065_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_065_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_065_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_065_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2016,8 +2418,13 @@
 3.328781
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_066_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_066_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_066_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_066_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2047,8 +2454,13 @@
 3.328602
 ],
 "length_m": 58,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_067_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_067_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_067_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_067_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2070,8 +2482,13 @@
 3.328587
 ],
 "length_m": 13,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_068_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_068_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_068_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_068_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2093,8 +2510,13 @@
 3.331452
 ],
 "length_m": 38,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_069_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_069_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_069_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_069_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2120,8 +2542,13 @@
 3.342053
 ],
 "length_m": 11,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_070_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_070_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_070_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_070_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2143,8 +2570,13 @@
 3.341951
 ],
 "length_m": 35,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/airport_rd/street_071_01_a.jpg",
+"google/ibudo/twins/airport_rd/street_071_01_b.jpg",
+"google/ibudo/twins/airport_rd/street_071_02_a.jpg",
+"google/ibudo/twins/airport_rd/street_071_02_b.jpg"
+]
 }
 ]
 }
