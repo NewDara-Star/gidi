@@ -96,7 +96,7 @@ for a_, i in enumerate(idx):
             continue
         if polys[i].intersection(polys[j]).area > 0.05:
             s_, l_ = (i, j) if polys[i].area < polys[j].area else (j, i)
-            Q = polys[s_].difference(polys[l_].buffer(0.15))
+            Q = polys[s_].difference(polys[l_].buffer(0.35))   # 35 cm: rounding corners to 0.1 m must not bring the overlap back
             Q = max(getattr(Q, 'geoms', [Q]), key=lambda x: x.area) if not Q.is_empty else Q
             own = Polygon(B[s_][1:]).difference(Polygon(B[l_][1:]).buffer(0.3))   # a point only the smaller one holds
             at = R((own if not own.is_empty else Polygon(B[s_][1:])).representative_point().coords[0])
