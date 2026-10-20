@@ -87,7 +87,8 @@ for a_, i in enumerate(idx):
             s_, l_ = (i, j) if polys[i].area < polys[j].area else (j, i)
             Q = polys[s_].difference(polys[l_].buffer(0.15))
             Q = max(getattr(Q, 'geoms', [Q]), key=lambda x: x.area) if not Q.is_empty else Q
-            at = R(Polygon(B[s_][1:]).representative_point().coords[0])
+            own = Polygon(B[s_][1:]).difference(Polygon(B[l_][1:]).buffer(0.3))   # a point only the smaller one holds
+            at = R((own if not own.is_empty else Polygon(B[s_][1:])).representative_point().coords[0])
             E = [e for e in E if not (e['op'] == 'reshape building' and e['at'] == at)]
             if Q.is_empty or Q.geom_type != 'Polygon' or Q.area < 6:
                 E.append({'op': 'delete building', 'at': at, 'kind': B[s_][0], 'note': 'overlapped a bigger one', 'by_who': WHO}); polys[s_] = None; gone += 1

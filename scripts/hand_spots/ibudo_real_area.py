@@ -58,7 +58,7 @@ CORR = unary_union([g.buffer(w) for n, g, w in LINES] + [RAIL.buffer(7)]).inters
 
 # ---- 1. what is there goes: in the area, and in the new corridors through the district
 B = G['buildings']['hub']
-CLEAR = AREA.union(CORR.intersection(HUB))
+CLEAR = AREA.union(CORR.intersection(HUB)) if os.environ.get('GIDI_CORRIDORS') else AREA   # the corridors were cleared once, with the first area (GIDI_CORRIDORS=1)
 for b in B:
     if len(b) > 3 and Polygon(b[1:]).intersects(CLEAR):
         q = Polygon(b[1:]).representative_point()
