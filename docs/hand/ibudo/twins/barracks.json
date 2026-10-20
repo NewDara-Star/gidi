@@ -30,8 +30,13 @@
 3.342938
 ],
 "length_m": 19,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/barracks/street_000_01_a.jpg",
+"google/ibudo/twins/barracks/street_000_01_b.jpg",
+"google/ibudo/twins/barracks/street_000_02_a.jpg",
+"google/ibudo/twins/barracks/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -77,8 +82,11 @@
 3.343965
 ],
 "length_m": 151,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/barracks/street_001_01_a.jpg",
+"google/ibudo/twins/barracks/street_001_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -136,8 +144,13 @@
 3.343957
 ],
 "length_m": 298,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/barracks/street_002_07_a.jpg",
+"google/ibudo/twins/barracks/street_002_07_b.jpg",
+"google/ibudo/twins/barracks/street_002_08_a.jpg",
+"google/ibudo/twins/barracks/street_002_08_b.jpg"
+]
 },
 {
 "gidi": [
@@ -187,8 +200,13 @@
 3.342921
 ],
 "length_m": 184,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/barracks/street_003_04_a.jpg",
+"google/ibudo/twins/barracks/street_003_04_b.jpg",
+"google/ibudo/twins/barracks/street_003_05_a.jpg",
+"google/ibudo/twins/barracks/street_003_05_b.jpg"
+]
 },
 {
 "gidi": [
