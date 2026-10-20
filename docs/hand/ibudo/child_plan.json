@@ -248,26 +248,25 @@
    ]
   },
   {
-   "id": "nafrc_ladipo",
-   "name": "Barracks and spare parts",
-   "real": "Matori: the NAFRC resettlement barracks (slab rows, courtyard blocks, open sandy field) and Ladipo / Paramo spare-parts markets against the rail",
+   "id": "spare_parts",
+   "name": "Spare parts quarter",
+   "real": "Ladipo and Paramo: the spare-parts markets in blue-roof shed rows against the rail, mechanics working in the street, tables along the walls (the barracks shrunk to give it room: more life)",
    "anchor_real": [
-    6.5465,
-    3.344
+    6.5435,
+    3.3455
    ],
    "anchor_gidi": [
-    8000,
-    4870
+    8300,
+    4800
    ],
    "streets": [
     "Ladipo St",
-    "FIIRO Rd",
-    "Jimade St",
-    "Unity Cl"
+    "the market lanes",
+    "Jimade St"
    ],
    "pts": [
     [
-     7600,
+     7900,
      4600
     ],
     [
@@ -277,6 +276,41 @@
     [
      8740,
      5000
+    ],
+    [
+     7900,
+     5070
+    ]
+   ]
+  },
+  {
+   "id": "barracks",
+   "name": "Barracks",
+   "real": "the NAFRC resettlement barracks at Matori: slab rows, courtyard blocks, an open sandy field (kept small and walled)",
+   "anchor_real": [
+    6.5465,
+    3.344
+   ],
+   "anchor_gidi": [
+    7750,
+    4850
+   ],
+   "streets": [
+    "FIIRO Rd",
+    "Unity Cl"
+   ],
+   "pts": [
+    [
+     7600,
+     4600
+    ],
+    [
+     7900,
+     4600
+    ],
+    [
+     7900,
+     5100
     ],
     [
      7600,
@@ -472,6 +506,75 @@
      5720
     ]
    ]
+  },
+  {
+   "id": "osolo_way",
+   "name": "Osolo Way strip",
+   "real": "Osolo Way, Isolo/Ajao: a busy north-south main road lined with shops, banks, churches and bus stops, the walk between Ìbùdó's two cores",
+   "anchor_real": [
+    6.54,
+    3.3316
+   ],
+   "anchor_gidi": [
+    8100,
+    4850
+   ],
+   "streets": [
+    "Osolo Way"
+   ],
+   "pts": [
+    [
+     8045,
+     4600
+    ],
+    [
+     8155,
+     4600
+    ],
+    [
+     8155,
+     5460
+    ],
+    [
+     8045,
+     5460
+    ]
+   ]
+  },
+  {
+   "id": "itire_rd",
+   "name": "Itire Road strip",
+   "real": "Itire Rd and Lawanson Rd, from the Ojuelegba junction west: a long lively road of markets, shops and bus stops (Lawanson market), the cross road through Ìbùdó's south",
+   "anchor_real": [
+    6.5107,
+    3.363
+   ],
+   "anchor_gidi": [
+    8869,
+    5130
+   ],
+   "streets": [
+    "Itire Rd",
+    "Lawanson Rd"
+   ],
+   "pts": [
+    [
+     6860,
+     5080
+    ],
+    [
+     8869,
+     5080
+    ],
+    [
+     8869,
+     5185
+    ],
+    [
+     6880,
+     5185
+    ]
+   ]
   }
  ],
  "roads": [
@@ -501,11 +604,11 @@
   },
   {
    "gidi": "the cross road at Ìkòríta (now 'Akande Road')",
-   "real": "Itire Rd (west) and Ojuelegba Rd (east)"
+   "real": "Itire Rd and Lawanson Rd (west of Ojuelegba), built as the Itire Road strip"
   },
   {
    "gidi": "the north-south road (now 'Kalejaiye Avenue')",
-   "real": "Church St, Oshodi (north) into Osolo Way (south)"
+   "real": "Church St, Oshodi (north), then Osolo Way (the Osolo Way strip, south)"
   }
  ]
 }

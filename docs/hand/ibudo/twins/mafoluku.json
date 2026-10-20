@@ -30,8 +30,13 @@
 3.335649
 ],
 "length_m": 51,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_000_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_000_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_000_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -53,8 +58,13 @@
 3.335755
 ],
 "length_m": 26,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_001_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_001_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_001_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_001_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -76,8 +86,13 @@
 3.33492
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_002_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_002_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_002_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_002_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -99,8 +114,13 @@
 3.33535
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_003_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_003_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_003_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_003_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -122,8 +142,15 @@
 3.335439
 ],
 "length_m": 101,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_004_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_004_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_004_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_004_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_004_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_004_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -145,8 +172,13 @@
 3.334899
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_005_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_005_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_005_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_005_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -168,8 +200,13 @@
 3.334502
 ],
 "length_m": 67,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_006_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_006_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_006_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_006_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -191,8 +228,15 @@
 3.334614
 ],
 "length_m": 96,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_007_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_007_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_007_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_007_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_007_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_007_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -214,8 +258,17 @@
 3.333652
 ],
 "length_m": 136,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_008_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_008_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_008_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_008_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_008_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_008_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_008_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_008_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -257,8 +310,19 @@
 3.334403
 ],
 "length_m": 192,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_009_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_009_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_009_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_009_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_009_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_009_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_009_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_009_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_009_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_009_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -288,8 +352,19 @@
 3.334738
 ],
 "length_m": 187,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_010_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_010_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_010_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_010_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_010_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_010_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_010_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_010_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_010_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_010_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -311,8 +386,21 @@
 3.335265
 ],
 "length_m": 212,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_011_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_011_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_011_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_011_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_011_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_05_b.jpg",
+"google/ibudo/twins/mafoluku/street_011_06_a.jpg",
+"google/ibudo/twins/mafoluku/street_011_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -334,8 +422,13 @@
 3.335649
 ],
 "length_m": 126,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_012_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_012_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_012_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_012_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -357,8 +450,13 @@
 3.335277
 ],
 "length_m": 37,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_013_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_013_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_013_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_013_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -380,8 +478,13 @@
 3.331412
 ],
 "length_m": 28,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_014_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_014_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_014_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_014_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -415,8 +518,17 @@
 3.333496
 ],
 "length_m": 158,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_015_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_015_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_015_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_015_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_015_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_015_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_015_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_015_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -438,8 +550,17 @@
 3.332187
 ],
 "length_m": 155,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_016_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_016_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_016_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_016_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_016_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_016_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_016_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_016_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -461,8 +582,13 @@
 3.332965
 ],
 "length_m": 79,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_017_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_017_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_017_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_017_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -484,8 +610,13 @@
 3.3332
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_018_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_018_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_018_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_018_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -507,8 +638,17 @@
 3.332438
 ],
 "length_m": 152,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_019_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_019_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_019_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_019_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_019_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_019_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_019_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_019_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -530,8 +670,13 @@
 3.33166
 ],
 "length_m": 76,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_020_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_020_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_020_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_020_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -553,8 +698,13 @@
 3.33191
 ],
 "length_m": 71,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_021_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_021_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_021_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_021_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -576,8 +726,13 @@
 3.331725
 ],
 "length_m": 73,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_022_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_022_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_022_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -599,8 +754,27 @@
 3.333051
 ],
 "length_m": 327,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_023_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_05_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_06_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_06_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_07_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_07_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_08_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_08_b.jpg",
+"google/ibudo/twins/mafoluku/street_023_09_a.jpg",
+"google/ibudo/twins/mafoluku/street_023_09_b.jpg"
+]
 },
 {
 "gidi": [
@@ -622,8 +796,17 @@
 3.332672
 ],
 "length_m": 151,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_024_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_024_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_024_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_024_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_024_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_024_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_024_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_024_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -645,8 +828,21 @@
 3.332733
 ],
 "length_m": 201,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_025_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_025_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_025_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_025_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_025_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_05_b.jpg",
+"google/ibudo/twins/mafoluku/street_025_06_a.jpg",
+"google/ibudo/twins/mafoluku/street_025_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -668,8 +864,13 @@
 3.33177
 ],
 "length_m": 68,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_026_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_026_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_026_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_026_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -691,8 +892,13 @@
 3.331541
 ],
 "length_m": 69,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_027_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_027_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_027_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_027_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -714,8 +920,17 @@
 3.330819
 ],
 "length_m": 143,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_028_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_028_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_028_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_028_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_028_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_028_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_028_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_028_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -737,8 +952,15 @@
 3.331475
 ],
 "length_m": 96,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_029_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_029_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_029_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_029_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_029_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_029_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -768,8 +990,15 @@
 3.330205
 ],
 "length_m": 106,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_030_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_030_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_030_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_030_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_030_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_030_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -799,8 +1028,21 @@
 3.32921
 ],
 "length_m": 208,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_031_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_031_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_031_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_031_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_031_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_05_b.jpg",
+"google/ibudo/twins/mafoluku/street_031_06_a.jpg",
+"google/ibudo/twins/mafoluku/street_031_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -822,8 +1064,15 @@
 3.329758
 ],
 "length_m": 101,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_032_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_032_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_032_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_032_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_032_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_032_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -845,8 +1094,13 @@
 3.32929
 ],
 "length_m": 47,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_033_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_033_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_033_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_033_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -888,8 +1142,19 @@
 3.330446
 ],
 "length_m": 181,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_034_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_034_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_034_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_034_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_034_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_034_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_034_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_034_04_b.jpg",
+"google/ibudo/twins/mafoluku/street_034_05_a.jpg",
+"google/ibudo/twins/mafoluku/street_034_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -911,8 +1176,13 @@
 3.331314
 ],
 "length_m": 71,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_035_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_035_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_035_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_035_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -934,8 +1204,13 @@
 3.331097
 ],
 "length_m": 65,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_036_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_036_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_036_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_036_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -961,8 +1236,13 @@
 3.328975
 ],
 "length_m": 72,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_037_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_037_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_037_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_037_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -984,8 +1264,13 @@
 3.328284
 ],
 "length_m": 39,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_038_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_038_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_038_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_038_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1011,8 +1296,13 @@
 3.328192
 ],
 "length_m": 23,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_039_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_039_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_039_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_039_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1038,8 +1328,17 @@
 3.333337
 ],
 "length_m": 120,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_040_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_040_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_040_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_040_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_040_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_040_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_040_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_040_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1065,8 +1364,13 @@
 3.334156
 ],
 "length_m": 73,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_041_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_041_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_041_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_041_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1088,8 +1392,13 @@
 3.334599
 ],
 "length_m": 75,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_042_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_042_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_042_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_042_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1127,8 +1436,17 @@
 3.33529
 ],
 "length_m": 132,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_043_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_043_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_043_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_043_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_043_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_043_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_043_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_043_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1150,8 +1468,15 @@
 3.334836
 ],
 "length_m": 87,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_044_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_044_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_044_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_044_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_044_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_044_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1177,8 +1502,13 @@
 3.335535
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_045_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_045_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_045_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_045_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1200,8 +1530,13 @@
 3.335097
 ],
 "length_m": 68,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_046_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_046_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_046_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_046_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1223,8 +1558,13 @@
 3.333717
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_047_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_047_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_047_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_047_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1246,8 +1586,17 @@
 3.334133
 ],
 "length_m": 128,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_048_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_048_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_048_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_048_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_048_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_048_03_b.jpg",
+"google/ibudo/twins/mafoluku/street_048_04_a.jpg",
+"google/ibudo/twins/mafoluku/street_048_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1269,8 +1618,13 @@
 3.334559
 ],
 "length_m": 69,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_049_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_049_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_049_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_049_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1292,8 +1646,15 @@
 3.333765
 ],
 "length_m": 106,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_050_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_050_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_050_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_050_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_050_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_050_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1315,8 +1676,13 @@
 3.334327
 ],
 "length_m": 71,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_051_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_051_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_051_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_051_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1338,8 +1704,13 @@
 3.335562
 ],
 "length_m": 72,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_052_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_052_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_052_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_052_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1373,8 +1744,15 @@
 3.335422
 ],
 "length_m": 104,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_053_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_053_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_053_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_053_02_b.jpg",
+"google/ibudo/twins/mafoluku/street_053_03_a.jpg",
+"google/ibudo/twins/mafoluku/street_053_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1396,8 +1774,13 @@
 3.334832
 ],
 "length_m": 36,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/mafoluku/street_054_01_a.jpg",
+"google/ibudo/twins/mafoluku/street_054_01_b.jpg",
+"google/ibudo/twins/mafoluku/street_054_02_a.jpg",
+"google/ibudo/twins/mafoluku/street_054_02_b.jpg"
+]
 }
 ]
 }
