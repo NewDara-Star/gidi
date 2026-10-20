@@ -38,6 +38,17 @@ M_LAT, M_LON = 110600.0, 109900.0
 R = lambda xy: [round(xy[0], 1), round(xy[1], 1)]
 
 
+def ring_pts(g):   # a footprint's corners, rounded to 0.1 m, with no corner repeated (the bake's fronts need real edges)
+    out = []
+    for c in list(g.exterior.coords)[:-1]:
+        q = R(c)
+        if not out or q != out[-1]:
+            out.append(q)
+    if len(out) > 1 and out[0] == out[-1]:
+        out.pop()
+    return out
+
+
 def T(lo, la):   # real -> Gidi
     return (GX0 + (lo - LO0) * M_LON, GY0 - (la - LA0) * M_LAT)
 
@@ -151,6 +162,18 @@ for i, (k, g, e) in enumerate(ADDED):
         if near[0] < 25:
             q = nearest_points(near[1], p_)[0]
             cs = cs + [(q.x, q.y)] if end == -1 else [(q.x, q.y)] + cs
+    for end in (0, -1):   # the seam: a street reaching the area's edge runs on to the nearest street, lane or main outside it
+        p_ = Point(cs[end])
+        if p_.distance(AREA.boundary) > 2.0 or g.length < 10:
+            continue
+        outside = [h for kk, h in LIVE if h.distance(p_) < 30] + [m_ for m_ in FIXED if m_.distance(p_) < 30]
+        if not outside:
+            continue
+        h = min(outside, key=lambda h_: h_.distance(p_))
+        if h.distance(p_) < 0.5:
+            continue
+        q = nearest_points(h, p_)[0]
+        cs = cs + [(q.x, q.y)] if end == -1 else [(q.x, q.y)] + cs
     if len(cs) != len(g.coords):
         g = LineString(cs); e['pts'] = [R(c) for c in cs]; ADDED[i] = (k, g, e)
 # pieces cut off by the clipping lead nowhere: only what joins the network (the layout's lines, mains, the streets kept) stays
@@ -217,7 +240,7 @@ with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt')
             h = height(P)
             st = max(1, min(12, round(h / 3.2))) if h else 1
             kind = 'warehouse' if P.area > 2500 else ('front' if P.distance(WAYS) < 9 else 'back')
-            E.append({'op': 'add building', 'kind': kind, 'pts': [R(c) for c in list(P.exterior.coords)[:-1]], 'storeys': st, 'note': f"real footprint {r['full_plus_code']}, {h:.1f} m", 'by_who': WHO})
+            E.append({'op': 'add building', 'kind': kind, 'pts': ring_pts(P), 'storeys': st, 'note': f"real footprint {r['full_plus_code']}, {h:.1f} m", 'by_who': WHO})
             nb += 1
 
 H = json.load(open('web/hand/hub.json'))

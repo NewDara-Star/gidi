@@ -127,8 +127,13 @@
 3.35223
 ],
 "length_m": 11,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_003_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_003_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_003_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_003_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -425,8 +430,13 @@
 3.352087
 ],
 "length_m": 112,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_013_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_013_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_013_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_013_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -503,8 +513,13 @@
 3.352857
 ],
 "length_m": 73,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_015_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_015_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_015_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_015_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -530,8 +545,13 @@
 3.353214
 ],
 "length_m": 30,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_016_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_016_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_016_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_016_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -573,8 +593,14 @@
 3.352202
 ],
 "length_m": 81,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_017_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_017_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_017_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_017_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_017_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -628,8 +654,15 @@
 3.352916
 ],
 "length_m": 83,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_018_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_018_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_018_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_018_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_018_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_018_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -675,8 +708,15 @@
 3.353003
 ],
 "length_m": 111,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_019_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_019_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_019_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_019_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_019_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_019_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -706,8 +746,13 @@
 3.352812
 ],
 "length_m": 63,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_020_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_020_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_020_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_020_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -752,8 +797,13 @@
 3.350179
 ],
 "length_m": 33,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_022_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_022_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_022_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -775,8 +825,13 @@
 3.350155
 ],
 "length_m": 73,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_023_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_023_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_023_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_023_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -798,8 +853,13 @@
 3.349914
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_024_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_024_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_024_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_024_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -825,8 +885,17 @@
 3.349452
 ],
 "length_m": 140,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_025_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_025_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_025_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_025_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_025_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_025_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_025_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_025_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -852,8 +921,13 @@
 3.350329
 ],
 "length_m": 15,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_026_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_026_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_026_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_026_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -875,8 +949,17 @@
 3.349671
 ],
 "length_m": 138,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_027_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_027_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_027_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_027_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_027_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_027_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_027_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_027_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -898,8 +981,13 @@
 3.348968
 ],
 "length_m": 66,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_028_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_028_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_028_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_028_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -921,8 +1009,15 @@
 3.348466
 ],
 "length_m": 91,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_029_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_029_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_029_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_029_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_029_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_029_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -944,8 +1039,13 @@
 3.348154
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_030_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_030_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_030_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_030_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -967,8 +1067,13 @@
 3.347722
 ],
 "length_m": 80,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_031_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_031_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_031_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_031_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -990,8 +1095,13 @@
 3.347363
 ],
 "length_m": 12,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_032_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_032_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_032_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_032_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1013,8 +1123,13 @@
 3.347313
 ],
 "length_m": 57,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_033_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_033_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_033_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_033_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1036,8 +1151,13 @@
 3.348008
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_034_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_034_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_034_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_034_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1059,8 +1179,13 @@
 3.347608
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_035_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_035_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_035_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_035_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1082,8 +1207,13 @@
 3.347239
 ],
 "length_m": 48,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_036_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_036_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_036_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_036_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1105,8 +1235,13 @@
 3.348277
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_037_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_037_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_037_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_037_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1128,8 +1263,13 @@
 3.348735
 ],
 "length_m": 71,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_038_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_038_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_038_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_038_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1151,8 +1291,17 @@
 3.349198
 ],
 "length_m": 138,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_039_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_039_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_039_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_039_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_039_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_039_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_039_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_039_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1186,8 +1335,13 @@
 3.348567
 ],
 "length_m": 35,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_040_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_040_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_040_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_040_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1209,8 +1363,13 @@
 3.348512
 ],
 "length_m": 60,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_041_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_041_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_041_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_041_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1236,8 +1395,19 @@
 3.347805
 ],
 "length_m": 175,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_042_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_042_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_042_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_042_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_042_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_042_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_042_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_042_04_b.jpg",
+"google/ibudo/twins/oshodi_core/street_042_05_a.jpg",
+"google/ibudo/twins/oshodi_core/street_042_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1259,8 +1429,17 @@
 3.347111
 ],
 "length_m": 149,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_043_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_043_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_043_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_043_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_043_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_043_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_043_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_043_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1282,8 +1461,13 @@
 3.347369
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_044_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_044_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_044_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_044_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1305,8 +1489,13 @@
 3.348072
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_045_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_045_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_045_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_045_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1336,8 +1525,13 @@
 3.348705
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_046_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_046_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_046_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_046_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1363,8 +1557,15 @@
 3.348413
 ],
 "length_m": 93,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_047_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_047_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_047_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_047_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_047_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_047_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1410,8 +1611,15 @@
 3.348986
 ],
 "length_m": 154,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_048_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_048_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_048_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_048_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_048_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_048_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1469,8 +1677,15 @@
 3.348669
 ],
 "length_m": 95,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_049_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_049_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_049_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_049_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_049_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_049_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1492,8 +1707,15 @@
 3.349407
 ],
 "length_m": 81,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_050_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_050_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_050_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_050_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_050_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_050_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1527,8 +1749,17 @@
 3.350389
 ],
 "length_m": 135,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_051_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_051_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_051_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_051_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_051_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_051_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_051_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_051_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1550,8 +1781,13 @@
 3.349781
 ],
 "length_m": 100,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_052_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_052_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_052_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_052_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1581,8 +1817,15 @@
 3.350317
 ],
 "length_m": 118,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_053_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_053_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_053_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_053_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_053_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_053_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1612,8 +1855,13 @@
 3.351133
 ],
 "length_m": 33,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_054_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_054_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_054_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_054_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1635,8 +1883,13 @@
 3.350997
 ],
 "length_m": 14,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_055_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_055_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_055_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_055_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1662,8 +1915,13 @@
 3.351169
 ],
 "length_m": 27,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_056_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_056_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_056_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_056_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1735,8 +1993,13 @@
 3.350703
 ],
 "length_m": 58,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_059_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_059_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_059_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_059_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1794,8 +2057,23 @@
 3.349776
 ],
 "length_m": 246,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_060_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_04_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_05_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_05_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_06_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_06_b.jpg",
+"google/ibudo/twins/oshodi_core/street_060_07_a.jpg",
+"google/ibudo/twins/oshodi_core/street_060_07_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1895,8 +2173,13 @@
 3.350021
 ],
 "length_m": 55,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_063_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_063_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_063_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_063_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1922,8 +2205,13 @@
 3.348535
 ],
 "length_m": 67,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_064_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_064_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_064_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_064_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1996,8 +2284,13 @@
 3.348789
 ],
 "length_m": 186,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_066_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_066_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_066_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_066_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2138,8 +2431,15 @@
 3.347849
 ],
 "length_m": 99,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_072_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_072_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_072_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_072_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_072_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_072_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2188,8 +2488,15 @@
 3.347243
 ],
 "length_m": 104,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_074_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_074_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_074_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_074_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_074_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_074_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2235,8 +2542,15 @@
 3.347417
 ],
 "length_m": 91,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_075_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_075_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_075_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_075_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_075_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_075_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2270,8 +2584,17 @@
 3.348246
 ],
 "length_m": 140,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_076_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_076_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_076_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_076_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_076_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_076_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_076_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_076_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2301,8 +2624,15 @@
 3.348886
 ],
 "length_m": 106,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_077_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_077_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_077_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_077_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_077_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_077_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2324,8 +2654,13 @@
 3.348628
 ],
 "length_m": 78,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_078_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_078_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_078_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_078_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2351,8 +2686,15 @@
 3.349025
 ],
 "length_m": 87,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_079_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_079_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_079_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_079_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_079_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_079_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2378,8 +2720,19 @@
 3.347485
 ],
 "length_m": 173,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_080_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_080_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_080_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_080_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_080_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_080_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_080_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_080_04_b.jpg",
+"google/ibudo/twins/oshodi_core/street_080_05_a.jpg",
+"google/ibudo/twins/oshodi_core/street_080_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2401,8 +2754,13 @@
 3.346575
 ],
 "length_m": 27,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_081_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_081_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_081_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_081_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2424,8 +2782,13 @@
 3.346699
 ],
 "length_m": 54,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_082_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_082_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_082_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_082_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2447,8 +2810,13 @@
 3.346821
 ],
 "length_m": 65,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_083_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_083_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_083_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_083_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2470,8 +2838,13 @@
 3.346997
 ],
 "length_m": 28,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_084_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_084_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_084_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_084_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2493,8 +2866,15 @@
 3.346945
 ],
 "length_m": 118,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_085_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_085_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_085_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_085_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_085_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_085_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2516,8 +2896,15 @@
 3.346915
 ],
 "length_m": 110,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_086_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_086_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_086_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_086_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_086_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_086_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2539,8 +2926,13 @@
 3.346735
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_087_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_087_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_087_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_087_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2562,8 +2954,13 @@
 3.346861
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_088_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_088_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_088_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_088_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2585,8 +2982,15 @@
 3.346602
 ],
 "length_m": 112,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_089_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_089_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_089_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_089_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_089_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_089_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2608,8 +3012,13 @@
 3.34702
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_090_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_090_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_090_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_090_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2631,8 +3040,13 @@
 3.346768
 ],
 "length_m": 17,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_091_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_091_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_091_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_091_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2654,8 +3068,13 @@
 3.346569
 ],
 "length_m": 26,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_092_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_092_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_092_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_092_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2677,8 +3096,15 @@
 3.347437
 ],
 "length_m": 81,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_093_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_093_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_093_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_093_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_093_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_093_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2700,8 +3126,15 @@
 3.347869
 ],
 "length_m": 87,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_094_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_094_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_094_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_094_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_094_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_094_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2723,8 +3156,13 @@
 3.347172
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_095_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_095_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_095_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_095_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2746,8 +3184,13 @@
 3.347529
 ],
 "length_m": 27,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_096_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_096_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_096_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_096_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2769,8 +3212,15 @@
 3.348656
 ],
 "length_m": 98,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_097_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_097_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_097_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_097_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_097_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_097_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2804,8 +3254,13 @@
 3.347021
 ],
 "length_m": 41,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_098_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_098_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_098_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_098_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -2907,8 +3362,41 @@
 3.34927
 ],
 "length_m": 631,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/oshodi_core/street_099_01_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_01_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_02_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_02_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_03_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_03_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_04_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_04_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_05_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_05_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_06_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_06_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_07_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_07_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_08_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_08_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_09_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_09_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_10_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_10_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_11_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_11_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_12_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_12_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_13_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_13_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_14_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_14_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_15_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_15_b.jpg",
+"google/ibudo/twins/oshodi_core/street_099_16_a.jpg",
+"google/ibudo/twins/oshodi_core/street_099_16_b.jpg"
+]
 }
 ]
 }

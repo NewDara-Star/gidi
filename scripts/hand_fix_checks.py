@@ -21,6 +21,17 @@ D = sys.argv[1]
 WHO = sys.argv[2] if len(sys.argv) > 2 else 'Claude: clean-up after the checks'
 G = json.loads(open('web/gidi-data.js').read()[len('window.GIDI='):-1])
 R = lambda xy: [round(xy[0], 1), round(xy[1], 1)]
+
+
+def ring_pts(g):   # a footprint's corners, rounded to 0.1 m, with no corner repeated (the bake's fronts need real edges)
+    out = []
+    for c in list(g.exterior.coords)[:-1]:
+        q = R(c)
+        if not out or q != out[-1]:
+            out.append(q)
+    if len(out) > 1 and out[0] == out[-1]:
+        out.pop()
+    return out
 DP = Polygon(next(d for d in G['districts'] if d['id'] == D)['poly'][0])
 NEAR = DP.buffer(40)
 L = lambda p: LineString(p) if len(p) > 1 else None
@@ -71,7 +82,7 @@ for i, b in enumerate(B):
     if Q.is_empty or Q.geom_type != 'Polygon' or Q.area < 6:
         E.append({'op': 'delete building', 'at': at, 'kind': b[0], 'note': 'past a building line, over a gutter or round a pole: too little left', 'by_who': WHO}); polys[i] = None; gone += 1
     else:
-        E.append({'op': 'reshape building', 'at': at, 'kind': b[0], 'pts': [R(c) for c in list(Q.exterior.coords)[:-1]], 'note': 'cut back to the building line', 'by_who': WHO}); polys[i] = Q; cut += 1
+        E.append({'op': 'reshape building', 'at': at, 'kind': b[0], 'pts': ring_pts(Q), 'note': 'cut back to the building line', 'by_who': WHO}); polys[i] = Q; cut += 1
 # overlaps: the smaller gives way
 idx = [i for i, P in enumerate(polys) if P is not None]
 tree = STRtree([polys[i] for i in idx])
@@ -93,7 +104,7 @@ for a_, i in enumerate(idx):
             if Q.is_empty or Q.geom_type != 'Polygon' or Q.area < 6:
                 E.append({'op': 'delete building', 'at': at, 'kind': B[s_][0], 'note': 'overlapped a bigger one', 'by_who': WHO}); polys[s_] = None; gone += 1
             else:
-                E.append({'op': 'reshape building', 'at': at, 'kind': B[s_][0], 'pts': [R(c) for c in list(Q.exterior.coords)[:-1]], 'note': 'cut back from its neighbour', 'by_who': WHO}); polys[s_] = Q; cut += 1
+                E.append({'op': 'reshape building', 'at': at, 'kind': B[s_][0], 'pts': ring_pts(Q), 'note': 'cut back from its neighbour', 'by_who': WHO}); polys[s_] = Q; cut += 1
 # reach: no way within 45 m
 W = [L(p) for k in ('streets', 'lanes', 'paths') for ps in (G.get(k) or {}).values() for p in ps] + [L(m['pts']) for m in G['mains']] + [L(a['pts']) for a in G['arterials']]
 W = [w for w in W if w is not None and w.distance(DP) < 100]
