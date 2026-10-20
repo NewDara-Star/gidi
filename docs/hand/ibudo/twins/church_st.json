@@ -30,8 +30,13 @@
 3.347222
 ],
 "length_m": 24,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_000_01_a.jpg",
+"google/ibudo/twins/church_st/street_000_01_b.jpg",
+"google/ibudo/twins/church_st/street_000_02_a.jpg",
+"google/ibudo/twins/church_st/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -57,8 +62,17 @@
 3.347774
 ],
 "length_m": 126,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_001_01_a.jpg",
+"google/ibudo/twins/church_st/street_001_01_b.jpg",
+"google/ibudo/twins/church_st/street_001_02_a.jpg",
+"google/ibudo/twins/church_st/street_001_02_b.jpg",
+"google/ibudo/twins/church_st/street_001_03_a.jpg",
+"google/ibudo/twins/church_st/street_001_03_b.jpg",
+"google/ibudo/twins/church_st/street_001_04_a.jpg",
+"google/ibudo/twins/church_st/street_001_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -80,8 +94,17 @@
 3.347111
 ],
 "length_m": 149,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_002_01_a.jpg",
+"google/ibudo/twins/church_st/street_002_01_b.jpg",
+"google/ibudo/twins/church_st/street_002_02_a.jpg",
+"google/ibudo/twins/church_st/street_002_02_b.jpg",
+"google/ibudo/twins/church_st/street_002_03_a.jpg",
+"google/ibudo/twins/church_st/street_002_03_b.jpg",
+"google/ibudo/twins/church_st/street_002_04_a.jpg",
+"google/ibudo/twins/church_st/street_002_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -103,8 +126,13 @@
 3.347369
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_003_01_a.jpg",
+"google/ibudo/twins/church_st/street_003_01_b.jpg",
+"google/ibudo/twins/church_st/street_003_02_a.jpg",
+"google/ibudo/twins/church_st/street_003_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -126,8 +154,13 @@
 3.347793
 ],
 "length_m": 16,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_004_01_a.jpg",
+"google/ibudo/twins/church_st/street_004_01_b.jpg",
+"google/ibudo/twins/church_st/street_004_02_a.jpg",
+"google/ibudo/twins/church_st/street_004_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -173,8 +206,15 @@
 3.347417
 ],
 "length_m": 91,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_005_01_a.jpg",
+"google/ibudo/twins/church_st/street_005_01_b.jpg",
+"google/ibudo/twins/church_st/street_005_02_a.jpg",
+"google/ibudo/twins/church_st/street_005_02_b.jpg",
+"google/ibudo/twins/church_st/street_005_03_a.jpg",
+"google/ibudo/twins/church_st/street_005_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -200,8 +240,17 @@
 3.347282
 ],
 "length_m": 129,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_006_01_a.jpg",
+"google/ibudo/twins/church_st/street_006_01_b.jpg",
+"google/ibudo/twins/church_st/street_006_02_a.jpg",
+"google/ibudo/twins/church_st/street_006_02_b.jpg",
+"google/ibudo/twins/church_st/street_006_03_a.jpg",
+"google/ibudo/twins/church_st/street_006_03_b.jpg",
+"google/ibudo/twins/church_st/street_006_04_a.jpg",
+"google/ibudo/twins/church_st/street_006_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -223,8 +272,13 @@
 3.34649
 ],
 "length_m": 45,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_007_01_a.jpg",
+"google/ibudo/twins/church_st/street_007_01_b.jpg",
+"google/ibudo/twins/church_st/street_007_02_a.jpg",
+"google/ibudo/twins/church_st/street_007_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -246,8 +300,13 @@
 3.346285
 ],
 "length_m": 79,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_008_01_a.jpg",
+"google/ibudo/twins/church_st/street_008_01_b.jpg",
+"google/ibudo/twins/church_st/street_008_02_a.jpg",
+"google/ibudo/twins/church_st/street_008_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -269,8 +328,13 @@
 3.345269
 ],
 "length_m": 74,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_009_01_a.jpg",
+"google/ibudo/twins/church_st/street_009_01_b.jpg",
+"google/ibudo/twins/church_st/street_009_02_a.jpg",
+"google/ibudo/twins/church_st/street_009_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -308,8 +372,15 @@
 3.344833
 ],
 "length_m": 103,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_010_01_a.jpg",
+"google/ibudo/twins/church_st/street_010_01_b.jpg",
+"google/ibudo/twins/church_st/street_010_02_a.jpg",
+"google/ibudo/twins/church_st/street_010_02_b.jpg",
+"google/ibudo/twins/church_st/street_010_03_a.jpg",
+"google/ibudo/twins/church_st/street_010_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -335,8 +406,15 @@
 3.345789
 ],
 "length_m": 109,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_011_01_a.jpg",
+"google/ibudo/twins/church_st/street_011_01_b.jpg",
+"google/ibudo/twins/church_st/street_011_02_a.jpg",
+"google/ibudo/twins/church_st/street_011_02_b.jpg",
+"google/ibudo/twins/church_st/street_011_03_a.jpg",
+"google/ibudo/twins/church_st/street_011_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -358,8 +436,13 @@
 3.345395
 ],
 "length_m": 10,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_012_01_a.jpg",
+"google/ibudo/twins/church_st/street_012_01_b.jpg",
+"google/ibudo/twins/church_st/street_012_02_a.jpg",
+"google/ibudo/twins/church_st/street_012_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -381,8 +464,13 @@
 3.345323
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_013_01_a.jpg",
+"google/ibudo/twins/church_st/street_013_01_b.jpg",
+"google/ibudo/twins/church_st/street_013_02_a.jpg",
+"google/ibudo/twins/church_st/street_013_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -412,8 +500,15 @@
 3.346191
 ],
 "length_m": 166,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_014_01_a.jpg",
+"google/ibudo/twins/church_st/street_014_01_b.jpg",
+"google/ibudo/twins/church_st/street_014_02_a.jpg",
+"google/ibudo/twins/church_st/street_014_02_b.jpg",
+"google/ibudo/twins/church_st/street_014_05_a.jpg",
+"google/ibudo/twins/church_st/street_014_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -435,8 +530,13 @@
 3.346821
 ],
 "length_m": 65,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_015_01_a.jpg",
+"google/ibudo/twins/church_st/street_015_01_b.jpg",
+"google/ibudo/twins/church_st/street_015_02_a.jpg",
+"google/ibudo/twins/church_st/street_015_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -458,8 +558,13 @@
 3.346997
 ],
 "length_m": 28,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_016_01_a.jpg",
+"google/ibudo/twins/church_st/street_016_01_b.jpg",
+"google/ibudo/twins/church_st/street_016_02_a.jpg",
+"google/ibudo/twins/church_st/street_016_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -481,8 +586,13 @@
 3.345361
 ],
 "length_m": 29,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_017_01_a.jpg",
+"google/ibudo/twins/church_st/street_017_01_b.jpg",
+"google/ibudo/twins/church_st/street_017_02_a.jpg",
+"google/ibudo/twins/church_st/street_017_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -504,8 +614,13 @@
 3.345447
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_018_01_a.jpg",
+"google/ibudo/twins/church_st/street_018_01_b.jpg",
+"google/ibudo/twins/church_st/street_018_02_a.jpg",
+"google/ibudo/twins/church_st/street_018_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -539,8 +654,13 @@
 3.345182
 ],
 "length_m": 46,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_019_01_a.jpg",
+"google/ibudo/twins/church_st/street_019_01_b.jpg",
+"google/ibudo/twins/church_st/street_019_02_a.jpg",
+"google/ibudo/twins/church_st/street_019_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -582,8 +702,15 @@
 3.342708
 ],
 "length_m": 159,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_020_01_a.jpg",
+"google/ibudo/twins/church_st/street_020_01_b.jpg",
+"google/ibudo/twins/church_st/street_020_03_a.jpg",
+"google/ibudo/twins/church_st/street_020_03_b.jpg",
+"google/ibudo/twins/church_st/street_020_04_a.jpg",
+"google/ibudo/twins/church_st/street_020_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -605,8 +732,13 @@
 3.344189
 ],
 "length_m": 80,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_021_01_a.jpg",
+"google/ibudo/twins/church_st/street_021_01_b.jpg",
+"google/ibudo/twins/church_st/street_021_02_a.jpg",
+"google/ibudo/twins/church_st/street_021_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -644,8 +776,13 @@
 3.344233
 ],
 "length_m": 64,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_022_01_a.jpg",
+"google/ibudo/twins/church_st/street_022_01_b.jpg",
+"google/ibudo/twins/church_st/street_022_02_a.jpg",
+"google/ibudo/twins/church_st/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -667,8 +804,13 @@
 3.343962
 ],
 "length_m": 75,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_023_01_a.jpg",
+"google/ibudo/twins/church_st/street_023_01_b.jpg",
+"google/ibudo/twins/church_st/street_023_02_a.jpg",
+"google/ibudo/twins/church_st/street_023_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -694,8 +836,17 @@
 3.343227
 ],
 "length_m": 160,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_024_01_a.jpg",
+"google/ibudo/twins/church_st/street_024_01_b.jpg",
+"google/ibudo/twins/church_st/street_024_02_a.jpg",
+"google/ibudo/twins/church_st/street_024_02_b.jpg",
+"google/ibudo/twins/church_st/street_024_03_a.jpg",
+"google/ibudo/twins/church_st/street_024_03_b.jpg",
+"google/ibudo/twins/church_st/street_024_04_a.jpg",
+"google/ibudo/twins/church_st/street_024_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -717,8 +868,19 @@
 3.343076
 ],
 "length_m": 161,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_025_01_a.jpg",
+"google/ibudo/twins/church_st/street_025_01_b.jpg",
+"google/ibudo/twins/church_st/street_025_02_a.jpg",
+"google/ibudo/twins/church_st/street_025_02_b.jpg",
+"google/ibudo/twins/church_st/street_025_03_a.jpg",
+"google/ibudo/twins/church_st/street_025_03_b.jpg",
+"google/ibudo/twins/church_st/street_025_04_a.jpg",
+"google/ibudo/twins/church_st/street_025_04_b.jpg",
+"google/ibudo/twins/church_st/street_025_05_a.jpg",
+"google/ibudo/twins/church_st/street_025_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -740,8 +902,19 @@
 3.343028
 ],
 "length_m": 175,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_026_01_a.jpg",
+"google/ibudo/twins/church_st/street_026_01_b.jpg",
+"google/ibudo/twins/church_st/street_026_02_a.jpg",
+"google/ibudo/twins/church_st/street_026_02_b.jpg",
+"google/ibudo/twins/church_st/street_026_03_a.jpg",
+"google/ibudo/twins/church_st/street_026_03_b.jpg",
+"google/ibudo/twins/church_st/street_026_04_a.jpg",
+"google/ibudo/twins/church_st/street_026_04_b.jpg",
+"google/ibudo/twins/church_st/street_026_05_a.jpg",
+"google/ibudo/twins/church_st/street_026_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -767,8 +940,13 @@
 3.344173
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_027_01_a.jpg",
+"google/ibudo/twins/church_st/street_027_01_b.jpg",
+"google/ibudo/twins/church_st/street_027_02_a.jpg",
+"google/ibudo/twins/church_st/street_027_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -790,8 +968,13 @@
 3.344503
 ],
 "length_m": 76,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_028_01_a.jpg",
+"google/ibudo/twins/church_st/street_028_01_b.jpg",
+"google/ibudo/twins/church_st/street_028_02_a.jpg",
+"google/ibudo/twins/church_st/street_028_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -813,8 +996,13 @@
 3.343814
 ],
 "length_m": 78,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_029_01_a.jpg",
+"google/ibudo/twins/church_st/street_029_01_b.jpg",
+"google/ibudo/twins/church_st/street_029_02_a.jpg",
+"google/ibudo/twins/church_st/street_029_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -836,8 +1024,13 @@
 3.343888
 ],
 "length_m": 18,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_030_01_a.jpg",
+"google/ibudo/twins/church_st/street_030_01_b.jpg",
+"google/ibudo/twins/church_st/street_030_02_a.jpg",
+"google/ibudo/twins/church_st/street_030_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -859,8 +1052,17 @@
 3.344607
 ],
 "length_m": 140,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_031_01_a.jpg",
+"google/ibudo/twins/church_st/street_031_01_b.jpg",
+"google/ibudo/twins/church_st/street_031_02_a.jpg",
+"google/ibudo/twins/church_st/street_031_02_b.jpg",
+"google/ibudo/twins/church_st/street_031_03_a.jpg",
+"google/ibudo/twins/church_st/street_031_03_b.jpg",
+"google/ibudo/twins/church_st/street_031_04_a.jpg",
+"google/ibudo/twins/church_st/street_031_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -882,8 +1084,13 @@
 3.34522
 ],
 "length_m": 75,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_032_01_a.jpg",
+"google/ibudo/twins/church_st/street_032_01_b.jpg",
+"google/ibudo/twins/church_st/street_032_02_a.jpg",
+"google/ibudo/twins/church_st/street_032_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -909,8 +1116,15 @@
 3.345765
 ],
 "length_m": 115,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_033_01_a.jpg",
+"google/ibudo/twins/church_st/street_033_01_b.jpg",
+"google/ibudo/twins/church_st/street_033_02_a.jpg",
+"google/ibudo/twins/church_st/street_033_02_b.jpg",
+"google/ibudo/twins/church_st/street_033_03_a.jpg",
+"google/ibudo/twins/church_st/street_033_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -932,8 +1146,15 @@
 3.346652
 ],
 "length_m": 80,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_034_01_a.jpg",
+"google/ibudo/twins/church_st/street_034_01_b.jpg",
+"google/ibudo/twins/church_st/street_034_02_a.jpg",
+"google/ibudo/twins/church_st/street_034_02_b.jpg",
+"google/ibudo/twins/church_st/street_034_03_a.jpg",
+"google/ibudo/twins/church_st/street_034_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -987,8 +1208,13 @@
 3.345916
 ],
 "length_m": 125,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_035_01_a.jpg",
+"google/ibudo/twins/church_st/street_035_01_b.jpg",
+"google/ibudo/twins/church_st/street_035_02_a.jpg",
+"google/ibudo/twins/church_st/street_035_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1034,8 +1260,11 @@
 3.34615
 ],
 "length_m": 74,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_036_01_a.jpg",
+"google/ibudo/twins/church_st/street_036_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1057,8 +1286,13 @@
 3.344861
 ],
 "length_m": 74,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_037_01_a.jpg",
+"google/ibudo/twins/church_st/street_037_01_b.jpg",
+"google/ibudo/twins/church_st/street_037_02_a.jpg",
+"google/ibudo/twins/church_st/street_037_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1080,8 +1314,15 @@
 3.345171
 ],
 "length_m": 100,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_038_01_a.jpg",
+"google/ibudo/twins/church_st/street_038_01_b.jpg",
+"google/ibudo/twins/church_st/street_038_02_a.jpg",
+"google/ibudo/twins/church_st/street_038_02_b.jpg",
+"google/ibudo/twins/church_st/street_038_03_a.jpg",
+"google/ibudo/twins/church_st/street_038_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1103,8 +1344,13 @@
 3.346861
 ],
 "length_m": 77,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_039_01_a.jpg",
+"google/ibudo/twins/church_st/street_039_01_b.jpg",
+"google/ibudo/twins/church_st/street_039_02_a.jpg",
+"google/ibudo/twins/church_st/street_039_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1126,8 +1372,13 @@
 3.346308
 ],
 "length_m": 47,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_040_01_a.jpg",
+"google/ibudo/twins/church_st/street_040_01_b.jpg",
+"google/ibudo/twins/church_st/street_040_02_a.jpg",
+"google/ibudo/twins/church_st/street_040_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1149,8 +1400,13 @@
 3.344472
 ],
 "length_m": 24,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_041_01_a.jpg",
+"google/ibudo/twins/church_st/street_041_01_b.jpg",
+"google/ibudo/twins/church_st/street_041_02_a.jpg",
+"google/ibudo/twins/church_st/street_041_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1184,8 +1440,29 @@
 3.342806
 ],
 "length_m": 368,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_042_01_a.jpg",
+"google/ibudo/twins/church_st/street_042_01_b.jpg",
+"google/ibudo/twins/church_st/street_042_02_a.jpg",
+"google/ibudo/twins/church_st/street_042_02_b.jpg",
+"google/ibudo/twins/church_st/street_042_03_a.jpg",
+"google/ibudo/twins/church_st/street_042_03_b.jpg",
+"google/ibudo/twins/church_st/street_042_04_a.jpg",
+"google/ibudo/twins/church_st/street_042_04_b.jpg",
+"google/ibudo/twins/church_st/street_042_05_a.jpg",
+"google/ibudo/twins/church_st/street_042_05_b.jpg",
+"google/ibudo/twins/church_st/street_042_06_a.jpg",
+"google/ibudo/twins/church_st/street_042_06_b.jpg",
+"google/ibudo/twins/church_st/street_042_07_a.jpg",
+"google/ibudo/twins/church_st/street_042_07_b.jpg",
+"google/ibudo/twins/church_st/street_042_08_a.jpg",
+"google/ibudo/twins/church_st/street_042_08_b.jpg",
+"google/ibudo/twins/church_st/street_042_09_a.jpg",
+"google/ibudo/twins/church_st/street_042_09_b.jpg",
+"google/ibudo/twins/church_st/street_042_10_a.jpg",
+"google/ibudo/twins/church_st/street_042_10_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1207,8 +1484,15 @@
 3.341789
 ],
 "length_m": 99,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_043_01_a.jpg",
+"google/ibudo/twins/church_st/street_043_01_b.jpg",
+"google/ibudo/twins/church_st/street_043_02_a.jpg",
+"google/ibudo/twins/church_st/street_043_02_b.jpg",
+"google/ibudo/twins/church_st/street_043_03_a.jpg",
+"google/ibudo/twins/church_st/street_043_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1230,8 +1514,15 @@
 3.341596
 ],
 "length_m": 102,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_044_01_a.jpg",
+"google/ibudo/twins/church_st/street_044_01_b.jpg",
+"google/ibudo/twins/church_st/street_044_02_a.jpg",
+"google/ibudo/twins/church_st/street_044_02_b.jpg",
+"google/ibudo/twins/church_st/street_044_03_a.jpg",
+"google/ibudo/twins/church_st/street_044_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1257,8 +1548,13 @@
 3.342169
 ],
 "length_m": 80,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_045_01_a.jpg",
+"google/ibudo/twins/church_st/street_045_01_b.jpg",
+"google/ibudo/twins/church_st/street_045_02_a.jpg",
+"google/ibudo/twins/church_st/street_045_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1280,8 +1576,13 @@
 3.342202
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_046_01_a.jpg",
+"google/ibudo/twins/church_st/street_046_01_b.jpg",
+"google/ibudo/twins/church_st/street_046_02_a.jpg",
+"google/ibudo/twins/church_st/street_046_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1303,8 +1604,17 @@
 3.342143
 ],
 "length_m": 127,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_047_01_a.jpg",
+"google/ibudo/twins/church_st/street_047_01_b.jpg",
+"google/ibudo/twins/church_st/street_047_02_a.jpg",
+"google/ibudo/twins/church_st/street_047_02_b.jpg",
+"google/ibudo/twins/church_st/street_047_03_a.jpg",
+"google/ibudo/twins/church_st/street_047_03_b.jpg",
+"google/ibudo/twins/church_st/street_047_04_a.jpg",
+"google/ibudo/twins/church_st/street_047_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1330,8 +1640,13 @@
 3.341974
 ],
 "length_m": 34,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_048_01_a.jpg",
+"google/ibudo/twins/church_st/street_048_01_b.jpg",
+"google/ibudo/twins/church_st/street_048_02_a.jpg",
+"google/ibudo/twins/church_st/street_048_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1381,8 +1696,15 @@
 3.341636
 ],
 "length_m": 115,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_049_01_a.jpg",
+"google/ibudo/twins/church_st/street_049_01_b.jpg",
+"google/ibudo/twins/church_st/street_049_02_a.jpg",
+"google/ibudo/twins/church_st/street_049_02_b.jpg",
+"google/ibudo/twins/church_st/street_049_03_a.jpg",
+"google/ibudo/twins/church_st/street_049_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1428,8 +1750,15 @@
 3.341659
 ],
 "length_m": 131,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_050_01_a.jpg",
+"google/ibudo/twins/church_st/street_050_01_b.jpg",
+"google/ibudo/twins/church_st/street_050_02_a.jpg",
+"google/ibudo/twins/church_st/street_050_02_b.jpg",
+"google/ibudo/twins/church_st/street_050_03_a.jpg",
+"google/ibudo/twins/church_st/street_050_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1451,8 +1780,13 @@
 3.341978
 ],
 "length_m": 16,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_051_01_a.jpg",
+"google/ibudo/twins/church_st/street_051_01_b.jpg",
+"google/ibudo/twins/church_st/street_051_02_a.jpg",
+"google/ibudo/twins/church_st/street_051_02_b.jpg"
+]
 }
 ]
 }
