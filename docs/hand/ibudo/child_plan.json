@@ -610,5 +610,28 @@
    "gidi": "the north-south road (now 'Kalejaiye Avenue')",
    "real": "Church St, Oshodi (north), then Osolo Way (the Osolo Way strip, south)"
   }
+ ],
+ "protect": [
+  {
+   "name": "The boss's motor park (the opening: story place, with its office, levy table, okada rank and access to Animashaun St)",
+   "pts": [
+    [
+     9140,
+     4825
+    ],
+    [
+     9262,
+     4825
+    ],
+    [
+     9262,
+     4935
+    ],
+    [
+     9140,
+     4935
+    ]
+   ]
+  }
  ]
 }
