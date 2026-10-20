@@ -1,0 +1,1386 @@
+{
+"area": "ilupeju",
+"real": "Jibowu on Ikorodu Rd: the interstate coach company yards behind red railings, booking halls, touts and loaders, a colonial office, buses leaving for the rest of the country (chosen over Ilupeju's factories: more life, and it links Ìbùdó to the rest of Gidi)",
+"anchor_real": [
+6.5188,
+3.3683
+],
+"anchor_gidi": [
+8968,
+4775
+],
+"streets": [
+{
+"gidi": [
+[
+8906.0,
+4588.5
+],
+[
+8933.9,
+4582.9
+],
+[
+8936.5,
+4583.1
+],
+[
+8938.0,
+4584.1
+],
+[
+8942.1,
+4591.7
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "4505d719-5962-400d-9185-41533dcb8540",
+"photo_at": [
+6.520523,
+3.367921
+],
+"length_m": 42,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8905.9,
+4679.0
+],
+[
+8907.5,
+4635.7
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "8ad6d1c2-53a6-4f5a-989e-c4d7efbef456",
+"photo_at": [
+6.519864,
+3.367742
+],
+"length_m": 43,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8871.1,
+4643.3
+],
+[
+8872.9,
+4670.4
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "3995377c-9313-4298-a7c5-a9ebb7d74ee4",
+"photo_at": [
+6.519868,
+3.367427
+],
+"length_m": 27,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8871.2,
+4641.1
+],
+[
+8874.6,
+4648.8
+],
+[
+8881.3,
+4653.3
+],
+[
+8894.6,
+4651.8
+],
+[
+8901.5,
+4645.8
+],
+[
+8907.5,
+4635.7
+]
+],
+"kind": "main",
+"real_name": null,
+"real_class": "primary",
+"overture_id": "133d5b91-5762-437f-b790-f427b301ad31",
+"photo_at": [
+6.519909,
+3.367592
+],
+"length_m": 51,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8905.9,
+4679.0
+],
+[
+8900.3,
+4666.0
+],
+[
+8892.3,
+4660.6
+],
+[
+8886.5,
+4660.0
+],
+[
+8882.2,
+4660.5
+],
+[
+8877.3,
+4661.5
+],
+[
+8875.3,
+4663.5
+],
+[
+8872.9,
+4670.4
+]
+],
+"kind": "main",
+"real_name": null,
+"real_class": "primary",
+"overture_id": "87df9979-59a0-4903-a8fe-dd275b4ddd2b",
+"photo_at": [
+6.519835,
+3.367604
+],
+"length_m": 49,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8907.8,
+4706.8
+],
+[
+8906.2,
+4686.2
+],
+[
+8905.9,
+4679.0
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "ce7cb07d-d08b-463e-957a-915ec2536ed5",
+"photo_at": [
+6.519542,
+3.367742
+],
+"length_m": 28,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8872.9,
+4670.4
+],
+[
+8876.5,
+4688.9
+],
+[
+8880.9,
+4707.0
+],
+[
+8887.9,
+4729.1
+],
+[
+8893.3,
+4742.2
+],
+[
+8896.9,
+4751.6
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "d05adcf2-d73a-41cb-8df9-e50581604865",
+"photo_at": [
+6.519372,
+3.367521
+],
+"length_m": 85,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8925.7,
+4787.4
+],
+[
+8919.1,
+4765.4
+],
+[
+8913.8,
+4746.4
+],
+[
+8911.0,
+4726.0
+],
+[
+8907.8,
+4706.8
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "cc4ef486-20b7-44f6-b02d-21073cce8834",
+"photo_at": [
+6.519047,
+3.36781
+],
+"length_m": 83,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8896.9,
+4751.6
+],
+[
+8902.0,
+4776.2
+],
+[
+8913.0,
+4807.6
+],
+[
+8926.7,
+4838.7
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "d1a28e07-1cf5-417c-b36f-26b8ecec0c14",
+"photo_at": [
+6.518609,
+3.367763
+],
+"length_m": 92,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8896.9,
+4751.6
+],
+[
+8907.8,
+4772.5
+],
+[
+8933.5,
+4829.6
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "secondary",
+"overture_id": "ab45c87c-4495-4814-9107-e4e75d8b5b14",
+"photo_at": [
+6.518662,
+3.367825
+],
+"length_m": 86,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9005.5,
+4990.0
+],
+[
+8992.1,
+4956.8
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "86b29d52-02ee-4d18-b415-750f1550ccc8",
+"photo_at": [
+6.517006,
+3.36858
+],
+"length_m": 36,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8956.4,
+4889.8
+],
+[
+8973.1,
+4934.0
+],
+[
+8996.1,
+4990.0
+]
+],
+"kind": "main",
+"real_name": "Murtala Mohammed Way",
+"real_class": "secondary",
+"overture_id": "cbfef4d9-d5c9-4600-9817-b43a1b1be59f",
+"photo_at": [
+6.517306,
+3.368369
+],
+"length_m": 108,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8981.8,
+4977.0
+],
+[
+8986.7,
+4990.0
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "50162de3-33cd-48f1-ae2d-d2e7360f6dd7",
+"photo_at": [
+6.516915,
+3.368448
+],
+"length_m": 14,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8983.3,
+4934.3
+],
+[
+9010.5,
+4922.7
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "5be1a7f5-da6a-4740-84fc-eb806293716c",
+"photo_at": [
+6.517412,
+3.368563
+],
+"length_m": 30,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9051.5,
+4988.0
+],
+[
+9041.7,
+4985.6
+],
+[
+9029.4,
+4983.7
+],
+[
+9019.7,
+4980.4
+],
+[
+9010.1,
+4975.4
+],
+[
+9000.7,
+4967.6
+],
+[
+8992.1,
+4956.8
+]
+],
+"kind": "main",
+"real_name": null,
+"real_class": "primary",
+"overture_id": "0c358eeb-de7b-429a-955e-c117e43ef65f",
+"photo_at": [
+6.516951,
+3.368754
+],
+"length_m": 70,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9174.7,
+4947.9
+],
+[
+9188.0,
+4990.0
+]
+],
+"kind": "street",
+"real_name": "Edmund Crescent",
+"real_class": "unclassified",
+"overture_id": "e4192958-0935-48b3-a2d9-73e349478ff1",
+"photo_at": [
+6.517046,
+3.370242
+],
+"length_m": 44,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9136.0,
+4864.6
+],
+[
+9112.9,
+4809.9
+],
+[
+9110.3,
+4801.0
+],
+[
+9109.7,
+4793.9
+],
+[
+9115.9,
+4776.8
+],
+[
+9120.0,
+4767.3
+],
+[
+9135.7,
+4730.9
+],
+[
+9142.4,
+4714.9
+],
+[
+9147.7,
+4698.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "032ef570-ddb7-416b-8509-c94cf811a497",
+"photo_at": [
+6.518745,
+3.369632
+],
+"length_m": 179,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8952.7,
+4903.1
+],
+[
+8963.6,
+4930.1
+],
+[
+8981.8,
+4977.0
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "55e724a5-2a18-4d43-b59d-f14d5a571be3",
+"photo_at": [
+6.517308,
+3.368295
+],
+"length_m": 79,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8964.4,
+4886.2
+],
+[
+9004.0,
+4869.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "01be5758-33e4-4f22-96ce-a0aa76e666ad",
+"photo_at": [
+6.517868,
+3.368448
+],
+"length_m": 43,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8992.1,
+4956.8
+],
+[
+8983.3,
+4934.3
+],
+[
+8964.4,
+4886.2
+],
+[
+8960.4,
+4875.9
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "2d8ea803-3048-4f4a-9066-e4af4b32d87d",
+"photo_at": [
+6.517522,
+3.368375
+],
+"length_m": 87,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8937.1,
+4816.6
+],
+[
+8925.7,
+4787.4
+]
+],
+"kind": "main",
+"real_name": "Murtula Muhammed Way",
+"real_class": "primary",
+"overture_id": "2d8ea803-3048-4f4a-9066-e4af4b32d87d",
+"photo_at": [
+6.518556,
+3.367967
+],
+"length_m": 31,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9018.9,
+4749.7
+],
+[
+9022.6,
+4758.4
+],
+[
+9023.5,
+4763.0
+],
+[
+9024.1,
+4768.9
+],
+[
+9026.6,
+4776.5
+],
+[
+9038.9,
+4804.4
+],
+[
+9042.5,
+4811.6
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "2576eb88-7a5f-48dc-970b-c93941db8ce3",
+"photo_at": [
+6.518743,
+3.368852
+],
+"length_m": 67,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8991.7,
+4764.5
+],
+[
+9010.8,
+4807.1
+],
+[
+9013.6,
+4811.9
+],
+[
+9017.8,
+4814.2
+],
+[
+9030.6,
+4808.7
+],
+[
+9038.9,
+4804.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "1b2b5f81-68fb-4706-a377-774a020b4666",
+"photo_at": [
+6.518563,
+3.368665
+],
+"length_m": 80,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9142.4,
+4714.9
+],
+[
+9150.4,
+4721.8
+],
+[
+9156.8,
+4727.3
+],
+[
+9159.0,
+4731.6
+],
+[
+9159.4,
+4733.5
+],
+[
+9160.0,
+4735.9
+],
+[
+9159.6,
+4740.1
+],
+[
+9158.0,
+4745.5
+],
+[
+9154.5,
+4753.7
+],
+[
+9150.3,
+4761.6
+],
+[
+9146.9,
+4766.5
+],
+[
+9142.1,
+4770.0
+],
+[
+9135.9,
+4771.1
+],
+[
+9120.0,
+4767.3
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "adb45f23-de81-4635-8177-1f7ae04e9508",
+"photo_at": [
+6.519007,
+3.370003
+],
+"length_m": 90,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9046.3,
+4738.7
+],
+[
+9044.0,
+4716.2
+],
+[
+9030.0,
+4701.1
+],
+[
+9027.6,
+4699.6
+],
+[
+9023.3,
+4699.9
+],
+[
+9013.2,
+4704.5
+],
+[
+9012.4,
+4706.7
+],
+[
+9012.7,
+4710.1
+],
+[
+9019.7,
+4727.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "c3d34d3b-844b-4269-b4c4-2d783fb81075",
+"photo_at": [
+6.519468,
+3.368864
+],
+"length_m": 86,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9055.9,
+4735.1
+],
+[
+9044.2,
+4700.7
+],
+[
+9042.9,
+4697.6
+],
+[
+9042.0,
+4694.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "5692162b-cbf6-4b1a-b4b7-ac2bb2426001",
+"photo_at": [
+6.519343,
+3.369037
+],
+"length_m": 43,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8925.7,
+4787.4
+],
+[
+8947.9,
+4778.4
+]
+],
+"kind": "street",
+"real_name": "Jibowu Street",
+"real_class": "residential",
+"overture_id": "bbe54be0-e526-434d-ab4a-c4aca0a14476",
+"photo_at": [
+6.518728,
+3.368016
+],
+"length_m": 24,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8992.9,
+4760.1
+],
+[
+9018.9,
+4749.7
+],
+[
+9046.3,
+4738.7
+],
+[
+9055.9,
+4735.1
+],
+[
+9110.2,
+4712.1
+],
+[
+9147.7,
+4698.1
+]
+],
+"kind": "street",
+"real_name": "Jibowu Street",
+"real_class": "residential",
+"overture_id": "bbe54be0-e526-434d-ab4a-c4aca0a14476",
+"photo_at": [
+6.519216,
+3.369231
+],
+"length_m": 167,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8984.9,
+4646.7
+],
+[
+8960.5,
+4667.1
+],
+[
+8929.3,
+4690.6
+],
+[
+8907.8,
+4706.8
+]
+],
+"kind": "street",
+"real_name": "Igbobi Sabe Street",
+"real_class": "residential",
+"overture_id": "4b4b9d49-6f83-4103-adb2-176410f0edc6",
+"photo_at": [
+6.519683,
+3.368108
+],
+"length_m": 98,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9068.6,
+4621.8
+],
+[
+9031.6,
+4622.5
+]
+],
+"kind": "street",
+"real_name": "Igbobi Sabe Street",
+"real_class": "residential",
+"overture_id": "a31fdcd4-d2cc-4362-9bc7-3521b28bd44a",
+"photo_at": [
+6.520182,
+3.369047
+],
+"length_m": 37,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9165.0,
+4584.0
+],
+[
+9155.2,
+4590.1
+],
+[
+9145.4,
+4595.4
+],
+[
+9134.2,
+4602.9
+],
+[
+9117.5,
+4610.9
+],
+[
+9101.7,
+4616.9
+],
+[
+9092.9,
+4620.2
+],
+[
+9075.1,
+4621.2
+],
+[
+9068.6,
+4621.8
+]
+],
+"kind": "street",
+"real_name": "Igbobi Sabe Street",
+"real_class": "residential",
+"overture_id": "85a3c6ea-ab4e-4d46-82ad-b418bbb29a84",
+"photo_at": [
+6.520292,
+3.369677
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9147.7,
+4698.1
+],
+[
+9184.3,
+4681.9
+],
+[
+9185.9,
+4681.3
+]
+],
+"kind": "street",
+"real_name": "Jibowu Street",
+"real_class": "residential",
+"overture_id": "cb13d3be-12c3-49ec-a2e4-c0df05e68c3f",
+"photo_at": [
+6.519572,
+3.370109
+],
+"length_m": 42,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8803.3,
+4550.7
+],
+[
+8801.5,
+4553.6
+],
+[
+8802.9,
+4559.9
+],
+[
+8809.3,
+4569.1
+],
+[
+8818.5,
+4592.9
+],
+[
+8824.1,
+4610.8
+],
+[
+8832.6,
+4628.3
+],
+[
+8837.2,
+4635.9
+],
+[
+8840.3,
+4642.0
+],
+[
+8849.6,
+4643.1
+],
+[
+8857.1,
+4643.8
+],
+[
+8871.1,
+4643.3
+]
+],
+"kind": "street",
+"real_name": "Thani-Olodo Street",
+"real_class": "residential",
+"overture_id": "a660e56c-2602-4a4c-8a7f-15fceb40b18e",
+"photo_at": [
+6.520281,
+3.366992
+],
+"length_m": 131,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8907.5,
+4635.7
+],
+[
+8907.3,
+4609.1
+],
+[
+8906.0,
+4588.5
+],
+[
+8905.7,
+4541.0
+],
+[
+8905.6,
+4535.8
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "04080715-9273-43c3-a9de-84373abd7bc0",
+"photo_at": [
+6.520511,
+3.367736
+],
+"length_m": 100,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8905.7,
+4541.0
+],
+[
+8925.2,
+4540.9
+],
+[
+8941.8,
+4540.3
+],
+[
+8944.6,
+4539.7
+],
+[
+8947.1,
+4539.2
+],
+[
+8949.5,
+4537.8
+],
+[
+8951.4,
+4532.8
+],
+[
+8951.6,
+4529.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "8b7bb6cf-68f7-4466-af2f-3379cc9bddee",
+"photo_at": [
+6.520919,
+3.367976
+],
+"length_m": 53,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8868.0,
+4541.3
+],
+[
+8868.4,
+4567.1
+],
+[
+8869.8,
+4617.3
+],
+[
+8871.2,
+4641.1
+]
+],
+"kind": "main",
+"real_name": "Ikorodu Road",
+"real_class": "primary",
+"overture_id": "da45b4d7-09fb-4b1c-aeb2-b9aafa9f4656",
+"photo_at": [
+6.520462,
+3.3674
+],
+"length_m": 100,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9076.5,
+4510.8
+],
+[
+9107.3,
+4512.6
+]
+],
+"kind": "street",
+"real_name": "Ijaoye Street",
+"real_class": "residential",
+"overture_id": "2b0f4913-c13b-4fdd-8a6f-ec58d498809c",
+"photo_at": [
+6.521181,
+3.369427
+],
+"length_m": 31,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8986.3,
+4524.0
+],
+[
+8986.5,
+4546.5
+],
+[
+8988.6,
+4561.5
+],
+[
+8990.6,
+4575.1
+],
+[
+8999.2,
+4592.9
+],
+[
+8999.7,
+4594.1
+]
+],
+"kind": "street",
+"real_name": "Onoyade Street",
+"real_class": "residential",
+"overture_id": "2b00843b-b3db-4f41-bf20-f48ecaf7d2be",
+"photo_at": [
+6.520743,
+3.368485
+],
+"length_m": 73,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9107.3,
+4512.6
+],
+[
+9090.0,
+4557.8
+],
+[
+9085.2,
+4570.5
+],
+[
+9082.3,
+4579.4
+],
+[
+9068.6,
+4621.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "6090ce62-7f68-476e-979e-f9fd3ed2b4b0",
+"photo_at": [
+6.520683,
+3.36938
+],
+"length_m": 116,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+9107.3,
+4512.6
+],
+[
+9131.1,
+4515.9
+],
+[
+9152.3,
+4516.1
+]
+],
+"kind": "street",
+"real_name": "Ijaoye Street",
+"real_class": "residential",
+"overture_id": "240e496c-a2ac-469e-b342-8bb18a7a0ff3",
+"photo_at": [
+6.521145,
+3.369771
+],
+"length_m": 45,
+"status": "red",
+"pics": []
+}
+]
+}

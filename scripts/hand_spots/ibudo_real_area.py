@@ -32,6 +32,9 @@ G = json.loads(S[S.index('{'):S.rstrip().rstrip(';').rindex('}') + 1])
 L = json.load(open('web/layout-v2.json'))
 HUB = Polygon(L['districts']['hub'])
 AREA = Polygon(A['pts']).intersection(HUB.buffer(-6))
+for pr in CP.get('protect', []):   # story places no area build may touch (the boss's motor park)
+    AREA = AREA.difference(Polygon(pr['pts']).buffer(4))
+AREA = max(getattr(AREA, 'geoms', [AREA]), key=lambda g: g.area)
 WHO = f"Claude, 19 Oct 2026: Ìbùdó from real places ({A['name']})"
 M_LAT, M_LON = 110600.0, 109900.0
 (LA0, LO0), (GX0, GY0) = A['anchor_real'], A['anchor_gidi']
@@ -246,13 +249,24 @@ with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt')
 # ---- 4. the real places: churches, mosques, schools, clinics, chemists, hotels, banks, offices (Overture places), each at its real spot
 # with a Gidi name (invented, never a real one); the real name stays in the twin record
 PNAMES = {'church': ['Living Waters Chapel', 'Grace Harvest Church', 'Oke Iye Chapel', 'Mount Zion Assembly', 'New Dawn Church', 'Cherubim Light Chapel',
-                     'Rock of Ages Chapel', 'Peace Assembly', 'Overflow Chapel', 'Shiloh Gate Church', 'Ebenezer House of Prayer', 'Bethel Light Church'],
-          'mosque': ['Nurul Islam Mosque', 'Ìbùdó Central Mosque', 'Ansar Jumat Mosque', 'Al-Furqan Mosque', 'Baitul Huda Mosque', 'Tawheed Mosque'],
+                     'Rock of Ages Chapel', 'Peace Assembly', 'Overflow Chapel', 'Shiloh Gate Church', 'Ebenezer House of Prayer', 'Bethel Light Church',
+                     'Oluwaseun Gospel Church', 'Light of Ìbùdó Assembly', 'Fountain of Mercy Chapel', 'Abundant Rain Church', 'Holy Ghost Fire Ministry',
+                     'Calvary Hope Chapel', 'Emmanuel Covenant Church', 'Pillar of Truth Assembly', 'Morning Glory Chapel', 'Faith Harvest Ministry',
+                     'Anchor of Life Church', 'Second Mile Chapel', 'Showers of Grace Church', 'Jesus Arena Chapel', 'Olorun Agbaye Church',
+                     'Seed of Life Assembly', 'Divine Help Chapel', 'Prayer Mountain Church', 'Christ the Rock Chapel', 'Wells of Joy Church',
+                     'Victory Torch Assembly', 'Gate of Heaven Chapel', 'Love Fountain Church', 'Mercy Seat Chapel', 'Glorious Dawn Assembly',
+                     'Ayo Ni O Church', 'Testimony Chapel', 'Shield of Faith Church', 'House of Refuge', 'Living Bread Chapel'],
+          'mosque': ['Nurul Islam Mosque', 'Ìbùdó Central Mosque', 'Ansar Jumat Mosque', 'Al-Furqan Mosque', 'Baitul Huda Mosque', 'Tawheed Mosque',
+                     'Nasrul Lahi Mosque', 'Al-Hikmah Mosque', 'Darul Salam Mosque', 'Al-Ihsan Mosque', 'Jamiu Mosque', 'Al-Amin Mosque'],
           'school': ['Bright Star Nursery and Primary', 'Ayo Kids Academy', 'Grace Comprehensive College', 'Morning Star School', 'Unity Grammar School',
-                     'Ìbùdó Model School', 'Royal Seeds Academy', 'Victory Nursery and Primary', 'Treasure Kids School', 'Excel High School'],
-          'clinic': ['Mercy Clinic', 'Good Hope Clinic', 'Life Line Medical Centre', 'St Luke Clinic'], 'hospital': ['Ìbùdó General Hospital', 'Oasis Hospital'],
-          'chemist': ['Healthway Chemist', 'Rapha Pharmacy', 'Mama Bisi Chemist', 'Sure Cure Chemist'],
-          'hotel': ['Gidi Rest Hotel', 'Palm Court Hotel', 'Royal Comfort Inn', 'Travellers Lodge'], 'bank': ['Gidi Trust Bank', 'Mainland Bank', 'Union Ọjà Bank'],
+                     'Ìbùdó Model School', 'Royal Seeds Academy', 'Victory Nursery and Primary', 'Treasure Kids School', 'Excel High School',
+                     'Golden Gate College', 'Little Angels School', 'Crown Heights Academy', 'Sunrise Nursery and Primary', 'Wisdom Gate College',
+                     'Great Minds School', 'Pathfinder Academy', 'Rainbow Kids School', 'Ìlérí Grammar School', 'Owode Comprehensive College',
+                     'Starlight Nursery and Primary', 'Beacon High School', 'Bright Future Academy', 'Kingdom Heritage School'],
+          'clinic': ['Mercy Clinic', 'Good Hope Clinic', 'Life Line Medical Centre', 'St Luke Clinic', 'Ireti Clinic', 'Alafia Medical Centre', 'Care Point Clinic', 'Doyin Maternity', 'Healing Touch Clinic'], 'hospital': ['Ìbùdó General Hospital', 'Oasis Hospital'],
+          'chemist': ['Healthway Chemist', 'Rapha Pharmacy', 'Mama Bisi Chemist', 'Sure Cure Chemist', 'Alaafia Pharmacy', 'Good Health Chemist', 'Iya Rasaq Chemist', 'Life Spring Pharmacy', 'Tunde Drugs'],
+          'hotel': ['Gidi Rest Hotel', 'Palm Court Hotel', 'Royal Comfort Inn', 'Travellers Lodge', 'Jet Stop Hotel', 'Airways Suites', 'Cool Breeze Inn', 'Owambe Hotel', 'Sky Lane Suites',
+                     'Landing Hotel', 'Golden Crest Hotel', 'Plaza Comfort Inn', 'Starboard Suites', 'Quiet Haven Hotel'], 'bank': ['Gidi Trust Bank', 'Mainland Bank', 'Union Ọjà Bank'],
           'government': ['Ìbùdó Council Office', 'Motor Licensing Office']}
 used = {p_['name'] for p_ in G['pois']}
 
