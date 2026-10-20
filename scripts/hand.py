@@ -30,6 +30,10 @@
 #   {"op": "delete street", "at": [x, y]}                          the street or lane piece nearest the point (within 3 m)
 #   {"op": "name road", "at": [x, y], "name": "..."}               the main road nearest the point (within 3 m) takes the name
 #   {"op": "add structure", "kind": "skywalk", "name": "...", "pts": [...], "width": 3, "layer": 1}   a deck: the bake gives it heights
+#   {"op": "delete structure", "name": "..."}                 the district's decks of that name come down
+#   {"op": "add path", "pts": [[x, y], ...]}                    a footpath: market aisles, rail-side walks
+#   {"op": "delete path", "at": [x, y]}                        the footpath nearest the point (within 3 m)
+#   {"op": "delete main", "at": [x, y]}                        the district main road nearest the point (within 4 m)
 #   {"op": "cut street", "at": [x, y], "gap": 10}                   the street stops short both sides of the point (a dead end at a canal or the tracks)
 #   {"op": "delete building", ..., "early": true}                   cleared for a road placed by hand: removed with the road edits
 # labels and surfaces, applied after the surfaces are set:
@@ -155,7 +159,7 @@ def apply_frozen(out, stage):
     return rep
 
 
-ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street', 'add structure', 'reshape street')
+ROAD_OPS = ('add street', 'delete street', 'name road', 'cut street', 'add structure', 'delete structure', 'add path', 'delete path', 'delete main', 'reshape street')
 LABEL_OPS = ('set surface', 'name')
 
 
@@ -233,6 +237,29 @@ def apply_road_edits(out):
             elif op == 'add structure':   # a deck over the ground: {"kind": "skywalk" | "flyover" | "footbridge", "name", "pts", "width", "layer"}
                 out.setdefault('structures', []).append({'d': d, 'kind': e['kind'], 'name': e.get('name', ''), 'pts': e['pts'],
                                                          'width': e.get('width', 3), 'layer': e.get('layer', 1)})
+            elif op == 'add path':   # a footpath (no gutters, no traffic): {"pts"}
+                out.setdefault('paths', {}).setdefault(d, []).append([[round(x, 1), round(y, 1)] for x, y in e['pts']])
+            elif op == 'delete path':   # the footpath nearest the point (within 3 m)
+                P = Point(e['at']); L_ = (out.get('paths') or {}).get(d, [])
+                c = [(LineString(p).distance(P), i) for i, p in enumerate(L_) if len(p) > 1]
+                c = [x for x in c if x[0] < 3]
+                if c:
+                    L_.pop(min(c)[1])
+                else:
+                    print('  hand edit found no path at', e['at'], e.get('note', ''))
+            elif op == 'delete main':   # a district main road taken away: {"at"} (the main nearest the point, within 4 m)
+                P = Point(e['at'])
+                c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if m.get('d') == d and len(m['pts']) > 1]
+                c = [x for x in c if x[0] < 4]
+                if c:
+                    out['mains'].pop(min(c)[1])
+                else:
+                    print('  hand edit found no main at', e['at'], e.get('note', ''))
+            elif op == 'delete structure':   # a deck taken down: {"name"} (every piece of that name in the district)
+                n0 = len(out.get('structures', []))
+                out['structures'] = [x for x in out.get('structures', []) if not (x.get('d') == d and x.get('name') == e['name'])]
+                if len(out['structures']) == n0:
+                    print('  hand edit found no structure named', e['name'])
             elif op == 'name road':
                 P = Point(e['at'])
                 c = [(LineString(m['pts']).distance(P), i) for i, m in enumerate(out['mains']) if len(m['pts']) > 1]

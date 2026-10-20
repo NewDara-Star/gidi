@@ -150,8 +150,11 @@ names = {'border': 'The Border', 'bazaar': 'The Bazaar', 'railside': 'Railside',
 P_ = lambda k, dx=0, dy=0: (anchor[k][0] + dx, anchor[k][1] + dy)
 ART = [
     ('Coastal Expressway', 'exp', [(0, Y(3.4)), (X(4), Y(3.3)), (X(9), Y(3.2)), (X(14.9), Y(3.0)), (X(20), Y(2.6)), (X(24), Y(2.2)), P_('jungle', -200, 250), (X(31.2), Y(0.6))]),   # inland of the creek
-    ('Ring Road', 'exp', [(X(31.6), Y(0.4)), (X(30.6), Y(3.6)), P_('hub', 150, 300), (X(28.6), Y(11.5)), P_('airport', 300, 450)]),
-    ('Ayinde Avenue', 'art', [P_('hub', 0, 0), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),
+    ('Ring Road', 'exp', [(X(31.6), Y(0.4)), (X(30.6), Y(3.6)), (8869, 5130),   # Ìbùdó (owner, 19 Oct: the child of Oshodi and Ojuelegba): at Ìkòríta it is Ikorodu Rd,
+                          (9032, 4550), (8970.6, 4400), (8908.6, 4250), (8847.6, 4100), (8785.7, 3950), (8726.2, 3800),   # through the Oshodi core the real Agege Motor Rd's line (docs/hand/ibudo/child_plan.json)
+                          (X(28.6), Y(11.5)), P_('airport', 300, 450)]),
+    ('Ayinde Avenue', 'art', [(8300, 4431), (8450, 4368), (8550, 4326), (8650, 4284), (8750, 4245), (8850, 4205), (8955, 4161),   # in Ìbùdó the real Apapa-Oworonshoki Expressway's line,
+                              (8960, 3940), (X(29.4), Y(11.8)), P_('airport', 900, -50), P_('capital', -100, 300), P_('estate', -200, -250)]),   # on a deck over the trunk road and the rail; north of it ours
     ('Northern Road', 'art', [P_('yaba', -120, 80), (X(34.6), Y(12.6)), P_('foodgate', -200, 300), (X(38.5), Y(19.2)), (X(43), Y(19.6)), P_('oldshore', 0, 250), (X(56), Y(18.6))]),
     ('Old Motor Road', 'art', [(9175, 2375), (8500, 2000), (7700, 2000), P_('railside', 0, 0), (X(16), Y(13.8))]),   # round the airport's north fence, beside the rail, as Agege Motor Road runs
     ('Long Bridge Road', 'art', [(X(34.6), Y(12.6)), (10950, 3450)]),   # off the Northern Road to the bridge's foot
@@ -182,7 +185,8 @@ ART = [
     ('Admiralty Way', 'art', [(X(45.7), Y(2.6)), (X(46.6), Y(1.7)), (X(47), Y(1.3))]),   # the bridge's foot down to the expressway
     ('Peninsula Expressway', 'exp', [P_('heights', 0, 0), (X(43), Y(0.4)), (X(45), Y(0.6)), (X(47), Y(1.3)), (X(55), Y(1.6)), P_('frontier', 0, 200), (W, Y(2.4))]),
 ]
-RAIL = [P_('railside', -300, -500), (7600, 1880), (8500, 1880), (9150, 2250), (9450, 2900), (9250, 3600), P_('hub', 250, -200), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo)
+RAIL = [P_('railside', -300, -500), (7600, 1880), (8500, 1880), (9150, 2250), (9450, 2900), (9250, 3600), (8880, 3760), (8789, 3880), (8818, 3950), (8858, 4050), (8899, 4150), (8939, 4250), (8970, 4330), (8995, 4362), (9040, 4370), (9129.8, 4359.8), P_('maze', 0, 250), (X(34.0), Y(7.2)), (X(34.4), Y(5.0)), (10200, 5300)]   # ends on the mainland at the channel (Iddo).
+# Owner, 19 Oct 2026: through Ìbùdó's Oshodi core the line is the real line beside Agege Motor Rd; it leaves into the Maze where it always did
 
 if __name__ == '__main__':
     import json as _json
