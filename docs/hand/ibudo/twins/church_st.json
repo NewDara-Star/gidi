@@ -1,0 +1,1458 @@
+{
+"area": "church_st",
+"real": "Oshodi west of the market: Church St and Oshodi Rd, a regular grid of 2-4 storey shop houses and compounds, a school on a sandy yard, the Methodist church, hotels, carpenters and truck-pushers working on the street",
+"anchor_real": [
+6.5565,
+3.3445
+],
+"anchor_gidi": [
+7930,
+4270
+],
+"streets": [
+{
+"gidi": [
+[
+8231.0,
+4100.0
+],
+[
+8227.3,
+4123.8
+]
+],
+"kind": "street",
+"real_name": "Igbehinadun Street",
+"real_class": "tertiary",
+"overture_id": "2c97aed7-f382-4166-a7d1-dea085a154b0",
+"photo_at": [
+6.557929,
+3.347222
+],
+"length_m": 24,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8300.0,
+4144.3
+],
+[
+8290.7,
+4197.0
+],
+[
+8283.9,
+4269.4
+]
+],
+"kind": "street",
+"real_name": "Oredeyin Street",
+"real_class": "residential",
+"overture_id": "f81decf0-6c9c-4d55-8637-bfbf99d4600a",
+"photo_at": [
+6.557074,
+3.347774
+],
+"length_m": 126,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8227.3,
+4123.8
+],
+[
+8206.7,
+4271.0
+]
+],
+"kind": "street",
+"real_name": "Igbehinadun Street",
+"real_class": "tertiary",
+"overture_id": "0c2e5816-1119-4ec4-8724-2b60db515db3",
+"photo_at": [
+6.557156,
+3.347111
+],
+"length_m": 149,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8283.9,
+4269.4
+],
+[
+8206.7,
+4271.0
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "76e731ee-a56e-4d9d-b187-cd0172cdd176",
+"photo_at": [
+6.556498,
+3.347369
+],
+"length_m": 77,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8300.0,
+4269.6
+],
+[
+8283.9,
+4269.4
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "e1f19035-aa57-4cb0-85cf-e934f02bbb31",
+"photo_at": [
+6.556505,
+3.347793
+],
+"length_m": 16,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8272.4,
+4439.3
+],
+[
+8271.2,
+4420.2
+],
+[
+8268.8,
+4414.0
+],
+[
+8265.6,
+4411.6
+],
+[
+8260.6,
+4412.2
+],
+[
+8252.3,
+4414.8
+],
+[
+8237.1,
+4421.2
+],
+[
+8209.9,
+4435.5
+]
+],
+"kind": "street",
+"real_name": "Ganikale Close",
+"real_class": "residential",
+"overture_id": "de97057d-7d1c-4897-840b-e25dbfface80",
+"photo_at": [
+6.555184,
+3.347417
+],
+"length_m": 91,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8300.0,
+4349.5
+],
+[
+8254.1,
+4348.6
+],
+[
+8171.4,
+4350.7
+]
+],
+"kind": "street",
+"real_name": "Boladale Street",
+"real_class": "tertiary",
+"overture_id": "40020f8d-0df1-4954-8423-8be7388168e0",
+"photo_at": [
+6.555785,
+3.347282
+],
+"length_m": 129,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8171.4,
+4350.7
+],
+[
+8126.0,
+4352.3
+]
+],
+"kind": "street",
+"real_name": "Boladale Street",
+"real_class": "tertiary",
+"overture_id": "d61ecf07-a909-4347-b3c7-69f30c905d7a",
+"photo_at": [
+6.555763,
+3.34649
+],
+"length_m": 45,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8126.0,
+4352.3
+],
+[
+8126.3,
+4273.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "f765d61b-050c-4efc-89c2-a4ac8a6749a4",
+"photo_at": [
+6.556114,
+3.346285
+],
+"length_m": 79,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8011.7,
+4274.8
+],
+[
+8017.3,
+4348.7
+]
+],
+"kind": "street",
+"real_name": "Church Street",
+"real_class": "tertiary",
+"overture_id": "53068663-8513-41de-920b-7044e14bd04a",
+"photo_at": [
+6.556122,
+3.345269
+],
+"length_m": 74,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8017.3,
+4348.7
+],
+[
+7999.5,
+4350.2
+],
+[
+7975.7,
+4351.7
+],
+[
+7953.9,
+4360.1
+],
+[
+7941.1,
+4368.5
+],
+[
+7923.8,
+4382.8
+]
+],
+"kind": "street",
+"real_name": "Seinde Callisto Street",
+"real_class": "tertiary",
+"overture_id": "1e81072b-9838-45e4-a648-ab830b607c58",
+"photo_at": [
+6.55573,
+3.344833
+],
+"length_m": 103,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8126.0,
+4352.3
+],
+[
+8028.5,
+4349.1
+],
+[
+8017.3,
+4348.7
+]
+],
+"kind": "street",
+"real_name": "Boladale Street",
+"real_class": "tertiary",
+"overture_id": "c3d22b82-89ee-47ec-82d6-f2e8460a7130",
+"photo_at": [
+6.555772,
+3.345789
+],
+"length_m": 109,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8033.0,
+4407.6
+],
+[
+8023.6,
+4410.7
+]
+],
+"kind": "street",
+"real_name": "Adewale Crescent",
+"real_class": "residential",
+"overture_id": "86a86fd4-8dd0-4087-b423-c8968eb7f4ec",
+"photo_at": [
+6.555242,
+3.345395
+],
+"length_m": 10,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8017.3,
+4348.7
+],
+[
+8023.6,
+4410.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "e0484909-61cf-4e56-91c6-db0fffc60d62",
+"photo_at": [
+6.555508,
+3.345323
+],
+"length_m": 62,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8198.8,
+4409.5
+],
+[
+8054.8,
+4405.7
+],
+[
+8037.6,
+4407.4
+],
+[
+8033.0,
+4407.6
+]
+],
+"kind": "street",
+"real_name": "Adewale Crescent",
+"real_class": "residential",
+"overture_id": "2d0e71dd-9461-4d9f-b5ed-4ad52ac42e5b",
+"photo_at": [
+6.555259,
+3.346191
+],
+"length_m": 166,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8198.8,
+4409.5
+],
+[
+8171.4,
+4350.7
+]
+],
+"kind": "street",
+"real_name": "Kunle Akinosi Street",
+"real_class": "tertiary",
+"overture_id": "71c55d52-c931-4b5c-a8c6-5efa47c15e7e",
+"photo_at": [
+6.555505,
+3.346821
+],
+"length_m": 65,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8209.9,
+4435.5
+],
+[
+8198.8,
+4409.5
+]
+],
+"kind": "street",
+"real_name": "Kunle Akinosi Street",
+"real_class": "tertiary",
+"overture_id": "850df0e1-c538-4425-b2f0-b528508421ab",
+"photo_at": [
+6.555121,
+3.346997
+],
+"length_m": 28,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8023.6,
+4410.7
+],
+[
+8025.5,
+4440.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "9c9c477d-afef-454f-ad8c-5b2ad72d199c",
+"photo_at": [
+6.555095,
+3.345361
+],
+"length_m": 29,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8033.0,
+4407.6
+],
+[
+8035.3,
+4440.0
+]
+],
+"kind": "street",
+"real_name": "Sabiolegbe Street",
+"real_class": "residential",
+"overture_id": "15b86dc9-98b9-4f7d-b2e9-de489e956f38",
+"photo_at": [
+6.555109,
+3.345447
+],
+"length_m": 32,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7987.8,
+4440.0
+],
+[
+8000.4,
+4428.3
+],
+[
+8009.5,
+4420.8
+],
+[
+8013.7,
+4416.9
+],
+[
+8023.6,
+4410.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "2ffd9938-3fc7-42e4-bd58-02144e834cb8",
+"photo_at": [
+6.555104,
+3.345182
+],
+"length_m": 46,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7809.2,
+4428.2
+],
+[
+7789.7,
+4438.8
+],
+[
+7785.1,
+4440.0
+],
+[
+7779.2,
+4439.4
+],
+[
+7745.8,
+4434.1
+],
+[
+7662.9,
+4424.8
+],
+[
+7654.0,
+4424.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "e52a2656-4b4f-43cf-ae51-7bb56ee9762d",
+"photo_at": [
+6.555029,
+3.342708
+],
+"length_m": 159,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7923.8,
+4382.8
+],
+[
+7867.9,
+4440.0
+]
+],
+"kind": "street",
+"real_name": "Seinde Callisto Street",
+"real_class": "tertiary",
+"overture_id": "cf8bff33-b5c3-4657-9c7f-39f9f0f00cca",
+"photo_at": [
+6.555221,
+3.344189
+],
+"length_m": 80,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7870.0,
+4353.9
+],
+[
+7886.6,
+4354.2
+],
+[
+7895.7,
+4357.2
+],
+[
+7904.7,
+4363.7
+],
+[
+7914.8,
+4371.3
+],
+[
+7923.8,
+4382.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "07cea120-8dc2-4551-9222-35ea5056516f",
+"photo_at": [
+6.555679,
+3.344233
+],
+"length_m": 64,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7871.7,
+4278.5
+],
+[
+7870.0,
+4353.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "70c46e0f-bb82-4985-a2b9-d2e8469e2bd6",
+"photo_at": [
+6.556082,
+3.343962
+],
+"length_m": 75,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7710.1,
+4354.7
+],
+[
+7858.8,
+4353.9
+],
+[
+7870.0,
+4353.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "2321df39-f7d8-4a22-a82a-e9438d86059a",
+"photo_at": [
+6.555738,
+3.343227
+],
+"length_m": 160,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7853.9,
+4277.5
+],
+[
+7693.1,
+4271.7
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "01b0d50c-ec45-45de-bedc-4cc124bb5c63",
+"photo_at": [
+6.556458,
+3.343076
+],
+"length_m": 161,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7855.4,
+4199.8
+],
+[
+7681.2,
+4188.4
+]
+],
+"kind": "street",
+"real_name": "Alimi Oke Street",
+"real_class": "tertiary",
+"overture_id": "77559551-3b60-46d2-997c-a7730b7cbb59",
+"photo_at": [
+6.557186,
+3.343028
+],
+"length_m": 175,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7932.8,
+4199.5
+],
+[
+7886.8,
+4199.8
+],
+[
+7855.4,
+4199.8
+]
+],
+"kind": "street",
+"real_name": "Alimi Oke Street",
+"real_class": "tertiary",
+"overture_id": "7b9df388-9820-4119-96fe-78abc74b48b7",
+"photo_at": [
+6.557135,
+3.344173
+],
+"length_m": 77,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7932.8,
+4199.5
+],
+[
+7927.9,
+4123.7
+]
+],
+"kind": "street",
+"real_name": "Owoseni Street",
+"real_class": "residential",
+"overture_id": "da6b3d53-1339-4e9c-b737-77a898a7d9ba",
+"photo_at": [
+6.55748,
+3.344503
+],
+"length_m": 76,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7855.4,
+4199.8
+],
+[
+7853.9,
+4277.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "a8ee131f-165a-4d42-8276-e959c377c5c4",
+"photo_at": [
+6.556783,
+3.343814
+],
+"length_m": 78,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7871.7,
+4278.5
+],
+[
+7853.9,
+4277.5
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "2f84c7ff-01c0-4d04-996c-f8d3f19cc943",
+"photo_at": [
+6.556427,
+3.343888
+],
+"length_m": 18,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8011.7,
+4274.8
+],
+[
+7871.7,
+4278.5
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "25351172-bd9f-4d1c-89c7-248b592e3eaf",
+"photo_at": [
+6.55644,
+3.344607
+],
+"length_m": 140,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8006.5,
+4200.3
+],
+[
+8011.7,
+4274.8
+]
+],
+"kind": "street",
+"real_name": "Church Street",
+"real_class": "tertiary",
+"overture_id": "b8bc8098-60a7-44e6-9660-52370b8416d0",
+"photo_at": [
+6.556793,
+3.34522
+],
+"length_m": 75,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8126.3,
+4273.0
+],
+[
+8113.9,
+4273.2
+],
+[
+8011.7,
+4274.8
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "19d8948e-1d6b-415c-ba40-a024e8ed07a3",
+"photo_at": [
+6.556465,
+3.345765
+],
+"length_m": 115,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8206.7,
+4271.0
+],
+[
+8126.3,
+4273.0
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "c896bab4-aebb-43e8-b453-fbde5c4eda24",
+"photo_at": [
+6.556482,
+3.346652
+],
+"length_m": 80,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8113.9,
+4273.2
+],
+[
+8112.1,
+4258.8
+],
+[
+8103.2,
+4249.2
+],
+[
+8099.2,
+4242.5
+],
+[
+8098.0,
+4235.8
+],
+[
+8095.5,
+4229.9
+],
+[
+8087.6,
+4223.8
+],
+[
+8085.3,
+4219.5
+],
+[
+8084.0,
+4214.8
+],
+[
+8088.9,
+4158.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "5ced2d52-c6e4-41ac-9cd4-f97f18b99f39",
+"photo_at": [
+6.55695,
+3.345916
+],
+"length_m": 125,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8098.0,
+4235.8
+],
+[
+8107.0,
+4223.7
+],
+[
+8110.0,
+4216.2
+],
+[
+8110.6,
+4204.4
+],
+[
+8113.7,
+4196.9
+],
+[
+8121.2,
+4184.5
+],
+[
+8122.2,
+4173.0
+],
+[
+8122.6,
+4168.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "30ba4e42-fe1f-4200-97b1-badf8e201726",
+"photo_at": [
+6.55711,
+3.34615
+],
+"length_m": 74,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8006.5,
+4200.3
+],
+[
+7932.8,
+4199.5
+]
+],
+"kind": "street",
+"real_name": "Alimi Oke Street",
+"real_class": "tertiary",
+"overture_id": "a8dfced3-5f89-4360-816d-7d216a2069f1",
+"photo_at": [
+6.557134,
+3.344861
+],
+"length_m": 74,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8001.0,
+4100.0
+],
+[
+8006.5,
+4200.3
+]
+],
+"kind": "street",
+"real_name": "Church Street",
+"real_class": "tertiary",
+"overture_id": "d6d26384-b8b9-4f70-86ca-3d9c7088066c",
+"photo_at": [
+6.557584,
+3.345171
+],
+"length_m": 100,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8151.7,
+4107.0
+],
+[
+8227.3,
+4123.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "6e786198-ed23-46b1-bab3-a72524163fdb",
+"photo_at": [
+6.557898,
+3.346861
+],
+"length_m": 77,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8105.6,
+4100.0
+],
+[
+8151.7,
+4107.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "4463bd2a-7177-4f9f-bb8a-503ee9579009",
+"photo_at": [
+6.558006,
+3.346308
+],
+"length_m": 47,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7927.9,
+4123.7
+],
+[
+7925.9,
+4100.0
+]
+],
+"kind": "street",
+"real_name": "Owoseni Street",
+"real_class": "residential",
+"overture_id": "96565720-040c-461c-b969-b82691e58bc6",
+"photo_at": [
+6.55793,
+3.344472
+],
+"length_m": 24,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7560.0,
+4126.3
+],
+[
+7564.0,
+4127.2
+],
+[
+7779.7,
+4122.7
+],
+[
+7890.2,
+4123.6
+],
+[
+7927.9,
+4123.7
+]
+],
+"kind": "street",
+"real_name": "Mosaku Street",
+"real_class": "residential",
+"overture_id": "17f83730-1b1a-465c-9b3f-06a3fece4c43",
+"photo_at": [
+6.557825,
+3.342806
+],
+"length_m": 368,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7681.2,
+4188.4
+],
+[
+7582.8,
+4176.9
+]
+],
+"kind": "street",
+"real_name": "Alimi Oke Street",
+"real_class": "residential",
+"overture_id": "6a0cb852-3df5-4b6c-859c-3bc4ba1a3e3b",
+"photo_at": [
+6.55729,
+3.341789
+],
+"length_m": 99,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7661.7,
+4265.5
+],
+[
+7560.0,
+4261.1
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "ac8deb04-be3e-4a1f-b139-bcc8615aa0f1",
+"photo_at": [
+6.55656,
+3.341596
+],
+"length_m": 102,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7681.2,
+4188.4
+],
+[
+7673.4,
+4229.7
+],
+[
+7661.7,
+4265.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "ea499431-d10d-49fa-87fa-6a3007e9d37d",
+"photo_at": [
+6.556884,
+3.342169
+],
+"length_m": 80,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7693.1,
+4271.7
+],
+[
+7661.7,
+4265.5
+]
+],
+"kind": "street",
+"real_name": "Oshodi Road",
+"real_class": "tertiary",
+"overture_id": "9f173e35-9564-4e41-a028-ac7ce25e5eb6",
+"photo_at": [
+6.556512,
+3.342202
+],
+"length_m": 32,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7648.8,
+4391.2
+],
+[
+7693.1,
+4271.7
+]
+],
+"kind": "street",
+"real_name": "Adejumobi Street",
+"real_class": "residential",
+"overture_id": "fad650bf-5702-400a-a8cd-539a03ac03f8",
+"photo_at": [
+6.555944,
+3.342143
+],
+"length_m": 127,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7654.0,
+4424.4
+],
+[
+7653.8,
+4414.5
+],
+[
+7648.8,
+4391.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "87275fdd-2afb-4e31-b836-e0b19f2a5dc6",
+"photo_at": [
+6.555255,
+3.341974
+],
+"length_m": 34,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7560.0,
+4417.8
+],
+[
+7595.0,
+4426.4
+],
+[
+7609.7,
+4432.3
+],
+[
+7618.0,
+4434.5
+],
+[
+7621.3,
+4434.4
+],
+[
+7623.7,
+4432.5
+],
+[
+7629.2,
+4425.7
+],
+[
+7640.1,
+4407.1
+],
+[
+7648.8,
+4391.2
+]
+],
+"kind": "street",
+"real_name": "Adejumobi Street",
+"real_class": "residential",
+"overture_id": "e6876f69-0c6e-4b0d-b4d2-1f8ad56c9521",
+"photo_at": [
+6.555019,
+3.341636
+],
+"length_m": 115,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7574.1,
+4312.2
+],
+[
+7617.6,
+4336.1
+],
+[
+7620.0,
+4339.2
+],
+[
+7621.0,
+4343.2
+],
+[
+7613.6,
+4359.6
+],
+[
+7608.7,
+4361.6
+],
+[
+7604.2,
+4361.6
+],
+[
+7560.0,
+4350.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "af3eab24-cc71-466f-be91-7b89a3c2ab4c",
+"photo_at": [
+6.555773,
+3.341659
+],
+"length_m": 131,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7654.0,
+4424.4
+],
+[
+7651.7,
+4440.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "54bb3620-09b2-42e4-8867-eac2bcb81082",
+"photo_at": [
+6.555033,
+3.341978
+],
+"length_m": 16,
+"status": "red",
+"pics": []
+}
+]
+}

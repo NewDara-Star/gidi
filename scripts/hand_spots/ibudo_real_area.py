@@ -243,11 +243,66 @@ with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt')
             E.append({'op': 'add building', 'kind': kind, 'pts': ring_pts(P), 'storeys': st, 'note': f"real footprint {r['full_plus_code']}, {h:.1f} m", 'by_who': WHO})
             nb += 1
 
+# ---- 4. the real places: churches, mosques, schools, clinics, chemists, hotels, banks, offices (Overture places), each at its real spot
+# with a Gidi name (invented, never a real one); the real name stays in the twin record
+PNAMES = {'church': ['Living Waters Chapel', 'Grace Harvest Church', 'Oke Iye Chapel', 'Mount Zion Assembly', 'New Dawn Church', 'Cherubim Light Chapel',
+                     'Rock of Ages Chapel', 'Peace Assembly', 'Overflow Chapel', 'Shiloh Gate Church', 'Ebenezer House of Prayer', 'Bethel Light Church'],
+          'mosque': ['Nurul Islam Mosque', 'Ìbùdó Central Mosque', 'Ansar Jumat Mosque', 'Al-Furqan Mosque', 'Baitul Huda Mosque', 'Tawheed Mosque'],
+          'school': ['Bright Star Nursery and Primary', 'Ayo Kids Academy', 'Grace Comprehensive College', 'Morning Star School', 'Unity Grammar School',
+                     'Ìbùdó Model School', 'Royal Seeds Academy', 'Victory Nursery and Primary', 'Treasure Kids School', 'Excel High School'],
+          'clinic': ['Mercy Clinic', 'Good Hope Clinic', 'Life Line Medical Centre', 'St Luke Clinic'], 'hospital': ['Ìbùdó General Hospital', 'Oasis Hospital'],
+          'chemist': ['Healthway Chemist', 'Rapha Pharmacy', 'Mama Bisi Chemist', 'Sure Cure Chemist'],
+          'hotel': ['Gidi Rest Hotel', 'Palm Court Hotel', 'Royal Comfort Inn', 'Travellers Lodge'], 'bank': ['Gidi Trust Bank', 'Mainland Bank', 'Union Ọjà Bank'],
+          'government': ['Ìbùdó Council Office', 'Motor Licensing Office']}
+used = {p_['name'] for p_ in G['pois']}
+
+
+def pname(t_):
+    for n_ in PNAMES[t_]:
+        if n_ not in used:
+            used.add(n_); return n_
+    k_ = 2
+    while f"{PNAMES[t_][0]} {k_}" in used:
+        k_ += 1
+    used.add(f"{PNAMES[t_][0]} {k_}"); return f"{PNAMES[t_][0]} {k_}"
+
+
+def ptype(cat, name):
+    n_ = (name or '').lower()
+    if any(w in n_ for w in ('mosque', 'masjid', 'jumat', 'jamat', 'islam')): return 'mosque'
+    if cat in ('christian_place_of_worship', 'religious_organization', 'church_cathedral') or any(w in n_ for w in ('church', 'chapel', 'assembly', 'tabernacle')): return 'church'
+    if cat in ('place_of_learning', 'education', 'elementary_school', 'preschool', 'high_school', 'specialty_school', 'college_university', 'educational_service') or 'school' in n_ or 'college' in n_: return 'school'
+    if cat in ('pharmacy', 'drugstore') or 'pharm' in n_ or 'chemist' in n_: return 'chemist'
+    if cat in ('hospital',) or 'hospital' in n_: return 'hospital'
+    if cat in ('health_care', 'medical_center', 'clinic') or 'clinic' in n_ or 'medical' in n_: return 'clinic'
+    if cat in ('hotel', 'lodging'): return 'hotel'
+    if cat in ('bank', 'financial_service') and 'bank' in n_: return 'bank'
+    if cat == 'government_office': return 'government'
+    return None
+
+
+tp = pq.read_table(f'{DATA}/overture-lagos/lagos_overture_place.parquet', columns=['id', 'geometry', 'confidence', 'basic_category', 'names', 'bbox'])
+bbp = tp.column('bbox').to_pylist()
+PL = []
+for r in tp.take([i for i, b in enumerate(bbp) if W <= b['xmin'] <= E_ and S_ <= b['ymin'] <= N]).to_pylist():
+    nm = (r['names'] or {}).get('primary') if r['names'] else None
+    t_ = ptype(r['basic_category'], nm)
+    if not t_ or float(r['confidence'] or 0) < 0.4:
+        continue
+    pt = wkb.loads(r['geometry']); x, y = T(pt.x, pt.y)
+    if not AREA.contains(Point(x, y)) or any(Point(x, y).distance(Point(q_)) < 15 for q_ in PL):
+        continue
+    PL.append((x, y))
+    E.append({'op': 'add place', 'name': pname(t_), 'type': t_, 'x': round(x), 'y': round(y), 'note': f"real: {nm} ({r['basic_category']})", 'by_who': WHO})
+print('places:', len(PL))
+if os.environ.get('GIDI_PLACES_ONLY'):
+    E = [e for e in E if e['op'] == 'add place']
 H = json.load(open('web/hand/hub.json'))
 H['edits'] = H.get('edits', []) + E
 json.dump(H, open('web/hand/hub.json', 'w'), separators=(',', ':'), ensure_ascii=False)
 os.makedirs('docs/hand/ibudo/twins', exist_ok=True)
-json.dump({'area': AREA_ID, 'real': A['real'], 'anchor_real': A['anchor_real'], 'anchor_gidi': A['anchor_gidi'], 'streets': TWINS},
+if not os.environ.get('GIDI_PLACES_ONLY'):
+  json.dump({'area': AREA_ID, 'real': A['real'], 'anchor_real': A['anchor_real'], 'anchor_gidi': A['anchor_gidi'], 'streets': TWINS},
           open(f'docs/hand/ibudo/twins/{AREA_ID}.json', 'w'), ensure_ascii=False, indent=0)
 from collections import Counter
 print(AREA_ID, len(E), 'edits', dict(Counter(e['op'] for e in E)), '| buildings', nb, '| twin streets', len(TWINS), '| plots cleared', seen_par)

@@ -324,21 +324,20 @@
   },
   {
    "id": "ilupeju",
-   "name": "Ilupeju-type industry",
-   "real": "Ilupeju industrial estate east of the trunk road: factory sheds 100-200 m, truck yards, a big church in a shed",
+   "name": "Jibowu coach strip",
+   "real": "Jibowu on Ikorodu Rd: the interstate coach company yards behind red railings, booking halls, touts and loaders, a colonial office, buses leaving for the rest of the country (chosen over Ilupeju's factories: more life, and it links Ìbùdó to the rest of Gidi)",
    "anchor_real": [
-    6.552,
-    3.357
+    6.5188,
+    3.3683
    ],
    "anchor_gidi": [
-    9000,
-    4760
+    8968,
+    4775
    ],
    "streets": [
-    "Ilupeju Industrial Ave",
-    "Industrial St",
-    "Industrial Cres",
-    "Oduwobi St"
+    "Ikorodu Rd at Jibowu",
+    "Jibowu St",
+    "the coach yards"
    ],
    "pts": [
     [
