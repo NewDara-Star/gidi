@@ -63,7 +63,7 @@ def check_roads(gen, bgeoms, G):
         add(p, HALF["street"], "street")
     for p in gen.get("lanes", []):
         add(p, HALF["lane"], "lane")
-    for m in gen["mains"]:
+    for m in gen.get("mains_now", gen["mains"]):   # the finished map's mains when there is one (hand edits add and take away)
         add(m["pts"], HALF["main"], "main " + m.get("name", ""))
     for a in G["arterials"]:
         if a["cls"] in ("art", "exp"):
@@ -87,7 +87,7 @@ def check_roads(gen, bgeoms, G):
                 shapes.append((ln.buffer(XS.building_line(k) - 0.1), label + " (building line)", ok))   # 10 cm: corners are rounded to 0.1 m
         for p in gen.get("streets", []): bl(p, "street", "street")
         for p in gen.get("lanes", []): bl(p, "lane", "lane")
-        for m in gen["mains"]: bl(m["pts"], "main", "main " + m.get("name", ""))
+        for m in gen.get("mains_now", gen["mains"]): bl(m["pts"], "main", "main " + m.get("name", ""))
         for a in G["arterials"]:
             if a["cls"] in ("art", "exp"): bl(a["pts"], a["cls"], "arterial " + a["name"], {"toll booth", "toll canopy", "border booth", "border canopy", "drums", "checkpoint"})   # a task force checkpoint stands on the shoulder (still never on the carriageway)
         zs_ = [z for z in G.get("encroach", []) if z.get("d") == gen["id"]] + gen.get("encroach", [])   # market streets are placed in the bake
@@ -459,10 +459,12 @@ def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     if gen.get("layout") == "v2":   # Gidi is hand-made from here: check the finished map (hand edits applied), not the raw generated file
         gen = dict(gen)
-        for k in ("buildings", "streets", "lanes", "storeys"):
+        for k in ("buildings", "streets", "lanes", "paths", "storeys"):   # paths too: hand edits add and take them away
             if (G.get(k) or {}).get(did) is not None:
                 gen[k] = G[k][did]
         gen["mains"] = gen["mains"] + [{"name": m.get("name", ""), "pts": m["pts"]} for m in G["mains"] if m.get("d") == did and m.get("hand")]
+        gen["structures"] = [s for s in G.get("structures", []) if s.get("d") == did]   # and its decks
+        gen["mains_now"] = [{"name": m.get("name", ""), "pts": m["pts"]} for m in G["mains"] if m.get("d") == did]
     bg = [poly([p for p in b[1:]]) for b in gen["buildings"]]
     land = land_of(gen, G)
     res = []

@@ -1,0 +1,230 @@
+"""Ìbùdó, one area of the child plan built from its real place (owner, 19 Oct 2026: "you are taking streets from this place ... so you can
+have real life images that we can now model from"). docs/hand/ibudo/child_plan.json says which real place an area is and where it sits
+(true scale, north up). This writes hand edits into web/hand/hub.json:
+- the area is cleared (houses, streets, lanes, paths, plots, slip roads, decks and places that were there);
+- the new arterial and rail lines (scripts/layout_v2.py) get their corridors through the whole district;
+- the real streets go in (Overture Maps transportation, ODbL, from OpenStreetMap: ~/Real-world/research/data/overture-lagos), the trunk
+  road, the expressway and the rail being the layout's own lines;
+- the real building footprints go in (Google Open Buildings v3, CC-BY 4.0 / ODbL), their storeys from Open Buildings 2.5D 2023 heights;
+- every street's twin is written to docs/hand/ibudo/twins/<area>.json: the real street it is, its real name and a point to photograph.
+Nothing is generated: the shapes are the real ones; Gidi's own changes come by hand after.
+Usage: GIDI_BASE=<baked data before the area> python3 scripts/hand_spots/ibudo_real_area.py oshodi_core
+"""
+import csv
+import gzip
+import json
+import math
+import os
+import sys
+
+import numpy as np
+import pyarrow.parquet as pq
+from shapely import wkb, wkt
+from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
+from shapely.ops import unary_union
+
+AREA_ID = sys.argv[1]
+DATA = os.path.expanduser('~/Real-world/research/data')
+CP = json.load(open('docs/hand/ibudo/child_plan.json'))
+A = next(a for a in CP['areas'] if a['id'] == AREA_ID)
+S = open(os.environ.get('GIDI_BASE', 'web/gidi-data.js')).read()
+G = json.loads(S[S.index('{'):S.rstrip().rstrip(';').rindex('}') + 1])
+L = json.load(open('web/layout-v2.json'))
+HUB = Polygon(L['districts']['hub'])
+AREA = Polygon(A['pts']).intersection(HUB.buffer(-6))
+WHO = f"Claude, 19 Oct 2026: Ìbùdó from real places ({A['name']})"
+M_LAT, M_LON = 110600.0, 109900.0
+(LA0, LO0), (GX0, GY0) = A['anchor_real'], A['anchor_gidi']
+R = lambda xy: [round(xy[0], 1), round(xy[1], 1)]
+
+
+def T(lo, la):   # real -> Gidi
+    return (GX0 + (lo - LO0) * M_LON, GY0 - (la - LA0) * M_LAT)
+
+
+def Tinv(x, y):   # Gidi -> real (lat, lon)
+    return (LA0 - (y - GY0) / M_LAT, LO0 + (x - GX0) / M_LON)
+
+
+x0, y0, x1, y1 = AREA.bounds
+N, W = Tinv(x0 - 60, y0 - 60); S_, E_ = Tinv(x1 + 60, y1 + 60)
+E = []
+
+# ---- the layout's lines through the district: corridors (half-widths as the generator clears them, scripts/gen_fabric.py)
+CLR = {'exp': 18.2, 'art': 12.5}   # past the building line (scripts/cross_sections.py: exp 18, art 10)
+LINES = [(a['name'], LineString(a['pts']), CLR.get(a['cls'], 12.5)) for a in L['arterials'] if LineString(a['pts']).distance(HUB) < 30]
+RAIL = LineString(L['rail']['pts'])
+CORR = unary_union([g.buffer(w) for n, g, w in LINES] + [RAIL.buffer(7)]).intersection(HUB.buffer(5))
+
+# ---- 1. what is there goes: in the area, and in the new corridors through the district
+B = G['buildings']['hub']
+CLEAR = AREA.union(CORR.intersection(HUB))
+for b in B:
+    if len(b) > 3 and Polygon(b[1:]).intersects(CLEAR):
+        q = Polygon(b[1:]).representative_point()
+        E.append({'op': 'delete building', 'at': R((q.x, q.y)), 'kind': b[0], 'note': f"cleared for {A['name']} (real) or a layout line", 'by_who': WHO, 'early': True})
+LIVE = [[k, LineString(p)] for k in ('streets', 'lanes') for p in G[k].get('hub', [])]
+FIXED = [LineString(m['pts']) for m in G['mains'] if len(m['pts']) > 1] + [g for n, g, w in LINES]
+
+
+def joined(part, own, live):
+    return any(w is not own and w.distance(Point(part.coords[i])) < 1.5 for i in (0, -1) for w in live if w.distance(part) < 2)
+
+
+def lone_point(g, inside):
+    others = [h for k, h in LIVE if h is not g and h.distance(g) < 6]
+    cand = [g.interpolate(t * g.length / 20) for t in range(21)]
+    cand = [q for q in cand if inside.buffer(0.5).contains(q)] or cand
+    return max(cand, key=lambda q: min([h.distance(q) for h in others] or [99]))
+
+
+for item in list(LIVE):
+    kind, g = item
+    if not g.intersects(CLEAR) or g.intersection(CLEAR).length < 2:
+        continue
+    q = lone_point(g, CLEAR)
+    E.append({'op': 'delete street', 'at': R((q.x, q.y)), 'note': 'cleared', 'by_who': WHO})
+    LIVE.remove(item)
+    rest = g.difference(CLEAR.buffer(1))
+    for part in getattr(rest, 'geoms', [rest]):
+        if part.geom_type == 'LineString' and part.length > 15 and joined(part, g, [h for k, h in LIVE] + FIXED):
+            part = LineString([R(c) for c in part.coords]); LIVE.append([kind, part])
+            E.append({'op': 'add street', 'kind': 'lane' if kind == 'lanes' else 'street', 'pts': [list(c) for c in part.coords], 'note': 'the part outside, kept', 'by_who': WHO})
+for p in G.get('paths', {}).get('hub', []):
+    g = LineString(p)
+    if g.intersects(CLEAR):
+        q = g.interpolate(g.project(g.intersection(CLEAR).representative_point()))
+        E.append({'op': 'delete path', 'at': R((q.x, q.y)), 'note': 'cleared', 'by_who': WHO})
+for m in G['mains']:
+    g = LineString(m['pts'])
+    if m['d'] == 'hub' and g.intersection(CLEAR).length > 0.5 * g.length:
+        E.append({'op': 'delete main', 'at': R(g.interpolate(0.5, normalized=True).coords[0]), 'note': f"the old {m['name']}: the area is rebuilt from the real place", 'by_who': WHO})
+for st in G.get('structures', []):
+    if st['d'] == 'hub' and LineString(st['pts']).intersects(AREA):
+        E.append({'op': 'delete structure', 'name': st['name'], 'note': 'the area is rebuilt from the real place', 'by_who': WHO})
+seen_par = 0
+for p in G['parcels'].get('hub', []):
+    P = Polygon(p['pts'])
+    if P.intersection(CLEAR).area > 0.3 * P.area:
+        E.append({'op': 'delete parcel', 'at': R(P.representative_point().coords[0]), 'note': 'cleared', 'by_who': WHO}); seen_par += 1
+for p in G['pois']:
+    if p.get('d') == 'hub' and AREA.contains(Point(p['x'], p['y'])):
+        E.append({'op': 'delete place', 'name': p['name'], 'at': [p['x'], p['y']], 'note': 'the area is rebuilt from the real place', 'by_who': WHO})
+
+# ---- 2. the real streets
+t = pq.read_table(f'{DATA}/overture-lagos/lagos_overture_segment.parquet', columns=['id', 'names', 'subtype', 'class', 'geometry', 'bbox'])
+bb = t.column('bbox').to_pylist()
+rows = t.take([i for i, b in enumerate(bb) if b['xmax'] >= W and b['xmin'] <= E_ and b['ymax'] >= S_ and b['ymin'] <= N]).to_pylist()
+KIND = {'primary': 'main', 'secondary': 'main', 'tertiary': 'street', 'residential': 'street', 'unclassified': 'street', 'living_street': 'street',
+        'service': 'lane', 'track': 'lane', 'unknown': 'lane', 'footway': 'path', 'steps': 'path', 'path': 'path', 'pedestrian': 'path', 'cycleway': 'path'}
+TWINS, ADDED, TWINS_E = [], [], []
+KEEP_OUT = CORR.buffer(1)
+for r in rows:
+    if r['subtype'] != 'road' or r['class'] not in KIND:
+        continue   # the trunk road, the expressway and the rail are the layout's lines
+    g = LineString([T(*c) for c in wkb.loads(r['geometry']).coords]).intersection(AREA).difference(KEEP_OUT)
+    name = (r['names'] or {}).get('primary') if r['names'] else None
+    for part in getattr(g, 'geoms', [g]):
+        if part.geom_type != 'LineString' or part.length < 8:
+            continue
+        kind = KIND[r['class']]
+        pts = [R(c) for c in part.coords]
+        if kind == 'path':
+            E.append({'op': 'add path', 'pts': pts, 'note': f"real: {name or r['class']}", 'by_who': WHO})
+        else:
+            E.append({'op': 'add street', 'kind': kind, 'pts': pts, **({'name': ''} if kind == 'main' else {}), 'note': f"real: {name or r['class']}", 'by_who': WHO})
+        TWINS_E.append(E[-1])
+        ADDED.append((kind, part, E[-1]))
+        mid = part.interpolate(0.5, normalized=True); la, lo = Tinv(mid.x, mid.y)
+        TWINS.append({'gidi': pts, 'kind': kind, 'real_name': name, 'real_class': r['class'], 'overture_id': r['id'],
+                      'photo_at': [round(la, 6), round(lo, 6)], 'length_m': round(part.length), 'status': 'red', 'pics': []})
+# a street trimmed at a layout line's corridor runs on to the line, as the real one meets the real road
+from shapely.ops import nearest_points
+EDGE = KEEP_OUT.boundary
+for i, (k, g, e) in enumerate(ADDED):
+    cs = list(g.coords)
+    for end in (0, -1):
+        p_ = Point(cs[end])
+        if p_.distance(EDGE) > 2.0:
+            continue
+        near = min(((ln.distance(p_), ln) for n, ln, w in LINES), key=lambda t_: t_[0])
+        if near[0] < 25:
+            q = nearest_points(near[1], p_)[0]
+            cs = cs + [(q.x, q.y)] if end == -1 else [(q.x, q.y)] + cs
+    if len(cs) != len(g.coords):
+        g = LineString(cs); e['pts'] = [R(c) for c in cs]; ADDED[i] = (k, g, e)
+# pieces cut off by the clipping lead nowhere: only what joins the network (the layout's lines, mains, the streets kept) stays
+roots = [g for n, g, w in LINES] + [LineString(m['pts']) for m in G['mains'] if len(m['pts']) > 1] + [h for k, h in LIVE]
+items = [g for k, g, e in ADDED]
+ok = set()
+frontier = [i for i, g in enumerate(items) if any(g.distance(r_) < 1.0 for r_ in roots if r_.distance(g) < 2)]
+ok.update(frontier)
+while frontier:
+    nxt = []
+    for i in frontier:
+        for j, h in enumerate(items):
+            if j not in ok and items[i].distance(h) < 1.0:
+                ok.add(j); nxt.append(j)
+    frontier = nxt
+dropped = [e for i, (k, g, e) in enumerate(ADDED) if i not in ok]
+E = [e for e in E if not any(e is d_ for d_ in dropped)]
+TWINS = [t_ for t_, e in zip(TWINS, TWINS_E) if not any(e is d_ for d_ in dropped)]
+ADDED = [(k, g) for i, (k, g, e) in enumerate(ADDED) if i in ok]
+print('street pieces dropped (cut off):', len(dropped))
+WAYS = unary_union([g for k, g in ADDED] + [g for n, g, w in LINES] + roots)
+
+# ---- 3. the real buildings, their storeys from the 2023 heights
+import rasterio
+from rasterio.warp import transform as rtrans
+HT = rasterio.open(f'{DATA}/open-buildings-2023/tile_shazo_x29JA.tif')
+H2 = HT.read(2)
+
+
+def height(poly):
+    c = poly.representative_point(); la, lo = Tinv(c.x, c.y)
+    xs, ys = rtrans('EPSG:4326', HT.crs, [lo], [la]); r_, c_ = HT.index(xs[0], ys[0])
+    win = H2[max(r_ - 4, 0):r_ + 5, max(c_ - 4, 0):c_ + 5]
+    v = win[win > 0.5]
+    return float(np.median(v)) if v.size else 0.0
+
+
+BL = {'main': 6.3, 'street': 4.1, 'lane': 1.7}   # the building lines (scripts/cross_sections.py) and 20 cm
+STREET_BUF = unary_union([g.buffer(BL[k]) for k, g in ADDED if k != 'path'] + [CORR]
+                         + [LineString(m['pts']).buffer(6.3) for m in G['mains'] if len(m['pts']) > 1 and LineString(m['pts']).distance(AREA) < 30]
+                         + [h.buffer(BL['lane' if k == 'lanes' else 'street']) for k, h in LIVE if h.distance(AREA) < 30])
+OLD = [Polygon(b[1:]) for b in B if len(b) > 3 and not Polygon(b[1:]).intersects(CLEAR) and Polygon(b[1:]).distance(AREA) < 20]
+PLACED = []
+INNER = AREA.buffer(-1.0)
+nb = 0
+with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt') as f:
+    for r in csv.DictReader(f):
+        la, lo = float(r['latitude']), float(r['longitude'])
+        if not (S_ <= la <= N and W <= lo <= E_) or float(r['confidence']) < 0.65:
+            continue
+        g0 = wkt.loads(r['geometry'])
+        for pg in getattr(g0, 'geoms', [g0]):
+            P = Polygon([T(*c) for c in pg.exterior.coords]).buffer(0)
+            if P.is_empty or not AREA.contains(P.centroid):
+                continue
+            P = P.intersection(INNER).difference(STREET_BUF)   # inside the area, and cut back to the building line of every road near it
+            P = max(getattr(P, 'geoms', [P]), key=lambda q: q.area) if not P.is_empty else P
+            if P.is_empty or P.geom_type != 'Polygon' or P.area < 6:
+                continue
+            P = P.simplify(0.3)
+            if any(P.intersection(q).area > 0.5 for q in OLD + PLACED if q.distance(P) < 0.5) or P.distance(WAYS) > 40:
+                continue   # overlapping one already placed (the data has a few doubles), or reached by no way
+            PLACED.append(P)
+            h = height(P)
+            st = max(1, min(12, round(h / 3.2))) if h else 1
+            kind = 'warehouse' if P.area > 2500 else ('front' if P.distance(WAYS) < 9 else 'back')
+            E.append({'op': 'add building', 'kind': kind, 'pts': [R(c) for c in list(P.exterior.coords)[:-1]], 'storeys': st, 'note': f"real footprint {r['full_plus_code']}, {h:.1f} m", 'by_who': WHO})
+            nb += 1
+
+H = json.load(open('web/hand/hub.json'))
+H['edits'] = H.get('edits', []) + E
+json.dump(H, open('web/hand/hub.json', 'w'), separators=(',', ':'), ensure_ascii=False)
+os.makedirs('docs/hand/ibudo/twins', exist_ok=True)
+json.dump({'area': AREA_ID, 'real': A['real'], 'anchor_real': A['anchor_real'], 'anchor_gidi': A['anchor_gidi'], 'streets': TWINS},
+          open(f'docs/hand/ibudo/twins/{AREA_ID}.json', 'w'), ensure_ascii=False, indent=0)
+from collections import Counter
+print(AREA_ID, len(E), 'edits', dict(Counter(e['op'] for e in E)), '| buildings', nb, '| twin streets', len(TWINS), '| plots cleared', seen_par)
