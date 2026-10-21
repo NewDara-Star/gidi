@@ -1804,28 +1804,6 @@
 "google/ibudo/twins/church_st/street_051_02_a.jpg",
 "google/ibudo/twins/church_st/street_051_02_b.jpg"
 ]
-},
-{
-"gidi": [
-[
-7560.0,
-4350.1
-],
-[
-7523.7,
-4349.2
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 36,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
 }
 ]
 }

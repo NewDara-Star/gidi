@@ -1393,49 +1393,6 @@
 "status": "n/a",
 "pics": [],
 "link": true
-},
-{
-"gidi": [
-[
-8252.6,
-4100.0
-],
-[
-8290.7,
-4092.4
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 39,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-8121.9,
-4100.0
-],
-[
-8117.0,
-4139.1
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 39,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
 }
 ]
 }

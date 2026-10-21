@@ -3854,27 +3854,6 @@
 {
 "gidi": [
 [
-8366.3,
-4451.4
-],
-[
-8362.8,
-4443.5
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 9,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
 9118.6,
 4369.1
 ],
@@ -3897,12 +3876,12 @@
 {
 "gidi": [
 [
-8664.1,
-4539.3
+8666.7,
+4535.8
 ],
 [
-8709.1,
-4597.3
+8706.8,
+4564.7
 ]
 ],
 "kind": "lane",
@@ -3910,7 +3889,7 @@
 "real_class": "gidi link",
 "overture_id": null,
 "photo_at": null,
-"length_m": 73,
+"length_m": 49,
 "status": "n/a",
 "pics": [],
 "link": true,

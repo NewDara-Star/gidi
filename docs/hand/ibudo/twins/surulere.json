@@ -5303,28 +5303,6 @@
 {
 "gidi": [
 [
-8152.3,
-5244.0
-],
-[
-8172.2,
-5252.5
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 22,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
-},
-{
-"gidi": [
-[
 7158.5,
 5145.4
 ],
@@ -5333,7 +5311,7 @@
 5146.0
 ]
 ],
-"kind": "lane",
+"kind": "street",
 "real_name": null,
 "real_class": "gidi link",
 "overture_id": null,

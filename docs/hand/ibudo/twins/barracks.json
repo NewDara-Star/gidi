@@ -531,27 +531,6 @@
 "length_m": 37,
 "status": "red",
 "pics": []
-},
-{
-"gidi": [
-[
-7663.4,
-4945.1
-],
-[
-7655.5,
-4912.9
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 33,
-"status": "n/a",
-"pics": [],
-"link": true
 }
 ]
 }
