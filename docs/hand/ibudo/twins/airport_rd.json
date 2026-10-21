@@ -9,6 +9,51 @@
 7300,
 4520
 ],
+"area_pts": [
+[
+8300.0,
+4600.0
+],
+[
+8300.0,
+4440.0
+],
+[
+6672.3,
+4440.0
+],
+[
+6628.0,
+4483.4
+],
+[
+6625.7,
+4485.6
+],
+[
+6640.0,
+4600.0
+],
+[
+8300.0,
+4600.0
+]
+],
+"real_counts": {
+"buildings": 804,
+"built_m2": 118826,
+"street_m": {
+"lane": 703,
+"street": 3850,
+"main": 990,
+"path": 73
+},
+"places": {
+"church": 9,
+"school": 4,
+"hotel": 9
+}
+},
 "streets": [
 {
 "gidi": [
@@ -974,50 +1019,6 @@
 {
 "gidi": [
 [
-7605.3,
-4600.0
-],
-[
-7649.1,
-4524.1
-],
-[
-7658.6,
-4507.3
-],
-[
-7667.6,
-4489.1
-],
-[
-7679.8,
-4459.5
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "residential",
-"overture_id": "3cead3cf-46c8-458c-b7ee-662a71b42ef5",
-"photo_at": [
-6.5519,
-3.33614
-],
-"length_m": 159,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/airport_rd/street_028_01_a.jpg",
-"google/ibudo/twins/airport_rd/street_028_01_b.jpg",
-"google/ibudo/twins/airport_rd/street_028_02_a.jpg",
-"google/ibudo/twins/airport_rd/street_028_02_b.jpg",
-"google/ibudo/twins/airport_rd/street_028_03_a.jpg",
-"google/ibudo/twins/airport_rd/street_028_03_b.jpg",
-"google/ibudo/twins/airport_rd/street_028_04_a.jpg",
-"google/ibudo/twins/airport_rd/street_028_04_b.jpg"
-]
-},
-{
-"gidi": [
-[
 7883.8,
 4514.1
 ],
@@ -1226,44 +1227,6 @@
 {
 "gidi": [
 [
-7504.6,
-4600.0
-],
-[
-7416.1,
-4473.5
-],
-[
-7395.2,
-4440.0
-]
-],
-"kind": "street",
-"real_name": "Eyinogun Street",
-"real_class": "residential",
-"overture_id": "c123cbbc-a6fa-4771-ba8e-fe840f97226b",
-"photo_at": [
-6.551995,
-3.334356
-],
-"length_m": 194,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/airport_rd/street_034_01_a.jpg",
-"google/ibudo/twins/airport_rd/street_034_01_b.jpg",
-"google/ibudo/twins/airport_rd/street_034_02_a.jpg",
-"google/ibudo/twins/airport_rd/street_034_02_b.jpg",
-"google/ibudo/twins/airport_rd/street_034_03_a.jpg",
-"google/ibudo/twins/airport_rd/street_034_03_b.jpg",
-"google/ibudo/twins/airport_rd/street_034_04_a.jpg",
-"google/ibudo/twins/airport_rd/street_034_04_b.jpg",
-"google/ibudo/twins/airport_rd/street_034_05_a.jpg",
-"google/ibudo/twins/airport_rd/street_034_05_b.jpg"
-]
-},
-{
-"gidi": [
-[
 7137.6,
 4447.7
 ],
@@ -1431,34 +1394,6 @@
 "google/ibudo/twins/airport_rd/street_038_03_b.jpg",
 "google/ibudo/twins/airport_rd/street_038_04_a.jpg",
 "google/ibudo/twins/airport_rd/street_038_04_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7327.2,
-4600.0
-],
-[
-7254.9,
-4567.6
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "residential",
-"overture_id": "a010fde3-e03b-467d-af4b-e3c4e4516a6d",
-"photo_at": [
-6.551423,
-3.332918
-],
-"length_m": 79,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/airport_rd/street_039_01_a.jpg",
-"google/ibudo/twins/airport_rd/street_039_01_b.jpg",
-"google/ibudo/twins/airport_rd/street_039_02_a.jpg",
-"google/ibudo/twins/airport_rd/street_039_02_b.jpg"
 ]
 },
 {

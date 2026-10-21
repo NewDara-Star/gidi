@@ -9,6 +9,98 @@
 7650,
 5380
 ],
+"area_pts": [
+[
+6863.9,
+5149.9
+],
+[
+6876.3,
+5183.6
+],
+[
+6876.4,
+5183.7
+],
+[
+6896.6,
+5240.6
+],
+[
+6896.6,
+5240.6
+],
+[
+6906.9,
+5270.5
+],
+[
+7057.3,
+5656.6
+],
+[
+7062.2,
+5667.0
+],
+[
+7085.6,
+5713.5
+],
+[
+7125.0,
+5710.0
+],
+[
+8092.9,
+5484.0
+],
+[
+8115.7,
+5476.4
+],
+[
+8115.8,
+5476.4
+],
+[
+8168.2,
+5459.8
+],
+[
+8168.3,
+5459.7
+],
+[
+8169.6,
+5459.4
+],
+[
+8150.0,
+5130.0
+],
+[
+6863.9,
+5149.9
+]
+],
+"real_counts": {
+"buildings": 2438,
+"built_m2": 279010,
+"street_m": {
+"street": 8692,
+"lane": 672,
+"main": 1187
+},
+"places": {
+"church": 15,
+"school": 18,
+"hospital": 7,
+"clinic": 3,
+"chemist": 3,
+"bank": 2,
+"hotel": 5
+}
+},
 "streets": [
 {
 "gidi": [
@@ -4101,296 +4193,6 @@
 {
 "gidi": [
 [
-8100.6,
-5130.8
-],
-[
-8095.0,
-5164.6
-],
-[
-8082.7,
-5214.7
-],
-[
-8078.8,
-5239.3
-],
-[
-8076.5,
-5251.1
-],
-[
-8078.2,
-5256.4
-],
-[
-8081.0,
-5263.3
-],
-[
-8085.2,
-5268.9
-],
-[
-8092.8,
-5274.5
-]
-],
-"kind": "street",
-"real_name": "Ibidun Street",
-"real_class": "residential",
-"overture_id": "2a74ed79-2d1e-4e3a-9f79-d0c1b6902e2f",
-"photo_at": [
-6.50758,
-3.359959
-],
-"length_m": 152,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_111_01_a.jpg",
-"google/ibudo/twins/surulere/street_111_01_b.jpg",
-"google/ibudo/twins/surulere/street_111_02_a.jpg",
-"google/ibudo/twins/surulere/street_111_02_b.jpg",
-"google/ibudo/twins/surulere/street_111_03_a.jpg",
-"google/ibudo/twins/surulere/street_111_03_b.jpg",
-"google/ibudo/twins/surulere/street_111_04_a.jpg",
-"google/ibudo/twins/surulere/street_111_04_b.jpg"
-]
-},
-{
-"gidi": [
-[
-8152.3,
-5244.0
-],
-[
-8154.8,
-5226.5
-],
-[
-8155.5,
-5221.7
-]
-],
-"kind": "street",
-"real_name": "Ayilara Street",
-"real_class": "residential",
-"overture_id": "74536ef4-adee-4c60-b17e-788d461ef850",
-"photo_at": [
-6.50733,
-3.360585
-],
-"length_m": 22,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_112_01_a.jpg",
-"google/ibudo/twins/surulere/street_112_01_b.jpg",
-"google/ibudo/twins/surulere/street_112_02_a.jpg",
-"google/ibudo/twins/surulere/street_112_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-8116.8,
-5332.7
-],
-[
-8113.8,
-5317.8
-],
-[
-8110.0,
-5307.7
-],
-[
-8103.4,
-5284.2
-],
-[
-8099.4,
-5280.0
-],
-[
-8092.8,
-5274.5
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "service",
-"overture_id": "1c3f7bf8-5730-4d8a-bad4-ff9efc0b3663",
-"photo_at": [
-6.506709,
-3.36017
-],
-"length_m": 65,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_113_01_a.jpg",
-"google/ibudo/twins/surulere/street_113_01_b.jpg",
-"google/ibudo/twins/surulere/street_113_02_a.jpg",
-"google/ibudo/twins/surulere/street_113_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7968.5,
-5272.4
-],
-[
-7986.6,
-5296.9
-],
-[
-8012.7,
-5329.2
-],
-[
-8014.9,
-5331.8
-],
-[
-8018.1,
-5332.1
-],
-[
-8020.7,
-5331.5
-],
-[
-8023.2,
-5330.3
-],
-[
-8037.3,
-5323.1
-],
-[
-8064.9,
-5307.2
-],
-[
-8080.2,
-5293.8
-],
-[
-8092.8,
-5274.5
-]
-],
-"kind": "street",
-"real_name": "Clegg Street",
-"real_class": "residential",
-"overture_id": "d9e23149-a0c1-4ce5-af6f-568dd9b89145",
-"photo_at": [
-6.506464,
-3.359424
-],
-"length_m": 175,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_114_01_a.jpg",
-"google/ibudo/twins/surulere/street_114_01_b.jpg",
-"google/ibudo/twins/surulere/street_114_02_a.jpg",
-"google/ibudo/twins/surulere/street_114_02_b.jpg",
-"google/ibudo/twins/surulere/street_114_03_a.jpg",
-"google/ibudo/twins/surulere/street_114_03_b.jpg",
-"google/ibudo/twins/surulere/street_114_04_a.jpg",
-"google/ibudo/twins/surulere/street_114_04_b.jpg",
-"google/ibudo/twins/surulere/street_114_05_a.jpg",
-"google/ibudo/twins/surulere/street_114_05_b.jpg"
-]
-},
-{
-"gidi": [
-[
-8103.4,
-5284.2
-],
-[
-8108.7,
-5280.1
-],
-[
-8116.9,
-5276.5
-],
-[
-8150.7,
-5273.8
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "service",
-"overture_id": "57f0eca9-3025-4ed6-8837-85b4974b64ec",
-"photo_at": [
-6.506942,
-3.360331
-],
-"length_m": 50,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_115_01_a.jpg",
-"google/ibudo/twins/surulere/street_115_01_b.jpg",
-"google/ibudo/twins/surulere/street_115_02_a.jpg",
-"google/ibudo/twins/surulere/street_115_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-8092.8,
-5274.5
-],
-[
-8096.4,
-5269.2
-],
-[
-8107.5,
-5262.0
-],
-[
-8119.4,
-5258.1
-],
-[
-8129.6,
-5256.8
-],
-[
-8139.5,
-5252.8
-],
-[
-8152.3,
-5244.0
-]
-],
-"kind": "street",
-"real_name": "Clegg Street",
-"real_class": "residential",
-"overture_id": "2cfee334-9a4d-47e3-8bad-5737b298eb9f",
-"photo_at": [
-6.507104,
-3.360291
-],
-"length_m": 69,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_116_01_a.jpg",
-"google/ibudo/twins/surulere/street_116_01_b.jpg",
-"google/ibudo/twins/surulere/street_116_02_a.jpg",
-"google/ibudo/twins/surulere/street_116_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
 7905.4,
 5289.0
 ],
@@ -4907,230 +4709,6 @@
 {
 "gidi": [
 [
-7923.8,
-5218.7
-],
-[
-7912.1,
-5228.4
-],
-[
-7902.9,
-5235.4
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "service",
-"overture_id": "7913b5a4-5e5a-43dd-b992-cffcb6e19985",
-"photo_at": [
-6.507381,
-3.358397
-],
-"length_m": 27,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_131_01_a.jpg",
-"google/ibudo/twins/surulere/street_131_01_b.jpg",
-"google/ibudo/twins/surulere/street_131_02_a.jpg",
-"google/ibudo/twins/surulere/street_131_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7918.3,
-5211.0
-],
-[
-7923.8,
-5218.7
-],
-[
-7930.6,
-5226.8
-],
-[
-7950.1,
-5248.3
-],
-[
-7968.5,
-5272.4
-]
-],
-"kind": "street",
-"real_name": "Ishola Street",
-"real_class": "residential",
-"overture_id": "a92651dc-c1b9-4ebd-994a-ebe7c6609c90",
-"photo_at": [
-6.507254,
-3.358674
-],
-"length_m": 79,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_132_01_a.jpg",
-"google/ibudo/twins/surulere/street_132_01_b.jpg",
-"google/ibudo/twins/surulere/street_132_02_a.jpg",
-"google/ibudo/twins/surulere/street_132_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7870.6,
-5144.2
-],
-[
-7883.7,
-5166.6
-],
-[
-7903.4,
-5192.7
-],
-[
-7918.3,
-5211.0
-]
-],
-"kind": "street",
-"real_name": "Ishola Street",
-"real_class": "residential",
-"overture_id": "c2088664-1034-49f2-848e-c3bca97be7f5",
-"photo_at": [
-6.50782,
-3.35821
-],
-"length_m": 82,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_133_01_a.jpg",
-"google/ibudo/twins/surulere/street_133_01_b.jpg",
-"google/ibudo/twins/surulere/street_133_02_a.jpg",
-"google/ibudo/twins/surulere/street_133_02_b.jpg",
-"google/ibudo/twins/surulere/street_133_03_a.jpg",
-"google/ibudo/twins/surulere/street_133_03_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7968.5,
-5272.4
-],
-[
-7991.8,
-5254.6
-],
-[
-7999.9,
-5247.4
-],
-[
-8006.5,
-5239.7
-],
-[
-8011.0,
-5232.9
-],
-[
-8016.4,
-5218.6
-],
-[
-8020.7,
-5198.7
-],
-[
-8028.1,
-5160.1
-],
-[
-8032.7,
-5131.8
-]
-],
-"kind": "street",
-"real_name": "Karimu Street",
-"real_class": "residential",
-"overture_id": "1d60b84f-c953-4b0d-bff6-9dc1a995df08",
-"photo_at": [
-6.507524,
-3.359348
-],
-"length_m": 162,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_134_01_a.jpg",
-"google/ibudo/twins/surulere/street_134_01_b.jpg",
-"google/ibudo/twins/surulere/street_134_02_a.jpg",
-"google/ibudo/twins/surulere/street_134_02_b.jpg",
-"google/ibudo/twins/surulere/street_134_03_a.jpg",
-"google/ibudo/twins/surulere/street_134_03_b.jpg",
-"google/ibudo/twins/surulere/street_134_04_a.jpg",
-"google/ibudo/twins/surulere/street_134_04_b.jpg",
-"google/ibudo/twins/surulere/street_134_05_a.jpg",
-"google/ibudo/twins/surulere/street_134_05_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7918.3,
-5211.0
-],
-[
-7933.4,
-5197.4
-],
-[
-7942.6,
-5189.0
-],
-[
-7945.9,
-5185.6
-],
-[
-7948.3,
-5179.9
-],
-[
-7950.4,
-5173.6
-],
-[
-7956.8,
-5144.4
-],
-[
-7959.6,
-5133.0
-]
-],
-"kind": "street",
-"real_name": "Salawu Street",
-"real_class": "residential",
-"overture_id": "38826104-3faa-4c0f-8d4b-933c47e0b643",
-"photo_at": [
-6.507829,
-3.358721
-],
-"length_m": 92,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_135_01_a.jpg",
-"google/ibudo/twins/surulere/street_135_01_b.jpg",
-"google/ibudo/twins/surulere/street_135_02_a.jpg",
-"google/ibudo/twins/surulere/street_135_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
 7748.4,
 5136.2
 ],
@@ -5158,66 +4736,6 @@
 "google/ibudo/twins/surulere/street_136_01_b.jpg",
 "google/ibudo/twins/surulere/street_136_02_a.jpg",
 "google/ibudo/twins/surulere/street_136_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7865.3,
-5134.4
-],
-[
-7870.6,
-5144.2
-]
-],
-"kind": "street",
-"real_name": "Ishola Street",
-"real_class": "residential",
-"overture_id": "79619b36-5b28-4f95-85b4-6fa55dffce78",
-"photo_at": [
-6.508176,
-3.357984
-],
-"length_m": 11,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_137_01_a.jpg",
-"google/ibudo/twins/surulere/street_137_01_b.jpg",
-"google/ibudo/twins/surulere/street_137_02_a.jpg",
-"google/ibudo/twins/surulere/street_137_02_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7879.5,
-5134.2
-],
-[
-7875.9,
-5138.2
-],
-[
-7870.6,
-5144.2
-]
-],
-"kind": "street",
-"real_name": "Oni Street",
-"real_class": "residential",
-"overture_id": "f97e5a42-35d2-4628-9b1b-e113fb9a4264",
-"photo_at": [
-6.508177,
-3.358048
-],
-"length_m": 13,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/surulere/street_138_01_a.jpg",
-"google/ibudo/twins/surulere/street_138_01_b.jpg",
-"google/ibudo/twins/surulere/street_138_02_a.jpg",
-"google/ibudo/twins/surulere/street_138_02_b.jpg"
 ]
 },
 {

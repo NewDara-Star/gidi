@@ -9,6 +9,44 @@
 7930,
 4270
 ],
+"area_pts": [
+[
+8300.0,
+4440.0
+],
+[
+8300.0,
+4100.0
+],
+[
+7560.0,
+4100.0
+],
+[
+7560.0,
+4440.0
+],
+[
+8300.0,
+4440.0
+]
+],
+"real_counts": {
+"buildings": 995,
+"built_m2": 136511,
+"street_m": {
+"street": 4431,
+"lane": 199,
+"main": 0,
+"path": 0
+},
+"places": {
+"church": 12,
+"school": 6,
+"hotel": 4,
+"mosque": 1
+}
+},
 "streets": [
 {
 "gidi": [
@@ -1704,60 +1742,6 @@
 "google/ibudo/twins/church_st/street_049_02_b.jpg",
 "google/ibudo/twins/church_st/street_049_03_a.jpg",
 "google/ibudo/twins/church_st/street_049_03_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7574.1,
-4312.2
-],
-[
-7617.6,
-4336.1
-],
-[
-7620.0,
-4339.2
-],
-[
-7621.0,
-4343.2
-],
-[
-7613.6,
-4359.6
-],
-[
-7608.7,
-4361.6
-],
-[
-7604.2,
-4361.6
-],
-[
-7560.0,
-4350.1
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "residential",
-"overture_id": "af3eab24-cc71-466f-be91-7b89a3c2ab4c",
-"photo_at": [
-6.555773,
-3.341659
-],
-"length_m": 131,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/church_st/street_050_01_a.jpg",
-"google/ibudo/twins/church_st/street_050_01_b.jpg",
-"google/ibudo/twins/church_st/street_050_02_a.jpg",
-"google/ibudo/twins/church_st/street_050_02_b.jpg",
-"google/ibudo/twins/church_st/street_050_03_a.jpg",
-"google/ibudo/twins/church_st/street_050_03_b.jpg"
 ]
 },
 {

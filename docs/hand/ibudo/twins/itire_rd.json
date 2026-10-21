@@ -1,0 +1,1263 @@
+{
+"area": "itire_rd",
+"real": "Itire Rd and Lawanson Rd, from the Ojuelegba junction west: a long lively road of markets, shops and bus stops (Lawanson market), the cross road through Ìbùdó's south",
+"anchor_real": [
+6.5107,
+3.363
+],
+"anchor_gidi": [
+8869,
+5130
+],
+"area_pts": [
+[
+8869.0,
+5185.0
+],
+[
+8869.0,
+5080.0
+],
+[
+6860.0,
+5080.0
+],
+[
+6880.0,
+5185.0
+],
+[
+8869.0,
+5185.0
+]
+],
+"real_counts": {
+"buildings": 632,
+"built_m2": 101736,
+"street_m": {
+"street": 2616,
+"main": 875,
+"lane": 192
+},
+"places": {
+"school": 14,
+"church": 10,
+"hospital": 1,
+"hotel": 4,
+"clinic": 1
+}
+},
+"streets": [
+{
+"gidi": [
+[
+8212.0,
+5149.5
+],
+[
+8210.5,
+5165.6
+],
+[
+8210.8,
+5182.4
+],
+[
+8211.1,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Randle Avenue",
+"real_class": "tertiary",
+"overture_id": "333f590a-517d-4c52-8876-745b62f2cf74",
+"photo_at": [
+6.510363,
+3.357009
+],
+"length_m": 36,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8450.7,
+5185.0
+],
+[
+8452.6,
+5176.3
+],
+[
+8459.2,
+5138.9
+]
+],
+"kind": "street",
+"real_name": "Salawu Street",
+"real_class": "residential",
+"overture_id": "989f1ac4-bd93-4b70-92a1-138e341c29c1",
+"photo_at": [
+6.510411,
+3.359234
+],
+"length_m": 47,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8406.1,
+5096.0
+],
+[
+8391.5,
+5143.2
+],
+[
+8385.2,
+5161.3
+],
+[
+8380.5,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Oni Street",
+"real_class": "residential",
+"overture_id": "f97e5a42-35d2-4628-9b1b-e113fb9a4264",
+"photo_at": [
+6.510607,
+3.358663
+],
+"length_m": 93,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8522.8,
+5185.0
+],
+[
+8527.6,
+5151.7
+]
+],
+"kind": "street",
+"real_name": "Karimu Street",
+"real_class": "residential",
+"overture_id": "f0d0f0a5-5da5-4f7e-a396-320f957cd5e5",
+"photo_at": [
+6.510353,
+3.359871
+],
+"length_m": 34,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8599.4,
+5142.7
+],
+[
+8596.4,
+5157.9
+],
+[
+8592.0,
+5178.4
+],
+[
+8590.7,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Ibidun Street",
+"real_class": "residential",
+"overture_id": "ec6a1306-8933-470b-b44c-06ff7eadeb08",
+"photo_at": [
+6.510394,
+3.360508
+],
+"length_m": 43,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8736.0,
+5173.4
+],
+[
+8754.1,
+5176.6
+],
+[
+8779.0,
+5181.8
+],
+[
+8793.5,
+5185.0
+]
+],
+"kind": "main",
+"real_name": "Ojuelegba Road",
+"real_class": "secondary",
+"overture_id": "d608d5ab-4008-4d79-830b-13e985365769",
+"photo_at": [
+6.510258,
+3.362052
+],
+"length_m": 59,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8733.1,
+5185.0
+],
+[
+8736.0,
+5173.4
+]
+],
+"kind": "street",
+"real_name": "Akintan Street",
+"real_class": "residential",
+"overture_id": "af01ac5b-df6d-46d0-b8f5-99da1d916b87",
+"photo_at": [
+6.510255,
+3.361777
+],
+"length_m": 12,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8660.2,
+5185.0
+],
+[
+8665.4,
+5159.2
+]
+],
+"kind": "street",
+"real_name": "Ayilara Street",
+"real_class": "residential",
+"overture_id": "660105b5-bc9e-4420-bfb6-ae8121721583",
+"photo_at": [
+6.510319,
+3.361124
+],
+"length_m": 26,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8867.8,
+5172.4
+],
+[
+8861.9,
+5176.9
+],
+[
+8852.2,
+5181.8
+],
+[
+8842.7,
+5184.4
+],
+[
+8832.0,
+5184.7
+],
+[
+8819.7,
+5184.4
+]
+],
+"kind": "main",
+"real_name": null,
+"real_class": "primary",
+"overture_id": "0aa26244-e8f8-4ea7-a71f-43af04b3f5fd",
+"photo_at": [
+6.510214,
+3.362783
+],
+"length_m": 51,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8858.4,
+5096.9
+],
+[
+8840.8,
+5097.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "f69bb924-29f1-4b4f-8257-bd8cd3c3d097",
+"photo_at": [
+6.510995,
+3.362823
+],
+"length_m": 18,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8594.8,
+5135.1
+],
+[
+8620.6,
+5080.0
+]
+],
+"kind": "street",
+"real_name": "Ibidun Street",
+"real_class": "residential",
+"overture_id": "cce494fe-c264-4e23-a803-23668dae04bf",
+"photo_at": [
+6.510903,
+3.360622
+],
+"length_m": 61,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8527.4,
+5080.0
+],
+[
+8536.0,
+5088.9
+],
+[
+8542.3,
+5096.3
+]
+],
+"kind": "main",
+"real_name": "Itire Road",
+"real_class": "secondary",
+"overture_id": "a82f839f-9c8c-4c84-b96e-b54515e6df7b",
+"photo_at": [
+6.51108,
+3.359961
+],
+"length_m": 22,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8664.3,
+5152.9
+],
+[
+8685.9,
+5102.5
+],
+[
+8698.1,
+5080.0
+]
+],
+"kind": "street",
+"real_name": "Ayilara Street",
+"real_class": "residential",
+"overture_id": "d33f7e70-582a-4867-8278-d3f285c138f5",
+"photo_at": [
+6.510827,
+3.361282
+],
+"length_m": 80,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8819.7,
+5184.4
+],
+[
+8756.7,
+5170.3
+],
+[
+8723.2,
+5164.0
+],
+[
+8697.7,
+5159.2
+],
+[
+8664.3,
+5152.9
+]
+],
+"kind": "main",
+"real_name": "Ojuelegba Road",
+"real_class": "secondary",
+"overture_id": "06e43492-f253-43f5-b537-e3bb43fd69e5",
+"photo_at": [
+6.51036,
+3.361847
+],
+"length_m": 159,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8665.4,
+5159.2
+],
+[
+8682.5,
+5162.0
+],
+[
+8696.6,
+5164.6
+],
+[
+8714.8,
+5168.4
+],
+[
+8736.0,
+5173.4
+]
+],
+"kind": "main",
+"real_name": "Ojuelegba Road",
+"real_class": "secondary",
+"overture_id": "f0173935-bc38-466d-9794-c8e0ef10acba",
+"photo_at": [
+6.510379,
+3.36147
+],
+"length_m": 72,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8599.4,
+5142.7
+],
+[
+8610.3,
+5147.5
+],
+[
+8621.0,
+5150.6
+],
+[
+8637.1,
+5153.6
+],
+[
+8665.4,
+5159.2
+]
+],
+"kind": "main",
+"real_name": "Itire Road",
+"real_class": "secondary",
+"overture_id": "e4caada0-fb0e-4917-8d05-451cbd37adc4",
+"photo_at": [
+6.510495,
+3.360843
+],
+"length_m": 68,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8542.3,
+5096.3
+],
+[
+8555.6,
+5115.1
+],
+[
+8564.2,
+5123.3
+],
+[
+8575.1,
+5131.0
+],
+[
+8590.0,
+5138.8
+],
+[
+8599.4,
+5142.7
+]
+],
+"kind": "main",
+"real_name": "Itire Road",
+"real_class": "secondary",
+"overture_id": "7e820842-2884-4a30-8f26-94d96fe5f052",
+"photo_at": [
+6.510746,
+3.360247
+],
+"length_m": 75,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8664.3,
+5152.9
+],
+[
+8643.0,
+5147.6
+],
+[
+8623.2,
+5143.8
+],
+[
+8606.6,
+5139.5
+],
+[
+8599.9,
+5137.1
+],
+[
+8594.8,
+5135.1
+]
+],
+"kind": "main",
+"real_name": "Itire Road",
+"real_class": "secondary",
+"overture_id": "a6de98ee-c2f7-4f6c-9aba-da402f4d3eb3",
+"photo_at": [
+6.510565,
+3.360819
+],
+"length_m": 72,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8459.2,
+5138.9
+],
+[
+8491.0,
+5146.1
+],
+[
+8527.6,
+5151.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "55ad42e9-07d1-433e-9b28-9ae03a8ee317",
+"photo_at": [
+6.510551,
+3.35958
+],
+"length_m": 70,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8527.6,
+5151.7
+],
+[
+8530.1,
+5131.4
+],
+[
+8534.5,
+5114.2
+],
+[
+8542.3,
+5096.3
+]
+],
+"kind": "street",
+"real_name": "Karimu Street",
+"real_class": "residential",
+"overture_id": "818e8987-8614-4373-8da2-bb1c0416b9d5",
+"photo_at": [
+6.510761,
+3.359935
+],
+"length_m": 58,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8594.8,
+5135.1
+],
+[
+8583.0,
+5129.2
+],
+[
+8568.0,
+5118.9
+],
+[
+8558.4,
+5110.4
+],
+[
+8545.8,
+5092.6
+],
+[
+8536.9,
+5082.5
+]
+],
+"kind": "main",
+"real_name": "Itire Road",
+"real_class": "secondary",
+"overture_id": "dbb4719a-80a1-4b70-b749-4b719cb878b5",
+"photo_at": [
+6.510851,
+3.360205
+],
+"length_m": 79,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8364.0,
+5080.0
+],
+[
+8406.1,
+5096.0
+]
+],
+"kind": "street",
+"real_name": "Omolewa Street",
+"real_class": "residential",
+"overture_id": "6100dbc7-8436-4e6f-ab0c-52492566467a",
+"photo_at": [
+6.51108,
+3.358597
+],
+"length_m": 45,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8406.1,
+5096.0
+],
+[
+8451.8,
+5102.8
+]
+],
+"kind": "street",
+"real_name": "Omolewa Street",
+"real_class": "residential",
+"overture_id": "dc9cd1b2-c039-4c68-9617-2e0b3ae5e642",
+"photo_at": [
+6.510977,
+3.358996
+],
+"length_m": 46,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8459.2,
+5138.9
+],
+[
+8462.9,
+5111.1
+],
+[
+8462.8,
+5108.8
+],
+[
+8462.3,
+5107.0
+],
+[
+8461.4,
+5105.3
+],
+[
+8459.5,
+5104.3
+],
+[
+8451.8,
+5102.8
+]
+],
+"kind": "street",
+"real_name": "Salawu Street",
+"real_class": "residential",
+"overture_id": "e84ed89b-bdfc-48e9-bfa8-13381bc803f9",
+"photo_at": [
+6.510817,
+3.359298
+],
+"length_m": 44,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8212.0,
+5149.5
+],
+[
+8177.5,
+5147.0
+],
+[
+8145.7,
+5139.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "40be0815-bf83-47ee-ae3f-c3c6ed1a634c",
+"photo_at": [
+6.510546,
+3.356716
+],
+"length_m": 67,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8145.7,
+5139.0
+],
+[
+8173.0,
+5103.7
+],
+[
+8192.8,
+5080.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "b2b17742-1e94-4481-8453-12cb4717a01f",
+"photo_at": [
+6.510889,
+3.356629
+],
+"length_m": 76,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8235.8,
+5080.0
+],
+[
+8233.8,
+5086.1
+],
+[
+8231.2,
+5092.9
+],
+[
+8223.1,
+5116.5
+],
+[
+8212.0,
+5149.5
+]
+],
+"kind": "street",
+"real_name": "Randle Avenue",
+"real_class": "tertiary",
+"overture_id": "a750d39c-1606-4ad8-82fe-547524dd52d2",
+"photo_at": [
+6.510839,
+3.357128
+],
+"length_m": 73,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8233.8,
+5086.1
+],
+[
+8268.1,
+5097.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "10d6abb8-3838-49a4-ad55-50f553c484f7",
+"photo_at": [
+6.511043,
+3.357376
+],
+"length_m": 36,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7966.8,
+5160.0
+],
+[
+7917.5,
+5159.8
+],
+[
+7895.1,
+5158.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "ff7dcb6d-6a72-4abc-9016-e530663f2f8c",
+"photo_at": [
+6.51043,
+3.354464
+],
+"length_m": 72,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7892.9,
+5080.0
+],
+[
+7894.2,
+5112.6
+],
+[
+7894.2,
+5146.5
+],
+[
+7895.1,
+5158.0
+]
+],
+"kind": "street",
+"real_name": "Falolu Road",
+"real_class": "residential",
+"overture_id": "37cafaa7-e843-49ea-b1ef-1649808ea697",
+"photo_at": [
+6.510799,
+3.35413
+],
+"length_m": 78,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8036.9,
+5080.0
+],
+[
+8036.6,
+5094.1
+],
+[
+8035.1,
+5124.5
+],
+[
+8028.4,
+5149.1
+],
+[
+8026.5,
+5152.3
+],
+[
+8023.6,
+5155.7
+],
+[
+8020.6,
+5157.4
+],
+[
+8017.0,
+5158.5
+],
+[
+8000.1,
+5159.1
+],
+[
+7966.8,
+5160.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "9c4c676e-de56-4399-abbd-7d5ac03be42b",
+"photo_at": [
+6.510547,
+3.355356
+],
+"length_m": 136,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8105.6,
+5185.0
+],
+[
+8145.7,
+5139.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "fff20a96-2603-4aba-b0b4-950d99e0207f",
+"photo_at": [
+6.510411,
+3.356236
+],
+"length_m": 61,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7966.8,
+5160.0
+],
+[
+7967.4,
+5185.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "16cf3dc7-7543-4697-b429-5417990838f0",
+"photo_at": [
+6.510316,
+3.354793
+],
+"length_m": 25,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7895.1,
+5158.0
+],
+[
+7894.4,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Falolu Road",
+"real_class": "residential",
+"overture_id": "9973cd40-64c3-4520-b391-1156e2df8b49",
+"photo_at": [
+6.510325,
+3.354135
+],
+"length_m": 27,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7745.7,
+5185.0
+],
+[
+7745.5,
+5156.1
+],
+[
+7744.9,
+5121.7
+],
+[
+7745.0,
+5080.0
+]
+],
+"kind": "main",
+"real_name": "Ogunlana Drive",
+"real_class": "secondary",
+"overture_id": "dbcf44c3-11a3-4d51-92b2-c4a669a8daba",
+"photo_at": [
+6.510677,
+3.352774
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7737.2,
+5080.0
+],
+[
+7737.1,
+5121.7
+],
+[
+7737.3,
+5156.1
+],
+[
+7737.7,
+5185.0
+]
+],
+"kind": "main",
+"real_name": "Ogunlana Drive",
+"real_class": "secondary",
+"overture_id": "34048f57-06c0-496f-838a-3063f6541abc",
+"photo_at": [
+6.510677,
+3.352701
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7043.3,
+5185.0
+],
+[
+7042.9,
+5155.7
+]
+],
+"kind": "street",
+"real_name": "Anjorin Street",
+"real_class": "residential",
+"overture_id": "7294ceb2-fc8f-4556-9f86-5d2e1c96d79d",
+"photo_at": [
+6.510335,
+3.346386
+],
+"length_m": 29,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+6875.2,
+5159.6
+],
+[
+6909.0,
+5160.9
+],
+[
+7042.9,
+5155.7
+]
+],
+"kind": "street",
+"real_name": "Adegbola Street",
+"real_class": "residential",
+"overture_id": "f5da51b6-45fc-4a99-84ab-2730b46f96a1",
+"photo_at": [
+6.510438,
+3.345621
+],
+"length_m": 168,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7042.9,
+5155.7
+],
+[
+7044.5,
+5101.3
+],
+[
+7044.1,
+5080.0
+]
+],
+"kind": "street",
+"real_name": "Anjorin Street",
+"real_class": "residential",
+"overture_id": "bed8eb26-a7c0-41a8-9ac8-722fd49ffbae",
+"photo_at": [
+6.51081,
+3.346394
+],
+"length_m": 76,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7249.3,
+5185.0
+],
+[
+7250.0,
+5080.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "cc6b7d92-e908-4713-bf49-a6ff93665ebc",
+"photo_at": [
+6.510677,
+3.348265
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7288.7,
+5080.0
+],
+[
+7291.9,
+5158.7
+],
+[
+7291.9,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Jubril Martins Street",
+"real_class": "unclassified",
+"overture_id": "d702220e-0e2c-421f-81f9-b3698b8d0dbe",
+"photo_at": [
+6.510677,
+3.34864
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+}
+]
+}

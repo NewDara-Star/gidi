@@ -9,6 +9,90 @@
 7150,
 4900
 ],
+"area_pts": [
+[
+7600.0,
+4600.0
+],
+[
+6640.0,
+4600.0
+],
+[
+6752.4,
+4880.9
+],
+[
+6756.0,
+4888.8
+],
+[
+6756.1,
+4888.8
+],
+[
+6783.0,
+4948.8
+],
+[
+6783.0,
+4948.9
+],
+[
+6808.4,
+5008.4
+],
+[
+6808.5,
+5008.5
+],
+[
+6832.5,
+5067.5
+],
+[
+6832.5,
+5067.6
+],
+[
+6855.0,
+5125.9
+],
+[
+6855.0,
+5126.0
+],
+[
+6863.9,
+5150.0
+],
+[
+7600.0,
+5150.0
+],
+[
+7600.0,
+4600.0
+]
+],
+"real_counts": {
+"buildings": 1103,
+"built_m2": 200925,
+"street_m": {
+"main": 698,
+"lane": 1449,
+"street": 4899
+},
+"places": {
+"hotel": 10,
+"church": 10,
+"school": 4,
+"chemist": 2,
+"hospital": 1,
+"clinic": 1,
+"government": 1
+}
+},
 "streets": [
 {
 "gidi": [
@@ -2321,60 +2405,6 @@
 {
 "gidi": [
 [
-7600.0,
-5102.5
-],
-[
-7555.3,
-5107.0
-],
-[
-7458.3,
-5115.4
-],
-[
-7453.4,
-5108.5
-],
-[
-7453.6,
-5097.0
-],
-[
-7458.4,
-5049.7
-],
-[
-7475.1,
-5003.7
-],
-[
-7479.4,
-4994.4
-],
-[
-7490.9,
-4993.1
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "service",
-"overture_id": "5ebb6c33-d640-472e-8a4c-774f7d4d8bb5",
-"photo_at": [
-6.544054,
-3.334823
-],
-"length_m": 281,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/ajao/street_068_08_a.jpg",
-"google/ibudo/twins/ajao/street_068_08_b.jpg"
-]
-},
-{
-"gidi": [
-[
 7350.9,
 4922.8
 ],
@@ -2632,34 +2662,6 @@
 "google/ibudo/twins/ajao/street_074_07_b.jpg",
 "google/ibudo/twins/ajao/street_074_08_a.jpg",
 "google/ibudo/twins/ajao/street_074_08_b.jpg"
-]
-},
-{
-"gidi": [
-[
-7600.0,
-4982.2
-],
-[
-7490.9,
-4993.1
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "service",
-"overture_id": "1d50c433-d386-452f-aba2-542b22e57f20",
-"photo_at": [
-6.545208,
-3.335598
-],
-"length_m": 110,
-"status": "amber",
-"pics": [
-"google/ibudo/twins/ajao/street_075_02_a.jpg",
-"google/ibudo/twins/ajao/street_075_02_b.jpg",
-"google/ibudo/twins/ajao/street_075_03_a.jpg",
-"google/ibudo/twins/ajao/street_075_03_b.jpg"
 ]
 }
 ]

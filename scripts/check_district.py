@@ -455,6 +455,13 @@ def check_gutters(did, G, bg):
     return len(bad), "%d runs, %d crossings. %s" % (len(runs), n, worst(bad))
 
 
+def check_hand_landed(did, G):
+    """every hand edit (and every area built from its real place) found what it acts on: one that found nothing means the map under
+    it moved, and the edit is silently lost (21 Oct 2026: 227 such deletes left old houses standing under the real ones)"""
+    m = [x["what"] for x in G.get("hand_misses", []) if x.get("d") == did]
+    return len(m), "; ".join(m[:3])
+
+
 def run(did):
     gen, net, G = load("gen-%s.json" % did), load("network.json"), load_city()
     if gen.get("layout") == "v2":   # Gidi is hand-made from here: check the finished map (hand edits applied), not the raw generated file
@@ -487,6 +494,7 @@ def run(did):
     if gen.get("fabric") == "lagos":
         add("15 street furniture on walkways", check_furniture(did, G))
     add("16 things on their ground", check_things(did, G))
+    add("17 hand edits all landed", check_hand_landed(did, G))
     kinds = {}
     for p in gen.get("parcels", []):
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
