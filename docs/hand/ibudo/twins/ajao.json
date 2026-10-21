@@ -9,79 +9,14 @@
 7150,
 4900
 ],
-"area_pts": [
-[
-7600.0,
-4600.0
-],
-[
-6640.0,
-4600.0
-],
-[
-6752.4,
-4880.9
-],
-[
-6756.0,
-4888.8
-],
-[
-6756.1,
-4888.8
-],
-[
-6783.0,
-4948.8
-],
-[
-6783.0,
-4948.9
-],
-[
-6808.4,
-5008.4
-],
-[
-6808.5,
-5008.5
-],
-[
-6832.5,
-5067.5
-],
-[
-6832.5,
-5067.6
-],
-[
-6855.0,
-5125.9
-],
-[
-6855.0,
-5126.0
-],
-[
-6863.9,
-5150.0
-],
-[
-7600.0,
-5150.0
-],
-[
-7600.0,
-4600.0
-]
-],
+"area_wkt": "POLYGON ((6752.4 4880.9, 6756 4888.8, 6756.1 4888.8, 6783 4948.8, 6783 4948.9, 6808.4 5008.4, 6808.5 5008.5, 6832.5 5067.5, 6832.5 5067.6, 6855 5125.9, 6855 5126, 6863.9 5149.9, 6873.3 5149.8, 6860 5080, 7600 5080, 7600 4600, 6640 4600, 6752.4 4880.9))",
 "real_counts": {
-"buildings": 1103,
-"built_m2": 200925,
+"buildings": 988,
+"built_m2": 186063,
 "street_m": {
-"main": 698,
-"lane": 1449,
-"street": 4899
+"main": 625,
+"lane": 1223,
+"street": 4490
 },
 "places": {
 "hotel": 10,
@@ -94,6 +29,37 @@
 }
 },
 "streets": [
+{
+"gidi": [
+[
+7493.4,
+4600.0
+],
+[
+7528.7,
+4621.7
+],
+[
+7542.8,
+4630.4
+],
+[
+7600.0,
+4665.8
+]
+],
+"kind": "main",
+"real_name": "Apapa-Oworonshoki Expressway",
+"real_class": "primary",
+"overture_id": "b5865215-5a45-4f5d-8986-a6dd9cd63db4",
+"photo_at": [
+6.548416,
+3.33561
+],
+"length_m": 125,
+"status": "red",
+"pics": []
+},
 {
 "gidi": [
 [
@@ -2084,7 +2050,8 @@
 "google/ibudo/twins/ajao/street_058_01_b.jpg",
 "google/ibudo/twins/ajao/street_058_02_a.jpg",
 "google/ibudo/twins/ajao/street_058_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2136,7 +2103,8 @@
 "google/ibudo/twins/ajao/street_059_01_b.jpg",
 "google/ibudo/twins/ajao/street_059_02_a.jpg",
 "google/ibudo/twins/ajao/street_059_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2370,7 +2338,8 @@
 "pics": [
 "google/ibudo/twins/ajao/street_066_02_a.jpg",
 "google/ibudo/twins/ajao/street_066_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2400,7 +2369,63 @@
 "pics": [
 "google/ibudo/twins/ajao/street_067_02_a.jpg",
 "google/ibudo/twins/ajao/street_067_02_b.jpg"
+],
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7600.0,
+5102.5
+],
+[
+7555.3,
+5107.0
+],
+[
+7458.3,
+5115.4
+],
+[
+7453.4,
+5108.5
+],
+[
+7453.6,
+5097.0
+],
+[
+7458.4,
+5049.7
+],
+[
+7475.1,
+5003.7
+],
+[
+7479.4,
+4994.4
+],
+[
+7490.9,
+4993.1
 ]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "5ebb6c33-d640-472e-8a4c-774f7d4d8bb5",
+"photo_at": [
+6.544054,
+3.334823
+],
+"length_m": 281,
+"status": "amber",
+"pics": [
+"google/ibudo/twins/ajao/street_068_08_a.jpg",
+"google/ibudo/twins/ajao/street_068_08_b.jpg"
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2663,6 +2688,98 @@
 "google/ibudo/twins/ajao/street_074_08_a.jpg",
 "google/ibudo/twins/ajao/street_074_08_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+7569.6,
+4817.2
+],
+[
+7577.3,
+4736.7
+],
+[
+7578.8,
+4697.8
+],
+[
+7579.7,
+4695.5
+],
+[
+7583.4,
+4692.3
+],
+[
+7591.5,
+4691.8
+],
+[
+7600.0,
+4697.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "75912ad0-1257-459f-8ff5-b6d2df8687b3",
+"photo_at": [
+6.547402,
+3.335881
+],
+"length_m": 145,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7600.0,
+4982.2
+],
+[
+7490.9,
+4993.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "1d50c433-d386-452f-aba2-542b22e57f20",
+"photo_at": [
+6.545208,
+3.335598
+],
+"length_m": 110,
+"status": "amber",
+"pics": [
+"google/ibudo/twins/ajao/street_075_02_a.jpg",
+"google/ibudo/twins/ajao/street_075_02_b.jpg",
+"google/ibudo/twins/ajao/street_075_03_a.jpg",
+"google/ibudo/twins/ajao/street_075_03_b.jpg"
+]
+},
+{
+"gidi": [
+[
+7591.5,
+4691.8
+],
+[
+7600.0,
+4665.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 27,
+"status": "n/a",
+"pics": [],
+"link": true
 }
 ]
 }

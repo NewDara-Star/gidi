@@ -215,7 +215,7 @@ def _clear_area(out, d, e, stage):
             _drop_building(out, d, i)
     if stage == 'late':
         A = wkt.loads(e.get('places_wkt', e['wkt'])); PA = prep(A)
-        out['pois'] = [p for p in out['pois'] if not (p.get('d') == d and PA.contains(Point(p['x'], p['y'])))]
+        out['pois'] = [p for p in out['pois'] if not (p.get('d') == d and p.get('type') != 'story' and PA.contains(Point(p['x'], p['y'])))]   # the story's places stay
         out['structures'] = [x for x in out.get('structures', []) if not (x.get('d') == d and len(x['pts']) > 1 and PA.intersects(LineString(x['pts'])))]
         return
     Cb = C.buffer(1)

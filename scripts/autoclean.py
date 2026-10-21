@@ -32,7 +32,7 @@ def ring_pts(g):   # a footprint's corners, rounded to 0.1 m, with no corner rep
 def _valid(b):   # a footprint whose outline crosses itself is mended (its largest piece), so the cuts don't fail
     if len(b) < 4:
         return None
-    P = Polygon(b[1:])
+    P = Polygon([R(c) for c in b[1:]])   # as the bake will store it: rounding can turn a 0.04 m2 touch into a 0.2 m2 overlap
     if not P.is_valid:
         P = P.buffer(0)
         P = max(getattr(P, 'geoms', [P]), key=lambda x: x.area) if not P.is_empty else None
@@ -95,10 +95,10 @@ def plan(G, D):
         near = [bt.geometries[int(k)] for k in bt.query(P, predicate='intersects')]
         if not near:
             continue
-        Q = _biggest(P.difference(unary_union(near)))
+        Q = _biggest(P.difference(unary_union(near).buffer(0.15)))   # 15 cm more: rounding corners to 0.1 m must not bring the touch back
         if Q.is_empty or Q.geom_type != 'Polygon' or Q.area < 6:
             act[i] = (None, 'past a building line, over a gutter or round a pole: too little left'); polys[i] = None
-        else:
+        elif P.symmetric_difference(Q).area > 0.01:   # a touch the cut does not change is not a cut (it would only add corners, every bake)
             act[i] = (Q, 'cut back to the building line'); polys[i] = Q
     # overlaps: the smaller gives way
     idx = [i for i, P in enumerate(polys) if P is not None]
@@ -134,13 +134,60 @@ def plan(G, D):
 def clean(out, D):
     """The plan carried out on the bake's own data. Returns (cut back, gone, scraps)."""
     import hand
-    acts, scraps = plan(out, D)
-    cut = gone = 0
-    for i, Q, why in sorted(acts, key=lambda a: -a[0]):   # from the end, so removing one does not move the others
-        if Q is None:
-            hand._drop_building(out, D, i); gone += 1
-        else:
-            out['buildings'][D][i] = [out['buildings'][D][i][0]] + ring_pts(Q); cut += 1
-    for i in sorted(scraps, reverse=True):
-        out['streets'][D].pop(i)
-    return cut, gone, len(scraps)
+    cut = gone = n_scraps = 0
+    for _ in range(4):   # again until nothing is left to do: a cut can leave a sliver against a third building
+        acts, scraps = plan(out, D)
+        if not acts and not scraps:
+            break
+        for i, Q, why in sorted(acts, key=lambda a: -a[0]):   # from the end, so removing one does not move the others
+            if Q is None:
+                hand._drop_building(out, D, i); gone += 1
+            else:
+                out['buildings'][D][i] = [out['buildings'][D][i][0]] + ring_pts(Q); cut += 1
+        for i in sorted(scraps, reverse=True):
+            out['streets'][D].pop(i)
+        n_scraps += len(scraps)
+    return cut, gone, n_scraps
+
+
+def join(out, D, link=250.0):   # 250 m: real lanes that met a real road Gidi draws elsewhere
+    """Every street, lane and path group must reach one of the district's main roads or an arterial (check 9, same rules). One that
+    does not is joined to the nearest way that does by the shortest link, nearest first, on the bake's own roads. Returns the links."""
+    from shapely.ops import nearest_points
+    W = [(k, L(p['pts'] if isinstance(p, dict) else p)) for k in ('streets', 'lanes', 'paths') for p in (out.get(k) or {}).get(D, [])]
+    W += [('main', L(m['pts'])) for m in out['mains'] if m.get('d') == D]
+    W += [('main', L(a['pts'])) for a in out['arterials'] if a['cls'] in ('art', 'exp')]
+    W += [('deck', L(s['pts'])) for s in out.get('structures', []) if s.get('d') == D and s.get('kind') in ('footbridge', 'skywalk')]
+    W = [(k, g) for k, g in W if g is not None]
+    links = []
+    while True:
+        geoms = [g for _, g in W]; tree = STRtree(geoms); parent = list(range(len(W)))
+        def find(i):
+            while parent[i] != i:
+                parent[i] = parent[parent[i]]; i = parent[i]
+            return i
+        for i, g in enumerate(geoms):
+            for j in tree.query(g.buffer(1.0)):
+                if j != i and g.distance(geoms[j]) <= 1.0:
+                    parent[find(i)] = find(int(j))
+        rooted = {find(i) for i, (k, _) in enumerate(W) if k == 'main'}
+        loose = [i for i in range(len(W)) if W[i][0] != 'deck' and find(i) not in rooted]
+        if not loose:
+            return links
+        ok_ = [i for i in range(len(W)) if find(i) in rooted]
+        ot = STRtree([geoms[i] for i in ok_])
+        best = None
+        for i in loose:
+            for j in ot.query(geoms[i].buffer(link)):
+                dd = geoms[i].distance(geoms[ok_[int(j)]])
+                if dd < link and (best is None or dd < best[0]):
+                    best = (dd, i, ok_[int(j)])
+        if best is None:
+            return links   # too far from any way: left for check 9 to show
+        dd, i, j = best
+        p_, q_ = nearest_points(geoms[i], geoms[j])
+        pts = [R(p_.coords[0]), R(q_.coords[0])]
+        if pts[0] == pts[1]:   # within a hair: a half-metre stub makes the touch count
+            pts = [pts[0], [round(pts[0][0] + 0.5, 1), pts[0][1]]]
+        k = 'lanes'   # a lane, always: the clean-up takes street pieces under 3 m as scraps, and most links are a metre or two
+        out[k].setdefault(D, []).append(pts); W.append((k, L(pts))); links.append((k, pts))

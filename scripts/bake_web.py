@@ -416,7 +416,8 @@ import roadends
 print("road ends:",roadends.road_ends(out),"| bush furniture:",furniture.furniture(out,[],bush=True))
 # ---- the clean-up of the districts built from real places (scripts/autoclean.py), every bake: a fix to it reaches every area built
 import autoclean
-print("clean-up of the real areas (cut back, gone, scraps):",{d:autoclean.clean(out,d) for d in sorted(os.path.basename(f)[:-5] for f in glob.glob("web/hand/gen/*.json"))})
+_gd=sorted(os.path.basename(f)[:-5] for f in glob.glob("web/hand/gen/*.json"))
+print("links so no street group floats:",{d:len(autoclean.join(out,d)) for d in _gd},"| clean-up of the real areas (cut back, gone, scraps):",{d:autoclean.clean(out,d) for d in _gd})
 # ---- things the kit used to invent (scripts/things.py): monuments and road signs by rule, parked vehicles, the parks, people
 # standing, boats, trains, the rail stalls; the traffic and walkers as densities ("life"). Then the furniture and monument edits
 # that wait for them
@@ -440,6 +441,7 @@ import roadtypes
 print("road types:",roadtypes.types(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
+import realnames; print("real names swapped for invented ones:",realnames.rename(out))   # Gidi's names are its own (docs/hand/realnames.txt)
 out["hand_misses"]=hand.MISSES   # hand edits that found nothing: check 17 fails on any
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)
 open("web/gidi-data.js","w").write("window.GIDI="+s+";")

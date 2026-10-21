@@ -9,28 +9,7 @@
 7930,
 4270
 ],
-"area_pts": [
-[
-8300.0,
-4440.0
-],
-[
-8300.0,
-4100.0
-],
-[
-7560.0,
-4100.0
-],
-[
-7560.0,
-4440.0
-],
-[
-8300.0,
-4440.0
-]
-],
+"area_wkt": "POLYGON ((7560 4100, 7560 4440, 8300 4440, 8300 4100, 7560 4100))",
 "real_counts": {
 "buildings": 995,
 "built_m2": 136511,
@@ -1747,6 +1726,60 @@
 {
 "gidi": [
 [
+7574.1,
+4312.2
+],
+[
+7617.6,
+4336.1
+],
+[
+7620.0,
+4339.2
+],
+[
+7621.0,
+4343.2
+],
+[
+7613.6,
+4359.6
+],
+[
+7608.7,
+4361.6
+],
+[
+7604.2,
+4361.6
+],
+[
+7560.0,
+4350.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "af3eab24-cc71-466f-be91-7b89a3c2ab4c",
+"photo_at": [
+6.555773,
+3.341659
+],
+"length_m": 131,
+"status": "amber",
+"pics": [
+"google/ibudo/twins/church_st/street_050_01_a.jpg",
+"google/ibudo/twins/church_st/street_050_01_b.jpg",
+"google/ibudo/twins/church_st/street_050_02_a.jpg",
+"google/ibudo/twins/church_st/street_050_02_b.jpg",
+"google/ibudo/twins/church_st/street_050_03_a.jpg",
+"google/ibudo/twins/church_st/street_050_03_b.jpg"
+]
+},
+{
+"gidi": [
+[
 7654.0,
 4424.4
 ],
@@ -1771,6 +1804,28 @@
 "google/ibudo/twins/church_st/street_051_02_a.jpg",
 "google/ibudo/twins/church_st/street_051_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+7560.0,
+4350.1
+],
+[
+7523.7,
+4349.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 36,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }

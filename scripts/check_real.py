@@ -17,6 +17,7 @@ import os
 import re
 import sys
 
+from shapely import wkt
 from shapely.geometry import LineString, Point, Polygon
 from shapely.strtree import STRtree
 
@@ -80,10 +81,10 @@ def run(G):
         PTS.setdefault(('furn', f['kind']), []).append(Point(f['x'], f['y']))
     for tf in sorted(glob.glob('docs/hand/ibudo/twins/*.json')):
         T = json.load(open(tf)); a = T['area']
-        if 'area_pts' not in T or 'real_counts' not in T:
+        if 'area_wkt' not in T or 'real_counts' not in T:
             res.append((a, 'R0 real figures', False, 'the twin record has no real figures: build the area again (scripts/rebuild_areas.py)'))
             continue
-        AREA = Polygon(T['area_pts']); RC = T['real_counts']
+        AREA = wkt.loads(T['area_wkt']); RC = T['real_counts']   # the area's own part: what no later area builds again
         inb = [B[int(i)] for i in bt.query(AREA, predicate='intersects') if AREA.contains(B[int(i)][1].representative_point())]
         res.append((a,) + ratio_line('R1 buildings (count)', len(inb), RC['buildings'], BAND['buildings']))
         res.append((a,) + ratio_line('R1 buildings (built-up m2)', sum(p.area for _, p in inb), RC['built_m2'], BAND['built_m2']))
@@ -93,13 +94,15 @@ def run(G):
                 res.append((a,) + ratio_line('R2 %s length' % k, have, RC['street_m'][k], BAND['street_m']))
         miss = []
         for s in T['streets']:
+            if s.get('replaced'):
+                continue
             g = LineString(s['gidi'])
             m = g.interpolate(0.5, normalized=True)
             near = [allways[int(i)] for i in wt.query(m.buffer(3))]
             if not any(w.distance(m) < 3 for w in near):
                 miss.append('%s (%s) at (%.0f,%.0f)' % (s.get('real_name') or s['kind'], s['kind'], m.x, m.y))
         res.append((a, 'R3 twin streets on the map', not miss, '%d of %d gone. %s' % (len(miss), len(T['streets']), '; '.join(miss[:3]))))
-        tw = [LineString(x['gidi']) for x in T['streets'] if len(x['gidi']) > 1]
+        tw = [LineString(x['gidi']) for x in T['streets'] if len(x['gidi']) > 1 and not x.get('replaced')]
         twt = STRtree(tw) if tw else None
         orphan = []
         for k in ('main', 'street', 'lane'):
@@ -138,40 +141,11 @@ def run(G):
         bad = {k: v for k, v in short.items() if v > 0.2 * seen[k]}   # four photos in five must find theirs on the map
         res.append((a, 'R5 livable (photo spots with it on the map)', not bad,
                     ', '.join('%s %d/%d' % (k, seen[k] - short.get(k, 0), seen[k]) for k in sorted(seen, key=lambda k: -seen[k]))))
-    # N1: real names
-    real = set()
-    for tf in glob.glob('docs/hand/ibudo/twins/*.json'):
-        for s in json.load(open(tf))['streets']:
-            if s.get('real_name'):
-                real.add(s['real_name'])
-    for idx in glob.glob(os.path.join(PICS, '*', 'INDEX.tsv')):
-        for r in csv.DictReader(open(idx), delimiter='\t'):
-            for k in ('real_name', 'panel_street'):
-                v = re.sub(r'^[\d\-/ ]+', '', r.get(k) or '').strip()
-                if v:
-                    real.add(v)
-    BOX = []   # the real places Gidi is a child of: every named road and place around them (Overture Maps, from OpenStreetMap)
-    for tf in glob.glob('docs/hand/ibudo/twins/*.json'):
-        la = [s['photo_at'][0] for s in json.load(open(tf))['streets']]; lo = [s['photo_at'][1] for s in json.load(open(tf))['streets']]
-        if la:
-            BOX.append((min(la) - 0.01, max(la) + 0.01, min(lo) - 0.01, max(lo) + 0.01))
-    try:
-        import pyarrow.parquet as pq
-        for f in ('lagos_overture_segment.parquet', 'lagos_overture_place.parquet'):
-            t = pq.read_table(os.path.expanduser('~/Real-world/research/data/overture-lagos/' + f), columns=['names', 'bbox'])
-            for n, b in zip(t.column('names').to_pylist(), t.column('bbox').to_pylist()):
-                if n and n.get('primary') and any(a0 <= b['ymin'] <= a1 and o0 <= b['xmin'] <= o1 for a0, a1, o0, o1 in BOX):
-                    real.add(n['primary'])
-    except OSError:
-        pass
-    GENERIC = {'road', 'street', 'close', 'avenue', 'crescent', 'way', 'lane', 'drive', 'st', 'rd', 'ave', 'the', 'old', 'new', 'market', 'church',
-               'mosque', 'school', 'link', 'bridge', 'expressway', 'service', 'estate', 'park', 'garage', 'motor', 'bus', 'stop', 'junction', 'oshodi',
-               'surulere', 'lagos', 'unnamed', 'none'}
-    core = lambda n: ' '.join(w for w in re.findall(r"[a-zà-ÿ']+", n.lower()) if w not in GENERIC and len(w) > 1)
-    cores = {core(n) for n in real} - {''}
-    cores = {c for c in cores if len(c) >= 5}
+    # N1: real names (the list is docs/hand/realnames.txt, made by scripts/realnames.py)
+    import realnames
+    core, cores = realnames.core, realnames.cores()
     names = [m.get('name', '') for m in G['mains']] + [p.get('name', '') for p in G['pois'] if p.get('d') == D]
-    names += [l.get('text', l.get('name', '')) if isinstance(l, dict) else '' for l in (G.get('labels') or [])]
+    names += [l.get('t', '') if isinstance(l, dict) else '' for l in (G.get('labels') or [])]
     hit = sorted({n for n in names if n and core(n) in cores})
     res.append(('all', 'N1 no real names on the map', not hit, '%d found. %s' % (len(hit), '; '.join(sorted({re.sub(r' \d+$', '', h) for h in hit})))))
     return res

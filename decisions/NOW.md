@@ -1,5 +1,24 @@
 # Where the work stands (update at the end of every session)
 
+**21 Oct 2026 (main session, Claude; branch `regen/areas`, worktree `~/gidi-worktrees/regen`).** The owner asked: close the gaps, make every fix reach what is already built, check how close each area is to the real place and to the livable-world rules, and find out why rebuilds were slow.
+- **Fixes reach everything built** (new rule in `DECISIONS.md`): Ìbùdó's 15 areas are no longer kept as 29,000 frozen hand edits. `scripts/rebuild_areas.py <base>` builds all 15 again from their real places into `web/hand/gen/hub.json` (generated, never edited by hand) in about 5 minutes; the bake applies it before `web/hand/hub.json`, which now keeps only the real hand fixes (29). After any change to the builder (`scripts/hand_spots/ibudo_real_area.py`), the child plan or the real data: make a base (bake with `web/hand/gen/` moved away), run `rebuild_areas.py` on it, then `~/gidi-worktrees/tools/bake.sh <worktree>` (outside the repo).
+  - Each area is one `clear area` edit plus what it adds; the clean-up (`scripts/autoclean.py`: building lines, overlaps, reach, scraps) runs in every bake, so a fix to it reaches every area.
+  - After all areas: cut-off street groups are joined to the nearest rooted way ("Gidi link"), and houses out of walking reach of a chemist, church/mosque or school get one (Overture misses most small ones).
+  - Story places (type `story`) survive any area clearing.
+- **Why rebuilds were slow:** three bakes per area pass, three passes, and 30,000 replayed edits each doing linear lookups. Now one bake (about 6 minutes, 4 of them street furniture) after one rebuild; `~/gidi-worktrees/tools/bake.sh` bakes twice to prove the bake is deterministic, about 13 minutes.
+- **New checks:**
+  - `scripts/check_real.py` (run by the bake script, written to `out/cd/real.txt`): per area against its real place: buildings and built-up area, street length by kind, twin streets on the map, every street has a twin, kinds of place, livable things the photos show (R5), and no real names anywhere (N1).
+  - `scripts/check_rules.py` + `decisions/CHECKS.md`: every rule in `DECISIONS.md` mapped to the check that tests it. Five rules have no check yet: safe ground, surfaces against the photos, market lanes kept clear, every type has a real twin, the item register.
+  - `scripts/draw_area.py <area>`: Gidi beside the real footprints and roads, side by side, for a checking agent.
+  - Check 17: every hand edit landed (the bake lists misses in `hand_misses`).
+- **Real names:** the name pickers use common surnames, and some match real streets near the studied places (Taiwo, Makinde, Babatunde...). `docs/hand/realnames.txt` (made by `scripts/realnames.py`) lists every real name near the twins; the bake swaps any clash for an invented name at the very end (`realnames.rename`).
+- **District checks for Ìbùdó:** all pass again after the rebuild (overlaps, cut-off lanes, reach, hand edits landed). The clean-up now repeats until nothing is left, compares footprints as they are stored (rounded to 0.1 m), and cuts 15 cm past a building line so rounding cannot bring a touch back; the join's links are always lanes (the clean-up takes street pieces under 3 m as scraps).
+- **Still failing, next (check_real):**
+  - R3 twin streets "gone": some are on the map but moved, e.g. Ladipo Street is shifted up to 15 m at a sharp bend by the road tidy-up (`scripts/roadclean.py`, shared by all districts: change it carefully, every frozen district must still pass).
+  - R1/R2: areas keep 53-80% of the real built-up area. The builder cuts every real footprint back to a building line (main 6.3 m, street 4.1 m from the centre line); real Lagos builds closer (Ladipo's sheds sit on the road). Barracks has 6% of its real street length (cause not yet looked into).
+  - R5 livable: the map has no POS stand, loading bay, okada/keke rank, vulcaniser, kiosk, stalls or betting types yet: they come with the item register.
+  - Then: commit, PR, and the checking agent with `scripts/draw_area.py` pictures.
+
 **19 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
 
 **Done:**

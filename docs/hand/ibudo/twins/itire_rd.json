@@ -9,28 +9,7 @@
 8869,
 5130
 ],
-"area_pts": [
-[
-8869.0,
-5185.0
-],
-[
-8869.0,
-5080.0
-],
-[
-6860.0,
-5080.0
-],
-[
-6880.0,
-5185.0
-],
-[
-8869.0,
-5185.0
-]
-],
+"area_wkt": "POLYGON ((8869 5080, 6860 5080, 6880 5185, 8869 5185, 8869 5080))",
 "real_counts": {
 "buildings": 632,
 "built_m2": 101736,
@@ -891,6 +870,87 @@
 {
 "gidi": [
 [
+7819.5,
+5080.0
+],
+[
+7818.5,
+5096.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "806a30ff-283c-403b-a949-c7207a36e6e4",
+"photo_at": [
+6.511077,
+3.353446
+],
+"length_m": 17,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7580.5,
+5080.0
+],
+[
+7581.2,
+5115.0
+],
+[
+7581.9,
+5175.8
+],
+[
+7581.8,
+5178.3
+]
+],
+"kind": "street",
+"real_name": "Ajao Street",
+"real_class": "residential",
+"overture_id": "88e2bbc6-cac0-4cbd-af14-5ab70129cf37",
+"photo_at": [
+6.510708,
+3.351283
+],
+"length_m": 98,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7664.8,
+5133.2
+],
+[
+7663.9,
+5161.2
+],
+[
+7664.3,
+5177.8
+]
+],
+"kind": "street",
+"real_name": "Ayo Idowu Close",
+"real_class": "residential",
+"overture_id": "1f0b35c1-15de-4f51-8d09-66d4f826c3de",
+"photo_at": [
+6.51047,
+3.352036
+],
+"length_m": 45,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 7966.8,
 5160.0
 ],
@@ -998,6 +1058,29 @@
 3.355356
 ],
 "length_m": 136,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8088.8,
+5080.0
+],
+[
+8081.1,
+5093.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "8f8a7cbf-2df9-469e-93f6-cc740b36c830",
+"photo_at": [
+6.511092,
+3.355866
+],
+"length_m": 15,
 "status": "red",
 "pics": []
 },
@@ -1135,6 +1218,180 @@
 {
 "gidi": [
 [
+7817.6,
+5163.0
+],
+[
+7819.1,
+5185.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "2ef95dca-aec4-45a1-9a3e-6e18af7e675f",
+"photo_at": [
+6.510302,
+3.35344
+],
+"length_m": 22,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7664.3,
+5177.8
+],
+[
+7581.8,
+5178.3
+]
+],
+"kind": "street",
+"real_name": "Ayo Idowu Close",
+"real_class": "residential",
+"overture_id": "bd11c336-ca30-4215-9783-106a19ca5ae2",
+"photo_at": [
+6.510266,
+3.351663
+],
+"length_m": 83,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7546.9,
+5185.0
+],
+[
+7546.9,
+5180.9
+],
+[
+7548.0,
+5178.1
+],
+[
+7550.8,
+5175.7
+],
+[
+7574.4,
+5175.6
+],
+[
+7581.9,
+5175.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "56a82264-8e68-4873-ae6c-3633fc3989bf",
+"photo_at": [
+6.510287,
+3.351098
+],
+"length_m": 42,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7477.4,
+5174.1
+],
+[
+7486.4,
+5174.4
+],
+[
+7490.3,
+5176.0
+],
+[
+7495.5,
+5178.8
+],
+[
+7500.1,
+5185.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "66fc97df-0b1b-45b0-affe-1e9487a13dbe",
+"photo_at": [
+6.510284,
+3.350457
+],
+"length_m": 27,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7366.3,
+5174.4
+],
+[
+7365.8,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Sam Shonibare Street",
+"real_class": "residential",
+"overture_id": "fa9d67c4-0849-45e7-a6b6-cb7592e7ef9e",
+"photo_at": [
+6.510251,
+3.349324
+],
+"length_m": 11,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7115.5,
+5080.0
+],
+[
+7116.6,
+5129.2
+],
+[
+7117.5,
+5174.4
+],
+[
+7117.6,
+5185.0
+]
+],
+"kind": "street",
+"real_name": "Abayomi Street",
+"real_class": "residential",
+"overture_id": "f4ed713a-5555-4706-b46d-831b65ac3c4b",
+"photo_at": [
+6.510677,
+3.347055
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 7043.3,
 5185.0
 ],
@@ -1212,6 +1469,37 @@
 {
 "gidi": [
 [
+7181.8,
+5185.0
+],
+[
+7181.3,
+5156.7
+],
+[
+7181.5,
+5086.5
+],
+[
+7181.6,
+5080.0
+]
+],
+"kind": "street",
+"real_name": "Olatilewa Street",
+"real_class": "residential",
+"overture_id": "540dfd71-c201-4bb1-a0b5-39653c4098e6",
+"photo_at": [
+6.510677,
+3.347644
+],
+"length_m": 105,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 7249.3,
 5185.0
 ],
@@ -1258,6 +1546,375 @@
 "length_m": 105,
 "status": "red",
 "pics": []
+},
+{
+"gidi": [
+[
+7364.5,
+5080.0
+],
+[
+7365.3,
+5102.3
+],
+[
+7366.3,
+5174.4
+]
+],
+"kind": "street",
+"real_name": "Sam Shonibare Street",
+"real_class": "residential",
+"overture_id": "82fa848c-5dbe-4ebf-9e69-174f12c01208",
+"photo_at": [
+6.510725,
+3.349321
+],
+"length_m": 94,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7366.3,
+5174.4
+],
+[
+7387.4,
+5174.4
+],
+[
+7429.2,
+5174.3
+],
+[
+7477.4,
+5174.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "b3e67df8-c750-46eb-bb96-4e4e1d1060a9",
+"photo_at": [
+6.510299,
+3.349832
+],
+"length_m": 111,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7477.4,
+5174.1
+],
+[
+7477.9,
+5160.8
+],
+[
+7478.7,
+5149.8
+],
+[
+7481.1,
+5146.0
+],
+[
+7486.3,
+5142.6
+],
+[
+7492.5,
+5138.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "bd4b8e58-4c3d-471b-8a8d-d50fd32cc09a",
+"photo_at": [
+6.510492,
+3.350347
+],
+"length_m": 42,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7455.6,
+5103.5
+],
+[
+7428.5,
+5102.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "75891c9d-e9cd-40ec-9071-dd2ea2ba317d",
+"photo_at": [
+6.510943,
+3.350016
+],
+"length_m": 27,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7504.9,
+5080.0
+],
+[
+7505.1,
+5100.0
+],
+[
+7505.2,
+5129.6
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "2ded329f-8efa-476e-b36c-04386bdb219d",
+"photo_at": [
+6.510928,
+3.35059
+],
+"length_m": 50,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7455.7,
+5080.0
+],
+[
+7455.6,
+5103.5
+],
+[
+7456.7,
+5116.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "9f8b8024-98f3-4daf-b5a7-c292b763cb73",
+"photo_at": [
+6.510985,
+3.350139
+],
+"length_m": 37,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7664.3,
+5177.8
+],
+[
+7666.3,
+5201.6
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 24,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+8088.8,
+5080.0
+],
+[
+8088.6,
+5043.6
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 36,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7819.1,
+5185.0
+],
+[
+7808.3,
+5220.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 37,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7364.5,
+5080.0
+],
+[
+7387.5,
+5047.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 40,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7505.2,
+5129.6
+],
+[
+7492.5,
+5138.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 16,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+7456.7,
+5116.8
+],
+[
+7481.1,
+5146.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 38,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+7117.6,
+5185.0
+],
+[
+7116.2,
+5228.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 44,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7181.8,
+5185.0
+],
+[
+7160.2,
+5244.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 64,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7818.5,
+5096.5
+],
+[
+7817.6,
+5163.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 66,
+"status": "n/a",
+"pics": [],
+"link": true
 }
 ]
 }

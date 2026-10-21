@@ -17,7 +17,9 @@ from shapely.geometry import LineString, Point, Polygon
 A, OUT = sys.argv[1], sys.argv[2]
 DATA = os.path.expanduser('~/Real-world/research/data')
 T_ = json.load(open(f'docs/hand/ibudo/twins/{A}.json'))
-AREA = Polygon(T_['area_pts'])
+from shapely import wkt as _w
+AREA = _w.loads(T_['area_wkt'])
+AREA = max(getattr(AREA, 'geoms', [AREA]), key=lambda g: g.area) if AREA.geom_type != 'Polygon' else AREA
 (LA0, LO0), (GX0, GY0) = T_['anchor_real'], T_['anchor_gidi']
 M_LAT, M_LON = 110600.0, 109900.0
 T = lambda lo, la: (GX0 + (lo - LO0) * M_LON, GY0 - (la - LA0) * M_LAT)

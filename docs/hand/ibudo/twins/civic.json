@@ -9,36 +9,7 @@
 7930,
 3940
 ],
-"area_pts": [
-[
-7560.0,
-3726.1
-],
-[
-7560.0,
-4100.0
-],
-[
-8300.0,
-4100.0
-],
-[
-8300.0,
-3729.1
-],
-[
-8282.4,
-3727.9
-],
-[
-7606.0,
-3722.4
-],
-[
-7560.0,
-3726.1
-]
-],
+"area_wkt": "POLYGON ((8300 4100, 8300 3729.1, 8282.4 3727.9, 7606 3722.4, 7560 3726.1, 7560 4100, 8300 4100))",
 "real_counts": {
 "buildings": 724,
 "built_m2": 103370,
@@ -708,6 +679,88 @@
 "gidi": [
 [
 8300.0,
+3971.9
+],
+[
+8292.6,
+3973.2
+],
+[
+8277.8,
+3979.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "0d9dccd6-2e90-4724-b517-c67e41d16870",
+"photo_at": [
+6.564186,
+3.346264
+],
+"length_m": 23,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8289.0,
+4013.1
+],
+[
+8277.8,
+3979.1
+],
+[
+8272.3,
+3966.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "878ef373-0a99-4e63-965a-ee47b5d6afec",
+"photo_at": [
+6.564052,
+3.346196
+],
+"length_m": 50,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8289.0,
+4013.1
+],
+[
+8300.0,
+4041.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "65961471-5129-4402-af9b-8c87cc02c93e",
+"photo_at": [
+6.563221,
+3.346262
+],
+"length_m": 30,
+"status": "amber",
+"pics": [
+"google/ibudo/twins/civic/street_021_01_a.jpg",
+"google/ibudo/twins/civic/street_021_01_b.jpg",
+"google/ibudo/twins/civic/street_021_02_a.jpg",
+"google/ibudo/twins/civic/street_021_02_b.jpg"
+]
+},
+{
+"gidi": [
+[
+8300.0,
 4070.5
 ],
 [
@@ -736,13 +789,179 @@
 3.346262
 ],
 "length_m": 38,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8252.6,
+4100.0
+],
+[
+8238.3,
+4080.9
+],
+[
+8234.8,
+4077.8
+],
+[
+8232.1,
+4076.6
+],
+[
+8229.9,
+4076.5
+],
+[
+8224.7,
+4078.0
+],
+[
+8181.4,
+4094.7
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "644ea763-5cbe-41b6-bda8-b8d3b76429de",
+"photo_at": [
+6.56324,
+3.34565
+],
+"length_m": 86,
 "status": "amber",
 "pics": [
-"google/ibudo/twins/civic/street_021_01_a.jpg",
-"google/ibudo/twins/civic/street_021_01_b.jpg",
-"google/ibudo/twins/civic/street_021_02_a.jpg",
-"google/ibudo/twins/civic/street_021_02_b.jpg"
+"google/ibudo/twins/civic/street_022_01_a.jpg",
+"google/ibudo/twins/civic/street_022_01_b.jpg",
+"google/ibudo/twins/civic/street_022_02_a.jpg",
+"google/ibudo/twins/civic/street_022_02_b.jpg",
+"google/ibudo/twins/civic/street_022_03_a.jpg",
+"google/ibudo/twins/civic/street_022_03_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+8121.9,
+4100.0
+],
+[
+8115.6,
+4077.3
+],
+[
+8084.6,
+4003.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "dca30415-23d8-469b-a458-b2f04fc0ec73",
+"photo_at": [
+6.563495,
+3.344589
+],
+"length_m": 104,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8084.6,
+4003.4
+],
+[
+8068.4,
+3963.4
+],
+[
+8062.6,
+3947.6
+],
+[
+8062.7,
+3944.0
+],
+[
+8065.6,
+3941.8
+],
+[
+8076.6,
+3937.6
+],
+[
+8101.7,
+3927.9
+],
+[
+8119.0,
+3921.3
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "9198121c-c535-4d15-a575-1c6686873419",
+"photo_at": [
+6.564452,
+3.344207
+],
+"length_m": 124,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+7913.0,
+4020.0
+],
+[
+7939.5,
+4020.0
+],
+[
+7964.7,
+4019.9
+],
+[
+7997.5,
+4022.7
+],
+[
+8016.9,
+4024.6
+],
+[
+8027.2,
+4024.2
+],
+[
+8037.2,
+4021.4
+],
+[
+8084.6,
+4003.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "36773929-fb67-490d-af36-d57f30bdd42c",
+"photo_at": [
+6.563749,
+3.343642
+],
+"length_m": 175,
+"status": "red",
+"pics": []
 },
 {
 "gidi": [
@@ -1153,6 +1372,70 @@
 "google/ibudo/twins/civic/street_038_02_a.jpg",
 "google/ibudo/twins/civic/street_038_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+8300.0,
+4041.1
+],
+[
+8300.0,
+4070.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 29,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8252.6,
+4100.0
+],
+[
+8290.7,
+4092.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 39,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8121.9,
+4100.0
+],
+[
+8117.0,
+4139.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 39,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }
