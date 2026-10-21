@@ -9,6 +9,17 @@
 8950,
 3900
 ],
+"area_wkt": "POLYGON ((9027.5 4002.7, 9011.4 3955.8, 8990.7 3897.3, 8969.4 3837.5, 8947.7 3776.6, 8947.6 3776.6, 8933.3 3735.7, 8830 3740, 8810 3900, 8870 4060, 9027.5 4002.7))",
+"real_counts": {
+"buildings": 88,
+"built_m2": 26350,
+"street_m": {
+"lane": 890,
+"street": 0,
+"path": 0
+},
+"places": {}
+},
 "streets": [
 {
 "gidi": [
@@ -90,6 +101,45 @@
 {
 "gidi": [
 [
+8882.0,
+3939.0
+],
+[
+8903.4,
+3992.3
+],
+[
+8886.2,
+4000.0
+],
+[
+8868.1,
+4007.4
+],
+[
+8854.9,
+4012.5
+],
+[
+8871.4,
+4059.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "578d805e-8707-40d1-8f3b-8d99cb59c72f",
+"photo_at": [
+6.562282,
+3.350394
+],
+"length_m": 160,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 8932.4,
 4037.3
 ],
@@ -109,6 +159,263 @@
 "length_m": 13,
 "status": "red",
 "pics": []
+},
+{
+"gidi": [
+[
+8858.8,
+3982.0
+],
+[
+8849.9,
+3986.4
+],
+[
+8843.3,
+3988.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "04f58472-7ade-40b2-9ec5-77dcaf7ef26b",
+"photo_at": [
+6.562725,
+3.349601
+],
+"length_m": 17,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8830.1,
+3906.5
+],
+[
+8848.7,
+3954.6
+],
+[
+8858.8,
+3982.0
+],
+[
+8868.1,
+4007.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "f74b6e79-f75c-4d07-83f2-f95bce98e284",
+"photo_at": [
+6.562986,
+3.349585
+],
+"length_m": 108,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8845.4,
+3899.6
+],
+[
+8866.0,
+3946.5
+],
+[
+8886.2,
+4000.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "b3468e5e-8951-46d2-b9b6-df545e328989",
+"photo_at": [
+6.563055,
+3.349745
+],
+"length_m": 108,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8848.7,
+3954.6
+],
+[
+8866.0,
+3946.5
+],
+[
+8882.0,
+3939.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "d79e2e0b-0b73-4809-a00c-f26bd6aada22",
+"photo_at": [
+6.563077,
+3.34973
+],
+"length_m": 37,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8814.7,
+3912.6
+],
+[
+8830.1,
+3906.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "6959141f-34f6-4faa-8ce5-7bd66d81f2db",
+"photo_at": [
+6.563414,
+3.349339
+],
+"length_m": 17,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8845.4,
+3899.6
+],
+[
+8864.8,
+3891.4
+],
+[
+8882.0,
+3939.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "e76dd8a2-f52f-4a74-ad1c-80795d2978d2",
+"photo_at": [
+6.563452,
+3.349771
+],
+"length_m": 72,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8830.1,
+3906.5
+],
+[
+8845.4,
+3899.6
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "9dc0fcdf-c7cb-4aaf-907f-6520637a0060",
+"photo_at": [
+6.563473,
+3.349479
+],
+"length_m": 17,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8845.4,
+3899.6
+],
+[
+8826.2,
+3848.1
+],
+[
+8825.2,
+3845.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "c95bb113-66a7-41c3-a185-56380b0c124c",
+"photo_at": [
+6.563748,
+3.349456
+],
+"length_m": 58,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8814.1,
+3867.3
+],
+[
+8830.1,
+3906.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "5bee74e8-681d-4d6f-bf8f-8ea501797e0f",
+"photo_at": [
+6.563618,
+3.349336
+],
+"length_m": 42,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8871.4,
+4059.5
+],
+[
+8836.8,
+4073.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 37,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }

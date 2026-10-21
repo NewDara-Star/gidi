@@ -1,6 +1,6 @@
 # Bake Gidi map v0.3 into JSON for the web map: districts, water, arterials, generated local streets, POIs.
 # Units: metres, origin top-left, y down. Map units from map02.py are 0.8 km.
-import json, math, random, re, os
+import glob, json, math, random, re, os
 from shapely.geometry import Polygon, LineString, Point, MultiLineString
 from shapely.ops import unary_union, nearest_points
 src=open("scripts/map02.py").read()
@@ -414,6 +414,10 @@ print("frozen districts:",hand.apply_snapshots(out,keep_decks=True),"| hand edit
 # gate or the water; then the roads out in the bush get their poles and lights (scripts/furniture.py), not the kit
 import roadends
 print("road ends:",roadends.road_ends(out),"| bush furniture:",furniture.furniture(out,[],bush=True))
+# ---- the clean-up of the districts built from real places (scripts/autoclean.py), every bake: a fix to it reaches every area built
+import autoclean
+_gd=sorted(os.path.basename(f)[:-5] for f in glob.glob("web/hand/gen/*.json"))
+print("links so no street group floats:",{d:len(autoclean.join(out,d)) for d in _gd},"| clean-up of the real areas (cut back, gone, scraps):",{d:autoclean.clean(out,d) for d in _gd})
 # ---- things the kit used to invent (scripts/things.py): monuments and road signs by rule, parked vehicles, the parks, people
 # standing, boats, trains, the rail stalls; the traffic and walkers as densities ("life"). Then the furniture and monument edits
 # that wait for them
@@ -437,6 +441,8 @@ import roadtypes
 print("road types:",roadtypes.types(out))
 for mm in out["mains"]:  # labels read left to right
     if mm["pts"][0][0] > mm["pts"][-1][0]: mm["pts"] = mm["pts"][::-1]
+import realnames; print("real names swapped for invented ones:",realnames.rename(out))   # Gidi's names are its own (docs/hand/realnames.txt)
+out["hand_misses"]=hand.MISSES   # hand edits that found nothing: check 17 fails on any
 s=json.dumps(rd(out),separators=(",",":"),ensure_ascii=False)
 open("web/gidi-data.js","w").write("window.GIDI="+s+";")
 print(len(s)//1024,"KB", sum(len(v) for v in out["streets"].values()),"street segs",len(out["pois"]),"pois",len(out["mains"]),"mains")

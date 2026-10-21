@@ -9,6 +9,25 @@
 7650,
 5380
 ],
+"area_wkt": "POLYGON ((6876.4 5183.7, 6896.6 5240.6, 6906.9 5270.5, 7057.3 5656.6, 7062.2 5667, 7085.6 5713.5, 7125 5710, 8092.9 5484, 8115.7 5476.4, 8115.8 5476.4, 8168.2 5459.8, 8168.3 5459.7, 8169.6 5459.4, 8155 5214, 8155 5460, 8045 5460, 8045 5185, 6880 5185, 6873.3 5149.8, 6863.9 5149.9, 6876.3 5183.6, 6876.4 5183.7))",
+"real_counts": {
+"buildings": 2163,
+"built_m2": 241403,
+"street_m": {
+"street": 7914,
+"lane": 489,
+"main": 1103
+},
+"places": {
+"church": 11,
+"school": 18,
+"hospital": 7,
+"clinic": 3,
+"chemist": 3,
+"bank": 2,
+"hotel": 4
+}
+},
 "streets": [
 {
 "gidi": [
@@ -623,7 +642,8 @@
 ],
 "length_m": 52,
 "status": "red",
-"pics": []
+"pics": [],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1023,6 +1043,30 @@
 {
 "gidi": [
 [
+7158.5,
+5145.4
+],
+[
+7174.8,
+5146.6
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "cf241f7b-a6ce-425e-848d-1f63aba27899",
+"photo_at": [
+6.508116,
+3.351602
+],
+"length_m": 16,
+"status": "red",
+"pics": [],
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
 7358.1,
 5180.8
 ],
@@ -1239,7 +1283,8 @@
 ],
 "length_m": 40,
 "status": "red",
-"pics": []
+"pics": [],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1278,7 +1323,8 @@
 ],
 "length_m": 69,
 "status": "red",
-"pics": []
+"pics": [],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -4156,7 +4202,8 @@
 "google/ibudo/twins/surulere/street_111_03_b.jpg",
 "google/ibudo/twins/surulere/street_111_04_a.jpg",
 "google/ibudo/twins/surulere/street_111_04_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -4188,7 +4235,8 @@
 "google/ibudo/twins/surulere/street_112_01_b.jpg",
 "google/ibudo/twins/surulere/street_112_02_a.jpg",
 "google/ibudo/twins/surulere/street_112_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -4232,7 +4280,8 @@
 "google/ibudo/twins/surulere/street_113_01_b.jpg",
 "google/ibudo/twins/surulere/street_113_02_a.jpg",
 "google/ibudo/twins/surulere/street_113_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -4338,7 +4387,8 @@
 "google/ibudo/twins/surulere/street_115_01_b.jpg",
 "google/ibudo/twins/surulere/street_115_02_a.jpg",
 "google/ibudo/twins/surulere/street_115_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -4386,7 +4436,8 @@
 "google/ibudo/twins/surulere/street_116_01_b.jpg",
 "google/ibudo/twins/surulere/street_116_02_a.jpg",
 "google/ibudo/twins/surulere/street_116_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5012,7 +5063,8 @@
 "google/ibudo/twins/surulere/street_133_02_b.jpg",
 "google/ibudo/twins/surulere/street_133_03_a.jpg",
 "google/ibudo/twins/surulere/street_133_03_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5126,7 +5178,8 @@
 "google/ibudo/twins/surulere/street_135_01_b.jpg",
 "google/ibudo/twins/surulere/street_135_02_a.jpg",
 "google/ibudo/twins/surulere/street_135_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5158,7 +5211,8 @@
 "google/ibudo/twins/surulere/street_136_01_b.jpg",
 "google/ibudo/twins/surulere/street_136_02_a.jpg",
 "google/ibudo/twins/surulere/street_136_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5186,7 +5240,8 @@
 "google/ibudo/twins/surulere/street_137_01_b.jpg",
 "google/ibudo/twins/surulere/street_137_02_a.jpg",
 "google/ibudo/twins/surulere/street_137_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5218,7 +5273,8 @@
 "google/ibudo/twins/surulere/street_138_01_b.jpg",
 "google/ibudo/twins/surulere/street_138_02_a.jpg",
 "google/ibudo/twins/surulere/street_138_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -5241,7 +5297,52 @@
 ],
 "length_m": 19,
 "status": "red",
-"pics": []
+"pics": [],
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+8152.3,
+5244.0
+],
+[
+8172.2,
+5252.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 22,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+7158.5,
+5145.4
+],
+[
+7130.7,
+5146.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 28,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }

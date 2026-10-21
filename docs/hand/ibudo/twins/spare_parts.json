@@ -9,6 +9,20 @@
 8300,
 4800
 ],
+"area_wkt": "POLYGON ((7900 4600, 7900 5070, 8045 5057.9, 8045 4600, 8155 4600, 8155 5048.8, 8560 5015, 8560 4990, 8740 4990, 8740 4560, 7900 4600))",
+"real_counts": {
+"buildings": 522,
+"built_m2": 138822,
+"street_m": {
+"main": 645,
+"street": 1016,
+"lane": 3339
+},
+"places": {
+"church": 1,
+"school": 3
+}
+},
 "streets": [
 {
 "gidi": [
@@ -408,7 +422,8 @@
 "google/ibudo/twins/spare_parts/street_010_02_b.jpg",
 "google/ibudo/twins/spare_parts/street_010_03_a.jpg",
 "google/ibudo/twins/spare_parts/street_010_03_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -446,7 +461,8 @@
 "pics": [
 "google/ibudo/twins/spare_parts/street_011_01_a.jpg",
 "google/ibudo/twins/spare_parts/street_011_01_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -572,7 +588,8 @@
 "google/ibudo/twins/spare_parts/street_014_01_b.jpg",
 "google/ibudo/twins/spare_parts/street_014_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_014_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -713,6 +730,162 @@
 "google/ibudo/twins/spare_parts/street_016_08_a.jpg",
 "google/ibudo/twins/spare_parts/street_016_08_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+8396.4,
+4629.2
+],
+[
+8308.8,
+4704.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "dbfd6dca-7db0-47b2-9091-aacc5b51c5ef",
+"photo_at": [
+6.544704,
+3.345979
+],
+"length_m": 116,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8405.6,
+4602.0
+],
+[
+8445.5,
+4603.0
+],
+[
+8449.9,
+4604.5
+],
+[
+8452.8,
+4607.6
+],
+[
+8463.4,
+4617.2
+],
+[
+8468.6,
+4623.7
+],
+[
+8473.5,
+4630.8
+],
+[
+8477.9,
+4638.8
+],
+[
+8482.4,
+4649.9
+],
+[
+8485.8,
+4666.3
+],
+[
+8485.5,
+4672.2
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "61021dd4-4dfb-4cf5-8baa-e296dfc0a58d",
+"photo_at": [
+6.545161,
+3.346979
+],
+"length_m": 124,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8451.2,
+4626.0
+],
+[
+8433.4,
+4641.5
+],
+[
+8415.0,
+4658.2
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "a784ee13-7a5d-4d08-899b-a0dc9a21afe8",
+"photo_at": [
+6.544929,
+3.34671
+],
+"length_m": 48,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8396.4,
+4629.2
+],
+[
+8415.0,
+4658.2
+],
+[
+8427.4,
+4683.7
+],
+[
+8432.6,
+4694.3
+],
+[
+8433.8,
+4701.0
+],
+[
+8433.0,
+4703.8
+],
+[
+8431.9,
+4705.9
+],
+[
+8371.1,
+4772.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "3e5f7226-c8fc-434c-8b7d-96df8d19dfde",
+"photo_at": [
+6.54434,
+3.34669
+],
+"length_m": 176,
+"status": "red",
+"pics": []
 },
 {
 "gidi": [
@@ -1129,6 +1302,33 @@
 {
 "gidi": [
 [
+8578.8,
+4567.7
+],
+[
+8578.5,
+4569.4
+],
+[
+8572.8,
+4582.7
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "003abd90-e6f9-4162-b166-c5ce670cedc6",
+"photo_at": [
+6.545532,
+3.348011
+],
+"length_m": 16,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 8740.0,
 4615.2
 ],
@@ -1171,6 +1371,45 @@
 {
 "gidi": [
 [
+8510.4,
+4570.9
+],
+[
+8483.0,
+4600.4
+],
+[
+8463.4,
+4617.2
+],
+[
+8451.2,
+4626.0
+],
+[
+8396.4,
+4629.2
+],
+[
+8354.1,
+4613.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "7ede422c-567f-49c4-8724-644fdfd0cead",
+"photo_at": [
+6.545068,
+3.34679
+],
+"length_m": 181,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 8718.7,
 4907.0
 ],
@@ -1199,6 +1438,30 @@
 "google/ibudo/twins/spare_parts/street_027_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_027_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+8740.0,
+4983.9
+],
+[
+8719.5,
+5001.7
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "8a158656-68e7-4322-99b5-f841707c4fe8",
+"photo_at": [
+6.541757,
+3.349411
+],
+"length_m": 27,
+"status": "red",
+"pics": [],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1677,6 +1940,29 @@
 {
 "gidi": [
 [
+8415.7,
+5027.0
+],
+[
+8407.9,
+5022.2
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "8d8b85e9-f315-4130-9261-81110002ad12",
+"photo_at": [
+6.541469,
+3.346517
+],
+"length_m": 9,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
 8076.0,
 4994.7
 ],
@@ -1704,7 +1990,8 @@
 "google/ibudo/twins/spare_parts/street_037_01_b.jpg",
 "google/ibudo/twins/spare_parts/street_037_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_037_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1760,7 +2047,8 @@
 "google/ibudo/twins/spare_parts/street_039_01_b.jpg",
 "google/ibudo/twins/spare_parts/street_039_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_039_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1827,7 +2115,8 @@
 "google/ibudo/twins/spare_parts/street_041_01_b.jpg",
 "google/ibudo/twins/spare_parts/street_041_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_041_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1859,7 +2148,8 @@
 "google/ibudo/twins/spare_parts/street_042_01_b.jpg",
 "google/ibudo/twins/spare_parts/street_042_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_042_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2020,6 +2310,133 @@
 "google/ibudo/twins/spare_parts/street_047_02_a.jpg",
 "google/ibudo/twins/spare_parts/street_047_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+8409.4,
+5023.1
+],
+[
+8405.9,
+5028.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 7,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8354.1,
+4613.5
+],
+[
+8354.9,
+4579.8
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 34,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8238.3,
+5041.8
+],
+[
+8233.4,
+5075.4
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 34,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
+},
+{
+"gidi": [
+[
+8740.0,
+4983.9
+],
+[
+8740.0,
+4932.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 51,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8688.9,
+4667.4
+],
+[
+8711.4,
+4620.3
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 52,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+8572.8,
+4582.7
+],
+[
+8510.4,
+4570.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 63,
+"status": "n/a",
+"pics": [],
+"link": true
 }
 ]
 }

@@ -9,6 +9,17 @@
 7750,
 4850
 ],
+"area_wkt": "POLYGON ((7600 4600, 7600 5080, 7900 5080, 7900 4600, 7600 4600))",
+"real_counts": {
+"buildings": 175,
+"built_m2": 54899,
+"street_m": {
+"lane": 1559,
+"street": 301,
+"main": 0
+},
+"places": {}
+},
 "streets": [
 {
 "gidi": [
@@ -36,7 +47,8 @@
 "google/ibudo/twins/barracks/street_000_01_b.jpg",
 "google/ibudo/twins/barracks/street_000_02_a.jpg",
 "google/ibudo/twins/barracks/street_000_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -519,6 +531,27 @@
 "length_m": 37,
 "status": "red",
 "pics": []
+},
+{
+"gidi": [
+[
+7663.4,
+4945.1
+],
+[
+7655.5,
+4912.9
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 33,
+"status": "n/a",
+"pics": [],
+"link": true
 }
 ]
 }

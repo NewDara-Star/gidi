@@ -9,6 +9,23 @@
 8869,
 5130
 ],
+"area_wkt": "POLYGON ((8570 5379.3, 8620.7 5373.9, 8672.1 5368.5, 8724.4 5362.9, 8728.8 5362.4, 9170.3 5290.3, 9178.2 5288.7, 9238.7 5276, 9294.2 5264.3, 9288.3 5211.7, 9288.3 5211.6, 9282.1 5154.1, 9276.3 5097.4, 9271.1 5041.7, 9271.1 5041.6, 9266.8 4990, 8560 4990, 8560 5080, 8869 5080, 8869 5185, 8560 5185, 8560 5380.5, 8569.9 5379.3, 8570 5379.3))",
+"real_counts": {
+"buildings": 591,
+"built_m2": 89196,
+"street_m": {
+"street": 2178,
+"lane": 527,
+"main": 1864,
+"path": 15
+},
+"places": {
+"church": 14,
+"school": 8,
+"chemist": 1,
+"mosque": 1
+}
+},
 "streets": [
 {
 "gidi": [
@@ -144,7 +161,8 @@
 "google/ibudo/twins/ojuelegba/street_003_02_b.jpg",
 "google/ibudo/twins/ojuelegba/street_003_03_a.jpg",
 "google/ibudo/twins/ojuelegba/street_003_03_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -1493,7 +1511,8 @@
 "google/ibudo/twins/ojuelegba/street_041_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_041_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_041_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2153,7 +2172,8 @@
 "google/ibudo/twins/ojuelegba/street_058_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_058_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_058_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2363,7 +2383,8 @@
 "google/ibudo/twins/ojuelegba/street_063_03_b.jpg",
 "google/ibudo/twins/ojuelegba/street_063_04_a.jpg",
 "google/ibudo/twins/ojuelegba/street_063_04_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2403,7 +2424,8 @@
 "google/ibudo/twins/ojuelegba/street_064_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_064_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_064_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2443,7 +2465,8 @@
 "google/ibudo/twins/ojuelegba/street_065_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_065_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_065_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2483,7 +2506,8 @@
 "google/ibudo/twins/ojuelegba/street_066_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_066_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_066_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2527,7 +2551,8 @@
 "google/ibudo/twins/ojuelegba/street_067_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_067_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_067_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2563,7 +2588,8 @@
 "google/ibudo/twins/ojuelegba/street_068_01_b.jpg",
 "google/ibudo/twins/ojuelegba/street_068_02_a.jpg",
 "google/ibudo/twins/ojuelegba/street_068_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [

@@ -9,6 +9,23 @@
 7930,
 4270
 ],
+"area_wkt": "POLYGON ((7560 4100, 7560 4440, 8300 4440, 8300 4100, 7560 4100))",
+"real_counts": {
+"buildings": 995,
+"built_m2": 136511,
+"street_m": {
+"street": 4431,
+"lane": 199,
+"main": 0,
+"path": 0
+},
+"places": {
+"church": 12,
+"school": 6,
+"hotel": 4,
+"mosque": 1
+}
+},
 "streets": [
 {
 "gidi": [
@@ -1787,6 +1804,28 @@
 "google/ibudo/twins/church_st/street_051_02_a.jpg",
 "google/ibudo/twins/church_st/street_051_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+7560.0,
+4350.1
+],
+[
+7523.7,
+4349.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 36,
+"status": "n/a",
+"pics": [],
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }

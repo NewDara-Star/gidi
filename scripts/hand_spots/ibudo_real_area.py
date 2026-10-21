@@ -9,6 +9,8 @@ have real life images that we can now model from"). docs/hand/ibudo/child_plan.j
 - every street's twin is written to docs/hand/ibudo/twins/<area>.json: the real street it is, its real name and a point to photograph.
 Nothing is generated: the shapes are the real ones; Gidi's own changes come by hand after.
 Usage: GIDI_BASE=<baked data before the area> python3 scripts/hand_spots/ibudo_real_area.py oshodi_core
+scripts/rebuild_areas.py runs it for every area in turn (GIDI_HUB: the edits so far; GIDI_OUT: where this area's edits go).
+The twin record keeps what the study already found (pictures, status, notes) for every street it had.
 """
 import csv
 import gzip
@@ -19,7 +21,7 @@ import sys
 
 import numpy as np
 import pyarrow.parquet as pq
-from shapely import wkb, wkt
+from shapely import STRtree, wkb, wkt
 from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
 from shapely.ops import unary_union
 
@@ -35,6 +37,8 @@ AREA = Polygon(A['pts']).intersection(HUB.buffer(-6))
 for pr in CP.get('protect', []):   # story places no area build may touch (the boss's motor park)
     AREA = AREA.difference(Polygon(pr['pts']).buffer(4))
 AREA = max(getattr(AREA, 'geoms', [AREA]), key=lambda g: g.area)
+HUBF = os.environ.get('GIDI_HUB', 'web/hand/hub.json')
+OWN = AREA.difference(wkt.loads(os.environ['GIDI_LATER_WKT'])) if os.environ.get('GIDI_LATER_WKT') else AREA   # what stays this area's own
 WHO = f"Claude, 19 Oct 2026: Ìbùdó from real places ({A['name']})"
 M_LAT, M_LON = 110600.0, 109900.0
 (LA0, LO0), (GX0, GY0) = A['anchor_real'], A['anchor_gidi']
@@ -73,57 +77,20 @@ CORR = unary_union([g.buffer(w) for n, g, w in LINES] + [RAIL.buffer(7)]).inters
 # ---- 1. what is there goes: in the area, and in the new corridors through the district
 B = G['buildings']['hub']
 CLEAR = AREA.union(CORR.intersection(HUB)) if os.environ.get('GIDI_CORRIDORS') else AREA   # the corridors were cleared once, with the first area (GIDI_CORRIDORS=1)
-for b in B:
-    if len(b) > 3 and Polygon(b[1:]).intersects(CLEAR):
-        q = Polygon(b[1:]).representative_point()
-        E.append({'op': 'delete building', 'at': R((q.x, q.y)), 'kind': b[0], 'note': f"cleared for {A['name']} (real) or a layout line", 'by_who': WHO, 'early': True})
-LIVE = [[k, LineString(p)] for k in ('streets', 'lanes') for p in G[k].get('hub', [])]
+# one shape clears it (scripts/hand.py "clear area"): its streets cut back to the edge, its buildings, paths, plots, mains, decks and places
+# gone, whether the base or an earlier area put them there. A delete per thing missed whatever had moved by bake time (21 Oct 2026).
+sys.path.insert(0, 'scripts')
+import hand
+from shapely import set_precision
+e = {'op': 'clear area', 'wkt': set_precision(CLEAR, 0.1).wkt, 'places_wkt': set_precision(AREA, 0.1).wkt,
+     'note': f"cleared for {A['name']} (real) or a layout line", 'by_who': WHO}
+E.append(e)
+n_par = len(G['parcels'].get('hub', []))
+hand._clear_area(G, 'hub', e, 'road'); hand._clear_area(G, 'hub', e, 'late')   # this area is built on the map as the bake will leave it
+seen_par = n_par - len(G['parcels'].get('hub', []))
+B = G['buildings']['hub']
+LIVE = [[k, LineString(p)] for k in ('streets', 'lanes') for p in G[k].get('hub', []) if len(p) > 1]
 FIXED = [LineString(m['pts']) for m in G['mains'] if len(m['pts']) > 1] + [g for n, g, w in LINES]
-
-
-def joined(part, own, live):
-    return any(w is not own and w.distance(Point(part.coords[i])) < 1.5 for i in (0, -1) for w in live if w.distance(part) < 2)
-
-
-def lone_point(g, inside):
-    others = [h for k, h in LIVE if h is not g and h.distance(g) < 6]
-    cand = [g.interpolate(t * g.length / 20) for t in range(21)]
-    cand = [q for q in cand if inside.buffer(0.5).contains(q)] or cand
-    return max(cand, key=lambda q: min([h.distance(q) for h in others] or [99]))
-
-
-for item in list(LIVE):
-    kind, g = item
-    if not g.intersects(CLEAR) or g.intersection(CLEAR).length < 2:
-        continue
-    q = lone_point(g, CLEAR)
-    E.append({'op': 'delete street', 'at': R((q.x, q.y)), 'note': 'cleared', 'by_who': WHO})
-    LIVE.remove(item)
-    rest = g.difference(CLEAR.buffer(1))
-    for part in getattr(rest, 'geoms', [rest]):
-        if part.geom_type == 'LineString' and part.length > 15 and joined(part, g, [h for k, h in LIVE] + FIXED):
-            part = LineString([R(c) for c in part.coords]); LIVE.append([kind, part])
-            E.append({'op': 'add street', 'kind': 'lane' if kind == 'lanes' else 'street', 'pts': [list(c) for c in part.coords], 'note': 'the part outside, kept', 'by_who': WHO})
-for p in G.get('paths', {}).get('hub', []):
-    g = LineString(p)
-    if g.intersects(CLEAR):
-        q = g.interpolate(g.project(g.intersection(CLEAR).representative_point()))
-        E.append({'op': 'delete path', 'at': R((q.x, q.y)), 'note': 'cleared', 'by_who': WHO})
-for m in G['mains']:
-    g = LineString(m['pts'])
-    if m['d'] == 'hub' and g.intersection(CLEAR).length > 0.5 * g.length:
-        E.append({'op': 'delete main', 'at': R(g.interpolate(0.5, normalized=True).coords[0]), 'note': f"the old {m['name']}: the area is rebuilt from the real place", 'by_who': WHO})
-for st in G.get('structures', []):
-    if st['d'] == 'hub' and LineString(st['pts']).intersects(AREA):
-        E.append({'op': 'delete structure', 'name': st['name'], 'note': 'the area is rebuilt from the real place', 'by_who': WHO})
-seen_par = 0
-for p in G['parcels'].get('hub', []):
-    P = Polygon(p['pts'])
-    if P.intersection(CLEAR).area > 0.3 * P.area:
-        E.append({'op': 'delete parcel', 'at': R(P.representative_point().coords[0]), 'note': 'cleared', 'by_who': WHO}); seen_par += 1
-for p in G['pois']:
-    if p.get('d') == 'hub' and AREA.contains(Point(p['x'], p['y'])):
-        E.append({'op': 'delete place', 'name': p['name'], 'at': [p['x'], p['y']], 'note': 'the area is rebuilt from the real place', 'by_who': WHO})
 
 # ---- 2. the real streets
 t = pq.read_table(f'{DATA}/overture-lagos/lagos_overture_segment.parquet', columns=['id', 'names', 'subtype', 'class', 'geometry', 'bbox'])
@@ -132,11 +99,14 @@ rows = t.take([i for i, b in enumerate(bb) if b['xmax'] >= W and b['xmin'] <= E_
 KIND = {'primary': 'main', 'secondary': 'main', 'tertiary': 'street', 'residential': 'street', 'unclassified': 'street', 'living_street': 'street',
         'service': 'lane', 'track': 'lane', 'unknown': 'lane', 'footway': 'path', 'steps': 'path', 'path': 'path', 'pedestrian': 'path', 'cycleway': 'path'}
 TWINS, ADDED, TWINS_E = [], [], []
+REAL = {'buildings': 0, 'built_m2': 0.0, 'street_m': {}, 'places': {}}   # the real place in the area, before Gidi's changes: what check_real.py holds the map to
 KEEP_OUT = CORR.buffer(1)
 for r in rows:
     if r['subtype'] != 'road' or r['class'] not in KIND:
         continue   # the trunk road, the expressway and the rail are the layout's lines
-    g = LineString([T(*c) for c in wkb.loads(r['geometry']).coords]).intersection(AREA).difference(KEEP_OUT)
+    g = LineString([T(*c) for c in wkb.loads(r['geometry']).coords]).intersection(AREA)
+    REAL['street_m'][KIND[r['class']]] = REAL['street_m'].get(KIND[r['class']], 0) + round(g.intersection(OWN).length)
+    g = g.difference(KEEP_OUT)
     name = (r['names'] or {}).get('primary') if r['names'] else None
     for part in getattr(g, 'geoms', [g]):
         if part.geom_type != 'LineString' or part.length < 8:
@@ -183,15 +153,48 @@ for i, (k, g, e) in enumerate(ADDED):
 roots = [g for n, g, w in LINES] + [LineString(m['pts']) for m in G['mains'] if len(m['pts']) > 1] + [h for k, h in LIVE]
 items = [g for k, g, e in ADDED]
 ok = set()
-frontier = [i for i, g in enumerate(items) if any(g.distance(r_) < 1.0 for r_ in roots if r_.distance(g) < 2)]
-ok.update(frontier)
-while frontier:
-    nxt = []
-    for i in frontier:
-        for j, h in enumerate(items):
-            if j not in ok and items[i].distance(h) < 1.0:
-                ok.add(j); nxt.append(j)
-    frontier = nxt
+
+
+def spread(frontier):
+    ok.update(frontier)
+    while frontier:
+        nxt = []
+        for i in frontier:
+            for j, h in enumerate(items):
+                if j not in ok and items[i].distance(h) < 1.0:
+                    ok.add(j); nxt.append(j)
+        frontier = nxt
+
+
+spread([i for i, g in enumerate(items) if any(g.distance(r_) < 1.0 for r_ in roots if r_.distance(g) < 2)])
+# a group of real streets whose real way out is not on the map (a trunk road Gidi's arterial replaces, an old road the area cleared) is
+# joined to the nearest way by the shortest link, nearest group first, not dropped: the link is Gidi's own and its twin record says so
+LINK = 80.0
+while True:
+    out_ = [i for i in range(len(items)) if i not in ok]
+    if not out_:
+        break
+    reach = roots + [items[i] for i in ok]
+    best = None
+    for i in out_:
+        for r_ in reach:
+            dd = items[i].distance(r_)
+            if dd < LINK and (best is None or dd < best[0]):
+                best = (dd, i, r_)
+    if best is None:
+        break
+    dd, i, r_ = best
+    p_, q_ = nearest_points(items[i], r_)
+    if dd >= 0.5:
+        kind = 'street' if ADDED[i][0] in ('street', 'main') else 'lane'
+        pts = [R((p_.x, p_.y)), R((q_.x, q_.y))]
+        e = {'op': 'add street', 'kind': kind, 'pts': pts, 'note': 'Gidi link: the real way out of these streets is not on the map', 'by_who': WHO}
+        E.append(e); g = LineString(pts)
+        ADDED.append((kind, g, e)); items.append(g); ok.add(len(items) - 1)
+        TWINS.append({'gidi': pts, 'kind': kind, 'real_name': None, 'real_class': 'gidi link', 'overture_id': None, 'photo_at': None,
+                      'length_m': round(dd), 'status': 'n/a', 'pics': [], 'link': True})
+        TWINS_E.append(e)
+    spread([i])
 dropped = [e for i, (k, g, e) in enumerate(ADDED) if i not in ok]
 E = [e for e in E if not any(e is d_ for d_ in dropped)]
 TWINS = [t_ for t_, e in zip(TWINS, TWINS_E) if not any(e is d_ for d_ in dropped)]
@@ -232,6 +235,8 @@ with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt')
             P = Polygon([T(*c) for c in pg.exterior.coords]).buffer(0)
             if P.is_empty or not AREA.contains(P.centroid):
                 continue
+            if OWN.contains(P.centroid):
+                REAL['buildings'] += 1; REAL['built_m2'] += P.area
             P = P.intersection(INNER).difference(STREET_BUF)   # inside the area, and cut back to the building line of every road near it
             P = max(getattr(P, 'geoms', [P]), key=lambda q: q.area) if not P.is_empty else P
             if P.is_empty or P.geom_type != 'Polygon' or P.area < 6:
@@ -304,6 +309,8 @@ for r in tp.take([i for i, b in enumerate(bbp) if W <= b['xmin'] <= E_ and S_ <=
     if not t_ or float(r['confidence'] or 0) < 0.4:
         continue
     pt = wkb.loads(r['geometry']); x, y = T(pt.x, pt.y)
+    if OWN.contains(Point(x, y)):
+        REAL['places'][t_] = REAL['places'].get(t_, 0) + 1
     if not AREA.contains(Point(x, y)) or any(Point(x, y).distance(Point(q_)) < 15 for q_ in PL):
         continue
     PL.append((x, y))
@@ -311,12 +318,34 @@ for r in tp.take([i for i, b in enumerate(bbp) if W <= b['xmin'] <= E_ and S_ <=
 print('places:', len(PL))
 if os.environ.get('GIDI_PLACES_ONLY'):
     E = [e for e in E if e['op'] == 'add place']
-H = json.load(open('web/hand/hub.json'))
-H['edits'] = H.get('edits', []) + E
-json.dump(H, open('web/hand/hub.json', 'w'), separators=(',', ':'), ensure_ascii=False)
+if os.environ.get('GIDI_OUT'):
+    json.dump(E, open(os.environ['GIDI_OUT'], 'w'), separators=(',', ':'), ensure_ascii=False)
+else:
+    H = json.load(open(HUBF))
+    H['edits'] = H.get('edits', []) + E
+    json.dump(H, open(HUBF, 'w'), separators=(',', ':'), ensure_ascii=False)
 os.makedirs('docs/hand/ibudo/twins', exist_ok=True)
+TF = f'docs/hand/ibudo/twins/{AREA_ID}.json'
 if not os.environ.get('GIDI_PLACES_ONLY'):
-  json.dump({'area': AREA_ID, 'real': A['real'], 'anchor_real': A['anchor_real'], 'anchor_gidi': A['anchor_gidi'], 'streets': TWINS},
-          open(f'docs/hand/ibudo/twins/{AREA_ID}.json', 'w'), ensure_ascii=False, indent=0)
+    OLD_T = json.load(open(TF)) if os.path.exists(TF) else {}
+    was = {}
+    for t_ in OLD_T.get('streets', []):   # a street the study photographed keeps its pictures, status and notes when the area is built again
+        was.setdefault(t_.get('overture_id'), []).append(t_)
+    for t_ in TWINS:
+        if was.get(t_['overture_id']):
+            o_ = was[t_['overture_id']].pop(0)
+            t_.update({k: v for k, v in o_.items() if k not in ('gidi', 'length_m')})
+    for t_ in TWINS:   # a street a later area builds again: its record stays (and its pictures), marked, and is not looked for on the map
+        g_ = LineString(t_['gidi'])
+        if OWN.buffer(1).intersection(g_).length < 0.5 * g_.length:
+            t_['replaced'] = 'by a later area'
+        else:
+            t_.pop('replaced', None)
+    lost = sum(1 for v in was.values() for t_ in v if t_.get('pics'))
+    if lost:
+        print('WARNING: photographed streets no longer in the area:', lost)
+    json.dump({**{k: v for k, v in OLD_T.items() if k != 'streets'}, 'area': AREA_ID, 'real': A['real'], 'anchor_real': A['anchor_real'],
+               'anchor_gidi': A['anchor_gidi'], 'area_wkt': set_precision(OWN, 0.1).wkt,
+               'real_counts': {**REAL, 'built_m2': round(REAL['built_m2'])}, 'streets': TWINS}, open(TF, 'w'), ensure_ascii=False, indent=0)
 from collections import Counter
 print(AREA_ID, len(E), 'edits', dict(Counter(e['op'] for e in E)), '| buildings', nb, '| twin streets', len(TWINS), '| plots cleared', seen_par)

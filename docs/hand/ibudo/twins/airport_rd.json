@@ -9,6 +9,22 @@
 7300,
 4520
 ],
+"area_wkt": "POLYGON ((6672.3 4440, 6628 4483.4, 6625.7 4485.6, 6640 4600, 7600 4600, 7900 4600, 8300 4581, 8300 4440, 6672.3 4440))",
+"real_counts": {
+"buildings": 800,
+"built_m2": 118541,
+"street_m": {
+"lane": 698,
+"street": 3831,
+"main": 921,
+"path": 55
+},
+"places": {
+"church": 8,
+"school": 4,
+"hotel": 9
+}
+},
 "streets": [
 {
 "gidi": [
@@ -739,7 +755,8 @@
 "google/ibudo/twins/airport_rd/street_021_01_b.jpg",
 "google/ibudo/twins/airport_rd/street_021_02_a.jpg",
 "google/ibudo/twins/airport_rd/street_021_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2577,6 +2594,69 @@
 "google/ibudo/twins/airport_rd/street_071_02_a.jpg",
 "google/ibudo/twins/airport_rd/street_071_02_b.jpg"
 ]
+},
+{
+"gidi": [
+[
+7605.3,
+4600.0
+],
+[
+7587.8,
+4600.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 17,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+7404.6,
+4455.1
+],
+[
+7428.9,
+4440.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 29,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
+7254.9,
+4567.6
+],
+[
+7198.5,
+4563.6
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 57,
+"status": "n/a",
+"pics": [],
+"link": true
 }
 ]
 }

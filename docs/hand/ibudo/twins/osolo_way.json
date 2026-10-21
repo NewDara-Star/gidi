@@ -9,6 +9,17 @@
 8100,
 4850
 ],
+"area_wkt": "MULTIPOLYGON (((8045 5185, 8045 5460, 8155 5460, 8155 5185, 8045 5185)), ((8045 4600, 8045 5080, 8155 5080, 8155 4600, 8045 4600)))",
+"real_counts": {
+"buildings": 206,
+"built_m2": 30388,
+"street_m": {
+"street": 594,
+"lane": 304,
+"main": 198
+},
+"places": {}
+},
 "streets": [
 {
 "gidi": [
@@ -78,7 +89,8 @@
 "google/ibudo/twins/osolo_way/street_001_01_b.jpg",
 "google/ibudo/twins/osolo_way/street_001_02_a.jpg",
 "google/ibudo/twins/osolo_way/street_001_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -114,7 +126,8 @@
 "google/ibudo/twins/osolo_way/street_002_01_b.jpg",
 "google/ibudo/twins/osolo_way/street_002_02_a.jpg",
 "google/ibudo/twins/osolo_way/street_002_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -287,7 +300,8 @@
 "google/ibudo/twins/osolo_way/street_006_03_b.jpg",
 "google/ibudo/twins/osolo_way/street_006_04_a.jpg",
 "google/ibudo/twins/osolo_way/street_006_04_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -329,7 +343,8 @@
 "google/ibudo/twins/osolo_way/street_007_02_b.jpg",
 "google/ibudo/twins/osolo_way/street_007_03_a.jpg",
 "google/ibudo/twins/osolo_way/street_007_03_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -357,7 +372,8 @@
 "google/ibudo/twins/osolo_way/street_008_01_b.jpg",
 "google/ibudo/twins/osolo_way/street_008_02_a.jpg",
 "google/ibudo/twins/osolo_way/street_008_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -389,7 +405,8 @@
 "google/ibudo/twins/osolo_way/street_009_01_b.jpg",
 "google/ibudo/twins/osolo_way/street_009_02_a.jpg",
 "google/ibudo/twins/osolo_way/street_009_02_b.jpg"
-]
+],
+"replaced": "by a later area"
 },
 {
 "gidi": [
