@@ -36,7 +36,7 @@ for n, A in enumerate(CP['areas']):
     if n == 0:
         env['GIDI_CORRIDORS'] = '1'   # the layout's corridors through the whole district are cleared with the first area
     r = subprocess.run([sys.executable, '-W', 'ignore', 'scripts/hand_spots/ibudo_real_area.py', A['id']], env=env, capture_output=True, text=True)
-    print('\n'.join(l for l in r.stdout.strip().splitlines() if l.startswith(('street pieces', 'WARNING'))) + '\n' + (r.stdout.strip().splitlines() or [''])[-1], r.stderr[-2000:] if r.returncode else '')
+    print('\n'.join(l for l in r.stdout.strip().splitlines() if l.startswith(('street pieces', 'WARNING', 'real built-up'))) + '\n' + (r.stdout.strip().splitlines() or [''])[-1], r.stderr[-2000:] if r.returncode else '')
     if r.returncode:
         sys.exit(f'area {A["id"]} failed')
     E = json.load(open(out_f))

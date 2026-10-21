@@ -223,6 +223,7 @@ STREET_BUF = unary_union([g.buffer(BL[k]) for k, g in ADDED if k != 'path'] + [C
                          + [h.buffer(BL['lane' if k == 'lanes' else 'street']) for k, h in LIVE if h.distance(AREA) < 30])
 OLD = [Polygon(b[1:]) for b in B if len(b) > 3 and not Polygon(b[1:]).intersects(CLEAR) and Polygon(b[1:]).distance(AREA) < 20]
 PLACED = []
+LOST = {'building line': 0.0, 'on a kept building': 0.0, 'no way within 40 m': 0.0}   # real built-up m2 the area does not keep, and why
 INNER = AREA.buffer(-1.0)
 nb = 0
 with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt') as f:
@@ -235,15 +236,32 @@ with gzip.open(f'{DATA}/open-buildings-v3/lagos_open_buildings_v3.csv.gz', 'rt')
             P = Polygon([T(*c) for c in pg.exterior.coords]).buffer(0)
             if P.is_empty or not AREA.contains(P.centroid):
                 continue
-            if OWN.contains(P.centroid):
+            own = OWN.contains(P.centroid)
+            if own:
                 REAL['buildings'] += 1; REAL['built_m2'] += P.area
+            a0 = P.area
             P = P.intersection(INNER).difference(STREET_BUF)   # inside the area, and cut back to the building line of every road near it
             P = max(getattr(P, 'geoms', [P]), key=lambda q: q.area) if not P.is_empty else P
+            if own:
+                LOST['building line'] += a0 - (P.area if not P.is_empty else 0)
             if P.is_empty or P.geom_type != 'Polygon' or P.area < 6:
                 continue
             P = P.simplify(0.3)
-            if any(P.intersection(q).area > 0.5 for q in OLD + PLACED if q.distance(P) < 0.5) or P.distance(WAYS) > 40:
-                continue   # overlapping one already placed (the data has a few doubles), or reached by no way
+            if P.distance(WAYS) > 40:
+                if own:
+                    LOST['no way within 40 m'] += P.area
+                continue   # reached by no way
+            hit = [q for q in OLD + PLACED if q.distance(P) < 0.5 and P.intersection(q).area > 0.5]
+            if hit:   # real neighbours overlap a little in the data: cut back from them (35 cm, so rounding keeps them apart); a double goes
+                a1 = P.area
+                P = P.difference(unary_union(hit).buffer(0.35))
+                P = max(getattr(P, 'geoms', [P]), key=lambda q: q.area) if not P.is_empty else P
+                if P.is_empty or P.geom_type != 'Polygon' or P.area < 6 or P.area < 0.3 * a1:
+                    if own:
+                        LOST['on a kept building'] += a1
+                    continue
+                if own:
+                    LOST['on a kept building'] += a1 - P.area
             PLACED.append(P)
             h = height(P)
             st = max(1, min(12, round(h / 3.2))) if h else 1
@@ -348,4 +366,5 @@ if not os.environ.get('GIDI_PLACES_ONLY'):
                'anchor_gidi': A['anchor_gidi'], 'area_wkt': set_precision(OWN, 0.1).wkt,
                'real_counts': {**REAL, 'built_m2': round(REAL['built_m2'])}, 'streets': TWINS}, open(TF, 'w'), ensure_ascii=False, indent=0)
 from collections import Counter
+print('real built-up m2 not kept:', {k: round(v) for k, v in LOST.items()}, 'of', round(REAL['built_m2']))
 print(AREA_ID, len(E), 'edits', dict(Counter(e['op'] for e in E)), '| buildings', nb, '| twin streets', len(TWINS), '| plots cleared', seen_par)
