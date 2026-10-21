@@ -13,11 +13,15 @@
   - Check 17: every hand edit landed (the bake lists misses in `hand_misses`).
 - **Real names:** the name pickers use common surnames, and some match real streets near the studied places (Taiwo, Makinde, Babatunde...). `docs/hand/realnames.txt` (made by `scripts/realnames.py`) lists every real name near the twins; the bake swaps any clash for an invented name at the very end (`realnames.rename`).
 - **District checks for Ìbùdó:** all pass again after the rebuild (overlaps, cut-off lanes, reach, hand edits landed). The clean-up now repeats until nothing is left, compares footprints as they are stored (rounded to 0.1 m), and cuts 15 cm past a building line so rounding cannot bring a touch back; the join's links are always lanes (the clean-up takes street pieces under 3 m as scraps).
-- **Still failing, next (check_real):**
-  - R3 twin streets "gone": some are on the map but moved, e.g. Ladipo Street is shifted up to 15 m at a sharp bend by the road tidy-up (`scripts/roadclean.py`, shared by all districts: change it carefully, every frozen district must still pass).
-  - R1 passes in 14 of 15 areas since real footprints that overlap a neighbour are cut back, not dropped (21 Oct: about 244,000 m2 came back). Still lost: about 100,000 m2 to building lines (main 6.3 m, street 4.1 m from the centre line; real Lagos builds closer: the owner's rule, so ask before changing), about 39,000 m2 with no way within 40 m. The builder prints these per area. Barracks has 6% of its real street length (cause not yet looked into).
+- **Merged (22 Oct):** #156-#158 (rebuild, clean-up, real names, R1 cut-back) and #159: a real dual carriageway is one Gidi main (real main length counted once, mains' twins found within 10 m; Gidi's arterials/expressways are left out of R2 main length, like the real trunk roads). All 17 districts pass, bake deterministic, 680/680 photographed twins kept. check_real: 28 fails (R5 aside), no main-road R3/R6 fail left, no R1 fail.
+- **Still failing, next (check_real, 28):**
+  - R2 main length 120-149% in ajao, ilupeju, itire_rd, ojuelegba, surulere: the map has more main road than the real place (some real streets drawn as mains?). Look per area with `scripts/draw_area.py`.
+  - R2 lane length over 115% in airport_rd, civic, itire_rd (the join's "Gidi links" add lanes).
+  - R3/R6: single lanes/streets without a twin or gone, 1-6 per area.
+  - R4: ajao misses a government place, itire_rd a clinic.
+  - Building lines: about 100,000 m2 of real built-up is lost to them (main 6.3 m, street 4.1 m from the centre line; real Lagos builds closer): the owner's rule, so ask before changing. About 30,000 m2 more has no way within 40 m.
   - R5 livable: the map has no POS stand, loading bay, okada/keke rank, vulcaniser, kiosk, stalls or betting types yet: they come with the item register.
-  - Then: commit, PR, and the checking agent with `scripts/draw_area.py` pictures.
+  - Then: the checking agent with `scripts/draw_area.py` pictures.
 
 **19 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
 
