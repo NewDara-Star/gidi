@@ -34,8 +34,13 @@
 3.359471
 ],
 "length_m": 9,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_000_01_a.jpg",
+"google/ibudo/twins/stadium/street_000_01_b.jpg",
+"google/ibudo/twins/stadium/street_000_02_a.jpg",
+"google/ibudo/twins/stadium/street_000_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -57,8 +62,13 @@
 3.359534
 ],
 "length_m": 12,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_001_01_a.jpg",
+"google/ibudo/twins/stadium/street_001_01_b.jpg",
+"google/ibudo/twins/stadium/street_001_02_a.jpg",
+"google/ibudo/twins/stadium/street_001_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -80,8 +90,11 @@
 3.358903
 ],
 "length_m": 15,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_002_01_a.jpg",
+"google/ibudo/twins/stadium/street_002_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -103,8 +116,11 @@
 3.3592
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_003_01_a.jpg",
+"google/ibudo/twins/stadium/street_003_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -138,8 +154,11 @@
 3.358833
 ],
 "length_m": 23,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_004_02_a.jpg",
+"google/ibudo/twins/stadium/street_004_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -165,8 +184,13 @@
 3.359508
 ],
 "length_m": 46,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_005_01_a.jpg",
+"google/ibudo/twins/stadium/street_005_01_b.jpg",
+"google/ibudo/twins/stadium/street_005_02_a.jpg",
+"google/ibudo/twins/stadium/street_005_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -192,8 +216,13 @@
 3.359567
 ],
 "length_m": 37,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_006_01_a.jpg",
+"google/ibudo/twins/stadium/street_006_01_b.jpg",
+"google/ibudo/twins/stadium/street_006_02_a.jpg",
+"google/ibudo/twins/stadium/street_006_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -215,8 +244,13 @@
 3.361138
 ],
 "length_m": 17,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_007_01_a.jpg",
+"google/ibudo/twins/stadium/street_007_01_b.jpg",
+"google/ibudo/twins/stadium/street_007_02_a.jpg",
+"google/ibudo/twins/stadium/street_007_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -242,8 +276,13 @@
 3.361473
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_008_01_a.jpg",
+"google/ibudo/twins/stadium/street_008_01_b.jpg",
+"google/ibudo/twins/stadium/street_008_02_a.jpg",
+"google/ibudo/twins/stadium/street_008_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -269,8 +308,13 @@
 3.362101
 ],
 "length_m": 44,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_009_01_a.jpg",
+"google/ibudo/twins/stadium/street_009_01_b.jpg",
+"google/ibudo/twins/stadium/street_009_02_a.jpg",
+"google/ibudo/twins/stadium/street_009_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -292,8 +336,13 @@
 3.361629
 ],
 "length_m": 65,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_010_01_a.jpg",
+"google/ibudo/twins/stadium/street_010_01_b.jpg",
+"google/ibudo/twins/stadium/street_010_02_a.jpg",
+"google/ibudo/twins/stadium/street_010_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -315,8 +364,13 @@
 3.361888
 ],
 "length_m": 35,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_011_01_a.jpg",
+"google/ibudo/twins/stadium/street_011_01_b.jpg",
+"google/ibudo/twins/stadium/street_011_02_a.jpg",
+"google/ibudo/twins/stadium/street_011_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -342,8 +396,13 @@
 3.361418
 ],
 "length_m": 70,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_012_01_a.jpg",
+"google/ibudo/twins/stadium/street_012_01_b.jpg",
+"google/ibudo/twins/stadium/street_012_02_a.jpg",
+"google/ibudo/twins/stadium/street_012_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -373,8 +432,15 @@
 3.359432
 ],
 "length_m": 91,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_013_01_a.jpg",
+"google/ibudo/twins/stadium/street_013_01_b.jpg",
+"google/ibudo/twins/stadium/street_013_02_a.jpg",
+"google/ibudo/twins/stadium/street_013_02_b.jpg",
+"google/ibudo/twins/stadium/street_013_03_a.jpg",
+"google/ibudo/twins/stadium/street_013_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -432,8 +498,13 @@
 3.360013
 ],
 "length_m": 104,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_014_01_a.jpg",
+"google/ibudo/twins/stadium/street_014_01_b.jpg",
+"google/ibudo/twins/stadium/street_014_02_a.jpg",
+"google/ibudo/twins/stadium/street_014_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -463,8 +534,13 @@
 3.359589
 ],
 "length_m": 53,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_015_01_a.jpg",
+"google/ibudo/twins/stadium/street_015_01_b.jpg",
+"google/ibudo/twins/stadium/street_015_02_a.jpg",
+"google/ibudo/twins/stadium/street_015_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -530,8 +606,19 @@
 3.360589
 ],
 "length_m": 236,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_016_01_a.jpg",
+"google/ibudo/twins/stadium/street_016_01_b.jpg",
+"google/ibudo/twins/stadium/street_016_02_a.jpg",
+"google/ibudo/twins/stadium/street_016_02_b.jpg",
+"google/ibudo/twins/stadium/street_016_03_a.jpg",
+"google/ibudo/twins/stadium/street_016_03_b.jpg",
+"google/ibudo/twins/stadium/street_016_05_a.jpg",
+"google/ibudo/twins/stadium/street_016_05_b.jpg",
+"google/ibudo/twins/stadium/street_016_06_a.jpg",
+"google/ibudo/twins/stadium/street_016_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -553,8 +640,13 @@
 3.359729
 ],
 "length_m": 32,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_017_01_a.jpg",
+"google/ibudo/twins/stadium/street_017_01_b.jpg",
+"google/ibudo/twins/stadium/street_017_02_a.jpg",
+"google/ibudo/twins/stadium/street_017_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -584,8 +676,13 @@
 3.359276
 ],
 "length_m": 55,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_018_01_a.jpg",
+"google/ibudo/twins/stadium/street_018_01_b.jpg",
+"google/ibudo/twins/stadium/street_018_02_a.jpg",
+"google/ibudo/twins/stadium/street_018_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -607,8 +704,11 @@
 3.359196
 ],
 "length_m": 62,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_019_01_a.jpg",
+"google/ibudo/twins/stadium/street_019_01_b.jpg"
+]
 },
 {
 "gidi": [
@@ -662,8 +762,19 @@
 3.359399
 ],
 "length_m": 166,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_020_01_a.jpg",
+"google/ibudo/twins/stadium/street_020_01_b.jpg",
+"google/ibudo/twins/stadium/street_020_02_a.jpg",
+"google/ibudo/twins/stadium/street_020_02_b.jpg",
+"google/ibudo/twins/stadium/street_020_03_a.jpg",
+"google/ibudo/twins/stadium/street_020_03_b.jpg",
+"google/ibudo/twins/stadium/street_020_04_a.jpg",
+"google/ibudo/twins/stadium/street_020_04_b.jpg",
+"google/ibudo/twins/stadium/street_020_05_a.jpg",
+"google/ibudo/twins/stadium/street_020_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -685,8 +796,13 @@
 3.359242
 ],
 "length_m": 33,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_021_01_a.jpg",
+"google/ibudo/twins/stadium/street_021_01_b.jpg",
+"google/ibudo/twins/stadium/street_021_02_a.jpg",
+"google/ibudo/twins/stadium/street_021_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -708,8 +824,13 @@
 3.358994
 ],
 "length_m": 36,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_022_01_a.jpg",
+"google/ibudo/twins/stadium/street_022_01_b.jpg",
+"google/ibudo/twins/stadium/street_022_02_a.jpg",
+"google/ibudo/twins/stadium/street_022_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -731,8 +852,13 @@
 3.35917
 ],
 "length_m": 13,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_023_01_a.jpg",
+"google/ibudo/twins/stadium/street_023_01_b.jpg",
+"google/ibudo/twins/stadium/street_023_02_a.jpg",
+"google/ibudo/twins/stadium/street_023_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -754,8 +880,13 @@
 3.359326
 ],
 "length_m": 40,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_024_01_a.jpg",
+"google/ibudo/twins/stadium/street_024_01_b.jpg",
+"google/ibudo/twins/stadium/street_024_02_a.jpg",
+"google/ibudo/twins/stadium/street_024_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -781,8 +912,13 @@
 3.35907
 ],
 "length_m": 55,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_025_01_a.jpg",
+"google/ibudo/twins/stadium/street_025_01_b.jpg",
+"google/ibudo/twins/stadium/street_025_02_a.jpg",
+"google/ibudo/twins/stadium/street_025_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -804,8 +940,13 @@
 3.359616
 ],
 "length_m": 26,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_026_01_a.jpg",
+"google/ibudo/twins/stadium/street_026_01_b.jpg",
+"google/ibudo/twins/stadium/street_026_02_a.jpg",
+"google/ibudo/twins/stadium/street_026_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -855,8 +996,17 @@
 3.359904
 ],
 "length_m": 139,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_027_01_a.jpg",
+"google/ibudo/twins/stadium/street_027_01_b.jpg",
+"google/ibudo/twins/stadium/street_027_02_a.jpg",
+"google/ibudo/twins/stadium/street_027_02_b.jpg",
+"google/ibudo/twins/stadium/street_027_03_a.jpg",
+"google/ibudo/twins/stadium/street_027_03_b.jpg",
+"google/ibudo/twins/stadium/street_027_04_a.jpg",
+"google/ibudo/twins/stadium/street_027_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -878,8 +1028,13 @@
 3.359572
 ],
 "length_m": 47,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_028_01_a.jpg",
+"google/ibudo/twins/stadium/street_028_01_b.jpg",
+"google/ibudo/twins/stadium/street_028_02_a.jpg",
+"google/ibudo/twins/stadium/street_028_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -901,8 +1056,11 @@
 3.359467
 ],
 "length_m": 39,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_029_02_a.jpg",
+"google/ibudo/twins/stadium/street_029_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -948,8 +1106,17 @@
 3.362255
 ],
 "length_m": 190,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_030_01_a.jpg",
+"google/ibudo/twins/stadium/street_030_01_b.jpg",
+"google/ibudo/twins/stadium/street_030_03_a.jpg",
+"google/ibudo/twins/stadium/street_030_03_b.jpg",
+"google/ibudo/twins/stadium/street_030_04_a.jpg",
+"google/ibudo/twins/stadium/street_030_04_b.jpg",
+"google/ibudo/twins/stadium/street_030_05_a.jpg",
+"google/ibudo/twins/stadium/street_030_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1031,8 +1198,19 @@
 3.361395
 ],
 "length_m": 220,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_031_01_a.jpg",
+"google/ibudo/twins/stadium/street_031_01_b.jpg",
+"google/ibudo/twins/stadium/street_031_02_a.jpg",
+"google/ibudo/twins/stadium/street_031_02_b.jpg",
+"google/ibudo/twins/stadium/street_031_03_a.jpg",
+"google/ibudo/twins/stadium/street_031_03_b.jpg",
+"google/ibudo/twins/stadium/street_031_04_a.jpg",
+"google/ibudo/twins/stadium/street_031_04_b.jpg",
+"google/ibudo/twins/stadium/street_031_06_a.jpg",
+"google/ibudo/twins/stadium/street_031_06_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1058,8 +1236,13 @@
 3.362246
 ],
 "length_m": 49,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_032_01_a.jpg",
+"google/ibudo/twins/stadium/street_032_01_b.jpg",
+"google/ibudo/twins/stadium/street_032_02_a.jpg",
+"google/ibudo/twins/stadium/street_032_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1101,8 +1284,17 @@
 3.360141
 ],
 "length_m": 125,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_033_01_a.jpg",
+"google/ibudo/twins/stadium/street_033_01_b.jpg",
+"google/ibudo/twins/stadium/street_033_02_a.jpg",
+"google/ibudo/twins/stadium/street_033_02_b.jpg",
+"google/ibudo/twins/stadium/street_033_03_a.jpg",
+"google/ibudo/twins/stadium/street_033_03_b.jpg",
+"google/ibudo/twins/stadium/street_033_04_a.jpg",
+"google/ibudo/twins/stadium/street_033_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1124,8 +1316,13 @@
 3.362399
 ],
 "length_m": 36,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_034_01_a.jpg",
+"google/ibudo/twins/stadium/street_034_01_b.jpg",
+"google/ibudo/twins/stadium/street_034_02_a.jpg",
+"google/ibudo/twins/stadium/street_034_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1159,8 +1356,15 @@
 3.359021
 ],
 "length_m": 86,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_035_01_a.jpg",
+"google/ibudo/twins/stadium/street_035_01_b.jpg",
+"google/ibudo/twins/stadium/street_035_02_a.jpg",
+"google/ibudo/twins/stadium/street_035_02_b.jpg",
+"google/ibudo/twins/stadium/street_035_03_a.jpg",
+"google/ibudo/twins/stadium/street_035_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1182,8 +1386,13 @@
 3.358941
 ],
 "length_m": 31,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_036_01_a.jpg",
+"google/ibudo/twins/stadium/street_036_01_b.jpg",
+"google/ibudo/twins/stadium/street_036_02_a.jpg",
+"google/ibudo/twins/stadium/street_036_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -1205,8 +1414,13 @@
 3.35933
 ],
 "length_m": 78,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/stadium/street_037_01_a.jpg",
+"google/ibudo/twins/stadium/street_037_01_b.jpg",
+"google/ibudo/twins/stadium/street_037_02_a.jpg",
+"google/ibudo/twins/stadium/street_037_02_b.jpg"
+]
 }
 ]
 }
