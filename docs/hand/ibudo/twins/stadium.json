@@ -1,0 +1,1212 @@
+{
+"area": "stadium",
+"real": "Surulere stadiums: Teslim Balogun / National Stadium with the long panel fence and the BRT stop; Rabiatu Thompson-type 5-storey slab blocks ringed with shacks",
+"anchor_real": [
+6.501,
+3.361
+],
+"anchor_gidi": [
+8400,
+5280
+],
+"streets": [
+{
+"gidi": [
+[
+8230.8,
+5130.0
+],
+[
+8231.1,
+5130.9
+],
+[
+8233.1,
+5139.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "54b1306a-f127-417c-af80-6457994bcd80",
+"photo_at": [
+6.502315,
+3.359471
+],
+"length_m": 9,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8240.3,
+5141.7
+],
+[
+8237.5,
+5130.0
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "6a0fdaeb-2d28-4856-8222-758fff61ec53",
+"photo_at": [
+6.502304,
+3.359534
+],
+"length_m": 12,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8167.8,
+5130.0
+],
+[
+8171.3,
+5144.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "073fe628-7f97-4b33-9976-b742028b1cda",
+"photo_at": [
+6.502289,
+3.358903
+],
+"length_m": 15,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8233.1,
+5139.2
+],
+[
+8171.3,
+5144.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "a6372dc1-fb03-4a3b-bd11-44f6fe1929ae",
+"photo_at": [
+6.502248,
+3.3592
+],
+"length_m": 62,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8171.3,
+5144.8
+],
+[
+8165.5,
+5149.7
+],
+[
+8161.6,
+5150.7
+],
+[
+8158.1,
+5152.0
+],
+[
+8151.5,
+5155.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "8cb84006-6572-4fd9-8b3f-493e5668355e",
+"photo_at": [
+6.50217,
+3.358833
+],
+"length_m": 23,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8233.1,
+5139.2
+],
+[
+8235.6,
+5155.9
+],
+[
+8237.9,
+5184.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "856215c3-8e7e-49e2-ab7a-d70a00b392ef",
+"photo_at": [
+6.502069,
+3.359508
+],
+"length_m": 46,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8244.6,
+5177.9
+],
+[
+8242.5,
+5159.7
+],
+[
+8240.3,
+5141.7
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "e0551043-e805-4599-a7c0-f772c331d20a",
+"photo_at": [
+6.502087,
+3.359567
+],
+"length_m": 37,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8407.2,
+5130.0
+],
+[
+8423.1,
+5136.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "702ff7a4-af9f-4e4c-8678-7e065c4a1957",
+"photo_at": [
+6.502327,
+3.361138
+],
+"length_m": 17,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8423.1,
+5136.4
+],
+[
+8450.4,
+5147.3
+],
+[
+8481.2,
+5158.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "5b18b958-2d6e-4833-9cf7-4acf9663309d",
+"photo_at": [
+6.502194,
+3.361473
+],
+"length_m": 62,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8514.0,
+5171.5
+],
+[
+8522.5,
+5146.0
+],
+[
+8528.6,
+5130.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "2a0058cd-3f45-4490-810e-113a837ec6a9",
+"photo_at": [
+6.50217,
+3.362101
+],
+"length_m": 44,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8481.2,
+5158.8
+],
+[
+8457.0,
+5219.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "3a39d2d9-7bd1-4dbc-acee-5772b8f3c8d7",
+"photo_at": [
+6.501822,
+3.361629
+],
+"length_m": 65,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8481.2,
+5158.8
+],
+[
+8514.0,
+5171.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "3890c9b2-4285-40a7-9f7e-80cb80013770",
+"photo_at": [
+6.502038,
+3.361888
+],
+"length_m": 35,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8457.0,
+5219.4
+],
+[
+8454.6,
+5225.8
+],
+[
+8435.2,
+5286.0
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "dccb5227-9856-4bcd-afeb-fb46847406b9",
+"photo_at": [
+6.501247,
+3.361418
+],
+"length_m": 70,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8212.3,
+5317.2
+],
+[
+8225.3,
+5281.4
+],
+[
+8232.5,
+5259.5
+],
+[
+8240.9,
+5230.5
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "a981dd59-6777-4b15-94fe-bcca9a9f57a1",
+"photo_at": [
+6.501053,
+3.359432
+],
+"length_m": 91,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8240.9,
+5230.5
+],
+[
+8259.1,
+5234.5
+],
+[
+8269.0,
+5237.1
+],
+[
+8277.9,
+5238.3
+],
+[
+8284.9,
+5239.5
+],
+[
+8290.5,
+5238.3
+],
+[
+8301.3,
+5236.6
+],
+[
+8313.5,
+5230.9
+],
+[
+8321.5,
+5224.8
+],
+[
+8329.4,
+5219.3
+],
+[
+8336.1,
+5213.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "776f1c37-2426-4659-b0f7-71f9cfdf0965",
+"photo_at": [
+6.501378,
+3.360013
+],
+"length_m": 104,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8240.9,
+5230.5
+],
+[
+8245.1,
+5203.3
+],
+[
+8244.6,
+5188.1
+],
+[
+8244.6,
+5177.9
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "e8eaab2f-0440-4bfa-970c-b33e872aaa0b",
+"photo_at": [
+6.501684,
+3.359589
+],
+"length_m": 53,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8457.0,
+5219.4
+],
+[
+8456.6,
+5219.2
+],
+[
+8424.0,
+5206.0
+],
+[
+8375.7,
+5190.6
+],
+[
+8358.7,
+5168.8
+],
+[
+8337.8,
+5159.6
+],
+[
+8324.6,
+5157.3
+],
+[
+8315.4,
+5156.7
+],
+[
+8310.5,
+5155.7
+],
+[
+8297.7,
+5150.7
+],
+[
+8277.3,
+5146.4
+],
+[
+8259.9,
+5144.1
+],
+[
+8240.3,
+5141.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "36555427-602c-493e-9980-e1428caf47f0",
+"photo_at": [
+6.502021,
+3.360589
+],
+"length_m": 236,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8244.6,
+5177.9
+],
+[
+8276.1,
+5185.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "ef583564-7dc9-4091-a95c-c3322d699645",
+"photo_at": [
+6.501891,
+3.359729
+],
+"length_m": 32,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8237.9,
+5184.5
+],
+[
+8202.2,
+5188.9
+],
+[
+8193.0,
+5185.2
+],
+[
+8184.0,
+5186.7
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "fb6a422d-2a8a-4935-81cb-7bff8686ca46",
+"photo_at": [
+6.501833,
+3.359276
+],
+"length_m": 55,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8231.3,
+5234.0
+],
+[
+8172.2,
+5252.5
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "f9f074c3-7a1c-4525-8d28-fe6e2e6477ea",
+"photo_at": [
+6.501332,
+3.359196
+],
+"length_m": 62,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8237.9,
+5184.5
+],
+[
+8238.9,
+5200.5
+],
+[
+8234.7,
+5221.4
+],
+[
+8231.3,
+5234.0
+],
+[
+8227.4,
+5255.4
+],
+[
+8220.5,
+5276.1
+],
+[
+8213.4,
+5295.6
+],
+[
+8207.5,
+5312.4
+],
+[
+8201.7,
+5330.5
+],
+[
+8196.9,
+5344.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "76613bad-234e-4f8f-acda-902fa69e5625",
+"photo_at": [
+6.501129,
+3.359399
+],
+"length_m": 166,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8201.2,
+5347.9
+],
+[
+8212.3,
+5317.2
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "c0acb908-ed88-4ca4-880c-8970f40583d6",
+"photo_at": [
+6.500525,
+3.359242
+],
+"length_m": 33,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8196.9,
+5344.2
+],
+[
+8162.1,
+5333.3
+]
+],
+"kind": "street",
+"real_name": "Rabiatu Thompson Cresent",
+"real_class": "residential",
+"overture_id": "9f6df521-7cbe-4f8f-98e8-91d1783b0e75",
+"photo_at": [
+6.500469,
+3.358994
+],
+"length_m": 36,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8196.6,
+5360.4
+],
+[
+8201.2,
+5347.9
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "bb2debc8-322e-461e-9c07-d055a7107d46",
+"photo_at": [
+6.50033,
+3.35917
+],
+"length_m": 13,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8196.6,
+5360.4
+],
+[
+8235.4,
+5370.8
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "34ff0f20-366d-41b4-9e57-038d970de82b",
+"photo_at": [
+6.500226,
+3.359326
+],
+"length_m": 40,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8178.8,
+5412.0
+],
+[
+8189.1,
+5382.8
+],
+[
+8196.6,
+5360.4
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "83eb04f3-5a2f-4f5e-b7b0-6c6d69c57db6",
+"photo_at": [
+6.50004,
+3.35907
+],
+"length_m": 55,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8235.4,
+5370.8
+],
+[
+8260.4,
+5376.0
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "6b099653-7cdc-4863-b971-40ee8d48046a",
+"photo_at": [
+6.500155,
+3.359616
+],
+"length_m": 26,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8250.7,
+5326.2
+],
+[
+8268.1,
+5326.0
+],
+[
+8279.0,
+5329.8
+],
+[
+8285.9,
+5337.5
+],
+[
+8285.7,
+5349.2
+],
+[
+8279.6,
+5366.5
+],
+[
+8275.5,
+5376.6
+],
+[
+8263.9,
+5406.0
+],
+[
+8254.2,
+5430.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "bd1402d6-d193-4e5b-ac06-0ac2e5adc429",
+"photo_at": [
+6.500218,
+3.359904
+],
+"length_m": 139,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8235.4,
+5370.8
+],
+[
+8250.7,
+5326.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "b73b164f-cb38-4523-9771-f80b8f38cdba",
+"photo_at": [
+6.50038,
+3.359572
+],
+"length_m": 47,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8212.3,
+5317.2
+],
+[
+8250.7,
+5326.2
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "9563dde5-c3eb-4111-a755-c86b1d2ecc30",
+"photo_at": [
+6.500623,
+3.359467
+],
+"length_m": 39,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8509.2,
+5353.1
+],
+[
+8536.6,
+5273.5
+],
+[
+8538.1,
+5263.6
+],
+[
+8536.6,
+5256.2
+],
+[
+8529.5,
+5249.5
+],
+[
+8521.4,
+5245.0
+],
+[
+8505.8,
+5238.4
+],
+[
+8457.0,
+5219.4
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "50827a8a-ff99-40b9-a660-423f99e87520",
+"photo_at": [
+6.501156,
+3.362255
+],
+"length_m": 190,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8476.2,
+5391.0
+],
+[
+8480.0,
+5373.7
+],
+[
+8486.5,
+5345.1
+],
+[
+8489.1,
+5334.9
+],
+[
+8486.0,
+5329.3
+],
+[
+8479.9,
+5326.2
+],
+[
+8453.7,
+5322.2
+],
+[
+8446.9,
+5320.5
+],
+[
+8442.6,
+5314.9
+],
+[
+8428.3,
+5309.2
+],
+[
+8418.4,
+5306.0
+],
+[
+8404.7,
+5304.2
+],
+[
+8398.5,
+5303.6
+],
+[
+8381.1,
+5303.1
+],
+[
+8368.1,
+5305.2
+],
+[
+8353.4,
+5310.3
+],
+[
+8338.7,
+5318.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "a67fb9e2-8599-4d16-bf9b-ab08e5c22397",
+"photo_at": [
+6.500674,
+3.361395
+],
+"length_m": 220,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8514.0,
+5171.5
+],
+[
+8559.3,
+5188.8
+],
+[
+8560.0,
+5189.1
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "bc8ae63b-16c8-4861-81bf-81fae4e2fb39",
+"photo_at": [
+6.501902,
+3.362246
+],
+"length_m": 49,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8283.6,
+5427.8
+],
+[
+8286.6,
+5419.0
+],
+[
+8303.6,
+5372.7
+],
+[
+8322.6,
+5339.2
+],
+[
+8325.7,
+5332.8
+],
+[
+8329.0,
+5324.1
+],
+[
+8338.7,
+5318.1
+]
+],
+"kind": "lane",
+"real_name": null,
+"real_class": "service",
+"overture_id": "51e61a68-e17b-4f77-976b-2adb2a65265b",
+"photo_at": [
+6.500192,
+3.360141
+],
+"length_m": 125,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8560.0,
+5347.8
+],
+[
+8547.4,
+5382.0
+]
+],
+"kind": "main",
+"real_name": "Western Avenue",
+"real_class": "primary",
+"overture_id": "7b2d117e-a22a-4847-9b68-1163b19250e8",
+"photo_at": [
+6.500233,
+3.362399
+],
+"length_m": 36,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8196.9,
+5344.2
+],
+[
+8190.5,
+5361.5
+],
+[
+8180.1,
+5392.0
+],
+[
+8170.8,
+5416.9
+],
+[
+8167.6,
+5425.5
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "tertiary",
+"overture_id": "4714e76d-f69c-4dc9-96c2-edf107645dcf",
+"photo_at": [
+6.500051,
+3.359021
+],
+"length_m": 86,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8168.5,
+5441.3
+],
+[
+8178.8,
+5412.0
+]
+],
+"kind": "street",
+"real_name": "Akerele Road",
+"real_class": "tertiary",
+"overture_id": "7839c291-1958-4198-ab2b-d45242c8aca5",
+"photo_at": [
+6.499674,
+3.358941
+],
+"length_m": 31,
+"status": "red",
+"pics": []
+},
+{
+"gidi": [
+[
+8178.8,
+5412.0
+],
+[
+8254.2,
+5430.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "residential",
+"overture_id": "19ad1aa5-0796-46c9-bd4c-a6ffebaf5e47",
+"photo_at": [
+6.499721,
+3.35933
+],
+"length_m": 78,
+"status": "red",
+"pics": []
+}
+]
+}

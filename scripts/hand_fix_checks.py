@@ -66,11 +66,21 @@ for b_ in G['buildings'][D]:   # a pole or light standing inside a footprint: a 
 for r in G.get('gutters', []):
     if r.get('d') == D and r['state'] == 'open' and len(r['pts']) > 1:
         bad.append(L(r['pts']).buffer(0.1))
-BAD = unary_union(bad)
+BAD = unary_union([g.buffer(0) if not g.is_valid else g for g in bad])
 SOFT = {'stalls', 'kiosk'}   # tables and kiosks may stand in the market spill (the checks allow them in declared zones)
 B = G['buildings'][D]
 E = []
-polys = [Polygon(b[1:]) if len(b) > 3 else None for b in B]
+def _valid(b):   # a footprint whose outline crosses itself is mended (its largest piece), so the cuts below don't fail
+    if len(b) < 4:
+        return None
+    P = Polygon(b[1:])
+    if not P.is_valid:
+        P = P.buffer(0)
+        P = max(getattr(P, 'geoms', [P]), key=lambda x: x.area) if not P.is_empty else None
+    return P
+
+
+polys = [_valid(b) for b in B]
 cut = 0; gone = 0
 for i, b in enumerate(B):
     P = polys[i]
@@ -98,8 +108,8 @@ for a_, i in enumerate(idx):
             s_, l_ = (i, j) if polys[i].area < polys[j].area else (j, i)
             Q = polys[s_].difference(polys[l_].buffer(0.35))   # 35 cm: rounding corners to 0.1 m must not bring the overlap back
             Q = max(getattr(Q, 'geoms', [Q]), key=lambda x: x.area) if not Q.is_empty else Q
-            own = Polygon(B[s_][1:]).difference(Polygon(B[l_][1:]).buffer(0.3))   # a point only the smaller one holds
-            at = R((own if not own.is_empty else Polygon(B[s_][1:])).representative_point().coords[0])
+            own = _valid(B[s_]).difference(_valid(B[l_]).buffer(0.3))   # a point only the smaller one holds
+            at = R((own if not own.is_empty else _valid(B[s_])).representative_point().coords[0])
             E = [e for e in E if not (e['op'] == 'reshape building' and e['at'] == at)]
             if Q.is_empty or Q.geom_type != 'Polygon' or Q.area < 6:
                 E.append({'op': 'delete building', 'at': at, 'kind': B[s_][0], 'note': 'overlapped a bigger one', 'by_who': WHO}); polys[s_] = None; gone += 1
@@ -113,7 +123,7 @@ for i, P in enumerate(polys):
     if P is None or B[i][0] in SOFT:
         continue
     if len(wt.query(P.buffer(45))) == 0 or min(W[int(k)].distance(P) for k in wt.query(P.buffer(45))) > 44:
-        E.append({'op': 'delete building', 'at': R(Polygon(B[i][1:]).representative_point().coords[0]), 'kind': B[i][0], 'note': 'reached by no way', 'by_who': WHO}); polys[i] = None; gone += 1
+        E.append({'op': 'delete building', 'at': R(_valid(B[i]).representative_point().coords[0]), 'kind': B[i][0], 'note': 'reached by no way', 'by_who': WHO}); polys[i] = None; gone += 1
 for p in G['streets'].get(D, []):
     g = L(p)
     if g is not None and g.length < 3:
