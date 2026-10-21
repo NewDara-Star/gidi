@@ -63,10 +63,11 @@ def run(G):
     B = [(b[0], Polygon(b[1:])) for b in G['buildings'].get(D, []) if len(b) > 3]
     bt = STRtree([p for _, p in B])
     WAYS = {'street': [LineString(p) for p in G['streets'].get(D, []) if len(p) > 1], 'lane': [LineString(p) for p in G['lanes'].get(D, []) if len(p) > 1],
-            'main': [LineString(m['pts']) for m in G['mains'] if m.get('d') == D and len(m['pts']) > 1]
-                    + [LineString(x['pts']) for x in G['arterials'] if len(x['pts']) > 1],   # a real main road can be Gidi's own arterial, by design
+            'main': [LineString(m['pts']) for m in G['mains'] if m.get('d') == D and len(m['pts']) > 1],
             'path': [LineString(p) for p in (G.get('paths') or {}).get(D, []) if len(p) > 1]}
-    allways = [g for v in WAYS.values() for g in v]
+    # Gidi's arterials and expressways are the layout's lines: the real trunk roads and expressways are left out of the real figures, so they
+    # do not count in R2's main length; but a real main road can be Gidi's own arterial by design, so they do count as its twin (R3)
+    allways = [g for v in WAYS.values() for g in v] + [LineString(x['pts']) for x in G['arterials'] if len(x['pts']) > 1]
     wt = STRtree(allways)
     # what stands for each livable thing, by kind
     PTS = {}
@@ -98,8 +99,9 @@ def run(G):
                 continue
             g = LineString(s['gidi'])
             m = g.interpolate(0.5, normalized=True)
-            near = [allways[int(i)] for i in wt.query(m.buffer(3))]
-            if not any(w.distance(m) < 3 for w in near):
+            tol = 10 if s['kind'] == 'main' else 3   # a real dual carriageway (one line each way, ~8 m apart) is one Gidi main on its middle
+            near = [allways[int(i)] for i in wt.query(m.buffer(tol))]
+            if not any(w.distance(m) < tol for w in near):
                 miss.append('%s (%s) at (%.0f,%.0f)' % (s.get('real_name') or s['kind'], s['kind'], m.x, m.y))
         res.append((a, 'R3 twin streets on the map', not miss, '%d of %d gone. %s' % (len(miss), len(T['streets']), '; '.join(miss[:3]))))
         tw = [LineString(x['gidi']) for x in T['streets'] if len(x['gidi']) > 1 and not x.get('replaced')]
@@ -110,7 +112,8 @@ def run(G):
                 if g.length < 10 or g.intersection(AREA).length < 0.7 * g.length:
                     continue
                 m = g.interpolate(0.5, normalized=True)
-                if twt is None or not any(tw[int(i)].distance(m) < 3 for i in twt.query(m.buffer(3))):
+                tol = 10 if k == 'main' else 3
+                if twt is None or not any(tw[int(i)].distance(m) < tol for i in twt.query(m.buffer(tol))):
                     orphan.append('%s at (%.0f,%.0f)' % (k, m.x, m.y))
         res.append((a, 'R6 every street has its twin', not orphan, '%d without. %s' % (len(orphan), '; '.join(orphan[:3]))))
         gone = []

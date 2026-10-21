@@ -101,11 +101,16 @@ KIND = {'primary': 'main', 'secondary': 'main', 'tertiary': 'street', 'residenti
 TWINS, ADDED, TWINS_E = [], [], []
 REAL = {'buildings': 0, 'built_m2': 0.0, 'street_m': {}, 'places': {}}   # the real place in the area, before Gidi's changes: what check_real.py holds the map to
 KEEP_OUT = CORR.buffer(1)
+REAL_MAIN = []
 for r in rows:
     if r['subtype'] != 'road' or r['class'] not in KIND:
         continue   # the trunk road, the expressway and the rail are the layout's lines
     g = LineString([T(*c) for c in wkb.loads(r['geometry']).coords]).intersection(AREA)
-    REAL['street_m'][KIND[r['class']]] = REAL['street_m'].get(KIND[r['class']], 0) + round(g.intersection(OWN).length)
+    own_g = g.intersection(OWN)
+    if KIND[r['class']] == 'main':   # a dual carriageway is one line each way: count the road once (what lies within 12 m of a counted main is the other side)
+        own_g = own_g.difference(unary_union(REAL_MAIN).buffer(12)) if REAL_MAIN else own_g
+        REAL_MAIN.append(g.intersection(OWN))
+    REAL['street_m'][KIND[r['class']]] = REAL['street_m'].get(KIND[r['class']], 0) + round(own_g.length)
     g = g.difference(KEEP_OUT)
     name = (r['names'] or {}).get('primary') if r['names'] else None
     for part in getattr(g, 'geoms', [g]):
