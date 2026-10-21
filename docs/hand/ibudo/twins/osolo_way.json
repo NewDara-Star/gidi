@@ -30,8 +30,15 @@
 3.331503
 ],
 "length_m": 107,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_000_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_000_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_000_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_000_02_b.jpg",
+"google/ibudo/twins/osolo_way/street_000_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_000_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -65,8 +72,13 @@
 3.331537
 ],
 "length_m": 97,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_001_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_001_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_001_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_001_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -96,8 +108,13 @@
 3.33144
 ],
 "length_m": 75,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_002_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_002_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_002_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_002_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -123,8 +140,15 @@
 3.3316
 ],
 "length_m": 110,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_003_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_003_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_003_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_003_02_b.jpg",
+"google/ibudo/twins/osolo_way/street_003_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_003_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -154,8 +178,13 @@
 3.331761
 ],
 "length_m": 168,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_004_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_004_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_004_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_004_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -248,8 +277,17 @@
 3.33179
 ],
 "length_m": 121,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_006_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_006_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_006_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_006_02_b.jpg",
+"google/ibudo/twins/osolo_way/street_006_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_006_03_b.jpg",
+"google/ibudo/twins/osolo_way/street_006_04_a.jpg",
+"google/ibudo/twins/osolo_way/street_006_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -283,8 +321,15 @@
 3.331954
 ],
 "length_m": 89,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_007_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_007_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_007_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_007_02_b.jpg",
+"google/ibudo/twins/osolo_way/street_007_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_007_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -306,8 +351,13 @@
 3.332012
 ],
 "length_m": 20,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_008_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_008_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_008_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_008_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -333,8 +383,13 @@
 3.331686
 ],
 "length_m": 79,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_009_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_009_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_009_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_009_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -368,8 +423,15 @@
 3.331748
 ],
 "length_m": 155,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_010_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_010_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_010_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_010_03_b.jpg",
+"google/ibudo/twins/osolo_way/street_010_04_a.jpg",
+"google/ibudo/twins/osolo_way/street_010_04_b.jpg"
+]
 },
 {
 "gidi": [
@@ -391,8 +453,15 @@
 3.331424
 ],
 "length_m": 86,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_011_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_011_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_011_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_011_02_b.jpg",
+"google/ibudo/twins/osolo_way/street_011_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_011_03_b.jpg"
+]
 },
 {
 "gidi": [
@@ -414,8 +483,13 @@
 3.331559
 ],
 "length_m": 23,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_012_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_012_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_012_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_012_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -449,8 +523,15 @@
 3.331566
 ],
 "length_m": 163,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_013_03_a.jpg",
+"google/ibudo/twins/osolo_way/street_013_03_b.jpg",
+"google/ibudo/twins/osolo_way/street_013_04_a.jpg",
+"google/ibudo/twins/osolo_way/street_013_04_b.jpg",
+"google/ibudo/twins/osolo_way/street_013_05_a.jpg",
+"google/ibudo/twins/osolo_way/street_013_05_b.jpg"
+]
 },
 {
 "gidi": [
@@ -476,8 +557,13 @@
 3.331199
 ],
 "length_m": 57,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_014_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_014_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_014_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_014_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -499,8 +585,13 @@
 3.331196
 ],
 "length_m": 21,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_015_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_015_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_015_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_015_02_b.jpg"
+]
 },
 {
 "gidi": [
@@ -522,8 +613,13 @@
 3.331328
 ],
 "length_m": 50,
-"status": "red",
-"pics": []
+"status": "amber",
+"pics": [
+"google/ibudo/twins/osolo_way/street_016_01_a.jpg",
+"google/ibudo/twins/osolo_way/street_016_01_b.jpg",
+"google/ibudo/twins/osolo_way/street_016_02_a.jpg",
+"google/ibudo/twins/osolo_way/street_016_02_b.jpg"
+]
 }
 ]
 }
