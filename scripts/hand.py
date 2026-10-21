@@ -241,16 +241,21 @@ def _clear_area(out, d, e, stage):
             out[k][d] = keep
     if not cut:
         return
-    near = Cb.buffer(20)
-    live = [LineString(p) for k in ('streets', 'lanes') for p in (out.get(k) or {}).get(d, []) if len(p) > 1]
-    live = [g for g in live if g.intersects(near)] + [LineString(m['pts']) for m in out['mains'] if len(m['pts']) > 1 and LineString(m['pts']).intersects(near)]
-    live += [LineString(a['pts']) for a in out.get('arterials', []) if LineString(a['pts']).intersects(near)]
-    for k, g in cut:   # what is left outside the area stays if it is long enough and joined on at an end
+    from shapely.strtree import STRtree
+    live = [LineString(p) for k in ('streets', 'lanes') for p in (out.get(k) or {}).get(d, []) if len(p) > 1]   # every way in the district, not only
+    live += [LineString(m['pts']) for m in out['mains'] if len(m['pts']) > 1]                                    # those near the edge: a street's far end
+    live += [LineString(a['pts']) for a in out.get('arterials', []) if len(a['pts']) > 1]                         # can be what joins it on
+    lt = STRtree(live)
+    for k, g in cut:   # what is left outside the area stays if it is long enough and joined on at an end, or if the area only clips it
         rest = g.difference(Cb)
+        clipped = g.intersection(C).length < 0.5 * g.length
         for part in getattr(rest, 'geoms', [rest]):
-            if part.geom_type == 'LineString' and part.length > 15 and any(w.distance(Point(part.coords[j])) < 1.5 for j in (0, -1) for w in live):
+            if part.geom_type != 'LineString' or part.length <= 15:
+                continue
+            ends = [Point(part.coords[j]) for j in (0, -1)]
+            if clipped or any(live[int(i)].distance(e) < 1.5 for e in ends for i in lt.query(e.buffer(1.5))):
                 pts = [[round(x, 1), round(y, 1)] for x, y in part.coords]
-                out.setdefault(k, {}).setdefault(d, []).append(pts); live.append(LineString(pts))
+                out.setdefault(k, {}).setdefault(d, []).append(pts)
 
 
 def apply_road_edits(out):

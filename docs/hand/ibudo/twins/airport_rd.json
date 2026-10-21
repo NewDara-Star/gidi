@@ -2594,69 +2594,6 @@
 "google/ibudo/twins/airport_rd/street_071_02_a.jpg",
 "google/ibudo/twins/airport_rd/street_071_02_b.jpg"
 ]
-},
-{
-"gidi": [
-[
-7605.3,
-4600.0
-],
-[
-7587.8,
-4600.0
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 17,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-7404.6,
-4455.1
-],
-[
-7428.9,
-4440.0
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 29,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-7254.9,
-4567.6
-],
-[
-7198.5,
-4563.6
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 57,
-"status": "n/a",
-"pics": [],
-"link": true
 }
 ]
 }

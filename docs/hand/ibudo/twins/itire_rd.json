@@ -1724,6 +1724,27 @@
 {
 "gidi": [
 [
+7505.2,
+5129.6
+],
+[
+7492.5,
+5138.9
+]
+],
+"kind": "street",
+"real_name": null,
+"real_class": "gidi link",
+"overture_id": null,
+"photo_at": null,
+"length_m": 16,
+"status": "n/a",
+"pics": [],
+"link": true
+},
+{
+"gidi": [
+[
 7664.3,
 5177.8
 ],
@@ -1790,114 +1811,6 @@
 {
 "gidi": [
 [
-7364.5,
-5080.0
-],
-[
-7387.5,
-5047.1
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 40,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
-},
-{
-"gidi": [
-[
-7505.2,
-5129.6
-],
-[
-7492.5,
-5138.9
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 16,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-7456.7,
-5116.8
-],
-[
-7481.1,
-5146.0
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 38,
-"status": "n/a",
-"pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-7117.6,
-5185.0
-],
-[
-7116.2,
-5228.7
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 44,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
-},
-{
-"gidi": [
-[
-7181.8,
-5185.0
-],
-[
-7160.2,
-5244.9
-]
-],
-"kind": "street",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 64,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
-},
-{
-"gidi": [
-[
 7818.5,
 5096.5
 ],
@@ -1906,7 +1819,7 @@
 5163.0
 ]
 ],
-"kind": "street",
+"kind": "lane",
 "real_name": null,
 "real_class": "gidi link",
 "overture_id": null,

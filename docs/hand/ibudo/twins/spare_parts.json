@@ -2335,12 +2335,12 @@
 {
 "gidi": [
 [
-8354.1,
-4613.5
+8429.2,
+4602.6
 ],
 [
-8354.9,
-4579.8
+8429.9,
+4573.8
 ]
 ],
 "kind": "lane",
@@ -2348,32 +2348,10 @@
 "real_class": "gidi link",
 "overture_id": null,
 "photo_at": null,
-"length_m": 34,
+"length_m": 29,
 "status": "n/a",
 "pics": [],
 "link": true
-},
-{
-"gidi": [
-[
-8238.3,
-5041.8
-],
-[
-8233.4,
-5075.4
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 34,
-"status": "n/a",
-"pics": [],
-"link": true,
-"replaced": "by a later area"
 },
 {
 "gidi": [
@@ -2399,12 +2377,12 @@
 {
 "gidi": [
 [
-8688.9,
-4667.4
+8578.8,
+4567.7
 ],
 [
-8711.4,
-4620.3
+8563.5,
+4512.9
 ]
 ],
 "kind": "lane",
@@ -2412,31 +2390,11 @@
 "real_class": "gidi link",
 "overture_id": null,
 "photo_at": null,
-"length_m": 52,
+"length_m": 57,
 "status": "n/a",
 "pics": [],
-"link": true
-},
-{
-"gidi": [
-[
-8572.8,
-4582.7
-],
-[
-8510.4,
-4570.9
-]
-],
-"kind": "lane",
-"real_name": null,
-"real_class": "gidi link",
-"overture_id": null,
-"photo_at": null,
-"length_m": 63,
-"status": "n/a",
-"pics": [],
-"link": true
+"link": true,
+"replaced": "by a later area"
 }
 ]
 }
