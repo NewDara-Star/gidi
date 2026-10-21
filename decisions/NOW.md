@@ -15,7 +15,7 @@
 - **District checks for Ìbùdó:** all pass again after the rebuild (overlaps, cut-off lanes, reach, hand edits landed). The clean-up now repeats until nothing is left, compares footprints as they are stored (rounded to 0.1 m), and cuts 15 cm past a building line so rounding cannot bring a touch back; the join's links are always lanes (the clean-up takes street pieces under 3 m as scraps).
 - **Still failing, next (check_real):**
   - R3 twin streets "gone": some are on the map but moved, e.g. Ladipo Street is shifted up to 15 m at a sharp bend by the road tidy-up (`scripts/roadclean.py`, shared by all districts: change it carefully, every frozen district must still pass).
-  - R1/R2: areas keep 53-80% of the real built-up area. The builder cuts every real footprint back to a building line (main 6.3 m, street 4.1 m from the centre line); real Lagos builds closer (Ladipo's sheds sit on the road). Barracks has 6% of its real street length (cause not yet looked into).
+  - R1 passes in 14 of 15 areas since real footprints that overlap a neighbour are cut back, not dropped (21 Oct: about 244,000 m2 came back). Still lost: about 100,000 m2 to building lines (main 6.3 m, street 4.1 m from the centre line; real Lagos builds closer: the owner's rule, so ask before changing), about 39,000 m2 with no way within 40 m. The builder prints these per area. Barracks has 6% of its real street length (cause not yet looked into).
   - R5 livable: the map has no POS stand, loading bay, okada/keke rank, vulcaniser, kiosk, stalls or betting types yet: they come with the item register.
   - Then: commit, PR, and the checking agent with `scripts/draw_area.py` pictures.
 
