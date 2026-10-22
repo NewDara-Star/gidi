@@ -300,6 +300,9 @@ def pole(mb, x, y, rec, h=None, wood=False):
     top = (x + lean[0] * h, y + lean[1] * h, h)
     if wood:
         parts.cyl(mb, 'wood', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(lean[1], 4, 'X') @ Matrix.Rotation(-lean[0], 4, 'Y'), 0.13, h, hex_rgb('#5a4632'), 0.6, seg=8, r2=0.1)
+    elif 'lean_toward_deg' in rec:   # a pole the map leans hard: its shaft tipped the same way as its top (the old tilt runs y the other way)
+        parts.cyl(mb, 'concrete', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(-math.atan(lean[1]), 4, 'X') @ Matrix.Rotation(math.atan(lean[0]), 4, 'Y') @ Matrix.Rotation(math.pi / 4, 4, 'Z'),
+                  0.18, math.hypot(h, math.hypot(*lean) * h), hex_rgb('#9c978c'), need(rec, 'wear', 'pole'), seg=4, r2=0.1)
     else:  # square-tapered concrete
         parts.cyl(mb, 'concrete', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(lean[1], 4, 'X') @ Matrix.Rotation(-lean[0], 4, 'Y') @ Matrix.Rotation(math.pi / 4, 4, 'Z'), 0.18, h, hex_rgb('#9c978c'), need(rec, 'wear', 'pole'), seg=4, r2=0.1)
     ang = need(rec, 'arm', 'pole')

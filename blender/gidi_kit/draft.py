@@ -1110,6 +1110,22 @@ def street(sp, base_dir):
             xa, xb = vr.get('from_x', x0), vr.get('upto_x', x1)
             n_ = max(1, int((xb - xa) / 0.5))
             vr['shades'] = [rng.between(0.85, 1.05) for k in range(n_)]
+        elif vr.get('surface') == 'grass':   # the grass strip's pieces: each one's length, shade, and how far its two edges wander in
+            xa, xb = vr.get('from_x', x0), vr.get('upto_x', x1)
+            gr, vr['patches'], x = rng.child('grass' + vk), [], xa
+            while x < xb:
+                ln = gr.between(0.6, 1.6)
+                vr['patches'].append([round(min(ln, xb - x), 2), gr.between(0.8, 1.15), gr.between(0.0, 0.35), gr.between(0.0, 0.6)])
+                x += ln
+    for side in ('left', 'right'):   # a kerb's precast blocks: each one's length, shade and a chip off its top edge
+        kb = sp.get('kerb_' + side)
+        if kb:
+            xa, xb = kb.get('from_x', x0), kb.get('upto_x', x1)
+            kr, kb['blocks'], x = rng.child('kerb' + side), [], xa
+            while x < xb:
+                ln = kb.get('block_m', 1.0) * kr.between(0.95, 1.05)
+                kb['blocks'].append([round(min(ln, xb - x), 3), kr.between(0.85, 1.08), kr.between(0.0, 1.0) if kr.chance(kb.get('chipped', 0.2)) else 0.0])
+                x += ln
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -1150,6 +1166,9 @@ def props(P):
     rng = Rng('oldtown', 'props')
     for k, p in enumerate(P.get('poles', [])):
         p.update(pole(rng.child('pole', k), h=p.get('h', 9.5), wood=p.get('type') == 'timber'))
+        if 'lean_toward_deg' in p:   # a pole the map says leans hard one way: its lean from the map, not drafted
+            t, a = math.tan(math.radians(p.get('lean_deg', 0))), math.radians(p['lean_toward_deg'])
+            p['lean'] = [round(t * math.cos(a), 3), round(t * math.sin(a), 3)]
     for t in P.get('trees', []):
         t['form'] = tree(rng.child('tree', t['x']), kind=t.get('kind', 'palm'), h=t.get('h'))
     for k, s in enumerate(P.get('trade_spots', [])):
@@ -1210,6 +1229,11 @@ def props(P):
     for k, hp in enumerate(P.get('heaps', [])):
         if hp['kind'] == 'rubbish':
             hp['heap'] = refuse_heap(hp['r'], rng.child('heap', k))
+        elif hp['kind'] == 'blocks':   # a stack of hollow blocks: each block's nudge, turn and shade, and the gaps where one is gone
+            r = rng.child('blocks', k)
+            hp['blocks'] = [[round(r.between(-0.02, 0.02), 3), round(r.between(-0.02, 0.02), 3), round(r.between(-0.04, 0.04), 3), r.between(0.85, 1.1),
+                             r.chance(hp.get('gone', 0.1)) if j >= hp['cols'] * hp.get('rows', 1) else False]
+                            for j in range(hp['cols'] * hp.get('rows', 1) * hp['layers'])]
         elif hp['kind'] == 'goods':
             hp['goods'] = heap(hp['x'], hp['y'], hp['r'], hp.get('z_m', 0.0), hp.get('goods_kinds', ['sacks']), rng.child('heap', k), hp.get('tarp_colour'), cols=hp.get('goods_colours'))
     for k, p in enumerate(P.get('people', [])):

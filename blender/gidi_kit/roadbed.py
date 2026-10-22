@@ -6,6 +6,7 @@ A subdivided sheet over the street and its edges, its height made from the map's
 - `potholes`: bowls, each where the map puts it.
 - `ruts`: wheel tracks along the street; `packed` makes one a dark, smooth beaten track rather than a muddy groove.
 - `edge_rut`: a channel worn along the road's edge where the tar breaks into earth (`side`, `depth_m`, `w_m`).
+- `tar_fray`: how far the tar's edge wanders (1 = as drafted, 0 = a clean edge, as at a kerb).
 - `tar_lip_m`: the tar patches stand this proud of the earth and dust around them, so their broken edges show.
 - `puddles`: water lies flat in every spot lower than `level_m`, and the ground is dark and wet up to `wet_m`.
 
@@ -79,7 +80,7 @@ class Ground:
         return self._grid('relief', x, y)
 
     def _inside(self, x, y):
-        return _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + self._grid('fray', x, y))
+        return _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + self._grid('fray', x, y) * self.sp.get('tar_fray', 1.0))
 
     def _tar(self, x, y, soft=0.08):
         rel = self._relief(x, y) if self.amp else np.zeros_like(x)
