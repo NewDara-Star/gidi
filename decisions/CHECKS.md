@@ -83,3 +83,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | The Reach goes with Festac into the new map | The Reach stands in the Festac-inspired place | GAP: comes with the new map |
 | Build light, look full: modes, near-detail and streaming | frame time and memory per level in Work, Low, High and Full; budgets per level | GAP: comes with the mode switch in gidi-game (22 Oct) |
 | The owner's eye passes a kit | each test spot: Street View picture beside the rebuild from the same camera, the owner's pass/fail and notes | GAP: comes with the first kit test (22 Oct) |
+| People come from a kit too | every person on the shared skeleton; outfits from the checked list; crowd scenes side by side with Street View; crowd held at budget, not cut | GAP: comes with the people kit (22 Oct) |
