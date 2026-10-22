@@ -1,0 +1,30 @@
+{
+  "about": "What each kit part reads from the map (docs/MAP-FORMAT.md, section 4). DRAFT: hand-kept until the kit's parts declare it in code (a reads() list beside each builder, collected by the registry and written here). scripts/check_map.py --kit fails if a part reads a field the schema does not have, if a drawn record type has no part, or if a drawn field has no part reading it.",
+  "parts": {
+    "oldtown.street_piece": {"record": "road", "reads": ["kind", "centreline", "width", "surface", "sand_cover", "kerb_left", "kerb_right", "median", "crown", "ground_look", "verges", "crossings"]},
+    "gutters.gutter": {"record": "road", "reads": ["gutters"]},
+    "gutters.pieces": {"record": "gutter_pieces", "reads": ["of", "side", "pieces[].s0", "pieces[].s1", "pieces[].wall_wear", "pieces[].water_z", "pieces[].mix", "pieces[].caught", "pieces[].slabs"]},
+    "oldtown.frontage": {"record": "frontage", "reads": ["road", "side", "kind", "line", "setback", "platform", "wall"]},
+    "oldtown.wall": {"record": "wall", "reads": ["line", "wall"]},
+    "wear.wall_bays": {"record": "wall_bays", "reads": ["of", "bays", "chips", "daubs"]},
+    "oldtown.building": {"record": "building", "reads": ["kind", "footprint", "storeys", "storey_h", "ground_floor", "roof", "finish", "windows", "outside_stair", "wear"]},
+    "facade.faces": {"record": "faces", "reads": ["of", "blotch", "faces[].face", "faces[].windows", "faces[].doors", "faces[].shopfronts", "faces[].balconies", "faces[].screens", "faces[].stains", "faces[].addons", "faces[].signs", "faces[].awnings"]},
+    "zinc.roof_sheets": {"record": "roof_sheets", "reads": ["of", "sag", "slopes", "uprights"]},
+    "oldtown.leanto": {"record": "leanto", "reads": ["against", "face", "u0", "u1", "depth", "z_wall", "z_front", "sheet", "posts", "stand_z"]},
+    "oldtown.stall": {"record": "stall", "reads": ["kind", "at", "turn", "w", "d", "h", "colour", "tarp", "umbrella"]},
+    "props.heap": {"record": "heap", "reads": ["kind", "at", "r", "h", "tarp_colour"]},
+    "goods.goods": {"record": "goods", "reads": ["of", "items", "hung"]},
+    "props.pole": {"record": "pole", "reads": ["kind", "at", "h", "lean", "transformer", "lamp", "arm", "wear"]},
+    "props.wire": {"record": "wire", "reads": ["from_pole", "to_pole", "to_at", "n", "sag"]},
+    "oldtown.mast": {"record": "mast", "reads": ["kind", "at", "h", "colour"]},
+    "props.tree": {"record": "tree", "reads": ["kind", "at", "h", "lean", "form"]},
+    "vehicles.vehicle": {"record": "vehicle", "reads": ["kind", "at", "turn", "colour", "cab_colour", "lean", "tractor", "load", "cover"]},
+    "props.furniture": {"record": "furniture", "reads": ["kind", "at", "z", "turn", "colour", "length"]},
+    "oldtown.posters": {"record": "posters", "reads": ["of", "face", "items"]},
+    "roadbed.ground": {"record": "ground", "reads": ["of", "kind", "rings", "order", "z", "lip", "colour", "surface"]},
+    "roadbed.relief": {"record": "relief", "reads": ["origin", "cell", "cols", "rows", "z_mm"]},
+    "roadbed.marks": {"record": "ground_marks", "reads": ["of", "potholes", "ruts"]},
+    "detail.litter": {"record": "litter", "reads": ["of", "pieces"]},
+    "people.spots": {"record": "people", "reads": ["of", "spots"]}
+  }
+}
