@@ -107,10 +107,13 @@ for r in rows:
         continue   # the trunk road, the expressway and the rail are the layout's lines
     g = LineString([T(*c) for c in wkb.loads(r['geometry']).coords]).intersection(AREA)
     own_g = g.intersection(OWN)
-    if KIND[r['class']] == 'main':   # a dual carriageway is one line each way: count the road once (what lies within 12 m of a counted main is the other side)
-        own_g = own_g.difference(unary_union(REAL_MAIN).buffer(12)) if REAL_MAIN else own_g
+    m = own_g.length
+    if KIND[r['class']] == 'main':   # a dual carriageway is one line each way: count the road once (a run over 30 m within 12 m of a counted main is
+        if REAL_MAIN:                # the other side; a shorter one is only a junction, where a road crosses or meets a main)
+            ov = own_g.intersection(unary_union(REAL_MAIN).buffer(12))
+            m -= sum(q.length for q in getattr(ov, 'geoms', [ov]) if q.length > 30)
         REAL_MAIN.append(g.intersection(OWN))
-    REAL['street_m'][KIND[r['class']]] = REAL['street_m'].get(KIND[r['class']], 0) + round(own_g.length)
+    REAL['street_m'][KIND[r['class']]] = REAL['street_m'].get(KIND[r['class']], 0) + round(m)
     g = g.difference(KEEP_OUT)
     name = (r['names'] or {}).get('primary') if r['names'] else None
     for part in getattr(g, 'geoms', [g]):
