@@ -449,6 +449,9 @@ were never land neighbours; they stay linked only by bridge or boat.
 
 These are the borders and joins the data cannot decide. Each one is a look at Google Earth, not a new rule.
 
+All 15 were checked on 22 Oct: verdicts, split lines and the district list after the checks are in
+`EARTH-CHECK.md`.
+
 1. **Victoria Island and Ikoyi.** At 60% and below VI joins Ikoyi through the small pieces Elegushi west and Old
    Ikoyi west (across the Five Cowries creek and Falomo). The first study kept VI apart. Does built land really run
    across, or is the creek a full break?
