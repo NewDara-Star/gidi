@@ -84,3 +84,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | Build light, look full: modes, near-detail and streaming | frame time and memory per level in Work, Low, High and Full; budgets per level | GAP: comes with the mode switch in gidi-game (22 Oct) |
 | The owner's eye passes a kit | each test spot: Street View picture beside the rebuild from the same camera, the owner's pass/fail and notes | GAP: comes with the first kit test (22 Oct) |
 | People come from a kit too | every person on the shared skeleton; outfits from the checked list; crowd scenes side by side with Street View; crowd held at budget, not cut | GAP: comes with the people kit (22 Oct) |
+| One ground truth: everything the kit shows is in the map data | every object the kit builds traces to one map record; the kit has no seeds, scatters or spacing rules; changing a record changes the build | GAP: comes with the map-kit interface (22 Oct) |

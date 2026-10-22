@@ -49,3 +49,6 @@ The owner: "people randomly having like chatter conversations"; "beer parlour ta
 - **Sound and music:** radio from shops and buses, a station or two of our own music, generator hum, church and mosque, hawkers' calls.
 - **Things going on:** jobs anyone in Lagos knows (conductor, okada, hawking, a levy run), checkpoints, the light going off, rain that floods the street, traffic that locks up.
 - **Dense, not huge:** a small part of the city full of life beats a big empty one; the Underdeck is the first place to prove it, and short clips of it are how people hear about the game.
+
+## Place names: echo names (proposal, 22 Oct, awaiting the owner)
+The owner asked whether Gidi's places could just be parodies of the real names, since Gidi is Lagos made smaller. Invented names stay the rule. The proposal is **echo names**: built from Yoruba (or the place's own language) the way Lagos names are, close enough in sound or meaning that a Lagosian smiles and knows where they are, never a straight copy and never a cheap pun. Saba for Yaba is the model. Big landmarks get the clearest echo; quiet places get plain new names in the same style. Brands and businesses are always invented (Gidi's own). One name list for all 51 districts, made with the owner.
