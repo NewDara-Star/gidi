@@ -579,6 +579,17 @@ def frontage(e, collection=None):
 
 
 # ---------------------------------------------------------------- the street piece
+GROUNDS = []   # the street pieces' ground built so far, so props stand on it rather than at zero
+
+
+def ground_z(x, y):
+    """The ground's height at (x, y): the roadbed's where a street piece has one, else zero."""
+    for G in GROUNDS:
+        if G.x0 - 5 <= x <= G.x1 and -14.0 <= y <= 6.6:
+            return float(G.height(x, y))
+    return 0.0
+
+
 def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
     rng = Rng('oldtown', sp['id'])
     mb = MeshBuilder()
@@ -588,8 +599,10 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
     X0, X1, Y0, Y1 = extent
     G = None
     if sp.get('relief') or 'tar_cover' in sp:   # the ground as real geometry, humps, dips, potholes and patches (roadbed.py)
-        mb.face([(X0, Y0, -0.08), (X1, Y0, -0.08), (X1, Y1, -0.08), (X0, Y1, -0.08)], 'mud', hex_rgb('#7a5a44'), 0.1)
+        zb = -0.08 - 2 * (sp.get('relief') or {}).get('amp_m', 0.0)   # under the sheet's deepest dips
+        mb.face([(X0, Y0, zb), (X1, Y0, zb), (X1, Y1, zb), (X0, Y1, zb)], 'mud', hex_rgb('#7a5a44'), 0.1)
         _, G = roadbed.build(sp, collection, materials=master)
+        GROUNDS.append(G)
     else:   # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
         tar = hex_rgb('#665e57')
         mb.face([(X0, Y0, -0.02), (X1, Y0, -0.02), (X1, Y1, -0.02), (X0, Y1, -0.02)], 'mud', hex_rgb('#8a8174'), 0.1)
@@ -658,10 +671,12 @@ def spot_props(P, collection=None):
             else:
                 leanto(mb, s, side, r)
             sgn = 1 if side == 'left' else -1
+            g0 = len(gmb.cols)
             goods.band(gmb, s['x0'] + 0.15, s['x1'] - 0.15, s['wall_y'], s.get('goods_depth_m', 0.9), s.get('stand_z_m', 0.0),
                        s.get('goods_kinds', []), s.get('goods_fill', 0.0), r.child('goods'), side=sgn, tarp_over=s.get('goods_tarp', False))
             goods.hanging(gmb, s['x0'], s['x1'], s['wall_y'] - sgn * (s['depth'] - 0.08), s['z_front'] - 0.15,
                           s.get('hanging_kinds', []), s.get('hanging_fill', 0.0), r.child('hang'))
+            goods.weather(gmb, g0, s.get('goods_tone', 1.0), s.get('goods_dust', 0.0))
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'plank_stall':
             plank_stall(mb, s, r, gmb)
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'drinks_fridge':
@@ -684,16 +699,18 @@ def spot_props(P, collection=None):
         F = frame(((s['x0'] + s['x1']) / 2, s['wall_y'] - (0.04 if s['side'] == 'left' else -0.04), 0), (1, 0) if s['side'] == 'right' else (-1, 0), (0, -1) if s['side'] == 'left' else (0, 1))
         props.board(mb, F, s['text'], s['x1'] - s['x0'], s['z1'] - s['z0'], _hex(s['bg']), _hex(s['fg']), 0.5, hand=True, z=(s['z0'] + s['z1']) / 2)
     for k, v in enumerate(P.get('parked_vehicles', [])):
-        M = Matrix.Translation((v['x'], v['y'], 0)) @ Matrix.Rotation(math.radians(v.get('heading_deg', 0)), 4, 'Z')
+        a = math.radians(v.get('heading_deg', 0))   # on the ground: its height and pitch from where its wheels stand
+        zf, zr = (max(ground_z(v['x'] + s_ * 1.35 * math.cos(a) - q * math.sin(a), v['y'] + s_ * 1.35 * math.sin(a) + q * math.cos(a)) for q in (-0.8, 0.8)) for s_ in (1, -1))
+        M = Matrix.Translation((v['x'], v['y'], (zf + zr) / 2)) @ Matrix.Rotation(a, 4, 'Z') @ Matrix.Rotation(-math.atan2(zf - zr, 2.7), 4, 'Y')
         if v['kind'] == 'car':
             vehicles.car(mb, M, rng.child('car', k), cond='worn', kind=v.get('car_kind', 'saloon'), colour=v.get('colour'))
     for k, hp in enumerate(P.get('heaps', [])):
         if hp['kind'] == 'rubbish':
             street.refuse_heap(mb, hp['x'], hp['y'], hp['r'], rng.child('heap', k))
         elif hp['kind'] == 'goods':   # a tumble of goods at a stall
-            goods.heap(gmb, hp['x'], hp['y'], hp['r'], hp.get('z_m', 0.0), hp.get('goods_kinds', ['sacks']), rng.child('heap', k), hp.get('tarp_colour'))
+            goods.heap(gmb, hp['x'], hp['y'], hp['r'], hp.get('z_m', 0.0) + ground_z(hp['x'], hp['y']), hp.get('goods_kinds', ['sacks']), rng.child('heap', k), hp.get('tarp_colour'))
     for k, p in enumerate(P.get('people', [])):
-        M = Matrix.Translation((p['x'], p['y'], p.get('z_m', 0.0))) @ Matrix.Rotation(math.radians(p.get('facing_deg', 0)), 4, 'Z')
+        M = Matrix.Translation((p['x'], p['y'], p.get('z_m', ground_z(p['x'], p['y'])))) @ Matrix.Rotation(math.radians(p.get('facing_deg', 0)), 4, 'Z')
         people.person(mb, M, rng.child('person', k), kind=p.get('kind'), h=p.get('h'), pose=p.get('walking'))
     goods.soft(gmb.to_object('goods', collection, mat))
     return mb.to_object('props', collection, master)

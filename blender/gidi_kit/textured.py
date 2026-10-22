@@ -180,12 +180,14 @@ def _roadbed(mat, base):
         L.new(fac, m.inputs['Factor'])
         ia, ib = (6, 7) if kind == 'RGBA' else (2, 3)
         for i, v in ((ia, a), (ib, b)):
-            if isinstance(v, (int, float)):
+            if isinstance(v, (int, float, tuple)):
                 m.inputs[i].default_value = v
             else:
                 L.new(v, m.inputs[i])
         return m.outputs[2 if kind == 'RGBA' else 0]
 
+    GRAIN = {'earth': 0.5, 'dust': 0.45, 'tar': 0.7, 'mud': 0.8}
+    NORMAL_STRENGTH = 0.35   # the ground's grain stays fine; its shape is the geometry
     TILE = {'earth': 3.0, 'dust': 3.0, 'tar': 4.0, 'mud': 2.5}
     ROUGH = {'earth': 0.95, 'dust': 0.97, 'tar': 0.85, 'mud': 0.75}
     lay = {}
@@ -212,10 +214,15 @@ def _roadbed(mat, base):
             d.operation = 'DIVIDE'
             L.new(t.outputs['Color'], d.inputs[0])
             d.inputs[1].default_value = tuple(max(1e-3, v) for v in _mean(im))
+            g = N.new('ShaderNodeMix')   # only part of the photo's grain: packed street dust is smoother than the photo's
+            g.data_type = 'RGBA'
+            g.inputs['Factor'].default_value = GRAIN.get(k, 1.0)
+            g.inputs[6].default_value = (1, 1, 1, 1)
+            L.new(d.outputs[0], g.inputs[7])
             m = N.new('ShaderNodeVectorMath')
             m.operation = 'MULTIPLY'
             L.new(tint.outputs[0], m.inputs[0])
-            L.new(d.outputs[0], m.inputs[1])
+            L.new(g.outputs[2], m.inputs[1])
             colour = m.outputs[0]
         else:
             colour = tint.outputs[0]
@@ -241,11 +248,22 @@ def _roadbed(mat, base):
         r = mixc(f, r, lay[k]['rough'], 'FLOAT')
         if k == 'tar' and n is not None and lay[k]['nor'] is not None:
             n = mixc(f, n, lay[k]['nor'])
+    # beaten wheel tracks: darker, smoother; wet ground: darker, a little glossy; standing water: dark, mirror-flat
+    track, wet, water = attr('Track'), attr('Wet'), attr('Water')
+    for f, k, rough in ((track, 0.72, 0.8), (wet, 0.55, 0.4), (water, 0.35, 0.04)):
+        dark = N.new('ShaderNodeVectorMath')
+        dark.operation = 'SCALE'
+        dark.inputs['Scale'].default_value = k
+        L.new(c, dark.inputs[0])
+        c = mixc(f, c, dark.outputs[0])
+        r = mixc(f, r, rough, 'FLOAT')
     L.new(c, bs.inputs['Base Color'])
     L.new(r, bs.inputs['Roughness'])
     if n is not None:
+        flat = math('MAXIMUM', water, math('MULTIPLY', track, 0.6))
+        n = mixc(flat, n, (0.5, 0.5, 1.0, 1.0))
         nm = N.new('ShaderNodeNormalMap')
-        nm.inputs['Strength'].default_value = 1.0
+        nm.inputs['Strength'].default_value = NORMAL_STRENGTH
         L.new(n, nm.inputs['Color'])
         L.new(nm.outputs['Normal'], bs.inputs['Normal'])
 
