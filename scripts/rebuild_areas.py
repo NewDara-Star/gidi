@@ -6,8 +6,10 @@ Each area is built on the map as the areas before it left it (applied here in me
 needed between areas: one bake with no areas (the base), this, then one bake.
 Usage: python3 scripts/rebuild_areas.py <base gidi-data.js, baked with web/hand/gen/hub.json away>
 """
+import atexit
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -24,6 +26,7 @@ CP = json.load(open('docs/hand/ibudo/child_plan.json'))
 s = open(BASE).read()
 G = json.loads(s[s.index('{'):s.rstrip().rstrip(';').rindex('}') + 1])
 TMP = tempfile.mkdtemp(prefix='gidi_areas_')
+atexit.register(shutil.rmtree, TMP, True)   # a 50 MB copy of the map per run: gone when the run ends, even a failed one
 ALL = []
 for n, A in enumerate(CP['areas']):
     base_f, hub_f, out_f = (os.path.join(TMP, x) for x in ('base.js', 'hub.json', 'area.json'))
