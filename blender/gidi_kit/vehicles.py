@@ -287,8 +287,80 @@ def _car_profile(kind):
     return [(-2.25, 0.3), (2.2, 0.3), (2.3, 0.5), (2.3, 0.72), (1.6, 0.9), (1.0, 0.93), (0.35, 1.4), (-0.95, 1.42), (-1.65, 0.98), (-2.3, 0.92), (-2.3, 0.5)], 1.75, 0.32, 1.35, 'steel'
 
 
+def _arch(xc, zc, R, z_cut):
+    """Points over a wheel, rear to front: the body's bottom edge rising round the tyre and down again."""
+    a0 = math.asin(max(-1.0, min(1.0, (z_cut - zc) / R)))
+    return [(xc - R * math.cos(a), zc + R * math.sin(a)) for a in (a0 + (math.pi - 2 * a0) * k / 10 for k in range(11))]
+
+
+def _tapered(mb, M, prof, hw_of, mat, col, wear):
+    """A closed side profile [(x, z)...] lofted across the car with a half width that depends on height: a cabin whose
+    glass leans in (tumblehome)."""
+    left = [M @ Vector((x, hw_of(z), z)) for x, z in prof]
+    right = [M @ Vector((x, -hw_of(z), z)) for x, z in prof]
+    n = len(prof)
+    for i in range(n):
+        j = (i + 1) % n
+        mb.face([right[i], right[j], left[j], left[i]], mat, col, wear)
+    mb.face(left, mat, col, wear)
+    mb.face(list(reversed(right)), mat, col, wear)
+
+
+def saloon(mb, M, rng, cond='worn', colour=None):
+    """A four-door saloon at real proportions (4.7 x 1.78 x 1.45, wheelbase 2.7): a lower body with wheel arches cut
+    round the tyres, a glass cabin that leans in above the waist, a body-coloured roof, wrap-round bumpers, lamps set into
+    the corners, silver hubcaps. Built the way low-cost game cars are: block the proportions, then cut the arches, then
+    separate the parts that are separate on a real car."""
+    wear = WEAR[cond]
+    col = hex_rgb(colour or rng.pick({'#c9ced2': 4, '#1d1d1d': 3, '#f2f2ee': 3, '#2f3d4c': 2, '#7a1f1f': 2, '#6d5d44': 1}))
+    W, R, wb, zc = 1.78, 0.31, 1.35, 0.31
+    hw = W / 2
+    under = 0.24
+    # lower body: rear bottom, rear arch, sill, front arch, front bottom, nose, bonnet, waist, boot lid, tail
+    lower = [(-2.18, 0.3), *_arch(-wb, zc, R + 0.07, under), *_arch(wb, zc, R + 0.07, under), (2.2, 0.3),
+             (2.34, 0.42), (2.37, 0.6), (2.28, 0.74), (1.75, 0.83), (1.05, 0.92), (-1.5, 0.95), (-1.62, 1.0), (-2.2, 0.98),
+             (-2.33, 0.86), (-2.36, 0.55)]
+    body(mb, M, lower, W, 'carpaint', col, wear, r=0.07)
+    # the cabin: dark glass leaning in, then the roof and pillars in the body colour over it
+    cab = [(1.08, 0.92), (0.28, 1.38), (-0.82, 1.42), (-1.55, 0.97)]
+    lean = lambda z: hw - 0.07 - (z - 0.92) * 0.36
+    _tapered(mb, M, cab, lean, 'glass', hex_rgb('#182128'), 0)
+    roof = [(0.36, 1.36), (-0.88, 1.40), (-0.86, 1.445), (0.3, 1.405)]
+    _tapered(mb, M, roof, lambda z: lean(1.4) + 0.012, 'carpaint', col, wear)
+    for (xa, za), (xb, zb_) in (((1.08, 0.93), (0.3, 1.39)), ((-0.82, 1.43), (-1.56, 0.98))):   # A and C pillars
+        for s in (-1, 1):
+            parts.bar(mb, 'carpaint', M @ Vector((xa, s * (lean(za) + 0.012), za)), M @ Vector((xb, s * (lean(zb_) + 0.012), zb_)), 0.05, col, wear)
+    for s in (-1, 1):   # B pillar, black, and the door shut lines, handles, mirrors
+        parts.bar(mb, 'plastic', M @ Vector((-0.2, s * (lean(0.94) + 0.01), 0.94)), M @ Vector((-0.24, s * (lean(1.39) + 0.01), 1.39)), 0.045, hex_rgb('#141414'), 0)
+        for x in (1.05, -0.2, -1.4):
+            mb.box('paint', L(M, x, s * (hw + 0.002), 0.62), hex_rgb('#1a1a1a'), 0, size=(0.012, 0.004, 0.62))
+        for x in (0.75, -0.5):
+            mb.box('steel', L(M, x, s * (hw + 0.008), 0.84), shade(col, 0.8), 0, size=(0.16, 0.012, 0.035))
+        mb.box('carpaint', L(M, 0.98, s * (hw + 0.07), 1.0), col, wear, size=(0.1, 0.16, 0.11))
+        mb.box('plastic', L(M, 0.0, s * (hw + 0.004), 0.36), hex_rgb('#1d1d1d'), 0.3, size=(1.9, 0.006, 0.07))   # sill shadow
+    # wrap-round bumpers: body colour, a dark lip and grille slot under
+    for prof_, xl in (([(2.15, 0.22), (2.38, 0.22), (2.44, 0.3), (2.44, 0.5), (2.38, 0.56), (2.15, 0.56)], 2.42),
+                      ([(-2.44, 0.32), (-2.38, 0.22), (-2.15, 0.22), (-2.15, 0.62), (-2.38, 0.62), (-2.44, 0.56)], -2.42)):
+        body(mb, M, prof_, W + 0.04, 'carpaint', col, wear, r=0.05)
+        mb.box('plastic', L(M, xl, 0, 0.27), hex_rgb('#1b1b1b'), wear, size=(0.06, W * 0.8, 0.08))
+    mb.box('plastic', L(M, 2.33, 0, 0.66), hex_rgb('#151515'), 0.3, size=(0.03, W * 0.42, 0.13))   # grille
+    mb.box('steel', L(M, 2.345, 0, 0.66), hex_rgb('#b8bcc0'), 0, size=(0.01, 0.16, 0.06))
+    for s in (-1, 1):
+        lamp(mb, M, 2.31, s * (hw - 0.26), 0.68, 0.36, 0.1, 'head')
+        lamp(mb, M, -2.345, s * (hw - 0.2), 0.8, 0.32, 0.11, 'tail')
+        for x in (wb, -wb):   # the arch's dark inside, so no light shows through over the tyre
+            mb.box('plastic', L(M, x, s * (hw - 0.35), 0.48), hex_rgb('#0d0d0d'), 0, size=(0.78, 0.5, 0.36))
+    plate(mb, M, 2.46, 0.4, rng)
+    plate(mb, M, -2.46, 0.42, rng, back=True)
+    for x in (wb, -wb):
+        for s in (-1, 1):
+            wheel(mb, M, x, s * (hw - 0.04), R, 0.2, cond, rim='alloy')
+
+
 def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False, bed_load=True):
     """Private cars: saloon, SUV, pickup (research-vehicles 10). Taxi: yellow with a roof sign."""
+    if kind == 'saloon' and not taxi:
+        return saloon(mb, M, rng, cond, colour)
     prof, W, r, wb, rim = _car_profile(kind)
     wear = WEAR[cond]
     col = hex_rgb(colour or ('#f2c200' if taxi else rng.pick({'#c9ced2': 4, '#1d1d1d': 3, '#f2f2ee': 3, '#2f3d4c': 2, '#7a1f1f': 2, '#6d5d44': 1, '#3f5a3a': 1, '#1f4fa0': 1})))

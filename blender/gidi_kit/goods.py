@@ -129,6 +129,19 @@ def _item(mb, kind, M, rng, scale=1.0):
     return 0.0
 
 
+DUST = (0.105, 0.085, 0.065)   # the street's dust (#5b5148 linear-ish), settling on goods left out
+
+
+def weather(mb, start, tone=1.0, dust=0.0):
+    """Darken (tone) and dust (0..1, toward the street's dust colour) every face added to mb since face index `start`:
+    goods that sit in the shade and the street's dust all day."""
+    if tone == 1.0 and dust == 0.0:
+        return
+    f = lambda c: tuple((c[i] * (1 - dust) + DUST[i] * dust) * tone for i in range(3)) + tuple(c[3:])
+    for k in range(start, len(mb.cols)):
+        mb.cols[k] = [f(c) for c in mb.cols[k]]
+
+
 def band(mb, x0, x1, y_wall, depth, z0, kinds, fill, rng, side=1, tarp_over=False):
     """Goods along a wall: rows from the wall outward (`depth` deep), on a floor at z0. side +1: the wall is at +y and the
     goods come out toward -y (a left-hand shop); -1 the other way. fill 0..1 is how much of the band is taken."""

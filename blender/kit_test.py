@@ -124,7 +124,8 @@ def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0):
     shadeR = N.new('ShaderNodeValToRGB')   # cloud colour: bright tops, grey bellies
     L.new(noise.outputs['Fac'], shadeR.inputs['Fac'])
     f = shadeR.color_ramp.elements
-    f[0].position, f[0].color = 0.55, (0.62, 0.63, 0.66, 1)
+    g_ = 0.62 + 0.3 * max(0.0, clouds - 0.6)   # a full cover is white cloud, its bellies only a little grey
+    f[0].position, f[0].color = 0.55, (g_, g_ + 0.01, g_ + 0.03, 1)
     f[1].position, f[1].color = 0.85, (1.0, 1.0, 1.0, 1)
     cloud_bright = N.new('ShaderNodeVectorMath'); cloud_bright.operation = 'SCALE'
     cloud_bright.inputs['Scale'].default_value = 1.0 / strength * 0.9

@@ -2,13 +2,16 @@
 
 A subdivided sheet over the street and its edges, its height made from the map's street fields:
 - `crown_m`: the middle stands higher and falls off to the sandy edges.
-- `relief`: low broad humps and dips (`amp_m` over `scale_m`).
-- `potholes`: shallow wide bowls, each where the map puts it.
-- `ruts`: wheel tracks along the street.
+- `relief`: humps and dips (`amp_m` over `scale_m`); `off_road` scales them on the earth beyond the road's edge.
+- `potholes`: bowls, each where the map puts it.
+- `ruts`: wheel tracks along the street; `packed` makes one a dark, smooth beaten track rather than a muddy groove.
+- `edge_rut`: a channel worn along the road's edge where the tar breaks into earth (`side`, `depth_m`, `w_m`).
+- `tar_lip_m`: the tar patches stand this proud of the earth and dust around them, so their broken edges show.
+- `puddles`: water lies flat in every spot lower than `level_m`, and the ground is dark and wet up to `wet_m`.
 
 The surface is packed earth and sand over the tar. Tar shows in patches covering `tar_cover` of the road. Dust lies in the
 low spots and drifts at the edges, mud sits in the ruts and potholes, and laterite earth shows off the road. Each of these
-is a per-corner attribute (Tar, Dust, Mud, Edge) for the material to blend by, and a flat colour (Col) for the untextured
+is a per-corner attribute (Tar, Dust, Mud, Edge, Track, Wet, Water) for the material to blend by, and a flat colour (Col) for the untextured
 look. The layers' colours and their photo surfaces come from the map (`ground_colours`, `surfaces`); textured.py reads
 them off the material. Deterministic: the noise is seeded from the street's id.
 """
@@ -64,58 +67,108 @@ class Ground:
         self.half = sp['width_m'] / 2
         rel = sp.get('relief') or {}
         self.amp, self.scale = rel.get('amp_m', 0.0), rel.get('scale_m', 6.0)
+        self.off_road = rel.get('off_road', 1.0)
         self.crown = sp.get('crown_m', 0.0)
+        self.lip = sp.get('tar_lip_m', 0.0)
+        pu = sp.get('puddles') or {}
+        self.level, self.wet = pu.get('level_m'), pu.get('wet_m')
         self.pins = []   # bands held level: a covered gutter's line (y, half width)
         g = sp.get('gutter_left') or {}
         if g.get('type', 'none') != 'none':
             self.pins.append((self.cy + g['offset_m'], g['width'] / 2 + 0.35))
 
+        gx, gy = np.meshgrid(np.arange(self.x0, self.x1, 0.5), np.arange(self.cy - self.half, self.cy + self.half, 0.25))
+        cover = sp.get('tar_cover', 0.5)
+        self.thr = float(np.quantile(self._tar_noise(gx, gy), 1 - cover)) if 0 < cover < 1 else (1.0 if cover <= 0 else -1.0)
+
     def _relief(self, x, y):
         s = self.scale
         return self.amp * 2 * (fbm(x / (s * 1.6), y / s, self.seed) - 0.5)
+
+    def _inside(self, x, y):
+        fray = 0.5 * (vnoise(x / 0.9, y / 0.9, self.seed + 7) - 0.5) + 0.6 * (vnoise(x / 4, y / 4, self.seed + 8) - 0.5)
+        return _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + fray)
+
+    def _tar_noise(self, x, y):
+        patch = self.sp.get('tar_patch_m', 3.0)
+        return fbm(x / patch, y / (patch * 0.7), self.seed + 31) + 0.15 * (vnoise(x / 0.5, y / 0.5, self.seed + 3) - 0.5)
+
+    def _tar(self, x, y, soft=0.08):
+        rel = self._relief(x, y) if self.amp else np.zeros_like(x)
+        tar = _smooth(self.thr - soft, self.thr + soft, self._tar_noise(x, y)) * self._inside(x, y)
+        return tar * (1 - _smooth(0.0, -0.06, rel) * self.sp.get('dust_in_low', 0.7))
+
+    def _ruts(self, x, y, key):
+        out = np.zeros_like(x)
+        for r in self.sp.get('ruts', []):
+            win = _smooth(r['from_x'] - 2, r['from_x'], x) * (1 - _smooth(r['to_x'], r['to_x'] + 2, x))
+            out = np.maximum(out, win * np.exp(-((y - r['y']) / (r['w'] / 2)) ** 2 * 2) * r.get(key, 0.0))
+        return out
+
+    def _edge_rut(self, x, y):
+        er = self.sp.get('edge_rut') or {}
+        if not er:
+            return np.zeros_like(x)
+        wob = 0.35 * (vnoise(x / 3, 0.5, self.seed + 41) - 0.5)
+        out = np.zeros_like(x)
+        for s in ((-1,) if er.get('side') == 'right' else (1,) if er.get('side') == 'left' else (-1, 1)):
+            yc = self.cy + s * (self.half - er.get('w_m', 0.8) * 0.3) + wob
+            out = np.maximum(out, np.exp(-((y - yc) / (er.get('w_m', 0.8) / 2)) ** 2 * 2) * (0.7 + 0.6 * vnoise(x / 2, 1.5, self.seed + 43)))
+        return out * er.get('depth_m', 0.15)
 
     def height(self, x, y):
         x, y = np.asarray(x, float), np.asarray(y, float)
         d = (y - self.cy) / self.half
         h = self.crown * (1 - np.minimum(d * d, 1.6))
-        h = h + self._relief(x, y)
+        inside = self._inside(x, y)
+        h = h + self._relief(x, y) * (self.off_road + (1 - self.off_road) * inside)
+        if self.lip:   # the tar sheet's own thickness: a sharp step at its broken edges
+            h = h + self.lip * self._tar(x, y, soft=0.02)
+        h = h - self._edge_rut(x, y)
         for p in self.sp.get('potholes', []):
             q = np.hypot(x - p['x'], (y - p['y']) / p.get('stretch', 1.0)) / p['r']
             h = h - p['depth'] * np.where(q < 1, (1 - q * q) ** 2, 0) + 0.012 * np.where((q > 0.9) & (q < 1.3), 1 - np.abs(q - 1.1) / 0.2, 0)
-        for r in self.sp.get('ruts', []):
-            win = _smooth(r['from_x'] - 2, r['from_x'], x) * (1 - _smooth(r['to_x'], r['to_x'] + 2, x))
-            h = h - r['depth'] * win * np.exp(-((y - r['y']) / (r['w'] / 2)) ** 2 * 2)
+        h = h - self._ruts(x, y, 'depth')
         for yp, hw in self.pins:   # level by the gutter, so its slabs sit on the ground
             k = _smooth(hw + 0.6, hw, np.abs(y - yp))
             h = h * (1 - k)
+        if self.level is not None:   # standing water: flat at its level
+            h = np.maximum(h, self.level)
         return h
 
+    def bare(self, x, y):
+        """The height without standing water (where the water's floor is)."""
+        lv, self.level = self.level, None
+        try:
+            return self.height(x, y)
+        finally:
+            self.level = lv
+
     def layers(self, x, y, h):
-        """Tar, Dust, Mud, Edge in 0..1 at each point."""
+        """Tar, Dust, Mud, Edge, Track, Wet, Water in 0..1 at each point."""
         sp = self.sp
-        s = self.scale
-        rel = self._relief(x, y) if self.amp else np.zeros_like(x)
-        fray = 0.5 * (vnoise(x / 0.9, y / 0.9, self.seed + 7) - 0.5) + 0.6 * (vnoise(x / 4, y / 4, self.seed + 8) - 0.5)
-        inside = _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + fray)
+        inside = self._inside(x, y)
         edge = 1 - inside
-        patch = sp.get('tar_patch_m', 3.0)
-        tn = fbm(x / patch, y / (patch * 0.7), self.seed + 31) + 0.15 * (vnoise(x / 0.5, y / 0.5, self.seed + 3) - 0.5)
-        cover = sp.get('tar_cover', 0.5)
-        road = inside > 0.5
-        thr = np.quantile(tn[road], 1 - cover) if road.any() and 0 < cover < 1 else (1.0 if cover <= 0 else -1.0)
-        tar = _smooth(thr - 0.08, thr + 0.08, tn) * inside
+        tar = self._tar(x, y)
+        rel = self._relief(x, y) if self.amp else np.zeros_like(x)
         low = _smooth(0.0, -0.06, rel) * sp.get('dust_in_low', 0.7)
-        tar = tar * (1 - low)
         far = _smooth(25, 80, x) * sp.get('far_dust', 0.0)   # the far end of the street reads lighter, dustier
         dust = np.clip(1 - tar + low * 0.5 + far, 0, 1) * inside
-        mud = np.zeros_like(x)
+        mud = self._ruts(x, y, 'mud')
         for p in sp.get('potholes', []):
             q = np.hypot(x - p['x'], (y - p['y']) / p.get('stretch', 1.0)) / p['r']
             mud = np.maximum(mud, _smooth(1.0, 0.5, q) * p.get('mud', 0.8))
-        for r in sp.get('ruts', []):
-            win = _smooth(r['from_x'] - 2, r['from_x'], x) * (1 - _smooth(r['to_x'], r['to_x'] + 2, x))
-            mud = np.maximum(mud, win * np.exp(-((y - r['y']) / (r['w'] / 2)) ** 2 * 2) * r.get('mud', 0.6))
-        return tar, dust, mud, edge
+        er = sp.get('edge_rut') or {}
+        if er:
+            mud = np.maximum(mud, np.clip(self._edge_rut(x, y) / max(er.get('depth_m', 0.15), 1e-3), 0, 1) * er.get('mud', 0.6))
+        track = self._ruts(x, y, 'packed') * (1 - far * 0.5)
+        water = np.zeros_like(x)
+        wet = np.zeros_like(x)
+        if self.level is not None:
+            b = self.bare(x, y)
+            water = _smooth(self.level + 0.004, self.level - 0.01, b)
+            wet = _smooth(self.wet if self.wet is not None else self.level + 0.05, self.level, b) * (1 - water)
+        return dict(Tar=tar, Dust=dust, Mud=mud, Edge=edge, Track=track, Wet=wet, Water=water)
 
 
 def _xs(x0, x1, near, grow):
@@ -135,7 +188,8 @@ def build(sp, collection=None, ys=(-14.0, 6.6), materials=None, near=0.2, grow=0
     X, Y = np.meshgrid(xs, yv, indexing='ij')
     X, Y = X.ravel(), Y.ravel()
     Hh = G.height(X, Y)
-    tar, dust, mud, edge = G.layers(X, Y, Hh)
+    lay = G.layers(X, Y, Hh)
+    tar, mud, edge = lay['Tar'], lay['Mud'], lay['Edge']
     nx, ny = len(xs), len(yv)
     me = bpy.data.meshes.new(sp['id'] + '_ground')
     verts = np.stack([X, Y, Hh], 1)
@@ -153,10 +207,11 @@ def build(sp, collection=None, ys=(-14.0, 6.6), materials=None, near=0.2, grow=0
     c = cols['earth'][None] * edge[:, None] + cols['dust'][None] * (1 - edge[:, None])
     c = c * (1 - tar[:, None]) + cols['tar'][None] * tar[:, None]
     c = c * (1 - mud[:, None]) + cols['mud'][None] * mud[:, None]
+    c = c * (1 - 0.3 * lay['Track'][:, None]) * (1 - 0.4 * lay['Wet'][:, None]) * (1 - 0.6 * lay['Water'][:, None])
     lv = quads.ravel()
     col = me.color_attributes.new('Col', 'FLOAT_COLOR', 'CORNER')
     col.data.foreach_set('color', np.concatenate([c[lv], np.full((len(lv), 1), 0.3)], 1).astype(np.float32).ravel())
-    for name, arr in (('Wear', np.full(len(X), 0.3)), ('Tar', tar), ('Dust', dust), ('Mud', mud), ('Edge', edge)):
+    for name, arr in (('Wear', np.full(len(X), 0.3)), *lay.items()):
         at = me.attributes.new(name, 'FLOAT', 'CORNER')
         at.data.foreach_set('value', arr[lv].astype(np.float32))
     uv = me.uv_layers.new(name='UVMap')
