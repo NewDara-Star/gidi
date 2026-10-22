@@ -1,0 +1,105 @@
+a,b,old_link,old_edge_km,old_sim,core_a,core_b,new_land_border_km,new_built_meets_km,places_between
+Ipaja-Ayobo-Mosan,Alagbado-Agbado,land,5.0,85.1,Ayobo west; Ayobo; Ipaja,Alagbado; Alagbado south-west,0.0,0.0,Alagbado south; Command
+Ipaja-Ayobo-Mosan,Idimu,land,10.5,83.6,Ayobo west; Ayobo; Ipaja,"Idimu; Idimu, south-east of Lasu-Isheri Road",0.0,0.0,Baruwa; Gowon Estate; Gowon Estate east; Igando north
+Magodo,Ojodu-Berger-Omole,land,3.75,82.8,Magodo,Berger; Omole; Ojodu,0.0,0.0,Shangisha
+Alagbado-Agbado,Abule Egba-Ojokoro,land,6.25,82.2,Alagbado; Alagbado south-west,Abule Egba; Ojokoro,0.0,0.0,Ekoro; Meiran
+Shomolu-Pedro-Onipanu,Mushin-Idi Araba-Odi Olowo,land,3.25,81.6,Pedro; Obanikoro-Onipanu; Shomolu,Ojuwoye-Mushin,0.0,0.0,
+Igbogbo-Baiyeku,Ijede,land,10.5,81.0,Igbogbo,Ijede; Ijede north-east 1; Ijede south-east; Ijede east 2; Ijede north-east 2,0.0,0.0,Ita Elewa; Ita Elewa south-east
+Sangotedo,Awoyaya-Lakowe,land,10.0,80.0,Sangotedo; Sangotedo south-east; Sangotedo east 2; Sangotedo east 1,"Lakowe; Lakowe, south of Lekki-Epe Expressway; Lakowe east; Awoyaya",0.0,0.0,Eleko; Eleko west 3; Ogombo south-west 4
+Eleko-Akodo-Ibeju,Epe town-Noforija,land,4.75,79.0,"Eleko north-east; Ibeju west 2; Ibeju west 4; Ibeju west 5; Eleko west 1; Akodo; Ibeju; Eleko; Eleko, south-east of Okun-Ajah Road; Ibeju west 1; Ibeju, west of Eleko Beach Road; Eleko east",Epe north 1; Epe east 59; Noforija north 2; Epe east 55; Epe north 2; Noforija north 1; Epe east 61; Epe east 38; Epe east 62; Epe; Epe east 80; Epe south; Noforija south-east; Noforija; Epe north-west; Epe east 56; Epe east 1,1.5,0.0,"Ejinrin; Ejinrin, east of Lekki-Epe Expressway; Ibeju"
+Agege-Pen Cinema,Ifako-Ijaiye-Iju,land,4.0,79.0,Agege; Pen Cinema,Ijaiye north-west; Ijaiye; Iju,0.0,0.0,
+Ijanikin-Igbo Elerin,Agbara-Morogbo,land,9.25,79.0,Ijanikin north-west; Ijanikin,"Agbara east; Morogbo west 1; Morogbo west 2; Morogbo west 3; Morogbo west 4; Morogbo north-west 1; Morogbo south-west 2; Morogbo west 7; Agbara; Agbara, east of Lagos-Badagry Expressway; Agbara south-east; Morogbo west 8; Morogbo north-west 3; Agbara west; Morogbo west 5; Morogbo; Morogbo south 1; Morogbo west 6; Morogbo, west of Lagos-Badagry Expressway; Morogbo north-west 2",0.7,0.0,Ijanikin north-west; Otto-Awori
+Okota-Ago Palace,Ikotun,land,6.0,78.3,"Ago Palace north-east; Ago Palace east; Ago Palace; Ago Palace, east of Ago Palace Way; Okota, south of Ago Palace Way; Okota",Ikotun east; Ikotun,0.0,0.0,Abaranje
+Ejigbo,Ikotun,land,0.75,76.4,Ejigbo,Ikotun east; Ikotun,0.0,0.0,Egbe
+Ikorodu town,Igbogbo-Baiyeku,land,11.5,76.2,Ikorodu town north-east; Ikorodu town,Igbogbo,0.0,0.0,Ebute (Ikorodu); Ipakodo; Ita Elewa
+Aguda-Ijesha-Coker,Iganmu-Orile,land,3.5,76.2,Ijesha; Aguda; Coker,Iganmu; Orile Iganmu,0.0,0.0,Adelabu; Ajegunle
+Agege-Pen Cinema,Abule Egba-Ojokoro,land,3.25,75.2,Agege; Pen Cinema,Abule Egba; Ojokoro,0.0,0.0,Iyana Ipaja
+Mushin-Idi Araba-Odi Olowo,Isolo,land,2.5,74.2,Ojuwoye-Mushin,Isolo north-east; Isolo,0.0,0.0,Itire; Papa Ajao
+Ipaja-Ayobo-Mosan,Abule Egba-Ojokoro,land,2.75,74.0,Ayobo west; Ayobo; Ipaja,Abule Egba; Ojokoro,0.0,0.0,Iyana Ipaja
+Eleko-Akodo-Ibeju,Ejinrin-Agbowa,land,16.5,73.8,"Eleko north-east; Ibeju west 2; Ibeju west 4; Ibeju west 5; Eleko west 1; Akodo; Ibeju; Eleko; Eleko, south-east of Okun-Ajah Road; Ibeju west 1; Ibeju, west of Eleko Beach Road; Eleko east","Ejinrin west 26; Ejinrin; Ejinrin south-east; Ejinrin, east of Old Lagos Road 2; Agbowa, south-west of Old Lagos Road; Ejinrin north; Agbowa; Agbowa west; Agbowa south-east 10",0.0,0.0,"Ejinrin, east of Lekki-Epe Expressway; Epe; Epe east 38; Ibeju; Ogombo"
+Badore,Sangotedo,land,5.5,71.3,Badore,Sangotedo; Sangotedo south-east; Sangotedo east 2; Sangotedo east 1,0.0,0.0,
+Obalende,Ikoyi-Banana Island,land,3.5,71.1,Obalende,"Banana Island; Ikoyi, south of Bourdillon Road; Banana Island east; Ikoyi",0.0,0.0,Old Ikoyi west
+Surulere (Ojuelegba-Bode Thomas-Stadium),Aguda-Ijesha-Coker,land,4.0,70.6,Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,Ijesha; Aguda; Coker,0.0,0.0,Adelabu; Ogunlana
+Ebute Metta-Oyingbo-Otto-Iddo,Surulere (Ojuelegba-Bode Thomas-Stadium),land,2.75,69.6,"Ebute Metta, east of Murtula Muhammed Way; Ebute Metta; Otto-Iddo; Oyingbo; Oyingbo north",Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,0.0,0.0,Costain; Sabo
+Awoyaya-Lakowe,Ejinrin-Agbowa,land,6.75,69.5,"Lakowe; Lakowe, south of Lekki-Epe Expressway; Lakowe east; Awoyaya","Ejinrin west 26; Ejinrin; Ejinrin south-east; Ejinrin, east of Old Lagos Road 2; Agbowa, south-west of Old Lagos Road; Ejinrin north; Agbowa; Agbowa west; Agbowa south-east 10",0.0,0.0,Ogombo
+Iyana Ipaja,Orile Agege-Dopemu,land,2.0,69.1,Iyana Ipaja,Dopemu,0.05,0.05,Akowonjo; Pen Cinema
+Apapa-Tin Can,Kirikiri-Navy Town,land,2.75,68.1,"Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",Kirikiri; Kirikiri south-east,0.0,0.0,"Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Ijegun-Egba east"
+Itire-Lawanson,Isolo,land,3.5,67.6,Lawanson; Itire,Isolo north-east; Isolo,0.1,0.1,Cele; Itire; Papa Ajao
+Gbagada,Maryland-Onigbongbo,land,2.5,67.2,Gbagada; Gbagada Phase 2,Maryland,0.0,0.0,
+Surulere (Ojuelegba-Bode Thomas-Stadium),Mushin-Idi Araba-Odi Olowo,land,2.75,67.1,Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,Ojuwoye-Mushin,0.0,0.0,"Odi-Olowo, west of Lagos–Ibadan SGR"
+Ipaja-Ayobo-Mosan,Egbeda-Akowonjo,land,2.0,66.8,Ayobo west; Ayobo; Ipaja,"Akowonjo; Egbeda; Egbeda, north-west of Egbeda-Idimu Road; Egbeda south",0.0,0.0,Gowon Estate east; Iyana Ipaja
+Shomolu-Pedro-Onipanu,Bariga-Akoka,land,3.0,66.6,Pedro; Obanikoro-Onipanu; Shomolu,Akoka; Bariga,0.0,0.0,Bajulaiye
+Badore,Awoyaya-Lakowe,land,1.75,65.8,Badore,"Lakowe; Lakowe, south of Lekki-Epe Expressway; Lakowe east; Awoyaya",0.0,0.0,
+Okota-Ago Palace,Ejigbo,land,2.25,65.7,"Ago Palace north-east; Ago Palace east; Ago Palace; Ago Palace, east of Ago Palace Way; Okota, south of Ago Palace Way; Okota",Ejigbo,0.0,0.0,Jakande Estate (Isolo); Jakande Estate (Isolo) east
+Ojota-Ogudu,Oworonshoki,land,4.25,65.3,Ogudu; Ojota,Oworonshoki,0.0,0.0,Agboyi; Gbagada Phase 2; Ogudu
+Ikorodu town,Ijede,land,3.0,65.2,Ikorodu town north-east; Ikorodu town,Ijede; Ijede north-east 1; Ijede south-east; Ijede east 2; Ijede north-east 2,0.0,0.0,Ita Elewa
+Ajah-Abraham Adesanya,Badore,land,5.75,64.9,"Ajah south-west; Abraham Adesanya south; Abraham Adesanya; Abraham Adesanya, north-east of Lekki-Epe Expressway; Ajah",Badore,0.0,0.0,"Addo; Addo, west of Addo Road; Langbasa"
+Gbagada,Shomolu-Pedro-Onipanu,land,2.5,64.5,Gbagada; Gbagada Phase 2,Pedro; Obanikoro-Onipanu; Shomolu,0.15,0.15,Bajulaiye; Gbagada; Soluyi
+Iba,Ijanikin-Igbo Elerin,land,1.5,63.6,"Iba, south of Lagos-Badagry Expressway; Iba; Iba east; Iba north-east",Ijanikin north-west; Ijanikin,0.0,0.0,"Okokomaiko; Okokomaiko, north-west of Lagos-Badagry Expressway"
+Ikeja GRA,Maryland-Onigbongbo,land,3.0,63.6,Ikeja GRA,Maryland,0.0,0.0,"Onigbongbo; Shogunle, east of Agege Motor Road"
+Ikorodu town,Ogijo-Sagamu Rd,land,5.75,63.5,Ikorodu town north-east; Ikorodu town,Ogijo south; Ogijo; Ogijo north-west; Ogijo south-east,0.0,0.0,"Odogunyan; Odogunyan, south-east of Sagamu Road"
+Ajegunle (Ajeromi),Amukoko-Layeni (Ifelodun),land,2.25,63.0,Ajegunle,,0.0,0.0,
+Festac,Satellite Town,land,0.75,62.5,Festac north-east; Festac,Satellite Town,0.0,0.0,Agboju; Alakija; Mile 2; Trade Fair
+Surulere (Ojuelegba-Bode Thomas-Stadium),Itire-Lawanson,land,1.0,62.0,Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,Lawanson; Itire,0.0,0.0,Idi-Araba; Ogunlana
+Satellite Town,Alaba-Ojo-LASU,land,4.5,61.2,Satellite Town,Ojo (LASU); Alaba south-east; Alaba; Ojo (LASU) north,0.0,0.0,
+Iganmu-Orile,Amukoko-Layeni (Ifelodun),land,3.5,60.6,Iganmu; Orile Iganmu,,0.0,0.0,
+Ajao Estate,Airport (MMIA),land,1.0,60.2,Ajao Estate,Airport (MMIA),0.0,0.0,Airport (MMIA) south
+Oshodi-Mafoluku,Ajao Estate,land,2.75,59.9,Oshodi; Mafoluku,Ajao Estate,0.0,0.0,Airport (MMIA) south; Isolo north-east
+Ikoyi-Banana Island,Oniru-Lekki Phase 1,land,4.0,59.7,"Banana Island; Ikoyi, south of Bourdillon Road; Banana Island east; Ikoyi","Oniru; Lekki Phase 1; Lekki Phase 1, north-east of Admiralty Way; Lekki Phase 1, west of Admiralty Way; Lekki Phase 1, north-west of Admiralty Way",2.85,0.0,"Banana Island; Banana Island east; Elegushi west; Ikoyi; Ikoyi, south of Bourdillon Road"
+Isawo-Owutu-Odogunyan,Isheri-Olowora (Ikosi-Isheri),land,0.75,59.4,"Odogunyan north-west 2; Isawo north; Isawo; Odogunyan; Odogunyan, south-east of Sagamu Road; Odogunyan north; Owutu; Isawo south-east; Odogunyan east; Odogunyan north-west 1",Olowora-Isheri (Ikosi-Isheri); Olowora east,0.0,0.0,
+Shomolu-Pedro-Onipanu,Yaba-Sabo-Jibowu,land,4.0,59.1,Pedro; Obanikoro-Onipanu; Shomolu,Yaba; Sabo; Jibowu,0.0,0.0,Bajulaiye; Fadeyi; Odi-Olowo
+Lekki FTZ-Dangote,Epe town-Noforija,land,3.5,59.0,Lekki FTZ east 67; Lekki FTZ east 68; Lekki FTZ north-east 12; Lekki FTZ east 47; Lekki FTZ east 2; Lekki FTZ east 3; Lekki FTZ east 51; Lekki FTZ east 6; Lekki FTZ; Lekki FTZ east 58; Lekki FTZ east 8; Lekki FTZ east 37; Lekki FTZ east 64; Lekki FTZ east 66,Epe north 1; Epe east 59; Noforija north 2; Epe east 55; Epe north 2; Noforija north 1; Epe east 61; Epe east 38; Epe east 62; Epe; Epe east 80; Epe south; Noforija south-east; Noforija; Epe north-west; Epe east 56; Epe east 1,0.65,0.15,Ibeju
+Ikoyi-Banana Island,Victoria Island,land,2.75,58.6,"Banana Island; Ikoyi, south of Bourdillon Road; Banana Island east; Ikoyi","Victoria Island; Victoria Island, north-west of Adeola Odeku Street",0.0,0.0,Elegushi west; Old Ikoyi west
+Festac,Ikotun,land,0.25,58.2,Festac north-east; Festac,Ikotun east; Ikotun,0.0,0.0,
+Yaba-Sabo-Jibowu,Mushin-Idi Araba-Odi Olowo,land,1.0,56.5,Yaba; Sabo; Jibowu,Ojuwoye-Mushin,0.0,0.0,"Odi-Olowo, west of Lagos–Ibadan SGR"
+Gbagada,Bariga-Akoka,land,1.25,55.9,Gbagada; Gbagada Phase 2,Akoka; Bariga,0.0,0.0,Bajulaiye; Ilaje (Bariga)
+Ojota-Ogudu,Maryland-Onigbongbo,land,1.0,55.8,Ogudu; Ojota,Maryland,0.0,0.0,Mende
+Agric-Majidun-Ogolonto,Ojota-Ogudu,land,1.25,55.2,"Majidun north-east; Majidun-Ogolonto; Agric (Ikorodu); Agric (Ikorodu), north-west of Ikorodu Road",Ogudu; Ojota,0.0,0.0,Agboyi
+Ogba-Agidingbi-Alausa industrial,Maryland-Onigbongbo,land,1.0,54.1,Agidingbi; Alausa; Ogba,Maryland,0.0,0.0,
+Papa Ajao-Ladipo,Ajao Estate,land,1.0,52.9,Papa Ajao; Ladipo,Ajao Estate,0.0,0.0,Isolo north-east
+Allen-Opebi-Computer Village,Ikeja Along-Cantonment,land,3.25,52.8,"Allen-Opebi; Computer Village, south-west of Mobolaji Bank-Anthony Way; Computer Village",Ikeja Along,0.0,0.0,Airport (MMIA)
+Ogba-Agidingbi-Alausa industrial,Ikeja Along-Cantonment,land,1.25,52.7,Agidingbi; Alausa; Ogba,Ikeja Along,0.0,0.0,Airport (MMIA); Pen Cinema
+Trade Fair-Abule Ado,Igando,land,6.75,52.3,Trade Fair; Abule Ado,Igando south-west; Igando west; Igando north-west; Igando north; Igando,0.0,0.0,
+Ikorodu town,Imota,land,1.25,52.1,Ikorodu town north-east; Ikorodu town,"Imota east 2; Imota north-west; Imota north-east 2; Imota north-east 3; Imota north-east 1; Imota west 1; Imota east 1; Imota south-east; Imota south 2; Imota west 4; Imota; Imota south 3; Imota west 2; Imota west 3; Imota south 1; Imota, north of Old Lagos Road",0.0,0.0,
+Victoria Island,Oniru-Lekki Phase 1,land,2.5,51.9,"Victoria Island; Victoria Island, north-west of Adeola Odeku Street","Oniru; Lekki Phase 1; Lekki Phase 1, north-east of Admiralty Way; Lekki Phase 1, west of Admiralty Way; Lekki Phase 1, north-west of Admiralty Way",0.0,0.0,Elegushi west
+Oworonshoki,Bariga-Akoka,land,2.75,51.8,Oworonshoki,Akoka; Bariga,0.0,0.0,Ilaje (Bariga)
+Magodo,Ogba-Agidingbi-Alausa industrial,land,4.0,51.8,Magodo,Agidingbi; Alausa; Ogba,0.0,0.0,
+Oshodi-Mafoluku,Ikeja Along-Cantonment,land,1.75,51.7,Oshodi; Mafoluku,Ikeja Along,0.0,0.0,Airport (MMIA)
+Trade Fair-Abule Ado,Iba,land,1.0,51.6,Trade Fair; Abule Ado,"Iba, south of Lagos-Badagry Expressway; Iba; Iba east; Iba north-east",0.0,0.0,
+Trade Fair-Abule Ado,Alaba-Ojo-LASU,land,5.5,51.0,Trade Fair; Abule Ado,Ojo (LASU); Alaba south-east; Alaba; Ojo (LASU) north,0.0,0.0,Volks north-east
+Ikeja GRA,Ikeja Along-Cantonment,land,2.25,50.9,Ikeja GRA,Ikeja Along,0.0,0.0,
+Gbagada,Ilupeju,land,1.0,50.8,Gbagada; Gbagada Phase 2,Ilupeju,0.0,0.0,
+Isale Eko-Idumota-Marina,Ebute Metta-Oyingbo-Otto-Iddo,land,0.25,50.2,Idumota; Marina; Isale Eko,"Ebute Metta, east of Murtula Muhammed Way; Ebute Metta; Otto-Iddo; Oyingbo; Oyingbo north",0.0,0.0,Ijora; Isale Eko; Marina
+Ilupeju,Maryland-Onigbongbo,land,1.0,50.1,Ilupeju,Maryland,0.0,0.0,"Shogunle, east of Agege Motor Road"
+Ajao Estate,Ejigbo,land,2.75,50.1,Ajao Estate,Ejigbo,0.0,0.0,Airport (MMIA) south
+Agric-Majidun-Ogolonto,Ketu-Mile 12-Ikosi,land,4.5,49.8,"Majidun north-east; Majidun-Ogolonto; Agric (Ikorodu); Agric (Ikorodu), north-west of Ikorodu Road",Ikosi; Mile 12; Ketu,0.0,0.0,Agboyi north
+Kirikiri-Navy Town,Festac,land,2.25,49.8,Kirikiri; Kirikiri south-east,Festac north-east; Festac,0.0,0.0,
+Victoria Island,Apapa-Tin Can,water,0.0,49.2,"Victoria Island; Victoria Island, north-west of Adeola Odeku Street","Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",0.0,0.0,Eko Atlantic
+Ogba-Agidingbi-Alausa industrial,Ifako-Ijaiye-Iju,land,6.0,48.4,Agidingbi; Alausa; Ogba,Ijaiye north-west; Ijaiye; Iju,0.0,0.0,Fagba
+Ilupeju,Oshodi-Mafoluku,land,0.5,47.2,Ilupeju,Oshodi; Mafoluku,0.0,0.0,Ilasamaja
+Ojota-Ogudu,Ogba-Agidingbi-Alausa industrial,land,2.25,46.4,Ogudu; Ojota,Agidingbi; Alausa; Ogba,0.0,0.0,Oregun
+Onikan-Lafiaji (Lagos Island East),Apapa-Tin Can,water,0.0,45.9,Lafiaji; Onikan,"Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",0.0,0.0,
+Ikeja GRA,Ogba-Agidingbi-Alausa industrial,land,0.75,45.9,Ikeja GRA,Agidingbi; Alausa; Ogba,0.0,0.0,Computer Village
+Agric-Majidun-Ogolonto,Isheri-Olowora (Ikosi-Isheri),land,2.5,45.4,"Majidun north-east; Majidun-Ogolonto; Agric (Ikorodu); Agric (Ikorodu), north-west of Ikorodu Road",Olowora-Isheri (Ikosi-Isheri); Olowora east,0.0,0.0,Owode Onirin
+Magodo,Isheri-Olowora (Ikosi-Isheri),land,1.5,44.8,Magodo,Olowora-Isheri (Ikosi-Isheri); Olowora east,0.0,0.0,Mile 12; Shangisha
+Obalende,Victoria Island,water,0.0,43.4,Obalende,"Victoria Island; Victoria Island, north-west of Adeola Odeku Street",0.0,0.0,Eko Atlantic; Old Ikoyi west
+Mile 2-Amuwo,Kirikiri-Navy Town,land,4.5,42.7,Mile 2 north-east; Amuwo Odofin; Mile 2,Kirikiri; Kirikiri south-east,0.0,0.0,"Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Satellite Town"
+Trade Fair-Abule Ado,Ikotun,land,1.25,42.3,Trade Fair; Abule Ado,Ikotun east; Ikotun,0.0,0.0,
+Oshodi-Mafoluku,Ikeja GRA,land,2.5,42.1,Oshodi; Mafoluku,Ikeja GRA,0.0,0.0,Ikeja Cantonment
+Ketu-Mile 12-Ikosi,Ogba-Agidingbi-Alausa industrial,land,0.75,42.0,Ikosi; Mile 12; Ketu,Agidingbi; Alausa; Ogba,0.0,0.0,
+Yaba-Sabo-Jibowu,Makoko-Iwaya,land,2.25,41.8,Yaba; Sabo; Jibowu,Makoko; Iwaya,0.0,0.0,Alagomeji; Onike-Abule Oja; Oyingbo north; UNILAG
+Ogba-Agidingbi-Alausa industrial,Orile Agege-Dopemu,land,0.75,41.6,Agidingbi; Alausa; Ogba,Dopemu,0.0,0.0,Pen Cinema
+Itire-Lawanson,Okota-Ago Palace,land,0.5,41.1,Lawanson; Itire,"Ago Palace north-east; Ago Palace east; Ago Palace; Ago Palace, east of Ago Palace Way; Okota, south of Ago Palace Way; Okota",0.0,0.0,Cele; Ijesha; Itire
+Ikeja Along-Cantonment,Orile Agege-Dopemu,land,2.0,40.9,Ikeja Along,Dopemu,0.0,0.0,Egbeda; Pen Cinema
+Makoko-Iwaya,Surulere (Ojuelegba-Bode Thomas-Stadium),land,1.0,39.6,Makoko; Iwaya,Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,0.0,0.0,
+Surulere (Ojuelegba-Bode Thomas-Stadium),Ijora-Badia,land,0.5,39.2,Stadium (Surulere); Bode Thomas; Surulere; Ojuelegba,"Ijora Badia; Ijora Badia, north-east of LRMT Blue Line; Ijora",0.0,0.0,Iganmu
+Ilupeju,Ikeja GRA,land,1.25,39.1,Ilupeju,Ikeja GRA,0.0,0.0,"Shogunle, east of Agege Motor Road"
+Obalende,Apapa-Tin Can,water,0.0,38.5,Obalende,"Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",0.0,0.0,Eko Atlantic
+Ajegunle (Ajeromi),Mile 2-Amuwo,land,2.25,37.0,Ajegunle,Mile 2 north-east; Amuwo Odofin; Mile 2,0.0,0.0,"Amukoko, north of Lagos-Badagry Expressway; Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Coker"
+Papa Ajao-Ladipo,Oshodi-Mafoluku,land,2.25,36.0,Papa Ajao; Ladipo,Oshodi; Mafoluku,0.0,0.0,Ilasamaja; Isolo north-east
+Isale Eko-Idumota-Marina,Apapa-Tin Can,water,0.0,34.3,Idumota; Marina; Isale Eko,"Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",0.0,0.0,Ijora
+Ajegunle (Ajeromi),Kirikiri-Navy Town,land,2.75,30.1,Ajegunle,Kirikiri; Kirikiri south-east,0.0,0.0,"Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway"
+Shomolu-Pedro-Onipanu,Papa Ajao-Ladipo,land,0.5,28.7,Pedro; Obanikoro-Onipanu; Shomolu,Papa Ajao; Ladipo,0.0,0.0,Ilupeju
+Apapa-Tin Can,Amukoko-Layeni (Ifelodun),land,2.25,25.9,"Tin Can south-west; Apapa Wharf, east of Apapa-Oworonshoki Expressway; Tin Can south-east; Apapa Wharf; Apapa GRA; Apapa Wharf south-east; Apapa GRA north-east; Apapa GRA, south-west of Apapa-Oworonshoki Expressway; Tin Can south; Tin Can",,0.0,0.0,
+Isale Eko-Idumota-Marina,Ijora-Badia,water,0.0,25.8,Idumota; Marina; Isale Eko,"Ijora Badia; Ijora Badia, north-east of LRMT Blue Line; Ijora",0.0,0.0,Isale Eko; Otto-Iddo
+Bariga-Akoka,UNILAG,land,2.25,25.7,Akoka; Bariga,UNILAG,0.0,0.0,Bariga; Jibowu

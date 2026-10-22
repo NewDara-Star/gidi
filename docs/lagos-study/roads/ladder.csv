@@ -1,0 +1,385 @@
+step,similarity_pct,why,group_a,group_b,groups_after
+1,72.7,Google check: always together,Bariga,Ilaje (Bariga),402
+2,50.8,Google check: always together,Bariga / Ilaje (Bariga),Shomolu,401
+3,27.0,Google check: always together,Ajah,Ilaje Ajah,400
+4,60.6,Google check: always together,Ilaje Ajah / Ajah,Ajah,399
+5,43.9,Google check: always together,Ajah / Ilaje Ajah,Ilaje Ajah,398
+6,60.0,Google check: always together,Ajah / Ilaje Ajah (+1 places),Ilaje Ajah,397
+7,49.5,Google check: always together,Badore,Ajah / Ilaje Ajah (+2 places),396
+8,93.8,ladder,Morogbo,Badagry,395
+9,93.5,ladder,Abaranje,Igando,394
+10,92.9,ladder,Igbogbo,Ita Elewa,393
+11,92.9,ladder,Ogunlana,Aguda,392
+12,91.8,ladder,Alagbado,Command,391
+13,91.7,ladder,Onigbongbo,Ikeja GRA,390
+14,91.3,ladder,Akowonjo,Dopemu,389
+15,90.3,ladder,Ojuwoye-Mushin,Idi-Oro,388
+16,89.4,ladder,Morogbo,Agbara,387
+17,89.3,ladder,Ketu,Alapere,386
+18,89.0,ladder,Adelabu,Coker,385
+19,88.8,ladder,Kosofe,Ikosi,384
+20,88.5,ladder,Abesan,Baruwa,383
+21,90.4,ladder,Ayobo,Baruwa / Abesan,382
+22,88.5,ladder,Alagbado / Command,Meiran,381
+23,88.2,ladder,Odogunyan,Isawo,380
+24,88.1,ladder,Orile Agege,Iyana Ipaja,379
+25,88.0,ladder,Ipakodo,Majidun,378
+26,91.2,ladder,Majidun / Ipakodo,Ebute (Ikorodu),377
+27,87.8,ladder,Lakowe,Lakowe,376
+28,87.8,ladder,Agbowa,Agbowa,375
+29,87.7,ladder,Ita Elewa / Igbogbo,Bayeku,374
+30,88.2,ladder,Bayeku / Ita Elewa / Igbogbo,Ijede,373
+31,87.7,ladder,Ogunlana / Aguda,Lawanson,372
+32,87.2,ladder,Iyana Ipaja,Alagbado / Meiran / Command,371
+33,87.0,ladder,Odi-Olowo,Odi-Olowo,370
+34,86.6,ladder,Imota,Imota,369
+35,86.5,ladder,Egan,Egan,368
+36,86.1,ladder,Ewu-Elepe,Ewu-Elepe,367
+37,86.1,ladder,Bayeku / Ita Elewa / Ijede (+1 places),Ita Elewa,366
+38,86.0,ladder,Pedro,Palmgrove,365
+39,86.0,ladder,Iba,Isheri-Olofin,364
+40,85.8,ladder,Ijaiye,Ijaiye,363
+41,85.8,ladder,Isolo,Ire-Akari,362
+42,85.6,ladder,Badagry,Badagry,361
+43,85.2,ladder,Akoka,Bajulaiye,360
+44,85.2,ladder,Imota,Ewu-Elepe,359
+45,84.8,ladder,Mafoluku,Shogunle,358
+46,84.7,ladder,Bajulaiye / Akoka,Fadeyi,357
+47,84.3,ladder,Imota,Imota,356
+48,84.2,ladder,Abijo,Abijo,355
+49,84.2,ladder,Majidun / Ebute (Ikorodu) / Ipakodo,Isawo / Odogunyan,354
+50,84.0,ladder,Epe,Epe,353
+51,84.0,ladder,Egbeda,Egbeda,352
+52,83.9,ladder,Abaranje / Igando,Akesan,351
+53,83.9,ladder,Isawo / Odogunyan / Majidun (+2 places),Ikorodu town,350
+54,83.9,ladder,Morogbo,Badagry,349
+55,84.3,ladder,Morogbo / Badagry,Morogbo,348
+56,83.5,ladder,Okokomaiko,Okokomaiko,347
+57,83.4,ladder,Alagbado / Meiran / Command (+1 places),Ekoro,346
+58,83.3,ladder,Lakowe,Bogije,345
+59,84.0,ladder,Bogije / Lakowe,Awoyaya,344
+60,83.2,ladder,Oshodi,Mafoluku / Shogunle,343
+61,83.2,ladder,Epe,Ejinrin,342
+62,83.2,ladder,Eleko,Ogombo,341
+63,83.0,ladder,Odi-Olowo,Idi-Araba,340
+64,82.9,ladder,Orile Agege / Iyana Ipaja,Oko-Oba,339
+65,82.9,ladder,Alagbado / Meiran / Ekoro (+2 places),Alakuko,338
+66,82.6,ladder,Ogombo,Ogombo,337
+67,82.6,ladder,Gowon Estate,Alagbado / Meiran / Ekoro (+3 places),336
+68,82.3,ladder,Iju,Fagba,335
+69,82.0,ladder,Olodi Apapa,Boundary (Ajegunle),334
+70,81.9,ladder,Agboyi,Irawo,333
+71,81.8,ladder,Isolo / Ire-Akari,Oke-Afa,332
+72,81.7,ladder,Egbe,Idimu,331
+73,82.1,ladder,Egbe / Idimu,Ejigbo,330
+74,82.0,ladder,Abaranje / Igando / Akesan,Ejigbo / Egbe / Idimu,329
+75,81.6,ladder,Bayeku / Ita Elewa / Ijede (+2 places),Ogijo,328
+76,81.3,ladder,Noforija,Epe,327
+77,81.1,ladder,Allen-Opebi,Agidingbi,326
+78,81.1,ladder,Ikoyi,Old Ikoyi,325
+79,81.1,ladder,Olorunsogo,Ojuwoye-Mushin / Idi-Oro,324
+80,81.0,ladder,Bayeku / Ita Elewa / Ijede (+3 places),Isawo / Odogunyan / Majidun (+3 places),323
+81,81.0,ladder,Ago Palace,Jakande Estate (Isolo),322
+82,81.0,ladder,Morogbo,Agbara,321
+83,80.7,ladder,Iba,Iba / Isheri-Olofin,320
+84,81.8,ladder,Alaba,Iba / Isheri-Olofin,319
+85,80.5,ladder,Mile 2,Alakija,318
+86,80.4,ladder,Morogbo / Badagry,Morogbo,317
+87,80.3,ladder,Surulere,Bode Thomas,316
+88,80.2,ladder,Shangisha,Olowora-Isheri (Ikosi-Isheri),315
+89,80.2,ladder,Ago Palace / Jakande Estate (Isolo),Isheri-Osun,314
+90,80.1,ladder,Stadium (Surulere),Costain,313
+91,80.0,ladder,Ogudu,Ifako-Gbagada,312
+92,79.9,ladder,Ejinrin,Agbowa,311
+93,79.5,ladder,Lakowe,Ogombo,310
+94,79.4,ladder,Agboju,Festac,309
+95,79.0,ladder,Gowon Estate,Ipaja,308
+96,78.9,ladder,Oregun,Alausa,307
+97,78.7,ladder,Maryland,Oregun,306
+98,78.7,ladder,Abaranje,Abaranje,305
+99,78.5,ladder,Ogombo,Ogombo,304
+100,78.4,ladder,Idi-Araba / Odi-Olowo,Bajulaiye / Fadeyi / Akoka,303
+101,78.2,ladder,Bayeku / Ita Elewa / Isawo (+9 places),Ogijo,302
+102,78.1,ladder,Ejinrin / Epe,Ejinrin / Agbowa,301
+103,77.8,ladder,Elegushi,Victoria Island,300
+104,77.8,ladder,Sangotedo,Abijo,299
+105,77.4,ladder,Alagbado / Meiran / Ekoro (+4 places),Abule Egba,298
+106,77.3,ladder,Oko-Oba,Ifako-Ijaiye,297
+107,77.3,ladder,Parkview,Banana Island,296
+108,76.8,ladder,Boundary (Ajegunle) / Olodi Apapa,Ajegunle,295
+109,76.7,ladder,Abaranje / Igando / Ejigbo (+3 places),Ijegun,294
+110,76.5,ladder,Papa Ajao,Isolo,293
+111,76.3,ladder,Egbeda,Akowonjo / Dopemu,292
+112,76.2,ladder,Ogudu / Ifako-Gbagada,Gbagada Phase 2,291
+113,76.2,ladder,Abaranje / Igando / Ejigbo (+4 places),Jakande Estate (Isolo),290
+114,76.1,ladder,Omole,Berger,289
+115,75.9,ladder,Computer Village,Allen-Opebi / Agidingbi,288
+116,75.9,ladder,Apapa Wharf,Apapa GRA,287
+117,75.9,ladder,Majidun-Ogolonto,Ajegunle (Ikorodu Rd),286
+118,75.9,ladder,Bayeku / Ita Elewa / Isawo (+10 places),Odogunyan,285
+119,75.9,ladder,Agboyi / Irawo,Shangisha / Olowora-Isheri (Ikosi-Isheri),284
+120,75.8,ladder,Agbara / Morogbo,Agbara,283
+121,75.7,ladder,Elegushi,Ikate,282
+122,75.6,ladder,Addo,Langbasa,281
+123,75.5,ladder,Alapere / Ketu,Kosofe / Ikosi,280
+124,75.5,ladder,Onike-Abule Oja,Yaba,279
+125,75.4,ladder,Ibeju,Ogombo / Eleko,278
+126,75.3,ladder,Coker / Adelabu,Ogunlana / Aguda / Lawanson,277
+127,77.5,ladder,Coker / Ogunlana / Aguda (+2 places),Idi-Araba / Bajulaiye / Odi-Olowo (+3 places),276
+128,77.5,ladder,Idi-Araba / Coker / Ogunlana (+8 places),Olorunsogo / Ojuwoye-Mushin / Idi-Oro,275
+129,75.3,ladder,Sabo,Alagomeji,274
+130,74.9,ladder,Elegushi / Ikate,Lekki Phase 1,273
+131,74.8,ladder,Alagbado / Meiran / Ekoro (+5 places),Pen Cinema,272
+132,74.2,ladder,Agungi,Jakande (Lekki),271
+133,73.8,ladder,Sangotedo,Eleko,270
+134,73.8,ladder,Ago Palace / Jakande Estate (Isolo) / Isheri-Osun,Ago Palace,269
+135,73.5,ladder,Elegushi / Lekki Phase 1 / Ikate,Lekki Phase 1,268
+136,72.9,ladder,Onike-Abule Oja / Yaba,Jibowu,267
+137,72.8,ladder,Ejinrin / Agbowa / Epe (+2 places),Imota,266
+138,72.7,ladder,Egan,Igando,265
+139,75.8,ladder,Igando / Egan,Ayobo,264
+140,72.6,ladder,Abaranje / Igando / Ejigbo (+5 places),Ikotun,263
+141,72.6,ladder,Abraham Adesanya,Abraham Adesanya,262
+142,72.1,ladder,Isale Eko,Marina,261
+143,72.1,ladder,Amukoko,Mile 2,260
+144,72.0,ladder,Idi-Araba / Coker / Ogunlana (+11 places),Palmgrove / Pedro,259
+145,71.9,ladder,Badagry,Badagry,258
+146,71.7,ladder,Ojo (LASU),Isheri-Olofin,257
+147,71.7,ladder,Idimu,Baruwa / Abesan / Ayobo,256
+148,79.2,ladder,Baruwa / Idimu / Abesan (+1 places),Alagbado / Meiran / Ekoro (+6 places),255
+149,79.2,ladder,Alagbado / Meiran / Ekoro (+10 places),Abaranje / Igando / Ejigbo (+6 places),254
+150,71.5,ladder,Apapa GRA,Apapa Wharf,253
+151,71.3,ladder,Ajara,Ajara,252
+152,71.2,ladder,Ifako-Ijaiye / Oko-Oba,Oko-Oba / Orile Agege / Iyana Ipaja,251
+153,74.2,ladder,Ifako-Ijaiye / Oko-Oba / Orile Agege (+2 places),Fagba / Iju,250
+154,71.0,ladder,Ajara,Ajara,249
+155,71.0,ladder,Amuwo Odofin,Mile 2 / Alakija,248
+156,71.0,ladder,Idi-Araba / Coker / Ogunlana (+13 places),Gbagada,247
+157,70.8,ladder,Bayeku / Ita Elewa / Isawo (+11 places),Odogunyan,246
+158,70.6,ladder,Oregun / Maryland,Computer Village / Allen-Opebi / Agidingbi,245
+159,72.7,ladder,Computer Village / Allen-Opebi / Agidingbi (+2 places),Mende,244
+160,70.4,ladder,Sangotedo / Abijo,Ogombo,243
+161,79.0,ladder,Sangotedo / Abijo / Ogombo (+1 places),Bogije / Lakowe / Awoyaya (+1 places),242
+162,70.4,ladder,Mile 2 / Alakija / Amuwo Odofin,Festac / Agboju,241
+163,70.3,ladder,Ago Palace,Ago Palace,240
+164,70.2,ladder,Ilasamaja,Ladipo,239
+165,70.1,ladder,Idi-Araba / Coker / Ogunlana (+14 places),Itire,238
+166,70.1,ladder,Oyingbo,Otto-Iddo,237
+167,70.0,ladder,Osapa London,Ikota,236
+168,69.8,ladder,Agboyi / Shangisha / Olowora-Isheri (Ikosi-Isheri) (+1 places),Omole / Berger,235
+169,69.7,ladder,Cele,Isolo / Papa Ajao,234
+170,69.5,ladder,Kirikiri,Boundary (Ajegunle),233
+171,69.4,ladder,Imota,Imota,232
+172,69.2,ladder,Fagba / Ifako-Ijaiye / Oko-Oba (+4 places),Ogba,231
+173,69.1,ladder,Bayeku / Ita Elewa / Isawo (+12 places),Majidun-Ogolonto / Ajegunle (Ikorodu Rd),230
+174,69.0,ladder,Ijegun-Egba,Ijegun-Egba,229
+175,68.9,ladder,Ijesha,Itire / Idi-Araba / Coker (+15 places),228
+176,68.8,ladder,Agbara / Morogbo,Agbara,227
+177,83.1,ladder,Morogbo / Badagry (+1 places),Agbara / Morogbo (+1 places),226
+178,68.8,ladder,Ajegunle / Boundary (Ajegunle) / Olodi Apapa,Orile Iganmu,225
+179,68.6,ladder,Osapa London / Ikota,VGC,224
+180,68.6,ladder,Trade Fair,Mile 2 / Festac / Agboju (+2 places),223
+181,68.6,ladder,Ago Palace,Ago Palace / Jakande Estate (Isolo) / Isheri-Osun (+1 places),222
+182,69.9,ladder,Abaranje,Ago Palace / Jakande Estate (Isolo) / Isheri-Osun (+2 places),221
+183,68.5,ladder,Ago Palace,Isolo / Oke-Afa / Ire-Akari,220
+184,68.5,ladder,Elegushi / Lekki Phase 1 / Ikate (+1 places),Ilasan,219
+185,68.0,ladder,Sangotedo / Abijo / Bogije (+5 places),Abijo,218
+186,67.9,ladder,Jibowu / Onike-Abule Oja / Yaba,Igbobi,217
+187,67.9,ladder,Navy Town,Abule Ado,216
+188,67.8,ladder,Ebute Metta,Sabo / Alagomeji,215
+189,67.7,ladder,Itire / Idi-Araba / Coker (+16 places),Ajegunle / Boundary (Ajegunle) / Orile Iganmu (+1 places),214
+190,67.7,ladder,Iponri,Ebute Metta,213
+191,67.5,ladder,Ijede,Ijede,212
+192,75.5,ladder,Bayeku / Ita Elewa / Isawo (+14 places),Ijede,211
+193,67.3,ladder,Ajah / Badore / Ilaje Ajah (+3 places),VGC,210
+194,68.2,ladder,Ajah / Badore / VGC (+4 places),Abraham Adesanya,209
+195,67.0,ladder,Iba / Isheri-Olofin / Alaba (+1 places),Alaba,208
+196,69.6,ladder,Alaba / Iba / Isheri-Olofin (+2 places),Iba,207
+197,67.0,ladder,Ogombo,Ogombo,206
+198,66.9,ladder,Ijaiye,Ojokoro,205
+199,66.7,ladder,Bayeku / Ita Elewa / Isawo (+16 places),Bayeku,204
+200,74.3,ladder,Bayeku / Ita Elewa / Isawo (+17 places),Ibeshe,203
+201,66.6,ladder,Sangotedo / Abijo / Bogije (+6 places),Bogije,202
+202,66.2,ladder,Egbeda / Akowonjo / Dopemu (+1 places),Shasha,201
+203,66.2,ladder,Festac,Trade Fair / Mile 2 / Festac (+3 places),200
+204,66.1,ladder,Agbara / Morogbo / Badagry (+5 places),Morogbo,199
+205,65.9,ladder,Elegushi / Lekki Phase 1 / Ikate (+2 places),Agungi / Jakande (Lekki),198
+206,65.8,ladder,Anthony Village,Obanikoro-Onipanu,197
+207,66.7,ladder,Obanikoro-Onipanu / Anthony Village,Ogudu / Ifako-Gbagada / Gbagada Phase 2,196
+208,65.6,ladder,Agbara / Morogbo / Badagry (+6 places),Morogbo,195
+209,65.5,ladder,Bayeku / Ita Elewa / Isawo (+18 places),Isawo,194
+210,65.4,ladder,Alagbado / Abaranje / Meiran (+19 places),Ijaiye / Ojokoro,193
+211,80.0,ladder,Alagbado / Abaranje / Meiran (+22 places),Fagba,192
+212,65.1,ladder,Ago Palace / Isolo / Oke-Afa (+1 places),Airport (MMIA),191
+213,66.1,ladder,Airport (MMIA) / Ago Palace / Isolo (+2 places),Mafoluku / Shogunle / Oshodi,190
+214,65.0,ladder,Bayeku / Ita Elewa / Isawo (+19 places),Imota,189
+215,65.0,ladder,Lafiaji,Marina / Isale Eko,188
+216,64.9,ladder,Parkview / Banana Island,Ikoyi / Old Ikoyi,187
+217,68.0,ladder,Ikoyi,Ikoyi / Parkview / Old Ikoyi (+1 places),186
+218,68.3,ladder,Ikoyi / Parkview / Old Ikoyi (+2 places),Elegushi / Victoria Island,185
+219,64.3,ladder,Satellite Town,Ijegun-Egba,184
+220,64.3,ladder,Alagbado / Abaranje / Meiran (+23 places),Egbeda / Akowonjo / Shasha (+2 places),183
+221,64.2,ladder,Addo,Langbasa / Addo,182
+222,64.1,ladder,Trade Fair / Mile 2 / Festac (+4 places),Satellite Town / Ijegun-Egba,181
+223,64.1,ladder,Morogbo,Badagry,180
+224,63.1,ladder,Chevron,Osapa London / VGC / Ikota,179
+225,63.1,ladder,Alaba / Iba / Isheri-Olofin (+3 places),Okokomaiko,178
+226,63.0,ladder,Agbara / Morogbo / Badagry (+7 places),Badagry,177
+227,63.0,ladder,Alagbado / Abaranje / Meiran (+28 places),Ikeja Along,176
+228,62.9,ladder,Ejinrin,Noforija,175
+229,62.9,ladder,Elegushi / Lekki Phase 1 / Agungi (+4 places),Oniru,174
+230,62.5,ladder,Alaba / Iba / Okokomaiko (+5 places),Navy Town,173
+231,62.5,ladder,Ajara,Ajara,172
+232,62.4,ladder,Elegushi / Ikoyi / Parkview (+4 places),Old Ikoyi,171
+233,62.3,ladder,Marina / Lafiaji / Isale Eko,Obalende,170
+234,62.2,ladder,Sangotedo / Bogije / Abijo (+7 places),Ajah / Badore / Abraham Adesanya (+6 places),169
+235,64.6,ladder,Ajah / Sangotedo / Badore (+16 places),Langbasa / Addo,168
+236,64.5,ladder,VGC,Ajah / Langbasa / Sangotedo (+19 places),167
+237,61.9,ladder,Bayeku / Ita Elewa / Isawo (+20 places),Odogunyan,166
+238,61.4,ladder,Otto-Iddo / Oyingbo,Iponri / Ebute Metta,165
+239,61.4,ladder,Tin Can,Apapa Wharf,164
+240,61.3,ladder,Badagry,Badagry,163
+241,61.2,ladder,Alagbado / Abaranje / Meiran (+29 places),Fagba / Ifako-Ijaiye / Oko-Oba (+5 places),162
+242,61.2,ladder,Bayeku / Ita Elewa / Isawo (+21 places),Ogijo,161
+243,61.2,ladder,Mafoluku / Shogunle / Oshodi (+5 places),Okota,160
+244,61.1,ladder,Computer Village / Mende / Allen-Opebi (+3 places),Computer Village,159
+245,60.8,ladder,Bayeku / Ita Elewa / Isawo (+22 places),Odogunyan,158
+246,60.6,ladder,Apapa GRA,Apapa Wharf / Apapa GRA,157
+247,60.6,ladder,Bayeku / Ita Elewa / Isawo (+23 places),Ijede,156
+248,60.3,ladder,Sabo / Alagomeji / Ebute Metta,Oyingbo,155
+249,60.3,ladder,Ijegun-Egba,Ijegun-Egba,154
+250,59.6,ladder,Ajegunle / Itire / Idi-Araba (+20 places),Ojuelegba,153
+251,59.3,ladder,Morogbo,Morogbo,152
+252,59.3,ladder,Ogombo (+1 places),Lakowe / Ogombo,151
+253,65.5,ladder,Ajah / Langbasa / Sangotedo (+20 places),Ogombo / Lakowe (+3 places),150
+254,59.1,ladder,Alagbado / Abaranje / Fagba (+37 places),Ikotun,149
+255,59.3,ladder,Alagbado / Abaranje / Fagba (+38 places),Jakande Estate (Isolo),148
+256,59.0,ladder,Ikeja Cantonment,Computer Village / Mende / Allen-Opebi (+4 places),147
+257,60.8,ladder,Computer Village / Mende / Ikeja Cantonment (+5 places),Mafoluku / Okota / Shogunle (+6 places),146
+258,61.2,ladder,Mafoluku / Computer Village / Okota (+14 places),Ojota,145
+259,59.5,ladder,Mafoluku / Computer Village / Okota (+15 places),Okota,144
+260,58.9,ladder,Alaba / Iba / Okokomaiko (+6 places),Ojo (LASU) / Isheri-Olofin,143
+261,58.7,ladder,Ewu-Elepe,Imota,142
+262,79.5,ladder,Bayeku / Ita Elewa / Isawo (+24 places),Ewu-Elepe / Imota,141
+263,58.6,ladder,Igando,Igando,140
+264,58.5,ladder,Ejinrin / Agbowa / Epe (+3 places),Noforija,139
+265,58.4,ladder,Costain / Stadium (Surulere),Iganmu,138
+266,58.0,ladder,Surulere / Bode Thomas,Ajegunle / Itire / Idi-Araba (+21 places),137
+267,57.7,ladder,Morogbo / Badagry,Badagry,136
+268,57.0,ladder,Ajegunle / Itire / Idi-Araba (+23 places),Bariga / Ilaje (Bariga) / Shomolu,135
+269,56.8,ladder,Epe,Noforija / Ejinrin,134
+270,56.7,ladder,Bayeku / Ita Elewa / Isawo (+27 places),Owutu,133
+271,56.6,ladder,Agbara / Morogbo / Badagry (+8 places),Morogbo / Agbara,132
+272,56.4,ladder,Alagbado / Abaranje / Fagba (+39 places),Alagbado,131
+273,55.9,ladder,Old Ikoyi / Elegushi / Ikoyi (+5 places),Dolphin Estate,130
+274,55.8,ladder,Ejinrin / Agbowa / Epe (+4 places),Ejinrin,129
+275,55.7,ladder,Ejinrin / Agbowa / Epe (+5 places),Epe,128
+276,56.9,ladder,Ejinrin / Agbowa / Epe (+6 places),Imota,127
+277,66.0,ladder,Imota / Ejinrin / Agbowa (+8 places),Imota,126
+278,65.6,ladder,Imota / Ejinrin / Agbowa (+9 places),Imota / Ewu-Elepe,125
+279,63.6,ladder,Imota / Ejinrin / Agbowa (+11 places),Imota,124
+280,61.6,ladder,Imota / Ejinrin / Agbowa (+12 places),Epe / Noforija,123
+281,62.0,ladder,Imota / Ejinrin / Agbowa (+14 places),Ejinrin,122
+282,56.9,ladder,Imota / Ejinrin / Agbowa (+15 places),Epe,121
+283,56.7,ladder,Imota / Ejinrin / Agbowa (+16 places),Epe,120
+284,55.7,ladder,Tin Can,Ijegun-Egba,119
+285,55.5,ladder,Ogudu / Ifako-Gbagada / Gbagada Phase 2 (+2 places),Soluyi,118
+286,55.5,ladder,Cele / Isolo / Papa Ajao,Ladipo / Ilasamaja,117
+287,55.3,ladder,Igando / Egan / Ayobo (+1 places),Egan,116
+288,56.7,ladder,Egan / Igando / Ayobo (+2 places),Alagbado / Abaranje / Fagba (+40 places),115
+289,55.2,ladder,Agboyi / Shangisha / Olowora-Isheri (Ikosi-Isheri) (+3 places),Ojodu,114
+290,55.2,ladder,Alagbado / Abaranje / Fagba (+45 places),Agboyi / Shangisha / Olowora-Isheri (Ikosi-Isheri) (+4 places),113
+291,69.2,ladder,Alagbado / Abaranje / Fagba (+52 places),Magodo,112
+292,55.0,ladder,Ago Palace / Jakande Estate (Isolo) / Abaranje (+4 places),Alagbado / Abaranje / Fagba (+53 places),111
+293,55.2,ladder,Alagbado / Ago Palace / Abaranje (+60 places),Ipaja / Gowon Estate,110
+294,54.9,ladder,Bayeku / Ita Elewa / Isawo (+28 places),Ita Elewa,109
+295,54.5,ladder,Alagbado / Ago Palace / Abaranje (+62 places),Fagba,108
+296,54.1,ladder,Ajegunle / Itire / Idi-Araba (+26 places),Ogudu / Ifako-Gbagada / Gbagada Phase 2 (+3 places),107
+297,65.8,ladder,Ajegunle / Itire / Ogudu (+32 places),Kosofe / Alapere / Ikosi (+1 places),106
+298,54.3,ladder,Ajegunle / Itire / Ogudu (+36 places),Jibowu / Onike-Abule Oja / Igbobi (+1 places),105
+299,58.7,ladder,Ajegunle / Itire / Ogudu (+40 places),Iwaya,104
+300,53.7,ladder,Shogunle,Ilupeju,103
+301,53.6,ladder,Alagbado / Ago Palace / Abaranje (+63 places),Alagbado,102
+302,53.5,ladder,Eleko,Eleko,101
+303,53.5,ladder,Alagbado / Ago Palace / Abaranje (+64 places),Igando,100
+304,53.4,ladder,Agbara / Morogbo / Badagry (+10 places),Morogbo / Badagry,99
+305,76.1,ladder,Morogbo / Badagry,Agbara / Morogbo / Badagry (+13 places),98
+306,71.3,ladder,Badagry,Agbara / Morogbo / Badagry (+16 places),97
+307,68.6,ladder,Agbara / Morogbo / Badagry (+17 places),Badagry,96
+308,56.9,ladder,Agbara / Morogbo / Badagry (+20 places),Badagry,95
+309,53.4,ladder,Ibeju / Ogombo / Eleko,Ibeju,94
+310,53.6,ladder,Ibeju / Ogombo / Eleko (+1 places),Lekki FTZ,93
+311,53.2,ladder,Ajah / Langbasa / Sangotedo (+26 places),Chevron,92
+312,53.1,ladder,Otto-Awori,Morogbo,91
+313,67.7,ladder,Morogbo,Otto-Awori / Morogbo,90
+314,65.4,ladder,Agbara / Morogbo / Badagry (+21 places),Otto-Awori / Morogbo (+1 places),89
+315,52.9,ladder,Ibeju / Ogombo / Eleko (+2 places),Ibeju,88
+316,52.6,ladder,Okota / Mafoluku / Computer Village (+16 places),Alagbado / Ago Palace / Abaranje (+66 places),87
+317,52.5,ladder,Old Ikoyi / Elegushi / Ikoyi (+6 places),Elegushi / Lekki Phase 1 / Agungi (+5 places),86
+318,65.3,ladder,Elegushi / Lekki Phase 1 / Agungi (+14 places),Victoria Island,85
+319,51.8,ladder,Ajara,Ajara,84
+320,51.6,ladder,Ajah / Langbasa / Sangotedo (+27 places),Eleko,83
+321,51.5,ladder,Ibeju / Ogombo / Eleko (+3 places),Ibeju,82
+322,51.1,ladder,Ajah / Langbasa / Sangotedo (+28 places),Eleko,81
+323,51.2,ladder,Ajah / Langbasa / Sangotedo (+30 places),Abraham Adesanya,80
+324,51.3,ladder,Ajah / Langbasa / Sangotedo (+31 places),Sangotedo / Eleko,79
+325,51.1,ladder,Ajegunle / Itire / Ogudu (+41 places),Amukoko,78
+326,50.7,ladder,Bayeku / Ita Elewa / Isawo (+29 places),Ewu-Elepe,77
+327,50.6,ladder,Kirikiri / Boundary (Ajegunle),Kirikiri,76
+328,50.3,ladder,Alagbado / Ago Palace / Abaranje (+85 places),Ikeja GRA / Onigbongbo,75
+329,49.1,ladder,Bayeku / Ita Elewa / Isawo (+30 places),Isawo,74
+330,48.8,ladder,Otto-Iddo / Oyingbo / Iponri (+1 places),Iganmu / Costain / Stadium (Surulere),73
+331,48.7,ladder,Bayeku / Ita Elewa / Isawo (+31 places),Bayeku,72
+332,48.1,ladder,Elegushi / Lekki Phase 1 / Agungi (+15 places),Osapa London / VGC / Ikota (+1 places),71
+333,53.2,ladder,Ajah / Langbasa / Sangotedo (+33 places),Elegushi / Lekki Phase 1 / Agungi (+19 places),70
+334,47.9,ladder,Bayeku / Ita Elewa / Isawo (+32 places),Bayeku,69
+335,47.5,ladder,Volks,Ago Palace,68
+336,47.1,ladder,Ajara,Ajara,67
+337,50.0,ladder,Ajara (+3 places),Ajara,66
+338,46.8,ladder,Ajegunle / Itire / Ogudu (+42 places),Cele / Isolo / Ladipo (+2 places),65
+339,46.3,ladder,Iganmu / Otto-Iddo / Costain (+4 places),Ajegunle / Itire / Ogudu (+47 places),64
+340,46.0,ladder,Ajegunle / Itire / Ogudu (+54 places),Sabo / Oyingbo / Alagomeji (+1 places),63
+341,45.9,ladder,Elegushi / Ajah / Langbasa (+55 places),Sangotedo,62
+342,45.8,ladder,Ibeju / Ogombo / Eleko (+4 places),Eleko,61
+343,45.8,ladder,Apapa GRA / Apapa Wharf,Ijora Badia,60
+344,45.6,ladder,Airport (MMIA),Alausa / Oregun,59
+345,45.5,ladder,Elegushi / Ajah / Langbasa (+56 places),Agungi,58
+346,44.9,ladder,Imota,Imota / Ejinrin / Agbowa (+17 places),57
+347,48.9,ladder,Agbowa,Imota / Ejinrin / Agbowa (+20 places),56
+348,47.9,ladder,Imota,Imota / Ejinrin / Agbowa (+21 places),55
+349,47.5,ladder,Bayeku / Ita Elewa / Isawo (+33 places),Imota / Ejinrin / Agbowa (+22 places),54
+350,68.3,ladder,Bayeku / Ita Elewa / Isawo (+58 places),Epe / Noforija / Ejinrin (+1 places),53
+351,66.2,ladder,Bayeku / Ita Elewa / Isawo (+62 places),Imota,52
+352,44.8,ladder,Alagbado / Ago Palace / Abaranje (+87 places),Egbeda,51
+353,44.7,ladder,Kirikiri / Boundary (Ajegunle),Satellite Town / Ijegun-Egba / Trade Fair (+6 places),50
+354,44.1,ladder,Apapa GRA / Apapa Wharf / Ijora Badia (+1 places),Apapa Wharf / Apapa GRA,49
+355,44.0,ladder,Ibeju / Ogombo / Eleko (+5 places),Ibeju,48
+356,43.5,ladder,Ibeju / Ogombo / Eleko (+6 places),Ogombo,47
+357,43.4,ladder,Alausa / Oregun / Airport (MMIA),Ajegunle / Itire / Ogudu (+58 places),46
+358,42.8,ladder,Ajegunle / Alausa / Oregun (+61 places),Satellite Town / Ijegun-Egba / Trade Fair (+9 places),45
+359,42.0,ladder,Alaba / Iba / Okokomaiko (+8 places),Ojo (LASU),44
+360,40.6,ladder,Ajegunle / Alausa / Satellite Town (+73 places),Navy Town / Abule Ado,43
+361,48.6,ladder,Ajegunle / Alausa / Satellite Town (+75 places),Alaba / Iba / Okokomaiko (+9 places),42
+362,40.3,ladder,Bayeku / Ita Elewa / Isawo (+63 places),Ikorodu town,41
+363,40.1,ladder,Ajegunle / Alaba / Alausa (+87 places),UNILAG,40
+364,40.0,ladder,Ibeju / Ogombo / Eleko (+7 places),Ibeju,39
+365,38.4,ladder,Ajegunle / Alaba / Alausa (+88 places),Oworonshoki,38
+366,38.2,ladder,Bayeku / Ita Elewa / Isawo (+64 places),Ita Elewa,37
+367,36.6,ladder,Bayeku / Ita Elewa / Isawo (+65 places),Ogijo,36
+368,36.1,ladder,Alagbado / Ago Palace / Abaranje (+88 places),Olowora,35
+369,35.9,ladder,Alagbado / Ago Palace / Abaranje (+89 places),Ilupeju / Shogunle,34
+370,35.8,ladder,Ibeju,Ibeju / Ogombo / Eleko (+8 places),33
+371,36.2,ladder,Elegushi / Ajah / Langbasa (+57 places),Ibeju / Ogombo / Eleko (+9 places),32
+372,35.2,ladder,Alagbado / Ago Palace / Abaranje (+91 places),Agric (Ikorodu),31
+373,34.9,ladder,Elegushi / Ajah / Ibeju (+69 places),Sangotedo,30
+374,34.6,ladder,Ajegunle / Alaba / Alausa (+89 places),Mile 2 / Amukoko,29
+375,34.0,ladder,Bayeku / Ita Elewa / Isawo (+66 places),Ibeshe,28
+376,32.9,ladder,Alagbado / Ago Palace / Abaranje (+92 places),Volks / Ago Palace,27
+377,32.7,ladder,Elegushi / Ajah / Ibeju (+70 places),Ibeju,26
+378,32.6,ladder,Elegushi / Ajah / Ibeju (+71 places),Eko Atlantic,25
+379,31.2,ladder,Bayeku / Ita Elewa / Isawo (+67 places),Ajegunle (Ikorodu Rd),24
+380,28.9,ladder,Alagbado / Ago Palace / Abaranje (+95 places),Agboyi,23
+381,27.5,ladder,Ajegunle / Alaba / Alausa (+91 places),Satellite Town,22
+382,26.2,ladder,Ajegunle / Alaba / Alausa (+92 places),Volks,21
+383,23.8,ladder,Ajegunle / Alaba / Alausa (+93 places),Makoko,20
+384,21.8,ladder,Elegushi / Ajah / Ibeju (+72 places),Ibeju,19
