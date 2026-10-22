@@ -76,3 +76,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | Real Lagos roads, no ideal road template | roads on their real lines, buildings on their real spots, no building cut for a template | GAP: road-line offset check and city flow audit being built (22 Oct) |
 | Gidi is Lagos, miniaturised; the map starts again | every district traced to the real places it sits on; positions and network against real Lagos at the chosen scale | GAP: the whole-Lagos study and new frame come first (22 Oct) |
 | The new map is 1:3, about 27 x 10.5 km | map size and positions against real Lagos at 1:3 | GAP: comes with the new frame |
+| Roads first, districts by their borders | the skeleton is the real road network at 1:3; every district edge is a real border; merged places really touch | GAP: comes with the road skeleton and the border map (22 Oct) |
