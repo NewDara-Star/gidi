@@ -156,6 +156,7 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 |---|---|---|
 | `plot`, `road` | ids | |
 | `side` | which side of the road | `"left"` |
+| `line` | the plot's edge, drawn with the road on its right (the Frontage tool draws it so; turning it round moves its lean-tos across) | |
 | `kind` | `shop_line_step`, `leanto_to_road`, `wall_gate`, `platform_house`, `low_wall_bars`, `sheet_fence`, `breeze_fence`, `plank_fence`, `open_forecourt` | `"wall_gate"` |
 | `line` | line, m: the wall or shop line (bends allowed) | `[[12831,6092.6],[12850,6092.6]]` |
 | `setback` | m from the road edge | `0` |
@@ -192,6 +193,8 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 | `depth`, `z_wall`, `z_front`, `stand_z` | m | `1.8`, `3.0`, `2.2`, `0.25` |
 | `sheet` | `material` (`zinc`, `longspan`, `tarp`, `plank`), `colour`, `state`, `edge_colour`?, `surface`? | |
 | `posts` | `none`, `timber`, `steel` | `"timber"` |
+
+A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`: outside a building (its footprint runs with the building on the left), and on the right of a wall's or frontage's `line`. To put a wall's lean-to on the other side, turn the line round; the board's "Put it on the other side" does that and moves the line's gates and lean-tos so they stay where they were. It is refused while the wall carries dress (bays, posters), which would land on the wrong side.
 
 #### stall (`st-`): tables, kiosks, umbrellas, carts, fridges
 `kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`), `place`?.
@@ -340,8 +343,9 @@ A stamp copies a full record, or a group of them, from a studied spot (or anothe
 "from": {"spot": "ot175", "record": "L1", "date": "2026-10-22", "note": "stamped from the long bungalow, then shortened to 8.7 m"}
 ```
 
-- **From a test spot to the map:** a test spot's frame is x along its street and y to the left. The stamp tool places the spot's origin O and street heading t on the map, and every point becomes P = O + x·(cos t, sin t) + y·(sin t, -cos t) in Gidi metres (y south). Face positions (`u`, `z`) and local goods frames need no change.
-- **A group stamp** (a whole lean-to with its sheets and goods, a building with its faces and roof) keeps the links inside the group: the new `goods` record points at the new lean-to's id.
+- **Sources.** The Stamp tool copies from any folder in this format: the map itself (any started district), the example (`docs/map-format-example/`), and each folder under `map-stamps/<name>/` (a converted test spot, laid out like `map/`: `<dNN>/plan.json` and `<dNN>/dress/`). A converted test spot is written once in Gidi metres, at any free spot, by the converter; the tool then moves and turns the copy to where you click, so the old "place O and t" step is just a stamp. Face positions (`u`, `z`) and local goods frames need no change.
+- **A group stamp:** clicking a record takes it with everything that hangs on it (its faces and roof sheets, lean-tos, goods, wall bays, posters, wires). Clicking a lean-to or a piece of dress takes what it stands on, with it. Shift-click picks more; dragging a box picks everything whose first point is inside. Links inside the group point at the new ids (the new `goods` record points at the new lean-to). A link outside the group (a building's plot, a frontage's plot and road) is dropped for you to set again; a building takes the plot it lands in.
+- **Placing:** the group's middle goes where you click; R and [ ] turn it (15° and 1°). Every point moves and turns, `turn` and wire `lean` are added to, relief grids are resampled; local frames go with their parent. `from` is `{"spot": "map/d02" | "example/d15" | "<stamp folder>/dNN", "record": <source id>, "date"}`, and keeps the source's own `from` as its `note`.
 - The draft desk (`blender/kit_draft.py`) can still write a test spot's first records. After that the records are the map's, edited by hand.
 
 ## 4. Validation
@@ -450,10 +454,12 @@ The board stops writing an edit log. Today it appends "add building at (x, y)" o
 `scripts/board_server.py` keeps what works (local only on 127.0.0.1, one write at a time, atomic save, finite numbers only, undo). The old map's calls (`/api/edit`, `/api/undo`, `web/hand/<d>.json`) are unchanged. The new frame (`board.html?frame=new`, drawing code in `web/mapedit.js`) uses these:
 
 - `GET /api/map/list`: which districts are started, and the 51 study districts.
-- `GET /api/map/load?d=dNN`: the district's records and the checker's problems.
+- `GET /api/map/load?d=dNN`: the district's plan records and the checker's problems, and which dress tiles it has.
+- `GET /api/map/tiles?d=dNN&t=46_78,47_78`: dress records of those tiles. The board loads the tiles in view once the view is under 1.5 km across.
+- `GET /api/map/sources`, `GET /api/map/source?src=&d=`: the stamp sources (section 3) and all of one source district's records.
 - `POST /api/map/start {d}`: the first drawing in a district. Writes `district.json` with the outline from the frame study and **no name**, and an empty `plan.json`.
-- `POST /api/map/save {d, records}`: whole records by id, written in the canonical layout. A record with an unknown type or field, a bad id or a non-finite number is refused. A record with fields still to set is saved (the board shows it dashed amber, each missing field in red), so drawing can go ahead before every value is known.
-- `POST /api/map/delete {d, id}`: refused while other records still point at it.
+- `POST /api/map/save {d, records}`: whole records by id, written in the canonical layout. Plan records go to `plan.json`, dress records to the tile of their parent's first point (a lean-to's goods and sheets to its host's), and a record that moves takes its dress with it to the new tile. Only the touched files are rewritten; an empty tile file is removed. A record with an unknown type or field, a bad id or a non-finite number is refused. A record with fields still to set is saved (the board shows it dashed amber, each missing field in red), so drawing can go ahead before every value is known.
+- `POST /api/map/delete {d, id, children?}`: refused while other records still point at it; with `children: true` its dress (faces, sheets, goods, lean-tos) goes with it, in one undo step.
 - `POST /api/map/undo`: the last save or delete, if nothing has changed it since.
 - `POST /api/map/check {d}`: `check_map.py` runs on every save; its problems come back with the record id and show red on the board.
 
@@ -513,8 +519,9 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 - The twin catalogue outside the repo, with ids.
 - The board, still to do (the save calls and the first tools are in; see section 6):
   - **Brushes** (the owner said yes, 22 Oct: everything a brush writes stored in full).
-  - **The dress layer**: dress tiles, the face editor, goods, ground paint, relief, litter.
-  - **Frontage** tool (a plot edge and its road), **Person spot**, **Pole wires**, **Stamp**.
-  - Lean-to on a wall (today it picks a building face), and a district outline editor (today the outline comes from the frame study).
+  - **The dress layer** editors: the face editor, goods, ground paint, relief, litter (dress tiles load and save already).
+  - **Person spot**, **Pole wires**.
+  - A district outline editor (today the outline comes from the frame study).
+  - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side".
   - Loading only the districts in view once many are started.
 - The kit reads the new map: a converter for the two test spots, then `@reads` on each part.

@@ -9,11 +9,12 @@ Edits made since the last bake are also kept in web/board-pending.json, so the b
 run: each carries the time it was made, and the board shows the ones newer than web/gidi-data.js.
 
 The new frame (board.html?frame=new) draws the new map instead (docs/MAP-FORMAT.md): /api/map/* load and save whole records
-by id in map/<district>/district.json and plan.json, in the canonical layout, and run scripts/check_map.py on the district
+by id in map/<district>/district.json, plan.json and dress/<tx>_<ty>.json (each dress record in its parent's 100 m
+tile), in the canonical layout, and run scripts/check_map.py on the district
 after every save so the board can show each record's problems. A record may be saved before every field has a value (the
 board shows what is missing in red); the checker, not the board, says when it is complete.
 
-Local only: it listens on 127.0.0.1, accepts only the hand-file operations below and plan records of the map schema, and
+Local only: it listens on 127.0.0.1, accepts only the hand-file operations below and records of the map schema, and
 writes only web/hand/, that file and map/.
 """
 import http.server
@@ -43,6 +44,7 @@ MAP = os.path.join(ROOT, 'map')
 STUDY = os.path.join(ROOT, 'web', 'frame-study.js')
 DISTRICT_RE = re.compile(r'^d\d\d$')
 ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
+TILE_RE = re.compile(r'^-?\d+_-?\d+\.json$')
 MAP_UNDO = []        # [(district, [(id, before, after), ...])], newest last; kept while the server runs
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 _checker = None
@@ -56,17 +58,16 @@ def checker():
     return _checker
 
 
-def plan_types():
-    S = checker().SCHEMA
-    return {t for t, r in S['records'].items() if r['layer'] == 'plan'}
+def layer_of(t):
+    return checker().SCHEMA['records'][t]['layer']
 
 
 def map_files(d):
     return os.path.join(MAP, d, 'district.json'), os.path.join(MAP, d, 'plan.json')
 
 
-def map_started():
-    return sorted(d for d in os.listdir(MAP) if DISTRICT_RE.match(d) and os.path.exists(map_files(d)[0])) if os.path.isdir(MAP) else []
+def map_started(top=MAP):
+    return sorted(d for d in os.listdir(top) if DISTRICT_RE.match(d) and os.path.exists(os.path.join(top, d, 'district.json'))) if os.path.isdir(top) else []
 
 
 def read_doc(path):
@@ -80,21 +81,101 @@ def write_doc(path, doc):
     os.replace(tmp, path)
 
 
+def doc_names(top, d):
+    """district.json, plan.json and every dress tile of district d, as paths inside its folder."""
+    dd = os.path.join(top, d, 'dress')
+    tiles = sorted('dress/' + f for f in os.listdir(dd) if TILE_RE.match(f)) if os.path.isdir(dd) else []
+    return [n for n in ('district.json', 'plan.json') if os.path.exists(os.path.join(top, d, n))] + tiles
+
+
+_STATE = {}          # district -> {'sig', 'recs': {id: record}, 'loc': {id: file inside the district folder}}
+
+
+def load_state(d, top=MAP):
+    """Every record of district d and the file each one is in, read again only when a file has changed on disk."""
+    names = doc_names(top, d)
+    sig = tuple((n, os.stat(os.path.join(top, d, n)).st_mtime_ns, os.path.getsize(os.path.join(top, d, n))) for n in names)
+    key = (top, d)
+    S = _STATE.get(key)
+    if S and S['sig'] == sig:
+        return S
+    recs, loc = {}, {}
+    for n in names:
+        for r in read_doc(os.path.join(top, d, n)).get('records', []):
+            recs[r['id']], loc[r['id']] = r, n
+    S = _STATE[key] = {'sig': sig, 'recs': recs, 'loc': loc}
+    return S
+
+
 def map_state(d):
-    """{id: record} for district d: the district record and every plan record."""
-    fd, fp = map_files(d)
-    recs = {r['id']: r for r in read_doc(fd).get('records', [])}
-    if os.path.exists(fp):
-        recs.update({r['id']: r for r in read_doc(fp).get('records', [])})
-    return recs
+    """{id: record} for district d (a copy: change it, then map_write the ids that changed)."""
+    return dict(load_state(d)['recs'])
 
 
-def map_write(d, recs):
-    fd, fp = map_files(d)
-    S = checker().SCHEMA
-    head = {'format': S['format'], 'district': d, 'layer': 'plan'}
-    write_doc(fd, dict(head, records=[r for r in recs.values() if r['type'] == 'district']))
-    write_doc(fp, dict(head, records=[r for r in recs.values() if r['type'] != 'district']))
+def home_of(r, recs):
+    """The file a record belongs in: district.json, plan.json, or the dress tile of its parent's first point (its own
+    first point when it has no parent; a lean-to's, the point of what it leans on), as check_map.py wants it. None when a dress record has neither."""
+    if r['type'] == 'district':
+        return 'district.json'
+    if layer_of(r['type']) == 'plan':
+        return 'plan.json'
+    C = checker()
+    a, par, seen = None, recs.get(r.get('of')), set()
+    while par and a is None and par['id'] not in seen:     # a lean-to has no point of its own: go to what it leans on
+        seen.add(par['id'])
+        a = C.anchor(par)
+        par = recs.get(par.get('of') or par.get('against'))
+    a = a or C.anchor(r)
+    if a is None:
+        return None
+    tx, ty = C.tile_of(a)
+    return f'dress/{tx}_{ty}.json'
+
+
+def map_write(d, recs, changed):
+    """Write the files that the changed (or removed) ids touch, and their dress children's, which follow the parent's tile."""
+    S = load_state(d)
+    loc = dict(S['loc'])
+    ids, grow = set(changed), True
+    while grow:                          # and what hangs on them, which may have to follow them into another tile
+        more = {i for i, r in recs.items() if i not in ids and (r.get('of') in ids or r.get('against') in ids)}
+        ids |= more
+        grow = bool(more)
+    files = {loc[i] for i in ids if i in loc}
+    for i in ids:
+        if i in recs:
+            loc[i] = home_of(recs[i], recs)
+            files.add(loc[i])
+        else:
+            loc.pop(i, None)
+    head = {'format': checker().SCHEMA['format'], 'district': d}
+    for n in sorted(files):
+        p = os.path.join(MAP, d, n)
+        recs_n = [recs[i] for i, f in loc.items() if f == n]
+        if n.startswith('dress/'):
+            if not recs_n:
+                if os.path.exists(p):
+                    os.remove(p)
+                continue
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            write_doc(p, dict(head, layer='dress', tile=[int(x) for x in re.findall(r'-?\d+', n)], records=recs_n))
+        else:
+            write_doc(p, dict(head, layer='plan', records=recs_n))
+    _STATE.pop((MAP, d), None)
+    S = load_state(d)
+    return S
+
+
+def stamp_sources():
+    """Folders in the map format a stamp can copy from: the map itself, the worked example, and each folder under map-stamps/
+    (a test spot converted into Gidi metres goes there)."""
+    out = {'map': MAP, 'example': os.path.join(ROOT, 'docs', 'map-format-example')}
+    extra = os.path.join(ROOT, 'map-stamps')
+    if os.path.isdir(extra):
+        for n in sorted(os.listdir(extra)):
+            if os.path.isdir(os.path.join(extra, n)) and re.fullmatch(r'[a-z0-9_-]+', n):
+                out[n] = os.path.join(extra, n)
+    return out
 
 
 def map_problems(d):
@@ -126,8 +207,8 @@ def record_error(d, r):
     if not isinstance(r, dict):
         return 'not a record'
     t = r.get('type')
-    if t not in plan_types():
-        return f'{t!r} is not a plan record type'
+    if t not in S['records']:
+        return f'{t!r} is not a record type'
     if t == 'district':
         if r.get('id') != d or r.get('n') != int(d[1:]):
             return 'the district record is the one for this district'
@@ -226,13 +307,30 @@ class Board(http.server.SimpleHTTPRequestHandler):
         q = urllib.parse.parse_qs(u.query)
         if u.path == '/api/map/list':
             return self.send_json({'districts': map_started(), 'study': os.path.exists(STUDY)})
-        if u.path == '/api/map/load':
+        if u.path == '/api/map/load':          # the district record and the plan; dress tiles come one by one (tiles)
             d = (q.get('d') or [''])[0]
             if not DISTRICT_RE.match(d):
                 return self.send_json({'error': f'no district {d!r}'}, 400)
             if d not in map_started():
                 return self.send_json({'d': d, 'exists': False})
-            return self.send_json({'d': d, 'exists': True, 'records': list(map_state(d).values()), 'problems': map_problems(d)})
+            S = load_state(d)
+            return self.send_json({'d': d, 'exists': True, 'records': [r for i, r in S['recs'].items() if not S['loc'][i].startswith('dress/')],
+                                   'tiles': sorted({f[6:-5] for f in S['loc'].values() if f.startswith('dress/')}), 'problems': map_problems(d)})
+        if u.path == '/api/map/tiles':         # the dress records of some tiles: t=128_60,128_61
+            d = (q.get('d') or [''])[0]
+            if d not in map_started():
+                return self.send_json({'error': f'{d!r} is not started'}, 400)
+            want = {'dress/' + t + '.json' for t in (q.get('t') or [''])[0].split(',') if re.fullmatch(r'-?\d+_-?\d+', t)}
+            S = load_state(d)
+            return self.send_json({'d': d, 'records': [r for i, r in S['recs'].items() if S['loc'][i] in want]})
+        if u.path == '/api/map/sources':
+            return self.send_json({'sources': [{'src': k, 'districts': map_started(v)} for k, v in stamp_sources().items()]})
+        if u.path == '/api/map/source':        # every record of one district of a stamp source, plan and dress
+            src, d = (q.get('src') or [''])[0], (q.get('d') or [''])[0]
+            top = stamp_sources().get(src)
+            if not top or d not in map_started(top):
+                return self.send_json({'error': f'no district {d!r} in {src!r}'}, 400)
+            return self.send_json({'src': src, 'd': d, 'records': list(load_state(d, top)['recs'].values())})
         return self.send_json({'error': 'unknown'}, 404)
 
     def do_POST(self):
@@ -292,8 +390,9 @@ class Board(http.server.SimpleHTTPRequestHandler):
                     recs.pop(rid, None)
                 else:
                     recs[rid] = before
-            map_write(d, recs)
-            return self.send_json({'ok': True, 'd': d, 'records': list(recs.values()), 'problems': map_problems(d)})
+            map_write(d, recs, [rid for rid, _, _ in steps])
+            return self.send_json({'ok': True, 'd': d, 'changed': [recs[rid] for rid, _, _ in steps if rid in recs],
+                                   'removed': [rid for rid, _, _ in steps if rid not in recs], 'problems': map_problems(d)})
         d = body.get('d')
         if not isinstance(d, str) or not DISTRICT_RE.match(d) or not 1 <= int(d[1:]) <= 99:
             return self.send_json({'error': f'no district {d!r}'}, 400)
@@ -306,7 +405,8 @@ class Board(http.server.SimpleHTTPRequestHandler):
             if rec is None:
                 return self.send_json({'error': f'the frame study has no district {int(d[1:])}'}, 400)
             os.makedirs(os.path.join(MAP, d), exist_ok=True)
-            map_write(d, {d: rec})
+            write_doc(map_files(d)[1], {'format': checker().SCHEMA['format'], 'district': d, 'layer': 'plan', 'records': []})
+            map_write(d, {d: rec}, [d])
             return self.send_json({'ok': True, 'records': [rec], 'problems': map_problems(d)})
         if d not in map_started():
             return self.send_json({'error': f'{d} is not started yet'}, 400)
@@ -322,12 +422,18 @@ class Board(http.server.SimpleHTTPRequestHandler):
                     return self.send_json({'error': f'{r.get("id") if isinstance(r, dict) else r}: {why}'}, 400)
                 if r['id'] in others:
                     return self.send_json({'error': f'{r["id"]} is already used in another district'}, 400)
+            for r in new:
+                recs[r['id']] = r
+            for r in new:
+                if home_of(r, recs) is None:
+                    return self.send_json({'error': f'{r["id"]}: a dress record needs its parent (of) or a point of its own, to find its tile'}, 400)
+            recs = map_state(d)
             if len({r['id'] for r in new}) != len(new):
                 return self.send_json({'error': 'the same id twice'}, 400)
             MAP_UNDO.append((d, [(r['id'], recs.get(r['id']), r) for r in new]))
             for r in new:
                 recs[r['id']] = r
-            map_write(d, recs)
+            map_write(d, recs, [r['id'] for r in new])
             return self.send_json({'ok': True, 'problems': map_problems(d)})
         if self.path == '/api/map/delete':
             rid = body.get('id')
@@ -335,12 +441,18 @@ class Board(http.server.SimpleHTTPRequestHandler):
                 return self.send_json({'error': f'{rid!r} is not in {d}'}, 400)
             if recs[rid]['type'] == 'district':
                 return self.send_json({'error': 'the district record stays'}, 400)
-            by = links_to(recs, rid)
+            gone = [rid]                        # children: true also takes the dress records that dress it (faces, goods...)
+            if body.get('children'):
+                for i in gone:
+                    gone += [c for c, r in recs.items() if r.get('of') == i and c not in gone]
+            by = [b for b in links_to(recs, rid) if b not in gone]
+            for c in gone[1:]:
+                by += [b for b in links_to(recs, c) if b not in gone and b not in by]
             if by:
                 return self.send_json({'error': f'{", ".join(by)} still point{"s" if len(by) == 1 else ""} at it: delete or relink them first'}, 409)
-            MAP_UNDO.append((d, [(rid, recs.pop(rid), None)]))
-            map_write(d, recs)
-            return self.send_json({'ok': True, 'problems': map_problems(d)})
+            MAP_UNDO.append((d, [(i, recs.pop(i), None) for i in gone]))
+            map_write(d, recs, gone)
+            return self.send_json({'ok': True, 'removed': gone, 'problems': map_problems(d)})
         if self.path == '/api/map/check':
             return self.send_json({'ok': True, 'problems': map_problems(d)})
         return self.send_json({'error': 'unknown'}, 404)
