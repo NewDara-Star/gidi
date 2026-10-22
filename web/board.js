@@ -312,7 +312,7 @@
   }
 
   // ------------------------------------------------------------------ drawing
-  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, things: true, ground: false, paint: true, places: true, labels: true, checks: true };
+  const LAYERS = { water: true, roads: true, gutters: true, plots: true, buildings: true, fronts: true, walls: true, trees: true, furniture: true, things: true, ground: false, paint: true, places: true, labels: true, checks: true, real: !!window.REAL };
   const KIND_FILL = (k) => ({ front: "--home", back: "--home", extension: "--home", "face-me": "--home", "old house": "--home", "brazilian house": "--home", villa: "--home", mansion: "--home", flats: "--home",
     stalls: "--trade", shed: "--trade", kiosk: "--trade", canopy: "--trade", "phone mall": "--trade", bakery: "--trade", buka: "--trade", office: "--trade",
     school: "--civic", barracks: "--civic", cellblock: "--civic", gatehouse: "--civic", checkpoint: "--civic", palace: "--civic", "office block": "--civic", "bank tower": "--civic", hotel: "--civic",
@@ -369,6 +369,14 @@
         path(b.pts, true); ctx.fillStyle = css(KIND_FILL(b.kind)); ctx.fill();
         ctx.lineWidth = bad.has(b) ? 3 * px : lw; ctx.strokeStyle = bad.has(b) ? css("--bad") : css("--home-line"); ctx.stroke();
       }
+    }
+    if (LAYERS.real && window.REAL) {   // the real place each area is the child of (scripts/real_underlay.py): move buildings onto it by hand
+      const RL = window.REAL;
+      if (!RL.bb) { RL.bb = RL.b.map(bboxOf); RL.rb = RL.r.map((q) => bboxOf(q.pts)); }
+      ctx.strokeStyle = "rgba(200,40,160,.85)"; ctx.lineWidth = Math.max(1.2 * px, 0.1); ctx.setLineDash([3 * px, 2 * px]);
+      RL.b.forEach((q, i) => { if (hit(RL.bb[i], v)) { path(q, true); ctx.stroke(); } });
+      ctx.setLineDash([]); ctx.strokeStyle = "rgba(200,40,160,.5)";
+      RL.r.forEach((q, i) => { if (hit(RL.rb[i], v)) { path(q.pts); ctx.lineWidth = Math.max(px, { exp: 6, art: 5, main: 3, street: 1.5, lane: 0.8, path: 0.4 }[q.k] || 1); ctx.stroke(); } });
     }
     if (LAYERS.fronts && s > 1.2) for (const b of gquery(M.gB, v)) {
       if (!b.front) continue;
@@ -844,7 +852,7 @@
   let toastT; function toast(t) { const e = $("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => (e.style.display = "none"), 3500); }
 
   // ------------------------------------------------------------------ layers, districts, theme
-  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", things: "Vehicles & people", ground: "Ground use", paint: "Ground paint", places: "Places", labels: "Labels", checks: "Checks" };
+  const LNAME = { water: "Water", roads: "Roads", gutters: "Gutters", plots: "Plots", buildings: "Buildings", fronts: "Shops & balconies", walls: "Walls", trees: "Trees", furniture: "Furniture", things: "Vehicles & people", ground: "Ground use", paint: "Ground paint", places: "Places", labels: "Labels", checks: "Checks", real: "Real place" };
   for (const k of Object.keys(LAYERS)) { const l = document.createElement("label"); l.innerHTML = `<input type="checkbox" ${LAYERS[k] ? "checked" : ""}> ${LNAME[k]}`; l.querySelector("input").addEventListener("change", (e) => { LAYERS[k] = e.target.checked; draw(); }); $("layers").appendChild(l); }
   const dsel = $("district");
   dsel.innerHTML = `<option value="">Go to a district…</option>` + DIST.map((d) => `<option value="${d.id}">${esc(d.name)}</option>`).join("");

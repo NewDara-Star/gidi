@@ -35,6 +35,7 @@ Then open http://127.0.0.1:8777/web/board.html.
 - **Ground use** (layer, off at first): what each piece of ground is for (`scripts/ground.py`): the parking strips at the carriageway's edges in blue, motor parks, markets, yards and other plots tinted, the rail corridor. The bottom bar names the ground under the mouse and who may be on it.
 - **Ground paint** (layer): grass lots, dry grass, mud by the gutters, worn dirt paths, sandy shores (`scripts/groundpaint.py`). Click one to see it; `Delete` removes it. The soil colour, weeds at the walls, dust at the road edges and litter are district rules in the data (`ground_paint.rules`), drawn by the kit.
 - **Monuments** (stars) and **named places** (pins).
+- **Real place** (layer): the real footprints (magenta dashed) and roads (magenta) each Ìbùdó area is the child of, placed by that area's anchor, so buildings and streets can be moved onto their real spots by hand. Made by `python3 scripts/real_underlay.py` (needs `~/Real-world`) into `web/real-underlay.js`, which is never committed: a study aid, not map data.
 - **Layers:** each of the above can be switched off in the top bar.
 
 ## The checks (red outlines)
