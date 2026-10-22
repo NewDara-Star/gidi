@@ -20,6 +20,9 @@
   - R3/R6: single lanes/streets without a twin or gone, 1-6 per area.
   - Building lines: about 100,000 m2 of real built-up is lost to them (main 6.3 m, street 4.1 m from the centre line; real Lagos builds closer): the owner's rule, so ask before changing. About 30,000 m2 more has no way within 40 m.
   - R5 livable: the map has no POS stand, loading bay, okada/keke rank, vulcaniser, kiosk, stalls or betting types yet: they come with the item register.
+- **The checker agent (22 Oct, first run):** `python3 scripts/draw_area.py <area> <out.png>` for all 15, shrink them (`sips -Z 1600`: full size stalls an agent), then one agent looks at each beside its real place and scores it 1-5. First scores: church_st, barracks, stadium 5; civic, mafoluku, ajao, surulere 4; oshodi_core, arena, ojuelegba, osolo_way 3; spare_parts, ilupeju 2; airport_rd, itire_rd too thin to judge (draw_area needs a taller frame for strips). Its "wrong expressway paths" and "no Oshodi cloverleaf" are Gidi's layout lines, by design.
+  - Fixed from it (#165): a later area's clear dropped every building it touched, so big real warehouses went; now cut back. +208 buildings, +60,000 m2.
+  - Still to look at from it: thin housing in ilupeju's west half and south-east, ojuelegba's west inset; civic's compound perimeter rows; stray edge roads (osolo_way west edge, barracks south edge, surulere north-east strip).
   - Then: the checking agent with `scripts/draw_area.py` pictures.
 
 **19 Oct 2026.** Gidi v2 is the live map, hand-made from here on (the stop line, `DECISIONS.md`).
