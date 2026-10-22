@@ -36,6 +36,8 @@ for n, A in enumerate(CP['areas']):
     later = [Polygon(B_['pts']) for B_ in CP['areas'][n + 1:]]
     if later:   # the part a later area builds again is not this one's: its twin record and real figures leave it out
         env['GIDI_LATER_WKT'] = unary_union(later).wkt
+    if os.environ.get('GIDI_LOST_DIR'):   # the real footprints each area does not keep, and why (scripts/draw_area.py shows them)
+        env['GIDI_LOST_OUT'] = os.path.join(os.environ['GIDI_LOST_DIR'], A['id'] + '.json')
     if n == 0:
         env['GIDI_CORRIDORS'] = '1'   # the layout's corridors through the whole district are cleared with the first area
     r = subprocess.run([sys.executable, '-W', 'ignore', 'scripts/hand_spots/ibudo_real_area.py', A['id']], env=env, capture_output=True, text=True)

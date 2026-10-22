@@ -1,6 +1,7 @@
 """One Ìbùdó area side by side with its real place, at the same scale and frame: the map as baked (left) and the real footprints and
 roads it was built from (right: Google Open Buildings v3, Overture Maps; drawn here to compare, never put in the map). For the match
-check (scripts/check_real.py) and the checker agent's eyes. Usage: python3 scripts/draw_area.py <area> <out.png>"""
+check (scripts/check_real.py) and the checker agent's eyes. Usage: python3 scripts/draw_area.py <area> <out.png>
+(GIDI_LOST_DIR=<dir> from a rebuild_areas.py run with it set: also outlines the real footprints the area did not keep, by why)"""
 import csv
 import gzip
 import json
@@ -46,6 +47,16 @@ for m in G['mains'] + G['arterials']:
 for p in G['pois']:
     if AREA.contains(Point(p['x'], p['y'])):
         ax.plot(p['x'], p['y'], 'o', ms=4, color='#c22'); ax.text(p['x'] + 4, p['y'], p['type'], fontsize=6, color='#c22')
+LOSTF = os.path.join(os.environ.get('GIDI_LOST_DIR', ''), A + '.json')   # the real footprints the area did not keep (scripts/rebuild_areas.py
+if os.environ.get('GIDI_LOST_DIR') and os.path.exists(LOSTF):           # with GIDI_LOST_DIR set), outlined by why
+    LCOL = {'building line': '#d22', 'no way within 40 m': '#a2c', 'on a kept building': '#28c'}
+    for why, w in json.load(open(LOSTF)):
+        P = wkt.loads(w)
+        for pg in getattr(P, 'geoms', [P]):
+            ax.plot(*pg.exterior.xy, color=LCOL[why], lw=0.6)
+    for why, c in LCOL.items():
+        ax.plot([], [], color=c, label='real, not kept: ' + why)
+    ax.legend(loc='lower left', fontsize=7)
 ax = axs[1]
 from_ll = lambda c: T(*c)
 N_, S_ = LA0 - (y0 - GY0) / M_LAT, LA0 - (y1 - GY0) / M_LAT
