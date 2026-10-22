@@ -39,6 +39,7 @@ html, body { margin: 0; height: 100%; background: var(--paper); color: var(--ink
 .group button, .group select, .group label { font: inherit; color: var(--ink); background: transparent; border: 0; border-radius: 5px; padding: 5px 9px; cursor: pointer; white-space: nowrap; }
 .group select { background: var(--paper); border: 1px solid var(--panel-line); padding: 4px 6px; }
 .group button:hover { background: var(--line); }
+.group a { text-decoration: none; display: flex; }
 .group button.on { background: var(--accent); color: #fff; }
 .group label { display: flex; align-items: center; gap: 4px; padding: 5px 6px; }
 .title { font-weight: 650; padding: 5px 10px; }
@@ -78,13 +79,15 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; border: 1px sol
   </div>
   <div class="group"><select id="kind" aria-label="Kind to place"></select></div>
   <div class="group" id="layers"></div>
-  <div class="group"><button id="theme" title="Light or dark">◐</button></div>
+  <div class="group"><a href="board.html?frame=new" title="The new frame: real Lagos at 1:3, to draw the new map on"><button>New frame</button></a><button id="theme" title="Light or dark">◐</button></div>
 </div>
 <div id="panel"></div>
 <div id="status"><div id="where">–</div><div id="pending">–</div><div id="checks">–</div></div>
 <div id="toast"></div>
-<script src="gidi-data.js"></script>
-<script src="real-underlay.js"></script>
-<script src="board.js"></script>
+<script>
+// board.html?frame=new opens the new frame (real Lagos at 1:3, study layers: scripts/frame_study.py); plain board.html the old map
+if (new URLSearchParams(location.search).get("frame") === "new") document.write('<script src="frame-study.js"><\/script><script src="frame.js"><\/script>');
+else document.write('<script src="gidi-data.js"><\/script><script src="real-underlay.js"><\/script><script src="board.js"><\/script>');
+</script>
 </body>
 </html>
