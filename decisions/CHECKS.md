@@ -81,3 +81,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | A kit is proven by rebuilding real streets from it | each kit's test spots: picture beside the rebuild, held or not, and what was fixed | GAP: comes with the first kit (22 Oct) |
 | The map tells the kit what goes where | every kit part is driven by a map field; nothing placed without one | GAP: comes with the map-kit interface (22 Oct) |
 | The Reach goes with Festac into the new map | The Reach stands in the Festac-inspired place | GAP: comes with the new map |
+| Build light, look full: modes, near-detail and streaming | frame time and memory per level in Work, Low, High and Full; budgets per level | GAP: comes with the mode switch in gidi-game (22 Oct) |
