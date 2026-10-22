@@ -13,12 +13,11 @@
   - Check 17: every hand edit landed (the bake lists misses in `hand_misses`).
 - **Real names:** the name pickers use common surnames, and some match real streets near the studied places (Taiwo, Makinde, Babatunde...). `docs/hand/realnames.txt` (made by `scripts/realnames.py`) lists every real name near the twins; the bake swaps any clash for an invented name at the very end (`realnames.rename`).
 - **District checks for Ìbùdó:** all pass again after the rebuild (overlaps, cut-off lanes, reach, hand edits landed). The clean-up now repeats until nothing is left, compares footprints as they are stored (rounded to 0.1 m), and cuts 15 cm past a building line so rounding cannot bring a touch back; the join's links are always lanes (the clean-up takes street pieces under 3 m as scraps).
-- **Merged (22 Oct):** #156-#158 (rebuild, clean-up, real names, R1 cut-back) and #159: a real dual carriageway is one Gidi main (real main length counted once, mains' twins found within 10 m; Gidi's arterials/expressways are left out of R2 main length, like the real trunk roads). All 17 districts pass, bake deterministic, 680/680 photographed twins kept. check_real: 28 fails (R5 aside), no main-road R3/R6 fail left, no R1 fail.
-- **Still failing, next (check_real, 28):**
-  - R2 main length 120-149% in ajao, ilupeju, itire_rd, ojuelegba, surulere: the map has more main road than the real place (some real streets drawn as mains?). Look per area with `scripts/draw_area.py`.
-  - R2 lane length over 115% in airport_rd, civic, itire_rd (the join's "Gidi links" add lanes).
+- **Merged (22 Oct):** #156-#158 (rebuild, clean-up, real names, R1 cut-back); #159 + #161: a real dual carriageway is one Gidi main (counted once where a run over 30 m lies within 12 m of a counted main; a junction is not a second side; mains' twins found within 10 m; Gidi's arterials/expressways left out of R2 main, like the real trunk roads); #162: a real place beside another kind of place is kept (it was dropped within 15 m of any place; 26 more places, ajao's government office and itire_rd's clinic back). All 17 districts pass, bake deterministic, 680/680 photographed twins kept.
+- **Still failing (check_real, 23):**
+  - R2 main: ilupeju 116%, itire_rd 128%. Every map main there lies on a real main's twin, so what is left is how the real figure is counted (e.g. slip roads), not extra roads.
+  - R2 lane: airport_rd 130%, civic 148%, itire_rd 119%. Not stray roads: the joins. The builder runs a real lane on up to 30 m past its area's edge to the nearest way (the seam), and links join cut-off groups to a main (31 at rebuild, 4 at bake; e.g. an 81 m link in civic at (7955,3939)). Decide: count joins as Gidi's own (leave them out of R2), or find the real connection instead of a straight link.
   - R3/R6: single lanes/streets without a twin or gone, 1-6 per area.
-  - R4: ajao misses a government place, itire_rd a clinic.
   - Building lines: about 100,000 m2 of real built-up is lost to them (main 6.3 m, street 4.1 m from the centre line; real Lagos builds closer): the owner's rule, so ask before changing. About 30,000 m2 more has no way within 40 m.
   - R5 livable: the map has no POS stand, loading bay, okada/keke rank, vulcaniser, kiosk, stalls or betting types yet: they come with the item register.
   - Then: the checking agent with `scripts/draw_area.py` pictures.
