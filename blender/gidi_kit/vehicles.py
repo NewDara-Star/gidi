@@ -507,10 +507,16 @@ def container_box(mb, M, rng, length=12.2, col=None, wear=0.5):
     mb.box('steel', L(M, 0, 0, H + 0.02), shade(col, 0.8), wear + 0.2, size=(length, W, 0.04))
 
 
-def container_truck(mb, M, rng, cond='worn', loaded=None):
+def container_truck(mb, M, rng, cond='worn', loaded=None, box_col=None, tractor=True):
     """An articulated container truck, 16.5 m: a cab-over tractor and a skeletal trailer carrying a
-    40 ft container (or empty), the Apapa queue's vehicle. Front at +x."""
+    40 ft container (or empty), the Apapa queue's vehicle. Front at +x. tractor=False: the trailer left standing on its
+    legs, no cab."""
     wear = WEAR[cond]
+    if not tractor:
+        _trailer(mb, M, rng, cond, wear, loaded, box_col)
+        for s_ in (-1, 1):   # the landing legs it stands on at the front
+            mb.box('steel', L(M, 2.6, s_ * 0.8, 0.65), hex_rgb('#2a2a2a'), wear, size=(0.15, 0.15, 1.3))
+        return
     cab = hex_rgb(rng.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc']))
     # tractor: cab-over, 2.5 m wide, roof at 3.4 m, fuel tanks and air tanks below
     mb.box('carpaint', L(M, 6.9, 0, 2.15), cab, wear, size=(2.2, 2.5, 2.5))
@@ -526,15 +532,22 @@ def container_truck(mb, M, rng, cond='worn', loaded=None):
             wheel(mb, M, x, s_ * 1.05, 0.52, 0.32, cond)
     for s_ in (-1, 1):
         lamp(mb, M, 8.02, s_ * 0.95, 1.2, 0.25, 0.15, 'head')
-    # trailer: skeletal frame on three axles
+    _trailer(mb, M, rng, cond, wear, loaded, box_col)
+
+
+def _trailer(mb, M, rng, cond, wear, loaded, box_col):
+    """The skeletal container trailer on three axles at its back, the box on it (centred at x=-2.5)."""
     mb.box('steel', L(M, -2.5, 0, 1.25), hex_rgb('#2a2a2a'), wear, size=(12.4, 0.9, 0.25))
     for x in (-6.2, -7.5, -8.8):
         for s_ in (-1, 1):
             wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
     for x in (2.0, -7.0):
         mb.box('steel', L(M, x, 0, 1.3), hex_rgb('#2a2a2a'), wear, size=(0.3, 2.4, 0.2))
+    for s_ in (-1, 1):   # the side rails, painted in warning stripes
+        for k in range(16):
+            mb.box('steel', L(M, -8.6 + k * 0.76, s_ * 1.2, 1.3), hex_rgb('#e0b020' if k % 2 else '#e8e6df'), wear, size=(0.76, 0.05, 0.16))
     if loaded if loaded is not None else rng.chance(0.85):
-        container_box(mb, L(M, -2.5, 0, 1.42), rng, 12.2, wear=wear)
+        container_box(mb, L(M, -2.5, 0, 1.42), rng, 12.2, col=box_col, wear=wear)
     for s_ in (-1, 1):
         lamp(mb, M, -8.95, s_ * 1.0, 1.1, 0.2, 0.12, 'tail')
 

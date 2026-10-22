@@ -143,6 +143,26 @@ def sack_lying(mb, M, rng, scale=1.0):
     return h
 
 
+BALE = ['#2f6b4a', '#3a7a52', '#2a5f8a', '#e6e3dc', '#2f6b4a']
+
+
+def bale(mb, M, rng, scale=1.0, col=None):
+    """A trader's bale: a big bundle (clothes, shoes, nylon) wrapped in woven poly or net, about a metre long, bulging,
+    tied round with rope bands, sitting where it was dropped. Returns its height."""
+    a, b, c = rng.between(0.45, 0.6) * scale, rng.between(0.32, 0.42) * scale, rng.between(0.3, 0.42) * scale
+    col = hex_rgb(col or rng.pick(BALE))
+    col = shade(col, rng.between(0.85, 1.1))
+    rope = shade(col, 0.55)
+    bands = [rng.between(-0.55, -0.35), rng.between(0.35, 0.55)]
+
+    def colf(p):
+        u = p.x / a
+        if any(abs(u - t) < 0.05 for t in bands):
+            return rope   # a rope band round it
+        return shade(col, 0.82) if p.z < c * 0.5 else col   # the underside, dirtier
+    return pillow(mb, 'woven', M, a, b, c, col, colf, e1=0.7, e2=0.6, nu=28, nv=12, flat=0.7)
+
+
 def sack_open(mb, M, rng, scale=1.0):
     """A sack standing open on a stall, its top rolled down to show what it holds (garri, beans, pepper, rice...)."""
     w, d, h = rng.between(0.45, 0.6) * scale, rng.between(0.38, 0.5) * scale, rng.between(0.4, 0.6) * scale
@@ -216,10 +236,15 @@ def carton(mb, M, rng, s):
     return s[2]
 
 
-def _item(mb, kind, M, rng, scale=1.0, hard=None):
+def _item(mb, kind, M, rng, scale=1.0, hard=None, cols=None):
     """One item standing at M; returns its height. Soft things go to mb (shaded smooth); hard ones (crates, basins,
-    jerrycans, cartons) to `hard` when given, so their edges stay crisp."""
+    jerrycans, cartons) to `hard` when given, so their edges stay crisp. cols: the map's colours for bales and bags."""
     hb = hard or mb
+    if kind == 'bales':
+        h = bale(mb, M, rng, scale, rng.pick(cols) if cols else None)
+        if rng.chance(0.35):   # another dropped on top, across it
+            h += bale(mb, M @ Matrix.Translation((rng.between(-0.1, 0.1), 0, h * 0.85)) @ Matrix.Rotation(rng.between(1.2, 1.9), 4, 'Z'), rng.child('top'), scale * 0.85, rng.pick(cols) if cols else None) * 0.85
+        return h
     if kind == 'sacks':
         if rng.chance(0.55):   # a stack of filled sacks lying flat, bricked
             h = 0
@@ -230,7 +255,7 @@ def _item(mb, kind, M, rng, scale=1.0, hard=None):
     if kind == 'nylon_bags':
         h = 0
         for k in range(rng.randrange(2, 5)):
-            h = max(h, nylon_bag(mb, M @ Matrix.Translation((rng.between(-0.2, 0.2), rng.between(-0.12, 0.12), 0)) @ Matrix.Rotation(rng.between(-1, 1), 4, 'Z'), rng.child('b', k)))
+            h = max(h, nylon_bag(mb, M @ Matrix.Translation((rng.between(-0.2, 0.2), rng.between(-0.12, 0.12), 0)) @ Matrix.Rotation(rng.between(-1, 1), 4, 'Z'), rng.child('b', k), hex_rgb(rng.pick(cols)) if cols else None))
         return h
     if kind == 'crates':
         n = rng.randrange(1, 5)
@@ -288,7 +313,7 @@ def weather(mb, start, tone=1.0, dust=0.0):
         mb.cols[k] = [f(c) for c in mb.cols[k]]
 
 
-def band(mb, x0, x1, y_wall, depth, z0, kinds, fill, rng, side=1, tarp_over=False, hard=None):
+def band(mb, x0, x1, y_wall, depth, z0, kinds, fill, rng, side=1, tarp_over=False, hard=None, cols=None):
     """Goods along a wall: rows from the wall outward (`depth` deep), on a floor at z0. side +1: the wall is at +y and the
     goods come out toward -y (a left-hand shop); -1 the other way. fill 0..1 is how much of the band is taken."""
     if not kinds or fill <= 0:
@@ -303,9 +328,9 @@ def band(mb, x0, x1, y_wall, depth, z0, kinds, fill, rng, side=1, tarp_over=Fals
             if rng.chance(fill * (1.0 - 0.35 * r / rows)):
                 kind = rng.pick(kinds)
                 M = Matrix.Translation((x + step / 2, y + rng.between(-0.08, 0.08), z0)) @ Matrix.Rotation(rng.between(-0.35, 0.35), 4, 'Z')
-                h = _item(mb, kind, M, rng.child('item', r, round(x, 2)), scale=1.0 if r == 0 else 0.85, hard=hard)
+                h = _item(mb, kind, M, rng.child('item', r, round(x, 2)), scale=1.0 if r == 0 else 0.85, hard=hard, cols=cols)
                 if r == 0 and kind in ('sacks', 'cartons', 'crates', 'nylon_bags') and rng.chance(fill * 0.6):   # a second layer on the back row
-                    _item(mb, kind, M @ Matrix.Translation((rng.between(-0.08, 0.08), 0, h)) @ Matrix.Rotation(rng.between(-0.4, 0.4), 4, 'Z'), rng.child('top', round(x, 2)), 0.9, hard=hard)
+                    _item(mb, kind, M @ Matrix.Translation((rng.between(-0.08, 0.08), 0, h)) @ Matrix.Rotation(rng.between(-0.4, 0.4), 4, 'Z'), rng.child('top', round(x, 2)), 0.9, hard=hard, cols=cols)
                 tops.append(h)
             x += step
     if tarp_over and tops:
@@ -334,12 +359,12 @@ def hanging(mb, x0, x1, y, z, kinds, fill, rng):
         x += rng.between(0.35, 0.7)
 
 
-def heap(mb, x, y, r, z0, kinds, rng, tarp_col=None, hard=None):
+def heap(mb, x, y, r, z0, kinds, rng, tarp_col=None, hard=None, cols=None):
     """A heap of goods (a tumble at a stall's foot): items piled in a mound of radius r, a tarp half over it."""
-    n = max(3, int(r * r * 12))
+    n = max(3, int(r * r * (3 if kinds == ['bales'] else 12)))   # bales are big: fewer of them
     for k in range(n):
         a, q = rng.between(0, math.tau), r * math.sqrt(rng.between(0, 1))
         zz = z0 + (1 - q / r) * 0.35 * rng.between(0.3, 1.0)
-        _item(mb, rng.pick(kinds), Matrix.Translation((x + math.cos(a) * q, y + math.sin(a) * q, zz)) @ Matrix.Rotation(rng.between(-1, 1), 4, 'Z'), rng.child('heap', k), 0.9, hard=hard)
+        _item(mb, rng.pick(kinds), Matrix.Translation((x + math.cos(a) * q, y + math.sin(a) * q, zz)) @ Matrix.Rotation(rng.between(-1, 1), 4, 'Z'), rng.child('heap', k), 0.9, hard=hard, cols=cols)
     if tarp_col:
         tarp(mb, x - r * 0.8, x + r * 0.6, y - r * 0.5, y + r * 0.7, z0 + 0.7, 0.55, hex_rgb(tarp_col), rng.child('tarp'), side=-1)
