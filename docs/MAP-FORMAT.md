@@ -247,7 +247,9 @@ Each dress record has `of`: the plan record it dresses.
 | `signs` | list | `u0`, `u1`, `z0`, `z1`, `bg`, `fg`, `text` |
 | `awnings` | table | `u0`, `u1`, `z`, `depth`, `colour` |
 
-A table is written `{"cols": [...], "rows": [[...], ...]}`; the columns must be exactly the schema's, in order. Example window row: `[1.6, 4.0, 1.2, 1.2, "louvre_glass", 0.6]`.
+A table is written `{"cols": [...], "rows": [[...], ...]}`; the columns must be exactly the schema's, in order. Example window row: `[1.6, 4.0, 1.2, 1.2, "louvre_glass", 0.6]`. A cell written `null` is a value still to set (drawn on the board, not given yet): the checker lists it as a missing value, like a missing field.
+
+On a face, `u` is metres along the face from its first corner (footprint corner `face`) and `z` metres up from the ground. A window's, door's, stain's and add-on's `u` is its middle. A window's and a stain's `z` is its bottom edge (a window's sill), a door stands on the ground, an add-on's `z` is its middle. (The old kit parts read a window's `z` as its middle; the parts that read this format follow this line.)
 
 #### roof_sheets (`rs-`), of a building or lean-to
 `sag`, `slopes` (each: `face`, `rows`, `ph` (three phases), `sheets` table: `tone` (`main`, `second`, `new`), `shade`, `wear`, `nails` (per row, how rusted each nail line is), `edge` (per row)), `uprights` table (`u`, `lean`, `shade`) for a mono roof's or lean-to's posts.
@@ -519,9 +521,8 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 - The twin catalogue outside the repo, with ids.
 - The board, still to do (the save calls and the first tools are in; see section 6):
   - **Brushes** (the owner said yes, 22 Oct: everything a brush writes stored in full).
-  - **The dress layer** editors: the face editor, goods, ground paint, relief, litter (dress tiles load and save already).
-  - **Person spot**, **Pole wires**.
+  - **Brushes** for litter, relief, goods bands and ground paint; **Person spot**, **Pole wires**.
   - A district outline editor (today the outline comes from the frame study).
-  - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side".
+  - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side"; the dress editors: the face editor (Face, C, or a building's Face buttons: one face drawn flat in u and z, every piece drawn as a box and edited in a form), Goods (O) in a lean-to's, stall's, heap's or bin's frame, Litter (X), Ground paint (D), Relief (H: a grid, raised and lowered cell by cell). Each piece is a table row: click it to pick it (its row lights up in the panel), drag it to move it, Delete removes just it; the next one drawn takes the picked one's values except where it lies.
   - Loading only the districts in view once many are started.
 - The kit reads the new map: a converter for the two test spots, then `@reads` on each part.
