@@ -1,7 +1,7 @@
 """The dense old town kit, driven by the map (decisions: "The map tells the kit what goes where").
 
 Everything here reads one spot's map record (the fields of the old town kit list, KIT.md section 12, plus the ones the
-first eye test found missing, marked _proposed in the map) and puts exactly that there: a building's footprint, storeys,
+first eye test found missing, now in KIT.md section 12 too) and puts exactly that there: a building's footprint, storeys,
 roof, wall, balcony and shop fronts; each frontage edge's platform, wall and gate; the street piece; the props at their
 spots. It never decides where a thing goes; where the map is silent the kit leaves the thing out, except windows on a
 face the map gives no window spots for (spaced in bays, a gap noted in the test's NOTES.md).
@@ -13,9 +13,10 @@ with piers and the ribbed sheet-steel gate, the raised front platform, the stree
 """
 import math
 
+import bpy
 from mathutils import Matrix, Vector
 
-from . import gutters, parts, people, props, street, vehicles, wear as W
+from . import goods, gutters, parts, people, props, roadbed, street, vehicles, wear as W
 from .core import MeshBuilder, Rng, at, ccw, edge_out, frame, hex_rgb, offset, prism, shade
 from .materials import master
 from .parcels import tree
@@ -28,6 +29,24 @@ STATE_WEAR = {'rusty': 0.85, 'silver': 0.25, 'painted': 0.35}
 
 def _hex(c, default='#888888'):
     return hex_rgb(c or default)
+
+
+def mat(name):
+    """The kit's master material for a slot; 'slot:surface' is that slot with a photo surface the map picked for one part
+    (textured.py), a copy of the slot's master until the textures go on."""
+    if ':' not in name:
+        return master(name)
+    m = bpy.data.materials.get(name)
+    if m is None:
+        m = master(name.partition(':')[0]).copy()
+        m.name = name
+    return m
+
+
+def surfaced(mb, picks):
+    """Give the slots the map picked a surface for their own material ('zinc' -> 'zinc:rusty_corrugated_iron')."""
+    mb.slots = [f'{s}:{picks[s]}' if picks.get(s) else s for s in mb.slots]
+    return mb
 
 
 # ---------------------------------------------------------------- footprints
@@ -131,7 +150,7 @@ def leanto(mb, sp, side, rng):
         parts.bar(mb, 'wood', (x, y_f, zf), (x, y_w, sp['z_wall'] - 0.08), 0.07, TIMBER, 0.7)   # a rafter back to the wall
 
 
-def plank_stall(mb, sp, rng):
+def plank_stall(mb, sp, rng, gmb=None):
     """A plank stall against the road edge: a timber frame boarded on three sides, a plank shelf at table height, and a
     heap of sacks and bundles piled on its top."""
     x0, x1, y0, y1, h = sp['x0'], sp['x1'], sp['y0'], sp['y1'], sp['h']
@@ -149,13 +168,16 @@ def plank_stall(mb, sp, rng):
             mb.box('wood', m, shade(col, rng.between(0.75, 1.15)), 0.8, size=(L + 0.04, 0.03, (top - 0.35) / n - 0.015))
     mb.box('wood', Matrix.Translation(((x0 + x1) / 2, (y0 + y1) / 2, 1.08)), shade(col, 1.1), 0.8, size=(x1 - x0 + 0.1, y1 - y0 + 0.2, 0.05))
     mb.box('wood', Matrix.Translation(((x0 + x1) / 2, (y0 + y1) / 2, h)), shade(col, 0.9), 0.8, size=(x1 - x0 + 0.2, y1 - y0 + 0.2, 0.05))
+    gmb = gmb or mb   # the soft goods (sacks, tarp) can go to their own smooth-shaded object
     if sp.get('goods') == 'sacks_on_top':   # sacks, foam and bundles in white, grey and cream, sagging over the edges
         for k in range(9):
             cx, cy = rng.between(x0 + 0.3, x1 - 0.3), rng.between(y0 + 0.1, y1 - 0.1)
             sx, sy, sz = rng.between(0.6, 1.2), rng.between(0.5, 0.9), rng.between(0.18, 0.3)
-            c = hex_rgb(rng.pick(sp.get('goods_colours_proposed') or ['#e6e3dc', '#d2cec4', '#bdb7aa', '#e9e0c9', '#c9c3b4']))
-            mb.box('cloth', Matrix.Translation((cx, cy, h + 0.05 + sz / 2 + (k // 4) * 0.22)) @ Matrix.Rotation(rng.between(-0.3, 0.3), 4, 'Z'), c, 0.4, size=(sx, sy, sz))
+            c = hex_rgb(rng.pick(sp.get('goods_colours') or ['#e6e3dc', '#d2cec4', '#bdb7aa', '#e9e0c9', '#c9c3b4']))
+            goods.lump(gmb, 'cloth', Matrix.Translation((cx, cy, h + 0.03 + (k // 4) * 0.2)) @ Matrix.Rotation(rng.between(-0.3, 0.3), 4, 'Z'), sx, sy, sz * 1.6, c, 0.4, top=0.7, sag=0.05)
         mb.box('cloth', Matrix.Translation((x1 + 0.05, (y0 + y1) / 2, h - 0.2)) @ Matrix.Rotation(-0.25, 4, 'Y'), hex_rgb('#d8d2c4'), 0.4, size=(0.9, y1 - y0 + 0.3, 0.05))
+    if sp.get('tarp_colour'):   # a tarp thrown over the top, hanging down its road side
+        goods.tarp(gmb, x0 - 0.15, x1 + 0.1, y0 - 0.12, y1, h + sp.get('tarp_z_m', 0.5), sp.get('tarp_drop_m', 1.0), _hex(sp['tarp_colour']), rng.child('tarp'), side=-1 if sp['y0'] > 0 else 1)
 
 
 def display_cabinet(mb, M, w=0.9, d=0.45, h=0.6):
@@ -237,9 +259,10 @@ def loop_rail(mb, a, b, z, h, col, wear, solid_h=0.3, pitch=0.32):
         parts.bar(mb, 'steel', P(u, zb), P(u, zt), 0.05, col, wear)
 
 
-def plain_wall(mb, line, h, col, wear, rng, piers=(), mould=True, skip=None):
+def plain_wall(mb, line, h, col, wear, rng, piers=(), mould=True, skip=None, broken=0.0, blotch=0.3):
     """A rendered block wall along a polyline, unpainted grey: mould dark at the top and in patches, red earth up its foot,
-    a cement patch or two. piers: points where a square pier stands. skip(x0, x1) -> True leaves a stretch out (a gate)."""
+    a cement patch or two. piers: points where a square pier stands. skip(x0, x1) -> True leaves a stretch out (a gate).
+    broken: the share of 1.2 m bays where the render has come away to the block; blotch: how uneven the grey is."""
     for i in range(len(line) - 1):
         a, b = line[i], line[i + 1]
         L = math.dist(a, b)
@@ -257,7 +280,7 @@ def plain_wall(mb, line, h, col, wear, rng, piers=(), mould=True, skip=None):
             zs = [0.0, 0.35, 0.9, h - 0.7, h]
             cs = []
             for z in zs:
-                c = shade(col, 0.95 + 0.1 * blot)
+                c = shade(col, 1.0 + blotch * (blot - 0.5) * (0.6 + 0.4 * math.sin(z * 2.1 + blot * 6)))
                 c = W.mix(c, W.DIRT, wear * 0.3 * (1 - W.smooth(0.0, 0.5, z)))
                 if mould:
                     c = W.mix(c, W.GRIME, wear * (0.35 + 0.5 * blot) * W.smooth(h - 2.0, h, z))
@@ -272,6 +295,23 @@ def plain_wall(mb, line, h, col, wear, rng, piers=(), mould=True, skip=None):
                 for side in (-1, 1):
                     q = [m @ Vector((x, side * 0.104, z)), m @ Vector((x + 0.4, side * 0.104, z)), m @ Vector((x + 0.4, side * 0.104, z + 0.35)), m @ Vector((x, side * 0.104, z + 0.35))]
                     mb.face(q[::-1] if side > 0 else q, 'paint', W.CEMENT, wear)
+            if rng.chance(broken):   # render come away: the sandcrete block and its mortar showing, ragged at the edge
+                bw, bh = rng.between(0.4, w - 0.1), rng.between(0.35, 1.2)
+                x = rng.between(-w / 2 + bw / 2, w / 2 - bw / 2)
+                z = rng.pick([rng.between(0.05, 0.4), rng.between(0.4, h - bh - 0.1)])
+                for side in (-1, 1):
+                    y = side * 0.105
+                    q = [m @ Vector((x - bw / 2, y, z)), m @ Vector((x + bw / 2, y, z)), m @ Vector((x + bw / 2, y, z + bh)), m @ Vector((x - bw / 2, y, z + bh))]
+                    mb.face(q[::-1] if side > 0 else q, 'paint', shade(W.BLOCK, rng.between(0.85, 1.1)), wear)
+                    zz = z + 0.225
+                    while zz < z + bh - 0.05:   # the bed joints
+                        q = [m @ Vector((x - bw / 2, y * 1.01, zz - 0.012)), m @ Vector((x + bw / 2, y * 1.01, zz - 0.012)), m @ Vector((x + bw / 2, y * 1.01, zz + 0.012)), m @ Vector((x - bw / 2, y * 1.01, zz + 0.012))]
+                        mb.face(q[::-1] if side > 0 else q, 'paint', W.MORTAR, wear)
+                        zz += 0.225
+                    # the render's broken lip round it, a shade lighter
+                    for z_ in (z - 0.02, z + bh + 0.02):
+                        q = [m @ Vector((x - bw / 2 - 0.03, y * 1.005, z_ - 0.02)), m @ Vector((x + bw / 2 + 0.03, y * 1.005, z_ - 0.02)), m @ Vector((x + bw / 2 + 0.03, y * 1.005, z_ + 0.02)), m @ Vector((x - bw / 2 - 0.03, y * 1.005, z_ + 0.02))]
+                        mb.face(q[::-1] if side > 0 else q, 'paint', shade(col, 1.15), wear)
     for p in piers:
         mb.box('paint', Matrix.Translation((p[0], p[1], (h + 0.35) / 2)), W.mix(col, W.GRIME, wear * 0.4), wear, size=(0.4, 0.4, h + 0.35), skip=('-z',))
 
@@ -367,6 +407,7 @@ def building(b, collection=None):
 
     # shop fronts the map lists (x from..to along the street face)
     taken = {i: [] for i in range(len(fs))}
+    openings = {i: [] for i in range(len(fs))}   # (kind, u, z, w, h, barred) per face, for the weathering
     for s in b.get('shopfronts', []):
         hit = None
         for k, (A, B, L, n, F) in enumerate(fs):
@@ -387,6 +428,7 @@ def building(b, collection=None):
         else:
             dark_opening(mb, F, u, w, min(2.3, H - 0.5), shade(_hex(s.get('frame_colour'), '#5a3a2a'), 1.0), 0.6)
         taken[k].append((u - w / 2 - 0.3, u + w / 2 + 0.3))
+        openings[k].append(('door', u, 1.2, w, 2.4, False))
 
     # windows: where the map puts them; on a face with no spots from the map, in bays (the gap noted in NOTES.md)
     wtype = b.get('windows', 'louvre_glass')
@@ -396,6 +438,7 @@ def building(b, collection=None):
     shut = _hex(b['window_shutters']) if b.get('window_shutters') else None
 
     def put_window(F, u, z, k):
+        openings[k].append(('window', u, z, 1.0, 1.15, False))
         if wtype in ('plank_shutter', 'louvre_timber'):
             plank_window(mb, F, u, z, 0.9, 1.1, _hex(b.get('shutter_colour'), '#6b4a33'), wear)
         else:
@@ -462,6 +505,13 @@ def building(b, collection=None):
             for p in run['posts']:
                 parts.bar(mb, 'paint', (p[0], p[1], z), (p[0], p[1], H), 0.22, paint, wear)
 
+    # stains: rain run down from the eaves and the sills, cement patches, render broken off at the foot (wear.age_face)
+    stains = wf.get('stains', 'none')
+    if stains != 'none':
+        for k, (A, B, L, n, F) in enumerate(fs):
+            for rep_ in range(2 if stains == 'heavy' else 1):
+                W.age_face(mb, F, L, H, wx, openings[k], levels[1:], rng.child('stains', k, rep_), flat_top=flat)
+
     # roof
     if flat:
         parts.roof_flat(mb, poly, H, spec['parapet'])
@@ -481,9 +531,10 @@ def building(b, collection=None):
                 for e0, e1 in ((r['A'], r['B']), (r['B'], r['C']), (r['C'], r['D']), (r['D'], r['A'])):
                     m = Matrix.Translation(((e0[0] + e1[0]) / 2, (e0[1] + e1[1]) / 2, r['y0'] - fh / 2 + 0.02)) @ Matrix.Rotation(math.atan2(e1[1] - e0[1], e1[0] - e0[0]), 4, 'Z')
                     mb.box('wood' if roof.get('fascia') == 'timber' else 'paint', m, rs['fascia'], wear, size=(math.dist(e0, e1) + 0.05, 0.05, fh))
-                    if roof.get('edge_colour_proposed'):   # the sheet's turned-down edge flashing above it
-                        mb.box('zinc', m @ Matrix.Translation((0, 0, fh / 2 + roof.get('edge_h_m', 0.15) / 2)), _hex(roof['edge_colour_proposed']), 0.3, size=(math.dist(e0, e1) + 0.08, 0.04, roof.get('edge_h_m', 0.15)))
-    return mb.to_object(b['id'], collection, master)
+                    if roof.get('edge_colour'):   # the sheet's turned-down edge flashing above it
+                        mb.box('zinc', m @ Matrix.Translation((0, 0, fh / 2 + roof.get('edge_h_m', 0.15) / 2)), _hex(roof['edge_colour']), 0.3, size=(math.dist(e0, e1) + 0.08, 0.04, roof.get('edge_h_m', 0.15)))
+    surfaced(mb, {'zinc': roof.get('surface'), 'paint': wf.get('surface')})
+    return mb.to_object(b['id'], collection, mat)
 
 
 # ---------------------------------------------------------------- frontage edges
@@ -497,11 +548,12 @@ def frontage(e, collection=None):
         y_line, y_front = e['line_y'], e['platform_front_y']
         x0, x1 = e['from_x'], e['to_x']
         poly = ccw([(x0, y_front), (x1, y_front), (x1, y_line + s * 0.05), (x0, y_line + s * 0.05)])
-        prism(mb, 'concrete', poly, 0, h, shade(CONCRETE, 0.6), shade(CONCRETE, 0.85), 0.1, cap=True, cap_col=shade(CONCRETE, 0.95))
+        pc = _hex(e.get('platform_colour'), '#a39f95')
+        prism(mb, 'concrete', poly, 0, h, shade(pc, 0.6), shade(pc, 0.85), 0.1, cap=True, cap_col=shade(pc, 0.95))
         # the broken front edge: a few chips out of the face
         for k in range(int((x1 - x0) / 3)):
             x = rng.between(x0 + 0.5, x1 - 0.5)
-            mb.box('concrete', Matrix.Translation((x, y_front - s * 0.01, h - 0.06)), shade(CONCRETE, 0.55), 0.9, size=(rng.between(0.2, 0.6), 0.03, 0.1))
+            mb.box('concrete', Matrix.Translation((x, y_front - s * 0.01, h - 0.06)), shade(pc, 0.55), 0.9, size=(rng.between(0.2, 0.6), 0.03, 0.1))
     elif kind == 'wall_gate':
         wall = e['wall']
         g = e.get('gate') or {}
@@ -515,13 +567,15 @@ def frontage(e, collection=None):
                     return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0])
             return line[0][1]
         piers = [(gx0 - 0.2, y_at(gx0)), (gx1 + 0.2, y_at(gx1))] if g else []
-        plain_wall(mb, line, wall.get('h', 2.2), _hex(wall.get('wall_colour'), '#8e8d87'), 0.85 if wall.get('state') == 'mouldy' else 0.5, rng.child('wall'), piers=piers, skip=skip)
+        plain_wall(mb, line, wall.get('h', 2.2), _hex(wall.get('wall_colour'), '#8e8d87'), 0.85 if wall.get('state') == 'mouldy' else 0.5, rng.child('wall'), piers=piers, skip=skip,
+                   broken=wall.get('render_broken', 0.0), blotch=wall.get('blotch', 0.3))
         if g:
             a, b = (gx0, y_at(gx0)), (gx1, y_at(gx1))
             if s < 0:   # the gate's face toward the street
                 a, b = b, a
-            sheet_gate(mb, a, b, g.get('h', 2.0), _hex(g.get('colour'), '#6f757a'), 0.6, rng.child('gate'), leaves=g.get('leaves', 2), wicket=g.get('wicket', False), number=g.get('house_number'))
-    return mb.to_object(e['id'], collection, master)
+            sheet_gate(mb, a, b, g.get('h', 2.0), _hex(g.get('colour'), '#6f757a'), g.get('wear', 0.6), rng.child('gate'), leaves=g.get('leaves', 2), wicket=g.get('wicket', False), number=g.get('house_number'))
+        surfaced(mb, {'steel': g.get('surface'), 'paint': wall.get('surface')})
+    return mb.to_object(e['id'], collection, mat)
 
 
 # ---------------------------------------------------------------- the street piece
@@ -531,29 +585,38 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
     (x0, cy), (x1, _) = sp['centreline'][0], sp['centreline'][-1]
     w = sp['width_m']
     yl, yr = cy + w / 2, cy - w / 2
-    tar = hex_rgb('#665e57')
-    # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
     X0, X1, Y0, Y1 = extent
-    mb.face([(X0, Y0, -0.02), (X1, Y0, -0.02), (X1, Y1, -0.02), (X0, Y1, -0.02)], 'mud', hex_rgb('#8a8174'), 0.1)
-    step = 2.0
-    n = int((x1 - x0) / step)
-    for k in range(n):
-        xa, xb = x0 + k * step, x0 + (k + 1) * step
-        fa, fb = rng.between(-0.25, 0.1), rng.between(-0.25, 0.1)   # the frayed edges
-        ga, gb = rng.between(-0.1, 0.25), rng.between(-0.1, 0.25)
-        mb.face([(xa, yr + ga, 0.0), (xb, yr + gb, 0.0), (xb, yl + fb, 0.0), (xa, yl + fa, 0.0)], 'asphalt', shade(tar, rng.between(0.95, 1.05)), 0.5)
-    if sp.get('sand_cover') == 'edges':   # dust and sand blown onto the tar edges, fading out onto the tar
-        sand, dust = hex_rgb('#8a8276'), shade(tar, 1.05)
+    G = None
+    if sp.get('relief') or 'tar_cover' in sp:   # the ground as real geometry, humps, dips, potholes and patches (roadbed.py)
+        mb.face([(X0, Y0, -0.08), (X1, Y0, -0.08), (X1, Y1, -0.08), (X0, Y1, -0.08)], 'mud', hex_rgb('#7a5a44'), 0.1)
+        _, G = roadbed.build(sp, collection, materials=master)
+    else:   # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
+        tar = hex_rgb('#665e57')
+        mb.face([(X0, Y0, -0.02), (X1, Y0, -0.02), (X1, Y1, -0.02), (X0, Y1, -0.02)], 'mud', hex_rgb('#8a8174'), 0.1)
+        step = 2.0
+        n = int((x1 - x0) / step)
         for k in range(n):
             xa, xb = x0 + k * step, x0 + (k + 1) * step
-            for y_e, s in ((yl, -1), (yr, 1)):
-                wd = rng.between(0.3, 0.8)
-                mb.face([(xa, y_e, 0.004), (xb, y_e, 0.004), (xb, y_e + s * wd, 0.004), (xa, y_e + s * wd, 0.004)][::s], 'mud', [sand, sand, dust, dust][::s], 0.1)
+            fa, fb = rng.between(-0.25, 0.1), rng.between(-0.25, 0.1)   # the frayed edges
+            ga, gb = rng.between(-0.1, 0.25), rng.between(-0.1, 0.25)
+            mb.face([(xa, yr + ga, 0.0), (xb, yr + gb, 0.0), (xb, yl + fb, 0.0), (xa, yl + fa, 0.0)], 'asphalt', shade(tar, rng.between(0.95, 1.05)), 0.5)
+        if sp.get('sand_cover') == 'edges':   # dust and sand blown onto the tar edges, fading out onto the tar
+            sand, dust = hex_rgb('#8a8276'), shade(tar, 1.05)
+            for k in range(n):
+                xa, xb = x0 + k * step, x0 + (k + 1) * step
+                for y_e, s in ((yl, -1), (yr, 1)):
+                    wd = rng.between(0.3, 0.8)
+                    mb.face([(xa, y_e, 0.004), (xb, y_e, 0.004), (xb, y_e + s * wd, 0.004), (xa, y_e + s * wd, 0.004)][::s], 'mud', [sand, sand, dust, dust][::s], 0.1)
+    gz = (lambda x, y: float(G.height(x, y))) if G else (lambda x, y: 0.0)
     vr = sp.get('verge_right') or {}
     if vr.get('surface') == 'concrete_apron':
         xa, xb = x0, vr.get('upto_x', x1)
         y0_, y1_ = yr - vr['width'] - 0.4, yr + 0.05
-        mb.face([(xa, y0_, 0.03), (xb, y0_, 0.03), (xb, y1_, 0.03), (xa, y1_, 0.03)], 'concrete', hex_rgb('#8f8b83'), 0.05)
+        n_ = max(1, int((xb - xa) / 0.5))   # in short pieces laid on the ground, cracked at the joints
+        for k in range(n_):
+            a_, b_ = xa + (xb - xa) * k / n_, xa + (xb - xa) * (k + 1) / n_ - 0.015
+            z = [gz(a_, y0_) + 0.035, gz(b_, y0_) + 0.035, gz(b_, y1_) + 0.035, gz(a_, y1_) + 0.035]
+            mb.face([(a_, y0_, z[0]), (b_, y0_, z[1]), (b_, y1_, z[2]), (a_, y1_, z[3])], 'concrete', shade(hex_rgb('#8f8b83'), rng.between(0.85, 1.05)), 0.4)
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -562,39 +625,50 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
                        lambda p: True, wear=0.2)
         for c in sp.get('crossings', []):
             if c.get('side') == 'left':
-                mb.box('concrete', Matrix.Translation((c['x'], y, 0.27)) @ Matrix.Rotation(rng.between(-0.03, 0.03), 4, 'Z'), shade(CONCRETE, rng.between(0.85, 1.0)), 0.7, size=(c['w'], g['width'] + 0.7, 0.1))
+                mb.box('concrete', Matrix.Translation((c['x'], y, 0.27)) @ Matrix.Rotation(rng.between(-0.03, 0.03), 4, 'Z'), shade(_hex(g.get('slab_colour'), '#a39f95'), rng.between(0.85, 1.0)), 0.7, size=(c['w'], g['width'] + 0.7, 0.1))
     return mb.to_object(sp['id'], collection, master)
 
 
 # ---------------------------------------------------------------- props at their spots
 def spot_props(P, collection=None):
     mb = MeshBuilder()
+    gmb = MeshBuilder()   # goods and clutter, shaded smooth
     rng = Rng('oldtown', 'props')
     tops = []
     for k, p in enumerate(P.get('poles', [])):
         pts, top = street.pole(mb, p['x'], p['y'], rng.child('pole', k), h=p.get('h', 9.5), wood=p.get('type') == 'timber')
         tops.append(pts)
-    for wspec in P.get('wires_proposed', []):
+    for wspec in P.get('wires', []):
         a = tops[wspec['from_pole']]
         bs = tops[wspec['to_pole']] if 'to_pole' in wspec else [Vector(wspec['to_xyz']) + Vector((0, 0.4 * (i - 1), 0)) for i in range(3)]
         for i in range(wspec.get('n', 2)):
             street.wire(mb, a[i % 3], bs[i % 3], wspec.get('sag', 0.5))
     for m in P.get('masts', []):
         lattice_mast(mb, m['x'], m['y'], m['h'])
-    for t in P.get('trees_proposed', []):
+    for t in P.get('trees', []):
         tree(mb, t['x'], t['y'], rng.child('tree', t['x']), kind=t.get('kind', 'palm'), h=t.get('h'))
     for k, s in enumerate(P.get('trade_spots', [])):
         r = rng.child('trade', k)
         side = 'left' if s.get('y', s.get('wall_y', s.get('y0', 0))) > 0 else 'right'
         if s['type'] == 'lean-to row':
-            leanto(mb, s, side, r)
+            if s.get('surface'):   # a sheet the map gave its own photo surface: its own object, so its zinc can differ
+                lmb = MeshBuilder()
+                leanto(lmb, s, side, r)
+                surfaced(lmb, {'zinc': s['surface']}).to_object(f'leanto_{k}', collection, mat)
+            else:
+                leanto(mb, s, side, r)
+            sgn = 1 if side == 'left' else -1
+            goods.band(gmb, s['x0'] + 0.15, s['x1'] - 0.15, s['wall_y'], s.get('goods_depth_m', 0.9), s.get('stand_z_m', 0.0),
+                       s.get('goods_kinds', []), s.get('goods_fill', 0.0), r.child('goods'), side=sgn, tarp_over=s.get('goods_tarp', False))
+            goods.hanging(gmb, s['x0'], s['x1'], s['wall_y'] - sgn * (s['depth'] - 0.08), s['z_front'] - 0.15,
+                          s.get('hanging_kinds', []), s.get('hanging_fill', 0.0), r.child('hang'))
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'plank_stall':
-            plank_stall(mb, s, r)
+            plank_stall(mb, s, r, gmb)
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'drinks_fridge':
             drinks_fridge(mb, Matrix.Translation((s['x'], s['y'], 0.3)), s.get('h', 1.3), _hex(s.get('colour'), '#cfd3d6'))
         elif s['type'] == 'table':
             M = Matrix.Translation((s['x'], s['y'], 0.3))
-            items = s.get('items_proposed', [])
+            items = s.get('items', [])
             if any(i.startswith('crate') for i in items):   # a stack of crates on the platform
                 for j, it in enumerate(items):
                     props.crate(mb, M @ Matrix.Translation((0, 0, j * 0.3)) @ Matrix.Rotation(r.between(-0.1, 0.1), 4, 'Z'), _hex(it.split(':')[1]), 0.4)
@@ -606,19 +680,22 @@ def spot_props(P, collection=None):
                     display_cabinet(mb, M @ Matrix.Translation((u, 0, 0.8)), w=min(1.1, s['w'] / len(items) - 0.1))
                 elif it.startswith('basin'):
                     props.basin(mb, M @ Matrix.Translation((u, 0, 0.8)), _hex(it.split(':')[1]))
-    for s in P.get('signs_proposed', []):
+    for s in P.get('signs', []):
         F = frame(((s['x0'] + s['x1']) / 2, s['wall_y'] - (0.04 if s['side'] == 'left' else -0.04), 0), (1, 0) if s['side'] == 'right' else (-1, 0), (0, -1) if s['side'] == 'left' else (0, 1))
         props.board(mb, F, s['text'], s['x1'] - s['x0'], s['z1'] - s['z0'], _hex(s['bg']), _hex(s['fg']), 0.5, hand=True, z=(s['z0'] + s['z1']) / 2)
     for k, v in enumerate(P.get('parked_vehicles', [])):
         M = Matrix.Translation((v['x'], v['y'], 0)) @ Matrix.Rotation(math.radians(v.get('heading_deg', 0)), 4, 'Z')
         if v['kind'] == 'car':
-            vehicles.car(mb, M, rng.child('car', k), cond='worn', kind=v.get('car_kind_proposed', 'saloon'), colour=v.get('colour'))
+            vehicles.car(mb, M, rng.child('car', k), cond='worn', kind=v.get('car_kind', 'saloon'), colour=v.get('colour'))
     for k, hp in enumerate(P.get('heaps', [])):
         if hp['kind'] == 'rubbish':
             street.refuse_heap(mb, hp['x'], hp['y'], hp['r'], rng.child('heap', k))
-    for k, p in enumerate(P.get('people_proposed', [])):
-        M = Matrix.Translation((p['x'], p['y'], 0)) @ Matrix.Rotation(math.radians(p.get('facing_deg', 0)), 4, 'Z')
-        people.person(mb, M, rng.child('person', k), kind=p.get('kind'), h=p.get('h'))
+        elif hp['kind'] == 'goods':   # a tumble of goods at a stall
+            goods.heap(gmb, hp['x'], hp['y'], hp['r'], hp.get('z_m', 0.0), hp.get('goods_kinds', ['sacks']), rng.child('heap', k), hp.get('tarp_colour'))
+    for k, p in enumerate(P.get('people', [])):
+        M = Matrix.Translation((p['x'], p['y'], p.get('z_m', 0.0))) @ Matrix.Rotation(math.radians(p.get('facing_deg', 0)), 4, 'Z')
+        people.person(mb, M, rng.child('person', k), kind=p.get('kind'), h=p.get('h'), pose=p.get('walking'))
+    goods.soft(gmb.to_object('goods', collection, mat))
     return mb.to_object('props', collection, master)
 
 
