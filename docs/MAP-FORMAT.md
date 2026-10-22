@@ -3,7 +3,7 @@
 The new map is the one ground truth (decisions, 22 Oct: "everything that we do must be in map data. Every single thing").
 The drawing board saves into it. The Blender kit and the Unreal import read it. Nothing else holds the city.
 
-This is a draft. No board or kit code reads it yet.
+This is a draft. The board's new frame draws and saves the plan layer in it (section 6); the kit does not read it yet.
 
 - **Schema:** `schema/map_schema.json` (every record type, field, type, unit and allowed value).
 - **Checker:** `scripts/check_map.py` (rejects anything unknown, missing, mistyped, unlinked or real-named).
@@ -447,10 +447,15 @@ The frame holds about 3 million real roofs; at 1:3 the land is a ninth, so Gidi 
 
 The board stops writing an edit log. Today it appends "add building at (x, y)" operations to `web/hand/<d>.json`, applied to a generated base and found again by position. The new map has no base: the files are the state, and git is the history. The board saves whole records by id.
 
-`scripts/board_server.py` keeps what works (local only on 127.0.0.1, one write at a time, atomic save, finite numbers only, undo) and gets two new calls for the new frame:
+`scripts/board_server.py` keeps what works (local only on 127.0.0.1, one write at a time, atomic save, finite numbers only, undo). The old map's calls (`/api/edit`, `/api/undo`, `web/hand/<d>.json`) are unchanged. The new frame (`board.html?frame=new`, drawing code in `web/mapedit.js`) uses these:
 
-- `POST /api/map/save {record}`: checks the record against the schema, writes it into the right file (district, layer, tile) in the canonical layout, replacing the record with that id. A bad record is refused with the checker's message.
-- `POST /api/map/delete {id}`: removes it, and refuses while other records still point at it.
+- `GET /api/map/list`: which districts are started, and the 51 study districts.
+- `GET /api/map/load?d=dNN`: the district's records and the checker's problems.
+- `POST /api/map/start {d}`: the first drawing in a district. Writes `district.json` with the outline from the frame study and **no name**, and an empty `plan.json`.
+- `POST /api/map/save {d, records}`: whole records by id, written in the canonical layout. A record with an unknown type or field, a bad id or a non-finite number is refused. A record with fields still to set is saved (the board shows it dashed amber, each missing field in red), so drawing can go ahead before every value is known.
+- `POST /api/map/delete {d, id}`: refused while other records still point at it.
+- `POST /api/map/undo`: the last save or delete, if nothing has changed it since.
+- `POST /api/map/check {d}`: `check_map.py` runs on every save; its problems come back with the record id and show red on the board.
 
 | Old board tool or op | New record |
 |---|---|
@@ -506,5 +511,10 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 - The owner's answers, then the format becomes `gidi-map/1.0` and a rule in `DECISIONS.md`.
 - A real-names list for the whole new frame (every street name in the frame, outside the repo), so the name check covers it.
 - The twin catalogue outside the repo, with ids.
-- The board's save calls and the first tools (Plot, Building, Road, Frontage) on the new frame.
+- The board, still to do (the save calls and the first tools are in; see section 6):
+  - **Brushes** (the owner said yes, 22 Oct: everything a brush writes stored in full).
+  - **The dress layer**: dress tiles, the face editor, goods, ground paint, relief, litter.
+  - **Frontage** tool (a plot edge and its road), **Person spot**, **Pole wires**, **Stamp**.
+  - Lean-to on a wall (today it picks a building face), and a district outline editor (today the outline comes from the frame study).
+  - Loading only the districts in view once many are started.
 - The kit reads the new map: a converter for the two test spots, then `@reads` on each part.
