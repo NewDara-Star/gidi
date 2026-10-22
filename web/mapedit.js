@@ -45,6 +45,22 @@ window.MAPEDIT = (() => {
     const a = angDeg * Math.PI / 180, u = [Math.cos(a), Math.sin(a)], v = [-u[1], u[0]];
     return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [r2(cx + u[0] * i * w / 2 + v[0] * j * dep / 2), r2(cy + u[1] * i * w / 2 + v[1] * j * dep / 2)]);
   }
+  // dress records: the world points of their pieces, a relief grid's box, the frame goods sit in
+  const TILE = 100;
+  const rowsOf = (t) => (t && Array.isArray(t.rows) && Array.isArray(t.cols) ? t.rows.map((row) => Object.fromEntries(t.cols.map((c, i) => [c, row[i]]))) : []);
+  function piecePts(r) {
+    const t = r.type === "litter" ? r.pieces : r.type === "people" ? r.spots : r.type === "ground_marks" ? r.potholes : null;
+    const P = rowsOf(t).filter((o) => isFinite(o.x) && isFinite(o.y)).map((o) => [o.x, o.y]);
+    if (r.type === "ground_marks") for (const u of (r.ruts || [])) if (Array.isArray(u.line)) P.push(...u.line);
+    return P;
+  }
+  function reliefBox(r) { if (!r || r.type !== "relief" || !Array.isArray(r.origin) || !(r.cell > 0) || !(r.cols >= 2) || !(r.rows >= 2)) return null; const [x, y] = r.origin, w = (r.cols - 1) * r.cell, h = (r.rows - 1) * r.cell; return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]; }
+  function goodsFrame(par, get) {   // docs/MAP-FORMAT.md "Local frames": origin o, x along ux, y along uy (metres)
+    if (!par) return null;
+    if (par.type === "leanto") { const q = leantoQuad(par, get); if (!q) return null; const L = dist(q[0], q[1]) || 1, ux = [(q[1][0] - q[0][0]) / L, (q[1][1] - q[0][1]) / L]; return { o: q[0], ux, uy: [-ux[1], ux[0]] }; }
+    if (!Array.isArray(par.at)) return null;
+    const a = (par.turn || 0) * Math.PI / 180; return { o: par.at, ux: [Math.cos(a), Math.sin(a)], uy: [-Math.sin(a), Math.cos(a)] };
+  }
   function boxPts(at, w, d, turn) { const a = (turn || 0) * Math.PI / 180, u = [Math.cos(a), Math.sin(a)], v = [-u[1], u[0]]; return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [at[0] + u[0] * i * w / 2 + v[0] * j * d / 2, at[1] + u[1] * i * w / 2 + v[1] * j * d / 2]); }
 
   // ------------------------------------------------------------------ the schema (schema/map_schema.json)
@@ -69,17 +85,59 @@ window.MAPEDIT = (() => {
     if (r.type === "building" && Array.isArray(r.footprint)) return { pts: r.footprint, closed: true, set: (q, P) => { q.footprint = P; } };
     if (r.type === "plot" && Array.isArray(r.outline)) return { pts: r.outline, closed: true, set: (q, P) => { q.outline = P; } };
     if (r.type === "place" && Array.isArray(r.area) && r.area[0]) return { pts: r.area[0], closed: true, set: (q, P) => { q.area = [P, ...q.area.slice(1)]; } };
+    if (r.type === "ground" && Array.isArray(r.rings) && r.rings[0]) return { pts: r.rings[0], closed: true, set: (q, P) => { q.rings = [P, ...q.rings.slice(1)]; } };
     return null;
   }
-  function allPts(r) { const e = editPts(r); if (e) return e.pts; if (Array.isArray(r.at)) return [r.at]; const q = leantoQuad(r); return q || []; }
-  function moveRec(r, dx, dy) {   // the whole record shifted, every point (heights kept)
-    const mv = (p) => [r2(p[0] + dx), r2(p[1] + dy), ...p.slice(2)];
+  function allPts(r, get = rec) { const e = editPts(r); if (e) return e.pts; if (Array.isArray(r.at)) return [r.at]; const q = leantoQuad(r, get) || reliefBox(r); if (q) return q; const P = piecePts(r); if (P.length) return P; const g = goodsFrame(get(r.of), get); return g ? [g.o] : []; }
+
+  // ------------------------------------------------------------------ moving, turning and relinking a record by its schema
+  // Every point a record holds moves (heights kept); a "turn" turns, a lean turns with it; table rows with world x, y move
+  // (litter, potholes, people; goods and tree lobes sit in their parent's frame and need nothing). Links in ids are renamed;
+  // a link not in ids is dropped, to be set again on the map (it shows as needing a value when it is required).
+  const WORLD_T = new Set(["litter_piece", "pothole", "person"]);
+  function xform(o, shape, X) {
+    for (const [k, sp] of Object.entries(shape)) {
+      if (!(k in o) || o[k] === null) continue;
+      const f = spec(sp), v = o[k];
+      if (f.base === "id") { if (X.ids) { if (X.ids.has(v)) o[k] = X.ids.get(v); else delete o[k]; } }
+      else if (f.base === "pt" && k === "lean") o[k] = X.rot(v);
+      else if ((f.base === "pt" || f.base === "pt3") && Array.isArray(v)) o[k] = X.f(v);
+      else if ((f.base === "line" || f.base === "ring") && Array.isArray(v)) o[k] = v.map(X.f);
+      else if (f.base === "rings" && Array.isArray(v)) o[k] = v.map((r) => r.map(X.f));
+      else if (f.base === "num" && k === "turn" && X.deg) o[k] = Math.round((((v + X.deg) % 360) + 360) % 360 * 100) / 100;
+      else if (f.base === "obj" && v && typeof v === "object") xform(v, SCHEMA.shapes[f.arg], X);
+      else if (f.base === "objs" && Array.isArray(v)) v.forEach((x) => xform(x, SCHEMA.shapes[f.arg], X));
+      else if (f.base === "table" && v && Array.isArray(v.rows)) {
+        const c = (n) => v.cols.indexOf(n), ix = c("x"), iy = c("y"), it = c("turn");
+        for (const row of v.rows) {
+          if (WORLD_T.has(f.arg) && ix >= 0 && isFinite(row[ix]) && isFinite(row[iy])) { const q = X.f([row[ix], row[iy]]); row[ix] = q[0]; row[iy] = q[1]; }
+          else if (f.arg === "lobe" && isFinite(row[ix]) && isFinite(row[iy])) { const q = X.rot([row[ix], row[iy]]); row[ix] = q[0]; row[iy] = q[1]; }
+          if ((WORLD_T.has(f.arg) || f.arg === "frond") && it >= 0 && isFinite(row[it]) && X.deg) row[it] = Math.round((((row[it] + X.deg) % 360) + 360) % 360 * 100) / 100;
+        }
+      }
+    }
+  }
+  function reliefTurned(r, X) {   // a relief grid stays square to the frame: turned, it is sampled again onto a new grid
+    const n = r.cols, m = r.rows, c = r.cell, z = (i, j) => (i >= 0 && j >= 0 && i < n && j < m ? r.z_mm[j * n + i] : 0);
+    const P = reliefBox(r).map(X.f), b = bboxOf(P), cols = Math.max(2, Math.round((b[2] - b[0]) / c) + 1), rows = Math.max(2, Math.round((b[3] - b[1]) / c) + 1), out = [];
+    const a = -X.deg * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a), O = X.f(r.origin);
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+      const dx = b[0] + i * c - O[0], dy = b[1] + j * c - O[1], u = (dx * cs - dy * sn) / c, w = (dx * sn + dy * cs) / c, i0 = Math.floor(u), j0 = Math.floor(w), fu = u - i0, fw = w - j0;
+      out.push(u < -0.01 || w < -0.01 || u > n - 0.99 || w > m - 0.99 ? 0 : Math.round(z(i0, j0) * (1 - fu) * (1 - fw) + z(i0 + 1, j0) * fu * (1 - fw) + z(i0, j0 + 1) * (1 - fu) * fw + z(i0 + 1, j0 + 1) * fu * fw));
+    }
+    r.origin = [r2(b[0]), r2(b[1])]; r.cols = cols; r.rows = rows; r.z_mm = out;
+  }
+  function transformed(r, X) {   // a copy of r, moved, turned and relinked
     const q = clone(r);
-    if (q.type === "place") q.area = q.area.map((ring) => ring.map(mv));
-    else if (GEOM[q.type] && Array.isArray(q[GEOM[q.type]])) q[GEOM[q.type]] = q[GEOM[q.type]].map(mv);
-    if (Array.isArray(q.at)) q.at = mv(q.at);
+    if (q.type === "relief" && X.deg && Array.isArray(q.z_mm) && reliefBox(q)) { reliefTurned(q, X); const o = q.origin; delete q.origin; xform(q, fieldsOf(q.type), X); q.origin = o; }
+    else xform(q, fieldsOf(q.type), X);
     return q;
   }
+  function mover(pivot, at, deg, ids = null) {
+    const a = deg * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a);
+    return { deg, ids, f: (p) => { const dx = p[0] - pivot[0], dy = p[1] - pivot[1]; return [r2(at[0] + dx * cs - dy * sn), r2(at[1] + dx * sn + dy * cs), ...p.slice(2)]; }, rot: (v) => [r2(v[0] * cs - v[1] * sn), r2(v[0] * sn + v[1] * cs)] };
+  }
+  const moveRec = (r, dx, dy) => transformed(r, mover([0, 0], [dx, dy], 0));
   function turnRec(r, deg) {
     const q = clone(r);
     if ("turn" in fieldsOf(q.type) && Array.isArray(q.at)) { q.turn = Math.round(((q.turn || 0) + deg) * 100) / 100; return q; }
@@ -98,18 +156,19 @@ window.MAPEDIT = (() => {
   const dHere = (p) => { const s = V.districtAt(p); return s ? dId(s.n) : null; };
   const rec = (id) => { const d = dOf.get(id); return d && DS.has(d) ? DS.get(d).recs.get(id) : null; };
   const recsOf = (types) => { const out = []; for (const D of DS.values()) for (const r of D.recs.values()) if (!types || types.includes(r.type)) out.push(r); return out; };
+  const taken = new Set();   // ids handed out this session (a stamp makes many before any is saved)
   function newId(type) {
     const pre = SCHEMA.records[type].prefix, abc = "abcdefghijklmnopqrstuvwxyz0123456789";
-    for (;;) { const b = new Uint8Array(8); crypto.getRandomValues(b); const id = pre + "-" + [...b].map((x) => abc[x % 36]).join(""); if (!dOf.has(id)) return id; }
+    for (;;) { const b = new Uint8Array(8); crypto.getRandomValues(b); const id = pre + "-" + [...b].map((x) => abc[x % 36]).join(""); if (!dOf.has(id) && !taken.has(id)) { taken.add(id); return id; } }
   }
   function setProblems(d, list) {
     const D = DS.get(d); if (!D) return;
     D.probs = new Map(); D.file = [];
     for (const p of list || []) { if (p.id) { if (!D.probs.has(p.id)) D.probs.set(p.id, []); D.probs.get(p.id).push(p); } else D.file.push(p.where + ": " + p.msg); }
   }
-  function setRecords(d, records, problems) {
+  function setRecords(d, records, problems, tiles) {
     const old = DS.get(d); if (old) for (const id of old.recs.keys()) dOf.delete(id);
-    const D = { recs: new Map(), probs: new Map(), file: [] }; DS.set(d, D);
+    const D = { recs: new Map(), probs: new Map(), file: [], tiles: new Set(tiles || []), got: new Set() }; DS.set(d, D);
     for (const r of records) { D.recs.set(r.id, r); dOf.set(r.id, d); }
     setProblems(d, problems);
   }
@@ -126,8 +185,20 @@ window.MAPEDIT = (() => {
     if (loading.has(d)) return; loading.add(d);
     const j = await api("/api/map/load?d=" + d); loading.delete(d);
     if (!j) return;
-    if (j.exists) setRecords(d, j.records, j.problems); else started.delete(d);
+    if (j.exists) setRecords(d, j.records, j.problems, j.tiles); else started.delete(d);
     V.draw(); showPanel();
+  }
+  async function loadTiles(d, tiles) {   // the dress layer, 100 m tile by tile, only where the view is
+    const j = await api("/api/map/tiles?d=" + d + "&t=" + tiles.join(","));
+    const D = DS.get(d); if (!j || !D) return;
+    for (const r of j.records) { D.recs.set(r.id, r); dOf.set(r.id, d); }
+    V.draw();
+  }
+  function applyChanges(d, changed, removed, problems) {
+    const D = DS.get(d); if (!D) return;
+    for (const r of changed || []) { D.recs.set(r.id, r); dOf.set(r.id, d); }
+    for (const id of removed || []) { D.recs.delete(id); dOf.delete(id); }
+    setProblems(d, problems);
   }
   // save whole records (grouped by district); on a refusal the district is loaded again so the board shows what is saved
   async function save(records) {
@@ -154,20 +225,20 @@ window.MAPEDIT = (() => {
   }
   async function del(r) {
     const d = dOf.get(r.id);
-    const j = await api("/api/map/delete", { d, id: r.id });
+    const j = await api("/api/map/delete", { d, id: r.id, children: true });   // with the dress records that dress it
     if (!j) return;
-    DS.get(d).recs.delete(r.id); dOf.delete(r.id); setProblems(d, j.problems);
-    if (sel && sel.id === r.id) sel = null; lastMsg = "Deleted"; V.draw(); showPanel();
+    applyChanges(d, [], j.removed, j.problems);
+    if (sel && !rec(sel.id)) sel = null; lastMsg = "Deleted" + (j.removed.length > 1 ? ` with ${j.removed.length - 1} dress record${j.removed.length > 2 ? "s" : ""}` : ""); toast(lastMsg); V.draw(); showPanel();
   }
   async function undo() {
     const j = await api("/api/map/undo", {});
     if (!j) return;
-    setRecords(j.d, j.records, j.problems); sel = sel && rec(sel.id); toast("Undone"); lastMsg = "Undone"; V.draw(); showPanel();
+    applyChanges(j.d, j.changed, j.removed, j.problems); sel = sel && rec(sel.id); toast("Undone"); lastMsg = "Undone"; V.draw(); showPanel();
   }
   async function start(d) {
     const j = await api("/api/map/start", { d });
     if (!j) return;
-    started.add(d); setRecords(d, j.records, j.problems); fillPicker(); toast(`Started ${d}: its outline is from the frame study; its name is still to give`); V.draw(); showPanel();
+    started.add(d); setRecords(d, j.records, j.problems, []); fillPicker(); loadSources(); toast(`Started ${d}: its outline is from the frame study; its name is still to give`); V.draw(); showPanel();
   }
 
   // ------------------------------------------------------------------ problems: the checker's, and a few the board sees on its own
@@ -199,18 +270,21 @@ window.MAPEDIT = (() => {
   }
 
   // ------------------------------------------------------------------ tools
-  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"]];
+  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"], ["frontage", "Frontage", "E", "Click a plot's side that faces a street"], ["stamp", "Stamp", "K", "Copy records (with their dress) from the map or a source and place them"]];
   const KINDS = () => ({
     street: SCHEMA.enums.road_kind.map((k) => [k, k]), building: SCHEMA.enums.house_type.map((k) => [k, k]), plot: SCHEMA.enums.plot_kind.map((k) => [k, k]),
-    tree: SCHEMA.enums.tree_kind.map((k) => [k, k]), place: SCHEMA.enums.place_kind.map((k) => [k, k]), surface: SCHEMA.enums.road_surface.map((k) => [k, k]),
+    tree: SCHEMA.enums.tree_kind.map((k) => [k, k]), place: SCHEMA.enums.place_kind.map((k) => [k, k]), surface: SCHEMA.enums.road_surface.map((k) => [k, k]), frontage: SCHEMA.enums.frontage_kind.map((k) => [k, k]),
     furniture: [["stall", "stall_kind"], ["pole", "pole_kind"], ["vehicle", "vehicle_kind"], ["furniture", "furniture_kind"], ["heap", "heap_kind"]].map(([t, e]) => [t, SCHEMA.enums[e].map((k) => [t + ":" + k, k])]),
   });
   let tool = "select", sel = null, hover = null, ghost = null, drag = null, linePts = [], cursor = null, snapAt = null, firstClick = null;
-  let snapReal = true;
+  let snapReal = true, hoverEdge = null;
+  const WALLED = new Set(["wall_gate", "low_wall_bars", "sheet_fence", "breeze_fence", "plank_fence"]);   // frontages whose front is a wall
   try { snapReal = localStorage.getItem("gidi-map-snapreal") !== "0"; } catch (e) {}
   function setTool(t) {
     if (!SCHEMA) return;
-    tool = t; linePts = []; ghost = null; firstClick = null; snapAt = null;
+    tool = t; linePts = []; ghost = null; firstClick = null; snapAt = null; hoverEdge = null; placing = null; pickBox = null;
+    if (t === "stamp") sel = null;
+    if (t === "stamp") loadSources().then(() => { if (tool !== "stamp") return; let k = ""; try { k = localStorage.getItem("gidi-map-stampsrc") || ""; } catch (e) {} if (!SRC && k) loadSrc(k); else showPanel(); });
     document.querySelectorAll("#mtools button").forEach((b) => b.classList.toggle("on", b.dataset.tool === t));
     const ks = $("mkind"), K = KINDS()[t];
     ks.innerHTML = !K ? "" : t === "furniture" ? K.map(([g, L]) => `<optgroup label="${g}">${L.map(([v, l]) => `<option value="${v}">${l}</option>`).join("")}</optgroup>`).join("") : K.map(([v, l]) => `<option value="${v}">${l}</option>`).join("");
@@ -250,9 +324,9 @@ window.MAPEDIT = (() => {
   }
 
   // ------------------------------------------------------------------ picking
-  function leantoQuad(r) {
-    if (r.type !== "leanto") return null;
-    const host = rec(r.against); if (!host || !(r.u1 > r.u0)) return null;
+  function leantoQuad(r, get = rec) {
+    if (!r || r.type !== "leanto") return null;
+    const host = get(r.against); if (!host || !(r.u1 > r.u0)) return null;
     let a, b;
     if (host.type === "building" && Array.isArray(host.footprint) && Number.isInteger(r.face) && r.face < host.footprint.length) {
       const fp = host.footprint, p = fp[r.face], q = fp[(r.face + 1) % fp.length], L = dist(p, q) || 1, u = [(q[0] - p[0]) / L, (q[1] - p[1]) / L];
@@ -271,23 +345,33 @@ window.MAPEDIT = (() => {
     return null;
   }
   const thingR = (r) => r.type === "tree" ? (r.kind === "palm" ? 2.5 : r.kind === "shrub" ? 1 : 3.5) : r.type === "heap" ? (r.r > 0 ? r.r : 1) : 0.3;
-  function pick(p) {
-    const tol = Math.max(0.5, 7 / V.s);
+  const MAPW = { list: (types) => recsOf(types), get: (id) => rec(id) };
+  function pick(p, W = MAPW) {   // the record under p: small things first, then lean-tos, buildings, the ground, lines, roads, plots, places
+    const tol = Math.max(0.5, 7 / V.s), L = W.list;
     let best = null, bd = tol;
-    for (const r of recsOf([...POINTY])) { if (!Array.isArray(r.at)) continue; const q = thingPts(r); const d = q && inPoly(p, q) ? 0 : dist(p, r.at) - (r.type === "tree" || r.type === "heap" ? Math.min(thingR(r), 1.2) : 0); if (d < bd) { bd = d; best = r; } }
+    for (const r of L([...POINTY])) { if (!Array.isArray(r.at)) continue; const q = thingPts(r); const d = q && inPoly(p, q) ? 0 : dist(p, r.at) - (r.type === "tree" || r.type === "heap" ? Math.min(thingR(r), 1.2) : 0); if (d < bd) { bd = d; best = r; } }
+    for (const r of L(["litter", "people", "ground_marks"])) for (const q of piecePts(r)) { const d = dist(p, q); if (d < bd) { bd = d; best = r; } }
+    for (const r of L(["goods"])) { const g = goodsFrame(W.get(r.of), W.get); if (!g) continue; for (const o of [...rowsOf(r.items), ...rowsOf(r.hung)]) { if (![o.x, o.y].every(isFinite)) continue; const d = dist(p, [g.o[0] + g.ux[0] * o.x + g.uy[0] * o.y, g.o[1] + g.ux[1] * o.x + g.uy[1] * o.y]); if (d < bd) { bd = d; best = r; } } }
     if (best) return best;
-    for (const r of recsOf(["leanto"])) { const q = leantoQuad(r); if (q && inPoly(p, q)) return r; }
-    const bs = recsOf(["building"]).filter((b) => Array.isArray(b.footprint) && b.footprint.length > 2 && inPoly(p, b.footprint));
+    for (const r of L(["leanto"])) { const q = leantoQuad(r, W.get); if (q && inPoly(p, q)) return r; }
+    const bs = L(["building"]).filter((b) => Array.isArray(b.footprint) && b.footprint.length > 2 && inPoly(p, b.footprint));
     if (bs.length) return bs.sort((a, b) => Math.abs(signedArea(a.footprint)) - Math.abs(signedArea(b.footprint)))[0];
+    const gs = L(["ground"]).filter((r) => Array.isArray(r.rings) && r.rings.some((g) => Array.isArray(g) && g.length > 2 && inPoly(p, g)));
+    if (gs.length) return gs.sort((a, b) => (b.order || 0) - (a.order || 0))[0];
     bd = Math.max(0.4, 6 / V.s);
-    for (const r of recsOf(["wall", "frontage"])) { if (!Array.isArray(r.line)) continue; const d = lineDist(p, r.line); if (d < bd) { bd = d; best = r; } }
+    for (const r of L(["wall", "frontage"])) { if (!Array.isArray(r.line)) continue; const d = lineDist(p, r.line); if (d < bd) { bd = d; best = r; } }
     if (best) return best;
     let rd = 1e9;
-    for (const r of recsOf(["road"])) { if (!Array.isArray(r.centreline)) continue; const d = lineDist(p, r.centreline); if (d < Math.max((r.width || 0) / 2, 6 / V.s) && d < rd) { rd = d; best = r; } }
+    for (const r of L(["road"])) { if (!Array.isArray(r.centreline)) continue; const d = lineDist(p, r.centreline); if (d < Math.max((r.width || 0) / 2, 6 / V.s) && d < rd) { rd = d; best = r; } }
     if (best) return best;
-    const pl = recsOf(["plot"]).filter((r) => Array.isArray(r.outline) && r.outline.length > 2 && inPoly(p, r.outline));
+    const pl = L(["plot"]).filter((r) => Array.isArray(r.outline) && r.outline.length > 2 && inPoly(p, r.outline));
     if (pl.length) return pl.sort((a, b) => Math.abs(signedArea(a.outline)) - Math.abs(signedArea(b.outline)))[0];
-    return recsOf(["place"]).find((r) => Array.isArray(r.area) && r.area.some((ring) => ring.length > 2 && inPoly(p, ring))) || null;
+    return L(["place"]).find((r) => Array.isArray(r.area) && r.area.some((ring) => ring.length > 2 && inPoly(p, ring))) || L(["relief"]).find((r) => reliefBox(r) && inPoly(p, reliefBox(r))) || null;
+  }
+  function plotEdgeAt(p) {   // the plot side under p, for a frontage
+    const tol = Math.max(0.4, 8 / V.s); let best = null;
+    for (const r of recsOf(["plot"])) { const o = r.outline; if (!Array.isArray(o) || o.length < 3) continue; for (let i = 0; i < o.length; i++) { const d = segDist(p, o[i], o[(i + 1) % o.length]); if (d < tol && (!best || d < best.off)) best = { r, i, a: o[i], b: o[(i + 1) % o.length], off: d }; } }
+    return best;
   }
   function handleAt(p) {
     const e = tool === "select" && editPts(sel); if (!e) return null;
@@ -302,6 +386,72 @@ window.MAPEDIT = (() => {
     for (const b of recsOf(["building"])) { const fp = b.footprint; if (!Array.isArray(fp) || fp.length < 3) continue; for (let i = 0; i < fp.length; i++) { const q = fp[(i + 1) % fp.length], np = nearestOnSeg(p, fp[i], q), d = dist(p, np); if (d < tol && (!best || d < best.off)) best = { r: b, face: i, u: r2(dist(fp[i], np)), off: d, len: dist(fp[i], q) }; } }
     for (const w of recsOf(["wall", "frontage"])) { if (!Array.isArray(w.line)) continue; const a = along(w.line, p); if (a.off < tol && (!best || a.off < best.off)) best = { r: w, u: r2(a.s), off: a.off, len: lineLen(w.line) }; }
     return best;
+  }
+
+  // ------------------------------------------------------------------ stamps (docs/MAP-FORMAT.md §3)
+  // Copy a record, or a group, from a source (the map, the worked example, a converted test spot under map-stamps/) and
+  // place it: full values, new ids, links inside the group kept, a "from" note. Never a live link to the source.
+  let SOURCES = [], SRC = null, srcKey = "", picked = [], placing = null, stampDeg = 0, pickBox = null;
+  const srcW = () => ({ list: (types) => (SRC ? [...SRC.recs.values()].filter((r) => r.type !== "district" && (!types || types.includes(r.type))) : []), get: (id) => (SRC ? SRC.recs.get(id) || null : null) });
+  async function loadSources() { const j = await api("/api/map/sources"); if (j) SOURCES = j.sources; }
+  async function loadSrc(key) {
+    srcKey = key; picked = []; placing = null; SRC = null;
+    try { localStorage.setItem("gidi-map-stampsrc", key); } catch (e) {}
+    if (!key) { showPanel(); V.draw(); return; }
+    const [src, d] = key.split("|"), j = await api(`/api/map/source?src=${encodeURIComponent(src)}&d=${d}`);
+    if (j && srcKey === key) SRC = { src, d, recs: new Map(j.records.map((r) => [r.id, r])) };
+    showPanel(); V.draw();
+  }
+  function groupOf(ids) {   // the picked records and what hangs on them: dress (of), lean-tos (against), wires (from_pole)
+    const W = srcW(), all = W.list(null), out = new Map(), q = [...ids];
+    while (q.length) { const id = q.pop(); if (out.has(id)) continue; const r = W.get(id); if (!r) continue; out.set(id, r); for (const c of all) if (!out.has(c.id) && (c.of === id || c.against === id || c.from_pole === id)) q.push(c.id); }
+    return [...out.values()];
+  }
+  function rootOf(id) {   // a lean-to or a dress record has no place of its own: copy what it stands on, with it
+    const W = srcW(), seen = new Set(); let r = W.get(id);
+    while (r && !seen.has(r.id)) { seen.add(r.id); const up = W.get(r.against || r.of); if (!up) break; r = up; }
+    return r ? r.id : id;
+  }
+  function groupPts(G) { const W = srcW(), P = []; for (const r of G) P.push(...allPts(r, W.get).map((q) => q.slice(0, 2))); return P; }
+  function startPlacing() {
+    const G = groupOf(picked); if (!G.length) return;
+    const P = groupPts(G); if (!P.length) { toast("Nothing in that group has a place on the map"); return; }
+    const b = bboxOf(P); placing = { G, pivot: [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2] }; stampDeg = 0;
+    toast(`Placing ${G.length} record${G.length > 1 ? "s" : ""}: click to put a copy down, R or [ ] to turn, Esc to stop`); showPanel(); V.draw();
+  }
+  function stampCopies(at) {   // the group, moved to at and turned, with new ids
+    const { G, pivot } = placing, ids = new Map(G.map((r) => [r.id, newId(r.type)])), X = mover(pivot, at, stampDeg, ids), day = new Date().toISOString().slice(0, 10);
+    const spot = SRC.src === "map" ? "map/" + SRC.d : SRC.src + "/" + SRC.d;
+    return G.map((r) => { const q = transformed(r, X); q.id = ids.get(r.id); q.from = { spot, record: r.id, date: day }; if (r.from && r.from.spot) q.from.note = `it came there from ${r.from.spot} ${r.from.record}`; return q; });
+  }
+  async function placeStamp(at) {
+    const d = dHere(at);
+    if (!d || !started.has(d)) { toast(d ? `${d} isn't started: pick it under "Draw in" to start it` : "That's outside every district"); return; }
+    const C = stampCopies(at);
+    for (const b of C) if (b.type === "building" && !b.plot && Array.isArray(b.footprint)) { const pl = recsOf(["plot"]).find((q) => Array.isArray(q.outline) && inPoly(centroid(b.footprint), q.outline)); if (pl) b.plot = pl.id; }   // the plot it now stands in
+    for (const r of C) r._d = d;
+    if (await save(C)) { lastMsg = `Stamped ${C.length} record${C.length > 1 ? "s" : ""}`; toast(lastMsg + ` in ${d}`); }
+  }
+  function drawRec(ctx, r, get, px, col, fill) {   // a record's outline, plainly: the stamp source and the copy being placed
+    ctx.strokeStyle = col; ctx.lineWidth = 1.5 * px;
+    const e = editPts(r), q = thingPts(r) || leantoQuad(r, get) || reliefBox(r);
+    if (r.type === "road" && e) { path(ctx, e.pts); ctx.lineCap = "butt"; ctx.lineWidth = Math.max(r.width || 0, 3 * px); ctx.globalAlpha = 0.35; ctx.stroke(); ctx.globalAlpha = 1; return; }
+    if (r.type === "place") return;
+    const P = e ? e.pts : q;
+    if (P && P.length > 1) { path(ctx, P, !e || e.closed); if (fill && (!e || e.closed)) { ctx.fillStyle = fill; ctx.fill(); } ctx.stroke(); return; }
+    if (Array.isArray(r.at)) { ctx.beginPath(); ctx.arc(r.at[0], r.at[1], Math.max(thingR(r), 3 * px), 0, 7); ctx.stroke(); return; }
+    for (const c of piecePts(r)) { ctx.beginPath(); ctx.arc(c[0], c[1], Math.max(0.1, 1.5 * px), 0, 7); ctx.fillStyle = col; ctx.fill(); }
+  }
+  function drawStamp(ctx, v, px) {
+    if (tool !== "stamp" || !SRC) return;
+    const W = srcW(), PUR = "#a24bd6";
+    if (SRC.src !== "map") for (const r of W.list(null)) { const P = allPts(r, W.get); if (P.length && hit(bboxOf(P), v)) drawRec(ctx, r, W.get, px, "rgba(162,75,214,.75)"); }
+    for (const r of groupOf(picked)) drawRec(ctx, r, W.get, px * 2, PUR, "rgba(162,75,214,.25)");
+    if (pickBox && pickBox.b) { path(ctx, [pickBox.a, [pickBox.b[0], pickBox.a[1]], pickBox.b, [pickBox.a[0], pickBox.b[1]]], true); ctx.strokeStyle = PUR; ctx.lineWidth = px; ctx.setLineDash([4 * px, 3 * px]); ctx.stroke(); ctx.setLineDash([]); }
+    if (placing && cursor) {
+      const X = mover(placing.pivot, cursor, stampDeg), G = placing.G.map((r) => transformed(r, X)), M = new Map(G.map((r) => [r.id, r])), get = (id) => M.get(id) || null;
+      for (const r of G) drawRec(ctx, r, get, px * 1.5, PUR, "rgba(162,75,214,.3)");
+    }
   }
 
   // ------------------------------------------------------------------ pointer (frame.js hands over the left button)
@@ -321,6 +471,32 @@ window.MAPEDIT = (() => {
       const o = pick(p); sel = o; showPanel(); V.draw();
       if (o) { drag = { o, start: p, moved: false, before: clone(o) }; return true; }
       return false;   // empty ground: frame.js pans
+    }
+    if (tool === "stamp") {
+      if (placing) { placeStamp(p); return true; }
+      if (!SRC) { toast("Pick what to copy from, in the panel"); return true; }
+      const o = pick(p, srcW());
+      if (!o) { pickBox = { a: p }; return true; }   // empty ground: drag a box round what to copy
+      const id = rootOf(o.id);
+      if (ev.shiftKey) { picked = picked.includes(id) ? picked.filter((x) => x !== id) : [...picked, id]; showPanel(); V.draw(); return true; }
+      picked = [id]; startPlacing(); return true;
+    }
+    if (tool === "frontage") {
+      const e = plotEdgeAt(p);
+      if (!e) { toast("Click on the side of a plot that faces a street"); return true; }
+      const mid = [(e.a[0] + e.b[0]) / 2, (e.a[1] + e.b[1]) / 2];
+      let best = null, bd = 40;
+      for (const r of recsOf(["road"])) { if (!Array.isArray(r.centreline) || r.centreline.length < 2) continue; const a = along(r.centreline, mid); if (a.off < bd) { bd = a.off; best = { r, a }; } }
+      if (!best) { toast("No street within 40 m of that side: draw the street first"); return true; }
+      const c = best.r.centreline, i = best.a.i, dx = c[i + 1][0] - c[i][0], dy = c[i + 1][1] - c[i][1], q = best.a.q;
+      const side = (mid[0] - q[0]) * dy - (mid[1] - q[1]) * dx > 0 ? "left" : "right";   // as you walk the street from its first point (y south)
+      let line = [e.a.slice(0, 2), e.b.slice(0, 2)];
+      const ux = line[1][0] - line[0][0], uy = line[1][1] - line[0][1];
+      if ((q[0] - mid[0]) * -uy + (q[1] - mid[1]) * ux < 0) line = line.reverse();   // the line runs with the street on its right: a lean-to on it stands toward the street
+      const kind = $("mkind").value, r = { id: newId("frontage"), type: "frontage", plot: e.r.id, road: best.r.id, side, kind, line, ...defaults(SCHEMA.records.frontage.fields) };
+      if (best.r.width > 0) r.setback = r2(Math.max(0, best.a.off - best.r.width / 2));   // measured from the drawing: the street's edge to the plot side
+      if (WALLED.has(kind)) r.wall = defaults(SCHEMA.shapes.wall);
+      create(r, mid); return true;
     }
     if (tool === "street" || tool === "wall") {
       const sn = tool === "street" ? snapPt(p, null, ev) : { p: cornerSnap(p, null, ev) };
@@ -359,6 +535,9 @@ window.MAPEDIT = (() => {
   }
   function move(ev, p) {
     cursor = p;
+    if (pickBox) { pickBox.b = p; V.draw(); return true; }
+    if (tool === "stamp") { if (placing) V.draw(); else { const o = SRC && pick(p, srcW()); if (o !== hover) { hover = o; V.draw(); } } return false; }
+    if (tool === "frontage") { const e = plotEdgeAt(p); if ((e && e.r.id + e.i) !== (hoverEdge && hoverEdge.r.id + hoverEdge.i)) { hoverEdge = e; V.draw(); } return false; }
     if (drag && drag.vtx !== undefined) {
       let q;
       if (drag.obj.type === "road" && (drag.vtx === 0 || drag.vtx === drag.pts.length - 1)) { const sn = snapPt(p, drag.obj, ev); q = sn.p; drag.snap = sn; snapAt = sn.on || sn.real ? sn.p : null; }
@@ -379,6 +558,16 @@ window.MAPEDIT = (() => {
   }
   async function up(ev, p) {
     V.cv.classList.remove("move");
+    if (pickBox) {
+      const { a, b } = pickBox; pickBox = null;
+      if (b && Math.abs(b[0] - a[0]) * V.s > 4 && Math.abs(b[1] - a[1]) * V.s > 4) {
+        const box = [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[0], b[0]), Math.max(a[1], b[1])], W = srcW();
+        const inside = W.list(null).filter((r) => { const P = allPts(r, W.get); return P.length && P[0][0] >= box[0] && P[0][0] <= box[2] && P[0][1] >= box[1] && P[0][1] <= box[3]; });
+        picked = [...new Set(inside.map((r) => rootOf(r.id)))];
+        if (picked.length) startPlacing(); else toast("Nothing in that box");
+      }
+      V.draw(); return;
+    }
     if (drag && drag.vtx !== undefined) {
       const { obj, before, pts, snap } = drag; drag = null; snapAt = null;
       const q = clone(obj), extra = [];
@@ -421,6 +610,7 @@ window.MAPEDIT = (() => {
   // ------------------------------------------------------------------ drawing (world metres; frame.js has set the transform)
   const KIND_FILL = (k) => ({ face_me_bungalow: "--home", compound_house: "--home", colonial_house: "--home", walkup: "--home", shop_under_flats: "--trade", market_block: "--trade", kiosk_row: "--trade", church: "--civic", mosque: "--civic", school: "--civic" }[k] || "--works");
   const SURF = { tar_new: "--tar", tar_worn: "--worn", sand: "--sand", earth: "--mud", laterite: "--laterite", interlock: "--interlock" };
+  const GROUND = { tar: "#3e3e40", earth: "#8a6a4a", laterite: "#a0522d", sand: "#d6c08a", dust: "#b8a688", mud: "#5a4632", wet: "#4b555e", water: "#3b6e8f", concrete: "#a7a49d", interlock: "#9a8070", grass: "#5f8a3a", rubble: "#8d8478" };   // drawing colours only
   const surfCol = (k) => SURF[k] ? css(SURF[k]) : k === "concrete" ? "#a7a49d" : k === "plank" ? "#8a6a4a" : css("--worn");
   let MAPON = true;
   function path(ctx, pts, close) { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]); if (close) ctx.closePath(); }
@@ -428,6 +618,12 @@ window.MAPEDIT = (() => {
     if (!SCHEMA) return;
     // load the started districts in view once zoomed in to a district or so
     if (v[2] - v[0] < 15000) for (const d of started) if (!DS.has(d) && !loading.has(d)) { const S = studyD(d); if (S && hit(S.bb, v)) load(d); }
+    // and the dress tiles in view once zoomed in to a street or so
+    if (v[2] - v[0] < 1500) for (const [d, D] of DS) {
+      if (!D.tiles.size) continue; const want = [];
+      for (let tx = Math.floor(v[0] / TILE); tx <= Math.floor(v[2] / TILE); tx++) for (let ty = Math.floor(v[1] / TILE); ty <= Math.floor(v[3] / TILE); ty++) { const k = tx + "_" + ty; if (D.tiles.has(k) && !D.got.has(k)) { D.got.add(k); want.push(k); } }
+      if (want.length) loadTiles(d, want);
+    }
     if (cur) { const S = studyD(cur); if (S) { ctx.strokeStyle = css("--accent"); ctx.lineWidth = 2.5 * px; ctx.setLineDash([10 * px, 6 * px]); for (const r of S.rings) { path(ctx, r[0], true); ctx.stroke(); } ctx.setLineDash([]); } }
     if (!MAPON) return;
     boardBad = boardProblems(v);
@@ -443,6 +639,12 @@ window.MAPEDIT = (() => {
       ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : "rgba(255,255,255,.7)"; ctx.lineWidth = (b ? 2 : 1) * px; ctx.setLineDash(r.width > 0 ? [6 * px, 5 * px] : [3 * px, 3 * px]); ctx.stroke(); ctx.setLineDash([]);
       if (V.s > 1.5) for (const q of [c[0], c[c.length - 1]]) { ctx.beginPath(); ctx.arc(q[0], q[1], 2.5 * px, 0, 7); ctx.fillStyle = css("--ink"); ctx.fill(); }
     }
+    // the ground: painted patches (later order over earlier) and relief grids
+    for (const r of recsOf(["ground"]).sort((a, b) => (a.order || 0) - (b.order || 0))) for (const ring of (Array.isArray(r.rings) ? r.rings : [])) {
+      if (!Array.isArray(ring) || ring.length < 3 || !inView(ring)) continue;
+      path(ctx, ring, true); ctx.fillStyle = r.colour || GROUND[r.kind] || "#8a7a66"; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1; edge(r, "rgba(0,0,0,.25)", px);
+    }
+    for (const r of recsOf(["relief"])) { const q = reliefBox(r); if (!q || !inView(q)) continue; if (V.s > 6 && Array.isArray(r.z_mm)) { const c = r.cell; for (let j = 0; j < r.rows; j++) for (let i = 0; i < r.cols; i++) { const z = r.z_mm[j * r.cols + i] || 0; if (!z) continue; ctx.fillStyle = z > 0 ? `rgba(255,170,60,${Math.min(0.5, Math.abs(z) / 120)})` : `rgba(40,110,220,${Math.min(0.5, Math.abs(z) / 120)})`; ctx.fillRect(r.origin[0] + i * c - c / 2, r.origin[1] + j * c - c / 2, c, c); } } path(ctx, q, true); ctx.setLineDash([3 * px, 3 * px]); edge(r, "rgba(255,170,60,.8)", px); ctx.setLineDash([]); }
     for (const r of recsOf(["plot"])) { if (!Array.isArray(r.outline) || r.outline.length < 3 || !inView(r.outline)) continue; path(ctx, r.outline, true); ctx.fillStyle = css("--plot"); ctx.fill(); ctx.setLineDash([4 * px, 3 * px]); const b = badness(r); ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : css("--plot-line"); ctx.lineWidth = (b ? 2 : 1) * px; ctx.stroke(); ctx.setLineDash([]); }
     for (const r of recsOf(["building"])) { const fp = r.footprint; if (!Array.isArray(fp) || fp.length < 3 || !inView(fp)) continue; path(ctx, fp, true); ctx.fillStyle = css(KIND_FILL(r.kind)); ctx.fill(); edge(r, css("--home-line"), Math.max(px, 0.08)); }
     for (const r of recsOf(["wall", "frontage"])) {
@@ -455,6 +657,18 @@ window.MAPEDIT = (() => {
     for (const r of recsOf(["heap", "tree"])) { if (!Array.isArray(r.at) || !inView([r.at])) continue; ctx.beginPath(); ctx.arc(r.at[0], r.at[1], thingR(r), 0, 7); ctx.fillStyle = r.type === "tree" ? "rgba(50,120,50,.32)" : "rgba(140,110,80,.5)"; ctx.fill(); edge(r, r.type === "tree" ? "#3d7a32" : "#6d5a44", Math.max(px, 0.08)); }
     for (const r of recsOf(["pole"])) { if (!Array.isArray(r.at) || !inView([r.at])) continue; ctx.beginPath(); ctx.arc(r.at[0], r.at[1], Math.max(0.2, 2.5 * px), 0, 7); ctx.fillStyle = "#5b4a3a"; ctx.fill(); edge(r, "#5b4a3a", px); }
     for (const r of recsOf(["wire"])) { const a = rec(r.from_pole), b = r.to_pole ? rec(r.to_pole) : null, e = b ? b.at : r.to_at; if (!a || !Array.isArray(a.at) || !Array.isArray(e)) continue; path(ctx, [a.at, e]); ctx.strokeStyle = "#333"; ctx.lineWidth = px; ctx.stroke(); }
+    // small things: goods in their parent's frame, litter, potholes and ruts, person spots
+    for (const r of recsOf(["goods"])) {
+      const g = goodsFrame(rec(r.of), rec); if (!g || !inView([g.o])) continue;
+      for (const o of [...rowsOf(r.items), ...rowsOf(r.hung)]) { if (![o.x, o.y, o.w, o.d].every(isFinite)) continue; const c = [g.o[0] + g.ux[0] * o.x + g.uy[0] * o.y, g.o[1] + g.ux[1] * o.x + g.uy[1] * o.y], t = Math.atan2(g.ux[1], g.ux[0]) * 180 / Math.PI + (o.turn || 0); path(ctx, boxPts(c, o.w, o.d, t), true); ctx.fillStyle = o.colour || "#c9b48a"; ctx.fill(); }
+      const b = badness(r); if (b) { ctx.beginPath(); ctx.arc(g.o[0], g.o[1], 4 * px, 0, 7); ctx.fillStyle = b === "bad" ? BAD : WARN; ctx.fill(); }
+    }
+    for (const r of recsOf(["litter", "people", "ground_marks"])) {
+      const P = piecePts(r); if (!P.length || !inView(P)) continue; const b = badness(r);
+      if (r.type === "ground_marks") { for (const u of (r.ruts || [])) if (Array.isArray(u.line) && u.line.length > 1) { path(ctx, u.line); ctx.strokeStyle = "rgba(60,40,25,.55)"; ctx.lineWidth = u.w > 0 ? u.w : 0.5; ctx.stroke(); } for (const o of rowsOf(r.potholes)) if (isFinite(o.x)) { ctx.beginPath(); ctx.arc(o.x, o.y, o.r > 0 ? o.r : 0.4, 0, 7); ctx.fillStyle = "rgba(50,35,25,.7)"; ctx.fill(); } }
+      else for (const o of rowsOf(r.type === "litter" ? r.pieces : r.spots)) { if (!isFinite(o.x)) continue; ctx.beginPath(); ctx.arc(o.x, o.y, r.type === "people" ? Math.max(0.25, 3 * px) : Math.max(0.06, 1.5 * px), 0, 7); ctx.fillStyle = r.type === "people" ? "#e0457b" : (o.colour || "#ddd"); ctx.fill(); if (r.type === "people" && isFinite(o.turn)) { const a = o.turn * Math.PI / 180; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x + Math.cos(a) * 0.5, o.y + Math.sin(a) * 0.5); ctx.strokeStyle = "#e0457b"; ctx.lineWidth = Math.max(0.06, px); ctx.stroke(); } }
+      if (b) { const c = P[0]; ctx.beginPath(); ctx.arc(c[0], c[1], 5 * px, 0, 7); ctx.strokeStyle = b === "bad" ? BAD : WARN; ctx.lineWidth = 2 * px; ctx.stroke(); }
+    }
     for (const r of recsOf(["place"])) for (const ring of (Array.isArray(r.area) ? r.area : [])) if (ring.length > 2 && inView(ring)) { path(ctx, ring, true); ctx.setLineDash([8 * px, 4 * px]); const b = badness(r); ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : css("--accent"); ctx.lineWidth = 1.5 * px; ctx.stroke(); ctx.setLineDash([]); }
     // selection, hover, handles, what is being drawn
     const outline = (r, col, w) => {
@@ -479,6 +693,8 @@ window.MAPEDIT = (() => {
       for (const x of linePts) { ctx.beginPath(); ctx.arc(x.p[0], x.p[1], 4 * px, 0, 7); ctx.fillStyle = x.on ? css("--ok") : css("--sel"); ctx.fill(); }
     }
     if (firstClick) { const e = firstClick; let at; if (e.face !== undefined) { const fp = e.r.footprint, p0 = fp[e.face], q = fp[(e.face + 1) % fp.length], L = dist(p0, q) || 1; at = [p0[0] + (q[0] - p0[0]) * e.u / L, p0[1] + (q[1] - p0[1]) * e.u / L]; } else at = pointAlong(e.r.line, e.u); ctx.beginPath(); ctx.arc(at[0], at[1], 5 * px, 0, 7); ctx.fillStyle = css("--sel"); ctx.fill(); }
+    if (hoverEdge && tool === "frontage") { path(ctx, [hoverEdge.a, hoverEdge.b]); ctx.strokeStyle = css("--sel"); ctx.lineWidth = 4 * px; ctx.stroke(); }
+    drawStamp(ctx, v, px);
     if (snapAt) { ctx.beginPath(); ctx.arc(snapAt[0], snapAt[1], 7 * px, 0, 7); ctx.strokeStyle = css("--ok"); ctx.lineWidth = 2 * px; ctx.stroke(); }
   }
   function drawScreen(ctx) {   // small labels: a building's storeys, a line's length while drawing
@@ -570,11 +786,23 @@ window.MAPEDIT = (() => {
     else if (act === "rm") setPath(r, p, undefined);
     await save([r]);
   }
-  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side twice. <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
+  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side or a wall twice; on a wall it stands on the right of the wall's line ("Put it on the other side" turns the line round). <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road. <b>Frontage</b> (E): click a plot's side that faces a street; it finds the street, the side and the setback. <b>Stamp</b> (K): copy records with everything on them, from the map or a source, and place copies.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
   function showPanel() {
     const P = $("panel"); if (!SCHEMA || !P) return;
     const keep = P.scrollTop;
     const o = sel;
+    if (!o && tool === "stamp") {
+      const opts = SOURCES.flatMap((x) => x.districts.map((d) => [x.src + "|" + d, (x.src === "map" ? "the map" : x.src) + " · " + d]));
+      const G = picked.length ? groupOf(picked) : [], cnt = {}; for (const r of G) cnt[r.type] = (cnt[r.type] || 0) + 1;
+      P.innerHTML = `<h3>Stamp</h3><div class="fld"><span class="fk">copy from</span><select id="msrc"><option value="">— pick a source —</option>${opts.map(([v, l]) => `<option value="${esc(v)}"${v === srcKey ? " selected" : ""}>${esc(l)}</option>`).join("")}</select></div>`
+        + (SRC ? `<div class="row"><button id="msrcgo">Show the source</button></div><p class="k">${SRC.recs.size} records in ${esc(SRC.src)}/${SRC.d}${SRC.src === "map" ? "" : ", drawn in purple where they lie"}.</p>` : "")
+        + (G.length ? `<p><b>${placing ? "Placing" : "Picked"}</b>: ${Object.entries(cnt).map(([t, n]) => `${n} ${t}`).join(", ")}${placing ? ` · turned ${stampDeg}°` : ""}</p>${placing ? "" : `<div class="row"><button id="mplace">Place it (Enter)</button></div>`}` : "")
+        + `<p class="k">Click a record to copy it with everything on it (faces, roof sheets, lean-tos, goods, wires); <kbd>Shift</kbd>-click to pick more, then <kbd>Enter</kbd>; or drag a box. Then click on the map to put a copy down, and again for another. <kbd>R</kbd>, <kbd>[</kbd> <kbd>]</kbd> turn it; <kbd>Esc</kbd> stops.</p><p class="k">Each copy holds the full values with new ids and a "from" note, never a link to the source. A link to something outside the copy (its plot, its street) is left for you to set again; a building takes the plot it lands in.</p>`;
+      $("msrc").addEventListener("change", (ev) => loadSrc(ev.target.value));
+      const go = $("msrcgo"); if (go) go.addEventListener("click", () => { const W = srcW(), Pp = W.list(null).flatMap((r) => allPts(r, W.get)); if (Pp.length) V.fit(bboxOf(Pp), 60); });
+      const pl = $("mplace"); if (pl) pl.addEventListener("click", startPlacing);
+      return;
+    }
     if (!o) {
       let h = `<h3>${tool === "select" ? "Nothing selected" : "Drawing: " + tool}</h3>`;
       if (!cur) h += `<p class="k">Pick the district to draw in, under "Draw in". Its outline comes from the frame study; everything else is drawn by hand.</p>`;
@@ -599,18 +827,31 @@ window.MAPEDIT = (() => {
       const fp = o.footprint, c = centroid(fp), w = dist(fp[0], fp[1]), dep = dist(fp[1], fp[2]), ang = Math.atan2(fp[1][1] - fp[0][1], fp[1][0] - fp[0][0]) * 180 / Math.PI;
       h += `<fieldset><legend>Exact size and place</legend><div class="fld"><span class="fk">width, depth (m)</span><span class="ptrow"><input id="nw" type="number" step="0.1" value="${w.toFixed(2)}"><input id="nd" type="number" step="0.1" value="${dep.toFixed(2)}"></span></div><div class="fld"><span class="fk">angle (°)</span><input id="na" type="number" step="1" value="${ang.toFixed(1)}"></div><div class="fld"><span class="fk">middle x, y</span><span class="ptrow"><input id="nx" type="number" step="0.1" value="${c[0].toFixed(2)}"><input id="ny" type="number" step="0.1" value="${c[1].toFixed(2)}"></span></div><p class="k">Face 0 runs from the first corner to the second.</p></fieldset>`;
     }
+    const kids = recsOf(null).filter((c) => c.of === o.id || c.against === o.id), par = o.of && rec(o.of), host = o.type === "leanto" && rec(o.against);
+    if (kids.length) h += `<fieldset><legend>On it</legend><div class="chips">${kids.map((c) => `<button data-go="${c.id}">${esc(c.type)} ${c.id}</button>`).join("")}</div></fieldset>`;
+    if (par) h += `<div class="row"><button data-go="${par.id}">It dresses ${esc(par.type)} ${par.id}</button></div>`;
+    if (host && Array.isArray(host.line)) h += `<div class="row"><button id="mflip" title="It stands on the right of its ${host.type}'s line; this turns the line round, keeping gates and lean-tos where they are">Put it on the other side</button></div>`;
     const F0 = fieldsOf(o.type);
     h += Object.entries(F0).filter(([k]) => !["id", "type", "ref", "from"].includes(k)).map(([k, sp]) => fieldHTML(k, sp, o[k], k)).join("");
     for (const k of ["ref", "from"]) if (o[k]) h += `<div class="fld"><span class="fk">${k}</span><code>${esc(JSON.stringify(o[k]))}</code></div>`;
     h += `<div class="row">${"turn" in F0 || editPts(o) ? `<button id="mrl">⟲ 15°</button><button id="mrr">⟳ 15°</button>` : ""}${o.type !== "district" ? `<button id="mdel">Delete</button>` : ""}</div><hr>` + HELP;
     P.innerHTML = h; P.scrollTop = keep;
     const on = (id, fn) => { const e = $(id); if (e) e.addEventListener("click", fn); };
-    on("mrl", () => turnSel(-15)); on("mrr", () => turnSel(15)); on("mdel", () => del(o));
+    on("mrl", () => turnSel(-15)); on("mrr", () => turnSel(15)); on("mdel", () => del(o)); on("mflip", () => flipSide(o));
     if ($("nw")) ["nw", "nd", "na", "nx", "ny"].forEach((id) => $(id).addEventListener("change", async () => {
       const [w, dep, a, x, y] = ["nw", "nd", "na", "nx", "ny"].map((i) => parseFloat($(i).value));
       if (![w, dep, a, x, y].every(isFinite) || w < 0.5 || dep < 0.5) { toast("Size needs numbers of at least 0.5 m"); showPanel(); return; }
       const q = clone(o); q.footprint = orient(rectFrom(w, dep, a, x, y)); await save([q]);
     }));
+  }
+  async function flipSide(lt) {   // a lean-to stands on the right of its wall's line: turn the line round to move it across
+    const host = rec(lt.against); if (!host || !Array.isArray(host.line)) return;
+    if (recsOf(null).some((c) => c.of === host.id)) { toast(`${host.id} is dressed already (wall bays or posters): its line can't turn round under them`); return; }
+    const L = lineLen(host.line), q = clone(host), fl = (o) => { if (isFinite(o.u0) && isFinite(o.u1)) { const a = o.u0; o.u0 = r2(Math.max(0, L - o.u1)); o.u1 = r2(L - a); } };
+    q.line = host.line.slice().reverse();
+    if (q.wall && Array.isArray(q.wall.gates)) q.wall.gates.forEach(fl);
+    const lts = recsOf(["leanto"]).filter((x) => x.against === host.id).map((x) => { const y = clone(x); fl(y); return y; });
+    if (await save([q, ...lts])) toast(`${host.id}'s line turned round: its lean-to${lts.length > 1 ? "s" : ""} now stand${lts.length > 1 ? "" : "s"} on the other side`);
   }
   async function turnSel(deg) { if (!sel) return; const q = turnRec(sel, deg); if (q) await save([q]); }
 
@@ -636,7 +877,7 @@ window.MAPEDIT = (() => {
   }
   function buildBar() {
     const st = document.createElement("style");
-    st.textContent = `#panel .fld{display:grid;grid-template-columns:38% 1fr auto;gap:4px;align-items:center;margin:3px 0}#panel .fk{color:var(--muted);overflow-wrap:anywhere}#panel .fk.bad{color:var(--bad);font-weight:600}#panel fieldset{border:1px solid var(--panel-line);border-radius:6px;margin:6px 0;padding:4px 6px}#panel fieldset.item{border-style:dashed}#panel legend{font-size:12px}#panel select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--panel-line);border-radius:6px;padding:3px 4px;width:100%}#panel .chk{display:flex;flex-wrap:wrap;gap:2px 8px}#panel .chk label{display:flex;gap:3px;align-items:center}#panel .ptrow,#panel .hexrow{display:flex;gap:4px}#panel .hexrow input[type=color]{width:34px;padding:0;height:26px}#panel .tb input{padding:2px 3px}#panel .tb th{font-weight:500;color:var(--muted);text-align:left}#panel .x{padding:1px 6px}#panel .probs{margin:4px 0 8px;font-size:12px}#panel .probs .warn{color:var(--warn)}#panel .probs .bad{color:var(--bad)}#panel code{font-size:11px;overflow-wrap:anywhere}#panel{width:360px}`;
+    st.textContent = `#panel .fld{display:grid;grid-template-columns:38% 1fr auto;gap:4px;align-items:center;margin:3px 0}#panel .fk{color:var(--muted);overflow-wrap:anywhere}#panel .fk.bad{color:var(--bad);font-weight:600}#panel fieldset{border:1px solid var(--panel-line);border-radius:6px;margin:6px 0;padding:4px 6px}#panel fieldset.item{border-style:dashed}#panel legend{font-size:12px}#panel select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--panel-line);border-radius:6px;padding:3px 4px;width:100%}#panel .chk{display:flex;flex-wrap:wrap;gap:2px 8px}#panel .chk label{display:flex;gap:3px;align-items:center}#panel .ptrow,#panel .hexrow{display:flex;gap:4px}#panel .hexrow input[type=color]{width:34px;padding:0;height:26px}#panel .tb input{padding:2px 3px}#panel .tb th{font-weight:500;color:var(--muted);text-align:left}#panel .x{padding:1px 6px}#panel .probs{margin:4px 0 8px;font-size:12px}#panel .probs .warn{color:var(--warn)}#panel .probs .bad{color:var(--bad)}#panel code{font-size:11px;overflow-wrap:anywhere}#panel{width:360px}#panel .chips{display:flex;flex-wrap:wrap;gap:4px}#panel .chips button{font-size:11px}`;
     document.head.appendChild(st);
     const bar = document.querySelector(".bar");
     bar.insertAdjacentHTML("beforeend", `<div class="group"><select id="mdist" aria-label="District to draw in"></select></div><div class="group" id="mtools">${TOOLS.map(([t, l, k, tip]) => `<button data-tool="${t}" title="${tip} (${k})">${l}</button>`).join("")}</div><div class="group"><select id="mkind" aria-label="Kind"></select><label id="msnap" title="While drawing a street, snap onto the real road line under it"><input type="checkbox"${snapReal ? " checked" : ""}> Snap to real roads</label><label title="Show the new map's records"><input type="checkbox" id="mon" checked> Map</label></div>`);
@@ -652,13 +893,18 @@ window.MAPEDIT = (() => {
     const P = $("panel");
     P.style.display = "";
     P.addEventListener("change", (ev) => { const el = ev.target; if (el.type === "color" && el.dataset.for) { const t = P.querySelector(`input[data-p="${CSS.escape(el.dataset.for)}"]:not([type=color])`); if (t) { t.value = el.value; onField(t); } return; } if (el.dataset.p) onField(el); });
-    P.addEventListener("click", (ev) => { const b = ev.target.closest("button[data-act]"); if (b) { ev.preventDefault(); onAct(b); } });
+    P.addEventListener("click", (ev) => {
+      const g = ev.target.closest("button[data-go]"); if (g) { sel = rec(g.dataset.go); const Q = sel && allPts(sel); if (Q && Q.length && !hit(bboxOf(Q), V.view())) { const c = centroid(Q); V.focus(c[0], c[1], V.s); } showPanel(); V.draw(); return; }
+      const b = ev.target.closest("button[data-act]"); if (b) { ev.preventDefault(); onAct(b); }
+    });
     window.addEventListener("keydown", (ev) => {
       if (/^(INPUT|SELECT|TEXTAREA)$/.test(ev.target.tagName)) return;
       if ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === "z") { ev.preventDefault(); undo(); return; }
       if (ev.metaKey || ev.ctrlKey) return;
       const k = ev.key.toLowerCase();
-      if (k === "escape") { linePts = []; ghost = null; drag = null; firstClick = null; if (tool !== "select") setTool("select"); else { sel = null; showPanel(); } V.draw(); }
+      if (k === "escape") { if (placing || picked.length) { placing = null; picked = []; showPanel(); V.draw(); return; } linePts = []; ghost = null; drag = null; firstClick = null; if (tool !== "select") setTool("select"); else { sel = null; showPanel(); } V.draw(); }
+      else if (placing && (k === "r" || k === "[" || k === "]")) { stampDeg += k === "r" ? (ev.shiftKey ? -15 : 15) : k === "[" ? -1 : 1; V.draw(); }
+      else if (k === "enter" && tool === "stamp" && picked.length && !placing) startPlacing();
       else if (k === "enter" && (tool === "street" || tool === "wall")) finishLine();
       else if (k === "backspace" || k === "delete") { ev.preventDefault(); if ((tool === "street" || tool === "wall") && linePts.length) { linePts.pop(); V.draw(); } else if (sel && sel.type !== "district") del(sel); }
       else if (k === "r") turnSel(ev.shiftKey ? -15 : 15);
@@ -676,9 +922,10 @@ window.MAPEDIT = (() => {
     try { cur = localStorage.getItem("gidi-map-district") || null; } catch (e) {}
     setTool("select");
     await loadList();
+    await loadSources();
     fillPicker();
     if (cur && started.has(cur)) load(cur);
     showPanel(); V.draw();
   }
-  return { init, drawWorld, drawScreen, down, move, up, get state() { return { DS, dOf, sel, cur, tool }; } };
+  return { init, drawWorld, drawScreen, down, move, up, get state() { return { DS, dOf, sel, cur, tool, SOURCES, SRC, picked }; } };
 })();

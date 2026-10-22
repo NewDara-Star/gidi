@@ -230,6 +230,7 @@
     F, cv, draw, districtAt, fit, toW, saveView,
     toS: (p) => [p[0] * s + ox, p[1] * s + oy],
     get s() { return s; },
+    view: () => viewBB(),
     focus(x, y, scale) { s = Math.max(s, scale || s); ox = W / 2 - x * s; oy = H / 2 - y * s; saveView(); draw(); },
   });
   resize();
