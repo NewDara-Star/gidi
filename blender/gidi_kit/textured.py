@@ -44,13 +44,16 @@ _MEAN = {}
 
 
 def _mean(im):
-    """The texture's average colour (linear), so it can be divided out and leave only its variation."""
+    """The texture's average colour (linear, as the shader sees it), so it can be divided out and leave only its variation."""
     if im.name not in _MEAN:
         import numpy as np
         w, h = im.size
         px = np.empty(w * h * 4, dtype=np.float32)
         im.pixels.foreach_get(px)
-        _MEAN[im.name] = tuple(float(v) for v in px.reshape(-1, 4)[::97, :3].mean(axis=0))
+        c = px.reshape(-1, 4)[::97, :3]
+        if im.colorspace_settings.name == 'sRGB':   # pixels come back as stored (sRGB); the shader sees them linear
+            c = np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+        _MEAN[im.name] = tuple(float(v) for v in c.mean(axis=0))
     return _MEAN[im.name]
 
 
@@ -129,8 +132,9 @@ def _slot(mat, base, surf, tile, aged, aged_show, span):
         nm.inputs['Strength'].default_value = 0.8
         L.new(tex(nor).outputs['Color'], nm.inputs['Color'])
         L.new(nm.outputs['Normal'], bs.inputs['Normal'])
-    if mat.name in ('zinc', 'steel'):
-        bs.inputs['Metallic'].default_value = 0.35 if mat.name == 'zinc' else 0.2
+    slot = mat.name.partition(':')[0]
+    if slot in ('zinc', 'steel'):
+        bs.inputs['Metallic'].default_value = 0.35 if slot == 'zinc' else 0.2
 
 
 def _const(N, v):
@@ -139,17 +143,136 @@ def _const(N, v):
     return n.outputs[0]
 
 
+def _roadbed(mat, base):
+    """The street's ground (roadbed.py): earth, dust, tar and mud layers, each its map colour times its photo surface's
+    variation, blended by the sheet's Edge, Dust, Tar and Mud attributes and by each surface's own height map, so tar
+    shows on its high grains first and dust settles into the low ones."""
+    import json
+    spec = json.loads(mat.get('gidi_layers', '{}') or '{}')
+    cols, surfs = spec.get('colours', {}), spec.get('surfaces', {})
+    nt = mat.node_tree
+    nt.nodes.clear()
+    N, L = nt.nodes, nt.links
+    out = N.new('ShaderNodeOutputMaterial')
+    bs = N.new('ShaderNodeBsdfPrincipled')
+    L.new(bs.outputs[0], out.inputs['Surface'])
+    uv = N.new('ShaderNodeUVMap')
+    uv.uv_map = 'UVMap'
+
+    def attr(name):
+        a = N.new('ShaderNodeAttribute')
+        a.attribute_name = name
+        return a.outputs['Fac']
+
+    def math(op, a, b):
+        m = N.new('ShaderNodeMath')
+        m.operation = op
+        for i, v in enumerate((a, b)):
+            if isinstance(v, (int, float)):
+                m.inputs[i].default_value = v
+            else:
+                L.new(v, m.inputs[i])
+        return m.outputs[0]
+
+    def mixc(fac, a, b, kind='RGBA'):
+        m = N.new('ShaderNodeMix')
+        m.data_type = kind
+        L.new(fac, m.inputs['Factor'])
+        ia, ib = (6, 7) if kind == 'RGBA' else (2, 3)
+        for i, v in ((ia, a), (ib, b)):
+            if isinstance(v, (int, float)):
+                m.inputs[i].default_value = v
+            else:
+                L.new(v, m.inputs[i])
+        return m.outputs[2 if kind == 'RGBA' else 0]
+
+    TILE = {'earth': 3.0, 'dust': 3.0, 'tar': 4.0, 'mud': 2.5}
+    ROUGH = {'earth': 0.95, 'dust': 0.97, 'tar': 0.85, 'mud': 0.75}
+    lay = {}
+    for k in ('earth', 'dust', 'tar', 'mud'):
+        surf = surfs.get(k)
+        sc = N.new('ShaderNodeVectorMath')
+        sc.operation = 'SCALE'
+        sc.inputs['Scale'].default_value = 1.0 / TILE[k]
+        L.new(uv.outputs['UV'], sc.inputs[0])
+
+        def tex(kind, colour=False):
+            im = _img(base, surf, kind, colour) if surf else None
+            if im is None:
+                return None, None
+            t = N.new('ShaderNodeTexImage')
+            t.image = im
+            L.new(sc.outputs[0], t.inputs['Vector'])
+            return t, im
+        t, im = tex('diffuse', True)
+        tint = N.new('ShaderNodeRGB')
+        tint.outputs[0].default_value = (*cols.get(k, (0.3, 0.25, 0.2)), 1)
+        if t:
+            d = N.new('ShaderNodeVectorMath')
+            d.operation = 'DIVIDE'
+            L.new(t.outputs['Color'], d.inputs[0])
+            d.inputs[1].default_value = tuple(max(1e-3, v) for v in _mean(im))
+            m = N.new('ShaderNodeVectorMath')
+            m.operation = 'MULTIPLY'
+            L.new(tint.outputs[0], m.inputs[0])
+            L.new(d.outputs[0], m.inputs[1])
+            colour = m.outputs[0]
+        else:
+            colour = tint.outputs[0]
+        # a Metal shader takes 16 samplers, EEVEE uses some: height maps only where they blend, normals for dust and tar
+        dt, _ = tex('displacement') if k != 'earth' else (None, None)
+        nt_, _ = tex('nor_gl') if k in ('dust', 'tar') else (None, None)
+        lay[k] = dict(col=colour, disp=dt.outputs['Color'] if dt else 0.5, nor=nt_.outputs['Color'] if nt_ else None, rough=ROUGH[k])
+
+    def hb(mask, disp, soft=0.12):
+        """Height blend: where the mask is half, the layer's own high grains win."""
+        v = math('ADD', mask, math('MULTIPLY', math('SUBTRACT', disp, 0.5), 0.6) if not isinstance(disp, float) else 0.0)
+        r = N.new('ShaderNodeMapRange')
+        L.new(v, r.inputs['Value'])
+        r.inputs['From Min'].default_value, r.inputs['From Max'].default_value = 0.5 - soft, 0.5 + soft
+        return r.outputs['Result']
+
+    f_dust = hb(math('SUBTRACT', 1.0, attr('Edge')), lay['dust']['disp'], 0.2)
+    f_tar = hb(attr('Tar'), lay['tar']['disp'])
+    f_mud = hb(attr('Mud'), lay['mud']['disp'], 0.2)
+    c, r, n = lay['earth']['col'], lay['earth']['rough'], lay['dust']['nor']
+    for f, k in ((f_dust, 'dust'), (f_tar, 'tar'), (f_mud, 'mud')):
+        c = mixc(f, c, lay[k]['col'])
+        r = mixc(f, r, lay[k]['rough'], 'FLOAT')
+        if k == 'tar' and n is not None and lay[k]['nor'] is not None:
+            n = mixc(f, n, lay[k]['nor'])
+    L.new(c, bs.inputs['Base Color'])
+    L.new(r, bs.inputs['Roughness'])
+    if n is not None:
+        nm = N.new('ShaderNodeNormalMap')
+        nm.inputs['Strength'].default_value = 1.0
+        L.new(n, nm.inputs['Color'])
+        L.new(nm.outputs['Normal'], bs.inputs['Normal'])
+
+
 def apply(base=None):
-    """Swap the kit's master materials for textured ones, by slot name. Returns the slots done."""
+    """Swap the kit's master materials for textured ones, by slot name. A material named 'slot:surface' is that slot with
+    another surface picked by the map (a rusty roof's rusty_corrugated_iron). 'roadbed' is the street's ground. Returns the
+    materials done."""
     base = base or root()
     done = []
     if not os.path.isdir(base):
         print('textures: no folder at', base, '- kit materials kept')
         return done
-    for name, (surf, tile, aged, show, span) in SLOTS.items():
-        mat = bpy.data.materials.get(name)
-        if mat is None or not os.path.isdir(os.path.join(base, surf)):
+    has = lambda s: s and os.path.isdir(os.path.join(base, s))
+    for mat in list(bpy.data.materials):
+        name = mat.name
+        if name == 'roadbed':
+            _roadbed(mat, base)
+            done.append(name)
             continue
-        _slot(mat, base, surf, tile, aged if aged and os.path.isdir(os.path.join(base, aged)) else None, show, span)
+        slot, _, pick = name.partition(':')
+        if slot not in SLOTS or not mat.use_nodes:
+            continue
+        surf, tile, aged, show, span = SLOTS[slot]
+        surf = pick if has(pick) else surf
+        if not has(surf):
+            continue
+        _slot(mat, base, surf, tile, aged if has(aged) else None, show, span)
         done.append(name)
     return done

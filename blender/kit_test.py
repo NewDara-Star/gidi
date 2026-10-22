@@ -2,7 +2,8 @@
 own camera (decisions: "A kit is proven by rebuilding real streets from it", "The owner's eye passes a kit").
 blender -b --factory-startup -P blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]
     [--textures <dir> | --no-textures]   (textures default to $GIDI_TEXTURES or ~/Real-world/textures/polyhaven)
-The map's 'shot' block gives the camera (position, heading, pitch, horizontal field of view, frame) and the sky; the kit
+The map's 'shot' block gives the camera (position, heading, pitch, horizontal field of view, frame) and the light (a sun
+angle and cloud cover, or the old overcast); the kit
 reads the rest. Light by default: EEVEE, low samples, the shot's own frame size."""
 import json
 import math
@@ -11,6 +12,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
+from mathutils import Vector  # noqa: E402
 import scene  # noqa: E402
 from gidi_kit import detail, oldtown, textured  # noqa: E402
 
@@ -75,7 +77,91 @@ def overcast(sc):
     sc.collection.objects.link(ob)
 
 
-overcast(sc)
+def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0):
+    """A clear physical sky (Blender's multiple-scattering sky) with bright broken cumulus over it, and a hard sun at
+    the Street View's sun angle. sun: {azimuth_deg from north, clockwise; elevation_deg}; the map's frame has x east,
+    y north. clouds: how much of the sky they cover. The camera sees the clouds; the light is the sky dimmed toward grey by
+    them, so shade under eaves stays dark. seen_gain lifts only what the camera sees of the sky (against a lowered exposure)."""
+    az, el = math.radians(sun['azimuth_deg']), math.radians(sun['elevation_deg'])
+    d = Vector((math.sin(az) * math.cos(el), math.cos(az) * math.cos(el), math.sin(el)))
+    w = bpy.data.worlds.new('sky')
+    sc.world = w
+    w.use_nodes = True
+    nt = w.node_tree
+    nt.nodes.clear()
+    N, L = nt.nodes, nt.links
+    out = N.new('ShaderNodeOutputWorld')
+    bg = N.new('ShaderNodeBackground')
+    sk = N.new('ShaderNodeTexSky')
+    sk.sky_type = 'MULTIPLE_SCATTERING'
+    sk.sun_disc = False
+    sk.sun_elevation = el
+    sk.sun_rotation = math.atan2(d.y, d.x) - math.pi / 2
+    sk.air_density, sk.aerosol_density = 1.0, 2.5   # tropical haze
+    # a cloud layer: the view ray hits a flat sheet overhead (x/z, y/z), broken noise on it, thinning toward the horizon
+    geo = N.new('ShaderNodeNewGeometry')
+    sep = N.new('ShaderNodeSeparateXYZ')
+    L.new(geo.outputs['Incoming'], sep.inputs[0])
+    nz = N.new('ShaderNodeMath'); nz.operation = 'MULTIPLY'; nz.inputs[1].default_value = -1.0
+    L.new(sep.outputs['Z'], nz.inputs[0])
+    cz = N.new('ShaderNodeMath'); cz.operation = 'MAXIMUM'; cz.inputs[1].default_value = 0.04
+    L.new(nz.outputs[0], cz.inputs[0])
+    inv = N.new('ShaderNodeVectorMath'); inv.operation = 'DIVIDE'
+    L.new(geo.outputs['Incoming'], inv.inputs[0])
+    cmb = N.new('ShaderNodeCombineXYZ')
+    L.new(cz.outputs[0], cmb.inputs[0]); L.new(cz.outputs[0], cmb.inputs[1]); L.new(cz.outputs[0], cmb.inputs[2])
+    L.new(cmb.outputs[0], inv.inputs[1])
+    noise = N.new('ShaderNodeTexNoise')
+    noise.inputs['Scale'].default_value = 0.6
+    noise.inputs['Detail'].default_value = 8.0
+    noise.inputs['Roughness'].default_value = 0.6
+    L.new(inv.outputs[0], noise.inputs['Vector'])
+    cr = N.new('ShaderNodeValToRGB')   # cloud density: none below the threshold, white puffs above it
+    L.new(noise.outputs['Fac'], cr.inputs['Fac'])
+    e = cr.color_ramp.elements
+    e[0].position, e[0].color = 0.6 - clouds * 0.25, (0, 0, 0, 1)
+    e[1].position, e[1].color = 0.78 - clouds * 0.25, (1, 1, 1, 1)
+    shadeR = N.new('ShaderNodeValToRGB')   # cloud colour: bright tops, grey bellies
+    L.new(noise.outputs['Fac'], shadeR.inputs['Fac'])
+    f = shadeR.color_ramp.elements
+    f[0].position, f[0].color = 0.55, (0.62, 0.63, 0.66, 1)
+    f[1].position, f[1].color = 0.85, (1.0, 1.0, 1.0, 1)
+    cloud_bright = N.new('ShaderNodeVectorMath'); cloud_bright.operation = 'SCALE'
+    cloud_bright.inputs['Scale'].default_value = 1.0 / strength * 0.9
+    L.new(shadeR.outputs['Color'], cloud_bright.inputs[0])
+    seen = N.new('ShaderNodeMix'); seen.data_type = 'RGBA'
+    L.new(cr.outputs['Color'], seen.inputs['Factor'])
+    L.new(sk.outputs['Color'], seen.inputs[6])
+    L.new(cloud_bright.outputs[0], seen.inputs[7])
+    lit = N.new('ShaderNodeMix'); lit.data_type = 'RGBA'   # what lights the scene: the sky, greyed by the cloud cover
+    lit.inputs['Factor'].default_value = clouds * 0.8
+    L.new(sk.outputs['Color'], lit.inputs[6])
+    lit.inputs[7].default_value = (0.8 / strength * 0.3, 0.75 / strength * 0.3, 0.68 / strength * 0.3, 1)
+    lp = N.new('ShaderNodeLightPath')
+    ms = N.new('ShaderNodeMix'); ms.data_type = 'RGBA'
+    L.new(lp.outputs['Is Camera Ray'], ms.inputs['Factor'])
+    L.new(lit.outputs[2], ms.inputs[6])
+    L.new(seen.outputs[2], ms.inputs[7])
+    gain = N.new('ShaderNodeMix'); gain.data_type = 'RGBA'; gain.blend_type = 'MULTIPLY'
+    L.new(lp.outputs['Is Camera Ray'], gain.inputs['Factor'])
+    L.new(ms.outputs[2], gain.inputs[6])
+    gain.inputs[7].default_value = (seen_gain, seen_gain, seen_gain, 1)
+    L.new(gain.outputs[2], bg.inputs['Color'])
+    bg.inputs['Strength'].default_value = strength
+    L.new(bg.outputs['Background'], out.inputs['Surface'])
+    lamp = bpy.data.lights.new('sun', 'SUN')
+    lamp.energy = sun_w
+    lamp.color = (1.0, 0.92, 0.82)
+    lamp.angle = math.radians(sun.get('angle_deg', 1.0))
+    ob = bpy.data.objects.new('sun', lamp)
+    ob.rotation_euler = d.to_track_quat('Z', 'Y').to_euler()
+    sc.collection.objects.link(ob)
+
+
+if shot.get('sun'):
+    sky_sun(sc, shot['sun'], shot.get('cloud_cover', 0.55), shot.get('sky_strength', 0.35), shot.get('sun_w', 4.0), 2 ** -float(shot.get('exposure', 0.0)))
+else:
+    overcast(sc)
 oldtown.build(spot, sc.collection)
 if not opt.get('--no-textures'):   # the photo textures, outside the repo (gidi_kit/textured.py)
     print('textured:', textured.apply(opt.get('--textures')))
@@ -94,11 +180,12 @@ sc.render.image_settings.file_format = 'JPEG'
 sc.render.image_settings.quality = 90
 sc.view_settings.view_transform = 'AgX'
 sc.view_settings.look = 'AgX - Medium High Contrast'
+sc.view_settings.exposure = float(shot.get('exposure', 0.0))
 sc.eevee.taa_render_samples = int(opt.get('--samples', 16))
 sc.eevee.use_shadows = True
 sc.eevee.use_fast_gi = True
 sc.eevee.use_raytracing = True
-sc.eevee.fast_gi_distance = 3.0
+sc.eevee.fast_gi_distance = float(shot.get('gi_distance_m', 3.0))
 sc.render.filepath = opt['--out']
 bpy.ops.render.render(write_still=True)
 print('WROTE', opt['--out'])
