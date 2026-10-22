@@ -198,6 +198,8 @@ def sign(mb, F, r, wear):
     a block [colour, u0, u1, z0, z1] in board fractions), on a thin frame, out from the wall."""
     u, z, w, h, y = r['u'], r['z'], r['w'], r['h'], r.get('out', 0.08)
     col = _c(r.get('col'), '#e8e2d0')
+    if r.get('sag') or r.get('torn') or r.get('peel') or r.get('paper') or 't' in r:
+        return _sheet(mb, F, r, wear, u, z, w, h, y, col)
     mb.box('wood', at(F, u, y, z), shade(col, 0.6), wear, size=(w + 0.06, 0.04, h + 0.06))
     _q(mb, F, u - w / 2, u + w / 2, z - h / 2, z + h / 2, y + 0.021, 'paint', col, r.get('wear', wear))
     for bd in r.get('bands', []):
@@ -209,6 +211,51 @@ def sign(mb, F, r, wear):
             _q(mb, F, u - w / 2 + w * a, u - w / 2 + w * b, z - h / 2 + h * f0, z - h / 2 + h * f1, y + 0.026, 'paint', _c(c), r.get('wear', wear))
     for s_ in r.get('legs', []):   # brackets back to the wall
         parts.bar(mb, 'steel', F @ Vector((u + s_ * w / 2 * 0.8, y, z - h / 2)), F @ Vector((u + s_ * w / 2 * 0.8, 0.0, z - h / 2 - 0.3)), 0.03, STRUT, 0.8)
+
+
+def _sheet(mb, F, r, wear, u, z, w, h, y, col):
+    """A board or a pasted poster with a body: a board t thick on its frame (or paper, flat on the wall), bulging out by
+    sag in its middle, its printed blocks (bands) following the bulge, torn away up from its foot where the map says
+    (torn: [from, to, how far up] in fractions of its width and height, ragged), and a corner peeled off and folded out
+    (peel: [corner tl, tr, bl or br, size m])."""
+    t, sag, paper = r.get('t', 0.004 if r.get('paper') else 0.04), r.get('sag', 0.0), r.get('paper', False)
+    nu, nv = 10, 5
+    ww = r.get('wear', wear)
+
+    def cut(fu):   # how far up the foot is torn at fu across
+        for a, b, dep in r.get('torn', []):
+            if a <= fu <= b:
+                k = int(fu * nu * 2) % 3
+                return dep * (1.0, 0.65, 0.85)[k]
+        return 0.0
+
+    def P(fu, fv, dy):
+        bulge = sag * math.sin(math.pi * fu) * math.sin(math.pi * fv)
+        return F @ Vector((u - w / 2 + w * fu, y + dy + bulge, z - h / 2 + h * fv))
+
+    def patch(a, b, f0, f1, dy, c, mat='paint'):
+        for i in range(nu):
+            u0, u1 = a + (b - a) * i / nu, a + (b - a) * (i + 1) / nu
+            fm = (u0 + u1) / 2
+            v0 = max(f0, cut(fm))
+            if v0 >= f1:
+                continue
+            mb.face([P(u0, v0, dy), P(u1, v0, dy), P(u1, f1, dy), P(u0, f1, dy)], mat, c, ww)
+    if not paper:   # the board: its edge and back, then its face
+        mb.box('wood', at(F, u, y - t / 2, z), shade(col, 0.6), wear, size=(w + 0.06, t, h + 0.06))
+    patch(0.0, 1.0, 0.0, 1.0, 0.002 + (0 if paper else 0.001), col)
+    for k, bd in enumerate(r.get('bands', [])):
+        c, a, b, f0, f1 = (bd[0], 0.03, 0.97, bd[1], bd[2]) if len(bd) == 3 else bd
+        patch(a, b, f0, f1, 0.004 + 0.001 * k, _c(c))
+    if r.get('peel'):   # a corner come away, folded out from the wall
+        cn, sz = r['peel']
+        fu, fv = {'tl': (0, 1), 'tr': (1, 1), 'bl': (0, 0), 'br': (1, 0)}[cn]
+        su, sv = (1 if fu == 0 else -1) * sz / w, (1 if fv == 0 else -1) * sz / h
+        a_, b_, c_ = P(fu, fv, 0.009), P(fu + su, fv, 0.009), P(fu, fv + sv, 0.009)
+        tip = F @ Vector((u - w / 2 + w * (fu + su * 0.4), y + sz * 0.7, z - h / 2 + h * (fv + sv * 0.4)))
+        mb.face([b_, c_, tip], 'paint', hex_rgb('#e4dfd2'), ww)
+        mb.face([tip, c_, b_], 'paint', hex_rgb('#d6d0c2'), ww)
+        mb.face([a_, b_, c_], 'paint', shade(hex_rgb('#8a8174'), 0.8), 0.8)   # the wall showing under it
 
 
 def banner(mb, F, r):
