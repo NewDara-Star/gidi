@@ -72,3 +72,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | The item register, once per finished district | every item typed | GAP: the register is not built yet |
 | Match passes | renders against references | owner's review |
 | Fixes reach everything already built | areas rebuilt from source every time; hand fixes that no longer land fail | 17, R0 |
+| Hand-made, checked by programs; the base is frozen | `scripts/rebuild_areas.py` | refuses to run unless `GIDI_REBUILD_OK=owner`; every hand edit must land (check 17, `check_district.py`); a change to the area builder shows in review |
