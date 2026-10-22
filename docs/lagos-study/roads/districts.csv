@@ -1,0 +1,176 @@
+threshold,district,name,in_frame,roof_km2,built_km2,built_km2_at_1to3,places
+65,1,Alagbado / Abaranje / Meiran,True,50.32,131.6,14.62,"Alagbado; Abaranje; Meiran; Igando; Ejigbo; Ekoro; Command; Pen Cinema; Iyana Ipaja; Egbe; Baruwa; Fagba north-west; Idimu, south-east of Lasu-Isheri Road; Idimu; Abesan; Ayobo; Akesan; Ikotun; Ijaiye north-west; Ijegun; Alagbado south-west; Gowon Estate east; Jakande Estate (Isolo) north-west; Jakande Estate (Isolo) east; Alakuko; Alagbado south; Abule Egba; Fagba, north of Yakoyo Road; Ijaiye; Ikeja Along; Ikotun east; Ojokoro; Igando south-west; Igando west; Egbeda south"
+65,2,Bayeku / Ita Elewa / Isawo,True,42.52,167.0,18.55,"Bayeku; Ita Elewa; Isawo; Ijede; Odogunyan; Igbogbo; Ita Elewa, east of Ijede Road; Ijede north-east 1; Ogijo south-east; Majidun north-east; Ibeshe south; Ijede north-east 2; Imota west 2; Majidun-Ogolonto; Ikorodu town; Isawo north; Ebute (Ikorodu); Odogunyan east; Isawo south-east; Owutu; Ikorodu town north-east; Ipakodo; Odogunyan, south-east of Sagamu Road; Ogijo north-west; Bayeku west 1; Odogunyan north-west 1; Ita Elewa south-east; Odogunyan north-west 2; Ibeshe; Ajegunle (Ikorodu Rd) east; Ogijo south; Ijede east 2; Bayeku west 2; Bayeku south 2; Ita Elewa, north-west of Old Lagos Road; Ajegunle (Ikorodu Rd)"
+65,3,Ajegunle / Itire / Idi-Araba,True,23.0,48.0,5.33,"Ajegunle; Itire; Idi-Araba; Coker; Boundary (Ajegunle); Ogunlana; Aguda; Bajulaiye; Adelabu; Odi-Olowo, west of Lagos–Ibadan SGR; Orile Iganmu; Amukoko; Surulere; Fadeyi; Odi-Olowo; Olorunsogo; Lawanson; Ojuwoye-Mushin; Ojuelegba; Gbagada; Bode Thomas; Ijesha; Sabo; Palmgrove; Oyingbo north; Olodi Apapa; Idi-Oro; Pedro; Alagomeji; Ebute Metta, east of Murtula Muhammed Way; Akoka"
+65,4,Alaba / Iba / Ojo (LASU),True,12.7,38.3,4.26,"Alaba; Iba; Iba, south of Lagos-Badagry Expressway; Iba east; Ojo (LASU) north; Isheri-Olofin; Alaba south-east; Isheri-Olofin south"
+65,5,Ago Palace / Jakande Estate (Isolo) / Abaranje,True,11.22,36.3,4.04,"Ago Palace; Jakande Estate (Isolo); Ago Palace north-east; Ago Palace, east of Ago Palace Way; Abaranje south-west 1; Isheri-Osun; Abaranje south-west 2; Ago Palace west; Ago Palace south-west"
+65,6,Elegushi / Lekki Phase 1 / Agungi,True,9.33,29.4,3.27,"Elegushi; Lekki Phase 1; Agungi; Jakande (Lekki); Lekki Phase 1, north-east of Admiralty Way; Ikate; Ilasan; Oniru; Banana Island east; Agungi west"
+65,7,Ajah / Badore / Abraham Adesanya,True,7.96,29.4,3.27,"Ajah south-west; Badore; Abraham Adesanya, north-east of Lekki-Epe Expressway; Abraham Adesanya; VGC north-west; Chevron south-east; Ilaje Ajah; VGC, south-east of Lekki-Epe Expressway; Ilaje Ajah south; Ilaje Ajah south-west; Ajah"
+65,8,Agbara / Morogbo / Badagry,True,7.94,35.6,3.95,"Agbara; Morogbo north-west 1; Agbara, east of Lagos-Badagry Expressway; Agbara west; Morogbo west 3; Badagry north-east 2; Badagry north-east 3; Morogbo west 4; Badagry north-east 4; Morogbo west 8; Morogbo north-west 3"
+65,9,Fagba / Ifako-Ijaiye / Oko-Oba,True,7.5,17.9,1.99,Fagba; Ifako-Ijaiye; Oko-Oba; Orile Agege; Oko-Oba north; Iyana Ipaja north-east; Iju; Ogba
+65,10,Sangotedo / Bogije / Abijo,True,6.93,27.6,3.06,"Sangotedo; Bogije, south of Lekki-Epe Expressway; Abijo; Bogije; Lakowe; Lakowe, south of Lekki-Epe Expressway; Awoyaya; Abijo, south-east of Lekki-Epe Expressway 2; Abijo, south-east of Lekki-Epe Expressway 1; Ogombo south-west 4; Eleko west 2"
+65,11,Ibeju / Ogombo / Eleko,False,6.39,20.4,2.27,"Ibeju; Ogombo; Ibeju, west of Eleko Beach Road; Eleko; Ibeju west 3; Lekki FTZ; Ibeju west 2; Ibeju south-west; Ibeju west 1; Eleko east; Ibeju south-east; Ibeju west 4; Ibeju south; Ogombo east; Ibeju, south-west of Eleko Beach Road"
+65,12,Agboyi / Shangisha / Olowora-Isheri (Ikosi-Isheri),True,6.19,20.2,2.24,"Agboyi north; Shangisha; Olowora-Isheri (Ikosi-Isheri); Magodo; Omole; Ojodu; Berger; Irawo; Olowora east; Agboyi; Agric (Ikorodu), north-west of Ikorodu Road"
+65,13,Egbeda / Akowonjo / Shasha,True,5.67,12.7,1.41,"Egbeda; Akowonjo; Shasha; Dopemu; Egbeda, north-west of Egbeda-Idimu Road"
+65,14,Mafoluku / Okota / Shogunle,True,5.54,13.2,1.46,Mafoluku; Okota; Shogunle; Oshodi; Airport (MMIA) south; Ago Palace east; Isolo; Oke-Afa; Ire-Akari
+65,15,Alausa / Oregun,True,5.47,14.3,1.59,Alausa; Oregun
+65,16,Ewu-Elepe / Imota,True,4.7,21.4,2.38,"Ewu-Elepe; Ewu-Elepe, south of Old Lagos Road; Ewu-Elepe west; Imota north-west; Imota west 1; Ewu-Elepe east"
+65,17,Ejinrin / Agbowa / Epe,False,4.54,13.4,1.49,"Ejinrin; Agbowa; Ejinrin, east of Old Lagos Road 2; Epe east 38; Agbowa, south-west of Old Lagos Road; Epe north 2; Imota south-east; Noforija north 1; Ejinrin west 26; Ejinrin, east of Old Lagos Road 3; Epe south; Epe east 80; Noforija north 2; Agbowa west; Epe north 1"
+65,18,Ogudu / Ifako-Gbagada / Gbagada Phase 2,True,4.21,12.6,1.4,Ogudu; Ifako-Gbagada; Gbagada Phase 2; Obanikoro-Onipanu; Anthony Village; Soluyi
+65,19,Trade Fair / Mile 2 / Festac,True,4.2,14.2,1.58,Trade Fair; Mile 2; Festac north-east; Festac; Agboju; Alakija; Amuwo Odofin
+65,20,Cele / Isolo / Ladipo,True,4.17,10.2,1.13,Cele; Isolo north-east; Ladipo; Papa Ajao; Ilasamaja
+65,21,Computer Village / Mende / Allen-Opebi,True,3.58,10.3,1.15,"Computer Village; Mende; Allen-Opebi; Computer Village, south-west of Mobolaji Bank-Anthony Way; Agidingbi; Oregun, south of Opebi Road; Maryland; Ojota"
+65,22,Langbasa / Addo,True,3.5,12.4,1.38,"Langbasa; Addo; Addo, west of Addo Road"
+65,23,Okokomaiko / Ijanikin,True,3.18,10.2,1.14,"Okokomaiko; Okokomaiko, north-west of Lagos-Badagry Expressway; Ijanikin north-west"
+65,24,Bariga / Ilaje (Bariga) / Shomolu,True,3.17,6.6,0.73,Bariga; Ilaje (Bariga); Shomolu; Oworonshoki
+65,25,Egan / Igando / Ayobo,True,2.77,9.4,1.04,Egan; Igando north; Egan north-east; Egan west; Ayobo west
+65,26,Ajara / Tin Can / Badagry,False,2.71,6.6,0.74,Ajara; Ajara east 1; Ajara east 4; Ajara south-west 3; Tin Can south; Ajara west 2; Ajara south-west 2; Ajara south-west 1; Badagry east 6
+65,27,Morogbo / Badagry,False,2.63,12.0,1.33,Morogbo west 2; Badagry north-east 1; Morogbo west 6
+65,28,Jibowu / Iwaya / Makoko,True,2.57,6.8,0.76,Jibowu; Iwaya; Makoko; Onike-Abule Oja; Igbobi; Yaba
+65,29,Kosofe / Alapere / Ikosi,True,2.54,5.6,0.62,Kosofe; Alapere; Ikosi; Ketu
+65,30,Ogombo,False,2.5,10.7,1.19,Ogombo south 1; Ogombo south-west 1; Ogombo south-west 3; Ogombo south 2
+65,31,Epe,False,2.46,10.9,1.21,Epe; Epe north-west
+65,32,Satellite Town,True,2.44,6.6,0.73,Satellite Town
+65,33,Badagry,False,2.25,9.1,1.01,"Badagry, north-west of Lagos-Badagry Expressway; Badagry; Badagry west"
+65,34,Navy Town / Abule Ado,True,2.21,7.0,0.77,Navy Town; Navy Town east; Abule Ado
+65,35,Imota,True,2.11,7.1,0.79,"Imota south 2; Imota south 3; Imota; Imota west 4; Imota west 3; Imota, north of Old Lagos Road; Imota south 1"
+65,36,Sangotedo / Abraham Adesanya / Eleko,True,1.91,7.0,0.77,Sangotedo east 2; Sangotedo east 1; Abraham Adesanya south; Sangotedo south-east; Eleko west 3
+65,37,Morogbo / Badagry,False,1.87,7.1,0.79,"Morogbo, west of Lagos-Badagry Expressway; Badagry east 5; Badagry east 4; Badagry east 1; Badagry north 6"
+65,38,Elegushi / Victoria Island / Eko Atlantic,True,1.78,6.1,0.67,"Elegushi west; Victoria Island, north-west of Adeola Odeku Street; Eko Atlantic; Victoria Island"
+65,39,Otto-Awori,True,1.76,6.2,0.69,Otto-Awori
+65,40,Ijegun-Egba,True,1.54,5.3,0.59,Ijegun-Egba
+65,41,Marina / Obalende / Lafiaji,True,1.53,4.3,0.48,Marina; Obalende; Lafiaji; Isale Eko
+65,42,Ogijo,True,1.47,4.7,0.52,Ogijo
+65,43,Mile 2 / Amukoko,True,1.45,4.6,0.51,"Mile 2 north-east; Amukoko, north of Lagos-Badagry Expressway"
+65,44,Ilupeju / Shogunle,True,1.43,4.1,0.45,"Ilupeju; Shogunle, east of Agege Motor Road"
+65,45,Ipaja / Gowon Estate,True,1.41,4.0,0.44,Ipaja; Gowon Estate
+65,46,Noforija / Ejinrin,False,1.38,4.6,0.51,"Noforija south-east; Ejinrin, east of Lekki-Epe Expressway"
+65,47,Eleko / Lakowe / Ogombo,False,1.38,5.7,0.63,Eleko north-east; Lakowe east; Ogombo south-west 2; Eleko west 1
+65,48,Ikeja GRA / Ikeja Cantonment / Onigbongbo,True,1.37,4.7,0.52,Ikeja GRA; Ikeja Cantonment; Onigbongbo
+65,49,Ijegun-Egba / Tin Can / Apapa Wharf,True,1.35,4.7,0.52,Ijegun-Egba south; Tin Can south-east; Apapa Wharf south-east; Tin Can south-west; Ijegun-Egba south-west; Ijegun-Egba east
+65,50,Okota,True,1.33,5.1,0.56,"Okota, south of Ago Palace Way"
+65,51,Morogbo / Agbara,True,1.32,5.1,0.57,Morogbo north-west 2; Agbara east
+65,52,Kirikiri / Boundary (Ajegunle),True,1.3,4.6,0.51,"Kirikiri south-east; Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Kirikiri"
+65,53,Morogbo,True,1.27,4.3,0.48,Morogbo; Morogbo west 7; Morogbo west 1; Morogbo east 1
+65,54,Ikoyi / Old Ikoyi,True,1.25,5.6,0.63,"Ikoyi; Ikoyi, south of Bourdillon Road; Old Ikoyi"
+65,55,Apapa GRA,True,1.24,4.7,0.52,Apapa GRA
+65,56,Otto-Iddo / Oyingbo / Iponri,True,1.12,3.3,0.37,Otto-Iddo; Oyingbo; Iponri; Ebute Metta
+65,57,Volks,True,1.08,4.5,0.5,Volks north-east
+65,58,Airport (MMIA),True,1.07,3.6,0.4,Airport (MMIA)
+65,59,Iganmu / Costain / Stadium (Surulere),True,1.02,3.5,0.39,Iganmu; Costain; Stadium (Surulere)
+65,60,Old Ikoyi,True,0.99,3.2,0.36,Old Ikoyi west
+65,61,Imota,True,0.96,3.8,0.42,Imota north-east 1; Imota east 1; Imota north-east 3
+65,62,Apapa Wharf / Apapa GRA / Ijora Badia,True,0.89,3.0,0.34,Apapa Wharf; Apapa GRA north-east; Ijora Badia
+65,63,Parkview / Dolphin Estate / Banana Island,True,0.89,3.3,0.37,Parkview; Dolphin Estate; Banana Island
+65,64,Osapa London / VGC / Ikota,True,0.77,3.2,0.35,Osapa London; VGC; Ikota; Chevron
+65,65,Apapa Wharf / Apapa GRA,True,0.62,2.1,0.23,"Apapa Wharf, east of Apapa-Oworonshoki Expressway; Apapa GRA, south-west of Apapa-Oworonshoki Expressway"
+65,66,UNILAG,True,0.43,1.6,0.18,UNILAG
+65,67,Ojo (LASU) / Volks,True,0.41,1.5,0.16,Ojo (LASU); Volks
+65,68,Satellite Town,True,0.4,1.6,0.17,Satellite Town south-east
+65,69,Mile 12,True,0.28,1.0,0.11,Mile 12
+65,70,Epe,False,0.13,0.5,0.06,Epe east 1
+60,1,Alagbado / Abaranje / Fagba,True,63.49,162.2,18.02,"Alagbado; Abaranje; Fagba; Meiran; Igando; Ejigbo; Ekoro; Command; Pen Cinema; Iyana Ipaja; Egbe; Baruwa; Egbeda; Fagba north-west; Idimu, south-east of Lasu-Isheri Road; Idimu; Abesan; Ifako-Ijaiye; Ayobo; Akowonjo; Akesan; Shasha; Ikotun; Ijaiye north-west; Dopemu; Oko-Oba; Orile Agege; Ijegun; Alagbado south-west; Gowon Estate east; Oko-Oba north; Jakande Estate (Isolo) north-west; Jakande Estate (Isolo) east; Alakuko; Egbeda, north-west of Egbeda-Idimu Road; Alagbado south; Abule Egba; Fagba, north of Yakoyo Road; Iyana Ipaja north-east; Ijaiye; Ikeja Along; Ikotun east; Iju; Ojokoro; Igando south-west; Igando west; Egbeda south; Ogba"
+60,2,Bayeku / Ita Elewa / Isawo,True,42.52,167.0,18.55,"Bayeku; Ita Elewa; Isawo; Ijede; Odogunyan; Igbogbo; Ita Elewa, east of Ijede Road; Ijede north-east 1; Ogijo south-east; Majidun north-east; Ibeshe south; Ijede north-east 2; Imota west 2; Majidun-Ogolonto; Ikorodu town; Isawo north; Ebute (Ikorodu); Odogunyan east; Isawo south-east; Owutu; Ikorodu town north-east; Ipakodo; Odogunyan, south-east of Sagamu Road; Ogijo north-west; Bayeku west 1; Odogunyan north-west 1; Ita Elewa south-east; Odogunyan north-west 2; Ibeshe; Ajegunle (Ikorodu Rd) east; Ogijo south; Ijede east 2; Bayeku west 2; Bayeku south 2; Ita Elewa, north-west of Old Lagos Road; Ajegunle (Ikorodu Rd)"
+60,3,Ajegunle / Itire / Idi-Araba,True,23.0,48.0,5.33,"Ajegunle; Itire; Idi-Araba; Coker; Boundary (Ajegunle); Ogunlana; Aguda; Bajulaiye; Adelabu; Odi-Olowo, west of Lagos–Ibadan SGR; Orile Iganmu; Amukoko; Surulere; Fadeyi; Odi-Olowo; Olorunsogo; Lawanson; Ojuwoye-Mushin; Ojuelegba; Gbagada; Bode Thomas; Ijesha; Sabo; Palmgrove; Oyingbo north; Olodi Apapa; Idi-Oro; Pedro; Alagomeji; Ebute Metta, east of Murtula Muhammed Way; Akoka"
+60,4,Ajah / Langbasa / Sangotedo,True,18.76,71.0,7.89,"Ajah south-west; Langbasa; Sangotedo; Badore; Abraham Adesanya, north-east of Lekki-Epe Expressway; Addo; Bogije, south of Lekki-Epe Expressway; Abijo; Abraham Adesanya; Bogije; Lakowe; Lakowe, south of Lekki-Epe Expressway; VGC north-west; Awoyaya; Chevron south-east; Addo, west of Addo Road; Ilaje Ajah; VGC, south-east of Lekki-Epe Expressway; Sangotedo east 1; Abijo, south-east of Lekki-Epe Expressway 2; Abijo, south-east of Lekki-Epe Expressway 1; Ilaje Ajah south; Ogombo south-west 4; Ilaje Ajah south-west; Ajah; Eleko west 2"
+60,5,Alaba / Iba / Okokomaiko,True,16.96,51.8,5.76,"Alaba; Iba; Iba, south of Lagos-Badagry Expressway; Okokomaiko; Navy Town; Iba east; Okokomaiko, north-west of Lagos-Badagry Expressway; Ojo (LASU) north; Isheri-Olofin; Alaba south-east; Isheri-Olofin south"
+60,6,Ago Palace / Jakande Estate (Isolo) / Abaranje,True,11.22,36.3,4.04,"Ago Palace; Jakande Estate (Isolo); Ago Palace north-east; Ago Palace, east of Ago Palace Way; Abaranje south-west 1; Isheri-Osun; Abaranje south-west 2; Ago Palace west; Ago Palace south-west"
+60,7,Elegushi / Lekki Phase 1 / Agungi,True,9.33,29.4,3.27,"Elegushi; Lekki Phase 1; Agungi; Jakande (Lekki); Lekki Phase 1, north-east of Admiralty Way; Ikate; Ilasan; Oniru; Banana Island east; Agungi west"
+60,8,Satellite Town / Ijegun-Egba / Trade Fair,True,8.75,27.9,3.1,Satellite Town; Ijegun-Egba; Trade Fair; Mile 2; Festac north-east; Festac; Agboju; Navy Town east; Alakija; Abule Ado; Amuwo Odofin
+60,9,Agbara / Morogbo / Badagry,True,7.94,35.6,3.95,"Agbara; Morogbo north-west 1; Agbara, east of Lagos-Badagry Expressway; Agbara west; Morogbo west 3; Badagry north-east 2; Badagry north-east 3; Morogbo west 4; Badagry north-east 4; Morogbo west 8; Morogbo north-west 3"
+60,10,Ibeju / Ogombo / Eleko,False,6.39,20.4,2.27,"Ibeju; Ogombo; Ibeju, west of Eleko Beach Road; Eleko; Ibeju west 3; Lekki FTZ; Ibeju west 2; Ibeju south-west; Ibeju west 1; Eleko east; Ibeju south-east; Ibeju west 4; Ibeju south; Ogombo east; Ibeju, south-west of Eleko Beach Road"
+60,11,Agboyi / Shangisha / Olowora-Isheri (Ikosi-Isheri),True,6.19,20.2,2.24,"Agboyi north; Shangisha; Olowora-Isheri (Ikosi-Isheri); Magodo; Omole; Ojodu; Berger; Irawo; Olowora east; Agboyi; Agric (Ikorodu), north-west of Ikorodu Road"
+60,12,Mafoluku / Okota / Shogunle,True,5.54,13.2,1.46,Mafoluku; Okota; Shogunle; Oshodi; Airport (MMIA) south; Ago Palace east; Isolo; Oke-Afa; Ire-Akari
+60,13,Alausa / Oregun,True,5.47,14.3,1.59,Alausa; Oregun
+60,14,Old Ikoyi / Elegushi / Ikoyi,True,4.9,18.2,2.03,"Old Ikoyi west; Elegushi west; Ikoyi; Parkview; Victoria Island, north-west of Adeola Odeku Street; Ikoyi, south of Bourdillon Road; Old Ikoyi; Eko Atlantic; Victoria Island; Dolphin Estate; Banana Island"
+60,15,Ewu-Elepe / Imota,True,4.7,21.4,2.38,"Ewu-Elepe; Ewu-Elepe, south of Old Lagos Road; Ewu-Elepe west; Imota north-west; Imota west 1; Ewu-Elepe east"
+60,16,Ejinrin / Agbowa / Epe,False,4.54,13.4,1.49,"Ejinrin; Agbowa; Ejinrin, east of Old Lagos Road 2; Epe east 38; Agbowa, south-west of Old Lagos Road; Epe north 2; Imota south-east; Noforija north 1; Ejinrin west 26; Ejinrin, east of Old Lagos Road 3; Epe south; Epe east 80; Noforija north 2; Agbowa west; Epe north 1"
+60,17,Ogudu / Ifako-Gbagada / Gbagada Phase 2,True,4.21,12.6,1.4,Ogudu; Ifako-Gbagada; Gbagada Phase 2; Obanikoro-Onipanu; Anthony Village; Soluyi
+60,18,Cele / Isolo / Ladipo,True,4.17,10.2,1.13,Cele; Isolo north-east; Ladipo; Papa Ajao; Ilasamaja
+60,19,Computer Village / Mende / Allen-Opebi,True,3.58,10.3,1.15,"Computer Village; Mende; Allen-Opebi; Computer Village, south-west of Mobolaji Bank-Anthony Way; Agidingbi; Oregun, south of Opebi Road; Maryland; Ojota"
+60,20,Bariga / Ilaje (Bariga) / Shomolu,True,3.17,6.6,0.73,Bariga; Ilaje (Bariga); Shomolu; Oworonshoki
+60,21,Egan / Igando / Ayobo,True,2.77,9.4,1.04,Egan; Igando north; Egan north-east; Egan west; Ayobo west
+60,22,Ajara / Tin Can / Badagry,False,2.71,6.6,0.74,Ajara; Ajara east 1; Ajara east 4; Ajara south-west 3; Tin Can south; Ajara west 2; Ajara south-west 2; Ajara south-west 1; Badagry east 6
+60,23,Morogbo / Badagry,False,2.63,12.0,1.33,Morogbo west 2; Badagry north-east 1; Morogbo west 6
+60,24,Jibowu / Iwaya / Makoko,True,2.57,6.8,0.76,Jibowu; Iwaya; Makoko; Onike-Abule Oja; Igbobi; Yaba
+60,25,Kosofe / Alapere / Ikosi,True,2.54,5.6,0.62,Kosofe; Alapere; Ikosi; Ketu
+60,26,Ogombo,False,2.5,10.7,1.19,Ogombo south 1; Ogombo south-west 1; Ogombo south-west 3; Ogombo south 2
+60,27,Epe,False,2.46,10.9,1.21,Epe; Epe north-west
+60,28,Badagry,False,2.25,9.1,1.01,"Badagry, north-west of Lagos-Badagry Expressway; Badagry; Badagry west"
+60,29,Apapa GRA / Apapa Wharf / Ijora Badia,True,2.13,7.7,0.85,Apapa GRA; Apapa Wharf; Apapa GRA north-east; Ijora Badia
+60,30,Imota,True,2.11,7.1,0.79,"Imota south 2; Imota south 3; Imota; Imota west 4; Imota west 3; Imota, north of Old Lagos Road; Imota south 1"
+60,31,Morogbo / Badagry,False,1.87,7.1,0.79,"Morogbo, west of Lagos-Badagry Expressway; Badagry east 5; Badagry east 4; Badagry east 1; Badagry north 6"
+60,32,Otto-Awori,True,1.76,6.2,0.69,Otto-Awori
+60,33,Sangotedo / Abraham Adesanya / Eleko,True,1.54,5.4,0.6,Sangotedo east 2; Abraham Adesanya south; Sangotedo south-east; Eleko west 3
+60,34,Marina / Obalende / Lafiaji,True,1.53,4.3,0.48,Marina; Obalende; Lafiaji; Isale Eko
+60,35,Ogijo,True,1.47,4.7,0.52,Ogijo
+60,36,Mile 2 / Amukoko,True,1.45,4.6,0.51,"Mile 2 north-east; Amukoko, north of Lagos-Badagry Expressway"
+60,37,Ilupeju / Shogunle,True,1.43,4.1,0.45,"Ilupeju; Shogunle, east of Agege Motor Road"
+60,38,Ipaja / Gowon Estate,True,1.41,4.0,0.44,Ipaja; Gowon Estate
+60,39,Noforija / Ejinrin,False,1.38,4.6,0.51,"Noforija south-east; Ejinrin, east of Lekki-Epe Expressway"
+60,40,Eleko / Lakowe / Ogombo,False,1.38,5.7,0.63,Eleko north-east; Lakowe east; Ogombo south-west 2; Eleko west 1
+60,41,Ikeja GRA / Ikeja Cantonment / Onigbongbo,True,1.37,4.7,0.52,Ikeja GRA; Ikeja Cantonment; Onigbongbo
+60,42,Ijegun-Egba / Tin Can / Apapa Wharf,True,1.35,4.7,0.52,Ijegun-Egba south; Tin Can south-east; Apapa Wharf south-east; Tin Can south-west; Ijegun-Egba south-west; Ijegun-Egba east
+60,43,Okota,True,1.33,5.1,0.56,"Okota, south of Ago Palace Way"
+60,44,Morogbo / Agbara,True,1.32,5.1,0.57,Morogbo north-west 2; Agbara east
+60,45,Kirikiri / Boundary (Ajegunle),True,1.3,4.6,0.51,"Kirikiri south-east; Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Kirikiri"
+60,46,Morogbo,True,1.27,4.3,0.48,Morogbo; Morogbo west 7; Morogbo west 1; Morogbo east 1
+60,47,Otto-Iddo / Oyingbo / Iponri,True,1.12,3.3,0.37,Otto-Iddo; Oyingbo; Iponri; Ebute Metta
+60,48,Volks,True,1.08,4.5,0.5,Volks north-east
+60,49,Airport (MMIA),True,1.07,3.6,0.4,Airport (MMIA)
+60,50,Iganmu / Costain / Stadium (Surulere),True,1.02,3.5,0.39,Iganmu; Costain; Stadium (Surulere)
+60,51,Imota,True,0.96,3.8,0.42,Imota north-east 1; Imota east 1; Imota north-east 3
+60,52,Osapa London / VGC / Ikota,True,0.77,3.2,0.35,Osapa London; VGC; Ikota; Chevron
+60,53,Apapa Wharf / Apapa GRA,True,0.62,2.1,0.23,"Apapa Wharf, east of Apapa-Oworonshoki Expressway; Apapa GRA, south-west of Apapa-Oworonshoki Expressway"
+60,54,Ijanikin,True,0.55,1.9,0.21,Ijanikin north-west
+60,55,UNILAG,True,0.43,1.6,0.18,UNILAG
+60,56,Ojo (LASU) / Volks,True,0.41,1.5,0.16,Ojo (LASU); Volks
+60,57,Satellite Town,True,0.4,1.6,0.17,Satellite Town south-east
+60,58,Mile 12,True,0.28,1.0,0.11,Mile 12
+60,59,Epe,False,0.13,0.5,0.06,Epe east 1
+55,1,Alagbado / Ago Palace / Abaranje,True,84.33,229.4,25.49,"Alagbado; Ago Palace; Abaranje; Fagba; Meiran; Igando; Ejigbo; Ekoro; Command; Pen Cinema; Iyana Ipaja; Egbe; Baruwa; Egbeda; Fagba north-west; Idimu, south-east of Lasu-Isheri Road; Agboyi north; Idimu; Shangisha; Abesan; Ifako-Ijaiye; Ayobo; Akowonjo; Jakande Estate (Isolo); Akesan; Shasha; Ago Palace north-east; Olowora-Isheri (Ikosi-Isheri); Ikotun; Ijaiye north-west; Dopemu; Egan; Ipaja; Oko-Oba; Orile Agege; Ijegun; Igando north; Ago Palace, east of Ago Palace Way; Alagbado south-west; Abaranje south-west 1; Gowon Estate east; Oko-Oba north; Jakande Estate (Isolo) north-west; Jakande Estate (Isolo) east; Alakuko; Isheri-Osun; Egbeda, north-west of Egbeda-Idimu Road; Egan north-east; Alagbado south; Abaranje south-west 2; Gowon Estate; Magodo; Omole; Abule Egba; Fagba, north of Yakoyo Road; Iyana Ipaja north-east; Ijaiye; Ikeja Along; Ikotun east; Ojodu; Berger; Iju; Egan west; Ojokoro; Igando south-west; Igando west; Ayobo west; Irawo; Egbeda south; Ogba; Olowora east; Agric (Ikorodu), north-west of Ikorodu Road"
+55,2,Bayeku / Ita Elewa / Isawo,True,46.89,187.8,20.86,"Bayeku; Ita Elewa; Isawo; Ijede; Odogunyan; Igbogbo; Ewu-Elepe; Ita Elewa, east of Ijede Road; Ijede north-east 1; Ogijo south-east; Majidun north-east; Ibeshe south; Ijede north-east 2; Imota west 2; Ewu-Elepe, south of Old Lagos Road; Majidun-Ogolonto; Ikorodu town; Isawo north; Ebute (Ikorodu); Odogunyan east; Isawo south-east; Owutu; Ikorodu town north-east; Ipakodo; Odogunyan, south-east of Sagamu Road; Ogijo north-west; Ewu-Elepe west; Bayeku west 1; Odogunyan north-west 1; Ita Elewa south-east; Odogunyan north-west 2; Ibeshe; Ajegunle (Ikorodu Rd) east; Imota west 4; Ogijo south; Ijede east 2; Bayeku west 2; Bayeku south 2; Ita Elewa, north-west of Old Lagos Road; Ajegunle (Ikorodu Rd)"
+55,3,Ajegunle / Itire / Idi-Araba,True,25.86,53.8,5.98,"Ajegunle; Itire; Idi-Araba; Coker; Boundary (Ajegunle); Bariga; Ogunlana; Aguda; Bajulaiye; Adelabu; Odi-Olowo, west of Lagos–Ibadan SGR; Ilaje (Bariga); Shomolu; Orile Iganmu; Amukoko; Surulere; Fadeyi; Odi-Olowo; Olorunsogo; Lawanson; Ojuwoye-Mushin; Ojuelegba; Gbagada; Bode Thomas; Ijesha; Sabo; Palmgrove; Oyingbo north; Olodi Apapa; Idi-Oro; Pedro; Alagomeji; Ebute Metta, east of Murtula Muhammed Way; Akoka"
+55,4,Ajah / Langbasa / Sangotedo,True,21.82,84.2,9.36,"Ajah south-west; Langbasa; Sangotedo; Badore; Ogombo south 1; Abraham Adesanya, north-east of Lekki-Epe Expressway; Addo; Bogije, south of Lekki-Epe Expressway; Abijo; Abraham Adesanya; Bogije; Lakowe; Lakowe, south of Lekki-Epe Expressway; VGC north-west; Awoyaya; Chevron south-east; Ogombo south-west 1; Addo, west of Addo Road; Ilaje Ajah; VGC, south-east of Lekki-Epe Expressway; Ogombo south-west 3; Sangotedo east 1; Lakowe east; Abijo, south-east of Lekki-Epe Expressway 2; Ogombo south 2; Ogombo south-west 2; Abijo, south-east of Lekki-Epe Expressway 1; Ilaje Ajah south; Ogombo south-west 4; Ilaje Ajah south-west; Ajah; Eleko west 2"
+55,5,Alaba / Iba / Okokomaiko,True,16.96,51.8,5.76,"Alaba; Iba; Iba, south of Lagos-Badagry Expressway; Okokomaiko; Navy Town; Iba east; Okokomaiko, north-west of Lagos-Badagry Expressway; Ojo (LASU) north; Isheri-Olofin; Alaba south-east; Isheri-Olofin south"
+55,6,Okota / Mafoluku / Computer Village,True,11.83,33.2,3.69,"Okota, south of Ago Palace Way; Mafoluku; Computer Village; Okota; Mende; Ikeja GRA; Shogunle; Ikeja Cantonment; Oshodi; Airport (MMIA) south; Ago Palace east; Allen-Opebi; Isolo; Oke-Afa; Computer Village, south-west of Mobolaji Bank-Anthony Way; Agidingbi; Oregun, south of Opebi Road; Ire-Akari; Maryland; Onigbongbo; Ojota"
+55,7,Elegushi / Lekki Phase 1 / Agungi,True,9.33,29.4,3.27,"Elegushi; Lekki Phase 1; Agungi; Jakande (Lekki); Lekki Phase 1, north-east of Admiralty Way; Ikate; Ilasan; Oniru; Banana Island east; Agungi west"
+55,8,Agbara / Morogbo / Badagry,True,9.27,40.7,4.52,"Agbara; Morogbo north-west 1; Agbara, east of Lagos-Badagry Expressway; Morogbo north-west 2; Agbara west; Morogbo west 3; Badagry north-east 2; Badagry north-east 3; Agbara east; Morogbo west 4; Badagry north-east 4; Morogbo west 8; Morogbo north-west 3"
+55,9,Satellite Town / Ijegun-Egba / Trade Fair,True,8.75,27.9,3.1,Satellite Town; Ijegun-Egba; Trade Fair; Mile 2; Festac north-east; Festac; Agboju; Navy Town east; Alakija; Abule Ado; Amuwo Odofin
+55,10,Imota / Ejinrin / Agbowa,True,6.99,21.2,2.35,"Imota south 2; Ejinrin; Agbowa; Ejinrin, east of Old Lagos Road 2; Epe east 38; Agbowa, south-west of Old Lagos Road; Imota south 3; Imota; Epe north 2; Imota south-east; Noforija north 1; Ejinrin west 26; Imota north-west; Ejinrin, east of Old Lagos Road 3; Imota west 1; Ewu-Elepe east; Epe south; Epe east 80; Imota west 3; Imota, north of Old Lagos Road; Imota south 1; Noforija north 2; Agbowa west; Epe north 1"
+55,11,Ibeju / Ogombo / Eleko,False,6.39,20.4,2.27,"Ibeju; Ogombo; Ibeju, west of Eleko Beach Road; Eleko; Ibeju west 3; Lekki FTZ; Ibeju west 2; Ibeju south-west; Ibeju west 1; Eleko east; Ibeju south-east; Ibeju west 4; Ibeju south; Ogombo east; Ibeju, south-west of Eleko Beach Road"
+55,12,Alausa / Oregun,True,5.47,14.3,1.59,Alausa; Oregun
+55,13,Old Ikoyi / Elegushi / Ikoyi,True,4.9,18.2,2.03,"Old Ikoyi west; Elegushi west; Ikoyi; Parkview; Victoria Island, north-west of Adeola Odeku Street; Ikoyi, south of Bourdillon Road; Old Ikoyi; Eko Atlantic; Victoria Island; Dolphin Estate; Banana Island"
+55,14,Ogudu / Ifako-Gbagada / Gbagada Phase 2,True,4.65,13.9,1.54,Ogudu; Ifako-Gbagada; Gbagada Phase 2; Obanikoro-Onipanu; Anthony Village; Oworonshoki; Soluyi; Agboyi
+55,15,Cele / Isolo / Ladipo,True,4.17,10.2,1.13,Cele; Isolo north-east; Ladipo; Papa Ajao; Ilasamaja
+55,16,Epe / Noforija / Ejinrin,False,3.84,15.5,1.72,"Epe; Noforija south-east; Epe north-west; Ejinrin, east of Lekki-Epe Expressway"
+55,17,Ajara / Tin Can / Morogbo,False,2.83,6.9,0.77,Ajara; Ajara east 1; Ajara east 4; Ajara south-west 3; Tin Can south; Ajara west 2; Ajara south-west 2; Ajara south-west 1; Morogbo east 1; Badagry east 6
+55,18,Morogbo / Badagry,False,2.63,12.0,1.33,Morogbo west 2; Badagry north-east 1; Morogbo west 6
+55,19,Jibowu / Iwaya / Makoko,True,2.57,6.8,0.76,Jibowu; Iwaya; Makoko; Onike-Abule Oja; Igbobi; Yaba
+55,20,Kosofe / Alapere / Ikosi,True,2.54,5.6,0.62,Kosofe; Alapere; Ikosi; Ketu
+55,21,Badagry,False,2.25,9.1,1.01,"Badagry, north-west of Lagos-Badagry Expressway; Badagry; Badagry west"
+55,22,Apapa GRA / Apapa Wharf / Ijora Badia,True,2.13,7.7,0.85,Apapa GRA; Apapa Wharf; Apapa GRA north-east; Ijora Badia
+55,23,Morogbo / Badagry,False,1.87,7.1,0.79,"Morogbo, west of Lagos-Badagry Expressway; Badagry east 5; Badagry east 4; Badagry east 1; Badagry north 6"
+55,24,Otto-Awori,True,1.76,6.2,0.69,Otto-Awori
+55,25,Volks / Ago Palace,True,1.7,6.7,0.74,Volks north-east; Ago Palace west; Ago Palace south-west
+55,26,Sangotedo / Abraham Adesanya / Eleko,True,1.54,5.4,0.6,Sangotedo east 2; Abraham Adesanya south; Sangotedo south-east; Eleko west 3
+55,27,Marina / Obalende / Lafiaji,True,1.53,4.3,0.48,Marina; Obalende; Lafiaji; Isale Eko
+55,28,Ogijo,True,1.47,4.7,0.52,Ogijo
+55,29,Mile 2 / Amukoko,True,1.45,4.6,0.51,"Mile 2 north-east; Amukoko, north of Lagos-Badagry Expressway"
+55,30,Ilupeju / Shogunle,True,1.43,4.1,0.45,"Ilupeju; Shogunle, east of Agege Motor Road"
+55,31,Ijegun-Egba / Tin Can / Apapa Wharf,True,1.35,4.7,0.52,Ijegun-Egba south; Tin Can south-east; Apapa Wharf south-east; Tin Can south-west; Ijegun-Egba south-west; Ijegun-Egba east
+55,32,Kirikiri / Boundary (Ajegunle),True,1.3,4.6,0.51,"Kirikiri south-east; Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway; Kirikiri"
+55,33,Morogbo,True,1.16,4.0,0.45,Morogbo; Morogbo west 7; Morogbo west 1
+55,34,Otto-Iddo / Oyingbo / Iponri,True,1.12,3.3,0.37,Otto-Iddo; Oyingbo; Iponri; Ebute Metta
+55,35,Airport (MMIA),True,1.07,3.6,0.4,Airport (MMIA)
+55,36,Iganmu / Costain / Stadium (Surulere),True,1.02,3.5,0.39,Iganmu; Costain; Stadium (Surulere)
+55,37,Imota,True,0.96,3.8,0.42,Imota north-east 1; Imota east 1; Imota north-east 3
+55,38,Eleko,False,0.82,3.1,0.34,Eleko north-east; Eleko west 1
+55,39,Osapa London / VGC / Ikota,True,0.77,3.2,0.35,Osapa London; VGC; Ikota; Chevron
+55,40,Apapa Wharf / Apapa GRA,True,0.62,2.1,0.23,"Apapa Wharf, east of Apapa-Oworonshoki Expressway; Apapa GRA, south-west of Apapa-Oworonshoki Expressway"
+55,41,Ijanikin,True,0.55,1.9,0.21,Ijanikin north-west
+55,42,UNILAG,True,0.43,1.6,0.18,UNILAG
+55,43,Ojo (LASU) / Volks,True,0.41,1.5,0.16,Ojo (LASU); Volks
+55,44,Satellite Town,True,0.4,1.6,0.17,Satellite Town south-east
+55,45,Mile 12,True,0.28,1.0,0.11,Mile 12
+55,46,Epe,False,0.13,0.5,0.06,Epe east 1
