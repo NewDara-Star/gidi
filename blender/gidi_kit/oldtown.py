@@ -531,7 +531,7 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
     (x0, cy), (x1, _) = sp['centreline'][0], sp['centreline'][-1]
     w = sp['width_m']
     yl, yr = cy + w / 2, cy - w / 2
-    tar = hex_rgb('#5d5751')
+    tar = hex_rgb('#665e57')
     # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
     X0, X1, Y0, Y1 = extent
     mb.face([(X0, Y0, -0.02), (X1, Y0, -0.02), (X1, Y1, -0.02), (X0, Y1, -0.02)], 'mud', hex_rgb('#8a8174'), 0.1)
@@ -541,7 +541,7 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60)):
         xa, xb = x0 + k * step, x0 + (k + 1) * step
         fa, fb = rng.between(-0.25, 0.1), rng.between(-0.25, 0.1)   # the frayed edges
         ga, gb = rng.between(-0.1, 0.25), rng.between(-0.1, 0.25)
-        mb.face([(xa, yr + ga, 0.0), (xb, yr + gb, 0.0), (xb, yl + fb, 0.0), (xa, yl + fa, 0.0)], 'asphalt', shade(tar, rng.between(0.95, 1.05)), 0.75)
+        mb.face([(xa, yr + ga, 0.0), (xb, yr + gb, 0.0), (xb, yl + fb, 0.0), (xa, yl + fa, 0.0)], 'asphalt', shade(tar, rng.between(0.95, 1.05)), 0.5)
     if sp.get('sand_cover') == 'edges':   # dust and sand blown onto the tar edges, fading out onto the tar
         sand, dust = hex_rgb('#8a8276'), shade(tar, 1.05)
         for k in range(n):
