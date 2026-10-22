@@ -21,6 +21,8 @@ sys.path.insert(0, 'scripts')
 import autoclean
 import hand
 
+if os.environ.get('GIDI_REBUILD_OK') != 'owner':   # the generated base is frozen (decisions/DECISIONS.md, 22 Oct): gaps are fixed by hand edits
+    sys.exit('rebuild_areas: the generated base is frozen. Fix gaps by hand edits in web/hand/<district>.json. Rerun only when the owner says so (GIDI_REBUILD_OK=owner).')
 BASE = sys.argv[1]
 CP = json.load(open('docs/hand/ibudo/child_plan.json'))
 s = open(BASE).read()
