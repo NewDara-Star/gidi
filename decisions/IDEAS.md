@@ -1,5 +1,13 @@
 # Ideas (not decided; newest first)
 
+- **What makes Los Santos feel lived in, and what Gidi takes from it** (owner asked, 23 Oct; web research, sources below). Already ours: study a real city in bulk, then mix it (Rockstar: 250,000+ photos, landmarks right but "placement screwy"); everything placed by hand ("every tree"); wear everywhere (chipped poles, grime that reads even in miniature). The gaps for Gidi, each one map records:
+  - **Who lives where, by hour:** GTA's per-zone list of people and vehicles by time of day (`popcycle`). A district record could hold its mix: Mùṣá okadas, kekes, danfos, traders, apprentices; Victory Island SUVs and drivers waiting; joggers at dawn, the night crowd at the beer parlour.
+  - **Person spots (scenario points):** hand-placed spots where someone does something (smoking outside a shop, chatting on a bench, the gardener). These make a street feel lived in more than any crowd. For Gidi: the BetGidi agent and the men watching the TV through the shutter, the akara fryer, the mechanic under a car, the tout at the danfo door, the gala seller in traffic. A record with place, activity and hours (already on the board's list).
+  - **Vehicle scenes:** the broken-down danfo that never moves, the keke rank, okadas at the junction, a truck unloading at Ladipo.
+  - **Brands everywhere:** 40-60 invented brands on walls, umbrellas, buses, kiosks, radio. First one: BetGidi (brand canvas, 23 Oct, https://claude.ai/artifact/59JAAyvyoG3KuFQ29jgNiy: violet, lime, coral; "Gidi no dey sleep", "Na your turn").
+  - **Where GTA falls short and Gidi can win:** most buildings can't be entered, so they feel flat, and ordinary people mostly just run. Lagos frontages are open (lock-ups, stalls, verandas): a few steps inside each go far.
+  - Sound, overheard talk, day/night and rain: see "Life in the streets" below.
+  - Sources: Garbut interview (vortez.net), New Yorker "Idling in Los Santos" (allnightmenu.la), gtamods.com Popcycle.dat, GTAForums scenario list, weareopen.coop critique.
 - **Life in Gidi** (16 Oct): what makes the world feel like it exists. Rhythm, systems (NEPA, fuel, go-slow), moments (the bus preacher), texture, bus stop names the Lagos way, invented brands, Bet Gidi, naira, a radio made for Gidi, life after the story, online later, face scans. In full: `world-life.md`.
 - **Story as a tour of the map** (15 Oct). In GTA III, IV and V the story mostly walks the player through the city district by district. If Gidi ever gets a story, it can be layers of jobs and people that open the districts one by one.
   - GTA III: a revenge ladder through gangs.
