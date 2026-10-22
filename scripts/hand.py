@@ -210,8 +210,16 @@ def _clear_area(out, d, e, stage):
         xs = [q[0] for q in pts]; ys = [q[1] for q in pts]
         return not (max(xs) < x0 or min(xs) > x1 or max(ys) < y0 or min(ys) > y1)
     B = (out.get('buildings') or {}).get(d, [])
+    from autoclean import ring_pts
     for i in range(len(B) - 1, -1, -1):
         if len(B[i]) > 3 and inside_box(B[i][1:]) and PC.intersects(Polygon(B[i][1:])):
+            P = Polygon(B[i][1:]).buffer(0)
+            if P.intersection(C).area < 0.5 * P.area:   # a building the shape only clips is cut back to it (35 cm clear), not lost: a
+                Q = P.difference(C.buffer(0.35))        # 13,000 m2 warehouse went for 860 m2 over the next area's line (22 Oct 2026)
+                Q = max(getattr(Q, 'geoms', [Q]), key=lambda q: q.area) if not Q.is_empty else Q
+                if not Q.is_empty and Q.geom_type == 'Polygon' and Q.area >= 6 and len(ring_pts(Q)) >= 3:
+                    B[i] = [B[i][0]] + ring_pts(Q)
+                    continue
             _drop_building(out, d, i)
     if stage == 'late':
         A = wkt.loads(e.get('places_wkt', e['wkt'])); PA = prep(A)
