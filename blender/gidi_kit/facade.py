@@ -308,6 +308,24 @@ def roof_room(mb, r, wear):
     mb.box('zinc', at(Matrix(), (x0 + x1) / 2, (y0 + y1) / 2, z + h + 0.05), _c(r.get('roof_col'), '#6a4a38'), 0.85, size=(x1 - x0 + 0.4, y1 - y0 + 0.4, 0.03))
 
 
+def panel(mb, F, r):
+    """A corrugated zinc sheet nailed over the face (a shack's or a fence's walls): u0..u1 along, z0..z1 up, out from
+    the wall; its colour, a rust colour bled up from its foot over the share rust_h of its height, and its corrugation
+    (ribs every 0.076 m: the sheet's own profile, like the roof's)."""
+    u0, u1, z0, z1, y = r['u0'], r['u1'], r['z0'], r['z1'], r.get('out', 0.03)
+    col = _c(r['col'])
+    rust = _c(r.get('rust'), '#6b3a22')
+    zr = z0 + (z1 - z0) * r.get('rust_h', 0.0)
+    n = max(2, int((u1 - u0) / 0.038))
+    for i in range(n):
+        a, b = u0 + (u1 - u0) * i / n, u0 + (u1 - u0) * (i + 1) / n
+        f = 1.0 if i % 2 == 0 else 0.8
+        yy = y + (0.012 if i % 2 == 0 else 0.0)
+        if zr > z0 + 0.01:
+            _q(mb, F, a, b, z0, zr, yy, 'zinc', shade(rust, f), 0.9)
+        _q(mb, F, a, b, zr, z1, yy, 'zinc', shade(col, f), r.get('wear', 0.7))
+
+
 def draw(mb, fs, wx, fc, wear):
     """Everything in one building's facade block."""
     for r in fc.get('slab_edges', []):
@@ -332,5 +350,7 @@ def draw(mb, fs, wx, fc, wear):
         tarp(mb, r)
     for r in fc.get('bars', []):
         bars(mb, r)
+    for r in fc.get('panels', []):
+        panel(mb, fs[r['face']][4], r)
     for r in fc.get('roof_rooms', []):
         roof_room(mb, r, wear)
