@@ -55,7 +55,8 @@ def gutter(mb, pts, g, keep, wear=0.6):
         from . import draft
         recs = draft.gutter(pts, g, keep, wear)
     recs = iter(recs)
-    proud = 0.12 + 0.1 * min(1.0, g.get('depth', 0.6))   # deeper drains have taller walls
+    proud = g['proud_m'] if 'proud_m' in g else 0.12 + 0.1 * min(1.0, g.get('depth', 0.6))   # deeper drains have taller walls;
+    # the map can set the walls' top itself (proud_m, m above the ground: 0 or less sits the slabs flush with it)
     t = 0.12
     blocked = g.get('blocked') or []
     covered = g['state'] == 'covered'

@@ -99,7 +99,8 @@ def ground_grids(sp, near=0.2, grow=0.012):
     """A street's ground grids, sampled where the ground sheet has its corners: relief (m), fray (m, how far the tar's
     edge wanders in or out), tar (the tar field: tar where > 0), and along x the edge rut's wander (m) and strength."""
     N = Noise(sp)
-    ys = (N.cy - N.half - 8.6, N.cy + N.half + 2.9)
+    br, bl = sp.get('ground_band_m', (8.6, 2.9))   # how far the sheet reaches past the right and left edges
+    ys = (N.cy - N.half - br, N.cy + N.half + bl)
     xs = _xs(N.x0 - 5, N.x1, near, grow)
     yv = np.arange(ys[0], ys[1] + 1e-6, 0.15)
     X, Y = np.meshgrid(xs, yv, indexing='ij')
@@ -782,6 +783,49 @@ def display_cabinet(w, h, rng):
     return shelves
 
 
+def cage_stall(sp, rng):
+    """A cage stall's records (oldtown.cage_stall): its bars on each side, its top's boards, its goods on the counter and shelves."""
+    x0, x1, y0, y1, h = sp['x0'], sp['x1'], sp['y0'], sp['y1'], sp['h']
+    left = y0 > 0
+    yf, yb = (y0, y1) if left else (y1, y0)
+    bars = {}
+    for name, L in (('front', x1 - x0), ('start', abs(y1 - y0)), ('end', abs(y1 - y0))):
+        us, u = [], 0.12
+        while u < L - 0.08:
+            us.append(round(u, 3))
+            u += sp.get('bar_pitch_m', 0.12) * rng.between(0.9, 1.1)
+        bars[name] = us
+    top = [rng.between(0.78, 1.05) for k in range(max(2, round((x1 - x0) / 0.3)))]
+    kinds, fill = sp.get('goods_kinds', ['cartons', 'plastics']), sp.get('goods_fill', 0.7)
+    gd = []
+    sgn = 1 if left else -1
+    for k, z in enumerate([0.78] + list(sp.get('shelves', []))):
+        gd += band(x0 + 0.1, x1 - 0.1, yb, abs(y1 - y0) * (0.55 if k else 0.8), z, kinds, fill, rng.child('shelf', k), side=sgn, cols=sp.get('goods_colours'))
+    return dict(bars=bars, top_shades=top, goods=gd)   # heights over the ground under the stall
+
+
+def glass_cabinet(w, h, n, rng):
+    """A glass cabinet's shelves (oldtown.glass_cabinet): each shelf's row of packets, bottles and tins from the left."""
+    from .oldtown import SNACKS
+    shelves = []
+    for r in range(n):
+        items, x = [], -w / 2 + 0.06
+        while x < w / 2 - 0.1:
+            c, kind = rng.pick(SNACKS), rng.between(0, 1)
+            if kind < 0.5:
+                pw, ph = rng.between(0.06, 0.11), min(h / n - 0.05, rng.between(0.12, 0.2))
+                items.append(dict(k='packet', col=c, w=pw, h=ph, rz=[rng.between(-0.1, 0.1)]))
+                x += pw + 0.01
+            elif kind < 0.8:
+                items.append(dict(k='bottle', col=c))
+                x += 0.07
+            else:
+                items.append(dict(k='tins', col=c))
+                x += 0.09
+        shelves.append(items)
+    return shelves
+
+
 def drinks_fridge(h, rng):
     W = 0.7
     shelves = []
@@ -1071,7 +1115,7 @@ def street(sp, base_dir):
         y = cy + g['offset_m']
         gg = dict(id=sp['id'] + 'L', w=g['width'], depth=g.get('depth', 0.5), state='covered' if g['type'] == 'slab_covered' else 'open',
                   blocked=[{'from': 0, 'to': 999, 'fill': 'rubbish'}] if g.get('state') == 'half_blocked' else [],
-                  **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter') if k in g})
+                  **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter', 'proud_m') if k in g})
         g['pieces'] = gutter([(x0, y), (x1, y)], gg, lambda p: True, wear=g.get('wear', 0.2))
         for c in sp.get('crossings', []):
             if c.get('side') == 'left':
@@ -1127,6 +1171,10 @@ def props(P):
             s.update(plank_stall(s, r))
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'drinks_fridge':
             s.update(drinks_fridge(s.get('h', 1.3), r))
+        elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'glass_cabinet':
+            s['contents'] = glass_cabinet(s['w'], s['h'], s.get('shelf_n', 3), r)
+        elif s['type'] == 'cage stall':
+            s.update(cage_stall(s, r))
         elif s['type'] == 'table':
             items = s.get('items', [])
             if any(i.startswith('crate') for i in items):

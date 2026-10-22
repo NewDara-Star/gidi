@@ -192,6 +192,79 @@ def plank_stall(mb, sp, gmb=None):
         goods.tarp(gmb, x0 - 0.15, x1 + 0.1, y0 - 0.12, y1, h + sp.get('tarp_z_m', 0.5), sp.get('tarp_drop_m', 1.0), _hex(sp['tarp_colour']), need(sp, 'tarp_ph', 'plank stall'), side=-1 if sp['y0'] > 0 else 1)
 
 
+def cage_stall(mb, sp, gmb, hmb):
+    """A cage stall: a timber frame on four posts, steel bars across its front and ends (the trader locks it at night),
+    shelves inside with goods on them, a plank or zinc top. Its records: bars (each side's bar positions along it, from
+    its start), goods (leaves on the floor and each shelf), top_shades (the top's boards)."""
+    x0, x1, y0, y1, h = sp['x0'], sp['x1'], sp['y0'], sp['y1'], sp['h']
+    left = sp.get('y0', 0) > 0
+    yf, yb = (y0, y1) if left else (y1, y0)   # its front faces the street
+    z0 = ground_z((x0 + x1) / 2, yf)
+    wood = _hex(sp.get('colour'), '#5e4630')
+    bar_c = _hex(sp.get('bar_colour'), '#2a2624')
+    for x in (x0, x1):
+        for y in (y0, y1):
+            parts.bar(mb, 'wood', (x, y, z0), (x, y, z0 + h), 0.07, wood, 0.8)
+    for z in (0.12, 0.75, h - 0.05):   # rails round the frame: foot, counter and head
+        for (ax, ay), (bx, by) in (((x0, yf), (x1, yf)), ((x0, y0), (x0, y1)), ((x1, y0), (x1, y1)), ((x0, yb), (x1, yb))):
+            parts.bar(mb, 'wood', (ax, ay, z0 + z), (bx, by, z0 + z), 0.05, shade(wood, 0.9), 0.8)
+    mb.box('wood', Matrix.Translation(((x0 + x1) / 2, yb, z0 + h / 2)), shade(wood, 0.7), 0.8, size=(x1 - x0, 0.03, h))   # the back boards
+    sides = {'front': ((x0, yf), (x1, yf)), 'start': ((x0, y0), (x0, y1)), 'end': ((x1, y0), (x1, y1))}
+    for name, us in need(sp, 'bars', 'cage stall').items():
+        (ax, ay), (bx, by) = sides[name]
+        L = math.dist((ax, ay), (bx, by))
+        for u in us:
+            px, py = ax + (bx - ax) * u / L, ay + (by - ay) * u / L
+            parts.bar(mb, 'steel', (px, py, z0 + 0.75), (px, py, z0 + h - 0.05), 0.018, bar_c, 0.9)
+    for z in sp.get('shelves', []):   # plank shelves across the inside
+        mb.box('wood', Matrix.Translation(((x0 + x1) / 2, (yb + (yf + yb) / 2) / 2, z0 + z)), shade(wood, 1.05), 0.8, size=(x1 - x0 - 0.1, abs(y1 - y0) * 0.5, 0.025))
+    mb.box('wood', Matrix.Translation(((x0 + x1) / 2, (y0 + y1) / 2, z0 + 0.75)), shade(wood, 1.1), 0.8, size=(x1 - x0, abs(y1 - y0), 0.03))   # the counter
+    for k, f in enumerate(need(sp, 'top_shades', 'cage stall')):   # the top: boards or sheets laid across, overhanging the front
+        n = len(sp['top_shades'])
+        xa = x0 - 0.1 + (x1 - x0 + 0.2) * (k + 0.5) / n
+        mb.box('zinc' if sp.get('top') == 'zinc' else 'wood', Matrix.Translation((xa, (y0 + y1) / 2 + (-0.15 if left else 0.15), z0 + h + 0.03)),
+               shade(_hex(sp.get('top_colour'), '#6a5040'), f), 0.85, size=((x1 - x0 + 0.2) / n - 0.01, abs(y1 - y0) + 0.35, 0.025))
+    goods.draw(gmb, need(sp, 'goods', 'cage stall'), hard=hmb, dz=z0)
+
+
+def glass_cabinet(mb, sp, hmb):
+    """A trader's timber glass cabinet on legs by the road: a timber frame, glass on its front and ends, a boarded back,
+    shelves of packets, bottles and tins seen through the glass, a top board. Its records: contents (each shelf's row)."""
+    x, y, w, d, h, lh = sp['x'], sp['y'], sp['w'], sp['d'], sp['h'], sp.get('legs_h', 0.75)
+    M = Matrix.Translation((x, y, ground_z(x, y))) @ Matrix.Rotation(math.radians(sp.get('facing_deg', 0)), 4, 'Z')   # its front looks along -y
+    wood = _hex(sp.get('colour'), '#6a4a32')
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            mb.box('wood', at(M, sx * (w / 2 - 0.03), sy * (d / 2 - 0.03), (lh + h) / 2), shade(wood, 0.9), 0.8, size=(0.05, 0.05, lh + h))
+    for z in (lh, lh + h):
+        mb.box('wood', at(M, 0, 0, z), wood, 0.8, size=(w + (0.08 if z > lh else 0.0), d + (0.08 if z > lh else 0.0), 0.04))
+    mb.box('wood', at(M, 0, 0, lh * 0.3), shade(wood, 0.85), 0.8, size=(w - 0.06, 0.03, 0.04))   # a stretcher between the legs
+    mb.box('wood', at(M, 0, d / 2 - 0.015, lh + h / 2), shade(wood, 0.6), 0.8, size=(w - 0.06, 0.02, h))   # the back
+    mb.box('wood', at(M, 0, -d / 2 + 0.01, lh + h / 2), shade(wood, 0.85), 0.8, size=(0.035, 0.03, h))   # the doors' meeting stile
+    contents = need(sp, 'contents', 'glass cabinet')
+    n = len(contents)
+    for r, items in enumerate(contents):
+        zs = lh + 0.03 + r * h / n
+        if r:
+            mb.box('wood', at(M, 0, 0, zs - 0.015), shade(wood, 1.1), 0.8, size=(w - 0.06, d - 0.06, 0.02))
+        u = -w / 2 + 0.06
+        for it in items:
+            c = hex_rgb(it['col'])
+            if it['k'] == 'packet':
+                hmb.box('plastic', at(M, u + it['w'] / 2, 0.0, zs + it['h'] / 2, rz=it['rz'][0]), c, 0.1, size=(it['w'], 0.04, it['h']))
+                u += it['w'] + 0.01
+            elif it['k'] == 'bottle':
+                parts.cyl(hmb, 'plastic', at(M, u + 0.03, -0.02, zs), 0.028, min(0.18, h / n - 0.05), c, 0.1, seg=8)
+                u += 0.07
+            else:
+                for k in range(2):
+                    parts.cyl(hmb, 'steel', at(M, u + 0.04, 0.0, zs + k * 0.06), 0.035, 0.058, c, 0.2, seg=10)
+                u += 0.09
+    g = hex_rgb('#c9d6d6')
+    for (ax, ay), (bx, by) in (((-w / 2, -d / 2), (w / 2, -d / 2)), ((-w / 2, -d / 2), (-w / 2, d / 2)), ((w / 2, d / 2), (w / 2, -d / 2))):
+        mb.face([at(M, ax, ay, lh + 0.02).translation, at(M, bx, by, lh + 0.02).translation, at(M, bx, by, lh + h - 0.02).translation, at(M, ax, ay, lh + h - 0.02).translation], 'glass_clear', g, 0)
+
+
 SNACKS = ['#c62828', '#f9a825', '#1f6fb8', '#2e9a46', '#e8e4dc', '#e07b20', '#6a1b9a', '#d81b60']
 
 
@@ -776,7 +849,8 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
     G = None
     if sp.get('relief') or 'tar_cover' in sp:   # the ground as real geometry, humps, dips, potholes and patches (roadbed.py)
         zb = -0.08 - 2 * (sp.get('relief') or {}).get('amp_m', 0.0)   # under the sheet's deepest dips
-        mb.face([(X0, Y0, zb), (X1, Y0, zb), (X1, Y1, zb), (X0, Y1, zb)], 'mud', hex_rgb('#7a5a44'), 0.1)
+        beyond = _hex((sp.get('ground_colours') or {}).get('beyond'), '#7a5a44')   # the ground past the sheet's band
+        mb.face([(X0, Y0, zb), (X1, Y0, zb), (X1, Y1, zb), (X0, Y1, zb)], 'mud', beyond, 0.1)
         _, G = roadbed.build(sp, roadbed.grids(sp, base_dir), collection, materials=master)
         GROUNDS.append(G)
     else:   # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
@@ -816,7 +890,7 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
         gutters.gutter(mb, [(x0, y), (x1, y)], dict(id=sp['id'] + 'L', w=g['width'], depth=g.get('depth', 0.5), state='covered' if g['type'] == 'slab_covered' else 'open',
                                                     blocked=[{'from': 0, 'to': 999, 'fill': 'rubbish'}] if g.get('state') == 'half_blocked' else [],
                                                     pieces=need(g, 'pieces', 'gutter of ' + sp['id']),
-                                                    **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter') if k in g}),
+                                                    **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter', 'proud_m') if k in g}),
                        lambda p: True, wear=g.get('wear', 0.2))
         for c in sp.get('crossings', []):
             if c.get('side') == 'left':
@@ -883,10 +957,14 @@ def spot_props(P, collection=None):
                 goods.draw(gmb, need(s, 'goods', 'umbrella'), hard=hmb, dz=z)
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'plank_stall':
             plank_stall(mb, s, gmb)
+        elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'glass_cabinet':
+            glass_cabinet(mb, s, hmb)
+        elif s['type'] == 'cage stall':
+            cage_stall(mb, s, gmb, hmb)
         elif s['type'] == 'kiosk' and s.get('kiosk_kind') == 'drinks_fridge':
             drinks_fridge(mb, Matrix.Translation((s['x'], s['y'], 0.3)) @ Matrix.Rotation(math.radians(s.get('facing_deg', 0)), 4, 'Z'), s, s.get('h', 1.3), _hex(s.get('colour'), '#cfd3d6'))
         elif s['type'] == 'table':
-            M = Matrix.Translation((s['x'], s['y'], 0.3))
+            M = Matrix.Translation((s['x'], s['y'], s.get('z_m', 0.3)))   # on the platform, unless the map gives its foot
             items = s.get('items', [])
             if any(i.startswith('crate') for i in items):   # a stack of crates on the platform, each at its own turn
                 for j, (it, rz) in enumerate(zip(items, need(s, 'crate_rz', 'crate stack'))):
