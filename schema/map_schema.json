@@ -1,0 +1,556 @@
+{
+  "format": "gidi-map/0.1",
+  "about": "The new map's records (docs/MAP-FORMAT.md). Read by scripts/check_map.py. A field spec is a type, then an optional range, then '?' if the field may be left out. Lengths are metres, angles degrees, colours '#rrggbb', shares and wear 0 to 1. Positions are Gidi metres in the 1:3 frame (x east, y south, z up) unless the record says it is local to its parent.",
+
+  "common": {
+    "id": "str",
+    "type": "str",
+    "ref": "obj:ref?",
+    "from": "obj:stamp?",
+    "note": "str?"
+  },
+  "not_drawn": ["id", "type", "ref", "from", "note", "name", "use", "uses", "place", "plot", "hours"],
+
+  "enums": {
+    "side": ["left", "right"],
+    "road_kind": ["motorway", "trunk", "main_road", "local_main", "market_street", "home_street", "lane", "path", "ramp"],
+    "road_surface": ["tar_new", "tar_worn", "sand", "earth", "laterite", "interlock", "concrete", "plank"],
+    "sand_cover": ["none", "edges", "full"],
+    "kerb": ["none", "drain_wall", "painted_bw", "raised_pavement"],
+    "median": ["none", "low_concrete", "jersey"],
+    "gutter_kind": ["open_concrete", "open_earth", "slab_covered", "centre_channel"],
+    "gutter_state": ["clear", "half_blocked", "water"],
+    "verge_surface": ["earth", "concrete_apron", "sand", "grass", "interlock", "laterite"],
+    "crossing_kind": ["slab_bridge", "plank_bridge", "gate_ramp"],
+    "plot_kind": ["house", "compound", "shop_row", "market", "motor_park", "church_ground", "mosque_ground", "school_ground", "open_ground", "under_build", "yard", "car_park"],
+    "frontage_kind": ["shop_line_step", "leanto_to_road", "wall_gate", "platform_house", "low_wall_bars", "sheet_fence", "breeze_fence", "plank_fence", "open_forecourt"],
+    "wall_finish": ["render", "bare_block", "breeze_block", "sheet", "plank"],
+    "wall_state": ["clean", "mouldy"],
+    "piers": ["none", "at_gate", "every_bay"],
+    "wall_top": ["none", "razor_wire", "steel_rail", "broken_glass"],
+    "gate_kind": ["sheet_steel", "bar", "plank"],
+    "house_type": ["face_me_bungalow", "walkup", "shop_under_flats", "market_block", "compound_house", "church", "mosque", "school", "colonial_house", "kiosk_row", "shack", "shed", "under_build"],
+    "ground_floor": ["home", "lock_ups", "open_stalls", "workshop", "arcade", "cage_stalls"],
+    "roof_form": ["hip", "gable", "mono", "flat"],
+    "roof_material": ["zinc", "longspan", "tile", "slab"],
+    "roof_state": ["rusty", "silver", "painted", "new"],
+    "fascia_kind": ["timber", "render"],
+    "posts": ["none", "timber", "steel"],
+    "face_finish": ["render", "bare_block", "tile_brick", "tile_stone", "tile_pattern", "plaster_moulded"],
+    "window_kind": ["louvre_glass", "louvre_timber", "plank_shutter", "casement", "barred", "grille_cage", "opening"],
+    "bars": ["none", "vertical", "grid", "diamond", "sunray", "scroll"],
+    "outside_stair": ["none", "front_concrete", "front_steel", "spiral"],
+    "door_kind": ["plank", "steel", "panel", "open_dark", "curtain"],
+    "shopfront_door": ["plank_shutter", "roll_up", "open_dark", "glass", "grille"],
+    "rail": ["steel", "baluster", "breeze_block", "timber", "solid"],
+    "rail_pattern": ["loops", "pickets", "solid"],
+    "screen_kind": ["breeze_block"],
+    "stain_kind": ["streak", "patch", "block", "ac"],
+    "stain_tint": ["grime", "rust", "mould", "cement", "damp"],
+    "addon_kind": ["ac", "dish", "water_tank", "speaker", "mast", "meter", "lamp", "house_number", "rebar_stubs"],
+    "sheet_material": ["zinc", "longspan", "tarp", "plank"],
+    "sheet_tone": ["main", "second", "new"],
+    "stall_kind": ["plank_stall", "table", "kiosk", "cage_stall", "cart", "umbrella", "drinks_fridge", "display_cabinet", "container_shop", "rack"],
+    "heap_kind": ["sand", "gravel", "rubbish", "scrap", "goods", "tyres"],
+    "pole_kind": ["timber", "concrete", "steel"],
+    "lamp": ["none", "steel_arm", "solar"],
+    "mast_kind": ["lattice", "monopole"],
+    "tree_kind": ["palm", "shade", "plantain", "almond", "neem", "shrub"],
+    "vehicle_kind": ["danfo", "keke", "okada", "saloon", "suv", "pickup", "lorry", "container", "tanker", "bus", "wreck"],
+    "load_kind": ["none", "roll", "cargo", "sacks"],
+    "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand"],
+    "place_kind": ["market", "motor_park", "bus_stop", "church", "mosque", "school", "clinic", "betting", "bar", "buka", "police", "fuel", "bank", "chemist", "park", "garage", "workshop_yard", "story"],
+    "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
+    "ground_kind": ["tar", "earth", "laterite", "sand", "dust", "mud", "wet", "water", "concrete", "interlock", "grass", "rubble"],
+    "litter_kind": ["sachet", "bag", "bottle", "pack", "can", "husk", "paper", "rag", "tyre"],
+    "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet"],
+    "pose": ["stand", "walk", "sit", "squat", "lean", "carry"]
+  },
+
+  "shapes": {
+    "ref": {
+      "twin": "str?",
+      "shots": "strs?",
+      "kit": "str?"
+    },
+    "stamp": {
+      "spot": "str",
+      "record": "str",
+      "date": "str",
+      "note": "str?"
+    },
+    "surface_look": {
+      "colour": "hex",
+      "surface": "surface?"
+    },
+    "ground_look": {
+      "earth": "obj:surface_look?",
+      "dust": "obj:surface_look?",
+      "tar": "obj:surface_look?",
+      "mud": "obj:surface_look?"
+    },
+    "gutter": {
+      "side": "enum:side",
+      "s0": "num >=0",
+      "s1": "num >=0",
+      "kind": "enum:gutter_kind",
+      "width": "num >0",
+      "depth": "num >0",
+      "offset": "num >=0",
+      "state": "enum:gutter_state",
+      "slab_colour": "hex?",
+      "wall_colour": "hex?"
+    },
+    "verge": {
+      "side": "enum:side",
+      "s0": "num >=0",
+      "s1": "num >=0",
+      "surface": "enum:verge_surface",
+      "width": "num >0"
+    },
+    "crossing": {
+      "side": "enum:side",
+      "s": "num >=0",
+      "w": "num >0",
+      "kind": "enum:crossing_kind"
+    },
+    "platform": {
+      "h": "num 0..1.5",
+      "steps": "int 0..6",
+      "front": "num >=0",
+      "colour": "hex"
+    },
+    "gate": {
+      "u0": "num >=0",
+      "u1": "num >=0",
+      "h": "num >0",
+      "kind": "enum:gate_kind",
+      "colour": "hex",
+      "leaves": "int 1..4",
+      "wicket": "bool",
+      "number": "text?",
+      "wear": "num 0..1",
+      "surface": "surface?"
+    },
+    "wall": {
+      "h": "num >0",
+      "finish": "enum:wall_finish",
+      "colour": "hex",
+      "painted": "bool",
+      "state": "enum:wall_state",
+      "piers": "enum:piers",
+      "top": "enum:wall_top",
+      "surface": "surface?",
+      "gates": "objs:gate"
+    },
+    "fascia": {
+      "kind": "enum:fascia_kind",
+      "colour": "hex",
+      "h": "num >0"
+    },
+    "roof_edge": {
+      "colour": "hex",
+      "h": "num >0"
+    },
+    "roof": {
+      "form": "enum:roof_form",
+      "material": "enum:roof_material",
+      "state": "enum:roof_state",
+      "colour": "hex",
+      "pitch": "num 0..60",
+      "eave": "num 0..2.5",
+      "ridge_face": "int >=0?",
+      "parapet_h": "num >=0?",
+      "fascia": "obj:fascia?",
+      "edge": "obj:roof_edge?",
+      "posts": "enum:posts?",
+      "post_foot": "num?",
+      "surface": "surface?"
+    },
+    "base_band": {
+      "colour": "hex",
+      "h": "num >0"
+    },
+    "finish": {
+      "kind": "enum:face_finish",
+      "colour": "hex",
+      "trim_colour": "hex?",
+      "side_colour": "hex?",
+      "storey_bands": "hex?",
+      "base_band": "obj:base_band?",
+      "surface": "surface?"
+    },
+    "windows": {
+      "kind": "enum:window_kind",
+      "shutter_colour": "hex?",
+      "bars": "enum:bars",
+      "bar_colour": "hex?"
+    },
+    "sheet": {
+      "material": "enum:sheet_material",
+      "colour": "hex",
+      "state": "enum:roof_state",
+      "edge_colour": "hex?",
+      "surface": "surface?"
+    },
+    "tarp": {
+      "colour": "hex",
+      "z": "num >=0",
+      "drop": "num >=0"
+    },
+    "umbrella": {
+      "r": "num >0",
+      "colours": "hexes"
+    },
+    "load": {
+      "kind": "enum:load_kind",
+      "colour": "hex?"
+    },
+    "tree_form": {
+      "fronds": "table:frond?",
+      "lobes": "table:lobe?"
+    },
+
+    "face": {
+      "face": "int >=0",
+      "windows": "table:window",
+      "doors": "table:door",
+      "shopfronts": "objs:shopfront",
+      "balconies": "objs:balcony",
+      "screens": "objs:screen",
+      "stains": "table:stain",
+      "addons": "table:addon",
+      "signs": "objs:sign",
+      "awnings": "table:awning"
+    },
+    "shopfront": {
+      "u0": "num >=0",
+      "u1": "num >=0",
+      "door": "enum:shopfront_door",
+      "colour": "hex",
+      "open": "num 0..1",
+      "planks": "table:plank?"
+    },
+    "balcony": {
+      "u0": "num >=0",
+      "u1": "num >=0",
+      "storey": "int >=1",
+      "depth": "num >0",
+      "solid_h": "num >=0",
+      "rail": "enum:rail",
+      "pattern": "enum:rail_pattern",
+      "colour": "hex",
+      "posts": "bool"
+    },
+    "screen": {
+      "u0": "num >=0",
+      "u1": "num >=0",
+      "out": "num >=0",
+      "kind": "enum:screen_kind",
+      "colour": "hex",
+      "h": "num >0",
+      "cells": "nums"
+    },
+    "sign": {
+      "u0": "num >=0",
+      "u1": "num >=0",
+      "z0": "num >=0",
+      "z1": "num >=0",
+      "bg": "hex",
+      "fg": "hex",
+      "text": "text"
+    },
+    "slope": {
+      "face": "int >=0",
+      "rows": "int >=1",
+      "ph": "nums",
+      "sheets": "table:roof_sheet"
+    },
+    "bay": {
+      "u": "num >=0",
+      "w": "num >0",
+      "blot": "num 0..1",
+      "patch": "num 0..1",
+      "streaks": "table:streak",
+      "foot": "nums",
+      "broken": "obj:broken?"
+    },
+    "broken": {
+      "u": "num >=0",
+      "z": "num >=0",
+      "w": "num >0",
+      "h": "num >0",
+      "shades": "nums"
+    },
+    "poster": {
+      "u": "num",
+      "z": "num >=0",
+      "w": "num >0",
+      "h": "num >0",
+      "turn": "num?",
+      "colours": "hexes",
+      "torn": "num 0..1",
+      "shade": "num >0"
+    },
+    "gutter_piece": {
+      "s0": "num >=0",
+      "s1": "num >=0",
+      "wall_wear": "num 0..1",
+      "water_z": "num",
+      "mix": "obj:gutter_mix",
+      "caught": "table:litter_piece",
+      "slabs": "table:slab",
+      "joints": "table:joint"
+    },
+    "gutter_mix": {
+      "mud": "num 0..1",
+      "sand": "num 0..1",
+      "water": "num 0..1",
+      "rubbish": "num 0..1"
+    },
+    "rut": {
+      "line": "line",
+      "w": "num >0",
+      "depth": "num >=0",
+      "mud": "num 0..1",
+      "packed": "num 0..1"
+    },
+    "body": {
+      "look": "str",
+      "skin": "hex",
+      "top": "hex",
+      "bottom": "hex",
+      "head_load": "str?"
+    }
+  },
+
+  "tables": {
+    "window": [["u", "num >=0"], ["z", "num >=0"], ["w", "num >0"], ["h", "num >0"], ["kind", "enum:window_kind"], ["open", "num 0..1"]],
+    "door": [["u", "num >=0"], ["w", "num >0"], ["h", "num >0"], ["kind", "enum:door_kind"], ["colour", "hex"]],
+    "plank": [["shade", "num >0"], ["offset", "num"]],
+    "stain": [["kind", "enum:stain_kind"], ["u", "num"], ["z", "num"], ["w", "num >0"], ["h", "num >0"], ["tint", "enum:stain_tint"], ["dark", "num 0..1"], ["taper", "num 0..1"]],
+    "addon": [["kind", "enum:addon_kind"], ["u", "num"], ["z", "num"], ["colour", "hex"], ["size", "num >0"], ["shade", "num >0"]],
+    "awning": [["u0", "num >=0"], ["u1", "num >=0"], ["z", "num >=0"], ["depth", "num >0"], ["colour", "hex"]],
+    "roof_sheet": [["tone", "enum:sheet_tone"], ["shade", "num >0"], ["wear", "num 0..1"], ["nails", "numss"], ["edge", "nums"]],
+    "upright": [["u", "num"], ["lean", "num"], ["shade", "num >0"]],
+    "streak": [["u", "num"], ["w", "num >0"], ["z_top", "num"], ["len", "num >0"], ["dark", "num 0..1"]],
+    "chip": [["u", "num"], ["size", "num >0"]],
+    "daub": [["u", "num"], ["z", "num"], ["text", "text"], ["colour", "hex"], ["size", "num >0"]],
+    "slab": [["tip", "num"], ["roll", "num"], ["sink", "num"], ["dirt", "num 0..1"], ["dust", "num 0..1"], ["shade", "num >0"], ["gap", "num >=0"], ["broken", "bool"]],
+    "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"]],
+    "item": [["kind", "enum:goods_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["shade", "num >0"]],
+    "joint": [["slab", "int >=0"], ["o", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["du", "num"], ["turn", "num"]],
+    "pothole": [["x", "num"], ["y", "num"], ["r", "num >0"], ["depth", "num >=0"], ["stretch", "num >0"], ["turn", "num"], ["mud", "num 0..1"]],
+    "frond": [["turn", "num"], ["droop", "num"], ["len", "num >0"]],
+    "lobe": [["x", "num"], ["y", "num"], ["z", "num"], ["r", "num >0"]],
+    "person": [["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["h", "num >0"], ["pose", "enum:pose"], ["look", "str"]]
+  },
+
+  "records": {
+    "district": {
+      "layer": "plan", "prefix": "d", "kit": false,
+      "fields": {"n": "int >=1", "name": "name", "outline": "rings"}
+    },
+    "road": {
+      "layer": "plan", "prefix": "rd", "kit": true,
+      "fields": {
+        "kind": "enum:road_kind",
+        "name": "name?",
+        "centreline": "line",
+        "width": "num >0",
+        "surface": "enum:road_surface",
+        "sand_cover": "enum:sand_cover",
+        "kerb_left": "enum:kerb",
+        "kerb_right": "enum:kerb",
+        "median": "enum:median",
+        "crown": "num >=0",
+        "ground_look": "obj:ground_look",
+        "gutters": "objs:gutter",
+        "verges": "objs:verge",
+        "crossings": "objs:crossing"
+      }
+    },
+    "plot": {
+      "layer": "plan", "prefix": "pl", "kit": false,
+      "fields": {"kind": "enum:plot_kind", "outline": "ring", "place": "id:place?"}
+    },
+    "frontage": {
+      "layer": "plan", "prefix": "fr", "kit": true,
+      "fields": {
+        "plot": "id:plot",
+        "road": "id:road",
+        "side": "enum:side",
+        "kind": "enum:frontage_kind",
+        "line": "line",
+        "setback": "num >=0",
+        "platform": "obj:platform?",
+        "wall": "obj:wall?"
+      }
+    },
+    "wall": {
+      "layer": "plan", "prefix": "wl", "kit": true,
+      "fields": {"plot": "id:plot?", "line": "line", "wall": "obj:wall"}
+    },
+    "building": {
+      "layer": "plan", "prefix": "b", "kit": true,
+      "fields": {
+        "plot": "id:plot?",
+        "kind": "enum:house_type",
+        "footprint": "ring",
+        "storeys": "int 1..12",
+        "storey_h": "nums",
+        "ground_floor": "enum:ground_floor",
+        "roof": "obj:roof",
+        "finish": "obj:finish",
+        "windows": "obj:windows",
+        "outside_stair": "enum:outside_stair",
+        "wear": "num 0..1",
+        "place": "id:place?",
+        "use": "enums:game_use?"
+      }
+    },
+    "leanto": {
+      "layer": "plan", "prefix": "lt", "kit": true,
+      "fields": {
+        "against": "id:building,frontage,wall",
+        "face": "int >=0?",
+        "u0": "num >=0",
+        "u1": "num >=0",
+        "depth": "num >0",
+        "z_wall": "num >0",
+        "z_front": "num >0",
+        "sheet": "obj:sheet",
+        "posts": "enum:posts",
+        "stand_z": "num >=0",
+        "place": "id:place?"
+      }
+    },
+    "stall": {
+      "layer": "plan", "prefix": "st", "kit": true,
+      "fields": {
+        "kind": "enum:stall_kind",
+        "at": "pt",
+        "turn": "num",
+        "w": "num >0",
+        "d": "num >0",
+        "h": "num >0",
+        "colour": "hex",
+        "tarp": "obj:tarp?",
+        "umbrella": "obj:umbrella?",
+        "place": "id:place?"
+      }
+    },
+    "heap": {
+      "layer": "plan", "prefix": "hp", "kit": true,
+      "fields": {"kind": "enum:heap_kind", "at": "pt", "r": "num >0", "h": "num >0", "tarp_colour": "hex?"}
+    },
+    "pole": {
+      "layer": "plan", "prefix": "po", "kit": true,
+      "fields": {
+        "kind": "enum:pole_kind",
+        "at": "pt",
+        "h": "num >0",
+        "lean": "pt",
+        "transformer": "bool",
+        "lamp": "enum:lamp",
+        "arm": "bool",
+        "wear": "num 0..1"
+      }
+    },
+    "wire": {
+      "layer": "plan", "prefix": "wi", "kit": true,
+      "one_of": [["to_pole", "to_at"]],
+      "fields": {"from_pole": "id:pole", "to_pole": "id:pole?", "to_at": "pt3?", "n": "int 1..12", "sag": "num >=0"}
+    },
+    "mast": {
+      "layer": "plan", "prefix": "ms", "kit": true,
+      "fields": {"kind": "enum:mast_kind", "at": "pt", "h": "num >0", "colour": "hex"}
+    },
+    "tree": {
+      "layer": "plan", "prefix": "tr", "kit": true,
+      "fields": {"kind": "enum:tree_kind", "at": "pt", "h": "num >0", "lean": "pt", "form": "obj:tree_form"}
+    },
+    "vehicle": {
+      "layer": "plan", "prefix": "vh", "kit": true,
+      "fields": {
+        "kind": "enum:vehicle_kind",
+        "at": "pt",
+        "turn": "num",
+        "colour": "hex",
+        "cab_colour": "hex?",
+        "lean": "num?",
+        "tractor": "bool?",
+        "load": "obj:load?",
+        "cover": "hex?"
+      }
+    },
+    "furniture": {
+      "layer": "plan", "prefix": "fu", "kit": true,
+      "fields": {"kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?"}
+    },
+    "place": {
+      "layer": "plan", "prefix": "pc", "kit": false,
+      "fields": {
+        "kind": "enum:place_kind",
+        "name": "name?",
+        "area": "rings",
+        "uses": "enums:game_use",
+        "hours": "str?"
+      }
+    },
+
+    "faces": {
+      "layer": "dress", "prefix": "fc", "kit": true, "of": "building",
+      "fields": {"of": "id:building", "blotch": "nums", "faces": "objs:face"}
+    },
+    "roof_sheets": {
+      "layer": "dress", "prefix": "rs", "kit": true, "of": "building,leanto",
+      "fields": {"of": "id:building,leanto", "sag": "num >=0", "slopes": "objs:slope", "uprights": "table:upright"}
+    },
+    "wall_bays": {
+      "layer": "dress", "prefix": "wb", "kit": true, "of": "frontage,wall",
+      "fields": {"of": "id:frontage,wall", "bays": "objs:bay", "chips": "table:chip", "daubs": "table:daub"}
+    },
+    "posters": {
+      "layer": "dress", "prefix": "ps", "kit": true, "of": "frontage,wall,pole,stall,building",
+      "fields": {"of": "id:frontage,wall,pole,stall,building", "face": "int >=0?", "items": "objs:poster"}
+    },
+    "gutter_pieces": {
+      "layer": "dress", "prefix": "gp", "kit": true, "of": "road",
+      "fields": {"of": "id:road", "side": "enum:side", "pieces": "objs:gutter_piece"}
+    },
+    "ground": {
+      "layer": "dress", "prefix": "gr", "kit": true,
+      "fields": {
+        "of": "id:road,plot?",
+        "kind": "enum:ground_kind",
+        "rings": "rings",
+        "order": "int",
+        "z": "num?",
+        "lip": "num >=0?",
+        "colour": "hex?",
+        "surface": "surface?"
+      }
+    },
+    "relief": {
+      "layer": "dress", "prefix": "rl", "kit": true,
+      "fields": {"origin": "pt", "cell": "num >0", "cols": "int >=2", "rows": "int >=2", "z_mm": "ints"}
+    },
+    "ground_marks": {
+      "layer": "dress", "prefix": "gm", "kit": true, "of": "road,plot",
+      "fields": {"of": "id:road,plot", "potholes": "table:pothole", "ruts": "objs:rut"}
+    },
+    "litter": {
+      "layer": "dress", "prefix": "li", "kit": true,
+      "fields": {"of": "id:road,plot,furniture,ground?", "pieces": "table:litter_piece"}
+    },
+    "goods": {
+      "layer": "dress", "prefix": "gd", "kit": true, "of": "leanto,stall,heap,furniture",
+      "fields": {"of": "id:leanto,stall,heap,furniture", "items": "table:item", "hung": "table:item"}
+    },
+    "people": {
+      "layer": "dress", "prefix": "pp", "kit": true,
+      "fields": {"of": "id:place,road,plot?", "spots": "table:person"}
+    }
+  }
+}
