@@ -77,3 +77,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | Gidi is Lagos, miniaturised; the map starts again | every district traced to the real places it sits on; positions and network against real Lagos at the chosen scale | GAP: the whole-Lagos study and new frame come first (22 Oct) |
 | The new map is 1:3, about 27 x 10.5 km | map size and positions against real Lagos at 1:3 | GAP: comes with the new frame |
 | Roads first, districts by their borders | the skeleton is the real road network at 1:3; every district edge is a real border; merged places really touch | GAP: comes with the road skeleton and the border map (22 Oct) |
+| The plan is hand-made; the models come from kits | the plan has no generated content; every modelled thing names its kit and its reference pictures | GAP: comes with the new plan and the first kit (22 Oct) |
