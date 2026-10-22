@@ -1,6 +1,7 @@
 """A kit eye test: build one Street View spot from its map record with the old town kit and shoot it from the Street View's
 own camera (decisions: "A kit is proven by rebuilding real streets from it", "The owner's eye passes a kit").
 blender -b --factory-startup -P blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]
+    [--textures <dir> | --no-textures]   (textures default to $GIDI_TEXTURES or ~/Real-world/textures/polyhaven)
 The map's 'shot' block gives the camera (position, heading, pitch, horizontal field of view, frame) and the sky; the kit
 reads the rest. Light by default: EEVEE, low samples, the shot's own frame size."""
 import json
@@ -11,7 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 import scene  # noqa: E402
-from gidi_kit import detail, oldtown  # noqa: E402
+from gidi_kit import detail, oldtown, textured  # noqa: E402
 
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 opt = {}
@@ -76,6 +77,8 @@ def overcast(sc):
 
 overcast(sc)
 oldtown.build(spot, sc.collection)
+if not opt.get('--no-textures'):   # the photo textures, outside the repo (gidi_kit/textured.py)
+    print('textured:', textured.apply(opt.get('--textures')))
 cx, cy, cz = shot['camera_xyz']
 hd, pt = math.radians(shot.get('heading_deg', 0)), math.radians(shot.get('pitch_deg', 0))
 cam = scene.camera(sc, (cx, cy, cz), (cx + math.cos(hd) * math.cos(pt) * 100, cy + math.sin(hd) * math.cos(pt) * 100, cz + math.sin(pt) * 100))
