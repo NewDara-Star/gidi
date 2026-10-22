@@ -9,3 +9,5 @@ web/city/
 .venv/
 web/board-pending.json
 web/real-underlay.js
+web/frame-study.js
+web/frame-tiles/
