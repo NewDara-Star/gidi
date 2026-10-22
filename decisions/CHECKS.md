@@ -74,3 +74,4 @@ DETERMINISTIC line (`tools/bake.sh`).
 | Fixes reach everything already built | areas rebuilt from source every time; hand fixes that no longer land fail | 17, R0 |
 | Hand-made, checked by programs; the base is frozen | `scripts/rebuild_areas.py` | refuses to run unless `GIDI_REBUILD_OK=owner`; every hand edit must land (check 17, `check_district.py`); a change to the area builder shows in review |
 | Real Lagos roads, no ideal road template | roads on their real lines, buildings on their real spots, no building cut for a template | GAP: road-line offset check and city flow audit being built (22 Oct) |
+| Gidi is Lagos, miniaturised; the map starts again | every district traced to the real places it sits on; positions and network against real Lagos at the chosen scale | GAP: the whole-Lagos study and new frame come first (22 Oct) |
