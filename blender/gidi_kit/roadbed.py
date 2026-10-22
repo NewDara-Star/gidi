@@ -180,9 +180,12 @@ def _xs(x0, x1, near, grow):
     return np.array(xs)
 
 
-def build(sp, collection=None, ys=(-14.0, 6.6), materials=None, near=0.2, grow=0.012):
-    """The street's ground sheet as one object (material slot 'roadbed'); returns (object, Ground)."""
+def build(sp, collection=None, ys=None, materials=None, near=0.2, grow=0.012):
+    """The street's ground sheet as one object (material slot 'roadbed'); returns (object, Ground). ys: the band it
+    covers across the street, by default 8.6 m past the right edge and 2.9 m past the left (the frontages' ground)."""
     G = Ground(sp)
+    ys = ys or (G.cy - G.half - 8.6, G.cy + G.half + 2.9)
+    G.ys = ys
     xs = _xs(G.x0 - 5, G.x1, near, grow)
     yv = np.arange(ys[0], ys[1] + 1e-6, 0.15)
     X, Y = np.meshgrid(xs, yv, indexing='ij')
