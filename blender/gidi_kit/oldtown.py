@@ -17,7 +17,7 @@ import math
 import bpy
 from mathutils import Matrix, Vector
 
-from . import goods, gutters, parts, people, props, roadbed, street, vehicles, wear as W, zinc
+from . import facade, goods, gutters, parts, people, props, roadbed, street, vehicles, wear as W, zinc
 from .core import MeshBuilder, MissingRecord, at, ccw, edge_out, frame, hex_rgb, need, offset, prism, shade
 from .materials import master
 from .parcels import tree
@@ -570,8 +570,13 @@ def building(b, collection=None):
                frame=trim, glass=hex_rgb('#26323a'), mullion=hex_rgb('#b8bcc0'), bars=b.get('window_bars', 'none'), bar_col=_hex(b.get('bar_colour'), '#262626'), wear=wear, hood=False)
     shut = _hex(b['window_shutters']) if b.get('window_shutters') else None
 
-    def put_window(F, u, z):
-        if wtype in ('plank_shutter', 'louvre_timber'):
+    def put_window(F, u, z, sp=None):
+        if sp and sp.get('kind'):   # this window's own record (the facade pass): its kind, size, bars, cloth
+            facade.window(mb, F, u, z, sp, win, wear)
+            if shut and sp['kind'] not in ('boarded', 'dark'):
+                for s_ in (-1, 1):
+                    mb.box('wood', at(F, u + s_ * (sp.get('w', win['w']) / 2 + 0.28), 0.05, z), shut, wear, size=(0.5, 0.03, sp.get('h', win['h'])))
+        elif wtype in ('plank_shutter', 'louvre_timber'):
             plank_window(mb, F, u, z, 0.9, 1.1, _hex(b.get('shutter_colour'), '#6b4a33'), wear)
         else:
             parts.window(mb, F, u, z, win)
@@ -585,7 +590,7 @@ def building(b, collection=None):
         hit = _on_face(fs, sp['x'], sp['y'])
         if hit:
             k, u, _ = hit
-            put_window(fs[k][4], u, need(sp, 'z', 'window spot'))
+            put_window(fs[k][4], u + sp.get('du', 0.0), need(sp, 'z', 'window spot'), sp)
     acs = need(b, 'ac_units', 'building ' + b['id'])
     if not isinstance(acs, list):
         raise MissingRecord('building %s: ac_units must be a list of AC boxes (x, y, z, shade, pipe)' % b['id'])
@@ -655,6 +660,9 @@ def building(b, collection=None):
     # stains: rain run down from the eaves and the sills, cement patches, render broken off at the foot (wear.age_face)
     for m in (need(b, 'stains', 'building ' + b['id']) if wf.get('stains', 'none') != 'none' else []):
         W.marks(mb, fs[m['face']][4], wx, [m])
+
+    if b.get('facade'):   # the walk-up's close-up layer: slab edges, add-on rooms, closed balconies, pipes, wires, signs, laundry, tanks, tarps
+        facade.draw(mb, fs, wx, b['facade'], wear)
 
     # roof
     if flat:
