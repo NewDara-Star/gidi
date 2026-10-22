@@ -1,7 +1,8 @@
 /* The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study
    layers to draw the new map on by hand. Opened with board.html?frame=new; the old map stays at board.html.
    Data: window.FRAME (scripts/frame_study.py) and, zoomed in, web/frame-tiles/ (scripts/frame_footprints.py), Gidi metres,
-   y south. A study underlay only: real names and lines are shown here and never written into the map. */
+   y south. A study underlay only: real names and lines are shown here and never written into the map. The new map's
+   records are drawn and edited over it by web/mapedit.js (window.MAPEDIT), which this file hands its view to. */
 (() => {
   "use strict";
   const F = window.FRAME;
@@ -10,13 +11,14 @@
   const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const isDark = () => { const r = document.documentElement.dataset.theme; return r ? r === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
 
-  // ------------------------------------------------------------------ the bar: this view has no drawing tools yet
+  // ------------------------------------------------------------------ the bar (the map editor adds its tools after it)
   document.title = "Gidi Drawing Board: new frame";
   document.querySelector(".bar").innerHTML = `
     <div class="group"><span class="title">Gidi drawing board · new frame 1:3</span><select id="district" aria-label="Go to a district"></select></div>
     <div class="group" id="layers"></div>
     <div class="group"><button id="fit" title="The whole frame (0)">Whole frame</button><a href="board.html" id="old" title="The old 17-district map"><button>Old map</button></a><button id="theme" title="Light or dark">◐</button></div>`;
-  $("panel").style.display = "none";
+  const ME = window.MAPEDIT && F ? window.MAPEDIT : null;
+  if (!ME) $("panel").style.display = "none";
   if (!F) {
     document.querySelector(".bar").insertAdjacentHTML("beforeend", '<div class="group"><span class="title" style="color:var(--bad)">No study layers yet: run scripts/frame_study.py</span></div>');
     return;
@@ -131,6 +133,7 @@
     // district borders, then the unsure lines and lines still to trace, dashed in their own colours
     if (LAYERS.districts) { ctx.strokeStyle = P.dline; ctx.lineWidth = 1.4 * px; for (const d of F.districts) if (hit(d.bb, v)) for (const r of d.rings) { path(r[0], true); ctx.stroke(); } }
     if (LAYERS.unsure) for (const l of F.lines) { if (!hit(l.bb, v)) continue; path(l.p); ctx.strokeStyle = l.k === "unsure" ? P.unsure : P.trace; ctx.lineWidth = (l === hover ? 5 : 3) * px; ctx.setLineDash(l.k === "unsure" ? [9 * px, 6 * px] : [3 * px, 5 * px]); ctx.stroke(); ctx.setLineDash([]); }
+    if (ME) ME.drawWorld(ctx, v, px);   // the new map's records, over the study
     // the frame's edge
     ctx.strokeStyle = P.frame; ctx.lineWidth = 2 * px; ctx.strokeRect(0, 0, FW, FH);
 
@@ -169,6 +172,7 @@
       }
     }
     ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
+    if (ME) ME.drawScreen(ctx);
     drawScale();
     if (LAYERS.roofs && tileIndex && !roofsOn) status3.textContent = "Real roofs show when zoomed in under 4.5 km across";
     else status3.textContent = LAYERS.roofs && !tileIndex ? "No real roofs yet: run scripts/frame_footprints.py" : "Study underlay: real Lagos at 1:3. Not map data.";
@@ -188,28 +192,46 @@
     status1.textContent = `x ${Math.round(p[0])} m, y ${Math.round(p[1])} m · real ${la.toFixed(5)}, ${lo.toFixed(5)}` + (d ? ` · ${d.n}. ${d.name}` : "") + (hover ? ` · ${hover.q}` : "");
   }
 
-  // ------------------------------------------------------------------ pan and zoom
-  let drag = null;
-  cv.addEventListener("pointerdown", (ev) => { drag = { x: ev.clientX, y: ev.clientY, ox, oy }; cv.setPointerCapture(ev.pointerId); cv.classList.add("panning"); });
+  // ------------------------------------------------------------------ pan and zoom (the map editor gets the left button first)
+  let drag = null, spaceDown = false;
+  cv.addEventListener("pointerdown", (ev) => {
+    cv.setPointerCapture(ev.pointerId);
+    if (ME && ev.button === 0 && !spaceDown && ME.down(ev, toW(ev.clientX, ev.clientY))) return;
+    drag = { x: ev.clientX, y: ev.clientY, ox, oy }; cv.classList.add("panning");
+  });
+  cv.addEventListener("contextmenu", (ev) => ev.preventDefault());
   cv.addEventListener("pointermove", (ev) => {
     if (drag) { ox = drag.ox + ev.clientX - drag.x; oy = drag.oy + ev.clientY - drag.y; draw(); return; }
     const p = toW(ev.clientX, ev.clientY);
+    if (ME && ME.move(ev, p)) { where(p); return; }
     let h = null, bd = 6 / s;
     if (LAYERS.unsure) for (const l of F.lines) if (hit(l.bb, [p[0] - bd, p[1] - bd, p[0] + bd, p[1] + bd])) { const d = lineDist(p, l.p); if (d < bd) { bd = d; h = l; } }
     if (h !== hover) { hover = h; draw(); }
     where(p);
   });
-  cv.addEventListener("pointerup", () => { if (drag) { drag = null; cv.classList.remove("panning"); saveView(); } });
+  cv.addEventListener("pointerup", (ev) => { if (drag) { drag = null; cv.classList.remove("panning"); saveView(); } else if (ME) ME.up(ev, toW(ev.clientX, ev.clientY)); });
   cv.addEventListener("wheel", (ev) => {
     ev.preventDefault();
-    const k = Math.exp(-ev.deltaY * (ev.ctrlKey ? 0.01 : 0.0015)), ns = Math.max(0.01, Math.min(20, s * k));
+    const k = Math.exp(-ev.deltaY * (ev.ctrlKey ? 0.01 : 0.0015)), ns = Math.max(0.01, Math.min(60, s * k));
     ox = ev.clientX - (ev.clientX - ox) * ns / s; oy = ev.clientY - (ev.clientY - oy) * ns / s; s = ns; draw(); saveView();
   }, { passive: false });
-  window.addEventListener("keydown", (ev) => { if (ev.key === "0") fit([0, 0, FW, FH]); });
+  window.addEventListener("keydown", (ev) => {
+    if (/^(INPUT|SELECT|TEXTAREA)$/.test(ev.target.tagName)) return;
+    if (ev.key === " ") { spaceDown = true; cv.classList.add("pan"); ev.preventDefault(); }
+    else if (ev.key === "0") fit([0, 0, FW, FH]);
+  });
+  window.addEventListener("keyup", (ev) => { if (ev.key === " ") { spaceDown = false; cv.classList.remove("pan"); } });
   $("fit").addEventListener("click", () => fit([0, 0, FW, FH]));
   $("theme").addEventListener("click", () => { const r = document.documentElement; r.dataset.theme = isDark() ? "light" : "dark"; draw(); });
   window.addEventListener("resize", resize);
   window.addEventListener("hashchange", () => { if (location.hash !== lastHash && viewFromHash()) draw(); });
+  // the view, for the map editor: world <-> screen, redraw, the study district under a point, go to a spot
+  if (ME) ME.init({
+    F, cv, draw, districtAt, fit, toW, saveView,
+    toS: (p) => [p[0] * s + ox, p[1] * s + oy],
+    get s() { return s; },
+    focus(x, y, scale) { s = Math.max(s, scale || s); ox = W / 2 - x * s; oy = H / 2 - y * s; saveView(); draw(); },
+  });
   resize();
   if (!viewFromHash()) fit([0, 0, FW, FH]); else draw();
 })();

@@ -251,11 +251,11 @@ def canonical(doc):
     return h + ',"records":[\n' + ',\n'.join(lines) + '\n]}\n'
 
 
-def load_map(top, fix):
+def load_map(top, fix, only=None):
     files = []
     for d in sorted(os.listdir(top)):
         dd = os.path.join(top, d)
-        if not os.path.isdir(dd):
+        if not os.path.isdir(dd) or (only and d not in only):
             continue
         names = ['district.json', 'plan.json'] + ['dress/' + f for f in sorted(os.listdir(os.path.join(dd, 'dress')))
                                                    if f.endswith('.json')] if os.path.isdir(os.path.join(dd, 'dress')) else ['district.json', 'plan.json']
@@ -279,8 +279,9 @@ def load_map(top, fix):
     return files
 
 
-def check(top, fix=False):
-    files = load_map(top, fix)
+def check(top, fix=False, only=None):
+    """Check the map under top (only: a list of district folders to check, as the board does on each save)."""
+    files = load_map(top, fix, only)
     recs, where_of, refs = {}, {}, []
     for d, n, p, doc in files:
         w = f'{d}/{n}'
