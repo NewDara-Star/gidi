@@ -201,7 +201,10 @@ def check_table(where, t, name, refs):
             err(f'{where}.rows[{i}]', f'should have {len(cols)} values')
             continue
         for (c, spec), v in zip(cols, row):
-            check_value(f'{where}.rows[{i}].{c}', v, spec, refs)
+            if v is None and not spec.endswith('?'):      # a cell drawn but not given yet: still to set, like a missing field
+                err(f'{where}.rows[{i}]', f'missing value {c!r}')
+            elif v is not None:
+                check_value(f'{where}.rows[{i}].{c}', v, spec, refs)
 
 
 # ------------------------------------------------------------------ geometry helpers for the cross-checks
