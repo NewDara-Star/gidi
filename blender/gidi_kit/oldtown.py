@@ -884,6 +884,39 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
             a_, b_ = xa + (xb - xa) * k / n_, xa + (xb - xa) * (k + 1) / n_ - 0.015
             z = [gz(a_, y0_) + 0.035, gz(b_, y0_) + 0.035, gz(b_, y1_) + 0.035, gz(a_, y1_) + 0.035]
             mb.face([(a_, y0_, z[0]), (b_, y0_, z[1]), (b_, y1_, z[2]), (a_, y1_, z[3])], 'concrete', shade(_hex(vr.get('colour'), '#8f8b83'), f), 0.4)
+    for vk, s_ in (('verge_right', -1), ('verge_left', 1)):   # a grass strip behind the road's edge (or its kerb), in pieces
+        vr = sp.get(vk) or {}
+        if vr.get('surface') != 'grass':
+            continue
+        xa = vr.get('from_x', x0)
+        kb = sp.get('kerb_right' if s_ < 0 else 'kerb_left') or {}
+        y_in = (yr if s_ < 0 else yl) + s_ * (kb.get('w_m', 0.0) + vr.get('gap_m', 0.0))
+        col = _hex(need(vr, 'colour', 'grass verge of ' + sp['id']))
+        for ln, f, a_in, a_out in need(vr, 'patches', 'grass verge of ' + sp['id']):
+            ya, yb = y_in + s_ * a_in, y_in + s_ * (vr['width'] - a_out)
+            q = [(xa, ya), (xa + ln, ya), (xa + ln, yb), (xa, yb)]
+            mb.face([(px, py, gz(px, py) + 0.03) for px, py in (q if s_ > 0 else q[::-1])], 'ground', shade(col, f), 0.2)
+            xa += ln
+    for side, s_ in (('right', -1), ('left', 1)):   # a raised kerb along the road's edge: precast blocks, their face toward the road
+        kb = sp.get('kerb_' + side)
+        if not kb:
+            if (sp.get('kerb') or {}).get(side, 'none') != 'none':
+                raise MissingRecord(f"street {sp['id']}: kerb {side} is {sp['kerb'][side]} but has no kerb_{side} record")
+            continue
+        y_e = (yr if s_ < 0 else yl) + s_ * kb.get('w_m', 0.15) / 2
+        top, face = _hex(need(kb, 'colour', 'kerb')), _hex(kb['face_colour']) if kb.get('face_colour') else None
+        xa = kb.get('from_x', x0)
+        for ln, f, chip in need(kb, 'blocks', 'kerb ' + side + ' of ' + sp['id']):
+            z = gz(xa + ln / 2, y_e)
+            M = Matrix.Translation((xa + ln / 2, y_e, z + kb.get('h_m', 0.2) / 2 - 0.05))
+            mb.box('concrete', M, shade(top, f), 0.5, size=(ln - 0.012, kb.get('w_m', 0.15), kb.get('h_m', 0.2) + 0.1))
+            if face:   # the road face darker (tyre and splash): a thin skin on it
+                mb.face([(xa, y_e - s_ * (kb.get('w_m', 0.15) / 2 + 0.003), z - 0.05), (xa + ln - 0.012, y_e - s_ * (kb.get('w_m', 0.15) / 2 + 0.003), z - 0.05),
+                         (xa + ln - 0.012, y_e - s_ * (kb.get('w_m', 0.15) / 2 + 0.003), z + kb.get('h_m', 0.2) * 0.85),
+                         (xa, y_e - s_ * (kb.get('w_m', 0.15) / 2 + 0.003), z + kb.get('h_m', 0.2) * 0.85)][::s_], 'concrete', shade(face, f), 0.6)
+            if chip:   # a chip off the road-side top edge
+                mb.box('concrete', Matrix.Translation((xa + ln * chip, y_e - s_ * kb.get('w_m', 0.15) * 0.35, z + kb.get('h_m', 0.2) - 0.03)), shade(top, 0.6), 0.8, size=(0.12, kb.get('w_m', 0.15) * 0.32, 0.07))
+            xa += ln
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -896,6 +929,20 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
             if c.get('side') == 'left':
                 mb.box('concrete', Matrix.Translation((c['x'], y, 0.27)) @ Matrix.Rotation(need(c, 'rz', 'crossing'), 4, 'Z'), shade(_hex(g.get('slab_colour'), '#a39f95'), need(c, 'shade', 'crossing')), 0.7, size=(c['w'], g['width'] + 0.7, 0.1))
     return mb.to_object(sp['id'], collection, master)
+
+
+def street_lamp(mb, lp):
+    """A steel street lamp from its record: x, y, h (m), arm_m (how far the arm reaches), facing_deg (the arm's way), colour."""
+    if need(lp, 'type', 'lamp') != 'steel_arm':
+        raise MissingRecord(f"lamp type {lp['type']} has no part")
+    x, y, h = lp['x'], lp['y'], need(lp, 'h', 'lamp')
+    col, a = _hex(lp.get('colour'), '#8a8c8c'), math.radians(need(lp, 'facing_deg', 'lamp'))
+    z0 = ground_z(x, y)
+    parts.cyl(mb, 'steel', Matrix.Translation((x, y, z0)), 0.09, h, col, 0.4, seg=10, r2=0.06)
+    d = Vector((math.cos(a), math.sin(a), 0))
+    top, end = Vector((x, y, z0 + h)), Vector((x, y, z0 + h)) + d * need(lp, 'arm_m', 'lamp') + Vector((0, 0, 0.35))
+    parts.bar(mb, 'steel', top - Vector((0, 0, 0.6)), end, 0.05, col, 0.4)
+    mb.box('steel', Matrix.Translation(end + d * 0.25 - Vector((0, 0, 0.05))) @ Matrix.Rotation(a, 4, 'Z'), shade(col, 0.8), 0.4, size=(0.6, 0.25, 0.12))
 
 
 def sand_heap(mb, x, y, r, h, col):
@@ -936,6 +983,8 @@ def spot_props(P, collection=None):
         lattice_mast(mb, m['x'], m['y'], m['h'])
     for t in P.get('trees', []):
         tree(mb, t['x'], t['y'], need(t, 'form', 'tree'))
+    for lp in P.get('lamps', []):   # a street lamp: a steel pole, an arm out over the road, a flat head
+        street_lamp(mb, lp)
     for k, s in enumerate(P.get('trade_spots', [])):
         side = 'left' if s.get('y', s.get('wall_y', s.get('y0', 0))) > 0 else 'right'
         if s['type'] == 'lean-to row':
@@ -1023,6 +1072,19 @@ def spot_props(P, collection=None):
             street.refuse_heap(mb, hp['x'], hp['y'], hp['r'], need(hp, 'heap', 'rubbish heap'))
         elif hp['kind'] == 'sand':   # a heap of sand tipped by the road: a low mound, its height and colour from the map
             sand_heap(mb, hp['x'], hp['y'], hp['r'], need(hp, 'h', 'sand heap'), _hex(need(hp, 'colour', 'sand heap')))
+        elif hp['kind'] == 'blocks':   # a stack of hollow sandcrete blocks: cols along, rows deep, layers high
+            a = math.radians(hp.get('facing_deg', 0))
+            z0, col, j = ground_z(hp['x'], hp['y']), _hex(need(hp, 'colour', 'block stack')), 0
+            for ly in range(hp['layers']):
+                for rw in range(hp.get('rows', 1)):
+                    for c in range(hp['cols']):
+                        dx, dy, rz, f, gone = need(hp, 'blocks', 'block stack')[j]
+                        j += 1
+                        if gone:
+                            continue
+                        u, v = (c - (hp['cols'] - 1) / 2) * 0.46 + dx, (rw - (hp.get('rows', 1) - 1) / 2) * 0.23 + dy
+                        M = Matrix.Translation((hp['x'] + u * math.cos(a) - v * math.sin(a), hp['y'] + u * math.sin(a) + v * math.cos(a), z0 + 0.1125 + ly * 0.225)) @ Matrix.Rotation(a + rz, 4, 'Z')
+                        mb.box('block', M, shade(col, f), 0.6, size=(0.45, 0.225, 0.225))
         elif hp['kind'] == 'goods':   # a tumble of goods at a stall, on the ground
             goods.draw(gmb, need(hp, 'goods', 'goods heap'), hard=hmb, dz=ground_z(hp['x'], hp['y']))
     for k, p in enumerate(P.get('people', [])):
