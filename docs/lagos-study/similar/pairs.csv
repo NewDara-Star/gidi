@@ -1,0 +1,186 @@
+unit_a,unit_b,link,shared_edge_km,similarity_pct,class_part_hellinger,metric_part_rms_z
+Agege-Pen Cinema,Orile Agege-Dopemu,land,4.5,86.3,0.173,0.28
+Agbara-Morogbo,Badagry town-Seme,land,15.0,85.2,0.185,0.31
+Ipaja-Ayobo-Mosan,Alagbado-Agbado,land,5.0,85.1,0.225,0.2
+Epe town-Noforija,Ejinrin-Agbowa,land,18.25,84.6,0.145,0.46
+Okokomaiko,Ijanikin-Igbo Elerin,land,11.25,84.2,0.2,0.32
+Iyana Ipaja,Abule Egba-Ojokoro,land,1.0,83.9,0.236,0.24
+Ipaja-Ayobo-Mosan,Idimu,land,10.5,83.6,0.207,0.34
+Magodo,Ojodu-Berger-Omole,land,3.75,82.8,0.202,0.4
+Alagbado-Agbado,Abule Egba-Ojokoro,land,6.25,82.2,0.24,0.32
+Shomolu-Pedro-Onipanu,Mushin-Idi Araba-Odi Olowo,land,3.25,81.6,0.219,0.42
+Iba,Igando,land,5.25,81.2,0.256,0.33
+Igbogbo-Baiyeku,Ijede,land,10.5,81.0,0.276,0.29
+Ikota-VGC-Chevron,Ajah-Abraham Adesanya,land,7.5,80.6,0.223,0.46
+Ikorodu town,Isawo-Owutu-Odogunyan,land,7.5,80.5,0.261,0.36
+Sangotedo,Awoyaya-Lakowe,land,10.0,80.0,0.252,0.41
+Ejigbo,Egbe,land,5.5,79.9,0.293,0.3
+Idimu,Igando,land,7.25,79.9,0.31,0.25
+Eleko-Akodo-Ibeju,Epe town-Noforija,land,4.75,79.0,0.172,0.69
+Agege-Pen Cinema,Ifako-Ijaiye-Iju,land,4.0,79.0,0.196,0.63
+Ijanikin-Igbo Elerin,Agbara-Morogbo,land,9.25,79.0,0.18,0.67
+Okota-Ago Palace,Ikotun,land,6.0,78.3,0.295,0.39
+Itire-Lawanson,Mushin-Idi Araba-Odi Olowo,land,1.5,78.1,0.318,0.33
+Airport (MMIA),Ikeja Along-Cantonment,land,4.75,77.7,0.272,0.48
+Ikate-Agungi-Osapa-Jakande,Ikota-VGC-Chevron,land,6.75,77.6,0.3,0.41
+Ifako-Ijaiye-Iju,Abule Egba-Ojokoro,land,3.5,77.4,0.304,0.41
+Ijede,Imota,land,17.25,77.3,0.323,0.36
+Awoyaya-Lakowe,Eleko-Akodo-Ibeju,land,17.75,77.0,0.228,0.65
+Ejigbo,Ikotun,land,0.75,76.4,0.292,0.5
+Aguda-Ijesha-Coker,Itire-Lawanson,land,3.5,76.3,0.326,0.41
+Ikorodu town,Igbogbo-Baiyeku,land,11.5,76.2,0.276,0.55
+Aguda-Ijesha-Coker,Iganmu-Orile,land,3.5,76.2,0.262,0.6
+Oniru-Lekki Phase 1,Ikate-Agungi-Osapa-Jakande,land,5.5,75.5,0.318,0.48
+Egbeda-Akowonjo,Egbe,land,3.0,75.2,0.391,0.29
+Agege-Pen Cinema,Abule Egba-Ojokoro,land,3.25,75.2,0.281,0.6
+Ketu-Mile 12-Ikosi,Ojota-Ogudu,land,6.5,75.2,0.347,0.41
+Mushin-Idi Araba-Odi Olowo,Isolo,land,2.5,74.2,0.281,0.66
+Iyana Ipaja,Ipaja-Ayobo-Mosan,land,5.0,74.1,0.345,0.48
+Ipaja-Ayobo-Mosan,Abule Egba-Ojokoro,land,2.75,74.0,0.361,0.44
+Eleko-Akodo-Ibeju,Ejinrin-Agbowa,land,16.5,73.8,0.209,0.88
+Idimu,Egbe,land,1.0,73.6,0.317,0.59
+Iyana Ipaja,Egbeda-Akowonjo,land,5.0,73.5,0.381,0.41
+Iyana Ipaja,Agege-Pen Cinema,land,0.5,73.2,0.3,0.66
+Egbeda-Akowonjo,Orile Agege-Dopemu,land,1.75,73.0,0.359,0.5
+Ajah-Abraham Adesanya,Sangotedo,land,7.5,72.7,0.331,0.6
+Alaba-Ojo-LASU,Okokomaiko,land,7.75,71.9,0.345,0.61
+Badore,Sangotedo,land,5.5,71.3,0.354,0.61
+Ketu-Mile 12-Ikosi,Magodo,land,4.75,71.2,0.386,0.52
+Obalende,Ikoyi-Banana Island,land,3.5,71.1,0.222,1.0
+Idimu,Ikotun,land,3.75,71.0,0.404,0.48
+Surulere (Ojuelegba-Bode Thomas-Stadium),Iganmu-Orile,land,1.75,70.8,0.339,0.68
+Surulere (Ojuelegba-Bode Thomas-Stadium),Aguda-Ijesha-Coker,land,4.0,70.6,0.378,0.58
+Okota-Ago Palace,Festac,land,5.0,70.5,0.36,0.64
+Ikotun,Egbe,land,6.0,70.5,0.369,0.62
+Ebute Metta-Oyingbo-Otto-Iddo,Surulere (Ojuelegba-Bode Thomas-Stadium),land,2.75,69.6,0.436,0.47
+Awoyaya-Lakowe,Ejinrin-Agbowa,land,6.75,69.5,0.277,0.93
+Onikan-Lafiaji (Lagos Island East),Obalende,land,2.75,69.3,0.36,0.71
+Kirikiri-Navy Town,Satellite Town,land,5.0,69.2,0.385,0.64
+Yaba-Sabo-Jibowu,Surulere (Ojuelegba-Bode Thomas-Stadium),land,2.25,69.1,0.469,0.41
+Iyana Ipaja,Orile Agege-Dopemu,land,2.0,69.1,0.36,0.72
+Ikotun,Igando,land,9.5,69.0,0.437,0.51
+Apapa-Tin Can,Kirikiri-Navy Town,land,2.75,68.1,0.355,0.79
+Itire-Lawanson,Isolo,land,3.5,67.6,0.409,0.66
+Ojota-Ogudu,Gbagada,land,3.25,67.4,0.49,0.45
+Gbagada,Maryland-Onigbongbo,land,2.5,67.2,0.452,0.57
+Surulere (Ojuelegba-Bode Thomas-Stadium),Mushin-Idi Araba-Odi Olowo,land,2.75,67.1,0.439,0.61
+Ipaja-Ayobo-Mosan,Egbeda-Akowonjo,land,2.0,66.8,0.482,0.5
+Ajao Estate,Isolo,land,3.5,66.6,0.444,0.62
+Shomolu-Pedro-Onipanu,Bariga-Akoka,land,3.0,66.6,0.484,0.51
+Satellite Town,Trade Fair-Abule Ado,land,7.5,66.3,0.511,0.45
+Okokomaiko,Iba,land,4.5,66.0,0.504,0.48
+Badore,Awoyaya-Lakowe,land,1.75,65.8,0.428,0.71
+Okota-Ago Palace,Ejigbo,land,2.25,65.7,0.402,0.79
+Ojota-Ogudu,Oworonshoki,land,4.25,65.3,0.444,0.69
+Ikorodu town,Ijede,land,3.0,65.2,0.42,0.77
+Ajah-Abraham Adesanya,Badore,land,5.75,64.9,0.415,0.8
+Isawo-Owutu-Odogunyan,Ogijo-Sagamu Rd,land,7.75,64.8,0.356,0.97
+Gbagada,Shomolu-Pedro-Onipanu,land,2.5,64.5,0.456,0.7
+Iba,Ijanikin-Igbo Elerin,land,1.5,63.6,0.511,0.6
+Ikeja GRA,Maryland-Onigbongbo,land,3.0,63.6,0.453,0.77
+Ilupeju,Papa Ajao-Ladipo,land,2.0,63.6,0.493,0.65
+Ikorodu town,Ogijo-Sagamu Rd,land,5.75,63.5,0.359,1.04
+Ajegunle (Ajeromi),Amukoko-Layeni (Ifelodun),land,2.25,63.0,0.445,0.82
+Festac,Satellite Town,land,0.75,62.5,0.457,0.82
+Iganmu-Orile,Ajegunle (Ajeromi),land,0.75,62.2,0.438,0.89
+Surulere (Ojuelegba-Bode Thomas-Stadium),Itire-Lawanson,land,1.0,62.0,0.493,0.74
+Egbeda-Akowonjo,Idimu,land,2.75,61.8,0.531,0.64
+Ogijo-Sagamu Rd,Imota,land,6.75,61.7,0.425,0.95
+Isale Eko-Idumota-Marina,Onikan-Lafiaji (Lagos Island East),land,2.5,61.5,0.456,0.87
+Eleko-Akodo-Ibeju,Lekki FTZ-Dangote,land,8.5,61.4,0.284,1.37
+Satellite Town,Alaba-Ojo-LASU,land,4.5,61.2,0.439,0.94
+Ejinrin-Agbowa,Imota,land,11.25,61.0,0.435,0.96
+Iganmu-Orile,Amukoko-Layeni (Ifelodun),land,3.5,60.6,0.432,0.99
+Ajao Estate,Airport (MMIA),land,1.0,60.2,0.555,0.67
+Oshodi-Mafoluku,Ajao Estate,land,2.75,59.9,0.42,1.07
+Allen-Opebi-Computer Village,Ogba-Agidingbi-Alausa industrial,land,6.0,59.9,0.417,1.07
+Ikoyi-Banana Island,Oniru-Lekki Phase 1,land,4.0,59.7,0.476,0.92
+Isawo-Owutu-Odogunyan,Isheri-Olowora (Ikosi-Isheri),land,0.75,59.4,0.517,0.82
+Shomolu-Pedro-Onipanu,Yaba-Sabo-Jibowu,land,4.0,59.1,0.555,0.73
+Lekki FTZ-Dangote,Epe town-Noforija,land,3.5,59.0,0.192,1.77
+Ikoyi-Banana Island,Victoria Island,land,2.75,58.6,0.509,0.89
+Festac,Ikotun,land,0.25,58.2,0.552,0.79
+Festac,Trade Fair-Abule Ado,land,4.5,57.2,0.515,0.95
+Ketu-Mile 12-Ikosi,Isheri-Olowora (Ikosi-Isheri),land,5.0,56.9,0.535,0.91
+Yaba-Sabo-Jibowu,Mushin-Idi Araba-Odi Olowo,land,1.0,56.5,0.619,0.69
+Bariga-Akoka,Yaba-Sabo-Jibowu,land,1.75,56.1,0.605,0.75
+Gbagada,Bariga-Akoka,land,1.25,55.9,0.634,0.69
+Ojota-Ogudu,Maryland-Onigbongbo,land,1.0,55.8,0.621,0.73
+Agric-Majidun-Ogolonto,Ojota-Ogudu,land,1.25,55.2,0.502,1.1
+Ogba-Agidingbi-Alausa industrial,Maryland-Onigbongbo,land,1.0,54.1,0.612,0.85
+Aguda-Ijesha-Coker,Ajegunle (Ajeromi),land,1.0,54.0,0.593,0.91
+Papa Ajao-Ladipo,Ajao Estate,land,1.0,52.9,0.609,0.93
+Allen-Opebi-Computer Village,Ikeja Along-Cantonment,land,3.25,52.8,0.651,0.81
+Ogba-Agidingbi-Alausa industrial,Ikeja Along-Cantonment,land,1.25,52.7,0.612,0.93
+Alaba-Ojo-LASU,Iba,land,4.75,52.4,0.646,0.85
+Trade Fair-Abule Ado,Igando,land,6.75,52.3,0.573,1.06
+Okota-Ago Palace,Mile 2-Amuwo,land,2.75,52.2,0.474,1.35
+Ikorodu town,Imota,land,1.25,52.1,0.589,1.03
+Victoria Island,Oniru-Lekki Phase 1,land,2.5,51.9,0.586,1.05
+Oworonshoki,Bariga-Akoka,land,2.75,51.8,0.651,0.86
+Magodo,Ogba-Agidingbi-Alausa industrial,land,4.0,51.8,0.462,1.4
+Oshodi-Mafoluku,Ikeja Along-Cantonment,land,1.75,51.7,0.614,0.98
+Trade Fair-Abule Ado,Iba,land,1.0,51.6,0.585,1.07
+Ejigbo,Airport (MMIA),land,3.75,51.4,0.6,1.04
+Trade Fair-Abule Ado,Alaba-Ojo-LASU,land,5.5,51.0,0.653,0.91
+Ikeja GRA,Ikeja Along-Cantonment,land,2.25,50.9,0.693,0.8
+Gbagada,Ilupeju,land,1.0,50.8,0.471,1.44
+Mile 2-Amuwo,Festac,land,2.25,50.8,0.503,1.35
+Isolo,Okota-Ago Palace,land,5.25,50.3,0.623,1.03
+Isale Eko-Idumota-Marina,Ebute Metta-Oyingbo-Otto-Iddo,land,0.25,50.2,0.508,1.37
+Ilupeju,Maryland-Onigbongbo,land,1.0,50.1,0.626,1.03
+Ajao Estate,Ejigbo,land,2.75,50.1,0.598,1.12
+Papa Ajao-Ladipo,Isolo,land,0.75,50.0,0.594,1.13
+Agric-Majidun-Ogolonto,Ketu-Mile 12-Ikosi,land,4.5,49.8,0.539,1.3
+Kirikiri-Navy Town,Festac,land,2.25,49.8,0.628,1.05
+Victoria Island,Apapa-Tin Can,water,0.0,49.2,0.506,1.43
+Ogba-Agidingbi-Alausa industrial,Ojodu-Berger-Omole,land,5.5,49.1,0.567,1.26
+Ikeja GRA,Allen-Opebi-Computer Village,land,2.75,48.5,0.621,1.14
+Ogba-Agidingbi-Alausa industrial,Ifako-Ijaiye-Iju,land,6.0,48.4,0.584,1.25
+Egbeda-Akowonjo,Ikeja Along-Cantonment,land,1.75,48.2,0.683,0.98
+Apapa-Tin Can,Ijora-Badia,land,3.0,48.0,0.674,1.02
+Ilupeju,Oshodi-Mafoluku,land,0.5,47.2,0.527,1.48
+Oshodi-Mafoluku,Airport (MMIA),land,3.25,47.1,0.664,1.1
+Ojota-Ogudu,Ogba-Agidingbi-Alausa industrial,land,2.25,46.4,0.599,1.32
+Onikan-Lafiaji (Lagos Island East),Apapa-Tin Can,water,0.0,45.9,0.566,1.44
+Ikeja GRA,Ogba-Agidingbi-Alausa industrial,land,0.75,45.9,0.673,1.13
+Egbeda-Akowonjo,Airport (MMIA),land,4.25,45.4,0.718,1.03
+Agric-Majidun-Ogolonto,Isheri-Olowora (Ikosi-Isheri),land,2.5,45.4,0.66,1.2
+Ebute Metta-Oyingbo-Otto-Iddo,Makoko-Iwaya,land,2.5,44.9,0.604,1.39
+Magodo,Isheri-Olowora (Ikosi-Isheri),land,1.5,44.8,0.734,1.02
+Obalende,Victoria Island,water,0.0,43.4,0.675,1.27
+Ogba-Agidingbi-Alausa industrial,Agege-Pen Cinema,land,2.75,43.4,0.579,1.54
+Aguda-Ijesha-Coker,Okota-Ago Palace,land,2.75,43.0,0.708,1.21
+Mile 2-Amuwo,Kirikiri-Navy Town,land,4.5,42.7,0.731,1.15
+Trade Fair-Abule Ado,Ikotun,land,1.25,42.3,0.739,1.16
+Oshodi-Mafoluku,Ikeja GRA,land,2.5,42.1,0.708,1.25
+Iganmu-Orile,Apapa-Tin Can,land,1.25,42.0,0.689,1.31
+Ketu-Mile 12-Ikosi,Ogba-Agidingbi-Alausa industrial,land,0.75,42.0,0.622,1.5
+Agric-Majidun-Ogolonto,Isawo-Owutu-Odogunyan,land,5.75,41.9,0.621,1.51
+Yaba-Sabo-Jibowu,Makoko-Iwaya,land,2.25,41.8,0.637,1.47
+Ogba-Agidingbi-Alausa industrial,Orile Agege-Dopemu,land,0.75,41.6,0.641,1.47
+Shomolu-Pedro-Onipanu,Ilupeju,land,2.75,41.4,0.557,1.72
+Itire-Lawanson,Okota-Ago Palace,land,0.5,41.1,0.72,1.27
+Ebute Metta-Oyingbo-Otto-Iddo,Ijora-Badia,land,3.0,41.1,0.647,1.48
+Gbagada,Oworonshoki,land,2.0,41.1,0.812,1.01
+Ikeja Along-Cantonment,Orile Agege-Dopemu,land,2.0,40.9,0.776,1.13
+Makoko-Iwaya,Surulere (Ojuelegba-Bode Thomas-Stadium),land,1.0,39.6,0.68,1.47
+Isheri-Olowora (Ikosi-Isheri),Ojodu-Berger-Omole,land,0.5,39.3,0.778,1.21
+Surulere (Ojuelegba-Bode Thomas-Stadium),Ijora-Badia,land,0.5,39.2,0.698,1.44
+Ilupeju,Ikeja GRA,land,1.25,39.1,0.674,1.52
+Obalende,Apapa-Tin Can,water,0.0,38.5,0.692,1.5
+UNILAG,Yaba-Sabo-Jibowu,land,1.25,38.3,0.737,1.38
+Ajegunle (Ajeromi),Mile 2-Amuwo,land,2.25,37.0,0.634,1.75
+Ikorodu town,Agric-Majidun-Ogolonto,land,3.0,36.6,0.78,1.36
+Papa Ajao-Ladipo,Oshodi-Mafoluku,land,2.25,36.0,0.7,1.62
+Aguda-Ijesha-Coker,Mile 2-Amuwo,land,4.25,34.6,0.698,1.7
+Isale Eko-Idumota-Marina,Apapa-Tin Can,water,0.0,34.3,0.632,1.91
+Iganmu-Orile,Ijora-Badia,land,2.25,33.5,0.756,1.6
+Mushin-Idi Araba-Odi Olowo,Papa Ajao-Ladipo,land,2.5,32.4,0.754,1.67
+Apapa-Tin Can,Ajegunle (Ajeromi),land,3.0,32.1,0.734,1.74
+UNILAG,Makoko-Iwaya,land,1.75,32.1,0.731,1.75
+Ajegunle (Ajeromi),Kirikiri-Navy Town,land,2.75,30.1,0.793,1.69
+Shomolu-Pedro-Onipanu,Papa Ajao-Ladipo,land,0.5,28.7,0.786,1.79
+Apapa-Tin Can,Amukoko-Layeni (Ifelodun),land,2.25,25.9,0.81,1.88
+Isale Eko-Idumota-Marina,Ijora-Badia,water,0.0,25.8,0.8,1.91
+Bariga-Akoka,UNILAG,land,2.25,25.7,0.825,1.84
