@@ -72,6 +72,135 @@ to Ebute Metta; Gbagada to Gbagada-Ogudu.
 | Igbogbo-Bayeku-Ita Elewa | Ita Elewa, Igbogbo, Bayeku, Ofin, Igbopa | West: Ikorodu town's east valleys. East: the big stream valley that runs from Mowo Kekere south-south-west to the lagoon at Ijede, at about 3.56 to 3.57 (*seen*). South: the lagoon |
 | Ijede-Gberigbe | Ijede, Oyewaw, Gberigbe, Oke Agbo, Ipakan, Ita Elewa east of Ijede Road | West: the Mowo-Ijede valley. East: Imota. South: the lagoon |
 
+## Source votes (22 Oct)
+
+The owner's rule: "If multiple people agree on something, it's probably correct." Every unsure or *to trace* line
+was put to at least three independent sources, and the majority decides. On an even split, the line that follows a
+real physical break wins. Study only: the 23 screenshots stay outside the repo, in
+`~/Real-world/research/google/lagos-study/border-votes/` (the file names carry the number, the source and the
+coordinates). No Google imagery or geometry goes into Gidi.
+
+The sources:
+- **G**: Google Maps labels, and the area card, which names Google's neighbourhood at the map centre (z16 to z17).
+- **S**: Google satellite, for the fabric and the physical breaks.
+- **O**: the OpenStreetMap website (the map only; OSM has no LCDA lines in Lagos, only LGAs).
+- **L**: the official LGA lines (`~/Real-world/research/data/lagos_lgas_utm31.geojson`, point in polygon). LGAs
+  are coarse: often both sides of a line share one LGA, so L is often neutral.
+- **W**: written sources (Wikipedia and the press).
+
+Confidence: **sure** = all sources agree; **likely** = a clear majority, or a physical break with no dissent;
+**coin-toss** = an even split with no break to decide it. No line came out a coin-toss, so the board now shows no
+pink or amber lines. The district borders drawn are the verdicts.
+
+| Line | Verdict | Votes | Confidence |
+|---|---|---|---|
+| Surulere / Aguda | Ogunlana Drive and Adelabu Street (one north-south road at about 3.348 to 3.351). The Adelabu place goes to Aguda-Coker-Orile | G, O, S for; L neutral; W neutral | likely |
+| Ogunlana (the place) | Joins Itire-Lawanson-Ijesha, as the Itire-Ikate side | G 3 of 5 cards; S (roof leans north) | likely |
+| Itire-Lawanson / Mushin | The Idi-Araba canal at about 6.5165, which runs just north of Lawanson Road / Itire Road. The Itire place is cut there: Idi-Araba north goes to Mushin | G, S, O for; L against; W against | likely |
+| Itire-Lawanson / Surulere | Ogunlana Drive, Surulere east of it | follows the Ogunlana verdict: G, O, S | likely |
+| Mushin / Ilupeju | Neither candidate. The Onipanu edge at about 6.543, where Ilupeju's industrial grid meets Onipanu. Memberships unchanged | G, O, S for; L neutral | likely |
+| Mushin west | Ladipo Street, then Isolo Road (not the railway, which runs east of Agege Motor Road) | O, S for; G one dissent; L neutral | likely |
+| Lekki Phase 1 / Agungi | Ikate's east edge at about 3.497. The "Agungi west" place (Cowrie Creek, "Ikate Elegushi") goes to Lekki Phase 1 | G, O, S for; L neutral | likely |
+| Agric-Isawo-Owutu east | The north-south stream valley at about 3.489. The Majidun north-east place is cut there: the Eyita side goes to Ikorodu Town | G, S, O for; L neutral | likely |
+| Ikorodu Town north / Odogunyan on Sagamu Road | The Fourth Mainland Road reserve at about 6.640. "Odogunyan, south-east of Sagamu Road" goes to Ikorodu Town; "Itamaga north-east" (north of the line) goes to Odogunyan-Ogijo | O, G, S, W for; L neutral | likely |
+| Ikorodu Town west | Unchanged: the Agric valley above is the west edge | as above | likely |
+| Ita Elewa | The real Ita Elewa is an old-town quarter, already in Ikorodu Town. The big place called "Ita Elewa" is the Elesin, Oke and Parafa band east of the town's stream valley. It stays in district 49, now named Igbogbo-Bayeku | G, W for; O, S (valley break) for | likely |
+| Agbado-Oke Odo east | The railway (unchanged) | G, O, S for; W against; L neutral | likely |
+| Command | Moves to Agbado-Oke Odo | G, S, W (the LCDA is named for Oke Odo) for; one address says Ipaja | likely |
+| Ago Palace-Abaranje-Ijegun | No extra cut. The big "Ago Palace" place is really Ijegun, Ije Ododo and Isheri Osun; the real Ago Palace Way estates are east of the canal, in Okota. District 45 is now named Ijegun-Abaranje-Isheri Osun. "Jakande Estate (Isolo) east" (the real estate at Oke-Afa) goes to Okota | G, O, L for | likely |
+| Ejigbo south | The edge of the Ejigbo places along the Egbe Road side. "Jakande Estate (Isolo) north-west" (card: Egbe) goes from Ejigbo to Ikotun-Igando | G, O, L, S (west of the Ikotun-Ejigbo stream) for | likely |
+| Ikotun-Igando south | The LASU-Isheri (Igando-LASU) Road (unchanged) | O, G for; L neutral | likely |
+| Oworonshoki | Joins Gbagada-Ogudu (not Shomolu-Bariga, and not its own district) | G card (Gbagada), L (Kosofe, with Gbagada), W (Kosofe) for; S (fabric runs on to Bariga) against; G and O labels name it but do not decide | likely |
+| Boundary west of the expressway | Stays in Kirikiri-Tin Can | O (port and industrial land, the Kirikiri lighter terminal), S (terminals, not houses), L (Amuwo Odofin, with Kirikiri) for; G card ("Apapa") for neither; the expressway is the break against Ajegunle | likely |
+| Lagos Island quarters | Quarter lines inside one district, not district borders (the note stays on the board) | not voted | n/a |
+
+### The sources for each line
+
+**Surulere / Aguda, Ogunlana, Itire.**
+- G area cards:
+  - Aguda at [6.4905,3.344](https://www.google.com/maps/@6.4905,3.344,16z) and [6.501,3.342](https://www.google.com/maps/@6.501,3.342,16z). Aguda market is in the Adelabu place.
+  - Ikate at [6.5033,3.3397](https://www.google.com/maps/@6.5033,3.3397,17z) and [6.503,3.347](https://www.google.com/maps/@6.503,3.347,17z).
+  - Itire at [6.5065,3.334](https://www.google.com/maps/@6.5065,3.334,17z), [6.512,3.335](https://www.google.com/maps/@6.512,3.335,17z) and [6.508,3.330](https://www.google.com/maps/@6.508,3.330,17z).
+  - Animashaun at [6.499,3.334](https://www.google.com/maps/@6.499,3.334,17z).
+  - Idi-Araba at [6.516,3.341](https://www.google.com/maps/@6.516,3.341,17z).
+  - Mushin at [6.518,3.3377](https://www.google.com/maps/@6.518,3.3377,16z).
+- G labels at [z15](https://www.google.com/maps/@6.515,3.345,15z): MUSHIN about 6.526, ITIRE about 6.507, IDI-ARABA about 6.515. The dark Idi-Araba canal runs east-west at about 6.516.
+- O ([map](https://www.openstreetmap.org/#map=16/6.505/3.345)): Ogunlana Drive runs on as Adelabu Street, and Lawanson Road runs on as Itire Road. Idi Araba is labelled north of it.
+- S: dense old core west of Ogunlana and Adelabu, a bungalow suburb east of it.
+- L: the whole area is Surulere LGA, except that the Itire point falls in Mushin LGA.
+- W: [Surulere](https://en.wikipedia.org/wiki/Surulere) lists Itire, Ikate and Aguda as its quarters.
+- Roof split of the Itire place: 0.88 km² south of 6.517 and 1.01 km² north.
+
+**Mushin / Ilupeju, Mushin west.**
+- G cards:
+  - Ilupeju at [6.547,3.359](https://www.google.com/maps/@6.547,3.359,16z).
+  - Onipanu at [6.542,3.358](https://www.google.com/maps/@6.542,3.358,16z) and [6.538,3.360](https://www.google.com/maps/@6.538,3.360,16z).
+  - Papa Ajao at [6.5358,3.3506](https://www.google.com/maps/@6.5358,3.3506,16z).
+  - Idi Oro at [6.5238,3.3559](https://www.google.com/maps/@6.5238,3.3559,16z).
+- O ([map](https://www.openstreetmap.org/#map=15/6.540/3.355)): Palm Avenue lies west of Agege Motor Road, inside Mushin and Papa Ajao, so it is not an Ilupeju line. Agege Motor Road is Ilupeju's west edge against Ladipo.
+- S: Ilupeju's industrial grid (the big factory sheds) against dense Onipanu and Mushin.
+- L: all Mushin LGA (neutral).
+
+**Lekki Phase 1 / Agungi.**
+- G cards:
+  - Ikate Elegushi at [6.4534,3.4929](https://www.google.com/maps/@6.4534,3.4929,16z).
+  - Lekki Phase 1 at [6.4547,3.4756](https://www.google.com/maps/@6.4547,3.4756,16z).
+  - Nicon Town Estate at [6.4509,3.5078](https://www.google.com/maps/@6.4509,3.5078,16z).
+- O ([map](https://www.openstreetmap.org/#map=15/6.455/3.495)): Lekki Phase I is west of Freedom Way, with Moba and Ikate east of it. Then come Nicon Town (about 3.4995), Osapa London (about 3.512) and Agungi (about 3.513).
+- L: all Eti-Osa (neutral).
+
+**Ikorodu (Agric east, Odogunyan, Ita Elewa).**
+- G: every area card in Ikorodu says only "Ikorodu", so the cards do not vote here.
+- G labels ([map](https://www.google.com/maps/@6.62,3.50,14z)):
+  - Agric Isawo west of the valley, Eyita east of it.
+  - Sabo Ikorodu bus stop at about 6.645, the Odogunyan label at about 6.652.
+  - Ita Elewa Primary Health Centre on Oriwu Road at 6.6126,3.5024, in the old town.
+- O ([map](https://www.openstreetmap.org/#map=14/6.625/3.505)):
+  - The Fourth Mainland Road reserve, an empty strip, crosses Sagamu Road at about 6.640.
+  - The LASPOTECH campus lies south of it.
+  - The stream valley lies at about 3.489.
+- S: the green valley at 3.489, and the empty reserve strip.
+- W:
+  - [LASUSTECH](https://en.wikipedia.org/wiki/Lagos_State_University_of_Science_and_Technology) gives its address as "Ikorodu".
+  - [ThisDay](https://thisdaylive.com/index.php/2017/09/29/ikorodu-gra-residents-cry-out-over-inec-office) places the old Ikorodu LGA office at Ita-Elewa, in the town.
+  - [Ikorodu](https://en.wikipedia.org/wiki/Ikorodu).
+- Roof splits:
+  - Majidun north-east: 0.49 km² west of 3.489, 0.82 km² east.
+  - Odogunyan south-east of Sagamu Road: 0.40 km² south of 6.640, 0.05 km² north.
+
+**Agbado-Oke Odo east, Command.**
+- G:
+  - The Abule Egba polygon spans the expressway, and the Ojokoro label sits between the expressway and the railway.
+  - The OKE ODO label is at about 6.632,3.282, in or next to the Command place.
+  - The card at [6.638,3.265](https://www.google.com/maps/@6.638,3.265,16z) says Abule Egba.
+- O ([map](https://www.openstreetmap.org/#map=14/6.635/3.290)): Ojokoro and Ifako-Ijaiye are labelled between the two lines, with Iju beyond the railway.
+- S: the fenced standard-gauge railway beside the old line is the harder break. The Oke Odo valley lies south of Command.
+- L: neutral (Meiran and Alakuko are Ifako-Ijaye too).
+- W: [Ifako-Ijaiye](https://en.wikipedia.org/wiki/Ifako-Ijaiye) lists Ijaiye and Ojokoro, which is a vote for the expressway. The Agbado/Oke-Odo LCDA is named for Oke Odo.
+
+**Ago Palace, Jakande Estate, Ejigbo south, Ikotun-Igando south.**
+- G ([map](https://www.google.com/maps/@6.525,3.285,14z)):
+  - Ijegun, Ije Ododo and Isheri Osun are labelled across the big "Ago Palace" place.
+  - The card at 6.5391,3.2781 says Egbe.
+  - The card at 6.5335,3.3017 says Isolo.
+- O ([map](https://www.openstreetmap.org/#map=14/6.525/3.285)):
+  - The canal is the Oshodi-Isolo LGA line.
+  - Egbe is labelled at about 6.539,3.276.
+  - Igando and Akesan are north of the LASU-Isheri Road, with Ijegun and Ijagemo south of it.
+- L: Jakande Estate (Isolo) east falls in Oshodi-Isolo; north-west falls in Alimosho.
+
+**Oworonshoki.**
+- G: the area card at [6.5556,3.4027](https://www.google.com/maps/@6.5556,3.4027,16z) says Gbagada. The label "Oworonshoki" sits east of the Third Mainland Bridge approach.
+- O ([map](https://www.openstreetmap.org/#map=15/6.552/3.398)): "Oworonsoki" is labelled on the waterfront, east of the Third Axial Road.
+- L: Kosofe, the same LGA as Gbagada. Bariga is in Shomolu LGA.
+- W: [Oworonshoki](https://en.wikipedia.org/wiki/Oworonshoki) calls it a Kosofe suburb, with two wards.
+
+**Boundary west of the expressway.**
+- G: the card at [6.4448,3.3204](https://www.google.com/maps/@6.4448,3.3204,17z) says Apapa.
+- G and S at [z15](https://www.google.com/maps/@6.446,3.323,15z): the Kirikiri lighter terminal (KLT 1) and tank farms between the creek and the expressway.
+- O ([map](https://www.openstreetmap.org/#map=15/6.446/3.323)): port and industrial land between the Kirikiri canal and the expressway; Ajegunle's houses start east of the expressway.
+- L: Amuwo Odofin (with Kirikiri; Ajegunle is Ajeromi-Ifelodun).
+
 ## District list after the checks: 51 districts in the frame
 
 Each district is a real place or a group of real neighbouring places. Members are place names from `places.csv`
@@ -86,14 +215,14 @@ Each district is a real place or a group of real neighbouring places. Members ar
 | 5 | Festac | Festac, Festac north-east, Agboju, Alakija | Badagry Expressway south; Festac canal east; swamp north; Trade Fair west. The Reach stands here |
 | 6 | Mile 2-Amuwo Odofin | Mile 2, Mile 2 north-east, Amuwo Odofin, Amukoko north of the expressway | Festac canal west; Mile 2 interchange; Oshodi-Apapa Expressway east |
 | 7 | Satellite Town | Satellite Town, Satellite Town south-east, Ijegun-Egba (all but east) | Badagry Expressway north; creek south (tank farms on it); Kirikiri east |
-| 8 | Kirikiri-Tin Can | Kirikiri, Kirikiri south-east, Tin Can (all pieces), Ijegun-Egba east, Boundary west of the expressway | Western port: creek, port walls and the Oshodi-Apapa Expressway |
+| 8 | Kirikiri-Tin Can | Kirikiri, Kirikiri south-east, Tin Can (all pieces), Ijegun-Egba east, Boundary west of the expressway (port land, by vote) | Western port: creek, port walls and the Oshodi-Apapa Expressway |
 | 9 | Ajegunle | Ajegunle, Amukoko, Boundary, Olodi Apapa | Badagry Expressway north; Apapa canal east |
 | 10 | Apapa | Apapa GRA (all pieces), Apapa Wharf (all pieces) | West canal; harbour; Ijora to the north |
 | 11 | Ijora-Iganmu-Costain | Ijora, Ijora Badia (both), Iganmu, Costain, Iponri | Railway, Eko Bridge approach and Western Avenue |
-| 12 | Aguda-Coker-Orile | Aguda, Coker, Orile Iganmu | See the core table |
-| 13 | Surulere | Surulere, Ojuelegba, Bode Thomas, Stadium (Surulere), Adelabu, Ogunlana | See the core table |
-| 14 | Itire-Lawanson-Ijesha | Itire, Lawanson, Ijesha | See the core table |
-| 15 | Mushin | Mushin, Idi-Oro, Odi-Olowo (both), Ojuwoye-Mushin, Olorunsogo, Idi-Araba | See the core table |
+| 12 | Aguda-Coker-Orile | Aguda, Coker, Orile Iganmu, Adelabu | See the core table |
+| 13 | Surulere | Surulere, Ojuelegba, Bode Thomas, Stadium (Surulere) | See the core table |
+| 14 | Itire-Lawanson-Ijesha | Itire south of the Idi-Araba canal, Lawanson, Ijesha, Ogunlana | See the core table |
+| 15 | Mushin | Mushin, Idi-Oro, Odi-Olowo (both), Ojuwoye-Mushin, Olorunsogo, Idi-Araba, Itire north of the canal | See the core table |
 | 16 | Ebute Metta-Oyingbo-Otto | Ebute Metta (both), Oyingbo (both), Otto-Iddo | Railway west; lagoon east; Iddo and the Carter Bridge head south; Yaba north |
 | 17 | Yaba | Yaba, Sabo, Alagomeji, Jibowu, Onike-Abule Oja, Igbobi | Railway at Ojuelegba; Ikorodu Road; UNILAG and Makoko east |
 | 18 | UNILAG | UNILAG | Campus walls and the lagoon (special fabric) |
@@ -101,15 +230,15 @@ Each district is a real place or a group of real neighbouring places. Members ar
 | 20 | Lagos Island (Eko) | Isale Eko, Idumota, Marina, Lafiaji, Onikan, Obalende | Water all round; ring-road ramps. Quarters inside |
 | 21 | Ikoyi | Ikoyi, Ikoyi south of Bourdillon Road, Old Ikoyi, Old Ikoyi west, Dolphin Estate, Parkview, Banana Island, Banana Island east | Obalende canal west; Five Cowries Creek south; lagoon north and east |
 | 22 | Victoria Island | Victoria Island (both), Elegushi west, Eko Atlantic | Five Cowries Creek north; ocean south; Lekki Phase 1 east |
-| 23 | Lekki Phase 1 | Oniru, Lekki Phase 1 (both), Ikate, Elegushi | VI west; lagoon north; ocean south; the Agungi edge east (*to trace*) |
+| 23 | Lekki Phase 1 | Oniru, Lekki Phase 1 (both), Ikate, Elegushi, Agungi west | VI west; lagoon north; ocean south; Ikate's east edge at about 3.497 (by vote) |
 | 24 | Lekki-Agungi-Chevron | Agungi (both), Ilasan, Jakande (Lekki), Osapa London, Ikota, VGC (all pieces), Chevron | Along the Lekki-Epe Expressway from Agungi to Ajah |
 | 25 | Ajah | Ajah south-west, Ilaje Ajah (all), Abraham Adesanya (all), Addo (both), Langbasa, Badore, Chevron south-east | Ajah roundabout and Addo Road; lagoon north |
 | 26 | Sangotedo-Abijo-Lakowe | Sangotedo (all), Bogije (both), Abijo (all), Lakowe (both), Awoyaya, Ogombo south-west, Eleko west | Lekki-Epe Expressway east of Ajah to the frame edge |
-| 27 | Shomolu-Bariga | see the core table | |
-| 28 | Gbagada-Ogudu | see the core table | |
+| 27 | Shomolu-Bariga | see the core table (Oworonshoki left, by vote) | |
+| 28 | Gbagada-Ogudu | see the core table, plus Oworonshoki (by vote) | |
 | 29 | Ilupeju | Ilupeju, Shogunle east of Agege Motor Road | Agege Motor Road; Ikorodu Road; Palm Avenue |
 | 30 | Isolo-Ladipo | Isolo, Isolo north-east, Cele, Ladipo, Papa Ajao, Ilasamaja, Ajao Estate | Isolo canal south; Oshodi-Apapa Expressway; airport south fence |
-| 31 | Okota | Okota (both), Ire-Akari, Oke-Afa | Ago Palace Way west; Oshodi-Apapa Expressway east; Isolo canal north |
+| 31 | Okota | Okota (both), Ire-Akari, Oke-Afa, Ago Palace east of Ago Palace Way, Jakande Estate (Isolo) east | Ago Palace Way west; Oshodi-Apapa Expressway east; Isolo canal north |
 | 32 | Oshodi-Mafoluku | Oshodi, Mafoluku, Shogunle, Airport (MMIA) south, Ago Palace east | Airport fence; Oshodi interchange; Agege Motor Road |
 | 33 | Airport (MMIA) | Airport (MMIA) | The fence |
 | 34 | Ikeja GRA-Cantonment | Ikeja GRA, Ikeja Cantonment, Onigbongbo, Ikeja Along | Mobolaji Bank-Anthony Way north; Obafemi Awolowo Way; airport |
@@ -118,16 +247,16 @@ Each district is a real place or a group of real neighbouring places. Members ar
 | 37 | Agege-Ifako-Ijaiye | Orile Agege, Pen Cinema, Oko-Oba (both), Ifako-Ijaiye, Fagba (all pieces), Iju, Iyana Ipaja north-east | The railway and the Lagos-Abeokuta Expressway west; the airport south |
 | 38 | Ketu-Mile 12 | Ketu, Mile 12, Kosofe, Alapere, Ikosi, Agboyi (both), Irawo | Ikorodu Road; Ogun River swamp north and east |
 | 39 | Magodo-Omole-Berger | Magodo, Shangisha, Omole, Ojodu, Berger, Olowora-Isheri, Olowora east | Lagos-Ibadan Expressway; Magodo's walls; Ogun State line |
-| 40 | Agbado-Oke Odo | see the west sprawl table | |
+| 40 | Agbado-Oke Odo | see the west sprawl table, plus Command (by vote) | |
 | 41 | Ipaja-Ayobo | see the west sprawl table | |
 | 42 | Egbeda-Idimu | see the west sprawl table (plus Egbeda south and north-west pieces) | |
-| 43 | Ikotun-Igando | see the west sprawl table | |
+| 43 | Ikotun-Igando | see the west sprawl table, plus Jakande Estate (Isolo) north-west (by vote) | |
 | 44 | Ejigbo | see the west sprawl table | |
-| 45 | Ago Palace-Abaranje-Ijegun | see the west sprawl table | |
+| 45 | Ijegun-Abaranje-Isheri Osun | see the west sprawl table (renamed by vote) | |
 | 46 | Agric-Isawo-Owutu | see the Ikorodu table | |
-| 47 | Ikorodu Town | see the Ikorodu table | |
+| 47 | Ikorodu Town | see the Ikorodu table, plus Odogunyan south-east of Sagamu Road and Majidun north-east east of 3.489 (by vote) | |
 | 48 | Odogunyan-Ogijo | see the Ikorodu table | |
-| 49 | Igbogbo-Bayeku-Ita Elewa | see the Ikorodu table | |
+| 49 | Igbogbo-Bayeku | see the Ikorodu table (renamed by vote: the real Ita Elewa is in the old town) | |
 | 50 | Ijede-Gberigbe | see the Ikorodu table | |
 | 51 | Imota-Ewu-Elepe | Imota (all pieces), Ewu-Elepe (all pieces) | East of Ijede to the frame edge; Old Lagos Road |
 
@@ -136,17 +265,9 @@ road), UNILAG into Yaba, and Odogunyan-Ogijo into Ikorodu Town. That gives 48.
 
 ## Still unsure
 
-- **Lines marked *to trace*.** They are named from the street map, not seen as a break on the ground. Draw each
-  on the board against the fabric and check one Street View where the fabric does not change.
-- **Agbado-Oke Odo's east edge**: the Lagos-Abeokuta Expressway or the old railway. **Command** sits just north of
-  the Oke Odo valley and may belong to Agbado-Oke Odo rather than Ipaja-Ayobo.
-- **Ago Palace-Abaranje-Ijegun** is large (Ago Palace alone was 36 km² built). It may want a cut between the Ago
-  Palace Way estates and Abaranje-Ijegun.
-- **The core's inner lines** (Surulere / Aguda, Itire / Mushin, Mushin / Ilupeju) are street lines in a fabric
-  that runs on without a break. They are real names but not real walls.
-- **Oworonshoki** sits across the expressway from Shomolu-Bariga on the waterfront. It could be its own small
-  waterfront place (like Makoko) instead of part of Shomolu-Bariga.
-- **Ita Elewa** is a big place (17.7 km² built) and the name point is from memory. Its split between Ikorodu Town
-  and Igbogbo-Bayeku should be checked on Street View along Ijede Road.
-- **Boundary west of the expressway** went to Kirikiri-Tin Can. It is houses, not port, so it could join Ajegunle.
+The source votes of 22 Oct (above) settled every line that was listed here, and every line marked *to trace*: the
+*to trace* marks in the tables above are kept as history, and the vote table gives the line now drawn. What is left:
+- The settled lines in the dense core (Surulere / Aguda, Itire / Mushin, Mushin / Ilupeju) are street lines and a
+  canal in a fabric that runs on. They are real, but they are drawn by hand on the board, not seen as walls.
+- Lagos Island's quarters are lines inside one district (the note on the board).
 - Built areas per district were not re-measured. They need a rerun of the place sums for the new memberships.
