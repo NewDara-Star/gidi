@@ -337,9 +337,9 @@ for r in tp.take([i for i, b in enumerate(bbp) if W <= b['xmin'] <= E_ and S_ <=
     pt = wkb.loads(r['geometry']); x, y = T(pt.x, pt.y)
     if OWN.contains(Point(x, y)):
         REAL['places'][t_] = REAL['places'].get(t_, 0) + 1
-    if not AREA.contains(Point(x, y)) or any(Point(x, y).distance(Point(q_)) < 15 for q_ in PL):
-        continue
-    PL.append((x, y))
+    if not AREA.contains(Point(x, y)) or any(Point(x, y).distance(Point(q_)) < 15 for q_, k_ in PL if k_ == t_):
+        continue   # the same place listed twice; a clinic beside a church is two places
+    PL.append(((x, y), t_))
     E.append({'op': 'add place', 'name': pname(t_), 'type': t_, 'x': round(x), 'y': round(y), 'note': f"real: {nm} ({r['basic_category']})", 'by_who': WHO})
 print('places:', len(PL))
 if os.environ.get('GIDI_PLACES_ONLY'):
