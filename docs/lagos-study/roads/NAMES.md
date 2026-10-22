@@ -1,117 +1,114 @@
 # Echo names for the 51 districts (draft, 22 Oct 2026)
 
 Working names for the 51 districts in `EARTH-CHECK.md` ("District list after the checks"), as the map format's fourth
-call asks (`decisions/DECISIONS.md`, "The map format's four calls", point 4; the idea is in `decisions/IDEAS.md`,
+call asks (`decisions/DECISIONS.md`, "The map format's four calls", point 4; the rule is in `decisions/IDEAS.md`,
 "Place names: echo names"). **Every name here is a draft: the owner reviews it**, and any of them can change later.
 
 **Study only.** The real district names in the second column stay in this file. They never go into `map/` files or
-any other map data; the map gets only the echo name.
+any other map data; the map gets only the Gidi name.
 
-## The method
+## The rule (owner, 22 Oct)
 
-- **Built the way Lagos names are built.** Yoruba words joined and contracted (Òkè + iyì, Owó + gúnlẹ̀), the same
-  shapes real names use: a virtue and its reward (Surulere), a thing that lands (Ajegunle), a town that gathers
-  (Ilupeju), a hill, a waterside, a market's mouth.
-- **Two ways to echo.**
-  - *By sound:* a near-rhyme that is also a real Yoruba word with a fitting meaning (Saba for Yaba is the model;
-    Àpapọ̀ for Apapa, Gbàgede for Gbagada, Àgbègbè for Agege).
-  - *By meaning:* the real name, or what the place is famous for, said another way (Owógúnlẹ̀ for Ajegunle, both
-    "money has landed"; Àgólo, "tin", for Tin Can; Ọ̀ṣùpá, "moon", for Satellite Town).
-  - The best ones do both.
-- **How clear.** The famous places (Lagos Island, VI, Ikoyi, Lekki, Surulere, Yaba, Mushin, Oshodi, Ikeja and
-  Computer Village, Ajegunle, Apapa, Festac, Makoko, Ikorodu) get the clearest echo. Quiet districts get plain new
-  names in the same style, with only a light echo or none.
-- **Never** the real name, a straight copy, a cheap pun, or a word that is rude or unlucky. Words were checked for
-  near-homophones with bad meanings (for example, *ìbálé* "virginity" ruled out an "Ibale"; *àjẹ́* "witch" ruled out an
-  "Aje").
-- **No clash with real places.** Each plain spelling, and each of its words, was checked against
-  `docs/hand/realnames.txt` (full cores) and the 819 frame places with their gazetteer names (`places.csv`). Known
-  Nigerian town names were avoided too (Iganna, Agbede, Irele, Okuta, Ota). Two drafts failed and were changed: Olorì
-  (a core in `realnames.txt`) and Ìdẹ̀ra (a core). "Imole" appears only inside a church's name; it is kept.
-- **Old Gidi names reused where they fit** (the 14 Yoruba district names of #118, `scripts/bake_web.py`): Saba, Àdàrú,
-  Ìbùdó, Ọjà-Ńlá, Ìlú-Omi, Ẹnu-Ọjà, Pápákọ̀, Ọ̀dàn and Ààlà carry over to the district that took their inspiration.
-  Five are not reused, see "Old names not carried over" below.
-- **The Reach** stands in Àjọ̀dún (Festac, district 5), on Carnival Avenue, the old Gidi name for its Seventh Avenue
-  street (DECISIONS, "The Reach goes with Festac into the new map").
-- Tone marks are given as best known; the plain spelling is the form for signs and plain text. A
-  Yoruba speaker should check the ones marked *check* below.
+"Make the names sound similar. So if something is English, it should be English. Something is Yoruba, it should be
+Yoruba that sounds similar to... computer village, gadget village... Yaba Saba."
+
+- **Sound first.** A Lagosian hears the real name in the Gidi one: the same rhythm, the same number of syllables, most
+  of the same sounds, with one or two changed. Saba for Yaba is the gold standard. A name that only shares a meaning
+  is out.
+- **Same language as the real name.** English names get English sound-alikes (Computer Village to Gadget Village,
+  Victoria Island to Victory Island). Yoruba names get Yoruba sound-alikes that still sound like real Yoruba words or
+  names; a decent meaning is a bonus, never needed. Mixed names keep the mix.
+- **The district's name follows its headline place** (usually the first in the study name, or the one Lagos calls the
+  area by). The other members can get their own sound-alikes later as quarters.
+- **Never** the real name, a real nearby place name, anything rude, or a cheap shot. Each plain spelling was checked
+  against `docs/hand/realnames.txt` (no full core matches) and the 819 frame places with their gazetteer names
+  (`places.csv`): none match. A few English words (Victory, Fiesta, Agro, Starlight) appear only inside business names
+  there, never as a place.
+- **Old Gidi names stay only if they sound like their real place.** Saba, Àpapọ̀, Gbàgede, Àláṣẹ, Agbègbè, Òkòtó,
+  Gadget Village and Costa (from Costa Circle) stay. Ìbùdó comes back, moved to Ebute Metta, where it sounds right.
+  Àdàrú, Pápákọ̀, Ọjà-Ńlá, Ìlú-Omi, Ẹnu-Ọjà, Ọ̀dàn and Ààlà are dropped: they don't sound like their places. Àdàrú can stay as
+  the Maze's own nickname.
+- **Lagos becomes Lagoon** everywhere it appears: Lagoon Island, Lagoon University. That matches the old Gidi name for
+  the university.
+- **The Reach** stands in Fiesta Town (Festac, district 5), on Carnival Avenue (DECISIONS, "The Reach goes with Festac
+  into the new map").
+- Tone marks are given as best known; the plain spelling is the form for signs and plain text.
 
 ## The 51 names
 
-| # | Real district (study only) | Echo name | Plain spelling | Meaning / how built | Why it echoes |
-|---|---|---|---|---|---|
-| 1 | Agbara-Morogbo | Ààlà | Aala | "boundary, limit". Old Gidi name of the Border | Agbara sits on the Lagos-Ogun line at the frame's west edge; reused from the old Border district |
-| 2 | Okokomaiko-Ijanikin-Otto | Ọ̀kọ̀ọ̀kan | Okookan | "one by one" | Sound: *Oko-ko…* opens like Okokomaiko; meaning: the bus stops strung one by one down the Badagry road |
-| 3 | Alaba-Ojo-Trade Fair | Ọjà-Ńlá | Oja-Nla | "the great market". Old Gidi name of the Bazaar | Meaning: Alaba International Market and the Trade Fair halls; reused |
-| 4 | Iba-Isheri-Olofin | Ìbẹ̀rẹ̀ | Ibere | "the beginning" | Light sound echo of Iba (*Ib-*); a quiet district, plain new name |
-| 5 | Festac | Àjọ̀dún | Ajodun | "festival, celebration" | Meaning: FESTAC is the Festival of Arts and Culture; the festival town. The Reach stands here, on Carnival Avenue |
-| 6 | Mile 2-Amuwo Odofin | Àmúwá | Amuwa | "what is brought (in)" | Sound: Amuwo to Amuwa, one vowel; meaning: the port's goods and trucks brought through the Mile 2 interchange |
-| 7 | Satellite Town | Ìlú-Ọ̀ṣùpá | Ilu-Osupa | "moon town" | Meaning: the moon is the satellite; a Lagosian gets it in a beat |
-| 8 | Kirikiri-Tin Can | Àgólo | Agolo | "tin, a tin can" | Meaning: Tin Can Island port said in Yoruba. *check* tone marks (written *agolo* in dictionaries) |
-| 9 | Ajegunle | Owógúnlẹ̀ | Owogunle | "money has landed (at home)" | Meaning and build: Ajegunle is *ajé gúnlẹ̀*, "wealth has landed"; *owó* (money) swaps for *ajé*. Its English nickname stays Jungle City |
-| 10 | Apapa | Àpapọ̀ | Apapo | "the total, everything gathered together" | Sound: Apapa to Apapọ, one vowel; meaning: the port where all the goods come together |
-| 11 | Ijora-Iganmu-Costain | Ìtàgé | Itage | "stage, theatre" | Meaning: the National Theatre at Iganmu (Gidi's The Crown); light sound echo of the *I-* names. *check*: it is a loan from English "stage" |
-| 12 | Aguda-Coker-Orile | Orírun | Orirun | "origin, source" | Sound and meaning: Orile ("homeland") to Orírun ("origin"), a near-synonym with the same start |
-| 13 | Surulere | Ìfaradàlérè | Ifaradalere | "endurance has its reward" (*ìfaradà ní èrè*) | Build: Surulere is *sùúrù ní èrè*, "patience has its reward"; a near-synonym virtue, same shape and the same *-lere* ending. Spoken short: Faradà |
-| 14 | Itire-Lawanson-Ijesha | Ìtura | Itura | "relief, refreshment" | Light sound echo of Itire (*It-…*); plain new name |
-| 15 | Mushin | Àdàrú | Adaru | "confusion, a mix-up". Old Gidi name of the Maze | Meaning: Mushin's famous tangle and noise; reused (the Àdàrú motor park is already the Lagos pass's spot 1) |
-| 16 | Ebute Metta-Oyingbo-Otto | Etídò-Mẹ́ta | Etido-Meta | "three water-edges" (*etí odò*, the riverside) | Build: Ebute Metta is "three landings"; a different word for the waterside, same *Meta* |
-| 17 | Yaba | Saba | Saba | the old Gidi name (#118) | Sound: Yaba to Saba, one letter. The model for the method |
-| 18 | UNILAG | Akẹ́kọ̀ọ́ | Akekoo | "student" | Sound: the campus is at Akoka (*Ak-ko…*); meaning: the university town. The school itself keeps its old Gidi name, Lagoon University |
-| 19 | Makoko | Ìlú-Omi | Ilu-Omi | "water town". Old Gidi name of Water Town | Meaning: the stilt town on the lagoon; reused |
-| 20 | Lagos Island (Eko) | Àkọ́ | Ako | "the first" (the first town) | Sound: Èkó to Àkọ́, the same tones with the vowels changed; meaning: the old first town of the city. Its English nickname stays Old Island |
-| 21 | Ikoyi | Òkè-Iyì | Oke-Iyi | "hill of prestige, of honour"; spoken Òkèyì | Sound: Okèyì against Ikoyi; meaning: old money and status. The old Heights name Òkè-Ọlà can name its Banana Island quarter |
-| 22 | Victoria Island | Erékùṣù-Ìṣẹ́gun | Isegun Island | "island of victory" | Meaning: Victoria means victory; a Lagosian says "VI", Gidi says "Isegun Island" |
-| 23 | Lekki Phase 1 | Ìlẹ̀kẹ̀ | Ileke | "beads" (worn by chiefs and the rich) | Sound: Ileke against Lekki; meaning: adornment and new money |
-| 24 | Lekki-Agungi-Chevron | Ìlẹ̀kẹ̀-Kejì | Ileke Keji | "Ìlẹ̀kẹ̀ the second" | Lagos says Lekki Phase 1 and Phase 2 down the same road; the estate strip is Ìlẹ̀kẹ̀'s second part |
-| 25 | Ajah | Àjọ | Ajo | "a gathering; the rotating savings group" | Sound: Ajah to Ajo; meaning: the far junction where the roads, buses and the market all gather |
-| 26 | Sangotedo-Abijo-Lakowe | Ọ̀dàn | Odan | "open grassland, the plain". Old Gidi name of the Frontier | Meaning: the open, half-built frontier at the end of the peninsula; reused |
-| 27 | Shomolu-Bariga | Ìtẹ̀wé | Itewe | "printing" | Meaning: Shomolu is Lagos's printing-press town |
-| 28 | Gbagada-Ogudu | Gbàgede | Gbagede | "open square, plaza" | Sound: Gbagada to Gbagede; meaning: open, roomy ground after the dense south |
-| 29 | Ilupeju | Ìlú-Pàdé | Ilupade | "the town meets" | Build: Ilupeju is *ìlú pé jọ*, "the town gathered"; a synonym in the same shape |
-| 30 | Isolo-Ladipo | Ìṣọ́lẹ̀ | Isole | "keeping watch over the land" | Sound: Isolo to Isole, one vowel. Plain meaning, no joke |
-| 31 | Okota | Òkòtó | Okoto | "spinning top" (the child's toy) | Sound: Okota to Okoto, one vowel. *check* the tones (dictionaries give *òkòtó*) |
-| 32 | Oshodi-Mafoluku | Ìbùdó | Ibudo | "camp, station, base". Old Gidi name of the Hub | Meaning: Oshodi, the great bus station and interchange; reused |
-| 33 | Airport (MMIA) | Pápákọ̀ | Papako | "a vehicle park" (*pápákọ̀ òfurufú*, airport). Old Gidi name | Meaning: the airport; reused. *check*: alone the word means any vehicle park; the full form may be wanted |
-| 34 | Ikeja GRA-Cantonment | Ìkẹ́jọba | Ikejoba | "the government's keeping" (*ìkẹ́*, care, + *ìjọba*, government) | Sound: Ikeja + ijoba; meaning: the Government Reserved Area |
-| 35 | Computer Village-Allen-Maryland | Abúlé-Ẹ̀rọ | Abule-Ero | "village of machines" | Meaning: Computer Village said in Yoruba. Gadget Village stays as the market's own name |
-| 36 | Alausa-Oregun-Ogba | Àláṣẹ | Alase | "one who holds authority" | Sound: Alausa to Alase; meaning: the seat of the state government (Gidi's The Capital) |
-| 37 | Agege-Ifako-Ijaiye | Agbègbè | Agbegbe | "the area, the surroundings" | Sound: Agege to Agbegbe, very close |
-| 38 | Ketu-Mile 12 | Ẹnu-Ọjà | Enu-Oja | "the market's mouth". Old Gidi name of Food Gate | Meaning: the Mile 12 produce market at the city's northern gate; reused |
-| 39 | Magodo-Omole-Berger | Àgbàlá | Agbala | "the walled yard, courtyard" | Meaning: gated, walled estates (Gidi's The Estate). Light sound echo of Magodo's *-a-* |
-| 40 | Agbado-Oke Odo | Òkè-Ọkà | Oke-Oka | "hill of grain" | Sound: Oke Odo to Oke-Oka; meaning: *àgbàdo* is maize, *ọkà* is grain. A double echo |
-| 41 | Ipaja-Ayobo | Ayọ̀wá | Ayowa | "joy has come" | Build: Ayobo is *ayọ̀ bọ̀*, "joy is coming"; a near-synonym |
-| 42 | Egbeda-Idimu | Ìdílé | Idile | "family, household" | Sound: Idimu to Idile; meaning: a family suburb |
-| 43 | Ikotun-Igando | Okotun | Okotun | "new farm" (*oko tuntun*, contracted) | Sound: Ikotun to Okotun; meaning: new land at the city's fringe |
-| 44 | Ejigbo | Èjìdò | Ejido | "two waters" (*èjì odò*) | Sound: Ejigbo to Ejido; it lies between the Ikotun-Ejigbo stream and the airport water |
-| 45 | Ijegun-Abaranje-Isheri Osun | Ìrọ̀rùn | Irorun | "ease, comfort" | Light echo of Ijegun's *I-…un*; a quiet district, plain new name |
-| 46 | Agric-Isawo-Owutu | Àgbẹ̀ | Agbe | "farmer" | Sound and meaning: "Agric" (the old agricultural settlement) to Àgbẹ̀ |
-| 47 | Ikorodu Town | Ìkórè | Ikore | "harvest" | Sound: *Iko-r…* opens like Ikorodu; meaning: the farm town and its big market |
-| 48 | Odogunyan-Ogijo | Odò-Àyàn | Odo-Ayan | "the river of Àyàn" (the drum's spirit) | Sound: Odo-gun-yan to Odo-A-yan |
-| 49 | Igbogbo-Bayeku | Ìgboro | Igboro | "the town's open streets" | Sound: Igbogbo to Igboro, one consonant |
-| 50 | Ijede-Gberigbe | Ìjẹ́rí | Ijeri | "testimony, witness" | Sound: Ijede to Ijeri |
-| 51 | Imota-Ewu-Elepe | Ìmọ́lẹ̀ | Imole | "light" | Sound: Imota to Imole; the city's eastern edge, where the sun comes up |
+| # | Real district (study only) | Gidi name | Plain spelling | Lang | Sounds like the real one because... | Meaning (optional) |
+|---|---|---|---|---|---|---|
+| 1 | Agbara-Morogbo | Àgbàlá | Agbala | Yoruba | A-gba-ra to A-gba-la: one consonant | "courtyard" |
+| 2 | Okokomaiko-Ijanikin-Otto | Okoromaiko | Okoromaiko | Yoruba | O-ko-ko-mai-ko to O-ko-ro-mai-ko: one consonant, same rhythm | none |
+| 3 | Alaba-Ojo-Trade Fair | Alàgbà (and the Grand Fair) | Alagba | Yoruba + English | Alaba to Alagba: one sound added. Trade Fair to Grand Fair: *tr-a-d* to *gr-a-nd* | Alàgbà, "elder" |
+| 4 | Iba-Isheri-Olofin | Ìwà | Iwa | Yoruba | I-ba to I-wa: one consonant | "character" |
+| 5 | Festac | Fiesta Town | Fiesta Town | English | Fes-tac Town to Fies-ta Town: same start, same rhythm | a festival town, like FESTAC's |
+| 6 | Mile 2-Amuwo Odofin | Mile 10-Àmúwá | Mile 10-Amuwa | English + Yoruba | Mile Two to Mile Ten; Amuwo to Amuwa: one vowel | Àmúwá, "what is brought in" |
+| 7 | Satellite Town | Starlight Town | Starlight Town | English | Sat-el-lite to Star-light: the same *s-t…light* | none needed |
+| 8 | Kirikiri-Tin Can | Kẹ́rẹ́kẹ́rẹ́-Tin Pan | Kerekere-Tin Pan | Yoruba + English | Kiri-kiri to Kere-kere: same doubled shape, vowels changed. Tin Can to Tin Pan: one word, one sound | kẹ́rẹ́kẹ́rẹ́, "little by little" |
+| 9 | Ajegunle | Ayégúnlẹ̀ | Ayegunle | Yoruba | A-je-gun-le to A-ye-gun-le: one consonant. English nickname Jungle City stays | "life has landed (at home)" |
+| 10 | Apapa | Àpapọ̀ | Apapo | Yoruba | A-pa-pa to A-pa-po: one vowel | "everything gathered together" |
+| 11 | Ijora-Iganmu-Costain | Costa | Costa | English | Cos-tain to Cos-ta (the old Gidi Costa Circle, after the Costain roundabout) | none |
+| 12 | Aguda-Coker-Orile | Agunda | Agunda | Yoruba | A-gu-da to A-gun-da: one sound added | none |
+| 13 | Surulere | Sọ̀rọ̀lérè | Sorolere | Yoruba | Su-ru-le-re to So-ro-le-re: two vowels, same rhythm and ending | "speaking has its reward" |
+| 14 | Itire-Lawanson-Ijesha | Ìtìrí | Itiri | Yoruba | I-ti-re to I-ti-ri: one vowel | none |
+| 15 | Mushin | Mùṣá | Musha | Yoruba | Mu-shin to Mu-sha: same start, the end changed | none |
+| 16 | Ebute Metta-Oyingbo-Otto | Ìbùdó Mẹ́ta | Ibudo Meta | Yoruba | E-bu-te Me-ta to I-bu-do Me-ta: two sounds changed, same rhythm. Reuses the old Gidi name Ìbùdó | "three camps, three stations" |
+| 17 | Yaba | Saba | Saba | Yoruba | Ya-ba to Sa-ba: one consonant. The model | kept from #118 |
+| 18 | UNILAG | Lagoon University | Lagoon University | English | University of Lagos to Lagoon University (the old Gidi name). "Unilagoon" for short | none |
+| 19 | Makoko | Makoro | Makoro | Yoruba | Ma-ko-ko to Ma-ko-ro: one consonant | none |
+| 20 | Lagos Island (Eko) | Lagoon Island | Lagoon Island | English | La-gos to La-goon. The English nickname Old Island can stay | none |
+| 21 | Ikoyi | Ìwòyí | Iwoyi | Yoruba | I-ko-yi to I-wo-yi: one consonant | "this time, by now" |
+| 22 | Victoria Island | Victory Island | Victory Island | English | Vic-tor-i-a to Vic-tor-y; still "VI" | none needed |
+| 23 | Lekki Phase 1 | Leke Phase 1 | Leke Phase 1 | Yoruba + English | Lek-ki to Le-ke: one vowel. "Phase 1" kept, as "Village" is in Gadget Village | Leke, a Yoruba short name |
+| 24 | Lekki-Agungi-Chevron | Leke Phase 2 | Leke Phase 2 | Yoruba + English | the strip further down the same road, as Lagos numbers its Lekki phases | none |
+| 25 | Ajah | Àjọ | Ajo | Yoruba | A-jah to A-jo: one vowel | "a gathering; the savings group" |
+| 26 | Sangotedo-Abijo-Lakowe | Àyàntẹ̀dó | Ayantedo | Yoruba | San-go-te-do to A-yan-te-do: same rhythm, same *-tedo* | "Àyàn (the drum) has settled" |
+| 27 | Shomolu-Bariga | Ṣọmọlá | Shomola | Yoruba | Sho-mo-lu to Sho-mo-la: one vowel | none |
+| 28 | Gbagada-Ogudu | Gbàgede | Gbagede | Yoruba | Gba-ga-da to Gba-ge-de: two vowels | "open square, plaza" |
+| 29 | Ilupeju | Ìlúpẹ̀lẹ́ | Ilupele | Yoruba | I-lu-pe-ju to I-lu-pe-le: one syllable | "the gentle town" |
+| 30 | Isolo-Ladipo | Ìṣọ́lẹ̀ | Isole | Yoruba | I-so-lo to I-so-le: one vowel | "keeping watch over the land" |
+| 31 | Okota | Òkòtó | Okoto | Yoruba | O-ko-ta to O-ko-to: one vowel | "spinning top" |
+| 32 | Oshodi-Mafoluku | Ọ̀ṣọ́dé | Oshode | Yoruba | O-sho-di to O-sho-de: one vowel | "beauty has come" |
+| 33 | Airport (MMIA) | Gidi International Airport | Gidi International Airport | English | no real name to echo: "the airport" is a common noun, and the real one is named after a person. The old Gidi name stays | none |
+| 34 | Ikeja GRA-Cantonment | Ìgbèjà GRA | Igbeja GRA | Yoruba + English | I-ke-ja to I-gbe-ja: one consonant. GRA and Cantonment are common nouns and stay | ìgbèjà, "defence" (fits the barracks) |
+| 35 | Computer Village-Allen-Maryland | Gadget Village | Gadget Village | English | the owner's own example: Com-pu-ter to Gad-get, Village kept. Its junction is Marigold Junction (after Maryland, old Gidi) | none |
+| 36 | Alausa-Oregun-Ogba | Àláṣẹ | Alase | Yoruba | A-lau-sa to A-la-se: same start, nearly the same end | "the one with authority" (the seat of government) |
+| 37 | Agege-Ifako-Ijaiye | Agbègbè | Agbegbe | Yoruba | A-ge-ge to A-gbe-gbe: the same shape | "the area, the surroundings" |
+| 38 | Ketu-Mile 12 | Mile 20 | Mile 20 | English | Mile Twelve to Mile Twenty: same start, the market's bus stop name kept as a mile post | none |
+| 39 | Magodo-Omole-Berger | Ọmọlà | Omola | Yoruba | O-mo-le to O-mo-la: one vowel (Omole, the estate) | "child of wealth" |
+| 40 | Agbado-Oke Odo | Òkè-Ọkà | Oke-Oka | Yoruba | O-ke O-do to O-ke O-ka: one consonant | "hill of grain" (àgbàdo is maize) |
+| 41 | Ipaja-Ayobo | Ìpadà-Ayọ̀wá | Ipada-Ayowa | Yoruba | I-pa-ja to I-pa-da; A-yo-bo to A-yo-wa: one consonant each | "the return; joy has come" |
+| 42 | Egbeda-Idimu | Ìdílé | Idile | Yoruba | I-di-mu to I-di-le: one syllable. Named after Idimu, because any sound-alike of Egbeda keeps the real name Egbe in it | "family" |
+| 43 | Ikotun-Igando | Okotun | Okotun | Yoruba | I-ko-tun to O-ko-tun: one vowel | "new farm" (oko tuntun) |
+| 44 | Ejigbo | Èjìdò | Ejido | Yoruba | E-ji-gbo to E-ji-do: one consonant | "two waters" |
+| 45 | Ijegun-Abaranje-Isheri Osun | Ìṣẹ́gun | Isegun | Yoruba | I-je-gun to I-se-gun: one consonant | "victory" |
+| 46 | Agric-Isawo-Owutu | Agro | Agro | English | Ag-ric to Ag-ro: same start | none |
+| 47 | Ikorodu Town | Ìkòrodò | Ikorodo | Yoruba | I-ko-ro-du to I-ko-ro-do: one vowel | none |
+| 48 | Odogunyan-Ogijo | Odò-Àyàn | Odo-Ayan | Yoruba | O-do-gun-yan to O-do-a-yan: one syllable softened | "the river of Àyàn" |
+| 49 | Igbogbo-Bayeku | Ìgboro | Igboro | Yoruba | I-gbo-gbo to I-gbo-ro: one consonant | "the town's open streets" |
+| 50 | Ijede-Gberigbe | Ìjẹ́rí | Ijeri | Yoruba | I-je-de to I-je-ri: one consonant | "testimony" |
+| 51 | Imota-Ewu-Elepe | Ìmọ́lẹ̀ | Imole | Yoruba | I-mo-ta to I-mo-le: one syllable | "light" |
 
-## Old names not carried over
+## Unsure, for the owner or a Yoruba speaker
 
-- **Ẹ̀gbẹ́-Irin** (Railside, "beside the rail", after Agege): its plain spelling contains *Egbe*, a real place
-  (Egbe-Idimu, inside district 43). Agege gets Agbègbè. Ẹ̀gbẹ́-Irin can still name the rail quarter inside it.
-- **Èbúté-Ńlá** (the Port, "the great harbour"): *Ebute* is the real Ebute Metta (district 16) and Ebute Ero, so a
-  Lagosian would look in the wrong place. Apapa gets Àpapọ̀.
-- **Igbó-Ọ̀la** (Jungle City): read plainly, *Igbo* is also street slang for cannabis, and with Ajegunle's
-  reputation that is a cheap shot. Ajegunle gets Owógúnlẹ̀ and keeps "Jungle City" as its English nickname.
-- **Etí-Òkun** (Old Shore, after Ikorodu): *òkun* is the sea, but Ikorodu is on the lagoon, and the name does not
-  echo Ikorodu. Ikorodu gets Ìkórè. (The right word for the lagoon edge, *Etí-Ọ̀sà*, is the real Eti-Osa LGA.)
-- **Òkè-Ọlà** (the Heights): Ikoyi gets the closer echo Òkè-Iyì; Òkè-Ọlà is free for its Banana Island quarter.
-- The English nicknames (Old Island, The Estate, The Capital, The Maze, The Hub, and others) can stay as nicknames
-  where their district carries on.
+- **Too close?** Several names are one sound away from the real ones, on purpose and as close as Saba is to Yaba: Àpapọ̀,
+  Àjọ, Òkòtó, Okotun, Ìkòrodò, Ìṣọ́lẹ̀, Ṣọmọlá, Ọ̀ṣọ́dé, Àmúwá. Ìkòrodò and Okotun are the closest.
+- **Real places elsewhere in Nigeria, not in Lagos:** Ayegunle is a town name in Kogi and Ondo, and Igbeja is close to
+  Igbaja in Kwara. Neither is near the frame, but the owner may want them further away.
+- **No meaning:** Okoromaiko, Agunda, Ìtìrí, Mùṣá, Makoro and Ìkòrodò sound right but mean nothing. Mùṣá also looks like the
+  Hausa name Musa.
+- **The mile posts:** Mile 2 to Mile 10 and Mile 12 to Mile 20 keep the "Mile" but change the number. The other choice is
+  numbers that sound closer to two and twelve; no good pair was found.
+- **The Airport** keeps its old Gidi name; there is no real name to echo.
+- **Tone marks** to check: Òkòtó, Agbègbè, Ṣọmọlá, Ìtìrí, Agunda, Okoromaiko.
 
-## Unsure, for a Yoruba speaker to check
+## Earlier drafts (22 Oct, meaning echoes, replaced)
 
-- **Tone marks:** Àgólo (dictionaries write *agolo*, tone unclear), Òkòtó (one dialect source), Agbègbè, Ìtàgé.
-- **Ìtàgé** is a loan of English "stage"; fine in speech, but less "built from Yoruba" than the others.
-- **Pápákọ̀** alone means any vehicle park; the old name is kept, but *Pápákọ̀-Òfurufú* is the full word for an airport.
-- **Okotun** (43) and **Àmúwá** (6) are one sound off their real names, as close as Saba; the owner may want them
-  further away.
-- **Àdàrú** ("confusion") for Mushin is a little sharp; it was already the Maze's name, and the game work uses it.
-- **Ìfaradàlérè** is long; on signs it may read as Faradà.
+The first draft echoed meaning as often as sound. The owner asked for sound-alikes in the same language instead, so
+these were replaced; the ones that also sounded alike are kept in the table above.
+1 Ààlà, 2 Ọ̀kọ̀ọ̀kan, 3 Ọjà-Ńlá, 4 Ìbẹ̀rẹ̀, 5 Àjọ̀dún, 6 Àmúwá, 7 Ìlú-Ọ̀ṣùpá, 8 Àgólo, 9 Owógúnlẹ̀, 10 Àpapọ̀, 11 Ìtàgé, 12 Orírun,
+13 Ìfaradàlérè, 14 Ìtura, 15 Àdàrú, 16 Etídò-Mẹ́ta, 17 Saba, 18 Akẹ́kọ̀ọ́, 19 Ìlú-Omi, 20 Àkọ́, 21 Òkè-Iyì, 22 Erékùṣù-Ìṣẹ́gun,
+23 Ìlẹ̀kẹ̀, 24 Ìlẹ̀kẹ̀-Kejì, 25 Àjọ, 26 Ọ̀dàn, 27 Ìtẹ̀wé, 28 Gbàgede, 29 Ìlú-Pàdé, 30 Ìṣọ́lẹ̀, 31 Òkòtó, 32 Ìbùdó, 33 Pápákọ̀,
+34 Ìkẹ́jọba, 35 Abúlé-Ẹ̀rọ, 36 Àláṣẹ, 37 Agbègbè, 38 Ẹnu-Ọjà, 39 Àgbàlá, 40 Òkè-Ọkà, 41 Ayọ̀wá, 42 Ìdílé, 43 Okotun, 44 Èjìdò,
+45 Ìrọ̀rùn, 46 Àgbẹ̀, 47 Ìkórè, 48 Odò-Àyàn, 49 Ìgboro, 50 Ìjẹ́rí, 51 Ìmọ́lẹ̀.
