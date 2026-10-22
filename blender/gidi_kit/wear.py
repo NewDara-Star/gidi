@@ -14,7 +14,7 @@ import math
 from mathutils import Matrix, Vector
 
 from . import detail
-from .core import Rng, at, hex_rgb
+from .core import at, hex_rgb
 
 DIRT = hex_rgb('#7a5236')     # red earth splashed up from the yard and the gutter
 GRIME = hex_rgb('#3b3a33')    # rain-run grime and mould
@@ -38,12 +38,15 @@ def smooth(e0, e1, x):
 class Weather:
     """A house's weathering: the colour of its wall at any point, and the dice for its overlays."""
 
-    def __init__(self, paint, wear, H, key):
+    def __init__(self, paint, wear, H, key, ph=None):
+        """ph: the paint blotch's six phases (the house's wall_finish.blotch record); the old city's generators give
+        none, and they are drafted from the house's key."""
         self.paint, self.wear, self.H = paint, wear, H
         self.top, self.top_k = H, 0.15   # the wall's very top (a parapet's coping) and how much grime runs down from it
-        self.rng = Rng('wear', *key)
-        r = self.rng.child('blotch')
-        self.ph = [r.between(0, math.tau) for _ in range(6)]
+        if ph is None:
+            from . import draft
+            ph = draft.blotch(key)
+        self.ph = list(ph)
         self.cells = []   # every wall strip drawn (a, b, columns, rows), so overlays can match the wall's colour exactly
 
     def wall(self, x, y, z):
@@ -111,18 +114,12 @@ def _pt(F, u, z, y=OFF):
     return F @ Vector((u, y, z))
 
 
+DARK = {'grime': GRIME, 'rust': RUST}
+
+
 def streak(mb, F, wx, u, z_top, length, w, dark, k, y=OFF, taper=0.9):
-    """A run of grime (or rust) from z_top down: strongest at the top, gone at the foot, soft at the sides."""
-    if w > 0.35 and length > 0.4 and taper < 1.0 and not detail.web():   # a wide run is never even: a few narrower runs (never a band under a coping)
-        r = Rng('streak', round(u, 2), round(z_top, 2), round(length, 2))
-        n = 2 + int(w / 0.6)
-        for j in range(n):
-            ww = w / n * r.between(0.6, 1.7)
-            uu = u - w / 2 + (j + 0.5) * w / n + r.between(-0.3, 0.3) * w / n
-            lo, hi = max(u - w / 2, uu - ww / 2), min(u + w / 2, uu + ww / 2)   # inside the run it splits, never past the wall's end
-            uu, ww = (lo + hi) / 2, hi - lo
-            streak(mb, F, wx, uu, z_top, length * r.between(0.45, 1.05), ww, dark, k * r.between(0.65, 1.0), y + j * 0.0005, taper)
-        return
+    """A run of grime (or rust) from z_top down: strongest at the top, gone at the foot, soft at the sides. A wide run
+    comes as the few narrower runs its record splits it into (draft.streak_leaves); this draws one of them."""
     z_bot = z_top - length
     wb = w * taper
     wc = lambda q: wx.seen(*(F @ Vector((q[0], 0, q[1]))))
@@ -147,35 +144,33 @@ def streak(mb, F, wx, u, z_top, length, w, dark, k, y=OFF, taper=0.9):
         mb.face([_pt(F, a, b, y) for a, b in q], 'paint', cols, wx.wear)
 
 
-def patch(mb, F, wx, u, z, w, h, col, rng, y=OFF):
-    """A patch of plaster that was redone and never painted: a slightly ragged outline."""
-    n = 11
+def patch(mb, F, wx, p):
+    """A patch of plaster that was redone and never painted: a slightly ragged outline. p: its record (u, z, w, h, col,
+    y; r, each of its 11 points' reach, and mix, how far each fades into the wall)."""
+    u, z, w, h, col = p['u'], p['z'], p['w'], p['h'], tuple(p['col'])
+    n = len(p['r'])
     pts = []
-    for i in range(n):
+    for i, rr in enumerate(p['r']):
         a = i / n * math.tau
-        rr = rng.between(0.7, 1.0)
         pts.append((u + math.cos(a) * w / 2 * rr, z + math.sin(a) * h / 2 * rr))
-    cols = [mix(col, wx.seen(*(F @ Vector((p[0], 0, p[1])))), rng.between(0.0, 0.3)) for p in pts]
-    mb.face([_pt(F, a, b, y) for a, b in pts], 'paint', cols, wx.wear)
+    cols = [mix(col, wx.seen(*(F @ Vector((q[0], 0, q[1])))), m) for q, m in zip(pts, p['mix'])]
+    mb.face([_pt(F, a, b, p['y']) for a, b in pts], 'paint', cols, wx.wear)
 
 
-def bare_block(mb, F, wx, u, z0, w, courses, rng, y=0.05):
+def bare_block(mb, F, wx, blk):
     """Render broken away down to the block: a ragged hole whose edges follow the blocks (450 x 225 mm, laid half-bond),
-    the dark mortar showing in the joints, each block its own shade, a dark rim where the old render stands proud."""
+    the dark mortar showing in the joints, each block its own shade, a dark rim where the old render stands proud.
+    blk: its record (z0, y, and per course from the foot, its ends ul, uh and each block's shade; null: none in it)."""
     ch, bl = 0.225, 0.45
-    for r in range(courses):
+    z0, y = blk['z0'], blk['y']
+    for r, co in enumerate(blk['courses']):
         zl, zh = z0 + r * ch, z0 + (r + 1) * ch
-        t = (r + 0.5) / courses * 2 - 1   # a ragged blob, widest across its middle
-        hw = w / 2 * math.sqrt(max(0.0, 1 - t * t)) ** 0.6
-        sh = bl / 2 if r % 2 else 0.0      # half-bond: every other course shifted half a block
-        ul = math.floor((u - hw * rng.between(0.7, 1.05) - sh) / bl) * bl + sh
-        uh = math.ceil((u + hw * rng.between(0.7, 1.05) - sh) / bl) * bl + sh
-        if uh - ul < bl - 1e-6:
+        if co is None:
             continue
+        ul, uh = co['ul'], co['uh']
         mb.face([_pt(F, ul, zl, y), _pt(F, uh, zl, y), _pt(F, uh, zh, y), _pt(F, ul, zh, y)], 'block', MORTAR, wx.wear)
         x = ul
-        while x < uh - 1e-6:
-            f = rng.between(0.85, 1.12)
+        for f in co['shades']:
             c = tuple(v * f for v in BLOCK)
             c = mix(c, DIRT, wx.wear * 0.6 * (1 - smooth(0.0, 0.8, zl)))
             a, b = x + 0.008, x + bl - 0.008
@@ -186,7 +181,7 @@ def bare_block(mb, F, wx, u, z0, w, courses, rng, y=0.05):
                     'paint', mix(wx.seen(*(F @ Vector((e, 0, zl)))), GRIME, 0.35), wx.wear)
 
 
-def ac_unit(mb, F, u, z, wear, rng):
+def ac_unit(mb, F, u, z, wear, rng=None):
     """A split AC's outdoor unit on two brackets, its pipes into the wall: off-white gone yellow-grey, the fan behind a dark grille."""
     from .parts import bar, cyl
     body = mix((0.80, 0.79, 0.74), (0.55, 0.50, 0.40), wear * 0.5)
@@ -214,91 +209,26 @@ def lnb_arm(mb, x, y, z, rz):
 
 
 # ---------------------------------------------------------------- one house's walls
+def marks(mb, F, wx, ms):
+    """Draw one wall face's weathering from its records: streak (u, z_top, length, w, 'grime' or 'rust', k, y, taper),
+    patch, block (render broken to the block) and ac (an AC unit at u, z)."""
+    for m in ms:
+        if 'streak' in m:
+            u, z_top, length, w, dark, k, y, taper = m['streak']
+            streak(mb, F, wx, u, z_top, length, w, DARK[dark], k, y, taper)
+        elif 'patch' in m:
+            patch(mb, F, wx, m['patch'])
+        elif 'block' in m:
+            bare_block(mb, F, wx, m['block'])
+        elif 'ac' in m:
+            ac_unit(mb, F, m['ac'][0], m['ac'][1], wx.wear)
+
+
 def age_face(mb, F, L, z_top, wx, openings, bands, rng, flat_top=False, foot=True, ac=0, few=False):
-    """Weather one wall face: openings [(kind, u, z, w, h, barred)], bands [z of the storey bands], z_top the wall's top
-    (the parapet's top on a flat roof). Strength follows the house's wear."""
-    w_ = wx.wear
-    half = L / 2 - 0.25
-    if half < 0.4:
-        return
-    below = lambda z: max([b + 0.1 for b in bands if b + 0.1 < z - 0.05] + [0.47])   # a streak stops at the band under it
-    taken = [(o[1] - o[3] / 2 - 0.15, o[1] + o[3] / 2 + 0.15, o[2] - o[4] / 2 - 0.2, o[2] + o[4] / 2 + 0.25) for o in openings]
-    free = lambda u0, u1, z0, z1: u0 >= -half - 1e-6 and u1 <= half + 1e-6 and not any(u0 < b and u1 > a and z0 < d and z1 > c for a, b, c, d in taken)
-
-    for kind, u, z, w, h, barred in openings:
-        if kind != 'window':
-            continue
-        sill = z - h / 2 - 0.16
-        if rng.chance((0.35 + 0.6 * w_) * (0.5 if few else 1.0)):   # grime from the sill: across it, or from its two ends
-            ln = min(sill - below(sill), rng.between(0.7, 2.0) * (0.6 + w_))
-            if ln > 0.2:
-                if rng.chance(0.5):
-                    streak(mb, F, wx, u, sill, ln, w + 0.35, GRIME, min(0.9, rng.between(0.55, 0.85) * (0.5 + w_)), taper=0.8)
-                else:
-                    for s in (-1, 1):
-                        streak(mb, F, wx, u + s * (w / 2 + 0.1), sill, ln, rng.between(0.2, 0.4), GRIME, min(0.9, rng.between(0.6, 0.9) * (0.5 + w_)))
-        if barred and rng.chance(0.25 + 0.7 * w_):   # rust run down from the bars' feet
-            for k in range(rng.randrange(2, 5)):
-                uu = u + rng.between(-w / 2, w / 2)
-                ln = min(sill - below(sill), rng.between(0.25, 0.9))
-                if ln > 0.1:
-                    streak(mb, F, wx, uu, sill - 0.01, ln, rng.between(0.03, 0.07), RUST, rng.between(0.45, 0.8), y=OFF + 0.002, taper=0.5)
-        if not detail.web() and rng.chance(0.3 * w_):   # rain run off the lintel's ends
-            for s in (-1, 1):
-                streak(mb, F, wx, u + s * (w / 2 + 0.05), z + h / 2 + 0.12, rng.between(0.3, 0.7), 0.12, GRIME, 0.3 * (0.5 + w_))
-
-    # off the ledges: under a balcony's slab, and from the storey bands
-    for kind, u, z, w, h, barred in openings:
-        if kind == 'balcony' and rng.chance(0.4 + 0.6 * w_):
-            zb = z - h / 2 - 0.13
-            for k in range(rng.randrange(2, 5)):
-                uu = u + rng.between(-w / 2, w / 2)
-                streak(mb, F, wx, uu, zb, min(zb - below(zb), rng.between(0.6, 2.0)), rng.between(0.2, 0.7), GRIME, min(0.9, rng.between(0.5, 0.85) * (0.5 + w_)), taper=0.8)
-    for b in bands:
-        for k in range(int(rng.between(0, 3) * w_ * L / 8 * (0.5 if detail.web() else 1.0) * (0.5 if few else 1.0))):
-            uu, zb = rng.between(-half, half), b - 0.11
-            if free(uu - 0.2, uu + 0.2, zb - 0.5, zb):
-                streak(mb, F, wx, uu, zb, min(zb - below(zb), rng.between(0.4, 1.6)), rng.between(0.15, 0.5), GRIME, min(0.85, rng.between(0.4, 0.75) * (0.5 + w_)), taper=0.8)
-
-    # down from the top: a band of mould under a flat roof's coping, and streaks from it (fewer under a roof's overhang)
-    if flat_top and rng.chance(0.3 + 0.7 * w_):
-        streak(mb, F, wx, 0, z_top - 0.13, rng.between(0.3, 0.8), 2 * half + 0.4, GRIME, min(0.8, rng.between(0.4, 0.65) * (0.4 + w_)), y=OFF - 0.003, taper=1.0)
-    n_top = int(L / 2.5 * (0.4 + w_) * (1.6 if flat_top else 0.6) * rng.between(0.6, 1.3) * (0.5 if detail.web() else 1.0) * (0.5 if few else 1.0))
-    for k in range(n_top):
-        uu = rng.between(-half, half)
-        ln = rng.between(0.6, 2.8 if flat_top else 1.4) * (0.5 + w_)
-        sw_ = rng.between(0.2, 0.9)
-        uu = max(-half + sw_ / 2, min(half - sw_ / 2, uu))   # on the wall, not past its corner
-        streak(mb, F, wx, uu, z_top - 0.13, ln, sw_, GRIME, min(0.95, rng.between(0.5, 0.9) * (0.4 + w_)), taper=rng.between(0.6, 1.0))
-
-    # patches of new cement, and render broken off to the block
-    for k in range(int(rng.between(0, 2.5) * w_ * L / 6 + 0.5)):
-        pw, ph = rng.between(0.35, 1.4), rng.between(0.3, 1.0)
-        uu, zz = rng.between(-half + pw / 2, half - pw / 2), rng.between(0.7, z_top - 0.6)
-        if free(uu - pw / 2, uu + pw / 2, zz - ph / 2, zz + ph / 2):
-            pc = CEMENT if rng.chance(0.6) else mix(tuple(v * rng.between(1.03, 1.1) for v in wx.paint), CEMENT, 0.25)   # bare cement, or a touch-up in new paint
-            patch(mb, F, wx, uu, zz, pw, ph, pc, rng, y=OFF - 0.004)
-    if foot and not few and rng.chance(0.1 + 0.6 * w_):   # at the foot, where the splash and the damp eat it first
-        bw, z0, nc = rng.between(0.9, 2.2), rng.between(0.0, 0.3), rng.randrange(2, 6)
-        uu = rng.pick([-half + bw / 2, half - bw / 2, rng.between(-half + bw / 2, half - bw / 2)]) if half > bw / 2 else 0
-        if half > bw / 2 and free(uu - bw / 2 - 0.25, uu + bw / 2 + 0.25, z0, z0 + nc * 0.225):
-            bare_block(mb, F, wx, uu, z0, bw, nc, rng.child('block'))
-    if not few and rng.chance(0.25 * w_):   # and now and then higher up, where a pipe or a sign came off
-        bw, nc = rng.between(0.9, 1.6), rng.randrange(2, 5)
-        uu, zz = rng.between(-half + bw / 2, half - bw / 2), rng.between(1.2, max(1.3, z_top - 1.4))
-        if half > bw / 2 and free(uu - bw / 2 - 0.25, uu + bw / 2 + 0.25, zz, zz + nc * 0.225):
-            bare_block(mb, F, wx, uu, zz, bw, nc, rng.child('block2'), y=OFF + 0.002)
-
-    # AC units on the upper floors (and the shop's), each with its drip stain
-    for k in range(ac):
-        for _ in range(6):
-            uu = rng.between(-half + 0.5, half - 0.5)
-            zz = rng.pick([b for b in bands] or [0.0]) + rng.between(1.0, 1.6)
-            if free(uu - 0.5, uu + 0.5, zz - 0.35, zz + 0.6):
-                ac_unit(mb, F, uu, zz, w_, rng)
-                streak(mb, F, wx, uu - 0.2, zz - 0.02, min(zz - below(zz), rng.between(0.8, 2.2)), 0.18, GRIME, 0.55, taper=0.4)
-                taken.append((uu - 0.55, uu + 0.55, zz - 0.4, zz + 0.65))
-                break
+    """For the old city's generators: weather one wall face from its own dice (draft.age_face drafts the marks: openings
+    [(kind, u, z, w, h, barred)], bands [z of the storey bands], z_top the wall's top), then draw them."""
+    from . import draft
+    marks(mb, F, wx, draft.age_face(L, z_top, wx.wear, wx.paint, openings, bands, rng, flat_top, foot, ac, few))
 
 
 def meter_drop(mb, corner, nxt, centre, z, rng):

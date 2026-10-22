@@ -24,6 +24,7 @@ for i, a in enumerate(args):
         opt[a] = args[i + 1] if i + 1 < len(args) and not args[i + 1].startswith('--') else True
 detail.LEVEL = 'full'
 spot = json.load(open(opt['--map']))
+spot['_dir'] = os.path.dirname(os.path.abspath(opt['--map']))   # the ground grids lie beside the map
 shot = spot['shot']
 sc = scene.reset()
 

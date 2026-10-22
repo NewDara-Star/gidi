@@ -13,7 +13,7 @@ import math
 from mathutils import Vector
 
 from . import detail
-from .core import Rng, hex_rgb, shade
+from .core import hex_rgb, shade
 
 RUST = hex_rgb('#6d4129')        # rust, a dull red-brown
 RUST_DARK = hex_rgb('#3c2416')   # old rust, nearly black where it's wet longest
@@ -32,8 +32,19 @@ def sag_at(spec, t, v):
 
 
 def sheets(mb, A, B, C, D, spec, wear_of=None):
-    """A slope of zinc sheets: eave A->B, top D->C (C == D: a hip end). spec: col, col2, mixed, wear, pitch, depth, profile,
-    and sag (metres, from the roof's age). wear_of(i): sheet i's own wear."""
+    """For the old city's generators: a slope drafted from its own dice (draft.zinc_slope), then drawn. wear_of(i): sheet
+    i's own wear."""
+    from . import draft
+    slope(mb, A, B, C, D, spec, draft.zinc_slope(A, B, C, D, spec, wear_of))
+
+
+def slope(mb, A, B, C, D, spec, rec):
+    """A slope of zinc sheets: eave A->B, top D->C (C == D: a hip end). spec: col, col2, wear, pitch, depth, profile, and
+    sag (metres, from the roof's age). rec: the slope's record (KIT.md section 12): rows up the slope, the colour blotch's
+    phases ph, and each sheet's tone (main, second or new), shade, wear, how rusted each nail line is (nails, per row) and
+    its lapped edge (edge, per row). None: nothing (a slope too small to have sheets)."""
+    if rec is None:
+        return
     A, B, C, D = (Vector(p) for p in (A, B, C, D))
     L = (B - A).length
     if L < 1e-3:
@@ -49,9 +60,7 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
     flip = nrm.z < 0   # the slope was given the other way round: turn the faces so the tops face up (Unreal culls back faces)
     if flip:
         nrm = -nrm
-    rng = Rng('zinc', round(A.x, 1), round(A.y, 1), round(A.z, 1), round(B.x, 1), round(B.y, 1))
     web = detail.web()
-    w0 = spec['wear']
     sag = spec.get('sag', 0.0)
     pitch, depth, prof = spec['pitch'], spec['depth'], spec['profile']
 
@@ -71,17 +80,12 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             return depth * 0.5 * (1 - math.cos(t * math.tau))
         return depth if 0.08 < t < 0.24 else (depth * (t / 0.08) if t <= 0.08 else (depth * (1 - (t - 0.24) / 0.08) if t < 0.32 else 0.0))
 
-    ns = max(1, round(L / (COVER * 2 if web else COVER)))   # the web tiles: sheets in pairs, one face each
-    nr = max(1, math.ceil(hgt / rng.between(2.4, 3.4)))   # sheets come 2.4-3.6 m long: a long slope has end laps
-    ph = [rng.between(0, math.tau) for _ in range(3)]
-    for j in range(ns):
+    ns, nr, ph = len(rec['sheets']), rec['rows'], rec['ph']
+    for j, sh_ in enumerate(rec['sheets']):
         s0, s1 = L * j / ns, L * (j + 1) / ns
-        sw = wear_of(j) if wear_of else max(0.0, min(1.0, w0 + rng.between(-0.3, 0.3)))
-        new = rng.chance(0.02 + 0.06 * w0)
-        base = NEW if new else (spec['col2'] if spec.get('mixed') and j % 3 == 0 else spec['col'])
-        base = shade(base, rng.between(0.85, 1.1))
-        if new:
-            sw *= 0.15
+        sw = sh_['wear']
+        tone = sh_['tone']
+        base = shade(NEW if tone == 'new' else (spec['col2'] if tone == 'second' else spec['col']), sh_['shade'])
         side = 0.006 * (j % 2)   # each sheet laps over the one before by a rib
         m = 1 if web else max(2, round((s1 - s0) / pitch * (4 if prof == 'sine' else 5)))
         ss = [s0 + (s1 - s0) * i / m for i in range(m + 1)]
@@ -91,10 +95,10 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
             v0e = max(0.0, v0 - (0.12 / hgt if r else 0.0))   # ...and reaches 12 cm down over it
             # the purlins the sheet is nailed to, about a metre apart: a row at each nail line (rust starts there and runs
             # down the slope) and one just above it (clean), so the colour can break sharply at the nails
-            npur = 0 if web else max(1, round(hgt * (v1 - v0e) / 1.0))   # the web tiles: no nail rows (Unreal's material carries the fine rust)
+            nail_k = dict(enumerate(sh_['nails'][r]))   # how badly each nail line has rusted
+            npur = 0 if web else len(nail_k)   # the web tiles: no nail rows (Unreal's material carries the fine rust)
             nails = [v0e + (v1 - v0e) * (i + 0.5) / npur for i in range(npur)]
-            nail_k = {i: rng.random() ** 2 for i in range(max(1, npur))}   # how badly each nail line has rusted: most a little
-            edge_k = rng.random() ** 2                                  # and this sheet's lapped edge
+            edge_k = sh_['edge'][r]                     # and this sheet's lapped edge
             vs = sorted({v0e, v1, *nails, *([] if web else [min(v1, v + 0.03 / hgt) for v in nails])})   # the web tiles: no crisp break, the rust fades both ways
             if sag > 0.005 and len(vs) < 3:
                 vs = [v0e, (v0e + v1) / 2, v1]
@@ -129,13 +133,15 @@ def sheets(mb, A, B, C, D, spec, wear_of=None):
 GRIME = hex_rgb('#36342f')
 
 
-def slab(mb, poly, z, col, wear):
+def slab(mb, poly, z, col, wear, ph=None):
     """A flat concrete roof: rings from the parapet in to the middle, so the colour can change across it. Darkest along
-    the parapet where the water stands and the mould grows, ponding marks in blotches, sun-bleached in the open."""
+    the parapet where the water stands and the mould grows, ponding marks in blotches, sun-bleached in the open.
+    ph: the ponding blotch's three phases (the roof's slab_blotch record)."""
     n = len(poly)
     cx, cy = sum(p[0] for p in poly) / n, sum(p[1] for p in poly) / n
-    rng = Rng('slab', round(cx, 1), round(cy, 1))
-    ph = [rng.between(0, math.tau) for _ in range(3)]
+    if ph is None:   # the old city's generators: drafted from the slab's own dice
+        from . import draft
+        ph = draft.slab_blotch(poly)
     fs = [1.0, 0.85, 0.5, 0.0]   # the rings, as a share of the way out from the middle
 
     def pt(p, f):

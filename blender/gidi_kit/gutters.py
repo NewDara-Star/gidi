@@ -11,7 +11,7 @@ import math
 from mathutils import Matrix
 
 from . import detail
-from .core import Rng, hex_rgb, shade
+from .core import MissingRecord, hex_rgb, shade
 
 WALL = hex_rgb('#8a857a')
 WALL_DIRTY = hex_rgb('#4a4a40')
@@ -46,9 +46,15 @@ def pieces(pts, keep, piece=PIECE):
 
 
 def gutter(mb, pts, g, keep, wear=0.6):
-    """One gutter from the data: pts in the kit's frame, g its record (w, depth, state, blocked)."""
+    """One gutter: pts in the kit's frame, g its record (w, depth, state, blocked) with its pieces' records (pieces: per
+    piece ww, how dirty its walls are; inside, what lies in it; slabs over it). The old city's generators give no pieces:
+    they are drafted from the gutter's own dice (draft.gutter)."""
     w = g['w']
-    rng = Rng('gutter', g['id'])
+    recs = g.get('pieces')
+    if recs is None:
+        from . import draft
+        recs = draft.gutter(pts, g, keep, wear)
+    recs = iter(recs)
     proud = 0.12 + 0.1 * min(1.0, g.get('depth', 0.6))   # deeper drains have taller walls
     t = 0.12
     blocked = g.get('blocked') or []
@@ -57,10 +63,13 @@ def gutter(mb, pts, g, keep, wear=0.6):
         L = math.dist(a, b)
         if L < 0.05:
             continue
+        rec = next(recs, None)
+        if rec is None:
+            raise MissingRecord('gutter %s: fewer piece records than pieces' % g.get('id'))
         dx, dy = (b[0] - a[0]) / L, (b[1] - a[1]) / L
         nx, ny = -dy, dx
         P = lambda u, o, z: (a[0] + dx * u + nx * o, a[1] + dy * u + ny * o, z)
-        ww = wear * rng.between(0.7, 1.2)
+        ww = rec['ww']
         # the two walls: outer face, top, inner face (dark with the wet below the top)
         for side in (-1, 1):
             o_in, o_out = side * w / 2, side * (w / 2 + t)
@@ -75,85 +84,71 @@ def gutter(mb, pts, g, keep, wear=0.6):
                 mb.face(q if side < 0 else q[::-1], 'concrete', cs if side < 0 else cs[::-1], ww)
         fill = next((bk['fill'] for bk in blocked if bk['from'] <= s + L / 2 < bk['to']), None)
         if not (covered and detail.web()):   # in the web tiles the slabs hide what's inside
-            _inside(mb, P, L, w, proud, fill, covered, rng, wear)
+            _inside(mb, P, L, w, proud, fill, rec['inside'])
         if covered:
-            _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear, g)
+            _slabs(mb, P, L, w, t, proud, dx, dy, wear, g, rec['slabs'])
 
 
-def _inside(mb, P, L, w, proud, fill, covered, rng, wear):
-    """Inside an open gutter: silt, then water (high and green where it's blocked), or rubbish heaped to the rim."""
+def _inside(mb, P, L, w, proud, fill, ins):
+    """Inside an open gutter: silt, then water (high and green where it's blocked), or rubbish heaped to the rim.
+    ins: its record (rubbish: pieces at u along, o across, z, with col, size, rz, rx; or zw, the water's height, mix, how
+    much silt or scum shows at each corner, and caught, what floats in it)."""
     if fill == 'rubbish' or not detail.web():   # under water the silt doesn't show in the web tiles
         mb.face([P(0, -w / 2, 0.02), P(L, -w / 2, 0.02), P(L, w / 2, 0.02), P(0, w / 2, 0.02)], 'mud', SILT, 0.7)
     if fill == 'rubbish':
         mb.face([P(0, -w / 2, proud * 0.7), P(L, -w / 2, proud * 0.85), P(L, w / 2, proud * 0.75), P(0, w / 2, proud * 0.8)], 'mud',
                 [shade(SILT, 1.6), shade(SILT, 1.3), shade(SILT, 1.8), shade(SILT, 1.4)], 0.8)
-        for _ in range(int(L * 6)):   # bottles, nylon, sachets, a slipper
-            u, o = rng.between(0, L), rng.between(-w / 2, w / 2)
-            z = proud * rng.between(0.7, 1.15)
-            c = rng.pick(RUBBISH)
-            sz = (rng.between(0.06, 0.2), rng.between(0.04, 0.14), rng.between(0.01, 0.05))   # flat: sachets, bags, crushed bottles
-            mb.box('plastic', Matrix.Translation(P(u, o, z)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z') @ Matrix.Rotation(rng.between(-0.6, 0.6), 4, 'X'), c, 0.5, size=sz)
+        for r in ins['rubbish']:   # bottles, nylon, sachets, a slipper
+            mb.box('plastic', Matrix.Translation(P(r['u'], r['o'], r['z'])) @ Matrix.Rotation(r['rz'], 4, 'Z') @ Matrix.Rotation(r['rx'], 4, 'X'), tuple(r['col']), 0.5, size=r['size'])
     else:
         green = fill == 'green_water'
-        zw = proud * (0.75 if green else rng.between(0.25, 0.45))
+        zw = ins['zw']
         q = [P(0, -w / 2, zw), P(L, -w / 2, zw), P(L, w / 2, zw), P(0, w / 2, zw)]
         if green:   # scum gathers along the walls
-            cols = [_mix(GREEN, SCUM, rng.between(0.2, 0.7)) for _ in range(4)]
+            cols = [_mix(GREEN, SCUM, m) for m in ins['mix']]
         else:
-            cols = [_mix(WATER, SILT, rng.between(0.0, 0.5)) for _ in range(4)]
+            cols = [_mix(WATER, SILT, m) for m in ins['mix']]
         mb.face(q, 'mud', cols, 0.2)   # not 'water': that slot is the lagoon's one colour in Unreal
-        if not covered and rng.chance(0.25 * wear):   # something caught in an open drain
-            for _ in range(rng.randrange(1, 4)):
-                u, o = rng.between(0.2, L - 0.2), rng.between(-w / 3, w / 3)
-                mb.box('plastic', Matrix.Translation(P(u, o, zw + 0.02)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z'), rng.pick(RUBBISH), 0.5,
-                       size=(rng.between(0.1, 0.25), rng.between(0.06, 0.15), 0.04))
+        for c in ins['caught']:   # something caught in an open drain
+            mb.box('plastic', Matrix.Translation(P(c['u'], c['o'], zw + 0.02)) @ Matrix.Rotation(c['rz'], 4, 'Z'), tuple(c['col']), 0.5, size=c['size'])
 
 
-def _slab(mb, P, u, L_, w, t, z, ang, tip, roll, c, wear, rng, broken):
+def _slab(mb, P, u, L_, w, t, z, ang, tip, roll, c, wear, broken):
     """One precast slab across the channel, centred u along it, L_ long: tipped (tip, about the gutter's line) and rocked
-    (roll, across it). Broken: in two pieces with a crack between, or a corner knocked off."""
+    (roll, across it). Broken: {split: [where, tip of each half]} in two pieces with a crack between, or {corner: [side,
+    cut, the fallen lump's tilts]} a corner knocked off."""
     span = w + 2 * t + 0.04
     base = lambda du, dv, rx, ry: Matrix.Translation(P(u + du, dv, z)) @ Matrix.Rotation(ang, 4, 'Z') @ Matrix.Rotation(rx, 4, 'X') @ Matrix.Rotation(ry, 4, 'Y')
-    if broken == 'split':   # cracked across the channel, the two halves at their own tilts
-        f = rng.between(0.35, 0.65)
+    if broken and 'split' in broken:   # cracked across the channel, the two halves at their own tilts
+        f, t1, t2 = broken['split']
         a_, b_ = span * f, span * (1 - f)
-        mb.box('concrete', base(0, -span / 2 + a_ / 2 - 0.01, tip + rng.between(-0.06, 0.06), roll), c, wear, size=(L_, a_ - 0.02, 0.1), skip=('-z',))
-        mb.box('concrete', base(0, span / 2 - b_ / 2 + 0.01, tip + rng.between(-0.06, 0.06), roll - 0.02), shade(c, 0.93), wear, size=(L_, b_ - 0.02, 0.1), skip=('-z',))
-    elif broken == 'corner':   # a corner gone: the slab short on one side, a lump of it fallen beside
-        s_ = rng.pick([-1, 1])
-        cut = rng.between(0.15, 0.3)
+        mb.box('concrete', base(0, -span / 2 + a_ / 2 - 0.01, tip + t1, roll), c, wear, size=(L_, a_ - 0.02, 0.1), skip=('-z',))
+        mb.box('concrete', base(0, span / 2 - b_ / 2 + 0.01, tip + t2, roll - 0.02), shade(c, 0.93), wear, size=(L_, b_ - 0.02, 0.1), skip=('-z',))
+    elif broken and 'corner' in broken:   # a corner gone: the slab short on one side, a lump of it fallen beside
+        s_, cut, rx, ry = broken['corner']
         mb.box('concrete', base(0, -s_ * cut / 2, tip, roll), c, wear, size=(L_, span - cut, 0.1), skip=('-z',))
         mb.box('concrete', base(-L_ * 0.25, s_ * (span / 2 - cut / 2), tip, roll), c, wear, size=(L_ * 0.5, cut, 0.1), skip=('-z',))
-        mb.box('concrete', base(L_ * 0.2, s_ * (span / 2 + 0.15), rng.between(-0.5, 0.5), rng.between(-0.5, 0.5)) @ Matrix.Translation((0, 0, -0.07)), shade(c, 0.9), wear, size=(0.12, 0.09, 0.06))
+        mb.box('concrete', base(L_ * 0.2, s_ * (span / 2 + 0.15), rx, ry) @ Matrix.Translation((0, 0, -0.07)), shade(c, 0.9), wear, size=(0.12, 0.09, 0.06))
     else:
         mb.box('concrete', base(0, 0, tip, roll), c, wear, size=(L_, span, 0.1), skip=('-z',))
 
 
-def _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear, g=None):
-    """Precast slabs across a covered gutter, 0.6 m each (pairs in the web tiles), gaps between; some cracked and tipped,
-    some sunk. From the map (`g`): `slab_colour`; `dust` 0..1 settled on them; `open_share`, the share of slabs gone, the
-    drain open between the ones left; `broken` 0..1, how many are cracked or chipped; `rock` 0..1, how much they tip and
-    rock; `litter` 0..1, dirt and rubbish packed into the joints."""
-    g = g or {}
-    n = max(1, round(L / (1.2 if detail.web() else 0.6)))   # the web tiles: slabs in pairs
+def _slabs(mb, P, L, w, t, proud, dx, dy, wear, g, recs):
+    """Precast slabs across a covered gutter, 0.6 m each (pairs in the web tiles), gaps between. From the map (`g`):
+    `slab_colour`; `dust` 0..1 settled on them; `litter` > 0, dirt packed into the joints. recs: each slab's record
+    ({gone} where the drain shows; or tip, roll, sink, its dirt, dust and shade, the gap after it, broken, and joint: the
+    rubbish in the joint after it)."""
+    n = len(recs)
     base_c = hex_rgb(g['slab_colour']) if g.get('slab_colour') else SLAB
-    rock = g.get('rock', 0.0)
     ang = math.atan2(dy, dx)
-    for k in range(n):
+    for k, r in enumerate(recs):
         u = (k + 0.5) * L / n
-        if rng.chance(g.get('open_share', 0.0)):   # this slab is gone: the drain shows
+        if r.get('gone'):   # this slab is gone: the drain shows
             continue
-        tip = rng.between(-0.08, 0.08) if rng.chance(0.15 + 0.3 * wear + 0.5 * rock) else 0.0
-        roll = rng.between(-0.06, 0.06) * rock
-        sink = rng.between(0.02, 0.08) if rng.chance(0.1 + 0.2 * wear + 0.3 * rock) else 0.0
-        c = shade(_mix(_mix(base_c, WALL_DIRTY, rng.between(0.1, 0.5) * wear), DUST, g.get('dust', 0.0) * rng.between(0.6, 1.0)), rng.between(0.8, 1.05))
-        gap = 0.03 + rng.between(0.0, 0.06) * rock
-        broken = rng.pick(['split', 'corner']) if rng.chance(g.get('broken', 0.0)) else None
-        _slab(mb, P, u, L / n - gap, w, t, proud + 0.05 - sink, ang, tip, roll, c, wear, rng, broken)
+        c = shade(_mix(_mix(base_c, WALL_DIRTY, r['dirt'] * wear), DUST, g.get('dust', 0.0) * r['dust']), r['shade'])
+        _slab(mb, P, u, L / n - r['gap'], w, t, proud + 0.05 - r['sink'], ang, r['tip'], r['roll'], c, wear, r['broken'])
         if g.get('litter', 0.0) > 0:   # the joint after this slab: dirt packed in, and what the wind left there
             uj = (k + 1) * L / n
             mb.face([P(uj - 0.04, -w / 2 - t, proud + 0.02), P(uj + 0.04, -w / 2 - t, proud + 0.02), P(uj + 0.04, w / 2 + t, proud + 0.03), P(uj - 0.04, w / 2 + t, proud + 0.03)], 'mud', DIRT, 0.8)
-            for _ in range(int(rng.between(0, 4) * g['litter'])):
-                o = rng.between(-w / 2 - t, w / 2 + t)
-                sz = (rng.between(0.05, 0.16), rng.between(0.04, 0.1), rng.between(0.008, 0.03))
-                mb.box('plastic', Matrix.Translation(P(uj + rng.between(-0.05, 0.05), o, proud + 0.1)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z') @ Matrix.Rotation(rng.between(-0.5, 0.5), 4, 'X'), rng.pick(RUBBISH), 0.5, size=sz)
+            for j in r['joint']:
+                mb.box('plastic', Matrix.Translation(P(uj + j['du'], j['o'], proud + 0.1)) @ Matrix.Rotation(j['rz'], 4, 'Z') @ Matrix.Rotation(j['rx'], 4, 'X'), tuple(j['col']), 0.5, size=j['size'])
