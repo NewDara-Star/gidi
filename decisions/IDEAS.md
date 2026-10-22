@@ -41,3 +41,11 @@
 - five belts between them, each with its own grain: Mafoluku (densest), an Ajao-type estate (walled, bigger plots), Ilupeju-type industry, a Papa Ajao mix (houses and workshops, a spare-parts market), and a Surulere grid;
 - several markets instead of one (an Arena-type set of sheds, a strip along the rail, spare parts, textiles, under the bridge), and walled institutions next to the Oshodi crossing (barracks, hospital, council).
 Open question: real Oshodi has the railway running through the crossing; Gidi's rail only clips the corner. Moving it changes the whole city.
+
+## Life in the streets: what makes people stay (owner, 22 Oct)
+The owner: "people randomly having like chatter conversations"; "beer parlour talk... somebody on the road looking at a newspaper... stupid football takes"; music; bus stop names. Lagos Life (browser, 2026) drew millions of players in its first days on curiosity alone, then had "nothing going on" (the owner played it). Curiosity brings people once; life and things to do keep them.
+- **Overheard talk:** groups that argue as you pass: the newspaper stand (football, politics, prices), the beer parlour, the barber's, the bus queue, the market women, the mechanics. Short lines, many of them, in pidgin, Yoruba and English, picked by place and time (match day, fuel queue, rain, NEPA off).
+- **Bus stops you hear before you see:** conductors calling the stops and routes from the danfo door, the stop's name on a painted sign or a wall; the same names on the map.
+- **Sound and music:** radio from shops and buses, a station or two of our own music, generator hum, church and mosque, hawkers' calls.
+- **Things going on:** jobs anyone in Lagos knows (conductor, okada, hawking, a levy run), checkpoints, the light going off, rain that floods the street, traffic that locks up.
+- **Dense, not huge:** a small part of the city full of life beats a big empty one; the Underdeck is the first place to prove it, and short clips of it are how people hear about the game.
