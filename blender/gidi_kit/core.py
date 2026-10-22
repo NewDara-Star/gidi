@@ -36,6 +36,18 @@ class Rng(random.Random):
         return lo + (hi - lo) * self.random()
 
 
+class MissingRecord(KeyError):
+    """A record the kit needs is not on the map. The kit draws only what the map holds (KIT.md section 12, "Records"):
+    draft the spot (blender/kit_draft.py) or add the record by hand."""
+
+
+def need(d, key, what):
+    """d[key], or MissingRecord naming what is missing (`what`: whose record it is)."""
+    if key not in d:
+        raise MissingRecord(f'{what}: no {key!r} record on the map')
+    return d[key]
+
+
 def hex_rgb(h):
     """'#rrggbb' or 0xrrggbb -> linear RGB tuple (Blender colour attributes are linear)."""
     if isinstance(h, str):

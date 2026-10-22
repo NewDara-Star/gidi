@@ -218,18 +218,16 @@ def generator(mb, M, col=None, wear=0.6):
     mb.box('plastic', at(M, -0.2, W / 2 - 0.02, 0.2), hex_rgb('#1d1d1d'), 0, size=(0.06, 0.03, 0.04))   # pull-start
 
 
-def bin_drum(mb, M, rng, col=None):
-    """A blue drum cut down for a bin, rubbish heaped over its rim and spilling at its foot."""
+def bin_drum(mb, M, litter, col=None):
+    """A blue drum cut down for a bin, rubbish heaped over its rim and spilling at its foot. litter: its record, each
+    piece (street.litter_piece's record) with at, where it lies from the drum's foot."""
     from . import street
     col = col or hex_rgb('#1f5fa8')
     parts.cyl(mb, 'plastic', M, 0.29, 0.72, col, 0.6, seg=14, caps=(True, False))
     parts.cyl(mb, 'plastic', M, 0.27, 0.72, shade(col, 0.5), 0.6, seg=14, caps=(False, False))
-    for k in range(9):
-        a, d = rng.between(0, math.tau), rng.between(0, 0.25)
-        street.litter_piece(mb, M.translation.x + math.cos(a) * d, M.translation.y + math.sin(a) * d, M.translation.z + 0.7 + rng.between(0, 0.12), rng)
-    for k in range(6):
-        a, d = rng.between(0, math.tau), rng.between(0.32, 0.8)
-        street.litter_piece(mb, M.translation.x + math.cos(a) * d, M.translation.y + math.sin(a) * d, M.translation.z + 0.005, rng)
+    for lp in litter:
+        dx, dy, dz = lp['at']
+        street.litter_piece(mb, M.translation.x + dx, M.translation.y + dy, M.translation.z + dz, lp)
 
 
 def awning(mb, x0, x1, y, z, depth, col, side=1, wear=0.5):

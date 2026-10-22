@@ -112,7 +112,7 @@ def walls(mb, poly, H, spec):
     lift = spec.get('lift', 0.0)
     bands = [k * STOREY + lift for k in range(1, spec['storeys'])]
     # the paint, weathered (gidi_kit/wear.py): cut into columns and bands so it can fade, blotch and take the red splash at the foot
-    wx = spec.get('_wx') or wear_.Weather(col, wear, H, (round(poly[0][0], 1), round(poly[0][1], 1)))
+    wx = spec.get('_wx') or wear_.Weather(col, wear, H, (round(poly[0][0], 1), round(poly[0][1], 1)), spec.get('blotch'))
     spec['_wx'] = wx
     if spec.get('roof', {}).get('form') == 'flat':   # rain off a parapet's coping streaks the wall under it most
         wx.top, wx.top_k = H + spec['parapet']['parapet_h'] + 0.12, 0.4
@@ -317,8 +317,9 @@ def corrugated(mb, A, B, C, D, spec, wear_of=None):
         mb.face([q0, q1, p1, p0], 'zinc', shade(col, 0.6), wear)  # underside
 
 
-def roof_pitched(mb, poly, H, spec, rng):
-    """Gable or hip roof over a quad footprint with an overhang, fascia and ridge cap."""
+def roof_slopes(poly, H, spec):
+    """A gable or hip roof's shape over a quad footprint: its eave corners A-D (with the overhang), ridge ends m1, m2, eave
+    and ridge heights y0, zr, the wall quad o turned to match, and its slopes as (eave, eave, top, top) corners."""
     e0, e1 = math.dist(poly[0], poly[1]), math.dist(poly[1], poly[2])
     gp = offset(poly, spec['overhang'])
     A, B, C, D = gp if e0 >= e1 else [gp[1], gp[2], gp[3], gp[0]]
@@ -335,15 +336,28 @@ def roof_pitched(mb, poly, H, spec, rng):
         m1, m2 = (m1[0] + dx * k, m1[1] + dy * k), (m2[0] - dx * k, m2[1] - dy * k)
     P = lambda p, z: (p[0], p[1], z)
     zr = H + rise
-    if 'sag' not in spec:   # old roofs sink between the eave and the ridge
-        spec['sag'] = max(0.0, spec['wear'] - 0.45) * rng.child('sag').between(0.05, 0.3) * min(1.0, short / 5)
-    sheet_wear = lambda i: max(0.0, min(1.0, spec['wear'] + rng.child('sheet', i).between(-0.35, 0.35)))
-    corrugated(mb, P(A, y0), P(B, y0), P(m2, zr), P(m1, zr), spec, sheet_wear)
-    corrugated(mb, P(C, y0), P(D, y0), P(m1, zr), P(m2, zr), spec, sheet_wear)
+    slopes = [(P(A, y0), P(B, y0), P(m2, zr), P(m1, zr)), (P(C, y0), P(D, y0), P(m1, zr), P(m2, zr))]
     if spec['form'] == 'hip':
-        corrugated(mb, P(D, y0), P(A, y0), P(m1, zr), P(m1, zr), spec, sheet_wear)
-        corrugated(mb, P(B, y0), P(C, y0), P(m2, zr), P(m2, zr), spec, sheet_wear)
-    else:  # gable walls in the wall paint, on the wall line
+        slopes += [(P(D, y0), P(A, y0), P(m1, zr), P(m1, zr)), (P(B, y0), P(C, y0), P(m2, zr), P(m2, zr))]
+    return dict(A=A, B=B, C=C, D=D, o=o, m1=m1, m2=m2, y0=y0, zr=zr, slopes=slopes)
+
+
+def roof_pitched(mb, poly, H, spec, rng=None, rec=None):
+    """Gable or hip roof over a quad footprint with an overhang, fascia and ridge cap. rec: the roof's record (KIT.md
+    section 12): how far it sags and each slope's sheets. The old city's generators give an rng instead, and the record
+    is drafted from it (draft.roof_pitched)."""
+    g = roof_slopes(poly, H, spec)
+    A, B, C, D, o, m1, m2, y0, zr = (g[k] for k in ('A', 'B', 'C', 'D', 'o', 'm1', 'm2', 'y0', 'zr'))
+    if rec is None:
+        from . import draft
+        rec = draft.roof_pitched(poly, H, spec, rng)
+    spec['sag'] = rec['sag']   # old roofs sink between the eave and the ridge
+    for q, r in zip(g['slopes'], rec['slopes']):
+        if spec['pitch'] < 0.3:
+            zinc.slope(mb, *q, spec, r)
+        else:
+            corrugated(mb, *q, spec, lambda i, w=r['wears']: w[i])
+    if spec['form'] != 'hip':  # gable walls in the wall paint, on the wall line
         for a, b in ((o[1], o[2]), (o[3], o[0])):
             mid = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
             tri = [(a[0], a[1], H), (b[0], b[1], H), (mid[0], mid[1], zr - 0.15)]
@@ -373,7 +387,7 @@ def roof_flat(mb, poly, H, spec):
     for i in range(len(outer)):  # the coping's top: a ring from the outer edge to the inner face only
         j = (i + 1) % len(outer)
         mb.face([(outer[i][0], outer[i][1], z), (outer[j][0], outer[j][1], z), (inner[j][0], inner[j][1], z), (inner[i][0], inner[i][1], z)], 'paint', spec['trim'], spec['wear'])
-    zinc.slab(mb, inner, H + 0.02, spec['slab'], spec['wear'])
+    zinc.slab(mb, inner, H + 0.02, spec['slab'], spec['wear'], spec.get('slab_blotch'))
     return inner
 
 

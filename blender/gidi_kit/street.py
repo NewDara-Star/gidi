@@ -11,7 +11,7 @@ import math
 from mathutils import Matrix, Vector
 
 from . import detail, parts
-from .core import hex_rgb, shade
+from .core import hex_rgb, need, shade
 
 # ---------------------------------------------------------------- conditions
 # Each condition: base colour(s), grid step, potholes per 100 m (range), pothole radius, ruts, patches.
@@ -288,16 +288,21 @@ def drain(mb, run, spec, rng):
 
 
 # ---------------------------------------------------------------- poles, wires, transformers
-def pole(mb, x, y, rng, h=None, wood=False):
-    """A concrete (or old timber) pole with a crossarm and insulators. Returns its three wire points."""
-    h = h or rng.between(9, 11)
-    lean = (rng.between(-0.06, 0.06), rng.between(-0.06, 0.06))
+def pole(mb, x, y, rec, h=None, wood=False):
+    """A concrete (or old timber) pole with a crossarm and insulators. Returns its three wire points. rec: its record
+    (lean [x, y] per metre up, wear unless timber, arm: the crossarm's turn; h if no h is given), or for the old city's
+    generators an Rng it is drafted from."""
+    if not isinstance(rec, dict):
+        from . import draft
+        rec = draft.pole(rec, h, wood)
+    h = h or need(rec, 'h', 'pole')
+    lean = tuple(need(rec, 'lean', 'pole'))
     top = (x + lean[0] * h, y + lean[1] * h, h)
     if wood:
         parts.cyl(mb, 'wood', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(lean[1], 4, 'X') @ Matrix.Rotation(-lean[0], 4, 'Y'), 0.13, h, hex_rgb('#5a4632'), 0.6, seg=8, r2=0.1)
     else:  # square-tapered concrete
-        parts.cyl(mb, 'concrete', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(lean[1], 4, 'X') @ Matrix.Rotation(-lean[0], 4, 'Y') @ Matrix.Rotation(math.pi / 4, 4, 'Z'), 0.18, h, hex_rgb('#9c978c'), rng.between(0.4, 0.8), seg=4, r2=0.1)
-    ang = rng.between(0, math.pi)
+        parts.cyl(mb, 'concrete', Matrix.Translation((x, y, 0)) @ Matrix.Rotation(lean[1], 4, 'X') @ Matrix.Rotation(-lean[0], 4, 'Y') @ Matrix.Rotation(math.pi / 4, 4, 'Z'), 0.18, h, hex_rgb('#9c978c'), need(rec, 'wear', 'pole'), seg=4, r2=0.1)
+    ang = need(rec, 'arm', 'pole')
     ax, ay = math.cos(ang), math.sin(ang)
     arm = 1.0
     parts.bar(mb, 'steel', (top[0] - ax * arm, top[1] - ay * arm, h - 0.3), (top[0] + ax * arm, top[1] + ay * arm, h - 0.3), 0.08, hex_rgb('#6b6b66'), 0.5)
@@ -344,15 +349,20 @@ LITTER = [('#e8f0f4', 'sachet', 5), ('#9ccbe8', 'sachet', 2), ('#1c1c1c', 'bag',
           ('#cfe3d6', 'bottle', 2), ('#ffffff', 'pack', 1.5), ('#c0c0c0', 'can', 1), ('#d9b85a', 'husk', 1)]
 
 
-def litter_piece(mb, x, y, z, rng):
-    col, kind, _ = rng.pick({l: l[2] for l in LITTER})
-    c = hex_rgb(col)
-    rz = rng.between(0, math.tau)
-    m = Matrix.Translation((x, y, z)) @ Matrix.Rotation(rz, 4, 'Z')
+def litter_piece(mb, x, y, z, rec):
+    """One piece of litter at x, y, z. rec: what it is (kind: sachet, bag, bottle, pack, can, husk), its colour col, its
+    turn rz, and its own shape (a sachet's tilt; a bag's r, h, r2), or for the old city's generators an Rng it is drafted
+    from (from LITTER's mix)."""
+    if not isinstance(rec, dict):
+        from . import draft
+        rec = draft.litter_piece(rec)
+    kind = rec['kind']
+    c = hex_rgb(rec['col'])
+    m = Matrix.Translation((x, y, z)) @ Matrix.Rotation(rec['rz'], 4, 'Z')
     if kind == 'sachet':  # a torn pure-water pouch lying flat
-        mb.box('plastic', m @ Matrix.Rotation(rng.between(-0.2, 0.2), 4, 'X'), c, 0, size=(0.18, 0.12, 0.006))
+        mb.box('plastic', m @ Matrix.Rotation(rec['tilt'], 4, 'X'), c, 0, size=(0.18, 0.12, 0.006))
     elif kind == 'bag':  # a crumpled nylon bag
-        parts.cyl(mb, 'plastic', m, rng.between(0.05, 0.1), rng.between(0.04, 0.08), c, 0, seg=6, r2=rng.between(0.02, 0.05))
+        parts.cyl(mb, 'plastic', m, rec['r'], rec['h'], c, 0, seg=6, r2=rec['r2'])
     elif kind == 'bottle':
         parts.cyl(mb, 'glass', m @ Matrix.Translation((0, 0, 0.04)) @ Matrix.Rotation(math.pi / 2, 4, 'X'), 0.04, 0.24, c, 0, seg=6)
     elif kind == 'pack':
@@ -363,25 +373,28 @@ def litter_piece(mb, x, y, z, rng):
         mb.box('cloth', m, c, 0, size=(0.2, 0.05, 0.03))
 
 
-def refuse_heap(mb, x, y, r, rng):
-    """A heap of bags, ash and food waste, 1–5 m across, often smouldering."""
-    rings, seg = 5, 14
-    h = r * rng.between(0.3, 0.5)
+def refuse_heap(mb, x, y, r, rec):
+    """A heap of bags, ash and food waste, 1-5 m across, often smouldering. rec: its record (h; jitter, each ring
+    point's reach in x and y; cols, each face's colour by ring; litter, pieces with their place at [dx, dy, z]), or for
+    the old city's generators an Rng it is drafted from."""
+    if not isinstance(rec, dict):
+        from . import draft
+        rec = draft.refuse_heap(r, rec)
+    rings, seg = len(rec['jitter']) - 1, len(rec['jitter'][0])
+    h = rec['h']
     prev = None
-    for k in range(rings + 1):
+    for k, jit in enumerate(rec['jitter']):
         t = k / rings
         rr = r * (1 - t ** 1.6)
         z = h * math.sin(t * math.pi / 2)
-        ring = [Vector((x + math.cos(a) * rr * rng.between(0.85, 1.15), y + math.sin(a) * rr * rng.between(0.85, 1.15), z)) for a in (i / seg * math.tau for i in range(seg))]
+        ring = [Vector((x + math.cos(a) * rr * jx, y + math.sin(a) * rr * jy, z)) for a, (jx, jy) in zip((i / seg * math.tau for i in range(seg)), jit)]
         if prev:
             for i in range(seg):
                 j = (i + 1) % seg
-                mb.face([prev[i], prev[j], ring[j], ring[i]], 'mud', hex_rgb(rng.pick(['#3a3026', '#4a3e30', '#2a2622'])), 0.9)
+                mb.face([prev[i], prev[j], ring[j], ring[i]], 'mud', hex_rgb(rec['cols'][k - 1][i]), 0.9)
         prev = ring
-    for _ in range(int(r * r * 12)):
-        a, d = rng.between(0, math.tau), rng.between(0, r)
-        zz = h * max(0, 1 - (d / r) ** 1.6) * 0.9
-        litter_piece(mb, x + math.cos(a) * d, y + math.sin(a) * d, zz, rng)
+    for p in rec['litter']:
+        litter_piece(mb, x + p['at'][0], y + p['at'][1], p['at'][2], p)
 
 
 # ---------------------------------------------------------------- people placed by hand (docs/KIT-GAPS.md, "New in the v2 layout")

@@ -63,20 +63,25 @@ def _inside(p, poly):
     return ins
 
 
-def tree(mb, x, y, rng, kind=None, h=None):
-    """Street and compound trees: a broad almond/neem-like canopy, or a coconut/oil palm."""
-    kind = kind or rng.pick({'broad': 3, 'palm': 2})
-    if kind == 'palm':
-        h = h or rng.between(7, 13)
-        lean = Vector((rng.between(-0.6, 0.6), rng.between(-0.6, 0.6), 0))
+def tree(mb, x, y, rec, kind=None, h=None):
+    """Street and compound trees: a broad almond/neem-like canopy, or a coconut/oil palm. rec: its form (kind; h; a
+    palm's lean and fronds, each frond's turn and the shades of its four blades; a broad tree's lobes, each at a turn a
+    and reach r, height z and size as shares of h, col and shade). The old city's generators pass an Rng instead (with
+    kind and h, or None to pick), and the form is drafted from it (draft.tree)."""
+    if not isinstance(rec, dict):
+        from . import draft
+        rec = draft.tree(rec, kind, h)
+    h = rec['h']
+    if rec['kind'] == 'palm':
+        lean = Vector((rec['lean'][0], rec['lean'][1], 0))
         prev = Vector((x, y, 0))
         for k in range(1, 9):  # a curved, ringed trunk
             t = k / 8
             p = Vector((x, y, h * t)) + lean * t * t * 2
             parts.bar(mb, 'wood', prev, p, 0.32 - 0.1 * t, shade(hex_rgb('#7a6248'), 0.9 if k % 2 else 1.05), 0.6)
             prev = p
-        for f in range(11):  # fronds: arching, drooping blades
-            a = f / 11 * math.tau + rng.between(-0.2, 0.2)
+        for f, fr in enumerate(rec['fronds']):  # fronds: arching, drooping blades
+            a = f / 11 * math.tau + fr['turn']
             d = Vector((math.cos(a), math.sin(a), 0))
             pts = [prev]
             for s in range(1, 5):
@@ -85,19 +90,18 @@ def tree(mb, x, y, rng, kind=None, h=None):
             side = Vector((-d.y, d.x, 0))
             for s in range(4):
                 w0, w1 = 0.5 * (1 - s / 4) + 0.05, 0.5 * (1 - (s + 1) / 4) + 0.05
-                col = shade(hex_rgb('#4f7a2e'), rng.between(0.8, 1.15))
+                col = shade(hex_rgb('#4f7a2e'), fr['shades'][s])
                 mb.face([pts[s] - side * w0, pts[s + 1] - side * w1, pts[s + 1] + side * w1, pts[s] + side * w0], 'leaf', col, 0.2)
                 mb.face([pts[s] + side * w0, pts[s + 1] + side * w1, pts[s + 1] - side * w1, pts[s] - side * w0], 'leaf', col, 0.2)
         for k in range(3):
             parts.cyl(mb, 'plastic', Matrix.Translation(prev + Vector((math.cos(k * 2.1) * 0.25, math.sin(k * 2.1) * 0.25, -0.35))), 0.13, 0.22, hex_rgb('#6b5a2a'), 0, seg=6)
         return
-    h = h or rng.between(6, 11)
     parts.cyl(mb, 'wood', Matrix.Translation((x, y, 0)), 0.25, h * 0.55, hex_rgb('#5e4a38'), 0.6, seg=8, r2=0.17)
-    for k in range(rng.randrange(4, 7)):  # canopy of leafy lobes
-        a, r = rng.between(0, math.tau), rng.between(0, h * 0.25)
-        cx, cy, cz = x + math.cos(a) * r, y + math.sin(a) * r, h * rng.between(0.6, 0.85)
-        rr = h * rng.between(0.22, 0.32)
-        _lobe(mb, cx, cy, cz, rr, rr * 0.7, shade(hex_rgb(rng.pick(['#3f7a2e', '#4f8a34', '#2f6a2a'])), rng.between(0.85, 1.1)))
+    for lb in rec['lobes']:  # canopy of leafy lobes
+        a, r = lb['a'], lb['r']
+        cx, cy, cz = x + math.cos(a) * r, y + math.sin(a) * r, h * lb['z']
+        rr = h * lb['size']
+        _lobe(mb, cx, cy, cz, rr, rr * 0.7, shade(hex_rgb(lb['col']), lb['shade']))
 
 
 def _lobe(mb, x, y, z, r, rz, col, seg=10, rings=6):

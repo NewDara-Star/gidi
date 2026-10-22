@@ -254,10 +254,11 @@ def keke(mb, M, rng, cond='worn', cargo=False):
     parts.text(mb, 'paint', L(M, -1.27, 0, 1.4, rz=-math.pi / 2), rng.pick(SLOGANS), 0.06, hex_rgb('#d4a62a'), max_w=1.1)
 
 
-def okada(mb, M, rng, cond='worn', rider=None, passenger=None, load=None):
-    """Motorcycle taxi, 2.02 x 0.74 x 1.06 m, wheelbase 1.285, 17-inch wheels [src]."""
+def okada(mb, M, rng, cond='worn', rider=None, passenger=None, load=None, colour=None):
+    """Motorcycle taxi, 2.02 x 0.74 x 1.06 m, wheelbase 1.285, 17-inch wheels [src]. colour: its record (the map's), or
+    None to pick it from rng."""
     wear = WEAR[cond]
-    col = hex_rgb(rng.pick({'#b71c1c': 3, '#111111': 3, '#1565c0': 2, '#e8e2d6': 1}))
+    col = hex_rgb(colour or rng.pick({'#b71c1c': 3, '#111111': 3, '#1565c0': 2, '#e8e2d6': 1}))
     for x in (0.64, -0.64):  # 17-inch wheels with spokes
         parts.cyl(mb, 'rubber', L(M, x, -0.04, 0.31, rx=-math.pi / 2), 0.31, 0.08, hex_rgb('#1c1c1c'), 0, seg=18)
         parts.cyl(mb, 'steel', L(M, x, -0.045, 0.31, rx=-math.pi / 2), 0.24, 0.09, hex_rgb('#b0b4b8'), 0.3, seg=18)
@@ -358,7 +359,8 @@ def saloon(mb, M, rng, cond='worn', colour=None):
 
 
 def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False, bed_load=True):
-    """Private cars: saloon, SUV, pickup (research-vehicles 10). Taxi: yellow with a roof sign."""
+    """Private cars: saloon, SUV, pickup (research-vehicles 10). Taxi: yellow with a roof sign. bed_load: a pickup's
+    load, True to roll it from rng, False for none, or its record (the load's colour)."""
     if kind == 'saloon' and not taxi:
         return saloon(mb, M, rng, cond, colour)
     prof, W, r, wb, rim = _car_profile(kind)
@@ -395,7 +397,9 @@ def car(mb, M, rng, cond='worn', kind='saloon', colour=None, taxi=False, bed_loa
         mb.box('plastic', L(M, -0.3, 0, max(p[1] for p in prof) + 0.08), hex_rgb('#ffffff'), 0, size=(0.4, 0.15, 0.15))
         for s in (-1, 1):
             mb.box('carpaint', L(M, -0.2, s * (W / 2 + 0.005), 0.65), hex_rgb('#141414'), 0, size=(3.4, 0.01, 0.06))
-    if kind == 'pickup' and bed_load and rng.chance(0.6):  # a load in the bed
+    if kind == 'pickup' and isinstance(bed_load, str):  # a load in the bed, from the map
+        mb.box('cloth', L(M, -1.6, 0, 1.25), hex_rgb(bed_load), 0.5, size=(1.6, 1.5, 0.5))
+    elif kind == 'pickup' and bed_load is True and rng.chance(0.6):  # a load in the bed
         mb.box('cloth', L(M, -1.6, 0, 1.25), hex_rgb(rng.pick(['#c8a96e', '#2f5fa8', '#3a3a3a'])), 0.5, size=(1.6, 1.5, 0.5))
 
 
@@ -507,17 +511,17 @@ def container_box(mb, M, rng, length=12.2, col=None, wear=0.5):
     mb.box('steel', L(M, 0, 0, H + 0.02), shade(col, 0.8), wear + 0.2, size=(length, W, 0.04))
 
 
-def container_truck(mb, M, rng, cond='worn', loaded=None, box_col=None, tractor=True):
+def container_truck(mb, M, rng, cond='worn', loaded=None, box_col=None, tractor=True, cab_col=None):
     """An articulated container truck, 16.5 m: a cab-over tractor and a skeletal trailer carrying a
     40 ft container (or empty), the Apapa queue's vehicle. Front at +x. tractor=False: the trailer left standing on its
-    legs, no cab."""
+    legs, no cab. cab_col, box_col: the map's colours, or None to pick them from rng."""
     wear = WEAR[cond]
     if not tractor:
         _trailer(mb, M, rng, cond, wear, loaded, box_col)
         for s_ in (-1, 1):   # the landing legs it stands on at the front
             mb.box('steel', L(M, 2.6, s_ * 0.8, 0.65), hex_rgb('#2a2a2a'), wear, size=(0.15, 0.15, 1.3))
         return
-    cab = hex_rgb(rng.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc']))
+    cab = hex_rgb(cab_col or rng.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc']))
     # tractor: cab-over, 2.5 m wide, roof at 3.4 m, fuel tanks and air tanks below
     mb.box('carpaint', L(M, 6.9, 0, 2.15), cab, wear, size=(2.2, 2.5, 2.5))
     mb.box('carpaint', L(M, 6.6, 0, 3.55), shade(cab, 0.9), wear, size=(1.6, 2.3, 0.4))  # roof fairing

@@ -56,38 +56,29 @@ def limb(mb, mat, a, b, r0, r1, col, seg=7):
     sphere(mb, mat, Matrix.Translation(b), r1, r1, r1, col, seg=seg, rings=4)
 
 
-def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None, arms=None, man=None):
-    """One person at M (facing +x). kind: a dress type from DRESS, or None to pick by character.
+def person(mb, M, rec, kind=None, ch='dense', pose=None, h=None, phase=None, arms=None, man=None):
+    """One person at M (facing +x). rec: their record (kind, a dress type from DRESS; h; skin; top, top_mat, bottom;
+    swing and phase of the gait; long_dress; shoes; head: gele colours, fila colour or hair; a hawker's tray, a pupil's
+    satchel). The old city's generators pass an Rng instead, with kind (None to pick by character), ch, pose, h, phase
+    and man, and the record is drafted from it (draft.person).
     arms: {side (-1 right, 1 left): (elbow, wrist)} in M's frame at 1.75 m tall (scaled to the height), for a pose
-    other than hanging or swinging; man: True or False to fix it. Returns where the hands and head are, so props can go in them."""
-    kind = kind or rng.pick(DRESS.get(ch, DRESS['dense']))
-    woman = kind in ('wrapper',) or (kind in ('ankara', 'tshirt', 'office', 'hawker', 'school') and rng.chance(0.5))
-    if man is not None:   # a part that has to be one or the other (an agbero, a parking boy)
-        woman = not man
-    h = h or (rng.between(1.55, 1.72) if woman else rng.between(1.65, 1.85))
-    if kind == 'school':
-        h = rng.between(1.2, 1.55)
+    other than hanging or swinging. Returns where the hands and head are, so props can go in them."""
+    if not isinstance(rec, dict):
+        from . import draft
+        rec = draft.person(rec, kind, ch, pose, h, phase, man)
+    kind, h = rec['kind'], rec['h']
     k = h / 1.75
-    skin = hex_rgb(rng.pick(SKIN))
-    print_col = hex_rgb(rng.pick(ANKARA))
-    top = {'ankara': print_col, 'wrapper': hex_rgb(rng.pick(ANKARA)), 'buba': hex_rgb(rng.pick(['#f4f1ea', '#c9a27a', '#1f5fa8', '#2e294e', '#7a1f1f'])),
-           'tshirt': hex_rgb(rng.pick(PLAIN + ANKARA[:5])), 'kaftan': hex_rgb(rng.pick(['#f4f1ea', '#e8dcc0', '#9ab0c8', '#3f5a3a', '#1d1d1d'])),
-           'agbada': hex_rgb(rng.pick(['#f4f1ea', '#1f3f8a', '#4a2a55', '#c9a13b', '#2e7d4f'])), 'school': hex_rgb('#f4f1ea'), 'office': hex_rgb(rng.pick(['#f4f1ea', '#bcd9e6', '#e8dcc0'])),
-           'hawker': hex_rgb(rng.pick(ANKARA))}[kind]
-    top_mat = 'ankara' if kind in ('ankara', 'wrapper', 'hawker', 'agbada') and not (kind == 'agbada' and rng.chance(0.5)) else 'cloth'
-    bottom = {'ankara': print_col, 'buba': top, 'tshirt': hex_rgb(rng.pick(['#2f3d4c', '#1f3f8a', '#1d1d1d', '#6d5d44'])), 'school': hex_rgb(rng.pick(['#1f3f8a', '#6d5d44', '#2e7d4f'])),
-              'office': hex_rgb(rng.pick(['#1d1d1d', '#2f3d4c'])), 'kaftan': top, 'agbada': top, 'wrapper': hex_rgb(rng.pick(ANKARA)), 'hawker': hex_rgb(rng.pick(ANKARA))}[kind]
-    walk = pose if pose is not None else rng.chance(0.6)
-    sw = (0.32 if phase is not None else rng.between(0.25, 0.4)) if walk else 0.03
-    ph = phase if phase is not None else rng.pick([1, -1])
+    skin = hex_rgb(rec['skin'])
+    top, top_mat, bottom = hex_rgb(rec['top']), rec['top_mat'], hex_rgb(rec['bottom'])
+    sw, ph = rec['swing'], rec['phase']
     hip = 0.95 * k
     # legs (hidden by long dresses and robes, but feet show)
-    long_dress = kind in ('wrapper', 'kaftan', 'agbada') or (woman and kind in ('ankara', 'hawker') and rng.chance(0.6))
-    for s in (-1, 1):
+    long_dress = rec['long_dress']
+    for s, shoe in zip((-1, 1), rec['shoes']):
         a = ph * s * sw
         foot = Vector((math.sin(a) * hip * 0.95, s * 0.09 * k, 0.07))
         limb(mb, 'cloth' if not long_dress else 'skin', M @ Vector((0, s * 0.09 * k, hip)), M @ foot, 0.075 * k, 0.05 * k, bottom if not long_dress else skin)
-        sphere(mb, 'rubber', M @ Matrix.Translation((foot.x + 0.05, foot.y, 0.04)), 0.12 * k, 0.05 * k, 0.045, hex_rgb(rng.pick(['#1d1d1d', '#5a3a28', '#e8e2d6'])), seg=8, rings=4)
+        sphere(mb, 'rubber', M @ Matrix.Translation((foot.x + 0.05, foot.y, 0.04)), 0.12 * k, 0.05 * k, 0.045, hex_rgb(shoe), seg=8, rings=4)
     if long_dress:  # wrapper/kaftan/agbada skirt: a flared tapered tube
         flare = 0.24 if kind == 'agbada' else 0.2
         parts.cyl(mb, top_mat if kind != 'wrapper' else 'ankara', M @ Matrix.Translation((0, 0, 0.1 * k)), flare * k, hip + 0.05 * k - 0.1 * k, bottom if kind == 'wrapper' else top, 0, seg=12, r2=0.17 * k)
@@ -104,15 +95,15 @@ def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None, arm
     head = M @ Matrix.Translation((0.01, 0, 1.63 * k))
     sphere(mb, 'skin', head, 0.1 * k, 0.09 * k, 0.12 * k, skin, seg=12, rings=8)
     sphere(mb, 'skin', head @ Matrix.Translation((0.095 * k, 0, -0.01 * k)), 0.025 * k, 0.022 * k, 0.03 * k, shade(skin, 0.9), seg=6, rings=4)  # nose
-    hair = hex_rgb('#141210')
-    if kind == 'wrapper' or (woman and rng.chance(0.45)):  # gele head-tie
+    hd = rec['head']
+    if 'gele' in hd:  # gele head-tie
         g = head @ Matrix.Translation((-0.01 * k, 0, 0.1 * k))
-        sphere(mb, 'ankara', g, 0.15 * k, 0.16 * k, 0.09 * k, hex_rgb(rng.pick(ANKARA + ['#c9a13b'])), seg=12, rings=6, top=0.75)
-        sphere(mb, 'ankara', g @ Matrix.Translation((-0.06 * k, 0, 0.08 * k)) @ Matrix.Rotation(-0.5, 4, 'Y'), 0.05 * k, 0.17 * k, 0.1 * k, hex_rgb(rng.pick(ANKARA)), seg=10, rings=5)
-    elif kind in ('buba', 'agbada') or (not woman and rng.chance(0.15)):  # fila cap, slouched
-        parts.cyl(mb, 'cloth', head @ Matrix.Translation((0, 0, 0.06 * k)) @ Matrix.Rotation(0.25, 4, 'Y'), 0.105 * k, 0.11 * k, hex_rgb(rng.pick(['#7a1f1f', '#2e294e', '#c9a13b', '#1d1d1d', '#f4f1ea'])), 0, seg=10, r2=0.08 * k)
+        sphere(mb, 'ankara', g, 0.15 * k, 0.16 * k, 0.09 * k, hex_rgb(hd['gele'][0]), seg=12, rings=6, top=0.75)
+        sphere(mb, 'ankara', g @ Matrix.Translation((-0.06 * k, 0, 0.08 * k)) @ Matrix.Rotation(-0.5, 4, 'Y'), 0.05 * k, 0.17 * k, 0.1 * k, hex_rgb(hd['gele'][1]), seg=10, rings=5)
+    elif 'fila' in hd:  # fila cap, slouched
+        parts.cyl(mb, 'cloth', head @ Matrix.Translation((0, 0, 0.06 * k)) @ Matrix.Rotation(0.25, 4, 'Y'), 0.105 * k, 0.11 * k, hex_rgb(hd['fila']), 0, seg=10, r2=0.08 * k)
     else:
-        sphere(mb, 'rubber', head @ Matrix.Translation((-0.005, 0, 0.012)), 0.104 * k, 0.094 * k, 0.122 * k, hair, seg=12, rings=8, top=0.62)
+        sphere(mb, 'rubber', head @ Matrix.Translation((-0.005, 0, 0.012)), 0.104 * k, 0.094 * k, 0.122 * k, hex_rgb(hd['hair']), seg=12, rings=8, top=0.62)
     # arms swing against the legs
     hands = {}
     for s in (-1, 1):
@@ -129,11 +120,11 @@ def person(mb, M, rng, kind=None, ch='dense', pose=None, h=None, phase=None, arm
         sphere(mb, 'skin', Matrix.Translation(wr + Vector((0, 0, -0.06 * k))), 0.035 * k, 0.03 * k, 0.06 * k, skin, seg=6, rings=4)
     if kind == 'hawker':  # a tray or basin on the head, with goods
         t = head @ Matrix.Translation((0, 0, 0.16 * k))
-        parts.cyl(mb, 'steel', t, 0.32, 0.08, hex_rgb(rng.pick(['#c9ced2', '#2f6fae', '#c62828'])), 0.3, seg=16, r2=0.36)
-        for _ in range(rng.randrange(5, 12)):
-            sphere(mb, 'plastic', t @ Matrix.Translation((rng.between(-0.22, 0.22), rng.between(-0.22, 0.22), 0.12)), 0.06, 0.06, 0.06, hex_rgb(rng.pick(['#ff7043', '#fdd835', '#7cb342', '#ffffff', '#e8f0f4', '#c62828'])), seg=6, rings=4)
+        parts.cyl(mb, 'steel', t, 0.32, 0.08, hex_rgb(rec['tray']['col']), 0.3, seg=16, r2=0.36)
+        for gx, gy, gc in rec['tray']['goods']:
+            sphere(mb, 'plastic', t @ Matrix.Translation((gx, gy, 0.12)), 0.06, 0.06, 0.06, hex_rgb(gc), seg=6, rings=4)
     if kind == 'school':  # a satchel
-        mb.box('cloth', torso_m @ Matrix.Translation((-0.2 * k, 0, 0.25 * k)), hex_rgb(rng.pick(['#c62828', '#1f5fa8', '#3a3a3a'])), 0, size=(0.12, 0.28 * k, 0.32 * k))
+        mb.box('cloth', torso_m @ Matrix.Translation((-0.2 * k, 0, 0.25 * k)), hex_rgb(rec['satchel']), 0, size=(0.12, 0.28 * k, 0.32 * k))
     return dict(hands=hands, head=head, k=k, torso=torso_m, top=top)
 
 

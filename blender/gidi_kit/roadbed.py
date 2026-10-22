@@ -13,43 +13,19 @@ The surface is packed earth and sand over the tar. Tar shows in patches covering
 low spots and drifts at the edges, mud sits in the ruts and potholes, and laterite earth shows off the road. Each of these
 is a per-corner attribute (Tar, Dust, Mud, Edge, Track, Wet, Water) for the material to blend by, and a flat colour (Col) for the untextured
 look. The layers' colours and their photo surfaces come from the map (`ground_colours`, `surfaces`); textured.py reads
-them off the material. Deterministic: the noise is seeded from the street's id.
+them off the material. The ground's own shape (humps and dips, the tar's fray and patches, the edge rut's wander) is the
+street's ground grids, a record stored beside the map (`ground_grid`); the kit rolls nothing.
 """
 import json
-import zlib
+import os
 
 import bpy
 import numpy as np
 
-from .core import hex_rgb
+from .core import hex_rgb, need
 
 COLOURS = {'earth': '#7a5a44', 'dust': '#6e5a4a', 'tar': '#4a3c35', 'mud': '#3e3128'}
 SURFACES = {'earth': 'red_laterite_soil_stones', 'dust': 'dirt_floor', 'tar': 'worn_asphalt', 'mud': 'muddy_tracks'}
-
-
-def _hash(i, j, seed):
-    h = (i.astype(np.int64) * 374761393 + j.astype(np.int64) * 668265263 + seed * 2654435761) & 0xffffffff
-    h = ((h ^ (h >> 13)) * 1274126177) & 0xffffffff
-    return ((h ^ (h >> 16)) & 0xffff) / 65535.0
-
-
-def vnoise(x, y, seed):
-    """Smooth value noise in 0..1."""
-    i, j = np.floor(x), np.floor(y)
-    fx, fy = x - i, y - j
-    sx, sy = fx * fx * (3 - 2 * fx), fy * fy * (3 - 2 * fy)
-    a, b = _hash(i, j, seed), _hash(i + 1, j, seed)
-    c, d = _hash(i, j + 1, seed), _hash(i + 1, j + 1, seed)
-    return a + (b - a) * sx + (c - a) * sy + (a - b - c + d) * sx * sy
-
-
-def fbm(x, y, seed, octaves=3):
-    v, amp, tot = 0.0, 1.0, 0.0
-    for o in range(octaves):
-        v = v + amp * vnoise(x * 2 ** o, y * 2 ** o, seed + 97 * o)
-        tot += amp
-        amp *= 0.5
-    return v / tot
 
 
 def _smooth(e0, e1, x):
@@ -57,16 +33,25 @@ def _smooth(e0, e1, x):
     return t * t * (3 - 2 * t)
 
 
-class Ground:
-    """One street piece's ground: its height and its layers at any point (numpy arrays or floats)."""
+def grids(sp, base_dir):
+    """A street's ground grids, from the file its record names (`ground_grid`, beside the map)."""
+    name = need(sp, 'ground_grid', 'street ' + sp['id'])
+    with np.load(os.path.join(base_dir, name)) as f:
+        return {k: f[k] for k in f.files}
 
-    def __init__(self, sp):
+
+class Ground:
+    """One street piece's ground: its height and its layers at any point (numpy arrays or floats). The ground's own
+    shape (its humps and dips, where the tar's edge frays, where the tar lies, the edge rut's wander) comes from the
+    street's ground grids (KIT.md section 12), read between their corners; everything else from the street's fields."""
+
+    def __init__(self, sp, grids):
         self.sp = sp
-        self.seed = zlib.crc32(sp['id'].encode()) & 0xffff
+        self.g = grids
         (self.x0, self.cy), (self.x1, _) = sp['centreline'][0], sp['centreline'][-1]
         self.half = sp['width_m'] / 2
         rel = sp.get('relief') or {}
-        self.amp, self.scale = rel.get('amp_m', 0.0), rel.get('scale_m', 6.0)
+        self.amp = rel.get('amp_m', 0.0)
         self.off_road = rel.get('off_road', 1.0)
         self.crown = sp.get('crown_m', 0.0)
         self.lip = sp.get('tar_lip_m', 0.0)
@@ -77,25 +62,28 @@ class Ground:
         if g.get('type', 'none') != 'none':
             self.pins.append((self.cy + g['offset_m'], g['width'] / 2 + 0.35))
 
-        gx, gy = np.meshgrid(np.arange(self.x0, self.x1, 0.5), np.arange(self.cy - self.half, self.cy + self.half, 0.25))
-        cover = sp.get('tar_cover', 0.5)
-        self.thr = float(np.quantile(self._tar_noise(gx, gy), 1 - cover)) if 0 < cover < 1 else (1.0 if cover <= 0 else -1.0)
+    def _grid(self, key, x, y):
+        """A grid's value at (x, y): bilinear between its corners (exact on them), held at its edges beyond."""
+        xs, ys, v = self.g['xs'], self.g['ys'], self.g[key]
+        x, y = np.asarray(x, float), np.asarray(y, float)
+        i = np.clip(np.searchsorted(xs, x, side='right') - 1, 0, len(xs) - 2)
+        j = np.clip(np.searchsorted(ys, y, side='right') - 1, 0, len(ys) - 2)
+        tx = np.clip((x - xs[i]) / (xs[i + 1] - xs[i]), 0, 1)
+        ty = np.clip((y - ys[j]) / (ys[j + 1] - ys[j]), 0, 1)
+        return (v[i, j] * (1 - tx) + v[i + 1, j] * tx) * (1 - ty) + (v[i, j + 1] * (1 - tx) + v[i + 1, j + 1] * tx) * ty
+
+    def _along(self, key, x):
+        return np.interp(np.asarray(x, float), self.g['xs'], self.g[key])
 
     def _relief(self, x, y):
-        s = self.scale
-        return self.amp * 2 * (fbm(x / (s * 1.6), y / s, self.seed) - 0.5)
+        return self._grid('relief', x, y)
 
     def _inside(self, x, y):
-        fray = 0.5 * (vnoise(x / 0.9, y / 0.9, self.seed + 7) - 0.5) + 0.6 * (vnoise(x / 4, y / 4, self.seed + 8) - 0.5)
-        return _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + fray)
-
-    def _tar_noise(self, x, y):
-        patch = self.sp.get('tar_patch_m', 3.0)
-        return fbm(x / patch, y / (patch * 0.7), self.seed + 31) + 0.15 * (vnoise(x / 0.5, y / 0.5, self.seed + 3) - 0.5)
+        return _smooth(-0.1, 0.5, self.half - np.abs(y - self.cy) + self._grid('fray', x, y))
 
     def _tar(self, x, y, soft=0.08):
         rel = self._relief(x, y) if self.amp else np.zeros_like(x)
-        tar = _smooth(self.thr - soft, self.thr + soft, self._tar_noise(x, y)) * self._inside(x, y)
+        tar = _smooth(-soft, soft, self._grid('tar', x, y)) * self._inside(x, y)
         return tar * (1 - _smooth(0.0, -0.06, rel) * self.sp.get('dust_in_low', 0.7))
 
     def _ruts(self, x, y, key):
@@ -109,11 +97,11 @@ class Ground:
         er = self.sp.get('edge_rut') or {}
         if not er:
             return np.zeros_like(x)
-        wob = 0.35 * (vnoise(x / 3, 0.5, self.seed + 41) - 0.5)
+        wob = self._along('rut_wob', x)
         out = np.zeros_like(x)
         for s in ((-1,) if er.get('side') == 'right' else (1,) if er.get('side') == 'left' else (-1, 1)):
             yc = self.cy + s * (self.half - er.get('w_m', 0.8) * 0.3) + wob
-            out = np.maximum(out, np.exp(-((y - yc) / (er.get('w_m', 0.8) / 2)) ** 2 * 2) * (0.7 + 0.6 * vnoise(x / 2, 1.5, self.seed + 43)))
+            out = np.maximum(out, np.exp(-((y - yc) / (er.get('w_m', 0.8) / 2)) ** 2 * 2) * self._along('rut_k', x))
         return out * er.get('depth_m', 0.15)
 
     def height(self, x, y):
@@ -171,23 +159,13 @@ class Ground:
         return dict(Tar=tar, Dust=dust, Mud=mud, Edge=edge, Track=track, Wet=wet, Water=water)
 
 
-def _xs(x0, x1, near, grow):
-    xs, x = [], x0
-    while x < x1:
-        xs.append(x)
-        x += near + max(0.0, x - 20) * grow
-    xs.append(x1)
-    return np.array(xs)
-
-
-def build(sp, collection=None, ys=None, materials=None, near=0.2, grow=0.012):
-    """The street's ground sheet as one object (material slot 'roadbed'); returns (object, Ground). ys: the band it
-    covers across the street, by default 8.6 m past the right edge and 2.9 m past the left (the frontages' ground)."""
-    G = Ground(sp)
-    ys = ys or (G.cy - G.half - 8.6, G.cy + G.half + 2.9)
-    G.ys = ys
-    xs = _xs(G.x0 - 5, G.x1, near, grow)
-    yv = np.arange(ys[0], ys[1] + 1e-6, 0.15)
+def build(sp, grids, collection=None, materials=None):
+    """The street's ground sheet as one object (material slot 'roadbed'), its corners where the ground grids have
+    theirs; returns (object, Ground). The band it covers across the street is the grids' (`band`: 8.6 m past the right
+    edge and 2.9 m past the left in a first draft, the frontages' ground)."""
+    G = Ground(sp, grids)
+    G.ys = tuple(float(v) for v in grids['band'])
+    xs, yv = grids['xs'], grids['ys']
     X, Y = np.meshgrid(xs, yv, indexing='ij')
     X, Y = X.ravel(), Y.ravel()
     Hh = G.height(X, Y)
