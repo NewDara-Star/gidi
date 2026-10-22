@@ -891,8 +891,9 @@ def building(b):
             continue
         k, F, A, B, L = hit
         xm = (s['from_x'] + s['to_x']) / 2
-        u = (xm - (A[0] + B[0]) / 2) * (B[0] - A[0]) / L
-        w = s['to_x'] - s['from_x']
+        dx = (B[0] - A[0]) / L
+        u = (xm - (A[0] + B[0]) / 2) / dx
+        w = (s['to_x'] - s['from_x']) / abs(dx)
         if s['door'] == 'plank_shutter':
             r = rng.child('shop', s['from_x'])
             n = max(2, round(w / 0.16))
@@ -1059,15 +1060,16 @@ def street(sp, base_dir):
             rut = float(_ruts(sp, x, y, 'depth')) / 0.05 + float(_edge_rut(sp, N, x, y)) / 0.1
             if lr.chance((1 + lt.get('walls', 3.0) * edge + lt.get('ruts', 2.0) * min(1.0, rut)) / (1 + lt.get('walls', 3.0) + lt.get('ruts', 2.0))):
                 lt['pieces'].append(dict(litter_piece(lr), x=x, y=y))
-    vr = sp.get('verge_right') or {}
-    if vr.get('surface') == 'concrete_apron':
-        xa, xb = x0, vr.get('upto_x', x1)
-        n_ = max(1, int((xb - xa) / 0.5))
-        vr['shades'] = [rng.between(0.85, 1.05) for k in range(n_)]
+    for vk in ('verge_right', 'verge_left'):
+        vr = sp.get(vk) or {}
+        if vr.get('surface') == 'concrete_apron':
+            xa, xb = vr.get('from_x', x0), vr.get('upto_x', x1)
+            n_ = max(1, int((xb - xa) / 0.5))
+            vr['shades'] = [rng.between(0.85, 1.05) for k in range(n_)]
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
-        gg = dict(id=sp['id'] + 'L', w=g['width'], depth=0.5, state='covered' if g['type'] == 'slab_covered' else 'open',
+        gg = dict(id=sp['id'] + 'L', w=g['width'], depth=g.get('depth', 0.5), state='covered' if g['type'] == 'slab_covered' else 'open',
                   blocked=[{'from': 0, 'to': 999, 'fill': 'rubbish'}] if g.get('state') == 'half_blocked' else [],
                   **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter') if k in g})
         g['pieces'] = gutter([(x0, y), (x1, y)], gg, lambda p: True, wear=g.get('wear', 0.2))

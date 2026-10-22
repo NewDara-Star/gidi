@@ -52,7 +52,10 @@ def surfaced(mb, picks):
 
 # ---------------------------------------------------------------- footprints
 def rects(poly):
-    """A rectilinear footprint cut into rectangles along x (each a counter-clockwise quad), for pitched roofs."""
+    """A rectilinear footprint cut into rectangles along x (each a counter-clockwise quad), for pitched roofs. A plot
+    turned to the street (a four-cornered footprint whose sides are not along x and y) keeps its quad whole."""
+    if len(poly) == 4 and any(abs(poly[i][0] - poly[(i + 1) % 4][0]) > 1e-3 and abs(poly[i][1] - poly[(i + 1) % 4][1]) > 1e-3 for i in range(4)):
+        return [[tuple(p) for p in poly]]
     xs = sorted({round(p[0], 3) for p in poly})
     out = []
     for x0, x1 in zip(xs, xs[1:]):
@@ -554,8 +557,8 @@ def building(b, collection=None):
         k, F, A, B, L = hit
         xm = (s['from_x'] + s['to_x']) / 2
         dx = (B[0] - A[0]) / L
-        u = (xm - (A[0] + B[0]) / 2) * dx
-        w = s['to_x'] - s['from_x']
+        u = (xm - (A[0] + B[0]) / 2) / dx   # x along the street to the way along the face (the same on a face along x)
+        w = (s['to_x'] - s['from_x']) / abs(dx)
         if s['door'] == 'plank_shutter':
             plank_shutter(mb, F, u, w, min(2.45, H - 0.5), _hex(s.get('colour'), '#6b3b2e'), 0.7, need(s, 'planks', 'plank shutter'))
         elif s['door'] == 'roll_up':
@@ -795,20 +798,22 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
     if lt and G is not None:   # litter spread thin, gathered at the walls and in the ruts: each piece where the map has it
         for lp in need(lt, 'pieces', 'litter of ' + sp['id']):
             street.litter_piece(mb, lp['x'], lp['y'], gz(lp['x'], lp['y']) + 0.004, lp)
-    vr = sp.get('verge_right') or {}
-    if vr.get('surface') == 'concrete_apron':
-        xa, xb = x0, vr.get('upto_x', x1)
-        y0_, y1_ = yr - vr['width'] - 0.4, yr + 0.05
+    for vk, s_ in (('verge_right', -1), ('verge_left', 1)):   # a concrete apron along the road's edge, either side
+        vr = sp.get(vk) or {}
+        if vr.get('surface') != 'concrete_apron':
+            continue
+        xa, xb = vr.get('from_x', x0), vr.get('upto_x', x1)
+        y0_, y1_ = (yr - vr['width'] - 0.4, yr + 0.05) if s_ < 0 else (yl - 0.05, yl + vr['width'] + 0.4)
         shades = need(vr, 'shades', 'apron of ' + sp['id'])
         n_ = len(shades)   # in short pieces laid on the ground, cracked at the joints
         for k, f in enumerate(shades):
             a_, b_ = xa + (xb - xa) * k / n_, xa + (xb - xa) * (k + 1) / n_ - 0.015
             z = [gz(a_, y0_) + 0.035, gz(b_, y0_) + 0.035, gz(b_, y1_) + 0.035, gz(a_, y1_) + 0.035]
-            mb.face([(a_, y0_, z[0]), (b_, y0_, z[1]), (b_, y1_, z[2]), (a_, y1_, z[3])], 'concrete', shade(hex_rgb('#8f8b83'), f), 0.4)
+            mb.face([(a_, y0_, z[0]), (b_, y0_, z[1]), (b_, y1_, z[2]), (a_, y1_, z[3])], 'concrete', shade(_hex(vr.get('colour'), '#8f8b83'), f), 0.4)
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
-        gutters.gutter(mb, [(x0, y), (x1, y)], dict(id=sp['id'] + 'L', w=g['width'], depth=0.5, state='covered' if g['type'] == 'slab_covered' else 'open',
+        gutters.gutter(mb, [(x0, y), (x1, y)], dict(id=sp['id'] + 'L', w=g['width'], depth=g.get('depth', 0.5), state='covered' if g['type'] == 'slab_covered' else 'open',
                                                     blocked=[{'from': 0, 'to': 999, 'fill': 'rubbish'}] if g.get('state') == 'half_blocked' else [],
                                                     pieces=need(g, 'pieces', 'gutter of ' + sp['id']),
                                                     **{k: g[k] for k in ('slab_colour', 'dust', 'open_share', 'broken', 'rock', 'litter') if k in g}),
@@ -817,6 +822,23 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
             if c.get('side') == 'left':
                 mb.box('concrete', Matrix.Translation((c['x'], y, 0.27)) @ Matrix.Rotation(need(c, 'rz', 'crossing'), 4, 'Z'), shade(_hex(g.get('slab_colour'), '#a39f95'), need(c, 'shade', 'crossing')), 0.7, size=(c['w'], g['width'] + 0.7, 0.1))
     return mb.to_object(sp['id'], collection, master)
+
+
+def sand_heap(mb, x, y, r, h, col):
+    """A sand heap: a smooth mound r across its foot and h high, sitting on the ground at x, y, its foot a shade darker."""
+    z0 = ground_z(x, y)
+    rings, seg = 5, 18
+    pts = []
+    for i in range(rings + 1):
+        t = i / rings
+        rr = r * (1 - t ** 1.6)
+        zz = z0 - 0.03 + h * (1 - (1 - t) ** 2) if i < rings else z0 + h
+        pts.append([(x + rr * math.cos(a * math.tau / seg), y + rr * math.sin(a * math.tau / seg), zz) for a in range(seg)])
+    for i in range(rings):
+        c = shade(col, 0.86 + 0.14 * i / rings)
+        for a in range(seg):
+            b = (a + 1) % seg
+            mb.face([pts[i][a], pts[i][b], pts[i + 1][b], pts[i + 1][a]], 'mud', c, 0.3)
 
 
 # ---------------------------------------------------------------- props at their spots
@@ -921,6 +943,8 @@ def spot_props(P, collection=None):
     for k, hp in enumerate(P.get('heaps', [])):
         if hp['kind'] == 'rubbish':
             street.refuse_heap(mb, hp['x'], hp['y'], hp['r'], need(hp, 'heap', 'rubbish heap'))
+        elif hp['kind'] == 'sand':   # a heap of sand tipped by the road: a low mound, its height and colour from the map
+            sand_heap(mb, hp['x'], hp['y'], hp['r'], need(hp, 'h', 'sand heap'), _hex(need(hp, 'colour', 'sand heap')))
         elif hp['kind'] == 'goods':   # a tumble of goods at a stall, on the ground
             goods.draw(gmb, need(hp, 'goods', 'goods heap'), hard=hmb, dz=ground_z(hp['x'], hp['y']))
     for k, p in enumerate(P.get('people', [])):

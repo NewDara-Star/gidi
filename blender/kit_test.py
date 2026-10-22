@@ -79,11 +79,13 @@ def overcast(sc):
     sc.collection.objects.link(ob)
 
 
-def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0):
+def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0, seen_sky=None):
     """A clear physical sky (Blender's multiple-scattering sky) with bright broken cumulus over it, and a hard sun at
     the Street View's sun angle. sun: {azimuth_deg from north, clockwise; elevation_deg}; the map's frame has x east,
     y north. clouds: how much of the sky they cover. The camera sees the clouds; the light is the sky dimmed toward grey by
-    them, so shade under eaves stays dark. seen_gain lifts only what the camera sees of the sky (against a lowered exposure)."""
+    them, so shade under eaves stays dark. seen_gain lifts only what the camera sees of the sky (against a lowered exposure).
+    seen_sky: the map's sky colours as the photo shows them ({horizon, zenith} hex): the camera sees that blue, graded up
+    from the horizon, under the clouds, in place of the physical sky's own (which the light still comes from)."""
     az, el = math.radians(sun['azimuth_deg']), math.radians(sun['elevation_deg'])
     d = Vector((math.sin(az) * math.cos(el), math.cos(az) * math.cos(el), math.sin(el)))
     w = bpy.data.worlds.new('sky')
@@ -134,7 +136,18 @@ def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0):
     L.new(shadeR.outputs['Color'], cloud_bright.inputs[0])
     seen = N.new('ShaderNodeMix'); seen.data_type = 'RGBA'
     L.new(cr.outputs['Color'], seen.inputs['Factor'])
-    L.new(sk.outputs['Color'], seen.inputs[6])
+    if seen_sky:   # the photo's own blue, horizon to zenith
+        from gidi_kit.core import hex_rgb
+        up = N.new('ShaderNodeMath'); up.operation = 'POWER'; up.use_clamp = True
+        L.new(nz.outputs[0], up.inputs[0])   # how far up the view looks (the world's incoming points back at the camera)
+        up.inputs[1].default_value = 0.6
+        grad = N.new('ShaderNodeMix'); grad.data_type = 'RGBA'
+        L.new(up.outputs[0], grad.inputs['Factor'])
+        grad.inputs[6].default_value = tuple(v / strength for v in hex_rgb(seen_sky['horizon'])) + (1,)
+        grad.inputs[7].default_value = tuple(v / strength for v in hex_rgb(seen_sky['zenith'])) + (1,)
+        L.new(grad.outputs[2], seen.inputs[6])
+    else:
+        L.new(sk.outputs['Color'], seen.inputs[6])
     L.new(cloud_bright.outputs[0], seen.inputs[7])
     lit = N.new('ShaderNodeMix'); lit.data_type = 'RGBA'   # what lights the scene: the sky, greyed by the cloud cover
     lit.inputs['Factor'].default_value = clouds * 0.8
@@ -162,7 +175,7 @@ def sky_sun(sc, sun, clouds=0.55, strength=0.35, sun_w=4.0, seen_gain=1.0):
 
 
 if shot.get('sun'):
-    sky_sun(sc, shot['sun'], shot.get('cloud_cover', 0.55), shot.get('sky_strength', 0.35), shot.get('sun_w', 4.0), 2 ** -float(shot.get('exposure', 0.0)))
+    sky_sun(sc, shot['sun'], shot.get('cloud_cover', 0.55), shot.get('sky_strength', 0.35), shot.get('sun_w', 4.0), 2 ** -float(shot.get('exposure', 0.0)), shot.get('sky_seen'))
 else:
     overcast(sc)
 oldtown.build(spot, sc.collection)
