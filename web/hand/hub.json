@@ -2719,6 +2719,752 @@
    "storeys": 1,
    "note": "real footprint, reached by the footpath into the yard",
    "by_who": "Claude, 22 Oct 2026: spare_parts hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8895.3,
+     4749.4
+    ],
+    [
+     8877.3,
+     4767.4
+    ],
+    [
+     8876.3,
+     4767.4
+    ],
+    [
+     8875.3,
+     4768.4
+    ],
+    [
+     8873.3,
+     4768.4
+    ],
+    [
+     8872.3,
+     4769.4
+    ],
+    [
+     8871.3,
+     4769.4
+    ],
+    [
+     8857.3,
+     4783.4
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8741.0,
+     4610.8
+    ],
+    [
+     8744.0,
+     4610.8
+    ],
+    [
+     8800.0,
+     4666.8
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8768.4,
+     4819.1
+    ],
+    [
+     8770.4,
+     4819.1
+    ],
+    [
+     8776.4,
+     4813.1
+    ],
+    [
+     8776.4,
+     4800.1
+    ],
+    [
+     8783.4,
+     4793.1
+    ],
+    [
+     8784.4,
+     4793.1
+    ],
+    [
+     8787.4,
+     4790.1
+    ],
+    [
+     8787.4,
+     4784.1
+    ],
+    [
+     8790.4,
+     4781.1
+    ],
+    [
+     8791.4,
+     4781.1
+    ],
+    [
+     8794.4,
+     4778.1
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8743.1,
+     4742.3
+    ],
+    [
+     8752.1,
+     4742.3
+    ],
+    [
+     8760.1,
+     4750.3
+    ],
+    [
+     8760.1,
+     4752.3
+    ],
+    [
+     8761.1,
+     4753.3
+    ],
+    [
+     8761.1,
+     4754.3
+    ],
+    [
+     8772.1,
+     4765.3
+    ],
+    [
+     8775.1,
+     4765.3
+    ],
+    [
+     8778.1,
+     4762.3
+    ],
+    [
+     8778.1,
+     4760.3
+    ],
+    [
+     8789.1,
+     4749.3
+    ],
+    [
+     8789.1,
+     4748.3
+    ],
+    [
+     8790.1,
+     4747.3
+    ],
+    [
+     8790.1,
+     4743.3
+    ],
+    [
+     8796.1,
+     4737.3
+    ],
+    [
+     8796.1,
+     4734.3
+    ],
+    [
+     8793.1,
+     4731.3
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     9046.0,
+     4703.8
+    ],
+    [
+     9048.0,
+     4703.8
+    ],
+    [
+     9049.0,
+     4702.8
+    ],
+    [
+     9051.0,
+     4702.8
+    ],
+    [
+     9052.0,
+     4701.8
+    ],
+    [
+     9054.0,
+     4701.8
+    ],
+    [
+     9057.0,
+     4699.8
+    ],
+    [
+     9059.0,
+     4699.8
+    ],
+    [
+     9063.0,
+     4695.8
+    ],
+    [
+     9063.0,
+     4684.8
+    ],
+    [
+     9070.0,
+     4677.8
+    ],
+    [
+     9071.0,
+     4677.8
+    ],
+    [
+     9072.0,
+     4676.8
+    ],
+    [
+     9074.0,
+     4676.8
+    ],
+    [
+     9075.0,
+     4675.8
+    ],
+    [
+     9077.0,
+     4675.8
+    ],
+    [
+     9078.0,
+     4674.8
+    ],
+    [
+     9080.0,
+     4674.8
+    ],
+    [
+     9081.0,
+     4673.8
+    ],
+    [
+     9082.0,
+     4673.8
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8750.4,
+     4989.1
+    ],
+    [
+     8752.4,
+     4989.1
+    ],
+    [
+     8754.4,
+     4991.1
+    ],
+    [
+     8771.4,
+     4991.1
+    ],
+    [
+     8796.4,
+     4966.1
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add path",
+   "pts": [
+    [
+     8872.4,
+     4665.0
+    ],
+    [
+     8834.4,
+     4703.0
+    ]
+   ],
+   "note": "footpath into the yard between the buildings: the real way in is not in the open data",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8858.3,
+     4788.5
+    ],
+    [
+     8857.4,
+     4785.0
+    ],
+    [
+     8852.8,
+     4786.1
+    ],
+    [
+     8853.7,
+     4789.6
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8768.8,
+     4662.2
+    ],
+    [
+     8768.5,
+     4659.3
+    ],
+    [
+     8764.5,
+     4659.6
+    ],
+    [
+     8764.8,
+     4662.6
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8779.9,
+     4691.3
+    ],
+    [
+     8778.7,
+     4688.9
+    ],
+    [
+     8775.2,
+     4690.7
+    ],
+    [
+     8776.5,
+     4693.1
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8810.8,
+     4778.7
+    ],
+    [
+     8807.2,
+     4771.6
+    ],
+    [
+     8795.9,
+     4777.3
+    ],
+    [
+     8799.4,
+     4784.4
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8864.3,
+     4814.7
+    ],
+    [
+     8861.0,
+     4806.4
+    ],
+    [
+     8856.2,
+     4808.3
+    ],
+    [
+     8859.5,
+     4816.7
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8843.9,
+     4777.8
+    ],
+    [
+     8846.7,
+     4776.7
+    ],
+    [
+     8842.5,
+     4765.9
+    ],
+    [
+     8837.8,
+     4767.8
+    ],
+    [
+     8842.9,
+     4781.0
+    ],
+    [
+     8844.9,
+     4780.3
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8782.7,
+     4690.2
+    ],
+    [
+     8781.7,
+     4687.3
+    ],
+    [
+     8779.1,
+     4688.2
+    ],
+    [
+     8780.1,
+     4691.1
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8867.3,
+     4823.5
+    ],
+    [
+     8866.3,
+     4819.5
+    ],
+    [
+     8863.2,
+     4820.3
+    ],
+    [
+     8864.3,
+     4824.3
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8795.4,
+     4736.5
+    ],
+    [
+     8792.6,
+     4733.9
+    ],
+    [
+     8787.6,
+     4739.3
+    ],
+    [
+     8790.4,
+     4742.0
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8864.8,
+     4804.2
+    ],
+    [
+     8859.0,
+     4789.3
+    ],
+    [
+     8854.8,
+     4790.9
+    ],
+    [
+     8860.6,
+     4805.8
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8771.9,
+     4671.9
+    ],
+    [
+     8770.0,
+     4664.7
+    ],
+    [
+     8761.5,
+     4667.0
+    ],
+    [
+     8763.4,
+     4674.2
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     9086.9,
+     4672.3
+    ],
+    [
+     9086.0,
+     4668.3
+    ],
+    [
+     9082.5,
+     4669.1
+    ],
+    [
+     9083.3,
+     4673.1
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8800.1,
+     4938.5
+    ],
+    [
+     8797.8,
+     4939.9
+    ],
+    [
+     8803.8,
+     4950.4
+    ],
+    [
+     8806.2,
+     4949.0
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8801.6,
+     4964.2
+    ],
+    [
+     8799.4,
+     4959.9
+    ],
+    [
+     8795.9,
+     4961.8
+    ],
+    [
+     8798.1,
+     4966.0
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8805.6,
+     4672.0
+    ],
+    [
+     8803.6,
+     4666.9
+    ],
+    [
+     8800.5,
+     4668.1
+    ],
+    [
+     8802.5,
+     4673.3
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8795.3,
+     4728.8
+    ],
+    [
+     8794.0,
+     4724.8
+    ],
+    [
+     8790.7,
+     4725.9
+    ],
+    [
+     8791.9,
+     4729.9
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
+  },
+  {
+   "op": "add building",
+   "kind": "back",
+   "pts": [
+    [
+     8832.7,
+     4703.0
+    ],
+    [
+     8829.8,
+     4697.5
+    ],
+    [
+     8822.9,
+     4701.1
+    ],
+    [
+     8825.8,
+     4706.6
+    ]
+   ],
+   "storeys": 1,
+   "note": "real footprint, reached by the footpath into the yard",
+   "by_who": "Claude, 22 Oct 2026: ilupeju hand pass (real buildings onto their real spots)"
   }
  ],
  "applied": [],
