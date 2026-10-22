@@ -2,6 +2,7 @@
 own camera (decisions: "A kit is proven by rebuilding real streets from it", "The owner's eye passes a kit").
 blender -b --factory-startup -P blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]
     [--textures <dir> | --no-textures]   (textures default to $GIDI_TEXTURES or ~/Real-world/textures/polyhaven)
+    [--cam x,y,z --at x,y,z [--hfov deg] [--size w,h]]   a close-up of one part, from its own camera, in the same light
 The map's 'shot' block gives the camera (position, heading, pitch, horizontal field of view, frame) and the light (a sun
 angle and cloud cover, or the old overcast); the kit
 reads the rest. Light by default: EEVEE, low samples, the shot's own frame size."""
@@ -168,14 +169,18 @@ if not opt.get('--no-textures'):   # the photo textures, outside the repo (gidi_
     print('textured:', textured.apply(opt.get('--textures')))
 cx, cy, cz = shot['camera_xyz']
 hd, pt = math.radians(shot.get('heading_deg', 0)), math.radians(shot.get('pitch_deg', 0))
-cam = scene.camera(sc, (cx, cy, cz), (cx + math.cos(hd) * math.cos(pt) * 100, cy + math.sin(hd) * math.cos(pt) * 100, cz + math.sin(pt) * 100))
+if opt.get('--cam'):
+    vec = lambda s_: tuple(float(v) for v in s_.split(','))
+    cam = scene.camera(sc, vec(opt['--cam']), vec(opt['--at']))
+else:
+    cam = scene.camera(sc, (cx, cy, cz), (cx + math.cos(hd) * math.cos(pt) * 100, cy + math.sin(hd) * math.cos(pt) * 100, cz + math.sin(pt) * 100))
 cam.data.sensor_fit = 'HORIZONTAL'
 cam.data.sensor_width = 36.0
-cam.data.lens = 18.0 / math.tan(math.radians(shot.get('hfov_deg', 90)) / 2)
+cam.data.lens = 18.0 / math.tan(math.radians(float(opt.get('--hfov', shot.get('hfov_deg', 90)))) / 2)
 if opt.get('--blend'):
     bpy.ops.wm.save_as_mainfile(filepath=opt['--blend'])
 sc.render.engine = 'BLENDER_EEVEE'
-sc.render.resolution_x, sc.render.resolution_y = shot.get('frame_px', (1200, 670))
+sc.render.resolution_x, sc.render.resolution_y = [int(v) for v in opt['--size'].split(',')] if opt.get('--size') else shot.get('frame_px', (1200, 670))
 sc.render.resolution_percentage = 100
 sc.render.image_settings.file_format = 'JPEG'
 sc.render.image_settings.quality = 90
