@@ -23,6 +23,7 @@ import re
 import sys
 
 import numpy as np
+import pyproj
 import shapely
 from affine import Affine
 from rasterio import features
@@ -122,9 +123,9 @@ D51 = [
     (9, 'Ajegunle', ['Ajegunle', 'Amukoko', 'Boundary (Ajegunle)', 'Olodi Apapa']),
     (10, 'Apapa', ['Apapa GRA', 'Apapa Wharf']),
     (11, 'Ijora-Iganmu-Costain', ['Ijora', 'Iganmu', 'Costain', 'Iponri']),
-    (12, 'Aguda-Coker-Orile', ['Aguda', 'Coker', 'Orile Iganmu']),
-    (13, 'Surulere', ['Surulere', 'Ojuelegba', 'Bode Thomas', 'Stadium (Surulere)', 'Adelabu', 'Ogunlana']),
-    (14, 'Itire-Lawanson-Ijesha', ['Itire', 'Lawanson', 'Ijesha']),
+    (12, 'Aguda-Coker-Orile', ['Aguda', 'Coker', 'Orile Iganmu', 'Adelabu']),
+    (13, 'Surulere', ['Surulere', 'Ojuelegba', 'Bode Thomas', 'Stadium (Surulere)']),
+    (14, 'Itire-Lawanson-Ijesha', ['Itire', 'Lawanson', 'Ijesha', 'Ogunlana']),
     (15, 'Mushin', ['Mushin', 'Idi-Oro', 'Odi-Olowo', 'Ojuwoye-Mushin', 'Olorunsogo', 'Idi-Araba']),
     (16, 'Ebute Metta-Oyingbo-Otto', ['Ebute Metta', 'Oyingbo', 'Otto-Iddo']),
     (17, 'Yaba', ['Yaba', 'Sabo', 'Alagomeji', 'Jibowu', 'Onike-Abule Oja', 'Igbobi']),
@@ -133,15 +134,15 @@ D51 = [
     (20, 'Lagos Island (Eko)', ['Isale Eko', 'Idumota', 'Marina', 'Lafiaji', 'Onikan', 'Obalende']),
     (21, 'Ikoyi', ['Ikoyi', 'Old Ikoyi', 'Dolphin Estate', 'Parkview', 'Banana Island']),
     (22, 'Victoria Island', ['Victoria Island', '=Elegushi west', 'Eko Atlantic']),
-    (23, 'Lekki Phase 1', ['Oniru', 'Lekki Phase 1', 'Ikate', 'Elegushi']),
+    (23, 'Lekki Phase 1', ['Oniru', 'Lekki Phase 1', 'Ikate', 'Elegushi', '=Agungi west']),
     (24, 'Lekki-Agungi-Chevron', ['Agungi', 'Ilasan', 'Jakande (Lekki)', 'Osapa London', 'Ikota', 'VGC', 'Chevron']),
     (25, 'Ajah', ['Ajah', 'Ilaje Ajah', 'Abraham Adesanya', 'Addo', 'Langbasa', 'Badore', '=Chevron south-east']),
     (26, 'Sangotedo-Abijo-Lakowe', ['Sangotedo', 'Bogije', 'Abijo', 'Lakowe', 'Awoyaya', 'Ogombo', 'Eleko']),
-    (27, 'Shomolu-Bariga', ['Shomolu', 'Bariga', 'Ilaje (Bariga)', 'Bajulaiye', 'Pedro', 'Akoka', 'Fadeyi', 'Palmgrove', 'Obanikoro-Onipanu', 'Oworonshoki']),
-    (28, 'Gbagada-Ogudu', ['Gbagada', 'Gbagada Phase 2', 'Ifako-Gbagada', 'Soluyi', 'Ogudu', 'Anthony Village']),
+    (27, 'Shomolu-Bariga', ['Shomolu', 'Bariga', 'Ilaje (Bariga)', 'Bajulaiye', 'Pedro', 'Akoka', 'Fadeyi', 'Palmgrove', 'Obanikoro-Onipanu']),
+    (28, 'Gbagada-Ogudu', ['Gbagada', 'Gbagada Phase 2', 'Ifako-Gbagada', 'Soluyi', 'Ogudu', 'Anthony Village', 'Oworonshoki']),
     (29, 'Ilupeju', ['Ilupeju', '=Shogunle, east of Agege Motor Road']),
     (30, 'Isolo-Ladipo', ['Isolo', 'Cele', 'Ladipo', 'Papa Ajao', 'Ilasamaja', 'Ajao Estate']),
-    (31, 'Okota', ['Okota', 'Ire-Akari', 'Oke-Afa', '=Ago Palace, east of Ago Palace Way']),
+    (31, 'Okota', ['Okota', 'Ire-Akari', 'Oke-Afa', '=Ago Palace, east of Ago Palace Way', '=Jakande Estate (Isolo) east']),
     (32, 'Oshodi-Mafoluku', ['Oshodi', 'Mafoluku', 'Shogunle', '=Airport (MMIA) south', '=Ago Palace east']),
     (33, 'Airport (MMIA)', ['Airport (MMIA)']),
     (34, 'Ikeja GRA-Cantonment', ['Ikeja GRA', 'Ikeja Cantonment', 'Onigbongbo', 'Ikeja Along']),
@@ -150,16 +151,16 @@ D51 = [
     (37, 'Agege-Ifako-Ijaiye', ['Orile Agege', 'Agege', 'Pen Cinema', 'Oko-Oba', 'Ifako-Ijaiye', 'Fagba', 'Iju', '=Iyana Ipaja north-east']),
     (38, 'Ketu-Mile 12', ['Ketu', 'Mile 12', 'Kosofe', 'Alapere', 'Ikosi', 'Agboyi', 'Irawo', 'Owode Onirin']),
     (39, 'Magodo-Omole-Berger', ['Magodo', 'Shangisha', 'Omole', 'Ojodu', 'Berger', 'Olowora']),
-    (40, 'Agbado-Oke Odo', ['Alagbado', 'Alakuko', 'Ijaiye', 'Ojokoro', 'Abule Egba', 'Meiran', 'Ekoro', 'Oke Odo']),
-    (41, 'Ipaja-Ayobo', ['Ipaja', 'Ayobo', 'Abesan', 'Baruwa', 'Gowon Estate', 'Command', 'Iyana Ipaja', '=Alagbado south', '=Alagbado south-west']),
+    (40, 'Agbado-Oke Odo', ['Alagbado', 'Alakuko', 'Ijaiye', 'Ojokoro', 'Abule Egba', 'Meiran', 'Ekoro', 'Oke Odo', 'Command']),
+    (41, 'Ipaja-Ayobo', ['Ipaja', 'Ayobo', 'Abesan', 'Baruwa', 'Gowon Estate', 'Iyana Ipaja', '=Alagbado south', '=Alagbado south-west']),
     (42, 'Egbeda-Idimu', ['Egbeda', 'Akowonjo', 'Shasha', 'Dopemu', 'Idimu']),
-    (43, 'Ikotun-Igando', ['Ikotun', 'Igando', 'Egan', 'Akesan', 'Egbe']),
-    (44, 'Ejigbo', ['Ejigbo', '=Jakande Estate (Isolo) north-west']),
-    (45, 'Ago Palace-Abaranje-Ijegun', ['Ago Palace', 'Jakande Estate (Isolo)', 'Abaranje', 'Ijegun', 'Isheri-Osun']),
+    (43, 'Ikotun-Igando', ['Ikotun', 'Igando', 'Egan', 'Akesan', 'Egbe', '=Jakande Estate (Isolo) north-west']),
+    (44, 'Ejigbo', ['Ejigbo']),
+    (45, 'Ijegun-Abaranje-Isheri Osun', ['Ago Palace', 'Jakande Estate (Isolo)', 'Abaranje', 'Ijegun', 'Isheri-Osun']),
     (46, 'Agric-Isawo-Owutu', ['Isawo', 'Owutu', 'Majidun', 'Ajegunle (Ikorodu Rd)', 'Agric (Ikorodu)', 'Ogolonto']),
-    (47, 'Ikorodu Town', ['Ikorodu town', 'Ebute (Ikorodu)', 'Ipakodo', 'Ibeshe', 'Itamaga']),
-    (48, 'Odogunyan-Ogijo', ['Odogunyan', 'Ogijo']),
-    (49, 'Igbogbo-Bayeku-Ita Elewa', ['Ita Elewa', 'Igbogbo', 'Bayeku', 'Ofin', 'Igbopa']),
+    (47, 'Ikorodu Town', ['Ikorodu town', 'Ebute (Ikorodu)', 'Ipakodo', 'Ibeshe', 'Itamaga', '=Odogunyan, south-east of Sagamu Road']),
+    (48, 'Odogunyan-Ogijo', ['Odogunyan', 'Ogijo', '=Itamaga north-east']),
+    (49, 'Igbogbo-Bayeku', ['Ita Elewa', 'Igbogbo', 'Bayeku', 'Ofin', 'Igbopa']),
     (50, 'Ijede-Gberigbe', ['Ijede', 'Gberigbe', 'Oke Agbo', 'Ipakan', 'Oyewaw', '=Ita Elewa, east of Ijede Road']),
     (51, 'Imota-Ewu-Elepe', ['Imota', 'Ewu-Elepe']),
 ]
@@ -204,6 +205,26 @@ for _ in range(50):
         own[p] = d
 D = own[place]
 D[place == 0] = 0
+# places the source votes (EARTH-CHECK.md, "Source votes (22 Oct)") cut in two along a line of latitude or longitude:
+# (place, 'lat' | 'lon', the cut, the district on the north / east side); the rest of the place keeps its own district
+SPLITS = [
+    ('Itire', 'lat', 6.5165, 15),                 # the Idi-Araba canal: Idi-Araba to Mushin, Itire south of it stays
+    ('Majidun north-east', 'lon', 3.489, 47),     # the stream valley: Eyita side to Ikorodu Town, Agric side stays
+]
+UTM = pyproj.Transformer.from_crs(4326, 32631, always_xy=True)
+NAMED = {q['name']: p for p, q in PL.items()}
+
+
+def past(cut, axis, x, y):
+    u, v = UTM.transform(3.4, cut) if axis == 'lat' else UTM.transform(cut, 6.55)
+    return y > v if axis == 'lat' else x > u
+
+
+for nm, axis, cut, d in SPLITS:
+    p = NAMED[nm]
+    ii, jj = np.nonzero(place == p)
+    side = past(cut, axis, X0 + (jj + .5) * C, Y0 + (ii + .5) * C)
+    D[ii[side], jj[side]] = d
 
 # check: every place EARTH-CHECK names is found
 for d, nm, mem in D51:
@@ -244,27 +265,9 @@ def border(A, B):
 starts = lambda *names: (lambda q: any(q['name'] == n or q['name'].startswith(n + ' ') or q['name'].startswith(n + ',') for n in names))
 inD = lambda d, pred: (lambda q: own[q['id']] == d and pred(q))
 # EARTH-CHECK.md, "Still unsure" and the lines marked *to trace*. kind: unsure = a question to settle, trace = a named
-# line to draw on the board against the fabric.
+# line to draw on the board against the fabric. The source votes of 22 Oct settled all of them but these: a line stays
+# here only while its vote is a coin-toss.
 LINES = [
-    ('unsure', 'Agbado-Oke Odo east edge: Lagos-Abeokuta Expressway or the old Agege-Ijoko railway?', dpoly.get(40), dpoly.get(37)),
-    ('unsure', 'Command: Agbado-Oke Odo or Ipaja-Ayobo?', group_poly(starts('Command')), dpoly.get(40)),
-    ('unsure', 'Ago Palace-Abaranje-Ijegun is large: cut here, Ago Palace Way estates / Abaranje-Ijegun?',
-     group_poly(inD(45, starts('Ago Palace', 'Jakande Estate (Isolo)'))), group_poly(inD(45, lambda q: not starts('Ago Palace', 'Jakande Estate (Isolo)')(q)))),
-    ('unsure', 'Surulere / Aguda: a street line, not a wall (Ogunlana, Adelabu): where?', dpoly.get(13), dpoly.get(12)),
-    ('unsure', 'Itire / Mushin: Lawanson Road or Itire Road? (no wall on the ground)', dpoly.get(14), dpoly.get(15)),
-    ('unsure', 'Mushin / Ilupeju: Agege Motor Road or Palm Avenue? (no wall on the ground)', dpoly.get(15), dpoly.get(29)),
-    ('unsure', 'Oworonshoki: its own waterfront place (like Makoko) or part of Shomolu-Bariga?',
-     group_poly(starts('Oworonshoki')), group_poly(inD(27, lambda q: not starts('Oworonshoki')(q)))),
-    ('unsure', 'Ita Elewa: Ikorodu Town or Igbogbo-Bayeku? (check Street View along Ijede Road)', group_poly(starts('Ita Elewa')), dpoly.get(47)),
-    ('unsure', 'Boundary west of the expressway: Kirikiri-Tin Can or Ajegunle? (houses, not port)',
-     group_poly(starts('Boundary (Ajegunle), west of Apapa-Oworonshoki Expressway')), dpoly.get(9)),
-    ('trace', 'To trace: Mushin west, the railway by Ladipo and Papa Ajao', dpoly.get(15), dpoly.get(30)),
-    ('trace', 'To trace: Itire-Lawanson / Surulere, Lawanson Road / Itire Road', dpoly.get(14), dpoly.get(13)),
-    ('trace', 'To trace: Ikotun-Igando south, the edge of Abaranje along Igando-LASU Road', dpoly.get(43), dpoly.get(45)),
-    ('trace', 'To trace: Ejigbo south, Jakande Estate\'s north edge', dpoly.get(44), dpoly.get(45)),
-    ('trace', 'To trace: Lekki Phase 1 / Agungi', dpoly.get(23), dpoly.get(24)),
-    ('trace', 'To trace: Agric-Isawo-Owutu east, the stream and open band at about 3.48', dpoly.get(46), dpoly.get(47)),
-    ('trace', 'To trace: Ikorodu Town north, Odogunyan\'s edge on Sagamu Road (about 6.645)', dpoly.get(47), dpoly.get(48)),
 ]
 lines = []
 for kind, q, A, B in LINES:
@@ -287,7 +290,8 @@ for p, q in PL.items():
     x, y = q['x'], q['y']
     if not CLIP.contains(shapely.Point(x, y)):
         continue
-    labels.append({'n': q['name'], 'at': R1(gidi([(x, y)]))[0], 'r': q['roof_km2'], 'd': int(own[p]), 'f': q['fabric']})
+    d = next((sd for nm, axis, cut, sd in SPLITS if nm == q['name'] and past(cut, axis, x, y)), int(own[p]))
+    labels.append({'n': q['name'], 'at': R1(gidi([(x, y)]))[0], 'r': q['roof_km2'], 'd': d, 'f': q['fabric']})
 labels.sort(key=lambda o: -o['r'])
 print(len(labels), 'place labels in the frame (of', len(PL), ')')
 
