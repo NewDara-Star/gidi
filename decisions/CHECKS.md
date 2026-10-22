@@ -78,3 +78,6 @@ DETERMINISTIC line (`tools/bake.sh`).
 | The new map is 1:3, about 27 x 10.5 km | map size and positions against real Lagos at 1:3 | GAP: comes with the new frame |
 | Roads first, districts by their borders | the skeleton is the real road network at 1:3; every district edge is a real border; merged places really touch | GAP: comes with the road skeleton and the border map (22 Oct) |
 | The plan is hand-made; the models come from kits | the plan has no generated content; every modelled thing names its kit and its reference pictures | GAP: comes with the new plan and the first kit (22 Oct) |
+| A kit is proven by rebuilding real streets from it | each kit's test spots: picture beside the rebuild, held or not, and what was fixed | GAP: comes with the first kit (22 Oct) |
+| The map tells the kit what goes where | every kit part is driven by a map field; nothing placed without one | GAP: comes with the map-kit interface (22 Oct) |
+| The Reach goes with Festac into the new map | The Reach stands in the Festac-inspired place | GAP: comes with the new map |
