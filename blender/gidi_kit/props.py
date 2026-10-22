@@ -195,3 +195,56 @@ def ticket_book(mb, M, col=None):
     """A ticket book: a pad of coloured tickets with a dark card back."""
     mb.box('cloth', M, hex_rgb('#2a2622'), 0.4, size=(0.1, 0.07, 0.012))
     mb.box('cloth', at(M, 0, 0, 0.012), col or hex_rgb('#f2d7a0'), 0.3, size=(0.095, 0.065, 0.012))
+
+
+def generator(mb, M, col=None, wear=0.6):
+    """A small petrol generator ("I better pass my neighbour"): a tube frame round a dark engine, the fuel tank on top in
+    the maker's red or yellow, the pull-start and the exhaust's silencer on one side."""
+    col = col or hex_rgb('#c62828')
+    tube = hex_rgb('#2a2a2a')
+    L, W, H = 0.6, 0.45, 0.46
+    for sx in (-1, 1):   # the frame: two hoops and the rails between
+        for sy in (-1, 1):
+            parts.bar(mb, 'steel', M @ Vector((sx * L / 2, sy * W / 2, 0.02)), M @ Vector((sx * L / 2, sy * W / 2, H)), 0.025, tube, wear)
+        parts.bar(mb, 'steel', M @ Vector((sx * L / 2, -W / 2, H)), M @ Vector((sx * L / 2, W / 2, H)), 0.025, tube, wear)
+        parts.bar(mb, 'steel', M @ Vector((sx * L / 2, -W / 2, 0.02)), M @ Vector((sx * L / 2, W / 2, 0.02)), 0.025, tube, wear)
+    for sy in (-1, 1):
+        parts.bar(mb, 'steel', M @ Vector((-L / 2, sy * W / 2, 0.02)), M @ Vector((L / 2, sy * W / 2, 0.02)), 0.025, tube, wear)
+    mb.box('steel', at(M, -0.05, 0, 0.17), hex_rgb('#3a3a38'), wear, size=(0.32, 0.3, 0.26))   # engine
+    mb.box('steel', at(M, 0.17, 0, 0.17), shade(col, 0.9), wear, size=(0.16, 0.34, 0.26))    # alternator housing
+    mb.box('carpaint', at(M, 0, 0, H - 0.06), col, wear, size=(0.42, 0.34, 0.14))           # tank
+    parts.cyl(mb, 'plastic', at(M, 0.08, 0.08, H + 0.01), 0.04, 0.03, hex_rgb('#1d1d1d'), 0, seg=8)
+    parts.cyl(mb, 'steel', at(M, -0.08, -W / 2 + 0.06, 0.24, rx=math.pi / 2), 0.06, 0.2, hex_rgb('#5a5650'), wear, seg=10)   # silencer
+    mb.box('plastic', at(M, -0.2, W / 2 - 0.02, 0.2), hex_rgb('#1d1d1d'), 0, size=(0.06, 0.03, 0.04))   # pull-start
+
+
+def bin_drum(mb, M, rng, col=None):
+    """A blue drum cut down for a bin, rubbish heaped over its rim and spilling at its foot."""
+    from . import street
+    col = col or hex_rgb('#1f5fa8')
+    parts.cyl(mb, 'plastic', M, 0.29, 0.72, col, 0.6, seg=14, caps=(True, False))
+    parts.cyl(mb, 'plastic', M, 0.27, 0.72, shade(col, 0.5), 0.6, seg=14, caps=(False, False))
+    for k in range(9):
+        a, d = rng.between(0, math.tau), rng.between(0, 0.25)
+        street.litter_piece(mb, M.translation.x + math.cos(a) * d, M.translation.y + math.sin(a) * d, M.translation.z + 0.7 + rng.between(0, 0.12), rng)
+    for k in range(6):
+        a, d = rng.between(0, math.tau), rng.between(0.32, 0.8)
+        street.litter_piece(mb, M.translation.x + math.cos(a) * d, M.translation.y + math.sin(a) * d, M.translation.z + 0.005, rng)
+
+
+def awning(mb, x0, x1, y, z, depth, col, side=1, wear=0.5):
+    """A canvas or plastic awning over a door: sloping out from the wall at y (side +1: out toward +y), a valance hanging
+    from its front edge, two steel stays."""
+    yf = y + side * depth
+    zf = z - depth * 0.35
+    q = [Vector((x0, y, z)), Vector((x1, y, z)), Vector((x1, yf, zf)), Vector((x0, yf, zf))]
+    mb.face(q if side < 0 else q[::-1], 'cloth', col, wear)
+    mb.face(q[::-1] if side < 0 else q, 'cloth', shade(col, 0.7), wear)
+    n = max(2, int((x1 - x0) / 0.3))
+    for k in range(n):   # the scalloped valance
+        a_, b_ = x0 + (x1 - x0) * k / n, x0 + (x1 - x0) * (k + 1) / n
+        v = [Vector((a_, yf, zf)), Vector((b_, yf, zf)), Vector((b_, yf, zf - 0.18)), Vector(((a_ + b_) / 2, yf, zf - 0.24)), Vector((a_, yf, zf - 0.18))]
+        mb.face(v if side > 0 else v[::-1], 'cloth', shade(col, 0.9), wear)
+        mb.face(v[::-1] if side > 0 else v, 'cloth', shade(col, 0.6), wear)
+    for x in (x0 + 0.1, x1 - 0.1):
+        parts.bar(mb, 'steel', (x, y, z - depth * 0.7), (x, yf, zf), 0.015, hex_rgb('#3a3a3a'), wear)

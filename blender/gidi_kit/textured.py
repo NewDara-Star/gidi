@@ -41,6 +41,7 @@ def _img(base, surf, kind, colour=False):
 
 
 _MEAN = {}
+ROUGH_FLOOR = {'concrete': 0.8, 'block': 0.8, 'paint': 0.75, 'ground': 0.85, 'mud': 0.6}
 
 
 def _mean(im):
@@ -124,8 +125,11 @@ def _slot(mat, base, surf, tile, aged, aged_show, span):
         colour = mix(fac, colour, aged_tint)
     L.new(colour, bs.inputs['Base Color'])
     rough = _img(base, surf, 'rough')
-    if rough:
-        L.new(tex(rough).outputs['Color'], bs.inputs['Roughness'])
+    if rough:   # dusty, sun-baked surfaces never shine: masonry and concrete stay above a floor of roughness
+        rr = N.new('ShaderNodeMapRange')
+        L.new(tex(rough).outputs['Color'], rr.inputs['Value'])
+        rr.inputs['To Min'].default_value = ROUGH_FLOOR.get(mat.name.partition(':')[0], 0.0)
+        L.new(rr.outputs['Result'], bs.inputs['Roughness'])
     nor = _img(base, surf, 'nor_gl')
     if nor:
         nm = N.new('ShaderNodeNormalMap')

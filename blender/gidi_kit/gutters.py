@@ -20,6 +20,8 @@ WATER = hex_rgb('#24301f')       # the usual: black-green, barely moving
 GREEN = hex_rgb('#2f3d1e')       # blocked: standing green water with scum
 SCUM = hex_rgb('#58613a')
 SLAB = hex_rgb('#9a958b')
+DUST = hex_rgb('#5b4c3e')         # the street's dust, settled on slabs and walls
+DIRT = hex_rgb('#3a2e24')         # packed into the joints
 RUBBISH = [hex_rgb(c) for c in ('#d9d4c8', '#cfc9bb', '#e2ddd2', '#1c1c1c', '#262626', '#3d5f86', '#8a3a30', '#b8ad8c', '#6b5b45', '#5d7a8c')]   # sachets, black nylon, faded bottles
 PIECE = 2.4
 
@@ -62,8 +64,8 @@ def gutter(mb, pts, g, keep, wear=0.6):
         # the two walls: outer face, top, inner face (dark with the wet below the top)
         for side in (-1, 1):
             o_in, o_out = side * w / 2, side * (w / 2 + t)
-            top = _mix(WALL, WALL_DIRTY, ww * 0.6)
-            foot = _mix(WALL, WALL_DIRTY, ww * 0.8)
+            top = _mix(_mix(WALL, WALL_DIRTY, ww * 0.6), DUST, g.get('dust', 0.0))
+            foot = _mix(_mix(WALL, WALL_DIRTY, ww * 0.8), DUST, g.get('dust', 0.0))
             faces = ([P(0, o_out, 0), P(L, o_out, 0), P(L, o_out, proud), P(0, o_out, proud)], [foot, foot, top, top]), \
                     ([P(0, o_out, proud), P(L, o_out, proud), P(L, o_in, proud), P(0, o_in, proud)], [top] * 4), \
                     ([P(0, o_in, proud), P(L, o_in, proud), P(L, o_in, 0.0), P(0, o_in, 0.0)], [top, top, SILT, SILT])
@@ -75,7 +77,7 @@ def gutter(mb, pts, g, keep, wear=0.6):
         if not (covered and detail.web()):   # in the web tiles the slabs hide what's inside
             _inside(mb, P, L, w, proud, fill, covered, rng, wear)
         if covered:
-            _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear)
+            _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear, g)
 
 
 def _inside(mb, P, L, w, proud, fill, covered, rng, wear):
@@ -107,13 +109,51 @@ def _inside(mb, P, L, w, proud, fill, covered, rng, wear):
                        size=(rng.between(0.1, 0.25), rng.between(0.06, 0.15), 0.04))
 
 
-def _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear):
-    """Precast slabs across a covered gutter, 0.6 m each (pairs in the web tiles), gaps between; some cracked and tipped, some sunk."""
+def _slab(mb, P, u, L_, w, t, z, ang, tip, roll, c, wear, rng, broken):
+    """One precast slab across the channel, centred u along it, L_ long: tipped (tip, about the gutter's line) and rocked
+    (roll, across it). Broken: in two pieces with a crack between, or a corner knocked off."""
+    span = w + 2 * t + 0.04
+    base = lambda du, dv, rx, ry: Matrix.Translation(P(u + du, dv, z)) @ Matrix.Rotation(ang, 4, 'Z') @ Matrix.Rotation(rx, 4, 'X') @ Matrix.Rotation(ry, 4, 'Y')
+    if broken == 'split':   # cracked across the channel, the two halves at their own tilts
+        f = rng.between(0.35, 0.65)
+        a_, b_ = span * f, span * (1 - f)
+        mb.box('concrete', base(0, -span / 2 + a_ / 2 - 0.01, tip + rng.between(-0.06, 0.06), roll), c, wear, size=(L_, a_ - 0.02, 0.1), skip=('-z',))
+        mb.box('concrete', base(0, span / 2 - b_ / 2 + 0.01, tip + rng.between(-0.06, 0.06), roll - 0.02), shade(c, 0.93), wear, size=(L_, b_ - 0.02, 0.1), skip=('-z',))
+    elif broken == 'corner':   # a corner gone: the slab short on one side, a lump of it fallen beside
+        s_ = rng.pick([-1, 1])
+        cut = rng.between(0.15, 0.3)
+        mb.box('concrete', base(0, -s_ * cut / 2, tip, roll), c, wear, size=(L_, span - cut, 0.1), skip=('-z',))
+        mb.box('concrete', base(-L_ * 0.25, s_ * (span / 2 - cut / 2), tip, roll), c, wear, size=(L_ * 0.5, cut, 0.1), skip=('-z',))
+        mb.box('concrete', base(L_ * 0.2, s_ * (span / 2 + 0.15), rng.between(-0.5, 0.5), rng.between(-0.5, 0.5)) @ Matrix.Translation((0, 0, -0.07)), shade(c, 0.9), wear, size=(0.12, 0.09, 0.06))
+    else:
+        mb.box('concrete', base(0, 0, tip, roll), c, wear, size=(L_, span, 0.1), skip=('-z',))
+
+
+def _slabs(mb, P, L, w, t, proud, dx, dy, rng, wear, g=None):
+    """Precast slabs across a covered gutter, 0.6 m each (pairs in the web tiles), gaps between; some cracked and tipped,
+    some sunk. From the map (`g`): `slab_colour`; `dust` 0..1 settled on them; `open_share`, the share of slabs gone, the
+    drain open between the ones left; `broken` 0..1, how many are cracked or chipped; `rock` 0..1, how much they tip and
+    rock; `litter` 0..1, dirt and rubbish packed into the joints."""
+    g = g or {}
     n = max(1, round(L / (1.2 if detail.web() else 0.6)))   # the web tiles: slabs in pairs
+    base_c = hex_rgb(g['slab_colour']) if g.get('slab_colour') else SLAB
+    rock = g.get('rock', 0.0)
+    ang = math.atan2(dy, dx)
     for k in range(n):
         u = (k + 0.5) * L / n
-        tip = rng.between(-0.08, 0.08) if rng.chance(0.15 + 0.3 * wear) else 0.0
-        sink = rng.between(0.02, 0.08) if rng.chance(0.1 + 0.2 * wear) else 0.0
-        c = shade(_mix(SLAB, WALL_DIRTY, rng.between(0.1, 0.5) * wear), rng.between(0.85, 1.08))
-        m = Matrix.Translation(P(u, 0, proud + 0.05 - sink)) @ Matrix.Rotation(math.atan2(dy, dx), 4, 'Z') @ Matrix.Rotation(tip, 4, 'X')
-        mb.box('concrete', m, c, wear, size=(L / n - 0.03, w + 2 * t + 0.04, 0.1), skip=('-z',))
+        if rng.chance(g.get('open_share', 0.0)):   # this slab is gone: the drain shows
+            continue
+        tip = rng.between(-0.08, 0.08) if rng.chance(0.15 + 0.3 * wear + 0.5 * rock) else 0.0
+        roll = rng.between(-0.06, 0.06) * rock
+        sink = rng.between(0.02, 0.08) if rng.chance(0.1 + 0.2 * wear + 0.3 * rock) else 0.0
+        c = shade(_mix(_mix(base_c, WALL_DIRTY, rng.between(0.1, 0.5) * wear), DUST, g.get('dust', 0.0) * rng.between(0.6, 1.0)), rng.between(0.8, 1.05))
+        gap = 0.03 + rng.between(0.0, 0.06) * rock
+        broken = rng.pick(['split', 'corner']) if rng.chance(g.get('broken', 0.0)) else None
+        _slab(mb, P, u, L / n - gap, w, t, proud + 0.05 - sink, ang, tip, roll, c, wear, rng, broken)
+        if g.get('litter', 0.0) > 0:   # the joint after this slab: dirt packed in, and what the wind left there
+            uj = (k + 1) * L / n
+            mb.face([P(uj - 0.04, -w / 2 - t, proud + 0.02), P(uj + 0.04, -w / 2 - t, proud + 0.02), P(uj + 0.04, w / 2 + t, proud + 0.03), P(uj - 0.04, w / 2 + t, proud + 0.03)], 'mud', DIRT, 0.8)
+            for _ in range(int(rng.between(0, 4) * g['litter'])):
+                o = rng.between(-w / 2 - t, w / 2 + t)
+                sz = (rng.between(0.05, 0.16), rng.between(0.04, 0.1), rng.between(0.008, 0.03))
+                mb.box('plastic', Matrix.Translation(P(uj + rng.between(-0.05, 0.05), o, proud + 0.1)) @ Matrix.Rotation(rng.between(0, 3.14), 4, 'Z') @ Matrix.Rotation(rng.between(-0.5, 0.5), 4, 'X'), rng.pick(RUBBISH), 0.5, size=sz)

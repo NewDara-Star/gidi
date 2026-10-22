@@ -191,6 +191,20 @@ def master(name):
         nt._in(nt.math('SUBTRACT', 0.8, nt.math('MULTIPLY', wear, 0.8), clamp=True), p.inputs['Coat Weight'])
     elif name == 'glass':
         nt.bsdf(col, rough=0.06, metal=0.4)
+    elif name == 'glass_clear':   # a display case's or fridge door's glass: see-through, a faint sheen
+        p = nt.bsdf(col, rough=0.04)
+        p.inputs['Alpha'].default_value = 0.22
+        mat.surface_render_method = 'BLENDED'
+    elif name == 'woven':   # woven polypropylene (sacks, tarps): the colour in a fine basket weave
+        pos = nt.world_pos()
+        ck = nt.add('ShaderNodeTexChecker')
+        ck.inputs['Scale'].default_value = 140.0
+        ck.inputs['Color1'].default_value = (1, 1, 1, 1)
+        ck.inputs['Color2'].default_value = (0.84, 0.84, 0.84, 1)
+        nt.link(pos, ck.inputs['Vector'])
+        base = nt.mix(1.0, col, ck.outputs['Color'], 'MULTIPLY')
+        base = nt.mix(nt.math('MULTIPLY', nt.noise(3.0, 3, pos), 0.35), base, (0.33, 0.27, 0.2))   # handled, dusty
+        nt.bsdf(base, rough=0.75)
     elif name == 'glass_lit':
         nt.bsdf(col, rough=0.06, metal=0.2, emit=(1.0, 0.72, 0.38), emit_strength=0.0)
     elif name == 'wood':
