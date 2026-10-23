@@ -42,6 +42,11 @@ Fifteen lanes drawn by hand on the real twin's pattern (STREETS.md), on both sid
 redrafted with `--frontage` (50-68% cover per block): 339 buildings (150 before), 50% cover. Still empty: the strip
 between Bada Street's twin and the Ikorodu Road edge (Bada was joined to Adewusi after the draft), for the next hand pass.
 
+## Hand pass 7 (23 Oct): block B4 (Ladipo market and the Matori estate), from the Google study
+
+Seven streets drawn by hand on the real twin's pattern (STREETS.md). B4's three blocks redrafted with `--frontage` and
+`--sizes=12,20000`, so the market sheds and warehouses come through: 214 buildings (40 before), 53% cover.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |

@@ -308,3 +308,19 @@ Ago-Owu and Smith Streets beside it.
 | rd-65shqr4p | the unnamed cross street off Smith Street | lane | the rail side west (ends in the block) |
 | rd-iwrs1m4t | Agbekolade Street | lane | the Agege Motor Road to the rail side |
 | rd-et552uc8 | Olorunnibe Street | lane | the Agege Motor Road to the rail side |
+
+**Block B4** (Ladipo Street, Palm Avenue and the district's north-east edge). The real twin is the Ladipo spare parts
+market and the Matori industrial estate: long market sheds and warehouses on a few wide roads (Jimade Street through the
+market, Fatai Atere Way crossing to Matori, the estate road along the north side), and a residential corner by Palm
+Avenue on short streets (Badejo Kalesanwo, Oduduwa, Ikole, C.A.C.). Fatai Atere Way and Jimade end on the district edge;
+they carry on in the neighbour when that seam is joined by hand.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-99r8996c | Fatai Atere Way | local_main | Ladipo Street to the north-east edge |
+| rd-tdvlj3x3 | Jimade Street (the Ladipo market street) | market_street | Ladipo Street by Daraju to Fatai Atere's twin at the edge |
+| rd-fujb836w | the Matori estate road along the north side | service_road | Ladipo Street to the edge |
+| rd-dntx4fhp | Badejo Kalesanwo Street | lane | Ladipo Street east (ends in the block) |
+| rd-2rumos81 | Oduduwa Street | lane | Ladipo Street east (ends in the block) |
+| rd-44hhdxyo | Ikole Street | lane | Oduduwa's twin to Palm Avenue |
+| rd-l791gps5 | C.A.C. Street | lane | Oduduwa's twin side to Palm Avenue |
