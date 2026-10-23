@@ -8,6 +8,12 @@ The roads stay on their real lines; a copied house on a road fell in the wrong p
 110 counted a few twice), 44 were set back by hand on clear land beside where they fell (within 15 m, not turned, each
 checked on a picture); 60 were left out, because the frontage beside them already holds its copied houses. 1,470 houses now.
 
+## Hand pass 2 (23 Oct): overlaps
+
+173 houses that overlapped a neighbour (up to 10% of the smaller, 968 m² in all) were trimmed back to the bigger
+house's wall, so neighbours share a party wall as in Mushin; the biggest trims were checked on a picture. No two houses
+overlap now.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
