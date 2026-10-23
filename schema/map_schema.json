@@ -66,6 +66,7 @@
     "cart_kind": ["push", "trolley"],
     "cab_kind": ["single", "double"],
     "gate_side": ["u0", "u1"],
+    "umbrella_base": ["tyre", "bucket", "drum", "none"],
     "poster_face": ["out", "in"],
     "place_kind": ["market", "motor_park", "bus_stop", "church", "mosque", "school", "clinic", "betting", "bar", "buka", "police", "fuel", "bank", "chemist", "park", "garage", "workshop_yard", "story"],
     "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
@@ -224,7 +225,27 @@
     },
     "umbrella": {
       "r": "num >0",
-      "colours": "hexes"
+      "colours": "hexes",
+      "panels": "int 6..12?",
+      "open": "num 0..1?",
+      "height": "num >0?",
+      "base": "enum:umbrella_base?",
+      "valance": "bool?",
+      "tilt": "num?",
+      "head_tilt": "num?",
+      "pole_colour": "hex?",
+      "prints": "objs:umbrella_print?"
+    },
+    "umbrella_print": {
+      "panel": "int >=0",
+      "t": "num 0..1",
+      "v": "num 0..1?",
+      "w": "num >0",
+      "h": "num >0",
+      "colour": "hex",
+      "word": "text?",
+      "ink": "hex?",
+      "lines": "int 1..12?"
     },
     "load": {
       "kind": "enum:load_kind",
@@ -545,7 +566,7 @@
     },
     "furniture": {
       "layer": "plan", "prefix": "fu", "kit": true,
-      "fields": {"kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?"}
+      "fields": {"kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?", "height": "num >0?"}
     },
     "place": {
       "layer": "plan", "prefix": "pc", "kit": false,
