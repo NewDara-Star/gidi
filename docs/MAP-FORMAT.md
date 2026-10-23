@@ -200,7 +200,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 | `ground_floor` | `home`, `lock_ups`, `open_stalls`, `workshop`, `arcade`, `cage_stalls` | `"lock_ups"` |
 | `roof` | `form` (`hip`, `gable`, `mono`, `flat`), `material` (`zinc`, `longspan`, `tile`, `slab`), `state` (`rusty`, `silver`, `painted`, `new`), `colour`, `pitch` (deg), `eave` (m), `ridge_face`?, `parapet_h`?, `fascia`? (`kind`, `colour`, `h`), `edge`? (`colour`, `h`), `posts`?, `post_foot`?, `surface`? | `{"form":"hip","material":"zinc","state":"rusty","colour":"#7c5c4b","pitch":14,"eave":0.9}` |
 | `finish` | `kind` (`render`, `bare_block`, `tile_brick`, `tile_stone`, `tile_pattern`, `plaster_moulded`), `colour`, `trim_colour`?, `side_colour`?, `storey_bands`?, `base_band`? (`colour`, `h`), `surface`? | `{"kind":"render","colour":"#c9b48a","base_band":{"colour":"#7d6f5a","h":0.9}}` |
-| `windows` | the building's window look: `kind`, `shutter_colour`?, `bars` (`none`, `vertical`, `grid`, `diamond`, `sunray`, `scroll`), `bar_colour`? | `{"kind":"louvre_glass","bars":"vertical","bar_colour":"#262626"}` |
+| `windows` | the building's window look: `kind`, `shutter_colour`?, `bars` (`none`, `vertical`, `grid`, `diamond`, `sunray`, `scroll`), `bar_colour`?, `panel_colour`? (a painted panel round every window, its storey's floor to its ceiling) | `{"kind":"louvre_glass","bars":"vertical","bar_colour":"#262626"}` |
 | `outside_stair` | `none`, `front_concrete`, `front_steel`, `spiral` | `"none"` |
 | `wear` | 0 to 1 | `0.7` |
 | `place`?, `use`? | the place it belongs to; game uses (not drawn) | `["buy","eat"]` |
@@ -261,7 +261,7 @@ Each dress record has `of`: the plan record it dresses.
 | `windows` | table | `u`, `z` (sill), `w`, `h`, `kind`, `open` (0 to 1) |
 | `doors` | table | `u`, `w`, `h`, `kind` (`plank`, `steel`, `panel`, `open_dark`, `curtain`), `colour` |
 | `shopfronts` | list | `u0`, `u1`, `door` (`plank_shutter`, `roll_up`, `open_dark`, `glass`, `grille`), `colour`, `open`, `planks`? (table: `shade`, `offset`) |
-| `balconies` | list | `u0`, `u1`, `storey`, `depth`, `solid_h`, `rail`, `pattern` (`loops`, `pickets`, `solid`), `colour`, `posts` |
+| `balconies` | list | `u0`, `u1`, `storey` (the storey whose floor it is level with: 1 is the ground floor, 2 the first floor up), `depth`, `solid_h`, `rail`, `pattern` (`loops`, `pickets`, `diamond`, `solid`), `colour`, `posts`; a balcony reaching a corner turns it when the next face has one on the same storey starting there |
 | `screens` | list | breeze-block screens: `u0`, `u1`, `out`, `kind`, `colour`, `h`, `cells` (one shade per cell) |
 | `stains` | table | `kind` (`streak`, `patch`, `block`, `ac`), `u`, `z`, `w`, `h`, `tint` (`grime`, `rust`, `mould`, `cement`, `damp`), `dark`, `taper` |
 | `addons` | table | `kind` (`ac`, `dish`, `water_tank`, `speaker`, `mast`, `meter`, `lamp`, `house_number`, `rebar_stubs`), `u`, `z`, `colour`, `size`, `shade` |
