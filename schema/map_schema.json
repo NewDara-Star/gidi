@@ -260,7 +260,8 @@
       "rail": "enum:rail",
       "pattern": "enum:rail_pattern",
       "colour": "hex",
-      "posts": "bool"
+      "posts": "bool",
+      "edge": "num >0?"
     },
     "screen": {
       "u0": "num >=0",

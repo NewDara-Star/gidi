@@ -261,7 +261,7 @@ Each dress record has `of`: the plan record it dresses.
 | `windows` | table | `u`, `z` (sill), `w`, `h`, `kind`, `open` (0 to 1) |
 | `doors` | table | `u`, `w`, `h`, `kind` (`plank`, `steel`, `panel`, `open_dark`, `curtain`), `colour` |
 | `shopfronts` | list | `u0`, `u1`, `door` (`plank_shutter`, `roll_up`, `open_dark`, `glass`, `grille`), `colour`, `open`, `planks`? (table: `shade`, `offset`) |
-| `balconies` | list | `u0`, `u1`, `storey` (the storey whose floor it is level with: 1 is the ground floor, 2 the first floor up), `depth`, `solid_h`, `rail`, `pattern` (`loops`, `pickets`, `diamond`, `solid`), `colour`, `posts`; a balcony reaching a corner turns it when the next face has one on the same storey starting there |
+| `balconies` | list | `u0`, `u1`, `storey` (the storey whose floor it is level with: 1 is the ground floor, 2 the first floor up), `depth`, `solid_h`, `rail`, `pattern` (`loops`, `pickets`, `diamond`, `solid`), `colour`, `posts`, `edge`? (m, the slab edge's depth: older blocks have deep edge beams; 0.18 if unset); a balcony reaching a corner turns it when the next face has one on the same storey starting there |
 | `screens` | list | breeze-block screens: `u0`, `u1`, `out`, `kind`, `colour`, `h`, `cells` (one shade per cell) |
 | `stains` | table | `kind` (`streak`, `patch`, `block`, `ac`), `u`, `z`, `w`, `h`, `tint` (`grime`, `rust`, `mould`, `cement`, `damp`), `dark`, `taper` |
 | `addons` | table | `kind` (`ac`, `dish`, `water_tank`, `speaker`, `mast`, `meter`, `lamp`, `house_number`, `rebar_stubs`), `u`, `z`, `colour`, `size`, `shade` |
