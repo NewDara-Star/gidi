@@ -89,6 +89,9 @@ def check_value(where, v, spec, refs):
     elif base in ('nums', 'ints'):
         if not isinstance(v, list) or not all(is_num(x) and (base == 'nums' or isinstance(x, int)) for x in v):
             err(where, f'should be a list of {"numbers" if base == "nums" else "integers"}')
+    elif base == 'angles':
+        if not (is_num(v) or isinstance(v, list) and v and all(is_num(x) for x in v)):
+            err(where, 'should be a number or a list of numbers')
     elif base == 'numss':
         if not isinstance(v, list) or not all(isinstance(x, list) and all(is_num(y) for y in x) for x in v):
             err(where, 'should be a list of lists of numbers')

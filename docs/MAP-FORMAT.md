@@ -184,7 +184,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 | `platform`? | `h` (m), `steps`, `front` (m, how far it reaches toward the road), `colour` | `{"h":0.3,"steps":1,"front":1.2,"colour":"#7a7268"}` |
 | `wall`? | the wall object (below) | |
 
-**The wall object** (on a frontage, or on a free `wall` record): `h`, `finish` (`render`, `bare_block`, `breeze_block`, `sheet`, `plank`), `colour`, `painted`, `state` (`clean`, `mouldy`), `piers` (`none`, `at_gate`, `every_bay`), `top` (`none`, `razor_wire`, `steel_rail`, `broken_glass`), `surface`?, `gates`: list of `u0`, `u1` (m along the line), `h`, `kind` (`sheet_steel`, `bar`, `plank`), `colour`, `leaves`, `wicket`, `number`? (text), `wear`, `surface`?, and optionally `open` (degrees a leaf stands open: + swings to the line's left, - to its right) and `sag` (degrees a leaf has dropped off its top hinge, free end down).
+**The wall object** (on a frontage, or on a free `wall` record): `h`, `finish` (`render`, `bare_block`, `breeze_block`, `sheet`, `plank`, `railing`: posts, two flat rails and spiked bars), `colour`, `painted`, `state` (`clean`, `mouldy`), `piers` (`none`, `at_gate`, `every_bay`), `top` (`none`, `razor_wire`, `steel_rail`, `broken_glass`), `surface`?, `gates`: list of `u0`, `u1` (m along the line), `h`, `kind` (`sheet_steel`, `bar`, `plank`), `colour`, `leaves`, `wicket`, `number`? (text), `wear`, `surface`?, and optionally `open` (degrees a leaf stands open: + swings to the line's left, - to its right; one number for every leaf, or a list leaf by leaf), `sag` (degrees a leaf has dropped off its top hinge, free end down) and `posters` (the gate's own, swinging with its leaves: `leaf`, `u` m from its hinge, `z`, `w`, `h`, `colours`, `face` `out` or `in`).
 
 #### wall (`wl-`): a side or back wall not on a street
 `plot`?, `line`, `wall` (the wall object above).
@@ -232,7 +232,7 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 `kind` (`palm`, `shade`, `plantain`, `almond`, `neem`, `shrub`), `at`, `h`, `lean`, `form`: a table of `fronds` (turn, droop, len) for a palm, or `lobes` (x, y, z, r) for a broad tree.
 
 #### vehicle (`vh-`): a parked spot
-`kind` (`danfo`, `keke`, `okada`, `saloon`, `suv`, `pickup`, `lorry`, `container`, `tanker`, `bus`, `wreck`), `at`, `turn`, `colour`, `cab_colour`?, `lean`?, `tractor`?, `load`? (`kind`: `none`, `roll`, `cargo`, `sacks`; `colour`?), `cover`? (a car cover's colour).
+`kind` (`danfo`, `keke`, `okada`, `saloon`, `suv`, `pickup`, `lorry`, `container`, `tanker`, `bus`, `wreck`), `at`, `turn`, `colour`, `cab_colour`?, `cab`? (`single`, `double`: a pickup's cab), `lean`?, `tractor`?, `load`? (`kind`: `none`, `roll`, `cargo`, `sacks`; `colour`?), `cover`? (a car cover's colour).
 
 #### furniture (`fu-`)
 `kind` (`bench`, `chair`, `stool`, `generator`, `bin`, `water_tank`, `drum`, `tyre_stack`, `gas_rack`, `speaker`, `tank_stand`, `compressor`, `tyre_changer`), `at`, `z`, `turn`, `colour`, `length`? (a bench's length, a tank stand's height, how many tyres in a stack). `z` is what it stands on: a compressor on a trolley stands at the trolley's deck.
@@ -297,7 +297,7 @@ On a face, `u` is metres along the face from its first corner (footprint corner 
 `of`? and `pieces` table: `kind` (`sachet`, `bag`, `bottle`, `pack`, `can`, `husk`, `paper`, `rag`, `tyre`), `colour`, `x`, `y`, `z`, `turn`, `tilt`, `w`, `d`, `h`. World positions.
 
 #### goods (`gd-`), of a lean-to, stall, heap or furniture (a bin)
-`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`, `basket`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`. In the parent's frame.
+`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`, `basket`, `jerrycan`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`. In the parent's frame.
 
 **One record per item, or a group?** A group: one `goods` record per lean-to (or stall or heap) holding one row per item, every value written. A stamped band of 90 sacks is 90 rows, never "90 sacks here". Separate records with ids would double the size and nothing ever needs to link to one sack.
 
