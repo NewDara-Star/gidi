@@ -17,11 +17,18 @@ overlap now.
 ## Hand pass 3 (23 Oct): block B1's lanes and houses, from the Google study
 
 B1 (the expressway's east service road, Ladipo Street, Palm Avenue, Isolo Road) was studied on Google satellite at its
-real twin: a warehouse strip along the expressway, then the Ladipo-Odunsi grid, houses wall to wall. Eleven streets were
+real twin: a warehouse strip along the expressway, then the Ladipo-Odunsi grid, houses wall to wall. Ten streets were
 drawn by hand on that pattern (STREETS.md, "Lanes drawn by hand"). The copy draft could not follow lanes drawn by hand,
 so B1's houses were redrafted: the grid's blocks with the twin's own houses turned to face their lanes
 (`draft_buildings.py --frontage`), the strip with the twin's own sheds (`--sizes=600,20000`), the rest copied. B1 now
 holds 298 buildings at 53% cover (it was 132 at 24%). The block numbers in the table below are from the first draft.
+
+## Hand pass 4 (23 Oct): block B0 (Idi-Araba, LUTH), from the Google study
+
+Nine streets drawn by hand on the real twin's pattern (STREETS.md): LUTH's drives as service roads, six housing
+streets. Housing blocks redrafted with `--frontage` (50-65% cover); the campus (LUTH, the College of Medicine, Birch
+Freeman) keeps copied real buildings with its greens between (`draft_buildings.py`, copy). B0 now holds 343 buildings
+(it was 222). LUTH wants its own place record (campus wall and gates) in a later pass.
 
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
