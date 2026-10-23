@@ -2,6 +2,12 @@
 
 Drafted by `scripts/draft_buildings.py` (owner, 23 Oct: real footprints, then hand). 1457 houses in 41 blocks. Each block's number is its place in size order. After the run, 31 houses that crossed the district line were taken out (the tool now keeps only houses wholly inside), leaving 1426; the counts below are from before that.
 
+## Hand pass 1 (23 Oct): the houses that fell on a road
+
+The roads stay on their real lines; a copied house on a road fell in the wrong place, not the road. Of the 104 (the table's
+110 counted a few twice), 44 were set back by hand on clear land beside where they fell (within 15 m, not turned, each
+checked on a picture); 60 were left out, because the frontage beside them already holds its copied houses. 1,470 houses now.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
