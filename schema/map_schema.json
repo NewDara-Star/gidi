@@ -13,7 +13,10 @@
 
   "enums": {
     "side": ["left", "right"],
-    "road_kind": ["motorway", "trunk", "main_road", "local_main", "market_street", "home_street", "lane", "path", "ramp"],
+    "road_kind": ["motorway", "trunk", "main_road", "local_main", "service_road", "market_street", "home_street", "lane", "path", "ramp"],
+    "rail_kind": ["main_line", "siding"],
+    "rail_fence": ["none", "wall", "mesh", "broken_wall"],
+    "ballast": ["stone", "earth", "sand"],
     "road_surface": ["tar_new", "tar_worn", "sand", "earth", "laterite", "interlock", "concrete", "plank"],
     "sand_cover": ["none", "edges", "full"],
     "kerb": ["none", "drain_wall", "painted_bw", "raised_pavement"],
@@ -443,6 +446,28 @@
     "heap": {
       "layer": "plan", "prefix": "hp", "kit": true,
       "fields": {"kind": "enum:heap_kind", "at": "pt", "r": "num >0", "h": "num >0", "tarp_colour": "hex?"}
+    },
+    "rail": {
+      "layer": "plan", "prefix": "rl", "kit": true,
+      "fields": {
+        "kind": "enum:rail_kind",
+        "centreline": "line",
+        "tracks": "int >=1",
+        "corridor": "num >0",
+        "ballast": "enum:ballast",
+        "fence_left": "enum:rail_fence",
+        "fence_right": "enum:rail_fence"
+      }
+    },
+    "station": {
+      "layer": "plan", "prefix": "sn", "kit": true,
+      "fields": {
+        "name": "name?",
+        "rail": "id:rail",
+        "area": "rings",
+        "platforms": "rings",
+        "canopy": "bool"
+      }
     },
     "pole": {
       "layer": "plan", "prefix": "po", "kit": true,

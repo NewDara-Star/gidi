@@ -128,7 +128,7 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 #### road (`rd-`): roads, streets, lanes and paths
 | Field | Type, units | Example |
 |---|---|---|
-| `kind` | `motorway`, `trunk`, `main_road`, `local_main`, `market_street`, `home_street`, `lane`, `path`, `ramp` | `"home_street"` |
+| `kind` | `motorway`, `trunk`, `main_road`, `local_main`, `service_road` (the slow side road beside a motorway, behind its kerb or median), `market_street`, `home_street`, `lane`, `path`, `ramp` | `"home_street"` |
 | `name`? | Gidi name | `"Ìrètí Close"` |
 | `centreline` | line of [x, y] or [x, y, z] points, m | `[[12830,6088],[12850,6088]]` |
 | `width` | m, kerb to kerb (or edge to edge) | `5.2` |
@@ -143,6 +143,27 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 | `crossings` | list: `side`, `s`, `w`, `kind` (`slab_bridge`, `plank_bridge`, `gate_ramp`) | `{"side":"left","s":6.2,"w":1.4,"kind":"slab_bridge"}` |
 
 `left` and `right` are as you walk from the first centreline point to the last, seen on the board. `s` is metres along the centreline from its first point. Two roads join by sharing a point exactly; an end within 1 m of another road but not on it fails the check.
+
+#### rail (`rl-`): a railway line
+| Field | Type, units | Example |
+|---|---|---|
+| `kind` | `main_line`, `siding` | `"main_line"` |
+| `centreline` | line, m (the middle of the tracks) | `[[13050,5300],[13330,6100]]` |
+| `tracks` | how many tracks side by side | `2` |
+| `corridor` | m, the width of the rail land between its fences (or the open strip) | `18` |
+| `ballast` | `stone`, `earth`, `sand` | `"stone"` |
+| `fence_left`, `fence_right` | `none`, `wall`, `mesh`, `broken_wall` | `"broken_wall"` |
+
+A road crossing the rail shares a point with its centreline (a level crossing); a bridge over it is a road whose points carry z.
+
+#### station (`sn-`): a rail station
+| Field | Type, units | Example |
+|---|---|---|
+| `name`? | Gidi name | |
+| `rail` | id of the rail it stands on | `"rl-4k2m9q1x"` |
+| `area` | rings: the station's ground (forecourt, yard) | |
+| `platforms` | rings: each platform's edge | |
+| `canopy` | whether the platforms have a roof | `true` |
 
 #### plot (`pl-`)
 | Field | Type | Example |
