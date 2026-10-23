@@ -30,6 +30,12 @@ streets. Housing blocks redrafted with `--frontage` (50-65% cover); the campus (
 Freeman) keeps copied real buildings with its greens between (`draft_buildings.py`, copy). B0 now holds 343 buildings
 (it was 222). LUTH wants its own place record (campus wall and gates) in a later pass.
 
+## Hand pass 5 (23 Oct): block B2 (Ishaga Road to Lawanson), from the Google study
+
+Seven lanes drawn by hand on the real twin's pattern (STREETS.md): the north-south streets off Ishaga Road, Daniyan on
+the canal bank, two south-west streets towards Lawanson and Adedoyin's pocket. All four of B2's blocks redrafted with
+`--frontage` (54-68% cover per block); 367 buildings (136 before), 51% cover over the whole block.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
