@@ -871,8 +871,13 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
     gz = (lambda x, y: float(G.height(x, y))) if G else (lambda x, y: 0.0)
     lt = sp.get('litter') or {}
     if lt and G is not None:   # litter spread thin, gathered at the walls and in the ruts: each piece where the map has it
+        dust = (sp.get('ground_colours') or {}).get('dust') or roadbed.COLOURS['dust']
+        srgb = lambda h: [int(h.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4)]
         for lp in need(lt, 'pieces', 'litter of ' + sp['id']):
-            street.litter_piece(mb, lp['x'], lp['y'], gz(lp['x'], lp['y']) + 0.004, lp)
+            if lp.get('dust'):   # street dust settled on it: its colour drawn toward the ground's
+                c, d = srgb(lp['col']), lp['dust']
+                lp = dict(lp, col='#%02x%02x%02x' % tuple(round(a * (1 - d) + b * d) for a, b in zip(c, srgb(dust))))
+            street.litter_piece(mb, lp['x'], lp['y'], gz(lp['x'], lp['y']) + 0.004 - 0.02 * lp.get('buried', 0.0), lp)
     for vk, s_ in (('verge_right', -1), ('verge_left', 1)):   # a concrete apron along the road's edge, either side
         vr = sp.get(vk) or {}
         if vr.get('surface') != 'concrete_apron':
@@ -968,6 +973,19 @@ def median_wall(mb, md, gz, sid):
             mb.face([(xb + 0.004, y0 - 0.005, z), (xb + 0.004 + 0.03 * crack, y0 - 0.005, z), (xb + 0.004 + 0.03 * crack, y0 - 0.005, z + 0.06 + h),
                      (xb + 0.004, y0 - 0.005, z + 0.06 + h)], 'concrete', shade(face, 0.35), 0.8)
         xa += ln
+    for x, sw, sh, dk in md.get('streaks', []):   # grime run down the near face from its top: x, width, how far down, how dark
+        z = gz(x, md['y_m']) - 0.06
+        zt = z + 0.06 + h - c
+        mb.face([(x - sw / 2, y0 - 0.006, zt - sh), (x + sw / 2, y0 - 0.006, zt - sh * 0.7), (x + sw / 2, y0 - 0.006, zt), (x - sw / 2, y0 - 0.006, zt)],
+                'concrete', [shade(face, 1 - dk * 0.5), shade(face, 1 - dk * 0.5), shade(face, 1 - dk), shade(face, 1 - dk)], 0.7)
+    dr = md.get('drift')
+    if dr:   # sand and dust banked against its near foot: per point along it, how high (h_m share) and how far out (w_m share)
+        col = _hex(need(dr, 'colour', 'median drift'))
+        pts = need(dr, 'points', 'median drift')
+        for (xa_, ha, wa), (xb_, hb, wb) in zip(pts, pts[1:]):
+            za, zb = gz(xa_, y0 - 0.1), gz(xb_, y0 - 0.1)
+            mb.face([(xa_, y0 - 0.002, za + dr['h_m'] * ha), (xa_, y0 - dr['w_m'] * wa, za - 0.02), (xb_, y0 - dr['w_m'] * wb, zb - 0.02), (xb_, y0 - 0.002, zb + dr['h_m'] * hb)],
+                    'mud', [shade(col, 1.06), shade(col, 0.95), shade(col, 0.95), shade(col, 1.06)], 0.3)
 
 
 def street_lamp(mb, lp):
@@ -1085,7 +1103,7 @@ def spot_props(P, collection=None):
                                      cab_col=need(v, 'cab_colour', 'container truck') if tractor else None, tractor_kind=v.get('tractor_kind', 'cab_over'),
                                      bonnet_col=need(v, 'bonnet_colour', 'bonneted tractor') if tractor and bonneted else None, glass=v.get('glass', 'whole'),
                                      trailer=v.get('trailer', 'skeletal'), trailer_col=v.get('trailer_colour'), stripes=v.get('stripes', True),
-                                     box_marks=v.get('box_marks'), box_wear=v.get('box_wear'))
+                                     box_marks=v.get('box_marks'), box_wear=v.get('box_wear'), rec=v)
     for k, v in enumerate(P.get('parked_vehicles', [])):
         if v['kind'] == 'okada':
             a = math.radians(v.get('heading_deg', 0))

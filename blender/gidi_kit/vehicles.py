@@ -71,12 +71,21 @@ def body(mb, M, profile, width, mat, col, wear, r=0.12):
     mb.face(list(reversed(ri)), mat, col, wear)
 
 
-def wheel(mb, M, x, y, r, w, cond, rim='steel'):
+def wheel(mb, M, x, y, r, w, cond, rim='steel', rim_col=None):
     s = 1 if y > 0 else -1
     if cond == 'wreck':  # on blocks
         mb.box('concrete', L(M, x, y, 0.15), hex_rgb('#8a857a'), 0.8, size=(0.4, 0.2, 0.3))
         return
     tyre = hex_rgb('#1c1c1c' if cond in ('new', 'worn') else '#2e2d2b')
+    if rim_col is not None:   # the map's own rim colour: the tyre centred on y, a dished rim, hub and nuts on its outer face
+        parts.cyl(mb, 'rubber', L(M, x, y - w / 2, r, rx=-math.pi / 2), r, w, tyre, 0, seg=18)
+        yo, rx_ = y + s * w / 2, (-math.pi / 2 if s > 0 else math.pi / 2)
+        parts.cyl(mb, 'steel', L(M, x, yo - s * 0.01, r, rx=rx_), r * 0.66, 0.02, rim_col, 0.35, seg=16)
+        parts.cyl(mb, 'steel', L(M, x, yo, r, rx=rx_), r * 0.24, 0.05, shade(rim_col, 0.6), 0.5, seg=10)
+        for k in range(8):
+            a = k / 8 * math.tau
+            mb.box('steel', L(M, x + math.cos(a) * r * 0.34, yo + s * 0.015, r + math.sin(a) * r * 0.34), shade(rim_col, 0.5), 0.6, size=(0.04, 0.03, 0.04))
+        return
     parts.cyl(mb, 'rubber', L(M, x, y - s * w / 2, r, rx=-math.pi / 2), r, w, tyre, 0, seg=18)
     rim_c = hex_rgb({'steel': '#2a2a2a', 'alloy': '#c9ced2', 'chrome': '#e8ecef'}[rim])
     if cond == 'battered':
@@ -495,18 +504,25 @@ def wheelbarrow(mb, M, rng):
 CONTAINER_COLS = ['#8e2f22', '#1f4f8a', '#2f6b3a', '#7a7d80', '#5a1f2a', '#c8a020', '#e8e6df', '#b0551f']
 
 
-def container_box(mb, M, rng, length=12.2, col=None, wear=0.5, marks=None):
+def container_box(mb, M, rng, length=12.2, col=None, wear=0.5, marks=None, ribs=None):
     """A shipping container (corrugated sides, end doors with locking bars), base at M's origin,
     centred, x along. Plain: no line's name or mark (rule zero). marks: the map's painted panels and runs on its long
-    sides, each u (m from its middle, + to the front), z (m up from its base), w, h (m), colour, wear."""
+    sides, each u (m from its middle, + to the front), z (m up from its base), w, h (m), colour, wear. ribs: the map's
+    corrugation, per side (the -y side first) per rib [out (m, + out: the wave and the dents), lean (rad), shade (the fade)];
+    without them the ribs stand straight and even."""
     col = hex_rgb(col or rng.pick(CONTAINER_COLS))
     H, W = 2.59, 2.44
     mb.box('steel', L(M, 0, 0, H / 2), col, wear, size=(length, W, H))
-    k = -length / 2 + 0.3
+    k, j = -length / 2 + 0.3, 0
     while k < length / 2 - 0.2:  # corrugation ribs on both sides
-        for s_ in (-1, 1):
-            mb.box('steel', L(M, k, s_ * (W / 2 + 0.02), H / 2), shade(col, 0.85), wear, size=(0.12, 0.04, H - 0.2))
+        for i, s_ in enumerate((-1, 1)):
+            if ribs:
+                out, lean, f = ribs[i][j]
+                mb.box('steel', L(M, k, s_ * (W / 2 + 0.02 + out), H / 2, rx=s_ * lean), shade(col, 0.85 * f), wear, size=(0.14, 0.05, H - 0.2))
+            else:
+                mb.box('steel', L(M, k, s_ * (W / 2 + 0.02), H / 2), shade(col, 0.85), wear, size=(0.12, 0.04, H - 0.2))
         k += 0.3
+        j += 1
     for y in (-0.6, -0.2, 0.2, 0.6):  # door locking bars at the back
         mb.box('steel', L(M, -length / 2 - 0.03, y, H / 2), hex_rgb('#3a3a3a'), wear, size=(0.04, 0.05, H - 0.3))
     mb.box('steel', L(M, 0, 0, H + 0.02), shade(col, 0.8), wear + 0.2, size=(length, W, 0.04))
@@ -516,22 +532,26 @@ def container_box(mb, M, rng, length=12.2, col=None, wear=0.5, marks=None):
 
 
 def container_truck(mb, M, rng, cond='worn', loaded=None, box_col=None, tractor=True, cab_col=None, tractor_kind='cab_over', bonnet_col=None,
-                    glass='whole', trailer='skeletal', trailer_col=None, stripes=True, box_marks=None, box_wear=None):
+                    glass='whole', trailer='skeletal', trailer_col=None, stripes=True, box_marks=None, box_wear=None, rec=None):
     """An articulated container truck, 16.5 m: a cab-over tractor and a skeletal trailer carrying a
     40 ft container (or empty), the Apapa queue's vehicle. Front at +x. tractor=False: the trailer left standing on its
     legs, no cab. cab_col, box_col: the map's colours, or None to pick them from rng. From the map too: tractor_kind
     ('cab_over', or 'bonneted': the old long-nosed tractor, its bonnet_col and its glass 'whole' or 'gone'), trailer
     ('skeletal' or 'flatbed': a deck on deep side beams), trailer_col (its steel; default dark), stripes (the side rails
-    in warning stripes), box_marks (container_box's marks) and box_wear (the box's own wear, else the truck's)."""
+    in warning stripes), box_marks (container_box's marks) and box_wear (the box's own wear, else the truck's). rec: the
+    rest of the map's record, read only when given: rim_colour, box_ribs (container_box's ribs), tractor_marks (rust and
+    patches on the bonneted tractor: part 'cab' or 'wing', x along, z, w, h, colour), beam_marks (the same on a flatbed's
+    side beams: x, z, w, h, colour)."""
     wear = WEAR[cond]
-    tr = dict(trailer=trailer, trailer_col=trailer_col, stripes=stripes, box_marks=box_marks, box_wear=box_wear)
+    rec = rec or {}
+    tr = dict(trailer=trailer, trailer_col=trailer_col, stripes=stripes, box_marks=box_marks, box_wear=box_wear, rec=rec)
     if not tractor:
         _trailer(mb, M, rng, cond, wear, loaded, box_col, **tr)
         for s_ in (-1, 1):   # the landing legs it stands on at the front
             mb.box('steel', L(M, 2.6, s_ * 0.8, 0.65), hex_rgb('#2a2a2a'), wear, size=(0.15, 0.15, 1.3))
         return
     if tractor_kind == 'bonneted':
-        _bonneted_tractor(mb, M, cond, wear, hex_rgb(cab_col), hex_rgb(bonnet_col or cab_col), glass)
+        _bonneted_tractor(mb, M, cond, wear, hex_rgb(cab_col), hex_rgb(bonnet_col or cab_col), glass, rec)
         _trailer(mb, M, rng, cond, wear, loaded, box_col, **tr)
         return
     cab = hex_rgb(cab_col or rng.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc']))
@@ -555,39 +575,55 @@ def container_truck(mb, M, rng, cond='worn', loaded=None, box_col=None, tractor=
 DARK_GAP = (0.03, 0.028, 0.026)   # an empty window frame
 
 
-def _bonneted_tractor(mb, M, cond, wear, cab, bonnet, glass):
-    """The old long-nosed tractor of the Lagos container queue, short in the wheelbase: a bonnet and wide front wings
-    over the front axle, a square steel cab behind them (roof at 2.75 m), the chassis running back under the fifth wheel
-    to two drive axles. Front at +x 6.9; the fifth wheel at x 2.3, under the box's front."""
+def _bonneted_tractor(mb, M, cond, wear, cab, bonnet, glass, rec):
+    """The old long-nosed tractor of the Lagos container queue, short in the wheelbase: a rounded bonnet and wide front
+    wings arched over the front wheels, a slatted grille, a square steel cab behind them (roof at 2.75 m) with mirrors on
+    long arms, the chassis running back under the fifth wheel to two drive axles. Front at +x 6.9; the fifth wheel at x
+    2.3, under the box's front. rec: rim_colour, tractor_marks (see container_truck)."""
     dark = hex_rgb('#262422')
+    rim = hex_rgb(rec['rim_colour']) if rec.get('rim_colour') else None
     mb.box('steel', L(M, 3.6, 0, 0.95), dark, wear, size=(6.4, 1.0, 0.3))   # chassis
-    mb.box('carpaint', L(M, 6.05, 0, 1.38), bonnet, wear, size=(1.6, 1.25, 0.65))   # the bonnet
-    mb.box('carpaint', L(M, 6.0, 0, 1.73), shade(bonnet, 0.92), wear, size=(1.5, 1.05, 0.06))
-    for s_ in (-1, 1):   # the wings over the front wheels, down to the step
-        mb.box('carpaint', L(M, 6.1, s_ * 1.0, 1.2), bonnet, wear, size=(1.5, 0.42, 0.5))
-        mb.box('carpaint', L(M, 6.1, s_ * 1.05, 0.85), shade(bonnet, 0.8), wear, size=(1.3, 0.32, 0.2))
-    mb.box('steel', L(M, 6.88, 0, 1.3), shade(bonnet, 0.55), wear, size=(0.06, 1.0, 0.75))   # the grille
-    mb.box('steel', L(M, 6.95, 0, 0.78), hex_rgb('#3a3a3a'), wear, size=(0.14, 2.3, 0.22))   # bumper
+    body(mb, M, [(5.3, 1.05), (6.8, 1.05), (6.88, 1.3), (6.8, 1.62), (6.5, 1.76), (5.3, 1.8)], 1.2, 'carpaint', bonnet, wear, r=0.14)   # the bonnet
+    ring = lambda rr: [(6.1 + rr * math.cos(math.pi - k * math.pi / 8), 0.52 + rr * math.sin(math.pi - k * math.pi / 8)) for k in range(9)]
+    inner, outer = ring(0.66), ring(0.8)
+    # each wing in convex pieces (the arch would fold a single outline): the lip round the arch, the panel filled out to
+    # its front and back edges, and the flat top
+    wing = [[inner[k], inner[k + 1], outer[k + 1], outer[k]] for k in range(8)]
+    wing += [[outer[k], outer[k + 1], (5.3, outer[k + 1][1]), (5.3, outer[k][1])][::-1] for k in range(4)]
+    wing += [[outer[k], (6.95, outer[k][1]), (6.95, outer[k + 1][1]), outer[k + 1]][::-1] for k in range(4, 8)]
+    wing += [[(5.3, 1.25), (6.95, 1.25), (6.95, 1.3), (6.75, 1.45), (5.3, 1.5)]]
+    for s_ in (-1, 1):   # the wings, arched over the front wheels, and the step behind each
+        for pc in wing:
+            body(mb, L(M, 0, s_ * 0.98, 0), pc, 0.4, 'carpaint', bonnet, wear, r=0.01)
+        mb.box('steel', L(M, 5.15, s_ * 1.05, 0.72), dark, wear, size=(0.4, 0.3, 0.05))
+    mb.box('steel', L(M, 6.9, 0, 1.3), shade(bonnet, 0.35), wear, size=(0.04, 0.9, 0.6))   # the grille: dark, slatted
+    for k in range(7):
+        mb.box('steel', L(M, 6.93, -0.39 + k * 0.13, 1.3), shade(bonnet, 0.7), wear, size=(0.03, 0.04, 0.58))
+    mb.box('steel', L(M, 6.98, 0, 0.8), hex_rgb('#3a3a3a'), wear, size=(0.14, 2.3, 0.22))   # bumper
     for s_ in (-1, 1):
-        lamp(mb, M, 6.92, s_ * 0.7, 1.55, 0.18, 0.18, 'head')
-    mb.box('carpaint', L(M, 4.55, 0, 1.95), cab, wear, size=(1.5, 2.3, 1.6))   # the cab, its windows dark or empty
-    mb.box('carpaint', L(M, 4.55, 0, 2.77), shade(cab, 0.9), wear, size=(1.55, 2.3, 0.06))
+        parts.cyl(mb, 'steel', L(M, 6.9, s_ * 0.78, 1.5, ry=math.pi / 2), 0.12, 0.08, hex_rgb('#d8d4c8'), 0.4, seg=10)   # headlamp rims
+    body(mb, M, [(3.8, 1.05), (5.3, 1.05), (5.32, 2.62), (5.2, 2.75), (3.8, 2.75)], 2.3, 'carpaint', cab, wear, r=0.08)   # the cab
     gc = hex_rgb('#1c2830') if glass == 'whole' else DARK_GAP
     for s_ in (-1, 1):
-        glass_panel(mb, M, [(p[0], s_ * 1.155, p[1]) for p in ((4.1, 2.05), (5.15, 2.05), (5.15, 2.6), (4.1, 2.6))][::s_], gc)
-        mb.box('steel', L(M, 4.85, s_ * 1.17, 1.9), shade(cab, 0.75), wear, size=(0.02, 0.02, 0.5))   # the door's handle line
-        mb.box('steel', L(M, 5.5, s_ * 1.3, 2.25), dark, wear, size=(0.05, 0.05, 0.55))   # mirror arm
-    glass_panel(mb, M, [(5.31, -1.0, 2.05), (5.31, 1.0, 2.05), (5.31, 1.0, 2.62), (5.31, -1.0, 2.62)], gc)
-    for s_ in (-1, 1):   # the fuel tank under the cab door, the steps
-        parts.cyl(mb, 'steel', L(M, 4.0, s_ * 0.95, 0.9, ry=math.pi / 2), 0.28, 1.2, hex_rgb('#5e5a52'), wear, seg=10)
+        glass_panel(mb, M, [(p[0], s_ * 1.156, p[1]) for p in ((4.1, 2.05), (5.12, 2.05), (5.12, 2.58), (4.1, 2.58))][::s_], gc)
+        mb.box('steel', L(M, 3.95, s_ * 1.16, 1.9), shade(cab, 0.6), wear, size=(0.02, 0.01, 1.5))   # the door's rear seam
+        mb.box('steel', L(M, 4.25, s_ * 1.17, 1.85), shade(cab, 0.7), wear, size=(0.16, 0.03, 0.04))   # its handle
+        parts.bar(mb, 'steel', M @ Vector((5.25, s_ * 1.15, 2.5)), M @ Vector((5.45, s_ * 1.45, 2.45)), 0.02, dark, 0.5)   # mirror arm
+        mb.box('steel', L(M, 5.45, s_ * 1.47, 2.2), dark, wear, size=(0.04, 0.2, 0.45))   # the mirror
+    glass_panel(mb, M, [(5.33, -1.0, 2.05), (5.33, 1.0, 2.05), (5.33, 1.0, 2.58), (5.33, -1.0, 2.58)], gc)
+    for s_ in (-1, 1):   # the fuel tank under the cab door
+        parts.cyl(mb, 'steel', L(M, 3.3, s_ * 0.95, 0.9, ry=math.pi / 2), 0.28, 1.0, hex_rgb('#5e5a52'), wear, seg=10)
     mb.box('steel', L(M, 2.3, 0, 1.25), hex_rgb('#3a3a3a'), wear, size=(1.2, 2.0, 0.12))   # fifth wheel
+    for mk in rec.get('tractor_marks', []):   # rust and patches on the cab and wings, both sides
+        yo = 1.157 if mk['part'] == 'cab' else 1.19
+        for s_ in (-1, 1):
+            mb.box('paint', L(M, mk['x'], s_ * yo, mk['z'] + mk['h'] / 2), hex_rgb(mk['colour']), 0.8, size=(mk['w'], 0.006, mk['h']))
     for x in (6.1, 2.9, 1.7):
         for s_ in (-1, 1):
-            wheel(mb, M, x, s_ * 1.05, 0.52, 0.32, cond)
+            wheel(mb, M, x, s_ * 1.05, 0.52, 0.32, cond, rim_col=rim)
 
 
-
-def _trailer(mb, M, rng, cond, wear, loaded, box_col, trailer='skeletal', trailer_col=None, stripes=True, box_marks=None, box_wear=None):
+def _trailer(mb, M, rng, cond, wear, loaded, box_col, trailer='skeletal', trailer_col=None, stripes=True, box_marks=None, box_wear=None, rec=None):
     """The container trailer on three axles at its back, the box on it (centred at x=-2.5): skeletal (a spine and its
     rails) or a flatbed (a deck on deep side beams, cross members showing under it)."""
     steel = hex_rgb(trailer_col) if trailer_col else hex_rgb('#2a2a2a')
@@ -598,11 +634,15 @@ def _trailer(mb, M, rng, cond, wear, loaded, box_col, trailer='skeletal', traile
             mb.box('steel', L(M, 3.0, s_ * 1.17, 1.22), steel, wear, size=(1.6, 0.1, 0.2))
         for k in range(10):   # cross members under the deck
             mb.box('steel', L(M, -8.4 + k * 1.2, 0, 1.12), shade(steel, 0.6), wear, size=(0.12, 2.2, 0.3))
+        for mk in (rec or {}).get('beam_marks', []):   # rust, a painted number, patches on the beams
+            for s_ in (-1, 1):
+                mb.box('paint', L(M, mk['x'], s_ * 1.225, mk['z'] + mk['h'] / 2), hex_rgb(mk['colour']), 0.8, size=(mk['w'], 0.006, mk['h']))
     else:
         mb.box('steel', L(M, -2.5, 0, 1.25), steel, wear, size=(12.4, 0.9, 0.25))
+    rim = hex_rgb(rec['rim_colour']) if rec and rec.get('rim_colour') else None
     for x in (-6.2, -7.5, -8.8):
         for s_ in (-1, 1):
-            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond)
+            wheel(mb, M, x, s_ * 1.05, 0.5, 0.3, cond, rim_col=rim)
     if trailer != 'flatbed':
         for x in (2.0, -7.0):
             mb.box('steel', L(M, x, 0, 1.3), steel, wear, size=(0.3, 2.4, 0.2))
@@ -610,7 +650,7 @@ def _trailer(mb, M, rng, cond, wear, loaded, box_col, trailer='skeletal', traile
             for k in range(16):
                 mb.box('steel', L(M, -8.6 + k * 0.76, s_ * 1.2, 1.3), hex_rgb('#e0b020' if k % 2 else '#e8e6df') if stripes else steel, wear, size=(0.76, 0.05, 0.16))
     if loaded if loaded is not None else rng.chance(0.85):
-        container_box(mb, L(M, -2.5, 0, 1.42), rng, 12.2, col=box_col, wear=wear if box_wear is None else box_wear, marks=box_marks)
+        container_box(mb, L(M, -2.5, 0, 1.42), rng, 12.2, col=box_col, wear=wear if box_wear is None else box_wear, marks=box_marks, ribs=(rec or {}).get('box_ribs'))
     for s_ in (-1, 1):
         lamp(mb, M, -8.95, s_ * 1.0, 1.1, 0.2, 0.12, 'tail')
 

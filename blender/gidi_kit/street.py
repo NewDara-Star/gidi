@@ -353,8 +353,9 @@ LITTER = [('#e8f0f4', 'sachet', 5), ('#9ccbe8', 'sachet', 2), ('#1c1c1c', 'bag',
 
 
 def litter_piece(mb, x, y, z, rec):
-    """One piece of litter at x, y, z. rec: what it is (kind: sachet, bag, bottle, pack, can, husk, sheet), its colour col,
-    its turn rz, and its own shape (a sachet's tilt; a bag's r, h, r2; a sheet's w, l, fold, tilt, plastic), or for the old city's generators an Rng it is drafted
+    """One piece of litter at x, y, z. rec: what it is (kind: sachet, bag, bottle, pack, can, husk, sheet, crumb), its colour col,
+    its turn rz, and its own shape (a sachet's tilt; a bag's r, h, r2; a sheet's w, l, fold, tilt, plastic; a crumb's s, h, tilt; on any piece, dust and buried, read where it
+    is laid), or for the old city's generators an Rng it is drafted
     from (from LITTER's mix)."""
     if not isinstance(rec, dict):
         from . import draft
@@ -382,6 +383,8 @@ def litter_piece(mb, x, y, z, rec):
         mb.face([m @ Vector(p) for p in ((a, -w, 0.003), (k, -w, 0.003), (k, w, 0.003), (a, w, 0.003))], mat_, c, 0.2)
         if fd > 0.05:
             mb.face([m @ Vector(p) for p in ((k, -w, 0.003), (e.x, -w, e.z + 0.003), (e.x, w, e.z + 0.003), (k, w, 0.003))], mat_, shade(c, 0.85), 0.2)
+    elif kind == 'crumb':  # a small broken bit (carton, nylon, rag, charcoal), s across, h high, tipped
+        mb.box('cloth', m @ Matrix.Rotation(rec.get('tilt', 0.0), 4, 'X'), c, 0.4, size=(rec['s'], rec['s'] * 0.7, rec['h']))
     else:
         mb.box('cloth', m, c, 0, size=(0.2, 0.05, 0.03))
 

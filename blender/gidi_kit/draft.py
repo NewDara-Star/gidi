@@ -1121,7 +1121,16 @@ def street(sp, base_dir):
             for _ in range(int(bd['per_m2'] * (bb - ba) * abs(bd['y1'] - bd['y0']))):
                 x, t = br.between(ba, bb), br.random()
                 y = bd['y0'] + (bd['y1'] - bd['y0']) * t ** bd.get('gather', 1.0)   # gather > 1: thicker toward y0
-                lt['pieces'].append(dict(litter_sheet(br, bd.get('colours')) if br.chance(bd.get('sheets', 0.6)) else litter_piece(br), x=x, y=y))
+                if br.chance(bd.get('crumbs', 0.0)):   # a small dark broken bit
+                    pc = dict(kind='crumb', col=br.pick(bd.get('crumb_colours') or ['#2e2a26', '#3a3530', '#4a4238', '#5a5248']), rz=round(br.between(0, math.tau), 3),
+                              s=round(br.between(0.025, 0.09), 3), h=round(br.between(0.006, 0.025), 3), tilt=round(br.between(-0.3, 0.3), 3))
+                else:
+                    pc = litter_sheet(br, bd.get('colours')) if br.chance(bd.get('sheets', 0.6)) else litter_piece(br)
+                if bd.get('dust'):   # how much street dust lies on it, and how far it is trodden in
+                    pc['dust'] = round(br.between(*bd['dust']), 3)
+                if bd.get('buried'):
+                    pc['buried'] = round(br.between(*bd['buried']), 3)
+                lt['pieces'].append(dict(pc, x=x, y=y))
     for vk in ('verge_right', 'verge_left'):
         vr = sp.get(vk) or {}
         if vr.get('surface') == 'concrete_apron':
@@ -1153,6 +1162,16 @@ def street(sp, base_dir):
                                  round(mr.between(0.1, 0.9), 3) if mr.chance(md.get('chipped', 0.2)) else 0.0,
                                  round(mr.between(0.3, 1.0), 3) if mr.chance(md.get('cracked', 0.5)) else 0.0])
             x += ln
+        if md.get('grime'):   # grime runs down its near face: where, how wide, how far down, how dark
+            gr = rng.child('median grime')
+            md['streaks'] = [[round(gr.between(md['from_x'], md['upto_x']), 3), round(gr.between(0.05, 0.5), 3), round(gr.between(0.1, md['h_m'] * 0.9), 3),
+                              round(gr.between(0.1, 0.45), 3)] for _ in range(int(md['grime'] * (md['upto_x'] - md['from_x'])))]
+        if md.get('drift'):   # the sand banked at its foot: every 0.5 m, how high and how far out (shares of h_m and w_m)
+            dr_, x = rng.child('median drift'), md['from_x']
+            md['drift']['points'] = []
+            while x <= md['upto_x']:
+                md['drift']['points'].append([round(x, 2), round(dr_.between(0.3, 1.0), 3), round(dr_.between(0.5, 1.0), 3)])
+                x += 0.5
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -1240,6 +1259,22 @@ def props(P):
             if v.get('tractor', False):
                 cab = r.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc'])
                 v['cab_colour'] = v.get('cab_colour') or cab   # a colour the map gave stays
+            if v.get('box_wave') or v.get('box_fade') or v.get('box_dents'):   # the box's corrugation, rib by rib, per side
+                rr, n = rng.child('container ribs', k), 0
+                u = -12.2 / 2 + 0.3
+                while u < 12.2 / 2 - 0.2:
+                    n += 1
+                    u += 0.3
+                v['box_ribs'] = []
+                for side in range(2):
+                    ph, ph2 = rr.between(0, math.tau), rr.between(0, math.tau)
+                    dents = [(rr.between(0, n), rr.between(1.0, 3.0), rr.between(0.02, 0.05)) for _ in range(v.get('box_dents', 0))]
+                    ribs = []
+                    for j in range(n):
+                        out = v.get('box_wave', 0.0) * 0.02 * math.sin(j * 0.9 + ph) - sum(d * max(0.0, 1 - abs(j - c) / w) for c, w, d in dents)
+                        f = 1 + v.get('box_fade', 0.0) * 0.18 * (math.sin(j * 0.21 + ph2) + rr.between(-0.4, 0.4))
+                        ribs.append([round(out, 4), round(v.get('box_wave', 0.0) * rr.between(-0.02, 0.02), 4), round(f, 3)])
+                    v['box_ribs'].append(ribs)
             if not v.get('colour'):
                 from .vehicles import CONTAINER_COLS
                 v['colour'] = r.pick(CONTAINER_COLS)
