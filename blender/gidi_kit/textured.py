@@ -284,7 +284,7 @@ def apply(base=None):
     has = lambda s: s and os.path.isdir(os.path.join(base, s))
     for mat in list(bpy.data.materials):
         name = mat.name
-        if name == 'roadbed':
+        if name == 'roadbed' or name.startswith('roadbed.'):   # a further street's ground: its own copy (oldtown.street_piece)
             _roadbed(mat, base)
             done.append(name)
             continue
