@@ -57,6 +57,12 @@ Three lanes drawn by hand on the real twin's pattern (STREETS.md). The block red
 Lanes from z17 Google shots (STREETS.md); houses redrafted with `--frontage --sizes=12,20000` so the factories by the
 expressway and the big halls come through: B6 241 buildings (59% cover), B7 116 (62%), B9 152 (60%).
 
+## Hand pass 10 (23 Oct): block B1 redone from a close-zoom study
+
+B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in place of the 10 offset lanes of hand pass
+3). Its houses were cleared and redrafted: the grid with `--frontage --sizes=12,20000`, the warehouse strip with
+`--frontage --sizes=300,20000`. B1 now holds 347 buildings at 54% cover.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
