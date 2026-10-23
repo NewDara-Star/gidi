@@ -1,6 +1,10 @@
 """A district's first draft of buildings, from its real blocks' own houses (owner, 23 Oct: "real footprints, then hand").
 
-  ~/.venvs/gidi/bin/python scripts/draft_buildings.py map/d15 [--blocks=3,7] [--dry] [--picture=<png>]
+  ~/.venvs/gidi/bin/python scripts/draft_buildings.py map/d15 [--blocks=3,7] [--frontage] [--dry]
+
+--frontage lines the named blocks' street edges with the twin place's own houses turned to face the street (for
+blocks cut by hand-drawn lanes; see frontage()); --sizes=a,b takes only real buildings of a to b m2 (a warehouse
+strip: its sheds; default 12,600, houses).
 
 A Gidi block (the land between the district's roads) is its real block at 1:3: the streets lie on the real lines. Houses
 stay house-size, so a block takes its real block's own houses, moved, never scaled or turned. Anchors are set round the
@@ -9,7 +13,9 @@ same place relative to the real anchor 3c (a house moves by -2c). Near each anch
 the Gidi street runs through c, so frontages keep their real setbacks and angles; the real block's dropped streets come
 through as gaps, where lanes are drawn by hand. The real street is where the real houses are not, so each anchor's
 fabric is nudged (up to SHIFT m) to where the Gidi roads near it are clearest, and a house still caught by a road is
-moved straight away from it (up to NUDGE m): the road lines carry their own small errors, tripled at real size.
+moved straight away from it (up to NUDGE m): the road lines carry their own small errors, tripled at real size. A house
+still caught is set back on clear land beside where it fell (up to SETBACK m), and houses that overlap are trimmed to a
+shared party wall: the road stays on its real line (hand passes 1 and 2, 23 Oct).
 
 Written: one `building` record per kept house, its footprint only, with a `note`. Everything else (kind, storeys, roof,
 finish, ground floor) is left missing, so the board shows it amber until the hand pass sets it from the shots. A house
@@ -29,7 +35,7 @@ import sys
 
 from pyproj import Transformer
 from shapely.geometry import LineString, Point, Polygon, shape
-from shapely.affinity import translate
+from shapely.affinity import rotate, translate
 from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
@@ -37,7 +43,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.expanduser('~/Real-world/research/data/ms-buildings/')
 FU, FV = 500525.0, 707825.0            # the frame's south-west corner, UTM 31N (web/frame-study.js `real_sw_utm31`)
 SCALE, RH = 3, 10500 * 3
-STEP, SHIFT, NUDGE = 30.0, 7, 6.0
+STEP, SHIFT, NUDGE, SETBACK = 30.0, 7, 6.0, 15.0
+FRONT, HOUSE = 0.7, [12, 600]        # frontage: front this far in from the street edge; a house's footprint, m2
 WIDTH = {'motorway': 25, 'trunk': 21.5, 'main_road': 12, 'local_main': 8, 'service_road': 7, 'market_street': 8,
          'home_street': 6, 'lane': 4, 'path': 2, 'ramp': 6}          # where a road's width is still missing
 RAIL_CORRIDOR = 18.0                                               # where a rail's corridor is still missing
@@ -105,13 +112,96 @@ def fill(g, real, tree, blocked, outline):
             continue
         if h.intersection(blocked).area > 0.5:
             h2 = nudge(h, blocked)
+            if h2 is None or not (free(h2) and outline.contains(h2)):
+                h2 = set_back(h, g, blocked, outline, keep)
             if h2 is None:
                 clash.append(h)
-            elif free(h2) and outline.contains(h2):
+            else:
                 keep.append(h2)
         elif free(h):
             keep.append(h)
     return keep, clash
+
+
+def axis(f):
+    """A real house's street-facing side: the short side of its smallest box (angle in degrees, width, depth)."""
+    c = list(f.minimum_rotated_rectangle.exterior.coords)
+    e = [(c[i + 1][0] - c[i][0], c[i + 1][1] - c[i][1]) for i in range(2)]
+    L = [math.hypot(*v) for v in e]
+    k = 0 if L[0] <= L[1] else 1
+    return math.degrees(math.atan2(e[k][1], e[k][0])), L[k], L[1 - k]
+
+
+def frontage(g, real, tree, outline):
+    """A block cut by hand-drawn lanes (owner, 23 Oct: "lanes on dropped streets"): its edges are lined with the twin
+    place's own real houses, nearest the twin point first, each turned to face its street, its front FRONT m in from the
+    street edge, wall to wall. Copied fabric cannot follow lanes drawn by hand (the real streets near the twin point are
+    not where the lanes are), so here the houses follow the lanes and keep only their real shapes and sizes."""
+    keep, used, ring, t = [], set(), g.exterior, 0.0
+    inside = g.buffer(0.01)
+    while t < ring.length - 4:
+        p, q = ring.interpolate(t), ring.interpolate(min(t + 2, ring.length))
+        ang = math.degrees(math.atan2(q.y - p.y, q.x - p.x))
+        ux, uy = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+        twin = Point(SCALE * p.x, SCALE * p.y)
+        cand = sorted((i for i in tree.query(twin.buffer(80)) if i not in used and HOUSE[0] < real[i].area < HOUSE[1]),
+                      key=lambda i: real[i].centroid.distance(twin))
+        placed = False
+        for i in cand[:12]:
+            a, wid, dep = axis(real[i])
+            h = rotate(real[i], ang - a, origin='centroid')
+            c = h.centroid
+            for sgn in (1, -1):
+                tx = p.x + ux * wid / 2 - sgn * uy * (dep / 2 + FRONT)
+                ty = p.y + uy * wid / 2 + sgn * ux * (dep / 2 + FRONT)
+                h2 = translate(h, tx - c.x, ty - c.y)
+                if inside.contains(h2) and outline.contains(h2) and not any(h2.intersection(o).area > 0.5 for o in keep):
+                    keep.append(h2)
+                    used.add(i)
+                    t += wid + 0.3
+                    placed = True
+                    break
+            if placed:
+                break
+        if not placed:
+            t += 1.0
+    return keep, []
+
+
+def set_back(h, g, blocked, outline, keep):
+    """A house the road lines catch, set back on clear land beside where it fell: the nearest spot within SETBACK m
+    (rings of 0.5 m, not turned) that is half a metre clear of every road, inside the district, on its own block and
+    clear of the houses kept; else None (hand pass 1, 23 Oct: the road stays on its real line)."""
+    gap = blocked.buffer(0.5)
+    for r in range(1, int(SETBACK * 2) + 1):
+        for a in range(0, 360, 10):
+            h2 = translate(h, r / 2 * math.cos(math.radians(a)), r / 2 * math.sin(math.radians(a)))
+            if (g.contains(h2.centroid) and outline.contains(h2) and not h2.intersects(gap)
+                    and not any(h2.intersection(o).area > 0.05 * min(h2.area, o.area) for o in keep)):
+                return h2
+    return None
+
+
+def party_walls(new, have):
+    """Neighbours share a wall, never pass through each other (hand pass 2, 23 Oct): each new house that overlaps a
+    bigger one, or any house already in the map, is trimmed back to that house's wall."""
+    from shapely.strtree import STRtree as T
+    allh = have + new
+    tree = T(allh)
+    for k in sorted(range(len(new)), key=lambda k: new[k].area):
+        h = new[k]
+        for j in tree.query(h):
+            o = allh[j]
+            if o is h or (j >= len(have) and o.area < h.area):
+                continue
+            if h.intersection(o).area > 0.05:
+                d = h.difference(o).buffer(-0.05).buffer(0.05)
+                if d.is_empty:
+                    h = d
+                    break
+                h = max(getattr(d, 'geoms', [d]), key=lambda q: q.area).simplify(0.1)
+        new[k] = h
+    return [h for h in new if not h.is_empty and h.area >= 12]      # a house swallowed by its neighbour is gone
 
 
 def nudge(h, blocked):
@@ -172,11 +262,14 @@ def main():
         if any(g.intersects(h) for h in have):
             report.append((i, g, None, None))
             continue
-        keep, clash = fill(g, real, tree, blocked, outline)
+        if 'sizes' in opt:                                   # e.g. --sizes=600,20000: a warehouse strip's sheds only
+            HOUSE[:] = [float(v) for v in opt['sizes'].split(',')]
+        keep, clash = (frontage(g, real, tree, outline) if opt.get('frontage') else fill(g, real, tree, blocked, outline))
         new += keep
         report.append((i, g, keep, clash))
         print(f'block {i}: {len(keep)} houses, {round(sum(h.area for h in keep) / g.area * 100)}% covered, {len(clash)} on a road',
               flush=True)
+    new = party_walls(new, have)
     seen = {r['id'] for r in recs}
     for h in new:
         i = bid(h)
