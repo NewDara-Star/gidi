@@ -76,11 +76,13 @@ window.MAPEDIT = (() => {
     }
     return o;
   }
-  const GEOM = { road: "centreline", plot: "outline", building: "footprint", wall: "line", frontage: "line", place: "area", district: "outline" };
+  const GEOM = { road: "centreline", rail: "centreline", station: "area", plot: "outline", building: "footprint", wall: "line", frontage: "line", place: "area", district: "outline" };
   const POINTY = new Set(["stall", "pole", "tree", "vehicle", "furniture", "heap"]);
   function editPts(r) {   // the points a handle edits, and whether they close
     if (!r) return null;
     if (r.type === "road" && Array.isArray(r.centreline)) return { pts: r.centreline, closed: false, set: (q, P) => { q.centreline = P; } };
+    if (r.type === "rail" && Array.isArray(r.centreline)) return { pts: r.centreline, closed: false, set: (q, P) => { q.centreline = P; } };
+    if (r.type === "station" && Array.isArray(r.area) && r.area[0]) return { pts: r.area[0], closed: true, set: (q, P) => { q.area = [P, ...q.area.slice(1)]; } };
     if ((r.type === "wall" || r.type === "frontage") && Array.isArray(r.line)) return { pts: r.line, closed: false, set: (q, P) => { q.line = P; } };
     if (r.type === "building" && Array.isArray(r.footprint)) return { pts: r.footprint, closed: true, set: (q, P) => { q.footprint = P; } };
     if (r.type === "plot" && Array.isArray(r.outline)) return { pts: r.outline, closed: true, set: (q, P) => { q.outline = P; } };
@@ -727,6 +729,12 @@ window.MAPEDIT = (() => {
       path(ctx, c); const b = badness(r);
       ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : "rgba(255,255,255,.7)"; ctx.lineWidth = (b ? 2 : 1) * px; ctx.setLineDash(r.width > 0 ? [6 * px, 5 * px] : [3 * px, 3 * px]); ctx.stroke(); ctx.setLineDash([]);
       if (V.s > 1.5) for (const q of [c[0], c[c.length - 1]]) { ctx.beginPath(); ctx.arc(q[0], q[1], 2.5 * px, 0, 7); ctx.fillStyle = css("--ink"); ctx.fill(); }
+    }
+    for (const r of recsOf(["station"])) for (const ring of [...(Array.isArray(r.area) ? r.area : []), ...(Array.isArray(r.platforms) ? r.platforms : [])]) if (Array.isArray(ring) && ring.length > 2 && inView(ring)) { path(ctx, ring, true); ctx.fillStyle = "rgba(120,120,130,.35)"; ctx.fill(); edge(r, "#555", px); }
+    for (const r of recsOf(["rail"])) {   // the corridor, then the sleepers' dash down the middle
+      const c = r.centreline; if (!Array.isArray(c) || c.length < 2 || !inView(c)) continue;
+      if (r.corridor > 0) { path(ctx, c); ctx.strokeStyle = "rgba(110,100,90,.45)"; ctx.lineWidth = r.corridor; ctx.stroke(); }
+      path(ctx, c); ctx.setLineDash([4 * px, 3 * px]); edge(r, "#222", 2.5 * px); ctx.setLineDash([]);
     }
     // the ground: painted patches (later order over earlier) and relief grids
     for (const r of recsOf(["ground"]).sort((a, b) => (a.order || 0) - (b.order || 0))) for (const ring of (Array.isArray(r.rings) ? r.rings : [])) {
