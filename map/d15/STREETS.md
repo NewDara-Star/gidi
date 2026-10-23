@@ -283,3 +283,28 @@ south-east streets running down to Lawanson Road; and a pocket by Adedoyin Road.
 | rd-nybc6644 | Alves Street | lane | Onipede's side down towards Lawanson (ends in the block) |
 | rd-b9u5qmox | Odunsi Street | lane | south of the canal down towards Lawanson (ends in the block) |
 | rd-oiymgele | Adedoyin Road | lane | the pocket by Aborishade, west to east |
+
+**Block B3** (Ogunmokun Street, the Agege Motor Road, the Ikorodu Road edge and Kayode Street; the rail runs through
+it). The real twin is the Mushin station side of Fadeyi: east of the rail, a close grid of short east-west streets (Giwa,
+Cole, Adesina, Aiyetoro / Akinola, Ayonuga, Adewusi) crossed by the long north-south Haruna, Ayonuga and Akorohunfayo
+Streets, running to the Ikorodu Road service lane; west of the rail, crooked streets off Ogunmokun and Smith Streets,
+and Agbekolade and Olorunnibe off the Agege Motor Road. Streets on the rail side end at the rail, as the real ones end at
+Ago-Owu and Smith Streets beside it.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-mzaial2i | Giwa Street | lane | the rail side to Akorohunfayo's twin |
+| rd-jdq1vk2j | Cole Street | lane | the rail side to Akorohunfayo's twin |
+| rd-ye8zhvw4 | Haruna Street | lane | Cole's twin south (ends in the block) |
+| rd-vhulohlp | Adesina Street | lane | the rail side east (ends in the block) |
+| rd-vx27esql | Aiyetoro Street / Akinola Street | lane | the rail side to the Ikorodu Road edge |
+| rd-r5gc47ia | Ayonuga Street (north-south) | lane | Aiyetoro's twin south |
+| rd-abbx5rnv | Ayonuga Street (east-west) | lane | the north-south Ayonuga to the Ikorodu Road edge |
+| rd-70q1fgdg | Adewusi Street | lane | the rail side to the Ikorodu Road edge |
+| rd-n2ald4yc | Bada Street | lane | Adewusi's twin south towards Jibowu (ends in the block) |
+| rd-1383lbsh | Oluwakemi Street | lane | Kayode Street's side south to Akorohunfayo's twin |
+| rd-8fe89b52 | Akorohunfayo Street | lane | Oluwakemi's twin past Giwa and Cole to Aiyetoro's twin |
+| rd-h6vwsegj | the unnamed street south of Ogunmokun (by the NDO lounge) | lane | Ogunmokun's side towards Smith Street |
+| rd-65shqr4p | the unnamed cross street off Smith Street | lane | the rail side west (ends in the block) |
+| rd-iwrs1m4t | Agbekolade Street | lane | the Agege Motor Road to the rail side |
+| rd-et552uc8 | Olorunnibe Street | lane | the Agege Motor Road to the rail side |
