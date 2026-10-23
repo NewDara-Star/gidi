@@ -46,7 +46,7 @@
     "door_kind": ["plank", "steel", "panel", "open_dark", "curtain"],
     "shopfront_door": ["plank_shutter", "roll_up", "open_dark", "glass", "grille"],
     "rail": ["steel", "baluster", "breeze_block", "timber", "solid"],
-    "rail_pattern": ["loops", "pickets", "solid"],
+    "rail_pattern": ["loops", "pickets", "solid", "diamond"],
     "screen_kind": ["breeze_block"],
     "stain_kind": ["streak", "patch", "block", "ac"],
     "stain_tint": ["grime", "rust", "mould", "cement", "damp"],
@@ -187,7 +187,7 @@
       "kind": "enum:window_kind",
       "shutter_colour": "hex?",
       "bars": "enum:bars",
-      "bar_colour": "hex?"
+      "bar_colour": "hex?", "panel_colour": "hex?"
     },
     "sheet": {
       "material": "enum:sheet_material",
