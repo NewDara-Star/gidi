@@ -65,6 +65,7 @@
     "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand", "compressor", "tyre_changer"],
     "cart_kind": ["push", "trolley"],
     "cab_kind": ["single", "double"],
+    "gate_side": ["u0", "u1"],
     "poster_face": ["out", "in"],
     "place_kind": ["market", "motor_park", "bus_stop", "church", "mosque", "school", "clinic", "betting", "bar", "buka", "police", "fuel", "bank", "chemist", "park", "garage", "workshop_yard", "story"],
     "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
@@ -141,7 +142,9 @@
       "surface": "surface?",
       "open": "angles?",
       "sag": "num?",
-      "posters": "objs:gate_poster?"
+      "posters": "objs:gate_poster?",
+      "piers": "enums:gate_side?",
+      "spikes": "bool?"
     },
     "gate_poster": {
       "leaf": "int >=0",
@@ -150,7 +153,8 @@
       "w": "num >0",
       "h": "num >0",
       "colours": "hexes",
-      "face": "enum:poster_face?"
+      "face": "enum:poster_face?",
+      "lines": "int 1..40?"
     },
     "wall": {
       "h": "num >0",
