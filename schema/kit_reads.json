@@ -76,7 +76,8 @@
     "colour",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "danfo.vehicle": {
@@ -96,7 +97,8 @@
     "danfo.seed",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "furniture.furniture": {
@@ -108,7 +110,8 @@
     "length",
     "turn",
     "z",
-    "at"
+    "at",
+    "wear"
    ]
   },
   "furniture.goods": {
@@ -138,7 +141,8 @@
     "keke.seed",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "loose.goods": {
@@ -209,7 +213,8 @@
     "tractor",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "molue.vehicle": {
@@ -221,7 +226,8 @@
     "molue.seed",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "person.people": {
@@ -245,7 +251,8 @@
     "spots[].look.skin",
     "spots[].look.weight",
     "spots[].pose",
-    "of"
+    "of",
+    "wear"
    ]
   },
   "pickup.vehicle": {
@@ -269,7 +276,8 @@
     "pickup.wheels_missing",
     "at",
     "kind",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "pole.pole": {
@@ -381,7 +389,8 @@
     "turn",
     "w",
     "at",
-    "place"
+    "place",
+    "wear"
    ]
   },
   "umbrella.stall": {
@@ -410,7 +419,8 @@
     "umbrella.valance",
     "at",
     "place",
-    "turn"
+    "turn",
+    "wear"
    ]
   },
   "wall.posters": {

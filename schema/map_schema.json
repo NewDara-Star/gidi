@@ -33,7 +33,7 @@
     "wall_top": ["none", "razor_wire", "steel_rail", "broken_glass"],
     "gate_kind": ["sheet_steel", "bar", "plank"],
     "house_type": ["face_me_bungalow", "walkup", "shop_under_flats", "market_block", "compound_house", "church", "mosque", "school", "colonial_house", "kiosk_row", "shack", "shed", "under_build"],
-    "ground_floor": ["home", "lock_ups", "open_stalls", "workshop", "arcade", "cage_stalls"],
+    "ground_floor": ["home", "flats", "lock_ups", "open_stalls", "workshop", "arcade", "cage_stalls"],
     "roof_form": ["hip", "gable", "mono", "flat"],
     "roof_material": ["zinc", "longspan", "tile", "slab"],
     "roof_state": ["rusty", "silver", "painted", "new"],
@@ -74,7 +74,7 @@
     "litter_kind": ["sachet", "bag", "bottle", "pack", "can", "husk", "paper", "rag", "tyre"],
     "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet", "basket", "jerrycan"],
     "pose": ["stand", "walk", "sit", "squat", "lean", "carry", "head_load", "push", "hold", "lie_prone"],
-    "pickup_body": ["hilux", "p504"],
+    "pickup_body": ["hilux", "hilux4", "p504"],
     "tailgate": ["up", "down", "missing"],
     "vehicle_glass": ["whole", "cracked", "gone"],
     "corner": ["FL", "FR", "RL", "RR", "L", "R", "F"]
@@ -170,6 +170,7 @@
       "piers": "enum:piers",
       "top": "enum:wall_top",
       "surface": "surface?",
+      "wear": "num 0..1?",
       "gates": "objs:gate"
     },
     "fascia": {
@@ -555,6 +556,7 @@
     "stall": {
       "layer": "plan", "prefix": "st", "kit": true,
       "fields": {
+        "wear": "num 0..1?",
         "kind": "enum:stall_kind",
         "at": "pt",
         "turn": "num",
@@ -632,6 +634,7 @@
     "vehicle": {
       "layer": "plan", "prefix": "vh", "kit": true,
       "fields": {
+        "wear": "num 0..1?",
         "kind": "enum:vehicle_kind",
         "at": "pt",
         "turn": "num",
@@ -652,7 +655,7 @@
     },
     "furniture": {
       "layer": "plan", "prefix": "fu", "kit": true,
-      "fields": {"kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?", "height": "num >0?"}
+      "fields": {"wear": "num 0..1?", "kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?", "height": "num >0?"}
     },
     "place": {
       "layer": "plan", "prefix": "pc", "kit": false,
@@ -716,7 +719,7 @@
     },
     "people": {
       "layer": "dress", "prefix": "pp", "kit": true,
-      "fields": {"of": "id:place,road,plot?", "spots": "table:person"}
+      "fields": {"wear": "num 0..1?", "of": "id:place,road,plot?", "spots": "table:person"}
     }
   }
 }
