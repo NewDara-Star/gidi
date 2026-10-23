@@ -230,25 +230,38 @@ Drawn from the Google study of each block's real twin (satellite at the twin spo
 corner); only the pattern is taken (direction, spacing, where the streets begin and end), never Google's lines. Values
 are left missing (amber) like every street not yet measured.
 
-**Block B1** (between the expressway's east service road, Ladipo Street, Palm Avenue and Isolo Road). The real twin is
-two places: a warehouse strip along the expressway (big sheds and yards: the SCOA, Kia, Afprint and NAFDAC side) and,
-east of Alhaji Amusa / Olanibi Street, the dense Ladipo-Odunsi grid, streets about 70 m apart parallel to Ladipo
-Street's south-east leg (Shotinoye, Olasode, Ikale, Orenaji) crossed at right angles (Ojekunle, Adeolu, Sebanjo), houses
-wall to wall. Kept at 1:3: the strip's edge street and its way in from the expressway, four of the grid's long streets
-(one in three, 36 m apart, so two real-size houses stand back to back between them) and four cross streets. Houses: the grid's blocks are lined with the twin's own houses turned to face their lanes (`draft_buildings.py --frontage`); the strip's with the twin's own sheds (`--sizes=600,20000`).
+**Block B1** (between the expressway's east service road, Ladipo Street, Palm Avenue and Isolo Road). Redrawn 23 Oct
+from a close-zoom study (owner: zoom in for the details): the first lanes were offsets from Ladipo Street read at z16 and
+missed the real grid. The real twin is two places: a warehouse strip along the expressway (big sheds and yards) west of
+Alhaji Akinwunmi and Alhaji Amusa Streets, and the dense Ladipo-Odunsi grid east of them. The grid fans out from the
+Akinwunmi/Ladipo apex: its long streets (Oloruntoyin-Okesanya, Olapeju-Olasonde, Osoro-Shotinoye, then Ikale, Oremeji,
+Aladesuru) run south-south-east, crossed by Oloje, Ojekunle, Jumoke Way and Sebanjo; south of Jumoke the streets turn
+(Awanatu, Sadiku, Omoleran north-north-east; Dada and Akinbayode east). Each lane below lies on its real street's line;
+about one real street in two is kept, 35-55 m apart, so two rows of real-size houses stand between them. Alhaji
+Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 
 | Gidi id | real twin | kind | from, to |
 |---|---|---|---|
-| rd-xv349h4t | Olanibi / Alhaji Amusa Street (the warehouse strip's east edge) | home_street | Isolo Road to Ladipo Street, 100 m east of the service road |
-| rd-u279z4ax | Bello Street (west end) | home_street | the expressway's east service road to the Olanibi twin |
-| rd-e0xhkawc | Shotinoye Street | lane | parallel to Ladipo Street's south-east leg, 36 m in |
-| rd-bnvso03s | Ikale / Olasode Street | lane | 72 m in |
-| rd-yjd1xo0i | Orenaji / Aledesuru Street | lane | 108 m in |
-| rd-cu7mk008 | Alhaji Lamidi / Awonatu Street | lane | 144 m in, the Olanibi twin to Sebanjo's twin (fills the big south block) |
-| rd-yixf7hb6 | Yusuph Street | lane | Ladipo Street to the Olanibi twin |
-| rd-5dd0t1l1 | Ojekunle Street | lane | Ladipo Street to the Olanibi twin |
-| rd-zsmjw1sh | Adeolu Street / Jumoke Way | lane | Ladipo Street to the Olanibi twin |
-| rd-xtsicy57 | Sebanjo Street | lane | Ladipo Street to Isolo Road |
+| rd-wwc5xw6r | Alhaji Akinwunmi Street | home_street | its market stretch to Bello Street (the strip's east edge) |
+| rd-leh07psm | Bello Street | home_street | the expressway's east service road to the Olanibi bus stop |
+| rd-jq923w3v | Bello Street's east end, past Omoba Foods | lane | Akinwunmi's corner to Oloje Street |
+| rd-oe3ndnqj | Alhaji Amusa Street | home_street | Bello Street to Isolo Road |
+| rd-vt757j5a | Olanibi Street | local_main | the bus stop to Isolo Road |
+| rd-zvenwhp0 | Ojekunle Street (Fatai Atere Way's west leg) | local_main | the Olanibi bus stop to Ladipo Street |
+| rd-wizltkz5 | Oloruntoyin Street, then Okesanya Street | lane | Akinwunmi to Sebanjo Street |
+| rd-ua9h579y | Osoro Street, then Shotinoye Street | lane | Akinwunmi's market stretch to Sebanjo Street |
+| rd-t0f428b6 | Odushina Street | lane | Akinwunmi to Oloje Street |
+| rd-q1xvtu3t | Oloje Street | lane | Bello's east end to Osoro Street |
+| rd-nec7uo7x | Jumoke Way | lane | the Jakande street to Shotinoye Street |
+| rd-j54ymnoy | Ogunmefun Street | lane | Jumoke Way to Oremeji Street |
+| rd-bg3ujvct | Oremeji Street | lane | Ogunmefun Street to Sebanjo's west end |
+| rd-pz8kfbdt | Sebanjo Street | lane | Ladipo Street to Oremeji Street |
+| rd-7g32eziy | the street from the Olanibi bus stop past Jakande Plaza | lane | the bus stop to Sebanjo's west end (Kingdom Against Kingdom) |
+| rd-dboedcs1 | Awanatu Street | lane | the Jakande street to Akinbayode Street |
+| rd-fxei4ynh | Dada Street | lane | Awanatu Street to Sadiku Street |
+| rd-03o2r4u5 | Sadiku Street | lane | the Jakande street to Akinbayode Street |
+| rd-c5n44yad | Omoleran Street | lane | the Jakande street to Isolo Road |
+| rd-ve4qwm14 | Akinbayode Street | lane | Olanibi Street to Omoleran Street |
 
 **Block B0** (Ishaga Road, Bishop Fashoro Street, the Agege Motor Road edge, Ajegunle and Atunrase Streets). The real
 twin is Idi-Araba: the LUTH campus with the College of Medicine and its staff quarters (internal drives, big buildings,
