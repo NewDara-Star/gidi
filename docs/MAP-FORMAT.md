@@ -184,7 +184,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 | `platform`? | `h` (m), `steps`, `front` (m, how far it reaches toward the road), `colour` | `{"h":0.3,"steps":1,"front":1.2,"colour":"#7a7268"}` |
 | `wall`? | the wall object (below) | |
 
-**The wall object** (on a frontage, or on a free `wall` record): `h`, `finish` (`render`, `bare_block`, `breeze_block`, `sheet`, `plank`), `colour`, `painted`, `state` (`clean`, `mouldy`), `piers` (`none`, `at_gate`, `every_bay`), `top` (`none`, `razor_wire`, `steel_rail`, `broken_glass`), `surface`?, `gates`: list of `u0`, `u1` (m along the line), `h`, `kind` (`sheet_steel`, `bar`, `plank`), `colour`, `leaves`, `wicket`, `number`? (text), `wear`, `surface`?.
+**The wall object** (on a frontage, or on a free `wall` record): `h`, `finish` (`render`, `bare_block`, `breeze_block`, `sheet`, `plank`), `colour`, `painted`, `state` (`clean`, `mouldy`), `piers` (`none`, `at_gate`, `every_bay`), `top` (`none`, `razor_wire`, `steel_rail`, `broken_glass`), `surface`?, `gates`: list of `u0`, `u1` (m along the line), `h`, `kind` (`sheet_steel`, `bar`, `plank`), `colour`, `leaves`, `wicket`, `number`? (text), `wear`, `surface`?, and optionally `open` (degrees a leaf stands open: + swings to the line's left, - to its right) and `sag` (degrees a leaf has dropped off its top hinge, free end down).
 
 #### wall (`wl-`): a side or back wall not on a street
 `plot`?, `line`, `wall` (the wall object above).
@@ -224,7 +224,7 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 `kind` (`sand`, `gravel`, `rubbish`, `scrap`, `goods`, `tyres`), `at`, `r`, `h`, `tarp_colour`?. Goods on a heap are a `goods` record.
 
 #### pole (`po-`), wire (`wi-`), mast (`ms-`)
-- pole: `kind` (`timber`, `concrete`, `steel`), `at`, `h`, `lean` ([x, y] degrees), `transformer`, `lamp` (`none`, `steel_arm`, `solar`), `arm`, `wear`; and, all optional: `turn` (degrees: the line the cross-arm runs across), `arm_length` (m), `insulators` (on the arm), `boxes` (heights of junction boxes up the shaft), `tangle` (0 to 1: dropped wire balled round the shaft), `stay` (a stay wire to the ground), `lamp_reach` (m), `boards` (street-name blades on top: `text`, `bg`, `fg`?; invented names only). `lean` [x, y]: degrees tipped toward east and toward south. Posters on a pole are a `posters` record.
+- pole: `kind` (`timber`, `concrete`, `steel`), `at`, `h`, `lean` ([x, y] degrees), `transformer`, `lamp` (`none`, `steel_arm`, `solar`), `arm`, `wear`; and, all optional: `turn` (degrees: the line the cross-arm runs across), `arm_length` (m), `insulators` (on the arm), `boxes` (heights of junction boxes up the shaft), `tangle` (0 to 1: dropped wire balled round the shaft), `stay` (a stay wire to the ground), `lamp_reach` (m), `boards` (street-name blades on top: `text`, `bg`, `fg`?, `rim`? (the thin line along the blade's top and bottom in the `fg` colour, on unless false); invented names only). `lean` [x, y]: degrees tipped toward east and toward south. Posters on a pole are a `posters` record.
 - wire: `from_pole`, then exactly one of `to_pole` or `to_at` ([x, y, z], e.g. a point on a wall), `n` (wires in the run), `sag` (m), `kind`? (`line`: the mains between poles; `service`: a drop to a house).
 - mast: `kind` (`lattice`, `monopole`), `at`, `h`, `colour`.
 

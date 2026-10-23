@@ -134,7 +134,9 @@
       "wicket": "bool",
       "number": "text?",
       "wear": "num 0..1",
-      "surface": "surface?"
+      "surface": "surface?",
+      "open": "num?",
+      "sag": "num?"
     },
     "wall": {
       "h": "num >0",
@@ -255,7 +257,7 @@
       "h": "num >0",
       "cells": "nums"
     },
-    "name_board": {"text": "text", "bg": "hex", "fg": "hex?"},
+    "name_board": {"text": "text", "bg": "hex", "fg": "hex?", "rim": "bool?"},
     "sign": {
       "u0": "num >=0",
       "u1": "num >=0",
