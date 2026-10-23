@@ -489,6 +489,7 @@
         "insulators": "int 0..6?",
         "boxes": "nums?",
         "tangle": "num 0..1?",
+        "lash": "num >0?",
         "stay": "bool?",
         "lamp_reach": "num >0?",
         "boards": "objs:name_board?"
