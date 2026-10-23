@@ -7,7 +7,7 @@ This is a draft. The board's new frame draws and saves the plan layer in it (sec
 
 - **Schema:** `schema/map_schema.json` (every record type, field, type, unit and allowed value).
 - **Checker:** `scripts/check_map.py` (rejects anything unknown, missing, mistyped, unlinked or real-named).
-- **What the kit reads:** `schema/kit_reads.json` (each kit part and the fields it reads).
+- **What the kit reads:** `schema/kit_reads.json` (each builder and the fields it reads; written by gidi-game `tools/kit_fields.py --write`).
 - **Worked example:** `docs/map-format-example/d15/` (one 20 m street; passes the checker).
 
 ## In short
@@ -218,7 +218,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`: outside a building (its footprint runs with the building on the left), and on the right of a wall's or frontage's `line`. To put a wall's lean-to on the other side, turn the line round; the board's "Put it on the other side" does that and moves the line's gates and lean-tos so they stay where they were. It is refused while the wall carries dress (bays, posters), which would land on the wrong side.
 
 #### stall (`st-`): tables, kiosks, umbrellas, carts, fridges
-`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`, and optionally `panels`, `open` (1 open, 0 closed), `height` (the hem above the ground), `base` (`tyre`, `bucket`, `drum`, `none`), `valance`, `tilt` (the whole umbrella leaning), `head_tilt` (the head cocked on its joint, the pole straight), `pole_colour`, `prints`: a brand on the cloth, each `panel`, `t` (0 top to 1 hem), `v`? (across, 0.5 the middle), `w`, `h`, `colour`, and `word`? (letters) or `ink`? and `lines`? (a badge and its lettering)), `cart`? (`kind`: `push` (a long bed on two big wheels, a handlebar, a front leg) or `trolley` (a low plank deck on four small wheels); `wheel_r`? m, `sides`? m (a barred cage that high, round the bed), `spokes`? (spoked wheels, that many spokes), `handle_tilt`? (the handlebar's lean from upright, degrees, 65 if not given): for kind `cart`, its load is its goods), `place`?. A stall faces its `turn`: `w` runs across its front, `d` front to back, `h` is its top (a table's top, a rack's or kiosk's height). Its goods sit in its frame: x forward (toward its front), y to its right, z up from its foot. `tarp` is a sheet on four poles over it: its back edge at `z` (m above the ground), its front a little lower, a flap hanging `drop` m down the front.
+`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`diameter`, `colours`, and optionally `panels`, `open` (1 open, 0 closed), `height` (the hem above the ground), `base` (`tyre`, `bucket`, `drum`, `none`), `valance`, `tilt` (the whole umbrella leaning), `head_tilt` (the head cocked on its joint, the pole straight), `pole_colour`, `bucket_colour` (a `bucket` base's colour), `prints`: a brand on the cloth, each `panel`, `t` (0 top to 1 hem), `v`? (across, 0.5 the middle), `w`, `h`, `colour`, and `word`? (letters) or `ink`? and `lines`? (a badge and its lettering)), `cart`? (`kind`: `push` (a long bed on two big wheels, a handlebar, a front leg) or `trolley` (a low plank deck on four small wheels); `wheel_r`? m, `sides`? m (a barred cage that high, round the bed), `spokes`? (spoked wheels, that many spokes), `handle_tilt`? (the handlebar's lean from upright, degrees, 65 if not given): for kind `cart`, its load is its goods), `place`?. A stall faces its `turn`: `w` runs across its front, `d` front to back, `h` is its top (a table's top, a rack's or kiosk's height). Its goods sit in its frame: x forward (toward its front), y to its right, z up from its foot. `tarp` is a sheet on four poles over it: its back edge at `z` (m above the ground), its front a little lower, a flap hanging `drop` m down the front.
 
 #### heap (`hp-`)
 `kind` (`sand`, `gravel`, `rubbish`, `scrap`, `goods`, `tyres`), `at`, `r`, `h`, `tarp_colour`?. Goods on a heap are a `goods` record.
@@ -232,7 +232,15 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 `kind` (`palm`, `shade`, `plantain`, `almond`, `neem`, `shrub`), `at`, `h`, `lean`, `form`: a table of `fronds` (turn, droop, len) for a palm, or `lobes` (x, y, z, r) for a broad tree.
 
 #### vehicle (`vh-`): a parked spot
-`kind` (`danfo`, `keke`, `okada`, `saloon`, `suv`, `pickup`, `lorry`, `container`, `tanker`, `bus`, `wreck`), `at`, `turn`, `colour`, `cab_colour`?, `cab`? (`single`, `double`: a pickup's cab), `lean`?, `tractor`?, `load`? (`kind`: `none`, `roll`, `cargo`, `sacks`; `colour`?), `cover`? (a car cover's colour).
+`kind` (`danfo`, `keke`, `okada`, `saloon`, `suv`, `pickup`, `lorry`, `container`, `tanker`, `bus`, `molue`, `brt`, `wreck`), `at`, `turn`, `colour`, `cab_colour`?, `cab`? (`single`, `double`: a pickup's cab), `lean`?, `tractor`?, `load`? (`kind`: `none`, `roll`, `cargo`, `sacks`; `colour`?), `cover`? (a car cover's colour).
+
+What the kind's builder reads beyond these sits in an object named after the kind (all optional; the builder's own default when left out):
+- `pickup`: `body` (`hilux`, `p504`), `cab`, `police`, `lower_colour`, `lower_band`, `bumper`, `bumpers_missing`, `glass` (`whole`, `cracked`, `gone`), `tailgate` (`up`, `down`, `missing`), `wheels` (`steel`, `alloy`), `wheels_missing`, `mirrors_missing`, `load`, `load_colour`, `load_rows`;
+- `danfo`: `rack`, `bullbar`, `bumpers`, `guard_R`, `plate_R`, `hubcaps_missing`, `paint_alt` (parts in a replacement yellow), `rear` (`slogan`, `line`, `year`), `seed` (which hand the lettering is in: a stored choice, not a dice roll);
+- `keke`: `letter_colour`, `rear` (`line`), `seed`;  `molue`: `route`, `line`, `seed`;  `brt`: `band`, `route`;
+- `lorry`: `tractor_kind`, `trailer`, `box`, `axles`, `roof`, `doors`, `exhaust`, `bumper`, `deflector`, `spare`, `stripes`, `glass`, `colour2`, `bonnet_colour`, `trailer_colour`, `rim_colour`, `cab_doors_missing`, `mirrors_missing`, `wheels_missing`, `dents` (each `side`, `u`, `v`?, `z`, `r`, `depth`, `box`?).
+
+Missing parts are listed by corner or side (`FL`, `FR`, `RL`, `RR`, `L`, `R`, `F`).
 
 #### furniture (`fu-`)
 `kind` (`bench`, `chair`, `stool`, `generator`, `bin`, `water_tank`, `drum`, `tyre_stack`, `gas_rack`, `speaker`, `tank_stand`, `compressor`, `tyre_changer`), `at`, `z`, `turn`, `colour`, `length`? (a bench's length, a tank stand's height, how many tyres in a stack), `height`? (a bench's seat, 0.45 if not given). `z` is what it stands on: a compressor on a trolley stands at the trolley's deck.
@@ -297,12 +305,12 @@ On a face, `u` is metres along the face from its first corner (footprint corner 
 `of`? and `pieces` table: `kind` (`sachet`, `bag`, `bottle`, `pack`, `can`, `husk`, `paper`, `rag`, `tyre`), `colour`, `x`, `y`, `z`, `turn`, `tilt`, `w`, `d`, `h`. World positions.
 
 #### goods (`gd-`), of a lean-to, stall, heap or furniture (a bin)
-`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`, `basket`, `jerrycan`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`. In the parent's frame.
+`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`, `basket`, `jerrycan`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`, `cap`? (a jerrycan's or bottle's cap colour). In the parent's frame.
 
 **One record per item, or a group?** A group: one `goods` record per lean-to (or stall or heap) holding one row per item, every value written. A stamped band of 90 sacks is 90 rows, never "90 sacks here". Separate records with ids would double the size and nothing ever needs to link to one sack.
 
 #### people (`pp-`)
-`of`? (a place, road or plot) and `spots` table: `x`, `y`, `z`, `turn`, `h`, `pose` (`stand`, `walk`, `sit`, `squat`, `lean`, `carry`), `look` (an id in the people kit, when it exists).
+`of`? (a place, road or plot) and `spots` table: `x`, `y`, `z`, `turn`, `h`, `pose` (`stand`, `walk`, `sit`, `squat`, `lean`, `carry`, `head_load`, `push`, `hold`, `lie_prone`), `look`: the person in full, as the person builder reads it: `name`?, the body's dials 0 to 1 (`gender` (1 male), `age` (0.5 is 25), `muscle`, `weight`, `height`, `proportions`, `african`?), `skin`?, `eyebrows`?, `hair`?, `clothes`? (garment names from the people kit's packs), `colours`? (by garment: an rgb, `{dye: rgb}`, or `{above, below, at}` split at a height), `lean`? (degrees forward), `seat`? (m, for `sit` and `lie_prone`), `carry`?, `carry_seat`?.
 
 ### KIT.md §12 fields: where each one went
 
@@ -403,14 +411,19 @@ Tested both ways: the example passes; a broken copy (an extra field, a missing f
 
 Fields that are not drawn are listed once in the schema (`not_drawn`: `id`, `ref`, `from`, `note`, `name`, `use`, `uses`, `place`, `plot`, `hours`).
 
-Today the list is kept by hand. When the kit moves to the new map, each builder declares what it reads beside its code:
+The kit is the game repo's builders (`gidi-game/tools/*_build.py`; the old Blender kit is archived in `legacy/blender/`). Each builder declares every recipe key it reads beside its code, with its type and what it does when the key is absent:
 
 ```python
-@reads('building', 'kind', 'footprint', 'storeys', 'storey_h', 'roof', 'finish', 'windows', 'wear')
-def building(b, collection=None): ...
+FIELDS = {
+    'stall.kind': ('str', 'required'),
+    'stall.tarp.colour': ('hex', '#e8e8e4'),
+    'goods.items[].kind': ('str', 'required'),
+    ...
+}
+RECORDS = {'': 'stall.umbrella'}   # only when its keys do not start with their record type (umbrella, vehicles, person)
 ```
 
-The registry collects these and writes `kit_reads.json`, so the check always matches the code. The kit's `need()` (MissingRecord) stays as the last guard, but a map that passes `check_map.py` never trips it.
+Its recipe is wrapped (`tools/fields.py`), so a build that reads a key `FIELDS` does not declare stops. `tools/kit_fields.py --map=<this repo>` checks the declarations both ways against `schema/map_schema.json`: it fails (exit 1) on a builder field the map cannot say, a type that disagrees, or a field the builder needs that the map lets be absent; it flags a field of a drawn record that no builder reads (the fields the map reader itself uses are not flagged: `at`, `z`, `turn`, `of`, `plot`, `place`, a vehicle's `kind`, a wire's poles, and `wear`, which the wear layer reads for everything); with `--records=<map dir>` it lists the records that do not set a field a builder reads. `--write` writes `kit_reads.json` from the declarations, so this repo's `check_map.py --kit` always matches the code. A field a builder grows goes into the schema in the same change (`decisions/DECISIONS.md`, "The interface works both ways").
 
 `decisions/CHECKS.md`: this is the start of the check for "The map tells the kit what goes where" and "One ground truth". They stay GAP until the kit reads the new map.
 
