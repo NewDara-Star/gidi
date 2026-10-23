@@ -223,3 +223,29 @@ These were drawn here and left the district with the south lobe. Surulere takes 
 | rd-3fomj9ap | s30 | Bishop Crowther Street | home_street | missing | south lobe E-W, Falolu to Randle | none yet |
 | rd-6zdeymgc | s31 | Karimu Street | home_street | missing | the long south-east street | none yet |
 | rd-pp320oeu | s32 | Clegg Street | home_street | missing | south-east to Western Avenue | none yet |
+
+## Lanes drawn by hand (23 Oct, owner: "lanes on dropped streets")
+
+Drawn from the Google study of each block's real twin (satellite at the twin spot, real = 3 x Gidi from the frame's
+corner); only the pattern is taken (direction, spacing, where the streets begin and end), never Google's lines. Values
+are left missing (amber) like every street not yet measured.
+
+**Block B1** (between the expressway's east service road, Ladipo Street, Palm Avenue and Isolo Road). The real twin is
+two places: a warehouse strip along the expressway (big sheds and yards: the SCOA, Kia, Afprint and NAFDAC side) and,
+east of Alhaji Amusa / Olanibi Street, the dense Ladipo-Odunsi grid, streets about 70 m apart parallel to Ladipo
+Street's south-east leg (Shotinoye, Olasode, Ikale, Orenaji) crossed at right angles (Ojekunle, Adeolu, Sebanjo), houses
+wall to wall. Kept at 1:3: the strip's edge street and its way in from the expressway, four of the grid's long streets
+(one in three, 36 m apart, so two real-size houses stand back to back between them) and four cross streets. Houses: the grid's blocks are lined with the twin's own houses turned to face their lanes (`draft_buildings.py --frontage`); the strip's with the twin's own sheds (`--sizes=600,20000`).
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-xv349h4t | Olanibi / Alhaji Amusa Street (the warehouse strip's east edge) | home_street | Isolo Road to Ladipo Street, 100 m east of the service road |
+| rd-u279z4ax | Bello Street (west end) | home_street | the expressway's east service road to the Olanibi twin |
+| rd-e0xhkawc | Shotinoye Street | lane | parallel to Ladipo Street's south-east leg, 36 m in |
+| rd-bnvso03s | Ikale / Olasode Street | lane | 72 m in |
+| rd-yjd1xo0i | Orenaji / Aledesuru Street | lane | 108 m in |
+| rd-cu7mk008 | Alhaji Lamidi / Awonatu Street | lane | 144 m in, the Olanibi twin to Sebanjo's twin (fills the big south block) |
+| rd-yixf7hb6 | Yusuph Street | lane | Ladipo Street to the Olanibi twin |
+| rd-5dd0t1l1 | Ojekunle Street | lane | Ladipo Street to the Olanibi twin |
+| rd-zsmjw1sh | Adeolu Street / Jumoke Way | lane | Ladipo Street to the Olanibi twin |
+| rd-xtsicy57 | Sebanjo Street | lane | Ladipo Street to Isolo Road |
