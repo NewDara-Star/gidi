@@ -218,7 +218,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`: outside a building (its footprint runs with the building on the left), and on the right of a wall's or frontage's `line`. To put a wall's lean-to on the other side, turn the line round; the board's "Put it on the other side" does that and moves the line's gates and lean-tos so they stay where they were. It is refused while the wall carries dress (bays, posters), which would land on the wrong side.
 
 #### stall (`st-`): tables, kiosks, umbrellas, carts, fridges
-`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`), `place`?. A stall faces its `turn`: `w` runs across its front, `d` front to back, `h` is its top (a table's top, a rack's or kiosk's height). Its goods sit in its frame: x forward (toward its front), y to its right, z up from its foot. `tarp` is a sheet on four poles over it: its back edge at `z` (m above the ground), its front a little lower, a flap hanging `drop` m down the front.
+`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`), `cart`? (`kind`: `push` (a long bed on two big wheels, a handlebar, a front leg) or `trolley` (a low plank deck on four small wheels); `wheel_r`? m: for kind `cart`, its load is its goods), `place`?. A stall faces its `turn`: `w` runs across its front, `d` front to back, `h` is its top (a table's top, a rack's or kiosk's height). Its goods sit in its frame: x forward (toward its front), y to its right, z up from its foot. `tarp` is a sheet on four poles over it: its back edge at `z` (m above the ground), its front a little lower, a flap hanging `drop` m down the front.
 
 #### heap (`hp-`)
 `kind` (`sand`, `gravel`, `rubbish`, `scrap`, `goods`, `tyres`), `at`, `r`, `h`, `tarp_colour`?. Goods on a heap are a `goods` record.
@@ -235,7 +235,7 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 `kind` (`danfo`, `keke`, `okada`, `saloon`, `suv`, `pickup`, `lorry`, `container`, `tanker`, `bus`, `wreck`), `at`, `turn`, `colour`, `cab_colour`?, `lean`?, `tractor`?, `load`? (`kind`: `none`, `roll`, `cargo`, `sacks`; `colour`?), `cover`? (a car cover's colour).
 
 #### furniture (`fu-`)
-`kind` (`bench`, `chair`, `stool`, `generator`, `bin`, `water_tank`, `drum`, `tyre_stack`, `gas_rack`, `speaker`, `tank_stand`), `at`, `z`, `turn`, `colour`, `length`?.
+`kind` (`bench`, `chair`, `stool`, `generator`, `bin`, `water_tank`, `drum`, `tyre_stack`, `gas_rack`, `speaker`, `tank_stand`, `compressor`, `tyre_changer`), `at`, `z`, `turn`, `colour`, `length`? (a bench's length, a tank stand's height, how many tyres in a stack). `z` is what it stands on: a compressor on a trolley stands at the trolley's deck.
 
 #### place (`pc-`): what the game uses a spot for
 | Field | Type | Example |

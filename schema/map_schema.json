@@ -62,7 +62,8 @@
     "tree_kind": ["palm", "shade", "plantain", "almond", "neem", "shrub"],
     "vehicle_kind": ["danfo", "keke", "okada", "saloon", "suv", "pickup", "lorry", "container", "tanker", "bus", "wreck"],
     "load_kind": ["none", "roll", "cargo", "sacks"],
-    "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand"],
+    "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand", "compressor", "tyre_changer"],
+    "cart_kind": ["push", "trolley"],
     "place_kind": ["market", "motor_park", "bus_stop", "church", "mosque", "school", "clinic", "betting", "bar", "buka", "police", "fuel", "bank", "chemist", "park", "garage", "workshop_yard", "story"],
     "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
     "ground_kind": ["tar", "earth", "laterite", "sand", "dust", "mud", "wet", "water", "concrete", "interlock", "grass", "rubble"],
@@ -72,6 +73,7 @@
   },
 
   "shapes": {
+    "cart": {"kind": "enum:cart_kind", "wheel_r": "num >0?"},
     "ref": {
       "twin": "str?",
       "shots": "strs?",
@@ -444,6 +446,7 @@
         "colour": "hex",
         "tarp": "obj:tarp?",
         "umbrella": "obj:umbrella?",
+        "cart": "obj:cart?",
         "place": "id:place?"
       }
     },
