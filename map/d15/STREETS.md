@@ -267,3 +267,19 @@ the north gate (Apesin's end) to Ishaga Road, Road 4 and the staff quarters road
 | rd-phi8eic8 | Takuro Street | lane | Ajegunle Street to LUTH's main drive |
 | rd-jm7fmw8p | Olaleye Street | lane | Takuro's twin north (ends in the block) |
 | rd-9ozcrkqs | Akintola / Apesin Street | lane | LUTH's main drive to Laniyan Street, by Eko Boys |
+
+**Block B2** (Ishaga Road, Itire Road, Ajegunle, Onipede, Mushin Road's end, Bello, Atunrase, Aborishade and Dosunmu
+Streets). The real twin is the Ishaga Road / Lawanson side of Itire: north of the canal, short north-south streets
+about 90 m apart running from Ishaga Road down to Daniyan Street on the canal bank; south-west of it, north-west to
+south-east streets running down to Lawanson Road; and a pocket by Adedoyin Road. Kept: three of the north streets
+(Abati and Moshalashi left as gaps), Daniyan on the canal, two south-west streets and Adedoyin.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-i6s2bf4s | Daniyan Street (north of the canal) | lane | the west edge along the canal to Igbira's twin |
+| rd-a0jvm3x0 | Adekunle Street | lane | Ishaga Road to Daniyan's twin |
+| rd-uheomc6y | Garuba Musa Street | lane | Ishaga Road to Daniyan's twin |
+| rd-tfs65na7 | Igbira Street | lane | Ishaga Road to Daniyan's twin |
+| rd-nybc6644 | Alves Street | lane | Onipede's side down towards Lawanson (ends in the block) |
+| rd-b9u5qmox | Odunsi Street | lane | south of the canal down towards Lawanson (ends in the block) |
+| rd-oiymgele | Adedoyin Road | lane | the pocket by Aborishade, west to east |
