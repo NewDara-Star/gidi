@@ -68,7 +68,7 @@
     "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
     "ground_kind": ["tar", "earth", "laterite", "sand", "dust", "mud", "wet", "water", "concrete", "interlock", "grass", "rubble"],
     "litter_kind": ["sachet", "bag", "bottle", "pack", "can", "husk", "paper", "rag", "tyre"],
-    "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet"],
+    "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet", "basket"],
     "pose": ["stand", "walk", "sit", "squat", "lean", "carry"]
   },
 

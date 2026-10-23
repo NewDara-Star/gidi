@@ -297,7 +297,7 @@ On a face, `u` is metres along the face from its first corner (footprint corner 
 `of`? and `pieces` table: `kind` (`sachet`, `bag`, `bottle`, `pack`, `can`, `husk`, `paper`, `rag`, `tyre`), `colour`, `x`, `y`, `z`, `turn`, `tilt`, `w`, `d`, `h`. World positions.
 
 #### goods (`gd-`), of a lean-to, stall, heap or furniture (a bin)
-`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`. In the parent's frame.
+`items` and `hung` tables: `kind` (`sack`, `nylon_bag`, `crate`, `plastic`, `cloth`, `carton`, `bale`, `basin`, `bowl`, `bottle`, `tyre`, `timber`, `part`, `food`, `cabinet`, `basket`), `colour`, `x`, `y`, `z`, `turn`, `w`, `d`, `h`, `shade`. In the parent's frame.
 
 **One record per item, or a group?** A group: one `goods` record per lean-to (or stall or heap) holding one row per item, every value written. A stamped band of 90 sacks is 90 rows, never "90 sacks here". Separate records with ids would double the size and nothing ever needs to link to one sack.
 
