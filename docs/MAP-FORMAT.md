@@ -218,7 +218,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`: outside a building (its footprint runs with the building on the left), and on the right of a wall's or frontage's `line`. To put a wall's lean-to on the other side, turn the line round; the board's "Put it on the other side" does that and moves the line's gates and lean-tos so they stay where they were. It is refused while the wall carries dress (bays, posters), which would land on the wrong side.
 
 #### stall (`st-`): tables, kiosks, umbrellas, carts, fridges
-`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`), `place`?.
+`kind` (`plank_stall`, `table`, `kiosk`, `cage_stall`, `cart`, `umbrella`, `drinks_fridge`, `display_cabinet`, `container_shop`, `rack`), `at`, `turn`, `w`, `d`, `h`, `colour`, `tarp`? (`colour`, `z`, `drop`), `umbrella`? (`r`, `colours`), `place`?. A stall faces its `turn`: `w` runs across its front, `d` front to back, `h` is its top (a table's top, a rack's or kiosk's height). Its goods sit in its frame: x forward (toward its front), y to its right, z up from its foot. `tarp` is a sheet on four poles over it: its back edge at `z` (m above the ground), its front a little lower, a flap hanging `drop` m down the front.
 
 #### heap (`hp-`)
 `kind` (`sand`, `gravel`, `rubbish`, `scrap`, `goods`, `tyres`), `at`, `r`, `h`, `tarp_colour`?. Goods on a heap are a `goods` record.
