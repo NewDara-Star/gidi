@@ -51,7 +51,7 @@ Deck depths: flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m.
 
 ## For the 3D kit (done 15 Oct 2026)
 > The map data now holds road heights (see `docs/road-heights.md`).
-> 1. In `blender/gidi_kit/structures.py` / `blender/city.py`, draw every deck from its own `z` list (deck top per point of `pts`) instead of `deck_height()` with the fixed `BRIDGE_H` / `6.5 * layer`. Keep the piers, lamps, lane paint and murals; the piers run from the ground (terrain, or 0 over water) up to `z - depth`.
+> 1. In `legacy/blender/gidi_kit/structures.py` / `legacy/blender/city.py`, draw every deck from its own `z` list (deck top per point of `pts`) instead of `deck_height()` with the fixed `BRIDGE_H` / `6.5 * layer`. Keep the piers, lamps, lane paint and murals; the piers run from the ground (terrain, or 0 over water) up to `z - depth`.
 > 2. Draw the new kinds: `approach` (a ramp deck on an embankment or short viaduct, the road's width) and `culvert` (a slab with low parapets over the canal, level with the road).
 > 3. Draw `quays` as a concrete sea wall from the water up to `top`, with the land behind it made up to that height.
 > 4. Read the canal width from `canals[i].width` (4 m) instead of `CANAL_W = 8`.
@@ -59,7 +59,7 @@ Deck depths: flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m.
 
 **What the kit does now:**
 - Every deck is drawn from its own `z`. Flyovers, approaches and the three bridges are built whole, across every tile they cross.
-- **The kit still builds on flat ground.** So it draws each deck at its height above the ground under it: the map's `z` less the terrain from `web/terrain.json`, with 0 on water. The headroom is the map's, and every ramp lands on its road. When the kit takes the terrain, it draws `z` as it is (`ground_at` and `rel_z` in `blender/city.py`).
+- **The kit still builds on flat ground.** So it draws each deck at its height above the ground under it: the map's `z` less the terrain from `web/terrain.json`, with 0 on water. The headroom is the map's, and every ramp lands on its road. When the kit takes the terrain, it draws `z` as it is (`ground_at` and `rel_z` in `legacy/blender/city.py`).
 - **Deck depths:** flyover 1.2 m, bridge 1.8 m, skywalk 0.6 m. Piers run from the ground to the deck's underside.
 - **Approaches:** an embankment between retaining walls while under 4 m, then a viaduct on piers.
 - **Culverts:** a slab flush with the road, with low parapets only where the road crosses the water, once per crossing. The map can hold two or three culverts overlapping at a junction.

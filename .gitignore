@@ -3,7 +3,7 @@ __pycache__/
 *.part
 /out/
 .DS_Store
-blender/out/
+legacy/blender/out/
 __pycache__/
 web/city/
 .venv/

@@ -1,6 +1,6 @@
 """Generate the whole city as tiles, in parallel Blender processes, and write the manifest.
 
-python3 blender/city_run.py [--jobs 8] [--size 400] [--detail web] [--only 6,10;7,10] [--fresh] [--terrain]
+python3 legacy/blender/city_run.py [--jobs 8] [--size 400] [--detail web] [--only 6,10;7,10] [--fresh] [--terrain]
 
 --detail: "web" (the light build, the default) or "full,web". The browser view is a quick preview and loads only the light
 tiles (owner, 16 Oct: "the full scene can be viewed in Unreal"); full tiles are for close test renders.
@@ -20,7 +20,7 @@ import subprocess
 import sys
 import time
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # legacy/blender/ -> the repo
 args = sys.argv[1:]
 opt = {}
 for i, a in enumerate(args):
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         out = os.path.join(OUT, det)
         os.makedirs(os.path.join(out, 'tiles'), exist_ok=True)
         # the POI overrides are computed once, before the workers start
-        subprocess.run(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--', '--tiles', '', '--out', out, '--detail', det, '--size', str(SIZE)] + (['--terrain'] if opt.get('--terrain') else []), capture_output=True)
+        subprocess.run(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'legacy', 'blender', 'city.py'), '--', '--tiles', '', '--out', out, '--detail', det, '--size', str(SIZE)] + (['--terrain'] if opt.get('--terrain') else []), capture_output=True)
         # a pool of short-lived workers: each Blender process builds a small batch and exits, so its
         # memory is freed (a full tile peaks at ~3.5 GB and Blender keeps growing across tiles; two
         # long-lived full workers got killed on a 16 GB machine). A batch that dies loses only itself;
@@ -90,7 +90,7 @@ if __name__ == '__main__':
                     c = queue.pop(0)
                     log = open(os.path.join(out, f'log_{n % 50}.txt'), 'w')
                     n += 1
-                    procs.append(subprocess.Popen(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'blender', 'city.py'), '--',
+                    procs.append(subprocess.Popen(['blender', '-b', '--factory-startup', '-P', os.path.join(ROOT, 'legacy', 'blender', 'city.py'), '--',
                                                    '--tiles', ';'.join(f'{a},{b}' for a, b in c), '--out', out, '--detail', det, '--size', str(SIZE)], stdout=log, stderr=subprocess.STDOUT))
                 if time.time() - last > 30:
                     last = time.time()

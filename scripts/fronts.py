@@ -26,7 +26,7 @@ from shapely.strtree import STRtree
 
 CHARACTER = {'maze': 'dense', 'hub': 'dense', 'jungle': 'dense', 'foodgate': 'dense', 'bazaar': 'dense',
              'railside': 'sprawl', 'frontier': 'sprawl', 'border': 'sprawl', 'oldisland': 'old_island', 'oldshore': 'old_island',
-             'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}   # blender/gidi_kit/rules.py
+             'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}   # legacy/blender/gidi_kit/rules.py
 SHOP_P = {'dense': 0.7, 'sprawl': 0.6, 'old_island': 0.8, 'elite': 0.1, 'civic': 0.5, 'waterfront': 0.4, 'port': 0.7}         # the kit's shop_p
 BALCONY_P = {'dense': 0.35, 'sprawl': 0.3, 'old_island': 0.5, 'elite': 0.6, 'civic': 0.3, 'waterfront': 0.1, 'port': 0.35}    # the kit's balcony_p
 HOUSES = ('front', 'back')

@@ -37,7 +37,7 @@ from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-WIDTH = {'main': 14.0, 'street': 7.0, 'lane': 3.5, 'path': 2.5, 'exp': 30.0, 'art': 18.0, 'bridge': 22.0}  # blender/city.py
+WIDTH = {'main': 14.0, 'street': 7.0, 'lane': 3.5, 'path': 2.5, 'exp': 30.0, 'art': 18.0, 'bridge': 22.0}  # legacy/blender/city.py
 
 
 def load_city():
@@ -195,7 +195,7 @@ def audit(G, did, ring, roads, tree, decks, wet, reg, built_kinds):
         if c['type'] not in reg['civic']:
             m3.append(f"{c['name']} ({c['type']}): no builder, the plot stays bare")
         elif c['type'] == 'landmark' and c['name'] not in reg['named']:
-            m3.append(f"{c['name']} (landmark): built as a plain hall until blender/gidi_kit/landmarks.py gives it a model of its own")
+            m3.append(f"{c['name']} (landmark): built as a plain hall until legacy/blender/gidi_kit/landmarks.py gives it a model of its own")
     # M4: what stands at each place on the map. A place is modelled when its own kind of building is
     # there, or a parcel or deck holds it; a place on an ordinary house (or nothing) has nothing of its own.
     m4 = defaultdict(list)

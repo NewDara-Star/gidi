@@ -1,6 +1,6 @@
 # Kit coverage: everything in Gidi's data, and whether the kit builds it
 
-Made by `python3 blender/coverage.py` from `web/gen-*.json`, `web/civic.json` and `blender/gidi_kit/registry.py`. Do not edit by hand.
+Made by `python3 legacy/blender/coverage.py` from `web/gen-*.json`, `web/civic.json` and `legacy/blender/gidi_kit/registry.py`. Do not edit by hand.
 
 **115 of 119 kinds built.**
 

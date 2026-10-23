@@ -1,6 +1,6 @@
 """The newest kit pieces side by side: the container truck, the 911 food lorry, the trains, the
 Crown Hall, the central mosque and a flyover with painted piers.
-blender -b --factory-startup -P blender/new_kit_sheet.py -- [--out blender/out/new_kit.jpg]"""
+blender -b --factory-startup -P legacy/blender/new_kit_sheet.py -- [--out legacy/blender/out/new_kit.jpg]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

@@ -4,16 +4,16 @@ Copy everything below the line into the modeller's session.
 
 ---
 
-You're building new pieces for the Gidi 3D kit in Blender: `blender/gidi_kit/`, driven by `blender/city.py`. Gidi is an invented city inspired by Lagos. The map data is already placed by hand: every piece below already has a position, a footprint or a point, and a kind in `web/gidi-data.js`. The kit just can't draw them yet. The full list, with notes, is in `docs/KIT-GAPS.md` under "New in the v2 layout".
+You're building new pieces for the Gidi 3D kit in Blender: `legacy/blender/gidi_kit/`, driven by `legacy/blender/city.py`. Gidi is an invented city inspired by Lagos. The map data is already placed by hand: every piece below already has a position, a footprint or a point, and a kind in `web/gidi-data.js`. The kit just can't draw them yet. The full list, with notes, is in `docs/KIT-GAPS.md` under "New in the v2 layout".
 
 **Rules**
 - Work on a branch, never on main. Open a PR; self-merge when it builds.
-- Follow the existing builders: buildings in `archetypes.py` (`def name(a, rng, collection=None)`), furniture in `street.py` and `roadside.py`, vehicles in `vehicles.py`, monuments in `monuments.py`. Register building kinds in `blender/gidi_kit/registry.py` (next to `'kiosk'`); furniture kinds are dispatched in `city.py`'s furniture loop (next to `f_['kind'] == 'transformer'`).
+- Follow the existing builders: buildings in `archetypes.py` (`def name(a, rng, collection=None)`), furniture in `street.py` and `roadside.py`, vehicles in `vehicles.py`, monuments in `monuments.py`. Register building kinds in `legacy/blender/gidi_kit/registry.py` (next to `'kiosk'`); furniture kinds are dispatched in `city.py`'s furniture loop (next to `f_['kind'] == 'transformer'`).
 - Deterministic: use only the `rng` you're handed, never `random` or `hash()`. Same data, same model, every time.
 - Low poly, stylised realism, game-ready: look at `vehicles.py`'s danfo and `monuments.py` for the level of detail.
 - Worn, never new. Rusted zinc, faded paint, rain stains at the base of walls, bare blockwork, dust.
 - Sacred places are never crime sites; don't put gang or crime props on churches, mosques, schools or clinics.
-- Render a contact sheet of what you made (see `blender/new_kit_sheet.py`) and look at it before you open the PR. Put the sheet in the PR.
+- Render a contact sheet of what you made (see `legacy/blender/new_kit_sheet.py`) and look at it before you open the PR. Put the sheet in the PR.
 
 **Build these, in this order (the opening of the story happens here)**
 

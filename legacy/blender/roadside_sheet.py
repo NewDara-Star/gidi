@@ -1,5 +1,5 @@
 """The roadside kit side by side: lamps, a direction sign, a gantry, speed and no-parking discs, a
-dressed bridge deck. blender -b --factory-startup -P blender/roadside_sheet.py -- [--out blender/out/roadside.jpg]"""
+dressed bridge deck. blender -b --factory-startup -P legacy/blender/roadside_sheet.py -- [--out legacy/blender/out/roadside.jpg]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

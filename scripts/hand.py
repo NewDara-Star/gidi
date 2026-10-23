@@ -712,7 +712,7 @@ def apply_edits(out):
                     L_.pop(hit[0])
                 else:
                     _miss('  hand edit found no plot at', e['at'], e.get('note', ''))
-            elif op == 'add monument':   # placed by hand (blender/gidi_kit/monuments.py): {"model", "x", "y", "ang", "name", "span"}
+            elif op == 'add monument':   # placed by hand (legacy/blender/gidi_kit/monuments.py): {"model", "x", "y", "ang", "name", "span"}
                 out.setdefault('monuments', []).append({k: e[k] for k in ('model', 'x', 'y', 'ang') if k in e} | {'d': d, 'name': e.get('name', ''), **({'span': e['span']} if 'span' in e else {})})
             elif op == 'add zone':
                 out.setdefault('encroach', []).append({'kind': e['kind'], 'd': d, 'pts': e['pts']})

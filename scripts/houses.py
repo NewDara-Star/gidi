@@ -3,7 +3,7 @@ everything in the data; batch 2 of what the kit used to invent).
 
 - out["roles"][d][str(i)] = {"type", "name"}: a point place (police station, fire station, clinic, fuel station, bank,
   chemist, office, nightclub, warehouse, betting shop) or a named landmark takes over a building. The rule is the kit's
-  (blender/city.py poi_overrides): the nearest front or back house of its district within 120 m that no other place has
+  (legacy/blender/city.py poi_overrides): the nearest front or back house of its district within 120 m that no other place has
   taken, in the order of the places. The kit used to keep its answer in a cache file that went stale when the map changed.
 - out["houses"][d][str(i)] = {"flat": 1 | 0, "unf": 1 | 0, "tank": [x, y] | 0, "dish": [x, y] | 0, "tyres": n}: a front, back
   or shed house's roof (flat or pitched, the kit's share by character and storeys; pitched needs four corners), whether
@@ -14,7 +14,7 @@ everything in the data; batch 2 of what the kit used to invent).
     the fire engines and ambulances parked out front of fire stations, hospitals and clinics, and a church's old molue;
     the police pound: wrecked cars and a heap of seized okadas behind a police station.
 
-The draws use the kit's Rng and its shares (blender/gidi_kit/rules.py), so the bake stays byte-identical. Looks that take no
+The draws use the kit's Rng and its shares (legacy/blender/gidi_kit/rules.py), so the bake stays byte-identical. Looks that take no
 ground (paint, window type, roof colour) stay with the kit for now. Hand edits: "set house" (scripts/hand.py).
 """
 import math
@@ -26,7 +26,7 @@ import ground as GU
 from things import Rng, CHARACTER, condition
 
 FLAT_P = {'dense': {1: 0.08, 2: 0.5, 3: 0.75, 4: 0.95}, 'sprawl': {1: 0.05, 2: 0.4, 3: 0.7, 4: 0.9}, 'old_island': {1: 0.1, 2: 0.4, 3: 0.7, 4: 0.9},
-          'elite': {1: 0.2, 2: 0.3, 3: 0.5, 4: 0.8}, 'civic': {1: 0.2, 2: 0.5, 3: 0.75, 4: 0.95}}   # blender/gidi_kit/rules.py C[...]
+          'elite': {1: 0.2, 2: 0.3, 3: 0.5, 4: 0.8}, 'civic': {1: 0.2, 2: 0.5, 3: 0.75, 4: 0.95}}   # legacy/blender/gidi_kit/rules.py C[...]
 SHARE = {   # tank, dish, generator, roof tyres (rules.py C[...]; waterfront and port as dense)
     'dense': (0.6, 0.3, 0.4, 0.35), 'sprawl': (0.55, 0.35, 0.45, 0.2), 'old_island': (0.5, 0.3, 0.35, 0.2),
     'elite': (0.7, 0.5, 0.2, 0.0), 'civic': (0.6, 0.35, 0.35, 0.05),
@@ -55,7 +55,7 @@ def roles(out):
     cent = {(d, i): Polygon(b[1:]).centroid for d, L in B.items() for i, b in enumerate(L) if len(b) > 3 and b[0] in ('front', 'back')}
     civic = [(s['type'], s['name'], Polygon(s['pts']).centroid) for s in out.get('safe_ground', [])]
     named_plots = {}
-    for poi in out['pois']:   # a landmark stands on the nearest civic plot of its type within 300 m (blender/city.py NAMED_PLOTS)
+    for poi in out['pois']:   # a landmark stands on the nearest civic plot of its type within 300 m (legacy/blender/city.py NAMED_PLOTS)
         if poi['name'] in LANDMARKS:
             q = Point(poi['x'], poi['y'])
             c = [(q.distance(p), n) for t, n, p in civic if t == poi['type'] and n not in named_plots]

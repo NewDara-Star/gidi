@@ -1,5 +1,5 @@
 """A street of Maze houses on their own, to judge wear and age close up (no tile build).
-blender -b --factory-startup -P blender/wear_sheet.py -- [--detail web|full] [--vc] [--district maze] [--view street|high|roofs] [--out ...]
+blender -b --factory-startup -P legacy/blender/wear_sheet.py -- [--detail web|full] [--vc] [--district maze] [--view street|high|roofs] [--out ...]
 --vc renders the vertex colours alone, the way Unreal's master material shows them (the Blender shader's wear is not there)."""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

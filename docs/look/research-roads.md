@@ -10,7 +10,7 @@ Tags:
 
 Hex values are weathered colours seen in photos, not paint-chart values.
 
-Character keys used in SELECT BY (from `blender/gidi_kit/rules.py`):
+Character keys used in SELECT BY (from `legacy/blender/gidi_kit/rules.py`):
 - `dense`: Maze, Hub, Jungle, Food Gate, Bazaar.
 - `sprawl`: Railside, Frontier, Border.
 - `old_island`: Old Island, Old Shore.

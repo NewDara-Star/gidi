@@ -3,7 +3,7 @@
 The "feel like Lagos" pass. All fifteen districts are built from measured patterns. Now the isms in `docs/LAGOS-ISMS.md` go into the city, partly by rule and partly by hand. The topography (`feature/terrain`, `web/terrain.json`) comes first, because floods depend on it.
 
 ## Audit (15 Oct 2026)
-"Map" means the 2D generator and its data (`scripts/gen_fabric.py`, `web/gen-*.json`, `web/gidi-data.js`). "Kit" means the Blender kit (`blender/`), which draws the 3D city from that data.
+"Map" means the 2D generator and its data (`scripts/gen_fabric.py`, `web/gen-*.json`, `web/gidi-data.js`). "Kit" means the Blender kit (`legacy/blender/`), which draws the 3D city from that data.
 
 | # | Ism | In the map | In the kit | Missing |
 |---|---|---|---|---|
@@ -105,7 +105,7 @@ A covered run is also where a gutter passes under a house front or a compound-wa
 >
 > For each one:
 > - Put it in the map data first: `scripts/isms.py` after the generator, with the rates per district from LAGOS-ISMS.md, plus `web/isms-edits.json` for hand edits.
-> - Draw it in the 2D map (`web/app.js`, `web/shell.html`) and the 3D view (`web/view3d.js`). Then have the Blender kit read it from the data instead of inventing it (gutters especially: `blender/generate.py` and `blender/city.py`).
+> - Draw it in the 2D map (`web/app.js`, `web/shell.html`) and the 3D view (`web/view3d.js`). Then have the Blender kit read it from the data instead of inventing it (gutters especially: `legacy/blender/generate.py` and `legacy/blender/city.py`).
 > - Extend `check_district.py` where an ism breaks a rule on purpose.
 > - Teach `scripts/explore_city.py` where it matters: a missing link really blocks a walk; a one-way street is one-way for a ride.
 > - Look at the result in 2D and 3D before showing it.

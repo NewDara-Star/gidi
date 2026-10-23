@@ -45,7 +45,7 @@ The owner's direction: "take inspiration from the places to build the area... al
 Marigold Junction (1), because the owner named it, and the Railside bakeries (18), because Tunde steals bread. Then the Heights' Atlantic Reclaim (15) and The Crown (5), the two biggest silhouettes.
 
 ## The kit's monuments and landmarks, placed by hand (16 Oct)
-The modeler's pieces (`blender/gidi_kit/monuments.py`, `landmarks.py`), all invented, matched to places. They're placed with the `add monument` hand edit. A district with any hand-placed monument keeps only those, and the kit's automatic corner monuments stay only where no hand pass has been yet.
+The modeler's pieces (`legacy/blender/gidi_kit/monuments.py`, `landmarks.py`), all invented, matched to places. They're placed with the `add monument` hand edit. A district with any hand-placed monument keeps only those, and the kit's automatic corner monuments stay only where no hand pass has been yet.
 
 | Piece | Where in Gidi | Why | Status |
 |---|---|---|---|

@@ -5,7 +5,7 @@ first eye test found missing, now in KIT.md section 12 too) and puts exactly tha
 roof, wall, balcony and shop fronts; each frontage edge's platform, wall and gate; the street piece; the props at their
 spots. One ground truth (decisions, 22 Oct): every window, sheet, stain, sack and bump is a stored record of the map, and
 the kit throws no dice. A record the kit needs and the map lacks is an error (core.MissingRecord), never a guess; a first
-draft of a new spot's records comes from the draft desk (draft.py, blender/kit_draft.py).
+draft of a new spot's records comes from the draft desk (draft.py, legacy/blender/kit_draft.py).
 
 Built on the shared parts (parts.walls, window, roof_pitched, roof_flat; zinc sheets; gutters; street poles and wires;
 vehicles.car; parcels.tree; props; people). New here: the lean-to on timber posts, plank shutters, the plank stall, the

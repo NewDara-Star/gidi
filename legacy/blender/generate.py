@@ -1,6 +1,6 @@
 """Build part of Gidi in Blender from the generated map data, every object styled by rules.
 
-blender -b --factory-startup -P blender/generate.py -- --district maze --at 2620,4392 --r 110 --out blender/out/ladi-lane
+blender -b --factory-startup -P legacy/blender/generate.py -- --district maze --at 2620,4392 --r 110 --out legacy/blender/out/ladi-lane
   [--render overview,street,main] [--glb] [--blend]
 
 Reads web/gen-<district>.json (x east, y south, metres). Each building's look comes from its own
@@ -20,7 +20,7 @@ from gidi_kit.core import MeshBuilder, Rng, ccw, edge_out, hex_rgb, offset  # no
 from gidi_kit.materials import master  # noqa: E402
 from gidi_kit.rules import UNFINISHED_SHARE  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # legacy/blender/ -> the repo
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 opt = {}
 for i, a in enumerate(args):
@@ -29,7 +29,7 @@ for i, a in enumerate(args):
 district = opt.get('--district', 'maze')
 cx, cy = (float(v) for v in opt.get('--at', '2620,4392').split(','))
 R = float(opt.get('--r', 110))
-out = opt.get('--out', os.path.join(ROOT, 'blender', 'out', district))
+out = opt.get('--out', os.path.join(ROOT, 'legacy', 'blender', 'out', district))
 os.makedirs(out, exist_ok=True)
 
 D = json.load(open(os.path.join(ROOT, 'web', f'gen-{district}.json')))

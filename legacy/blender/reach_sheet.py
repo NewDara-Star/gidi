@@ -1,4 +1,4 @@
-"""The Reach, close up. blender -b --factory-startup -P blender/reach_sheet.py"""
+"""The Reach, close up. blender -b --factory-startup -P legacy/blender/reach_sheet.py"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

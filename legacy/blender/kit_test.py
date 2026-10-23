@@ -1,6 +1,6 @@
 """A kit eye test: build one Street View spot from its map record with the old town kit and shoot it from the Street View's
 own camera (decisions: "A kit is proven by rebuilding real streets from it", "The owner's eye passes a kit").
-blender -b --factory-startup -P blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]
+blender -b --factory-startup -P legacy/blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]
     [--textures <dir> | --no-textures]   (textures default to $GIDI_TEXTURES or ~/Real-world/textures/polyhaven)
     [--cam x,y,z --at x,y,z [--hfov deg] [--size w,h]]   a close-up of one part, from its own camera, in the same light
 The map's 'shot' block gives the camera (position, heading, pitch, horizontal field of view, frame) and the light (a sun

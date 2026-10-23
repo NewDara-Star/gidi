@@ -25,7 +25,7 @@ from shapely.strtree import STRtree
 
 CHARACTER = {'maze': 'dense', 'hub': 'dense', 'jungle': 'dense', 'foodgate': 'dense', 'bazaar': 'dense',
              'railside': 'sprawl', 'frontier': 'sprawl', 'border': 'sprawl', 'oldisland': 'old_island', 'oldshore': 'old_island',
-             'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}   # blender/gidi_kit/rules.py
+             'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}   # legacy/blender/gidi_kit/rules.py
 WALLED_SHARE = {'dense': 0.3, 'sprawl': 0.55, 'old_island': 0.1, 'elite': 0.95, 'civic': 0.6, 'waterfront': 0.05, 'port': 0.4}   # the kit's compound_p
 HOUSES = {'front', 'back', 'old house', 'brazilian house', 'colonial house', 'villa', 'mansion', 'flats', 'face-me', 'unfinished house'}
 REACH = 2.0   # how far a compound reaches from its house

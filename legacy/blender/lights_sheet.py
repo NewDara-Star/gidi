@@ -1,4 +1,4 @@
-"""Traffic lights, street-light ads, the new statues. blender -b --factory-startup -P blender/lights_sheet.py"""
+"""Traffic lights, street-light ads, the new statues. blender -b --factory-startup -P legacy/blender/lights_sheet.py"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

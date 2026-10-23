@@ -45,9 +45,9 @@ import ground as GU
 CHARACTER = {'maze': 'dense', 'hub': 'dense', 'jungle': 'dense', 'foodgate': 'dense', 'bazaar': 'dense',
              'railside': 'sprawl', 'frontier': 'sprawl', 'border': 'sprawl', 'oldisland': 'old_island', 'oldshore': 'old_island',
              'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}
-ART_W = {'exp': 30.0, 'art': 18.0, 'bridge': 22.0}   # blender/city.py: the kit's arterial widths
+ART_W = {'exp': 30.0, 'art': 18.0, 'bridge': 22.0}   # legacy/blender/city.py: the kit's arterial widths
 SPEED = {'main': 50, 'art': 60, 'exp': 80, 'bridge': 80}
-JUNCTION = {   # blender/gidi_kit/monuments.py: what stands at a main-road junction, by character
+JUNCTION = {   # legacy/blender/gidi_kit/monuments.py: what stands at a main-road junction, by character
     'old_island': ['statue:masquerade', 'statue:horse_rider', 'clock_tower', 'led_board'],
     'civic': ['statue:saxophonist', 'statue:horse_rider', 'clock_tower', 'led_board'],
     'elite': ['statue:three_elders', 'sculpture', 'led_board'],
@@ -60,7 +60,7 @@ POINT_LANDMARKS = {'Coconut Beach': ('beach_arch', -math.pi / 2), 'Hunter Rounda
 WEALTH = {'elite': 0.85, 'civic': 0.55, 'dense': 0.3, 'sprawl': 0.35, 'old_island': 0.3, 'waterfront': 0.1, 'port': 0.3}
 CROWD = {'dense': 30, 'old_island': 40, 'sprawl': 15, 'elite': 2, 'civic': 10, 'waterfront': 20, 'port': 10}   # per 100 m, research-street 4.3
 GAP = {'main': 14, 'street': 30, 'lane': 60}   # metres between moving vehicles in a lane, about
-MIX = {   # research-vehicles 8.6: shares of moving traffic by character and road class (blender/gidi_kit/vehicles.py)
+MIX = {   # research-vehicles 8.6: shares of moving traffic by character and road class (legacy/blender/gidi_kit/vehicles.py)
     ('dense', 'main'): {'danfo': 26, 'korope': 4, 'keke': 5, 'okada': 5, 'car': 40, 'brt': 5, 'tipper': 6, 'tanker': 6, 'cart': 3, 'water': 1, 'refuse': 1, 'mixer': 1},
     ('dense', 'street'): {'danfo': 7, 'korope': 3, 'keke': 25, 'okada': 25, 'car': 30, 'tipper': 3, 'cart': 5, 'wheelbarrow': 2, 'water': 1.5, 'refuse': 0.5},
     ('old_island', 'main'): {'danfo': 20, 'car': 55, 'brt': 5, 'tanker': 5, 'tipper': 5, 'cart': 10},
@@ -82,7 +82,7 @@ WIDTH = {'danfo': 2.0, 'korope': 1.7, 'brt': 2.6, 'keke': 1.3, 'okada': 0.8, 'ca
          'molue': 2.5, 'stacker': 4.0, 'forklift': 1.4}
 COMMERCIAL = {'danfo', 'korope', 'keke', 'okada', 'tipper', 'tanker', 'brt', 'cart', 'container', 'lorry911', 'refuse', 'mixer', 'water', 'molue', 'stacker', 'forklift'}
 TRAIN_L = {'commuter': 20.6, 'loco': 14.0, 'coach': 18.6, 'wagon': 14.6}
-DRESS = {   # blender/gidi_kit/people.py, shares by character [est, research-street 4.2]
+DRESS = {   # legacy/blender/gidi_kit/people.py, shares by character [est, research-street 4.2]
     'dense': {'ankara': 3, 'wrapper': 3, 'buba': 2, 'tshirt': 4, 'kaftan': 1, 'hawker': 1.5, 'school': 0.8, 'agbada': 0.3},
     'old_island': {'ankara': 3, 'wrapper': 4, 'buba': 2, 'tshirt': 3, 'kaftan': 1.5, 'hawker': 2, 'agbada': 0.6, 'school': 0.6},
     'sprawl': {'ankara': 2, 'wrapper': 3, 'buba': 2, 'tshirt': 4, 'kaftan': 2, 'hawker': 1, 'school': 1.2, 'agbada': 0.3},
@@ -94,7 +94,7 @@ DRESS = {   # blender/gidi_kit/people.py, shares by character [est, research-str
 
 
 class Rng(random.Random):
-    """blender/gidi_kit/core.py's Rng, exactly: random.Random seeded from any key, with weighted picks."""
+    """legacy/blender/gidi_kit/core.py's Rng, exactly: random.Random seeded from any key, with weighted picks."""
 
     def __init__(self, *key):
         self.key = '/'.join(str(k) for k in key)
@@ -227,7 +227,7 @@ def _ahead_name(W, road, end_pt, here):
     return road.get('name') or (W.dname.get(d) if d else None) or 'City Centre'
 
 
-# ------------------------------------------------------------------ monuments by rule (blender/city.py monument_sites)
+# ------------------------------------------------------------------ monuments by rule (legacy/blender/city.py monument_sites)
 def monuments(W):
     mains = [r for r in W.roads if r['k'] == 'main']
     sites, per = [], {}
@@ -321,7 +321,7 @@ def monuments(W):
     return res
 
 
-# ------------------------------------------------------------------ road signs (blender/city.py roadside_sites)
+# ------------------------------------------------------------------ road signs (legacy/blender/city.py roadside_sites)
 def signs(W, profile_s=None):
     big = [dict(r, cls='main') for r in W.roads if r['k'] == 'main'] + [dict(a) for a in W.arts]
     sites, junctions = [], []

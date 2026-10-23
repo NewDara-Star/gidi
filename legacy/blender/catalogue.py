@@ -1,6 +1,6 @@
 """Contact sheet of the kit: the same footprint built for each district character and several seeds.
 
-blender -b --factory-startup -P blender/catalogue.py -- --out blender/out/catalogue.jpg [--storeys 1,2,3] [--seeds 4]
+blender -b --factory-startup -P legacy/blender/catalogue.py -- --out legacy/blender/out/catalogue.jpg [--storeys 1,2,3] [--seeds 4]
 """
 import math
 import os
