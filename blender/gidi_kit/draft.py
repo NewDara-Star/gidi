@@ -324,6 +324,17 @@ def litter_piece(rng):
     return rec
 
 
+SHEET_COLS = ['#d8d4cc', '#c9c3b5', '#e8e6e0', '#9fb3c8', '#7d8a96', '#c8b48a', '#2a3a5a', '#b23a32', '#3a3a3a', '#a8b8a0']
+
+
+def litter_sheet(rng, cols=None):
+    """A flat piece of rubbish trodden into the dirt: paper, carton or nylon sheet, w by l, part of it folded up (fold, 0..1),
+    lying a little tipped (tilt); plastic or paper."""
+    return dict(kind='sheet', col=rng.pick(cols or SHEET_COLS), rz=rng.between(0, math.tau), w=round(rng.between(0.12, 0.45), 3),
+                l=round(rng.between(0.15, 0.6), 3), fold=round(rng.between(0, 1) ** 2, 3), tilt=round(rng.between(-0.08, 0.08), 3),
+                plastic=rng.chance(0.3))
+
+
 def refuse_heap(r, rng):
     rings, seg = 5, 14
     h = r * rng.between(0.3, 0.5)
@@ -1104,6 +1115,13 @@ def street(sp, base_dir):
             rut = float(_ruts(sp, x, y, 'depth')) / 0.05 + float(_edge_rut(sp, N, x, y)) / 0.1
             if lr.chance((1 + lt.get('walls', 3.0) * edge + lt.get('ruts', 2.0) * min(1.0, rut)) / (1 + lt.get('walls', 3.0) + lt.get('ruts', 2.0))):
                 lt['pieces'].append(dict(litter_piece(lr), x=x, y=y))
+        for k, bd in enumerate(lt.get('bands', [])):   # a strip where rubbish lies thick (along a median, a wall): sheets and the usual mix
+            br = rng.child('litter band', k)
+            ba, bb = bd.get('from_x', xa), bd.get('to_x', xb)
+            for _ in range(int(bd['per_m2'] * (bb - ba) * abs(bd['y1'] - bd['y0']))):
+                x, t = br.between(ba, bb), br.random()
+                y = bd['y0'] + (bd['y1'] - bd['y0']) * t ** bd.get('gather', 1.0)   # gather > 1: thicker toward y0
+                lt['pieces'].append(dict(litter_sheet(br, bd.get('colours')) if br.chance(bd.get('sheets', 0.6)) else litter_piece(br), x=x, y=y))
     for vk in ('verge_right', 'verge_left'):
         vr = sp.get(vk) or {}
         if vr.get('surface') == 'concrete_apron':
@@ -1126,6 +1144,15 @@ def street(sp, base_dir):
                 ln = kb.get('block_m', 1.0) * kr.between(0.95, 1.05)
                 kb['blocks'].append([round(min(ln, xb - x), 3), kr.between(0.85, 1.08), kr.between(0.0, 1.0) if kr.chance(kb.get('chipped', 0.2)) else 0.0])
                 x += ln
+    md = sp.get('median_wall')
+    if md:   # a cast median's lengths: each one's length, shade, a chip off its near top edge, a crack at its joint
+        mr, md['blocks'], x = rng.child('median'), [], md['from_x']
+        while x < md['upto_x']:
+            ln = md.get('block_m', 3.0) * mr.between(0.9, 1.1)
+            md['blocks'].append([round(min(ln, md['upto_x'] - x), 3), round(mr.between(0.88, 1.06), 3),
+                                 round(mr.between(0.1, 0.9), 3) if mr.chance(md.get('chipped', 0.2)) else 0.0,
+                                 round(mr.between(0.3, 1.0), 3) if mr.chance(md.get('cracked', 0.5)) else 0.0])
+            x += ln
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -1211,7 +1238,8 @@ def props(P):
         if v['kind'] == 'container':
             r = rng.child('container', k)
             if v.get('tractor', False):
-                v['cab_colour'] = r.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc'])
+                cab = r.pick(['#e8e6df', '#c62828', '#1f5fa8', '#e0b020', '#2e7d4f', '#d8d4cc'])
+                v['cab_colour'] = v.get('cab_colour') or cab   # a colour the map gave stays
             if not v.get('colour'):
                 from .vehicles import CONTAINER_COLS
                 v['colour'] = r.pick(CONTAINER_COLS)

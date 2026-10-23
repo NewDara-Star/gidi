@@ -851,7 +851,8 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
         zb = -0.08 - 2 * (sp.get('relief') or {}).get('amp_m', 0.0)   # under the sheet's deepest dips
         beyond = _hex((sp.get('ground_colours') or {}).get('beyond'), '#7a5a44')   # the ground past the sheet's band
         mb.face([(X0, Y0, zb), (X1, Y0, zb), (X1, Y1, zb), (X0, Y1, zb)], 'mud', beyond, 0.1)
-        _, G = roadbed.build(sp, roadbed.grids(sp, base_dir), collection, materials=master)
+        own = (lambda n: master(n)) if not GROUNDS else (lambda n: master(n).copy())   # each further street its own layers
+        _, G = roadbed.build(sp, roadbed.grids(sp, base_dir), collection, materials=own)
         GROUNDS.append(G)
     else:   # the ground everywhere (earth), then the tar laid on it in strips so its edge can fray into the earth
         tar = hex_rgb('#665e57')
@@ -917,6 +918,11 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
             if chip:   # a chip off the road-side top edge
                 mb.box('concrete', Matrix.Translation((xa + ln * chip, y_e - s_ * kb.get('w_m', 0.15) * 0.35, z + kb.get('h_m', 0.2) - 0.03)), shade(top, 0.6), 0.8, size=(0.12, kb.get('w_m', 0.15) * 0.32, 0.07))
             xa += ln
+    md = sp.get('median_wall')
+    if md:
+        median_wall(mb, md, gz, sp['id'])
+    elif sp.get('median', 'none') != 'none':
+        raise MissingRecord(f"street {sp['id']}: median is {sp['median']} but has no median_wall record")
     g = sp.get('gutter_left') or {}
     if g.get('type', 'none') != 'none':
         y = cy + g['offset_m']
@@ -929,6 +935,39 @@ def street_piece(sp, collection=None, extent=(-40, 220, -60, 60), base_dir='.'):
             if c.get('side') == 'left':
                 mb.box('concrete', Matrix.Translation((c['x'], y, 0.27)) @ Matrix.Rotation(need(c, 'rz', 'crossing'), 4, 'Z'), shade(_hex(g.get('slab_colour'), '#a39f95'), need(c, 'shade', 'crossing')), 0.7, size=(c['w'], g['width'] + 0.7, 0.1))
     return mb.to_object(sp['id'], collection, master)
+
+
+def median_wall(mb, md, gz, sid):
+    """A low cast-concrete median along the street, from its record: y_m (its middle line), w_m, h_m, chamfer_m (the top
+    edges cut off), colour (the faces), top_colour (the grimed top), foot_colour and foot_h_m (the dirt splashed up its
+    feet), from_x, upto_x; drafted blocks [[length, shade, chip, crack]]: each cast length, its shade, a chip off its near
+    top edge (0 = none, else where along it) and a dark crack at its joint (0..1)."""
+    w, h, c = need(md, 'w_m', 'median'), need(md, 'h_m', 'median'), md.get('chamfer_m', 0.0)
+    y0, y1 = md['y_m'] - w / 2, md['y_m'] + w / 2
+    prof = [(y0, 0.0), (y0, h - c), (y0 + c, h), (y1 - c, h), (y1, h - c), (y1, 0.0)]
+    face, top = _hex(need(md, 'colour', 'median')), _hex(md.get('top_colour') or md['colour'])
+    foot, fh = _hex(md.get('foot_colour') or md['colour']), md.get('foot_h_m', 0.0)
+    xa = md['from_x']
+    for ln, f, chip, crack in need(md, 'blocks', 'median of ' + sid):
+        xb = xa + ln - 0.01
+        z = gz(xa + ln / 2, md['y_m']) - 0.06   # sunk a little into the ground, so no gap shows under it on a hump
+        P = lambda x, p: (x, p[0], z + p[1] + (0.06 if p[1] > 0 else 0.0))
+        for k in range(len(prof) - 1):   # the faces round its profile, near foot to far foot
+            p, q = prof[k], prof[k + 1]
+            col = top if p[1] >= h - c - 1e-6 and q[1] >= h - c - 1e-6 else face
+            mb.face([P(xa, p), P(xb, p), P(xb, q), P(xa, q)], 'concrete', shade(col, f), 0.55)
+        mb.face([P(xa, p) for p in prof], 'concrete', shade(face, f * 0.9), 0.55)
+        mb.face([P(xb, p) for p in prof[::-1]], 'concrete', shade(face, f * 0.9), 0.55)
+        for yy, s_ in ((y0, -1), (y1, 1)):   # the dirt thrown up its feet: a thin skin on each long face
+            if fh > 0:
+                mb.face([(xa, yy + s_ * 0.004, z), (xb, yy + s_ * 0.004, z), (xb, yy + s_ * 0.004, z + 0.06 + fh), (xa, yy + s_ * 0.004, z + 0.06 + fh)][::-s_],
+                        'concrete', shade(foot, f), 0.7)
+        if chip:   # a bite off the near top edge
+            mb.box('concrete', Matrix.Translation((xa + ln * chip, y0 + 0.04, z + 0.06 + h - 0.05)), shade(face, f * 0.7), 0.8, size=(0.25, 0.1, 0.12))
+        if crack:   # the joint at its end, a dark gap down its near face
+            mb.face([(xb + 0.004, y0 - 0.005, z), (xb + 0.004 + 0.03 * crack, y0 - 0.005, z), (xb + 0.004 + 0.03 * crack, y0 - 0.005, z + 0.06 + h),
+                     (xb + 0.004, y0 - 0.005, z + 0.06 + h)], 'concrete', shade(face, 0.35), 0.8)
+        xa += ln
 
 
 def street_lamp(mb, lp):
@@ -1041,8 +1080,12 @@ def spot_props(P, collection=None):
             a = math.radians(v.get('heading_deg', 0))
             M = Matrix.Translation((v['x'] + 2.5 * math.cos(a), v['y'] + 2.5 * math.sin(a), ground_z(v['x'], v['y']))) @ Matrix.Rotation(a, 4, 'Z')
             tractor = v.get('tractor', False)
-            vehicles.container_truck(mb, M, None, cond='worn', loaded=True, box_col=need(v, 'colour', 'container'), tractor=tractor,
-                                     cab_col=need(v, 'cab_colour', 'container truck') if tractor else None)
+            bonneted = v.get('tractor_kind', 'cab_over') == 'bonneted'
+            vehicles.container_truck(mb, M, None, cond=v.get('condition', 'worn'), loaded=True, box_col=need(v, 'colour', 'container'), tractor=tractor,
+                                     cab_col=need(v, 'cab_colour', 'container truck') if tractor else None, tractor_kind=v.get('tractor_kind', 'cab_over'),
+                                     bonnet_col=need(v, 'bonnet_colour', 'bonneted tractor') if tractor and bonneted else None, glass=v.get('glass', 'whole'),
+                                     trailer=v.get('trailer', 'skeletal'), trailer_col=v.get('trailer_colour'), stripes=v.get('stripes', True),
+                                     box_marks=v.get('box_marks'), box_wear=v.get('box_wear'))
     for k, v in enumerate(P.get('parked_vehicles', [])):
         if v['kind'] == 'okada':
             a = math.radians(v.get('heading_deg', 0))
