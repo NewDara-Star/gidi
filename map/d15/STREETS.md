@@ -304,21 +304,46 @@ Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 | rd-upzxrowm | Apesin Street | lane |  |
 | rd-r444jznj | Agoro Street | lane |  |
 
-**Block B2** (Ishaga Road, Itire Road, Ajegunle, Onipede, Mushin Road's end, Bello, Atunrase, Aborishade and Dosunmu
-Streets). The real twin is the Ishaga Road / Lawanson side of Itire: north of the canal, short north-south streets
-about 90 m apart running from Ishaga Road down to Daniyan Street on the canal bank; south-west of it, north-west to
-south-east streets running down to Lawanson Road; and a pocket by Adedoyin Road. Kept: three of the north streets
-(Abati and Moshalashi left as gaps), Daniyan on the canal, two south-west streets and Adedoyin.
+**Block B2** (Ishaga Road, the Itire Street and Lawanson Road edges, Aborishade Road, Abati George and Dosunmu Streets, Michael Ogun Street and the Itire-Ishaga junction). Redrawn 23 Oct from a close-zoom study (z18 at the checked shot scale; owner: zoom in for the details): the first seven lanes were read at z16 and missed most of the real streets. The real twin is Idi-Araba south of Ishaga Road and Itire-Lawanson: north of the canal, the Folarin-Oyekanmi grid east of Itire Street and the Garuba Musa-Igbira-Obele streets below the mosque; south of it, Durojaiye and Olufowobi, Omobola running up into Alves Street, the Kasali-Folarin-Ik Daro-Akinyemi Thompson streets down to Lawanson Road, the Adedoyin Road pocket by the Lawanson market, and Durojaiye, Bello, Adeniji and Adebayo Streets east of Michael Ogun. About one real street in two is kept, 40-80 m apart at real size. Streets that end on the district's edge (Itire Street, Lawanson Road) stop there until the seam pass. Left out for spacing: Oyewuwo, Seriki, Haruna, Olawepo, Agbole, Oduwawo, Wuraola, Abijade, Aina, Fashina, Ojikutu, the Lawanson Market lane, Daniyan's south-bank stretch. Removed: the seven z16 lanes rd-i6s2bf4s, rd-a0jvm3x0, rd-uheomc6y, rd-tfs65na7, rd-nybc6644, rd-b9u5qmox, rd-oiymgele.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-i6s2bf4s | Daniyan Street (north of the canal) | lane | the west edge along the canal to Igbira's twin |
-| rd-a0jvm3x0 | Adekunle Street | lane | Ishaga Road to Daniyan's twin |
-| rd-uheomc6y | Garuba Musa Street | lane | Ishaga Road to Daniyan's twin |
-| rd-tfs65na7 | Igbira Street | lane | Ishaga Road to Daniyan's twin |
-| rd-nybc6644 | Alves Street | lane | Onipede's side down towards Lawanson (ends in the block) |
-| rd-b9u5qmox | Odunsi Street | lane | south of the canal down towards Lawanson (ends in the block) |
-| rd-oiymgele | Adedoyin Road | lane | the pocket by Aborishade, west to east |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-x5gbmfao | Folarin Street | lane |
+| rd-d7mpoq41 | Babalola Street's east end, then Oyekanmi Street | lane |
+| rd-bm7zt6yx | the street along the canal's north bank, past Prince Heirs College | lane |
+| rd-r9bbqsd1 | Durodola Street | lane |
+| rd-3glst27l | Adekunle Street | lane |
+| rd-ldpvzbt7 | Abati Street | lane |
+| rd-r2lepc3j | Garuba Musa Street | lane |
+| rd-lnoqvges | Mallam Gana Street, then the Addide Iwaya street west to Garuba Musa | lane |
+| rd-qhwuhayy | the unnamed street between Olawepo Lane and Mallam Gana | lane |
+| rd-l3rs3wjs | Igbira Road, then Igbira Street to the canal | lane |
+| rd-30966k78 | Obele Road (its east-west stretch, then north to Ishaga Road) | lane |
+| rd-laaw1anj | Daniyan Street on the canal's north bank | lane |
+| rd-jcfqk5jf | the road past the Chapel of the Healing Cross | lane |
+| rd-j817mtxs | Durojaiye Street's north end, then Olufowobi Street | lane |
+| rd-ffpzwd6r | Omobola Street, then Alves Street north to Aborishade | home_street |
+| rd-psjkkw9f | Oseni Street | lane |
+| rd-emmu81lr | Asoluka Street | lane |
+| rd-uufgfc7r | Kasali Street | lane |
+| rd-ytjvbcdm | Folarin Street (Lawanson) | lane |
+| rd-gb8kkto3 | Ik Daro Street | lane |
+| rd-9c0gondv | Akinyemi Thompson Street | lane |
+| rd-790or58e | Oke Olu Street | lane |
+| rd-s40am6tw | Babalola Street (Lawanson) | lane |
+| rd-zhn2pif5 | Abati George Street | lane |
+| rd-k17bq15t | Adedoyin Road | home_street |
+| rd-ls7vi4p6 | Obafemi Ajayi Street | lane |
+| rd-nvm72nt7 | Caltos Drive | lane |
+| rd-vq96bf9e | Okon Drive | lane |
+| rd-3ir5l1tj | Aborishade Road's south end | lane |
+| rd-608fssnq | Babashola Street, then Oyenekan Street to the canal | lane |
+| rd-8crtp77o | Fasanya Street | lane |
+| rd-1uh80t1y | Taju Thompson Drive | lane |
+| rd-fp25sdd6 | Durojaiye Street (east), then Adeniji Street | home_street |
+| rd-ozs3ry4y | Bello Street | lane |
+| rd-i10tsslu | Adeniji Street (north-south) | lane |
+| rd-xd115opd | Adebayo Street | lane |
 
 **Block B3** (Ogunmokun Street, the Agege Motor Road, the Ikorodu Road edge and Kayode Street; the rail runs through
 it). The real twin is the Mushin station side of Fadeyi: east of the rail, a close grid of short east-west streets (Giwa,
