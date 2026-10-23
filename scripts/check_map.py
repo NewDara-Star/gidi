@@ -136,6 +136,9 @@ def check_value(where, v, spec, refs):
     elif base == 'enums':
         if not isinstance(v, list) or any(x not in SCHEMA['enums'][arg] for x in v):
             err(where, f'should be a list from {arg}: {", ".join(SCHEMA["enums"][arg])}')
+    elif base == 'dict':                       # keyed by the data's own names (a garment's colour by its name)
+        if not isinstance(v, dict) or not all(isinstance(k, str) for k in v):
+            err(where, 'should be an object keyed by names')
     elif base == 'obj':
         check_obj(where, v, SCHEMA['shapes'][arg], refs)
     elif base == 'objs':
@@ -408,9 +411,15 @@ def resolve(rt, path):
         key = seg.rstrip('[]')
         if fields is None or key not in fields:
             return False
-        kind, _, _ = parse(fields[key])
+        spec = fields[key][0] if isinstance(fields[key], list) else fields[key]   # a table's column is [type]
+        kind, _, _ = parse(spec)
         base, _, arg = kind.partition(':')
-        fields = SCHEMA['shapes'][arg] if base in ('obj', 'objs') else None
+        if base == 'dict':                      # keyed by the data's own names: what lies under it is free
+            return True
+        if base == 'table':
+            fields = dict({'cols': ['strs'], 'rows': ['list']}, **dict(SCHEMA['tables'][arg]))
+        else:
+            fields = SCHEMA['shapes'][arg] if base in ('obj', 'objs') else None
     return True
 
 

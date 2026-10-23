@@ -60,7 +60,7 @@
     "wire_kind": ["line", "service"],
     "mast_kind": ["lattice", "monopole"],
     "tree_kind": ["palm", "shade", "plantain", "almond", "neem", "shrub"],
-    "vehicle_kind": ["danfo", "keke", "okada", "saloon", "suv", "pickup", "lorry", "container", "tanker", "bus", "wreck"],
+    "vehicle_kind": ["danfo", "keke", "okada", "saloon", "suv", "pickup", "lorry", "container", "tanker", "bus", "molue", "brt", "wreck"],
     "load_kind": ["none", "roll", "cargo", "sacks"],
     "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand", "compressor", "tyre_changer"],
     "cart_kind": ["push", "trolley"],
@@ -73,7 +73,11 @@
     "ground_kind": ["tar", "earth", "laterite", "sand", "dust", "mud", "wet", "water", "concrete", "interlock", "grass", "rubble"],
     "litter_kind": ["sachet", "bag", "bottle", "pack", "can", "husk", "paper", "rag", "tyre"],
     "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet", "basket", "jerrycan"],
-    "pose": ["stand", "walk", "sit", "squat", "lean", "carry"]
+    "pose": ["stand", "walk", "sit", "squat", "lean", "carry", "head_load", "push", "hold", "lie_prone"],
+    "pickup_body": ["hilux", "p504"],
+    "tailgate": ["up", "down", "missing"],
+    "vehicle_glass": ["whole", "cracked", "gone"],
+    "corner": ["FL", "FR", "RL", "RR", "L", "R", "F"]
   },
 
   "shapes": {
@@ -224,7 +228,7 @@
       "drop": "num >=0"
     },
     "umbrella": {
-      "r": "num >0",
+      "diameter": "num >0",
       "colours": "hexes",
       "panels": "int 6..12?",
       "open": "num 0..1?",
@@ -234,6 +238,7 @@
       "tilt": "num?",
       "head_tilt": "num?",
       "pole_colour": "hex?",
+      "bucket_colour": "hex?",
       "prints": "objs:umbrella_print?"
     },
     "umbrella_print": {
@@ -250,6 +255,81 @@
     "load": {
       "kind": "enum:load_kind",
       "colour": "hex?"
+    },
+    "pickup": {
+      "body": "enum:pickup_body?",
+      "cab": "str?",
+      "police": "bool?",
+      "lower_colour": "hex?",
+      "lower_band": "bool?",
+      "bumper": "str?",
+      "bumpers_missing": "enums:corner?",
+      "glass": "enum:vehicle_glass?",
+      "tailgate": "enum:tailgate?",
+      "wheels": "str?",
+      "wheels_missing": "enums:corner?",
+      "mirrors_missing": "enums:corner?",
+      "load": "str?",
+      "load_colour": "hex?",
+      "load_rows": "int >=1?"
+    },
+    "danfo": {
+      "rack": "bool?",
+      "bullbar": "bool?",
+      "bumpers": "str?",
+      "guard_R": "bool?",
+      "plate_R": "str?",
+      "hubcaps_missing": "enums:corner?",
+      "paint_alt": "strs?",
+      "rear": "obj:danfo_rear?",
+      "seed": "int?"
+    },
+    "danfo_rear": {"slogan": "text", "line": "text", "year": "text"},
+    "keke": {"letter_colour": "hex?", "rear": "obj:keke_rear?", "seed": "int?"},
+    "keke_rear": {"line": "text"},
+    "molue": {"route": "text?", "line": "text?", "seed": "int?"},
+    "brt": {"band": "hex?", "route": "text?"},
+    "lorry": {
+      "tractor_kind": "str?",
+      "trailer": "str?",
+      "box": "str?",
+      "axles": "int 2..4?",
+      "roof": "str?",
+      "doors": "str?",
+      "exhaust": "str?",
+      "bumper": "str?",
+      "deflector": "bool?",
+      "spare": "bool?",
+      "stripes": "bool?",
+      "glass": "enum:vehicle_glass?",
+      "colour2": "hex?",
+      "bonnet_colour": "hex?",
+      "trailer_colour": "hex?",
+      "rim_colour": "hex?",
+      "cab_doors_missing": "enums:corner?",
+      "mirrors_missing": "enums:corner?",
+      "wheels_missing": "strs?",
+      "dents": "objs:dent?"
+    },
+    "dent": {"side": "str", "u": "num", "v": "num?", "z": "num", "r": "num >0", "depth": "num", "box": "int >=0?"},
+    "person_look": {
+      "name": "name?",
+      "gender": "num 0..1",
+      "age": "num 0..1",
+      "muscle": "num 0..1",
+      "weight": "num 0..1",
+      "height": "num 0..1",
+      "proportions": "num 0..1",
+      "african": "num 0..1?",
+      "skin": "str?",
+      "eyebrows": "str?",
+      "hair": "str?",
+      "clothes": "strs?",
+      "colours": "dict?",
+      "lean": "num?",
+      "seat": "num >=0?",
+      "carry": "str?",
+      "carry_seat": "str?"
     },
     "tree_form": {
       "fronds": "table:frond?",
@@ -385,12 +465,12 @@
     "daub": [["u", "num"], ["z", "num"], ["text", "text"], ["colour", "hex"], ["size", "num >0"]],
     "slab": [["tip", "num"], ["roll", "num"], ["sink", "num"], ["dirt", "num 0..1"], ["dust", "num 0..1"], ["shade", "num >0"], ["gap", "num >=0"], ["broken", "bool"]],
     "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"]],
-    "item": [["kind", "enum:goods_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["shade", "num >0"]],
+    "item": [["kind", "enum:goods_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["shade", "num >0"], ["cap", "hex?"]],
     "joint": [["slab", "int >=0"], ["o", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["du", "num"], ["turn", "num"]],
     "pothole": [["x", "num"], ["y", "num"], ["r", "num >0"], ["depth", "num >=0"], ["stretch", "num >0"], ["turn", "num"], ["mud", "num 0..1"]],
     "frond": [["turn", "num"], ["droop", "num"], ["len", "num >0"]],
     "lobe": [["x", "num"], ["y", "num"], ["z", "num"], ["r", "num >0"]],
-    "person": [["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["h", "num >0"], ["pose", "enum:pose"], ["look", "str"]]
+    "person": [["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["h", "num >0"], ["pose", "enum:pose"], ["look", "obj:person_look"]]
   },
 
   "records": {
@@ -561,7 +641,13 @@
         "lean": "num?",
         "tractor": "bool?",
         "load": "obj:load?",
-        "cover": "hex?"
+        "cover": "hex?",
+        "pickup": "obj:pickup?",
+        "danfo": "obj:danfo?",
+        "keke": "obj:keke?",
+        "molue": "obj:molue?",
+        "brt": "obj:brt?",
+        "lorry": "obj:lorry?"
       }
     },
     "furniture": {
