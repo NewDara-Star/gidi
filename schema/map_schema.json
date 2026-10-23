@@ -77,7 +77,7 @@
   },
 
   "shapes": {
-    "cart": {"kind": "enum:cart_kind", "wheel_r": "num >0?"},
+    "cart": {"kind": "enum:cart_kind", "wheel_r": "num >0?", "sides": "num >0?", "spokes": "num >0?", "handle_tilt": "num?"},
     "ref": {
       "twin": "str?",
       "shots": "strs?",
