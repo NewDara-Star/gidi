@@ -63,6 +63,10 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 3). Its houses were cleared and redrafted: the grid with `--frontage --sizes=12,20000`, the warehouse strip with
 `--frontage --sizes=300,20000`. B1 now holds 347 buildings at 54% cover.
 
+## Hand pass 11 (23 Oct): block B0 redone from a close-zoom study
+
+B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |

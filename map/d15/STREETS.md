@@ -263,23 +263,46 @@ Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 | rd-c5n44yad | Omoleran Street | lane | the Jakande street to Isolo Road |
 | rd-ve4qwm14 | Akinbayode Street | lane | Olanibi Street to Omoleran Street |
 
-**Block B0** (Ishaga Road, Bishop Fashoro Street, the Agege Motor Road edge, Ajegunle and Atunrase Streets). The real
-twin is Idi-Araba: the LUTH campus with the College of Medicine and its staff quarters (internal drives, big buildings,
-greens, the canal on its south-east side), Eko Boys and Birch Freeman High Schools, and irregular housing streets about
-100 m apart east of the canal to Bishop Street and west of the campus (Takuro, Olaleye). Kept: LUTH's main drive from
-the north gate (Apesin's end) to Ishaga Road, Road 4 and the staff quarters road, and six housing streets.
+**Block B0** (Ishaga Road, Bishop Fashoro Street, the Agege Motor Road edge, Ajegunle and Atunrase Streets). Redrawn 23 Oct from a close-zoom study (z18, shot scale checked against known roads; owner: zoom in for the details): the first nine lanes were read at z16 and missed most of the real streets. The real twin is Idi-Araba: the LUTH campus with the College of Medicine and its staff quarters (Roads 1, 4, 6 and 8, the long drive, the canal road), Eko Boys and Birch Freeman High Schools, and the dense housing round it: the Olaniyi-Alao Adegboyega streets north-east, the Takuro-Ojerinde-Kajola grid west of the campus, Cardoso-Omoniyi-Martins south, Lawani-Ogunfunmi-Akobi over the canal. Each lane lies on its real street's line; real dead ends are kept as dead ends. Left out for spacing or because the boundary road already carries them: Kobiti (too close to Bishop Street), Owokoniran Close, Abibu and Akodu west, Kusey, Arogbe, Kelani, Ojitoju, Akintola, Owodele, Obanimola, Ewumi, Karimu, and the stream path (it is Atunrase Street, the edge). Removed: the nine z16 lanes rd-d68pbjgh, rd-g9taxf2k, rd-g6v156jj, rd-w0uqy2s9, rd-erfcf0tx, rd-8xdqzq9d, rd-phi8eic8, rd-jm7fmw8p, rd-9ozcrkqs.
 
-| Gidi id | real twin | kind | from, to |
+| Gidi id | real twin | kind | note |
 |---|---|---|---|
-| rd-d68pbjgh | LUTH's main drive | service_road | the north gate (Apesin's end) to Ishaga Road |
-| rd-g9taxf2k | LUTH Road 4 | service_road | the main drive towards the canal (ends in the campus) |
-| rd-g6v156jj | the staff quarters road | service_road | the main drive to Laniyan Street, by Akintola |
-| rd-w0uqy2s9 | Olaniyi Street | lane | the staff quarters road past Birch Freeman to the Agege Motor Road edge |
-| rd-erfcf0tx | Alao Adegboyega Street | lane | Olaniyi's twin to Bishop Fashoro Street |
-| rd-8xdqzq9d | Lawani Street on to Ogunfunmi Street | lane | Ishaga Road to Bishop Fashoro Street, south of the canal |
-| rd-phi8eic8 | Takuro Street | lane | Ajegunle Street to LUTH's main drive |
-| rd-jm7fmw8p | Olaleye Street | lane | Takuro's twin north (ends in the block) |
-| rd-9ozcrkqs | Akintola / Apesin Street | lane | LUTH's main drive to Laniyan Street, by Eko Boys |
+| rd-7uajwuxt | Owokoniran Street | lane |  |
+| rd-su4tdfqc | Eniola Street, then Akobi Crescent over the canal | lane |  |
+| rd-ht4h23eq | Bankole Street, then Akintulu Street | lane | real dead end at its west end |
+| rd-ycxjs88t | Olaniyi Street, then Matuwo Street | local_main | crosses the Agege Motor Road to its far side (rd-et552uc8) |
+| rd-odaola3x | Rev. Asekun Lane | lane | real dead end |
+| rd-ukrlud0u | the bending street from Olaniyi down to Alao Adegboyega | lane |  |
+| rd-xwiedrw2 | Alao Adegboyega Street | lane | real dead end at its west end |
+| rd-8mm4jnop | Fasoro Lane | lane |  |
+| rd-yp7rd186 | LUTH's long drive | service_road | joins Fagbenro Street |
+| rd-gtkm5cxg | Fagbenro Street | lane |  |
+| rd-y7rfqvf1 | Akinola Street, then LUTH Road 1 | service_road |  |
+| rd-zpb4ffh6 | LUTH Road 1, west | service_road | to Ishaga Road |
+| rd-ep3ddbio | LUTH Road 1, east | service_road |  |
+| rd-8rjr3ndf | LUTH Road 8 | service_road | real dead end at its west end |
+| rd-rpxzoyty | LUTH Road 6, then the staff quarters road | service_road | real dead end at its south end |
+| rd-zai52ajf | LUTH's canal road | service_road |  |
+| rd-rfra6ops | Takuro Street | lane | joins Ojerinde Street |
+| rd-bqhbzj4y | Ojerinde Street | lane |  |
+| rd-pp06u4v5 | Wonuola Street | lane |  |
+| rd-0udahnvp | Alasalat Street | lane |  |
+| rd-ru7lycas | Moshalasi Street | lane |  |
+| rd-wzenm1tr | Kajola Street | lane |  |
+| rd-1ajcm4xn | Adeyemi Street | lane |  |
+| rd-ca5m65kw | Kosobameji Street, then Onifade Street | lane |  |
+| rd-ssz6ymgc | Cardoso Street | lane | joins Martins Street |
+| rd-trz9qjln | Omoniyi Street | lane |  |
+| rd-ixprqj8g | Martins Street's south stretch | lane |  |
+| rd-ed2dooh3 | Akodu Street, into the Eko Boys pocket | lane | real dead end at its east end |
+| rd-0yuaaxhr | Ogunfunmi Street | lane |  |
+| rd-zr9sx05c | Akobi Crescent | lane |  |
+| rd-xvy8425r | Lawani Street | lane | joins Ishaga Road |
+| rd-8beruwdd | Akin Baruwa Street | lane |  |
+| rd-zoczvixp | Atunrase Street's north arm | lane |  |
+| rd-w51808dt | LUTH Road 4, then the diagonal past the staff school | service_road | real dead end at its north-east end |
+| rd-upzxrowm | Apesin Street | lane |  |
+| rd-r444jznj | Agoro Street | lane |  |
 
 **Block B2** (Ishaga Road, Itire Road, Ajegunle, Onipede, Mushin Road's end, Bello, Atunrase, Aborishade and Dosunmu
 Streets). The real twin is the Ishaga Road / Lawanson side of Itire: north of the canal, short north-south streets
