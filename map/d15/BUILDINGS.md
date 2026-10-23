@@ -36,6 +36,12 @@ Seven lanes drawn by hand on the real twin's pattern (STREETS.md): the north-sou
 the canal bank, two south-west streets towards Lawanson and Adedoyin's pocket. All four of B2's blocks redrafted with
 `--frontage` (54-68% cover per block); 367 buildings (136 before), 51% cover over the whole block.
 
+## Hand pass 6 (23 Oct): block B3 (Mushin station to Ikorodu Road), from the Google study
+
+Fifteen lanes drawn by hand on the real twin's pattern (STREETS.md), on both sides of the rail. B3's four blocks
+redrafted with `--frontage` (50-68% cover per block): 339 buildings (150 before), 50% cover. Still empty: the strip
+between Bada Street's twin and the Ikorodu Road edge (Bada was joined to Adewusi after the draft), for the next hand pass.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
