@@ -57,6 +57,7 @@
     "heap_kind": ["sand", "gravel", "rubbish", "scrap", "goods", "tyres"],
     "pole_kind": ["timber", "concrete", "steel"],
     "lamp": ["none", "steel_arm", "solar"],
+    "wire_kind": ["line", "service"],
     "mast_kind": ["lattice", "monopole"],
     "tree_kind": ["palm", "shade", "plantain", "almond", "neem", "shrub"],
     "vehicle_kind": ["danfo", "keke", "okada", "saloon", "suv", "pickup", "lorry", "container", "tanker", "bus", "wreck"],
@@ -254,6 +255,7 @@
       "h": "num >0",
       "cells": "nums"
     },
+    "name_board": {"text": "text", "bg": "hex", "fg": "hex?"},
     "sign": {
       "u0": "num >=0",
       "u1": "num >=0",
@@ -479,13 +481,21 @@
         "transformer": "bool",
         "lamp": "enum:lamp",
         "arm": "bool",
-        "wear": "num 0..1"
+        "wear": "num 0..1",
+        "turn": "num?",
+        "arm_length": "num >0?",
+        "insulators": "int 0..6?",
+        "boxes": "nums?",
+        "tangle": "num 0..1?",
+        "stay": "bool?",
+        "lamp_reach": "num >0?",
+        "boards": "objs:name_board?"
       }
     },
     "wire": {
       "layer": "plan", "prefix": "wi", "kit": true,
       "one_of": [["to_pole", "to_at"]],
-      "fields": {"from_pole": "id:pole", "to_pole": "id:pole?", "to_at": "pt3?", "n": "int 1..12", "sag": "num >=0"}
+      "fields": {"from_pole": "id:pole", "to_pole": "id:pole?", "to_at": "pt3?", "n": "int 1..12", "sag": "num >=0", "kind": "enum:wire_kind?"}
     },
     "mast": {
       "layer": "plan", "prefix": "ms", "kit": true,

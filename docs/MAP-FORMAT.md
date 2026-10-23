@@ -224,8 +224,8 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 `kind` (`sand`, `gravel`, `rubbish`, `scrap`, `goods`, `tyres`), `at`, `r`, `h`, `tarp_colour`?. Goods on a heap are a `goods` record.
 
 #### pole (`po-`), wire (`wi-`), mast (`ms-`)
-- pole: `kind` (`timber`, `concrete`, `steel`), `at`, `h`, `lean` ([x, y] degrees), `transformer`, `lamp` (`none`, `steel_arm`, `solar`), `arm`, `wear`.
-- wire: `from_pole`, then exactly one of `to_pole` or `to_at` ([x, y, z], e.g. a point on a wall), `n` (wires in the run), `sag` (m).
+- pole: `kind` (`timber`, `concrete`, `steel`), `at`, `h`, `lean` ([x, y] degrees), `transformer`, `lamp` (`none`, `steel_arm`, `solar`), `arm`, `wear`; and, all optional: `turn` (degrees: the line the cross-arm runs across), `arm_length` (m), `insulators` (on the arm), `boxes` (heights of junction boxes up the shaft), `tangle` (0 to 1: dropped wire balled round the shaft), `stay` (a stay wire to the ground), `lamp_reach` (m), `boards` (street-name blades on top: `text`, `bg`, `fg`?; invented names only). `lean` [x, y]: degrees tipped toward east and toward south. Posters on a pole are a `posters` record.
+- wire: `from_pole`, then exactly one of `to_pole` or `to_at` ([x, y, z], e.g. a point on a wall), `n` (wires in the run), `sag` (m), `kind`? (`line`: the mains between poles; `service`: a drop to a house).
 - mast: `kind` (`lattice`, `monopole`), `at`, `h`, `colour`.
 
 #### tree (`tr-`)
