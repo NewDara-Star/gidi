@@ -27,7 +27,7 @@
     "crossing_kind": ["slab_bridge", "plank_bridge", "gate_ramp"],
     "plot_kind": ["house", "compound", "shop_row", "market", "motor_park", "church_ground", "mosque_ground", "school_ground", "open_ground", "under_build", "yard", "car_park"],
     "frontage_kind": ["shop_line_step", "leanto_to_road", "wall_gate", "platform_house", "low_wall_bars", "sheet_fence", "breeze_fence", "plank_fence", "open_forecourt"],
-    "wall_finish": ["render", "bare_block", "breeze_block", "sheet", "plank"],
+    "wall_finish": ["render", "bare_block", "breeze_block", "sheet", "plank", "railing"],
     "wall_state": ["clean", "mouldy"],
     "piers": ["none", "at_gate", "every_bay"],
     "wall_top": ["none", "razor_wire", "steel_rail", "broken_glass"],
@@ -64,11 +64,13 @@
     "load_kind": ["none", "roll", "cargo", "sacks"],
     "furniture_kind": ["bench", "chair", "stool", "generator", "bin", "water_tank", "drum", "tyre_stack", "gas_rack", "speaker", "tank_stand", "compressor", "tyre_changer"],
     "cart_kind": ["push", "trolley"],
+    "cab_kind": ["single", "double"],
+    "poster_face": ["out", "in"],
     "place_kind": ["market", "motor_park", "bus_stop", "church", "mosque", "school", "clinic", "betting", "bar", "buka", "police", "fuel", "bank", "chemist", "park", "garage", "workshop_yard", "story"],
     "game_use": ["buy", "sell", "eat", "drink", "pray", "bet", "pick_up", "drop_off", "load", "unload", "money", "rest", "sleep", "hide", "fix_vehicle", "fuel", "heal", "learn", "story"],
     "ground_kind": ["tar", "earth", "laterite", "sand", "dust", "mud", "wet", "water", "concrete", "interlock", "grass", "rubble"],
     "litter_kind": ["sachet", "bag", "bottle", "pack", "can", "husk", "paper", "rag", "tyre"],
-    "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet", "basket"],
+    "goods_kind": ["sack", "nylon_bag", "crate", "plastic", "cloth", "carton", "bale", "basin", "bowl", "bottle", "tyre", "timber", "part", "food", "cabinet", "basket", "jerrycan"],
     "pose": ["stand", "walk", "sit", "squat", "lean", "carry"]
   },
 
@@ -137,8 +139,18 @@
       "number": "text?",
       "wear": "num 0..1",
       "surface": "surface?",
-      "open": "num?",
-      "sag": "num?"
+      "open": "angles?",
+      "sag": "num?",
+      "posters": "objs:gate_poster?"
+    },
+    "gate_poster": {
+      "leaf": "int >=0",
+      "u": "num >=0",
+      "z": "num >=0",
+      "w": "num >0",
+      "h": "num >0",
+      "colours": "hexes",
+      "face": "enum:poster_face?"
     },
     "wall": {
       "h": "num >0",
@@ -519,6 +531,7 @@
         "turn": "num",
         "colour": "hex",
         "cab_colour": "hex?",
+        "cab": "enum:cab_kind?",
         "lean": "num?",
         "tractor": "bool?",
         "load": "obj:load?",
