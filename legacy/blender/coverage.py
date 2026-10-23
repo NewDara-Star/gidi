@@ -1,12 +1,12 @@
 """Writes docs/look/COVERAGE.md: every kind of thing in Gidi's data, how many, where, and whether
-the kit can build it yet. Plain Python (no Blender): python3 blender/coverage.py"""
+the kit can build it yet. Plain Python (no Blender): python3 legacy/blender/coverage.py"""
 import glob
 import json
 import os
 import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-reg = open(os.path.join(ROOT, 'blender', 'gidi_kit', 'registry.py')).read()
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # legacy/blender/ -> the repo
+reg = open(os.path.join(ROOT, 'legacy', 'blender', 'gidi_kit', 'registry.py')).read()
 
 
 def section(name):
@@ -15,7 +15,7 @@ def section(name):
 
 
 done = {k: section(k) for k in ('BUILDINGS', 'STRUCTURES', 'CIVIC_PLOTS')}
-pb = open(os.path.join(ROOT, 'blender', 'gidi_kit', 'parcels.py')).read()
+pb = open(os.path.join(ROOT, 'legacy', 'blender', 'gidi_kit', 'parcels.py')).read()
 done['PARCELS'] = set(re.findall(r"'([^']+)':\s*(?:lambda|[a-z_]+[,\n])", pb[pb.index('BUILDERS = {'):]))
 done['STRUCTURES'] = {'flyover', 'skywalk', 'footbridge', 'jetty', 'ramp'}
 done['CIVIC'] = done.pop('CIVIC_PLOTS') | set(re.findall(r"'([^']+)':\s*places\.", reg[reg.index('POI_PLACES'):])) | {'cemetery', 'sport', 'market', 'transit'}
@@ -43,7 +43,7 @@ for dist, counts in civ['counts'].items():
         tables['CIVIC'][t][dist] += n
 
 out = ['# Kit coverage: everything in Gidi\'s data, and whether the kit builds it', '',
-       'Made by `python3 blender/coverage.py` from `web/gen-*.json`, `web/civic.json` and `blender/gidi_kit/registry.py`. Do not edit by hand.', '']
+       'Made by `python3 legacy/blender/coverage.py` from `web/gen-*.json`, `web/civic.json` and `legacy/blender/gidi_kit/registry.py`. Do not edit by hand.', '']
 total = built = 0
 for name, title in (('BUILDINGS', 'Building kinds'), ('PARCELS', 'Parcels (plots and grounds)'), ('STRUCTURES', 'Structures'), ('CIVIC', 'Civic places')):
     out += [f'## {title}', '', '| Kind | Count | Districts | Built by the kit |', '|---|---|---|---|']

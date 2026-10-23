@@ -1,7 +1,7 @@
 """The Act 1 kit pieces side by side (docs/KIT-GAPS.md, "New in the v2 layout"): the face-me-I-face-you block, the motor
 park office (and a shot inside it), the buka, Ladi Lane's open lock-ups, the rail market, the people placed by hand,
 the police kiosk, the task force truck and an overhead sign.
-blender -b --factory-startup -P blender/act1_sheet.py -- [--out blender/out/act1] [--shots all,people,office,ladi]"""
+blender -b --factory-startup -P legacy/blender/act1_sheet.py -- [--out legacy/blender/out/act1] [--shots all,people,office,ladi]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

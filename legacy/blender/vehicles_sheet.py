@@ -1,5 +1,5 @@
 """Line-up of every vehicle in its conditions, and a crowd of every dress type.
-blender -b --factory-startup -P blender/vehicles_sheet.py -- [--out blender/out/vehicles.jpg]"""
+blender -b --factory-startup -P legacy/blender/vehicles_sheet.py -- [--out legacy/blender/out/vehicles.jpg]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

@@ -8,7 +8,7 @@ from shapely.ops import unary_union, substring, nearest_points
 from shapely import segmentize
 from shapely.strtree import STRtree
 
-WIDTH = {'main': 14.0, 'street': 7.0, 'lane': 3.5, 'path': 2.5, 'exp': 30.0, 'art': 18.0, 'bridge': 22.0}  # blender/city.py
+WIDTH = {'main': 14.0, 'street': 7.0, 'lane': 3.5, 'path': 2.5, 'exp': 30.0, 'art': 18.0, 'bridge': 22.0}  # legacy/blender/city.py
 RANK = {'path': 0, 'lane': 1, 'street': 2, 'main': 3, 'exp': 4, 'art': 4, 'bridge': 5}
 KEYS = (('street', 'streets'), ('lane', 'lanes'), ('path', 'paths'))
 MIN_PIECE = 18.0    # shortest piece worth keeping after a cut

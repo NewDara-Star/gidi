@@ -1,6 +1,6 @@
 """Build the whole city (everything in web/gidi-data.js) as streamable tiles.
 
-blender -b --factory-startup -P blender/city.py -- --tiles 6,12;7,12 [--size 400] [--out web/city] [--detail web|full]
+blender -b --factory-startup -P legacy/blender/city.py -- --tiles 6,12;7,12 [--size 400] [--out web/city] [--detail web|full]
 
 Each tile is a square of `size` metres. Everything whose centre falls in it is built there (lines
 are cut at the edges): buildings by kind through the registry, named civic plots, point places
@@ -9,7 +9,7 @@ conditions with drains, kerbs, poles and wires, litter, structures, expressways 
 rail line, canals, boardwalks, estate walls and gates, water, ground, trees. Everything in a tile
 is merged into one mesh and exported as tiles/<tx>_<ty>.glb (Draco), positioned relative to the
 tile's corner. Colour is in COLOR_0 (alpha = wear); material names say which shader to use.
-blender/city_run.py runs many tiles in parallel and writes the manifest.
+legacy/blender/city_run.py runs many tiles in parallel and writes the manifest.
 """
 import json
 import math
@@ -25,7 +25,7 @@ from mathutils import Matrix, Vector  # noqa: E402
 from gidi_kit import detail  # noqa: E402
 from gidi_kit import parts as kit_parts  # noqa: E402   (compound walls from the data)
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # legacy/blender/ -> the repo
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 opt = {}
 for i, a in enumerate(args):

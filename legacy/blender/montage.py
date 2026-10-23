@@ -1,4 +1,4 @@
-"""Stitch blender/out/kinds/*.jpg into one labelled sheet: python3 blender/montage.py [out.jpg] [cols]"""
+"""Stitch legacy/blender/out/kinds/*.jpg into one labelled sheet: python3 legacy/blender/montage.py [out.jpg] [cols]"""
 import json, os, sys
 from PIL import Image, ImageDraw, ImageFont
 d = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out', 'kinds')

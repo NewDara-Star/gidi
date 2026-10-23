@@ -20,7 +20,7 @@ SEED = 2026
 HERE = os.path.dirname(os.path.abspath(__file__))
 EDITS_FILE = os.path.join(HERE, "..", "web", "isms-edits.json")
 
-# ---- the roads: widths as the 3D kit draws them (blender/city.py WIDTH, ART_W)
+# ---- the roads: widths as the 3D kit draws them (legacy/blender/city.py WIDTH, ART_W)
 WIDTH = {"lane": 3.5, "street": 7.0, "main": 14.0, "art": 18.0, "exp": 30.0}
 RANK = {"lane": 0, "street": 1, "main": 2, "art": 3, "exp": 4}
 STEP = 2.0   # sampling step along a gutter, metres
@@ -30,7 +30,7 @@ STEP = 2.0   # sampling step along a gutter, metres
 # cover:   share of a street's gutter length under slabs
 # blocked: share of the OPEN length that is blocked (rubbish or green water)
 # w, depth: the channel in metres (40-100 cm wide, up to a metre deep)
-# Starting point is the kit's character table (blender/gidi_kit/rules.py STREET): dense mainland mostly open and blocked, elite estates covered.
+# Starting point is the kit's character table (legacy/blender/gidi_kit/rules.py STREET): dense mainland mostly open and blocked, elite estates covered.
 RATES = {
     "maze":      dict(has=0.97, cover=0.20, blocked=0.50, w=(0.5, 0.9), depth=(0.5, 0.9)),
     "hub":       dict(has=0.95, cover=0.30, blocked=0.40, w=(0.5, 0.9), depth=(0.5, 0.9)),

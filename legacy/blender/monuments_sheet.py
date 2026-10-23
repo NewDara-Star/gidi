@@ -1,5 +1,5 @@
 """Every monument in the kit side by side.
-blender -b --factory-startup -P blender/monuments_sheet.py -- [--out blender/out/monuments.jpg]"""
+blender -b --factory-startup -P legacy/blender/monuments_sheet.py -- [--out legacy/blender/out/monuments.jpg]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

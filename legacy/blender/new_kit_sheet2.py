@@ -1,7 +1,7 @@
 """Contact sheets for the second batch: --part vehicles (service vehicles, the molue, port
 machines, boats) or --part places (cathedral, heritage, civic tower, market block, refinery,
 the commemorative square, Freedom Ground, the airport, statues, beach arch, mural wall, billboard).
-blender -b --factory-startup -P blender/new_kit_sheet2.py -- --part vehicles [--out ...]"""
+blender -b --factory-startup -P legacy/blender/new_kit_sheet2.py -- --part vehicles [--out ...]"""
 import math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene  # noqa: E402

@@ -1,5 +1,5 @@
 """Contact sheet of every registered kind (except houses), each built on footprints taken from
-the real data, a few seeds side by side. blender -b --factory-startup -P blender/kinds_sheet.py -- [--kinds a,b] [--seeds 3] [--out ...]"""
+the real data, a few seeds side by side. blender -b --factory-startup -P legacy/blender/kinds_sheet.py -- [--kinds a,b] [--seeds 3] [--out ...]"""
 import glob
 import json
 import math
@@ -11,11 +11,11 @@ import scene  # noqa: E402
 from gidi_kit import registry  # noqa: E402
 from gidi_kit.core import Rng  # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # legacy/blender/ -> the repo
 args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 opt = dict(zip(args[::2], args[1::2]))
 seeds = int(opt.get('--seeds', 3))
-out = opt.get('--out', os.path.join(ROOT, 'blender', 'out', 'kinds.jpg'))
+out = opt.get('--out', os.path.join(ROOT, 'legacy', 'blender', 'out', 'kinds.jpg'))
 want = opt['--kinds'].split(',') if '--kinds' in opt else [k for k in registry.BUILDINGS if k not in ('front', 'back', 'shed')]
 
 samples = {}

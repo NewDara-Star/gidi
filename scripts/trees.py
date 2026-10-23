@@ -22,7 +22,7 @@ from shapely.strtree import STRtree
 CHARACTER = {'maze': 'dense', 'hub': 'dense', 'jungle': 'dense', 'foodgate': 'dense', 'bazaar': 'dense',
              'railside': 'sprawl', 'frontier': 'sprawl', 'border': 'sprawl', 'oldisland': 'old_island', 'oldshore': 'old_island',
              'estate': 'elite', 'heights': 'elite', 'capital': 'civic', 'watertown': 'waterfront', 'port': 'port'}
-PER_TILE = {'elite': 60, 'civic': 30, 'sprawl': 25, 'dense': 8, 'old_island': 6, 'waterfront': 10, 'port': 6, 'bush': 80}   # blender/city.py
+PER_TILE = {'elite': 60, 'civic': 30, 'sprawl': 25, 'dense': 8, 'old_island': 6, 'waterfront': 10, 'port': 6, 'bush': 80}   # legacy/blender/city.py
 TILE_M2 = 400.0 * 400.0
 PALMY = {'old_island', 'elite', 'waterfront'}
 

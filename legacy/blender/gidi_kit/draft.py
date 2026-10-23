@@ -2,7 +2,7 @@
 (decisions, 22 Oct: one ground truth; KIT.md section 12, "Records").
 
 The kit (oldtown.py and the parts it draws with) reads only those records and throws no dice: a spot builds from its
-map and nothing else. A first draft of a new spot comes from here (blender/kit_draft.py), and after that the records are
+map and nothing else. A first draft of a new spot comes from here (legacy/blender/kit_draft.py), and after that the records are
 the map's, edited by hand like any other field. Each planner is the old kit code with the drawing taken out: the same
 dice in the same order, so a drafted spot builds exactly as the seeded kit built it.
 

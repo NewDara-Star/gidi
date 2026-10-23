@@ -1,4 +1,4 @@
-/* Gidi Maps, 3D view. Close in, the city is the Blender kit's own models (blender/city_run.py writes
+/* Gidi Maps, 3D view. Close in, the city is the Blender kit's own models (legacy/blender/city_run.py writes
    them as 400 m tiles to web/city/<detail>/tiles): they stream in round where you're looking, the
    light "web" build out to about a kilometre and the full build right up close. Zoomed out, and
    wherever a tile isn't loaded, the city data (window.GIDI) stands in as extruded buildings, raised
@@ -266,7 +266,7 @@
 
 
   // ---------- the kit's models, streamed by tile ----------
-  // Kit materials come back by name (blender/gidi_kit/materials.py); colours ride on the vertices.
+  // Kit materials come back by name (legacy/blender/gidi_kit/materials.py); colours ride on the vertices.
   function kitMaterial(name, dark) {
     // both sides: some kit faces are wound the other way (they look fine in Blender, which draws
     // both sides), and three would show those as holes into the model. Back faces get their

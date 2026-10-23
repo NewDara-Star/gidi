@@ -1,7 +1,7 @@
 """The draft desk: write a first draft of every record a spot's map needs (decisions, 22 Oct: one ground truth; KIT.md
 section 12, "Records"). The old kit's seeded rules (gidi_kit/draft.py) run once on the map and what they choose goes
 into it as full records; from then on the records are the map's, edited by hand, and the kit reads only them.
-blender -b --factory-startup -P blender/kit_draft.py -- --map <spot>/map.json
+blender -b --factory-startup -P legacy/blender/kit_draft.py -- --map <spot>/map.json
 The map is kept first as <spot>/map_seeded.json (unless that is there already); the ground grids go beside the map
 (ground_<street id>.npz). Run it once per new spot, never on a map whose records were edited by hand: it overwrites them."""
 import json

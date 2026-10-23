@@ -38,7 +38,7 @@ class Rng(random.Random):
 
 class MissingRecord(KeyError):
     """A record the kit needs is not on the map. The kit draws only what the map holds (KIT.md section 12, "Records"):
-    draft the spot (blender/kit_draft.py) or add the record by hand."""
+    draft the spot (legacy/blender/kit_draft.py) or add the record by hand."""
 
 
 def need(d, key, what):

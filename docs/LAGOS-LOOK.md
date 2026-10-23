@@ -31,12 +31,12 @@ Rules turn those attributes into parts and specs, and a seed per object gives va
 ## How to run it (Blender 5.1, headless)
 | Command | What it does |
 |---|---|
-| `blender -b --factory-startup -P blender/catalogue.py -- --seeds 3` | Contact sheet: the same footprint built for each district character, storeys 1–3, several seeds. `--cam close` gives an eye-level shot of one shop house. |
-| `blender -b --factory-startup -P blender/generate.py -- --district maze --at 2620,4392 --r 140 --out blender/out/ladi-lane` | Builds the area around a point from `web/gen-<district>.json`, styled by the rules. Renders `overview.jpg` and `street.jpg` (eye level on the street with the most shop fronts). `--glb` exports glTF, `--blend` saves the scene. |
+| `blender -b --factory-startup -P legacy/blender/catalogue.py -- --seeds 3` | Contact sheet: the same footprint built for each district character, storeys 1–3, several seeds. `--cam close` gives an eye-level shot of one shop house. |
+| `blender -b --factory-startup -P legacy/blender/generate.py -- --district maze --at 2620,4392 --r 140 --out legacy/blender/out/ladi-lane` | Builds the area around a point from `web/gen-<district>.json`, styled by the rules. Renders `overview.jpg` and `street.jpg` (eye level on the street with the most shop fronts). `--glb` exports glTF, `--blend` saves the scene. |
 
-Output goes to `blender/out/`, which is not committed.
+Output goes to `legacy/blender/out/`, which is not committed.
 
-## How it is built (`blender/gidi_kit/`)
+## How it is built (`legacy/blender/gidi_kit/`)
 | File | What |
 |---|---|
 | `core.py` | `Rng`: a random stream from any key (district, building index, salt). `MeshBuilder`: faces with a material, a colour and a wear value. Polygon helpers. |
@@ -69,14 +69,14 @@ The kit pieces in `parts.py`:
 - zinc awnings on timber posts
 
 ## Monuments
-`gidi_kit/monuments.py`, all invented (research-landmarks 4–9, 23, 24). The contact sheet is `blender/monuments_sheet.py`.
+`gidi_kit/monuments.py`, all invented (research-landmarks 4–9, 23, 24). The contact sheet is `legacy/blender/monuments_sheet.py`.
 - Statues on a stepped plinth with a plaque and railing: a founder in agbada and fila, a white-robed masquerade, a talking-drummer.
 - Welded scrap sculpture, a clock tower (stopped hands, pyramid cap), a big LED screen at the junction.
 - A "WELCOME TO …" arch on the main roads into each built district, and the lighthouse on the port mole.
 - `city.py` places them: corners of main-road junctions by district character (up to four a district), arches where main roads enter, the lighthouse fixed. The sites also go to `web/city/monuments.json`.
 
 ## Roadside: lights and wayfinding
-`gidi_kit/roadside.py`; the contact sheet is `blender/roadside_sheet.py`.
+`gidi_kit/roadside.py`; the contact sheet is `legacy/blender/roadside_sheet.py`.
 - **Street lights:** galvanised poles with one arm, two arms on medians, or solar ones with a panel. They stand along every main road and along the streets of the elite and civic districts. A seeded share are dead, more in the poor districts. Each tile's JSON lists its working lamp heads.
 - **Signs:**
   - Green direction signs with arrows stand 30 m before every big junction. They name where each crossing road leads: the district at its far end, or the road's own name when it stays in the district.
@@ -86,7 +86,7 @@ The kit pieces in `parts.py`:
 - **Decks** (flyovers, the Long Bridge, the Cable Bridge): ramps at the real ends, yellow edge lines, white lane dashes, and a black-and-white chequered median with double lamps on the wide decks. The expressways have the same median and lamps.
 
 ## Landmarks, vehicles and boats (second batch)
-Contact sheets: `blender/new_kit_sheet.py`, `blender/new_kit_sheet2.py --part vehicles|places`, `blender/reach_sheet.py`.
+Contact sheets: `legacy/blender/new_kit_sheet.py`, `legacy/blender/new_kit_sheet2.py --part vehicles|places`, `legacy/blender/reach_sheet.py`.
 - **Named landmarks** (`gidi_kit/landmarks.py`, by the name on the map; a named place takes the nearest civic plot of its type, else a plot):
   - The Crown Hall, a cap-shaped cultural hall. It waits for a plot in the 2D map.
   - Central mosques with gold domes: Railside Jumat Mosque now; Old Island's waits for its place in the map.
@@ -120,7 +120,7 @@ Contact sheets: `blender/new_kit_sheet.py`, `blender/new_kit_sheet2.py --part ve
 
 ## The whole city, in the map's 3D view
 - **The city:**
-  - `python3 blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:
+  - `python3 legacy/blender/city_run.py` builds everything in `web/gidi-data.js` as 400 m tiles, in parallel Blender processes:
     - buildings by kind, the named civic plots
     - point places (the nearest plot turns into the police station, the fuel station...)
     - parcels, roads in their conditions with poles, wires and street lights

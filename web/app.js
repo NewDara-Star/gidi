@@ -187,7 +187,7 @@
         islands.map((j, i) => h("circle", { key: "is" + i, cx: j.x, cy: j.y, r: j.island_r, className: "plan-island" })),
         (G.quays || []).map((q, i) => h("path", { key: "q" + i, d: pts2d(q.pts), className: "plan-quay", style: { strokeWidth: w(1.2, 1.5) } }))),
       layers.plan && z > 1.6 && h("g", { pointerEvents: "none" }, FURN.map((f, i) => furnitureGlyph(f, i))),
-      // monuments placed by hand (blender/gidi_kit/monuments.py): a marker and its name; an arch is a bar across its road
+      // monuments placed by hand (legacy/blender/gidi_kit/monuments.py): a marker and its name; an arch is a bar across its road
       z > 0.5 && h("g", { pointerEvents: "none" }, (G.monuments || []).map((m, i) => m.model === "arch"
         ? h("g", { key: "mo" + i, transform: `translate(${m.x} ${m.y}) rotate(${m.ang + 90})` },
             h("rect", { x: -(m.span || 16) / 2, y: -0.8, width: m.span || 16, height: 1.6, className: "mon-arch" }))
