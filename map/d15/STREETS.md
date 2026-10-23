@@ -324,3 +324,13 @@ they carry on in the neighbour when that seam is joined by hand.
 | rd-2rumos81 | Oduduwa Street | lane | Ladipo Street east (ends in the block) |
 | rd-44hhdxyo | Ikole Street | lane | Oduduwa's twin to Palm Avenue |
 | rd-l791gps5 | C.A.C. Street | lane | Oduduwa's twin side to Palm Avenue |
+
+**Block B5** (Olayiwola Liasu, Ilasamaja Road, Itire Road, Akanro, Ayuba Dawodu and Olusanya Streets). The real twin is
+the Akanro / Ilasamaja side: long parallel east-west streets about 60 m apart (Oladosu Sanusi, Kekereowo, Ayuba
+Dawodu, Omosolape by the canal), and short streets off Ilasamaja Road. The three missing ones are drawn.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-jkhasg5m | Kekereowo Street / Olajide Street | lane | Olusanya's side east to Itire Road |
+| rd-zu0ao8aa | Omosolape Street | lane | Olusanya's side east along the canal (ends in the block) |
+| rd-9p5skecq | Onayiogbo Street | lane | Ilasamaja Road south (ends in the block) |

@@ -47,6 +47,11 @@ between Bada Street's twin and the Ikorodu Road edge (Bada was joined to Adewusi
 Seven streets drawn by hand on the real twin's pattern (STREETS.md). B4's three blocks redrafted with `--frontage` and
 `--sizes=12,20000`, so the market sheds and warehouses come through: 214 buildings (40 before), 53% cover.
 
+## Hand pass 8 (23 Oct): block B5 (Akanro, Ilasamaja), from the Google study
+
+Three lanes drawn by hand on the real twin's pattern (STREETS.md). The block redrafted with `--frontage`: 190 buildings
+(108 before), 59% cover, in rows along the real streets.
+
 ## Real houses that land on a road (hand pass: move the road, or the house if the road is right)
 
 | block | houses | covered | on a road at (Gidi x, y) |
