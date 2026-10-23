@@ -334,3 +334,42 @@ Dawodu, Omosolape by the canal), and short streets off Ilasamaja Road. The three
 | rd-jkhasg5m | Kekereowo Street / Olajide Street | lane | Olusanya's side east to Itire Road |
 | rd-zu0ao8aa | Omosolape Street | lane | Olusanya's side east along the canal (ends in the block) |
 | rd-9p5skecq | Onayiogbo Street | lane | Ilasamaja Road south (ends in the block) |
+
+**Small blocks, first batch (B6, B7, B9), studied at close zoom (z17)** (owner, 23 Oct: zoom in to get the details).
+Real streets here are 50-60 m apart, which is under 20 m at 1:3, too tight for a house on each side; so about one real
+street in two is kept, the main ones.
+
+B6 (Ilupeju's Mushin end and Onipanu, between the rail and Tinubu Road). Tinubu Road is the district edge (a seam).
+Egbeyemi Street crosses the narrow north strip edge to edge and comes back at the seam pass.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-pf99fopw | Ilupeju Road (Mushin end) | local_main | the lane by Adeshiyan Street to the Tinubu Road edge |
+| rd-f0cw4h6z | the unnamed street from Igbaja Street down to Ajegunle Street | lane | in the block to Ilupeju Road's twin |
+| rd-xjd6yh6c | Akinbola Street | lane | the west edge to the unnamed street |
+| rd-xclnzrz2 | the unnamed east-west street south of Akinbola, to Tinubu Road | lane | the unnamed street to the edge |
+| rd-rou8v2ci | Awoyokun Street | lane | Sosanya's twin to Ajegunle's twin |
+| rd-h8120zyk | Sosanya Street on to Ojewere Street | lane | Idera Road's twin to Ali Lane's twin by Mushin station |
+| rd-524395x5 | Ajegunle Street (Mushin) | lane | Awoyokun's twin south |
+| rd-m0yjgudq | Fagbile Street | lane | Sosanya's twin to Ajegunle's twin |
+| rd-z7y18cz7 | Ali Lane | lane | Sosanya's twin to Olapido Sode's twin |
+| rd-771zvqoe | Olapido Sode Street | lane | Ajegunle's twin to the east edge |
+
+B7 (the Apapa-Oshodi Expressway side by Isolo Road: factories along the expressway, Oye Primary School, houses east).
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-a3ok14xh | Shasere Ajibade Street | home_street | Isolo Road's side south past Oye Primary School |
+| rd-q7px2xqw | Chief Olu Adekoya Street | lane | Shasere's twin to the east edge |
+| rd-5dpnprkh | the unnamed street north of Adisa Thomas Street | lane | Shasere's twin to the east edge |
+| rd-ngnuvohi | Adisa Thomas Street | lane | Shasere's twin east (ends in the block) |
+| rd-90x3jf29 | Majekodunmi Street | lane | across Shasere's twin to the east edge |
+
+B9 (Bamgboye / Owo, between Adeoyo, Olusoga and Ilasamaja Road): Adeshile and Moliki left as gaps.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-kjitnqqz | Bamgboye Street | lane | Adeoyo's twin east (ends in the block) |
+| rd-31p2dumv | Owo Street on to Da-Silva Avenue | lane | Adeoyo's twin to the east edge |
+| rd-w8jhnt3x | Olanrewaju Street | lane | Olusoga's side to Owo's twin |
+| rd-9gbercvs | Alafia Street | lane | Olusoga Street to Owo's twin |
