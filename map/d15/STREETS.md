@@ -249,3 +249,21 @@ wall to wall. Kept at 1:3: the strip's edge street and its way in from the expre
 | rd-5dd0t1l1 | Ojekunle Street | lane | Ladipo Street to the Olanibi twin |
 | rd-zsmjw1sh | Adeolu Street / Jumoke Way | lane | Ladipo Street to the Olanibi twin |
 | rd-xtsicy57 | Sebanjo Street | lane | Ladipo Street to Isolo Road |
+
+**Block B0** (Ishaga Road, Bishop Fashoro Street, the Agege Motor Road edge, Ajegunle and Atunrase Streets). The real
+twin is Idi-Araba: the LUTH campus with the College of Medicine and its staff quarters (internal drives, big buildings,
+greens, the canal on its south-east side), Eko Boys and Birch Freeman High Schools, and irregular housing streets about
+100 m apart east of the canal to Bishop Street and west of the campus (Takuro, Olaleye). Kept: LUTH's main drive from
+the north gate (Apesin's end) to Ishaga Road, Road 4 and the staff quarters road, and six housing streets.
+
+| Gidi id | real twin | kind | from, to |
+|---|---|---|---|
+| rd-d68pbjgh | LUTH's main drive | service_road | the north gate (Apesin's end) to Ishaga Road |
+| rd-g9taxf2k | LUTH Road 4 | service_road | the main drive towards the canal (ends in the campus) |
+| rd-g6v156jj | the staff quarters road | service_road | the main drive to Laniyan Street, by Akintola |
+| rd-w0uqy2s9 | Olaniyi Street | lane | the staff quarters road past Birch Freeman to the Agege Motor Road edge |
+| rd-erfcf0tx | Alao Adegboyega Street | lane | Olaniyi's twin to Bishop Fashoro Street |
+| rd-8xdqzq9d | Lawani Street on to Ogunfunmi Street | lane | Ishaga Road to Bishop Fashoro Street, south of the canal |
+| rd-phi8eic8 | Takuro Street | lane | Ajegunle Street to LUTH's main drive |
+| rd-jm7fmw8p | Olaleye Street | lane | Takuro's twin north (ends in the block) |
+| rd-9ozcrkqs | Akintola / Apesin Street | lane | LUTH's main drive to Laniyan Street, by Eko Boys |
