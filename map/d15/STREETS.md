@@ -623,3 +623,11 @@ B19 (Ilupeju side of Mushin: the strip between Shokunbi Street and Olateju Stree
 | rd-vp2j6h9n | Olorunnisola Street | lane |
 | rd-jc6sxw9f | Alayaki Street | lane |
 | rd-txt3yk6k | Ashafihan Street | lane |
+
+B20 (the long strip between Olateju Street and the railway, from Olorunnisola Street down to Tade Lane). Read 24 Oct at z18 at the checked shot scale (two shots, north and south, at 3.3593). Olorunnisola Street runs in from Olateju Street and turns south as Akinbode Street down the strip; Araba Street crosses it from Olateju Street to a dead end short of the railway; Hanson Lane runs from Olateju Street to the railway further south. Left out for spacing: Tinuola Street, the Fashina Streets, Agunbiade Street, Gbenle Street, Danmegoro Street, Tade Lane.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-2elgaw22 | Olorunnisola Street on to Akinbode Street | lane |
+| rd-lsk0nkts | Araba Street | lane |
+| rd-6bv2yosa | Hanson Lane | lane |
