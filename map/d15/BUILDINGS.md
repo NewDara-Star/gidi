@@ -67,6 +67,10 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 25 (24 Oct): block B17 given its streets at close zoom
+
+B17 got 2 of its real streets (STREETS.md); its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B17 now holds 67 buildings at 51% cover (was 25 at 40%).
+
 ## Hand pass 24 (24 Oct): block B16 given its streets at close zoom
 
 B16 got 4 of its real streets (STREETS.md); its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B16 now holds 55 buildings at 53% cover (was 16 at 30%), all in its south part; its thin north strip between the two carriageways (about 1 m wide) has none.
