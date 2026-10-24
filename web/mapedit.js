@@ -90,7 +90,11 @@ window.MAPEDIT = (() => {
     if (r.type === "ground" && Array.isArray(r.rings) && r.rings[0]) return { pts: r.rings[0], closed: true, set: (q, P) => { q.rings = [P, ...q.rings.slice(1)]; } };
     return null;
   }
-  function allPts(r, get = rec) { const e = editPts(r); if (e) return e.pts; if (Array.isArray(r.at)) return [r.at]; const q = leantoQuad(r, get) || reliefBox(r); if (q) return q; const P = piecePts(r); if (P.length) return P; const g = goodsFrame(get(r.of), get); return g ? [g.o] : []; }
+  function wireEnds(r, get = rec) {   // a wire's two ends on the ground plan: its pole, then the other pole or its point on a house
+    const a = get(r.from_pole), b = r.to_pole ? get(r.to_pole) : null, e = b ? b.at : r.to_at;
+    return a && Array.isArray(a.at) && Array.isArray(e) ? [a.at, e.slice(0, 2)] : null;
+  }
+  function allPts(r, get = rec) { if (r.type === "wire") return wireEnds(r, get) || []; const e = editPts(r); if (e) return e.pts; if (Array.isArray(r.at)) return [r.at]; const q = leantoQuad(r, get) || reliefBox(r); if (q) return q; const P = piecePts(r); if (P.length) return P; const g = goodsFrame(get(r.of), get); return g ? [g.o] : []; }
 
   // ------------------------------------------------------------------ moving, turning and relinking a record by its schema
   // Every point a record holds moves (heights kept); a "turn" turns, a lean turns with it; table rows with world x, y move
@@ -272,7 +276,7 @@ window.MAPEDIT = (() => {
   }
 
   // ------------------------------------------------------------------ tools
-  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"], ["frontage", "Frontage", "E", "Click a plot's side that faces a street"], ["stamp", "Stamp", "K", "Copy records (with their dress) from the map or a source and place them"], ["face", "Face", "C", "Click a building's side to dress it: windows, doors, shopfronts, stains, add-ons"], ["goods", "Goods", "O", "Click inside a lean-to, stall, heap or bin to put an item there"], ["ground", "Ground", "D", "Paint a patch of ground: click points, Enter to finish"], ["relief", "Relief", "H", "Drag a box for a bump-and-dip grid; click a cell to raise it, ⌥-click to lower"], ["litter", "Litter", "X", "Click to drop a piece of litter"], ["brush", "Brush", "N", "Brush litter, goods, relief or ground paint: every stroke writes full records (⌥ erases)"], ["person", "Person", "I", "A person spot: where someone does something, and when. Click (drag to face them)"]];
+  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"], ["frontage", "Frontage", "E", "Click a plot's side that faces a street"], ["stamp", "Stamp", "K", "Copy records (with their dress) from the map or a source and place them"], ["face", "Face", "C", "Click a building's side to dress it: windows, doors, shopfronts, stains, add-ons"], ["goods", "Goods", "O", "Click inside a lean-to, stall, heap or bin to put an item there"], ["ground", "Ground", "D", "Paint a patch of ground: click points, Enter to finish"], ["relief", "Relief", "H", "Drag a box for a bump-and-dip grid; click a cell to raise it, ⌥-click to lower"], ["litter", "Litter", "X", "Click to drop a piece of litter"], ["brush", "Brush", "N", "Brush litter, goods, relief or ground paint: every stroke writes full records (⌥ erases)"], ["person", "Person", "I", "A person spot: where someone does something, and when. Click (drag to face them)"], ["wire", "Wire", "J", "Click a pole, then another pole (a line) or a house side or wall (a drop to the house); Shift keeps going from the last pole"]];
   const KINDS = () => ({
     street: SCHEMA.enums.road_kind.map((k) => [k, k]), building: SCHEMA.enums.house_type.map((k) => [k, k]), plot: SCHEMA.enums.plot_kind.map((k) => [k, k]),
     tree: SCHEMA.enums.tree_kind.map((k) => [k, k]), place: SCHEMA.enums.place_kind.map((k) => [k, k]), surface: SCHEMA.enums.road_surface.map((k) => [k, k]), frontage: SCHEMA.enums.frontage_kind.map((k) => [k, k]),
@@ -280,16 +284,22 @@ window.MAPEDIT = (() => {
     ground: SCHEMA.enums.ground_kind.map((k) => [k, k]), litter: SCHEMA.enums.litter_kind.map((k) => [k, k]), relief: [["0.5", "new grid: 0.5 m cells"], ["0.25", "new grid: 0.25 m cells"], ["1", "new grid: 1 m cells"]],
     brush: [["litter", "litter brush"], ["goods:items", "goods brush (on the ground)"], ["goods:hung", "goods brush (hung)"], ["relief", "relief brush"], ["ground", "ground paint brush"]],
     person: SCHEMA.enums.person_activity.map((k) => [k, k]),
+    wire: [["", "kind: line to a pole, service to a house"], ...SCHEMA.enums.wire_kind.map((k) => [k, k])],
     furniture: [["stall", "stall_kind"], ["pole", "pole_kind"], ["vehicle", "vehicle_kind"], ["furniture", "furniture_kind"], ["heap", "heap_kind"]].map(([t, e]) => [t, SCHEMA.enums[e].map((k) => [t + ":" + k, k])]),
   });
   let selRow = null;   // a picked row of a dress table (a goods item, a litter piece): {id, t, i}
   let tool = "select", sel = null, hover = null, ghost = null, drag = null, linePts = [], cursor = null, snapAt = null, firstClick = null;
-  let snapReal = true, hoverEdge = null;
+  let snapReal = true, hoverEdge = null, wireFrom = null;   // wireFrom: the pole a wire being drawn starts at
+  let clockOn = false, clockH = 7, wireZ = "";   // wireZ: the height (m) a drop meets the house, as you set it in the panel   // the clock filter: person spots out at clockH bright, the rest faint
   const WALLED = new Set(["wall_gate", "low_wall_bars", "sheet_fence", "breeze_fence", "plank_fence"]);   // frontages whose front is a wall
-  try { snapReal = localStorage.getItem("gidi-map-snapreal") !== "0"; } catch (e) {}
+  try { snapReal = localStorage.getItem("gidi-map-snapreal") !== "0"; wireZ = localStorage.getItem("gidi-map-wirez") || ""; } catch (e) {}
+  function outAt(r, h) {   // is a person spot out at hour h? spans with `to` before `from` run past midnight
+    return Array.isArray(r.hours) && r.hours.some((s) => s && isFinite(s.from) && isFinite(s.to) && (s.from <= s.to ? h >= s.from && h < s.to : h >= s.from || h < s.to));
+  }
+  const hhmm = (h) => String(Math.floor(h)).padStart(2, "0") + ":" + (h % 1 ? "30" : "00");
   function setTool(t) {
     if (!SCHEMA) return;
-    tool = t; linePts = []; ghost = null; firstClick = null; snapAt = null; hoverEdge = null; placing = null; pickBox = null;
+    tool = t; linePts = []; ghost = null; firstClick = null; wireFrom = null; snapAt = null; hoverEdge = null; placing = null; pickBox = null;
     if (t === "stamp") sel = null;
     if (t === "stamp") loadSources().then(() => { if (tool !== "stamp") return; let k = ""; try { k = localStorage.getItem("gidi-map-stampsrc") || ""; } catch (e) {} if (!SRC && k) loadSrc(k); else showPanel(); });
     document.querySelectorAll("#mtools button").forEach((b) => b.classList.toggle("on", b.dataset.tool === t));
@@ -297,6 +307,7 @@ window.MAPEDIT = (() => {
     ks.innerHTML = !K ? "" : Array.isArray(K[0][1]) ? K.map(([g, L]) => `<optgroup label="${g}">${L.map(([v, l]) => `<option value="${v}">${l}</option>`).join("")}</optgroup>`).join("") : K.map(([v, l]) => `<option value="${v}">${l}</option>`).join("");
     ks.style.display = K ? "" : "none";
     if (t === "brush") { if (![...ks.options].some((o) => o.value === BR.mode)) BR.mode = ks.value; ks.value = BR.mode; }
+    $("mwirezl").style.display = t === "wire" ? "" : "none";
     $("msnap").style.display = t === "street" || (t === "select" && sel && sel.type === "road") ? "" : "none";
     V.cv.className = t === "select" ? "" : "place";
     showPanel(); V.draw();
@@ -359,6 +370,7 @@ window.MAPEDIT = (() => {
     let best = null, bd = tol;
     for (const r of L([...POINTY])) { if (!Array.isArray(r.at)) continue; const q = thingPts(r); const d = q && inPoly(p, q) ? 0 : dist(p, r.at) - (r.type === "tree" || r.type === "heap" ? Math.min(thingR(r), 1.2) : 0); if (d < bd) { bd = d; best = r; } }
     for (const r of L(["litter", "people", "ground_marks"])) for (const q of piecePts(r)) { const d = dist(p, q); if (d < bd) { bd = d; best = r; } }
+    for (const r of L(["wire"])) { const E = wireEnds(r, W.get); if (!E) continue; const d = lineDist(p, E) + 0.1; if (d < bd) { bd = d; best = r; } }   // overhead, so before the houses under it
     for (const r of L(["goods"])) { const g = goodsFrame(W.get(r.of), W.get); if (!g) continue; for (const o of [...rowsOf(r.items), ...rowsOf(r.hung)]) { if (![o.x, o.y].every(isFinite)) continue; const d = dist(p, [g.o[0] + g.ux[0] * o.x + g.uy[0] * o.y, g.o[1] + g.ux[1] * o.x + g.uy[1] * o.y]); if (d < bd) { bd = d; best = r; } } }
     if (best) return best;
     for (const r of L(["leanto"])) { const q = leantoQuad(r, W.get); if (q && inPoly(p, q)) return r; }
@@ -874,6 +886,7 @@ window.MAPEDIT = (() => {
       if (o && o.type === "person_spot") { sel = o; selRow = null; showPanel(); V.draw(); drag = { o, start: p, moved: false, before: clone(o), fol: [] }; return true; }
       drag = { spot: [r2(p[0]), r2(p[1])] }; return true;
     }
+    if (tool === "wire") { wireClick(ev, p); return true; }
     if (tool === "face") { const e = edgeAt(p); if (!e || e.face === undefined) { toast("Click on a building's side"); return true; } openFace(e.r, e.face); return true; }
     if (tool === "goods" || tool === "litter") {
       const pc = pieceAt(p, [tool]);
@@ -923,8 +936,37 @@ window.MAPEDIT = (() => {
     }
     return false;
   }
+  async function wireClick(ev, p) {   // first a pole; then a pole (the line between them) or a house side or wall (a drop to the house)
+    const o = pick(p), pole = o && o.type === "pole" ? o : null;
+    if (!wireFrom) {
+      if (!pole) { toast("Click a pole to start the wire"); return; }
+      wireFrom = pole; toast("Now click the other pole, or the house side or wall it runs to"); V.draw(); return;
+    }
+    const from = wireFrom, k = $("mkind").value;
+    const r = { id: newId("wire"), type: "wire", from_pole: from.id, ...defaults(SCHEMA.records.wire.fields) };
+    if (pole) {
+      if (pole.id === from.id) { toast("That's the pole it starts at: click another"); return; }
+      r.to_pole = pole.id; r.kind = k || "line";
+    } else {
+      const e = edgeAt(p);
+      if (!e) { toast("Click another pole, or a house side or wall"); return; }
+      let at;
+      if (e.face !== undefined) { const fp = e.r.footprint, a = fp[e.face], q = fp[(e.face + 1) % fp.length], L = dist(a, q) || 1; at = [a[0] + (q[0] - a[0]) * e.u / L, a[1] + (q[1] - a[1]) * e.u / L]; }
+      else at = pointAlong(e.r.line, e.u);
+      const h = Number(wireZ);
+      if (!(wireZ !== "" && isFinite(h) && h > 0)) { toast("Set \"tied at\" in the top bar first: how high the wire meets the house or wall"); $("mwirez").focus(); return; }
+      r.to_at = [r2(at[0]), r2(at[1]), r2(h)];
+      r.kind = k || "service";
+    }
+    r._d = dOf.get(from.id);
+    const ok = await save([r]);
+    if (!ok) return;
+    sel = rec(r.id); wireFrom = pole && ev.shiftKey ? pole : null;
+    showPanel(); V.draw();
+  }
   function move(ev, p) {
     cursor = p;
+    if (tool === "wire") { if (wireFrom) V.draw(); return false; }
     if (pickBox) { pickBox.b = p; V.draw(); return true; }
     if (tool === "brush") { brAlt = ev.altKey; if (stroke) brushMove(p); else V.draw(); return !!stroke; }
     if (drag && drag.spot) { drag.to = p; V.draw(); return true; }
@@ -1086,7 +1128,16 @@ window.MAPEDIT = (() => {
     for (const r of recsOf(["stall", "vehicle", "furniture"])) { const q = thingPts(r); if (!q || !inView(q)) continue; path(ctx, q, true); ctx.fillStyle = r.type === "vehicle" ? "rgba(74,127,191,.75)" : r.type === "stall" ? "rgba(201,162,39,.8)" : "rgba(142,68,173,.7)"; ctx.fill(); edge(r, css("--ink"), px); }
     for (const r of recsOf(["heap", "tree"])) { if (!Array.isArray(r.at) || !inView([r.at])) continue; ctx.beginPath(); ctx.arc(r.at[0], r.at[1], thingR(r), 0, 7); ctx.fillStyle = r.type === "tree" ? "rgba(50,120,50,.32)" : "rgba(140,110,80,.5)"; ctx.fill(); edge(r, r.type === "tree" ? "#3d7a32" : "#6d5a44", Math.max(px, 0.08)); }
     for (const r of recsOf(["pole"])) { if (!Array.isArray(r.at) || !inView([r.at])) continue; ctx.beginPath(); ctx.arc(r.at[0], r.at[1], Math.max(0.2, 2.5 * px), 0, 7); ctx.fillStyle = "#5b4a3a"; ctx.fill(); edge(r, "#5b4a3a", px); }
-    for (const r of recsOf(["wire"])) { const a = rec(r.from_pole), b = r.to_pole ? rec(r.to_pole) : null, e = b ? b.at : r.to_at; if (!a || !Array.isArray(a.at) || !Array.isArray(e)) continue; path(ctx, [a.at, e]); ctx.strokeStyle = "#333"; ctx.lineWidth = px; ctx.stroke(); }
+    for (const r of recsOf(["wire"])) {
+      const E = wireEnds(r); if (!E) continue; const b = badness(r);
+      path(ctx, E); ctx.strokeStyle = b === "bad" ? BAD : "#333"; ctx.lineWidth = Math.max(px, (r.n > 1 ? 1.6 : 1) * px); ctx.setLineDash(r.kind === "service" ? [4 * px, 2 * px] : []); ctx.stroke(); ctx.setLineDash([]);
+      if (b === "incomplete") { const m = [(E[0][0] + E[1][0]) / 2, (E[0][1] + E[1][1]) / 2]; ctx.beginPath(); ctx.arc(m[0], m[1], 3 * px, 0, 7); ctx.strokeStyle = WARN; ctx.lineWidth = 1.5 * px; ctx.stroke(); }
+      if (!r.to_pole && Array.isArray(r.to_at)) { ctx.beginPath(); ctx.arc(E[1][0], E[1][1], 2 * px, 0, 7); ctx.fillStyle = "#333"; ctx.fill(); }
+    }
+    if (tool === "wire" && wireFrom && Array.isArray(wireFrom.at)) {
+      ctx.beginPath(); ctx.arc(wireFrom.at[0], wireFrom.at[1], 6 * px, 0, 7); ctx.strokeStyle = css("--sel"); ctx.lineWidth = 2 * px; ctx.stroke();
+      if (cursor) { path(ctx, [wireFrom.at, cursor]); ctx.globalAlpha = 0.6; ctx.setLineDash([4 * px, 3 * px]); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1; }
+    }
     // small things: goods in their parent's frame, litter, potholes and ruts, person spots
     for (const r of recsOf(["goods"])) {
       const g = goodsFrame(rec(r.of), rec); if (!g || !inView([g.o])) continue;
@@ -1105,11 +1156,13 @@ window.MAPEDIT = (() => {
     for (const r of recsOf(["person_spot"])) {   // a person from above: shoulders across the way they face, a head, a facing tick
       if (!Array.isArray(r.at) || !inView([r.at])) continue;
       const [x, y] = r.at, R = Math.max(0.22, 4.5 * px), b = badness(r), col = "#e0457b", a = isFinite(r.turn) ? r.turn * Math.PI / 180 : null;
+      ctx.globalAlpha = clockOn && !outAt(r, clockH) ? 0.15 : 1;
       if (r.parent) { const par = rec(r.parent), Q = par && allPts(par); if (Q && Q.length) { const c = Array.isArray(par.at) ? par.at : centroid(Q); path(ctx, [r.at, c]); ctx.strokeStyle = "rgba(224,69,123,.5)"; ctx.lineWidth = px; ctx.setLineDash([2 * px, 2 * px]); ctx.stroke(); ctx.setLineDash([]); } }
       if (a !== null) { ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * R * 0.5, y + Math.sin(a) * R * 0.5); ctx.lineTo(x + Math.cos(a) * R * 2.3, y + Math.sin(a) * R * 2.3); ctx.strokeStyle = col; ctx.lineWidth = Math.max(0.05, 2 * px); ctx.stroke(); }
       ctx.beginPath(); ctx.ellipse(x, y, R, R * 0.55, a === null ? 0 : a + Math.PI / 2, 0, 7); ctx.fillStyle = col; ctx.fill();
       ctx.beginPath(); ctx.arc(x, y, R * 0.42, 0, 7); ctx.fillStyle = "#3a2218"; ctx.fill();
       if (b) { ctx.beginPath(); ctx.arc(x, y, R * 1.4, 0, 7); ctx.strokeStyle = b === "bad" ? BAD : WARN; ctx.lineWidth = 1.5 * px; ctx.setLineDash(b === "incomplete" ? [3 * px, 2 * px] : []); ctx.stroke(); ctx.setLineDash([]); }
+      ctx.globalAlpha = 1;
     }
     if (drag && drag.spot && cursor) { const at = drag.spot; ctx.beginPath(); ctx.arc(at[0], at[1], Math.max(0.22, 4.5 * px), 0, 7); ctx.fillStyle = "rgba(224,69,123,.6)"; ctx.fill(); if (drag.to) { path(ctx, [at, drag.to]); ctx.strokeStyle = "#e0457b"; ctx.lineWidth = 2 * px; ctx.stroke(); } }
     for (const r of recsOf(["place"])) for (const ring of (Array.isArray(r.area) ? r.area : [])) if (ring.length > 2 && inView(ring)) { path(ctx, ring, true); ctx.setLineDash([8 * px, 4 * px]); const b = badness(r); ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : css("--accent"); ctx.lineWidth = 1.5 * px; ctx.stroke(); ctx.setLineDash([]); }
@@ -1119,6 +1172,7 @@ window.MAPEDIT = (() => {
       const e = editPts(r), q = thingPts(r) || leantoQuad(r);
       if (e) { if (r.type === "road") { path(ctx, e.pts); ctx.lineWidth = (r.width || 0) + 6 * px; ctx.globalAlpha = 0.3; ctx.stroke(); ctx.globalAlpha = 1; } else { path(ctx, e.pts, e.closed); ctx.stroke(); } }
       else if (q) { path(ctx, q, true); ctx.stroke(); }
+      else if (r.type === "wire") { const E = wireEnds(r); if (E) { path(ctx, E); ctx.stroke(); } }
       else if (Array.isArray(r.at)) { ctx.beginPath(); ctx.arc(r.at[0], r.at[1], Math.max(thingR(r), 9 * px), 0, 7); ctx.stroke(); }
     };
     if (hover && hover !== sel && tool === "select") outline(hover, css("--sel"), 1.5);
@@ -1146,7 +1200,7 @@ window.MAPEDIT = (() => {
     if (!SCHEMA || !MAPON) return;
     ctx.font = "600 11px -apple-system, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     if (V.s > 3) for (const r of recsOf(["building"])) { if (!Array.isArray(r.footprint) || r.footprint.length < 3) continue; const [X, Y] = V.toS(centroid(r.footprint)); if (X < 0 || Y < 0 || X > V.cv.clientWidth || Y > V.cv.clientHeight) continue; ctx.fillStyle = css("--ink"); ctx.fillText(r.storeys ? String(r.storeys) : "?", X, Y); }
-    if (V.s > 9) for (const r of recsOf(["person_spot"])) { if (!Array.isArray(r.at)) continue; const [X, Y] = V.toS(r.at); if (X < 0 || Y < 0 || X > V.cv.clientWidth || Y > V.cv.clientHeight) continue; ctx.font = "500 10px -apple-system, sans-serif"; ctx.fillStyle = "#b8285e"; ctx.fillText((r.activity || "?").replace(/_/g, " ") + (r.count > 1 ? " ×" + r.count : ""), X, Y + 16); ctx.font = "600 11px -apple-system, sans-serif"; }
+    if (V.s > 9) for (const r of recsOf(["person_spot"])) { if (!Array.isArray(r.at) || (clockOn && !outAt(r, clockH))) continue; const [X, Y] = V.toS(r.at); if (X < 0 || Y < 0 || X > V.cv.clientWidth || Y > V.cv.clientHeight) continue; ctx.font = "500 10px -apple-system, sans-serif"; ctx.fillStyle = "#b8285e"; ctx.fillText((r.activity || "?").replace(/_/g, " ") + (r.count > 1 ? " ×" + r.count : ""), X, Y + 16); ctx.font = "600 11px -apple-system, sans-serif"; }
     if (linePts.length && cursor) { const P = linePts.map((x) => x.p).concat([snapAt || cursor]); const [X, Y] = V.toS(P[P.length - 1]); ctx.fillStyle = css("--ink"); ctx.fillText(lineLen(P).toFixed(1) + " m", X + 30, Y - 12); }
     ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
     renderStatus();
@@ -1232,7 +1286,7 @@ window.MAPEDIT = (() => {
     else if (act === "rm") setPath(r, p, undefined);
     await save([r]);
   }
-  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side or a wall twice; on a wall it stands on the right of the wall's line ("Put it on the other side" turns the line round). <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road. <b>Frontage</b> (E): click a plot's side that faces a street; it finds the street, the side and the setback. <b>Stamp</b> (K): copy records with everything on them, from the map or a source, and place copies.<br><br><b>The dress layer.</b> <b>Face</b> (C): click a building's side to open it in the face editor (or a Face button in a building's panel). <b>Goods</b> (O): click inside a lean-to, stall, heap or bin to put an item there. <b>Litter</b> (X): click to drop a piece (it joins the litter record you picked, or one within 5 m). With a piece picked, the next one takes its values except where it lies. Drag a piece to move it, <kbd>Delete</kbd> removes just it; its row is lit in the panel's table. <b>Ground</b> (D): click points, <kbd>Enter</kbd>: a painted patch, over the earlier ones. <b>Relief</b> (H): drag a box for a flat grid; click a cell to raise it 10 mm (<kbd>Shift</kbd> 50), <kbd>⌥</kbd>-click to lower.<br><br><b>Brush</b> (N): pick litter, goods (on the ground or hung), relief or ground paint in the kind list; size, spacing and each value in the panel (unset, a value, random between two, or random from a list). Every stroke writes full rows (litter pieces, goods items, relief cells, a ground patch's outline), editable one by one; <kbd>⌥</kbd>-drag erases (relief: lowers); <kbd>[</kbd> <kbd>]</kbd> size; <kbd>⌘Z</kbd> undoes a whole stroke. <b>Person</b> (I): a person spot, where someone does something and when: click to place it (the activity from the kind list), drag to face them; it links to the stall, lean-to, vehicle, furniture or heap it stands at and moves and turns with it; hours, count and the rest in the panel.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
+  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side or a wall twice; on a wall it stands on the right of the wall's line ("Put it on the other side" turns the line round). <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road. <b>Frontage</b> (E): click a plot's side that faces a street; it finds the street, the side and the setback. <b>Stamp</b> (K): copy records with everything on them, from the map or a source, and place copies.<br><br><b>The dress layer.</b> <b>Face</b> (C): click a building's side to open it in the face editor (or a Face button in a building's panel). <b>Goods</b> (O): click inside a lean-to, stall, heap or bin to put an item there. <b>Litter</b> (X): click to drop a piece (it joins the litter record you picked, or one within 5 m). With a piece picked, the next one takes its values except where it lies. Drag a piece to move it, <kbd>Delete</kbd> removes just it; its row is lit in the panel's table. <b>Ground</b> (D): click points, <kbd>Enter</kbd>: a painted patch, over the earlier ones. <b>Relief</b> (H): drag a box for a flat grid; click a cell to raise it 10 mm (<kbd>Shift</kbd> 50), <kbd>⌥</kbd>-click to lower.<br><br><b>Brush</b> (N): pick litter, goods (on the ground or hung), relief or ground paint in the kind list; size, spacing and each value in the panel (unset, a value, random between two, or random from a list). Every stroke writes full rows (litter pieces, goods items, relief cells, a ground patch's outline), editable one by one; <kbd>⌥</kbd>-drag erases (relief: lowers); <kbd>[</kbd> <kbd>]</kbd> size; <kbd>⌘Z</kbd> undoes a whole stroke. <b>Person</b> (I): a person spot, where someone does something and when: click to place it (the activity from the kind list), drag to face them; it links to the stall, lean-to, vehicle, furniture or heap it stands at and moves and turns with it; hours, count and the rest in the panel. <b>Clock</b> (top bar): drag it to an hour and the spots out then stay bright, the rest go faint. <b>Wire</b> (J): click a pole, then another pole (a line) or a house side or wall (a drop, tied at the height in the top bar); <kbd>Shift</kbd> goes on from the last pole.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
   function showPanel() {
     const P = $("panel"); if (!SCHEMA || !P) return;
     const keep = P.scrollTop;
@@ -1249,6 +1303,10 @@ window.MAPEDIT = (() => {
       const go = $("msrcgo"); if (go) go.addEventListener("click", () => { const W = srcW(), Pp = W.list(null).flatMap((r) => allPts(r, W.get)); if (Pp.length) V.fit(bboxOf(Pp), 60); });
       const pl = $("mplace"); if (pl) pl.addEventListener("click", startPlacing);
       return;
+    }
+    if (!o && tool === "wire") {
+      P.innerHTML = `<h3>Wire</h3><p class="k">Click a pole, then the other pole: a line between them. Or click a pole, then a house side or a wall: a drop to the house, tied at the height in the top bar ("tied at"). <kbd>Shift</kbd>-click the second pole to go on from it. <kbd>Esc</kbd> stops. The kind comes from the list (line to a pole, service to a house, unless you pick one); wires in the run (n) and the sag are yours to set in the panel.</p><hr>` + HELP;
+      P.scrollTop = keep; return;
     }
     if (!o) {
       let h = `<h3>${tool === "select" ? "Nothing selected" : "Drawing: " + tool}</h3>`;
@@ -1335,11 +1393,15 @@ window.MAPEDIT = (() => {
     st.textContent = `#panel .fld{display:grid;grid-template-columns:38% 1fr auto;gap:4px;align-items:center;margin:3px 0}#panel .fk{color:var(--muted);overflow-wrap:anywhere}#panel .fk.bad{color:var(--bad);font-weight:600}#panel fieldset{border:1px solid var(--panel-line);border-radius:6px;margin:6px 0;padding:4px 6px}#panel fieldset.item{border-style:dashed}#panel legend{font-size:12px}#panel select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--panel-line);border-radius:6px;padding:3px 4px;width:100%}#panel .chk{display:flex;flex-wrap:wrap;gap:2px 8px}#panel .chk label{display:flex;gap:3px;align-items:center}#panel .ptrow,#panel .hexrow{display:flex;gap:4px}#panel .hexrow input[type=color]{width:34px;padding:0;height:26px}#panel .tb input{padding:2px 3px}#panel .tb th{font-weight:500;color:var(--muted);text-align:left}#panel .x{padding:1px 6px}#panel .probs{margin:4px 0 8px;font-size:12px}#panel .probs .warn{color:var(--warn)}#panel .probs .bad{color:var(--bad)}#panel code{font-size:11px;overflow-wrap:anywhere}#panel{width:360px}#panel .chips{display:flex;flex-wrap:wrap;gap:4px}#panel .chips button{font-size:11px}#panel .tb tr.on input{outline:2px solid var(--sel)}#panel .tbw{overflow-x:auto}#panel fieldset{min-width:0}#panel .tb input{min-width:44px}.bar{right:392px}#mtools{flex-wrap:wrap}#panel .brc{display:grid;grid-template-columns:30% 1fr;gap:3px 4px;align-items:center;margin:3px 0}#panel .brc .bri{grid-column:1/3}#panel .fk.unset{color:var(--warn)}`;
     document.head.appendChild(st);
     const bar = document.querySelector(".bar");
-    bar.insertAdjacentHTML("beforeend", `<div class="group"><select id="mdist" aria-label="District to draw in"></select></div><div class="group" id="mtools">${TOOLS.map(([t, l, k, tip]) => `<button data-tool="${t}" title="${tip} (${k})">${l}</button>`).join("")}</div><div class="group"><select id="mkind" aria-label="Kind"></select><label id="msnap" title="While drawing a street, snap onto the real road line under it"><input type="checkbox"${snapReal ? " checked" : ""}> Snap to real roads</label><label title="Show the new map's records"><input type="checkbox" id="mon" checked> Map</label></div>`);
+    bar.insertAdjacentHTML("beforeend", `<div class="group"><select id="mdist" aria-label="District to draw in"></select></div><div class="group" id="mtools">${TOOLS.map(([t, l, k, tip]) => `<button data-tool="${t}" title="${tip} (${k})">${l}</button>`).join("")}</div><div class="group"><select id="mkind" aria-label="Kind"></select><label id="msnap" title="While drawing a street, snap onto the real road line under it"><input type="checkbox"${snapReal ? " checked" : ""}> Snap to real roads</label><label id="mwirezl" title="How high a drop to a house meets the house or wall (m)">tied at <input id="mwirez" type="number" step="0.1" min="0" style="width:52px" placeholder="m"></label><label title="Show the new map's records"><input type="checkbox" id="mon" checked> Map</label></div><div class="group" title="The clock: person spots out at this hour stay bright, the rest go faint"><label><input type="checkbox" id="mclock"> Clock</label><input type="range" id="mclockh" min="0" max="23.5" step="0.5" value="${clockH}" style="width:110px"><span id="mclockt" class="k">${hhmm(clockH)}</span></div>`);
     document.querySelectorAll("#mtools button").forEach((b) => b.addEventListener("click", () => setTool(b.dataset.tool)));
     $("mkind").addEventListener("change", () => { if (tool === "brush") { BR.mode = $("mkind").value; saveBR(); showPanel(); V.draw(); } });
     $("msnap").querySelector("input").addEventListener("change", (ev) => { snapReal = ev.target.checked; try { localStorage.setItem("gidi-map-snapreal", snapReal ? "1" : "0"); } catch (e) {} });
     $("mon").addEventListener("change", (ev) => { MAPON = ev.target.checked; V.draw(); });
+    $("mwirez").value = wireZ; $("mwirez").addEventListener("change", (ev) => { wireZ = ev.target.value.trim(); try { localStorage.setItem("gidi-map-wirez", wireZ); } catch (e) {} });
+    const clockShow = () => { const n = recsOf(["person_spot"]), out = n.filter((r) => outAt(r, clockH)); $("mclockt").textContent = hhmm(clockH) + (clockOn ? ` · ${out.length} of ${n.length} out` : ""); V.draw(); };
+    $("mclock").addEventListener("change", (ev) => { clockOn = ev.target.checked; clockShow(); });
+    $("mclockh").addEventListener("input", (ev) => { clockH = Number(ev.target.value); if (!clockOn) { clockOn = true; $("mclock").checked = true; } clockShow(); });
     $("mdist").addEventListener("change", (ev) => {
       cur = ev.target.value || null; try { localStorage.setItem("gidi-map-district", cur || ""); } catch (e) {}
       sel = null; const S = cur && studyD(cur); if (S) V.fit(S.bb, 60);
@@ -1360,7 +1422,7 @@ window.MAPEDIT = (() => {
       if ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === "z") { ev.preventDefault(); undo(); return; }
       if (ev.metaKey || ev.ctrlKey) return;
       const k = ev.key.toLowerCase();
-      if (k === "escape") { if (placing || picked.length) { placing = null; picked = []; showPanel(); V.draw(); return; } linePts = []; ghost = null; drag = null; firstClick = null; if (tool !== "select") setTool("select"); else { sel = null; showPanel(); } V.draw(); }
+      if (k === "escape") { if (placing || picked.length) { placing = null; picked = []; showPanel(); V.draw(); return; } linePts = []; ghost = null; drag = null; firstClick = null; wireFrom = null; if (tool !== "select") setTool("select"); else { sel = null; showPanel(); } V.draw(); }
       else if (placing && (k === "r" || k === "[" || k === "]")) { stampDeg += k === "r" ? (ev.shiftKey ? -15 : 15) : k === "[" ? -1 : 1; V.draw(); }
       else if (k === "enter" && tool === "stamp" && picked.length && !placing) startPlacing();
       else if (k === "enter" && (tool === "street" || tool === "wall" || tool === "ground")) finishLine();
