@@ -8,6 +8,8 @@ An open-world city inspired by Lagos, built from data and by hand. The owner wor
 
 **Nothing is claimed without proof (owner, 24 Oct).** Hooks in `.claude/` hold it for gidi and gidi-game: the checks run before every commit, push and stop, and block on failure (a check that can't run blocks too); every code or map commit has a `Checked:` paragraph (what was run or looked at, what it showed, in numbers; "by eye" where it was by eye; what wasn't checked); a second model reviews every push and blocks claims with nothing behind them. Commit and push in separate commands. Never loosen a check to pass it, never work around a hook: if one is wrong, fix the hook in its own commit and say why. Say what you checked; an agent's report is checked before it is passed on.
 
+**Research the industry standard first (owner, 24 Oct: "not just when we're stuck... when we want to start stuff, see how the industry standard is").** When starting anything new (a look, a model, a tool, a level, a performance fix), first find how studios, the engine's makers and expert artists do it (docs, talks, breakdowns, tutorials), adapt that, and say in the commit what was found and where. Not only when stuck: the street test of 375 houses could not load until research showed what games do (shared tiling textures, detail in images instead of triangles). Downloads still need the owner's OK.
+
 **Read `decisions/` first, every session:**
 - `decisions/NOW.md`: where the work stands and what's next.
 - `decisions/DECISIONS.md`: the owner's standing decisions and rules.
