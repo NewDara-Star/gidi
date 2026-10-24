@@ -645,3 +645,9 @@ B22 (between Olorunsogo Street, Fafolu Street and Ayantuga Street). Read 24 Oct 
 |---|---|---|
 | rd-x0hilxfr | Oyo Street | lane |
 | rd-x7eslkeo | Macaulay Street | lane |
+
+B23 (between Coker Street, Olateju Street and Ogunmokun Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Olomowewe Street runs through the block from Olateju Street down to Ogunmokun Street; its south end meets Gidi's Ogunmokun road (rd-f782px4g), which runs south of the real line there. Left out for spacing: Jinadu Street (about 85 m from Olomowewe at Olateju).
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-pee3ohfv | Olomowewe Street | lane |
