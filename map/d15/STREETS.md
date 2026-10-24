@@ -590,3 +590,12 @@ B13 (central Mushin: between Post Office Road, Coker Street and Isolo Road, roun
 | rd-qpyslofn | Mumuni Street on to Adebesin Street | lane |
 | rd-0gi2ewca | Oluwoye Street | lane |
 | rd-0pmc0xha | Aganran Street | lane |
+
+B16 (Ilasamaja, between Akanro Street, Lamina Street and the expressway, down to the district edge; the rest of B16 is the thin strip between the two carriageways north of it, left as it is). Read 24 Oct at z18 at the checked shot scale (one shot on the block's south end, where its land is). Ajeabo Street runs from Akanro Street to the district edge; Odunaike Street from Akanro Street down to Kekereowo Street, which runs from Ajeabo Street to Lamina Street; Oremeji Street runs in from Lamina Street and on south as Olaide Awoye Street to the district edge. Left out for spacing: Olayinka Street, Technical Street, Waidi Apesin Street, Owoseni Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-6qjnbv9a | Ajeabo Street | lane |
+| rd-5z414dfc | Odunaike Street | lane |
+| rd-upn7sjm7 | Kekereowo Street | lane |
+| rd-vuw2n757 | Oremeji Street on to Olaide Awoye Street | lane |
