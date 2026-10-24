@@ -64,14 +64,24 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    **Rule since (24 Oct): "One near model; Nanite draws near to far"** (DECISIONS): no far versions per builder; each makes one
    near model within a budget, its fine look baked into images. Held by gidi-game `tools/look_travels.py` (#74, in the hooks).
    Owed: the wear layer (the dust and grime on every built thing is Blender shader math and does not reach Unreal yet), the
-   spot's ground, person outfits, the basin test. **Next:** the street test (one Mùṣá street of built houses and roofs in
-   Unreal, frame time and memory on the laptop; needs the Mac free and the owner's go) to set the budgets; bake the wear
-   layer; the roofs' patchiness tuned against the photos at street distance; then ridge cap, barge board, open eaves (map
+   spot's ground, person outfits, the basin test. **Street test done (24 Oct, gidi-game #75-#77; numbers in gidi-game
+   `docs/PERFORMANCE.md`):** 375 built houses round a Mùṣá lane (`tools/play.sh street`). It could not load at first (each
+   roof slope its own images, ~4,500 uncompressed; the roof edge's ribs 26.5 M of 28.1 M triangles); research showed games
+   share tiling images, so `zinc_kit.shared()` makes 6.4 m zinc tiles (24 for the street) and the edge is one row. Now 18.9 M
+   triangles, 60 fps in high at eye level, 59 from 15 m up, 6.9 GB, texture pool 111 MB. The houses are plain (flat paint,
+   no wear, black window holes), so this is a floor. **Proposed budgets, waiting on the owner's yes:** a house at most
+   80,000 triangles, a big or hero building 300,000, a scene 30 M in high; props and vehicles open until measured. On yes:
+   BUDGET in gidi-game `tools/look_travels.py`, and close the CHECKS gap. **Research done for the next step** (how the pros
+   make many buildings real): modular kits placed as instances (City Sample: 24 kits, 2,000+ meshes, corner/wall/entrance
+   per storey), trim sheets (one image set for all frames, sills, bands), per-house variation through Custom Primitive
+   Data on one material, wear as tiling grime + vertex-paint masks + decals, fake rooms behind windows (interior mapping).
+   **Next:** windows and doors as shared kit pieces, wall wear, then measure again; bake the wear layer; the roofs' patchiness tuned against the photos at street distance; then ridge cap, barge board, open eaves (map
    fields first); gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
-4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad
-   `perf/watchdog.sh`; to move into gidi-game `tools/`). Always open the editor with `tools/editor.sh`.
+4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (gidi-game
+   `tools/watchdog.sh`). The volumetric clouds are the dearest GPU pass over the roofs (8.5 ms): a lighter sky for work mode.
+   VoiceMode's whisper and kokoro services are disabled on this Mac (24 Oct, owner; `launchctl enable gui/501/com.voicemode.<name>` to undo). Always open the editor with `tools/editor.sh`.
 5. **The board:** district outline editing; load only the districts in view; a day filter once spots have `days`.
 6. Then the other six core districts (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13, Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28).
 
