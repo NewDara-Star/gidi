@@ -533,3 +533,15 @@ B9 (Bamgboye / Owo, between Adeoyo, Olusoga and Ilasamaja Road). Re-checked 24 O
 | rd-regiv15v | Olanrewaju Street | lane |
 | rd-4a3m9gq5 | Alafia Street | lane |
 | rd-kmzid1cy | Owo Street on to Da-Silva Avenue | lane |
+
+B11 (Araromi and Church Street: between Adeoyo Street, Isolo Road, Itire Road and Olusoga/Awawu Streets). Read 24 Oct at z18 at the checked shot scale (three shots). The north-west: Layi Oyekanmi Street from Isolo Road to Omu Street, Araromi Street from Layi Oyekanmi round its south leg to Church Street, and Olawoyin Street from Church Street up to Araromi. Across the middle Church Street runs from the Olusoga corner to Ademoshun Street; Alafia Street carries on from Church Street to B9's Alafia lane; Ewenla Street runs on to Daniel Street from Omowunmi to Olusoga; Ademoshun Street from Isolo Road to Church Street. Left out for spacing: Sanusi Street (beside Isolo Road), Rabiatu Idowu Street, Omowunmi Street's diagonal, Okesanya, Cameroon, Showunmi and Tamitope Streets.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-0gu6klk4 | Layi Oyekanmi Street | lane |
+| rd-m9b20y08 | Araromi Street | lane |
+| rd-wsadnelk | Olawoyin Street | lane |
+| rd-fb96tfq9 | Church Street | lane |
+| rd-hjh48h6m | Alafia Street (north of Olusoga) | lane |
+| rd-rby6c85s | Ewenla Street on to Daniel Street | lane |
+| rd-pilgciql | Ademoshun Street | lane |
