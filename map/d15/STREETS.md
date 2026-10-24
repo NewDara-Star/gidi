@@ -606,3 +606,12 @@ B17 (around Mushin General Hospital: between Palm Avenue, Isolo Road and Lapite 
 |---|---|---|
 | rd-dn9auxmx | Akinsola Crescent on to Ofada Street and Oduntan Street | lane |
 | rd-uwom6nbe | Folarin Street on to Alokolaro Crescent | lane |
+
+B18 (Idi-Oro, between Agege Motor Road, Folami Street and Labinjo Street's south bend). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Abeokuta Street and Labinjo Street run from Agege Motor Road down across the block; Makinde Street runs from Labinjo Street to Folami Street, and Alamutu Street from it down to the block's south-west edge. Left out for spacing: Shoremekun Street, Labinjo Close, Adeyanju Street, Wilkey Street, Odesanya Close.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-7qnvm1jp | Abeokuta Street | lane |
+| rd-9eb5vovf | Labinjo Street | lane |
+| rd-emgqj1wh | Makinde Street | lane |
+| rd-12jdsl3e | Alamutu Street | lane |
