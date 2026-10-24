@@ -28,12 +28,9 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   page (16-22 Oct) moved to `to-delete/decisions/NOW-log-16-22-oct.md`.
 
 **Waiting on the owner.**
-1. **People** (asked 24 Oct, the owner unsure): Claude's recommendation is one-mesh crowd people (MakeHuman bodies,
-   clothes merged into the body, one texture, LODs) on the same skeleton as MetaHuman, and MetaHuman only for the
-   named characters seen up close. Measured: 6 City Sample people took high to about 2 fps and added about 3 GB
-   (gidi-game `docs/PERFORMANCE.md`); the cost is their hair grooms, separate clothes and big textures, not where the
-   body came from. To prove it: N one-mesh people against N City Sample people in the Underdeck, low and high, with
-   the owner's go. Waiting on the owner's yes. (Settled 24 Oct: the draft desk stays in `legacy/`; gidi-data stays on
+1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
+   one skeleton; crowd people fully interactive (punch, run over, react, ragdoll). The proof still to run, when the Mac is
+   free and with the owner's go: N one-mesh people against N City Sample people in the Underdeck, low and high. (Settled 24 Oct: the draft desk stays in `legacy/`; gidi-data stays on
    this Mac with no remote; the untracked `Claude outputs/` folder, the 13-14 Oct Ladi Lane mock, moved to
    `~/gidi-data/to-delete/claude-outputs-13-14-oct/`.)
 2. **The lived-in records** (`decisions/lived-in.md`): a yes on `mix`, `route`, `state`, `moment`, `job`; and on the 18 new
@@ -58,7 +55,9 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    `legacy/blender/WHAT-IT-HELD.md`, zinc roof sheets and lean-tos first. **First done, waiting on the owner's eye (24 Oct):** the zinc lean-to, gidi-game #72
    (`tools/leanto_build.py`; `Art/Props/LeantoBuilt/GAPS.md` lists 12 gaps against the photos, 5 closed, 1 closed in shape, 6 open
    with reasons; `look_v1.jpg` is photo | old kit | new). The map format gained each sheet's `hang` and `bend` (gidi #280).
-   Next: zinc roof sheets on buildings (block_build's roof is one smooth surface today), then gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
+   The owner on v1 (24 Oct): "not bad", "the rust looks very good", it lacks a bit of texture: fine dents, grain and dirt in
+   the textures next. Its faces (23,532 to 55,762 a lean-to) are too many for a street of them: near and far versions
+   (ribs as shape near, painted into a flat sheet's texture far) before it goes on the map. Next: zinc roof sheets on buildings (block_build's roof is one smooth surface today), then gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad
