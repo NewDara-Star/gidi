@@ -638,3 +638,10 @@ B21 (west of Shokunbi Street, between Fafolu Street and Ayantuga Street). Read 2
 |---|---|---|
 | rd-sq9yr86z | Oyo Street | lane |
 | rd-cc9tth8j | Ashafihan Street | lane |
+
+B22 (between Olorunsogo Street, Fafolu Street and Ayantuga Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Oyo Street runs down from Fafolu Street to Macaulay Street, carrying on B21's Oyo lane; Macaulay Street crosses the block from Olorunsogo Street to Fafolu Street, where it carries on as B21's Ashafihan lane. Left out for spacing: the street from Fafolu Street down to Alli Close, Alli Close.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-x0hilxfr | Oyo Street | lane |
+| rd-x7eslkeo | Macaulay Street | lane |
