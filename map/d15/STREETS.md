@@ -468,21 +468,33 @@ Egbeyemi Street crosses the narrow north strip edge to edge and comes back at th
 | rd-z7y18cz7 | Ali Lane | lane | Sosanya's twin to Olapido Sode's twin |
 | rd-771zvqoe | Olapido Sode Street | lane | Ajegunle's twin to the east edge |
 
-B7 (the Apapa-Oshodi Expressway side by Isolo Road: factories along the expressway, Oye Primary School, houses east).
+B7 (the Apapa-Oshodi Expressway side by Isolo Road: factories along the expressway, Oye Primary School, houses east). Re-checked 24 Oct at z18 at the checked shot scale (two shots): the five z17 lanes sat up to 8 m off (Adisa Thomas Street ran diagonally). Now Shasere Ajibade Street end to end; on the factory side, the warehouse roads off the expressway's service road (past the Community Secondary School, by the bank, past ECS, by Kuramo Industries) and both arms of Ifelodun Street; east of Shasere, the Daleko market street, the Grace Baptist street off Adeoya Close, Chief Olu Adekoya Street to Olu Aina Street, Dele Viju Close, the P and P college street, Adisa Thomas, Taofik Abolaji and Majekodunmi Streets; and in the strip between Olu Aina and Adeoyo Streets, Igbo Owu and Adefuwa Streets. Removed: rd-a3ok14xh, rd-q7px2xqw, rd-5dpnprkh, rd-ngnuvohi, rd-90x3jf29.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-a3ok14xh | Shasere Ajibade Street | home_street | Isolo Road's side south past Oye Primary School |
-| rd-q7px2xqw | Chief Olu Adekoya Street | lane | Shasere's twin to the east edge |
-| rd-5dpnprkh | the unnamed street north of Adisa Thomas Street | lane | Shasere's twin to the east edge |
-| rd-ngnuvohi | Adisa Thomas Street | lane | Shasere's twin east (ends in the block) |
-| rd-90x3jf29 | Majekodunmi Street | lane | across Shasere's twin to the east edge |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-z3i9yyex | Shasere Ajibade Street | home_street |
+| rd-0i4ei708 | the Daleko market street | lane |
+| rd-i3tv1gvr | the street past Grace Baptist Church, off Adeoya Close | lane |
+| rd-4m50afsk | the warehouse road by the bank, off the expressway | lane |
+| rd-tfrak2nd | Chief Olu Adekoya Street | lane |
+| rd-2sb6jwlg | the factory road by Kuramo Industries | lane |
+| rd-zh0fu8w7 | the road past the Community Secondary School | lane |
+| rd-kjbrkrej | the warehouse road past ECS | lane |
+| rd-avjtnca0 | Ifelodun Street (the north-south arm) | lane |
+| rd-ns5g7sgs | Dele Viju Close | lane |
+| rd-ygloxipl | the street past the P and P college, off Adeoyo Street | lane |
+| rd-t07adhpt | Adisa Thomas Street | lane |
+| rd-wzqwmk8q | Taofik Abolaji Street | lane |
+| rd-vvycykua | Majekodunmi Street | lane |
+| rd-s96wwwah | Ifelodun Street (the east-west arm) | lane |
+| rd-nxtksffe | Igbo Owu Street | lane |
+| rd-39eedx9o | Adefuwa Street | lane |
 
-B9 (Bamgboye / Owo, between Adeoyo, Olusoga and Ilasamaja Road): Adeshile and Moliki left as gaps.
+B9 (Bamgboye / Owo, between Adeoyo, Olusoga and Ilasamaja Road). Re-checked 24 Oct at z18 at the checked shot scale: the four z17 lanes were within about 5 m, but Bamgboye Street stopped halfway and Alafia Street's north end sat 8 m west. Redrawn on the real lines, Bamgboye now running through to the district's east edge. Adeshile and Moliki Streets are still left as gaps for spacing. Removed: rd-kjitnqqz, rd-31p2dumv, rd-w8jhnt3x, rd-9gbercvs.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-kjitnqqz | Bamgboye Street | lane | Adeoyo's twin east (ends in the block) |
-| rd-31p2dumv | Owo Street on to Da-Silva Avenue | lane | Adeoyo's twin to the east edge |
-| rd-w8jhnt3x | Olanrewaju Street | lane | Olusoga's side to Owo's twin |
-| rd-9gbercvs | Alafia Street | lane | Olusoga Street to Owo's twin |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-wqe12uoj | Bamgboye Street | lane |
+| rd-regiv15v | Olanrewaju Street | lane |
+| rd-4a3m9gq5 | Alafia Street | lane |
+| rd-kmzid1cy | Owo Street on to Da-Silva Avenue | lane |
