@@ -658,3 +658,10 @@ B24 (between Akintan Street, Martins Street, the Agege Motor Road side and Onifa
 |---|---|---|
 | rd-96wuk9tz | Omoniyi Street (north stretch) | lane |
 | rd-zq9bs5v6 | Adeyemi Street (east of Akintan) | lane |
+
+B25 (between Shokunbi Street, Olateju Street, Ayantuga Street and Coker Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Onanuga Street crosses the block from Shokunbi Street to Olateju Street; Olufemi Onanuga Street runs from it down to Coker Street. Left out for spacing: Danmegoro Street (about 63 m from Onanuga at Olateju), the short street from Ayantuga Street down to Danmegoro, Wahabi Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-n9c6t57b | Onanuga Street | lane |
+| rd-0j8zaiv8 | Olufemi Onanuga Street | lane |
