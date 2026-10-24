@@ -46,9 +46,9 @@
    "repo": "gidi",
    "path": ".claude/hooks/repo.sh",
    "ext": ".sh",
-   "bytes": 4048,
+   "bytes": 4230,
    "changed": "2026-10-24",
-   "lines": 70,
+   "lines": 71,
    "summary": "Shared by the hooks (CLAUDE.md, \"Nothing is claimed without proof\"). Work happens in worktrees (~/gidi-worktrees/<dir>) and in gidi-game, so the repo a git command acts on is read from the command itself: the last `cd <dir>` before the git call, or `git -C <dir>`; failing that, the session's own folder.",
    "refs_in": [
     "gidi:.claude/hooks/checked-before-commit.sh",
@@ -175,7 +175,7 @@
    "path": "data/results/heights.py",
    "ext": ".py",
    "bytes": 1680,
-   "changed": "2026-10-13",
+   "changed": "2026-10-24",
    "lines": 33,
    "summary": "Per-LGA building height stats from Google Open Buildings 2.5D (2023), read at ~4 m (the data's effective resolution).",
    "refs_in": [
@@ -203,7 +203,7 @@
    "path": "data/results/landpop.py",
    "ext": ".py",
    "bytes": 2428,
-   "changed": "2026-10-13",
+   "changed": "2026-10-24",
    "lines": 43,
    "summary": "Per-LGA land cover (ESA WorldCover 2021), surface height (Copernicus DSM), population (WorldPop 2020).",
    "refs_in": [
@@ -277,7 +277,7 @@
    "path": "data/tools/pull-data.sh",
    "ext": ".sh",
    "bytes": 1803,
-   "changed": "2026-10-13",
+   "changed": "2026-10-24",
    "lines": 22,
    "summary": "Gidi data pull. Run on the Mac (Terminal): bash ~/gidi-data/research/data/pull-data.sh Downloads open datasets for the Lagos study into this folder. Safe to stop and re-run: finished files are skipped. 1. Google Open Buildings 2.5D Temporal, 2023, tiles over Lagos (CC-BY 4.0) - building height + presence",
    "refs_in": [
@@ -309,10 +309,10 @@
    "repo": "gidi",
    "path": "decisions/CODEBASE.md",
    "ext": ".md",
-   "bytes": 13039,
+   "bytes": 13894,
    "changed": "2026-10-24",
-   "lines": 164,
-   "summary": "What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Both are made by `scripts/inventory.py`; run it again after a clean-up or a big change:",
+   "lines": 172,
+   "summary": "What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: \"use the compiler to know what every piece of code is connected",
    "refs_in": [
     "gidi:.claude/hooks/checks-before-stop.sh",
     "gidi:CLAUDE.md",
@@ -527,7 +527,7 @@
    "path": "docs/BOARD.md",
    "ext": ".md",
    "bytes": 9758,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 98,
    "summary": "The drawing board: The owner, 16 Oct 2026: \"we should hand draw... we should know where something meets something... where the roads start, where the roads end, where the houses are, we should be able to move them.\"",
    "refs_in": [
@@ -576,7 +576,7 @@
    "path": "docs/DEEP-STUDY.md",
    "ext": ".md",
    "bytes": 4809,
-   "changed": "2026-10-16",
+   "changed": "2026-10-24",
    "lines": 65,
    "summary": "The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: \"the research should look at everything in the data and take them into consideration\". Every Gidi district is rebuilt in the v2 frame (`docs/LAYOUT-V2.md`) by one shared generator. Each district gets its own profile, and the profile is set from this study.",
    "refs_in": [
@@ -786,7 +786,7 @@
    "path": "docs/TWINS.md",
    "ext": ".md",
    "bytes": 11660,
-   "changed": "2026-10-19",
+   "changed": "2026-10-24",
    "lines": 283,
    "summary": "Real twins: every type in Gidi and the real thing it comes from: Made by `python3 scripts/twins.py` from the map and `web/twins.json` (the twins, kept by hand). Pictures live in `~/gidi-data/research/` (outside the repo). **none** = no twin yet; **red** = twin named, no picture; **amber** = pictures saved",
    "refs_in": [
@@ -1479,7 +1479,7 @@
    "path": "docs/gidi-data-plan.md",
    "ext": ".md",
    "bytes": 12375,
-   "changed": "2026-10-13",
+   "changed": "2026-10-24",
    "lines": 186,
    "summary": "Gidi data plan: everything we need to build accurate districts (v1, 13 Oct 2026): **Rule:** we study real Lagos to learn its patterns, then build our own world. Nothing real is traced or shipped.",
    "refs_in": [
@@ -1534,7 +1534,7 @@
    "path": "docs/hand/ibudo/README.md",
    "ext": ".md",
    "bytes": 1444,
-   "changed": "2026-10-19",
+   "changed": "2026-10-24",
    "lines": 19,
    "summary": "\u00ccb\u00f9d\u00f3, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct): Oshodi, studied on Google Earth and Street View (`~/gidi-data/research/google/ibudo/`, notes there), rebuilt one-for-one first, then made ours (the owner's method: like the fonts and the danfo). `design_v1.png`: metres, north up, 320 x 320 m.",
    "refs_in": [
@@ -1549,7 +1549,7 @@
    "path": "docs/hand/ibudo/child_plan.json",
    "ext": ".json",
    "bytes": 10701,
-   "changed": "2026-10-20",
+   "changed": "2026-10-24",
    "lines": 637,
    "summary": "keys: district, note, areas, roads, protect",
    "refs_in": [
@@ -1564,7 +1564,7 @@
    "path": "docs/hand/ibudo/child_plan.md",
    "ext": ".md",
    "bytes": 4784,
-   "changed": "2026-10-20",
+   "changed": "2026-10-24",
    "lines": 32,
    "summary": "\u00ccb\u00f9d\u00f3 plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (anchor_real, lat/lon) sits on a Gidi point (anchor_gidi, map metres, y south). Any Gidi point in an area maps back to the real point under it: that real street is its twin, photographed there. Study in ~/gidi-data/research/google/ibudo/study/.: | Gidi area | Real place | Real box (lat, lon) | Real streets in it | |---|---|---|---| | Oshodi core | Oshodi: the interchange, Oshodi Market (red sheds, the mosque inside), Oshodi Rd, the Brown St grid of shop houses, the rail and the trunk road side by side | 6.5524 to 6.5601, 3.3465 to 3.3542 | Oshodi Rd, Brown St, Adekoya St, Araromi St, Banjoko St, Ogunlana St, Oredeyin St, Church St, Boladale St, Kunle Akinosi St, Macarthy Ln |",
    "refs_in": [
@@ -1802,7 +1802,7 @@
    "path": "docs/hand/lagos-pass.md",
    "ext": ".md",
    "bytes": 4570,
-   "changed": "2026-10-19",
+   "changed": "2026-10-24",
    "lines": 52,
    "summary": "The Lagos pass (owner, 19 Oct): A place in Gidi is \"Lagos\" only when the owner has looked at it, rendered, and said so. Getting one spot there, all the way, teaches the technique; every decision made on the way becomes a rule other places can use (the data carries it), but each",
    "refs_in": [
@@ -1815,7 +1815,7 @@
    "path": "docs/hand/maze-hub-lagos.md",
    "ext": ".md",
    "bytes": 5486,
-   "changed": "2026-10-16",
+   "changed": "2026-10-24",
    "lines": 53,
    "summary": "The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from: - **photo:** the owner's reference photos (`~/gidi-data/research/refs/REVIEW.md`)",
    "refs_in": [
@@ -2585,7 +2585,7 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 8129,
+   "bytes": 8144,
    "changed": "2026-10-24",
    "lines": null,
    "summary": "",
@@ -2599,7 +2599,7 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 440400,
+   "bytes": 440860,
    "changed": "2026-10-24",
    "lines": null,
    "summary": "",
@@ -2710,7 +2710,7 @@
    "path": "docs/lagos-study/councils.md",
    "ext": ".md",
    "bytes": 22382,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 212,
    "summary": "Lagos councils: the 20 LGAs and 37 LCDAs: 22 Oct 2026. Companion to `STUDY.md`. Read-only study; nothing here is a district yet.",
    "refs_in": [
@@ -2726,7 +2726,7 @@
    "path": "docs/lagos-study/roads/EARTH-CHECK.md",
    "ext": ".md",
    "bytes": 31494,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 274,
    "summary": "Google Earth check of the borders (22 Oct 2026): `ROADS.md` section 6 left 15 borders the data could not settle. Each was looked at on Google Maps satellite (zoom 13 to 16) at the coordinates below. Study only: the 29 screenshots stay outside the repo, in `~/gidi-data/research/google/lagos-study/border-checks/` (file names carry the check number and the map",
    "refs_in": [
@@ -2756,7 +2756,7 @@
    "path": "docs/lagos-study/roads/ROADS.md",
    "ext": ".md",
    "bytes": 43025,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 510,
    "summary": "Roads first, districts by their borders: Step 1 of the new map plan (22 Oct): Gidi is real Lagos made smaller, at 1:3, in a frame about 27 \u00d7 10.5 km. This study lays down the skeleton of real roads, cuts Lagos into places along its real borders, measures every border, and joins places into districts only where they really touch and are alike.",
    "refs_in": [
@@ -2950,7 +2950,7 @@
    "path": "docs/lagos-study/roads/scripts/common.py",
    "ext": ".py",
    "bytes": 1412,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 28,
    "summary": "Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid.",
    "refs_in": [
@@ -3129,7 +3129,7 @@
    "path": "docs/lagos-study/similar/GOOGLE-CHECK.md",
    "ext": ".md",
    "bytes": 2949,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 31,
    "summary": "The close calls, checked on Google satellite (22 Oct 2026): The similarity numbers (`SIMILAR.md`) flagged 10 merges as close or doubtful. Each pair was looked at side by side on Google satellite, about 1 km across, at each unit's seed point. Study only: the pictures stay outside the repo (`~/gidi-data/research/google/lagos-study/close-calls/`, sheet `close_calls.jpg`).",
    "refs_in": [
@@ -3141,7 +3141,7 @@
    "path": "docs/lagos-study/similar/SIMILAR.md",
    "ext": ".md",
    "bytes": 71144,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 957,
    "summary": "Which places are alike: numbers for cutting districts: 22 Oct 2026. Read-only study. It gives numbers for how many districts, and which places merge. It does not decide. Builds on `docs/lagos-study/STUDY.md` and `councils.md`, and reuses their 250 m grids.",
    "refs_in": [
@@ -3287,7 +3287,7 @@
    "path": "docs/lagos-study/similar/scripts/finger.py",
    "ext": ".py",
    "bytes": 3540,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 52,
    "summary": "Per-unit fingerprint from the 250 m grids + Overture places + knowledge lists. Overture places (confidence >= 0.5)",
    "refs_in": [
@@ -3997,7 +3997,7 @@
    "path": "docs/pilot-foodgate.md",
    "ext": ".md",
    "bytes": 3540,
-   "changed": "2026-10-15",
+   "changed": "2026-10-24",
    "lines": 48,
    "summary": "The Food Gate pilot: the first district rebuilt from Google's data: Built 15 Oct 2026, from the plan in `docs/REBUILD-PLAN.md`. Food Gate is the test of whether moving from OpenStreetMap to Google's data was worth it, before the other districts and the new ones follow.",
    "refs_in": [
@@ -4873,7 +4873,7 @@
    "path": "legacy/blender/gidi_kit/textured.py",
    "ext": ".py",
    "bytes": 12949,
-   "changed": "2026-10-23",
+   "changed": "2026-10-24",
    "lines": 301,
    "summary": "Photo textures on the kit's material slots (the eye tests now; the same files go into Unreal later, so the look the owner passes is the one that ships).",
    "refs_in": [
@@ -4905,7 +4905,7 @@
    "path": "legacy/blender/gidi_kit/wear.py",
    "ext": ".py",
    "bytes": 14892,
-   "changed": "2026-10-23",
+   "changed": "2026-10-24",
    "lines": 261,
    "summary": "Age on the houses, in the vertex colours and in thin overlays on the walls.",
    "refs_in": [
@@ -4970,7 +4970,7 @@
    "path": "legacy/blender/kit_test.py",
    "ext": ".py",
    "bytes": 11757,
-   "changed": "2026-10-23",
+   "changed": "2026-10-24",
    "lines": 212,
    "summary": "A kit eye test: build one Street View spot from its map record with the old town kit and shoot it from the Street View's own camera (decisions: \"A kit is proven by rebuilding real streets from it\", \"The owner's eye passes a kit\"). blender -b --factory-startup -P legacy/blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]",
    "refs_in": [
@@ -5277,6 +5277,7 @@
     "gidi:docs/MAP-FORMAT.md",
     "gidi:legacy/README.md",
     "gidi:scripts/check_map.py",
+    "gidi:scripts/inventory.py",
     "gidi:web/mapedit.js"
    ]
   },
@@ -5484,7 +5485,7 @@
    "path": "scripts/check_real.py",
    "ext": ".py",
    "bytes": 9822,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 162,
    "summary": "How close the map is to the real places it is the child of (owner, 21 Oct 2026: \"nobody checks how close it is to the real place\"). For every area of a district built from real places (docs/hand/ibudo/twins/<area>.json): R1 buildings     the map's buildings in the area against the real footprints (count and built-up area)",
    "refs_in": [
@@ -5591,7 +5592,7 @@
    "path": "scripts/deep_prep.py",
    "ext": ".py",
    "bytes": 3634,
-   "changed": "2026-10-15",
+   "changed": "2026-10-24",
    "lines": 80,
    "summary": "Deep study, step 1 (docs/DEEP-STUDY.md): one pass over the big building files, cut per district, so the 17 district studies can run side by side. Reads Google Open Buildings v3 (outlines, confidence) and Microsoft's building outlines for Lagos once, and keeps the",
    "refs_in": [
@@ -5653,7 +5654,7 @@
    "path": "scripts/design_density.py",
    "ext": ".py",
    "bytes": 11502,
-   "changed": "2026-10-18",
+   "changed": "2026-10-24",
    "lines": 198,
    "summary": "A density pass: fill a district the way its real counterpart is built (Claude's design pass, owner 17 Oct 2026: \"build it based off the Lagos you see\"). Writes hand edits into web/hand/<district>.json, so every house it adds or lowers can be moved,",
    "refs_in": []
@@ -5663,7 +5664,7 @@
    "path": "scripts/district_profiles.py",
    "ext": ".py",
    "bytes": 68247,
-   "changed": "2026-10-18",
+   "changed": "2026-10-24",
    "lines": 754,
    "summary": "Per-district settings for gen_fabric.py. Each number says where it comes from. A district with no profile gets the generator's original (v1) behaviour. The Maze got its own profile in v2; its edge roads and gateways in web/network.json are kept exactly (\"keep_gateways\"), because the Hub was built against them.",
    "refs_in": [
@@ -5695,7 +5696,7 @@
    "path": "scripts/draft_buildings.py",
    "ext": ".py",
    "bytes": 15538,
-   "changed": "2026-10-23",
+   "changed": "2026-10-24",
    "lines": 303,
    "summary": "A district's first draft of buildings, from its real blocks' own houses (owner, 23 Oct: \"real footprints, then hand\").",
    "refs_in": [
@@ -5712,7 +5713,7 @@
    "path": "scripts/draw_area.py",
    "ext": ".py",
    "bytes": 4859,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 79,
    "summary": "One \u00ccb\u00f9d\u00f3 area side by side with its real place, at the same scale and frame: the map as baked (left) and the real footprints and roads it was built from (right: Google Open Buildings v3, Overture Maps; drawn here to compare, never put in the map). For the match",
    "refs_in": [
@@ -6058,7 +6059,7 @@
    "path": "scripts/hand_spots/ibudo_real_area.py",
    "ext": ".py",
    "bytes": 23729,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 385,
    "summary": "\u00ccb\u00f9d\u00f3, one area of the child plan built from its real place (owner, 19 Oct 2026: \"you are taking streets from this place ... so you can have real life images that we can now model from\"). docs/hand/ibudo/child_plan.json says which real place an area is and where it sits",
    "refs_in": [
@@ -6098,9 +6099,9 @@
    "repo": "gidi",
    "path": "scripts/inventory.py",
    "ext": ".py",
-   "bytes": 14393,
+   "bytes": 16048,
    "changed": "2026-10-24",
-   "lines": 287,
+   "lines": 318,
    "summary": "What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it.",
    "refs_in": [
     "gidi:.claude/hooks/repo.sh",
@@ -6216,7 +6217,7 @@
    "path": "scripts/real_underlay.py",
    "ext": ".py",
    "bytes": 3369,
-   "changed": "2026-10-22",
+   "changed": "2026-10-24",
    "lines": 60,
    "summary": "The real place under each \u00ccb\u00f9d\u00f3 area, for the drawing board's \"Real place\" layer: the real footprints (Google Open Buildings v3) and roads (Overture) each area is the child of, placed by that area's own anchor (docs/hand/ibudo/twins/<area>.json) and kept to the area.",
    "refs_in": [
@@ -6229,7 +6230,7 @@
    "path": "scripts/realnames.py",
    "ext": ".py",
    "bytes": 4608,
-   "changed": "2026-10-21",
+   "changed": "2026-10-24",
    "lines": 91,
    "summary": "Gidi's names are its own: no name on the map may share its core with a real name around the places Gidi is a child of.",
    "refs_in": [
@@ -6390,7 +6391,7 @@
    "path": "scripts/study_boxheights.py",
    "ext": ".py",
    "bytes": 2237,
-   "changed": "2026-10-14",
+   "changed": "2026-10-24",
    "lines": 31,
    "summary": "Height bands for a neighbourhood-level study: data/results/heights.py measures whole LGAs; this measures the part of an LGA inside lon/lat boxes, the same way (Google Open Buildings 2.5D, 2023: built pixels with presence >= 0.5, banded by height).",
    "refs_in": [
@@ -6464,7 +6465,7 @@
    "path": "scripts/study_deep.py",
    "ext": ".py",
    "bytes": 29034,
-   "changed": "2026-10-16",
+   "changed": "2026-10-24",
    "lines": 490,
    "summary": "Deep study, step 2 (docs/DEEP-STUDY.md): everything the data says about one district's real inspiration, for its generator profile. Sources (numbers only go into Gidi, never an outline, a name or an image): Google Open Buildings v3 outlines (confidence >= 0.70)   Google Open Buildings 2.5D 2023 heights (0.5 m, read at 2 m)",
    "refs_in": [
@@ -6523,7 +6524,7 @@
    "path": "scripts/study_google.py",
    "ext": ".py",
    "bytes": 5469,
-   "changed": "2026-10-15",
+   "changed": "2026-10-24",
    "lines": 100,
    "summary": "How much does OSM miss? Google Open Buildings v3 (machine-traced from satellite imagery, CC BY 4.0) against the OSM buildings of each district's study area, cell by cell. Only numbers are taken from Google's data: counts, ground covered, sizes. No geometry goes into Gidi.",
    "refs_in": [
@@ -6583,7 +6584,7 @@
    "path": "scripts/study_structure.py",
    "ext": ".py",
    "bytes": 6847,
-   "changed": "2026-10-15",
+   "changed": "2026-10-24",
    "lines": 130,
    "summary": "Structure study of a district's inspiration from Google Open Buildings v3 (outlines) and OSM (streets), and the same measures on Gidi's district, square by square (scripts/structure.py). Also Overture's places and street furniture per km2. Usage: python3 scripts/study_structure.py foodgate 3.370,6.580,3.415,6.620  -> docs/data/structure-<id>.json, table",
    "refs_in": [
@@ -6651,7 +6652,7 @@
    "path": "scripts/terrain.py",
    "ext": ".py",
    "bytes": 7554,
-   "changed": "2026-10-15",
+   "changed": "2026-10-24",
    "lines": 106,
    "summary": "Gidi's ground: a height grid for the whole map (web/terrain.json), from the land under each district's real inspiration. Each district takes the relief of its study area (the 30 m Copernicus surface model, ground estimated as the lowest pixel of",
    "refs_in": [
@@ -6700,7 +6701,7 @@
    "path": "scripts/twin_photos.py",
    "ext": ".py",
    "bytes": 2475,
-   "changed": "2026-10-20",
+   "changed": "2026-10-24",
    "lines": 48,
    "summary": "Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json). plan:   python3 scripts/twin_photos.py plan ibudo <area>    -> ~/gidi-data/research/google/<dir>/twins/<area>/PLAN.json (Street View points every 40 m, both ways)",
    "refs_in": []
@@ -6710,7 +6711,7 @@
    "path": "scripts/twins.py",
    "ext": ".py",
    "bytes": 4030,
-   "changed": "2026-10-19",
+   "changed": "2026-10-24",
    "lines": 70,
    "summary": "Every type in Gidi and its real twin (owner, 19 Oct 2026: \"let's know what every type of item and building as well to the type of surface, so we know we have a real life twin\"). Reads the map (web/gidi-data.js) for the types and their counts, and web/twins.json",
    "refs_in": [

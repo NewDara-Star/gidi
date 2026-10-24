@@ -29,10 +29,8 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 | `docs/studies/airport.md` | 126 | 2026-10-15 | The Airport: the deep study: Inspired by Murtala Muhammed International Airport, Ikeja. Study area: 15.81 km², 15.81 km… |
 | `docs/data/deep-check/SUMMARY.md` | 22 | 2026-10-16 | Each cell is Gidi against its real inspiration (0% = the same; ⚠ = more than 20% off). "Squares" = built 500 m squares … |
 | `scripts/deep_summary.py` | 34 | 2026-10-16 | All districts against their studies on one page (docs/data/deep-check/*.json, from scripts/deep_check.py). Usage: pytho… |
-| `scripts/design_density.py` | 198 | 2026-10-18 | A density pass: fill a district the way its real counterpart is built (Claude's design pass, owner 17 Oct 2026: "build … |
 | `scripts/child_plan.py` | 60 | 2026-10-19 | A district's child plan (owner, 19 Oct 2026: a district is the child of its real inspirations): draws docs/hand/<dir>/c… |
 | `scripts/hand_spots/ibudo_spot1.py` | 90 | 2026-10-19 | Ìbùdó spot 1 (docs/hand/ibudo/design_v1.png, the owner's approval 19 Oct 2026): Oshodi rebuilt one-for-one beside the R… |
-| `scripts/twin_photos.py` | 48 | 2026-10-20 | Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json). plan:   python3 scri… |
 | `legacy/blender/act1_sheet.py` | 71 | 2026-10-23 | The Act 1 kit pieces side by side (docs/KIT-GAPS.md, "New in the v2 layout"): the face-me-I-face-you block, the motor p… |
 | `legacy/blender/gidi_kit/__init__.py` | 1 | 2026-10-23 |  |
 | `legacy/blender/gidi_kit/detail.py` | 20 | 2026-10-23 | Detail level for the whole kit: 'full' for renders, 'web' for the streamed city (flat roof sheets, flat lettering, ligh… |
@@ -42,6 +40,8 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 | `legacy/blender/vehicles_sheet.py` | 39 | 2026-10-23 | Line-up of every vehicle in its conditions, and a crowd of every dress type. blender -b --factory-startup -P legacy/ble… |
 | `docs/lagos-study/similar/scripts/appendix.py` | 27 | 2026-10-24 | Appendix A and B of SIMILAR.md (unit fingerprints, neighbour pairs) from analysis.json. |
 | `docs/lagos-study/similar/scripts/plot_units.py` | 25 | 2026-10-24 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
+| `scripts/design_density.py` | 198 | 2026-10-24 | A density pass: fill a district the way its real counterpart is built (Claude's design pass, owner 17 Oct 2026: "build … |
+| `scripts/twin_photos.py` | 48 | 2026-10-24 | Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json). plan:   python3 scri… |
 
 ### gidi-game (1)
 

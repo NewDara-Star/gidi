@@ -184,6 +184,8 @@ def main():
         if os.path.splitext(key[1])[1] in ('.json', '.csv', '.tsv', '.geojson'):
             continue
         research = key[1].startswith(('research/', 'reference/'))
+        if key[1].startswith('tests/'):
+            continue                  # the file names in a test are made up on purpose: fixtures, not pointers
         for m in PATHY.finditer(t):
             p = m.group(1)
             around = t[max(0, m.start() - 40):m.end() + 2]
@@ -215,6 +217,35 @@ def main():
               open(os.path.join(a.out, 'inventory.json'), 'w'), indent=1)
     write_md(files, a.out)
     write_suspects(files, broken, a.out)
+
+    # the code by its parsers, and the documents as a vault
+    import code_graph
+    import doc_vault
+    schema = json.load(open(os.path.join(REPOS['gidi'], 'schema', 'map_schema.json')))
+    words = set()
+    def walk(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                words.add(k)
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+        elif isinstance(o, str):
+            words.update(re.findall(r'[A-Za-z_]\w*', o))
+    walk(schema)
+    graph = code_graph.build(REPOS, texts, words, on_disk | {d for r in REPOS.values() for _, ds, _ in os.walk(r) for d in ds})
+    code_graph.write(graph, a.out)
+    vault = doc_vault.build(files, texts)
+    doc_vault.write(vault, a.out)
+    json.dump({'symbols': graph['symbols'], 'comments': graph['comments'],
+               'files': {k: {x: v for x, v in f.items() if x != 'decls'} for k, f in graph['files'].items()}},
+              open(os.path.join(a.out, 'code_graph.json'), 'w'), indent=1)
+    st = collections.Counter(x['state'] for x in graph['symbols'])
+    vs = collections.Counter(d['state'] for d in vault.values())
+    print(f'code: {len(graph["symbols"])} pieces in {len(graph["files"])} files ({st["used"]} used, {st["maybe"]} maybe, '
+          f'{st["unused"]} unused), {len(graph["comments"])} comments naming what does not exist; {graph["note"]}')
+    print(f'documents: {len(vault)} ({vs["orphan"]} orphans, {vs["near-orphan"]} near-orphans)')
     print(f'{len(files)} files, {len(texts)} read, {sum(1 for r in files if not r["refs_in"])} pointed to by nothing, '
           f'{sum(len(v) for v in broken.values())} missing names in {len(broken)} files -> {a.out}')
 

@@ -2,7 +2,15 @@
 
 Read this before building anything new, so new work starts from what exists. Every file, with what it says it is,
 when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in
-`docs/inventory/SUSPECTS.md`. Both are made by `scripts/inventory.py`; run it again after a clean-up or a big change:
+`docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
+to, and that every comment is correct"; "know what every document is meant for, like an Obsidian vault"):
+`CODEMAP.md` (every function, class, method and constant, read by Python's `ast` and the TypeScript parser, with where
+it is used and what nothing uses; `scripts/code_graph.py`), `COMMENTS.md` (comments naming code that exists nowhere)
+and `VAULT.md` (every document: what it is for, its links, its backlinks, its nearest documents, orphans first;
+`scripts/doc_vault.py`, graph in `vault.json`). The JavaScript parser is the TypeScript compiler already on this Mac
+(stride-web's copy; `$GIDI_TS` points elsewhere); without it CODEMAP says JavaScript was not read.
+`tests/test_inventory.py` holds the checker to its cases and runs with the hooks. All are made by
+`scripts/inventory.py`; the hooks run it on every commit, and it can be run by hand:
 
     ~/.venvs/gidi/bin/python scripts/inventory.py
 
