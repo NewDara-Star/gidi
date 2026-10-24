@@ -299,7 +299,7 @@ A table is written `{"cols": [...], "rows": [[...], ...]}`; the columns must be 
 On a face, `u` is metres along the face from its first corner (footprint corner `face`) and `z` metres up from the ground. A window's, door's, stain's and add-on's `u` is its middle. A window's and a stain's `z` is its bottom edge (a window's sill), a door stands on the ground, an add-on's `z` is its middle. (The old kit parts read a window's `z` as its middle; the parts that read this format follow this line.)
 
 #### roof_sheets (`rs-`), of a building or lean-to
-`sag`, `slopes` (each: `face`, `rows`, `ph` (three phases), `sheets` table: `tone` (`main`, `second`, `new`), `shade`, `wear`, `nails` (per row, how rusted each nail line is), `edge` (per row)), `uprights` table (`u`, `lean`, `shade`) for a mono roof's or lean-to's posts.
+`sag`, `slopes` (each: `face`, `rows`, `ph` (three phases), `sheets` table: `tone` (`main`, `second`, `new`), `shade`, `wear`, `nails` (per row, how rusted each nail line is), `edge` (per row), `hang` (m the sheet's low end reaches past the eave or the lean-to's front beam: no two sheets alike in the old town, which gives the ragged front edge) and `bend` (degrees its low end is bent down past the support, 0 flat)), `uprights` table (`u`, `lean`, `shade`) for a mono roof's or lean-to's posts.
 
 #### wall_bays (`wb-`), of a frontage or wall
 `bays` (each 1.2 m bay: `u`, `w`, `blot`, `patch`, `streaks` table (`u`, `w`, `z_top`, `len`, `dark`), `foot` (damp foot), `broken`? (`u`, `z`, `w`, `h`, `shades`)), `chips` table (`u`, `size`), `daubs` table (`u`, `z`, `text`, `colour`, `size`).

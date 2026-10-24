@@ -473,7 +473,7 @@
     "stain": [["kind", "enum:stain_kind"], ["u", "num"], ["z", "num"], ["w", "num >0"], ["h", "num >0"], ["tint", "enum:stain_tint"], ["dark", "num 0..1"], ["taper", "num 0..1"]],
     "addon": [["kind", "enum:addon_kind"], ["u", "num"], ["z", "num"], ["colour", "hex"], ["size", "num >0"], ["shade", "num >0"]],
     "awning": [["u0", "num >=0"], ["u1", "num >=0"], ["z", "num >=0"], ["depth", "num >0"], ["colour", "hex"]],
-    "roof_sheet": [["tone", "enum:sheet_tone"], ["shade", "num >0"], ["wear", "num 0..1"], ["nails", "numss"], ["edge", "nums"]],
+    "roof_sheet": [["tone", "enum:sheet_tone"], ["shade", "num >0"], ["wear", "num 0..1"], ["nails", "numss"], ["edge", "nums"], ["hang", "num >=0"], ["bend", "num >=0"]],
     "upright": [["u", "num"], ["lean", "num"], ["shade", "num >0"]],
     "streak": [["u", "num"], ["w", "num >0"], ["z_top", "num"], ["len", "num >0"], ["dark", "num 0..1"]],
     "chip": [["u", "num"], ["size", "num >0"]],
