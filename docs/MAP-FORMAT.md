@@ -589,9 +589,9 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 - A real-names list for the whole new frame (every street name in the frame, outside the repo), so the name check covers it.
 - The twin catalogue outside the repo, with ids.
 - The board, still to do (the save calls and the first tools are in; see section 6):
-  - **Pole wires** (draw a wire from pole to pole or to a wall).
   - A district outline editor (today the outline comes from the frame study).
   - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side"; the dress editors: the face editor (Face, C, or a building's Face buttons: one face drawn flat in u and z, every piece drawn as a box and edited in a form), Goods (O) in a lean-to's, stall's, heap's or bin's frame, Litter (X), Ground paint (D), Relief (H: a grid, raised and lowered cell by cell). Each piece is a table row: click it to pick it (its row lights up in the panel), drag it to move it, Delete removes just it; the next one drawn takes the picked one's values except where it lies. Brushes (N, 23 Oct): litter, goods (on the ground or hung), relief and ground paint, every stroke written as full rows, an eraser, one undo a stroke. Person spots (I, 23 Oct): place, face, link to a parent, hours and count in the panel.
-  - The board does not yet show a person spot's hours (a clock filter: who is out at 7 am, at 10 pm).
+  - Done 24 Oct: Wire (J): a pole, then another pole (`to_pole`, kind `line`) or a house side or wall (`to_at`, kind `service`, tied at the height set in the top bar); Shift goes on from the last pole; `n` and `sag` are set by hand. The Clock (top bar): person spots out at the hour stay bright, the rest faint, with a count.
+  - Still to do: a day filter once person spots have `days` (`decisions/lived-in.md`).
   - Loading only the districts in view once many are started.
 - The kit reads the new map: a converter for the two test spots, then `@reads` on each part.
