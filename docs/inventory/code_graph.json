@@ -41040,13 +41040,13 @@
    ],
    "text": [
     "gidi:.claude/hooks/repo.sh",
+    "gidi:decisions/DECISIONS.md",
     "gidi:decisions/story/act-1-draft.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hand/ibudo/twins/stadium.json",
     "gidi:docs/hand/ibudo/twins/surulere.json",
     "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/look/research-civic.md",
-    "gidi:docs/look/research-roads.md"
+    "gidi:docs/look/research-civic.md"
    ]
   },
   {
@@ -43163,13 +43163,13 @@
    ],
    "text": [
     "gidi:.claude/hooks/repo.sh",
+    "gidi:decisions/DECISIONS.md",
     "gidi:decisions/story/act-1-draft.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hand/ibudo/twins/stadium.json",
     "gidi:docs/hand/ibudo/twins/surulere.json",
     "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/look/research-civic.md",
-    "gidi:docs/look/research-roads.md"
+    "gidi:docs/look/research-civic.md"
    ]
   },
   {
@@ -80495,9 +80495,9 @@
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-game:ASSETS.md",
+    "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/HISTORY.md",
-    "gidi:decisions/IDEAS.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -91731,13 +91731,13 @@
    ],
    "text": [
     "gidi-game:docs/PERFORMANCE.md",
+    "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-MAP-LESSONS.md",
     "gidi:docs/look/research-buildings.md",
     "gidi:docs/look/research-civic.md",
-    "gidi:docs/look/research-commerce.md",
-    "gidi:docs/look/research-housing.md"
+    "gidi:docs/look/research-commerce.md"
    ]
   },
   {

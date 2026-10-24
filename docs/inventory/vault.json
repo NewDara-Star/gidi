@@ -39,10 +39,10 @@
     "gidi-game",
     "held",
     "rule",
-    "review",
     "builder",
+    "review",
     "script",
-    "re-draft"
+    "builders"
    ]
   },
   {
@@ -66,13 +66,13 @@
    "state": "linked",
    "words": [
     "we're",
+    "kits",
     "hand",
     "view",
-    "kits",
-    "laptop",
+    "object",
     "records",
-    "modelled",
-    "blender"
+    "blender",
+    "laptop"
    ]
   },
   {
@@ -1812,6 +1812,10 @@
   {
    "from": "gidi:decisions/CHECKS.md",
    "to": "gidi:docs/lagos-study/roads/NAMES.md"
+  },
+  {
+   "from": "gidi:decisions/CHECKS.md",
+   "to": "gidi:legacy/blender/WHAT-IT-HELD.md"
   },
   {
    "from": "gidi:decisions/CHECKS.md",

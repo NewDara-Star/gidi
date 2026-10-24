@@ -83,6 +83,12 @@ first districts (Mùṣá and its neighbours) will hold first.
 
 ## How to use this page
 
+The owner decided (24 Oct, DECISIONS "Rebuild the old kit's things the new way") that every thing listed here
+without a builder is rebuilt the current way. Order: the first table (what the map's records need now: zinc roof
+sheets and lean-tos first, as zinc roofs are in about 58% of the old-town shots and lean-tos in 18%, then gutters,
+the road and ground, frontages, heaps, masts, the rail), then the numbered list above.
+
+
 When a builder is made, read the old function named here for its list of parts and its research note, then build from
 the real pictures. Cross the row off here in the same change. Nothing in `legacy/blender/` is edited, and the legacy
 tiles 6,12 / 7,12 / 8,13 stay byte-identical.
