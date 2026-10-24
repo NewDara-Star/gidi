@@ -28,9 +28,14 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   page (16-22 Oct) moved to `to-delete/decisions/NOW-log-16-22-oct.md`.
 
 **Waiting on the owner.**
-1. **Questions from the triage:** (a) people: MakeHuman for the crowd (19 Oct) or City Sample and MetaHuman on one skeleton
-   for everyone ("People come from a kit too", 22 Oct)? (b) where the draft desk lives now that `legacy/blender/kit_draft.py`
-   is frozen ("Rules draft, records rule"); (c) a private GitHub remote for gidi-data's text, so it is backed up.
+1. **People** (asked 24 Oct, the owner unsure): Claude's recommendation is one-mesh crowd people (MakeHuman bodies,
+   clothes merged into the body, one texture, LODs) on the same skeleton as MetaHuman, and MetaHuman only for the
+   named characters seen up close. Measured: 6 City Sample people took high to about 2 fps and added about 3 GB
+   (gidi-game `docs/PERFORMANCE.md`); the cost is their hair grooms, separate clothes and big textures, not where the
+   body came from. To prove it: N one-mesh people against N City Sample people in the Underdeck, low and high, with
+   the owner's go. Waiting on the owner's yes. (Settled 24 Oct: the draft desk stays in `legacy/`; gidi-data stays on
+   this Mac with no remote; the untracked `Claude outputs/` folder, the 13-14 Oct Ladi Lane mock, moved to
+   `~/gidi-data/to-delete/claude-outputs-13-14-oct/`.)
 2. **The lived-in records** (`decisions/lived-in.md`): a yes on `mix`, `route`, `state`, `moment`, `job`; and on the 18 new
    `person_activity` values (`docs/lagos-study/LIVING.md`).
 3. **Names** (#208, `docs/lagos-study/roads/NAMES.md`): Lagos → "Lagoon" in-game, or just "Gidi"? Ìkòrodò / Okotun too
@@ -39,7 +44,8 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 4. **Kit eye tests** (the owner's eye judges; all fails so far): `~/gidi-data/research/google/kits/old-town/tests/` ot175,
    ot91, ot149, ot73, ot45, and ut01_emmanuel (angle A v2, layers 1-7: verdicts pending; the pickup still reads weird).
 5. **Download OK?** a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
-6. **Restart the Mac** when convenient (swap 4.3 GB); then re-measure work mode's shadow pass.
+6. **Restart the Mac** when the owner is home (about two hours after 24 Oct evening; swap 4.3 GB); then re-measure
+   work mode's shadow pass.
 
 **Next, in order.**
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
@@ -49,7 +55,8 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
 3. **Builders still to make for the map:** frontage, lean-to, heap, tree, road, ground (`tools/kit_fields.py` lists 24
-   record types no builder draws yet).
+   record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
+   held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad
    `perf/watchdog.sh`; to move into gidi-game `tools/`). Always open the editor with `tools/editor.sh`.
 5. **The board:** district outline editing; load only the districts in view; a day filter once spots have `days`.

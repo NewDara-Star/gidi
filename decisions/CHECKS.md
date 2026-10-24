@@ -35,6 +35,7 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | Google: study yes, lift no. | Google pictures stay outside the repo | by hand (never committed) |
 | Never fetch: | process | not a map rule |
 | Look first: | references | owner's review |
+| Gidi's data stays on this Mac | `~/gidi-data` has no git remote | by hand: `git -C ~/gidi-data remote` printed nothing (24 Oct) |
 | Keep a delete-later list | `docs/DATA-SOURCES.md` | by hand |
 | Git: | branches, PRs | GitHub |
 | Writing: | process | not a map rule |
