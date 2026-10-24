@@ -599,3 +599,10 @@ B16 (Ilasamaja, between Akanro Street, Lamina Street and the expressway, down to
 | rd-5z414dfc | Odunaike Street | lane |
 | rd-upn7sjm7 | Kekereowo Street | lane |
 | rd-vuw2n757 | Oremeji Street on to Olaide Awoye Street | lane |
+
+B17 (around Mushin General Hospital: between Palm Avenue, Isolo Road and Lapite Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Akinsola Crescent runs down from Adekitan Street, round its bottom bend and up as Ofada Street on to Oduntan Street to the block's north-east edge; Folarin Street runs from that edge down past the hospital and on east as Alokolaro Crescent to Lapite Street. Left out for spacing: Salako Street, Igbore Street, the hospital's ring road, Olufunmilayo Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-dn9auxmx | Akinsola Crescent on to Ofada Street and Oduntan Street | lane |
+| rd-uwom6nbe | Folarin Street on to Alokolaro Crescent | lane |
