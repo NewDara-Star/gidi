@@ -6,7 +6,7 @@ The drawing board saves into it. The Blender kit and the Unreal import read it. 
 This is a draft. The board's new frame draws and saves the plan layer in it (section 6); the kit does not read it yet.
 
 - **Schema:** `schema/map_schema.json` (every record type, field, type, unit and allowed value).
-- **Checker:** `scripts/check_map.py` (rejects anything unknown, missing, mistyped, unlinked or real-named).
+- **Checker:** `scripts/check_map.py` (rejects anything unknown, mistyped, unlinked or real-named; a field not given yet is counted on its TODO line, the board's amber, and fails with `--strict`).
 - **What the kit reads:** `schema/kit_reads.json` (each builder and the fields it reads; written by gidi-game `tools/kit_fields.py --write`).
 - **Worked example:** `docs/map-format-example/d15/` (one 20 m street; passes the checker).
 

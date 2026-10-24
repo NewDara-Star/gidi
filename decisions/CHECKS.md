@@ -1,6 +1,6 @@
 # Which check holds each rule
 
-Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs with every bake:
+Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`):
 it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
 answered by this table, not by asking. A new rule goes in `DECISIONS.md` and here in the same change.
 
@@ -96,3 +96,5 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | A kit item grows; it splits only when it stops fitting | a new recipe key leaves the old recipes building the same; a new builder says in its docstring why it is not a key on an existing one; recipe keys match record fields | GAP (23 Oct): checked by eye at review; no script yet |
 | Rules draft, records rule; re-draft on request | a rule change in the draft desk changes no stored record; a re-draft is written beside the current records, keeps hand edits, and lands only on the owner's word | GAP (23 Oct): no re-draft tool yet; holds today because draft rules run only when a spot is first drafted |
 | The map format's four calls | check_map.py: brush output stored as full records; small things as rows; dress size reported; every district has a name | PART: the board runs check_map.py on every save and shows the problems (district names included); brushes not built yet (22 Oct) |
+| Nothing is claimed without proof | `.claude/hooks/`: `checks-before-commit.sh` (the checks, before every commit and push), `checked-before-commit.sh` (a `Checked:` paragraph with every code or map change), `review-before-push.sh` (a second model, blocks claims with nothing behind them and lying checks), `checks-before-stop.sh` (the checks before a turn ends with code changed) | PART (24 Oct): the hooks run and block; the review is a model's reading, not a proof; an agent's report is checked by hand |
+| The new map is the truth | the old map's files under `legacy/`; no live script reads them; gidi-game `tools/perf.sh` gone; nothing names `Real-world/` | GAP (24 Oct): being moved; then `scripts/inventory.py` can fail on a live file that names an old-map or `Real-world/` path |

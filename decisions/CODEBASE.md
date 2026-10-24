@@ -124,9 +124,16 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
   used now.
 - **CLAUDE.md's one rule names the old map's hand files** (`web/hand/<district>.json`). The new map's hand edits are
   the records in `map/`. The rule's wording is the owner's to change.
-- **`check_map.py map` always says FAIL.** All 35,707 of its problems are "missing field" (fields the records don't
-  fill yet), so the summary line reads FAIL every run and a real failure looks the same. Anyone reading it has to
-  filter by hand (`grep -v "missing field"`), and a check people learn to ignore can't catch anything.
+- **`check_map.py map` always said FAIL** (fixed 24 Oct). All 35,707 of its problems were "missing field", so every run
+  read FAIL and a real failure looked the same. Fields still to fill are now one TODO line (the board's amber); PASS
+  means no problem; `--strict` fails on the TODOs too.
+- **Unfinished work in old worktrees** (24 Oct; the 26 finished ones were removed, their work is in main):
+  `~/gidi-look` (look/style-test, PR #18 open since 14 Oct, `look/src/tex.js` changed), `~/gidi-worktrees/brushes`
+  (board/brushes-people: board brushes and people spots, schema, check_map and board changes, never committed),
+  `~/gidi-worktrees/dec` (hand/ibudo-areas-12: an old-map hand edit, never committed), `~/gidi-worktrees/kit`
+  (kit/lockups, one commit not in main), `~/gidi-worktrees/kit-items` (one DECISIONS commit not in main),
+  `~/gidi-worktrees/d15` (map/d15-roads, two commits whose PR #214 merged in another form), and gidi-game's
+  `~/gidi-worktrees/game-umbrella` (PR #45 merged, its last commit not in main). Each is the owner's call: finish, or drop.
 - The board carries both maps. That is why the old map can't simply be moved away: `board.html` loads
   `web/gidi-data.js`, and `board_server.py` writes old-map edits into `web/hand/`.
 
