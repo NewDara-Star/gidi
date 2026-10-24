@@ -677,3 +677,9 @@ B28 (between Ayantuga Street, Kumuyi Street, Post Office Road and Olumorokun Str
 | Gidi id | real twin | kind |
 |---|---|---|
 | rd-si9baapu | Bakare Close | lane |
+
+B29 (between Ayantuga Street, Shokunbi Street, Post Office Road and Kumuyi Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Danmegoro Street crosses the block from Kumuyi Street to Shokunbi Street; south of it is Shokunbi Primary School's compound with its own driveway (not drawn as a street).
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-way26cym | Danmegoro Street | lane |
