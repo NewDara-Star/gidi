@@ -5,8 +5,8 @@ then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scrip
 `docs/RESEARCH.md`. What the old map taught: `docs/OLD-MAP-LESSONS.md`.
 
 **State.** The new map (real Lagos at 1:3, 27 x 10.5 km, 51 districts) has its format (`docs/MAP-FORMAT.md`), the board's
-tools (plan, dress, brushes, person spots, wires, clock) and its first district, Mùṣá (15 Mushin): 312 roads, the rail and its
-station, and 3,793 houses drafted from real footprints and redrawn block by block (B0-B11 done; B12-B15 to do). The kit is the game repo's
+tools (plan, dress, brushes, person spots, wires, clock) and its first district, Mùṣá (15 Mushin): 316 roads, the rail and its
+station, and 3,840 houses drafted from real footprints and redrawn block by block (B0-B11 and B15 done; B12-B14 to do). The kit is the game repo's
 builders (`gidi-game/tools/*_build.py`), read from the map's records by `tools/map_build.py`; the Emmanuel St round trip
 passed. The old generated map is history: viewable only, frozen (`legacy/`). Nothing is running. Board:
 `cd ~/gidi && ~/.venvs/gidi/bin/python scripts/board_server.py --port 8779`, then
@@ -55,7 +55,7 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
    scripts that make or tune it (generator, studies, calibration, one-offs) into `to-delete/`; the bake must still run and
    legacy tiles 6,12 / 7,12 / 8,13 stay byte-identical; gidi-game's old importer reads `web/city/`.
-2. **Mùṣá** (decided 24 Oct late, DECISIONS "Finish the map's first layer first": the plan layer everywhere first, a few fields per building, then house-type rules; the B1 sample is in `~/gidi-data/research/google/b1/STUDY.md`): blocks B15, B14, B12 and the rest at z18 (B11 and B10 done 24 Oct: 7 and 9 streets, 133 and 169 houses); B0-B5's close-zoom recheck is done; then block by block
+2. **Mùṣá** (decided 24 Oct late, DECISIONS "Finish the map's first layer first": the plan layer everywhere first, a few fields per building, then house-type rules; the B1 sample is in `~/gidi-data/research/google/b1/STUDY.md`): blocks B14, B12, B13 and the rest at z18 (B11, B10 and B15 done 24 Oct: 7, 9 and 4 streets, 133, 169 and 77 houses); B0-B5's close-zoom recheck is done; then block by block
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
 3. **Rebuild the old kit's things the new way** (owner, 24 Oct): one builder at a time from the list in
