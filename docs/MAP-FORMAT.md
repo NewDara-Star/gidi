@@ -13,8 +13,8 @@ This is a draft. The board's new frame draws and saves the plan layer in it (sec
 ## In short
 
 - The map is a folder of plain JSON files: one folder per district, one **plan** file per district and **dress** files in 100 m tiles.
-- The **plan layer** is what you draw on the board: roads, plots, frontages, walls, building footprints and storeys, lean-tos, stalls, poles, trees, parked vehicles, places.
-- The **dress layer** is the detail on top: every window, door, stain, roof sheet, wall bay, gutter slab, sack, litter piece, poster, person spot, painted ground patch and bump. Each dress record hangs off one plan record.
+- The **plan layer** is what you draw on the board: roads, plots, frontages, walls, building footprints and storeys, lean-tos, stalls, poles, trees, parked vehicles, places, person spots.
+- The **dress layer** is the detail on top: every window, door, stain, roof sheet, wall bay, gutter slab, sack, litter piece, poster, painted ground patch and bump. Each dress record hangs off one plan record.
 - Every record has a stable id, a type and only the fields the schema allows. Positions are Gidi metres in the 1:3 frame.
 - The kit throws no dice. A field that is absent means "this thing has none", never "the kit picks".
 - Many small things (sacks, litter, slabs, windows) are stored as **rows of a table** inside one record, every value written out. That keeps the files about half the size and still explicit.
@@ -256,6 +256,24 @@ Missing parts are listed by corner or side (`FL`, `FR`, `RL`, `RR`, `L`, `R`, `F
 
 A place is not drawn. It is what the item register and the game read. Buildings, plots and stalls point to it with `place`.
 
+#### person_spot (`sp-`): where someone does something, and when
+The GTA "scenario point" (IDEAS, "What makes Los Santos feel lived in"): a hand-placed spot where a person does one thing at set hours. It says only where and what; the body, clothes and animation come later from Unreal's City Sample. The Blender kit does not draw it (`kit: false`); the Unreal import and the game read it.
+
+| Field | Type, units | Example |
+|---|---|---|
+| `at` | [x, y], m (world) | `[12834.2, 6085.3]` |
+| `z`? | m above the ground; left out, on the ground | `0.3` (on a platform) |
+| `turn` | degrees, the way they face | `270` |
+| `activity` | one of the list in the schema (`person_activity`): selling (`sell_from_stall`, `sell_from_ground`, `sell_from_kiosk`, `sell_at_shop_door`, `hawk_on_foot`, `hawk_in_traffic`, `call_customers`), food (`fry_food`, `grill_food`, `cook_pot`, `serve_food`, `eat`, `drink`), idling (`sit_bench`, `sit_chair`, `sit_step`, `squat`, `lean_wall`, `stand_wait`, `chat_group`, `argue`, `phone_call`, `smoke`, `watch_tv`, `listen_radio`, `read_papers`, `play_draughts`, `play_football`), money (`place_bet`, `pos_agent`, `sell_airtime`, `charge_phones`, `count_money`), transport (`tout_at_bus`, `conduct_bus`, `wait_for_bus`, `wait_on_okada`, `wait_on_keke`, `direct_traffic`, `police_check`, `guard_gate`, `load_vehicle`, `unload_vehicle`), trades (`repair_vehicle`, `fix_tyre`, `wash_vehicle`, `sell_fuel`, `repair_phone`, `weld`, `carpentry`, `tailor`, `barber`, `plait_hair`, `mend_shoes`, `build_site`), work and home (`carry_load`, `push_cart`, `sort_goods`, `fetch_water`, `sell_water`, `sweep`, `wash_clothes`, `hang_clothes`, `mind_child`, `play_children`, `sleep`, `pray`, `preach`, `beg`) | `"fry_food"` |
+| `hours` | list of spans: `from`, `to` (hours 0 to 24, decimals for minutes); `to` before `from` runs past midnight; at least one | `[{"from":6,"to":10.5},{"from":17,"to":21}]` |
+| `count` | people at the spot, 1 to 50 | `2` |
+| `parent`? | id of the stall, lean-to, building, vehicle, furniture, heap, frontage or wall it belongs to | `"st-fxuzxxx4"` |
+| `place`? | the place it belongs to | `"pc-8bpeyfvg"` |
+
+`at` and `turn` are world values, so a reader needs nothing else to put someone there. The board keeps them with the parent: moving or turning a parent moves and turns its spots the same way (one save), a stamp of the parent copies its spots, and deleting the parent deletes them. An empty `hours` list is a value still to set (amber), like a missing field.
+
+The dress layer's `people` record (below) is older: bodies at exact spots with a pose and a look from the people kit. Person spots are what the game needs first; whether `people` stays (a dressed crowd for stills) or goes is for the owner.
+
 ### Dress layer
 
 Each dress record has `of`: the plan record it dresses.
@@ -310,7 +328,7 @@ On a face, `u` is metres along the face from its first corner (footprint corner 
 **One record per item, or a group?** A group: one `goods` record per lean-to (or stall or heap) holding one row per item, every value written. A stamped band of 90 sacks is 90 rows, never "90 sacks here". Separate records with ids would double the size and nothing ever needs to link to one sack.
 
 #### people (`pp-`)
-`of`? (a place, road or plot) and `spots` table: `x`, `y`, `z`, `turn`, `h`, `pose` (`stand`, `walk`, `sit`, `squat`, `lean`, `carry`, `head_load`, `push`, `hold`, `lie_prone`), `look`: the person in full, as the person builder reads it: `name`?, the body's dials 0 to 1 (`gender` (1 male), `age` (0.5 is 25), `muscle`, `weight`, `height`, `proportions`, `african`?), `skin`?, `eyebrows`?, `hair`?, `clothes`? (garment names from the people kit's packs), `colours`? (by garment: an rgb, `{dye: rgb}`, or `{above, below, at}` split at a height), `lean`? (degrees forward), `seat`? (m, for `sit` and `lie_prone`), `carry`?, `carry_seat`?.
+`of`? (a place, road or plot) and `spots` table: `x`, `y`, `z`, `turn`, `h`, `pose` (`stand`, `walk`, `sit`, `squat`, `lean`, `carry`, `head_load`, `push`, `hold`, `lie_prone`), `look`: the person in full, as the person builder reads it: `name`?, the body's dials 0 to 1 (`gender` (1 male), `age` (0.5 is 25), `muscle`, `weight`, `height`, `proportions`, `african`?), `skin`?, `eyebrows`?, `hair`?, `clothes`? (garment names from the people kit's packs), `colours`? (by garment: an rgb, `{dye: rgb}`, or `{above, below, at}` split at a height), `lean`? (degrees forward), `seat`? (m, for `sit` and `lie_prone`), `carry`?, `carry_seat`?. Bodies at exact spots; for where someone does something and when, see `person_spot` in the plan layer.
 
 ### KIT.md §12 fields: where each one went
 
@@ -383,7 +401,7 @@ A stamp copies a full record, or a group of them, from a studied spot (or anothe
 
 ```
 ~/.venvs/gidi/bin/python scripts/check_map.py docs/map-format-example --kit schema/kit_reads.json
-PASS  30 records in 3 files, 0 problems
+PASS  31 records in 3 files, 0 problems
 ```
 
 `scripts/check_map.py` reads `schema/map_schema.json` and fails on:
@@ -494,8 +512,8 @@ The board stops writing an edit log. Today it appends "add building at (x, y)" o
 - `GET /api/map/tiles?d=dNN&t=46_78,47_78`: dress records of those tiles. The board loads the tiles in view once the view is under 1.5 km across.
 - `GET /api/map/sources`, `GET /api/map/source?src=&d=`: the stamp sources (section 3) and all of one source district's records.
 - `POST /api/map/start {d}`: the first drawing in a district. Writes `district.json` with the outline from the frame study and **no name**, and an empty `plan.json`.
-- `POST /api/map/save {d, records}`: whole records by id, written in the canonical layout. Plan records go to `plan.json`, dress records to the tile of their parent's first point (a lean-to's goods and sheets to its host's), and a record that moves takes its dress with it to the new tile. Only the touched files are rewritten; an empty tile file is removed. A record with an unknown type or field, a bad id or a non-finite number is refused. A record with fields still to set is saved (the board shows it dashed amber, each missing field in red), so drawing can go ahead before every value is known.
-- `POST /api/map/delete {d, id, children?}`: refused while other records still point at it; with `children: true` its dress (faces, sheets, goods, lean-tos) goes with it, in one undo step.
+- `POST /api/map/save {d, records, remove?}`: whole records by id, written in the canonical layout. Plan records go to `plan.json`, dress records to the tile of their parent's first point (a lean-to's goods and sheets to its host's), and a record that moves takes its dress with it to the new tile. Only the touched files are rewritten; an empty tile file is removed. A record with an unknown type or field, a bad id or a non-finite number is refused. A record with fields still to set is saved (the board shows it dashed amber, each missing field in red), so drawing can go ahead before every value is known. `remove` takes ids away in the same undo step (a brush stroke that erases a record's last piece); it is refused while anything else points at them.
+- `POST /api/map/delete {d, id, children?}`: refused while other records still point at it; with `children: true` its dress (faces, sheets, goods, lean-tos) and its person spots go with it, in one undo step.
 - `POST /api/map/undo`: the last save or delete, if nothing has changed it since.
 - `POST /api/map/check {d}`: `check_map.py` runs on every save; its problems come back with the record id and show red on the board.
 
@@ -510,7 +528,7 @@ The board stops writing an edit log. Today it appends "add building at (x, y)" o
 | Tree | `tree` |
 | Furniture: pole, street light, transformer | `pole` (`lamp`, `transformer`) |
 | Furniture: kiosk, stalls; `add thing` | `stall`, `furniture`, `heap` |
-| Furniture: hawkers, parking boy, agbero | `people` spots |
+| Furniture: hawkers, parking boy, agbero | `person_spot` (Person, I) |
 | Furniture: task force truck | `vehicle` |
 | `add place`, `move place` | `place` |
 | `add paint` | `ground` |
@@ -520,12 +538,29 @@ New tools the board needs:
 
 1. **Plot** and **Frontage** (pick a plot edge and its road).
 2. **Face editor:** one face drawn flat (u across, z up): windows, doors, shopfronts, balconies, screens, stains, add-ons, signs, awnings.
-3. **Lean-to** (pick a face and a stretch), **Stall**, **Heap**, **Pole and wire**, **Vehicle**, **Person spot**.
+3. **Lean-to** (pick a face and a stretch), **Stall**, **Heap**, **Pole and wire**, **Vehicle**, **Person spot** (Person, I).
 4. **Goods:** place items in a lean-to's or stall's frame, one by one or by stamp.
 5. **Ground paint** (patches by kind) and **Relief** (raise and lower grid cells).
 6. **Litter** (place pieces).
 7. **Stamp:** pick a record or group from a studied spot or the map, place it, get new ids and a `from` note.
 8. **Check:** every save runs the record through the schema; a button runs the whole checker on the district.
+
+### Brushes (owner, 22 Oct: "The map format's four calls")
+
+The Brush tool (N) paints many pieces in one stroke, and stores every one of them in full, exactly as the one-by-one tools would: there is no seed, no density field and no scatter rule anywhere in the map, so the kit sees nothing new to interpret.
+
+| Brush (the kind list) | What one stroke writes |
+|---|---|
+| litter | rows of a `litter` record's `pieces` (the picked litter record, one within 5 m, or a new one) |
+| goods (on the ground, or hung) | rows of the `goods` record of the lean-to, stall, heap or bin the stroke starts in (`items` or `hung`), in its frame, only inside it |
+| relief | the `z_mm` cells of the relief grids under the stroke: raise, lower, bumps, smooth or flatten, by so many mm, softer toward the brush's edge; each cell once a stroke |
+| ground paint | one new `ground` record: the outline of everything within the brush of the stroke (holes filled), as rings, painted over the earlier patches |
+
+- **Where pieces land:** darts thrown inside the brush as it moves, kept where no piece lies closer than the **spacing**; the brush **size** is its radius. This is chance at stroke time; what is saved is the x and y of each piece.
+- **Each column's value** is set in the side panel: **unset** (stays a missing value, amber, as everywhere else), **this value**, **random between** two numbers, or **random from** a list of kinds or colours. Random values are picked once, when the piece is made, and stored. Litter starts on the **street mix** for `kind` and `colour` (the old kit's street litter: sachets most, then bags, bottles, packs, cans and husks, each in its own colours; paper, rags and tyres only when picked) and the **natural mix** for sizes and age, `z` 0, `turn` 0-360 and `tilt` -10 to 10; goods start unset.
+- **Eraser:** hold ⌥ (or tick "erase") to take away the pieces under the brush of the kinds chosen for `kind` (every kind when it is unset or the street mix); a record left with no pieces is removed. On relief, ⌥ turns raise into lower. The ground brush has no eraser: delete or reshape a patch with Select.
+- **Undo:** a stroke is one save, so ⌘Z takes back the whole stroke.
+- Each piece stays a row: pick it with Select or the Litter or Goods tool, move it, change any value, delete it alone.
 
 Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they come by stamp or the draft desk and are edited as rows in a table panel; a drawing tool for them can come later.
 
@@ -554,9 +589,9 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 - A real-names list for the whole new frame (every street name in the frame, outside the repo), so the name check covers it.
 - The twin catalogue outside the repo, with ids.
 - The board, still to do (the save calls and the first tools are in; see section 6):
-  - **Brushes** (the owner said yes, 22 Oct: everything a brush writes stored in full).
-  - **Brushes** for litter, relief, goods bands and ground paint; **Person spot**, **Pole wires**.
+  - **Pole wires** (draw a wire from pole to pole or to a wall).
   - A district outline editor (today the outline comes from the frame study).
-  - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side"; the dress editors: the face editor (Face, C, or a building's Face buttons: one face drawn flat in u and z, every piece drawn as a box and edited in a form), Goods (O) in a lean-to's, stall's, heap's or bin's frame, Litter (X), Ground paint (D), Relief (H: a grid, raised and lowered cell by cell). Each piece is a table row: click it to pick it (its row lights up in the panel), drag it to move it, Delete removes just it; the next one drawn takes the picked one's values except where it lies.
+  - Done: Stamp (any source, groups, turn), Frontage (a plot edge: finds the road, side and setback), lean-tos on walls and frontages with "Put it on the other side"; the dress editors: the face editor (Face, C, or a building's Face buttons: one face drawn flat in u and z, every piece drawn as a box and edited in a form), Goods (O) in a lean-to's, stall's, heap's or bin's frame, Litter (X), Ground paint (D), Relief (H: a grid, raised and lowered cell by cell). Each piece is a table row: click it to pick it (its row lights up in the panel), drag it to move it, Delete removes just it; the next one drawn takes the picked one's values except where it lies. Brushes (N, 23 Oct): litter, goods (on the ground or hung), relief and ground paint, every stroke written as full rows, an eraser, one undo a stroke. Person spots (I, 23 Oct): place, face, link to a parent, hours and count in the panel.
+  - The board does not yet show a person spot's hours (a clock filter: who is out at 7 am, at 10 pm).
   - Loading only the districts in view once many are started.
 - The kit reads the new map: a converter for the two test spots, then `@reads` on each part.

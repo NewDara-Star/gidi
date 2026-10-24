@@ -77,7 +77,17 @@
     "pickup_body": ["hilux", "hilux4", "p504"],
     "tailgate": ["up", "down", "missing"],
     "vehicle_glass": ["whole", "cracked", "gone"],
-    "corner": ["FL", "FR", "RL", "RR", "L", "R", "F"]
+    "corner": ["FL", "FR", "RL", "RR", "L", "R", "F"],
+    "person_activity": [
+      "sell_from_stall", "sell_from_ground", "sell_from_kiosk", "sell_at_shop_door", "hawk_on_foot", "hawk_in_traffic", "call_customers",
+      "fry_food", "grill_food", "cook_pot", "serve_food", "eat", "drink",
+      "sit_bench", "sit_chair", "sit_step", "squat", "lean_wall", "stand_wait", "chat_group", "argue", "phone_call", "smoke",
+      "watch_tv", "listen_radio", "read_papers", "play_draughts", "play_football", "place_bet", "pos_agent", "sell_airtime", "charge_phones",
+      "tout_at_bus", "conduct_bus", "wait_for_bus", "wait_on_okada", "wait_on_keke", "direct_traffic", "police_check", "guard_gate",
+      "repair_vehicle", "fix_tyre", "wash_vehicle", "sell_fuel", "repair_phone", "weld", "carpentry", "tailor", "barber", "plait_hair", "mend_shoes", "build_site",
+      "carry_load", "push_cart", "load_vehicle", "unload_vehicle", "sort_goods", "count_money", "fetch_water", "sell_water",
+      "sweep", "wash_clothes", "hang_clothes", "mind_child", "play_children", "sleep", "pray", "preach", "beg"
+    ]
   },
 
   "shapes": {
@@ -443,6 +453,10 @@
       "mud": "num 0..1",
       "packed": "num 0..1"
     },
+    "span": {
+      "from": "num 0..24",
+      "to": "num 0..24"
+    },
     "body": {
       "look": "str",
       "skin": "hex",
@@ -465,7 +479,7 @@
     "chip": [["u", "num"], ["size", "num >0"]],
     "daub": [["u", "num"], ["z", "num"], ["text", "text"], ["colour", "hex"], ["size", "num >0"]],
     "slab": [["tip", "num"], ["roll", "num"], ["sink", "num"], ["dirt", "num 0..1"], ["dust", "num 0..1"], ["shade", "num >0"], ["gap", "num >=0"], ["broken", "bool"]],
-    "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"]],
+    "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["age", "num 0..1"], ["buried", "num 0..1"]],
     "item": [["kind", "enum:goods_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["shade", "num >0"], ["cap", "hex?"]],
     "joint": [["slab", "int >=0"], ["o", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["du", "num"], ["turn", "num"]],
     "pothole": [["x", "num"], ["y", "num"], ["r", "num >0"], ["depth", "num >=0"], ["stretch", "num >0"], ["turn", "num"], ["mud", "num 0..1"]],
@@ -656,6 +670,19 @@
     "furniture": {
       "layer": "plan", "prefix": "fu", "kit": true,
       "fields": {"wear": "num 0..1?", "kind": "enum:furniture_kind", "at": "pt", "z": "num", "turn": "num", "colour": "hex", "length": "num >0?", "height": "num >0?"}
+    },
+    "person_spot": {
+      "layer": "plan", "prefix": "sp", "kit": false,
+      "fields": {
+        "at": "pt",
+        "z": "num >=0?",
+        "turn": "num",
+        "activity": "enum:person_activity",
+        "hours": "objs:span",
+        "count": "int 1..50",
+        "parent": "id:stall,leanto,building,vehicle,furniture,heap,frontage,wall?",
+        "place": "id:place?"
+      }
     },
     "place": {
       "layer": "plan", "prefix": "pc", "kit": false,

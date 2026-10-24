@@ -412,9 +412,12 @@ class Board(http.server.SimpleHTTPRequestHandler):
             return self.send_json({'error': f'{d} is not started yet'}, 400)
         recs = map_state(d)
         if self.path == '/api/map/save':       # whole records by id: new ones added, existing ones replaced
-            new = body.get('records')
-            if not isinstance(new, list) or not new:
+            new, drop = body.get('records', []), body.get('remove', [])   # remove: ids to take away in the same undo step (a brush stroke)
+            if not isinstance(new, list) or not isinstance(drop, list) or not (new or drop):
                 return self.send_json({'error': 'no records'}, 400)
+            for rid in drop:
+                if rid not in recs or recs[rid]['type'] == 'district' or rid in {r.get('id') for r in new if isinstance(r, dict)}:
+                    return self.send_json({'error': f'{rid!r} can not be removed here'}, 400)
             others = {r for o in map_started() if o != d for r in map_state(o)}
             for r in new:
                 why = record_error(d, r)
@@ -427,14 +430,21 @@ class Board(http.server.SimpleHTTPRequestHandler):
             for r in new:
                 if home_of(r, recs) is None:
                     return self.send_json({'error': f'{r["id"]}: a dress record needs its parent (of) or a point of its own, to find its tile'}, 400)
+            for rid in drop:
+                recs.pop(rid, None)
+            by = sorted({b for rid in drop for b in links_to(recs, rid)})
+            if by:
+                return self.send_json({'error': f'{", ".join(by)} still point{"s" if len(by) == 1 else ""} at {", ".join(drop)}'}, 409)
             recs = map_state(d)
             if len({r['id'] for r in new}) != len(new):
                 return self.send_json({'error': 'the same id twice'}, 400)
-            MAP_UNDO.append((d, [(r['id'], recs.get(r['id']), r) for r in new]))
+            MAP_UNDO.append((d, [(r['id'], recs.get(r['id']), r) for r in new] + [(rid, recs[rid], None) for rid in drop]))
             for r in new:
                 recs[r['id']] = r
-            map_write(d, recs, [r['id'] for r in new])
-            return self.send_json({'ok': True, 'problems': map_problems(d)})
+            for rid in drop:
+                recs.pop(rid)
+            map_write(d, recs, [r['id'] for r in new] + drop)
+            return self.send_json({'ok': True, 'removed': drop, 'problems': map_problems(d)})
         if self.path == '/api/map/delete':
             rid = body.get('id')
             if rid not in recs:
@@ -442,9 +452,9 @@ class Board(http.server.SimpleHTTPRequestHandler):
             if recs[rid]['type'] == 'district':
                 return self.send_json({'error': 'the district record stays'}, 400)
             gone = [rid]                        # children: true also takes the dress records that dress it (faces, goods...)
-            if body.get('children'):
+            if body.get('children'):            # and the person spots that belong to it (parent)
                 for i in gone:
-                    gone += [c for c, r in recs.items() if r.get('of') == i and c not in gone]
+                    gone += [c for c, r in recs.items() if (r.get('of') == i or r.get('parent') == i) and c not in gone]
             by = [b for b in links_to(recs, rid) if b not in gone]
             for c in gone[1:]:
                 by += [b for b in links_to(recs, c) if b not in gone and b not in by]

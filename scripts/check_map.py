@@ -348,6 +348,12 @@ def check(top, fix=False, only=None):
             err(w, 'footprint runs the wrong way: walking from point i to i+1 the building is on your left on the board')
         if rt == 'relief' and isinstance(r.get('z_mm'), list) and len(r['z_mm']) != r.get('cols', 0) * r.get('rows', 0):
             err(w, f'z_mm has {len(r["z_mm"])} values, cols x rows is {r.get("cols", 0) * r.get("rows", 0)}')
+        if rt == 'person_spot' and isinstance(r.get('hours'), list):     # when someone is there: one or more from-to spans
+            if not r['hours']:
+                err(w, "missing value 'hours': at least one from-to span (0 to 24 is all day; 22 to 5 runs past midnight)")
+            for i, h in enumerate(r['hours']):
+                if isinstance(h, dict) and is_num(h.get('from')) and h.get('from') == h.get('to'):
+                    err(f'{w}.hours[{i}]', 'from and to are the same hour: the span is empty (0 to 24 is all day)')
         if rt == 'leanto' and recs.get(r.get('against'), {}).get('type') == 'building':
             fp = recs[r['against']].get('footprint') or []
             if not isinstance(r.get('face'), int) or not 0 <= r['face'] < len(fp):
