@@ -468,6 +468,21 @@ Egbeyemi Street crosses the narrow north strip edge to edge and comes back at th
 | rd-z7y18cz7 | Ali Lane | lane | Sosanya's twin to Olapido Sode's twin |
 | rd-771zvqoe | Olapido Sode Street | lane | Ajegunle's twin to the east edge |
 
+B6 re-checked 24 Oct at z18 at the checked shot scale (three shots down the block). The lanes above sit within a couple of metres of their real streets, but the block's middle (the Ilupeju side between the rail, the Adeshiyan Street road and Oyewole Street) had no streets at all beyond the base road loop. Added there: Oke-Arin, Ibiteye and Ajenifuja Streets west of Adeshiyan; Shyllon Street on both sides of the base road (which runs on its middle stretch); Ibadan and Shobayo Streets up from Shyllon; Iseyin and Adegboyega Streets across to Oyewole, and Tawose Street between them and Idera Road. Left out for spacing: the south arm of Ajenifuja, Church Street, Bambe Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-udhlvf7d | Oke-Arin Street | lane |
+| rd-khhejacj | Ibiteye Street | lane |
+| rd-jb2o4e6d | Ajenifuja Street | lane |
+| rd-ozzwa52h | Shyllon Street (west of the Adeshiyan road) | lane |
+| rd-81xgmq7j | Shyllon Street (east of the Adeshiyan road) | lane |
+| rd-dnrpnn94 | Ibadan Street | lane |
+| rd-i9d8jkyo | Shobayo Street | lane |
+| rd-hnz8n85y | Iseyin Street | lane |
+| rd-tzcgktxu | Adegboyega Street | lane |
+| rd-fotehnel | Tawose Street | lane |
+
 B7 (the Apapa-Oshodi Expressway side by Isolo Road: factories along the expressway, Oye Primary School, houses east). Re-checked 24 Oct at z18 at the checked shot scale (two shots): the five z17 lanes sat up to 8 m off (Adisa Thomas Street ran diagonally). Now Shasere Ajibade Street end to end; on the factory side, the warehouse roads off the expressway's service road (past the Community Secondary School, by the bank, past ECS, by Kuramo Industries) and both arms of Ifelodun Street; east of Shasere, the Daleko market street, the Grace Baptist street off Adeoya Close, Chief Olu Adekoya Street to Olu Aina Street, Dele Viju Close, the P and P college street, Adisa Thomas, Taofik Abolaji and Majekodunmi Streets; and in the strip between Olu Aina and Adeoyo Streets, Igbo Owu and Adefuwa Streets. Removed: rd-a3ok14xh, rd-q7px2xqw, rd-5dpnprkh, rd-ngnuvohi, rd-90x3jf29.
 
 | Gidi id | real twin | kind |
