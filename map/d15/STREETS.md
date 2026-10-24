@@ -345,30 +345,65 @@ Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 | rd-i10tsslu | Adeniji Street (north-south) | lane |
 | rd-xd115opd | Adebayo Street | lane |
 
-**Block B3** (Ogunmokun Street, the Agege Motor Road, the Ikorodu Road edge and Kayode Street; the rail runs through
-it). The real twin is the Mushin station side of Fadeyi: east of the rail, a close grid of short east-west streets (Giwa,
-Cole, Adesina, Aiyetoro / Akinola, Ayonuga, Adewusi) crossed by the long north-south Haruna, Ayonuga and Akorohunfayo
-Streets, running to the Ikorodu Road service lane; west of the rail, crooked streets off Ogunmokun and Smith Streets,
-and Agbekolade and Olorunnibe off the Agege Motor Road. Streets on the rail side end at the rail, as the real ones end at
-Ago-Owu and Smith Streets beside it.
+**Block B3** (Ogunmokun Street, the Agege Motor Road, the Ikorodu Road edge and Kayode Street; the rail runs through it). Redrawn 24 Oct from a close-zoom study (six z18 shots at the checked shot scale; owner: zoom in for the details): the first fifteen lanes were read at z16 and missed most of the real streets. The real twin is Fadeyi and Idi-Oro beside Mushin station. East of the rail: Lesi and Lawanson Crescents and Matanmi Street under Kayode, the Giwa-Cole-Adesina-Aiyetoro/Akinola streets crossed by Oluwakemi, Jacob and Ayonuga Streets, then Euba/Haruna, New Balogun, Oyedele, Ereko, Fasanya and the east-west Ayonuga; further south Adewusi, Brown Lane, Kadiri, Ojelade and Lawani Streets to the Ikorodu Road edge, and Bada and Kugbuyi Streets down to Jibowu. West of the rail: the Buraimoh-Igbarere-Imoru-Ojo-Amodu-Oyegunle-Akinbiyi grid by Elegba Festival Drive, Ijaiye, Igbeyin Adun, Ogunsanya, Awoyejo and Adegbite Streets round Mushin Main Market, and Ali, Ashaoku, Anifowoshe, Adedeji and Idumagbo Streets in the corner off the north-south Ogunmokun Street. Streets on the rail side still end at the rail (Smith and Ago-Owu Streets run beside it). Left out for spacing: Smith, Coker (Fadeyi) north end, Alarape, Ogunlobi, Thanni Olodo, Odili, Labinjo, Aileru, Safebirth. Removed: the fifteen z16 lanes rd-mzaial2i, rd-jdq1vk2j, rd-ye8zhvw4, rd-vhulohlp, rd-vx27esql, rd-r5gc47ia, rd-abbx5rnv, rd-70q1fgdg, rd-n2ald4yc, rd-1383lbsh, rd-8fe89b52, rd-h6vwsegj, rd-65shqr4p, rd-iwrs1m4t, rd-et552uc8.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-mzaial2i | Giwa Street | lane | the rail side to Akorohunfayo's twin |
-| rd-jdq1vk2j | Cole Street | lane | the rail side to Akorohunfayo's twin |
-| rd-ye8zhvw4 | Haruna Street | lane | Cole's twin south (ends in the block) |
-| rd-vhulohlp | Adesina Street | lane | the rail side east (ends in the block) |
-| rd-vx27esql | Aiyetoro Street / Akinola Street | lane | the rail side to the Ikorodu Road edge |
-| rd-r5gc47ia | Ayonuga Street (north-south) | lane | Aiyetoro's twin south |
-| rd-abbx5rnv | Ayonuga Street (east-west) | lane | the north-south Ayonuga to the Ikorodu Road edge |
-| rd-70q1fgdg | Adewusi Street | lane | the rail side to the Ikorodu Road edge |
-| rd-n2ald4yc | Bada Street | lane | Adewusi's twin south towards Jibowu (ends in the block) |
-| rd-1383lbsh | Oluwakemi Street | lane | Kayode Street's side south to Akorohunfayo's twin |
-| rd-8fe89b52 | Akorohunfayo Street | lane | Oluwakemi's twin past Giwa and Cole to Aiyetoro's twin |
-| rd-h6vwsegj | the unnamed street south of Ogunmokun (by the NDO lounge) | lane | Ogunmokun's side towards Smith Street |
-| rd-65shqr4p | the unnamed cross street off Smith Street | lane | the rail side west (ends in the block) |
-| rd-iwrs1m4t | Agbekolade Street | lane | the Agege Motor Road to the rail side |
-| rd-et552uc8 | Olorunnibe Street | lane | the Agege Motor Road to the rail side |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-4553yz2m | Lesi Crescent | lane |
+| rd-b0xmuid5 | Lawanson Crescent | lane |
+| rd-23dgcrr6 | Matanmi Street | lane |
+| rd-5f7exkiz | Giwa Street | lane |
+| rd-d2h8std9 | Oluwakemi Street | lane |
+| rd-fh7ahv9d | the street down to Opeloyeru Street | lane |
+| rd-f5ms4r2b | Ago-Owu Street | lane |
+| rd-ihiofwck | Cole Street | lane |
+| rd-rktb8bj7 | Jacob Street | lane |
+| rd-x0nmzqqy | Adesina Street | lane |
+| rd-jxc6hu8b | Ayonuga Street (north-south) | lane |
+| rd-32ty8fh6 | Akorohunfayo Street | lane |
+| rd-h0a9i5fg | Aiyetoro Street, then Akinola Street | lane |
+| rd-67sg60rp | Euba Street, then Haruna Street | lane |
+| rd-wt3bztea | Enilola Lane, then Aridagbe Street | lane |
+| rd-habxxo75 | New Balogun Street | lane |
+| rd-c6x0jntc | Coker Lane | lane |
+| rd-wovdjsau | Oyedele Street | lane |
+| rd-jz7sq90i | Ereko Street | lane |
+| rd-f6q1n1wy | Fasanya Street (Fadeyi) | lane |
+| rd-ii9itgbq | Ayonuga Street (east-west) | lane |
+| rd-3rgiuuc4 | Adewusi Street | lane |
+| rd-j8goyo7h | Brown Lane | lane |
+| rd-aa7ee22h | Kadiri Street | lane |
+| rd-gxcqgoq3 | Ojelade Street | lane |
+| rd-rv4ry0w9 | Lawani Street | lane |
+| rd-rey9587t | Bada Street (north-south) | lane |
+| rd-p3sthhi8 | Bada Street (east-west) | lane |
+| rd-khx710gd | Kugbuyi Street | lane |
+| rd-hzvl6lf5 | Daniel Street | lane |
+| rd-l96ihryl | the street off the Agege Motor Road by the pharmacy | lane |
+| rd-340okaz6 | the street off the Agege Motor Road by the children's hospital | lane |
+| rd-pruajgib | Agbekolade Street | lane |
+| rd-m61sp7km | Olorunnibe Street | lane |
+| rd-tweirlz8 | Buraimoh Street | lane |
+| rd-rbhmxjfp | Igbarere Street | lane |
+| rd-eoffh636 | Imoru Street | lane |
+| rd-lwd1maam | Ojo Street (south of Elegba Festival Drive) | lane |
+| rd-tpu9jzp8 | Ojo Street, then Oluwapo Street | lane |
+| rd-tiivalui | Amodu Street | lane |
+| rd-pj8cd3wg | Oyegunle Street | lane |
+| rd-ius2ua2s | Akinbiyi Street | lane |
+| rd-f4ggg0x2 | Ijaiye Street | lane |
+| rd-ziw0h5ax | Igbeyin Adun Street | lane |
+| rd-8hoarai5 | Ogunsanya Street | lane |
+| rd-v4erxr45 | Alhaji Awoyejo Street | lane |
+| rd-esu3rasg | Adegbite Street | lane |
+| rd-1h2058d6 | Ali Street | lane |
+| rd-pbwqrjkc | Ashaoku Street, on north-east past Ali Street | lane |
+| rd-c666dphk | Anifowoshe Street | lane |
+| rd-97wkrkzt | the street past the packaging works | lane |
+| rd-qf3o0ux0 | the short street south from the packaging works | lane |
+| rd-xvn9otuq | the street behind the Agege Motor Road | lane |
+| rd-74ayh5is | Adedeji Street | lane |
+| rd-kfww6jfn | Idumagbo Street | lane |
 
 **Block B4** (Ladipo Street, Palm Avenue and the district's north-east edge). The real twin is the Ladipo spare parts
 market and the Matori industrial estate: long market sheds and warehouses on a few wide roads (Jimade Street through the
