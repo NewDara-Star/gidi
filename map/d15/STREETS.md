@@ -665,3 +665,9 @@ B25 (between Shokunbi Street, Olateju Street, Ayantuga Street and Coker Street).
 |---|---|---|
 | rd-n9c6t57b | Onanuga Street | lane |
 | rd-0j8zaiv8 | Olufemi Onanuga Street | lane |
+
+B26 (Ilasamaja side: between Sadiku Street, Akanro Street, Oladele Street and Agoro Bogunbolu Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Gbangba Street runs from Sadiku Street down to Akanro Street, on to the end point of the older lane south of it (rd-5z414dfc). Left out for spacing: Oladele Street's north leg (about 40 m from the block's west edge), Araba Baptist Church Street and Oladeinde Coker Street, Olagbaiye Street (a dead end).
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-196r6fwm | Gbangba Street | lane |
