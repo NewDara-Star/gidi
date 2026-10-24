@@ -13,7 +13,7 @@ from structure import measure
 
 DID = sys.argv[1]
 W_, S_, E_, N_ = map(float, sys.argv[2].split(','))
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 SQ = 500.0
 tr = Transformer.from_crs(4326, 32631, always_xy=True).transform
 WID = {'motorway': 30, 'trunk': 24, 'primary': 18, 'secondary': 14, 'tertiary': 10, 'unclassified': 7, 'residential': 7,

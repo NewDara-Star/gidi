@@ -42,6 +42,6 @@ Built 15 Oct 2026, from the plan in `docs/REBUILD-PLAN.md`. Food Gate is the tes
 - **Standard trips:** all 56 route. One walk to Mile Market is 12% longer (639 → 717 m), through the new market.
 
 ## Not done
-- **The look:** ground colour, mud, rusted roofs, worn walls. It waits for the owner's tagged references in `~/Real-world/research/refs/` (see the memory "look first").
+- **The look:** ground colour, mud, rusted roofs, worn walls. It waits for the owner's tagged references in `~/gidi-data/research/refs/` (see the memory "look first").
 - **The street pattern** is still the old generator's. Real Ketu's streets bend more.
 - **Only Food Gate** is built this way. The other fourteen and the new Yaba/Akoka follow, one at a time.

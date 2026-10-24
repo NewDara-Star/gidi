@@ -1,7 +1,7 @@
 # Real twins: every type in Gidi and the real thing it comes from
 
 Made by `python3 scripts/twins.py` from the map and `web/twins.json` (the twins, kept by hand). Pictures live in
-`~/Real-world/research/` (outside the repo). **none** = no twin yet; **red** = twin named, no picture; **amber** = pictures saved
+`~/gidi-data/research/` (outside the repo). **none** = no twin yet; **red** = twin named, no picture; **amber** = pictures saved
 and studied; **green** = modelled and passed by the owner against the pictures.
 
 **0 green, 44 amber, 0 red, 166 none** of 210 types.

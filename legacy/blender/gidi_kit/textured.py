@@ -1,7 +1,7 @@
 """Photo textures on the kit's material slots (the eye tests now; the same files go into Unreal later, so the look the owner
 passes is the one that ships).
 
-The textures live outside the repo (CC0 Poly Haven surfaces, ~/Real-world/textures/polyhaven/<surface>/<surface>_<map>_2k.jpg);
+The textures live outside the repo (CC0 Poly Haven surfaces, ~/gidi-data/textures/polyhaven/<surface>/<surface>_<map>_2k.jpg);
 point GIDI_TEXTURES (or kit_test.py --textures) at that folder. Each slot keeps the kit's vertex colour as its colour: the
 texture only adds its own variation (its colour divided by its average, so a green wall stays the green the map asked for),
 and its normal and roughness maps. Wear (the vertex 'Wear', also in the colour's alpha) blends in the slot's aged surface:
@@ -28,7 +28,7 @@ SLOTS = {
 
 
 def root():
-    return os.environ.get('GIDI_TEXTURES', os.path.expanduser('~/Real-world/textures/polyhaven'))
+    return os.environ.get('GIDI_TEXTURES', os.path.expanduser('~/gidi-data/textures/polyhaven'))
 
 
 def _img(base, surf, kind, colour=False):

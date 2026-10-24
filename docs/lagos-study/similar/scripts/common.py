@@ -9,7 +9,7 @@ F=dict(np.load(L+'feat.npz')); K=dict(np.load(L+'class.npz')); Un=dict(np.load('
 x0,y0=float(F['x0']),float(F['y0']); ny,nx=F['n'].shape
 ext=[x0/1000,(x0+nx*250)/1000,y0/1000,(y0+ny*250)/1000]
 NAMES=json.load(open('unit_names.json'))
-lg=json.load(open('/Users/Star/Real-world/research/data/lagos_lgas_utm31.geojson'))['features']
+lg=json.load(open('/Users/Star/gidi-data/research/data/lagos_lgas_utm31.geojson'))['features']
 def draw_lga(ax,lw=0.5,c='#555'):
     for f in lg:
         g=shape(f['geometry']); gs=g.geoms if g.geom_type=='MultiPolygon' else [g]

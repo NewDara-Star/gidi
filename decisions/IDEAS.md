@@ -23,7 +23,7 @@
 - **Fabric types:** a district isn't one texture. The deep study finds 3–4 kinds of neighbourhood per district; the generator should lay them out in the real shares (busier along main roads, more open toward water and the city edge).
 - **Growing the map:** 1:2.5 (29 × 12 km) is the same layout rescaled, if Gidi ever needs more room.
 
-## Gidi's brand identity (owner, 19 Oct; refs in ~/Real-world/research/refs/brand/, study only)
+## Gidi's brand identity (owner, 19 Oct; refs in ~/gidi-data/research/refs/brand/, study only)
 - Danfo yellow and black, a third colour sparingly (the red and blue of hand-painted lettering).
 - Illustration: flat black silhouettes on yellow, rough printed texture, everyday street life (also the comic-panel cutscenes).
 - Lettering: Danfo Basic (done, gidi-game Art/Fonts) for painted bodywork and titles; a brush secondary font like danfo
@@ -34,7 +34,7 @@
 - Proposed order: a one-page brand sheet; coat-of-arms options; the brush font; plates and slogans into the data and kit.
 - **The main menu** (owner, 19 Oct, after God of War's): the menu items down one side in our Gidi lettering; the one you
   highlight lights up in colour, and the other side shows a Gidi monument or something only Gidi has (The Reach, the Marigold
-  Screen, a danfo...), cycling. Refs: ~/Real-world/research/refs/brand/identity (the owner's ÈKÓ poster: a black-and-white
+  Screen, a danfo...), cycling. Refs: ~/gidi-data/research/refs/brand/identity (the owner's ÈKÓ poster: a black-and-white
   cut-out landmark on danfo yellow, pattern-filled letters, the stripes down the edge; a red-and-black line drawing of street
   life on yellow; a skyline of landmarks, stock, study only). Open: black and white or full colour.
 - **Meshy's role** (owner, 19 Oct): complex sculptures, and a starting point when there's no obvious way into a build (learn
@@ -46,7 +46,7 @@
 
 
 ## Ìbùdó plan v2 (proposal, 19 Oct, awaiting the owner)
-Ìbùdó as it is (`docs/hand/ibudo/district_as_is.png`) doesn't read as a district: the Oshodi things are packed into the north-east corner, the stadium sits alone in the north-west, and 4 km² of the same houses lie between them; the main roads only run round the edge. From a Google study of real Oshodi and Ojuelegba (screenshots in `~/Real-world/research/google/ibudo/10-13`), proposal `docs/hand/ibudo/plan_v2_proposal.png`:
+Ìbùdó as it is (`docs/hand/ibudo/district_as_is.png`) doesn't read as a district: the Oshodi things are packed into the north-east corner, the stadium sits alone in the north-west, and 4 km² of the same houses lie between them; the main roads only run round the edge. From a Google study of real Oshodi and Ojuelegba (screenshots in `~/gidi-data/research/google/ibudo/10-13`), proposal `docs/hand/ibudo/plan_v2_proposal.png`:
 - two cores: Oshodi in the north-east (stays, beside the airport, as in life), Ojuelegba in the south-east (beside Saba, as in life): flyover junction, under-bridge market, stadium, a Shitta-type roundabout, a teaching hospital;
 - three roads that cross the district: an expressway west from the Oshodi crossing (Airport Rd type), the Ojuelegba cross road (Itire Rd type, on to Saba), and a north-south link road (Ikorodu Rd type);
 - five belts between them, each with its own grain: Mafoluku (densest), an Ajao-type estate (walled, bigger plots), Ilupeju-type industry, a Papa Ajao mix (houses and workshops, a spare-parts market), and a Surulere grid;

@@ -2,7 +2,7 @@
 import rasterio, numpy as np, json, os, sys
 from rasterio.features import rasterize
 from shapely.geometry import shape, box
-D=os.path.expanduser('~/mnt/Real-world/research/data/')
+D=os.path.expanduser('~/mnt/gidi-data/research/data/')
 L=json.load(open(D+'lagos_lgas_utm31.geojson'))['features']
 lg=[(f['properties']['name'],shape(f['geometry'])) for f in L]
 OUT=os.path.expanduser('~/gidi-work/tiles/'); os.makedirs(OUT,exist_ok=True)

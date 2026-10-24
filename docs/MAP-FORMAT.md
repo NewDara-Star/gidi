@@ -88,7 +88,7 @@ Every record may carry a `ref`:
 
 | Field | Meaning |
 |---|---|
-| `twin` | an id in the twin catalogue **outside the repo** (proposed: `~/Real-world/research/twins/index.tsv`: id, real name, real coordinates, notes). The map never holds the real name or coordinates. |
+| `twin` | an id in the twin catalogue **outside the repo** (proposed: `~/gidi-data/research/twins/index.tsv`: id, real name, real coordinates, notes). The map never holds the real name or coordinates. |
 | `shots` | Street View shot ids (`ot175`), never file names (file names carry real street names). |
 | `kit` | the kit the thing is modelled from. |
 

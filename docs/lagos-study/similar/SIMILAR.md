@@ -4,7 +4,7 @@
 Builds on `docs/lagos-study/STUDY.md` and `councils.md`, and reuses their 250 m grids.
 
 Pictures: `units.png` (the 81 units), `similarity.png` (every neighbour link, coloured by similarity), `ladder_85.png`, `ladder_75.png`, `ladder_65.png` (the districts at three levels).
-Tables: `units.csv` (fingerprints), `pairs.csv` (neighbour pairs), `ladder.csv` (every merge). Scripts, in `scripts/` (they read `~/Real-world` and the earlier study grids; never committed data): `seeds.py`, `units.py`, `finger.py`, `know.py`, `analyse.py`, `report.py`, `plots.py`.
+Tables: `units.csv` (fingerprints), `pairs.csv` (neighbour pairs), `ladder.csv` (every merge). Scripts, in `scripts/` (they read `~/gidi-data` and the earlier study grids; never committed data): `seeds.py`, `units.py`, `finger.py`, `know.py`, `analyse.py`, `report.py`, `plots.py`.
 
 Marks: [OB] Open Buildings v3 (conf >= 0.65), [H] 2.5D heights 2023, [OV] Overture, [WC] WorldCover, [WP] WorldPop, [K] general knowledge (not measured).
 

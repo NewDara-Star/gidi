@@ -2,7 +2,7 @@
 
 `ROADS.md` section 6 left 15 borders the data could not settle. Each was looked at on Google Maps satellite
 (zoom 13 to 16) at the coordinates below. Study only: the 29 screenshots stay outside the repo, in
-`~/Real-world/research/google/lagos-study/border-checks/` (file names carry the check number and the map
+`~/gidi-data/research/google/lagos-study/border-checks/` (file names carry the check number and the map
 coordinates). No Google imagery or geometry goes into Gidi; this note only names real lines to draw by hand.
 
 The owner's steer: the number of districts matters little. What matters is that each district is a real place, and
@@ -77,14 +77,14 @@ to Ebute Metta; Gbagada to Gbagada-Ogudu.
 The owner's rule: "If multiple people agree on something, it's probably correct." Every unsure or *to trace* line
 was put to at least three independent sources, and the majority decides. On an even split, the line that follows a
 real physical break wins. Study only: the 23 screenshots stay outside the repo, in
-`~/Real-world/research/google/lagos-study/border-votes/` (the file names carry the number, the source and the
+`~/gidi-data/research/google/lagos-study/border-votes/` (the file names carry the number, the source and the
 coordinates). No Google imagery or geometry goes into Gidi.
 
 The sources:
 - **G**: Google Maps labels, and the area card, which names Google's neighbourhood at the map centre (z16 to z17).
 - **S**: Google satellite, for the fabric and the physical breaks.
 - **O**: the OpenStreetMap website (the map only; OSM has no LCDA lines in Lagos, only LGAs).
-- **L**: the official LGA lines (`~/Real-world/research/data/lagos_lgas_utm31.geojson`, point in polygon). LGAs
+- **L**: the official LGA lines (`~/gidi-data/research/data/lagos_lgas_utm31.geojson`, point in polygon). LGAs
   are coarse: often both sides of a line share one LGA, so L is often neutral.
 - **W**: written sources (Wikipedia and the press).
 

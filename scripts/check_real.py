@@ -24,7 +24,7 @@ from shapely.strtree import STRtree
 D = sys.argv[1] if len(sys.argv) > 1 else 'hub'
 BAND = {'buildings': (0.80, 1.10), 'built_m2': (0.70, 1.10), 'street_m': (0.85, 1.15)}   # what the building lines and the clean-up may take
 NEAR = 100.0
-PICS = os.path.expanduser('~/Real-world/research/google/ibudo/twins')
+PICS = os.path.expanduser('~/gidi-data/research/google/ibudo/twins')
 M_LAT, M_LON = 110600.0, 109900.0
 # what a photo note names -> what stands for it on the map: (pois types, things, building kinds, furniture kinds)
 LIVABLE = {

@@ -3,7 +3,7 @@ surface, so we know we have a real life twin"). Reads the map (web/gidi-data.js)
 for the twins (kept by hand); writes docs/TWINS.md. New types in the map show up on the next run with no twin yet.
 
 web/twins.json: {"<group>/<type>": {"twin": what it is in Lagos, "where": a real place it was seen (and coordinates if known),
-"pics": [paths under ~/Real-world/research/], "status": "green" once the owner has passed the model against the pictures}}.
+"pics": [paths under ~/gidi-data/research/], "status": "green" once the owner has passed the model against the pictures}}.
 Status: none = no twin yet; red = twin named, no picture; amber = pictures saved, studied; green = modelled and passed by the owner.
 Pictures stay outside the repo (study yes, lift no).
 Usage: python3 scripts/twins.py
@@ -15,7 +15,7 @@ from collections import Counter
 S = open('web/gidi-data.js').read()
 G = json.loads(S[S.index('{'):S.rstrip().rstrip(';').rindex('}') + 1])
 T = json.load(open('web/twins.json')) if os.path.exists('web/twins.json') else {}
-RES = os.path.expanduser('~/Real-world/research')
+RES = os.path.expanduser('~/gidi-data/research')
 
 
 def flat(v):
@@ -46,7 +46,7 @@ groups = {
 }
 out = ['# Real twins: every type in Gidi and the real thing it comes from', '',
        'Made by `python3 scripts/twins.py` from the map and `web/twins.json` (the twins, kept by hand). Pictures live in',
-       '`~/Real-world/research/` (outside the repo). **none** = no twin yet; **red** = twin named, no picture; **amber** = pictures saved',
+       '`~/gidi-data/research/` (outside the repo). **none** = no twin yet; **red** = twin named, no picture; **amber** = pictures saved',
        'and studied; **green** = modelled and passed by the owner against the pictures.', '']
 tot = Counter()
 rows = []

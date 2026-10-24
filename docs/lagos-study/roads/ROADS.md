@@ -4,7 +4,7 @@ Step 1 of the new map plan (22 Oct): Gidi is real Lagos made smaller, at 1:3, in
 This study lays down the skeleton of real roads, cuts Lagos into places along its real borders, measures every
 border, and joins places into districts only where they really touch and are alike.
 
-Everything here is measured from the data in `~/Real-world/research/data/` (Overture roads, rail and water,
+Everything here is measured from the data in `~/gidi-data/research/data/` (Overture roads, rail and water,
 Google Open Buildings v3 roofs, ESA WorldCover land cover, the earlier 250 m study grids). Nothing was downloaded,
 no Google imagery is used or stored. Neighbourhood names come from a hand list of about 230 points from general
 knowledge (marked [K] in `scripts/gaz.py`); each point is good to about half a kilometre, not more.

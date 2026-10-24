@@ -5,7 +5,7 @@ from rasterio.merge import merge
 from shapely.geometry import shape, mapping
 from shapely.ops import transform
 from pyproj import Transformer
-D=os.path.expanduser('~/mnt/Real-world/research/data/')
+D=os.path.expanduser('~/mnt/gidi-data/research/data/')
 inv=Transformer.from_crs(32631,4326,always_xy=True).transform
 L=[(f['properties']['name'],transform(inv,shape(f['geometry']))) for f in json.load(open(D+'lagos_lgas_utm31.geojson'))['features']]
 WC={10:'trees',20:'shrub',30:'grass',40:'crops',50:'built',60:'bare',80:'water',90:'wetland',95:'mangrove'}

@@ -22,8 +22,8 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
   carries the old generated city beside it.
 - **gidi-game** holds the builders: Blender scripts that build each thing a map record names (they are the kit). It
   also holds the Unreal project that imports and plays it.
-- **Real-world** is World Drive, the owner's Finglas driving simulator, a different game. Its folder is also where
-  Gidi's downloaded datasets and Google study shots live, untracked (about 21 GB).
+- **gidi-data** is the study store: datasets, Google study shots, references, textures (about 22 GB, on this Mac
+  only). Until 24 Oct it lived inside `~/Real-world`, World Drive, the owner's Finglas driving simulator.
 
 ## gidi (`~/gidi`, 604 files)
 
@@ -94,23 +94,28 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 - `gidi_signs.py`: shop signs from the old kit's tiles
 - `gidi_look.py`, `gidi_surfaces.py`, `gidi_cam.py`, `tools/shot.sh`, `look.sh`, `surfaces.sh`, `make_textures.py`
 - `gidi_play.py`: the Ìbùdó play level
-- `tools/perf.sh`: the old laptop test on Gidi_City, now replaced by `measure.sh`
+- `tools/perf.sh`: the old laptop test on Gidi_City, removed 24 Oct (gidi-game #70); `measure.sh` replaces it
 
 **History**
 - `tools/frame_motorpark.py`, `props_build.py`, `prop_basin_final.py` (the 19 Oct Lagos pass)
 - `tools/vehicle_prep.py`, `vehicle_look.py`, `vehicle_export.py`, `photo.sh`, `Content/Python/gidi_photo.py` (the Meshy
   vehicles and photo mode)
 
-## Real-world (`~/Real-world`, 300 files): other project, plus Gidi's data store
+## gidi-data (`~/gidi-data`): Gidi's study store, about 22 GB
 
-- **World Drive** (tracked, last commit 5 Oct): `game/` (TypeScript, three.js, Electron), its `tools/`, `research/01-28`
-  (driving-sim research; 01-04 were about a browser Lagos game), `ROADMAP.md`, `CLAUDE.md`. Gidi uses none of the code.
-- **Gidi's store** (untracked, about 21 GB), named in about 50 gidi and gidi-game files:
-  - `research/data/`: the datasets (Google Open Buildings, Microsoft, Overture, WorldPop, WorldCover, DEM, deep-cache), about 20 GB
-  - `research/google/`: the Google study shots and the kit tests (`kits/old-town/tests/`)
-  - `research/refs/`, `research/models/`, `research/twins/`: reference pictures and models
-  - `textures/polyhaven/`: the CC0 surfaces used by Blender and Unreal
-  - `assets/makehuman/`: the people assets
+Moved out of World Drive's folder (`~/Real-world`) on 24 Oct (owner: "take out the Gidi stuff from real world"),
+with its tree kept, so every old path reads the same with `gidi-data` for `Real-world`. A local git repo with no
+remote: it tracks only our own text (notes, the kit tests' scripts, READMEs: 42 files, read by the inventory); the
+data stays on this Mac. Its `README.md` lists the folders:
+- `research/data/`: the datasets (Google Open Buildings, Microsoft, Overture, WorldPop, WorldCover, DEM, deep-cache), about 20 GB
+- `research/google/`: the Google study shots and the kit tests (`kits/old-town/tests/`, their notes and scripts)
+- `research/refs/`, `research/models/`, `research/games/`: reference pictures, models and look-target clips
+- `textures/polyhaven/`: the CC0 surfaces used by Blender and Unreal
+- `assets/makehuman/`: the people assets
+
+`~/Real-world` is World Drive alone again (tracked, last commit 5 Oct: `game/`, its `tools/`, `research/01-28`), a
+different game; Gidi uses none of it. Two Lagos files World Drive tracks (`lagos_copernicus_glo30_dsm.tif`,
+`lagos_overture_ferry_and_rail_segments.parquet`) were copied into `gidi-data/research/data/`, since gidi reads them.
 
 ## Known problems (24 Oct)
 
@@ -150,9 +155,9 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 1. **Move the old map into `legacy/old-map/`**: its scripts, data, viewer, `study-*.json` and history docs, as was
    done for `legacy/blender/`. The top of gidi would then hold only the new map. The board would still load the old
    map from its new place, and the legacy tiles would be checked byte-identical before merging.
-2. **Give Gidi's data store its own folder** (`~/gidi-data`, untracked), out of World Drive's repo, and update the
-   ~50 paths that name it. World Drive would then be left alone.
-3. **Retire `tools/perf.sh`** in gidi-game (replaced by `measure.sh`), and decide whether the Meshy vehicle path
+2. ~~Give Gidi's data store its own folder~~ (done 24 Oct: `~/gidi-data`; 84 lines in gidi and 3 in gidi-game repointed, gidi-game #71; counted with `git diff -U0 origin/main | grep -c '^+.*gidi-data'`, without docs/inventory and this page).
+   Open: a private GitHub remote for its text only, the owner's call.
+3. ~~Retire `tools/perf.sh`~~ (removed 24 Oct, gidi-game #70). Still open: decide whether the Meshy vehicle path
    (`vehicle_prep.py` and the rest) stays, now that vehicles are built.
-4. **A check that keeps this page true**: every new code file starts with what it is (all but three do today), no
-   document names a file that doesn't exist, and `scripts/inventory.py` runs with `check_rules.py`.
+4. **A check that keeps this page true**: the hooks (24 Oct) run `inventory.py` with `check_rules.py` on every
+   commit and block a new line naming a file that doesn't exist. Open: every new code file starts with what it is.

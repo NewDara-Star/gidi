@@ -1,7 +1,7 @@
 # The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026)
 
 The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from:
-- **photo:** the owner's reference photos (`~/Real-world/research/refs/REVIEW.md`)
+- **photo:** the owner's reference photos (`~/gidi-data/research/refs/REVIEW.md`)
 - **study:** the deep study (`docs/studies/`)
 - **ism:** the running Lagos-isms log (`docs/LAGOS-ISMS.md`)
 - **brief:** the district brief (`web/districts_info.json`)

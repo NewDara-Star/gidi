@@ -12,7 +12,7 @@ CLS=list(K["names"]); cl=K["cl"].copy(); _i=nd.distance_transform_edt(cl<0,retur
 built=F['cover']>=0.10
 # Overture places (confidence >= 0.5)
 P={k:np.zeros(N) for k in ('poi','market','transit','campus','industry','worship','hotel')}
-t=pq.read_table('/Users/Star/Real-world/research/data/overture-lagos/lagos_overture_place.parquet',columns=['geometry','confidence','basic_category','names']).to_pylist()
+t=pq.read_table('/Users/Star/gidi-data/research/data/overture-lagos/lagos_overture_place.parquet',columns=['geometry','confidence','basic_category','names']).to_pylist()
 for r in t:
     if (r['confidence'] or 0)<0.5: continue
     g=shapely.from_wkb(r['geometry']); x,y=T.transform(g.x,g.y); i=int((y-y0)//250); j=int((x-x0)//250)

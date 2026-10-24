@@ -13,7 +13,7 @@ Pictures: `skeleton.png` (roads, whole state and metro), `skeleton_inner.png` (O
 | [OV] | Overture: road segments (all classes, bridge flags, connectors), land use, infrastructure, places | road skeleton, street km, junctions, dead ends, street grid, airport/military/campus/industry |
 | [WC] | ESA WorldCover 2021 | water, mangrove, wetland, open land |
 | [WP] | WorldPop 2020 constrained | people |
-| [G] | Google Earth / Street View notes and screenshots in `~/Real-world/research/google/{estate,ibudo,maze,twins}` | estate, Oshodi and Mushin grain |
+| [G] | Google Earth / Street View notes and screenshots in `~/gidi-data/research/google/{estate,ibudo,maze,twins}` | estate, Oshodi and Mushin grain |
 | [R] | earlier 20-LGA research, `~/gidi/docs/lagos-lgas-research.md`, and `results/lga_table.json`, `heights_by_lga.json` | what places are known for; checks |
 | [K] | general knowledge of Lagos | names, what a place is like, junction names; not measured |
 

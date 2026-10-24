@@ -15,7 +15,7 @@ Study file (24 Oct 2026). Real place names live here and in other study files on
 ## Method (the measured lines)
 
 - **District shapes:** the 51 rings in `web/frame-study.js` (`window.FRAME.districts`), turned back into real UTM 31N (x 3, offset by the frame origin). Each measurement covers the real twin's area.
-- **People:** WorldPop 2020 constrained, UN-adjusted (`~/Real-world/research/data/worldpop`). It only counts people where it sees buildings, so the numbers for stilt and waterfront districts (Makoko) and for estates still being built are rough.
+- **People:** WorldPop 2020 constrained, UN-adjusted (`~/gidi-data/research/data/worldpop`). It only counts people where it sees buildings, so the numbers for stilt and waterfront districts (Makoko) and for estates still being built are rough.
 - **Buildings:** Google Open Buildings v3, confidence ≥ 0.65. Mean footprint in m², and "big roofs" = the share of roof area in buildings over 1,000 m² (warehouses, factories, markets, malls).
 - **Places:** Overture places, confidence ≥ 0.5, grouped into church, mosque, shop, food, night, hotel, money, office, school, health, motor, party, beauty, trade, transport and government. **Caveat:** Overture lists businesses that are online, so it over-counts rich areas and offices, and badly under-counts mosques (Mushin shows 308 churches to 12 mosques, which is not the real ratio). Read "places per 10,000 people" as a rough wealth-and-commerce signal only, never as a count.
 - Script: the session's `scratchpad/life/measure.py`; the numbers are copied below.

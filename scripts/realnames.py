@@ -8,7 +8,7 @@ so a name picker that slips, now or later, never reaches the map.
 import csv, glob, hashlib, json, os, re
 
 FILE = 'docs/hand/realnames.txt'
-PICS = os.path.expanduser('~/Real-world/research/google/ibudo/twins')
+PICS = os.path.expanduser('~/gidi-data/research/google/ibudo/twins')
 GENERIC = {'road', 'street', 'close', 'avenue', 'crescent', 'way', 'lane', 'drive', 'st', 'rd', 'ave', 'the', 'old', 'new', 'market', 'church',
            'mosque', 'school', 'link', 'bridge', 'expressway', 'service', 'estate', 'park', 'garage', 'motor', 'bus', 'stop', 'junction', 'oshodi',
            'surulere', 'lagos', 'unnamed', 'none'}
@@ -24,7 +24,7 @@ def core(n):
 
 
 def gather():
-    """Every real street and place name around the studied places (needs ~/Real-world)."""
+    """Every real street and place name around the studied places (needs ~/gidi-data)."""
     real = set()
     boxes = []
     for tf in glob.glob('docs/hand/ibudo/twins/*.json'):
@@ -42,7 +42,7 @@ def gather():
                     real.add(v)
     import pyarrow.parquet as pq
     for f in ('lagos_overture_segment.parquet', 'lagos_overture_place.parquet'):
-        t = pq.read_table(os.path.expanduser('~/Real-world/research/data/overture-lagos/' + f), columns=['names', 'bbox'])
+        t = pq.read_table(os.path.expanduser('~/gidi-data/research/data/overture-lagos/' + f), columns=['names', 'bbox'])
         for n, b in zip(t.column('names').to_pylist(), t.column('bbox').to_pylist()):
             if n and n.get('primary') and any(a0 <= b['ymin'] <= a1 and o0 <= b['xmin'] <= o1 for a0, a1, o0, o1 in boxes):
                 real.add(n['primary'])
