@@ -631,3 +631,10 @@ B20 (the long strip between Olateju Street and the railway, from Olorunnisola St
 | rd-2elgaw22 | Olorunnisola Street on to Akinbode Street | lane |
 | rd-lsk0nkts | Araba Street | lane |
 | rd-6bv2yosa | Hanson Lane | lane |
+
+B21 (west of Shokunbi Street, between Fafolu Street and Ayantuga Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Oyo Street and Ashafihan Street cross the block from its west edge to Shokunbi Street, carrying on the lines of B19's Alayaki and Ashafihan lanes across it. Left out for spacing: Akinboro Lane, Alhaji Otta Street, Banire Street, Ishadare Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-sq9yr86z | Oyo Street | lane |
+| rd-cc9tth8j | Ashafihan Street | lane |
