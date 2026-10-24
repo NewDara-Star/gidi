@@ -56,8 +56,13 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    (`tools/leanto_build.py`; `Art/Props/LeantoBuilt/GAPS.md` lists 12 gaps against the photos, 5 closed, 1 closed in shape, 6 open
    with reasons; `look_v1.jpg` is photo | old kit | new). The map format gained each sheet's `hang` and `bend` (gidi #280).
    The owner on v1 (24 Oct): "not bad", "the rust looks very good", it lacks a bit of texture: fine dents, grain and dirt in
-   the textures next. Its faces (23,532 to 55,762 a lean-to) are too many for a street of them: near and far versions
-   (ribs as shape near, painted into a flat sheet's texture far) before it goes on the map. Next: zinc roof sheets on buildings (block_build's roof is one smooth surface today), then gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
+   the textures next. **Done (24 Oct, gidi-game #73):** `tools/zinc_kit.py`, the sheets shared by the lean-to and the
+   block's roof: grain, pits and run-down streaks added; the look is three images per slope in the .glb (v1's shader rust
+   would not have reached Unreal); option `lod` 0/1/2 (ot197 43,492 / 8,386 / 900 faces; a bungalow's roof about 36,000
+   near, was 486,528). `Art/Buildings/BlockBuilt/ROOF-GAPS.md` and `roof_look_v1.jpg`: open are the ridge cap, open eaves
+   with rafter ends, the barge board (none in the format) and v1 reading patchier than real roofs from the street.
+   Only 2 of 18 builders make near/far versions so far (lean-to; block, for its roof sheets only). Next: gutters, and
+   near/far versions in the other builders. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad
