@@ -77,7 +77,7 @@ window.MAPEDIT = (() => {
     return o;
   }
   const GEOM = { road: "centreline", rail: "centreline", station: "area", plot: "outline", building: "footprint", wall: "line", frontage: "line", place: "area", district: "outline" };
-  const POINTY = new Set(["stall", "pole", "tree", "vehicle", "furniture", "heap"]);
+  const POINTY = new Set(["stall", "pole", "tree", "vehicle", "furniture", "heap", "person_spot"]);
   function editPts(r) {   // the points a handle edits, and whether they close
     if (!r) return null;
     if (r.type === "road" && Array.isArray(r.centreline)) return { pts: r.centreline, closed: false, set: (q, P) => { q.centreline = P; } };
@@ -142,7 +142,7 @@ window.MAPEDIT = (() => {
   const moveRec = (r, dx, dy) => transformed(r, mover([0, 0], [dx, dy], 0));
   function turnRec(r, deg) {
     const q = clone(r);
-    if ("turn" in fieldsOf(q.type) && Array.isArray(q.at)) { q.turn = Math.round(((q.turn || 0) + deg) * 100) / 100; return q; }
+    if ("turn" in fieldsOf(q.type) && Array.isArray(q.at)) { q.turn = Math.round(((((q.turn || 0) + deg) % 360) + 360) % 360 * 100) / 100; return q; }
     const e = editPts(q); if (!e || e.pts.length < 2) return null;
     const c = centroid(e.closed ? e.pts : [e.pts[0], e.pts[e.pts.length - 1]]), a = deg * Math.PI / 180, cs = Math.cos(a), sn = Math.sin(a);
     e.set(q, e.pts.map((p) => [r2(c[0] + (p[0] - c[0]) * cs - (p[1] - c[1]) * sn), r2(c[1] + (p[0] - c[0]) * sn + (p[1] - c[1]) * cs), ...p.slice(2)]));
@@ -272,12 +272,14 @@ window.MAPEDIT = (() => {
   }
 
   // ------------------------------------------------------------------ tools
-  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"], ["frontage", "Frontage", "E", "Click a plot's side that faces a street"], ["stamp", "Stamp", "K", "Copy records (with their dress) from the map or a source and place them"], ["face", "Face", "C", "Click a building's side to dress it: windows, doors, shopfronts, stains, add-ons"], ["goods", "Goods", "O", "Click inside a lean-to, stall, heap or bin to put an item there"], ["ground", "Ground", "D", "Paint a patch of ground: click points, Enter to finish"], ["relief", "Relief", "H", "Drag a box for a bump-and-dip grid; click a cell to raise it, ⌥-click to lower"], ["litter", "Litter", "X", "Click to drop a piece of litter"]];
+  const TOOLS = [["select", "Select", "V", "Select, move, turn, delete"], ["street", "Street", "S", "A road, street, lane or path: click points, Enter to finish"], ["building", "Building", "B", "Drag a box"], ["plot", "Plot", "P", "Drag a box"], ["wall", "Wall", "W", "Click points, Enter to finish"], ["gate", "Gate", "G", "Click a wall where the gate starts, then where it ends"], ["leanto", "Lean-to", "L", "Click a building side (or a wall) where it starts, then where it ends"], ["tree", "Tree", "T", "Click to plant"], ["furniture", "Furniture", "F", "Stalls, poles, parked vehicles, furniture, heaps: click to place"], ["place", "Place", "A", "What the game uses a spot for: drag a box"], ["surface", "Surface", "U", "Click a road to give it the surface"], ["frontage", "Frontage", "E", "Click a plot's side that faces a street"], ["stamp", "Stamp", "K", "Copy records (with their dress) from the map or a source and place them"], ["face", "Face", "C", "Click a building's side to dress it: windows, doors, shopfronts, stains, add-ons"], ["goods", "Goods", "O", "Click inside a lean-to, stall, heap or bin to put an item there"], ["ground", "Ground", "D", "Paint a patch of ground: click points, Enter to finish"], ["relief", "Relief", "H", "Drag a box for a bump-and-dip grid; click a cell to raise it, ⌥-click to lower"], ["litter", "Litter", "X", "Click to drop a piece of litter"], ["brush", "Brush", "N", "Brush litter, goods, relief or ground paint: every stroke writes full records (⌥ erases)"], ["person", "Person", "I", "A person spot: where someone does something, and when. Click (drag to face them)"]];
   const KINDS = () => ({
     street: SCHEMA.enums.road_kind.map((k) => [k, k]), building: SCHEMA.enums.house_type.map((k) => [k, k]), plot: SCHEMA.enums.plot_kind.map((k) => [k, k]),
     tree: SCHEMA.enums.tree_kind.map((k) => [k, k]), place: SCHEMA.enums.place_kind.map((k) => [k, k]), surface: SCHEMA.enums.road_surface.map((k) => [k, k]), frontage: SCHEMA.enums.frontage_kind.map((k) => [k, k]),
     goods: [["on the ground", "items"], ["hung", "hung"]].map(([g, t]) => [g, SCHEMA.enums.goods_kind.map((k) => [t + ":" + k, k])]),
     ground: SCHEMA.enums.ground_kind.map((k) => [k, k]), litter: SCHEMA.enums.litter_kind.map((k) => [k, k]), relief: [["0.5", "new grid: 0.5 m cells"], ["0.25", "new grid: 0.25 m cells"], ["1", "new grid: 1 m cells"]],
+    brush: [["litter", "litter brush"], ["goods:items", "goods brush (on the ground)"], ["goods:hung", "goods brush (hung)"], ["relief", "relief brush"], ["ground", "ground paint brush"]],
+    person: SCHEMA.enums.person_activity.map((k) => [k, k]),
     furniture: [["stall", "stall_kind"], ["pole", "pole_kind"], ["vehicle", "vehicle_kind"], ["furniture", "furniture_kind"], ["heap", "heap_kind"]].map(([t, e]) => [t, SCHEMA.enums[e].map((k) => [t + ":" + k, k])]),
   });
   let selRow = null;   // a picked row of a dress table (a goods item, a litter piece): {id, t, i}
@@ -294,6 +296,7 @@ window.MAPEDIT = (() => {
     const ks = $("mkind"), K = KINDS()[t];
     ks.innerHTML = !K ? "" : Array.isArray(K[0][1]) ? K.map(([g, L]) => `<optgroup label="${g}">${L.map(([v, l]) => `<option value="${v}">${l}</option>`).join("")}</optgroup>`).join("") : K.map(([v, l]) => `<option value="${v}">${l}</option>`).join("");
     ks.style.display = K ? "" : "none";
+    if (t === "brush") { if (![...ks.options].some((o) => o.value === BR.mode)) BR.mode = ks.value; ks.value = BR.mode; }
     $("msnap").style.display = t === "street" || (t === "select" && sel && sel.type === "road") ? "" : "none";
     V.cv.className = t === "select" ? "" : "place";
     showPanel(); V.draw();
@@ -349,7 +352,7 @@ window.MAPEDIT = (() => {
     if (r.type === "furniture") return boxPts(r.at, r.length > 0 ? r.length : 0.8, 0.6, r.turn);
     return null;
   }
-  const thingR = (r) => r.type === "tree" ? (r.kind === "palm" ? 2.5 : r.kind === "shrub" ? 1 : 3.5) : r.type === "heap" ? (r.r > 0 ? r.r : 1) : 0.3;
+  const thingR = (r) => r.type === "tree" ? (r.kind === "palm" ? 2.5 : r.kind === "shrub" ? 1 : 3.5) : r.type === "heap" ? (r.r > 0 ? r.r : 1) : r.type === "person_spot" ? 0.35 : 0.3;
   const MAPW = { list: (types) => recsOf(types), get: (id) => rec(id) };
   function pick(p, W = MAPW) {   // the record under p: small things first, then lean-tos, buildings, the ground, lines, roads, plots, places
     const tol = Math.max(0.5, 7 / V.s), L = W.list;
@@ -457,12 +460,12 @@ window.MAPEDIT = (() => {
   }
   function groupOf(ids) {   // the picked records and what hangs on them: dress (of), lean-tos (against), wires (from_pole)
     const W = srcW(), all = W.list(null), out = new Map(), q = [...ids];
-    while (q.length) { const id = q.pop(); if (out.has(id)) continue; const r = W.get(id); if (!r) continue; out.set(id, r); for (const c of all) if (!out.has(c.id) && (c.of === id || c.against === id || c.from_pole === id)) q.push(c.id); }
+    while (q.length) { const id = q.pop(); if (out.has(id)) continue; const r = W.get(id); if (!r) continue; out.set(id, r); for (const c of all) if (!out.has(c.id) && (c.of === id || c.against === id || c.from_pole === id || c.parent === id)) q.push(c.id); }
     return [...out.values()];
   }
   function rootOf(id) {   // a lean-to or a dress record has no place of its own: copy what it stands on, with it
     const W = srcW(), seen = new Set(); let r = W.get(id);
-    while (r && !seen.has(r.id)) { seen.add(r.id); const up = W.get(r.against || r.of); if (!up) break; r = up; }
+    while (r && !seen.has(r.id)) { seen.add(r.id); const up = W.get(r.against || r.of || r.parent); if (!up) break; r = up; }
     return r ? r.id : id;
   }
   function groupPts(G) { const W = srcW(), P = []; for (const r of G) P.push(...allPts(r, W.get).map((q) => q.slice(0, 2))); return P; }
@@ -507,6 +510,318 @@ window.MAPEDIT = (() => {
     }
   }
 
+  // ------------------------------------------------------------------ brushes (decisions: "The map format's four calls", "One ground truth")
+  // A stroke writes full records: the same table rows the one-by-one tools write (a litter piece, a goods item), a relief
+  // grid's cells, a ground patch's rings, every value written out. No seed, no density, nothing the kit has to expand.
+  // Chance is used only here, while brushing, to pick where each piece lies and the values the panel sets to "random";
+  // a column left "unset" stays unset (amber). A stroke is one save, so one undo takes the whole stroke back.
+  const BR = { mode: "litter", size: 1.5, spacing: 0.4, erase: false, scatter: { litter: "clumps", goods: "even" }, pull: { litter: 0.7, goods: 0 },
+    cols: { litter_piece: { kind: { m: "mix" }, colour: { m: "mix" }, z: { m: "value", v: 0 }, turn: { m: "range", a: 0, b: 360 }, tilt: { m: "range", a: -10, b: 10 }, w: { m: "mix" }, d: { m: "mix" }, h: { m: "mix" }, age: { m: "mix" }, buried: { m: "mix" } } },
+    relief: { op: "raise", mm: 20 }, ground: { kind: "", colour: "", broken: 0.5 } };
+  try {   // the last brush settings, kept per board (a convenience: the map holds only what the strokes wrote)
+    const o = JSON.parse(localStorage.getItem("gidi-map-brush") || "{}");
+    if (o && typeof o === "object") for (const [k, v] of Object.entries(o)) { if (k === "cols" && v && typeof v === "object") { for (const [tb, C] of Object.entries(v)) BR.cols[tb] = Object.assign(BR.cols[tb] || {}, C); } else if (BR[k] && typeof BR[k] === "object" && v && typeof v === "object") Object.assign(BR[k], v); else if (k in BR) BR[k] = v; }
+  } catch (e) {}
+  const saveBR = () => { try { localStorage.setItem("gidi-map-brush", JSON.stringify(BR)); } catch (e) {} };
+  const BR_T = { litter: "litter_piece", "goods:items": "item", "goods:hung": "item" };   // the table each brush writes rows of
+  const famOf = (mode) => (mode === "litter" ? "litter" : mode.startsWith("goods") ? "goods" : null);
+  let stroke = null, brAlt = false;
+  const maker = (tb, c) => (BR.cols[tb] && BR.cols[tb][c]) || { m: "unset" };
+  // "natural mix" (litter only): sizes mostly small, some medium, a few big; ages fresh, weathered and old, the old ones
+  // often part buried. Each is picked once per piece, at stroke time, and every value is written into its row.
+  const LIT_SIZE = { sachet: [0.12, 0.07, 0.01], bag: [0.3, 0.25, 0.12], bottle: [0.24, 0.07, 0.07], pack: [0.16, 0.1, 0.04], can: [0.12, 0.066, 0.066], husk: [0.18, 0.12, 0.1], paper: [0.21, 0.15, 0.005], rag: [0.4, 0.3, 0.04], tyre: [0.6, 0.6, 0.18] };   // w, d, h of a usual one, m
+  // the street mix (the old kit's, legacy street.py LITTER): colour, kind, how common; paper, rags and tyres only when picked
+  const LIT_MIX = [["#e8f0f4", "sachet", 5], ["#9ccbe8", "sachet", 2], ["#1c1c1c", "bag", 3], ["#1e6fd0", "bag", 1], ["#d32f2f", "bag", 1], ["#cfe3d6", "bottle", 2], ["#ffffff", "pack", 1.5], ["#c0c0c0", "can", 1], ["#d9b85a", "husk", 1]];
+  const LIT_COL = { paper: ["#d8d4cc", "#c9c3b5", "#e8e6e0", "#c8b48a"], rag: ["#c62828", "#f9a825", "#1f6fb8", "#2e9a46", "#e8dcc0", "#3b2a1a"], tyre: ["#1c1c1c"] };
+  function fromMix(L) { let u = Math.random() * L.reduce((a, x) => a + x[2], 0); for (const x of L) { u -= x[2]; if (u <= 0) return x; } return L[L.length - 1]; }
+  const RIGID = new Set(["bottle", "can", "tyre"]);   // these come in fewer sizes
+  const MIXABLE = new Set(["kind", "colour", "w", "d", "h", "age", "buried"]);
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const r3 = (v) => Math.round(v * 1000) / 1000;
+  function pieceCtx(tb) {   // one piece's kind, size class and age, so its columns agree with each other
+    const P = { kind: maker(tb, "kind").m === "mix" ? null : makeVal(tb, "kind", "enum:litter_kind") };
+    if (maker(tb, "kind").m === "mix") { const x = fromMix(LIT_MIX); P.kind = x[1]; P.colour = x[0]; }
+    const u = Math.random(); let k = u < 0.72 ? rnd(0.6, 1) : u < 0.93 ? rnd(1, 1.7) : rnd(1.8, 3);
+    if (RIGID.has(P.kind)) k = 1 + (k - 1) * 0.35;
+    P.k = k;
+    const a = Math.random();
+    if (a < 0.3) { P.age = r2(rnd(0, 0.2)); P.buried = 0; }
+    else if (a < 0.7) { P.age = r2(rnd(0.3, 0.65)); P.buried = Math.random() < 0.3 ? r2(rnd(0.05, 0.25)) : 0; }
+    else { P.age = r2(rnd(0.7, 1)); P.buried = Math.random() < 0.7 ? r2(rnd(0.2, 0.85)) : 0; }
+    return P;
+  }
+  function makeVal(tb, c, sp, P) {   // one piece's value for a column: unset (null), the value, a random one between two, one of a list, or the natural mix
+    const M = maker(tb, c), f = spec(sp);
+    if (M.m === "value" && M.v !== undefined && M.v !== null && M.v !== "") return M.v;
+    if (M.m === "range" && isFinite(M.a) && isFinite(M.b)) { const v = M.a + Math.random() * (M.b - M.a); return f.base === "int" ? Math.round(v) : r2(v); }
+    if (M.m === "pick" && Array.isArray(M.list) && M.list.length) return M.list[Math.floor(Math.random() * M.list.length)];
+    if (M.m === "mix" && P && tb === "litter_piece") {
+      if (c === "age" || c === "buried") return P[c];
+      if (c === "colour") { if (P.colour) return P.colour; const L = LIT_MIX.filter((x) => x[1] === P.kind); return L.length ? fromMix(L)[0] : LIT_COL[P.kind] ? LIT_COL[P.kind][Math.floor(Math.random() * LIT_COL[P.kind].length)] : null; }
+      const i = ["w", "d", "h"].indexOf(c); if (i < 0) return null;
+      const base = (LIT_SIZE[P.kind] || [0.2, 0.15, 0.05])[i]; return Math.max(0.001, r3(base * P.k * rnd(0.9, 1.1)));
+    }
+    return null;
+  }
+  function kindFilter(tb) { const M = maker(tb, "kind"); return M.m === "value" && M.v ? [M.v] : M.m === "pick" && M.list && M.list.length ? M.list : null; }   // what the eraser takes (every kind when none is chosen)
+  function hostShape(h) {   // goods lie inside their lean-to, stall, heap or bin
+    if (h.type === "heap") return (p) => dist(p, h.at) <= thingR(h);
+    const q = h.type === "leanto" ? leantoQuad(h) : thingPts(h); return q ? (p) => inPoly(p, q) : () => false;
+  }
+  function brushDown(ev, p) {
+    const mode = BR.mode, d = dHere(p), erase = BR.erase || ev.altKey;
+    const S = { mode, erase, d, dd: d, last: p, path: [p], touched: new Map(), made: [], cells: new Map(), n: 0 };   // touched: id -> its record before the stroke
+    if (!d || !started.has(d) || !DS.has(d)) { toast(d ? `${d} isn't started: pick it under "Draw in" to start it` : "That's outside every district"); return; }
+    if (mode === "ground" && erase) { toast("The ground brush has no eraser: pick a patch with Select and delete it, or drag its corners"); return; }
+    if (mode === "relief" && !recsOf(["relief"]).some((r) => dOf.get(r.id) === d && reliefBox(r) && inPoly(p, reliefBox(r)))) { toast("Start on a relief grid: drag a box with Relief (H) first, then brush it"); return; }
+    if ((mode === "litter" || mode.startsWith("goods")) && !erase) {
+      const [rt, t] = mode === "litter" ? ["litter", "pieces"] : ["goods", mode.split(":")[1]];
+      let r, host = null;
+      if (rt === "goods") { host = goodsHostAt(p); if (!host) { toast("Start the stroke inside a lean-to, stall, heap or bin"); return; } r = recsOf(["goods"]).find((g) => g.of === host.id); S.dd = dOf.get(host.id); }
+      else r = sel && sel.type === "litter" && dOf.get(sel.id) === d ? sel : recsOf(["litter"]).find((l) => dOf.get(l.id) === d && piecePts(l).some((q) => dist(q, p) < 5));
+      if (r) S.touched.set(r.id, clone(r));
+      else {   // a new record, shown while brushing and saved at the end
+        r = { id: newId(rt), type: rt }; if (host) r.of = host.id;
+        for (const [k, sp] of Object.entries(SCHEMA.records[rt].fields)) { const f = spec(sp); if (f.base === "table") r[k] = { cols: SCHEMA.tables[f.arg].map(([c]) => c), rows: [] }; }
+        DS.get(S.dd).recs.set(r.id, r); dOf.set(r.id, S.dd); S.made.push(r.id);
+      }
+      const fam = famOf(mode);
+      Object.assign(S, { r, t, tb: BR_T[mode], fam, inside: host ? hostShape(host) : () => true, pts: rowsOf(r[t]).map((o) => pieceXY(r, o)).filter(Boolean),
+        clumps: BR.scatter[fam] === "clumps", pull: Math.max(0, Math.min(1, +BR.pull[fam] || 0)), edges: edgesFor(d, host), roofs: fam === "litter" ? roofsIn(d) : [] });
+    }
+    stroke = S; dab(p, 0); V.draw();
+  }
+  // Where pieces land. "Clumps" (litter's default) goes along the stroke in spells: a clump (a few tight heaps, dense in the
+  // middle), a thin trail (a piece now and then), an empty gap; the spell lengths are thrown as the brush moves. "Even" keeps
+  // darts where no piece lies closer than the spacing. The pull moves a share of the pieces up against the nearest edge.
+  function edgesFor(d, host) {   // the lines rubbish collects against: kerbs, the foot of walls and houses, stall and lean-to sides, poles
+    if (host) { const q = host.type === "leanto" ? leantoQuad(host) : thingPts(host); return q ? q.map((a, i) => [a, q[(i + 1) % q.length]]) : []; }
+    const E = [], mine = (r) => dOf.get(r.id) === d, ring = (q) => q.forEach((a, i) => E.push([a, q[(i + 1) % q.length]]));
+    for (const r of recsOf(["road"])) if (mine(r) && Array.isArray(r.centreline) && r.width > 0) {
+      const C = r.centreline, h = r.width / 2;
+      for (let i = 0; i < C.length - 1; i++) { const a = C[i], b = C[i + 1], L = dist(a, b) || 1, n = [-(b[1] - a[1]) / L * h, (b[0] - a[0]) / L * h]; E.push([[a[0] + n[0], a[1] + n[1]], [b[0] + n[0], b[1] + n[1]]], [[a[0] - n[0], a[1] - n[1]], [b[0] - n[0], b[1] - n[1]]]); }
+    }
+    for (const r of recsOf(["building"])) if (mine(r) && Array.isArray(r.footprint) && r.footprint.length > 2) ring(r.footprint);
+    for (const r of recsOf(["wall", "frontage"])) if (mine(r) && Array.isArray(r.line)) for (let i = 0; i < r.line.length - 1; i++) E.push([r.line[i], r.line[i + 1]]);
+    for (const r of recsOf(["leanto", "stall", "furniture", "vehicle"])) { if (!mine(r)) continue; const q = r.type === "leanto" ? leantoQuad(r) : thingPts(r); if (q) ring(q); }
+    for (const r of recsOf(["pole", "tree", "heap"])) if (mine(r) && Array.isArray(r.at)) E.push([r.at, r.at]);
+    return E;
+  }
+  const roofsIn = (d) => recsOf(["building"]).filter((r) => dOf.get(r.id) === d && Array.isArray(r.footprint) && r.footprint.length > 2).map((r) => ({ fp: r.footprint, bb: bboxOf(r.footprint) }));
+  function pulled(q, R) {   // up against the nearest edge within reach, most pieces hard against it, a few a little off
+    let best = null, bd = R + 1;
+    for (const [a, b] of stroke.edges) { if (Math.min(a[0], b[0]) - bd > q[0] || Math.max(a[0], b[0]) + bd < q[0] || Math.min(a[1], b[1]) - bd > q[1] || Math.max(a[1], b[1]) + bd < q[1]) continue; const e = nearestOnSeg(q, a, b), dd = dist(q, e); if (dd < bd) { bd = dd; best = e; } }
+    if (!best || bd < 1e-4) return q;
+    const t = 0.03 + bd * 0.35 * Math.random() ** 2;
+    return [best[0] + (q[0] - best[0]) / bd * t, best[1] + (q[1] - best[1]) / bd * t];
+  }
+  const gauss = () => Math.sqrt(-2 * Math.log(1 - Math.random())) * Math.cos(2 * Math.PI * Math.random());
+  function putPiece(q, minD) {   // one row at q, if it lands where it may
+    const S = stroke;
+    if (S.pull > 0 && Math.random() < S.pull) q = pulled(q, Math.max(0.05, +BR.size || 1));
+    if (!S.inside(q) || S.roofs.some((b) => q[0] >= b.bb[0] && q[0] <= b.bb[2] && q[1] >= b.bb[1] && q[1] <= b.bb[3] && inPoly(q, b.fp))) return false;
+    for (const o of S.pts) if (Math.abs(o[0] - q[0]) < minD && Math.abs(o[1] - q[1]) < minD && dist(o, q) < minD) return false;
+    const xy = toLocal(S.r, q); if (!xy) return false;
+    const tab = S.r[S.t], T = S.T || (S.T = new Map(SCHEMA.tables[S.tb])), P = S.tb === "litter_piece" ? pieceCtx(S.tb) : null;
+    tab.rows.push(tab.cols.map((cn) => (cn === "x" ? xy[0] : cn === "y" ? xy[1] : P && cn === "kind" ? P.kind : makeVal(S.tb, cn, T.get(cn) || "num", P))));
+    S.pts.push(q); S.n++; return true;
+  }
+  function dab(c, step) {   // one touch of the brush at c, step metres on from the last
+    const S = stroke, R = Math.max(0.05, +BR.size || 1);
+    if (S.mode === "ground") return;
+    if (S.mode === "relief") return reliefDab(c, R);
+    if (S.erase) return eraseDab(c, R);
+    const sp = Math.max(0.02, +BR.spacing || 0.3);
+    if (!S.clumps) { for (let k = 0, n = Math.min(300, Math.ceil(2 * R * R / (sp * sp))); k < n; k++) { const a = Math.random() * 2 * Math.PI, rr = R * Math.sqrt(Math.random()); putPiece([c[0] + rr * Math.cos(a), c[1] + rr * Math.sin(a)], sp); } return; }
+    const ph = S.ph || (S.ph = { k: "", left: 0 });
+    ph.left -= step;
+    if (ph.left <= 0) {   // the next spell: after a clump a trail or a gap, after a gap mostly a clump
+      const u = Math.random();
+      ph.k = ph.k === "" ? "clump" : ph.k === "clump" ? (u < 0.6 ? "trail" : "gap") : ph.k === "trail" ? (u < 0.55 ? "clump" : "gap") : (u < 0.7 ? "clump" : "trail");
+      ph.left = R * (ph.k === "clump" ? rnd(0.6, 1.4) : ph.k === "trail" ? rnd(0.8, 2.5) : rnd(0.6, 2));
+      if (ph.k === "clump") for (let m = 1 + (Math.random() < 0.35) + (Math.random() < 0.15); m > 0; m--) {   // one to three heaps, each a cloud thick in the middle
+        const a = Math.random() * 2 * Math.PI, rr = R * 0.6 * Math.sqrt(Math.random()), o = [c[0] + rr * Math.cos(a), c[1] + rr * Math.sin(a)], sg = R * rnd(0.12, 0.35);
+        const n = Math.max(3, Math.min(60, Math.round(Math.PI * sg * sg / (sp * sp) * rnd(1.2, 2.4))));
+        for (let k = 0, got = 0; k < n * 3 && got < n; k++) got += putPiece([o[0] + gauss() * sg, o[1] + gauss() * sg], sp * 0.45) ? 1 : 0;
+      }
+    }
+    if (ph.k === "trail") {   // a piece every few spacings, near the brush's line
+      let e = step / (sp * rnd(3, 7)); for (; e > 0; e--) if (Math.random() < Math.min(1, e)) { const g = Math.min(R, Math.abs(gauss()) * R * 0.3), a = Math.random() * 2 * Math.PI; putPiece([c[0] + g * Math.cos(a), c[1] + g * Math.sin(a)], sp); }
+    }
+  }
+  function eraseDab(c, R) {   // take the rows of the chosen kinds under the brush
+    const S = stroke, [rt, ts] = S.mode === "litter" ? ["litter", ["pieces"]] : ["goods", [S.mode.split(":")[1]]], K = kindFilter(BR_T[S.mode]);
+    for (const r of recsOf([rt])) {
+      if (dOf.get(r.id) !== S.d) continue;
+      for (const t of ts) {
+        const tab = r[t]; if (!tab || !Array.isArray(tab.rows)) continue;
+        const ki = tab.cols.indexOf("kind"), keep = tab.rows.filter((row) => { const q = pieceXY(r, Object.fromEntries(tab.cols.map((cn, i) => [cn, row[i]]))); return !(q && dist(q, c) <= R && (!K || K.includes(row[ki]))); });
+        if (keep.length === tab.rows.length) continue;
+        if (!S.touched.has(r.id)) S.touched.set(r.id, clone(r));
+        S.n += tab.rows.length - keep.length; tab.rows = keep;
+      }
+    }
+  }
+  function reliefDab(c, R) {   // each cell under the stroke changes once, softer toward the brush's edge
+    const S = stroke, op = BR.relief.op, mm = +BR.relief.mm || 0, sg = S.erase ? -1 : 1;
+    for (const r of recsOf(["relief"])) {
+      const b = reliefBox(r); if (!b || dOf.get(r.id) !== S.d || !Array.isArray(r.z_mm)) continue;
+      const g = r.cell, i0 = Math.max(0, Math.ceil((c[0] - R - r.origin[0]) / g)), i1 = Math.min(r.cols - 1, Math.floor((c[0] + R - r.origin[0]) / g)), j0 = Math.max(0, Math.ceil((c[1] - R - r.origin[1]) / g)), j1 = Math.min(r.rows - 1, Math.floor((c[1] + R - r.origin[1]) / g));
+      if (i0 > i1 || j0 > j1) continue;
+      if (!S.touched.has(r.id)) { S.touched.set(r.id, clone(r)); S.cells.set(r.id, new Set()); }
+      const done = S.cells.get(r.id), z0 = S.touched.get(r.id).z_mm, at = (i, j) => z0[j * r.cols + i] || 0;
+      for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) {
+        const k = j * r.cols + i, dd = dist([r.origin[0] + i * g, r.origin[1] + j * g], c); if (dd > R || done.has(k)) continue;
+        done.add(k); S.n++;
+        const w = 1 - (dd / R) ** 2; let z = at(i, j);
+        if (op === "raise") z += sg * mm * w; else if (op === "lower") z -= sg * mm * w;
+        else if (op === "bumps") z += (Math.random() * 2 - 1) * mm * w;
+        else if (op === "smooth") { let s = 0, n = 0; for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const ii = i + di, jj = j + dj; if (ii >= 0 && jj >= 0 && ii < r.cols && jj < r.rows) { s += at(ii, jj); n++; } } z += (s / n - z) * w; }
+        else if (op === "flatten") z *= 1 - w;
+        r.z_mm[k] = Math.round(z);
+      }
+    }
+  }
+  function brushMove(p) {   // dabs at even steps along the pointer's path, so a fast stroke leaves no gaps
+    const S = stroke, step = Math.max(0.05, (+BR.size || 1) / (S.mode === "ground" ? 4 : 2));
+    for (let L = dist(S.last, p); L >= step; L = dist(S.last, p)) { const t = step / L, q = [S.last[0] + (p[0] - S.last[0]) * t, S.last[1] + (p[1] - S.last[1]) * t]; S.last = q; S.path.push(q); dab(q, step); }
+    V.draw();
+  }
+  async function brushUp() {
+    const S = stroke; stroke = null; if (!S) return;
+    if (S.mode === "ground") { S.path.push(cursor || S.last); return groundStroke(S); }
+    const out = [];
+    for (const [id, before] of S.touched) { const r = rec(id); if (!r) continue; out.push(clone(r)); Object.keys(r).forEach((k) => delete r[k]); Object.assign(r, before); }   // the saved ones come back from the save
+    for (const id of S.made) { const r = rec(id); DS.get(dOf.get(id)).recs.delete(id); dOf.delete(id); if (r) out.push(r); }
+    const empty = (q) => (q.type === "litter" ? !q.pieces.rows.length : q.type === "goods" ? !q.items.rows.length && !q.hung.rows.length : false);
+    const keep = out.filter((q) => !empty(q)), gone = out.filter((q) => empty(q) && !S.made.includes(q.id)).map((q) => q.id);   // a record left with no rows goes
+    if (!S.n || (!keep.length && !gone.length)) { V.draw(); return; }
+    const what = S.mode === "relief" ? `Brushed ${S.n} relief cell${S.n > 1 ? "s" : ""}` : `${S.erase ? "Erased" : "Brushed"} ${S.n} ${S.mode === "litter" ? "litter piece" : "goods item"}${S.n > 1 ? "s" : ""}`;
+    await saveStroke(S.dd, keep, gone, what);
+  }
+  async function saveStroke(d, records, remove, what) {
+    const j = await api("/api/map/save", { d, records, remove });
+    if (!j) { await load(d); return; }
+    applyChanges(d, records, j.removed, j.problems); lastMsg = what; toast(what + ": ⌘Z takes the whole stroke back");
+    if (sel) sel = rec(sel.id); V.draw(); showPanel();
+  }
+  async function groundStroke(S) {
+    const rings = sweptRings(S.path, Math.max(0.05, +BR.size || 1)); if (!rings.length) { V.draw(); return; }
+    const g = { id: newId("ground"), type: "ground", rings, order: Math.max(0, ...recsOf(["ground"]).map((x) => x.order || 0)) + 1 };
+    if (BR.ground.kind) g.kind = BR.ground.kind;   // left out, it needs a value (amber)
+    if (/^#[0-9a-f]{6}$/.test(BR.ground.colour || "")) g.colour = BR.ground.colour;
+    await saveStroke(S.d, [g], [], `Painted ${g.kind || "ground (kind still to set)"}${rings.length > 1 ? `, ${rings.length} patches` : ""}`);
+  }
+  function valueNoise() {   // smooth noise in -1..1 over the plane, its table thrown now (stroke time) and never stored
+    const T = Float32Array.from({ length: 1024 }, () => Math.random() * 2 - 1), h = (i, j) => T[(Math.imul(i, 374761393) ^ Math.imul(j, 668265263)) >>> 22], sm = (t) => t * t * (3 - 2 * t);
+    return (x, y) => { const i = Math.floor(x), j = Math.floor(y), u = sm(x - i), v = sm(y - j), a = h(i, j), b = h(i + 1, j), c = h(i, j + 1), d = h(i + 1, j + 1); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; };
+  }
+  function sweptRings(path, R) {   // the outline of the ground the stroke covers: cells on a fine grid, holes filled, edges traced
+    // A broken edge: the reach from the stroke swells and bites with noise at two sizes, and crumbs lie loose just past it.
+    const br = Math.max(0, Math.min(1, +BR.ground.broken || 0)), amp = 0.55 * br, Rx = R * (1 + amp * 1.6);
+    const c = Math.max(0.04, R / (br > 0 ? 8 : 4)), b = bboxOf(path), x0 = b[0] - Rx - 2 * c, y0 = b[1] - Rx - 2 * c, nx = Math.ceil((b[2] - b[0] + 2 * Rx) / c) + 5, ny = Math.ceil((b[3] - b[1] + 2 * Rx) / c) + 5;
+    if (nx * ny > 3e6) { toast("That stroke is too big for one patch: paint it in shorter strokes or with a smaller brush"); return []; }
+    const D = new Float32Array(nx * ny).fill(1e9), segs = path.length > 1 ? path.slice(1).map((q, i) => [path[i], q]) : [[path[0], path[0]]];
+    for (const [a, q] of segs) {
+      const i0 = Math.max(0, Math.floor((Math.min(a[0], q[0]) - Rx - x0) / c)), i1 = Math.min(nx - 1, Math.ceil((Math.max(a[0], q[0]) + Rx - x0) / c)), j0 = Math.max(0, Math.floor((Math.min(a[1], q[1]) - Rx - y0) / c)), j1 = Math.min(ny - 1, Math.ceil((Math.max(a[1], q[1]) + Rx - y0) / c));
+      for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) { const k = j * nx + i, dd = segDist([x0 + (i + 0.5) * c, y0 + (j + 0.5) * c], a, q); if (dd < D[k]) D[k] = dd; }
+    }
+    const F = new Uint8Array(nx * ny), N1 = valueNoise(), N2 = valueNoise(), N3 = valueNoise(), s1 = 1 / (0.8 * R), s2 = 1 / (0.25 * R), s3 = 1 / (0.12 * R);
+    for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+      const k = j * nx + i; if (D[k] > Rx) continue;
+      if (!br) { F[k] = D[k] <= R ? 1 : 0; continue; }
+      const x = x0 + (i + 0.5) * c, y = y0 + (j + 0.5) * c, reach = R * (1 + amp * (0.65 * N1(x * s1, y * s1) + 0.35 * N2(x * s2, y * s2)));
+      F[k] = D[k] <= reach || (D[k] <= Rx && N3(x * s3, y * s3) > 1 - 0.5 * br) ? 1 : 0;   // inside the swelling reach, or a crumb
+    }
+    for (let pass = 0, fixed = 1; fixed && pass < 4; pass++) {   // two cells touching only at a corner make a ring cross itself: fill one side
+      fixed = 0;
+      for (let j = 0; j < ny - 1; j++) for (let i = 0; i < nx - 1; i++) { const k = j * nx + i, a = F[k], b2 = F[k + 1], c2 = F[k + nx], d = F[k + nx + 1]; if (a === d && b2 === c2 && a !== b2) { if (a) F[k + 1] = 1; else F[k] = 1; fixed = 1; } }
+    }
+    const out = new Uint8Array(nx * ny), st = [0]; out[0] = 1;   // the outside, flooded from a corner; what it can't reach is painted
+    while (st.length) { const k = st.pop(), i = k % nx, j = (k - i) / nx; for (const [ii, jj] of [[i + 1, j], [i - 1, j], [i, j + 1], [i, j - 1]]) { if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue; const kk = jj * nx + ii; if (!out[kk] && !F[kk]) { out[kk] = 1; st.push(kk); } } }
+    const on = (i, j) => i >= 0 && j >= 0 && i < nx && j < ny && !out[j * nx + i];
+    const nxt = new Map(), key = (i, j) => i + "," + j, edge = (a, q) => { const k = key(...a); if (!nxt.has(k)) nxt.set(k, []); nxt.get(k).push(q); };
+    for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {   // each painted cell's sides that face the outside, clockwise on the board
+      if (!on(i, j)) continue;
+      if (!on(i, j - 1)) edge([i, j], [i + 1, j]); if (!on(i + 1, j)) edge([i + 1, j], [i + 1, j + 1]);
+      if (!on(i, j + 1)) edge([i + 1, j + 1], [i, j + 1]); if (!on(i - 1, j)) edge([i, j + 1], [i, j]);
+    }
+    const rings = [];
+    for (const [k0, L] of nxt) while (L.length) {
+      const loop = [k0.split(",").map(Number)];
+      let v = L.pop();
+      while (key(...v) !== k0) { loop.push(v); const M = nxt.get(key(...v)); if (!M || !M.length) break; v = M.pop(); }
+      let P = loop.filter((p, i) => { const a = loop[(i + loop.length - 1) % loop.length], q = loop[(i + 1) % loop.length]; return (p[0] - a[0]) * (q[1] - p[1]) - (p[1] - a[1]) * (q[0] - p[0]) !== 0; }).map(([i, j]) => [x0 + i * c, y0 + j * c]);
+      if (P.length < 3) continue;
+      const S = simplifyRing(P, c * 0.6); if (S.length >= 3 && !ringCrosses(S)) P = S;
+      P = P.map((p) => [r2(p[0]), r2(p[1])]);
+      if (Math.abs(signedArea(P)) > Math.max(0.02, 2 * c * c) && !ringCrosses(P)) rings.push(P);
+    }
+    return rings;
+  }
+  function simplifyRing(P, tol) {   // Douglas-Peucker on a closed ring, split at the point farthest from the first
+    const dp = (L) => { if (L.length < 3) return L; let im = 0, dm = 0; for (let i = 1; i < L.length - 1; i++) { const d = segDist(L[i], L[0], L[L.length - 1]); if (d > dm) { dm = d; im = i; } } return dm <= tol ? [L[0], L[L.length - 1]] : dp(L.slice(0, im + 1)).slice(0, -1).concat(dp(L.slice(im))); };
+    let f = 0; P.forEach((p, i) => { if (dist(p, P[0]) > dist(P[f], P[0])) f = i; });
+    return dp(P.slice(0, f + 1)).slice(0, -1).concat(dp(P.slice(f).concat([P[0]])).slice(0, -1));
+  }
+  function ringCrosses(P) { const n = P.length; for (let i = 0; i < n; i++) for (let j = i + 2; j < n; j++) { if (i === 0 && j === n - 1) continue; if (segsCross(P[i], P[(i + 1) % n], P[j], P[(j + 1) % n])) return true; } return false; }
+  function parentNear(p) {   // what a new person spot belongs to: the stall, lean-to, vehicle, furniture or heap it stands at, else the house it is in (a link, not a value)
+    const d = dHere(p); let best = null, bd = 1.5;
+    for (const r of recsOf(["stall", "vehicle", "furniture", "heap", "leanto"])) {
+      if (dOf.get(r.id) !== d) continue;
+      const q = r.type === "leanto" ? leantoQuad(r) : thingPts(r), dd = q ? (inPoly(p, q) ? 0 : ringDist(p, q)) : Array.isArray(r.at) ? Math.max(0, dist(p, r.at) - thingR(r)) : 1e9;
+      if (dd < bd) { bd = dd; best = r; }
+    }
+    return best || recsOf(["building"]).find((r) => dOf.get(r.id) === d && Array.isArray(r.footprint) && r.footprint.length > 2 && inPoly(p, r.footprint)) || null;   // else the house it is in
+  }
+  function drawBrush(ctx, px) {
+    if (tool !== "brush" || !cursor) return;
+    const R = Math.max(0.05, +BR.size || 1), er = (stroke ? stroke.erase : BR.erase || brAlt) && BR.mode !== "ground";
+    if (stroke && stroke.mode === "ground" && stroke.path.length) { path(ctx, stroke.path.concat([cursor])); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = /^#[0-9a-f]{6}$/.test(BR.ground.colour || "") ? BR.ground.colour : GROUND[BR.ground.kind] || "#8a7a66"; ctx.globalAlpha = 0.6; ctx.lineWidth = 2 * R; ctx.stroke(); ctx.globalAlpha = 1; ctx.lineCap = "butt"; }
+    ctx.beginPath(); ctx.arc(cursor[0], cursor[1], R, 0, 7); ctx.strokeStyle = er ? css("--bad") : css("--sel"); ctx.lineWidth = 1.5 * px; ctx.setLineDash(er ? [4 * px, 3 * px] : []); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function colHTML(tb, c, cs) {   // how the brush gives one column its value
+    const f = spec(cs), M = maker(tb, c), da = (fld) => `data-br="col" data-tb="${tb}" data-c="${c}" data-f="${fld}"`;
+    const modes = [["unset", "unset"], ["value", "this value"]].concat(f.base === "num" || f.base === "int" ? [["range", "random between"]] : []).concat(f.base === "enum" || f.base === "hex" ? [["pick", "random from"]] : []).concat(tb === "litter_piece" && MIXABLE.has(c) ? [["mix", c === "age" || c === "buried" ? "natural mix: fresh, old, buried" : c === "kind" ? "street mix: sachets, bags, bottles..." : c === "colour" ? "its kind's colours" : "natural mix: mostly small, a few big"]] : []);
+    let inp = "";
+    if (M.m === "value") inp = f.base === "enum" ? `<select ${da("v")}><option value="">— pick —</option>${SCHEMA.enums[f.arg].map((e) => `<option${e === M.v ? " selected" : ""}>${e}</option>`).join("")}</select>` : f.base === "hex" ? `<span class="hexrow"><input ${da("v")} value="${esc(M.v || "")}" placeholder="#rrggbb"><input type="color" ${da("v")} value="${esc(M.v || "#808080")}"></span>` : `<input type="number" step="any" ${da("v")} value="${M.v ?? ""}" placeholder="${esc(f.rng)}">`;
+    else if (M.m === "range") inp = `<span class="ptrow"><input type="number" step="any" ${da("a")} value="${M.a ?? ""}" placeholder="from"><input type="number" step="any" ${da("b")} value="${M.b ?? ""}" placeholder="to"></span>`;
+    else if (M.m === "pick") inp = f.base === "enum" ? `<div class="chk">${SCHEMA.enums[f.arg].map((e) => `<label><input type="checkbox" ${da("list")} value="${e}"${(M.list || []).includes(e) ? " checked" : ""}>${e}</label>`).join("")}</div>` : `<input ${da("list")} value="${esc((M.list || []).join(", "))}" placeholder="#rrggbb, #rrggbb, …">`;
+    return `<div class="brc"><span class="fk${M.m === "unset" ? " unset" : ""}" title="${esc(cs)}">${c}</span><select ${da("m")}>${modes.map(([v, l]) => `<option value="${v}"${v === M.m ? " selected" : ""}>${l}</option>`).join("")}</select>${inp ? `<div class="bri">${inp}</div>` : ""}</div>`;
+  }
+  function brushHTML() {
+    const m = BR.mode, tb = BR_T[m], lab = { litter: "litter", "goods:items": "goods on the ground", "goods:hung": "goods hung", relief: "relief", ground: "ground paint" }[m] || m;
+    let h = `<h3>Brush: ${esc(lab)}</h3><div class="fld"><span class="fk">size (radius, m)</span><input type="number" step="any" min="0.05" data-br="size" value="${BR.size}"></div>`;
+    if (tb) {
+      const fam = famOf(m);
+      h += `<div class="fld"><span class="fk">spacing (m)</span><input type="number" step="any" min="0.02" data-br="spacing" value="${BR.spacing}"></div>`;
+      h += `<div class="fld"><span class="fk">how they lie</span><select data-br="scatter">${[["clumps", "clumps, trails and gaps"], ["even", "even"]].map(([v, l]) => `<option value="${v}"${BR.scatter[fam] === v ? " selected" : ""}>${l}</option>`).join("")}</select></div>`;
+      h += `<div class="fld"><span class="fk">pull to edges</span><select data-br="pull">${[[0, "off"], [0.4, "some"], [0.7, "most"], [1, "all"]].map(([v, l]) => `<option value="${v}"${Math.abs((+BR.pull[fam] || 0) - v) < 0.05 ? " selected" : ""}>${l}</option>`).join("")}</select></div>`;
+    }
+    if (m !== "ground") h += `<div class="fld"><span class="fk">${m === "relief" ? "the other way" : "erase"}</span><label><input type="checkbox" data-br="erase"${BR.erase ? " checked" : ""}> ${m === "relief" ? "lower where it raises (or hold ⌥)" : "take pieces away (or hold ⌥)"}</label></div>`;
+    if (tb) h += `<fieldset><legend>Each ${m === "litter" ? "piece" : "item"}'s values${tb === "item" ? " (x, y in the host's frame)" : ""}</legend>${SCHEMA.tables[tb].filter(([c]) => c !== "x" && c !== "y").map(([c, cs]) => colHTML(tb, c, cs)).join("")}</fieldset><p class="k">Where each one lies (x, y) comes from the stroke${tb === "item" ? ", inside the lean-to, stall, heap or bin it starts in" : ""}: in clumps (a few tight heaps, then a thin trail or an empty gap, the lengths thrown as you brush) or evenly, none closer than the spacing (closer inside a clump). Pull to edges moves that share of them against the nearest ${tb === "item" ? "side of the host" : "kerb line, wall or house foot, stall or lean-to side, pole or tree"}; litter never lands on a roof. Street mix (kind and colour): the old kit's street litter, sachets most, then black and coloured bags, bottles, packs, cans and corn husks, each in its own colours; paper, rags and tyres only when you pick them. Natural mix: sizes about 7 in 10 small, 2 medium, 1 in 14 big (bottles, cans and tyres vary less); ages 3 in 10 fresh, 4 weathered, 3 old, most of the old part buried. "Random" values are picked now, once, and stored; "unset" stays unset (amber) for you to give. The eraser takes the pieces under it of the kinds chosen above (every kind when kind is unset or the street mix).</p>`;
+    if (m === "relief") h += `<div class="fld"><span class="fk">what it does</span><select data-br="op">${["raise", "lower", "bumps", "smooth", "flatten"].map((o) => `<option${o === BR.relief.op ? " selected" : ""}>${o}</option>`).join("")}</select></div><div class="fld"><span class="fk">by (mm)</span><input type="number" step="1" data-br="mm" value="${BR.relief.mm}"></div><p class="k">Brush over a relief grid (draw one with Relief, H). Each cell under the stroke changes once, less toward the brush's edge; bumps are random heights picked now and stored, cell by cell.</p>`;
+    if (m === "ground") h += `<div class="fld"><span class="fk">kind</span><select data-br="gkind"><option value="">— needs a value —</option>${SCHEMA.enums.ground_kind.map((k) => `<option${k === BR.ground.kind ? " selected" : ""}>${k}</option>`).join("")}</select></div><div class="fld"><span class="fk">colour (optional)</span><span class="hexrow"><input data-br="gcolour" value="${esc(BR.ground.colour || "")}" placeholder="none: #rrggbb"><input type="color" data-br="gcolour" value="${esc(BR.ground.colour || "#808080")}"></span></div><div class="fld"><span class="fk">broken edge</span><select data-br="broken">${[[0, "clean"], [0.3, "a little"], [0.5, "broken"], [0.8, "very broken"]].map(([v, l]) => `<option value="${v}"${Math.abs((+BR.ground.broken || 0) - v) < 0.05 ? " selected" : ""}>${l}</option>`).join("")}</select></div><p class="k">One stroke is one painted patch over the earlier ones, stored as rings: the ground the stroke covers, its edge swelling and bitten at two sizes, with loose crumbs just past it (each crumb its own ring). The edge is thrown now, at stroke time, and stored point by point.</p>`;
+    return h + `<p class="k">Change the brush with the kind list above; <kbd>[</kbd> <kbd>]</kbd> size. One stroke is one save: <kbd>⌘Z</kbd> takes it all back.</p>`;
+  }
+  function brushField(el) {
+    const k = el.dataset.br, v = el.value;
+    if (k === "size" || k === "spacing") { const n = Number(v); if (isFinite(n) && n > 0) BR[k] = n; }
+    else if (k === "erase") BR.erase = el.checked;
+    else if (k === "op") BR.relief.op = v; else if (k === "mm") BR.relief.mm = Number(v) || 0;
+    else if (k === "gkind") BR.ground.kind = v; else if (k === "gcolour") BR.ground.colour = v.trim().toLowerCase(); else if (k === "broken") BR.ground.broken = Math.max(0, Math.min(1, Number(v) || 0));
+    else if (k === "scatter") BR.scatter[famOf(BR.mode)] = v; else if (k === "pull") BR.pull[famOf(BR.mode)] = Number(v) || 0;
+    else if (k === "col") {
+      const tb = el.dataset.tb, c = el.dataset.c, f = el.dataset.f, cs = new Map(SCHEMA.tables[tb]).get(c), M = { ...maker(tb, c) };
+      if (f === "m") M.m = v;
+      else if (f === "v") { const q = parseVal({ dataset: { b: "cell", a: cs }, value: v }); if (q.err) { toast(q.err); return; } M.v = q.v; }
+      else if (f === "a" || f === "b") M[f] = v.trim() === "" ? undefined : Number(v);
+      else if (f === "list") M.list = spec(cs).base === "enum" ? [...$("panel").querySelectorAll(`input[data-br="col"][data-c="${c}"][data-f="list"]`)].filter((x) => x.checked).map((x) => x.value) : v.split(",").map((x) => x.trim().toLowerCase()).filter((x) => /^#[0-9a-f]{6}$/.test(x));
+      BR.cols[tb] = BR.cols[tb] || {}; BR.cols[tb][c] = M;
+    }
+    saveBR(); if (el.dataset.f === "m" || el.dataset.f === "v" || k === "gcolour") showPanel(); V.draw();
+  }
+
   // ------------------------------------------------------------------ pointer (frame.js hands over the left button)
   function down(ev, p) {   // true when the editor takes the click (frame.js pans otherwise); saving runs on its own
     if (!SCHEMA) return false;
@@ -524,7 +839,7 @@ window.MAPEDIT = (() => {
       const pc = pieceAt(p);
       if (pc) { sel = pc.r; selRow = { id: pc.r.id, t: pc.t, i: pc.i }; drag = { row: pc, start: p, moved: false }; showPanel(); V.draw(); return true; }   // one piece: drag moves just it
       const o = pick(p); sel = o; selRow = null; showPanel(); V.draw();
-      if (o) { drag = { o, start: p, moved: false, before: clone(o) }; return true; }
+      if (o) { drag = { o, start: p, moved: false, before: clone(o), fol: followers(o).map((f) => ({ f, before: clone(f) })) }; return true; }
       return false;   // empty ground: frame.js pans
     }
     if (tool === "stamp") {
@@ -552,6 +867,12 @@ window.MAPEDIT = (() => {
       if (best.r.width > 0) r.setback = r2(Math.max(0, best.a.off - best.r.width / 2));   // measured from the drawing: the street's edge to the plot side
       if (WALLED.has(kind)) r.wall = defaults(SCHEMA.shapes.wall);
       create(r, mid); return true;
+    }
+    if (tool === "brush") { brushDown(ev, p); return true; }
+    if (tool === "person") {   // click an existing spot to pick and drag it; elsewhere a new one, facing where you drag
+      const o = pick(p);
+      if (o && o.type === "person_spot") { sel = o; selRow = null; showPanel(); V.draw(); drag = { o, start: p, moved: false, before: clone(o), fol: [] }; return true; }
+      drag = { spot: [r2(p[0]), r2(p[1])] }; return true;
     }
     if (tool === "face") { const e = edgeAt(p); if (!e || e.face === undefined) { toast("Click on a building's side"); return true; } openFace(e.r, e.face); return true; }
     if (tool === "goods" || tool === "litter") {
@@ -605,6 +926,8 @@ window.MAPEDIT = (() => {
   function move(ev, p) {
     cursor = p;
     if (pickBox) { pickBox.b = p; V.draw(); return true; }
+    if (tool === "brush") { brAlt = ev.altKey; if (stroke) brushMove(p); else V.draw(); return !!stroke; }
+    if (drag && drag.spot) { drag.to = p; V.draw(); return true; }
     if (tool === "stamp") { if (placing) V.draw(); else { const o = SRC && pick(p, srcW()); if (o !== hover) { hover = o; V.draw(); } } return false; }
     if (tool === "frontage") { const e = plotEdgeAt(p); if ((e && e.r.id + e.i) !== (hoverEdge && hoverEdge.r.id + hoverEdge.i)) { hoverEdge = e; V.draw(); } return false; }
     if (drag && drag.vtx !== undefined) {
@@ -623,8 +946,10 @@ window.MAPEDIT = (() => {
     if (drag && drag.o) {
       if (!drag.moved && Math.hypot(...V.toS(p).map((x, i) => x - V.toS(drag.start)[i])) < 4) return true;
       drag.moved = true; V.cv.classList.add("move");
-      const m = moveRec(drag.before, p[0] - drag.start[0], p[1] - drag.start[1]);
-      Object.keys(drag.o).forEach((k) => delete drag.o[k]); Object.assign(drag.o, m); V.draw(); return true;
+      const dx = p[0] - drag.start[0], dy = p[1] - drag.start[1], m = moveRec(drag.before, dx, dy);
+      Object.keys(drag.o).forEach((k) => delete drag.o[k]); Object.assign(drag.o, m);
+      for (const { f, before } of drag.fol || []) { const q = moveRec(before, dx, dy); Object.keys(f).forEach((k) => delete f[k]); Object.assign(f, q); }   // its person spots go with it
+      V.draw(); return true;
     }
     if (drag && drag.box) { const a = drag.box, b = cornerSnap(p, null, ev); ghost = [[a[0], a[1]], [b[0], a[1]], [b[0], b[1]], [a[0], b[1]]]; V.draw(); return true; }
     if (tool === "street" || tool === "wall" || tool === "ground") { const sn = tool === "street" ? snapPt(p, null, ev) : { p: cornerSnap(p, null, ev) }; snapAt = sn.on || sn.real ? sn.p : null; if (linePts.length) V.draw(); else if (snapAt) V.draw(); return false; }
@@ -633,6 +958,14 @@ window.MAPEDIT = (() => {
   }
   async function up(ev, p) {
     V.cv.classList.remove("move");
+    if (stroke) { await brushUp(); return; }
+    if (drag && drag.spot) {   // a new person spot: what it does from the kind list; facing set only when dragged (else it needs a value)
+      const at = drag.spot, to = drag.to; drag = null;
+      const r = { id: newId("person_spot"), type: "person_spot", at, activity: $("mkind").value, ...defaults(SCHEMA.records.person_spot.fields) };
+      if (to) { const A = V.toS(at), B = V.toS(to); if (Math.hypot(B[0] - A[0], B[1] - A[1]) > 6) r.turn = Math.round((Math.atan2(to[1] - at[1], to[0] - at[0]) * 180 / Math.PI + 360) % 360); }
+      const par = parentNear(at); if (par) r.parent = par.id;
+      await create(r, at); return;
+    }
     if (pickBox) {
       const { a, b } = pickBox; pickBox = null;
       if (b && Math.abs(b[0] - a[0]) * V.s > 4 && Math.abs(b[1] - a[1]) * V.s > 4) {
@@ -657,10 +990,10 @@ window.MAPEDIT = (() => {
       await save([q]); return;
     }
     if (drag && drag.o) {
-      const { o, moved, before } = drag; drag = null;
+      const { o, moved, before, fol } = drag; drag = null;
       if (!moved) return;
-      const q = clone(o); Object.keys(o).forEach((k) => delete o[k]); Object.assign(o, before);
-      await save([q]); return;
+      const back = (x, b) => { const q = clone(x); Object.keys(x).forEach((k) => delete x[k]); Object.assign(x, b); return q; };   // the saved ones come back from save()
+      await save([back(o, before), ...(fol || []).map(({ f, before: b }) => back(f, b))]); return;
     }
     if (drag && drag.box) {
       const g = ghost; drag = null; ghost = null;
@@ -766,9 +1099,19 @@ window.MAPEDIT = (() => {
     for (const r of recsOf(["litter", "people", "ground_marks"])) {
       const P = piecePts(r); if (!P.length || !inView(P)) continue; const b = badness(r);
       if (r.type === "ground_marks") { for (const u of (r.ruts || [])) if (Array.isArray(u.line) && u.line.length > 1) { path(ctx, u.line); ctx.strokeStyle = "rgba(60,40,25,.55)"; ctx.lineWidth = u.w > 0 ? u.w : 0.5; ctx.stroke(); } for (const o of rowsOf(r.potholes)) if (isFinite(o.x)) { ctx.beginPath(); ctx.arc(o.x, o.y, o.r > 0 ? o.r : 0.4, 0, 7); ctx.fillStyle = "rgba(50,35,25,.7)"; ctx.fill(); } }
-      else for (const o of rowsOf(r.type === "litter" ? r.pieces : r.spots)) { if (!isFinite(o.x)) continue; ctx.beginPath(); ctx.arc(o.x, o.y, r.type === "people" ? Math.max(0.25, 3 * px) : Math.max(0.06, 1.5 * px), 0, 7); ctx.fillStyle = r.type === "people" ? "#e0457b" : (o.colour || "#ddd"); ctx.fill(); if (r.type === "people" && isFinite(o.turn)) { const a = o.turn * Math.PI / 180; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x + Math.cos(a) * 0.5, o.y + Math.sin(a) * 0.5); ctx.strokeStyle = "#e0457b"; ctx.lineWidth = Math.max(0.06, px); ctx.stroke(); } }
+      else for (const o of rowsOf(r.type === "litter" ? r.pieces : r.spots)) { if (!isFinite(o.x)) continue; ctx.beginPath(); ctx.arc(o.x, o.y, r.type === "people" ? Math.max(0.25, 3 * px) : Math.max(o.w > 0 ? o.w / 2 : 0.06, 1.5 * px), 0, 7); ctx.fillStyle = r.type === "people" ? "#e0457b" : (o.colour || "#ddd"); if (r.type === "litter" && o.age > 0) ctx.globalAlpha = 1 - 0.5 * Math.min(1, o.age); ctx.fill(); ctx.globalAlpha = 1; if (r.type === "litter" && o.buried > 0.15) { ctx.strokeStyle = "rgba(70,50,30,.8)"; ctx.lineWidth = Math.max(0.02, px); ctx.stroke(); } if (r.type === "people" && isFinite(o.turn)) { const a = o.turn * Math.PI / 180; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x + Math.cos(a) * 0.5, o.y + Math.sin(a) * 0.5); ctx.strokeStyle = "#e0457b"; ctx.lineWidth = Math.max(0.06, px); ctx.stroke(); } }
       if (b) { const c = P[0]; ctx.beginPath(); ctx.arc(c[0], c[1], 5 * px, 0, 7); ctx.strokeStyle = b === "bad" ? BAD : WARN; ctx.lineWidth = 2 * px; ctx.stroke(); }
     }
+    for (const r of recsOf(["person_spot"])) {   // a person from above: shoulders across the way they face, a head, a facing tick
+      if (!Array.isArray(r.at) || !inView([r.at])) continue;
+      const [x, y] = r.at, R = Math.max(0.22, 4.5 * px), b = badness(r), col = "#e0457b", a = isFinite(r.turn) ? r.turn * Math.PI / 180 : null;
+      if (r.parent) { const par = rec(r.parent), Q = par && allPts(par); if (Q && Q.length) { const c = Array.isArray(par.at) ? par.at : centroid(Q); path(ctx, [r.at, c]); ctx.strokeStyle = "rgba(224,69,123,.5)"; ctx.lineWidth = px; ctx.setLineDash([2 * px, 2 * px]); ctx.stroke(); ctx.setLineDash([]); } }
+      if (a !== null) { ctx.beginPath(); ctx.moveTo(x + Math.cos(a) * R * 0.5, y + Math.sin(a) * R * 0.5); ctx.lineTo(x + Math.cos(a) * R * 2.3, y + Math.sin(a) * R * 2.3); ctx.strokeStyle = col; ctx.lineWidth = Math.max(0.05, 2 * px); ctx.stroke(); }
+      ctx.beginPath(); ctx.ellipse(x, y, R, R * 0.55, a === null ? 0 : a + Math.PI / 2, 0, 7); ctx.fillStyle = col; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, R * 0.42, 0, 7); ctx.fillStyle = "#3a2218"; ctx.fill();
+      if (b) { ctx.beginPath(); ctx.arc(x, y, R * 1.4, 0, 7); ctx.strokeStyle = b === "bad" ? BAD : WARN; ctx.lineWidth = 1.5 * px; ctx.setLineDash(b === "incomplete" ? [3 * px, 2 * px] : []); ctx.stroke(); ctx.setLineDash([]); }
+    }
+    if (drag && drag.spot && cursor) { const at = drag.spot; ctx.beginPath(); ctx.arc(at[0], at[1], Math.max(0.22, 4.5 * px), 0, 7); ctx.fillStyle = "rgba(224,69,123,.6)"; ctx.fill(); if (drag.to) { path(ctx, [at, drag.to]); ctx.strokeStyle = "#e0457b"; ctx.lineWidth = 2 * px; ctx.stroke(); } }
     for (const r of recsOf(["place"])) for (const ring of (Array.isArray(r.area) ? r.area : [])) if (ring.length > 2 && inView(ring)) { path(ctx, ring, true); ctx.setLineDash([8 * px, 4 * px]); const b = badness(r); ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : css("--accent"); ctx.lineWidth = 1.5 * px; ctx.stroke(); ctx.setLineDash([]); }
     // selection, hover, handles, what is being drawn
     const outline = (r, col, w) => {
@@ -796,12 +1139,14 @@ window.MAPEDIT = (() => {
     if (firstClick) { const e = firstClick; let at; if (e.face !== undefined) { const fp = e.r.footprint, p0 = fp[e.face], q = fp[(e.face + 1) % fp.length], L = dist(p0, q) || 1; at = [p0[0] + (q[0] - p0[0]) * e.u / L, p0[1] + (q[1] - p0[1]) * e.u / L]; } else at = pointAlong(e.r.line, e.u); ctx.beginPath(); ctx.arc(at[0], at[1], 5 * px, 0, 7); ctx.fillStyle = css("--sel"); ctx.fill(); }
     if (hoverEdge && tool === "frontage") { path(ctx, [hoverEdge.a, hoverEdge.b]); ctx.strokeStyle = css("--sel"); ctx.lineWidth = 4 * px; ctx.stroke(); }
     drawStamp(ctx, v, px);
+    drawBrush(ctx, px);
     if (snapAt) { ctx.beginPath(); ctx.arc(snapAt[0], snapAt[1], 7 * px, 0, 7); ctx.strokeStyle = css("--ok"); ctx.lineWidth = 2 * px; ctx.stroke(); }
   }
   function drawScreen(ctx) {   // small labels: a building's storeys, a line's length while drawing
     if (!SCHEMA || !MAPON) return;
     ctx.font = "600 11px -apple-system, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     if (V.s > 3) for (const r of recsOf(["building"])) { if (!Array.isArray(r.footprint) || r.footprint.length < 3) continue; const [X, Y] = V.toS(centroid(r.footprint)); if (X < 0 || Y < 0 || X > V.cv.clientWidth || Y > V.cv.clientHeight) continue; ctx.fillStyle = css("--ink"); ctx.fillText(r.storeys ? String(r.storeys) : "?", X, Y); }
+    if (V.s > 9) for (const r of recsOf(["person_spot"])) { if (!Array.isArray(r.at)) continue; const [X, Y] = V.toS(r.at); if (X < 0 || Y < 0 || X > V.cv.clientWidth || Y > V.cv.clientHeight) continue; ctx.font = "500 10px -apple-system, sans-serif"; ctx.fillStyle = "#b8285e"; ctx.fillText((r.activity || "?").replace(/_/g, " ") + (r.count > 1 ? " ×" + r.count : ""), X, Y + 16); ctx.font = "600 11px -apple-system, sans-serif"; }
     if (linePts.length && cursor) { const P = linePts.map((x) => x.p).concat([snapAt || cursor]); const [X, Y] = V.toS(P[P.length - 1]); ctx.fillStyle = css("--ink"); ctx.fillText(lineLen(P).toFixed(1) + " m", X + 30, Y - 12); }
     ctx.textAlign = "start"; ctx.textBaseline = "alphabetic";
     renderStatus();
@@ -887,11 +1232,12 @@ window.MAPEDIT = (() => {
     else if (act === "rm") setPath(r, p, undefined);
     await save([r]);
   }
-  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side or a wall twice; on a wall it stands on the right of the wall's line ("Put it on the other side" turns the line round). <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road. <b>Frontage</b> (E): click a plot's side that faces a street; it finds the street, the side and the setback. <b>Stamp</b> (K): copy records with everything on them, from the map or a source, and place copies.<br><br><b>The dress layer.</b> <b>Face</b> (C): click a building's side to open it in the face editor (or a Face button in a building's panel). <b>Goods</b> (O): click inside a lean-to, stall, heap or bin to put an item there. <b>Litter</b> (X): click to drop a piece (it joins the litter record you picked, or one within 5 m). With a piece picked, the next one takes its values except where it lies. Drag a piece to move it, <kbd>Delete</kbd> removes just it; its row is lit in the panel's table. <b>Ground</b> (D): click points, <kbd>Enter</kbd>: a painted patch, over the earlier ones. <b>Relief</b> (H): drag a box for a flat grid; click a cell to raise it 10 mm (<kbd>Shift</kbd> 50), <kbd>⌥</kbd>-click to lower.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
+  const HELP = `<div id="help"><b>Select</b> (V): click a record; drag to move; drag a square handle to move a corner, a round one to add a corner, <kbd>⌥</kbd>-click a corner to remove it. <kbd>R</kbd>/<kbd>Shift R</kbd> turn 15°, <kbd>[</kbd> <kbd>]</kbd> 1°. <kbd>Delete</kbd> removes, <kbd>⌘Z</kbd> undoes. Drag empty ground, the right button or <kbd>Space</kbd> to pan.<br><br><b>Street</b> (S): click points, <kbd>Enter</kbd> or double-click to finish; points snap onto the map's roads (a shared point joins them) and, with "Snap to real roads", onto the real line under it. <kbd>Shift</kbd> places freely. <b>Building</b> (B), <b>Plot</b> (P), <b>Place</b> (A): drag a box. <b>Wall</b> (W): click points, <kbd>Enter</kbd>. <b>Gate</b> (G): click a wall twice, at each end. <b>Lean-to</b> (L): click a building side or a wall twice; on a wall it stands on the right of the wall's line ("Put it on the other side" turns the line round). <b>Tree</b> (T), <b>Furniture</b> (F): click. <b>Surface</b> (U): click a road. <b>Frontage</b> (E): click a plot's side that faces a street; it finds the street, the side and the setback. <b>Stamp</b> (K): copy records with everything on them, from the map or a source, and place copies.<br><br><b>The dress layer.</b> <b>Face</b> (C): click a building's side to open it in the face editor (or a Face button in a building's panel). <b>Goods</b> (O): click inside a lean-to, stall, heap or bin to put an item there. <b>Litter</b> (X): click to drop a piece (it joins the litter record you picked, or one within 5 m). With a piece picked, the next one takes its values except where it lies. Drag a piece to move it, <kbd>Delete</kbd> removes just it; its row is lit in the panel's table. <b>Ground</b> (D): click points, <kbd>Enter</kbd>: a painted patch, over the earlier ones. <b>Relief</b> (H): drag a box for a flat grid; click a cell to raise it 10 mm (<kbd>Shift</kbd> 50), <kbd>⌥</kbd>-click to lower.<br><br><b>Brush</b> (N): pick litter, goods (on the ground or hung), relief or ground paint in the kind list; size, spacing and each value in the panel (unset, a value, random between two, or random from a list). Every stroke writes full rows (litter pieces, goods items, relief cells, a ground patch's outline), editable one by one; <kbd>⌥</kbd>-drag erases (relief: lowers); <kbd>[</kbd> <kbd>]</kbd> size; <kbd>⌘Z</kbd> undoes a whole stroke. <b>Person</b> (I): a person spot, where someone does something and when: click to place it (the activity from the kind list), drag to face them; it links to the stall, lean-to, vehicle, furniture or heap it stands at and moves and turns with it; hours, count and the rest in the panel.<br><br>Every field shows its value; one in red needs a value (nothing is filled in for you). Outlines: <span style="color:var(--warn)">dashed amber</span> = fields still to set, <span style="color:var(--bad)">red</span> = a problem (check_map.py runs on every save, plus a house on a road or on another house).</div>`;
   function showPanel() {
     const P = $("panel"); if (!SCHEMA || !P) return;
     const keep = P.scrollTop;
     const o = sel;
+    if (tool === "brush") { P.innerHTML = brushHTML() + "<hr>" + HELP; P.scrollTop = keep; return; }
     if (!o && tool === "stamp") {
       const opts = SOURCES.flatMap((x) => x.districts.map((d) => [x.src + "|" + d, (x.src === "map" ? "the map" : x.src) + " · " + d]));
       const G = picked.length ? groupOf(picked) : [], cnt = {}; for (const r of G) cnt[r.type] = (cnt[r.type] || 0) + 1;
@@ -957,7 +1303,12 @@ window.MAPEDIT = (() => {
     const lts = recsOf(["leanto"]).filter((x) => x.against === host.id).map((x) => { const y = clone(x); fl(y); return y; });
     if (await save([q, ...lts])) toast(`${host.id}'s line turned round: its lean-to${lts.length > 1 ? "s" : ""} now stand${lts.length > 1 ? "" : "s"} on the other side`);
   }
-  async function turnSel(deg) { if (!sel) return; const q = turnRec(sel, deg); if (q) await save([q]); }
+  async function turnSel(deg) {   // its person spots turn with it, round the same middle
+    if (!sel) return; const q = turnRec(sel, deg); if (!q) return;
+    const e = editPts(sel), c = Array.isArray(sel.at) ? sel.at : e && e.pts.length > 1 ? centroid(e.closed ? e.pts : [e.pts[0], e.pts[e.pts.length - 1]]) : null;
+    await save([q, ...(c ? followers(sel).map((f) => transformed(f, mover(c, c, deg))) : [])]);
+  }
+  const followers = (o) => (o && o.type !== "person_spot" ? recsOf(["person_spot"]).filter((f) => f.parent === o.id) : []);   // person spots that belong to o move and turn with it
 
   // ------------------------------------------------------------------ status, the bar, keys
   let probI = 0;
@@ -981,11 +1332,12 @@ window.MAPEDIT = (() => {
   }
   function buildBar() {
     const st = document.createElement("style");
-    st.textContent = `#panel .fld{display:grid;grid-template-columns:38% 1fr auto;gap:4px;align-items:center;margin:3px 0}#panel .fk{color:var(--muted);overflow-wrap:anywhere}#panel .fk.bad{color:var(--bad);font-weight:600}#panel fieldset{border:1px solid var(--panel-line);border-radius:6px;margin:6px 0;padding:4px 6px}#panel fieldset.item{border-style:dashed}#panel legend{font-size:12px}#panel select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--panel-line);border-radius:6px;padding:3px 4px;width:100%}#panel .chk{display:flex;flex-wrap:wrap;gap:2px 8px}#panel .chk label{display:flex;gap:3px;align-items:center}#panel .ptrow,#panel .hexrow{display:flex;gap:4px}#panel .hexrow input[type=color]{width:34px;padding:0;height:26px}#panel .tb input{padding:2px 3px}#panel .tb th{font-weight:500;color:var(--muted);text-align:left}#panel .x{padding:1px 6px}#panel .probs{margin:4px 0 8px;font-size:12px}#panel .probs .warn{color:var(--warn)}#panel .probs .bad{color:var(--bad)}#panel code{font-size:11px;overflow-wrap:anywhere}#panel{width:360px}#panel .chips{display:flex;flex-wrap:wrap;gap:4px}#panel .chips button{font-size:11px}#panel .tb tr.on input{outline:2px solid var(--sel)}#panel .tbw{overflow-x:auto}#panel fieldset{min-width:0}#panel .tb input{min-width:44px}.bar{right:392px}#mtools{flex-wrap:wrap}`;
+    st.textContent = `#panel .fld{display:grid;grid-template-columns:38% 1fr auto;gap:4px;align-items:center;margin:3px 0}#panel .fk{color:var(--muted);overflow-wrap:anywhere}#panel .fk.bad{color:var(--bad);font-weight:600}#panel fieldset{border:1px solid var(--panel-line);border-radius:6px;margin:6px 0;padding:4px 6px}#panel fieldset.item{border-style:dashed}#panel legend{font-size:12px}#panel select{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--panel-line);border-radius:6px;padding:3px 4px;width:100%}#panel .chk{display:flex;flex-wrap:wrap;gap:2px 8px}#panel .chk label{display:flex;gap:3px;align-items:center}#panel .ptrow,#panel .hexrow{display:flex;gap:4px}#panel .hexrow input[type=color]{width:34px;padding:0;height:26px}#panel .tb input{padding:2px 3px}#panel .tb th{font-weight:500;color:var(--muted);text-align:left}#panel .x{padding:1px 6px}#panel .probs{margin:4px 0 8px;font-size:12px}#panel .probs .warn{color:var(--warn)}#panel .probs .bad{color:var(--bad)}#panel code{font-size:11px;overflow-wrap:anywhere}#panel{width:360px}#panel .chips{display:flex;flex-wrap:wrap;gap:4px}#panel .chips button{font-size:11px}#panel .tb tr.on input{outline:2px solid var(--sel)}#panel .tbw{overflow-x:auto}#panel fieldset{min-width:0}#panel .tb input{min-width:44px}.bar{right:392px}#mtools{flex-wrap:wrap}#panel .brc{display:grid;grid-template-columns:30% 1fr;gap:3px 4px;align-items:center;margin:3px 0}#panel .brc .bri{grid-column:1/3}#panel .fk.unset{color:var(--warn)}`;
     document.head.appendChild(st);
     const bar = document.querySelector(".bar");
     bar.insertAdjacentHTML("beforeend", `<div class="group"><select id="mdist" aria-label="District to draw in"></select></div><div class="group" id="mtools">${TOOLS.map(([t, l, k, tip]) => `<button data-tool="${t}" title="${tip} (${k})">${l}</button>`).join("")}</div><div class="group"><select id="mkind" aria-label="Kind"></select><label id="msnap" title="While drawing a street, snap onto the real road line under it"><input type="checkbox"${snapReal ? " checked" : ""}> Snap to real roads</label><label title="Show the new map's records"><input type="checkbox" id="mon" checked> Map</label></div>`);
     document.querySelectorAll("#mtools button").forEach((b) => b.addEventListener("click", () => setTool(b.dataset.tool)));
+    $("mkind").addEventListener("change", () => { if (tool === "brush") { BR.mode = $("mkind").value; saveBR(); showPanel(); V.draw(); } });
     $("msnap").querySelector("input").addEventListener("change", (ev) => { snapReal = ev.target.checked; try { localStorage.setItem("gidi-map-snapreal", snapReal ? "1" : "0"); } catch (e) {} });
     $("mon").addEventListener("change", (ev) => { MAPON = ev.target.checked; V.draw(); });
     $("mdist").addEventListener("change", (ev) => {
@@ -996,7 +1348,7 @@ window.MAPEDIT = (() => {
     });
     const P = $("panel");
     P.style.display = "";
-    P.addEventListener("change", (ev) => { const el = ev.target; if (el.type === "color" && el.dataset.for) { const t = P.querySelector(`input[data-p="${CSS.escape(el.dataset.for)}"]:not([type=color])`); if (t) { t.value = el.value; onField(t); } return; } if (el.dataset.p) onField(el); });
+    P.addEventListener("change", (ev) => { const el = ev.target; if (el.dataset.br) { brushField(el); return; } if (el.type === "color" && el.dataset.for) { const t = P.querySelector(`input[data-p="${CSS.escape(el.dataset.for)}"]:not([type=color])`); if (t) { t.value = el.value; onField(t); } return; } if (el.dataset.p) onField(el); });
     P.addEventListener("click", (ev) => {
       const g = ev.target.closest("button[data-go]"); if (g) { sel = rec(g.dataset.go); const Q = sel && allPts(sel); if (Q && Q.length && !hit(bboxOf(Q), V.view())) { const c = centroid(Q); V.focus(c[0], c[1], V.s); } showPanel(); V.draw(); return; }
       const fc = ev.target.closest("button[data-face]"); if (fc && sel) { openFace(sel.type === "faces" ? rec(sel.of) : sel, +fc.dataset.face); return; }
@@ -1018,6 +1370,7 @@ window.MAPEDIT = (() => {
         else if (rowSel()) { const q = clone(sel); q[selRow.t].rows.splice(selRow.i, 1); selRow = null; save([q]); }   // just the piece
         else if (sel && sel.type !== "district") del(sel);
       }
+      else if (tool === "brush" && (k === "[" || k === "]")) { BR.size = r2(Math.max(0.1, Math.min(50, BR.size * (k === "]" ? 1.25 : 0.8)))); saveBR(); showPanel(); V.draw(); }
       else if (k === "r") turnSel(ev.shiftKey ? -15 : 15);
       else if (k === "[") turnSel(-1); else if (k === "]") turnSel(1);
       else { const t = TOOLS.find((x) => x[2].toLowerCase() === k); if (t) setTool(t[0]); }
