@@ -651,3 +651,10 @@ B23 (between Coker Street, Olateju Street and Ogunmokun Street). Read 24 Oct at 
 | Gidi id | real twin | kind |
 |---|---|---|
 | rd-pee3ohfv | Olomowewe Street | lane |
+
+B24 (between Akintan Street, Martins Street, the Agege Motor Road side and Onifade Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Omoniyi Street runs down from the block's north edge to the Gidi road at Ogungbaiye Street, where the older Omoniyi lane (rd-trz9qjln) carries on south; Adeyemi Street crosses the block from Akintan Street to Martins Street. Left out for spacing: Kelani Street and Ogungbaiye Street (each about 75-80 m from Adeyemi).
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-96wuk9tz | Omoniyi Street (north stretch) | lane |
+| rd-zq9bs5v6 | Adeyemi Street (east of Akintan) | lane |
