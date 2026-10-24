@@ -55,7 +55,10 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
 3. **Rebuild the old kit's things the new way** (owner, 24 Oct): one builder at a time from the list in
-   `legacy/blender/WHAT-IT-HELD.md`, zinc roof sheets and lean-tos first. **Builders still to make for the map:** frontage, lean-to, heap, tree, road, ground (`tools/kit_fields.py` lists 24
+   `legacy/blender/WHAT-IT-HELD.md`, zinc roof sheets and lean-tos first. **First done, waiting on the owner's eye (24 Oct):** the zinc lean-to, gidi-game #72
+   (`tools/leanto_build.py`; `Art/Props/LeantoBuilt/GAPS.md` lists 12 gaps against the photos, 5 closed, 1 closed in shape, 6 open
+   with reasons; `look_v1.jpg` is photo | old kit | new). The map format gained each sheet's `hang` and `bend` (gidi #280).
+   Next: zinc roof sheets on buildings (block_build's roof is one smooth surface today), then gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad
