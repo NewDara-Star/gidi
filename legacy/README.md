@@ -1,5 +1,7 @@
 # Legacy: the old map's kit (frozen)
 
+What the old map was and its parts: `OLD-MAP.md`.
+
 `legacy/blender/` is the Blender kit of the **old generated city** (the 17 frozen districts, `web/gidi-data.js`, the 3D
 tab's tiles) and of the first old-town eye tests (ot175, ot91, ot149, ot73, ot45). It is kept only so that old map still
 builds: its tiles (6,12 / 7,12 / 8,13 checked) come out byte-identical from here.

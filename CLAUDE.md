@@ -10,5 +10,6 @@ An open-world city inspired by Lagos, built from data and by hand. The owner wor
 - `decisions/NOW.md`: where the work stands and what's next.
 - `decisions/DECISIONS.md`: the owner's standing decisions and rules.
 - `decisions/IDEAS.md`: ideas not decided yet.
+- `decisions/CODEBASE.md`: what the three repos hold, live or old (from `scripts/inventory.py`).
 
 When the owner decides something, or a good idea comes up, add it there. Update `NOW.md` before the session ends, so the next account picks up where this one stopped.

@@ -1,3 +1,4 @@
+# SIMILAR.md's ladder: how many districts at each similarity threshold, from analysis.json.
 import json, numpy as np
 A=json.load(open('analysis.json')); R=A['rows']; N=len(R); S=np.array(A['S'])
 flag=lambda r: r['distinct_pct']>=35 or r['richness']>=70

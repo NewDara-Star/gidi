@@ -311,7 +311,11 @@ For the browser pass (Google Earth top-down, 3D tilt, Street View). Coordinates 
 | 31 | Oworonshoki waterfront | 6.5550, 3.4050 | top | stilts and the Third Mainland landing |
 | 32 | Iganmu / Orile industry | 6.4797, 3.3601 | top | National Theatre, factories, the expressway knot |
 
-## Files (all in this folder)
+## Files
+
+**24 Oct: only the `.md` and `.png` files were committed.** The numbers, grids and scripts below are not on the Mac
+any more, so this study can't be rebuilt; its results stand as written.
+
 - `STUDY.md`, `councils.md`, `skeleton.png`, `skeleton_inner.png`, `character.png`
 - Numbers: `lga_stats.json` (per LGA), `zones.json` (every contiguous zone >= 1 km²), `feat.npz` / `class.npz` / `hgrid.npz` / `bgrid65.npz` / `rgrid.npz` / `ogrid.npz` (per-cell grids)
 - Scripts: `grid_bld.py` (buildings), `grid_orient.py` (building directions), `heights.py` (2.5D), `roads.py`, `rasters.py`, `feat.py`, `classify.py`, `plots.py`, `gaz.py` (knowledge place list)
