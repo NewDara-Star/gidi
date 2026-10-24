@@ -37,12 +37,12 @@
    "words": [
     "process",
     "gidi-game",
+    "held",
     "rule",
-    "builder",
     "review",
+    "builder",
     "script",
-    "re-draft",
-    "held"
+    "re-draft"
    ]
   },
   {
@@ -69,8 +69,8 @@
     "hand",
     "view",
     "kits",
-    "records",
     "laptop",
+    "records",
     "modelled",
     "blender"
    ]
@@ -101,8 +101,8 @@
     "metahuman",
     "yoruba",
     "talk",
-    "danfo",
-    "sound"
+    "sound",
+    "parlour"
    ]
   },
   {
@@ -111,10 +111,10 @@
    "state": "linked",
    "words": [
     "gidi-game",
-    "records",
     "dress",
     "sent",
     "pass",
+    "records",
     "editor",
     "hand",
     "layer"
@@ -324,8 +324,8 @@
     "one-way",
     "expressway",
     "reserve",
-    "kosofe",
     "island",
+    "kosofe",
     "acute",
     "railside"
    ]
@@ -356,8 +356,8 @@
     "stroke",
     "value",
     "records",
-    "relief",
-    "face"
+    "face",
+    "relief"
    ]
   },
   {
@@ -385,8 +385,8 @@
     "echo",
     "serves",
     "written",
-    "districts",
     "festac",
+    "districts",
     "island"
    ]
   },
@@ -520,8 +520,8 @@
     "footbridge",
     "flyover's",
     "rusty-roof",
-    "design",
     "oshodi",
+    "design",
     "parasols"
    ]
   },
@@ -579,10 +579,10 @@
     "island",
     "boxes",
     "island's",
-    "course",
-    "hipped",
     "beach",
-    "golf"
+    "hipped",
+    "course",
+    "booths"
    ]
   },
   {
@@ -592,12 +592,12 @@
    "words": [
     "slip",
     "knot",
-    "stadium",
     "maze",
+    "stadium",
     "northern",
     "terminal",
     "skywalks",
-    "skywalk"
+    "percentile"
    ]
   },
   {
@@ -656,8 +656,8 @@
     "ikorodu",
     "mile",
     "surveyed",
-    "planned",
-    "lekki"
+    "lekki",
+    "planned"
    ]
   },
   {
@@ -687,7 +687,7 @@
     "trace",
     "north",
     "neutral",
-    "expressway"
+    "isolo"
    ]
   },
   {
@@ -716,8 +716,8 @@
     "east",
     "ijegun-egba",
     "west",
-    "swamp",
-    "apapa"
+    "apapa",
+    "swamp"
    ]
   },
   {
@@ -731,8 +731,8 @@
     "splits",
     "magodo-omole",
     "okota-ikotun",
-    "roofs",
-    "gbagada"
+    "gbagada",
+    "maryland"
    ]
   },
   {
@@ -864,8 +864,8 @@
     "white",
     "prayer",
     "green",
-    "mosque",
     "hall",
+    "mosque",
     "minaret",
     "blue"
    ]
@@ -881,8 +881,8 @@
     "mains",
     "research-street",
     "asphalt",
-    "refuse",
-    "laterite"
+    "laterite",
+    "refuse"
    ]
   },
   {
@@ -912,7 +912,7 @@
     "steel",
     "colours",
     "yellow",
-    "deck"
+    "concrete"
    ]
   },
   {
@@ -1107,7 +1107,7 @@
     "barrier",
     "transportation",
     "developed",
-    "hospital"
+    "squares"
    ]
   },
   {
@@ -1206,8 +1206,8 @@
    "state": "linked",
    "words": [
     "recreation",
-    "service",
     "median",
+    "service",
     "touching",
     "travel",
     "pedestrian",
@@ -1298,11 +1298,11 @@
     "fingers",
     "stilt",
     "huts",
-    "canoe",
     "sawmill's",
     "village",
+    "canoe",
     "shore",
-    "boardwalks"
+    "okafor"
    ]
   },
   {
@@ -1326,13 +1326,28 @@
    "state": "linked",
    "words": [
     "builder",
-    "tiles",
     "tab's",
+    "tiles",
     "frozen",
     "fields",
     "old-town",
     "legacy",
     "builders"
+   ]
+  },
+  {
+   "id": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "title": "The old Blender kit: what it held, and what the builders can take from it",
+   "state": "linked",
+   "words": [
+    "builder",
+    "know-how",
+    "worth",
+    "fields",
+    "builders",
+    "conditions",
+    "sheet",
+    "fresh"
    ]
   },
   {
@@ -1343,9 +1358,9 @@
     "redrafted",
     "hand",
     "pass",
+    "lanes",
     "twin's",
     "redrawn",
-    "lanes",
     "cleared",
     "close-zoom"
    ]
@@ -1374,10 +1389,10 @@
     "font",
     "claude",
     "makehuman",
-    "plate",
     "tools",
     "gidiplate",
-    "ambientcg"
+    "ambientcg",
+    "plates"
    ]
   },
   {
@@ -1406,8 +1421,8 @@
     "wasd",
     "scripting",
     "meshy",
-    "tiles",
-    "console"
+    "console",
+    "tiles"
    ]
   },
   {
@@ -1448,9 +1463,9 @@
     "datasets",
     "shots",
     "reference",
-    "notes",
     "assets",
     "scripts",
+    "notes",
     "deep-study",
     "cache"
    ]
@@ -1497,7 +1512,7 @@
     "arena",
     "railway",
     "ilupeju",
-    "stadium"
+    "army"
    ]
   },
   {
@@ -1585,8 +1600,8 @@
     "positions",
     "goods",
     "scaffold",
-    "records",
     "render",
+    "records",
     "test"
    ]
   },
@@ -2168,6 +2183,10 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:legacy/blender/WHAT-IT-HELD.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:legacy/blender/gidi_kit/landmarks.py"
   },
   {
@@ -2429,6 +2448,10 @@
   {
    "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:docs/lagos-study/roads/NAMES.md"
+  },
+  {
+   "from": "gidi:decisions/DECISIONS.md",
+   "to": "gidi:legacy/blender/WHAT-IT-HELD.md"
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
@@ -2721,6 +2744,10 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi:docs/map-format-example/d15/plan.json"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi:legacy/blender/WHAT-IT-HELD.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -4981,6 +5008,70 @@
   {
    "from": "gidi:legacy/README.md",
    "to": "gidi:web/gidi-data.js"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi-data:research/google/kits/old-town/KIT.md"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi-game:tools/goods_kit.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi-game:tools/kit_fields.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi-game:tools/wear_layer.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/draft.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/goods.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/gutters.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/materials.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/people.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/roadbed.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/street.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/wear.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/gidi_kit/zinc.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/kit_draft.py"
+  },
+  {
+   "from": "gidi:legacy/blender/WHAT-IT-HELD.md",
+   "to": "gidi:legacy/blender/kit_test.py"
   },
   {
    "from": "gidi:map/d15/BUILDINGS.md",

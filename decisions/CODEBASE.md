@@ -67,7 +67,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `web/gidi-data.js`, `gen-*.json`, `hand/`, `network.json`, `layout-v2.json`, `terrain*.json`, `locked.json`, `civic.json` and the rest of `web/*.json` | the old map's data: generated, baked and hand-edited |
 | `web/app.js`, `shell.html`, `view3d.js`, `gidi-maps.html`, `scripts/build_viewer.py` | the old map viewer (2D and 3D) |
 | `study-*.json` (85, at the top of the repo) | each old district's pattern study, read by the generator |
-| `legacy/blender/` | the old map's Blender kit; the legacy tiles 6,12 / 7,12 / 8,13 must stay byte-identical |
+| `legacy/blender/` | the old map's Blender kit; the legacy tiles 6,12 / 7,12 / 8,13 must stay byte-identical; what it holds for the builders: `WHAT-IT-HELD.md` |
 | `data/` | per-LGA numbers (`results/`) and the download scripts (`tools/`) |
 
 **Research (written for the old map; its real Lagos numbers still hold).** Indexed in `docs/RESEARCH.md`:
