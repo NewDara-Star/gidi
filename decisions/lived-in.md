@@ -52,6 +52,8 @@ All of it is records in the map, placed and set by hand on the board. Checks are
 - **Examples to set by hand:** Mùṣá at 7 on a weekday is thick with okadas, traders opening and pupils. Victory Island at 9 has drivers waiting by SUVs. Ladipo market is full from 8 to 6 and empty at night apart from the guards. Any district at 23:00 is the beer parlour, the vigil and the danger hours.
 - **A check (program):** shares add to 100; every district has a mix; the mix's busy hours agree with its places' `hours`.
 
+- **District briefs:** `docs/lagos-study/LIVING.md` has a sheet for each of the 51 districts (people, wealth, day, work, vehicles, the busiest groups and hours) to seed each mix, and lists activities the spot list is missing.
+
 ### 2. Person spots (exists: `person_spot`, PR #267)
 Done: `at`, `turn`, `activity` (68 Lagos activities), `hours`, `count`, `parent`, `place`. Proposed additions, each a small field:
 - `chance` (0 to 1): not every spot is used every day, so the street changes from visit to visit.
