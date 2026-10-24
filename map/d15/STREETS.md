@@ -559,3 +559,12 @@ B10 (Ladipo: between Palm Avenue, Owhin Street, Ladipo Street, Agege Motor Road'
 | rd-xp0cgtsa | Olufunmilayo Street | lane |
 | rd-hvwdw3gi | Ojo Road on to Wey Street | lane |
 | rd-xjvsti21 | Odulana Street | lane |
+
+B15 (Papa Ajao, north of Ladipo: between Palm Avenue, Ladipo Street, Agege Motor Road and Oluwole Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Olaseinde Street runs from Ladipo Street to Agege Motor Road and Oshinfuye Street on to Taiwo Lane below it; Omodigbo Street on to Balogun Street and Buari Street run from Palm Avenue down to Ladipo Street. Left out for spacing: Anipele Street, Solomon Close, Disu Street's north end.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-80nwmh8a | Olaseinde Street | lane |
+| rd-mw3dwbpl | Oshinfuye Street on to Taiwo Lane | lane |
+| rd-xrm36c1i | Omodigbo Street on to Balogun Street | lane |
+| rd-gqsv49g9 | Buari Street | lane |
