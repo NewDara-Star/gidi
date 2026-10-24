@@ -155,7 +155,7 @@ Next, in order:
 **Parked, to come back to (the owner asked, 19 Oct):**
 1. **The build order's main line: one Maze (Àdàrú) street to the look target, end to end** (real models, the crowd, a walkable character, measured on the laptop). Everything vehicle-side feeds this.
 2. Unreal look fixes from 18 Oct: a building's paint lost under its scan, orange dust strips, blue ground patches, plain flat roofs.
-3. `tools/perf.sh`: the laptop frame-rate test, never run.
+3. ~~`tools/perf.sh`~~: retired 24 Oct (owner), never run; `tools/measure.sh` measures the play levels.
 4. The built danfo: recipes (a dozen variants), the wear material (needs Fab: chipped painted metal, rusty painted metal, grime/leak decals), into the game in place of the Meshy one.
 5. The other vehicles the danfo way: keke (its Meshy 3D blocked by auto mode; may not need it), korope, molue, BRT blue and red.
 6. Gidi Brush as a real font file (lettering exists only as a layout tool).
@@ -174,7 +174,7 @@ Next, in order:
 - **Keke and okada reference sheets made** (`~/Real-world/research/models/keke`, `okada`; 12 credits). Their 3D step (30 credits each) waits on the owner allowing Meshy's 3D tool in Claude Code's auto mode.
 - **Later on 19 Oct:** the danfo has the owner's D badge front and back and a tint per condition; it shows in Unreal on a Nanite material made for hero models (`M_GidiHero`). **Gidi's number plates** (gidi-game `Art/Plates/sheet.png`, `tools/plates.py`): the Gidi Plate font (custom, from Montserrat Bold: narrow, even strokes, slashed zero, a G with a crossbar at the owner's ask), five classes by colour (commercial danfo yellow, private blue, government green, services with a red band, transit blue), district code + three figures + two letters; every vehicle prints its own number from one material (`M_GidiPlate`). The motto "NO DEY SLEEP" is a placeholder for the owner. **The okada** is the second hero vehicle. The keke's 3D step is blocked by Claude Code's auto mode (Meshy spends credits): the owner allows `meshy_multi_image_to_3d` or approves the prompt. Check shots now wait in real seconds and capture the game window (`tools/shot.sh`).
 - **Waiting on the kit session:** stop drawing danfos and okadas in the tiles Unreal imports (until then the kit's block versions show through the models).
-- **Next:** the keke, korope, molue, BRT blue and red; the full Montserrat family for a lighter Gidi Plate (the plate's small lines) and a Gidi UI face; the brush font; the coat of arms (it replaces the plate's GIDI band); run `tools/perf.sh`.
+- **Next:** the keke, korope, molue, BRT blue and red; the full Montserrat family for a lighter Gidi Plate (the plate's small lines) and a Gidi UI face; the brush font; the coat of arms (it replaces the plate's GIDI band); ~~run `tools/perf.sh`~~ (retired 24 Oct; `tools/measure.sh`).
 
 **18 Oct (main session, Claude):**
 - **The Estate's streets redrawn from the study** (Magodo, Omole, Ikeja GRA; #103): a spine drive, parallel streets two plot rows apart ending in closes, two crescents, 8 gated links to the main roads instead of 17. Frozen again; all 17 districts pass.

@@ -94,7 +94,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 - `gidi_signs.py`: shop signs from the old kit's tiles
 - `gidi_look.py`, `gidi_surfaces.py`, `gidi_cam.py`, `tools/shot.sh`, `look.sh`, `surfaces.sh`, `make_textures.py`
 - `gidi_play.py`: the Ìbùdó play level
-- `tools/perf.sh`: the old laptop test on Gidi_City, now replaced by `measure.sh`
+- `tools/perf.sh`: the old laptop test on Gidi_City, retired 24 Oct (gidi-game, branch tools/retire-perf); `measure.sh` replaces it
 
 **History**
 - `tools/frame_motorpark.py`, `props_build.py`, `prop_basin_final.py` (the 19 Oct Lagos pass)
@@ -152,7 +152,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
    map from its new place, and the legacy tiles would be checked byte-identical before merging.
 2. **Give Gidi's data store its own folder** (`~/gidi-data`, untracked), out of World Drive's repo, and update the
    ~50 paths that name it. World Drive would then be left alone.
-3. **Retire `tools/perf.sh`** in gidi-game (replaced by `measure.sh`), and decide whether the Meshy vehicle path
+3. ~~Retire `tools/perf.sh`~~ (done 24 Oct, gidi-game branch tools/retire-perf). Still open: decide whether the Meshy vehicle path
    (`vehicle_prep.py` and the rest) stays, now that vehicles are built.
 4. **A check that keeps this page true**: every new code file starts with what it is (all but three do today), no
    document names a file that doesn't exist, and `scripts/inventory.py` runs with `check_rules.py`.
