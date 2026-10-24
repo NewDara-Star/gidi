@@ -33,10 +33,14 @@ run_checks() {
     out=$(cd "$r" && "$PY" scripts/inventory.py --untracked --out "$inv" 2>&1) || { echo "inventory.py can't run:"; printf "%s\n" "$out" | tail -10; rm -rf "${inv:?}"; return 1; }
     # A line this change adds that names a file of ours that exists nowhere: the name is wrong, or the file was never
     # committed. Lines already there are in SUSPECTS.md; a line that says the file is lost or not here is honest.
-    bad=$(cd "$r" && "$PY" - "$inv/inventory.json" <<'EOF'
+    bad=$(cd "$r" && "$PY" - "$inv/inventory.json" 2>&1 <<'EOF'
 import json, re, subprocess, sys
 broken = json.load(open(sys.argv[1]))['broken']
-diff = subprocess.run(['git', 'diff', '-U0', 'origin/main', '--'], capture_output=True, text=True).stdout
+run = subprocess.run(['git', 'diff', '-U0', 'origin/main', '--'], capture_output=True, text=True)
+if run.returncode:
+    print('git diff origin/main failed, so the added lines could not be read: ' + run.stderr.strip())
+    sys.exit(1)
+diff = run.stdout
 added, f = {}, None
 for line in diff.splitlines():
     if line.startswith('+++ '):
@@ -55,7 +59,7 @@ for f, lines in added.items():
         if any(p in l and not HONEST.search(l) for l in lines):
             print(f'{f} names {p}, which exists nowhere')
 EOF
-)
+) || { rm -rf "${inv:?}"; echo "The missing-file check can't run:"; printf "%s\n" "$bad" | tail -5; return 1; }
     rm -rf "${inv:?}"
     [ -n "$bad" ] && { echo "A changed file names a file that doesn't exist (fix the name, commit the file, or mark it lost):"; printf "%s\n" "$bad"; return 1; }
   elif [ "$k" = gidi-game ]; then

@@ -37,7 +37,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `map-stamps/` | records made from a test spot (`ut01_emmanuel`), to stamp onto the board |
 | `docs/MAP-FORMAT.md`, `docs/map-format-example/` | the format, and a worked example |
 | `docs/lagos-study/` | the study of all of real Lagos behind the 51 districts: `STUDY.md`, `councils.md`, `roads/` (ROADS, EARTH-CHECK, NAMES), `similar/`, `LIVING.md` |
-| `scripts/check_map.py` | the new map's checker (`check_map.py map`: only "missing field" problems allowed) |
+| `scripts/check_map.py` | the new map's checker (`check_map.py map`: PASS means no problem; fields still to fill are counted on its TODO line) |
 | `scripts/check_rules.py` | every rule in DECISIONS.md has a row in CHECKS.md |
 | `scripts/board_server.py` | the drawing board's server: saves board edits into `map/` (and old-map edits into `web/hand/`) |
 | `scripts/frame_study.py`, `frame_footprints.py` | the board's study layers for the new frame (written to `web/frame-study.js`, `web/frame-tiles/`: generated, never committed) |
@@ -122,8 +122,8 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 - **The OSM extract is gone** (`lagos.osm.pbf`, `adm6.geojson`: the repo held only links to a deleted scratch
   folder). The old-map scripts that read it (`study_extract.py`, `study_isms.py`) can't run. That is fine: OSM is not
   used now.
-- **CLAUDE.md's one rule names the old map's hand files** (`web/hand/<district>.json`). The new map's hand edits are
-  the records in `map/`. The rule's wording is the owner's to change.
+- **CLAUDE.md's one rule named the old map's hand files** (`web/hand/<district>.json`; fixed 24 Oct, owner: "the new
+  map is the truth"). It now names the records in `map/<dNN>/`.
 - **`check_map.py map` always said FAIL** (fixed 24 Oct). All 35,707 of its problems were "missing field", so every run
   read FAIL and a real failure looked the same. Fields still to fill are now one TODO line (the board's amber); PASS
   means no problem; `--strict` fails on the TODOs too.

@@ -19,13 +19,14 @@ esac
 repo_of "$cmd"
 [ -z "$repo" ] && exit 0
 [ "$kind" = other ] && exit 0
-cd "$repo" || exit 0
+cd "$repo" || { echo "Blocked: the review can't read $repo." >&2; exit 2; }
 state=$(git rev-parse --git-common-dir)/gidi-review
 mkdir -p "$state"
 git fetch -q origin main 2>/dev/null || git fetch -q origin main 2>/dev/null
+git rev-parse -q --verify origin/main >/dev/null || { echo "Blocked: no origin/main to review against (the fetch failed?). Fetch it, then push." >&2; exit 2; }
 head=$(git rev-parse HEAD)
 [ -f "$state/pass-$head" ] && exit 0
-count=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+count=$(git rev-list --count origin/main..HEAD) || { echo "Blocked: can't count the commits since origin/main." >&2; exit 2; }
 [ "$count" = "0" ] && exit 0
 
 prompt="$state/prompt.md"
