@@ -50,20 +50,12 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 5. **Download OK?** a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
 6. **Restart the Mac** when the owner is home (about two hours after 24 Oct evening; swap 4.3 GB); then re-measure
    work mode's shadow pass.
-7. **Finish the map first?** (owner, 24 Oct late: "Do you not think it's just best we finish the map?", asked while the
-   B1 Street View walk was under way). Recommended: yes. Finish the plan layer for every district (roads, blocks,
-   footprints, plus a few cheap fields per building from satellite and Open Buildings heights: house type, storeys, roof,
-   ground floor). Do not do street-by-street Street View: B1's Jumoke Way and Sebanjo St have no coverage. Study 10-20
-   Street View spots per kind of place to learn its house types, write the types as assembly rules that draft each
-   house's pieces, and hand-fix the hero streets. City Sample does it this way (building types and PCG, not
-   per-house parts). Waiting on the owner's yes. The B1 sample (12 Oloruntoyin, 26 Osoro, 12 Oloje):
-   `~/gidi-data/research/google/b1/STUDY.md`.
 
 **Next, in order.**
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
    scripts that make or tune it (generator, studies, calibration, one-offs) into `to-delete/`; the bake must still run and
    legacy tiles 6,12 / 7,12 / 8,13 stay byte-identical; gidi-game's old importer reads `web/city/`.
-2. **Mùṣá:** blocks B11, B10, B15, B14, B12 and the rest at z17-18; B0-B5's close-zoom recheck is done; then block by block
+2. **Mùṣá** (decided 24 Oct late, DECISIONS "Finish the map's first layer first": the plan layer everywhere first, a few fields per building, then house-type rules; the B1 sample is in `~/gidi-data/research/google/b1/STUDY.md`): blocks B11, B10, B15, B14, B12 and the rest at z17-18; B0-B5's close-zoom recheck is done; then block by block
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
 3. **Rebuild the old kit's things the new way** (owner, 24 Oct): one builder at a time from the list in
