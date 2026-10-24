@@ -545,3 +545,17 @@ B11 (Araromi and Church Street: between Adeoyo Street, Isolo Road, Itire Road an
 | rd-hjh48h6m | Alafia Street (north of Olusoga) | lane |
 | rd-rby6c85s | Ewenla Street on to Daniel Street | lane |
 | rd-pilgciql | Ademoshun Street | lane |
+
+B10 (Ladipo: between Palm Avenue, Owhin Street, Ladipo Street, Agege Motor Road's side and Isolo Road, round the dead-end road on Ogunoye and Oguntoye Streets). Read 24 Oct at z18 at the checked shot scale (five shots). Across from Owhin Street to Ladipo Street: Ofada, Oliyide and Iyalla Streets, then Aromire and Olufunmilayo Streets lower down. Down the middle: Tadeyo Street from Oliyide to Isolo Road, and Ogunoye Street from Ladipo Street to the dead-end road's tip, which now joins it to the rest. East of Ogunoye: Ojo Road on to Wey Street through to Agege Motor Road's side, and Odulana Street from Ladipo Street to Wey Street. Left out for spacing: Adekitan Street's east arm, Folarin and Alaba Streets, Sholanke, Moroluke and Dakobiri Streets.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-cr6a2j9l | Ofada Street | lane |
+| rd-f6n5u0g1 | Oliyide Street | lane |
+| rd-tjdct2l3 | Iyalla Street | lane |
+| rd-h0p4xdbd | Tadeyo Street | lane |
+| rd-549qul9s | Ogunoye Street | lane |
+| rd-qmm0iloh | Aromire Street | lane |
+| rd-xp0cgtsa | Olufunmilayo Street | lane |
+| rd-hvwdw3gi | Ojo Road on to Wey Street | lane |
+| rd-xjvsti21 | Odulana Street | lane |
