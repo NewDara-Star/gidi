@@ -405,21 +405,25 @@ Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 | rd-74ayh5is | Adedeji Street | lane |
 | rd-kfww6jfn | Idumagbo Street | lane |
 
-**Block B4** (Ladipo Street, Palm Avenue and the district's north-east edge). The real twin is the Ladipo spare parts
-market and the Matori industrial estate: long market sheds and warehouses on a few wide roads (Jimade Street through the
-market, Fatai Atere Way crossing to Matori, the estate road along the north side), and a residential corner by Palm
-Avenue on short streets (Badejo Kalesanwo, Oduduwa, Ikole, C.A.C.). Fatai Atere Way and Jimade end on the district edge;
-they carry on in the neighbour when that seam is joined by hand.
+**Block B4** (Ladipo Street, Palm Avenue and the district's north-east edge). Redrawn 24 Oct from a close-zoom study (five z18 shots at the checked shot scale; owner: zoom in for the details): the first six lanes were read at z16. The real twin is the Ladipo spare parts market and the Matori industrial estate: Jimade Street through the market, the estate road running north from it and east past the warehouses, the cross road over the sheds, the short streets off Ladipo Street by the bank (Unity Close among them), and the east-west street on the estate's north edge; in the residential corner by Palm Avenue, Badejo Kalesanwo, Oduduwa, Efon Alaye, Ikole and C.A.C. Streets, with Omodigbo Street's north end joining Palm Avenue. Fatai Atere Way (rd-99r8996c) was already on its real line and is kept. Streets that end on the district's edge stop there until the seam pass; the estate streets that end among the sheds are real dead ends. Removed: the six z16 lanes rd-tdvlj3x3, rd-fujb836w, rd-dntx4fhp, rd-2rumos81, rd-44hhdxyo, rd-l791gps5.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-99r8996c | Fatai Atere Way | local_main | Ladipo Street to the north-east edge |
-| rd-tdvlj3x3 | Jimade Street (the Ladipo market street) | market_street | Ladipo Street by Daraju to Fatai Atere's twin at the edge |
-| rd-fujb836w | the Matori estate road along the north side | service_road | Ladipo Street to the edge |
-| rd-dntx4fhp | Badejo Kalesanwo Street | lane | Ladipo Street east (ends in the block) |
-| rd-2rumos81 | Oduduwa Street | lane | Ladipo Street east (ends in the block) |
-| rd-44hhdxyo | Ikole Street | lane | Oduduwa's twin to Palm Avenue |
-| rd-l791gps5 | C.A.C. Street | lane | Oduduwa's twin side to Palm Avenue |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-yeqmwvdn | Jimade Street (the Ladipo market street) | market_street |
+| rd-vnres9ex | the Matori estate road: north from Jimade Street, then east past the warehouses | service_road |
+| rd-cpn887is | the estate road across the sheds, Jimade Street to the north road | lane |
+| rd-s5h4f0w5 | the street off Ladipo Street by the bank | lane |
+| rd-ypmlhk6e | Unity Close | lane |
+| rd-yp8z89b0 | the street north to the estate's edge | lane |
+| rd-cfhigpz4 | the east-west street at the estate's north edge | lane |
+| rd-145fsri7 | the street off Ladipo Street past the warehouses | lane |
+| rd-kvh4h6jq | the short street behind the bank | lane |
+| rd-m64dyubf | Badejo Kalesanwo Street | lane |
+| rd-gjzqjyr2 | Oduduwa Street | lane |
+| rd-nssllco8 | Efon Alaye Street | lane |
+| rd-tn5e2vxk | Ikole Street | lane |
+| rd-0wdqpabq | C.A.C. Street | lane |
+| rd-sznt34c5 | Omodigbo Street's north end | lane |
 
 **Block B5** (Olayiwola Liasu, Ilasamaja Road, Itire Road, Akanro, Ayuba Dawodu and Olusanya Streets). The real twin is
 the Akanro / Ilasamaja side: long parallel east-west streets about 60 m apart (Oladosu Sanusi, Kekereowo, Ayuba
