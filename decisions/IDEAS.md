@@ -61,6 +61,11 @@ The owner: "people randomly having like chatter conversations"; "beer parlour ta
 - **Things going on:** jobs anyone in Lagos knows (conductor, okada, hawking, a levy run), checkpoints, the light going off, rain that floods the street, traffic that locks up.
 - **Dense, not huge:** a small part of the city full of life beats a big empty one; the Underdeck is the first place to prove it, and short clips of it are how people hear about the game.
 
+## Living in each district (24 Oct, research, awaiting the owner)
+- **The okada map as a rule:** okadas banned in the inner councils (raids, seizures; they still run the back streets) and free in the outer ring, as in Lagos since 2022. Tunde's risk zone is the centre, his home ground the edge (`docs/lagos-study/LIVING.md`).
+- **Four first mix templates:** the market, the dormitory suburb, the estate and the never-sleeps junction, each then set by hand per district.
+- **18 more person activities** (bake_bread, carry_headload, run_press, smoke_fish, shuck_oysters, saw_timber, butcher_meat, test_speaker, collect_levy, play_chess, dj, spray_money, jog, study, mould_blocks, farm, queue_atm, cyber_work and others); each tied to a district in LIVING.md.
+
 ## Place names: echo names (proposal, 22 Oct, awaiting the owner)
 The owner asked whether Gidi's places could just be parodies of the real names, since Gidi is Lagos made smaller. Invented names stay the rule. The proposal is **echo names**: built from Yoruba (or the place's own language) the way Lagos names are, close enough in sound or meaning that a Lagosian smiles and knows where they are, never a straight copy and never a cheap pun. Saba for Yaba is the model. Big landmarks get the clearest echo; quiet places get plain new names in the same style. Brands and businesses are always invented (Gidi's own). One name list for all 51 districts, made with the owner.
 
