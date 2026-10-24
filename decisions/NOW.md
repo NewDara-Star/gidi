@@ -27,6 +27,13 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   DECISIONS ("Invented names only"); CHECKS rows made honest where only an old-map check held a rule; the old log of this
   page (16-22 Oct) moved to `to-delete/decisions/NOW-log-16-22-oct.md`.
 
+- **Kit pieces** (gidi-game #79, the rule "Save what makes a house, not each house"): block_build's windows and doors are
+  shared pieces (`kit_pieces`), placed by each house's `.pieces.json` with that house's own slot colours. Full street:
+  7 pieces, 9,292 placed, files 785 MB (853 before), 16.8 ms frame, GPU median 19.6 ms (16.2 before: one actor per
+  piece). Next: instanced meshes (ISM/HISM, Custom Primitive Data for colour); measure_csv.py reads Play_Street's
+  scene file even for a named test street (fix); split the other builders (walls and gates, vehicles, stall goods,
+  poles).
+
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
    one skeleton; crowd people fully interactive (punch, run over, react, ragdoll). The proof still to run, when the Mac is
@@ -43,6 +50,14 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 5. **Download OK?** a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
 6. **Restart the Mac** when the owner is home (about two hours after 24 Oct evening; swap 4.3 GB); then re-measure
    work mode's shadow pass.
+7. **Finish the map first?** (owner, 24 Oct late: "Do you not think it's just best we finish the map?", asked while the
+   B1 Street View walk was under way). Recommended: yes. Finish the plan layer for every district (roads, blocks,
+   footprints, plus a few cheap fields per building from satellite and Open Buildings heights: house type, storeys, roof,
+   ground floor). Do not do street-by-street Street View: B1's Jumoke Way and Sebanjo St have no coverage. Study 10-20
+   Street View spots per kind of place to learn its house types, write the types as assembly rules that draft each
+   house's pieces, and hand-fix the hero streets. City Sample does it this way (building types and PCG, not
+   per-house parts). Waiting on the owner's yes. The B1 sample (12 Oloruntoyin, 26 Osoro, 12 Oloje):
+   `~/gidi-data/research/google/b1/STUDY.md`.
 
 **Next, in order.**
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
