@@ -1,5 +1,5 @@
 """Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json).
-  plan:   python3 scripts/twin_photos.py plan ibudo <area>    -> ~/Real-world/research/google/<dir>/twins/<area>/PLAN.json (Street View points every 40 m, both ways)
+  plan:   python3 scripts/twin_photos.py plan ibudo <area>    -> ~/gidi-data/research/google/<dir>/twins/<area>/PLAN.json (Street View points every 40 m, both ways)
   attach: python3 scripts/twin_photos.py attach ibudo <area>  -> reads that folder's INDEX.tsv, lists each street's pictures in the twins file (amber)
 Pictures stay outside the repo (study only)."""
 import csv
@@ -12,7 +12,7 @@ from shapely.geometry import LineString
 
 CMD, D, AREA = sys.argv[1:4]
 TW = f'docs/hand/{D}/twins/{AREA}.json'
-OUT = os.path.expanduser(f'~/Real-world/research/google/{D}/twins/{AREA}')
+OUT = os.path.expanduser(f'~/gidi-data/research/google/{D}/twins/{AREA}')
 T = json.load(open(TW))
 (LA0, LO0), (GX0, GY0) = T['anchor_real'], T['anchor_gidi']
 inv = lambda x, y: (LA0 - (y - GY0) / 110600, LO0 + (x - GX0) / 109900)
@@ -38,7 +38,7 @@ else:
     for r in rows:
         f = r.get('file', '-')
         if f and f != '-':
-            by.setdefault(int(r['n']), []).append(os.path.relpath(os.path.join(OUT, os.path.basename(f)), os.path.expanduser('~/Real-world/research')))
+            by.setdefault(int(r['n']), []).append(os.path.relpath(os.path.join(OUT, os.path.basename(f)), os.path.expanduser('~/gidi-data/research')))
     for i, s in enumerate(T['streets']):
         s['pics'] = sorted(set(by.get(i, [])))
         if s['pics'] and s['status'] == 'red':

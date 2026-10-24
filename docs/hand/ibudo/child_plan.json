@@ -1,6 +1,6 @@
 {
  "district": "hub",
- "note": "Ìbùdó plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (anchor_real, lat/lon) sits on a Gidi point (anchor_gidi, map metres, y south). Any Gidi point in an area maps back to the real point under it: that real street is its twin, photographed there. Study in ~/Real-world/research/google/ibudo/study/.",
+ "note": "Ìbùdó plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (anchor_real, lat/lon) sits on a Gidi point (anchor_gidi, map metres, y south). Any Gidi point in an area maps back to the real point under it: that real street is its twin, photographed there. Study in ~/gidi-data/research/google/ibudo/study/.",
  "areas": [
   {
    "id": "oshodi_core",

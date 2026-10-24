@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gidi data pull. Run on the Mac (Terminal): bash ~/Real-world/research/data/pull-data.sh
+# Gidi data pull. Run on the Mac (Terminal): bash ~/gidi-data/research/data/pull-data.sh
 # Downloads open datasets for the Lagos study into this folder. Safe to stop and re-run: finished files are skipped.
 cd "$(dirname "$0")"
 get() { # url file

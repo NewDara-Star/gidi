@@ -2,7 +2,7 @@
 # side by side. Reads Google Open Buildings v3 (outlines, confidence) and Microsoft's building outlines for Lagos once, and keeps the
 # buildings whose centre lies inside each district's study area (study-<id>.pkl), in metres (UTM 31N).
 # Numbers only are taken from these files into Gidi; no outline is ever copied into the map.
-# Usage: python3 scripts/deep_prep.py [ids...]      -> $GIDI_DEEP_CACHE/bld-<id>.pkl  (default: ~/Real-world/research/data/deep-cache)
+# Usage: python3 scripts/deep_prep.py [ids...]      -> $GIDI_DEEP_CACHE/bld-<id>.pkl  (default: ~/gidi-data/research/data/deep-cache)
 import csv, gzip, json, os, pickle, sys
 import numpy as np
 from shapely import wkt
@@ -12,7 +12,7 @@ from shapely.prepared import prep
 from pyproj import Transformer
 
 csv.field_size_limit(10 ** 8)
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 CACHE = os.environ.get('GIDI_DEEP_CACHE', os.path.join(DATA, 'deep-cache'))
 DIRS = ['.', os.environ.get('GIDI_STUDIES', '')]
 IDS = sys.argv[1:] or ['border', 'bazaar', 'jungle', 'port', 'maze', 'hub', 'railside', 'capital', 'estate', 'foodgate', 'watertown',

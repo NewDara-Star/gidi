@@ -83,7 +83,7 @@
 - **Method:** pixels read at ~4 m. Built = presence ≥ 0.5. Storeys ≈ 3 m each. The 4.5–7.5 m band mixes tall pitched-roof bungalows with 2-storey houses.
 - **Built-up share is low where an LGA includes lagoon water**, e.g. Lagos Island and Eti-Osa.
 - **Epe and Ibeju-Lekki are only partly covered** until the eastern tiles are downloaded.
-- **Script and results:** `Real-world/research/data/results/heights.py` and `heights_by_lga.json`.
+- **Script and results:** `gidi-data/research/data/results/heights.py` and `heights_by_lga.json`.
 
 | LGA | Mean height (m) | Under 4.5 m | 4.5–7.5 m | 7.5–10.5 m (3) | 10.5 m+ (4+) |
 |---|---|---|---|---|---|
@@ -122,7 +122,7 @@
 - **Sources:** WorldPop 2020 constrained (people per km² of land); ESA WorldCover 2021 (tree and built-up share of land); Open Buildings 2.5D 2023 (heights); Copernicus DSM 30 m (share of the area below 5 m).
 - **Districts** are weighted averages of their inspiration LGAs.
 - **Caveat on low ground:** the DSM includes rooftops and treetops, and LGA polygons include lagoon water. So "below 5 m" over-counts water-heavy LGAs. Use it to rank districts, not as exact numbers.
-- **Files:** `Real-world/research/data/results/lga_table.json` (per LGA), plus the scripts `heights.py` and `landpop.py`.
+- **Files:** `gidi-data/research/data/results/lga_table.json` (per LGA), plus the scripts `heights.py` and `landpop.py`.
 
 | District | People/km² | Trees | Built-up | Mean height | 1 storey / 1–2 / 3 / 4+ | Below 5 m |
 |---|---|---|---|---|---|---|

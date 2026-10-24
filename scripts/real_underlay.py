@@ -2,7 +2,7 @@
 roads (Overture) each area is the child of, placed by that area's own anchor (docs/hand/ibudo/twins/<area>.json) and kept to the area.
 A study aid to move Gidi's buildings onto their real spots by hand; never map data, never committed (web/real-underlay.js is ignored).
 
-  python3 scripts/real_underlay.py      writes web/real-underlay.js (needs ~/Real-world)
+  python3 scripts/real_underlay.py      writes web/real-underlay.js (needs ~/gidi-data)
 """
 import csv
 import glob
@@ -15,7 +15,7 @@ from shapely import wkb, wkt
 from shapely.geometry import LineString, Polygon
 from shapely.prepared import prep
 
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 M_LAT, M_LON = 110600.0, 109900.0
 KIND = {'motorway': 'exp', 'trunk': 'art', 'primary': 'main', 'secondary': 'main', 'tertiary': 'street', 'residential': 'street', 'unclassified': 'street',
         'living_street': 'street', 'service': 'lane', 'track': 'lane', 'unknown': 'lane', 'footway': 'path', 'path': 'path', 'pedestrian': 'path', 'steps': 'path'}

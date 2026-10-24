@@ -36,7 +36,7 @@ The owner asked for this on 15 Oct 2026: "the research should look at everything
 - **Landmarks:** the biggest buildings, and the place listed nearest each one.
 
 ## Run
-1. `python3 scripts/deep_prep.py`: one pass over the big building files, cut per district, into `~/Real-world/research/data/deep-cache/`.
+1. `python3 scripts/deep_prep.py`: one pass over the big building files, cut per district, into `~/gidi-data/research/data/deep-cache/`.
 2. `python3 scripts/study_deep.py <id>` for each district. They run side by side; about 20 s each, a few minutes for Railside.
 3. `python3 scripts/deep_report.py` writes the pages.
 

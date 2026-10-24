@@ -1,6 +1,6 @@
 # The close calls, checked on Google satellite (22 Oct 2026)
 
-The similarity numbers (`SIMILAR.md`) flagged 10 merges as close or doubtful. Each pair was looked at side by side on Google satellite, about 1 km across, at each unit's seed point. Study only: the pictures stay outside the repo (`~/Real-world/research/google/lagos-study/close-calls/`, sheet `close_calls.jpg`).
+The similarity numbers (`SIMILAR.md`) flagged 10 merges as close or doubtful. Each pair was looked at side by side on Google satellite, about 1 km across, at each unit's seed point. Study only: the pictures stay outside the repo (`~/gidi-data/research/google/lagos-study/close-calls/`, sheet `close_calls.jpg`).
 
 | Pair (similarity) | Verdict | What the pictures show |
 |---|---|---|

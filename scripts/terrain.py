@@ -18,7 +18,7 @@ from shapely.ops import transform
 from shapely import contains_xy
 from pyproj import Transformer
 
-DEM = os.environ.get("GIDI_DEM", os.path.expanduser("~/Real-world/research/data/dem/Copernicus_DSM_COG_10_N06_00_E003_00_DEM.tif"))
+DEM = os.environ.get("GIDI_DEM", os.path.expanduser("~/gidi-data/research/data/dem/Copernicus_DSM_COG_10_N06_00_E003_00_DEM.tif"))
 STUDY_DIRS = [".", os.environ.get("GIDI_STUDIES", "")]   # the study pickles are not in the repo (*.pkl is ignored)
 CELL = 40
 exec(open("scripts/bake_web.py").read().split("# Storeys for any district")[0])   # water, ocean (map polygons)

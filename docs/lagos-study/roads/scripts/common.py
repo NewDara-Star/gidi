@@ -1,7 +1,7 @@
 # Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid.
 import os, json, numpy as np
 from pyproj import Transformer
-DATA = '/Users/Star/Real-world/research/data/'
+DATA = '/Users/Star/gidi-data/research/data/'
 SCR = os.environ.get('GIDI_SCRATCH', '/private/tmp/claude-501/-Users-Star-gidi/bd25866f-2f1b-4b56-a662-5ab97de6e073/scratchpad/')
 LAGOS = SCR + 'lagos/'          # the earlier study's 250 m grids (feat.npz, class.npz, bgrid65.npz, hgrid.npz, rgrid.npz)
 WORK = SCR + 'roads/'           # this study's working files

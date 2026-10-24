@@ -3,7 +3,7 @@ have real life images that we can now model from"). docs/hand/ibudo/child_plan.j
 (true scale, north up). This writes hand edits into web/hand/hub.json:
 - the area is cleared (houses, streets, lanes, paths, plots, slip roads, decks and places that were there);
 - the new arterial and rail lines (scripts/layout_v2.py) get their corridors through the whole district;
-- the real streets go in (Overture Maps transportation, ODbL, from OpenStreetMap: ~/Real-world/research/data/overture-lagos), the trunk
+- the real streets go in (Overture Maps transportation, ODbL, from OpenStreetMap: ~/gidi-data/research/data/overture-lagos), the trunk
   road, the expressway and the rail being the layout's own lines;
 - the real building footprints go in (Google Open Buildings v3, CC-BY 4.0 / ODbL), their storeys from Open Buildings 2.5D 2023 heights;
 - every street's twin is written to docs/hand/ibudo/twins/<area>.json: the real street it is, its real name and a point to photograph.
@@ -26,7 +26,7 @@ from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
 from shapely.ops import unary_union
 
 AREA_ID = sys.argv[1]
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 CP = json.load(open('docs/hand/ibudo/child_plan.json'))
 A = next(a for a in CP['areas'] if a['id'] == AREA_ID)
 S = open(os.environ.get('GIDI_BASE', 'web/gidi-data.js')).read()

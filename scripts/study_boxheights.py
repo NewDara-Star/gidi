@@ -9,7 +9,7 @@ from rasterio.windows import from_bounds
 from shapely.geometry import shape, box
 from shapely.ops import unary_union, transform
 from pyproj import Transformer
-D = os.environ.get("GIDI_DATA", os.path.expanduser("~/Real-world/research/data/"))   # where data/tools/pull-data.sh puts it
+D = os.environ.get("GIDI_DATA", os.path.expanduser("~/gidi-data/research/data/"))   # where data/tools/pull-data.sh puts it
 lga = sys.argv[1]; boxes = [tuple(map(float, b.split(","))) for b in sys.argv[2].split(";")]
 L = json.load(open(D + "lagos_lgas_utm31.geojson"))["features"]
 g = next(shape(f["geometry"]) for f in L if f["properties"]["name"] == lga)

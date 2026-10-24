@@ -12,7 +12,7 @@ from shapely.strtree import STRtree
 from shapely import contains_xy
 from pyproj import Transformer
 
-OB = os.environ.get("GIDI_OPEN_BUILDINGS", os.path.expanduser("~/Real-world/research/data/open-buildings-v3/lagos_open_buildings_v3.csv.gz"))
+OB = os.environ.get("GIDI_OPEN_BUILDINGS", os.path.expanduser("~/gidi-data/research/data/open-buildings-v3/lagos_open_buildings_v3.csv.gz"))
 CONF = 0.70
 CELL = 250.0
 IDS = sys.argv[1:] or ["maze", "hub", "jungle", "foodgate", "watertown", "capital", "bazaar", "port", "railside", "estate",

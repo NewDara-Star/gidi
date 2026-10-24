@@ -24,7 +24,7 @@ listed in <district>/BUILDINGS.md for the hand pass (the rule: a real house on a
 that already hold a building are skipped: a draft never moves anything already in the map ("Rules draft, records rule").
 
 Footprints: Microsoft's Global ML Building Footprints (ODbL, © Microsoft; numbers only), streamed from
-~/Real-world/research/data/ms-buildings/ for the district's real box. Never Google's geometry.
+~/gidi-data/research/data/ms-buildings/ for the district's real box. Never Google's geometry.
 """
 import gzip
 import hashlib
@@ -40,7 +40,7 @@ from shapely.ops import unary_union
 from shapely.strtree import STRtree
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.expanduser('~/Real-world/research/data/ms-buildings/')
+DATA = os.path.expanduser('~/gidi-data/research/data/ms-buildings/')
 FU, FV = 500525.0, 707825.0            # the frame's south-west corner, UTM 31N (web/frame-study.js `real_sw_utm31`)
 SCALE, RH = 3, 10500 * 3
 STEP, SHIFT, NUDGE, SETBACK = 30.0, 7, 6.0, 15.0

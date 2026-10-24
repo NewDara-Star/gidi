@@ -7,7 +7,7 @@
 - **[H]** Google Open Buildings 2.5D Temporal 2023 heights (48 tiles, read at ~4 m; "4+" = share of built pixels 10.5 m or taller, about 4 storeys and up).
 - **[OV]** Overture roads, land use and places.
 - **[WP]** WorldPop 2020 (constrained). **[WC]** ESA WorldCover 2021.
-- **[G]** the Google Earth / Street View notes already in `~/Real-world/research/google/`.
+- **[G]** the Google Earth / Street View notes already in `~/gidi-data/research/google/`.
 - **[R]** the earlier 20-LGA research (`~/gidi/docs/lagos-lgas-research.md`).
 - **[K]** general knowledge of Lagos (not measured; check before relying on it).
 

@@ -1,6 +1,6 @@
 # Ìbùdó, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct)
 
-Oshodi, studied on Google Earth and Street View (`~/Real-world/research/google/ibudo/`, notes there), rebuilt one-for-one
+Oshodi, studied on Google Earth and Street View (`~/gidi-data/research/google/ibudo/`, notes there), rebuilt one-for-one
 first, then made ours (the owner's method: like the fonts and the danfo). `design_v1.png`: metres, north up, 320 x 320 m.
 
 One-for-one (from Oshodi):

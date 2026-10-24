@@ -5,7 +5,7 @@ teaches the technique; every decision made on the way becomes a rule other place
 place earns its own pass when the owner has looked at it. This takes years; places are improved in updates as they pass.
 
 ## How a spot gets its pass
-1. **Reference frames:** the owner's photos of real Lagos places like it (`~/Real-world/research/refs/`, study only) and the
+1. **Reference frames:** the owner's photos of real Lagos places like it (`~/gidi-data/research/refs/`, study only) and the
    two videos; zoomed in, everything in them listed.
 2. **The shot list:** every element in those frames, below, each with what makes it read as Lagos.
 3. **Build each element:** a kit piece (Blender, part by part), a Meshy sculpture (statues only), a Megascans surface, a

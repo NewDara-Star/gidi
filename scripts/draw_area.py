@@ -16,7 +16,7 @@ from shapely import wkb, wkt
 from shapely.geometry import LineString, Point, Polygon
 
 A, OUT = sys.argv[1], sys.argv[2]
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 T_ = json.load(open(f'docs/hand/ibudo/twins/{A}.json'))
 from shapely import wkt as _w
 AREA = _w.loads(T_['area_wkt'])

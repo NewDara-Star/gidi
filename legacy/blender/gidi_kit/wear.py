@@ -4,7 +4,7 @@ Unreal shows the kit's vertex colour alone (no procedural wear), so everything t
 painted into the colours or laid on the wall as geometry: red earth splashed up the foot, paint faded unevenly, black
 rain-run streaks under the sills and the parapet, rust run down from the burglar bars, cement patches, render broken
 away to the sandcrete block, the AC unit's drip. Looked at against the Mushin and Shomolu study and the street refs
-(~/Real-world/research): numbers and colours only.
+(~/gidi-data/research): numbers and colours only.
 
 Every overlay stands a hair off the wall (OFF) and fades into the wall's own colour at its soft edges: the wall's colour
 at any point is a smooth function (Weather.wall), so an overlay can match it exactly where it fades out.

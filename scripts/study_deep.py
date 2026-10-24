@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from structure import measure
 
 DID = sys.argv[1]
-DATA = os.path.expanduser('~/Real-world/research/data')
+DATA = os.path.expanduser('~/gidi-data/research/data')
 CACHE = os.environ.get('GIDI_DEEP_CACHE', os.path.join(DATA, 'deep-cache'))
 DIRS = ['.', os.environ.get('GIDI_STUDIES', '')]
 tr = Transformer.from_crs(4326, 32631, always_xy=True).transform

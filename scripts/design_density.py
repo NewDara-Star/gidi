@@ -12,7 +12,7 @@ What it does, street by street, on the finished map (web/gidi-data.js):
 - the existing towers away from the main roads come down to two storeys (a few stay), with "set storeys".
 
 PROFILES holds each district's numbers, from the Google Earth study (study yes, lift no: only measurements, no geometry):
-the Maze, from Mushin and Shomolu (18 Oct; notes in ~/Real-world/research/google/maze/NOTES.md): roofs cover 75-85% of the ground; long one- and two-storey houses (about 10 x 15-30 m)
+the Maze, from Mushin and Shomolu (18 Oct; notes in ~/gidi-data/research/google/maze/NOTES.md): roofs cover 75-85% of the ground; long one- and two-storey houses (about 10 x 15-30 m)
 in rows along the streets with 1-3 m alleys between; taller buildings only here and there, mostly on the main roads.
 """
 import json

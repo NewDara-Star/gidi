@@ -2,7 +2,8 @@
 
     ~/.venvs/gidi/bin/python scripts/inventory.py [--out docs/inventory]
 
-Reads the git-tracked files of ~/gidi, ~/gidi-game and ~/Real-world (nothing untracked, nothing generated) and writes:
+Reads the git-tracked files of ~/gidi, ~/gidi-game and ~/gidi-data (the study store: only its notes and scripts are
+tracked; nothing untracked, nothing generated) and writes:
   inventory.json   one row per file: repo, path, kind, lines, last change, summary, the files that point to it
   INVENTORY.md     the same per folder, readable; binary files (art, models) counted per folder, not listed
   SUSPECTS.md      what to look at first: code and documents nothing points to, and paths that documents and code name
@@ -21,7 +22,7 @@ import re
 import subprocess
 
 REPOS = {'gidi': os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'gidi-game': os.path.expanduser('~/gidi-game'),
-         'Real-world': os.path.expanduser('~/Real-world')}
+         'gidi-data': os.path.expanduser('~/gidi-data')}
 TEXT = {'.py', '.sh', '.js', '.mjs', '.ts', '.mts', '.tsx', '.md', '.html', '.css', '.json', '.ini', '.txt', '.toml',
         '.yml', '.yaml', '.csv', '.tsv', '.geojson', '.cfg', ''}
 CODE = {'.py', '.sh', '.js', '.mjs', '.ts', '.mts', '.tsx', '.html', '.css'}
@@ -117,7 +118,8 @@ def main():
             size = os.path.getsize(full)
             row = {'repo': name, 'path': path, 'ext': ext, 'bytes': size, 'changed': when.get(path, ''),
                    'lines': None, 'summary': '', 'text': ext in TEXT}
-            if row['text'] and size <= BIG:
+            # this script's own output names every file: reading it would make everything look pointed to
+            if row['text'] and size <= BIG and not (name == 'gidi' and path.startswith('docs/inventory/')):
                 try:
                     t = open(full, encoding='utf-8').read()
                 except (UnicodeDecodeError, OSError):
@@ -165,8 +167,8 @@ def main():
                 ins.add(k)
         r['refs_in'] = sorted(f'{k[0]}:{k[1]}' for k in ins)
 
-    # paths of ours that do not exist: a name under one of our repos' top folders (scripts/x.py, tools/y.sh) that is
-    # neither tracked nor on disk there, or a bare script name (x.py, y.sh) that exists in none of the repos. Research
+    # paths of ours that do not exist: a name under one of our repos' top folders (scripts/<name>.py, tools/<name>.sh) that is
+    # neither tracked nor on disk there, or a bare script name (<name>.py) that exists in none of the repos. Research
     # write-ups about other people's projects name their files, so bare names are only checked outside research/.
     tops, on_disk, have = {}, set(), set()
     for name, repo in REPOS.items():
@@ -229,7 +231,7 @@ def cell(s, n=160):
 
 def write_md(files, out):
     lines = ['# Inventory of the three repos', '',
-             'Made by `scripts/inventory.py` (gidi): every git-tracked file in gidi, gidi-game and Real-world. "Refs" is '
+             'Made by `scripts/inventory.py` (gidi): every git-tracked file in gidi, gidi-game and gidi-data. "Refs" is '
              'how many other files name it (imports, links, mentions). Binary files are counted per folder. Run it again '
              'to refresh; do not edit by hand.', '']
     for repo in REPOS:

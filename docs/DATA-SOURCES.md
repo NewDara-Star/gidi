@@ -1,6 +1,6 @@
 # Data sources, and what to delete later
 
-Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/Real-world/research/data/` (about 20 GB, mostly Google's 2.5D tiles). The OpenStreetMap extract (`lagos.osm.pbf`, 55 MB) is gone from the Mac; the repo's links to it were removed on 24 Oct.
+Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gidi-data/research/data/` (about 20 GB, mostly Google's 2.5D tiles). The OpenStreetMap extract (`lagos.osm.pbf`, 55 MB) is gone from the Mac; the repo's links to it were removed on 24 Oct.
 
 **The rule:**
 - We **study** these files: numbers, patterns, our own eyes on Google Earth and Street View.
