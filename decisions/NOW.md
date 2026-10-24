@@ -69,9 +69,10 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    roof slope its own images, ~4,500 uncompressed; the roof edge's ribs 26.5 M of 28.1 M triangles); research showed games
    share tiling images, so `zinc_kit.shared()` makes 6.4 m zinc tiles (24 for the street) and the edge is one row. Now 18.9 M
    triangles, 60 fps in high at eye level, 59 from 15 m up, 6.9 GB, texture pool 111 MB. The houses are plain (flat paint,
-   no wear, black window holes), so this is a floor. **Proposed budgets, waiting on the owner's yes:** a house at most
-   80,000 triangles, a big or hero building 300,000, a scene 30 M in high; props and vehicles open until measured. On yes:
-   BUDGET in gidi-game `tools/look_travels.py`, and close the CHECKS gap. **Research done for the next step** (how the pros
+   no wear, black window holes), so this is a floor. **Budgets set (owner's yes, 24 Oct; DECISIONS "One near model"):** a
+   building at most 300,000 triangles (held by gidi-game `tools/look_travels.py`), an ordinary house 80,000 as the target,
+   a scene 30 M in high; props and vehicles open until measured. **New rule: "Save what makes a house, not each house"**
+   (DECISIONS): shared kit pieces placed by each house's record. **Research done for the next step** (how the pros
    make many buildings real): modular kits placed as instances (City Sample: 24 kits, 2,000+ meshes, corner/wall/entrance
    per storey), trim sheets (one image set for all frames, sills, bands), per-house variation through Custom Primitive
    Data on one material, wear as tiling grime + vertex-paint masks + decals, fake rooms behind windows (interior mapping).
