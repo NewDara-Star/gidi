@@ -100,13 +100,16 @@ def summary(path, ext, text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(REPOS['gidi'], 'docs', 'inventory'))
+    ap.add_argument('--untracked', action='store_true',
+                    help="also read gidi's new files not yet added (the commit hook: a commit's new files count too)")
     a = ap.parse_args()
 
     files = []          # rows
     texts = {}          # (repo, path) -> text, for reading references
     for name, repo in REPOS.items():
         when = last_changes(repo)
-        for path in git(repo, 'ls-files').splitlines():
+        listed = git(repo, 'ls-files', *(['--cached', '--others', '--exclude-standard'] if a.untracked and name == 'gidi' else []))
+        for path in listed.splitlines():
             full = os.path.join(repo, path)
             if not os.path.isfile(full):
                 continue

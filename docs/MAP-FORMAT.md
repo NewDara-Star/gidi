@@ -6,7 +6,7 @@ The drawing board saves into it. The Blender kit and the Unreal import read it. 
 This is a draft. The board's new frame draws and saves the plan layer in it (section 6); the kit does not read it yet.
 
 - **Schema:** `schema/map_schema.json` (every record type, field, type, unit and allowed value).
-- **Checker:** `scripts/check_map.py` (rejects anything unknown, missing, mistyped, unlinked or real-named).
+- **Checker:** `scripts/check_map.py` (rejects anything unknown, mistyped, unlinked or real-named; a field not given yet is counted on its TODO line, the board's amber, and fails with `--strict`).
 - **What the kit reads:** `schema/kit_reads.json` (each builder and the fields it reads; written by gidi-game `tools/kit_fields.py --write`).
 - **Worked example:** `docs/map-format-example/d15/` (one 20 m street; passes the checker).
 
@@ -417,7 +417,7 @@ PASS  31 records in 3 files, 0 problems
 - a name or sign text that shares its core with a real name;
 - a file not in the canonical layout (`--fix` rewrites it).
 
-Tested both ways: the example passes; a broken copy (an extra field, a missing field, a real road name, an unknown vehicle kind, a wire with both ends, a renamed table column, a link to nothing, a lean-to longer than its wall, two roads 0.36 m apart) fails with 13 problems named.
+Tested both ways: the example passes; a broken copy (an extra field, a missing field, a real road name, an unknown vehicle kind, a wire with both ends, a renamed table column, a link to nothing, a lean-to longer than its wall, two roads 0.36 m apart) fails with 13 problems named (22 Oct; the missing field now with `--strict`, 24 Oct).
 
 ### What each kit part reads
 

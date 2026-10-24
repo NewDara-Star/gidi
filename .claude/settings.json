@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/checks-before-commit.sh",
+            "timeout": 120,
+            "statusMessage": "The checks before committing"
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/checked-before-commit.sh",
+            "statusMessage": "A Checked: paragraph with every code or map change"
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/review-before-push.sh",
+            "timeout": 600,
+            "statusMessage": "A second model reviews the push against the rules"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/checks-before-stop.sh",
+            "timeout": 120,
+            "statusMessage": "Checking changed code before stopping"
+          }
+        ]
+      }
+    ]
+  }
+}

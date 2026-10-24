@@ -1,6 +1,6 @@
 """The new map's checker (docs/MAP-FORMAT.md; owner, 22 Oct 2026: "one ground truth"). Nothing in the map is guessed: a
-record with an unknown field, a missing field, a wrong type, a broken link or a real name fails here, before the board,
-the kit or the Unreal import ever reads it.
+record with an unknown field, a wrong type, a broken link or a real name fails here, before the board, the kit or the
+Unreal import ever reads it. A field not given yet is counted as still to fill (TODO), and fails too with --strict.
 
   python3 scripts/check_map.py <map dir>                      check every district under it (map/ by default)
   python3 scripts/check_map.py <map dir> --kit schema/kit_reads.json   also check what each kit part reads
@@ -8,7 +8,8 @@ the kit or the Unreal import ever reads it.
   python3 scripts/check_map.py <map dir> --fix                rewrite each file in the canonical layout (one record a line)
 
 A map dir holds one folder per district: district.json, plan.json and dress/<tx>_<ty>.json (100 m tiles). The schema is
-schema/map_schema.json. Exits 1 on any failure.
+schema/map_schema.json. Exits 1 on any problem. A field not given yet is counted on a TODO line, not a problem (the
+board shows it amber); with --strict it fails too.
 """
 import json
 import math
@@ -24,6 +25,7 @@ HEADER = {'format', 'district', 'layer', 'tile', 'records'}
 ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
 
 errors = []
+TODO = re.compile(r": missing (?:field|value) '([^']+)'")      # what the board shows amber
 
 
 def err(where, msg):
@@ -477,7 +479,17 @@ if __name__ == '__main__':
         check_kit(args[args.index('--kit') + 1])
     if '--sizes' in args:
         sizes(files)
-    for e in errors:
+    # A field drawn but not given yet is still to fill (the board's amber), not a problem (its red): one count per
+    # field, so the problems stay readable and PASS means none. --strict fails on them too (a district called finished).
+    todo = [e for e in errors if TODO.search(e)]
+    bad = errors if '--strict' in args else [e for e in errors if not TODO.search(e)]
+    for e in bad:
         print('FAIL ', e)
-    print('%s  %d records in %d files, %d problems' % ('PASS' if not errors else 'FAIL', len(recs), len(files), len(errors)))
-    sys.exit(1 if errors else 0)
+    if todo and '--strict' not in args:
+        by = {}
+        for e in todo:
+            f = TODO.search(e).group(1)
+            by[f] = by.get(f, 0) + 1
+        print('TODO  %d fields still to fill: %s' % (len(todo), ', '.join('%s %d' % kv for kv in sorted(by.items(), key=lambda kv: -kv[1]))))
+    print('%s  %d records in %d files, %d problems' % ('PASS' if not bad else 'FAIL', len(recs), len(files), len(bad)))
+    sys.exit(1 if bad else 0)
