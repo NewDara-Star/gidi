@@ -1,3 +1,4 @@
+# Appendix A and B of SIMILAR.md (unit fingerprints, neighbour pairs) from analysis.json.
 import json, csv, numpy as np
 A=json.load(open('analysis.json')); R=A['rows']; S=np.array(A['S'])
 CLS=list(np.load('../lagos/class.npz')['names'])

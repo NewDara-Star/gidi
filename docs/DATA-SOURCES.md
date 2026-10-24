@@ -1,6 +1,6 @@
 # Data sources, and what to delete later
 
-Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/Real-world/research/data/` (about 20 GB, mostly Google's 2.5D tiles). Plus `lagos.osm.pbf` (55 MB) in the repo folder, which is git-ignored.
+Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/Real-world/research/data/` (about 20 GB, mostly Google's 2.5D tiles). The OpenStreetMap extract (`lagos.osm.pbf`, 55 MB) is gone from the Mac; the repo's links to it were removed on 24 Oct.
 
 **The rule:**
 - We **study** these files: numbers, patterns, our own eyes on Google Earth and Street View.
@@ -19,7 +19,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/Re
 | `dem/`, `lagos_copernicus_glo30_dsm.tif` | Copernicus 30 m surface model | Copernicus licence | 95 MB | `web/terrain.json` | keep until Unreal has its Landscape |
 | `worldcover/` | ESA WorldCover 10 m, 2021 | CC BY 4.0 | 271 MB | empty land vs untraced land | map final |
 | `worldpop/` | WorldPop 100 m population, 2020 | CC BY 4.0 | 59 MB | people per district | map final |
-| `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | map final |
+| `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | deleted (24 Oct: not on the Mac) |
 | `deep-cache/` | the buildings of each district's study area, cut once from Google's and Microsoft's files (`scripts/deep_prep.py`) | as above | ~250 MB | the deep study (`docs/DEEP-STUDY.md`) | map final |
 | `study-*.pkl` (scratch folders) | each district study's extract | from the above | small | regenerating districts | map final |
 

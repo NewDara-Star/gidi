@@ -1,3 +1,4 @@
+# Map of the study units (SIMILAR.md's unit pictures), drawn with common.py.
 from common import *
 from matplotlib.colors import ListedColormap
 unit=Un['unit']; n=len(NAMES)

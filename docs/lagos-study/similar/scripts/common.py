@@ -1,3 +1,4 @@
+# Shared by the similarity study's plot scripts: the grids, the units, the LGA lines. Needs the grids in ../lagos/ (feat.npz, class.npz), which were never committed and are lost (decisions/CODEBASE.md).
 import numpy as np, json, matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from shapely.geometry import shape

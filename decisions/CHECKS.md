@@ -4,8 +4,8 @@ Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why 
 it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
 answered by this table, not by asking. A new rule goes in `DECISIONS.md` and here in the same change.
 
-Checks: `check_district.py` (1–17, every district), `check_real.py` (R1–R5, N1: the areas built from real places), the bake's
-DETERMINISTIC line (`tools/bake.sh`).
+Checks: `check_district.py` (1–17, every district), `check_real.py` (R1–R5, N1: the areas built from real places), `check_map.py` (the new map).
+The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was never committed (found 24 Oct).
 
 | Rule | How it is held | Checked by |
 |---|---|---|
@@ -31,7 +31,7 @@ DETERMINISTIC line (`tools/bake.sh`).
 | The hand pass covers infrastructure and labels | furniture and labels placed by hand land where meant | 15, 17 |
 | Roads have surfaces; poorer areas have unpaved and marshy ones | every road has a surface | GAP: no check that a street's surface matches what its twin photos show (earth, laterite, tar, interlock) |
 | Hand-place, not tune. | hand edits on top of the built base | 17 |
-| Freeze everything | the map comes out the same every bake | DETERMINISTIC |
+| Freeze everything | the map comes out the same every bake | GAP: `tools/bake.sh` (the DETERMINISTIC line) was never committed |
 | Account for every square metre: | carriageway, gutter, walkway, building line, encroachment | 1, 2, 3, 14, 15, 16 |
 | Markets spill onto the road: | tables in declared zones, a lane kept clear | 1 (zones); GAP: no check that a lane stays clear |
 | Everything is in the data | things are objects with positions | 16 |
