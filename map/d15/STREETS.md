@@ -425,15 +425,28 @@ Akinwunmi joins its kept stretch at the Ladipo market (rd-cbrqj76p).
 | rd-0wdqpabq | C.A.C. Street | lane |
 | rd-sznt34c5 | Omodigbo Street's north end | lane |
 
-**Block B5** (Olayiwola Liasu, Ilasamaja Road, Itire Road, Akanro, Ayuba Dawodu and Olusanya Streets). The real twin is
-the Akanro / Ilasamaja side: long parallel east-west streets about 60 m apart (Oladosu Sanusi, Kekereowo, Ayuba
-Dawodu, Omosolape by the canal), and short streets off Ilasamaja Road. The three missing ones are drawn.
+**Block B5** (Olayiwola Liasu, Ilasamaja Road, Itire Road, Akanro, Ayuba Dawodu and Olusanya Streets). Redrawn 24 Oct from a close-zoom study (three z18 shots at the checked shot scale; owner: zoom in for the details): the first three lanes were read at z16 and two of them sat off the real lines. The real twin is the Akanro / Ilasamaja side. North of Akanro Street: Oladeinde Coker Street bending up to the Karimu Agoro street, Alfa Nda Street, Alhaji Isiaka Nda Street, Oba Lane, Ajose Street, Olafimihan Street (its west end runs up Moriamo Ajoke Street's line to Ilasamaja Road), Okunade Street and Onayiogbo Street. South of it: Oladosu Sanusi running on as Mopelola and Tanimowo Streets, Shobowale Street, Afisi Street on to Ojo Street, Ogunbowale Street and the Date Palm school street, Kekereowo Street on to Babalola Street and Itire Road, Olajide Street, the street past the Christ Apostolic Church, and Omosolape Street beyond the canal. Ayuba Dawodu and Akanro Streets were already on their real lines and are kept. Left out for spacing: Anofiu, Moriamo Ajoke's south end, Church Close, Odofin and Alhaji Alaka, Oyinkan, Irokosu, Ganiyu Hassan, Olusanya (Gidi's west edge road is its twin). Removed: the three z16 lanes rd-jkhasg5m, rd-zu0ao8aa, rd-9p5skecq.
 
-| Gidi id | real twin | kind | from, to |
-|---|---|---|---|
-| rd-jkhasg5m | Kekereowo Street / Olajide Street | lane | Olusanya's side east to Itire Road |
-| rd-zu0ao8aa | Omosolape Street | lane | Olusanya's side east along the canal (ends in the block) |
-| rd-9p5skecq | Onayiogbo Street | lane | Ilasamaja Road south (ends in the block) |
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-nj3sfh8p | Oladeinde Coker Street | lane |
+| rd-4h8mnpoo | the street by Karimu Agoro Street, Ilasamaja Road to Alfa Nda Street | lane |
+| rd-dla5ljj1 | Alfa Nda Street | lane |
+| rd-yj4woxpz | Alhaji Isiaka Nda Street, on south past Akanro Street | lane |
+| rd-jc0mdz0x | Oba Lane | lane |
+| rd-iro9fmv2 | Olafimihan Street | lane |
+| rd-56ovxs0k | Okunade Street | lane |
+| rd-u80w77ph | Ajose Street | lane |
+| rd-364h94tc | Onayiogbo Street | lane |
+| rd-jaf53pf0 | Oladosu Sanusi, Mopelola and Tanimowo Streets | lane |
+| rd-h1lgtwi5 | Shobowale Street | lane |
+| rd-iz10prdy | Afisi Street on to Ojo Street | lane |
+| rd-9ho3snky | Ogunbowale Street | lane |
+| rd-5y1k9nk7 | the street by Date Palm High School | lane |
+| rd-kvx590dw | Kekereowo Street on to Babalola Street | lane |
+| rd-uy3bbwus | Olajide Street | lane |
+| rd-n8hut0ew | the street past the Christ Apostolic Church, to the canal side | lane |
+| rd-k2glzog0 | Omosolape Street | lane |
 
 **Small blocks, first batch (B6, B7, B9), studied at close zoom (z17)** (owner, 23 Oct: zoom in to get the details).
 Real streets here are 50-60 m apart, which is under 20 m at 1:3, too tight for a house on each side; so about one real
