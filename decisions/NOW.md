@@ -54,7 +54,8 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 2. **Mùṣá:** blocks B11, B10, B15, B14, B12 and the rest at z17-18; B0-B5's close-zoom recheck is done; then block by block
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
-3. **Builders still to make for the map:** frontage, lean-to, heap, tree, road, ground (`tools/kit_fields.py` lists 24
+3. **Rebuild the old kit's things the new way** (owner, 24 Oct): one builder at a time from the list in
+   `legacy/blender/WHAT-IT-HELD.md`, zinc roof sheets and lean-tos first. **Builders still to make for the map:** frontage, lean-to, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad

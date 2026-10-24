@@ -16,7 +16,7 @@ Made by `scripts/inventory.py` with `scripts/doc_vault.py`: every markdown docum
 For: datasets, shots, reference, assets, scripts, notes, deep-study, cache. Last changed 2026-10-24, 23 lines.
 Links to 4: `gidi-data:research/data/pull-data.sh`, `gidi-data:research/refs/REVIEW.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/DATA-SOURCES.md`
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.12); `gidi:decisions/NOW.md` (0.11).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.13); `gidi:decisions/NOW.md` (0.1).
 
 ## gidi-data:research/google/estate
 ### `gidi-data:research/google/estate/NOTES.md`
@@ -193,10 +193,10 @@ Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/DECISIONS
 ## gidi:decisions
 ### `gidi:decisions/CHECKS.md`
 **Which check holds each rule**. Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
-For: process, gidi-game, held, rule, review, builder, script, re-draft. Last changed 2026-10-24, 89 lines.
-Links to 22: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md` ...
+For: process, gidi-game, held, rule, builder, review, script, builders. Last changed 2026-10-24, 90 lines.
+Links to 23: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md` ...
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/MAP-FORMAT.md`), 3 code files (`gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`).
-Nearest in words: `gidi:decisions/DECISIONS.md` (0.43); `gidi:decisions/NOW.md` (0.37); `gidi:decisions/CODEBASE.md` (0.35).
+Nearest in words: `gidi:decisions/DECISIONS.md` (0.45); `gidi:decisions/NOW.md` (0.38); `gidi:decisions/CODEBASE.md` (0.35).
 
 ### `gidi:decisions/CODEBASE.md`
 **What the code holds: the three repos, one page**. What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
@@ -207,10 +207,10 @@ Nearest in words: `gidi:decisions/NOW.md` (0.36); `gidi:decisions/CHECKS.md` (0.
 
 ### `gidi:decisions/DECISIONS.md`
 **Decisions (the owner's standing rules)**. Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
-For: we're, hand, view, kits, laptop, records, modelled, blender. Last changed 2026-10-24, 124 lines.
+For: we're, kits, hand, view, object, records, blender, laptop. Last changed 2026-10-24, 125 lines.
 Links to 34: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:ASSETS.md`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/plates.py`, `gidi-game:tools/umbrella_build.py`, `gidi:decisions/CHECKS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/story/acts-2-3-draft.md`, `gidi:docs/BOARD.md` ...
 Backlinks: 13 documents (`gidi-data:README.md`, `gidi-game:CLAUDE.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/NOW.md` ...), 3 code files (`gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`, `gidi:scripts/rebuild_areas.py`).
-Nearest in words: `gidi:decisions/CHECKS.md` (0.43); `gidi:decisions/NOW.md` (0.43); `gidi:docs/MAP-FORMAT.md` (0.32).
+Nearest in words: `gidi:decisions/CHECKS.md` (0.45); `gidi:decisions/NOW.md` (0.43); `gidi:docs/MAP-FORMAT.md` (0.32).
 
 ### `gidi:decisions/HISTORY.md`
 **Decisions that were replaced (history)**. Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct, word for
@@ -224,21 +224,21 @@ Nearest in words: `gidi:decisions/DECISIONS.md` (0.31); `gidi:decisions/CODEBASE
 For: refs, motion, video, metahuman, yoruba, talk, sound, parlour. Last changed 2026-10-24, 68 lines.
 Links to 5: `gidi:decisions/lived-in.md`, `gidi:decisions/world-life.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:docs/lagos-study/roads/NAMES.md`
 Backlinks: 5 documents (`gidi:CLAUDE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/README.md`, `gidi:docs/lagos-study/roads/NAMES.md`), 0 code files ().
-Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS.md` (0.24); `gidi:decisions/world-life.md` (0.21).
+Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS.md` (0.23); `gidi:decisions/world-life.md` (0.21).
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, dress, sent, pass, records, editor, hand, layer. Last changed 2026-10-24, 147 lines.
+For: gidi-game, dress, sent, pass, records, editor, hand, layer. Last changed 2026-10-24, 148 lines.
 Links to 56: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/kit_fields.py` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 2 code files (`gidi:.claude/hooks/review-before-push.sh`, `gidi:web/hand/hub.json`).
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.46); `gidi:decisions/DECISIONS.md` (0.43); `gidi:decisions/CHECKS.md` (0.37).
+Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.46); `gidi:decisions/DECISIONS.md` (0.43); `gidi:decisions/CHECKS.md` (0.38).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
 For: session, decided, ideas, instructions, whenever, keeping, update, newest. Last changed 2026-10-24, 9 lines.
 Links to 4: `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:CLAUDE.md` (0.32); `gidi:README.md` (0.14); `gidi:decisions/DECISIONS.md` (0.11).
+Nearest in words: `gidi:CLAUDE.md` (0.32); `gidi:README.md` (0.14); `gidi:decisions/DECISIONS.md` (0.1).
 
 ### `gidi:decisions/lived-in.md`
 **The lived-in layer: what every GTA does, and Gidi's plan**. The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, across every game, and for a "lived-in layer" plan for Gidi. **A proposal, not decided.** It builds on `world-life.md` (rhythm, systems, moments, texture: *what* Gidi's life is) and the IDEAS entry "What makes Los Santos feel lived in" (23 Oct). This file is about *the machinery*: what records and rules make that life show up in the game.
@@ -319,7 +319,7 @@ Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.19); `gidi:decisions/NOW.md` (0.1
 For: final, cdla, delete, licence, studies, outlines, downloaded, google's. Last changed 2026-10-24, 31 lines.
 Links to 4: `gidi:docs/DEEP-STUDY.md`, `gidi:scripts/deep_prep.py`, `gidi:scripts/study_google.py`, `gidi:web/terrain.json`
 Backlinks: 4 documents (`gidi-data:README.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`), 0 code files ().
-Nearest in words: `gidi:docs/gidi-data-plan.md` (0.11); `gidi:decisions/DECISIONS.md` (0.11); `gidi-game:README.md` (0.1).
+Nearest in words: `gidi:docs/gidi-data-plan.md` (0.11); `gidi:decisions/DECISIONS.md` (0.11); `gidi-data:README.md` (0.1).
 
 ### `gidi:docs/DEEP-STUDY.md`
 **The deep study: every district's inspiration, from all the data**. The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt in the v2 frame (`to-delete/docs/LAYOUT-V2.md`) by one shared generator. Each district gets its own profile, and the profile is set from this study.
@@ -375,7 +375,7 @@ Nearest in words: `gidi:docs/jungle-pattern-study.md` (0.34); `gidi:docs/railsid
 For: border, badagry, bush, expressway, estimated, post, sprawl, bazaar. Last changed 2026-10-15, 137 lines.
 Links to 16: `gidi:data/results/lga_table.json`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/img/border-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/explore_city.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_boxheights.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.29); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.25).
+Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.3); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.25).
 
 ### `gidi:docs/capital-pattern-study.md`
 **The Capital pattern study: central Ikeja → The Capital (v1)**. The Capital pattern study: central Ikeja → The Capital (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
@@ -448,7 +448,7 @@ Nearest in words: `gidi:decisions/story/README.md` (0.19); `gidi:docs/maze-patte
 For: bronze, concept, credits, menu, rider, masquerade, saxophonist, eyo-style. Last changed 2026-10-19, 30 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/hand/borrowed-lagos.md` (0.14); `gidi:docs/look/research-landmarks.md` (0.13); `gidi:legacy/blender/WHAT-IT-HELD.md` (0.08).
+Nearest in words: `gidi:docs/hand/borrowed-lagos.md` (0.14); `gidi:docs/look/research-landmarks.md` (0.13); `gidi:decisions/DECISIONS.md` (0.08).
 
 ## gidi:docs
 ### `gidi:docs/heights-pattern-study.md`
@@ -816,15 +816,15 @@ Nearest in words: `gidi:docs/heights-pattern-study.md` (0.26); `gidi:docs/LAGOS-
 For: builder, tab's, tiles, frozen, fields, old-town, legacy, builders. Last changed 2026-10-24, 14 lines.
 Links to 5: `gidi:docs/MAP-FORMAT.md`, `gidi:legacy/OLD-MAP.md`, `gidi:legacy/blender/city.py`, `gidi:schema/map_schema.json`, `gidi:web/gidi-data.js`
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:legacy/blender/WHAT-IT-HELD.md` (0.31); `gidi:decisions/CODEBASE.md` (0.23); `gidi:CLAUDE.md` (0.19).
+Nearest in words: `gidi:legacy/blender/WHAT-IT-HELD.md` (0.33); `gidi:decisions/CODEBASE.md` (0.23); `gidi:decisions/NOW.md` (0.19).
 
 ## gidi:legacy/blender
 ### `gidi:legacy/blender/WHAT-IT-HELD.md`
 **The old Blender kit: what it held, and what the builders can take from it**. The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel". This page answers that. The kit is frozen (DECISIONS, "The interface works both ways; the builders are the kit"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made
-For: builder, know-how, worth, fields, builders, conditions, sheet, fresh. Last changed ?, 92 lines.
+For: builder, know-how, worth, fields, builders, conditions, sheet, fresh. Last changed 2026-10-24, 98 lines.
 Links to 16: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/wear_layer.py`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:legacy/blender/gidi_kit/draft.py`, `gidi:legacy/blender/gidi_kit/goods.py`, `gidi:legacy/blender/gidi_kit/gutters.py`, `gidi:legacy/blender/gidi_kit/materials.py`, `gidi:legacy/blender/gidi_kit/people.py`, `gidi:legacy/blender/gidi_kit/roadbed.py`, `gidi:legacy/blender/gidi_kit/street.py` ...
-Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:legacy/README.md` (0.31); `gidi:decisions/NOW.md` (0.22); `gidi:decisions/DECISIONS.md` (0.21).
+Backlinks: 4 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 0 code files ().
+Nearest in words: `gidi:legacy/README.md` (0.33); `gidi:decisions/DECISIONS.md` (0.25); `gidi:decisions/NOW.md` (0.24).
 
 ## gidi:map/d15
 ### `gidi:map/d15/BUILDINGS.md`
@@ -832,7 +832,7 @@ Nearest in words: `gidi:legacy/README.md` (0.31); `gidi:decisions/NOW.md` (0.22)
 For: redrafted, hand, pass, lanes, twin's, redrawn, cleared, close-zoom. Last changed 2026-10-24, 143 lines.
 Links to 2: `gidi:map/d15/STREETS.md`, `gidi:scripts/draft_buildings.py`
 Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi:scripts/draft_buildings.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.13); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.09).
+Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.12); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.09).
 
 ### `gidi:map/d15/STREETS.md`
 **Mùṣá (district 15): the road plan and where each street comes from**. Mùṣá (district 15): the road plan and where each street comes from: Roads only, drawn on the new frame (1:3). Every kept street sits on its real line, squeezed to the frame, at its real width (never shrunk). Real names live here only, never in the map. Buildings come later.
