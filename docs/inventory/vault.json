@@ -8,11 +8,11 @@
     "commit",
     "push",
     "hook",
-    "account",
-    "frozen",
-    "loosen",
     "session",
-    "checked"
+    "checked",
+    "account",
+    "extend",
+    "loosen"
    ]
   },
   {
@@ -21,13 +21,13 @@
    "state": "linked",
    "words": [
     "repos",
-    "drawing",
     "airbus",
     "provided",
+    "drawing",
+    "newdara-star",
     "glo",
     "odbl",
-    "records",
-    "newdara-star"
+    "open-world"
    ]
   },
   {
@@ -38,11 +38,11 @@
     "process",
     "gidi-game",
     "rule",
+    "builder",
     "review",
-    "owner's",
+    "script",
     "re-draft",
-    "twin",
-    "fail"
+    "held"
    ]
   },
   {
@@ -51,28 +51,43 @@
    "state": "linked",
    "words": [
     "scripts",
-    "old-map",
     "gidi-game",
-    "board",
     "inventory",
-    "map's",
     "board's",
-    "committed"
+    "map's",
+    "remote",
+    "old-map",
+    "board"
    ]
   },
   {
    "id": "gidi:decisions/DECISIONS.md",
-   "title": "Decisions (the owner's; newest first)",
+   "title": "Decisions (the owner's standing rules)",
    "state": "linked",
    "words": [
-    "hand",
     "we're",
+    "hand",
     "view",
-    "records",
     "kits",
-    "build",
+    "records",
     "laptop",
-    "owner's"
+    "modelled",
+    "blender"
+   ]
+  },
+  {
+   "id": "gidi:decisions/HISTORY.md",
+   "title": "Decisions that were replaced (history)",
+   "state": "linked",
+   "words": [
+    "replaced",
+    "hand-made",
+    "miniaturised",
+    "plan",
+    "clean-up",
+    "seams",
+    "oshodi",
+    "hand"
    ]
   },
   {
@@ -80,14 +95,14 @@
    "title": "Ideas (not decided; newest first)",
    "state": "linked",
    "words": [
-    "motion",
     "refs",
+    "motion",
     "video",
     "metahuman",
     "yoruba",
     "talk",
-    "sound",
-    "danfo"
+    "danfo",
+    "sound"
    ]
   },
   {
@@ -96,13 +111,13 @@
    "state": "linked",
    "words": [
     "gidi-game",
-    "unreal",
     "records",
-    "hand",
+    "dress",
     "sent",
     "pass",
-    "dress",
-    "board"
+    "editor",
+    "hand",
+    "layer"
    ]
   },
   {
@@ -110,14 +125,14 @@
    "title": "Decisions and ideas",
    "state": "linked",
    "words": [
-    "ideas",
-    "decided",
-    "instructions",
     "session",
-    "update",
+    "decided",
+    "ideas",
+    "instructions",
     "whenever",
     "keeping",
-    "repos"
+    "update",
+    "newest"
    ]
   },
   {
@@ -128,11 +143,11 @@
     "grandtheftwiki",
     "spots",
     "moments",
-    "player",
     "proposed",
+    "player",
     "speech",
     "mods",
-    "hour"
+    "jobs"
    ]
   },
   {
@@ -140,10 +155,10 @@
    "title": "The story of Gidi",
    "state": "linked",
    "words": [
-    "acts",
     "paste",
-    "account",
+    "acts",
     "boss's",
+    "account",
     "story",
     "roadmap",
     "prototyping",
@@ -156,13 +171,13 @@
    "state": "linked",
    "words": [
     "boss",
-    "fares",
     "tunde",
     "bike",
-    "alpha",
     "boss's",
+    "fares",
+    "alpha",
     "debt",
-    "money"
+    "paying"
    ]
   },
   {
@@ -172,11 +187,11 @@
    "words": [
     "tunde",
     "boss",
-    "boys",
     "bike",
+    "boss's",
+    "boys",
     "claude's",
     "debt",
-    "boss's",
     "fight"
    ]
   },
@@ -185,14 +200,14 @@
    "title": "1. The Ledger",
    "state": "linked",
    "words": [
-    "chairman",
     "tunde",
-    "player",
+    "chairman",
     "ledger",
     "bike",
+    "player",
     "alpha",
     "tunde's",
-    "boys"
+    "mama"
    ]
   },
   {
@@ -200,14 +215,14 @@
    "title": "2. Union",
    "state": "linked",
    "words": [
+    "tunde",
     "election",
     "envelopes",
     "chairman",
-    "tunde",
     "lorry's",
-    "wins",
     "ledger",
-    "union"
+    "wins",
+    "lorry"
    ]
   },
   {
@@ -217,12 +232,12 @@
    "words": [
     "captain",
     "phone",
+    "tunde",
     "adaeze",
     "garba",
-    "tunde",
+    "tunde's",
     "chairman",
-    "captain's",
-    "voice"
+    "captain's"
    ]
   },
   {
@@ -235,9 +250,9 @@
     "novels",
     "drugs",
     "stories",
+    "force",
     "betting",
-    "task",
-    "force"
+    "task"
    ]
   },
   {
@@ -247,12 +262,12 @@
    "words": [
     "naira",
     "betting",
-    "player",
     "currency",
+    "player",
+    "football",
     "radio",
-    "everyone",
-    "preacher",
-    "scan"
+    "scan",
+    "everyone"
    ]
   },
   {
@@ -260,29 +275,14 @@
    "title": "The drawing board",
    "state": "linked",
    "words": [
-    "click",
     "bake",
+    "click",
     "drag",
-    "dashed",
     "edit",
     "edits",
-    "board",
+    "dashed",
+    "furniture",
     "select"
-   ]
-  },
-  {
-   "id": "gidi:docs/CITY-LIVING-TEST.md",
-   "title": "City living test: Haiku agents live in Gidi and report how moving around feels",
-   "state": "linked",
-   "words": [
-    "walk",
-    "ride",
-    "lives",
-    "foot",
-    "okada",
-    "interchange",
-    "lead",
-    "walks"
    ]
   },
   {
@@ -293,11 +293,11 @@
     "final",
     "cdla",
     "delete",
-    "studies",
     "licence",
-    "google",
+    "studies",
+    "outlines",
     "downloaded",
-    "outlines"
+    "google's"
    ]
   },
   {
@@ -308,71 +308,11 @@
     "types",
     "wobble",
     "touching",
-    "fabric",
+    "district's",
     "settings",
-    "district's",
-    "bands",
+    "measures",
+    "fabric",
     "counts"
-   ]
-  },
-  {
-   "id": "gidi:docs/DISTRICT-BRIEF.md",
-   "title": "Brief: build one Gidi district",
-   "state": "linked",
-   "words": [
-    "scale",
-    "seed",
-    "neighbourhood-level",
-    "worked",
-    "district's",
-    "oldshore",
-    "bazaar",
-    "frontier"
-   ]
-  },
-  {
-   "id": "gidi:docs/FLOW-AUDIT.md",
-   "title": "City flow audit, 22 Oct 2026",
-   "state": "linked",
-   "words": [
-    "arterial",
-    "flow",
-    "campus",
-    "upgrade",
-    "mainland",
-    "lagos's",
-    "north",
-    "mains"
-   ]
-  },
-  {
-   "id": "gidi:docs/ISMS-BUILD.md",
-   "title": "Building the Lagos-isms: what exists, what's missing, and the prompt",
-   "state": "linked",
-   "words": [
-    "docs",
-    "gutter",
-    "safe",
-    "missing",
-    "one-way",
-    "edits",
-    "hand",
-    "rates"
-   ]
-  },
-  {
-   "id": "gidi:docs/KIT-GAPS.md",
-   "title": "Kit gaps: things the map now has that the 3D kit can't draw well yet",
-   "state": "linked",
-   "words": [
-    "version",
-    "stored",
-    "furniture",
-    "vertex",
-    "data",
-    "kit's",
-    "kitchen",
-    "they're"
    ]
   },
   {
@@ -382,12 +322,12 @@
    "words": [
     "suits",
     "one-way",
-    "kosofe",
-    "ikeja",
-    "wetland",
-    "acute",
     "expressway",
-    "reserve"
+    "reserve",
+    "kosofe",
+    "island",
+    "acute",
+    "railside"
    ]
   },
   {
@@ -401,38 +341,8 @@
     "haze",
     "contrast",
     "dusk",
-    "soft",
-    "warm"
-   ]
-  },
-  {
-   "id": "gidi:docs/LAGOS-LOOK.md",
-   "title": "The Lagos look: a seeded Blender kit that styles Gidi from its data",
-   "state": "linked",
-   "words": [
-    "attributes",
-    "conditions",
-    "contact",
-    "tile",
-    "character",
-    "markings",
-    "flats",
-    "material"
-   ]
-  },
-  {
-   "id": "gidi:docs/LAYOUT-V2.md",
-   "title": "Gidi v2: the layout",
-   "state": "linked",
-   "words": [
-    "harbour",
-    "channel",
-    "lagoon",
-    "creek",
-    "yaba",
-    "study's",
-    "akoka",
-    "frozen"
+    "warm",
+    "soft"
    ]
   },
   {
@@ -440,329 +350,74 @@
    "title": "The new map's data format (draft 0.1, for the owner to approve)",
    "state": "linked",
    "words": [
-    "record",
     "dress",
+    "record",
     "field",
-    "records",
     "stroke",
-    "face",
     "value",
-    "relief"
+    "records",
+    "relief",
+    "face"
    ]
   },
   {
-   "id": "gidi:docs/REBUILD-PLAN.md",
-   "title": "Rebuilding Gidi from Google's data",
+   "id": "gidi:docs/OLD-MAP-LESSONS.md",
+   "title": "What the old map taught: still true for the new one",
    "state": "linked",
    "words": [
-    "google's",
-    "outlines",
-    "bends",
-    "slots",
-    "street's",
-    "osm's",
-    "scattered",
-    "extensions"
-   ]
-  },
-  {
-   "id": "gidi:docs/TWINS.md",
-   "title": "Real twins: every type in Gidi and the real thing it comes from",
-   "state": "linked",
-   "words": [
-    "none",
-    "amber",
-    "oshodi",
-    "pictures",
-    "twin",
-    "status",
-    "type",
-    "yaba"
-   ]
-  },
-  {
-   "id": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "title": "Unreal port plan",
-   "state": "linked",
-   "words": [
-    "unreal",
-    "importer",
-    "meshes",
-    "browser",
+    "ramp",
     "reimport",
-    "export",
-    "data",
-    "materials"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/README.md",
-   "title": "3D audit, all districts",
-   "state": "linked",
-   "words": [
-    "rerun",
-    "kinds",
-    "page",
-    "details",
-    "overshoots",
-    "knife-edge",
+    "unreal",
+    "viewing",
     "misses",
-    "audit"
+    "often",
+    "missed",
+    "living"
    ]
   },
   {
-   "id": "gidi:docs/audit/bazaar.md",
-   "title": "3D audit: The Bazaar",
+   "id": "gidi:docs/RESEARCH.md",
+   "title": "The Lagos research: what we know, and which new districts it serves",
    "state": "linked",
    "words": [
-    "bazaar",
-    "past",
-    "kinds",
-    "builder",
-    "overshoots",
-    "scrap",
-    "knife-edge",
-    "unfinished"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/border.md",
-   "title": "3D audit: The Border",
-   "state": "linked",
-   "words": [
-    "kinds",
-    "builder",
-    "border",
-    "sport",
-    "pitch",
-    "danger",
-    "fishing",
-    "booth"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/capital.md",
-   "title": "3D audit: The Capital",
-   "state": "linked",
-   "words": [
-    "capital",
-    "kinds",
-    "builder",
-    "ayinde",
-    "bust",
-    "overshoots",
-    "knife-edge",
-    "misses"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/estate.md",
-   "title": "3D audit: The Estate",
-   "state": "linked",
-   "words": [
-    "kinds",
-    "past",
-    "shonibare",
-    "builder",
-    "mansion",
-    "clubhouse",
-    "overshoots",
-    "knife-edge"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/foodgate.md",
-   "title": "3D audit: Food Gate",
-   "state": "linked",
-   "words": [
-    "foodgate",
-    "kinds",
-    "builder",
-    "extension",
-    "sport",
-    "stage",
-    "pitch",
-    "overshoots"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/frontier.md",
-   "title": "3D audit: The Frontier",
-   "state": "linked",
-   "words": [
-    "frontier",
-    "kinds",
-    "toll",
-    "builder",
-    "landmark",
-    "flare",
-    "bare",
-    "disputed"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/heights.md",
-   "title": "3D audit: The Heights",
-   "state": "linked",
-   "words": [
-    "heights",
-    "kinds",
-    "mbanefo",
-    "builder",
-    "hassan",
-    "oldisland",
-    "nightclub",
-    "beach"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/hub.md",
-   "title": "3D audit: The Hub",
-   "state": "linked",
-   "words": [
-    "kinds",
-    "builder",
-    "sport",
-    "pitch",
-    "overshoots",
-    "knife-edge",
-    "warehouse",
-    "misses"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/jungle.md",
-   "title": "3D audit: Jungle City",
-   "state": "linked",
-   "words": [
-    "jungle",
-    "kinds",
-    "cafe",
-    "builder",
-    "studio",
-    "sport",
-    "pitch",
-    "overshoots"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/maze.md",
-   "title": "3D audit: The Maze",
-   "state": "linked",
-   "words": [
-    "maze",
-    "kinds",
-    "builder",
-    "sport",
-    "pitch",
-    "overshoots",
-    "knife-edge",
-    "transformer"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/oldisland.md",
-   "title": "3D audit: Old Island",
-   "state": "linked",
-   "words": [
-    "oldisland",
-    "remi",
-    "past",
-    "kinds",
-    "degrees",
-    "builder",
-    "brazilian",
-    "overshoots"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/oldshore.md",
-   "title": "3D audit: Old Shore",
-   "state": "linked",
-   "words": [
-    "oldshore",
-    "past",
-    "kinds",
-    "lateef",
-    "builder",
-    "barge",
-    "sport",
-    "rack"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/port.md",
-   "title": "3D audit: The Port",
-   "state": "linked",
-   "words": [
-    "port",
-    "past",
-    "kinds",
-    "builder",
-    "cellblock",
-    "crane",
-    "villa",
-    "trailer"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/railside.md",
-   "title": "3D audit: Railside",
-   "state": "linked",
-   "words": [
-    "railside",
-    "fadipe",
-    "kinds",
-    "past",
-    "builder",
-    "lawal",
-    "roundabout",
-    "kehinde"
-   ]
-  },
-  {
-   "id": "gidi:docs/audit/watertown.md",
-   "title": "3D audit: Water Town",
-   "state": "linked",
-   "words": [
-    "watertown",
-    "kinds",
-    "builder",
-    "stilt",
-    "raft",
-    "shed",
-    "sawdust",
-    "overshoots"
+    "shomolu-bariga",
+    "measured",
+    "echo",
+    "serves",
+    "written",
+    "districts",
+    "festac",
+    "island"
    ]
   },
   {
    "id": "gidi:docs/bazaar-pattern-study.md",
    "title": "The Bazaar pattern study: Ojo round the electronics market \u2192 The Bazaar (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "bazaar",
     "expressway",
     "electronics",
-    "fair",
     "wholesale",
-    "median",
-    "avenue",
-    "plazas"
+    "fair",
+    "jungle",
+    "plazas",
+    "avenue"
    ]
   },
   {
    "id": "gidi:docs/border-pattern-study.md",
    "title": "Border pattern study: Badagry \u2192 the Border (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
-    "badagry",
     "border",
+    "badagry",
     "bush",
     "expressway",
     "estimated",
-    "sprawl",
     "post",
-    "worldcover"
+    "sprawl",
+    "bazaar"
    ]
   },
   {
@@ -771,34 +426,19 @@
    "state": "linked",
    "words": [
     "capital",
-    "ikeja",
     "estimated",
+    "ikeja",
     "cantonment",
+    "railside",
     "typical",
-    "gateways",
-    "range",
-    "shrine"
-   ]
-  },
-  {
-   "id": "gidi:docs/data/deep-check/SUMMARY.md",
-   "title": "",
-   "state": "orphan",
-   "words": [
-    "skew",
-    "squares",
-    "sample",
-    "inspiration",
-    "saba",
-    "cell",
-    "touching",
-    "small"
+    "shrine",
+    "gateways"
    ]
   },
   {
    "id": "gidi:docs/estate-pattern-study.md",
    "title": "Estate pattern study: Ikeja GRA, Magodo and Omole \u2192 the Estate (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "estates",
     "ikeja",
@@ -807,37 +447,37 @@
     "kosofe",
     "estate's",
     "omole's",
-    "typical"
+    "quarters"
    ]
   },
   {
    "id": "gidi:docs/foodgate-pattern-study.md",
    "title": "Food Gate pattern study: Ojota\u2013Ketu\u2013Mile 12 (Kosofe) \u2192 Food Gate (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
-    "kosofe",
     "northern",
+    "kosofe",
+    "food",
     "mile",
     "adeleke",
     "maze's",
     "ketu",
-    "median",
     "corridor"
    ]
   },
   {
    "id": "gidi:docs/frontier-pattern-study.md",
    "title": "Frontier pattern study: the Lekki peninsula \u2192 the Frontier (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "frontier",
     "peninsula",
     "cells",
     "awoyaya",
-    "empty",
     "tracts",
-    "lekki",
-    "ajah"
+    "empty",
+    "refinery",
+    "flare"
    ]
   },
   {
@@ -850,24 +490,9 @@
     "daramola's",
     "tier",
     "token",
-    "eti-osa",
     "mapillary",
-    "wealth"
-   ]
-  },
-  {
-   "id": "gidi:docs/gidi-districts-v0.3.md",
-   "title": "Gidi: 15 districts (map v0.3)",
-   "state": "linked",
-   "words": [
-    "missions",
-    "outside",
-    "okada",
-    "heartland",
-    "dawn",
-    "banned",
-    "port",
-    "nights"
+    "eti-osa",
+    "saloons"
    ]
   },
   {
@@ -876,13 +501,13 @@
    "state": "linked",
    "words": [
     "placed",
+    "capital",
     "saba",
     "channel",
-    "capital",
     "mall",
     "national",
     "museum",
-    "great"
+    "bridge's"
    ]
   },
   {
@@ -892,11 +517,11 @@
    "words": [
     "one-for-one",
     "flyover",
-    "oshodi",
-    "rusty-roof",
-    "flyover's",
-    "project's",
     "footbridge",
+    "flyover's",
+    "rusty-roof",
+    "design",
+    "oshodi",
     "parasols"
    ]
   },
@@ -907,27 +532,12 @@
    "words": [
     "oshodi",
     "mafoluku",
+    "osolo",
     "cres",
     "ojuelegba",
-    "osolo",
     "jibowu",
     "coach",
     "arena"
-   ]
-  },
-  {
-   "id": "gidi:docs/hand/lagos-pass.md",
-   "title": "The Lagos pass (owner, 19 Oct)",
-   "state": "linked",
-   "words": [
-    "overcast",
-    "bags",
-    "haze",
-    "conductors",
-    "billboards",
-    "videos",
-    "element",
-    "spot"
    ]
   },
   {
@@ -938,11 +548,11 @@
     "brief",
     "photo",
     "story",
-    "print",
     "yard",
+    "print",
     "assets",
-    "bowl",
-    "pedro"
+    "daleko",
+    "bowl"
    ]
   },
   {
@@ -954,31 +564,31 @@
     "concept",
     "credits",
     "menu",
-    "plinth",
-    "picture",
-    "stone",
+    "rider",
+    "masquerade",
+    "saxophonist",
     "eyo-style"
    ]
   },
   {
    "id": "gidi:docs/heights-pattern-study.md",
    "title": "Heights pattern study: Ikoyi, Victoria Island and Banana Island \u2192 the Heights (v3)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "ikoyi",
-    "boxes",
     "island",
-    "hipped",
+    "boxes",
+    "island's",
     "course",
-    "victoria",
-    "golf",
-    "booths"
+    "hipped",
+    "beach",
+    "golf"
    ]
   },
   {
    "id": "gidi:docs/hub-pattern-study.md",
    "title": "Hub pattern study: Oshodi/Isolo + Surulere \u2192 The Hub (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "slip",
     "knot",
@@ -986,53 +596,23 @@
     "maze",
     "northern",
     "terminal",
-    "percentile",
-    "station"
-   ]
-  },
-  {
-   "id": "gidi:docs/junctions.md",
-   "title": "Junctions (pass 3 of the road work)",
-   "state": "near-orphan",
-   "words": [
-    "roundabouts",
-    "ring",
-    "wahab",
-    "radius",
-    "roundabout",
-    "ajasa",
-    "give-way",
-    "oladipo"
+    "skywalks",
+    "skywalk"
    ]
   },
   {
    "id": "gidi:docs/jungle-pattern-study.md",
    "title": "Jungle City pattern study: Ajegunle (+ Festac) \u2192 Jungle City (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "jungle",
     "flats",
-    "median",
-    "ajegunle",
     "expressway",
     "adeleke",
+    "median",
+    "ajegunle",
     "maze's",
-    "festac"
-   ]
-  },
-  {
-   "id": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "title": "Brief for the kit modeller: the Act 1 gaps",
-   "state": "linked",
-   "words": [
-    "furniture",
-    "you're",
-    "plastic",
-    "chair",
-    "wheelbarrow",
-    "kitchen",
-    "cutscene",
-    "ticket"
+    "footbridge"
    ]
   },
   {
@@ -1042,12 +622,12 @@
    "words": [
     "unverified",
     "unsourced",
-    "wikipedia",
     "opened",
+    "wikipedia",
     "languages",
     "yoruba",
-    "festivals",
-    "religion"
+    "sourced",
+    "festivals"
    ]
   },
   {
@@ -1056,13 +636,13 @@
    "state": "linked",
    "words": [
     "brush",
-    "draft",
     "careful",
+    "draft",
     "traders",
-    "spots",
     "workers",
+    "spots",
     "moving",
-    "activities"
+    "okada"
    ]
   },
   {
@@ -1072,12 +652,12 @@
    "words": [
     "belt",
     "bldg",
-    "ikorodu",
     "tilt",
-    "planned",
-    "lekki",
+    "ikorodu",
+    "mile",
     "surveyed",
-    "mean"
+    "planned",
+    "lekki"
    ]
   },
   {
@@ -1086,13 +666,13 @@
    "state": "linked",
    "words": [
     "known",
-    "lcdas",
     "zones",
+    "lcdas",
     "amuwo-odofin",
     "lcda",
     "apapa",
     "mainland",
-    "ikorodu"
+    "neighbours"
    ]
   },
   {
@@ -1102,12 +682,12 @@
    "words": [
     "east",
     "west",
+    "south",
     "likely",
-    "north",
     "trace",
-    "isolo",
+    "north",
     "neutral",
-    "ikorodu"
+    "expressway"
    ]
   },
   {
@@ -1120,9 +700,9 @@
     "english",
     "vowel",
     "sound",
-    "leke",
     "mile",
-    "none"
+    "leke",
+    "sounds"
    ]
   },
   {
@@ -1133,11 +713,11 @@
     "morogbo",
     "north-east",
     "imota",
-    "land",
+    "east",
     "ijegun-egba",
     "west",
-    "apapa",
-    "swamp"
+    "swamp",
+    "apapa"
    ]
   },
   {
@@ -1150,9 +730,9 @@
     "joins",
     "splits",
     "magodo-omole",
+    "okota-ikotun",
     "roofs",
-    "gbagada",
-    "okota-ikotun"
+    "gbagada"
    ]
   },
   {
@@ -1161,13 +741,13 @@
    "state": "linked",
    "words": [
     "belt",
-    "land",
     "bungalow",
     "ogba-agidingbi-alausa",
     "isheri-olowora",
     "ijora-badia",
     "apapa-tin",
-    "alaba-ojo-lasu"
+    "alaba-ojo-lasu",
+    "agric-majidun-ogolonto"
    ]
   },
   {
@@ -1177,297 +757,12 @@
    "words": [
     "ftz-dangote",
     "agric-majidun-ogolonto",
-    "makoko-iwaya",
-    "ijora-badia",
     "eko-idumota-marina",
     "isheri-olowora",
     "allen-opebi-computer",
-    "ogba-agidingbi-alausa"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-13.md",
-   "title": "City living test, 13 Oct 2026: the Maze, the Hub, Jungle City",
-   "state": "orphan",
-   "words": [
-    "minutes",
-    "walk",
-    "skywalk",
-    "jungle",
-    "interchange",
-    "station",
-    "tool",
-    "session"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-13b.md",
-   "title": "City living test, 13 Oct 2026 (second run): the Maze, the Hub, Jungle City, Food Gate",
-   "state": "orphan",
-   "words": [
-    "minutes",
-    "walk",
-    "interchange",
-    "jungle",
-    "stadium's",
-    "mile",
-    "yard",
-    "maze"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-13c.md",
-   "title": "City living test, 13 Oct 2026 (third run): all five districts",
-   "state": "orphan",
-   "words": [
-    "minutes",
-    "walk",
-    "stilt",
-    "tool",
-    "foot",
-    "jungle",
-    "town",
-    "footbridge"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14.md",
-   "title": "City living test, 14 Oct 2026: six districts, with the new Capital",
-   "state": "orphan",
-   "words": [
-    "minutes",
-    "capital",
-    "walk",
-    "gadget",
-    "secretariat",
-    "fingers",
-    "village",
-    "mile"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14b.md",
-   "title": "City living test, 14 Oct 2026 (second run): seven districts, with the new Bazaar",
-   "state": "orphan",
-   "words": [
-    "walk",
-    "gadget",
-    "ride",
-    "dead-end",
-    "tool",
-    "minutes",
-    "village",
-    "jungle"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14c.md",
-   "title": "City living test, 14 Oct 2026 (third run): eight districts, with the new Port",
-   "state": "orphan",
-   "words": [
-    "reserve",
-    "minutes",
-    "yard",
-    "port",
-    "container",
-    "chidi",
-    "okada",
-    "ngozi"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14d.md",
-   "title": "City living test, 14 Oct 2026 (fourth run): nine districts, with the new Railside",
-   "state": "orphan",
-   "words": [
-    "re-laid",
-    "railside",
-    "roundabout",
-    "interchange",
-    "walk",
-    "capital",
-    "minutes",
-    "nine"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14e.md",
-   "title": "City living test, 14 Oct 2026 (fifth run): ten districts, with the new Estate",
-   "state": "orphan",
-   "words": [
-    "capital's",
-    "senator's",
-    "musa's",
-    "okada",
-    "gadget",
-    "estate's",
-    "walk",
-    "emeka"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14f.md",
-   "title": "City living test, 14 Oct 2026 (sixth run): eleven districts, with the new Old Island",
-   "state": "orphan",
-   "words": [
-    "bisi",
-    "sule",
-    "cloth",
-    "wharf",
-    "minutes",
-    "island",
-    "brazilian",
-    "walked"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14g.md",
-   "title": "City living test, 14 Oct 2026 (seventh run): twelve districts, with the new Heights",
-   "state": "orphan",
-   "words": [
-    "pearl",
-    "walk",
-    "towers",
-    "minutes",
-    "kunle",
-    "shorter",
-    "emeka",
-    "gates"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14h.md",
-   "title": "City living test, 14 Oct 2026 (eighth run): the Heights v2",
-   "state": "orphan",
-   "words": [
-    "beach",
-    "bisi",
-    "minutes",
-    "sunday",
-    "pearl",
-    "kunle",
-    "island",
-    "drive"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14i.md",
-   "title": "City living test, 14 Oct 2026 (ninth run): the Heights v3",
-   "state": "orphan",
-   "words": [
-    "pearl",
-    "club",
-    "golf",
-    "minutes",
-    "walk",
-    "kunle",
-    "towers",
-    "course"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14j.md",
-   "title": "City living test, 14 Oct 2026 (tenth run): thirteen districts, with the new Frontier",
-   "state": "orphan",
-   "words": [
-    "frontier",
-    "femi",
-    "toll",
-    "plaza",
-    "ride",
-    "walk",
-    "pearl",
-    "refinery"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14k.md",
-   "title": "City living test, 15 Oct 2026 (eleventh run): Old Shore",
-   "state": "orphan",
-   "words": [
-    "shore",
-    "sade",
-    "fish",
-    "hunter",
-    "minutes",
-    "tools",
-    "thirteen",
-    "roundabout"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-14l.md",
-   "title": "City living test, 15 Oct 2026: the Border",
-   "state": "orphan",
-   "words": [
-    "dayo",
-    "funmi",
-    "coconut",
-    "emeka",
-    "railside",
-    "border",
-    "checkpoint",
-    "rode"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "title": "City living test, 15 Oct 2026: open gutters (ism 15, group 1)",
-   "state": "orphan",
-   "words": [
-    "gutter",
-    "gutters",
-    "blocked",
-    "slabs",
-    "plank",
-    "adeleke",
-    "door",
-    "fifteen"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-15m.md",
-   "title": "City living test, 15 Oct 2026 (twelfth run): all fifteen districts",
-   "state": "near-orphan",
-   "words": [
-    "combined",
-    "shore",
-    "shore's",
-    "fifteen",
-    "walk",
-    "hunter",
-    "trips",
-    "palace"
-   ]
-  },
-  {
-   "id": "gidi:docs/living-test-2026-10-15n.md",
-   "title": "City living test, 15 Oct 2026: road clean-up, pass 1",
-   "state": "orphan",
-   "words": [
-    "lesser",
-    "pass",
-    "changed",
-    "fifteen",
-    "mains",
-    "loses",
-    "tidying",
-    "straightened"
-   ]
-  },
-  {
-   "id": "gidi:docs/look/COVERAGE.md",
-   "title": "Kit coverage: everything in Gidi's data, and whether the kit builds it",
-   "state": "linked",
-   "words": [
-    "oldisland",
-    "foodgate",
-    "watertown",
-    "bazaar",
-    "railside",
-    "port",
-    "capital",
-    "oldshore"
+    "ogba-agidingbi-alausa",
+    "ijora-badia",
+    "makoko-iwaya"
    ]
   },
   {
@@ -1477,11 +772,11 @@
    "words": [
     "elite",
     "select",
-    "white",
     "often",
+    "white",
+    "long-span",
     "older",
     "painted",
-    "long-span",
     "green"
    ]
   },
@@ -1490,14 +785,14 @@
    "title": "Civic and public-service buildings: a catalogue for the Gidi generator",
    "state": "linked",
    "words": [
-    "white",
     "agency",
     "crest",
+    "white",
     "police",
-    "colours",
+    "variants",
     "steel",
-    "select",
-    "variants"
+    "pound",
+    "select"
    ]
   },
   {
@@ -1507,12 +802,12 @@
    "words": [
     "mapping",
     "select",
-    "condition",
     "variants",
+    "condition",
     "steel",
     "props",
-    "white",
-    "timber"
+    "timber",
+    "plazas"
    ]
   },
   {
@@ -1522,12 +817,12 @@
    "words": [
     "elite",
     "steel",
+    "condition",
     "white",
     "mapping",
-    "condition",
-    "select",
-    "decayed",
-    "flats"
+    "flats",
+    "variants",
+    "select"
    ]
   },
   {
@@ -1535,14 +830,14 @@
    "title": "Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks",
    "state": "linked",
    "words": [
-    "white",
     "oldisland",
+    "white",
     "canon",
     "condition",
     "reference",
-    "concrete",
+    "designs",
     "select",
-    "painted"
+    "concrete"
    ]
   },
   {
@@ -1553,11 +848,11 @@
     "white",
     "condition",
     "elite",
-    "painted",
     "mapping",
+    "painted",
     "select",
-    "variants",
-    "props"
+    "club",
+    "variants"
    ]
   },
   {
@@ -1567,12 +862,12 @@
    "words": [
     "dome",
     "white",
-    "green",
     "prayer",
+    "green",
     "mosque",
-    "blue",
     "hall",
-    "minaret"
+    "minaret",
+    "blue"
    ]
   },
   {
@@ -1583,11 +878,11 @@
     "select",
     "mapping",
     "sand",
-    "asphalt",
-    "laterite",
     "mains",
     "research-street",
-    "refuse"
+    "asphalt",
+    "refuse",
+    "laterite"
    ]
   },
   {
@@ -1599,9 +894,9 @@
     "black",
     "white",
     "yellow",
+    "often",
     "colours",
     "blue",
-    "often",
     "painted"
    ]
   },
@@ -1614,10 +909,10 @@
     "mapping",
     "select",
     "condition",
-    "colours",
     "steel",
+    "colours",
     "yellow",
-    "blue"
+    "deck"
    ]
   },
   {
@@ -1627,12 +922,12 @@
    "words": [
     "rear",
     "occupants",
-    "black",
     "street-research",
+    "black",
     "mapping",
     "select",
-    "white",
-    "dimensions"
+    "dimensions",
+    "white"
    ]
   },
   {
@@ -1641,12 +936,12 @@
    "state": "linked",
    "words": [
     "lean-to's",
-    "lean-to",
     "gutter's",
+    "lean-to",
     "shop-under-flats",
     "bungalow's",
     "example",
-    "stamped",
+    "stand-in",
     "pothole"
    ]
   },
@@ -1657,87 +952,72 @@
    "words": [
     "maze",
     "adeleke",
-    "median",
+    "crossings",
     "gateways",
     "mushin",
-    "crossings",
-    "shomolu",
-    "track"
+    "median",
+    "track",
+    "gang"
    ]
   },
   {
    "id": "gidi:docs/oldisland-pattern-study.md",
    "title": "Old Island pattern study: Lagos Island \u2192 Old Island (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "island",
     "island's",
+    "bridge's",
     "core's",
     "fountains",
-    "bridge's",
-    "waterfront",
-    "x-junctions",
-    "core"
+    "palace",
+    "shore",
+    "waterfront"
    ]
   },
   {
    "id": "gidi:docs/oldshore-pattern-study.md",
    "title": "Old Shore pattern study: old Ikorodu \u2192 Old Shore (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "shore",
     "jetty",
     "ikorodu's",
-    "ikorodu",
     "pins",
+    "town",
+    "ikorodu",
     "ferry",
-    "fish",
-    "town"
-   ]
-  },
-  {
-   "id": "gidi:docs/pilot-foodgate.md",
-   "title": "The Food Gate pilot: the first district rebuilt from Google's data",
-   "state": "linked",
-   "words": [
-    "google's",
-    "outlines",
-    "furniture",
-    "walkways",
-    "generator's",
-    "pilot",
-    "widths",
-    "rafts"
+    "fish"
    ]
   },
   {
    "id": "gidi:docs/port-pattern-study.md",
    "title": "The Port pattern study: Apapa \u2192 The Port (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "port",
-    "apapa",
     "quay",
+    "apapa",
     "yard",
-    "yards",
-    "container",
     "farm",
+    "container",
+    "yards",
     "reserve"
    ]
   },
   {
    "id": "gidi:docs/railside-pattern-study.md",
    "title": "Railside pattern study: Agege, Ifako/Ijaye and Alimosho \u2192 Railside (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
-    "lgas",
     "railside",
+    "lgas",
     "capital's",
     "landmarks",
-    "median",
     "pipeline",
-    "sprawl",
-    "mounds"
+    "roundabout",
+    "mounds",
+    "ring"
    ]
   },
   {
@@ -1745,44 +1025,29 @@
    "title": "Life in Lagos: what it's like to live there",
    "state": "linked",
    "words": [
-    "japa",
-    "guardian",
     "what's",
+    "japa",
+    "feels",
+    "guardian",
     "december",
     "true",
-    "feels",
     "rent",
-    "power"
-   ]
-  },
-  {
-   "id": "gidi:docs/road-heights.md",
-   "title": "Road heights (pass 2 of the road work)",
-   "state": "linked",
-   "words": [
-    "deck",
-    "ramp",
-    "headroom",
-    "culverts",
-    "deck's",
-    "approaches",
-    "cable",
-    "piers"
+    "sapa"
    ]
   },
   {
    "id": "gidi:docs/studies/airport.md",
    "title": "The Airport: the deep study",
-   "state": "orphan",
+   "state": "linked",
    "words": [
     "airport",
     "median",
     "touching",
-    "storeys",
     "transit",
-    "service",
-    "tenth",
-    "restaurant"
+    "airline",
+    "storeys",
+    "restaurant",
+    "tenth"
    ]
   },
   {
@@ -1790,13 +1055,13 @@
    "title": "The Bazaar: the deep study",
    "state": "linked",
    "words": [
-    "median",
-    "power",
     "touching",
+    "power",
+    "median",
+    "energy",
     "storeys",
     "tenth",
     "education",
-    "energy",
     "transit"
    ]
   },
@@ -1811,7 +1076,7 @@
     "tenth",
     "roman",
     "squares",
-    "land",
+    "catholic",
     "power"
    ]
   },
@@ -1820,13 +1085,13 @@
    "title": "The Capital: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "developed",
+    "median",
     "power",
     "touching",
     "storeys",
     "tenth",
-    "service",
+    "manufacturer",
     "squares"
    ]
   },
@@ -1835,14 +1100,14 @@
    "title": "The Estate: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
+    "median",
     "storeys",
     "tenth",
     "barrier",
-    "service",
     "transportation",
-    "squares"
+    "developed",
+    "hospital"
    ]
   },
   {
@@ -1852,9 +1117,9 @@
    "words": [
     "median",
     "touching",
-    "storeys",
     "power",
     "developed",
+    "storeys",
     "tenth",
     "religious",
     "transit"
@@ -1865,14 +1130,14 @@
    "title": "The Frontier: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
-    "storeys",
+    "median",
     "barrier",
+    "storeys",
     "tenth",
     "power",
-    "squares",
-    "land"
+    "grocery",
+    "squares"
    ]
   },
   {
@@ -1880,13 +1145,13 @@
    "title": "The Heights: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
+    "median",
     "storeys",
-    "service",
     "tenth",
-    "barrier",
     "historic",
+    "service",
+    "barrier",
     "squares"
    ]
   },
@@ -1896,13 +1161,13 @@
    "state": "linked",
    "words": [
     "transit",
-    "median",
     "touching",
-    "storeys",
+    "median",
     "transportation",
+    "storeys",
     "tenth",
     "squares",
-    "land"
+    "beauty"
    ]
   },
   {
@@ -1912,8 +1177,8 @@
    "words": [
     "median",
     "touching",
-    "storeys",
     "communication",
+    "storeys",
     "tenth",
     "power",
     "transit",
@@ -1925,13 +1190,13 @@
    "title": "The Maze: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
+    "median",
     "storeys",
     "tenth",
+    "dealer",
     "power",
     "transit",
-    "dealer",
     "transportation"
    ]
   },
@@ -1941,13 +1206,13 @@
    "state": "linked",
    "words": [
     "recreation",
-    "median",
     "service",
+    "median",
     "touching",
-    "storeys",
     "travel",
-    "tenth",
-    "pedestrian"
+    "pedestrian",
+    "storeys",
+    "tenth"
    ]
   },
   {
@@ -1955,14 +1220,14 @@
    "title": "Old Shore: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
-    "storeys",
+    "median",
     "power",
+    "storeys",
     "tenth",
     "religious",
     "transit",
-    "squares"
+    "developed"
    ]
   },
   {
@@ -1970,10 +1235,10 @@
    "title": "The Port: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
-    "storeys",
+    "median",
     "pier",
+    "storeys",
     "tenth",
     "power",
     "transit",
@@ -1991,8 +1256,8 @@
     "storeys",
     "tenth",
     "squares",
-    "land",
-    "beauty"
+    "beauty",
+    "planning"
    ]
   },
   {
@@ -2000,14 +1265,14 @@
    "title": "Water Town: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
+    "median",
     "christian",
     "storeys",
     "tenth",
     "education",
-    "power",
-    "venue"
+    "venue",
+    "power"
    ]
   },
   {
@@ -2015,43 +1280,28 @@
    "title": "Saba: the deep study",
    "state": "linked",
    "words": [
-    "median",
     "touching",
+    "median",
     "education",
     "storeys",
-    "service",
     "tenth",
     "financial",
+    "service",
     "transportation"
-   ]
-  },
-  {
-   "id": "gidi:docs/terrain.md",
-   "title": "Gidi terrain (v1, for review)",
-   "state": "near-orphan",
-   "words": [
-    "smoothing",
-    "ridges",
-    "ridge",
-    "valleys",
-    "area's",
-    "raises",
-    "features",
-    "edits"
    ]
   },
   {
    "id": "gidi:docs/watertown-pattern-study.md",
    "title": "Water Town pattern study: the Makoko\u2013Iwaya and Bariga waterfront \u2192 Water Town (v1)",
-   "state": "near-orphan",
+   "state": "linked",
    "words": [
     "fingers",
     "stilt",
     "huts",
-    "sawmill's",
     "canoe",
+    "sawmill's",
     "village",
-    "land",
+    "shore",
     "boardwalks"
    ]
   },
@@ -2062,12 +1312,12 @@
    "words": [
     "statistics",
     "banned",
-    "generated",
     "okadas",
     "gateways",
+    "palace",
     "stadiums",
-    "extract",
-    "island"
+    "island",
+    "extract"
    ]
   },
   {
@@ -2075,13 +1325,13 @@
    "title": "Legacy: the old map's kit (frozen)",
    "state": "linked",
    "words": [
-    "tiles",
-    "frozen",
-    "tab's",
-    "fields",
     "builder",
-    "legacy",
+    "tiles",
+    "tab's",
+    "frozen",
+    "fields",
     "old-town",
+    "legacy",
     "builders"
    ]
   },
@@ -2093,11 +1343,11 @@
     "redrafted",
     "hand",
     "pass",
-    "lanes",
     "twin's",
     "redrawn",
-    "close-zoom",
-    "cleared"
+    "lanes",
+    "cleared",
+    "close-zoom"
    ]
   },
   {
@@ -2111,8 +1361,8 @@
     "parallel",
     "missing",
     "twin",
-    "alhaji",
-    "home"
+    "home",
+    "east"
    ]
   },
   {
@@ -2120,14 +1370,14 @@
    "title": "Hand-made assets",
    "state": "linked",
    "words": [
-    "font",
     "content",
+    "font",
     "claude",
     "makehuman",
-    "danfo",
     "plate",
+    "tools",
     "gidiplate",
-    "axles"
+    "ambientcg"
    ]
   },
   {
@@ -2136,13 +1386,13 @@
    "state": "linked",
    "words": [
     "push",
-    "repo's",
     "commit",
+    "repo's",
     "generates",
     "commands",
     "unreal",
     "paragraph",
-    "proof"
+    "master"
    ]
   },
   {
@@ -2153,9 +1403,9 @@
     "editor",
     "import",
     "repo",
-    "meshy",
     "wasd",
     "scripting",
+    "meshy",
     "tiles",
     "console"
    ]
@@ -2170,8 +1420,8 @@
     "manny",
     "asphalt",
     "concrete",
-    "build",
     "animations",
+    "build",
     "map's"
    ]
   },
@@ -2180,10 +1430,10 @@
    "title": "Performance: modes, near detail, streaming, budgets",
    "state": "linked",
    "words": [
+    "mode",
     "tools",
     "lumen",
     "editor",
-    "mode",
     "modes",
     "play",
     "scalability",
@@ -2198,11 +1448,11 @@
     "datasets",
     "shots",
     "reference",
-    "scripts",
-    "assets",
     "notes",
-    "folder",
-    "deep-study"
+    "assets",
+    "scripts",
+    "deep-study",
+    "cache"
    ]
   },
   {
@@ -2210,14 +1460,14 @@
    "title": "The Estate: Magodo, Omole, Ikeja GRA (study, 18 Oct 2026). Study only; nothing copied.",
    "state": "linked",
    "words": [
-    "rows",
     "valley",
     "unplanned",
-    "parallel",
-    "planned",
+    "rows",
     "drive",
+    "parallel",
     "closes",
-    "omole"
+    "planned",
+    "network"
    ]
   },
   {
@@ -2226,13 +1476,13 @@
    "state": "linked",
    "words": [
     "twin",
-    "steel",
     "adekoya",
+    "steel",
     "oshodi",
-    "shop",
     "poles",
+    "shop",
     "awnings",
-    "wires"
+    "footbridge"
    ]
   },
   {
@@ -2245,9 +1495,9 @@
     "ojuelegba",
     "yaba",
     "arena",
-    "ilupeju",
     "railway",
-    "army"
+    "ilupeju",
+    "stadium"
    ]
   },
   {
@@ -2261,8 +1511,8 @@
     "steel",
     "sheet",
     "timber",
-    "plank",
-    "example"
+    "example",
+    "plank"
    ]
   },
   {
@@ -2270,13 +1520,13 @@
    "title": "Kit eye test 3: ot149, Mushin, Ayantuga St (Street View, Jul 2021, heading 180)",
    "state": "linked",
    "words": [
+    "apron",
     "photo",
     "turned",
-    "apron",
     "photo's",
     "render",
     "cage",
-    "camera",
+    "test",
     "toned"
    ]
   },
@@ -2286,13 +1536,13 @@
    "state": "linked",
    "words": [
     "reused",
+    "pass",
     "camera",
     "darker",
-    "colour",
     "sacks",
-    "pass",
-    "ruts",
-    "dark"
+    "colour",
+    "textured",
+    "ruts"
    ]
   },
   {
@@ -2307,7 +1557,7 @@
     "desk",
     "dirt",
     "flatbed",
-    "median"
+    "wings"
    ]
   },
   {
@@ -2318,11 +1568,11 @@
     "photo's",
     "drafted",
     "kerbs",
-    "grass",
     "balls",
-    "fence",
+    "grass",
+    "rider",
     "lean",
-    "smooth"
+    "fence"
    ]
   },
   {
@@ -2333,11 +1583,11 @@
     "jitter",
     "stored",
     "positions",
-    "records",
     "goods",
     "scaffold",
+    "records",
     "render",
-    "seeded"
+    "test"
    ]
   },
   {
@@ -2347,12 +1597,12 @@
    "words": [
     "angles",
     "gidi-game",
+    "crates",
     "emmanuel",
     "bench",
-    "crates",
-    "timber",
     "pallet",
-    "cart"
+    "timber",
+    "pickup"
    ]
   },
   {
@@ -2366,8 +1616,8 @@
     "hierarchy",
     "alleys",
     "curving",
-    "interiors",
-    "queued"
+    "coverage",
+    "interiors"
    ]
   },
   {
@@ -2377,12 +1627,12 @@
    "words": [
     "sprawl",
     "kokoro",
-    "zinc-roofed",
     "twins",
+    "zinc-roofed",
     "plastics",
     "selling",
     "stalls",
-    "sandy"
+    "gutter"
    ]
   },
   {
@@ -2391,9 +1641,9 @@
    "state": "linked",
    "words": [
     "deck",
-    "kerb",
     "piers",
     "palisade",
+    "kerb",
     "obalende",
     "shade",
     "ojuelegba",
@@ -2409,8 +1659,8 @@
     "portugal",
     "assets",
     "tomato",
-    "yaba",
     "question",
+    "yaba",
     "oshodi",
     "green-black"
    ]
@@ -2426,8 +1676,8 @@
     "asphalt",
     "damaged",
     "rough",
-    "painted",
-    "metal"
+    "metal",
+    "painted"
    ]
   }
  ],
@@ -2506,6 +1756,14 @@
   },
   {
    "from": "gidi:decisions/CHECKS.md",
+   "to": "gidi-game:tools/mode_sg.py"
+  },
+  {
+   "from": "gidi:decisions/CHECKS.md",
+   "to": "gidi-game:tools/play.sh"
+  },
+  {
+   "from": "gidi:decisions/CHECKS.md",
    "to": "gidi:.claude/hooks/checked-before-commit.sh"
   },
   {
@@ -2530,7 +1788,15 @@
   },
   {
    "from": "gidi:decisions/CHECKS.md",
+   "to": "gidi:decisions/HISTORY.md"
+  },
+  {
+   "from": "gidi:decisions/CHECKS.md",
    "to": "gidi:docs/DATA-SOURCES.md"
+  },
+  {
+   "from": "gidi:decisions/CHECKS.md",
+   "to": "gidi:docs/lagos-study/roads/NAMES.md"
   },
   {
    "from": "gidi:decisions/CHECKS.md",
@@ -2786,15 +2052,15 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:decisions/HISTORY.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:decisions/README.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:docs/BOARD.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2806,22 +2072,6 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/DISTRICT-BRIEF.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/FLOW-AUDIT.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/ISMS-BUILD.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/KIT-GAPS.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
   },
   {
@@ -2830,27 +2080,15 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/LAGOS-LOOK.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/LAYOUT-V2.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:docs/MAP-FORMAT.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/REBUILD-PLAN.md"
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/TWINS.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/UNREAL-PORT-PLAN.md"
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2858,11 +2096,27 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/gidi-districts-v0.3.md"
+   "to": "gidi:docs/hand/borrowed-lagos.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:docs/hand/ibudo/twins/civic.json"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:docs/hand/maze-hub-lagos.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:docs/hand/monument-briefs.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:docs/inventory/CODEMAP.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:docs/inventory/COMMENTS.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2874,7 +2128,11 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/junctions.md"
+   "to": "gidi:docs/inventory/VAULT.md"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:docs/inventory/vault.json"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2902,19 +2160,11 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/pilot-foodgate.md"
+   "to": "gidi:docs/maze-pattern-study.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:docs/research/LIFE-IN-LAGOS.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/road-heights.md"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:docs/terrain.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2970,11 +2220,23 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:scripts/code_graph.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:scripts/district_profiles.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:scripts/doc_vault.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:scripts/draft_buildings.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:scripts/draw_area.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -3031,6 +2293,14 @@
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:scripts/walknet.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:tests/test_inventory.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:to-delete/README.md"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -3118,6 +2388,14 @@
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
+   "to": "gidi:decisions/HISTORY.md"
+  },
+  {
+   "from": "gidi:decisions/DECISIONS.md",
+   "to": "gidi:decisions/IDEAS.md"
+  },
+  {
+   "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:decisions/story/acts-2-3-draft.md"
   },
   {
@@ -3134,31 +2412,11 @@
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:docs/LAYOUT-V2.md"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:docs/MAP-FORMAT.md"
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:docs/TWINS.md"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:docs/UNREAL-PORT-PLAN.md"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:docs/hand/borrowed-lagos.md"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:docs/hand/lagos-pass.md"
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
@@ -3167,6 +2425,10 @@
   {
    "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:docs/lagos-study/STUDY.md"
+  },
+  {
+   "from": "gidi:decisions/DECISIONS.md",
+   "to": "gidi:docs/lagos-study/roads/NAMES.md"
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
@@ -3186,15 +2448,7 @@
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:scripts/autoclean.py"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:scripts/check_map.py"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:scripts/check_real.py"
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
@@ -3226,10 +2480,6 @@
   },
   {
    "from": "gidi:decisions/DECISIONS.md",
-   "to": "gidi:scripts/twins.py"
-  },
-  {
-   "from": "gidi:decisions/DECISIONS.md",
    "to": "gidi:scripts/whats_here.py"
   },
   {
@@ -3237,7 +2487,63 @@
    "to": "gidi:web/hand/gen/hub.json"
   },
   {
-   "from": "gidi:decisions/DECISIONS.md",
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:decisions/CHECKS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:decisions/DECISIONS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:decisions/IDEAS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:docs/LAGOS-ISMS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:docs/hand/borrowed-lagos.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:scripts/autoclean.py"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:scripts/check_real.py"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:scripts/check_rules.py"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:scripts/rebuild_areas.py"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:scripts/twins.py"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:to-delete/docs/LAYOUT-V2.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:to-delete/docs/TWINS.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
+   "to": "gidi:to-delete/docs/hand/lagos-pass.md"
+  },
+  {
+   "from": "gidi:decisions/HISTORY.md",
    "to": "gidi:web/twins.json"
   },
   {
@@ -3247,6 +2553,10 @@
   {
    "from": "gidi:decisions/IDEAS.md",
    "to": "gidi:decisions/world-life.md"
+  },
+  {
+   "from": "gidi:decisions/IDEAS.md",
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
   },
   {
    "from": "gidi:decisions/IDEAS.md",
@@ -3274,27 +2584,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:ASSETS.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Art/People/hawker/spec.json"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:Content/Python/gidi_heroes.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Content/Python/gidi_look.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Content/Python/gidi_signs.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Content/Python/gidi_surfaces.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3306,15 +2596,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/danfo_build.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/editor.sh"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/fab_list.sh"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3330,15 +2612,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/import.sh"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/kit_fields.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/make_textures.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3346,23 +2620,11 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/measure.sh"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/person_build.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/photo.sh"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/pickup_build.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/plates.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3371,10 +2633,6 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/pole_build.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/shot.sh"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3394,22 +2652,6 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/vehicle_export.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/vehicle_kit.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/vehicle_look.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/vehicle_prep.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/wall_build.py"
   },
   {
@@ -3418,7 +2660,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:decisions/CHECKS.md"
+   "to": "gidi:decisions/CODEBASE.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3426,7 +2668,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:decisions/IDEAS.md"
+   "to": "gidi:decisions/HISTORY.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3434,43 +2676,15 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:decisions/world-life.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/BOARD.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/FLOW-AUDIT.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:docs/MAP-FORMAT.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/TWINS.md"
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/hand/borrowed-lagos.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/hand/maze-hub-lagos.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/hand/monument-briefs.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/inventory/INVENTORY.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md"
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3510,31 +2724,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/city_run.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:legacy/blender/gidi_kit/draft.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/facade.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/goods.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/oldtown.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/roadbed.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/textured.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3542,31 +2732,11 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/wear.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/gidi_kit/zinc.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:legacy/blender/kit_draft.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/kit_test.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:legacy/blender/wear_sheet.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:map/d15/BUILDINGS.md"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:map/d15/STREETS.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3578,15 +2748,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/autoclean.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:scripts/board_server.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/check_district.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3594,19 +2756,7 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/check_real.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/check_rules.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi:scripts/draft_buildings.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/draw_area.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3618,43 +2768,19 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/furniture.py"
+   "to": "gidi:scripts/inventory.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/hand.py"
+   "to": "gidi:to-delete/README.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/hand_spots/ibudo_real_area.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/realnames.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/rebuild_areas.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/roadends.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:scripts/roadtypes.py"
+   "to": "gidi:to-delete/decisions/NOW-log-16-22-oct.md"
   },
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi:web/board.html"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:web/hand/gen/hub.json"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi:web/hand/hub.json"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3694,11 +2820,11 @@
   },
   {
    "from": "gidi:decisions/story/README.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
+   "to": "gidi:to-delete/docs/CITY-LIVING-TEST.md"
   },
   {
    "from": "gidi:decisions/story/README.md",
-   "to": "gidi:docs/gidi-districts-v0.3.md"
+   "to": "gidi:to-delete/docs/gidi-districts-v0.3.md"
   },
   {
    "from": "gidi:decisions/story/acts-2-3-draft.md",
@@ -3726,7 +2852,7 @@
   },
   {
    "from": "gidi:decisions/story/novels/README.md",
-   "to": "gidi:docs/LAYOUT-V2.md"
+   "to": "gidi:to-delete/docs/LAYOUT-V2.md"
   },
   {
    "from": "gidi:decisions/world-life.md",
@@ -3785,26 +2911,6 @@
    "to": "gidi:web/board.js"
   },
   {
-   "from": "gidi:docs/CITY-LIVING-TEST.md",
-   "to": "gidi:scripts/bake_web.py"
-  },
-  {
-   "from": "gidi:docs/CITY-LIVING-TEST.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/CITY-LIVING-TEST.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/CITY-LIVING-TEST.md",
-   "to": "gidi:web/gidi-data.js"
-  },
-  {
-   "from": "gidi:docs/CITY-LIVING-TEST.md",
-   "to": "gidi:web/locked.json"
-  },
-  {
    "from": "gidi:docs/DATA-SOURCES.md",
    "to": "gidi:docs/DEEP-STUDY.md"
   },
@@ -3819,14 +2925,6 @@
   {
    "from": "gidi:docs/DATA-SOURCES.md",
    "to": "gidi:web/terrain.json"
-  },
-  {
-   "from": "gidi:docs/DEEP-STUDY.md",
-   "to": "gidi:docs/DISTRICT-BRIEF.md"
-  },
-  {
-   "from": "gidi:docs/DEEP-STUDY.md",
-   "to": "gidi:docs/LAYOUT-V2.md"
   },
   {
    "from": "gidi:docs/DEEP-STUDY.md",
@@ -3857,236 +2955,12 @@
    "to": "gidi:scripts/study_deep.py"
   },
   {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:README.md"
+   "from": "gidi:docs/DEEP-STUDY.md",
+   "to": "gidi:to-delete/docs/DISTRICT-BRIEF.md"
   },
   {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:data/results/lga_table.json"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:docs/LAGOS-LOOK.md"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:docs/audit/README.md"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:docs/maze-pattern-study.md"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:legacy/blender/city_run.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:legacy/blender/gidi_kit/landmarks.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:legacy/blender/gidi_kit/rules.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/audit3d.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/bake_web.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/build_viewer.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/district_profiles.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/draw_gen.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/gen_fabric.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/map02.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_analyse.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_boxheights.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_connect.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_core.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_extract.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_isms.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_undermapped.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_village.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:scripts/study_wellmapped.py"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:web/districts_info.json"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:web/gidi-maps.html"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:web/locked.json"
-  },
-  {
-   "from": "gidi:docs/DISTRICT-BRIEF.md",
-   "to": "gidi:web/network.json"
-  },
-  {
-   "from": "gidi:docs/FLOW-AUDIT.md",
-   "to": "gidi:web/layout-v2.json"
-  },
-  {
-   "from": "gidi:docs/FLOW-AUDIT.md",
-   "to": "gidi:web/network.json"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:README.md"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:docs/LAGOS-LIGHT.md"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:docs/UNREAL-PORT-PLAN.md"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:legacy/blender/city.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:legacy/blender/generate.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:scripts/bake_web.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:scripts/gen_fabric.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:scripts/isms.py"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/app.js"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/gidi-data.js"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/isms-edits.json"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/shell.html"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/terrain.json"
-  },
-  {
-   "from": "gidi:docs/ISMS-BUILD.md",
-   "to": "gidi:web/view3d.js"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:docs/REBUILD-PLAN.md"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:legacy/blender/city.py"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:legacy/blender/gidi_kit/gutters.py"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:legacy/blender/gidi_kit/wear.py"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:legacy/blender/gidi_kit/zinc.py"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:scripts/compounds.py"
-  },
-  {
-   "from": "gidi:docs/KIT-GAPS.md",
-   "to": "gidi:scripts/gen_fabric.py"
+   "from": "gidi:docs/DEEP-STUDY.md",
+   "to": "gidi:to-delete/docs/LAYOUT-V2.md"
   },
   {
    "from": "gidi:docs/LAGOS-ISMS.md",
@@ -4098,10 +2972,6 @@
   },
   {
    "from": "gidi:docs/LAGOS-ISMS.md",
-   "to": "gidi:docs/ISMS-BUILD.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-ISMS.md",
    "to": "gidi:legacy/blender/generate.py"
   },
   {
@@ -4117,252 +2987,12 @@
    "to": "gidi:scripts/study_isms.py"
   },
   {
+   "from": "gidi:docs/LAGOS-ISMS.md",
+   "to": "gidi:to-delete/docs/ISMS-BUILD.md"
+  },
+  {
    "from": "gidi:docs/LAGOS-LIGHT.md",
-   "to": "gidi:docs/UNREAL-PORT-PLAN.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/lagos-study/roads/scripts/places.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/COVERAGE.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/catalogue.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/kinds-1.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/kinds-2.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/ladi-lane-overview.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/ladi-lane-street.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/shop-close.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/showcase.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/img/vehicles-people.jpg"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-buildings.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-civic.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-commerce.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-housing.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-landmarks.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-leisure.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-religious.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-roads.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-street.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-transport.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:docs/look/research-vehicles.md"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/catalogue.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/city.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/city_run.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/coverage.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/generate.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/archetypes.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/blocks.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/core.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/kinds.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/landmarks.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/materials.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/monuments.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/parts.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/people.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/registry.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/roadside.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/rules.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/street.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/gidi_kit/vehicles.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/monuments_sheet.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/new_kit_sheet.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/new_kit_sheet2.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/reach_sheet.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:legacy/blender/roadside_sheet.py"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:web/gidi-data.js"
-  },
-  {
-   "from": "gidi:docs/LAGOS-LOOK.md",
-   "to": "gidi:web/view3d.js"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:docs/DEEP-STUDY.md"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:docs/img/layout-v2-island.png"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:docs/img/layout-v2.png"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/district_profiles.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/frame_network.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/freeze_district.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/gen_fabric.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/layout_v2.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/study_analyse.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:scripts/study_core.py"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:web/hand/foodgate.json"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:web/layout-v2.json"
-  },
-  {
-   "from": "gidi:docs/LAYOUT-V2.md",
-   "to": "gidi:web/network.json"
+   "to": "gidi:to-delete/docs/UNREAL-PORT-PLAN.md"
   },
   {
    "from": "gidi:docs/MAP-FORMAT.md",
@@ -4441,168 +3071,296 @@
    "to": "gidi:web/mapedit.js"
   },
   {
-   "from": "gidi:docs/REBUILD-PLAN.md",
-   "to": "gidi:docs/DATA-SOURCES.md"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:docs/LAGOS-ISMS.md"
   },
   {
-   "from": "gidi:docs/REBUILD-PLAN.md",
-   "to": "gidi:docs/data/google-vs-osm.json"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:docs/lagos-study/LIVING.md"
   },
   {
-   "from": "gidi:docs/REBUILD-PLAN.md",
-   "to": "gidi:docs/img/structure-google-osm-gidi.png"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:legacy/OLD-MAP.md"
   },
   {
-   "from": "gidi:docs/TWINS.md",
-   "to": "gidi:scripts/twins.py"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/FLOW-AUDIT.md"
   },
   {
-   "from": "gidi:docs/TWINS.md",
-   "to": "gidi:web/twins.json"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/ISMS-BUILD.md"
   },
   {
-   "from": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "to": "gidi:decisions/DECISIONS.md"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/KIT-GAPS.md"
   },
   {
-   "from": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "to": "gidi:legacy/blender/city.py"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/REBUILD-PLAN.md"
   },
   {
-   "from": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/UNREAL-PORT-PLAN.md"
   },
   {
-   "from": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "to": "gidi:web/gidi-data.js"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/hand/lagos-pass.md"
   },
   {
-   "from": "gidi:docs/UNREAL-PORT-PLAN.md",
-   "to": "gidi:web/terrain.json"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/junctions.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/bazaar.md"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/pilot-foodgate.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/border.md"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/road-heights.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/capital.md"
+   "from": "gidi:docs/OLD-MAP-LESSONS.md",
+   "to": "gidi:to-delete/docs/terrain.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/estate.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:data/results/lga_table.json"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/foodgate.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:decisions/lived-in.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/frontier.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:decisions/world-life.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/heights.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/DEEP-STUDY.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/hub.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/LAGOS-ISMS.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/jungle.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/LAGOS-LIGHT.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/maze.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/OLD-MAP-LESSONS.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/oldisland.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/bazaar-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/oldshore.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/border-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/port.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/capital-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/railside.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/estate-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:docs/audit/watertown.md"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/foodgate-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/README.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/frontier-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/bazaar.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/gidi-data-plan.md"
   },
   {
-   "from": "gidi:docs/audit/border.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/hand/borrowed-lagos.md"
   },
   {
-   "from": "gidi:docs/audit/capital.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/hand/maze-hub-lagos.md"
   },
   {
-   "from": "gidi:docs/audit/estate.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/hand/monument-briefs.md"
   },
   {
-   "from": "gidi:docs/audit/foodgate.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/heights-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/frontier.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/hub-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/heights.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/jungle-pattern-study.md"
   },
   {
-   "from": "gidi:docs/audit/hub.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/lagos-lgas-research.md"
   },
   {
-   "from": "gidi:docs/audit/jungle.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/lagos-study/LIVING.md"
   },
   {
-   "from": "gidi:docs/audit/maze.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/lagos-study/STUDY.md"
   },
   {
-   "from": "gidi:docs/audit/oldisland.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/lagos-study/councils.md"
   },
   {
-   "from": "gidi:docs/audit/oldshore.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/lagos-study/roads/NAMES.md"
   },
   {
-   "from": "gidi:docs/audit/port.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-buildings.md"
   },
   {
-   "from": "gidi:docs/audit/railside.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-civic.md"
   },
   {
-   "from": "gidi:docs/audit/watertown.md",
-   "to": "gidi:scripts/audit3d.py"
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-commerce.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-housing.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-landmarks.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-leisure.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-religious.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-roads.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-street.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-transport.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/look/research-vehicles.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/maze-pattern-study.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/oldisland-pattern-study.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/oldshore-pattern-study.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/port-pattern-study.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/railside-pattern-study.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/research/LIFE-IN-LAGOS.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/airport.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/bazaar.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/border.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/capital.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/estate.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/foodgate.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/frontier.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/heights.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/hub.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/jungle.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/maze.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/oldisland.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/oldshore.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/port.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/railside.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/watertown.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/studies/yaba.md"
+  },
+  {
+   "from": "gidi:docs/RESEARCH.md",
+   "to": "gidi:docs/watertown-pattern-study.md"
   },
   {
    "from": "gidi:docs/bazaar-pattern-study.md",
@@ -4961,10 +3719,6 @@
    "to": "gidi:data/results/lga_table.json"
   },
   {
-   "from": "gidi:docs/gidi-districts-v0.3.md",
-   "to": "gidi:docs/lagos-lgas-research.md"
-  },
-  {
    "from": "gidi:docs/hand/borrowed-lagos.md",
    "to": "gidi:legacy/blender/gidi_kit/landmarks.py"
   },
@@ -4978,15 +3732,15 @@
   },
   {
    "from": "gidi:docs/hand/maze-hub-lagos.md",
-   "to": "gidi:docs/KIT-GAPS.md"
-  },
-  {
-   "from": "gidi:docs/hand/maze-hub-lagos.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
   },
   {
    "from": "gidi:docs/hand/maze-hub-lagos.md",
    "to": "gidi:scripts/hand.py"
+  },
+  {
+   "from": "gidi:docs/hand/maze-hub-lagos.md",
+   "to": "gidi:to-delete/docs/KIT-GAPS.md"
   },
   {
    "from": "gidi:docs/hand/maze-hub-lagos.md",
@@ -5129,18 +3883,6 @@
    "to": "gidi:web/network.json"
   },
   {
-   "from": "gidi:docs/junctions.md",
-   "to": "gidi:docs/img/roundabouts.png"
-  },
-  {
-   "from": "gidi:docs/junctions.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/junctions.md",
-   "to": "gidi:scripts/junctions.py"
-  },
-  {
    "from": "gidi:docs/jungle-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
   },
@@ -5191,50 +3933,6 @@
   {
    "from": "gidi:docs/jungle-pattern-study.md",
    "to": "gidi:web/network.json"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:docs/KIT-GAPS.md"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/city.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/archetypes.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/monuments.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/people.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/registry.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/roadside.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/street.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/gidi_kit/vehicles.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:legacy/blender/new_kit_sheet.py"
-  },
-  {
-   "from": "gidi:docs/kit/MODELLER-BRIEF-ACT1.md",
-   "to": "gidi:web/gidi-data.js"
   },
   {
    "from": "gidi:docs/lagos-study/LIVING.md",
@@ -5483,178 +4181,6 @@
   {
    "from": "gidi:docs/lagos-study/similar/SIMILAR.md",
    "to": "gidi:docs/lagos-study/similar/units.csv"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13.md",
-   "to": "gidi:web/gidi-data.js"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13b.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13b.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13b.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:scripts/walknet.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:web/districts_info.json"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-13c.md",
-   "to": "gidi:web/locked.json"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14.md",
-   "to": "gidi:docs/capital-pattern-study.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14b.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14c.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14d.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14d.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14e.md",
-   "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14e.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14f.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14g.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14h.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14i.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14j.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14k.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-14l.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "to": "gidi:docs/img/gutters-estate.png"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "to": "gidi:docs/img/gutters-maze.png"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "to": "gidi:scripts/explore_city.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15-gutters.md",
-   "to": "gidi:scripts/isms.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15m.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15n.md",
-   "to": "gidi:docs/img/roads-clean.png"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15n.md",
-   "to": "gidi:scripts/audit3d.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15n.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/living-test-2026-10-15n.md",
-   "to": "gidi:scripts/roadclean.py"
-  },
-  {
-   "from": "gidi:docs/look/COVERAGE.md",
-   "to": "gidi:legacy/blender/coverage.py"
-  },
-  {
-   "from": "gidi:docs/look/COVERAGE.md",
-   "to": "gidi:legacy/blender/gidi_kit/registry.py"
-  },
-  {
-   "from": "gidi:docs/look/COVERAGE.md",
-   "to": "gidi:web/civic.json"
   },
   {
    "from": "gidi:docs/look/research-civic.md",
@@ -5941,46 +4467,6 @@
    "to": "gidi:web/network.json"
   },
   {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:docs/KIT-GAPS.md"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:docs/REBUILD-PLAN.md"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:docs/data/structure-foodgate.json"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:docs/img/pilot-foodgate-2d.png"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:scripts/cross_sections.py"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:scripts/furniture.py"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:scripts/structure.py"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:scripts/study_structure.py"
-  },
-  {
-   "from": "gidi:docs/pilot-foodgate.md",
-   "to": "gidi:web/terrain-edits.json"
-  },
-  {
    "from": "gidi:docs/port-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
   },
@@ -6098,39 +4584,7 @@
   },
   {
    "from": "gidi:docs/research/LIFE-IN-LAGOS.md",
-   "to": "gidi:docs/LAGOS-LOOK.md"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:docs/img/bridge-landings.png"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:docs/img/road-heights.png"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:legacy/blender/city.py"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:legacy/blender/gidi_kit/structures.py"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:scripts/check_district.py"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:scripts/roadclean.py"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:scripts/roadz.py"
-  },
-  {
-   "from": "gidi:docs/road-heights.md",
-   "to": "gidi:web/terrain.json"
+   "to": "gidi:to-delete/docs/LAGOS-LOOK.md"
   },
   {
    "from": "gidi:docs/studies/airport.md",
@@ -6269,26 +4723,6 @@
    "to": "gidi:scripts/study_deep.py"
   },
   {
-   "from": "gidi:docs/terrain.md",
-   "to": "gidi:docs/img/terrain.png"
-  },
-  {
-   "from": "gidi:docs/terrain.md",
-   "to": "gidi:scripts/draw_terrain.py"
-  },
-  {
-   "from": "gidi:docs/terrain.md",
-   "to": "gidi:scripts/terrain.py"
-  },
-  {
-   "from": "gidi:docs/terrain.md",
-   "to": "gidi:web/terrain-edits.json"
-  },
-  {
-   "from": "gidi:docs/terrain.md",
-   "to": "gidi:web/terrain.json"
-  },
-  {
    "from": "gidi:docs/watertown-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
   },
@@ -6366,23 +4800,7 @@
   },
   {
    "from": "gidi:legacy/OLD-MAP.md",
-   "to": "gidi:docs/CITY-LIVING-TEST.md"
-  },
-  {
-   "from": "gidi:legacy/OLD-MAP.md",
-   "to": "gidi:docs/DISTRICT-BRIEF.md"
-  },
-  {
-   "from": "gidi:legacy/OLD-MAP.md",
-   "to": "gidi:docs/ISMS-BUILD.md"
-  },
-  {
-   "from": "gidi:legacy/OLD-MAP.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
-  },
-  {
-   "from": "gidi:legacy/OLD-MAP.md",
-   "to": "gidi:docs/LAGOS-LOOK.md"
   },
   {
    "from": "gidi:legacy/OLD-MAP.md",
@@ -6419,10 +4837,6 @@
   {
    "from": "gidi:legacy/OLD-MAP.md",
    "to": "gidi:docs/jungle-pattern-study.md"
-  },
-  {
-   "from": "gidi:legacy/OLD-MAP.md",
-   "to": "gidi:docs/living-test-2026-10-15m.md"
   },
   {
    "from": "gidi:legacy/OLD-MAP.md",
@@ -6507,6 +4921,26 @@
   {
    "from": "gidi:legacy/OLD-MAP.md",
    "to": "gidi:scripts/study_landmarks.py"
+  },
+  {
+   "from": "gidi:legacy/OLD-MAP.md",
+   "to": "gidi:to-delete/docs/CITY-LIVING-TEST.md"
+  },
+  {
+   "from": "gidi:legacy/OLD-MAP.md",
+   "to": "gidi:to-delete/docs/DISTRICT-BRIEF.md"
+  },
+  {
+   "from": "gidi:legacy/OLD-MAP.md",
+   "to": "gidi:to-delete/docs/ISMS-BUILD.md"
+  },
+  {
+   "from": "gidi:legacy/OLD-MAP.md",
+   "to": "gidi:to-delete/docs/LAGOS-LOOK.md"
+  },
+  {
+   "from": "gidi:legacy/OLD-MAP.md",
+   "to": "gidi:to-delete/docs/living-test-2026-10-15m.md"
   },
   {
    "from": "gidi:legacy/OLD-MAP.md",
@@ -6858,7 +5292,7 @@
   },
   {
    "from": "gidi-data:research/google/ibudo/NOTES.md",
-   "to": "gidi:docs/TWINS.md"
+   "to": "gidi:to-delete/docs/TWINS.md"
   },
   {
    "from": "gidi-data:research/google/kits/old-town/KIT.md",

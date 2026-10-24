@@ -1,6 +1,6 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 6683 pieces of code in 236 files: 21 used nowhere, 111 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 6728 pieces of code in 240 files: 21 used nowhere, 111 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
@@ -536,7 +536,7 @@ Used elsewhere: `R` in `gidi:scripts/bake_web.py`, `gidi:scripts/hand_fix_checks
 
 ### `gidi:scripts/board_server.py`
 46 defined (46 used, 0 maybe, 0 unused). Imports: `gidi:scripts/check_map.py`. Imported by: nothing.
-Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/things.py`
+Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/things.py`; `log_message` in `gidi:scripts/code_graph.py`; `do_GET` in `gidi:scripts/code_graph.py`; `do_POST` in `gidi:scripts/code_graph.py`
 
 ### `gidi:scripts/build_viewer.py`
 4 defined (4 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -556,6 +556,10 @@ Used elsewhere: `ROOT` in `gidi:scripts/board_server.py`; `SCHEMA` in `gidi:scri
 
 ### `gidi:scripts/child_plan.py`
 18 defined (16 used, 2 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi:scripts/code_graph.py`
+15 defined (15 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/inventory.py`, `gidi:tests/test_inventory.py`.
+Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`; `find_ts` in `gidi:tests/test_inventory.py`; `build` in `gidi:scripts/inventory.py`, `gidi:tests/test_inventory.py`; `write` in `gidi:scripts/inventory.py`
 
 ### `gidi:scripts/compounds.py`
 7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/bake_web.py`.
@@ -590,6 +594,10 @@ Used elsewhere: `STOREY_BANDS` in `gidi:scripts/district_profiles.py`, `gidi:scr
 ### `gidi:scripts/district_profiles.py`
 23 defined (23 used, 0 maybe, 0 unused). Imports: `gidi:scripts/deep_profile.py`. Imported by: `gidi:scripts/deep_tune.py`, `gidi:scripts/gen_fabric.py`.
 Used elsewhere: `height_bands` in `gidi:scripts/gen_fabric.py`; `STOREY_BANDS` in `gidi:scripts/gen_fabric.py`; `estate` in `gidi:scripts/gen_fabric.py`; `border` in `gidi:scripts/gen_fabric.py`; `profile` in `gidi:scripts/deep_tune.py`, `gidi:scripts/gen_fabric.py`
+
+### `gidi:scripts/doc_vault.py`
+7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/inventory.py`.
+Used elsewhere: `WORD` in `gidi:scripts/inventory.py`; `build` in `gidi:scripts/inventory.py`; `write` in `gidi:scripts/inventory.py`
 
 ### `gidi:scripts/draft_buildings.py`
 27 defined (26 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -669,11 +677,14 @@ Used elsewhere: `LAYOUT` in `gidi:scripts/bake_web.py`, `gidi:scripts/freeze_dis
 Used elsewhere: `houses` in `gidi:scripts/bake_web.py`; `place` in `gidi:scripts/bake_web.py`
 
 ### `gidi:scripts/inventory.py`
-18 defined (18 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+18 defined (18 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/doc_vault.py`. Imported by: nothing.
 
 ### `gidi:scripts/isms.py`
 36 defined (36 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/bake_web.py`.
 Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`; `gutters` in `gidi:scripts/bake_web.py`; `apply_edits` in `gidi:scripts/bake_web.py`; `run` in `gidi:scripts/bake_web.py`; `src` in `gidi:scripts/bake_web.py`
+
+### `gidi:scripts/js_symbols.mjs`
+8 defined (8 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi:scripts/junctions.py`
 11 defined (9 used, 1 maybe, 1 unused). Imports: none of ours. Imported by: `gidi:scripts/bake_web.py`.
@@ -793,6 +804,9 @@ Used elsewhere: `ways_of` in `gidi:scripts/bake_web.py`, `gidi:scripts/check_dis
 
 ### `gidi:scripts/whats_here.py`
 22 defined (22 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi:tests/test_inventory.py`
+15 defined (15 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`. Imported by: nothing.
 
 ### `gidi:web/app.js`
 32 defined (32 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
