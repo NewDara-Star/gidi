@@ -568,3 +568,15 @@ B15 (Papa Ajao, north of Ladipo: between Palm Avenue, Ladipo Street, Agege Motor
 | rd-mw3dwbpl | Oshinfuye Street on to Taiwo Lane | lane |
 | rd-xrm36c1i | Omodigbo Street on to Balogun Street | lane |
 | rd-gqsv49g9 | Buari Street | lane |
+
+B14 (Idi-Oro to Ishaga Road: between Itire Street, Isolo Road, Paul Okuntola and Ajegunle Streets, and Ishaga Road). Read 24 Oct at z18 at the checked shot scale (two shots, north and south). The north arm has one spine, Oloruntosin Street on to Alasalat Street up to Isolo Road, crossed by Ogun Street, with Ajorin Street running on south and east to Paul Okuntola Street. The wider south part has Bakare Street from Itire Street down to Ishaga Road, with Ilora, Morgan and Gbolahan Streets across it. Left out for spacing: Sarunmi Street, John Street, Ayandeji Street, Olajide Street, Lawal Street, Taiwo Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-p224w40k | Oloruntosin Street on to Alasalat Street | lane |
+| rd-x37bsf38 | Ogun Street | lane |
+| rd-d9ib0rdk | Ajorin Street | lane |
+| rd-13cjjcjg | Bakare Street | lane |
+| rd-8p3596pi | Ilora Street | lane |
+| rd-blho77vn | Morgan Street | lane |
+| rd-x1ebutg6 | Gbolahan Street | lane |
