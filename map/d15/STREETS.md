@@ -580,3 +580,13 @@ B14 (Idi-Oro to Ishaga Road: between Itire Street, Isolo Road, Paul Okuntola and
 | rd-8p3596pi | Ilora Street | lane |
 | rd-blho77vn | Morgan Street | lane |
 | rd-x1ebutg6 | Gbolahan Street | lane |
+
+B13 (central Mushin: between Post Office Road, Coker Street and Isolo Road, round the dead end of Dada Iyalode and Abolade Streets). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Abiodun Street runs from Post Office Road down through the block, cut in two where it crosses Abolade Street; Mumuni Street on to Adebesin Street runs from Dada Iyalode Street to Coker Street; Oluwoye Street runs from Abolade Street to Isolo Road, with Aganran Street from it to Abiodun Street. Left out for spacing: Williams Ladega Street, Olapade Street, Olumorokun Street, Ogunmokun Street and the short unnamed streets east of Abiodun.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-cvnc099q | Abiodun Street (north of Abolade Street) | lane |
+| rd-ed6egqst | Abiodun Street | lane |
+| rd-qpyslofn | Mumuni Street on to Adebesin Street | lane |
+| rd-0gi2ewca | Oluwoye Street | lane |
+| rd-0pmc0xha | Aganran Street | lane |
