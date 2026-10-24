@@ -8,7 +8,6 @@ One session = one district. Read this brief, `README.md` and `docs/maze-pattern-
 - **Safe ground.** Churches, mosques, schools, hospitals and clinics are never crime locations. Nor is any place the district model flags `"safe": true` in `web/districts_info.json` (the Palace); the bake marks them all, with their plots, in `safe_ground`. Sacred traditions (Eyo, Oro, Egungun, etc.) are never criminal.
 - **Never push to `main`.** Work on a branch `district/<id>` and open a pull request. Only the owner merges.
 - **Never fetch** Pinterest, Nominatim or Overpass. Never use Google Maps, Street View or 3D Tiles as data. If a site is blocked, say so; don't work around it.
-- **Never read or use the `gta5` folder** on the owner's Mac.
 - **Look at what you make before showing it.** Check the picture, and check that no house sits on a road.
 - **Write for a designer, not a coder:** plain words, honest critique, one recommendation.
 
