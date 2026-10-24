@@ -20,8 +20,6 @@
   - **The Airport:** arrivals touts, cargo and smuggling, rich people passing through, police at every gate.
   - **Saba:** students and young people, tech hubs in old houses, the junction under the flyover, nightlife.
   - **The Gold Island** (after Banana Island): the most expensive address, behind one gated causeway: a place to get into, someone's home, or a view across the water.
-- **Fabric types:** a district isn't one texture. The deep study finds 3–4 kinds of neighbourhood per district; the generator should lay them out in the real shares (busier along main roads, more open toward water and the city edge).
-- **Growing the map:** 1:2.5 (29 × 12 km) is the same layout rescaled, if Gidi ever needs more room.
 
 ## Gidi's brand identity (owner, 19 Oct; refs in ~/gidi-data/research/refs/brand/, study only)
 - Danfo yellow and black, a third colour sparingly (the red and blue of hand-painted lettering).
@@ -45,14 +43,6 @@
 - **People** (owner, 19 Oct): first the hawker with the basin of drinks, built with MakeHuman in Blender (MPFB, CC0 assets) and judged in a render; then the full frame (refs/lagos-life 09, the motor park) and what it shows is missing; **then try MetaHuman** (Unreal), above all for animation: faces driven from a phone video (MetaHuman Animator), which suits the owner voice-acting the characters himself. If MakeHuman people don't hold up, MetaHuman replaces them.
 
 
-## Ìbùdó plan v2 (proposal, 19 Oct, awaiting the owner)
-Ìbùdó as it is (`docs/hand/ibudo/district_as_is.png`) doesn't read as a district: the Oshodi things are packed into the north-east corner, the stadium sits alone in the north-west, and 4 km² of the same houses lie between them; the main roads only run round the edge. From a Google study of real Oshodi and Ojuelegba (screenshots in `~/gidi-data/research/google/ibudo/10-13`), proposal `docs/hand/ibudo/plan_v2_proposal.png`:
-- two cores: Oshodi in the north-east (stays, beside the airport, as in life), Ojuelegba in the south-east (beside Saba, as in life): flyover junction, under-bridge market, stadium, a Shitta-type roundabout, a teaching hospital;
-- three roads that cross the district: an expressway west from the Oshodi crossing (Airport Rd type), the Ojuelegba cross road (Itire Rd type, on to Saba), and a north-south link road (Ikorodu Rd type);
-- five belts between them, each with its own grain: Mafoluku (densest), an Ajao-type estate (walled, bigger plots), Ilupeju-type industry, a Papa Ajao mix (houses and workshops, a spare-parts market), and a Surulere grid;
-- several markets instead of one (an Arena-type set of sheds, a strip along the rail, spare parts, textiles, under the bridge), and walled institutions next to the Oshodi crossing (barracks, hospital, council).
-Open question: real Oshodi has the railway running through the crossing; Gidi's rail only clips the corner. Moving it changes the whole city.
-
 ## Life in the streets: what makes people stay (owner, 22 Oct)
 The owner: "people randomly having like chatter conversations"; "beer parlour talk... somebody on the road looking at a newspaper... stupid football takes"; music; bus stop names. Lagos Life (browser, 2026) drew millions of players in its first days on curiosity alone, then had "nothing going on" (the owner played it). Curiosity brings people once; life and things to do keep them.
 - **Overheard talk:** groups that argue as you pass: the newspaper stand (football, politics, prices), the beer parlour, the barber's, the bus queue, the market women, the mechanics. Short lines, many of them, in pidgin, Yoruba and English, picked by place and time (match day, fuel queue, rain, NEPA off).
@@ -66,7 +56,12 @@ The owner: "people randomly having like chatter conversations"; "beer parlour ta
 - **Four first mix templates:** the market, the dormitory suburb, the estate and the never-sleeps junction, each then set by hand per district.
 - **18 more person activities** (bake_bread, carry_headload, run_press, smoke_fish, shuck_oysters, saw_timber, butcher_meat, test_speaker, collect_levy, play_chess, dj, spray_money, jog, study, mould_blocks, farm, queue_atm, cyber_work and others); each tied to a district in LIVING.md.
 
-## Place names: echo names (proposal, 22 Oct, awaiting the owner)
+## Place names: echo names (22 Oct; the rule is decided, the 51 names await the owner)
+The sound-alike rule below is now a decision (DECISIONS, "Invented names only"); what still waits is the owner's review of the names in `docs/lagos-study/roads/NAMES.md`.
+
 The owner asked whether Gidi's places could just be parodies of the real names, since Gidi is Lagos made smaller. Invented names stay the rule. The proposal is **echo names**: built from Yoruba (or the place's own language) the way Lagos names are, close enough in sound or meaning that a Lagosian smiles and knows where they are, never a straight copy and never a cheap pun. Saba for Yaba is the model. Big landmarks get the clearest echo; quiet places get plain new names in the same style. Brands and businesses are always invented (Gidi's own). One name list for all 51 districts, made with the owner.
 
 **The rule (owner, 22 Oct): sound-alike in the same language.** "Make the names sound similar. So if something is English, it should be English. Something is Yoruba, it should be Yoruba." Yaba → Saba, Computer Village → Gadget Village. A Lagosian should hear the real name in the Gidi one: the same rhythm and mostly the same sounds, with one or two changed. English names get English sound-alikes, Yoruba (and Awori, Egun) names get Yoruba ones that still sound like real Yoruba words or names, and mixed names keep the mix. A sound-alike may also have a decent meaning, but sound comes first; a name that only shares the meaning is out. It must never be the real name, a real nearby place, rude or a cheap shot. Old Gidi names stay only if they pass. Working drafts for all 51: `docs/lagos-study/roads/NAMES.md`, for the owner to review.
+
+## A living test for the new map (24 Oct, from the old map's living tests)
+- **Walk and ride the city between named places,** once a few districts join: cheap agents on foot, danfo, okada and keke, a standard trip list run after every change, each trip's length against its real one. On the old map this found what the numbers missed: places you can't reach, absurd detours, everything funnelling onto one road, houses with no way in, an okada ban that cut a district off. The lessons: `docs/OLD-MAP-LESSONS.md` ("Checking").

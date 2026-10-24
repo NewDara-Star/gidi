@@ -49,4 +49,4 @@ The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md
 23. **Surfaces:** worn tar and red earth; mud in the park yard after rain (study, photo).
 
 ## How it gets built
-Each ticked item becomes hand edits in `web/hand/maze-v2.json` and `web/hand/hub-v2.json`: exact footprints, furniture, roads, surfaces and labels, with a note on every one. The opening is then locked again (`web/locked.json`, in the v2 frame). The kit draws what it can. What it can't draw goes on `docs/KIT-GAPS.md`: the parts stacks, print kiosks, the canal footbridge, the buka, the levy table, the police kiosk, the overhead sign.
+Each ticked item becomes hand edits in `web/hand/maze-v2.json` and `web/hand/hub-v2.json`: exact footprints, furniture, roads, surfaces and labels, with a note on every one. The opening is then locked again (`web/locked.json`, in the v2 frame). The kit draws what it can. What it can't draw goes on `to-delete/docs/KIT-GAPS.md`: the parts stacks, print kiosks, the canal footbridge, the buka, the levy table, the police kiosk, the overhead sign.

@@ -1,6 +1,6 @@
 # Comments that name what does not exist
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`. Every comment and docstring in the three repos is read for the code names it mentions (`backticked` words, snake_case, camelCase, name()); each must exist as a name in the code, a file, a map schema field or a record key. These do not: the comment is out of date, has a typo, or names something outside the repos (a Blender or Unreal API, a library), which is fine and can be read past. 9 comments in 9 files.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`. Every comment and docstring in the three repos is read for the code names it mentions (`backticked` words, snake_case, camelCase, name()); each must exist as a name in the code, a file, a map schema field or a record key. These do not: the comment is out of date, has a typo, or names something outside the repos (a Blender or Unreal API, a library), which is fine and can be read past. 13 comments in 11 files.
 
 ## `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`
 - line 1: `old_hex`. "Measure a wall's colour in the Street View and in the render over the same box (SV pixels; the render is scaled"
@@ -16,6 +16,14 @@ Made by `scripts/inventory.py` with `scripts/code_graph.py`. Every comment and d
 
 ## `gidi:legacy/blender/gidi_kit/parts.py`
 - line 166: `window_spec`. "A window on a wall frame F at (u along, z centre height). spec from rules.window_spec."
+
+## `gidi:scripts/code_graph.py`
+- line 1: `backticked`, `snake_case`, `camelCase`. "The code graph, for scripts/inventory.py (owner, 24 Oct: "use the compiler to know what every single piece of code,"
+- line 280: `backticked`. "# `backticked`: each name in it"
+
+## `gidi:scripts/js_symbols.mjs`
+- line 12: `constructor`. "// no prototype: a name like `constructor` is a name"
+- line 32: `let`. "// functions held in a const, and constants at the top of the file (a nested `let` is a local, not a piece of code)"
 
 ## `gidi:scripts/surfaces.py`
 - line 69: `is_open`. "zones: {district: [(polygon, is_open)]} from the generated files' fabric zones (optional)."

@@ -22,6 +22,8 @@ Each part is marked:
   never extended (CLAUDE.md), and new work never reads from it.
 - **history**: what a decision or study left behind; read it, don't build on it
 - **other project**: not Gidi
+- **to delete**: moved into `to-delete/` (24 Oct) for the owner to delete; `to-delete/README.md` says why each file went.
+  The inventory lists these files but doesn't read them for references or names.
 
 ## The map in one breath
 
@@ -54,7 +56,8 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `scripts/inventory.py` | this inventory |
 | `web/board.html`, `board.js`, `frame.js`, `mapedit.js`, `faceedit.js` | the drawing board: `board.html?frame=new` is the new map's editor |
 | `docs/BOARD.md` | the board's tools |
-| `docs/kit/` | the brief for the kit modeller |
+| `docs/RESEARCH.md` | the real Lagos research that stays, and which new districts each study serves |
+| `docs/OLD-MAP-LESSONS.md` | what the old map's plans and passes taught that still holds |
 
 **Old map (13-21 Oct, frozen)**
 
@@ -67,18 +70,18 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `legacy/blender/` | the old map's Blender kit; the legacy tiles 6,12 / 7,12 / 8,13 must stay byte-identical |
 | `data/` | per-LGA numbers (`results/`) and the download scripts (`tools/`) |
 
+**Research (written for the old map; its real Lagos numbers still hold).** Indexed in `docs/RESEARCH.md`:
+- the pattern studies (15 in `docs/`, such as `docs/maze-pattern-study.md`) and the deep studies (`docs/studies/`, `docs/data/deep/`,
+  `docs/DEEP-STUDY.md`), with their pictures in `docs/img/`
+- `docs/look/research-*.md`, `docs/LAGOS-ISMS.md`, `docs/LAGOS-LIGHT.md`, `docs/research/LIFE-IN-LAGOS.md`,
+  `docs/lagos-lgas-research.md`, `docs/gidi-data-plan.md`, `docs/DATA-SOURCES.md` (what was downloaded, and when it can go)
+- `docs/hand/`: `maze-hub-lagos.md`, `borrowed-lagos.md`, `monument-briefs.md`; `ibudo/` and `realnames.txt` are old-map
+  data still read by `check_real.py`, `realnames.py` (and so `check_map.py`), `rebuild_areas.py`, `draw_area.py`
+
 **History**
-- `docs/*-pattern-study.md` (15): one per old district
-- `docs/living-test-*.md` (22) and `docs/CITY-LIVING-TEST.md`
-- `docs/DEEP-STUDY.md`, `docs/data/deep*/`
-- `docs/studies/`, `docs/audit/`, `docs/hand/` (Ìbùdó's child plan), `docs/img/` (26 MB of old-map pictures)
-- `docs/look/`: the Lagos look catalogues. Still useful as research, though written for the old kit.
-- `docs/LAYOUT-V2.md`, `REBUILD-PLAN.md`, `DISTRICT-BRIEF.md`, `KIT-GAPS.md`, `ISMS-BUILD.md`, `LAGOS-LOOK.md`,
-  `FLOW-AUDIT.md`, `TWINS.md`, `junctions.md`, `road-heights.md`, `terrain.md`, `pilot-foodgate.md`, `gidi-data-plan.md`,
-  `gidi-districts-v0.3.md`: the old map's plans and passes
-- Still read as research: `docs/LAGOS-ISMS.md` (the eccentricities log), `docs/lagos-lgas-research.md`,
-  `docs/research/LIFE-IN-LAGOS.md`, `docs/LAGOS-LIGHT.md`, `docs/DATA-SOURCES.md` (what was downloaded, and when it
-  can go), `docs/UNREAL-PORT-PLAN.md`
+- `decisions/HISTORY.md`: decisions that later ones replaced, and dropped ideas, word for word with what replaced them
+- `to-delete/`: the old map's living tests, audits, calibration, plans and passes (91 files, 24 Oct), and this folder's
+  old NOW log; their lessons are in `docs/OLD-MAP-LESSONS.md`
 
 ## gidi-game (`~/gidi-game`, 456 files; `Content/` is 34 GB on disk, nearly all generated or from Fab)
 
@@ -140,13 +143,10 @@ different game; Gidi uses none of it. Two Lagos files World Drive tracks (`lagos
 - **`check_map.py map` always said FAIL** (fixed 24 Oct). All 35,707 of its problems were "missing field", so every run
   read FAIL and a real failure looked the same. Fields still to fill are now one TODO line (the board's amber); PASS
   means no problem; `--strict` fails on the TODOs too.
-- **Unfinished work in old worktrees** (24 Oct; the 26 finished ones were removed, their work is in main):
-  `~/gidi-look` (look/style-test, PR #18 open since 14 Oct, `look/src/tex.js` changed), `~/gidi-worktrees/brushes`
-  (board/brushes-people: board brushes and people spots, schema, check_map and board changes, never committed),
-  `~/gidi-worktrees/dec` (hand/ibudo-areas-12: an old-map hand edit, never committed), `~/gidi-worktrees/kit`
-  (kit/lockups, one commit not in main), `~/gidi-worktrees/kit-items` (one DECISIONS commit not in main),
-  `~/gidi-worktrees/d15` (map/d15-roads, two commits whose PR #214 merged in another form), and gidi-game's
-  `~/gidi-worktrees/game-umbrella` (PR #45 merged, its last commit not in main). Each is the owner's call: finish, or drop.
+- ~~Unfinished work in old worktrees~~ (settled 24 Oct). Every branch whose work is in main was deleted (gidi 198
+  local and 197 remote, gidi-game 27 and all remote); the unfinished ones were checked against the decisions, found
+  replaced, saved as patches in `~/gidi-data/to-delete/branches/` and removed, and PR #18 was closed. Each repo has only
+  `main` now.
 - The board carries both maps. That is why the old map can't simply be moved away: `board.html` loads
   `web/gidi-data.js`, and `board_server.py` writes old-map edits into `web/hand/`.
 
@@ -160,9 +160,10 @@ different game; Gidi uses none of it. Two Lagos files World Drive tracks (`lagos
 
 ## Next clean-ups (the owner said yes to 1-3 on 24 Oct: "the new map is the truth")
 
-1. **Move the old map into `legacy/old-map/`**: its scripts, data, viewer, `study-*.json` and history docs, as was
-   done for `legacy/blender/`. The top of gidi would then hold only the new map. The board would still load the old
-   map from its new place, and the legacy tiles would be checked byte-identical before merging.
+1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it go into `legacy/`
+   (the board still draws it); the scripts that make or tune it (the generator, studies, calibration, one-off fixes) go
+   into `to-delete/`; the legacy tiles are checked byte-identical before merging. Its history docs went to `to-delete/`
+   on 24 Oct.
 2. ~~Give Gidi's data store its own folder~~ (done 24 Oct: `~/gidi-data`; 84 lines in gidi and 3 in gidi-game repointed, gidi-game #71; counted with `git diff -U0 origin/main | grep -c '^+.*gidi-data'`, without docs/inventory and this page).
    Open: a private GitHub remote for its text only, the owner's call.
 3. ~~Retire `tools/perf.sh`~~ (removed 24 Oct, gidi-game #70). Still open: decide whether the Meshy vehicle path
