@@ -6,7 +6,7 @@ works both ways; the builders are the kit"): nothing here is extended. A builder
 fresh, whole and clean, from real pictures; what it can take from here is the **knowledge** (what Lagos has, the sizes,
 the parts, the fields a record needs), never the mesh.
 
-`gidi_kit/` is about 12,000 lines, with 437 public functions in 26 files. Its renders are in `out/` on this Mac (not
+`gidi_kit/` is about 12,000 lines, with 437 public functions in 29 modules. Its renders are in `out/` on this Mac (not
 committed): `kinds-sheet*.jpg`, `new_kit*.jpg`, `vehicles*.jpg`, `monuments.jpg`, `roadside.jpg`, `lights.jpg`,
 `the_reach.jpg`, `showcase.jpg`, and one picture per kind in `out/kinds/`. Most of it reads as toys (the owner, 23 Oct):
 boxes with window grids, flat colours, no wear and no clutter. That is because most of it was made 13-16 Oct to fill a
@@ -14,7 +14,7 @@ generated city fast, before the look target and the kit tests.
 
 Two layers, of very different worth:
 - **The city kit (13-19 Oct):** `archetypes`, `kinds`, `places`, `blocks`, `parts`, `rules`, `registry`, `landmarks`,
-  `monuments`, `parcels`, `structures`, `roadside`, `street`, `vehicles`, `people`, `boats`, `props`, `materials`,
+  `monuments`, `parcels`, `structures`, `roadside`, `street`, `gutters`, `vehicles`, `people`, `boats`, `props`, `materials`,
   `detail`, `core`. 76 kinds of building, about 30 kinds of ground, some 35 vehicles, 19 monuments and 20 structures, built by
   seeded rules. Low detail. Its worth is the
   **list**: every kind of Lagos thing the old map needed, each with its research note.
