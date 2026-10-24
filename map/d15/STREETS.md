@@ -671,3 +671,9 @@ B26 (Ilasamaja side: between Sadiku Street, Akanro Street, Oladele Street and Ag
 | Gidi id | real twin | kind |
 |---|---|---|
 | rd-196r6fwm | Gbangba Street | lane |
+
+B28 (between Ayantuga Street, Kumuyi Street, Post Office Road and Olumorokun Street). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). The block's west half is a school compound with its own driveways (not drawn as streets); Bakare Close runs in from Kumuyi Street to a real dead end. Left out for spacing: Dawodu Lane, the other dead end off Kumuyi Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-si9baapu | Bakare Close | lane |
