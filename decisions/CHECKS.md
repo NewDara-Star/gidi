@@ -19,17 +19,17 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | Hand-making happens on the drawing board | process | not a map rule |
 | The browser 3D is a quick preview; the full scene is for Unreal | process | not a map rule |
 | The map is never final | the game's builders build from the map's records every time; nothing made from the map is committed in gidi-game | gidi-game `tools/kit_fields.py` (every builder key is a map field); 17 and R0 held it on the old map |
-| New districts: | the district list | 4 |
-| Old Island is a true island, | water around it | 3 |
+| New districts: | the district list | GAP: the new map has the airport (33) and Yaba-UNILAG (17, 18) in NAMES.md, but no check reads the district list; 4 held it on the old map |
+| Old Island is a true island, | water around it | GAP: no water check on the new map yet; 3 held it on the old map |
 | The research must be detailed: | studies in docs | owner's review |
-| Monuments are placed by hand | `add monument` edits | 12, 17 |
+| Monuments are placed by hand | `add monument` edits | GAP: the new map has no monument records yet; 12 and 17 held it on the old map |
 | Claude decides when the owner says so | process | not a map rule |
-| The hand pass covers infrastructure and labels | furniture and labels placed by hand land where meant | 15, 17 |
+| The hand pass covers infrastructure and labels | furniture and labels placed by hand land where meant | GAP: `check_map.py` counts fields still unset (its TODO line), not whether every stop, light and label is there; 15 and 17 held it on the old map |
 | Roads have surfaces; poorer areas have unpaved and marshy ones | every road has a surface | GAP: no check that a street's surface matches what its twin photos show (earth, laterite, tar, interlock) |
 | Freeze everything | the map comes out the same every bake | GAP: `tools/bake.sh` (the DETERMINISTIC line) was never committed |
-| Account for every square metre: | carriageway, gutter, walkway, building line, encroachment | 1, 2, 3, 14, 15, 16 |
-| Markets spill onto the road: | tables in declared zones, a lane kept clear | 1 (zones); GAP: no check that a lane stays clear |
-| Everything is in the data | things are objects with positions | 16 |
+| Account for every square metre: | carriageway, gutter, encroachment; nothing stands on the road (the building line and walkways went with "Real Lagos roads") | GAP: no check on the new map that nothing stands on a carriageway; 1, 2, 3, 14, 15 and 16 held it on the old map |
+| Markets spill onto the road: | tables in declared zones, a lane kept clear | GAP: no check on the new map, and none anywhere that a lane stays clear; 1 held the zones on the old map |
+| Everything is in the data | things are objects with positions | GAP: `check_map.py` checks each record's fields and links, not that everything standing in the world has a record (see "One ground truth"); 16 held it on the old map |
 | Every road end is something | no road just stops | PART: `check_map.py` lists road ends that almost land on another road (under 1 m); no check yet that every end is a junction, close, gate, water or map edge; 9 held it on the old map |
 | Claude builds Gidi | process | not a map rule |
 | Google: study yes, lift no. | Google pictures stay outside the repo | by hand (never committed) |
@@ -54,9 +54,9 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | The kit session gets exact lists | process | not a map rule |
 | Light by default on the laptop | process | not a map rule |
 | People | gidi-game | gidi-game |
-| Every street has a real twin | every twin street on the map; every street on the map has a twin | R3, R6 |
+| Every street has a real twin | every twin street on the map; every street on the map has a twin | GAP: no twin check on the new map; R3 and R6 held it on the old map |
 | Take the interesting parts | the child plan | owner's review |
-| A livable world before the story | what the twin photos show is on the map near where it was seen | R5 |
+| A livable world before the story | what the twin photos show is on the map near where it was seen | GAP: no check on the new map; R5 held it on the old map |
 | The item register, once per finished district | every item typed | GAP: the register is not built yet |
 | Match passes | renders against references | owner's review |
 | Hand-made, checked by programs; the base is frozen | `scripts/rebuild_areas.py` | refuses to run unless `GIDI_REBUILD_OK=owner`; every hand edit must land (check 17, `check_district.py`); a change to the area builder shows in review |

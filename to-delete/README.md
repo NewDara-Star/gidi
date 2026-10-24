@@ -1,8 +1,10 @@
 # to-delete: for the owner to delete
 
 The owner asked (24 Oct) that what has no use any more is moved here, not deleted: they delete it themselves. Each file keeps
-its old path under `to-delete/`, so `git log -- <old path>` still finds its history. Nothing here is read by any program
-(`scripts/inventory.py` lists this folder as "to delete" and leaves it out of the orphan and missing-name counts).
+its old path under `to-delete/`, so `git log -- <old path>` still finds its history. No program uses what is here: `scripts/inventory.py` lists
+these files (and counts their lines) but does not read them for references or names, so they are left out of the orphan
+and missing-name counts. Live documents that still point here will lose those links when the folder is deleted; the
+files stay in git history.
 
 Before a file moved, it was read for what still holds for the new map. Those lessons are in `docs/OLD-MAP-LESSONS.md`; the
 real Lagos research that stays is indexed in `docs/RESEARCH.md`.
