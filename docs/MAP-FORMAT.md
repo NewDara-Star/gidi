@@ -417,7 +417,7 @@ PASS  31 records in 3 files, 0 problems
 - a name or sign text that shares its core with a real name;
 - a file not in the canonical layout (`--fix` rewrites it).
 
-Tested both ways: the example passes; a broken copy (an extra field, a missing field, a real road name, an unknown vehicle kind, a wire with both ends, a renamed table column, a link to nothing, a lean-to longer than its wall, two roads 0.36 m apart) fails with 13 problems named.
+Tested both ways: the example passes; a broken copy (an extra field, a missing field, a real road name, an unknown vehicle kind, a wire with both ends, a renamed table column, a link to nothing, a lean-to longer than its wall, two roads 0.36 m apart) fails with 13 problems named (22 Oct; the missing field now with `--strict`, 24 Oct).
 
 ### What each kit part reads
 

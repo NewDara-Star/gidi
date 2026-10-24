@@ -7,7 +7,7 @@ Roads only, drawn on the new frame (1:3). Every kept street sits on its real lin
 - Real streets inside the border (Overture study, rail left out): about **658**: 15 skeleton roads (expressways, trunk, mains), 145 named local streets, and about 498 unnamed street pieces longer than 30 Gidi m (1396 pieces in all). 212.6 km of real street, 70.9 km at Gidi scale.
 - Kept (22 Oct): **62 streets in 64 records**; after the owner's calls (23 Oct): 56 streets in 59 road records, plus a rail, a station and the market (the expressway and Western Avenue are each two records that start at an inside junction, so their first point lies in the district), 17.8 km. That is about 1 in 11 of the real streets: every skeleton road, every main, and about 40 local streets kept for life, kit tests and links.
 - Kinds: 6 motorway records, 1 trunk, 11 main roads, 12 local mains, 5 market streets, 27 home streets, 2 lanes.
-- Values: only what was seen. Widths measured on Google satellite at z19 (17 records) or taken from the kit shots; surfaces, kerbs, medians and drains from the kit Street View shots (ot numbers). Everything else is left missing, so the board shows it amber (needs a value). check_map has no red: every problem it lists is a missing field.
+- Values: only what was seen. Widths measured on Google satellite at z19 (17 records) or taken from the kit shots; surfaces, kerbs, medians and drains from the kit Street View shots (ot numbers). Everything else is left missing, so the board shows it amber (needs a value). check_map has no red: it passes, and every field left missing is counted on its TODO line.
 
 ## Defining places and the streets that carry them
 

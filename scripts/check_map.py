@@ -1,6 +1,6 @@
 """The new map's checker (docs/MAP-FORMAT.md; owner, 22 Oct 2026: "one ground truth"). Nothing in the map is guessed: a
-record with an unknown field, a missing field, a wrong type, a broken link or a real name fails here, before the board,
-the kit or the Unreal import ever reads it.
+record with an unknown field, a wrong type, a broken link or a real name fails here, before the board, the kit or the
+Unreal import ever reads it. A field not given yet is counted as still to fill (TODO), and fails too with --strict.
 
   python3 scripts/check_map.py <map dir>                      check every district under it (map/ by default)
   python3 scripts/check_map.py <map dir> --kit schema/kit_reads.json   also check what each kit part reads
