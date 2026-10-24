@@ -615,3 +615,11 @@ B18 (Idi-Oro, between Agege Motor Road, Folami Street and Labinjo Street's south
 | rd-9eb5vovf | Labinjo Street | lane |
 | rd-emgqj1wh | Makinde Street | lane |
 | rd-12jdsl3e | Alamutu Street | lane |
+
+B19 (Ilupeju side of Mushin: the strip between Shokunbi Street and Olateju Street, south of Vono Road). Read 24 Oct at z18 at the checked shot scale (one shot, the block fits it). Olorunnisola, Alayaki and Ashafihan Streets cross the strip from Shokunbi Street to Olateju Street, about one cross street in two. Left out for spacing: Alhaji Otta Street, the street past the bus stop between Alayaki and Ashafihan, Odusami Street.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-vp2j6h9n | Olorunnisola Street | lane |
+| rd-jc6sxw9f | Alayaki Street | lane |
+| rd-txt3yk6k | Ashafihan Street | lane |
