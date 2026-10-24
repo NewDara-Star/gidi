@@ -505,6 +505,26 @@ B7 (the Apapa-Oshodi Expressway side by Isolo Road: factories along the expressw
 | rd-nxtksffe | Igbo Owu Street | lane |
 | rd-39eedx9o | Adefuwa Street | lane |
 
+B8 (Fashoro and Ojuelegba: east of Bishop Street and Atunrase Street, down to Ojuelegba Road, the expressway side the east edge). Read 24 Oct at z18 at the checked shot scale (three shots); it had no streets of its own but the base lane on Cole Street. North of Apena Street: the Olode-Okuta Street loop with Odejayi Crescent on to Ramos Street and Odejayi's north arm, Akinwande, Rosamond and Akinhanmi Streets, Haastrup and Omololu Streets with Ibidun's east arm, and Apena Street through to Ibidun Street. South of it to Ojuelegba Road: Onasanya, Mabo, Banire, Ibidun (beside the canal) and Ayilara Streets. The Lagos Anglican Girls Grammar School grounds stay open. Left out for spacing: Oludipe Street, Shodipe Close, Karimu, Shitawu and Ororedo Streets.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-m76g0s16 | Olode-Okuta Street | lane |
+| rd-njs0ka5v | Odejayi Crescent on to Ramos Street | lane |
+| rd-skzfzgm3 | Odejayi Crescent (the north arm) | lane |
+| rd-peirz7h1 | Akinwande Street | lane |
+| rd-uo9tlyvq | Rosamond Street | lane |
+| rd-lv47qmiy | Akinhanmi Street | lane |
+| rd-0cpdhblw | Haastrup Street | lane |
+| rd-3ysvvjrs | Omololu Street | lane |
+| rd-cq1ohmmi | Ibidun Street (the east arm) | lane |
+| rd-5d0hjnqv | Apena Street | lane |
+| rd-potxzar5 | Onasanya Street | lane |
+| rd-qb94w1lg | Mabo Street | lane |
+| rd-s783qtw5 | Banire Street | lane |
+| rd-ukmi0p9d | Ibidun Street, beside the canal | lane |
+| rd-4d9x8zni | Ayilara Street | lane |
+
 B9 (Bamgboye / Owo, between Adeoyo, Olusoga and Ilasamaja Road). Re-checked 24 Oct at z18 at the checked shot scale: the four z17 lanes were within about 5 m, but Bamgboye Street stopped halfway and Alafia Street's north end sat 8 m west. Redrawn on the real lines, Bamgboye now running through to the district's east edge. Adeshile and Moliki Streets are still left as gaps for spacing. Removed: rd-kjitnqqz, rd-31p2dumv, rd-w8jhnt3x, rd-9gbercvs.
 
 | Gidi id | real twin | kind |
