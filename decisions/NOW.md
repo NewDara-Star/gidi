@@ -61,8 +61,13 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    would not have reached Unreal); option `lod` 0/1/2 (ot197 43,492 / 8,386 / 900 faces; a bungalow's roof about 36,000
    near, was 486,528). `Art/Buildings/BlockBuilt/ROOF-GAPS.md` and `roof_look_v1.jpg`: open are the ridge cap, open eaves
    with rafter ends, the barge board (none in the format) and v1 reading patchier than real roofs from the street.
-   Only 2 of 18 builders make near/far versions so far (lean-to; block, for its roof sheets only). Next: gutters, and
-   near/far versions in the other builders. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
+   **Rule since (24 Oct): "One near model; Nanite draws near to far"** (DECISIONS): no far versions per builder; each makes one
+   near model within a budget, its fine look baked into images. Held by gidi-game `tools/look_travels.py` (#74, in the hooks).
+   Owed: the wear layer (the dust and grime on every built thing is Blender shader math and does not reach Unreal yet), the
+   spot's ground, person outfits, the basin test. **Next:** the street test (one Mùṣá street of built houses and roofs in
+   Unreal, frame time and memory on the laptop; needs the Mac free and the owner's go) to set the budgets; bake the wear
+   layer; the roofs' patchiness tuned against the photos at street distance; then ridge cap, barge board, open eaves (map
+   fields first); gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
    held: `legacy/blender/WHAT-IT-HELD.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (scratchpad

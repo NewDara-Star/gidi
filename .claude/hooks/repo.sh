@@ -65,6 +65,7 @@ EOF
     [ -n "$bad" ] && { echo "A changed file names a file that doesn't exist (fix the name, commit the file, or mark it lost):"; printf "%s\n" "$bad"; return 1; }
   elif [ "$k" = gidi-game ]; then
     out=$(cd "$r" && python3 tools/kit_fields.py --map="$HOME/gidi" 2>&1) || { echo "tools/kit_fields.py fails (a builder reads a field the map can't say):"; printf "%s\n" "$out" | tail -20; return 1; }
+    out=$(cd "$r" && python3 tools/look_travels.py 2>&1) || { echo "tools/look_travels.py fails (a look that won't reach Unreal, a .glb over budget or not fetched, or the check can't run):"; printf "%s\n" "$out" | tail -20; return 1; }
   fi
   return 0
 }
