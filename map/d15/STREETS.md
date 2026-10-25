@@ -683,3 +683,9 @@ B29 (between Ayantuga Street, Shokunbi Street, Post Office Road and Kumuyi Stree
 | Gidi id | real twin | kind |
 |---|---|---|
 | rd-way26cym | Danmegoro Street | lane |
+
+B30 (between Sadiku Street, Anifowoshe Street, Akanro Street and Agoro Bogunbolu Street). Read 25 Oct at z18 at the checked shot scale (one shot, the block fits it). Oladeinde Coker Street crosses the block and carries on east as the Coker lane drawn earlier (rd-nj3sfh8p), whose end it shares. Left out for spacing: Amusa Street, the next street south.
+
+| Gidi id | real twin | kind |
+|---|---|---|
+| rd-wmlmpxj0 | Oladeinde Coker Street | lane |
