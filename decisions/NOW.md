@@ -7,7 +7,7 @@ are in `HISTORY.md`, word for word; what they still owed is in the running order
 
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
-00. [ ] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
+00. [x] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
    read it in two passes (what each part is; then what it does and whether anything live uses it), then delete in
    both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
    dated notes whose lesson is written down, `legacy/` and the old map's Unreal side if nothing live needs them; NOW.md
@@ -37,6 +37,17 @@ merged and checked, add new ones where they belong, and say here when the owner 
      out of DECISIONS (the browser 3D preview, "Claude decides", "Build order: outward from the Maze") and three given
      a *Now:* note. Rules that still have a GAP row stay, so no GAP is closed by moving it.
    Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
+01. [ ] **The fighter's camera looks straight down (owner, 25 Oct: "it's never showing like over the shoulder").**
+   Found 25 Oct: Play_Street's controller starts at pitch -89.9 (Unreal's limit), yaw 133.5, though Start_Street is
+   pitch 0, yaw 11.2; the same to the decimal in 6 runs; the rig is a normal one (BP_CombatCharacter's arm 100 cm,
+   pawn control rotation, no pitch of its own). Not a held input: no gamepad connected, the mouse still, and the
+   rotation set back to (-15, 11.2) at frame 30 stays there for 30 s, and the picture is then over the shoulder down
+   the lane (gidi-game Saved/Perf/cam_fighter3.png). Turning off capture-on-launch (-ini override) did not change it.
+   Left: what sets it once at startup (the possess, the Combat controller's graph, or the Mac mouse capture: SDL's
+   macOS bug, a big first relative-mouse delta, is the nearest known case); then the fix in the game itself, not a
+   script: the controller faces the start after possessing (Epic's own FinishRestartPlayer does ClientSetRotation),
+   checked by the same frame log and a shot. The measure levels keep their fixed Cam_Measure (30 m up), which is why
+   the measuring pictures are overhead too.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
@@ -61,7 +72,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
    actors and World Partition (its first street in Unreal also shows the new edge pieces, not yet seen there).
    Progress 25 Oct (gidi-game kit/stall-pieces): plain stalls and umbrellas as 3 shared pieces (street_test --things
    --thing-pieces): 117 things 126 -> 24 actors, 118 -> 4 meshes, frame and GPU the same, memory ~0.12 GB lower (a hint).
-   Next builders in order: poles (4 variants; wires stay unique), then vehicles (keke_build exports no .glb; saloon,
+   Poles done (gidi-game #101): d15's 579 poles are 4 shapes, each one shared piece, the wires the pole's own mesh, the
+  lean now a rotation (an instance has no shear); whole vs piece in Blender 0-5 of 480,000 pixels; 58 poles in Unreal
+  67 -> 49 actors, 59 -> 41 meshes, frame, GPU and memory the same (PERFORMANCE.md "Poles as pieces").
+  Next builders in order: vehicles (keke_build exports no .glb; saloon,
    okada, bus and suv have no builder, 676 of d15's 824 vehicles; danfo and lorry have _static variants), then stalls
    with goods/posters and printed umbrellas; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming; on that city, decide the shadow and Nanite pool sizes (smaller saves ~0.55 GB, PERFORMANCE.md;
