@@ -4,17 +4,15 @@ Made by `scripts/inventory.py` (gidi): every git-tracked file in gidi, gidi-game
 
 ## gidi
 
-546 files.
+262 files.
 
 ### gidi/.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `.gitignore` | 14 | 2026-10-23 | 5 |  |
+| `.gitignore` | 11 | 2026-10-23 | 5 |  |
 | `CLAUDE.md` | 22 | 2026-10-25 | 26 | Gidi: An open-world city inspired by Lagos, built from data and by hand. The owner works across more than one Claude account. |
-| `README.md` | 32 | 2026-10-24 | 2 | Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the m… |
-
-Data: 86 files, 0.3 MB (.json); unpointed: 80.
+| `README.md` | 32 | 2026-10-24 | 1 | Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the m… |
 
 ### gidi/.claude
 
@@ -54,13 +52,13 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `CHECKS.md` | 98 | 2026-10-25 | 8 | Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before eve… |
-| `CODEBASE.md` | 180 | 2026-10-25 | 9 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
-| `DECISIONS.md` | 143 | 2026-10-25 | 16 | Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`… |
-| `HISTORY.md` | 59 | 2026-10-24 | 4 | Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we kno… |
+| `CHECKS.md` | 96 | 2026-10-25 | 8 | Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before eve… |
+| `CODEBASE.md` | 180 | 2026-10-25 | 7 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
+| `DECISIONS.md` | 142 | 2026-10-25 | 14 | Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`… |
+| `HISTORY.md` | 61 | 2026-10-25 | 4 | Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we kno… |
 | `IDEAS.md` | 68 | 2026-10-24 | 5 | Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig,… |
-| `NOW.md` | 307 | 2026-10-25 | 6 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
-| `README.md` | 9 | 2026-10-24 | 2 | Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it w… |
+| `NOW.md` | 305 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
+| `README.md` | 9 | 2026-10-24 | 1 | Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it w… |
 | `lived-in.md` | 154 | 2026-10-24 | 5 | The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, acro… |
 | `world-life.md` | 146 | 2026-10-16 | 4 | Life in Gidi: what makes the world feel like it exists: The owner's thinking from 16 Oct 2026, and Claude's proposals. The research behind it: `docs/research/L… |
 
@@ -68,13 +66,13 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `README.md` | 18 | 2026-10-24 | 2 | The story of Gidi: Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire. |
+| `README.md` | 18 | 2026-10-25 | 1 | The story of Gidi: Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire. |
 | `act-1-draft.md` | 109 | 2026-10-16 | 4 | Gidi Act 1: draft (the owner's outline, 15 Oct 2026, with Claude's notes): **Status:** a draft for the story pass, stage 3 of `gidi-roadmap.md` (not in this re… |
 | `acts-2-3-draft.md` | 77 | 2026-10-15 | 3 | Gidi Acts 2 and 3: working draft (updated 15 Oct 2026 after the owner's feedback): Builds on `act-1-draft.md`. The owner didn't like the pacing of Claude's fir… |
 | `novels/1-the-ledger.md` | 127 | 2026-10-15 | 1 | 1. The Ledger: *Claude's draft, 15 Oct 2026. It builds on the owner's confirmed story (`../act-1-draft.md`, `../acts-2-3-draft.md`) and adds people.* |
 | `novels/2-union.md` | 75 | 2026-10-15 | 1 | 2. Union: *Claude's draft, 15 Oct 2026. It keeps the owner's Act 1 (the steal, the boss's rescue, the okada on hire purchase, the robbery), then gives the city… |
 | `novels/3-the-phone.md` | 79 | 2026-10-15 | 1 | 3. The Phone: *Claude's draft, 15 Oct 2026. It keeps the owner's Act 1 (the steal, the rescue, the okada on hire purchase), then turns the open world into a th… |
-| `novels/README.md` | 36 | 2026-10-24 | 2 | Three stories for Gidi (Claude's drafts, 15 Oct 2026, for the owner to pick from): The owner asked for "two or three novels of the story" to read, pick from, a… |
+| `novels/README.md` | 36 | 2026-10-25 | 1 | Three stories for Gidi (Claude's drafts, 15 Oct 2026, for the owner to pick from): The owner asked for "two or three novels of the story" to read, pick from, a… |
 
 ### gidi/docs
 
@@ -82,29 +80,30 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 |---|---|---|---|---|
 | `BOARD.md` | 98 | 2026-10-24 | 2 | The drawing board: The owner, 16 Oct 2026: "we should hand draw... we should know where something meets something... where the roads start, where the roads end… |
 | `DATA-SOURCES.md` | 31 | 2026-10-24 | 4 | Data sources, and what to delete later: Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gidi-data/research/data/` (about 20 GB, m… |
-| `DEEP-STUDY.md` | 65 | 2026-10-24 | 9 | The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data a… |
-| `LAGOS-ISMS.md` | 276 | 2026-10-24 | 18 | Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things… |
-| `LAGOS-LIGHT.md` | 61 | 2026-10-24 | 2 | Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel … |
-| `MAP-FORMAT.md` | 599 | 2026-10-25 | 17 | The new map's data format (draft 0.1, for the owner to approve): The new map is the one ground truth (decisions, 22 Oct: "everything that we do must be in map … |
-| `OLD-MAP-LESSONS.md` | 89 | 2026-10-24 | 6 | What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history (`legacy/OLD-MAP.md`; DECISIONS, "The new map is the tru… |
+| `DEEP-STUDY.md` | 65 | 2026-10-25 | 4 | The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data a… |
+| `LAGOS-ISMS.md` | 276 | 2026-10-25 | 14 | Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things… |
+| `LAGOS-LIGHT.md` | 61 | 2026-10-25 | 2 | Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel … |
+| `MAP-FORMAT.md` | 599 | 2026-10-25 | 16 | The new map's data format (draft 0.1, for the owner to approve): The new map is the one ground truth (decisions, 22 Oct: "everything that we do must be in map … |
+| `OLD-KIT.md` | 98 |  | 7 | The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... … |
+| `OLD-MAP-LESSONS.md` | 89 | 2026-10-25 | 7 | What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history, deleted 25 Oct (git tag `before-cleanup-25oct`; DECISIO… |
 | `RESEARCH.md` | 66 | 2026-10-24 | 2 | The Lagos research: what we know, and which new districts it serves: Everything gidi holds about real Lagos, in one place. Most of it was written for the old m… |
-| `bazaar-pattern-study.md` | 125 | 2026-10-14 | 2 | The Bazaar pattern study: Ojo round the electronics market → The Bazaar (v1): Status: generated for review (14 Oct 2026). Same method as every district: we mea… |
-| `border-pattern-study.md` | 137 | 2026-10-15 | 2 | Border pattern study: Badagry → the Border (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, turn the… |
-| `capital-pattern-study.md` | 159 | 2026-10-14 | 2 | The Capital pattern study: central Ikeja → The Capital (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real pla… |
-| `estate-pattern-study.md` | 141 | 2026-10-14 | 2 | Estate pattern study: Ikeja GRA, Magodo and Omole → the Estate (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the … |
-| `foodgate-pattern-study.md` | 172 | 2026-10-14 | 2 | Food Gate pattern study: Ojota–Ketu–Mile 12 (Kosofe) → Food Gate (v1): Status: generated for review (13 Oct 2026). Same method as the other districts: we measu… |
-| `frontier-pattern-study.md` | 177 | 2026-10-14 | 2 | Frontier pattern study: the Lekki peninsula → the Frontier (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real… |
+| `bazaar-pattern-study.md` | 125 | 2026-10-14 | 1 | The Bazaar pattern study: Ojo round the electronics market → The Bazaar (v1): Status: generated for review (14 Oct 2026). Same method as every district: we mea… |
+| `border-pattern-study.md` | 137 | 2026-10-15 | 1 | Border pattern study: Badagry → the Border (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, turn the… |
+| `capital-pattern-study.md` | 159 | 2026-10-14 | 1 | The Capital pattern study: central Ikeja → The Capital (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real pla… |
+| `estate-pattern-study.md` | 141 | 2026-10-14 | 1 | Estate pattern study: Ikeja GRA, Magodo and Omole → the Estate (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the … |
+| `foodgate-pattern-study.md` | 172 | 2026-10-14 | 1 | Food Gate pattern study: Ojota–Ketu–Mile 12 (Kosofe) → Food Gate (v1): Status: generated for review (13 Oct 2026). Same method as the other districts: we measu… |
+| `frontier-pattern-study.md` | 177 | 2026-10-14 | 1 | Frontier pattern study: the Lekki peninsula → the Frontier (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real… |
 | `gidi-data-plan.md` | 186 | 2026-10-24 | 3 | Gidi data plan: everything we need to build accurate districts (v1, 13 Oct 2026): **Rule:** we study real Lagos to learn its patterns, then build our own world… |
-| `heights-pattern-study.md` | 208 | 2026-10-14 | 2 | Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v3): Status: generated for review (14 Oct 2026). Same method as every district: … |
-| `hub-pattern-study.md` | 278 | 2026-10-13 | 2 | Hub pattern study: Oshodi/Isolo + Surulere → The Hub (v1): Status: generated for review (13 Oct 2026). Same method as the Maze: we measure the real place, turn… |
-| `jungle-pattern-study.md` | 246 | 2026-10-14 | 2 | Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1): Status: generated for review (13 Oct 2026). Same method as the Maze and the Hub: we measure … |
-| `lagos-lgas-research.md` | 2800 | 2026-10-13 | 6 | Lagos, one local government at a time: research for Gidi: 13 October 2026. Twenty researchers, one per local government area (LGA), each asked what makes the p… |
-| `maze-pattern-study.md` | 254 | 2026-10-16 | 3 | Maze pattern study: Mushin + Shomolu → The Maze (v2): Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 was the first build; sect… |
-| `oldisland-pattern-study.md` | 143 | 2026-10-14 | 2 | Old Island pattern study: Lagos Island → Old Island (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place,… |
-| `oldshore-pattern-study.md` | 145 | 2026-10-15 | 2 | Old Shore pattern study: old Ikorodu → Old Shore (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, tu… |
-| `port-pattern-study.md` | 128 | 2026-10-14 | 2 | The Port pattern study: Apapa → The Port (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the n… |
-| `railside-pattern-study.md` | 125 | 2026-10-14 | 2 | Railside pattern study: Agege, Ifako/Ijaye and Alimosho → Railside (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure … |
-| `watertown-pattern-study.md` | 164 | 2026-10-14 | 2 | Water Town pattern study: the Makoko–Iwaya and Bariga waterfront → Water Town (v1): Status: generated for review (13 Oct 2026; v2 the same day: the land is reb… |
+| `heights-pattern-study.md` | 208 | 2026-10-14 | 1 | Heights pattern study: Ikoyi, Victoria Island and Banana Island → the Heights (v3): Status: generated for review (14 Oct 2026). Same method as every district: … |
+| `hub-pattern-study.md` | 278 | 2026-10-13 | 1 | Hub pattern study: Oshodi/Isolo + Surulere → The Hub (v1): Status: generated for review (13 Oct 2026). Same method as the Maze: we measure the real place, turn… |
+| `jungle-pattern-study.md` | 246 | 2026-10-14 | 1 | Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1): Status: generated for review (13 Oct 2026). Same method as the Maze and the Hub: we measure … |
+| `lagos-lgas-research.md` | 2800 | 2026-10-13 | 5 | Lagos, one local government at a time: research for Gidi: 13 October 2026. Twenty researchers, one per local government area (LGA), each asked what makes the p… |
+| `maze-pattern-study.md` | 254 | 2026-10-16 | 2 | Maze pattern study: Mushin + Shomolu → The Maze (v2): Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 was the first build; sect… |
+| `oldisland-pattern-study.md` | 143 | 2026-10-14 | 1 | Old Island pattern study: Lagos Island → Old Island (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place,… |
+| `oldshore-pattern-study.md` | 145 | 2026-10-15 | 1 | Old Shore pattern study: old Ikorodu → Old Shore (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, tu… |
+| `port-pattern-study.md` | 128 | 2026-10-14 | 1 | The Port pattern study: Apapa → The Port (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the n… |
+| `railside-pattern-study.md` | 125 | 2026-10-14 | 1 | Railside pattern study: Agege, Ifako/Ijaye and Alimosho → Railside (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure … |
+| `watertown-pattern-study.md` | 164 | 2026-10-14 | 1 | Water Town pattern study: the Makoko–Iwaya and Bariga waterfront → Water Town (v1): Status: generated for review (13 Oct 2026; v2 the same day: the land is reb… |
 
 Binary: 1 files, 0.3 MB (1 .png).
 
@@ -116,16 +115,10 @@ Data: 17 files, 0.3 MB (.json); unpointed: 16.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `borrowed-lagos.md` | 72 | 2026-10-23 | 8 | Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from plac… |
-| `ibudo/README.md` | 19 | 2026-10-24 | 2 | Ìbùdó, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct): Oshodi, studied on Google Earth and Street View (`~/gidi-data/research/google/i… |
-| `ibudo/child_plan.md` | 32 | 2026-10-24 | 1 | Ìbùdó plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (an… |
-| `maze-hub-lagos.md` | 53 | 2026-10-24 | 4 | The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md… |
+| `borrowed-lagos.md` | 72 | 2026-10-23 | 4 | Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from plac… |
+| `maze-hub-lagos.md` | 53 | 2026-10-25 | 3 | The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md… |
 | `monument-briefs.md` | 30 | 2026-10-19 | 2 | Monuments: what each needs (19 Oct): The owner's rule: Meshy for statues and monuments nobody walks into; structures people walk into or under are built in Ble… |
-| `realnames.txt` | 8421 | 2026-10-21 | 7 |  |
-
-Data: 16 files, 0.5 MB (.json); unpointed: 14.
-
-Binary: 6 files, 1.5 MB (6 .png).
+| `realnames.txt` | 8421 | 2026-10-21 | 5 |  |
 
 ### gidi/docs/img
 
@@ -133,7 +126,7 @@ Binary: 40 files, 19.5 MB (40 .png).
 
 ### gidi/docs/inventory
 
-Binary: 8 files, 5.4 MB (5 .md, 3 .json).
+Binary: 8 files, 3.0 MB (5 .md, 3 .json).
 
 ### gidi/docs/lagos-study
 
@@ -151,7 +144,7 @@ Binary: 8 files, 5.4 MB (5 .md, 3 .json).
 | `roads/scripts/ladder.py` | 140 | 2026-10-22 | 1 | Join places into districts: only places that really touch (built land meets across 200 m or more of their border) and are alike enough. The Google checks of 22… |
 | `roads/scripts/network.py` | 226 | 2026-10-22 | 1 | Measure the skeleton, choose the real extent that fits Gidi's 27 x 10.5 km frame at 1:3, draw it. ---------- 1. the frame: the 81 x 31.5 km real window (27 x 1… |
 | `roads/scripts/ob50.py` | 25 | 2026-10-22 | 1 | Open Buildings v3 (confidence >= 0.65) onto the 50 m grid: count and roof area per cell. Streams the 430 MB csv.gz in chunks; keeps only two small grids in mem… |
-| `roads/scripts/places.py` | 256 | 2026-10-22 | 2 | Cut Lagos land into places bounded by real borders, on the 50 m grid. Borders: big roads (motorway, trunk, primary), rail, narrow water (canals, creeks), secon… |
+| `roads/scripts/places.py` | 256 | 2026-10-22 | 1 | Cut Lagos land into places bounded by real borders, on the 50 m grid. Borders: big roads (motorway, trunk, primary), rail, narrow water (canals, creeks), secon… |
 | `roads/scripts/plot_places.py` | 56 | 2026-10-22 | 2 | Pictures of the places: coloured pieces, border lines, names. Optional argument: a group label per place (districts). |
 | `roads/scripts/report.py` | 116 | 2026-10-22 | 2 | District maps for the chosen thresholds, the old unit pairs that are not real neighbours, and the close calls for Google. ---------- old units: which of the fi… |
 | `roads/scripts/skeleton.py` | 70 | 2026-10-22 | 1 | The skeleton: every motorway, trunk, primary and secondary road (with their links), rail, bridges. Overture segments -> skel.pkl (one record per segment, UTM 3… |
@@ -182,13 +175,13 @@ Binary: 19 files, 13.0 MB (19 .png).
 | `research-civic.md` | 647 | 2026-10-14 | 1 | Civic and public-service buildings: a catalogue for the Gidi generator: Scope: hospitals, clinics, chemists, police (stations, command, posts, checkpoints, bar… |
 | `research-commerce.md` | 883 | 2026-10-16 | 1 | Gidi commerce catalogue: markets, shops, commerce and industry: Purpose: specs for the seeded Blender kit. This builds on `docs/look/research-buildings.md` §6 … |
 | `research-housing.md` | 926 | 2026-10-14 | 1 | Lagos housing types beyond the front/back house: a catalogue for the Gidi kit: Scope: every housing type (and the housing-adjacent structures that sit on resid… |
-| `research-landmarks.md` | 735 | 2026-10-14 | 3 | Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks: Rule zero applies here more than anywhere else. A landmark is the thing a player will r… |
+| `research-landmarks.md` | 735 | 2026-10-14 | 1 | Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks: Rule zero applies here more than anywhere else. A landmark is the thing a player will r… |
 | `research-leisure.md` | 800 | 2026-10-14 | 1 | Gidi catalogue: education, sport, leisure and nightlife places: This catalogue extends `docs/look/research-buildings.md` and `docs/look/research-street.md`. It… |
 | `research-religious.md` | 625 | 2026-10-14 | 1 | Gidi look research: religious buildings and places: Scope: mosques, churches, white-garment churches, prayer camps, storefront worship, roadside prayer spaces,… |
 | `research-roads.md` | 1147 | 2026-10-23 | 1 | Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with pot… |
-| `research-street.md` | 923 | 2026-10-14 | 11 | Gidi street catalogue: roads, vehicles, people, signage, props: This is research for a procedural generator. It studies real Lagos and describes patterns only.… |
+| `research-street.md` | 923 | 2026-10-14 | 9 | Gidi street catalogue: roads, vehicles, people, signage, props: This is research for a procedural generator. It studies real Lagos and describes patterns only.… |
 | `research-transport.md` | 886 | 2026-10-14 | 1 | Gidi transport and infrastructure catalogue: Research for the seeded Blender kit. Rule zero applies: real Lagos is studied as a pattern only. All names, liveri… |
-| `research-vehicles.md` | 1288 | 2026-10-14 | 2 | Gidi vehicle catalogue: everything that moves on Lagos roads and water: Research for the seeded Blender kit. **Rule zero:** study real Lagos, build our own cit… |
+| `research-vehicles.md` | 1288 | 2026-10-14 | 1 | Gidi vehicle catalogue: everything that moves on Lagos roads and water: Research for the seeded Blender kit. **Rule zero:** study real Lagos, build our own cit… |
 
 Binary: 9 files, 3.0 MB (9 .jpg).
 
@@ -196,7 +189,7 @@ Binary: 9 files, 3.0 MB (9 .jpg).
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `README.md` | 10 | 2026-10-22 | 2 | Worked example of the new map format: One short home street in district d15 (20 m, invented names), written as the map would hold it (docs/MAP-FORMAT.md): |
+| `README.md` | 10 | 2026-10-22 | 1 | Worked example of the new map format: One short home street in district d15 (20 m, invented names), written as the map would hold it (docs/MAP-FORMAT.md): |
 
 Data: 3 files, 0.0 MB (.json); unpointed: 0.
 
@@ -204,7 +197,7 @@ Data: 3 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `LIFE-IN-LAGOS.md` | 329 | 2026-10-24 | 4 | Life in Lagos: what it's like to live there: A research pass, 16 Oct 2026, for the owner's ask: "immerse yourself in what it's like to live in Lagos". |
+| `LIFE-IN-LAGOS.md` | 329 | 2026-10-25 | 4 | Life in Lagos: what it's like to live there: A research pass, 16 Oct 2026, for the owner's ask: "immerse yourself in what it's like to live in Lagos". |
 
 ### gidi/docs/studies
 
@@ -226,69 +219,7 @@ Data: 3 files, 0.0 MB (.json); unpointed: 0.
 | `port.md` | 127 | 2026-10-15 | 1 | The Port: the deep study: Inspired by Apapa + Mile 2 + the prison. Study area: 26.96 km², 19.36 km² of it land. Made by `scripts/study_deep.py` from Google's b… |
 | `railside.md` | 127 | 2026-10-15 | 1 | Railside: the deep study: Inspired by Agege + Ifako-Ijaiye + Alimosho. Study area: 215.35 km², 215.35 km² of it land. Made by `scripts/study_deep.py` from Goog… |
 | `watertown.md` | 127 | 2026-10-15 | 1 | Water Town: the deep study: Inspired by Makoko + Bariga + Agboyi + the sawmill. Study area: 7.27 km², 5.45 km² of it land. Made by `scripts/study_deep.py` from… |
-| `yaba.md` | 127 | 2026-10-15 | 2 | Saba: the deep study: Inspired by Yaba and Akoka: the university, Sabo, Ojuelegba. Study area: 12.88 km², 10.64 km² of it land. Made by `scripts/study_deep.py`… |
-
-### gidi/legacy
-
-| file | lines | changed | refs | what it says it is |
-|---|---|---|---|---|
-| `OLD-MAP.md` | 52 | 2026-10-24 | 4 | The old map (13-21 Oct 2026): what it was: The first Gidi: 15, then 17, invented districts generated from patterns measured in real Lagos (OpenStreetMap, then … |
-| `README.md` | 14 | 2026-10-24 | 2 | Legacy: the old map's kit (frozen): What the old map was and its parts: `OLD-MAP.md`. |
-
-### gidi/legacy/blender
-
-| file | lines | changed | refs | what it says it is |
-|---|---|---|---|---|
-| `WHAT-IT-HELD.md` | 98 | 2026-10-24 | 4 | The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... … |
-| `act1_sheet.py` | 71 | 2026-10-23 | 0 | The Act 1 kit pieces side by side (docs/KIT-GAPS.md, "New in the v2 layout"): the face-me-I-face-you block, the motor park office (and a shot inside it), the b… |
-| `catalogue.py` | 48 | 2026-10-23 | 0 | Contact sheet of the kit: the same footprint built for each district character and several seeds. |
-| `city.py` | 1104 | 2026-10-23 | 11 | Build the whole city (everything in web/gidi-data.js) as streamable tiles. |
-| `city_run.py` | 121 | 2026-10-23 | 5 | Generate the whole city as tiles, in parallel Blender processes, and write the manifest. |
-| `coverage.py` | 60 | 2026-10-23 | 1 | Writes docs/look/COVERAGE.md: every kind of thing in Gidi's data, how many, where, and whether the kit can build it yet. Plain Python (no Blender): python3 leg… |
-| `generate.py` | 458 | 2026-10-23 | 4 | Build part of Gidi in Blender from the generated map data, every object styled by rules. |
-| `gidi_kit/__init__.py` | 1 | 2026-10-23 | 0 |  |
-| `gidi_kit/archetypes.py` | 613 | 2026-10-23 | 1 | Archetypes: whole objects assembled from parts, driven by rules. |
-| `gidi_kit/blocks.py` | 151 | 2026-10-23 | 5 | A parametric building block that most non-house kinds are made from, plus shared pieces (signs with names, flagpoles, perimeter walls with gates, domes, minare… |
-| `gidi_kit/boats.py` | 92 | 2026-10-23 | 1 | Boats on the lagoon: the ferries and water buses on the ferry routes, outboard canoes round Water Town, and the sand-dredging barges. Research-transport (lagoo… |
-| `gidi_kit/core.py` | 227 | 2026-10-23 | 40 | Core of the Gidi kit: seeded randomness and a mesh builder. |
-| `gidi_kit/detail.py` | 20 | 2026-10-23 | 0 | Detail level for the whole kit: 'full' for renders, 'web' for the streamed city (flat roof sheets, flat lettering, lighter bars and louvres, fewer cylinder seg… |
-| `gidi_kit/draft.py` | 1333 | 2026-10-23 | 6 | The draft desk: the old kit's seeded rules, run once on a spot to write what they choose into its map as full records (decisions, 22 Oct: one ground truth; KIT… |
-| `gidi_kit/facade.py` | 404 | 2026-10-23 | 0 | A walk-up's street face, close up (the facade pass, 22 Oct 2026): what Balogun and Isale Eko faces carry on top of the wall, its windows and its balconies. Eve… |
-| `gidi_kit/goods.py` | 323 | 2026-10-23 | 3 | Goods and clutter: what fills a Lagos lean-to, stall or shop door. Sacks, tarps, nylon bags, crates, stacked plastics, cloth and cartons, piled against the wal… |
-| `gidi_kit/gutters.py` | 156 | 2026-10-23 | 4 | The gutters the data lays along the roads (scripts/isms.py, GD['gutters']): open or covered with slabs, and the stretches it marks blocked, with green water or… |
-| `gidi_kit/kinds.py` | 695 | 2026-10-23 | 8 | Archetypes for the rest of the data's building kinds. Each builder takes the object's attributes `a` (poly, storeys, district, ...) and its Rng, and returns (o… |
-| `gidi_kit/landmarks.py` | 337 | 2026-10-23 | 8 | Named landmarks: a place on the map that needs a model of its own, by its name. |
-| `gidi_kit/materials.py` | 304 | 2026-10-23 | 20 | Master materials. Each reads the mesh's 'Col' (paint colour) and 'Wear' (0..1) attributes, so a handful of materials cover every colour and age. The same pair … |
-| `gidi_kit/monuments.py` | 413 | 2026-10-23 | 8 | Monuments and street landmarks, all invented (README rule zero): roundabout and corner statues (a founder in agbada, a masquerade, a talking-drummer), welded s… |
-| `gidi_kit/oldtown.py` | 1167 | 2026-10-23 | 2 | The dense old town kit, driven by the map (decisions: "The map tells the kit what goes where"). |
-| `gidi_kit/parcels.py` | 553 | 2026-10-23 | 5 | Parcels: the plots and grounds in the data (web/gidi-data.js 'parcels'), each with its surface and the furniture that makes it read: pitches with goalposts, a … |
-| `gidi_kit/parts.py` | 694 | 2026-10-23 | 3 | Kit pieces. Each adds faces to a MeshBuilder, in world space, from a spec dict that the rules fill in (so the look of every piece is chosen from data, never ha… |
-| `gidi_kit/people.py` | 145 | 2026-10-23 | 8 | People of Lagos streets, from docs/look/research-street.md section 4 (clothing, skin, density). Real proportions (1.55-1.85 m, head about 1/7.5 of height), sta… |
-| `gidi_kit/places.py` | 854 | 2026-10-23 | 2 | Kinds built on the parametric block: civic, religious, commercial, housing types, leisure and transport buildings. Each picks a style and colours from research… |
-| `gidi_kit/props.py` | 249 | 2026-10-23 | 1 | Small props shared by the Act 1 pieces (docs/KIT-GAPS.md, "New in the v2 layout"): plastic chairs, benches, water drums, jerrycans, umbrellas, tables, a wheelb… |
-| `gidi_kit/registry.py` | 51 | 2026-10-23 | 2 | Which builder makes which thing in the data. generate.py and coverage.py both read this. |
-| `gidi_kit/roadbed.py` | 211 | 2026-10-23 | 5 | The ground of a street piece as real geometry: a Lagos street is "just ground", up here, down there, all over the place. |
-| `gidi_kit/roadside.py` | 240 | 2026-10-23 | 0 | Roadside furniture that makes a road read and lets you find your way: street lights (single and double arm, solar ones with their panel; a share dead, as in La… |
-| `gidi_kit/rules.py` | 207 | 2026-10-23 | 12 | The rules: from what the data knows about an object to how it looks. |
-| `gidi_kit/street.py` | 546 | 2026-10-23 | 7 | Street kit: road surfaces in every condition (from fresh asphalt to rutted mud), potholes that hold rainwater, markings, painted kerbs, speed bumps, open drain… |
-| `gidi_kit/structures.py` | 538 | 2026-10-23 | 1 | Structures and city-scale lines: flyovers and rail bridges, skywalks, canal footbridges, jetties, expressways with Jersey barriers, the Long Bridge on piers, t… |
-| `gidi_kit/textured.py` | 301 | 2026-10-24 | 4 | Photo textures on the kit's material slots (the eye tests now; the same files go into Unreal later, so the look the owner passes is the one that ships). |
-| `gidi_kit/vehicles.py` | 954 | 2026-10-23 | 3 | Vehicles of Lagos roads, from docs/look/research-vehicles.md (sizes [src] where it had them). Every builder adds faces to a MeshBuilder at matrix M (x forward,… |
-| `gidi_kit/wear.py` | 261 | 2026-10-24 | 4 | Age on the houses, in the vertex colours and in thin overlays on the walls. |
-| `gidi_kit/zinc.py` | 169 | 2026-10-23 | 3 | Corrugated zinc the way Lagos roofs are: sheet by sheet. |
-| `kinds_sheet.py` | 70 | 2026-10-23 | 0 | Contact sheet of every registered kind (except houses), each built on footprints taken from the real data, a few seeds side by side. blender -b --factory-start… |
-| `kit_draft.py` | 30 | 2026-10-23 | 14 | The draft desk: write a first draft of every record a spot's map needs (decisions, 22 Oct: one ground truth; KIT.md section 12, "Records"). The old kit's seede… |
-| `kit_test.py` | 212 | 2026-10-24 | 7 | A kit eye test: build one Street View spot from its map record with the old town kit and shoot it from the Street View's own camera (decisions: "A kit is prove… |
-| `lights_sheet.py` | 23 | 2026-10-23 | 0 | Traffic lights, street-light ads, the new statues. blender -b --factory-startup -P legacy/blender/lights_sheet.py |
-| `montage.py` | 23 | 2026-10-23 | 0 | Stitch legacy/blender/out/kinds/*.jpg into one labelled sheet: python3 legacy/blender/montage.py [out.jpg] [cols] |
-| `monuments_sheet.py` | 27 | 2026-10-23 | 0 | Every monument in the kit side by side. blender -b --factory-startup -P legacy/blender/monuments_sheet.py -- [--out legacy/blender/out/monuments.jpg] |
-| `new_kit_sheet.py` | 40 | 2026-10-23 | 0 | The newest kit pieces side by side: the container truck, the 911 food lorry, the trains, the Crown Hall, the central mosque and a flyover with painted piers. b… |
-| `new_kit_sheet2.py` | 58 | 2026-10-23 | 0 | Contact sheets for the second batch: --part vehicles (service vehicles, the molue, port machines, boats) or --part places (cathedral, heritage, civic tower, ma… |
-| `reach_sheet.py` | 17 | 2026-10-23 | 0 | The Reach, close up. blender -b --factory-startup -P legacy/blender/reach_sheet.py |
-| `roadside_sheet.py` | 28 | 2026-10-23 | 0 | The roadside kit side by side: lamps, a direction sign, a gantry, speed and no-parking discs, a dressed bridge deck. blender -b --factory-startup -P legacy/ble… |
-| `scene.py` | 95 | 2026-10-23 | 15 | Shared scene setup for previews: sky, sun, ground, camera, render settings. |
-| `vehicles_sheet.py` | 39 | 2026-10-23 | 0 | Line-up of every vehicle in its conditions, and a crowd of every dress type. blender -b --factory-startup -P legacy/blender/vehicles_sheet.py -- [--out legacy/… |
-| `wear_sheet.py` | 80 | 2026-10-23 | 0 | A street of Maze houses on their own, to judge wear and age close up (no tile build). blender -b --factory-startup -P legacy/blender/wear_sheet.py -- [--detail… |
+| `yaba.md` | 127 | 2026-10-15 | 1 | Saba: the deep study: Inspired by Yaba and Akoka: the university, Sabo, Ojuelegba. Study area: 12.88 km², 10.64 km² of it land. Made by `scripts/study_deep.py`… |
 
 ### gidi/map-stamps/ut01_emmanuel
 
@@ -313,27 +244,10 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `audit3d.py` | 279 | 2026-10-23 | 4 | 3D audit: does a district's map make a proper city when the kit builds it? |
-| `autoclean.py` | 194 | 2026-10-21 | 5 | The clean-up after the real areas, in every bake (owner, 21 Oct 2026: a fix made once must reach everything already built). Run after the hand edits, the road … |
-| `bake_web.py` | 449 | 2026-10-21 | 15 | Bake Gidi map v0.3 into JSON for the web map: districts, water, arterials, generated local streets, POIs. Units: metres, origin top-left, y down. Map units fro… |
-| `board_server.py` | 475 | 2026-10-24 | 8 | The drawing board's server (owner, 16 Oct 2026: "we should hand draw... know where something meets something"). |
-| `build_viewer.py` | 22 | 2026-10-18 | 2 | Assemble the one-file Gidi Maps page (2D + 3D) from the baked data: web/gidi-maps.html. Run after scripts/bake_web.py. Then publish web/gidi-maps.html to the l… |
-| `check_district.py` | 511 | 2026-10-21 | 25 | Independent checker for a generated district.  Usage: python3 scripts/check_district.py <id> Prints a PASS/FAIL line per check; exits 1 if any fails.  Import a… |
-| `check_map.py` | 636 | 2026-10-25 | 14 | The new map's checker (docs/MAP-FORMAT.md; owner, 22 Oct 2026: "one ground truth"). Nothing in the map is guessed: a record with an unknown field, a wrong type… |
-| `check_real.py` | 162 | 2026-10-24 | 5 | How close the map is to the real places it is the child of (owner, 21 Oct 2026: "nobody checks how close it is to the real place"). For every area of a distric… |
+| `board_server.py` | 408 | 2026-10-24 | 6 | The drawing board's server (owner, 16 Oct 2026: "we should hand draw... know where something meets something"). |
+| `check_map.py` | 636 | 2026-10-25 | 15 | The new map's checker (docs/MAP-FORMAT.md; owner, 22 Oct 2026: "one ground truth"). Nothing in the map is guessed: a record with an unknown field, a wrong type… |
 | `check_rules.py` | 18 | 2026-10-21 | 8 | Every rule in decisions/DECISIONS.md has a row in decisions/CHECKS.md saying what holds it (owner, 21 Oct 2026: gaps must not turn up only when someone asks). … |
-| `child_plan.py` | 60 | 2026-10-19 | 0 | A district's child plan (owner, 19 Oct 2026: a district is the child of its real inspirations): draws docs/hand/<dir>/child_plan.json over the district's outli… |
 | `code_graph.py` | 350 | 2026-10-24 | 4 | The code graph, for scripts/inventory.py (owner, 24 Oct: "use the compiler to know what every single piece of code, every line, is connected to, and that every… |
-| `compounds.py` | 141 | 2026-10-23 | 6 | Compound walls, in the map data (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D). |
-| `cross_sections.py` | 37 | 2026-10-15 | 17 | Gidi's road cross-sections: one table, read by the generator, the bake (written into the data as "cross_sections"), the space checker and the 3D kit. Agreed wi… |
-| `deep_check.py` | 103 | 2026-10-16 | 3 | Does a generated district come out like its inspiration? Measures a gen file the way the deep study measured real Lagos (the same structure measures, scripts/s… |
-| `deep_prep.py` | 80 | 2026-10-24 | 2 | Deep study, step 1 (docs/DEEP-STUDY.md): one pass over the big building files, cut per district, so the 17 district studies can run side by side. Reads Google … |
-| `deep_profile.py` | 120 | 2026-10-16 | 3 | From a district's deep study (docs/data/deep/<id>.json) to its generator settings, and its fabric-type zones (docs/DEEP-STUDY.md). |
-| `deep_report.py` | 105 | 2026-10-15 | 1 | Deep study, step 3: the study of a district (docs/data/deep/<id>.json) as a page a designer can read, ending in the targets its generator profile has to hit. U… |
-| `deep_summary.py` | 34 | 2026-10-16 | 0 | All districts against their studies on one page (docs/data/deep-check/*.json, from scripts/deep_check.py). Usage: python3 scripts/deep_summary.py [out.md]     … |
-| `deep_tune.py` | 49 | 2026-10-16 | 2 | One calibration pass (docs/DEEP-STUDY.md): each district's own miss against its study (docs/data/deep-check/<id>.json, written by scripts/deep_check.py) scales… |
-| `design_density.py` | 198 | 2026-10-24 | 0 | A density pass: fill a district the way its real counterpart is built (Claude's design pass, owner 17 Oct 2026: "build it based off the Lagos you see"). Writes… |
-| `district_profiles.py` | 754 | 2026-10-24 | 19 | Per-district settings for gen_fabric.py. Each number says where it comes from. A district with no profile gets the generator's original (v1) behaviour. The Maz… |
 | `doc_vault.py` | 140 | 2026-10-24 | 2 | The documents as a vault, for scripts/inventory.py (owner, 24 Oct: "use word matching to know what every document is meant for, like an Obsidian vault; if a do… |
 | `draft_buildings.py` | 303 | 2026-10-24 | 7 | A district's first draft of buildings, from its real blocks' own houses (owner, 23 Oct: "real footprints, then hand"). |
 | `draft_crossings.py` | 86 | 2026-10-25 | 3 | A district's first draft of each road's crossings: the bridges over its open gutters into the houses that face it. |
@@ -343,71 +257,12 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `draft_roads.py` | 129 | 2026-10-25 | 6 | A district's first draft of each road's surface, width, kerbs, drains and verges, from Street View readings by hand. |
 | `draft_storeys.py` | 168 | 2026-10-25 | 4 | A district's first draft of storeys, from each house's real source in Google's Open Buildings 2.5D heights. |
 | `draft_storeys_nearby.py` | 60 | 2026-10-25 | 3 | A district's first draft of storeys for the houses that draft_storeys.py could not read, from the houses around them. |
-| `draw_area.py` | 79 | 2026-10-24 | 3 | One Ìbùdó area side by side with its real place, at the same scale and frame: the map as baked (left) and the real footprints and roads it was built from (righ… |
-| `draw_gen.py` | 75 | 2026-10-15 | 4 | Draw a generated district (and optionally the real comparison square) at the same scale. |
-| `draw_terrain.py` | 27 | 2026-10-15 | 0 | The terrain review map: colour relief with hillshade, land 0-3 m (flood-prone) marked, contours every 2 m, district outlines. Usage: python3 scripts/draw_terra… |
-| `explore_city.py` | 207 | 2026-10-15 | 5 | Explore the generated Gidi districts on foot or by okada. Data: web/gidi-data.js (the baked city; run scripts/bake_web.py first). Run from the repo root: pytho… |
-| `fabric_metrics.py` | 51 | 2026-10-13 | 3 | Same yardstick for real and generated fabric: streets [(cls, LineString)], buildings [Polygon], area Polygon (metres). |
-| `fix_gutters_to_sections.py` | 73 | 2026-10-15 | 1 | One-off correction for a frozen district: its gutters were placed at the 3D kit's old road widths (a 7 m street, a 14 m main road) by scripts/isms.py; the agre… |
 | `frame_footprints.py` | 93 | 2026-10-22 | 3 | Real roofs under the new frame, for the drawing board's zoomed-in "Real roofs" layer (web/board.html?frame=new). |
-| `frame_network.py` | 132 | 2026-10-16 | 3 | The v2 frame's shared roads (docs/LAYOUT-V2.md): every district border becomes one named road, drawn once here, so districts can be generated side by side and … |
-| `frame_study.py` | 303 | 2026-10-22 | 7 | The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts… |
-| `freeze_district.py` | 24 | 2026-10-16 | 12 | Freeze a district: write everything it owns in the baked map (scripts/hand.py: snapshot) into web/hand/<id>.json, so from now on the bake loads it as it is and… |
-| `fronts.py` | 136 | 2026-10-23 | 7 | House fronts in the map data: which side faces the street, shop fronts, their canopies and the balconies (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D… |
-| `furniture.py` | 161 | 2026-10-17 | 4 | Street furniture as data, run by bake_web.py after the junctions and heights (the ground plan of the Google rebuild). Every pole, street light, traffic light, … |
-| `gen_fabric.py` | 1849 | 2026-10-18 | 20 | Original street + building generator for one Gidi district. Nothing here is copied from a real map: the inputs are only the statistics in study-<id>.json / stu… |
-| `ground.py` | 216 | 2026-10-18 | 6 | Ground use: what every square metre of Gidi is for, and who may be on it (owner, 17 Oct 2026: "it's important to have the entire system understand where people… |
-| `groundpaint.py` | 133 | 2026-10-18 | 5 | The ground itself, painted in the map data (owner, 17 Oct 2026: "even the grain of sand on the ground... everything in the data"; batch 3 of what the kit used … |
-| `hand.py` | 721 | 2026-10-23 | 25 | Hand files (owner, 15 Oct 2026: "less generator, more hand placing"): web/hand/<district>.json holds what is placed by hand in a district, and the bake applies… |
-| `hand_fix_checks.py` | 33 | 2026-10-21 | 1 | The clean-up after a real-area build, written as hand edits (owner: "clean up everything by hand"): reads the baked map and writes hand edits into web/hand/<di… |
-| `hand_fix_lines.py` | 86 | 2026-10-16 | 5 | Hand fix: houses that reach over a street's building line in the finished map (web/gidi-data.js). The bake's road clean-up extends and straightens streets afte… |
-| `hand_links.py` | 82 | 2026-10-16 | 4 | Hand placing helper: streets cut off from the city's road network (a cluster that only met a shore road, now a footpath in the v2 frame) each get one link stre… |
-| `houses.py` | 222 | 2026-10-23 | 6 | What stands on and beside each house, and which building each place takes over, in the map data (owner, 17 Oct 2026: everything in the data; batch 2 of what th… |
-| `inventory.py` | 318 | 2026-10-24 | 8 | What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it. |
-| `isms.py` | 523 | 2026-10-23 | 9 | The Lagos-isms, placed by rule into the baked city data (docs/ISMS-BUILD.md, docs/LAGOS-ISMS.md). Runs inside scripts/bake_web.py after the road clean-up (road… |
+| `frame_study.py` | 303 | 2026-10-22 | 6 | The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts… |
+| `inventory.py` | 318 | 2026-10-25 | 8 | What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it. |
 | `js_symbols.mjs` | 53 | 2026-10-24 | 1 | What a JavaScript file declares, uses and says in its comments, read by the TypeScript compiler's parser (not by word matching), for scripts/code_graph.py:   n… |
-| `junctions.py` | 253 | 2026-10-15 | 1 | Junctions, run by bake_web.py after the road clean-up and before the heights (pass 3 of the road work). |
-| `landmarks.py` | 204 | 2026-10-13 | 8 | Big pieces a district is known for, laid out before (or after) the ordinary street fabric. Used by gen_fabric.py when a district profile asks for them (the Hub… |
-| `layout_v2.py` | 219 | 2026-10-20 | 5 | Gidi v2 layout (owner's choice, 15 Oct 2026): a fictional Lagos at ONE even scale, 1:4 (docs/LAYOUT-V2.md). District positions = their inspirations' real posit… |
-| `map02.py` | 88 | 2026-10-13 | 2 | Gidi map v0.2 (drawn in units of 0.8 km; 1.25 units = 1 km): 15 districts merged from Lagos's 20 LGAs (see lagos-lgas-research.md). Schematic, km grid. stilts |
-| `market_streets.py` | 91 | 2026-10-16 | 3 | Market streets, run by bake_web.py on the final roads (after the clean-up and the junctions). The owner's ruling (15 Oct 2026, from Mile 12, Oshodi, Idumota): … |
-| `real_underlay.py` | 60 | 2026-10-24 | 2 | The real place under each Ìbùdó area, for the drawing board's "Real place" layer: the real footprints (Google Open Buildings v3) and roads (Overture) each area… |
-| `realnames.py` | 91 | 2026-10-24 | 5 | Gidi's names are its own: no name on the map may share its core with a real name around the places Gidi is a child of. |
-| `rebuild_areas.py` | 108 | 2026-10-22 | 11 | Ìbùdó's areas built again from their real places, every one, in the child plan's order (owner, 21 Oct 2026: "if you fix a bug in the future", it must reach eve… |
-| `rename_mains.py` | 60 | 2026-10-16 | 1 | After districts are generated side by side (the v2 frame), two of them can pick the same road name, or two roads sharing a first name ("Ayinde Road" and "Ayind… |
-| `roadclean.py` | 476 | 2026-10-23 | 3 | Rule-based clean-up of the baked road network, run by bake_web.py before the civic layer. Fixes what scripts/audit3d.py finds (D, R5, R1, R4, R2, R3), using th… |
-| `roadends.py` | 250 | 2026-10-17 | 8 | Road ends (owner, 17 Oct 2026: "the road quite literally just ends abruptly"). |
-| `roadtypes.py` | 131 | 2026-10-18 | 1 | What kind of road each street is (owner, 18 Oct 2026: "I don't think we understand things like closes, crescents, drives, ways"). The streets are stored in pie… |
-| `roadz.py` | 506 | 2026-10-16 | 4 | Road heights, run by bake_web.py after the road clean-up (scripts/roadclean.py). Pass 2 of the road work. |
-| `structure.py` | 131 | 2026-10-15 | 4 | How a place is built, not just how much: the structure measures of the Google rebuild (docs/REBUILD-PLAN.md). measure(buildings, streets, area) works the same … |
-| `study_analyse.py` | 258 | 2026-10-13 | 16 | Pattern study, step 2: turn the raw inspiration data into rules (statistics only; nothing is copied into Gidi). ---------- ROADS ---------- noded drive network… |
-| `study_boxheights.py` | 31 | 2026-10-24 | 6 | Height bands for a neighbourhood-level study: data/results/heights.py measures whole LGAs; this measures the part of an LGA inside lon/lat boxes, the same way … |
-| `study_connect.py` | 53 | 2026-10-13 | 16 | Pattern study, step 3: gateways to neighbours (deduplicated) and the spread of fabric density over 1 km squares. cluster crossings within 120 m (dual carriagew… |
-| `study_core.py` | 37 | 2026-10-14 | 16 | Pick representative real 1 km squares (median and dense) and measure them with the same yardstick used on Gidi. |
-| `study_deep.py` | 490 | 2026-10-24 | 19 | Deep study, step 2 (docs/DEEP-STUDY.md): everything the data says about one district's real inspiration, for its generator profile. Sources (numbers only go in… |
-| `study_extract.py` | 53 | 2026-10-13 | 17 | Pattern study, step 1: pull everything OSM knows about an inspiration area (OSM, ODbL). Data stays local; only statistics are used. |
-| `study_google.py` | 100 | 2026-10-24 | 1 | How much does OSM miss? Google Open Buildings v3 (machine-traced from satellite imagery, CC BY 4.0) against the OSM buildings of each district's study area, ce… |
-| `study_isms.py` | 134 | 2026-10-14 | 9 | Pattern study, the "Lagos-isms": eccentricities in the real data that a tidy generator would never make, counted the same way for every studied area so they ca… |
-| `study_landmarks.py` | 80 | 2026-10-13 | 16 | Pattern study, step 5 (Hub and any transit district): sizes of the big structures a district is known for. Flyover spans, interchanges (clusters of slip roads)… |
-| `study_structure.py` | 130 | 2026-10-24 | 0 | Structure study of a district's inspiration from Google Open Buildings v3 (outlines) and OSM (streets), and the same measures on Gidi's district, square by squ… |
-| `study_undermapped.py` | 38 | 2026-10-15 | 3 | Pattern study, for an area where OSM has mapped the streets but only a fraction of the buildings (central Ikeja: OSM footprints cover 10-14% of land that ESA W… |
-| `study_village.py` | 24 | 2026-10-13 | 0 | Waterfront studies: split the buildings on the water (stilt villages: more than 60 m from any mapped road) from the land ones. Writes study-<id>-village.json (… |
-| `study_wellmapped.py` | 39 | 2026-10-14 | 4 | Pattern study, for an area where OSM maps the streets everywhere but the buildings only in some neighbourhoods (the Estate: Ikeja GRA is traced, most of Magodo… |
-| `surfaces.py` | 152 | 2026-10-16 | 2 | Road surfaces (owner, 16 Oct 2026: "sometimes you have roads... not particularly paved... marshy ground... so much grime it barely looks like it's tarred... in… |
-| `terrain.py` | 106 | 2026-10-24 | 2 | Gidi's ground: a height grid for the whole map (web/terrain.json), from the land under each district's real inspiration. Each district takes the relief of its … |
-| `things.py` | 687 | 2026-10-23 | 9 | Things the 3D kit used to invent, now in the map data (owner, 17 Oct 2026: "everything should be in the data... even the grain of sand... if everything is in t… |
-| `trees.py` | 88 | 2026-10-23 | 4 | Trees in the map data (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D). |
-| `twin_photos.py` | 48 | 2026-10-24 | 0 | Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json). plan:   python3 scripts/twin_photos.py plan ibudo <area>    … |
-| `twins.py` | 70 | 2026-10-24 | 1 | Every type in Gidi and its real twin (owner, 19 Oct 2026: "let's know what every type of item and building as well to the type of surface, so we know we have a… |
-| `walknet.py` | 104 | 2026-10-15 | 5 | The walking and riding network of the built districts, shared by explore_city.py (the living test) and bake_web.py (placing schools, places of worship and chem… |
-| `whats_here.py` | 105 | 2026-10-15 | 1 | What is on the ground here? Everything the map holds at one spot, from the built data (web/gidi-data.js): the district and the ground's height, the surface (ca… |
-
-### gidi/scripts/hand_spots
-
-| file | lines | changed | refs | what it says it is |
-|---|---|---|---|---|
-| `ibudo_real_area.py` | 385 | 2026-10-24 | 2 | Ìbùdó, one area of the child plan built from its real place (owner, 19 Oct 2026: "you are taking streets from this place ... so you can have real life images t… |
-| `ibudo_spot1.py` | 90 | 2026-10-19 | 0 | Ìbùdó spot 1 (docs/hand/ibudo/design_v1.png, the owner's approval 19 Oct 2026): Oshodi rebuilt one-for-one beside the Ring Road flyover, written as hand edits … |
+| `realnames.py` | 22 | 2026-10-24 | 3 | Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only). |
+| `study_boxheights.py` | 31 | 2026-10-24 | 5 | Height bands for a neighbourhood-level study: data/results/heights.py measures whole LGAs; this measures the part of an LGA inside lon/lat boxes, the same way … |
 
 ### gidi/tests
 
@@ -419,24 +274,10 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `app.js` | 550 | 2026-10-23 | 3 | Gidi Maps: a Google Maps–style viewer for the Gidi city plan (map v0.3). Data: window.GIDI (metres, origin top-left, y down). React 18 UMD, no JSX. |
-| `board.html` | 94 | 2026-10-22 | 11 | Gidi Drawing Board |
-| `board.js` | 890 | 2026-10-22 | 4 | The Gidi drawing board (owner, 16 Oct 2026): a clean plan of the city to scale, where every road edge, plot, house and piece of street furniture can be seen ex… |
+| `board.html` | 75 | 2026-10-22 | 9 | Gidi Drawing Board |
 | `faceedit.js` | 235 | 2026-10-22 | 2 | The face editor on the new frame's board (docs/MAP-FORMAT.md, "faces"): one face of a building drawn flat, u across from the face's first corner, z up from the… |
 | `frame.js` | 239 | 2026-10-22 | 3 | The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Ope… |
 | `mapedit.js` | 1458 | 2026-10-24 | 6 | The new map's editor on the drawing board's new frame (board.html?frame=new; docs/MAP-FORMAT.md). Draws and saves the plan layer, record by record, in map/<dis… |
-| `shell.html` | 196 | 2026-10-17 | 3 | Gidi Maps |
-| `view3d.js` | 531 | 2026-10-23 | 2 | Gidi Maps, 3D view. Close in, the city is the Blender kit's own models (legacy/blender/city_run.py writes them as 400 m tiles to web/city/<detail>/tiles): they… |
-
-Data: 26 files, 12.1 MB (.json); unpointed: 2.
-
-Binary: 3 files, 94.2 MB (1 .json, 1 .js, 1 .html).
-
-### gidi/web/hand
-
-Data: 11 files, 8.1 MB (.json); unpointed: 10.
-
-Binary: 8 files, 22.1 MB (8 .json).
 
 ## gidi-game
 
@@ -450,7 +291,7 @@ Binary: 8 files, 22.1 MB (8 .json).
 | `.gitignore` | 47 | 2026-10-25 | 5 |  |
 | `ASSETS.md` | 36 | 2026-10-25 | 6 | Hand-made assets: / Asset / Where / Source / Status / /---/---/---/---/ / Danfo Basic 2.0 (font): the owner's danfo lettering (BirdFont, July 2022), spaced, ke… |
 | `CLAUDE.md` | 13 | 2026-10-24 | 26 | Gidi game (Unreal): Read the map repo's `decisions/` first (`~/gidi/decisions/NOW.md`, `DECISIONS.md`): the same rules apply here. |
-| `README.md` | 56 | 2026-10-24 | 2 | Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its d… |
+| `README.md` | 56 | 2026-10-24 | 1 | Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its d… |
 
 Data: 1 files, 0.0 MB (.json); unpointed: 0.
 
@@ -548,8 +389,8 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 |---|---|---|---|---|
 | `.gitkeep` | 1 | 2026-10-17 | 0 |  |
 | `gidi_cam.py` | 16 | 2026-10-18 | 3 | Put the check camera in the city level: tools/shot.sh moves it, the game starts looking through it (auto-activates). |
-| `gidi_heroes.py` | 267 | 2026-10-25 | 11 | Hero models in the city: hand-made vehicles (Art/Vehicles, made by tools/vehicle_prep.py) placed wherever the map data puts one of their kind (the data's "thin… |
-| `gidi_import.py` | 379 | 2026-10-24 | 8 | The Gidi importer: the city in Unreal, made from the map repo's data (the map is never final, so this runs again and again). |
+| `gidi_heroes.py` | 267 | 2026-10-25 | 10 | Hero models in the city: hand-made vehicles (Art/Vehicles, made by tools/vehicle_prep.py) placed wherever the map data puts one of their kind (the data's "thin… |
+| `gidi_import.py` | 379 | 2026-10-24 | 9 | The Gidi importer: the city in Unreal, made from the map repo's data (the map is never final, so this runs again and again). |
 | `gidi_look.py` | 49 | 2026-10-18 | 6 | The city's light and lens, set once in Gidi_City (run headless: tools/look.sh, or from gidi_import's _environment). |
 | `gidi_modes.py` | 111 | 2026-10-25 | 5 | The crowd per mode (decisions: "Build light, look full"; docs/PERFORMANCE.md). |
 | `gidi_paint.py` | 131 | 2026-10-19 | 3 | Painted panels that wear: M_GidiPaint, for the built vehicles' paint slots (gidi_heroes.py). |
@@ -558,7 +399,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `gidi_play.py` | 80 | 2026-10-24 | 5 | The playable spot: Ìbùdó's Market Road under the Ring Road flyover (the map's spot 1), as its own level you play in. |
 | `gidi_scan_export.py` | 53 | 2026-10-25 | 1 | The project's Megascans surfaces written out as image files, so the Blender kit tests render with the same scans the game uses. |
 | `gidi_signs.py` | 88 | 2026-10-18 | 1 | Shop signs and painted lettering in Unreal, from the kit's tile records (gidi repo web/city/<detail>/tiles/<t>.json "signs"). |
-| `gidi_stream.py` | 82 | 2026-10-24 | 5 | The city streams in pieces around the player (decisions: "Build light, look full", (4); docs/PERFORMANCE.md). |
+| `gidi_stream.py` | 82 | 2026-10-24 | 6 | The city streams in pieces around the player (decisions: "Build light, look full", (4); docs/PERFORMANCE.md). |
 | `gidi_street.py` | 364 | 2026-10-25 | 2 | The street test: a Mùṣá lane and the houses round it, each our own built house with its zinc roof, to measure. |
 | `gidi_surfaces.py` | 454 | 2026-10-25 | 9 | Textured surfaces: the city's walls, roofs, roads and ground get real texture, still in the kit's colours. |
 | `gidi_underdeck.py` | 282 | 2026-10-24 | 6 | The underdeck: a playable test street, a danfo park under a flyover pair (the owner, 22 Oct: video 1's real match, "try to build Obalende"). Its own level, Pla… |
@@ -636,7 +477,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `street_ground.py` | 58 | 2026-10-24 | 2 | The street test's ground: blender -b --factory-startup -P tools/street_ground.py -- <street dir> |
 | `street_join.py` | 26 | 2026-10-24 | 3 | The street test's houses as one mesh each: blender -b --factory-startup -P tools/street_join.py -- <id>.blend ... |
 | `street_test.py` | 188 | 2026-10-25 | 3 | The street test's houses: python tools/street_test.py <map dir> <x> <y> <radius> [--road <id>] [--only N] [--name <n>] [--tiles] [--pieces] |
-| `surfaces.sh` | 8 | 2026-10-18 | 3 | Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the material, re-point the imported meshes. Headless. |
+| `surfaces.sh` | 8 | 2026-10-18 | 2 | Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the material, re-point the imported meshes. Headless. |
 | `trace_mark.py` | 39 | 2026-10-19 | 2 | A mark's outline traced from its picture: ~/.venvs/gidi/bin/python tools/trace_mark.py <mark.png> <out.json> |
 | `umbrella_build.py` | 347 | 2026-10-25 | 4 | The market umbrella, built in Blender part by part: blender -b -P tools/umbrella_build.py -- <out.blend> [recipe.json] |
 | `underdeck_build.py` | 1133 | 2026-10-24 | 5 | The underdeck set: a danfo park under a flyover pair, built from the study of the real one (the owner, 22 Oct: "try to build Obalende"; refs ~/gidi-data/resear… |
@@ -661,7 +502,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `.gitignore` | 10 | 2026-10-24 | 4 |  |
-| `README.md` | 23 | 2026-10-24 | 2 | gidi-data: Gidi's study store: What Gidi studies Lagos from: open datasets, the Google study shots, reference pictures, the kit tests, textures and people asse… |
+| `README.md` | 23 | 2026-10-24 | 1 | gidi-data: Gidi's study store: What Gidi studies Lagos from: open datasets, the Google study shots, reference pictures, the kit tests, textures and people asse… |
 
 ### gidi-data/research/data
 
@@ -676,21 +517,21 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `estate/NOTES.md` | 26 | 2026-10-24 | 5 | The Estate: Magodo, Omole, Ikeja GRA (study, 18 Oct 2026). Study only; nothing copied.: - Planned: long parallel streets bending with the land, blocks ~60 m wi… |
-| `ibudo/NOTES.md` | 35 | 2026-10-24 | 5 | Ìbùdó study: Oshodi (19 Oct 2026). Study only: nothing here is copied into Gidi.: Views (Google Maps / Street View, Jul 2021 and Apr 2024): 01 interchange from… |
+| `estate/NOTES.md` | 26 | 2026-10-24 | 3 | The Estate: Magodo, Omole, Ikeja GRA (study, 18 Oct 2026). Study only; nothing copied.: - Planned: long parallel streets bending with the land, blocks ~60 m wi… |
+| `ibudo/NOTES.md` | 35 | 2026-10-24 | 3 | Ìbùdó study: Oshodi (19 Oct 2026). Study only: nothing here is copied into Gidi.: Views (Google Maps / Street View, Jul 2021 and Apr 2024): 01 interchange from… |
 | `ibudo/study/INVENTORY.md` | 280 | 2026-10-24 | 3 | Ìbùdó study, phase 1: Oshodi and Ojuelegba inventory (19 Oct 2026): Study only, from Google Maps satellite with labels and Street View. Nothing here is traced … |
-| `kits/old-town/KIT.md` | 682 | 2026-10-24 | 26 | Dense old town kit: This is the kit list for the dense old towns of Lagos, ready for the owner to check. It is built only from the Street View shots in this fo… |
+| `kits/old-town/KIT.md` | 682 | 2026-10-24 | 17 | Dense old town kit: This is the kit list for the dense old towns of Lagos, ready for the owner to check. It is built only from the Street View shots in this fo… |
 | `kits/old-town/tests/facade_hand.py` | 278 | 2026-10-24 | 3 | Hand records for the facade pass (22 Oct 2026): written into a spot's map.json in full, from the Street View crops. Every value below is chosen here by hand fo… |
 | `kits/old-town/tests/ot13/mk13_first.py` | 55 | 2026-10-24 | 0 | ot13 map as first written from the Street View frame: only KIT.md section 12 fields, by eye (usage: mk13_first.py map_first.json). |
 | `kits/old-town/tests/ot13/sbs.py` | 12 | 2026-10-24 | 3 | Side by side: the Street View shot (scaled to the render's height) / the kit's render (usage: sbs.py render.jpg out.jpg). |
-| `kits/old-town/tests/ot149/NOTES.md` | 79 | 2026-10-24 | 5 | Kit eye test 3: ot149, Mushin, Ayantuga St (Street View, Jul 2021, heading 180): The test: do the kit's parts hold on a third street they were not made for? Th… |
+| `kits/old-town/tests/ot149/NOTES.md` | 79 | 2026-10-24 | 3 | Kit eye test 3: ot149, Mushin, Ayantuga St (Street View, Jul 2021, heading 180): The test: do the kit's parts hold on a third street they were not made for? Th… |
 | `kits/old-town/tests/ot149/closeups149.sh` | 30 | 2026-10-24 | 1 | name spot svbox cam at hfov |
 | `kits/old-town/tests/ot149/hand149.py` | 130 | 2026-10-24 | 1 | ot149 hand records after drafting: the facade layer (signs, posters, the shack's zinc and cage, its tarp, the hung clothes) and the broken drain slab. Run on t… |
 | `kits/old-town/tests/ot149/mk149_first.py` | 101 | 2026-10-24 | 1 | ot149 map as first written from the Street View frame: only KIT.md section 12 fields, by eye. |
 | `kits/old-town/tests/ot149/mk149_pass.py` | 62 | 2026-10-24 | 1 | ot149 improvement pass: the map's own fields fixed or added, before drafting (map_first.json -> map_pass.json). |
 | `kits/old-town/tests/ot149/tone.py` | 18 | 2026-10-24 | 8 | Measure a wall's colour in the Street View and in the render over the same box (SV pixels; the render is scaled to match), and give the record colour that woul… |
-| `kits/old-town/tests/ot175/NOTES.md` | 234 | 2026-10-24 | 5 | Kit eye test 1: ot175, Ilasamaja/Mushin, Olayiwola Liasu St (Jul 2021): `side_by_side.jpg` shows the Street View on the left and the rebuild on the right, both… |
-| `kits/old-town/tests/ot45/NOTES.md` | 137 | 2026-10-24 | 5 | Kit eye test 5: ot45, Mushin, Ladipo St (Street View, Jul 2021, heading 180): The test: do the kit's parts hold on a fifth street they were not made for? The o… |
+| `kits/old-town/tests/ot175/NOTES.md` | 234 | 2026-10-24 | 3 | Kit eye test 1: ot175, Ilasamaja/Mushin, Olayiwola Liasu St (Jul 2021): `side_by_side.jpg` shows the Street View on the left and the rebuild on the right, both… |
+| `kits/old-town/tests/ot45/NOTES.md` | 137 | 2026-10-24 | 3 | Kit eye test 5: ot45, Mushin, Ladipo St (Street View, Jul 2021, heading 180): The test: do the kit's parts hold on a fifth street they were not made for? The o… |
 | `kits/old-town/tests/ot45/closeups45.sh` | 28 | 2026-10-24 | 1 | close-ups: Street View crop / kit at the same camera / kit close up (usage: run from ~/gidi-worktrees/test5) |
 | `kits/old-town/tests/ot45/hand45.py` | 22 | 2026-10-24 | 2 | ot45 hand records after drafting (usage: hand45.py map.json): the near carriageway's tar stops short of the median in a strip of trodden dirt, wider on the lef… |
 | `kits/old-town/tests/ot45/hand45_2.py` | 6 | 2026-10-24 | 2 | ot45 pass-2 hand records after drafting (usage: hand45_2.py map.json): the man under the tarp in a yellow-green top. |
@@ -699,17 +540,17 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `kits/old-town/tests/ot45/mk45_pass2.py` | 42 | 2026-10-24 | 1 | ot45 pass 2: field fixes on top of the pass-1 map (usage: mk45_pass2.py map_pass1_seeded.json map.json; the input is the pass-1 map before drafting, i.e. what … |
 | `kits/old-town/tests/ot45/run45.sh` | 11 | 2026-10-24 | 1 | rebuild ot45 from map_first.json through every pass, then render (run from a gidi worktree) |
 | `kits/old-town/tests/ot45/sbs.py` | 12 | 2026-10-24 | 3 | Side by side: the Street View shot (scaled to the render's height) / the kit's render (usage: sbs.py render.jpg out.jpg). |
-| `kits/old-town/tests/ot73/NOTES.md` | 76 | 2026-10-24 | 4 | Kit eye test 4: ot73, Epe, Ogunmule Akinlogba St (Street View, May 2024, heading 180): The test: do the kit's parts hold on a fourth street they were not made … |
+| `kits/old-town/tests/ot73/NOTES.md` | 76 | 2026-10-24 | 2 | Kit eye test 4: ot73, Epe, Ogunmule Akinlogba St (Street View, May 2024, heading 180): The test: do the kit's parts hold on a fourth street they were not made … |
 | `kits/old-town/tests/ot73/hand73.py` | 9 | 2026-10-24 | 1 | ot73 hand records after drafting: the trees' leaves darkened to the photo's olive. |
 | `kits/old-town/tests/ot73/mk73_first.py` | 78 | 2026-10-24 | 1 | ot73 map as first written from the Street View frame: only KIT.md section 12 fields, by eye. |
 | `kits/old-town/tests/ot73/mk73_pass.py` | 37 | 2026-10-24 | 1 | ot73 pass: the field fixes on top of map_first.json (usage: mk73_pass.py map_first.json map.json). |
-| `kits/old-town/tests/ot91/NOTES.md` | 168 | 2026-10-24 | 5 | Kit eye test 2: ot91, Isale Eko, Balogun area (Street View, date n/a, heading 0): The test: do the parts built for ot175 hold on a street they were not made fo… |
+| `kits/old-town/tests/ot91/NOTES.md` | 168 | 2026-10-24 | 3 | Kit eye test 2: ot91, Isale Eko, Balogun area (Street View, date n/a, heading 0): The test: do the parts built for ot175 hold on a street they were not made fo… |
 | `kits/old-town/tests/ut01_emmanuel/inventory.md` | 102 | 2026-10-24 | 2 | Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles: The owner's ultimate test (DECISIONS, 23 Oct): list every thing in the re… |
 | `kits/old-town/tools/part_view.py` | 87 | 2026-10-24 | 0 | Render kit parts alone (outside the repo; a test tool). blender -b --factory-startup -P part_view.py -- --gidi <repo> --build <spec.py> --out <file.jpg> [--mod… |
 | `kits/old-town/tools/sheet.py` | 14 | 2026-10-24 | 1 |  |
-| `maze/NOTES.md` | 15 | 2026-10-24 | 5 | The Maze: Mushin + Shomolu (study, 18 Oct 2026). Screenshots are for study only; nothing here is copied into Gidi.: - Coverage: Mushin 75-85% roof, Shomolu ~85… |
-| `twins/NOTES.md` | 3 | 2026-10-24 | 5 | Twins outside Ìbùdó (Street View, 19 Oct): ikorodu_kokoro_abu_st_sprawl_stalls (Feb 2017): a sprawl street, tar with sandy edges, a long row of zinc-roofed sta… |
-| `video1-street/NOTES.md` | 51 | 2026-10-24 | 5 | Video 1 street: reference notes (22 Oct 2026): Video 1 (`../../refs/video1/`) is an AI-made "Lagos game" clip. It shows a third-person view under a flyover, a … |
+| `maze/NOTES.md` | 15 | 2026-10-24 | 3 | The Maze: Mushin + Shomolu (study, 18 Oct 2026). Screenshots are for study only; nothing here is copied into Gidi.: - Coverage: Mushin 75-85% roof, Shomolu ~85… |
+| `twins/NOTES.md` | 3 | 2026-10-24 | 3 | Twins outside Ìbùdó (Street View, 19 Oct): ikorodu_kokoro_abu_st_sprawl_stalls (Feb 2017): a sprawl street, tar with sandy edges, a long row of zinc-roofed sta… |
+| `video1-street/NOTES.md` | 51 | 2026-10-24 | 3 | Video 1 street: reference notes (22 Oct 2026): Video 1 (`../../refs/video1/`) is an AI-made "Lagos game" clip. It shows a third-person view under a flyover, a … |
 
 ### gidi-data/research/refs
 
@@ -721,4 +562,4 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `README.md` | 9 | 2026-10-24 | 2 | Gidi textures (outside the repo): Downloaded 22 Oct 2026 with the owner's OK. Poly Haven, CC0 (free for any use, including a sold game). 2K maps per surface: d… |
+| `README.md` | 9 | 2026-10-24 | 1 | Gidi textures (outside the repo): Downloaded 22 Oct 2026 with the owner's OK. Poly Haven, CC0 (free for any use, including a sold game). 2K maps per surface: d… |

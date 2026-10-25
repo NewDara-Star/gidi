@@ -396,7 +396,7 @@ A stamp copies a full record, or a group of them, from a studied spot (or anothe
 - **Sources.** The Stamp tool copies from any folder in this format: the map itself (any started district), the example (`docs/map-format-example/`), and each folder under `map-stamps/<name>/` (a converted test spot, laid out like `map/`: `<dNN>/plan.json` and `<dNN>/dress/`). A converted test spot is written once in Gidi metres, at any free spot, by the converter (the game repo's `tools/spot_to_map.py <spot.json> map-stamps/<name> <dNN> --origin=x,y`: each recipe split by its builder's own declarations, every field the map requires written in full with what the builder builds without it, a thing's wear kept as the record's `wear`, which stalls, furniture, vehicles, people and the wall object may carry; `tools/map_build.py map-stamps/<name> <dNN> <out> --origin=x,y --spot=<spot.json>` builds it back to check the round trip); the tool then moves and turns the copy to where you click, so the old "place O and t" step is just a stamp. Face positions (`u`, `z`) and local goods frames need no change.
 - **A group stamp:** clicking a record takes it with everything that hangs on it (its faces and roof sheets, lean-tos, goods, wall bays, posters, wires). Clicking a lean-to or a piece of dress takes what it stands on, with it. Shift-click picks more; dragging a box picks everything whose first point is inside. Links inside the group point at the new ids (the new `goods` record points at the new lean-to). A link outside the group (a building's plot, a frontage's plot and road) is dropped for you to set again; a building takes the plot it lands in.
 - **Placing:** the group's middle goes where you click; R and [ ] turn it (15° and 1°). Every point moves and turns, `turn` and wire `lean` are added to, relief grids are resampled; local frames go with their parent. `from` is `{"spot": "map/d02" | "example/d15" | "<stamp folder>/dNN", "record": <source id>, "date"}`, and keeps the source's own `from` as its `note`.
-- The draft desk (`legacy/blender/kit_draft.py`) can still write a test spot's first records. After that the records are the map's, edited by hand.
+- A spot's first records come from `scripts/draft_*.py` (the old kit's draft desk was deleted 25 Oct). After that the records are the map's, edited by hand.
 
 ## 4. Validation
 
@@ -430,7 +430,7 @@ Tested both ways: the example passes; a broken copy (an extra field, a missing f
 
 Fields that are not drawn are listed once in the schema (`not_drawn`: `id`, `ref`, `from`, `note`, `name`, `use`, `uses`, `place`, `plot`, `hours`).
 
-The kit is the game repo's builders (`gidi-game/tools/*_build.py`; the old Blender kit is archived in `legacy/blender/`). Each builder declares every recipe key it reads beside its code, with its type and what it does when the key is absent:
+The kit is the game repo's builders (`gidi-game/tools/*_build.py`; the old Blender kit was deleted 25 Oct; what it held: `docs/OLD-KIT.md`). Each builder declares every recipe key it reads beside its code, with its type and what it does when the key is absent:
 
 ```python
 FIELDS = {

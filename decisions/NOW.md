@@ -64,9 +64,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
 8. [ ] Owed checks: a new check (a script in scripts/, not written yet) that every "next" / "to come" / "own commit" written in a commit since
    25 Oct is cited on this page, run at stop; then the per-level budget check (CHECKS.md GAP); the other 35 GAP rows
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
-9. [ ] Clean-up from the inventory (25 Oct): the 16 pieces of code used nowhere outside `legacy/` (of 21 in docs/inventory CODEMAP.md, 5 in
-   `legacy/`); the old map's Unreal side (`gidi_import.py`, `gidi_stream.py`, Gidi_City, Play_Ibudo) retired once
-   World Partition takes the new map (item 0d), `legacy/` itself kept frozen to view.
+9. [ ] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
+   `gidi_import.py`, `gidi_stream.py`, Gidi_City, Play_Ibudo, is 00 step 3).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -89,7 +88,7 @@ Done: measure_csv reads a named street's level (gidi-game #90). Road kit edges (
 tools (plan, dress, brushes, person spots, wires, clock) and its first district, Mùṣá (15 Mushin): 357 roads, the rail and its
 station, and 4,275 houses drafted from real footprints and redrawn block by block (all 42 blocks read by 25 Oct; B27, a factory, and four slivers left as they were). The kit is the game repo's
 builders (`gidi-game/tools/*_build.py`), read from the map's records by `tools/map_build.py`; the Emmanuel St round trip
-passed. The old generated map is history: viewable only, frozen (`legacy/`). Nothing is running. Board:
+passed. The old generated map is history: deleted 25 Oct (git tag `before-cleanup-25oct`). Nothing is running. Board:
 `cd ~/gidi && ~/.venvs/gidi/bin/python scripts/board_server.py --port 8779`, then
 `http://127.0.0.1:8779/web/board.html?frame=new`.
 
@@ -166,7 +165,7 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
    one skeleton; crowd people fully interactive (punch, run over, react, ragdoll). The proof still to run, when the Mac is
-   free and with the owner's go: N one-mesh people against N City Sample people in the Underdeck, low and high. (Settled 24 Oct: the draft desk stays in `legacy/`; gidi-data stays on
+   free and with the owner's go: N one-mesh people against N City Sample people in the Underdeck, low and high. (Settled 24 Oct: the draft desk stays in `legacy/`, deleted with it 25 Oct; gidi-data stays on
    this Mac with no remote; the untracked `Claude outputs/` folder, the 13-14 Oct Ladi Lane mock, moved to
    `~/gidi-data/to-delete/claude-outputs-13-14-oct/`.)
 2. **The lived-in records** (`decisions/lived-in.md`): a yes on `mix`, `route`, `state`, `moment`, `job`; and on the 18 new
@@ -181,14 +180,13 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    work mode's shadow pass.
 
 **Next, in order.**
-1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
-   scripts that make or tune it (generator, studies, calibration, one-offs) into `to-delete/`; the bake must still run and
-   legacy tiles 6,12 / 7,12 / 8,13 stay byte-identical; gidi-game's old importer reads `web/city/`.
+1. ~~**The old map, viewable only**~~ (24 Oct): replaced by item 00 (25 Oct): the old map and kit were deleted, kept at git
+   tag `before-cleanup-25oct`; `web/city/` goes when gidi-game's old importer does (00, step 3).
 2. **Mùṣá** (decided 24 Oct late, DECISIONS "Finish the map's first layer first": the plan layer everywhere first, a few fields per building, then house-type rules; the B1 sample is in `~/gidi-data/research/google/b1/STUDY.md`): the plan layer is done for every block: the small blocks were read 25 Oct (B30 got Oladeinde Coker Street, 21 houses; B31, B33, B35 and B36 were redrafted with no lane, 16, 13, 7 and 5 houses, B33's Ogidan Street left out for spacing and its railway strip, real bare ground, flagged; B34, B40 and B41, empty before, got 11, 2 and 1 houses; B32 and B37-B39 are slivers 3-16 m real wide, left empty); storeys drafted 25 Oct (`scripts/draft_storeys.py`, each house's real source found by shape, its Open Buildings 2.5D height read: 3,523 houses at 1-4 storeys; 35 read at 5+ and 787 with no source or no height left for a Street View check, listed in BUILDINGS.md); kind and ground floor drafted 25 Oct for the same 3,523 (`scripts/draft_kinds.py`: size, storeys and the street faced; lock-ups on busy roads); looks drafted 25 Oct for the same 3,523 (`scripts/draft_looks.py`: storey heights, roof, walls, windows, stair and wear by kind, shares from the old-town KIT.md study); the 35 read at 5+ checked in Street View 25 Oct (Hand pass 42: all 1-4 storeys, 2.5D read 13.5-20.5 m there); the 787 without storeys given their neighbours' median 25 Oct (`scripts/draft_storeys_nearby.py`; a sample of two judged in Street View were both wrong and fixed: rough, for the block-by-block pass), so every house now has all its fields; **finishing Mùṣá (owner 25 Oct, memory finish-musha-test: street by street, the final test is an Unreal overhead like Google Earth's plus random street views): roads read in Street View 25 Oct (#314: 529 points, 255 of 357 roads seen, `scripts/draft_roads.py`, STREETS.md "Roads read in Street View"; the read widths put 2,338 houses on carriageways, settled by hand pass 43: 2,301 set back, 377 cut, 70 left out, 4,275 houses); next: crossings over the gutters, the street edge from road_reads.tsv's edge column (walls, gates, kiosks, poles, parked cars, trees), ground patches, the gidi-game builders for road/ground/edge (research first), then the Unreal tests;** next the hand pass: schools, factory and B33's strip, front houses on busy roads, then the hero streets, then the other six core districts; B27 is the Vono Road factory compound (big sheds, no streets inside), left as it is for the per-building pass; B12, the corner by Palm Avenue, was read at z18 within B4's redo (its six lanes are in B4's table in STREETS.md) (B11, B10, B15, B14, B13, B16-B26, B28 and B29 done 24 Oct: 7, 9, 4, 7, 5, 4, 2, 4, 3, 3, 2, 2, 1, 2, 2, 1, 1 and 1 streets, 133, 169, 77, 113, 99, 55, 67, 56, 45, 51, 39, 24, 39, 28, 21, 19, 22 and 22 houses; B28 and B29 hold real school compounds the draft fills with houses, for the per-building pass); B0-B5's close-zoom recheck is done; then block by block
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
 3. **Rebuild the old kit's things the new way** (owner, 24 Oct): one builder at a time from the list in
-   `legacy/blender/WHAT-IT-HELD.md`, zinc roof sheets and lean-tos first. **First done, waiting on the owner's eye (24 Oct):** the zinc lean-to, gidi-game #72
+   `docs/OLD-KIT.md`, zinc roof sheets and lean-tos first. **First done, waiting on the owner's eye (24 Oct):** the zinc lean-to, gidi-game #72
    (`tools/leanto_build.py`; `Art/Props/LeantoBuilt/GAPS.md` lists 12 gaps against the photos, 5 closed, 1 closed in shape, 6 open
    with reasons; `look_v1.jpg` is photo | old kit | new). The map format gained each sheet's `hang` and `bend` (gidi #280).
    The owner on v1 (24 Oct): "not bad", "the rust looks very good", it lacks a bit of texture: fine dents, grain and dirt in
@@ -215,7 +213,7 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
    **Next:** windows and doors as shared kit pieces, wall wear, then measure again; bake the wear layer; the roofs' patchiness tuned against the photos at street distance; then ridge cap, barge board, open eaves (map
    fields first); gutters. **Builders still to make for the map:** frontage, heap, tree, road, ground (`tools/kit_fields.py` lists 24
    record types no builder draws yet). What the old Blender kit already worked out for each, and what else it
-   held: `legacy/blender/WHAT-IT-HELD.md`.
+   held: `docs/OLD-KIT.md`.
 4. **Unreal:** a real Mùṣá block (~500 buildings) against the budgets, with the owner's go and the watchdog on (gidi-game
    `tools/watchdog.sh`). The volumetric clouds are the dearest GPU pass over the roofs (8.5 ms): a lighter sky for work mode.
    VoiceMode's whisper and kokoro services are disabled on this Mac (24 Oct, owner; `launchctl enable gui/501/com.voicemode.<name>` to undo). Always open the editor with `tools/editor.sh`.

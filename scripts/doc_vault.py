@@ -92,7 +92,7 @@ def build(rows, texts):
         title = next((l.lstrip('#').strip() for l in t.splitlines() if l.startswith('#')), '')
         top = sorted(vec[k].items(), key=lambda kv: -kv[1])[:8]
         related = sorted(((cos(vec[k], vec[j]), j) for j in docs if j != k), reverse=True)[:3]
-        state = 'orphan' if not refs else 'near-orphan' if all(x.endswith(('decisions/CODEBASE.md', 'legacy/OLD-MAP.md')) for x in refs) else 'linked'
+        state = 'orphan' if not refs else 'near-orphan' if all(x.endswith('decisions/CODEBASE.md') for x in refs) else 'linked'
         out[k] = {'title': title, 'summary': r.get('summary', ''), 'changed': r.get('changed', ''), 'lines': r.get('lines'),
                   'words': [w for w, _ in top], 'links': sorted(links), 'from_docs': from_docs, 'from_code': from_code,
                   'related': [(round(s, 2), j) for s, j in related if s > 0], 'state': state}

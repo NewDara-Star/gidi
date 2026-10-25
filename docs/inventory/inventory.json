@@ -87,9 +87,9 @@
    "repo": "gidi",
    "path": ".gitignore",
    "ext": "",
-   "bytes": 172,
+   "bytes": 108,
    "changed": "2026-10-23",
-   "lines": 14,
+   "lines": 11,
    "summary": "",
    "refs_in": [
     "gidi-data:.gitignore",
@@ -103,7 +103,7 @@
    "repo": "gidi",
    "path": "CLAUDE.md",
    "ext": ".md",
-   "bytes": 3235,
+   "bytes": 3240,
    "changed": "2026-10-25",
    "lines": 22,
    "summary": "Gidi: An open-world city inspired by Lagos, built from data and by hand. The owner works across more than one Claude account.",
@@ -115,6 +115,7 @@
     "gidi:.claude/hooks/review-before-push.sh",
     "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/data/deep/airport.json",
     "gidi:docs/data/deep/bazaar.json",
@@ -132,21 +133,19 @@
     "gidi:docs/data/deep/port.json",
     "gidi:docs/data/deep/railside.json",
     "gidi:docs/data/deep/watertown.json",
-    "gidi:docs/data/deep/yaba.json",
-    "gidi:scripts/study_deep.py"
+    "gidi:docs/data/deep/yaba.json"
    ]
   },
   {
    "repo": "gidi",
    "path": "README.md",
    "ext": ".md",
-   "bytes": 1739,
+   "bytes": 1805,
    "changed": "2026-10-24",
    "lines": 32,
    "summary": "Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the map. It holds every road, block, building and thing the game puts there, as records in `map/`, plus the drawing board they are made on. The game itself (the builders and the Unreal project) is",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -236,29 +235,7 @@
     "gidi:docs/oldshore-pattern-study.md",
     "gidi:docs/port-pattern-study.md",
     "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/district_profiles.py",
-    "gidi:scripts/study_isms.py",
-    "gidi:scripts/study_undermapped.py",
-    "gidi:study-bazaar-isms.json",
-    "gidi:study-border-isms.json",
-    "gidi:study-capital-isms.json",
-    "gidi:study-estate-isms.json",
-    "gidi:study-festac-isms.json",
-    "gidi:study-foodgate-isms.json",
-    "gidi:study-frontier-isms.json",
-    "gidi:study-heights-isms.json",
-    "gidi:study-hub-isms.json",
-    "gidi:study-ikeja-isms.json",
-    "gidi:study-jungle-isms.json",
-    "gidi:study-maze-isms.json",
-    "gidi:study-oldisland-isms.json",
-    "gidi:study-oldshore-isms.json",
-    "gidi:study-port-isms.json",
-    "gidi:study-railside-isms.json",
-    "gidi:study-watertown-isms.json"
+    "gidi:docs/watertown-pattern-study.md"
    ]
   },
   {
@@ -290,9 +267,9 @@
    "repo": "gidi",
    "path": "decisions/CHECKS.md",
    "ext": ".md",
-   "bytes": 16514,
+   "bytes": 16049,
    "changed": "2026-10-25",
-   "lines": 98,
+   "lines": 96,
    "summary": "Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So \"are we covering all bases?\" is",
    "refs_in": [
     "gidi:.claude/hooks/repo.sh",
@@ -309,7 +286,7 @@
    "repo": "gidi",
    "path": "decisions/CODEBASE.md",
    "ext": ".md",
-   "bytes": 15329,
+   "bytes": 15368,
    "changed": "2026-10-25",
    "lines": 180,
    "summary": "What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: \"use the compiler to know what every piece of code is connected",
@@ -317,11 +294,9 @@
     "gidi:.claude/hooks/checks-before-stop.sh",
     "gidi:CLAUDE.md",
     "gidi:README.md",
-    "gidi:decisions/CHECKS.md",
     "gidi:decisions/NOW.md",
     "gidi:decisions/README.md",
     "gidi:docs/lagos-study/similar/scripts/common.py",
-    "gidi:legacy/OLD-MAP.md",
     "gidi:scripts/doc_vault.py"
    ]
   },
@@ -329,9 +304,9 @@
    "repo": "gidi",
    "path": "decisions/DECISIONS.md",
    "ext": ".md",
-   "bytes": 53166,
+   "bytes": 52039,
    "changed": "2026-10-25",
-   "lines": 143,
+   "lines": 142,
    "summary": "Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.",
    "refs_in": [
     "gidi-data:README.md",
@@ -347,18 +322,16 @@
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/lagos-study/roads/NAMES.md",
     "gidi:docs/research/LIFE-IN-LAGOS.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/check_rules.py",
-    "gidi:scripts/rebuild_areas.py"
+    "gidi:scripts/check_rules.py"
    ]
   },
   {
    "repo": "gidi",
    "path": "decisions/HISTORY.md",
    "ext": ".md",
-   "bytes": 12750,
-   "changed": "2026-10-24",
-   "lines": 59,
+   "bytes": 13887,
+   "changed": "2026-10-25",
+   "lines": 61,
    "summary": "Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct, word for",
    "refs_in": [
     "gidi:decisions/CHECKS.md",
@@ -387,17 +360,16 @@
    "repo": "gidi",
    "path": "decisions/NOW.md",
    "ext": ".md",
-   "bytes": 61987,
+   "bytes": 61725,
    "changed": "2026-10-25",
-   "lines": 307,
+   "lines": 305,
    "summary": "Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
     "gidi-game:CLAUDE.md",
     "gidi:.claude/hooks/review-before-push.sh",
     "gidi:CLAUDE.md",
-    "gidi:decisions/README.md",
-    "gidi:web/hand/hub.json"
+    "gidi:decisions/README.md"
    ]
   },
   {
@@ -409,8 +381,7 @@
    "lines": 9,
    "summary": "Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -434,12 +405,11 @@
    "path": "decisions/story/README.md",
    "ext": ".md",
    "bytes": 1209,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 18,
    "summary": "The story of Gidi: Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire.",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -512,12 +482,11 @@
    "path": "decisions/story/novels/README.md",
    "ext": ".md",
    "bytes": 3210,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 36,
    "summary": "Three stories for Gidi (Claude's drafts, 15 Oct 2026, for the owner to pick from): The owner asked for \"two or three novels of the story\" to read, pick from, and build their own. These are short stories, about 15 minutes' reading each, not full novels. Each one names the people who drive the plot and the side characters who give it colour, and it's told the way it would play in an open world.",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -568,27 +537,22 @@
    "path": "docs/DEEP-STUDY.md",
    "ext": ".md",
    "bytes": 4744,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 65,
    "summary": "The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: \"the research should look at everything in the data and take them into consideration\". Every Gidi district is rebuilt by one shared generator. Each district gets its own profile, and the profile is set from this study.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:docs/DATA-SOURCES.md",
-    "gidi:docs/RESEARCH.md",
-    "gidi:scripts/deep_prep.py",
-    "gidi:scripts/deep_profile.py",
-    "gidi:scripts/deep_tune.py",
-    "gidi:scripts/district_profiles.py",
-    "gidi:scripts/study_deep.py"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
    "repo": "gidi",
    "path": "docs/LAGOS-ISMS.md",
    "ext": ".md",
-   "bytes": 21920,
-   "changed": "2026-10-24",
+   "bytes": 21869,
+   "changed": "2026-10-25",
    "lines": 276,
    "summary": "Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things a tidy generator would never make, but that make Lagos feel like Lagos. For each one: - what it is - where it shows up in the real data (LGA and coordinates)",
    "refs_in": [
@@ -605,11 +569,7 @@
     "gidi:docs/oldisland-pattern-study.md",
     "gidi:docs/oldshore-pattern-study.md",
     "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/research/LIFE-IN-LAGOS.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/blender/gidi_kit/rules.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/study_isms.py"
+    "gidi:docs/research/LIFE-IN-LAGOS.md"
    ]
   },
   {
@@ -617,7 +577,7 @@
    "path": "docs/LAGOS-LIGHT.md",
    "ext": ".md",
    "bytes": 4262,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 61,
    "summary": "Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel of the light aren't the same. Most of it is physics. This is the lighting brief for Gidi's look, in the browser now and in Unreal later.",
    "refs_in": [
@@ -629,7 +589,7 @@
    "repo": "gidi",
    "path": "docs/MAP-FORMAT.md",
    "ext": ".md",
-   "bytes": 55183,
+   "bytes": 55211,
    "changed": "2026-10-25",
    "lines": 599,
    "summary": "The new map's data format (draft 0.1, for the owner to approve): The new map is the one ground truth (decisions, 22 Oct: \"everything that we do must be in map data. Every single thing\"). The drawing board saves into it. The Blender kit and the Unreal import read it. Nothing else holds the city.",
@@ -645,7 +605,6 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/map-format-example/README.md",
-    "gidi:legacy/README.md",
     "gidi:schema/map_schema.json",
     "gidi:scripts/board_server.py",
     "gidi:scripts/check_map.py",
@@ -655,19 +614,38 @@
   },
   {
    "repo": "gidi",
+   "path": "docs/OLD-KIT.md",
+   "ext": ".md",
+   "bytes": 8118,
+   "changed": "",
+   "lines": 98,
+   "summary": "The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): \"we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel\". This page answers that. The kit is frozen (DECISIONS, \"The interface works both ways; the builders are the kit\"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made",
+   "refs_in": [
+    "gidi:CLAUDE.md",
+    "gidi:decisions/CHECKS.md",
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/NOW.md",
+    "gidi:docs/LAGOS-ISMS.md",
+    "gidi:docs/MAP-FORMAT.md"
+   ]
+  },
+  {
+   "repo": "gidi",
    "path": "docs/OLD-MAP-LESSONS.md",
    "ext": ".md",
-   "bytes": 8280,
-   "changed": "2026-10-24",
+   "bytes": 8307,
+   "changed": "2026-10-25",
    "lines": 89,
-   "summary": "What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history (`legacy/OLD-MAP.md`; DECISIONS, \"The new map is the truth\"). Its plans and pass reports were deleted on 25 Oct (git tag `before-cleanup-25oct` holds them). Before they went, each was read for what still holds for the new map",
+   "summary": "What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history, deleted 25 Oct (git tag `before-cleanup-25oct`; DECISIONS, \"The new map is the truth\"). Its plans and pass reports were deleted on 25 Oct (git tag `before-cleanup-25oct` holds them). Before they went, each was read for what still holds for the new map",
    "refs_in": [
+    "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md"
+    "gidi:docs/OLD-KIT.md",
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -692,8 +670,7 @@
    "lines": 125,
    "summary": "The Bazaar pattern study: Ojo round the electronics market \u2192 The Bazaar (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -705,8 +682,7 @@
    "lines": 137,
    "summary": "Border pattern study: Badagry \u2192 the Border (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -718,8 +694,7 @@
    "lines": 159,
    "summary": "The Capital pattern study: central Ikeja \u2192 The Capital (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -811,11 +786,7 @@
    "lines": 1028,
    "summary": "keys: id, area_km2, bounds_lonlat, land_cover, land_km2, sources, buildings, heights, streets, structure_built_squares, places, street_things",
    "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/hand_spots/ibudo_spot1.py",
-    "gidi:scripts/rebuild_areas.py",
-    "gidi:web/hand/hub.json"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -907,8 +878,7 @@
    "lines": 141,
    "summary": "Estate pattern study: Ikeja GRA, Magodo and Omole \u2192 the Estate (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -920,8 +890,7 @@
    "lines": 172,
    "summary": "Food Gate pattern study: Ojota\u2013Ketu\u2013Mile 12 (Kosofe) \u2192 Food Gate (v1): Status: generated for review (13 Oct 2026). Same method as the other districts: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -933,8 +902,7 @@
    "lines": 177,
    "summary": "Frontier pattern study: the Lekki peninsula \u2192 the Frontier (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -959,15 +927,13 @@
    "changed": "2026-10-13",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi:scripts/map02.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi",
    "path": "docs/hand/borrowed-lagos.md",
    "ext": ".md",
-   "bytes": 10024,
+   "bytes": 10056,
    "changed": "2026-10-23",
    "lines": 72,
    "summary": "Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: \"take inspiration from the places to build the area... also from places that didn't inspire the districts, to give a taste of everywhere, tastefully and tactfully... research the actual Lagos map and see things you could take and creatively integrate.\"",
@@ -975,290 +941,21 @@
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/HISTORY.md",
-    "gidi:docs/RESEARCH.md",
-    "gidi:scripts/layout_v2.py",
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/heights.json",
-    "gidi:web/hand/port.json"
+    "gidi:docs/RESEARCH.md"
    ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/README.md",
-   "ext": ".md",
-   "bytes": 1444,
-   "changed": "2026-10-24",
-   "lines": 19,
-   "summary": "\u00ccb\u00f9d\u00f3, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct): Oshodi, studied on Google Earth and Street View (`~/gidi-data/research/google/ibudo/`, notes there), rebuilt one-for-one first, then made ours (the owner's method: like the fonts and the danfo). `design_v1.png`: metres, north up, 320 x 320 m.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/child_plan.json",
-   "ext": ".json",
-   "bytes": 10701,
-   "changed": "2026-10-24",
-   "lines": 637,
-   "summary": "keys: district, note, areas, roads, protect",
-   "refs_in": [
-    "gidi:scripts/child_plan.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/layout_v2.py",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/child_plan.md",
-   "ext": ".md",
-   "bytes": 4784,
-   "changed": "2026-10-24",
-   "lines": 32,
-   "summary": "\u00ccb\u00f9d\u00f3 plan v3, the child of Oshodi and Ojuelegba (owner, 19 Oct 2026). Each area is a real place set down at true scale (1 m = 1 m, north up): a real point (anchor_real, lat/lon) sits on a Gidi point (anchor_gidi, map metres, y south). Any Gidi point in an area maps back to the real point under it: that real street is its twin, photographed there. Study in ~/gidi-data/research/google/ibudo/study/.: | Gidi area | Real place | Real box (lat, lon) | Real streets in it | |---|---|---|---| | Oshodi core | Oshodi: the interchange, Oshodi Market (red sheds, the mosque inside), Oshodi Rd, the Brown St grid of shop houses, the rail and the trunk road side by side | 6.5524 to 6.5601, 3.3465 to 3.3542 | Oshodi Rd, Brown St, Adekoya St, Araromi St, Banjoko St, Ogunlana St, Oredeyin St, Church St, Boladale St, Kunle Akinosi St, Macarthy Ln |",
-   "refs_in": [
-    "gidi:scripts/child_plan.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/child_plan.png",
-   "ext": ".png",
-   "bytes": 146449,
-   "changed": "2026-10-20",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:scripts/child_plan.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/design_v1.png",
-   "ext": ".png",
-   "bytes": 119274,
-   "changed": "2026-10-19",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:docs/hand/ibudo/README.md",
-    "gidi:scripts/hand_spots/ibudo_spot1.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/district_as_is.png",
-   "ext": ".png",
-   "bytes": 569070,
-   "changed": "2026-10-19",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:decisions/HISTORY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/in_map_v1.png",
-   "ext": ".png",
-   "bytes": 228528,
-   "changed": "2026-10-19",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/oshodi_core.png",
-   "ext": ".png",
-   "bytes": 326779,
-   "changed": "2026-10-20",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/plan_v2_proposal.png",
-   "ext": ".png",
-   "bytes": 117031,
-   "changed": "2026-10-19",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:decisions/HISTORY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/airport_rd.json",
-   "ext": ".json",
-   "bytes": 41417,
-   "changed": "2026-10-22",
-   "lines": 2599,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/ajao.json",
-   "ext": ".json",
-   "bytes": 42988,
-   "changed": "2026-10-22",
-   "lines": 2785,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/arena.json",
-   "ext": ".json",
-   "bytes": 4570,
-   "changed": "2026-10-21",
-   "lines": 421,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/barracks.json",
-   "ext": ".json",
-   "bytes": 5294,
-   "changed": "2026-10-22",
-   "lines": 536,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/church_st.json",
-   "ext": ".json",
-   "bytes": 30385,
-   "changed": "2026-10-22",
-   "lines": 1809,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/civic.json",
-   "ext": ".json",
-   "bytes": 19562,
-   "changed": "2026-10-22",
-   "lines": 1398,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:legacy/blender/coverage.py",
-    "gidi:legacy/blender/gidi_kit/registry.py",
-    "gidi:scripts/bake_web.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/ilupeju.json",
-   "ext": ".json",
-   "bytes": 23039,
-   "changed": "2026-10-22",
-   "lines": 1681,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/itire_rd.json",
-   "ext": ".json",
-   "bytes": 18850,
-   "changed": "2026-10-22",
-   "lines": 1833,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/mafoluku.json",
-   "ext": ".json",
-   "bytes": 32972,
-   "changed": "2026-10-21",
-   "lines": 1801,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/ojuelegba.json",
-   "ext": ".json",
-   "bytes": 40895,
-   "changed": "2026-10-22",
-   "lines": 2623,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/oshodi_core.json",
-   "ext": ".json",
-   "bytes": 57395,
-   "changed": "2026-10-22",
-   "lines": 3899,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/osolo_way.json",
-   "ext": ".json",
-   "bytes": 9924,
-   "changed": "2026-10-22",
-   "lines": 642,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/spare_parts.json",
-   "ext": ".json",
-   "bytes": 32388,
-   "changed": "2026-10-22",
-   "lines": 2400,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/stadium.json",
-   "ext": ".json",
-   "bytes": 21528,
-   "changed": "2026-10-21",
-   "lines": 1451,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/hand/ibudo/twins/surulere.json",
-   "ext": ".json",
-   "bytes": 73526,
-   "changed": "2026-10-22",
-   "lines": 5326,
-   "summary": "keys: area, real, anchor_real, anchor_gidi, area_wkt, real_counts, streets",
-   "refs_in": []
   },
   {
    "repo": "gidi",
    "path": "docs/hand/maze-hub-lagos.md",
    "ext": ".md",
    "bytes": 5462,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 53,
    "summary": "The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from: - **photo:** the owner's reference photos (`~/gidi-data/research/refs/REVIEW.md`)",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:docs/RESEARCH.md",
-    "gidi:web/hand/hub.json"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -1287,8 +984,6 @@
     "gidi:decisions/CODEBASE.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/lagos-study/roads/NAMES.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/check_real.py",
     "gidi:scripts/realnames.py"
    ]
   },
@@ -1301,8 +996,7 @@
    "lines": 208,
    "summary": "Heights pattern study: Ikoyi, Victoria Island and Banana Island \u2192 the Heights (v3): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -1314,8 +1008,7 @@
    "lines": 278,
    "summary": "Hub pattern study: Oshodi/Isolo + Surulere \u2192 The Hub (v1): Status: generated for review (13 Oct 2026). Same method as the Maze: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.** Data: OpenStreetMap (ODbL), Lagos extract, plus building heights from Google Open Buildings 2.5D (via `data/results/lga_table.json`). Area studied: Oshodi/Isolo + Surulere LGAs, 64.6 km\u00b2 by the OpenStreetMap boundaries. The height and people table uses the government land areas, which add up to 75.9 km\u00b2; the shares are not affected.",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -1470,9 +1163,7 @@
    "changed": "2026-10-20",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi:scripts/layout_v2.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -1758,9 +1449,7 @@
    "changed": "2026-10-15",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi:scripts/draw_terrain.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -1802,13 +1491,12 @@
    "repo": "gidi",
    "path": "docs/inventory/CODEMAP.md",
    "ext": ".md",
-   "bytes": 140533,
-   "changed": "2026-10-24",
+   "bytes": 52363,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
     "gidi:scripts/code_graph.py"
    ]
   },
@@ -1816,8 +1504,8 @@
    "repo": "gidi",
    "path": "docs/inventory/COMMENTS.md",
    "ext": ".md",
-   "bytes": 2661,
-   "changed": "2026-10-24",
+   "bytes": 2045,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1829,8 +1517,8 @@
    "repo": "gidi",
    "path": "docs/inventory/INVENTORY.md",
    "ext": ".md",
-   "bytes": 85912,
-   "changed": "2026-10-24",
+   "bytes": 60871,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1843,8 +1531,8 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 8686,
-   "changed": "2026-10-24",
+   "bytes": 10050,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1857,8 +1545,8 @@
    "repo": "gidi",
    "path": "docs/inventory/VAULT.md",
    "ext": ".md",
-   "bytes": 123086,
-   "changed": "2026-10-24",
+   "bytes": 116622,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1870,8 +1558,8 @@
    "repo": "gidi",
    "path": "docs/inventory/code_graph.json",
    "ext": ".json",
-   "bytes": 4478519,
-   "changed": "2026-10-24",
+   "bytes": 2357862,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1882,8 +1570,8 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 435990,
-   "changed": "2026-10-24",
+   "bytes": 305142,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1895,8 +1583,8 @@
    "repo": "gidi",
    "path": "docs/inventory/vault.json",
    "ext": ".json",
-   "bytes": 130009,
-   "changed": "2026-10-24",
+   "bytes": 94268,
+   "changed": "2026-10-25",
    "lines": null,
    "summary": "",
    "refs_in": [
@@ -1913,8 +1601,7 @@
    "lines": 246,
    "summary": "Jungle City pattern study: Ajegunle (+ Festac) \u2192 Jungle City (v1): Status: generated for review (13 Oct 2026). Same method as the Maze and the Hub: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -1930,8 +1617,7 @@
     "gidi:docs/RESEARCH.md",
     "gidi:docs/lagos-study/LIVING.md",
     "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md",
-    "gidi:scripts/map02.py"
+    "gidi:docs/lagos-study/councils.md"
    ]
   },
   {
@@ -2313,8 +1999,7 @@
    "lines": 256,
    "summary": "Cut Lagos land into places bounded by real borders, on the 50 m grid. Borders: big roads (motorway, trunk, primary), rail, narrow water (canals, creeks), secondary roads, and changes in the built fabric. Wide water (lagoon, harbour, wide creeks) is not land: places only face each other across it.",
    "refs_in": [
-    "gidi:docs/lagos-study/roads/ROADS.md",
-    "gidi:legacy/blender/gidi_kit/kinds.py"
+    "gidi:docs/lagos-study/roads/ROADS.md"
    ]
   },
   {
@@ -2723,9 +2408,7 @@
    "changed": "2026-10-14",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi:legacy/blender/catalogue.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -2796,7 +2479,7 @@
    "lines": null,
    "summary": "",
    "refs_in": [
-    "gidi:legacy/blender/WHAT-IT-HELD.md"
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -2872,9 +2555,7 @@
    "lines": 735,
    "summary": "Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks: Rule zero applies here more than anywhere else. A landmark is the thing a player will recognise, so **every Gidi landmark must be an original design**. Real Lagos structures appear below only as references for a *type*: what makes that kind of thing striking, how big it is, what it is made of and how it ages. Each item ends with 1-2 invented Gidi designs that share the spirit but not the silhouette of any real one.",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:legacy/blender/gidi_kit/monuments.py"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -2905,7 +2586,7 @@
    "repo": "gidi",
    "path": "docs/look/research-roads.md",
    "ext": ".md",
-   "bytes": 70150,
+   "bytes": 70188,
    "changed": "2026-10-23",
    "lines": 1147,
    "summary": "Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with potholes of water, mushy laterite lanes, failed asphalt, choked drains. It builds on `docs/look/research-street.md` \u00a71 and \u00a76.7\u20136.9, and does not repeat what is there: road widths by class, kerb paint colours, median types, basic drain sizes, basic pothole density, the tree census. It goes deeper on **condition** and on **how to select it from data**.",
@@ -2930,9 +2611,7 @@
     "gidi:docs/look/research-religious.md",
     "gidi:docs/look/research-roads.md",
     "gidi:docs/look/research-transport.md",
-    "gidi:docs/look/research-vehicles.md",
-    "gidi:legacy/blender/gidi_kit/people.py",
-    "gidi:legacy/blender/gidi_kit/street.py"
+    "gidi:docs/look/research-vehicles.md"
    ]
   },
   {
@@ -2956,8 +2635,7 @@
    "lines": 1288,
    "summary": "Gidi vehicle catalogue: everything that moves on Lagos roads and water: Research for the seeded Blender kit. **Rule zero:** study real Lagos, build our own city. Every real model, operator, union, agency and brand below is a *pattern reference* only. In Gidi, invent the liveries, names, logos, plates and slogans; describe makes only as body shapes (\"1980s boxy rear-engine van\", \"bonneted American-style tractor\").",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/blender/gidi_kit/vehicles.py"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -2969,8 +2647,7 @@
    "lines": 10,
    "summary": "Worked example of the new map format: One short home street in district d15 (20 m, invented names), written as the map would hold it (docs/MAP-FORMAT.md):",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -3047,8 +2724,7 @@
    "summary": "Maze pattern study: Mushin + Shomolu \u2192 The Maze (v2): Status: v2, regenerated with the current generator for review (13 Oct 2026). v1 was the first build; section 5 compares the two. Method: **Option 2.** We measure the real place, turn the numbers into rules, and generate original streets and houses from the rules. **No real street or building geometry is copied into Gidi.** Data: OpenStreetMap (ODbL), Lagos extract, plus building heights, people, tree cover and terrain from `data/results/lga_table.json`. Area studied: Mushin + Shomolu LGAs, 33.7 km\u00b2.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3060,8 +2736,7 @@
    "lines": 143,
    "summary": "Old Island pattern study: Lagos Island \u2192 Old Island (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3073,8 +2748,7 @@
    "lines": 145,
    "summary": "Old Shore pattern study: old Ikorodu \u2192 Old Shore (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3086,8 +2760,7 @@
    "lines": 128,
    "summary": "The Port pattern study: Apapa \u2192 The Port (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3099,8 +2772,7 @@
    "lines": 125,
    "summary": "Railside pattern study: Agege, Ifako/Ijaye and Alimosho \u2192 Railside (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3108,7 +2780,7 @@
    "path": "docs/research/LIFE-IN-LAGOS.md",
    "ext": ".md",
    "bytes": 30494,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 329,
    "summary": "Life in Lagos: what it's like to live there: A research pass, 16 Oct 2026, for the owner's ask: \"immerse yourself in what it's like to live in Lagos\".",
    "refs_in": [
@@ -3319,8 +2991,7 @@
    "lines": 127,
    "summary": "Saba: the deep study: Inspired by Yaba and Akoka: the university, Sabo, Ojuelegba. Study area: 12.88 km\u00b2, 10.64 km\u00b2 of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:scripts/district_profiles.py"
+    "gidi:docs/RESEARCH.md"
    ]
   },
   {
@@ -3332,798 +3003,8 @@
    "lines": 164,
    "summary": "Water Town pattern study: the Makoko\u2013Iwaya and Bariga waterfront \u2192 Water Town (v1): Status: generated for review (13 Oct 2026; v2 the same day: the land is rebuilt as fingers running down to the shore). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets, houses and stilt houses from the rules. **No real street, building or name is copied into Gidi.**",
    "refs_in": [
-    "gidi:docs/RESEARCH.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:docs/RESEARCH.md"
    ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/OLD-MAP.md",
-   "ext": ".md",
-   "bytes": 6927,
-   "changed": "2026-10-24",
-   "lines": 52,
-   "summary": "The old map (13-21 Oct 2026): what it was: The first Gidi: 15, then 17, invented districts generated from patterns measured in real Lagos (OpenStreetMap, then Google's data), baked into `web/gidi-data.js`, hand-edited in `web/hand/`, styled by the Blender kit in `legacy/blender/`. On 22 Oct the owner restarted the map as real Lagos miniaturised (decisions/DECISIONS.md); this",
-   "refs_in": [
-    "gidi:README.md",
-    "gidi:docs/OLD-MAP-LESSONS.md",
-    "gidi:legacy/README.md",
-    "gidi:scripts/doc_vault.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/README.md",
-   "ext": ".md",
-   "bytes": 853,
-   "changed": "2026-10-24",
-   "lines": 14,
-   "summary": "Legacy: the old map's kit (frozen): What the old map was and its parts: `OLD-MAP.md`.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/WHAT-IT-HELD.md",
-   "ext": ".md",
-   "bytes": 8114,
-   "changed": "2026-10-24",
-   "lines": 98,
-   "summary": "The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): \"we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel\". This page answers that. The kit is frozen (DECISIONS, \"The interface works both ways; the builders are the kit\"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made",
-   "refs_in": [
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/act1_sheet.py",
-   "ext": ".py",
-   "bytes": 4520,
-   "changed": "2026-10-23",
-   "lines": 71,
-   "summary": "The Act 1 kit pieces side by side (docs/KIT-GAPS.md, \"New in the v2 layout\"): the face-me-I-face-you block, the motor park office (and a shot inside it), the buka, Ladi Lane's open lock-ups, the rail market, the people placed by hand, the police kiosk, the task force truck and an overhead sign.",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/catalogue.py",
-   "ext": ".py",
-   "bytes": 2162,
-   "changed": "2026-10-23",
-   "lines": 48,
-   "summary": "Contact sheet of the kit: the same footprint built for each district character and several seeds.",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/city.py",
-   "ext": ".py",
-   "bytes": 62381,
-   "changed": "2026-10-23",
-   "lines": 1104,
-   "summary": "Build the whole city (everything in web/gidi-data.js) as streamable tiles.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi:legacy/README.md",
-    "gidi:legacy/blender/city_run.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/monuments.py",
-    "gidi:scripts/audit3d.py",
-    "gidi:scripts/houses.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/roadclean.py",
-    "gidi:scripts/things.py",
-    "gidi:scripts/trees.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/city_run.py",
-   "ext": ".py",
-   "bytes": 6930,
-   "changed": "2026-10-23",
-   "lines": 121,
-   "summary": "Generate the whole city as tiles, in parallel Blender processes, and write the manifest.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
-    "gidi-game:Content/Python/gidi_import.py",
-    "gidi-game:README.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:web/view3d.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/coverage.py",
-   "ext": ".py",
-   "bytes": 3251,
-   "changed": "2026-10-23",
-   "lines": 60,
-   "summary": "Writes docs/look/COVERAGE.md: every kind of thing in Gidi's data, how many, where, and whether the kit can build it yet. Plain Python (no Blender): python3 legacy/blender/coverage.py",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/registry.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/generate.py",
-   "ext": ".py",
-   "bytes": 22308,
-   "changed": "2026-10-23",
-   "lines": 458,
-   "summary": "Build part of Gidi in Blender from the generated map data, every object styled by rules.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi:docs/LAGOS-ISMS.md",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/registry.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/__init__.py",
-   "ext": ".py",
-   "bytes": 0,
-   "changed": "2026-10-23",
-   "lines": 1,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/archetypes.py",
-   "ext": ".py",
-   "bytes": 40995,
-   "changed": "2026-10-23",
-   "lines": 613,
-   "summary": "Archetypes: whole objects assembled from parts, driven by rules.",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/places.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/blocks.py",
-   "ext": ".py",
-   "bytes": 9885,
-   "changed": "2026-10-23",
-   "lines": 151,
-   "summary": "A parametric building block that most non-house kinds are made from, plus shared pieces (signs with names, flagpoles, perimeter walls with gates, domes, minarets, towers).",
-   "refs_in": [
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:legacy/blender/gidi_kit/places.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/boats.py",
-   "ext": ".py",
-   "bytes": 5386,
-   "changed": "2026-10-23",
-   "lines": 92,
-   "summary": "Boats on the lagoon: the ferries and water buses on the ferry routes, outboard canoes round Water Town, and the sand-dredging barges. Research-transport (lagoon ferries, water buses), research- housing (the stilt village's canoes), research-commerce (sand mining on the lagoon). All invented.",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/kinds.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/core.py",
-   "ext": ".py",
-   "bytes": 9200,
-   "changed": "2026-10-23",
-   "lines": 227,
-   "summary": "Core of the Gidi kit: seeded randomness and a mesh builder.",
-   "refs_in": [
-    "gidi:legacy/blender/act1_sheet.py",
-    "gidi:legacy/blender/catalogue.py",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/generate.py",
-    "gidi:legacy/blender/gidi_kit/archetypes.py",
-    "gidi:legacy/blender/gidi_kit/blocks.py",
-    "gidi:legacy/blender/gidi_kit/boats.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/facade.py",
-    "gidi:legacy/blender/gidi_kit/goods.py",
-    "gidi:legacy/blender/gidi_kit/gutters.py",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:legacy/blender/gidi_kit/monuments.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:legacy/blender/gidi_kit/parts.py",
-    "gidi:legacy/blender/gidi_kit/people.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/props.py",
-    "gidi:legacy/blender/gidi_kit/roadbed.py",
-    "gidi:legacy/blender/gidi_kit/roadside.py",
-    "gidi:legacy/blender/gidi_kit/rules.py",
-    "gidi:legacy/blender/gidi_kit/street.py",
-    "gidi:legacy/blender/gidi_kit/structures.py",
-    "gidi:legacy/blender/gidi_kit/vehicles.py",
-    "gidi:legacy/blender/gidi_kit/wear.py",
-    "gidi:legacy/blender/gidi_kit/zinc.py",
-    "gidi:legacy/blender/kinds_sheet.py",
-    "gidi:legacy/blender/kit_test.py",
-    "gidi:legacy/blender/lights_sheet.py",
-    "gidi:legacy/blender/monuments_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet2.py",
-    "gidi:legacy/blender/reach_sheet.py",
-    "gidi:legacy/blender/roadside_sheet.py",
-    "gidi:legacy/blender/scene.py",
-    "gidi:legacy/blender/vehicles_sheet.py",
-    "gidi:legacy/blender/wear_sheet.py",
-    "gidi:scripts/things.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/detail.py",
-   "ext": ".py",
-   "bytes": 686,
-   "changed": "2026-10-23",
-   "lines": 20,
-   "summary": "Detail level for the whole kit: 'full' for renders, 'web' for the streamed city (flat roof sheets, flat lettering, lighter bars and louvres, fewer cylinder segments).",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/draft.py",
-   "ext": ".py",
-   "bytes": 67007,
-   "changed": "2026-10-23",
-   "lines": 1333,
-   "summary": "The draft desk: the old kit's seeded rules, run once on a spot to write what they choose into its map as full records (decisions, 22 Oct: one ground truth; KIT.md section 12, \"Records\").",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/kit_draft.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/facade.py",
-   "ext": ".py",
-   "bytes": 23225,
-   "changed": "2026-10-23",
-   "lines": 404,
-   "summary": "A walk-up's street face, close up (the facade pass, 22 Oct 2026): what Balogun and Isale Eko faces carry on top of the wall, its windows and its balconies. Every piece is a record in the building's `facade` block (KIT.md section 12); this draws them and decides nothing. Face-based records name the face (its index in the footprint, as `faces` lists them) and",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/goods.py",
-   "ext": ".py",
-   "bytes": 16975,
-   "changed": "2026-10-23",
-   "lines": 323,
-   "summary": "Goods and clutter: what fills a Lagos lean-to, stall or shop door. Sacks, tarps, nylon bags, crates, stacked plastics, cloth and cartons, piled against the wall, hung from the lean-to's front plate, or heaped at a stall.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/draft.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/gutters.py",
-   "ext": ".py",
-   "bytes": 9744,
-   "changed": "2026-10-23",
-   "lines": 156,
-   "summary": "The gutters the data lays along the roads (scripts/isms.py, GD['gutters']): open or covered with slabs, and the stretches it marks blocked, with green water or rubbish.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/draft.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/kinds.py",
-   "ext": ".py",
-   "bytes": 41236,
-   "changed": "2026-10-23",
-   "lines": 695,
-   "summary": "Archetypes for the rest of the data's building kinds. Each builder takes the object's attributes `a` (poly, storeys, district, ...) and its Rng, and returns (object, spec). Specs come from docs/look/research-*.md; numbers there marked [est] are tuned by eye.",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/archetypes.py",
-    "gidi:legacy/blender/gidi_kit/boats.py",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:legacy/blender/gidi_kit/monuments.py",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/roadside.py",
-    "gidi:legacy/blender/gidi_kit/structures.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/landmarks.py",
-   "ext": ".py",
-   "bytes": 20897,
-   "changed": "2026-10-23",
-   "lines": 337,
-   "summary": "Named landmarks: a place on the map that needs a model of its own, by its name.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:docs/hand/borrowed-lagos.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:scripts/audit3d.py",
-    "gidi:scripts/gen_fabric.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/materials.py",
-   "ext": ".py",
-   "bytes": 14670,
-   "changed": "2026-10-23",
-   "lines": 304,
-   "summary": "Master materials. Each reads the mesh's 'Col' (paint colour) and 'Wear' (0..1) attributes, so a handful of materials cover every colour and age. The same pair of attributes can drive material instances in Unreal (vertex colour + one float), which keeps the look portable.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/act1_sheet.py",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/generate.py",
-    "gidi:legacy/blender/gidi_kit/archetypes.py",
-    "gidi:legacy/blender/gidi_kit/blocks.py",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/lights_sheet.py",
-    "gidi:legacy/blender/monuments_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet2.py",
-    "gidi:legacy/blender/reach_sheet.py",
-    "gidi:legacy/blender/roadside_sheet.py",
-    "gidi:legacy/blender/scene.py",
-    "gidi:legacy/blender/vehicles_sheet.py",
-    "gidi:legacy/blender/wear_sheet.py",
-    "gidi:web/view3d.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/monuments.py",
-   "ext": ".py",
-   "bytes": 28715,
-   "changed": "2026-10-23",
-   "lines": 413,
-   "summary": "Monuments and street landmarks, all invented (README rule zero): roundabout and corner statues (a founder in agbada, a masquerade, a talking-drummer), welded scrap-metal sculpture, clock towers, 'welcome' arches over the main roads into a district, the port lighthouse and the big LED screens at",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:docs/hand/borrowed-lagos.md",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/things.py",
-    "gidi:web/app.js",
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/port.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/oldtown.py",
-   "ext": ".py",
-   "bytes": 78384,
-   "changed": "2026-10-23",
-   "lines": 1167,
-   "summary": "The dense old town kit, driven by the map (decisions: \"The map tells the kit what goes where\").",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:legacy/blender/gidi_kit/draft.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/parcels.py",
-   "ext": ".py",
-   "bytes": 33058,
-   "changed": "2026-10-23",
-   "lines": 553,
-   "summary": "Parcels: the plots and grounds in the data (web/gidi-data.js 'parcels'), each with its surface and the furniture that makes it read: pitches with goalposts, a golf course with fairways and greens, the decaying stadium bowl, an airfield runway, prison walls with towers, a tank farm's",
-   "refs_in": [
-    "gidi:legacy/blender/coverage.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:scripts/audit3d.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/parts.py",
-   "ext": ".py",
-   "bytes": 41562,
-   "changed": "2026-10-23",
-   "lines": 694,
-   "summary": "Kit pieces. Each adds faces to a MeshBuilder, in world space, from a spec dict that the rules fill in (so the look of every piece is chosen from data, never hard-wired here).",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/wear.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/people.py",
-   "ext": ".py",
-   "bytes": 9624,
-   "changed": "2026-10-23",
-   "lines": 145,
-   "summary": "People of Lagos streets, from docs/look/research-street.md section 4 (clothing, skin, density). Real proportions (1.55-1.85 m, head about 1/7.5 of height), standing or walking, and dressed by type: ankara two-piece, blouse and wrapper with gele, buba and sokoto with fila, agbada, kaftan,",
-   "refs_in": [
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/archetypes.py",
-    "gidi:legacy/blender/gidi_kit/boats.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/monuments.py",
-    "gidi:legacy/blender/gidi_kit/props.py",
-    "gidi:legacy/blender/gidi_kit/street.py",
-    "gidi:scripts/things.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/places.py",
-   "ext": ".py",
-   "bytes": 55796,
-   "changed": "2026-10-23",
-   "lines": 854,
-   "summary": "Kinds built on the parametric block: civic, religious, commercial, housing types, leisure and transport buildings. Each picks a style and colours from research-*.md and adds its signature parts. All names on signs are invented (rule zero).",
-   "refs_in": [
-    "gidi:docs/lagos-study/roads/ROADS.md",
-    "gidi:legacy/blender/gidi_kit/kinds.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/props.py",
-   "ext": ".py",
-   "bytes": 14246,
-   "changed": "2026-10-23",
-   "lines": 249,
-   "summary": "Small props shared by the Act 1 pieces (docs/KIT-GAPS.md, \"New in the v2 layout\"): plastic chairs, benches, water drums, jerrycans, umbrellas, tables, a wheelbarrow, crates, basins, washing lines, loaves in nylon and hand-painted boards. Each adds faces to a MeshBuilder at a matrix M (x forward, y left, z up). Worn, never new.",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/draft.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/registry.py",
-   "ext": ".py",
-   "bytes": 3581,
-   "changed": "2026-10-23",
-   "lines": 51,
-   "summary": "Which builder makes which thing in the data. generate.py and coverage.py both read this.",
-   "refs_in": [
-    "gidi:legacy/blender/coverage.py",
-    "gidi:scripts/audit3d.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/roadbed.py",
-   "ext": ".py",
-   "bytes": 11166,
-   "changed": "2026-10-23",
-   "lines": 211,
-   "summary": "The ground of a street piece as real geometry: a Lagos street is \"just ground\", up here, down there, all over the place.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/gidi_kit/textured.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/roadside.py",
-   "ext": ".py",
-   "bytes": 15833,
-   "changed": "2026-10-23",
-   "lines": 240,
-   "summary": "Roadside furniture that makes a road read and lets you find your way: street lights (single and double arm, solar ones with their panel; a share dead, as in Lagos), green direction signs and overhead gantries with Gidi's own place names, speed limits and no-parking discs.",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/rules.py",
-   "ext": ".py",
-   "bytes": 15105,
-   "changed": "2026-10-23",
-   "lines": 207,
-   "summary": "The rules: from what the data knows about an object to how it looks.",
-   "refs_in": [
-    "gidi:docs/LAGOS-ISMS.md",
-    "gidi:docs/look/research-roads.md",
-    "gidi:legacy/blender/catalogue.py",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/generate.py",
-    "gidi:legacy/blender/gidi_kit/archetypes.py",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:scripts/compounds.py",
-    "gidi:scripts/fronts.py",
-    "gidi:scripts/houses.py",
-    "gidi:scripts/isms.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/street.py",
-   "ext": ".py",
-   "bytes": 31711,
-   "changed": "2026-10-23",
-   "lines": 546,
-   "summary": "Street kit: road surfaces in every condition (from fresh asphalt to rutted mud), potholes that hold rainwater, markings, painted kerbs, speed bumps, open drains with broken slabs, concrete poles with sagging wire tangles, transformers, litter and refuse heaps.",
-   "refs_in": [
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/structures.py",
-    "gidi:web/mapedit.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/structures.py",
-   "ext": ".py",
-   "bytes": 29091,
-   "changed": "2026-10-23",
-   "lines": 538,
-   "summary": "Structures and city-scale lines: flyovers and rail bridges, skywalks, canal footbridges, jetties, expressways with Jersey barriers, the Long Bridge on piers, the Cable Bridge with its leaning paddle-blade pylon (research-landmarks 14-17, invented), the rail line, canals and boardwalks.",
-   "refs_in": [
-    "gidi:legacy/blender/gidi_kit/monuments.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/textured.py",
-   "ext": ".py",
-   "bytes": 12949,
-   "changed": "2026-10-24",
-   "lines": 301,
-   "summary": "Photo textures on the kit's material slots (the eye tests now; the same files go into Unreal later, so the look the owner passes is the one that ships).",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/gidi_kit/roadbed.py",
-    "gidi:legacy/blender/kit_test.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/vehicles.py",
-   "ext": ".py",
-   "bytes": 62156,
-   "changed": "2026-10-23",
-   "lines": 954,
-   "summary": "Vehicles of Lagos roads, from docs/look/research-vehicles.md (sizes [src] where it had them). Every builder adds faces to a MeshBuilder at matrix M (x forward, y left, z up, origin on the ground under the middle). Condition ('new', 'worn', 'battered', 'wreck') drives wear, mismatched",
-   "refs_in": [
-    "gidi:decisions/NOW.md",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:scripts/things.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/wear.py",
-   "ext": ".py",
-   "bytes": 14892,
-   "changed": "2026-10-24",
-   "lines": 261,
-   "summary": "Age on the houses, in the vertex colours and in thin overlays on the walls.",
-   "refs_in": [
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/parts.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/gidi_kit/zinc.py",
-   "ext": ".py",
-   "bytes": 8697,
-   "changed": "2026-10-23",
-   "lines": 169,
-   "summary": "Corrugated zinc the way Lagos roofs are: sheet by sheet.",
-   "refs_in": [
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/parts.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/kinds_sheet.py",
-   "ext": ".py",
-   "bytes": 3390,
-   "changed": "2026-10-23",
-   "lines": 70,
-   "summary": "Contact sheet of every registered kind (except houses), each built on footprints taken from the real data, a few seeds side by side. blender -b --factory-startup -P legacy/blender/kinds_sheet.py -- [--kinds a,b] [--seeds 3] [--out ...]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/kit_draft.py",
-   "ext": ".py",
-   "bytes": 1360,
-   "changed": "2026-10-23",
-   "lines": 30,
-   "summary": "The draft desk: write a first draft of every record a spot's map needs (decisions, 22 Oct: one ground truth; KIT.md section 12, \"Records\"). The old kit's seeded rules (gidi_kit/draft.py) run once on the map and what they choose goes into it as full records; from then on the records are the map's, edited by hand, and the kit reads only them.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md",
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
-    "gidi-data:research/google/kits/old-town/tests/ot45/run45.sh",
-    "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
-    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/core.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/kit_test.py",
-   "ext": ".py",
-   "bytes": 11757,
-   "changed": "2026-10-24",
-   "lines": 212,
-   "summary": "A kit eye test: build one Street View spot from its map record with the old town kit and shoot it from the Street View's own camera (decisions: \"A kit is proven by rebuilding real streets from it\", \"The owner's eye passes a kit\"). blender -b --factory-startup -P legacy/blender/kit_test.py -- --map <spot>/map.json --out <spot>/rebuild.jpg [--samples 16] [--blend <file>]",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
-    "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
-    "gidi-data:research/google/kits/old-town/tests/ot45/run45.sh",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/textured.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/lights_sheet.py",
-   "ext": ".py",
-   "bytes": 1267,
-   "changed": "2026-10-23",
-   "lines": 23,
-   "summary": "Traffic lights, street-light ads, the new statues. blender -b --factory-startup -P legacy/blender/lights_sheet.py",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/montage.py",
-   "ext": ".py",
-   "bytes": 1034,
-   "changed": "2026-10-23",
-   "lines": 23,
-   "summary": "Stitch legacy/blender/out/kinds/*.jpg into one labelled sheet: python3 legacy/blender/montage.py [out.jpg] [cols]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/monuments_sheet.py",
-   "ext": ".py",
-   "bytes": 1611,
-   "changed": "2026-10-23",
-   "lines": 27,
-   "summary": "Every monument in the kit side by side. blender -b --factory-startup -P legacy/blender/monuments_sheet.py -- [--out legacy/blender/out/monuments.jpg]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/new_kit_sheet.py",
-   "ext": ".py",
-   "bytes": 2336,
-   "changed": "2026-10-23",
-   "lines": 40,
-   "summary": "The newest kit pieces side by side: the container truck, the 911 food lorry, the trains, the Crown Hall, the central mosque and a flyover with painted piers. blender -b --factory-startup -P legacy/blender/new_kit_sheet.py -- [--out legacy/blender/out/new_kit.jpg]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/new_kit_sheet2.py",
-   "ext": ".py",
-   "bytes": 3737,
-   "changed": "2026-10-23",
-   "lines": 58,
-   "summary": "Contact sheets for the second batch: --part vehicles (service vehicles, the molue, port machines, boats) or --part places (cathedral, heritage, civic tower, market block, refinery, the commemorative square, Freedom Ground, the airport, statues, beach arch, mural wall, billboard).",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/reach_sheet.py",
-   "ext": ".py",
-   "bytes": 806,
-   "changed": "2026-10-23",
-   "lines": 17,
-   "summary": "The Reach, close up. blender -b --factory-startup -P legacy/blender/reach_sheet.py",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/roadside_sheet.py",
-   "ext": ".py",
-   "bytes": 1667,
-   "changed": "2026-10-23",
-   "lines": 28,
-   "summary": "The roadside kit side by side: lamps, a direction sign, a gantry, speed and no-parking discs, a dressed bridge deck. blender -b --factory-startup -P legacy/blender/roadside_sheet.py -- [--out legacy/blender/out/roadside.jpg]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/scene.py",
-   "ext": ".py",
-   "bytes": 3560,
-   "changed": "2026-10-23",
-   "lines": 95,
-   "summary": "Shared scene setup for previews: sky, sun, ground, camera, render settings.",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tools/part_view.py",
-    "gidi:legacy/blender/act1_sheet.py",
-    "gidi:legacy/blender/catalogue.py",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/generate.py",
-    "gidi:legacy/blender/kinds_sheet.py",
-    "gidi:legacy/blender/kit_test.py",
-    "gidi:legacy/blender/lights_sheet.py",
-    "gidi:legacy/blender/monuments_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet.py",
-    "gidi:legacy/blender/new_kit_sheet2.py",
-    "gidi:legacy/blender/reach_sheet.py",
-    "gidi:legacy/blender/roadside_sheet.py",
-    "gidi:legacy/blender/vehicles_sheet.py",
-    "gidi:legacy/blender/wear_sheet.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/vehicles_sheet.py",
-   "ext": ".py",
-   "bytes": 2243,
-   "changed": "2026-10-23",
-   "lines": 39,
-   "summary": "Line-up of every vehicle in its conditions, and a crowd of every dress type. blender -b --factory-startup -P legacy/blender/vehicles_sheet.py -- [--out legacy/blender/out/vehicles.jpg]",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "legacy/blender/wear_sheet.py",
-   "ext": ".py",
-   "bytes": 5742,
-   "changed": "2026-10-23",
-   "lines": 80,
-   "summary": "A street of Maze houses on their own, to judge wear and age close up (no tile build). blender -b --factory-startup -P legacy/blender/wear_sheet.py -- [--detail web|full] [--vc] [--district maze] [--view street|high|roofs] [--out ...] --vc renders the vertex colours alone, the way Unreal's master material shows them (the Blender shader's wear is not there).",
-   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -4328,7 +3209,6 @@
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:legacy/README.md",
     "gidi:scripts/check_map.py",
     "gidi:scripts/inventory.py",
     "gidi:web/mapedit.js"
@@ -4336,68 +3216,11 @@
   },
   {
    "repo": "gidi",
-   "path": "scripts/audit3d.py",
-   "ext": ".py",
-   "bytes": 16194,
-   "changed": "2026-10-23",
-   "lines": 279,
-   "summary": "3D audit: does a district's map make a proper city when the kit builds it?",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/blender/gidi_kit/landmarks.py",
-    "gidi:scripts/roadclean.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/autoclean.py",
-   "ext": ".py",
-   "bytes": 10419,
-   "changed": "2026-10-21",
-   "lines": 194,
-   "summary": "The clean-up after the real areas, in every bake (owner, 21 Oct 2026: a fix made once must reach everything already built). Run after the hand edits, the road ends and the bush furniture, on each district built from real places (web/hand/gen/<id>.json). Each building",
-   "refs_in": [
-    "gidi:decisions/HISTORY.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/hand_fix_checks.py",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/bake_web.py",
-   "ext": ".py",
-   "bytes": 33711,
-   "changed": "2026-10-21",
-   "lines": 449,
-   "summary": "Bake Gidi map v0.3 into JSON for the web map: districts, water, arterials, generated local streets, POIs. Units: metres, origin top-left, y down. Map units from map02.py are 0.8 km. ---- Gidi v2 frame (owner, 15 Oct 2026: one even scale 1:4, docs/LAYOUT-V2.md): size, water, districts, arterials and rail come from",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/explore_city.py",
-    "gidi:scripts/furniture.py",
-    "gidi:scripts/gen_fabric.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/junctions.py",
-    "gidi:scripts/market_streets.py",
-    "gidi:scripts/roadclean.py",
-    "gidi:scripts/roadz.py",
-    "gidi:scripts/terrain.py",
-    "gidi:scripts/walknet.py"
-   ]
-  },
-  {
-   "repo": "gidi",
    "path": "scripts/board_server.py",
    "ext": ".py",
-   "bytes": 23009,
+   "bytes": 19425,
    "changed": "2026-10-24",
-   "lines": 475,
+   "lines": 408,
    "summary": "The drawing board's server (owner, 16 Oct 2026: \"we should hand draw... know where something meets something\").",
    "refs_in": [
     "gidi:README.md",
@@ -4405,58 +3228,7 @@
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:scripts/hand.py",
-    "gidi:web/board.js",
     "gidi:web/mapedit.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/build_viewer.py",
-   "ext": ".py",
-   "bytes": 1255,
-   "changed": "2026-10-18",
-   "lines": 22,
-   "summary": "Assemble the one-file Gidi Maps page (2D + 3D) from the baked data: web/gidi-maps.html. Run after scripts/bake_web.py. Then publish web/gidi-maps.html to the live artifact (see docs/DISTRICT-BRIEF.md).",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/maze-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/check_district.py",
-   "ext": ".py",
-   "bytes": 27927,
-   "changed": "2026-10-21",
-   "lines": 511,
-   "summary": "Independent checker for a generated district.  Usage: python3 scripts/check_district.py <id> Prints a PASS/FAIL line per check; exits 1 if any fails.  Import and call run(did) for raw results.",
-   "refs_in": [
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/BOARD.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/audit3d.py",
-    "gidi:scripts/autoclean.py",
-    "gidi:scripts/ground.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/walknet.py",
-    "gidi:web/board.js"
    ]
   },
   {
@@ -4481,23 +3253,8 @@
     "gidi:schema/kit_reads.json",
     "gidi:scripts/board_server.py",
     "gidi:scripts/draft_buildings.py",
+    "gidi:scripts/realnames.py",
     "gidi:web/mapedit.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/check_real.py",
-   "ext": ".py",
-   "bytes": 9822,
-   "changed": "2026-10-24",
-   "lines": 162,
-   "summary": "How close the map is to the real places it is the child of (owner, 21 Oct 2026: \"nobody checks how close it is to the real place\"). For every area of a district built from real places (docs/hand/ibudo/twins/<area>.json): R1 buildings     the map's buildings in the area against the real footprints (count and built-up area)",
-   "refs_in": [
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/HISTORY.md",
-    "gidi:scripts/draw_area.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py"
    ]
   },
   {
@@ -4521,16 +3278,6 @@
   },
   {
    "repo": "gidi",
-   "path": "scripts/child_plan.py",
-   "ext": ".py",
-   "bytes": 3804,
-   "changed": "2026-10-19",
-   "lines": 60,
-   "summary": "A district's child plan (owner, 19 Oct 2026: a district is the child of its real inspirations): draws docs/hand/<dir>/child_plan.json over the district's outline, the arterials and the rail, each area labelled with the real place it comes from, and writes the real",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
    "path": "scripts/code_graph.py",
    "ext": ".py",
    "bytes": 19511,
@@ -4546,170 +3293,9 @@
   },
   {
    "repo": "gidi",
-   "path": "scripts/compounds.py",
-   "ext": ".py",
-   "bytes": 7624,
-   "changed": "2026-10-23",
-   "lines": 141,
-   "summary": "Compound walls, in the map data (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D).",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/cross_sections.py",
-   "ext": ".py",
-   "bytes": 2109,
-   "changed": "2026-10-15",
-   "lines": 37,
-   "summary": "Gidi's road cross-sections: one table, read by the generator, the bake (written into the data as \"cross_sections\"), the space checker and the 3D kit. Agreed with the owner on 15 Oct 2026 from real Food Gate (Google outlines against OSM centre lines: on residential streets a quarter of front buildings stand within 5 m of the centre line).",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:scripts/autoclean.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/fix_gutters_to_sections.py",
-    "gidi:scripts/furniture.py",
-    "gidi:scripts/gen_fabric.py",
-    "gidi:scripts/ground.py",
-    "gidi:scripts/groundpaint.py",
-    "gidi:scripts/hand_fix_lines.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/market_streets.py",
-    "gidi:scripts/roadends.py",
-    "gidi:scripts/things.py",
-    "gidi:web/app.js",
-    "gidi:web/shell.html"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_check.py",
-   "ext": ".py",
-   "bytes": 6411,
-   "changed": "2026-10-16",
-   "lines": 103,
-   "summary": "Does a generated district come out like its inspiration? Measures a gen file the way the deep study measured real Lagos (the same structure measures, scripts/structure.py, on built 500 m squares; storeys; street density) and prints it beside the study's targets.",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:scripts/deep_summary.py",
-    "gidi:scripts/deep_tune.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_prep.py",
-   "ext": ".py",
-   "bytes": 3634,
-   "changed": "2026-10-24",
-   "lines": 80,
-   "summary": "Deep study, step 1 (docs/DEEP-STUDY.md): one pass over the big building files, cut per district, so the 17 district studies can run side by side. Reads Google Open Buildings v3 (outlines, confidence) and Microsoft's building outlines for Lagos once, and keeps the",
-   "refs_in": [
-    "gidi:docs/DATA-SOURCES.md",
-    "gidi:docs/DEEP-STUDY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_profile.py",
-   "ext": ".py",
-   "bytes": 6850,
-   "changed": "2026-10-16",
-   "lines": 120,
-   "summary": "From a district's deep study (docs/data/deep/<id>.json) to its generator settings, and its fabric-type zones (docs/DEEP-STUDY.md).",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:scripts/district_profiles.py",
-    "gidi:scripts/gen_fabric.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_report.py",
-   "ext": ".py",
-   "bytes": 11178,
-   "changed": "2026-10-15",
-   "lines": 105,
-   "summary": "Deep study, step 3: the study of a district (docs/data/deep/<id>.json) as a page a designer can read, ending in the targets its generator profile has to hit. Usage: python3 scripts/deep_report.py [ids...]   -> docs/studies/<id>.md",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_summary.py",
-   "ext": ".py",
-   "bytes": 2227,
-   "changed": "2026-10-16",
-   "lines": 34,
-   "summary": "All districts against their studies on one page (docs/data/deep-check/*.json, from scripts/deep_check.py). Usage: python3 scripts/deep_summary.py [out.md]      prints a table; with a path, writes it as markdown too",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/deep_tune.py",
-   "ext": ".py",
-   "bytes": 3397,
-   "changed": "2026-10-16",
-   "lines": 49,
-   "summary": "One calibration pass (docs/DEEP-STUDY.md): each district's own miss against its study (docs/data/deep-check/<id>.json, written by scripts/deep_check.py) scales its own settings, and the result goes to web/deep-tune.json, which district_profiles applies last.",
-   "refs_in": [
-    "gidi:scripts/deep_check.py",
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/design_density.py",
-   "ext": ".py",
-   "bytes": 11502,
-   "changed": "2026-10-24",
-   "lines": 198,
-   "summary": "A density pass: fill a district the way its real counterpart is built (Claude's design pass, owner 17 Oct 2026: \"build it based off the Lagos you see\"). Writes hand edits into web/hand/<district>.json, so every house it adds or lowers can be moved,",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/district_profiles.py",
-   "ext": ".py",
-   "bytes": 68247,
-   "changed": "2026-10-24",
-   "lines": 754,
-   "summary": "Per-district settings for gen_fabric.py. Each number says where it comes from. A district with no profile gets the generator's original (v1) behaviour. The Maze got its own profile in v2; its edge roads and gateways in web/network.json are kept exactly (\"keep_gateways\"), because the Hub was built against them.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/deep_tune.py",
-    "gidi:scripts/gen_fabric.py"
-   ]
-  },
-  {
-   "repo": "gidi",
    "path": "scripts/doc_vault.py",
    "ext": ".py",
-   "bytes": 7993,
+   "bytes": 7970,
    "changed": "2026-10-24",
    "lines": 140,
    "summary": "The documents as a vault, for scripts/inventory.py (owner, 24 Oct: \"use word matching to know what every document is meant for, like an Obsidian vault; if a document is sort of an orphan, look into it and see its use\").",
@@ -4841,87 +3427,6 @@
   },
   {
    "repo": "gidi",
-   "path": "scripts/draw_area.py",
-   "ext": ".py",
-   "bytes": 4859,
-   "changed": "2026-10-24",
-   "lines": 79,
-   "summary": "One \u00ccb\u00f9d\u00f3 area side by side with its real place, at the same scale and frame: the map as baked (left) and the real footprints and roads it was built from (right: Google Open Buildings v3, Overture Maps; drawn here to compare, never put in the map). For the match",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/draw_gen.py",
-   "ext": ".py",
-   "bytes": 6974,
-   "changed": "2026-10-15",
-   "lines": 75,
-   "summary": "Draw a generated district (and optionally the real comparison square) at the same scale.",
-   "refs_in": [
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/draw_terrain.py",
-   "ext": ".py",
-   "bytes": 2112,
-   "changed": "2026-10-15",
-   "lines": 27,
-   "summary": "The terrain review map: colour relief with hillshade, land 0-3 m (flood-prone) marked, contours every 2 m, district outlines. Usage: python3 scripts/draw_terrain.py [out.png]  (after scripts/terrain.py)",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/explore_city.py",
-   "ext": ".py",
-   "bytes": 18179,
-   "changed": "2026-10-15",
-   "lines": 207,
-   "summary": "Explore the generated Gidi districts on foot or by okada. Data: web/gidi-data.js (the baked city; run scripts/bake_web.py first). Run from the repo root: python3 scripts/explore_city.py COMMAND ... Usage: explore_city.py overview                      what's here: size, counts, landmarks, parcels",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:scripts/walknet.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/fabric_metrics.py",
-   "ext": ".py",
-   "bytes": 3829,
-   "changed": "2026-10-13",
-   "lines": 51,
-   "summary": "Same yardstick for real and generated fabric: streets [(cls, LineString)], buildings [Polygon], area Polygon (metres).",
-   "refs_in": [
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/explore_city.py",
-    "gidi:scripts/walknet.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/fix_gutters_to_sections.py",
-   "ext": ".py",
-   "bytes": 3844,
-   "changed": "2026-10-15",
-   "lines": 73,
-   "summary": "One-off correction for a frozen district: its gutters were placed at the 3D kit's old road widths (a 7 m street, a 14 m main road) by scripts/isms.py; the agreed cross-sections (scripts/cross_sections.py) put the gutter right beside a narrower",
-   "refs_in": [
-    "gidi:web/hand/foodgate.json"
-   ]
-  },
-  {
-   "repo": "gidi",
    "path": "scripts/frame_footprints.py",
    "ext": ".py",
    "bytes": 3332,
@@ -4932,20 +3437,6 @@
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:web/frame.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/frame_network.py",
-   "ext": ".py",
-   "bytes": 6678,
-   "changed": "2026-10-16",
-   "lines": 132,
-   "summary": "The v2 frame's shared roads (docs/LAYOUT-V2.md): every district border becomes one named road, drawn once here, so districts can be generated side by side and still meet exactly. Reads web/layout-v2.json (districts already cut from one partition, so neighbours",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/gen_fabric.py",
-    "gidi:scripts/layout_v2.py"
    ]
   },
   {
@@ -4962,247 +3453,7 @@
     "gidi:map/d15/district.json",
     "gidi:scripts/board_server.py",
     "gidi:scripts/frame_footprints.py",
-    "gidi:web/board.html",
     "gidi:web/frame.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/freeze_district.py",
-   "ext": ".py",
-   "bytes": 1489,
-   "changed": "2026-10-16",
-   "lines": 24,
-   "summary": "Freeze a district: write everything it owns in the baked map (scripts/hand.py: snapshot) into web/hand/<id>.json, so from now on the bake loads it as it is and only hand edits change it. Run after a bake. Usage: python3 scripts/freeze_district.py foodgate",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/hand.py",
-    "gidi:web/hand/airport.json",
-    "gidi:web/hand/border.json",
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/estate.json",
-    "gidi:web/hand/heights.json",
-    "gidi:web/hand/hub.json",
-    "gidi:web/hand/oldisland.json",
-    "gidi:web/hand/port.json",
-    "gidi:web/hand/watertown.json",
-    "gidi:web/hand/yaba.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/fronts.py",
-   "ext": ".py",
-   "bytes": 7280,
-   "changed": "2026-10-23",
-   "lines": 136,
-   "summary": "House fronts in the map data: which side faces the street, shop fronts, their canopies and the balconies (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D).",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/rules.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/houses.py",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/furniture.py",
-   "ext": ".py",
-   "bytes": 9390,
-   "changed": "2026-10-17",
-   "lines": 161,
-   "summary": "Street furniture as data, run by bake_web.py after the junctions and heights (the ground plan of the Google rebuild). Every pole, street light, traffic light, transformer and bus stop gets its spot in out[\"furniture\"] ({kind, x, y, ang, road}:",
-   "refs_in": [
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:web/app.js",
-    "gidi:web/shell.html"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/gen_fabric.py",
-   "ext": ".py",
-   "bytes": 150975,
-   "changed": "2026-10-18",
-   "lines": 1849,
-   "summary": "Original street + building generator for one Gidi district. Nothing here is copied from a real map: the inputs are only the statistics in study-<id>.json / study-<id>-core.json (spacing, block size, junction mix, house sizes, setbacks, gaps, land-use shares) and Gidi's own districts, arterials and rail.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/landmarks.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/ground.py",
-   "ext": ".py",
-   "bytes": 11517,
-   "changed": "2026-10-18",
-   "lines": 216,
-   "summary": "Ground use: what every square metre of Gidi is for, and who may be on it (owner, 17 Oct 2026: \"it's important to have the entire system understand where people can walk... human beings don't walk on the main road, where cars can go, where boats",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/houses.py",
-    "gidi:scripts/things.py",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/groundpaint.py",
-   "ext": ".py",
-   "bytes": 8714,
-   "changed": "2026-10-18",
-   "lines": 133,
-   "summary": "The ground itself, painted in the map data (owner, 17 Oct 2026: \"even the grain of sand on the ground... everything in the data\"; batch 3 of what the kit used to invent, which drew one soil colour per 400 m tile).",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand.py",
-   "ext": ".py",
-   "bytes": 41898,
-   "changed": "2026-10-23",
-   "lines": 721,
-   "summary": "Hand files (owner, 15 Oct 2026: \"less generator, more hand placing\"): web/hand/<district>.json holds what is placed by hand in a district, and the bake applies it last, so hand work always wins and nothing is regenerated out from under it.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/BOARD.md",
-    "gidi:docs/hand/maze-hub-lagos.md",
-    "gidi:scripts/autoclean.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/board_server.py",
-    "gidi:scripts/freeze_district.py",
-    "gidi:scripts/groundpaint.py",
-    "gidi:scripts/hand_fix_lines.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/houses.py",
-    "gidi:scripts/rebuild_areas.py",
-    "gidi:scripts/roadtypes.py",
-    "gidi:scripts/things.py",
-    "gidi:web/board.js",
-    "gidi:web/hand/airport.json",
-    "gidi:web/hand/border.json",
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/estate.json",
-    "gidi:web/hand/foodgate.json",
-    "gidi:web/hand/heights.json",
-    "gidi:web/hand/oldisland.json",
-    "gidi:web/hand/port.json",
-    "gidi:web/hand/watertown.json",
-    "gidi:web/hand/yaba.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand_fix_checks.py",
-   "ext": ".py",
-   "bytes": 1659,
-   "changed": "2026-10-21",
-   "lines": 33,
-   "summary": "The clean-up after a real-area build, written as hand edits (owner: \"clean up everything by hand\"): reads the baked map and writes hand edits into web/hand/<district>.json for every building the checks would flag (scripts/autoclean.py says how each is fixed).",
-   "refs_in": [
-    "gidi:scripts/autoclean.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand_fix_lines.py",
-   "ext": ".py",
-   "bytes": 6338,
-   "changed": "2026-10-16",
-   "lines": 86,
-   "summary": "Hand fix: houses that reach over a street's building line in the finished map (web/gidi-data.js). The bake's road clean-up extends and straightens streets after the houses are placed, and roads placed by hand can pass close to houses. Each one is moved straight back",
-   "refs_in": [
-    "gidi:web/hand/airport.json",
-    "gidi:web/hand/border.json",
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/estate.json",
-    "gidi:web/hand/heights.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand_links.py",
-   "ext": ".py",
-   "bytes": 4755,
-   "changed": "2026-10-16",
-   "lines": 82,
-   "summary": "Hand placing helper: streets cut off from the city's road network (a cluster that only met a shore road, now a footpath in the v2 frame) each get one link street to the nearest road, written into the district's hand file as an exact placement with a note.",
-   "refs_in": [
-    "gidi:web/hand/capital.json",
-    "gidi:web/hand/estate.json",
-    "gidi:web/hand/heights.json",
-    "gidi:web/hand/watertown.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand_spots/ibudo_real_area.py",
-   "ext": ".py",
-   "bytes": 23729,
-   "changed": "2026-10-24",
-   "lines": 385,
-   "summary": "\u00ccb\u00f9d\u00f3, one area of the child plan built from its real place (owner, 19 Oct 2026: \"you are taking streets from this place ... so you can have real life images that we can now model from\"). docs/hand/ibudo/child_plan.json says which real place an area is and where it sits",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/hand_spots/ibudo_spot1.py",
-   "ext": ".py",
-   "bytes": 6563,
-   "changed": "2026-10-19",
-   "lines": 90,
-   "summary": "\u00ccb\u00f9d\u00f3 spot 1 (docs/hand/ibudo/design_v1.png, the owner's approval 19 Oct 2026): Oshodi rebuilt one-for-one beside the Ring Road flyover, written as hand edits into web/hand/hub.json. Run once, then bake with GIDI_THAW=hub, check, freeze.",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/houses.py",
-   "ext": ".py",
-   "bytes": 12309,
-   "changed": "2026-10-23",
-   "lines": 222,
-   "summary": "What stands on and beside each house, and which building each place takes over, in the map data (owner, 17 Oct 2026: everything in the data; batch 2 of what the kit used to invent).",
-   "refs_in": [
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/rules.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:web/board.js"
    ]
   },
   {
@@ -5210,7 +3461,7 @@
    "path": "scripts/inventory.py",
    "ext": ".py",
    "bytes": 16048,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 318,
    "summary": "What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it.",
    "refs_in": [
@@ -5222,26 +3473,6 @@
     "gidi:decisions/NOW.md",
     "gidi:scripts/code_graph.py",
     "gidi:scripts/doc_vault.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/isms.py",
-   "ext": ".py",
-   "bytes": 26159,
-   "changed": "2026-10-23",
-   "lines": 523,
-   "summary": "The Lagos-isms, placed by rule into the baked city data (docs/ISMS-BUILD.md, docs/LAGOS-ISMS.md). Runs inside scripts/bake_web.py after the road clean-up (roadclean.py) and the road heights (roadz.py), once the safe ground is listed. One function per ism, each reads the city (`out`) and writes its own lists back into it. Same seed, same isms.",
-   "refs_in": [
-    "gidi:docs/LAGOS-ISMS.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/gutters.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/fix_gutters_to_sections.py",
-    "gidi:scripts/roadends.py",
-    "gidi:web/app.js",
-    "gidi:web/isms-edits.json"
    ]
   },
   {
@@ -5258,241 +3489,16 @@
   },
   {
    "repo": "gidi",
-   "path": "scripts/junctions.py",
-   "ext": ".py",
-   "bytes": 12315,
-   "changed": "2026-10-15",
-   "lines": 253,
-   "summary": "Junctions, run by bake_web.py after the road clean-up and before the heights (pass 3 of the road work).",
-   "refs_in": [
-    "gidi:scripts/bake_web.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/landmarks.py",
-   "ext": ".py",
-   "bytes": 13151,
-   "changed": "2026-10-13",
-   "lines": 204,
-   "summary": "Big pieces a district is known for, laid out before (or after) the ordinary street fabric. Used by gen_fabric.py when a district profile asks for them (the Hub: flyovers, slip roads, skywalks, terminal, station, stadium, hotel). Every size comes from the profile (which comes from the pattern study); this file only decides where things go.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:docs/hand/borrowed-lagos.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/blender/gidi_kit/kinds.py",
-    "gidi:scripts/audit3d.py",
-    "gidi:scripts/gen_fabric.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/layout_v2.py",
-   "ext": ".py",
-   "bytes": 18665,
-   "changed": "2026-10-20",
-   "lines": 219,
-   "summary": "Gidi v2 layout (owner's choice, 15 Oct 2026): a fictional Lagos at ONE even scale, 1:4 (docs/LAYOUT-V2.md). District positions = their inspirations' real positions (study-area centroids) / SCALE, no turning, nothing squeezed. Coasts, the lagoon, the harbour, creeks, district borders and the arterials are drawn fresh here, never traced.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/roadz.py",
-    "gidi:web/layout-v2.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/map02.py",
-   "ext": ".py",
-   "bytes": 7838,
-   "changed": "2026-10-13",
-   "lines": 88,
-   "summary": "Gidi map v0.2 (drawn in units of 0.8 km; 1.25 units = 1 km): 15 districts merged from Lagos's 20 LGAs (see lagos-lgas-research.md). Schematic, km grid. stilts",
-   "refs_in": [
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/bake_web.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/market_streets.py",
-   "ext": ".py",
-   "bytes": 6044,
-   "changed": "2026-10-16",
-   "lines": 91,
-   "summary": "Market streets, run by bake_web.py on the final roads (after the clean-up and the junctions). The owner's ruling (15 Oct 2026, from Mile 12, Oshodi, Idumota): round a market, traders take the walkways and the carriageway too, under umbrellas",
-   "refs_in": [
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/gen_fabric.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/real_underlay.py",
-   "ext": ".py",
-   "bytes": 3369,
-   "changed": "2026-10-24",
-   "lines": 60,
-   "summary": "The real place under each \u00ccb\u00f9d\u00f3 area, for the drawing board's \"Real place\" layer: the real footprints (Google Open Buildings v3) and roads (Overture) each area is the child of, placed by that area's own anchor (docs/hand/ibudo/twins/<area>.json) and kept to the area.",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
    "path": "scripts/realnames.py",
    "ext": ".py",
-   "bytes": 4608,
+   "bytes": 1101,
    "changed": "2026-10-24",
-   "lines": 91,
-   "summary": "Gidi's names are its own: no name on the map may share its core with a real name around the places Gidi is a child of.",
+   "lines": 22,
+   "summary": "Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only).",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
     "gidi:docs/hand/realnames.txt",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/check_map.py",
-    "gidi:scripts/check_real.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/rebuild_areas.py",
-   "ext": ".py",
-   "bytes": 7136,
-   "changed": "2026-10-22",
-   "lines": 108,
-   "summary": "\u00ccb\u00f9d\u00f3's areas built again from their real places, every one, in the child plan's order (owner, 21 Oct 2026: \"if you fix a bug in the future\", it must reach everything already built). The area builds are not kept as hand edits any more: this writes them all, fresh, to",
-   "refs_in": [
-    "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:CLAUDE.md",
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/HISTORY.md",
-    "gidi:scripts/check_real.py",
-    "gidi:scripts/draw_area.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:web/hand/hub.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/rename_mains.py",
-   "ext": ".py",
-   "bytes": 3608,
-   "changed": "2026-10-16",
-   "lines": 60,
-   "summary": "After districts are generated side by side (the v2 frame), two of them can pick the same road name, or two roads sharing a first name (\"Ayinde Road\" and \"Ayinde Street\"), because neither saw the other's choice. This pass keeps each first name with the first district",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/roadclean.py",
-   "ext": ".py",
-   "bytes": 21430,
-   "changed": "2026-10-23",
-   "lines": 476,
-   "summary": "Rule-based clean-up of the baked road network, run by bake_web.py before the civic layer. Fixes what scripts/audit3d.py finds (D, R5, R1, R4, R2, R3), using the same tests as the audit. Buildings never move; a road is never extended through one (0.5 m clearance). Deterministic.",
-   "refs_in": [
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/roadz.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/roadends.py",
-   "ext": ".py",
-   "bytes": 14832,
-   "changed": "2026-10-17",
-   "lines": 250,
-   "summary": "Road ends (owner, 17 Oct 2026: \"the road quite literally just ends abruptly\").",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/gidi_kit/street.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/roadtypes.py",
-    "gidi:web/app.js",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/roadtypes.py",
-   "ext": ".py",
-   "bytes": 6508,
-   "changed": "2026-10-18",
-   "lines": 131,
-   "summary": "What kind of road each street is (owner, 18 Oct 2026: \"I don't think we understand things like closes, crescents, drives, ways\"). The streets are stored in pieces; this joins the pieces back into whole streets (pieces that meet end to end and",
-   "refs_in": [
-    "gidi:scripts/bake_web.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/roadz.py",
-   "ext": ".py",
-   "bytes": 30375,
-   "changed": "2026-10-16",
-   "lines": 506,
-   "summary": "Road heights, run by bake_web.py after the road clean-up (scripts/roadclean.py). Pass 2 of the road work.",
-   "refs_in": [
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/junctions.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/structure.py",
-   "ext": ".py",
-   "bytes": 7021,
-   "changed": "2026-10-15",
-   "lines": 131,
-   "summary": "How a place is built, not just how much: the structure measures of the Google rebuild (docs/REBUILD-PLAN.md). measure(buildings, streets, area) works the same on real Lagos (Google Open Buildings outlines + OSM streets, metres) and on Gidi (a district's buildings and ways), so a district can be scored against its inspiration like for like.",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:scripts/deep_check.py",
-    "gidi:scripts/study_deep.py",
-    "gidi:scripts/study_structure.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_analyse.py",
-   "ext": ".py",
-   "bytes": 18407,
-   "changed": "2026-10-13",
-   "lines": 258,
-   "summary": "Pattern study, step 2: turn the raw inspiration data into rules (statistics only; nothing is copied into Gidi). ---------- ROADS ---------- noded drive network street lengths between junctions (merge degree-2 chains) orientation local: 400 m cells -> dominant bearing + order; neighbour turn",
-   "refs_in": [
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
+    "gidi:scripts/check_map.py"
    ]
   },
   {
@@ -5508,1213 +3514,8 @@
     "gidi:docs/frontier-pattern-study.md",
     "gidi:docs/heights-pattern-study.md",
     "gidi:docs/oldshore-pattern-study.md",
-    "gidi:scripts/district_profiles.py",
     "gidi:scripts/draft_storeys.py"
    ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_connect.py",
-   "ext": ".py",
-   "bytes": 3441,
-   "changed": "2026-10-13",
-   "lines": 53,
-   "summary": "Pattern study, step 3: gateways to neighbours (deduplicated) and the spread of fabric density over 1 km squares. cluster crossings within 120 m (dual carriageways, roads running along the edge) fabric density over 1 km squares fully inside",
-   "refs_in": [
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_core.py",
-   "ext": ".py",
-   "bytes": 2541,
-   "changed": "2026-10-14",
-   "lines": 37,
-   "summary": "Pick representative real 1 km squares (median and dense) and measure them with the same yardstick used on Gidi.",
-   "refs_in": [
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_deep.py",
-   "ext": ".py",
-   "bytes": 29034,
-   "changed": "2026-10-24",
-   "lines": 490,
-   "summary": "Deep study, step 2 (docs/DEEP-STUDY.md): everything the data says about one district's real inspiration, for its generator profile. Sources (numbers only go into Gidi, never an outline, a name or an image): Google Open Buildings v3 outlines (confidence >= 0.70)   Google Open Buildings 2.5D 2023 heights (0.5 m, read at 2 m)",
-   "refs_in": [
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/studies/airport.md",
-    "gidi:docs/studies/bazaar.md",
-    "gidi:docs/studies/border.md",
-    "gidi:docs/studies/capital.md",
-    "gidi:docs/studies/estate.md",
-    "gidi:docs/studies/foodgate.md",
-    "gidi:docs/studies/frontier.md",
-    "gidi:docs/studies/heights.md",
-    "gidi:docs/studies/hub.md",
-    "gidi:docs/studies/jungle.md",
-    "gidi:docs/studies/maze.md",
-    "gidi:docs/studies/oldisland.md",
-    "gidi:docs/studies/oldshore.md",
-    "gidi:docs/studies/port.md",
-    "gidi:docs/studies/railside.md",
-    "gidi:docs/studies/watertown.md",
-    "gidi:docs/studies/yaba.md",
-    "gidi:scripts/deep_report.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_extract.py",
-   "ext": ".py",
-   "bytes": 3517,
-   "changed": "2026-10-13",
-   "lines": 53,
-   "summary": "Pattern study, step 1: pull everything OSM knows about an inspiration area (OSM, ODbL). Data stays local; only statistics are used.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_google.py",
-   "ext": ".py",
-   "bytes": 5469,
-   "changed": "2026-10-24",
-   "lines": 100,
-   "summary": "How much does OSM miss? Google Open Buildings v3 (machine-traced from satellite imagery, CC BY 4.0) against the OSM buildings of each district's study area, cell by cell. Only numbers are taken from Google's data: counts, ground covered, sizes. No geometry goes into Gidi.",
-   "refs_in": [
-    "gidi:docs/DATA-SOURCES.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_isms.py",
-   "ext": ".py",
-   "bytes": 10808,
-   "changed": "2026-10-14",
-   "lines": 134,
-   "summary": "Pattern study, the \"Lagos-isms\": eccentricities in the real data that a tidy generator would never make, counted the same way for every studied area so they can be compared (docs/LAGOS-ISMS.md). Nothing here is built into Gidi. Usage: python3 scripts/study_isms.py <study id>   ->   study-<id>-isms.json",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/LAGOS-ISMS.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_landmarks.py",
-   "ext": ".py",
-   "bytes": 6229,
-   "changed": "2026-10-13",
-   "lines": 80,
-   "summary": "Pattern study, step 5 (Hub and any transit district): sizes of the big structures a district is known for. Flyover spans, interchanges (clusters of slip roads), footbridges, bus terminals/parks, stadiums, rail stations, hotels. Statistics only: no real geometry or name goes into Gidi.  Usage: python3 scripts/study_landmarks.py <id>",
-   "refs_in": [
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_structure.py",
-   "ext": ".py",
-   "bytes": 6847,
-   "changed": "2026-10-24",
-   "lines": 130,
-   "summary": "Structure study of a district's inspiration from Google Open Buildings v3 (outlines) and OSM (streets), and the same measures on Gidi's district, square by square (scripts/structure.py). Also Overture's places and street furniture per km2. Usage: python3 scripts/study_structure.py foodgate 3.370,6.580,3.415,6.620  -> docs/data/structure-<id>.json, table",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_undermapped.py",
-   "ext": ".py",
-   "bytes": 3551,
-   "changed": "2026-10-15",
-   "lines": 38,
-   "summary": "Pattern study, for an area where OSM has mapped the streets but only a fraction of the buildings (central Ikeja: OSM footprints cover 10-14% of land that ESA WorldCover counts as 83% built up). The street figures in study-<id>-core.json stay as measured.",
-   "refs_in": [
-    "gidi:docs/border-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_village.py",
-   "ext": ".py",
-   "bytes": 2492,
-   "changed": "2026-10-13",
-   "lines": 24,
-   "summary": "Waterfront studies: split the buildings on the water (stilt villages: more than 60 m from any mapped road) from the land ones. Writes study-<id>-village.json (the village rules) and keeps only land buildings in study-<id>.pkl (the original is kept as",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/study_wellmapped.py",
-   "ext": ".py",
-   "bytes": 3128,
-   "changed": "2026-10-14",
-   "lines": 39,
-   "summary": "Pattern study, for an area where OSM maps the streets everywhere but the buildings only in some neighbourhoods (the Estate: Ikeja GRA is traced, most of Magodo and Omole are not). The street figures in study-<id>-core.json stay as measured. The building figures are measured instead on the 250 m cells of one well-mapped box whose buildings cover at least 3% of the",
-   "refs_in": [
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/surfaces.py",
-   "ext": ".py",
-   "bytes": 8513,
-   "changed": "2026-10-16",
-   "lines": 152,
-   "summary": "Road surfaces (owner, 16 Oct 2026: \"sometimes you have roads... not particularly paved... marshy ground... so much grime it barely looks like it's tarred... in the poorer areas\"). Every road and street gets a surface, by rule, the same every run:",
-   "refs_in": [
-    "gidi:scripts/bake_web.py",
-    "gidi:web/app.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/terrain.py",
-   "ext": ".py",
-   "bytes": 7554,
-   "changed": "2026-10-24",
-   "lines": 106,
-   "summary": "Gidi's ground: a height grid for the whole map (web/terrain.json), from the land under each district's real inspiration. Each district takes the relief of its study area (the 30 m Copernicus surface model, ground estimated as the lowest pixel of",
-   "refs_in": [
-    "gidi:scripts/draw_terrain.py",
-    "gidi:scripts/study_deep.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/things.py",
-   "ext": ".py",
-   "bytes": 37883,
-   "changed": "2026-10-23",
-   "lines": 687,
-   "summary": "Things the 3D kit used to invent, now in the map data (owner, 17 Oct 2026: \"everything should be in the data... even the grain of sand... if everything is in the data, we'll be able to better place stuff\").",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/build_viewer.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/ground.py",
-    "gidi:scripts/hand.py",
-    "gidi:scripts/houses.py",
-    "gidi:web/board.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/trees.py",
-   "ext": ".py",
-   "bytes": 4542,
-   "changed": "2026-10-23",
-   "lines": 88,
-   "summary": "Trees in the map data (owner, 16 Oct 2026: if it's in the 3D, it's in the 2D).",
-   "refs_in": [
-    "gidi:docs/BOARD.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/hand.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/twin_photos.py",
-   "ext": ".py",
-   "bytes": 2475,
-   "changed": "2026-10-24",
-   "lines": 48,
-   "summary": "Street twins' pictures for one built area of a child district (docs/hand/<dir>/twins/<area>.json). plan:   python3 scripts/twin_photos.py plan ibudo <area>    -> ~/gidi-data/research/google/<dir>/twins/<area>/PLAN.json (Street View points every 40 m, both ways)",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/twins.py",
-   "ext": ".py",
-   "bytes": 4030,
-   "changed": "2026-10-24",
-   "lines": 70,
-   "summary": "Every type in Gidi and its real twin (owner, 19 Oct 2026: \"let's know what every type of item and building as well to the type of surface, so we know we have a real life twin\"). Reads the map (web/gidi-data.js) for the types and their counts, and web/twins.json",
-   "refs_in": [
-    "gidi:decisions/HISTORY.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/walknet.py",
-   "ext": ".py",
-   "bytes": 6970,
-   "changed": "2026-10-15",
-   "lines": 104,
-   "summary": "The walking and riding network of the built districts, shared by explore_city.py (the living test) and bake_web.py (placing schools, places of worship and chemists by coverage), so both measure walks the same way. G is the baked city (web/gidi-data.js) or the dict bake_web.py is building.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/explore_city.py",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "scripts/whats_here.py",
-   "ext": ".py",
-   "bytes": 6338,
-   "changed": "2026-10-15",
-   "lines": 105,
-   "summary": "What is on the ground here? Everything the map holds at one spot, from the built data (web/gidi-data.js): the district and the ground's height, the surface (carriageway, gutter, walkway, market street, building, plot, yard, water), the building",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-airport-core.json",
-   "ext": ".json",
-   "bytes": 1540,
-   "changed": "2026-10-16",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-airport-landmarks.json",
-   "ext": ".json",
-   "bytes": 1589,
-   "changed": "2026-10-16",
-   "lines": 102,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-airport.json",
-   "ext": ".json",
-   "bytes": 8722,
-   "changed": "2026-10-16",
-   "lines": 527,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bazaar-core.json",
-   "ext": ".json",
-   "bytes": 1542,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bazaar-isms.json",
-   "ext": ".json",
-   "bytes": 2990,
-   "changed": "2026-10-14",
-   "lines": 210,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bazaar-landmarks.json",
-   "ext": ".json",
-   "bytes": 1328,
-   "changed": "2026-10-14",
-   "lines": 81,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bazaar.json",
-   "ext": ".json",
-   "bytes": 7763,
-   "changed": "2026-10-14",
-   "lines": 483,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-border-core.json",
-   "ext": ".json",
-   "bytes": 2361,
-   "changed": "2026-10-15",
-   "lines": 122,
-   "summary": "keys: note, ratio_cover_to_builtup, mean_footprint_m2, median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-border-isms.json",
-   "ext": ".json",
-   "bytes": 2091,
-   "changed": "2026-10-15",
-   "lines": 111,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-border-landmarks.json",
-   "ext": ".json",
-   "bytes": 1032,
-   "changed": "2026-10-15",
-   "lines": 59,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-border.json",
-   "ext": ".json",
-   "bytes": 5952,
-   "changed": "2026-10-15",
-   "lines": 347,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bordercoast-landmarks.json",
-   "ext": ".json",
-   "bytes": 964,
-   "changed": "2026-10-15",
-   "lines": 54,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-bordercoast.json",
-   "ext": ".json",
-   "bytes": 4584,
-   "changed": "2026-10-15",
-   "lines": 272,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-capital-core.json",
-   "ext": ".json",
-   "bytes": 2684,
-   "changed": "2026-10-14",
-   "lines": 144,
-   "summary": "keys: note, ratio_cover_to_builtup, mean_footprint_m2, median, dense",
-   "refs_in": [
-    "gidi:docs/capital-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-capital-isms.json",
-   "ext": ".json",
-   "bytes": 2910,
-   "changed": "2026-10-14",
-   "lines": 201,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-capital-landmarks.json",
-   "ext": ".json",
-   "bytes": 2056,
-   "changed": "2026-10-14",
-   "lines": 146,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-capital.json",
-   "ext": ".json",
-   "bytes": 9236,
-   "changed": "2026-10-14",
-   "lines": 557,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-estate-core.json",
-   "ext": ".json",
-   "bytes": 2364,
-   "changed": "2026-10-14",
-   "lines": 120,
-   "summary": "keys: note, box, median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-estate-isms.json",
-   "ext": ".json",
-   "bytes": 2950,
-   "changed": "2026-10-14",
-   "lines": 203,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-estate-landmarks.json",
-   "ext": ".json",
-   "bytes": 2006,
-   "changed": "2026-10-14",
-   "lines": 142,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-estate.json",
-   "ext": ".json",
-   "bytes": 9220,
-   "changed": "2026-10-14",
-   "lines": 556,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-festac-core.json",
-   "ext": ".json",
-   "bytes": 1419,
-   "changed": "2026-10-13",
-   "lines": 86,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-festac-isms.json",
-   "ext": ".json",
-   "bytes": 3276,
-   "changed": "2026-10-14",
-   "lines": 237,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-festac-landmarks.json",
-   "ext": ".json",
-   "bytes": 1472,
-   "changed": "2026-10-13",
-   "lines": 95,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-festac.json",
-   "ext": ".json",
-   "bytes": 8951,
-   "changed": "2026-10-13",
-   "lines": 541,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": [
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-foodgate-core.json",
-   "ext": ".json",
-   "bytes": 1546,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-foodgate-isms.json",
-   "ext": ".json",
-   "bytes": 3084,
-   "changed": "2026-10-14",
-   "lines": 221,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-foodgate-landmarks.json",
-   "ext": ".json",
-   "bytes": 1533,
-   "changed": "2026-10-13",
-   "lines": 97,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-foodgate.json",
-   "ext": ".json",
-   "bytes": 8213,
-   "changed": "2026-10-13",
-   "lines": 507,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-frontier-core.json",
-   "ext": ".json",
-   "bytes": 2363,
-   "changed": "2026-10-14",
-   "lines": 120,
-   "summary": "keys: note, box, median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-frontier-isms.json",
-   "ext": ".json",
-   "bytes": 3064,
-   "changed": "2026-10-14",
-   "lines": 213,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-frontier-landmarks.json",
-   "ext": ".json",
-   "bytes": 1522,
-   "changed": "2026-10-14",
-   "lines": 100,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-frontier.json",
-   "ext": ".json",
-   "bytes": 9094,
-   "changed": "2026-10-14",
-   "lines": 546,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-heights-core.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-heights-isms.json",
-   "ext": ".json",
-   "bytes": 2981,
-   "changed": "2026-10-14",
-   "lines": 204,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-heights-landmarks.json",
-   "ext": ".json",
-   "bytes": 3230,
-   "changed": "2026-10-14",
-   "lines": 258,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-heights.json",
-   "ext": ".json",
-   "bytes": 9373,
-   "changed": "2026-10-14",
-   "lines": 561,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hikoyi-core.json",
-   "ext": ".json",
-   "bytes": 1546,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hikoyi.json",
-   "ext": ".json",
-   "bytes": 7711,
-   "changed": "2026-10-14",
-   "lines": 486,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hub-core.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hub-isms.json",
-   "ext": ".json",
-   "bytes": 3319,
-   "changed": "2026-10-14",
-   "lines": 243,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hub-landmarks.json",
-   "ext": ".json",
-   "bytes": 1314,
-   "changed": "2026-10-13",
-   "lines": 97,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hub.json",
-   "ext": ".json",
-   "bytes": 9814,
-   "changed": "2026-10-13",
-   "lines": 582,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hvi-core.json",
-   "ext": ".json",
-   "bytes": 1546,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-hvi.json",
-   "ext": ".json",
-   "bytes": 7615,
-   "changed": "2026-10-14",
-   "lines": 476,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-ikeja-core.json",
-   "ext": ".json",
-   "bytes": 1480,
-   "changed": "2026-10-14",
-   "lines": 90,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-ikeja-isms.json",
-   "ext": ".json",
-   "bytes": 3176,
-   "changed": "2026-10-14",
-   "lines": 229,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-ikeja-landmarks.json",
-   "ext": ".json",
-   "bytes": 2677,
-   "changed": "2026-10-14",
-   "lines": 202,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-ikeja.json",
-   "ext": ".json",
-   "bytes": 9786,
-   "changed": "2026-10-14",
-   "lines": 581,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-jungle-core.json",
-   "ext": ".json",
-   "bytes": 1550,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-jungle-isms.json",
-   "ext": ".json",
-   "bytes": 3069,
-   "changed": "2026-10-14",
-   "lines": 216,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-jungle-landmarks.json",
-   "ext": ".json",
-   "bytes": 1427,
-   "changed": "2026-10-13",
-   "lines": 90,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": [
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-jungle.json",
-   "ext": ".json",
-   "bytes": 7853,
-   "changed": "2026-10-13",
-   "lines": 478,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-kosofe-core.json",
-   "ext": ".json",
-   "bytes": 1482,
-   "changed": "2026-10-13",
-   "lines": 90,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-kosofe-landmarks.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-13",
-   "lines": 100,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-kosofe.json",
-   "ext": ".json",
-   "bytes": 9099,
-   "changed": "2026-10-13",
-   "lines": 541,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-mainland-shomolu-landmarks.json",
-   "ext": ".json",
-   "bytes": 1656,
-   "changed": "2026-10-13",
-   "lines": 109,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": [
-    "gidi:docs/watertown-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-maze-core.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-maze-isms.json",
-   "ext": ".json",
-   "bytes": 3193,
-   "changed": "2026-10-14",
-   "lines": 226,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-maze-landmarks.json",
-   "ext": ".json",
-   "bytes": 1767,
-   "changed": "2026-10-13",
-   "lines": 114,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": [
-    "gidi:docs/maze-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-maze.json",
-   "ext": ".json",
-   "bytes": 9630,
-   "changed": "2026-10-13",
-   "lines": 574,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-ojo.json",
-   "ext": ".json",
-   "bytes": 7422,
-   "changed": "2026-10-14",
-   "lines": 468,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldisland-core.json",
-   "ext": ".json",
-   "bytes": 2377,
-   "changed": "2026-10-14",
-   "lines": 120,
-   "summary": "keys: note, box, median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldisland-isms.json",
-   "ext": ".json",
-   "bytes": 2898,
-   "changed": "2026-10-14",
-   "lines": 195,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldisland-landmarks.json",
-   "ext": ".json",
-   "bytes": 1657,
-   "changed": "2026-10-14",
-   "lines": 116,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldisland.json",
-   "ext": ".json",
-   "bytes": 8627,
-   "changed": "2026-10-14",
-   "lines": 531,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldshore-core.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-15",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldshore-isms.json",
-   "ext": ".json",
-   "bytes": 2908,
-   "changed": "2026-10-15",
-   "lines": 199,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldshore-landmarks.json",
-   "ext": ".json",
-   "bytes": 1386,
-   "changed": "2026-10-15",
-   "lines": 86,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-oldshore.json",
-   "ext": ".json",
-   "bytes": 8375,
-   "changed": "2026-10-15",
-   "lines": 518,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-port-core.json",
-   "ext": ".json",
-   "bytes": 1543,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-port-isms.json",
-   "ext": ".json",
-   "bytes": 3302,
-   "changed": "2026-10-14",
-   "lines": 242,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-port-landmarks.json",
-   "ext": ".json",
-   "bytes": 1636,
-   "changed": "2026-10-14",
-   "lines": 99,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-port.json",
-   "ext": ".json",
-   "bytes": 8443,
-   "changed": "2026-10-14",
-   "lines": 507,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-railside-core.json",
-   "ext": ".json",
-   "bytes": 1549,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-railside-isms.json",
-   "ext": ".json",
-   "bytes": 3220,
-   "changed": "2026-10-14",
-   "lines": 230,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-railside-landmarks.json",
-   "ext": ".json",
-   "bytes": 1751,
-   "changed": "2026-10-14",
-   "lines": 115,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-railside.json",
-   "ext": ".json",
-   "bytes": 9574,
-   "changed": "2026-10-14",
-   "lines": 568,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-watertown-core.json",
-   "ext": ".json",
-   "bytes": 1546,
-   "changed": "2026-10-14",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-watertown-isms.json",
-   "ext": ".json",
-   "bytes": 2913,
-   "changed": "2026-10-14",
-   "lines": 198,
-   "summary": "keys: id, area_km2, note, dead_end_at_water, dead_end_at_rail, missing_links, buildings_on_drainage_setback, buildings_in_road_reserve, markets_on_carriageway, overloaded_main_roads, unfinished_buildings, odd_junctions",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-watertown-landmarks.json",
-   "ext": ".json",
-   "bytes": 1304,
-   "changed": "2026-10-13",
-   "lines": 79,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-watertown-village.json",
-   "ext": ".json",
-   "bytes": 561,
-   "changed": "2026-10-13",
-   "lines": 35,
-   "summary": "keys: method, count, area_ha, per_km2_of_village, coverage, footprint_m2, short_side_m, long_side_m, gap_m, canoe_channels_km_per_km2_of_village, plank_bridges_m",
-   "refs_in": [
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "study-watertown.json",
-   "ext": ".json",
-   "bytes": 8388,
-   "changed": "2026-10-13",
-   "lines": 506,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-yaba-core.json",
-   "ext": ".json",
-   "bytes": 1541,
-   "changed": "2026-10-16",
-   "lines": 92,
-   "summary": "keys: median, dense",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-yaba-landmarks.json",
-   "ext": ".json",
-   "bytes": 1436,
-   "changed": "2026-10-16",
-   "lines": 90,
-   "summary": "keys: area_km2, flyover_spans_m, interchanges, major_road_rail_crossings, footbridges, bus_stations, parking_lots_m2, stadium, rail_station_building_m2, rail_stops_per_km_of_track, hotels, markets_m2",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "study-yaba.json",
-   "ext": ".json",
-   "bytes": 8932,
-   "changed": "2026-10-16",
-   "lines": 546,
-   "summary": "keys: road_km_by_class, road_km_per_km2, surface_tags, lanes_tags, oneway_share_by_km, named_share_minor, street_name_endings, junctions, street_length_between_junctions_m, sinuosity_segments_over_40m, orientation_whole_area, local_400m_cells",
-   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -6731,25 +3532,11 @@
   },
   {
    "repo": "gidi",
-   "path": "web/app.js",
-   "ext": ".js",
-   "bytes": 41101,
-   "changed": "2026-10-23",
-   "lines": 550,
-   "summary": "Gidi Maps: a Google Maps\u2013style viewer for the Gidi city plan (map v0.3). Data: window.GIDI (metres, origin top-left, y down). React 18 UMD, no JSX.",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/build_viewer.py"
-   ]
-  },
-  {
-   "repo": "gidi",
    "path": "web/board.html",
    "ext": ".html",
-   "bytes": 7604,
+   "bytes": 6024,
    "changed": "2026-10-22",
-   "lines": 94,
+   "lines": 75,
    "summary": "Gidi Drawing Board",
    "refs_in": [
     "gidi:README.md",
@@ -6760,68 +3547,7 @@
     "gidi:scripts/board_server.py",
     "gidi:scripts/frame_footprints.py",
     "gidi:scripts/frame_study.py",
-    "gidi:scripts/hand.py",
-    "gidi:web/frame.js",
     "gidi:web/mapedit.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/board.js",
-   "ext": ".js",
-   "bytes": 90604,
-   "changed": "2026-10-22",
-   "lines": 890,
-   "summary": "The Gidi drawing board (owner, 16 Oct 2026): a clean plan of the city to scale, where every road edge, plot, house and piece of street furniture can be seen exactly, checked, moved and placed. Edits are saved as hand-file edits through scripts/board_server.py, so the bake, the checks and the 3D follow the drawing. Data: window.GIDI (metres, y south).",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/BOARD.md",
-    "gidi:scripts/ground.py",
-    "gidi:web/board.html"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/civic.json",
-   "ext": ".json",
-   "bytes": 7328,
-   "changed": "2026-10-13",
-   "lines": 104,
-   "summary": "keys: _counts_order, counts, key",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:legacy/blender/coverage.py",
-    "gidi:legacy/blender/gidi_kit/registry.py",
-    "gidi:scripts/bake_web.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/deep-tune.json",
-   "ext": ".json",
-   "bytes": 2458,
-   "changed": "2026-10-16",
-   "lines": 135,
-   "summary": "keys: airport, bazaar, border, capital, estate, foodgate, frontier, heights, hub, jungle, maze, oldisland",
-   "refs_in": [
-    "gidi:scripts/deep_tune.py",
-    "gidi:scripts/district_profiles.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/districts_info.json",
-   "ext": ".json",
-   "bytes": 26439,
-   "changed": "2026-10-16",
-   "lines": 970,
-   "summary": "keys: jungle, maze, hub, railside, foodgate, port, bazaar, border, capital, estate, watertown, oldshore",
-   "refs_in": [
-    "gidi:docs/hand/maze-hub-lagos.md",
-    "gidi:docs/look/research-landmarks.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/deep_report.py",
-    "gidi:scripts/gen_fabric.py"
    ]
   },
   {
@@ -6841,531 +3567,14 @@
    "repo": "gidi",
    "path": "web/frame.js",
    "ext": ".js",
-   "bytes": 19908,
+   "bytes": 19775,
    "changed": "2026-10-22",
    "lines": 239,
-   "summary": "The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Opened with board.html?frame=new; the old map stays at board.html. Data: window.FRAME (scripts/frame_study.py) and, zoomed in, web/frame-tiles/ (scripts/frame_footprints.py), Gidi metres,",
+   "summary": "The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Opened with board.html. Data: window.FRAME (scripts/frame_study.py) and, zoomed in, web/frame-tiles/ (scripts/frame_footprints.py), Gidi metres,",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
     "gidi:web/board.html",
     "gidi:web/mapedit.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-airport.json",
-   "ext": ".json",
-   "bytes": 475010,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-bazaar.json",
-   "ext": ".json",
-   "bytes": 1866838,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/bazaar-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-border.json",
-   "ext": ".json",
-   "bytes": 661179,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/border-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-capital.json",
-   "ext": ".json",
-   "bytes": 335565,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/capital-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-estate.json",
-   "ext": ".json",
-   "bytes": 382231,
-   "changed": "2026-10-18",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, mains, canal, buildings, parcels, poi_pos, poi_plot, poi_from",
-   "refs_in": [
-    "gidi:docs/estate-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-foodgate.json",
-   "ext": ".json",
-   "bytes": 1000265,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/foodgate-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-frontier.json",
-   "ext": ".json",
-   "bytes": 2030912,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:docs/frontier-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-heights.json",
-   "ext": ".json",
-   "bytes": 366735,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, mains, canal, buildings, parcels, poi_pos, poi_plot, poi_from",
-   "refs_in": [
-    "gidi:docs/heights-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-hub.json",
-   "ext": ".json",
-   "bytes": 1240752,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/hub-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-jungle.json",
-   "ext": ".json",
-   "bytes": 924405,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/jungle-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-maze.json",
-   "ext": ".json",
-   "bytes": 509682,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/maze-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-oldisland.json",
-   "ext": ".json",
-   "bytes": 294184,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/oldisland-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-oldshore.json",
-   "ext": ".json",
-   "bytes": 899179,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/oldshore-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-port.json",
-   "ext": ".json",
-   "bytes": 223691,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/port-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-railside.json",
-   "ext": ".json",
-   "bytes": 1551943,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/railside-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-watertown.json",
-   "ext": ".json",
-   "bytes": 472454,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": [
-    "gidi:docs/watertown-pattern-study.md"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gen-yaba.json",
-   "ext": ".json",
-   "bytes": 437472,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: id, seed, method, streets, lanes, paths, mains, canal, buildings, parcels, poi_pos, poi_plot",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gidi-data.js",
-   "ext": ".js",
-   "bytes": 50015569,
-   "changed": "2026-10-22",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_import.py",
-    "gidi-game:tools/plates.py",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:legacy/README.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/city_run.py",
-    "gidi:legacy/blender/generate.py",
-    "gidi:legacy/blender/gidi_kit/parcels.py",
-    "gidi:legacy/blender/gidi_kit/places.py",
-    "gidi:legacy/blender/gidi_kit/registry.py",
-    "gidi:legacy/blender/kinds_sheet.py",
-    "gidi:scripts/audit3d.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/board_server.py",
-    "gidi:scripts/build_viewer.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/check_real.py",
-    "gidi:scripts/deep_check.py",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/draw_area.py",
-    "gidi:scripts/draw_gen.py",
-    "gidi:scripts/draw_terrain.py",
-    "gidi:scripts/explore_city.py",
-    "gidi:scripts/fix_gutters_to_sections.py",
-    "gidi:scripts/freeze_district.py",
-    "gidi:scripts/gen_fabric.py",
-    "gidi:scripts/hand_fix_checks.py",
-    "gidi:scripts/hand_fix_lines.py",
-    "gidi:scripts/hand_links.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/hand_spots/ibudo_spot1.py",
-    "gidi:scripts/isms.py",
-    "gidi:scripts/rebuild_areas.py",
-    "gidi:scripts/rename_mains.py",
-    "gidi:scripts/study_structure.py",
-    "gidi:scripts/surfaces.py",
-    "gidi:scripts/terrain.py",
-    "gidi:scripts/twins.py",
-    "gidi:scripts/walknet.py",
-    "gidi:scripts/whats_here.py",
-    "gidi:web/board.html"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/gidi-maps.html",
-   "ext": ".html",
-   "bytes": 42108568,
-   "changed": "2026-10-23",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:scripts/build_viewer.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/airport.json",
-   "ext": ".json",
-   "bytes": 951283,
-   "changed": "2026-10-20",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/bazaar.json",
-   "ext": ".json",
-   "bytes": 4132571,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/border.json",
-   "ext": ".json",
-   "bytes": 1391910,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/capital.json",
-   "ext": ".json",
-   "bytes": 559618,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/estate.json",
-   "ext": ".json",
-   "bytes": 420322,
-   "changed": "2026-10-18",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, note, retired, snapshot, applied",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/foodgate-v2.json",
-   "ext": ".json",
-   "bytes": 2246898,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/foodgate.json",
-   "ext": ".json",
-   "bytes": 1219430,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, edits, note, snapshot, log",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/frontier.json",
-   "ext": ".json",
-   "bytes": 2974043,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/gen/hub.json",
-   "ext": ".json",
-   "bytes": 3256614,
-   "changed": "2026-10-22",
-   "lines": null,
-   "summary": "",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/hand_spots/ibudo_spot1.py",
-    "gidi:scripts/rebuild_areas.py",
-    "gidi:web/hand/hub.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/heights.json",
-   "ext": ".json",
-   "bytes": 517934,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/hub.json",
-   "ext": ".json",
-   "bytes": 153076,
-   "changed": "2026-10-22",
-   "lines": 10239,
-   "summary": "keys: district, layout, edits, applied, log, note",
-   "refs_in": [
-    "gidi:decisions/DECISIONS.md",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/hand_spots/ibudo_spot1.py",
-    "gidi:scripts/rebuild_areas.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/jungle.json",
-   "ext": ".json",
-   "bytes": 2159709,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/maze.json",
-   "ext": ".json",
-   "bytes": 2051132,
-   "changed": "2026-10-20",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/oldisland.json",
-   "ext": ".json",
-   "bytes": 887088,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, snapshot, applied, log, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/oldshore.json",
-   "ext": ".json",
-   "bytes": 2082077,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/port.json",
-   "ext": ".json",
-   "bytes": 299340,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/railside.json",
-   "ext": ".json",
-   "bytes": 3184449,
-   "changed": "2026-10-16",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/watertown.json",
-   "ext": ".json",
-   "bytes": 824070,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, log, snapshot, applied, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/hand/yaba.json",
-   "ext": ".json",
-   "bytes": 858892,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: district, layout, edits, snapshot, applied, log, note",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
-   "path": "web/isms-edits.json",
-   "ext": ".json",
-   "bytes": 378,
-   "changed": "2026-10-15",
-   "lines": 6,
-   "summary": "keys: _about, gutters, gutter_crossings",
-   "refs_in": [
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/isms.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/layout-v2.json",
-   "ext": ".json",
-   "bytes": 62540,
-   "changed": "2026-10-20",
-   "lines": 1,
-   "summary": "keys: scale, size, note, water, ocean, districts, anchors, arterials, rail",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/child_plan.py",
-    "gidi:scripts/frame_network.py",
-    "gidi:scripts/hand_spots/ibudo_real_area.py",
-    "gidi:scripts/layout_v2.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/locked.json",
-   "ext": ".json",
-   "bytes": 3375,
-   "changed": "2026-10-13",
-   "lines": 224,
-   "summary": "keys: maze, hub, watertown",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/hand/maze-hub-lagos.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/district_profiles.py",
-    "gidi:scripts/gen_fabric.py"
    ]
   },
   {
@@ -7383,118 +3592,6 @@
     "gidi:web/board.html",
     "gidi:web/faceedit.js",
     "gidi:web/frame.js"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/network.json",
-   "ext": ".json",
-   "bytes": 32648,
-   "changed": "2026-10-16",
-   "lines": 3208,
-   "summary": "keys: frame, edges, gateways",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md",
-    "gidi:docs/foodgate-pattern-study.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/heights-pattern-study.md",
-    "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/jungle-pattern-study.md",
-    "gidi:docs/lagos-study/roads/scripts/ladder.py",
-    "gidi:docs/lagos-study/roads/scripts/network.py",
-    "gidi:docs/lagos-study/roads/scripts/plot_places.py",
-    "gidi:docs/lagos-study/roads/scripts/report.py",
-    "gidi:docs/maze-pattern-study.md",
-    "gidi:docs/oldisland-pattern-study.md",
-    "gidi:docs/oldshore-pattern-study.md",
-    "gidi:docs/port-pattern-study.md",
-    "gidi:docs/railside-pattern-study.md",
-    "gidi:docs/watertown-pattern-study.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/check_district.py",
-    "gidi:scripts/district_profiles.py",
-    "gidi:scripts/frame_footprints.py",
-    "gidi:scripts/frame_network.py",
-    "gidi:scripts/frame_study.py",
-    "gidi:scripts/gen_fabric.py",
-    "gidi:scripts/rename_mains.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/shell.html",
-   "ext": ".html",
-   "bytes": 23914,
-   "changed": "2026-10-17",
-   "lines": 196,
-   "summary": "Gidi Maps",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:legacy/OLD-MAP.md",
-    "gidi:scripts/build_viewer.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/terrain-edits.json",
-   "ext": ".json",
-   "bytes": 361,
-   "changed": "2026-10-15",
-   "lines": 5,
-   "summary": "a list of 2",
-   "refs_in": [
-    "gidi:scripts/terrain.py",
-    "gidi:web/terrain.json"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/terrain.json",
-   "ext": ".json",
-   "bytes": 331191,
-   "changed": "2026-10-16",
-   "lines": 1,
-   "summary": "keys: source, cell_m, origin, w, h, unit, z",
-   "refs_in": [
-    "gidi:docs/DATA-SOURCES.md",
-    "gidi:legacy/blender/city.py",
-    "gidi:legacy/blender/city_run.py",
-    "gidi:scripts/bake_web.py",
-    "gidi:scripts/draw_terrain.py",
-    "gidi:scripts/roadz.py",
-    "gidi:scripts/surfaces.py",
-    "gidi:scripts/terrain.py",
-    "gidi:scripts/whats_here.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/twins.json",
-   "ext": ".json",
-   "bytes": 10176,
-   "changed": "2026-10-19",
-   "lines": 342,
-   "summary": "keys: building/front, building/shed, building/stalls, building/kiosk, building/terminal, plot/under bridge, plot/market, plot/bus terminal, market zone/market street, market zone/rail market, deck/footbridge, deck/flyover",
-   "refs_in": [
-    "gidi:decisions/HISTORY.md",
-    "gidi:scripts/twins.py"
-   ]
-  },
-  {
-   "repo": "gidi",
-   "path": "web/view3d.js",
-   "ext": ".js",
-   "bytes": 39875,
-   "changed": "2026-10-23",
-   "lines": 531,
-   "summary": "Gidi Maps, 3D view. Close in, the city is the Blender kit's own models (legacy/blender/city_run.py writes them as 400 m tiles to web/city/<detail>/tiles): they stream in round where you're looking, the light \"web\" build out to about a kilometre and the full build right up close. Zoomed out, and",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/build_viewer.py"
    ]
   },
   {
@@ -11727,6 +7824,7 @@
     "gidi:.claude/hooks/review-before-push.sh",
     "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/data/deep/airport.json",
     "gidi:docs/data/deep/bazaar.json",
@@ -11744,8 +7842,7 @@
     "gidi:docs/data/deep/port.json",
     "gidi:docs/data/deep/railside.json",
     "gidi:docs/data/deep/watertown.json",
-    "gidi:docs/data/deep/yaba.json",
-    "gidi:scripts/study_deep.py"
+    "gidi:docs/data/deep/yaba.json"
    ]
   },
   {
@@ -11964,8 +8061,7 @@
     "gidi-game:tools/vehicle_export.py",
     "gidi-game:tools/vehicle_prep.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
-    "gidi:legacy/blender/city.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -11983,6 +8079,7 @@
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:README.md",
     "gidi-game:tools/import.sh",
+    "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md"
    ]
@@ -12116,6 +8213,7 @@
     "gidi-game:Content/Python/gidi_import.py",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/stream.sh",
+    "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md"
    ]
@@ -12203,8 +8301,7 @@
    "lines": 56,
    "summary": "Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its data and the kit's tiles.",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -12477,7 +8574,7 @@
     "gidi-game:tools/stall_build.py",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md"
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -12593,7 +8690,7 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
+    "gidi:docs/OLD-KIT.md",
     "gidi:schema/kit_reads.json"
    ]
   },
@@ -13187,8 +9284,7 @@
    "summary": "Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the material, re-point the imported meshes. Headless.",
    "refs_in": [
     "gidi-game:Content/Python/gidi_surfaces.py",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/bake_web.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -13377,7 +9473,7 @@
     "gidi-game:tools/spot_assemble.py",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md"
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -13441,8 +9537,7 @@
    "lines": 23,
    "summary": "gidi-data: Gidi's study store: What Gidi studies Lagos from: open datasets, the Google study shots, reference pictures, the kit tests, textures and people assets. It lived inside World Drive's folder (`~/Real-world`) until 24 Oct 2026; the owner moved it out (\"take out the Gidi stuff from real world\").",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -13507,9 +9602,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13523,9 +9616,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13565,16 +9656,7 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:legacy/blender/WHAT-IT-HELD.md",
-    "gidi:legacy/blender/gidi_kit/core.py",
-    "gidi:legacy/blender/gidi_kit/draft.py",
-    "gidi:legacy/blender/gidi_kit/facade.py",
-    "gidi:legacy/blender/gidi_kit/goods.py",
-    "gidi:legacy/blender/gidi_kit/oldtown.py",
-    "gidi:legacy/blender/gidi_kit/parts.py",
-    "gidi:legacy/blender/gidi_kit/roadbed.py",
-    "gidi:legacy/blender/gidi_kit/zinc.py",
-    "gidi:legacy/blender/kit_draft.py",
+    "gidi:docs/OLD-KIT.md",
     "gidi:map/d15/BUILDINGS.md",
     "gidi:scripts/draft_looks.py"
    ]
@@ -13628,9 +9710,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13711,9 +9791,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13727,9 +9805,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13844,9 +9920,7 @@
    "summary": "Kit eye test 4: ot73, Epe, Ogunmule Akinlogba St (Street View, May 2024, heading 180): The test: do the kit's parts hold on a fourth street they were not made for? The owner's eye judges. This is not a pass.",
    "refs_in": [
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13896,9 +9970,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13947,9 +10019,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13963,9 +10033,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -13979,9 +10047,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md",
-    "gidi:scripts/design_density.py",
-    "gidi:scripts/district_profiles.py"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -14007,8 +10073,7 @@
    "lines": 9,
    "summary": "Gidi textures (outside the repo): Downloaded 22 Oct 2026 with the owner's OK. Poly Haven, CC0 (free for any use, including a sold game). 2K maps per surface: diffuse, nor_gl (OpenGL normal: Blender; flip green for Unreal or use Unreal's flip option), rough, displacement, ao where offered.",
    "refs_in": [
-    "gidi:decisions/CODEBASE.md",
-    "gidi:scripts/audit3d.py"
+    "gidi:decisions/CODEBASE.md"
    ]
   }
  ],
@@ -14019,29 +10084,60 @@
   "gidi-game:tools/props_build.py": [
    "docs/hand/lagos-pass.md"
   ],
+  "gidi:.claude/hooks/review-before-push.sh": [
+   "rebuild_areas.py"
+  ],
   "gidi:decisions/CHECKS.md": [
-   "tools/bake.sh"
+   "check_district.py",
+   "check_real.py"
   ],
   "gidi:decisions/CODEBASE.md": [
+   "audit3d.py",
+   "bake_web.py",
+   "check_district.py",
+   "check_real.py",
    "concept.py",
+   "district_profiles.py",
+   "draw_area.py",
+   "explore_city.py",
    "fabric.py",
+   "frame_network.py",
+   "freeze_district.py",
+   "gen_fabric.py",
+   "hand.py",
    "lagoon.py",
+   "landmarks.py",
+   "layout_v2.py",
    "lgamap.py",
    "lgas.py",
+   "rebuild_areas.py",
+   "scripts/build_viewer.py",
+   "scripts/check_real.py",
    "scripts/compare.py",
    "scripts/gen3d.py",
    "sea.py",
    "study.py",
+   "study_extract.py",
+   "study_isms.py",
    "tools/bake.sh",
-   "tools/perf.sh"
+   "tools/perf.sh",
+   "walknet.py"
   ],
   "gidi:decisions/DECISIONS.md": [
+   "scripts/compounds.py",
+   "scripts/cross_sections.py",
+   "scripts/roadends.py",
    "tools/perf.sh"
   ],
   "gidi:decisions/HISTORY.md": [
    "docs/LAYOUT-V2.md",
    "docs/TWINS.md",
-   "docs/hand/lagos-pass.md"
+   "docs/hand/lagos-pass.md",
+   "scripts/autoclean.py",
+   "scripts/check_real.py",
+   "scripts/hand_spots/ibudo_real_area.py",
+   "scripts/rebuild_areas.py",
+   "scripts/twins.py"
   ],
   "gidi:decisions/story/README.md": [
    "gidi-performance-capture.md",
@@ -14052,6 +10148,48 @@
   ],
   "gidi:decisions/story/acts-2-3-draft.md": [
    "gidi-performance-capture.md"
+  ],
+  "gidi:docs/BOARD.md": [
+   "check_district.py",
+   "scripts/check_district.py",
+   "scripts/compounds.py",
+   "scripts/fronts.py",
+   "scripts/ground.py",
+   "scripts/groundpaint.py",
+   "scripts/hand.py",
+   "scripts/real_underlay.py",
+   "scripts/roadends.py",
+   "scripts/things.py"
+  ],
+  "gidi:docs/DATA-SOURCES.md": [
+   "scripts/deep_prep.py",
+   "scripts/study_google.py"
+  ],
+  "gidi:docs/DEEP-STUDY.md": [
+   "scripts/deep_check.py",
+   "scripts/deep_prep.py",
+   "scripts/deep_profile.py",
+   "scripts/deep_report.py",
+   "scripts/rename_mains.py",
+   "scripts/structure.py",
+   "scripts/study_deep.py"
+  ],
+  "gidi:docs/LAGOS-ISMS.md": [
+   "scripts/isms.py",
+   "scripts/study_isms.py",
+   "study_isms.py"
+  ],
+  "gidi:docs/OLD-KIT.md": [
+   "goods.py",
+   "gutters.py",
+   "kit_draft.py",
+   "kit_test.py",
+   "materials.py",
+   "people.py",
+   "roadbed.py",
+   "street.py",
+   "wear.py",
+   "zinc.py"
   ],
   "gidi:docs/OLD-MAP-LESSONS.md": [
    "docs/FLOW-AUDIT.md",
@@ -14065,6 +10203,121 @@
    "docs/road-heights.md",
    "docs/terrain.md"
   ],
+  "gidi:docs/bazaar-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/border-pattern-study.md": [
+   "check_district.py",
+   "explore_city.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_undermapped.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_extract.py",
+   "study_isms.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/capital-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_undermapped.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/estate-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_wellmapped.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_isms.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/foodgate-pattern-study.md": [
+   "scripts/check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_extract.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/frontier-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_wellmapped.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_isms.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/hand/borrowed-lagos.md": [
+   "landmarks.py",
+   "monuments.py"
+  ],
+  "gidi:docs/hand/maze-hub-lagos.md": [
+   "scripts/hand.py"
+  ],
+  "gidi:docs/heights-pattern-study.md": [
+   "bake_web.py",
+   "check_district.py",
+   "explore_city.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_extract.py",
+   "study_isms.py",
+   "study_landmarks.py"
+  ],
+  "gidi:docs/hub-pattern-study.md": [
+   "check_district.py",
+   "scripts/check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/draw_gen.py",
+   "scripts/gen_fabric.py",
+   "scripts/landmarks.py",
+   "scripts/study_extract.py",
+   "scripts/study_landmarks.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py"
+  ],
+  "gidi:docs/jungle-pattern-study.md": [
+   "scripts/check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/draw_gen.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_landmarks.py"
+  ],
   "gidi:docs/lagos-study/STUDY.md": [
    "classify.py",
    "feat.py",
@@ -14076,74 +10329,132 @@
   "gidi:docs/lagos-study/similar/scripts/appendix.py": [
    "appendix.md"
   ],
-  "gidi:legacy/OLD-MAP.md": [
-   "to-delete/docs/CITY-LIVING-TEST.md",
-   "to-delete/docs/DISTRICT-BRIEF.md",
-   "to-delete/docs/ISMS-BUILD.md",
-   "to-delete/docs/LAGOS-LOOK.md",
-   "to-delete/docs/living-test-2026-10-15m.md"
+  "gidi:docs/maze-pattern-study.md": [
+   "check_district.py",
+   "scripts/bake_web.py",
+   "scripts/build_viewer.py",
+   "scripts/check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/draw_gen.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_landmarks.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py"
   ],
-  "gidi:legacy/blender/act1_sheet.py": [
-   "docs/KIT-GAPS.md"
+  "gidi:docs/oldisland-pattern-study.md": [
+   "check_district.py",
+   "explore_city.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/study_wellmapped.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_isms.py",
+   "study_landmarks.py"
   ],
-  "gidi:legacy/blender/city.py": [
-   "docs/KIT-GAPS.md",
-   "docs/REBUILD-PLAN.md",
-   "docs/road-heights.md"
+  "gidi:docs/oldshore-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "scripts/walknet.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_isms.py",
+   "study_landmarks.py"
   ],
-  "gidi:legacy/blender/coverage.py": [
-   "COVERAGE.md",
-   "docs/look/COVERAGE.md"
+  "gidi:docs/port-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_landmarks.py"
   ],
-  "gidi:legacy/blender/gidi_kit/archetypes.py": [
-   "docs/KIT-GAPS.md"
+  "gidi:docs/railside-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_isms.py",
+   "study_landmarks.py"
   ],
-  "gidi:legacy/blender/gidi_kit/props.py": [
-   "docs/KIT-GAPS.md"
+  "gidi:docs/studies/airport.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:legacy/blender/gidi_kit/rules.py": [
-   "docs/LAGOS-LOOK.md"
+  "gidi:docs/studies/bazaar.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:legacy/blender/gidi_kit/street.py": [
-   "docs/KIT-GAPS.md"
+  "gidi:docs/studies/border.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/audit3d.py": [
-   "docs/LAGOS-LOOK.md"
+  "gidi:docs/studies/capital.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/bake_web.py": [
-   "docs/LAYOUT-V2.md"
+  "gidi:docs/studies/estate.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/build_viewer.py": [
-   "docs/DISTRICT-BRIEF.md"
+  "gidi:docs/studies/foodgate.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/deep_profile.py": [
-   "docs/pilot-foodgate.md"
+  "gidi:docs/studies/frontier.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/deep_summary.py": [
-   "out.md"
+  "gidi:docs/studies/heights.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/district_profiles.py": [
-   "docs/KIT-GAPS.md",
-   "docs/LAYOUT-V2.md",
-   "docs/REBUILD-PLAN.md"
+  "gidi:docs/studies/hub.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/frame_network.py": [
-   "docs/LAYOUT-V2.md"
+  "gidi:docs/studies/jungle.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/gen_fabric.py": [
-   "docs/REBUILD-PLAN.md"
+  "gidi:docs/studies/maze.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/isms.py": [
-   "docs/ISMS-BUILD.md"
+  "gidi:docs/studies/oldisland.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/layout_v2.py": [
-   "docs/LAYOUT-V2.md"
+  "gidi:docs/studies/oldshore.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/structure.py": [
-   "docs/REBUILD-PLAN.md"
+  "gidi:docs/studies/port.md": [
+   "scripts/study_deep.py"
   ],
-  "gidi:scripts/twins.py": [
-   "docs/TWINS.md"
+  "gidi:docs/studies/railside.md": [
+   "scripts/study_deep.py"
+  ],
+  "gidi:docs/studies/watertown.md": [
+   "scripts/study_deep.py"
+  ],
+  "gidi:docs/studies/yaba.md": [
+   "scripts/study_deep.py"
+  ],
+  "gidi:docs/watertown-pattern-study.md": [
+   "check_district.py",
+   "scripts/district_profiles.py",
+   "scripts/gen_fabric.py",
+   "scripts/study_extract.py",
+   "study_analyse.py",
+   "study_connect.py",
+   "study_core.py",
+   "study_landmarks.py"
+  ],
+  "gidi:scripts/doc_vault.py": [
+   "OLD-MAP.md"
+  ],
+  "gidi:web/mapedit.js": [
+   "street.py"
   ]
  }
 }

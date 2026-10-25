@@ -4,9 +4,8 @@ Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why 
 it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
 answered by this table, not by asking. A new rule goes in `DECISIONS.md` and here in the same change.
 
-Checks: `check_map.py` (the new map). The old map's checks, `check_district.py` (1–17) and `check_real.py` (R1–R6, N1), still run on the old map; the rows of rules
+Checks: `check_map.py` (the new map). The old map's checks (`check_district.py`, `check_real.py`) were deleted with it on 25 Oct; the rows of rules
 that held only for the old map went with them to `HISTORY.md` (24 Oct).
-The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was never committed (found 24 Oct).
 
 | Rule | How it is held | Checked by |
 |---|---|---|
@@ -26,7 +25,7 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | Claude decides when the owner says so | process | not a map rule |
 | The hand pass covers infrastructure and labels | furniture and labels placed by hand land where meant | GAP: `check_map.py` counts fields still unset (its TODO line), not whether every stop, light and label is there; 15 and 17 held it on the old map |
 | Roads have surfaces; poorer areas have unpaved and marshy ones | every road has a surface | GAP: no check that a street's surface matches what its twin photos show (earth, laterite, tar, interlock) |
-| Freeze everything | the map comes out the same every bake | GAP: `tools/bake.sh` (the DETERMINISTIC line) was never committed |
+| Freeze everything | the map is hand records in git, with no bake | GAP: nothing checks that a builder makes the same model twice from the same record |
 | Account for every square metre: | carriageway, gutter, encroachment; nothing stands on the road (the building line and walkways went with "Real Lagos roads") | PARTIAL (25 Oct): `check_map.py` fails a house more than 1 m2 inside a road's width (`on_road`); not yet stalls, poles or walls (`draft_edge.py` keeps its own off other roads) |
 | Markets spill onto the road: | tables in declared zones, a lane kept clear | GAP: no check on the new map, and none anywhere that a lane stays clear; 1 held the zones on the old map |
 | Everything is in the data | things are objects with positions | GAP: `check_map.py` checks each record's fields and links, not that everything standing in the world has a record (see "One ground truth"); 16 held it on the old map |
@@ -60,7 +59,6 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | A livable world before the story | what the twin photos show is on the map near where it was seen | GAP: no check on the new map; R5 held it on the old map |
 | The item register, once per finished district | every item typed | GAP: the register is not built yet |
 | Match passes | renders against references | owner's review |
-| Hand-made, checked by programs; the base is frozen | `scripts/rebuild_areas.py` | refuses to run unless `GIDI_REBUILD_OK=owner`; every hand edit must land (check 17, `check_district.py`); a change to the area builder shows in review |
 | Real Lagos roads, no ideal road template | roads on their real lines, buildings on their real spots, no building cut for a template | GAP: road-line offset check and city flow audit being built (22 Oct) |
 | Gidi is Lagos, miniaturised; the map starts again | every district traced to the real places it sits on; positions and network against real Lagos at the chosen scale | GAP: the whole-Lagos study and new frame come first (22 Oct) |
 | The new map is 1:3, about 27 x 10.5 km | map size and positions against real Lagos at 1:3 | GAP: comes with the new frame |
@@ -93,5 +91,5 @@ The bake's DETERMINISTIC line was meant to come from `tools/bake.sh`, which was 
 | Rules draft, records rule; re-draft on request | a rule change in the draft desk changes no stored record; a re-draft is written beside the current records, keeps hand edits, and lands only on the owner's word | GAP (23 Oct): no re-draft tool yet; holds today because draft rules run only when a spot is first drafted |
 | The map format's four calls | check_map.py: brush output stored as full records; small things as rows; dress size reported; every district has a name | PART: the board runs check_map.py on every save and shows the problems (district names included); brushes not built yet (22 Oct) |
 | Nothing is claimed without proof | `.claude/hooks/`: `checks-before-commit.sh` (the checks, before every commit and push), `checked-before-commit.sh` (a `Checked:` paragraph with every code or map change), `review-before-push.sh` (a second model, blocks claims with nothing behind them and lying checks), `checks-before-stop.sh` (the checks before a turn ends with code changed) | PART (24 Oct): the hooks run and block; the review is a model's reading, not a proof; an agent's report is checked by hand |
-| The new map is the truth | the old map's files under `legacy/`; no live script reads them; nothing names the store under World Drive's folder | GAP (24 Oct): the store is in `~/gidi-data` and no file in gidi (but CODEBASE.md's history lines and this row) or gidi-game (#71) names its old place (grep "Real-world", 24 Oct); the old map is not moved yet; then `scripts/inventory.py` can fail on a live file that names an old-map path |
-| Rebuild the old kit's things the new way | each builder made from the old kit's list has a gap list written first (the old render beside real photos), turntable and close-up sheets showing the new model beside the same photos with each gap marked closed or open, and the owner's pass; its row in `legacy/blender/WHAT-IT-HELD.md` crossed off | GAP (24 Oct): by eye and the owner's pass; `tools/kit_fields.py` lists the record types no builder draws yet, which shrinks as builders come |
+| The new map is the truth | the old map's code and data deleted from gidi (25 Oct); nothing names the store under World Drive's folder | GAP: gidi-game's old importer (`gidi_import.py`, `gidi_stream.py`) still reads the old tiles until item 0(d); `scripts/inventory.py` lists names of deleted files (SUSPECTS) but fails on none |
+| Rebuild the old kit's things the new way | each builder made from the old kit's list has a gap list written first (the old render beside real photos), turntable and close-up sheets showing the new model beside the same photos with each gap marked closed or open, and the owner's pass; its row in `docs/OLD-KIT.md` crossed off | GAP (24 Oct): by eye and the owner's pass; `tools/kit_fields.py` lists the record types no builder draws yet, which shrinks as builders come |

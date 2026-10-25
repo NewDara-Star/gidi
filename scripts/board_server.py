@@ -2,20 +2,13 @@
 
 python3 scripts/board_server.py [--port 8777]   then open http://127.0.0.1:8777/web/board.html
 
-Serves the repo's files, and saves every edit made on the board into its district's hand file (web/hand/<d>.json, the
-"edits" list, the same format scripts/hand.py applies), so the bake, the checks and the 3D all follow the drawing.
-
-Edits made since the last bake are also kept in web/board-pending.json, so the board can draw them before the bake has
-run: each carries the time it was made, and the board shows the ones newer than web/gidi-data.js.
-
-The new frame (board.html?frame=new) draws the new map instead (docs/MAP-FORMAT.md): /api/map/* load and save whole records
+Serves the repo's files. The board draws the new map (docs/MAP-FORMAT.md): /api/map/* load and save whole records
 by id in map/<district>/district.json, plan.json and dress/<tx>_<ty>.json (each dress record in its parent's 100 m
 tile), in the canonical layout, and run scripts/check_map.py on the district
 after every save so the board can show each record's problems. A record may be saved before every field has a value (the
 board shows what is missing in red); the checker, not the board, says when it is complete.
 
-Local only: it listens on 127.0.0.1, accepts only the hand-file operations below and records of the map schema, and
-writes only web/hand/, that file and map/.
+Local only: it listens on 127.0.0.1, accepts only records of the map schema, and writes only map/.
 """
 import http.server
 import json
@@ -23,21 +16,10 @@ import os
 import re
 import sys
 import threading
-import time
 import urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HAND = os.path.join(ROOT, 'web', 'hand')
-PENDING = os.path.join(ROOT, 'web', 'board-pending.json')
-DATA = os.path.join(ROOT, 'web', 'gidi-data.js')
-OPS = {'add building', 'delete building', 'move building', 'add furniture', 'delete furniture', 'move furniture',
-       'add place', 'move place', 'delete place', 'add parcel', 'delete parcel', 'add monument', 'move monument',
-       'delete monument', 'add zone', 'add street', 'delete street', 'cut street', 'name road', 'set surface', 'name',
-       'reshape building', 'reshape parcel', 'reshape zone', 'reshape street',
-       'cut wall', 'delete wall', 'add wall', 'add gate', 'delete gate',
-       'set front', 'add tree', 'move tree', 'delete tree', 'add thing', 'move thing', 'delete thing', 'set house', 'add paint', 'delete paint', 'set storeys'}
 LOCK = threading.Lock()   # one edit at a time: two quick saves must not overwrite each other
-ROAD_OPS = {'add street', 'delete street', 'cut street', 'name road', 'reshape street'}   # a frozen district needs a thaw bake for these
 
 # ------------------------------------------------------------------ the new map (docs/MAP-FORMAT.md)
 MAP = os.path.join(ROOT, 'map')
@@ -243,24 +225,6 @@ def district_from_study(d):
             'note': 'outline from the frame study (scripts/frame_study.py); redraw by hand where the border is decided'}
 
 
-def districts():
-    return {f[:-5] for f in os.listdir(HAND) if f.endswith('.json')}
-
-
-def load_pending():
-    try:
-        return json.load(open(PENDING))
-    except (OSError, ValueError):
-        return []
-
-
-def save_json(path, obj):
-    tmp = path + '.tmp'
-    with open(tmp, 'w') as fh:
-        json.dump(obj, fh, separators=(',', ':'))
-    os.replace(tmp, path)
-
-
 def numbers_ok(v):
     """Every number in an edit is finite (no NaN or infinity from a slip of the mouse)."""
     if isinstance(v, (int, float)) and not isinstance(v, bool):
@@ -295,8 +259,6 @@ class Board(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        if self.path.startswith('/api/pending'):
-            return self.send_json({'data_time': os.path.getmtime(DATA), 'edits': load_pending()})
         if self.path.startswith('/api/map/'):
             with LOCK:
                 return self.map_get()
@@ -344,35 +306,6 @@ class Board(http.server.SimpleHTTPRequestHandler):
             return self.send_json({'error': 'not JSON'}, 400)
         if self.path.startswith('/api/map/'):
             return self.map_post(body)
-        if self.path == '/api/edit':
-            d, e = body.get('d'), body.get('edit')
-            if d not in districts():
-                return self.send_json({'error': f'no district {d!r}'}, 400)
-            if not isinstance(e, dict) or e.get('op') not in OPS or not numbers_ok(e):
-                return self.send_json({'error': 'not a hand-file edit'}, 400)
-            e = dict(e, note=(str(e.get('note') or '') + ' (drawing board)').strip())
-            path = os.path.join(HAND, d + '.json')
-            H = json.load(open(path))
-            H.setdefault('edits', []).append(e)
-            save_json(path, H)
-            P = load_pending()
-            P.append({'t': time.time(), 'd': d, 'edit': e, 'thaw': e['op'] in ROAD_OPS})
-            save_json(PENDING, P)
-            return self.send_json({'ok': True, 'pending': len(P)})
-        if self.path == '/api/undo':   # takes back the last edit made on the board, if it's still the last in its hand file
-            P = load_pending()
-            if not P:
-                return self.send_json({'error': 'nothing to undo'}, 400)
-            last = P[-1]
-            path = os.path.join(HAND, last['d'] + '.json')
-            H = json.load(open(path))
-            if not H.get('edits') or H['edits'][-1] != last['edit']:
-                return self.send_json({'error': 'that edit has been baked or changed since; undo it with a new edit'}, 409)
-            H['edits'].pop()
-            save_json(path, H)
-            P.pop()
-            save_json(PENDING, P)
-            return self.send_json({'ok': True, 'pending': len(P)})
         return self.send_json({'error': 'unknown'}, 404)
 
     def map_post(self, body):

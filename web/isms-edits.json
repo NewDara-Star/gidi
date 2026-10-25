@@ -1,5 +1,0 @@
-{
-  "_about": "Hand edits to the Lagos-isms, applied after scripts/isms.py, so they always win. For each list (gutters, gutter_crossings): add (whole items), delete (ids), edit ({id: {field: value}}; to move an item set pts or pt). See docs/ISMS-BUILD.md, Data.",
-  "gutters": {"add": [], "delete": [], "edit": {}},
-  "gutter_crossings": {"add": [], "delete": [], "edit": {}}
-}

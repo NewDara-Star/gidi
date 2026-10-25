@@ -1,6 +1,6 @@
 # What the old map taught: still true for the new one
 
-The old generated map (13-21 Oct 2026) is history (`legacy/OLD-MAP.md`; DECISIONS, "The new map is the truth"). Its plans
+The old generated map (13-21 Oct 2026) is history, deleted 25 Oct (git tag `before-cleanup-25oct`; DECISIONS, "The new map is the truth"). Its plans
 and pass reports were deleted on 25 Oct (git tag `before-cleanup-25oct` holds them). Before they went, each was read for what still holds for the new map
 (real Lagos at 1:3, drawn by hand) and the builders. That is this page. Each lesson names the file it came from, in git
 history (`git show before-cleanup-25oct:to-delete/<path>`).
