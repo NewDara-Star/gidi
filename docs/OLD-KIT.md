@@ -90,8 +90,8 @@ the road and ground, frontages, heaps, masts, the rail), then the numbered list 
 
 
 When a builder is made, read the old function named here for its list of parts and its research note, then build from
-the real pictures. Cross the row off here in the same change. Nothing in `legacy/blender/` is edited, and the legacy
-tiles 6,12 / 7,12 / 8,13 stay byte-identical.
+the real pictures. Cross the row off here in the same change.
 
-The **draft desk** (`gidi_kit/draft.py`, `kit_draft.py`: the seeded rules that write a first draft of a spot's records)
-stays here in `legacy/` (owner, 24 Oct). It is run as it is; its rules are not extended.
+The old kit's code (`legacy/blender/`, the draft desk `kit_draft.py` with it) was deleted on 25 Oct (owner: "delete
+what's no longer useful"; the map is drafted by `scripts/draft_*.py` now). Every file named on this page is in git tag
+`before-cleanup-25oct`: `git show before-cleanup-25oct:legacy/blender/<path>`.

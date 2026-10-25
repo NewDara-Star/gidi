@@ -1,5 +1,5 @@
 /* The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study
-   layers to draw the new map on by hand. Opened with board.html?frame=new; the old map stays at board.html.
+   layers to draw the new map on by hand. Opened with board.html.
    Data: window.FRAME (scripts/frame_study.py) and, zoomed in, web/frame-tiles/ (scripts/frame_footprints.py), Gidi metres,
    y south. A study underlay only: real names and lines are shown here and never written into the map. The new map's
    records are drawn and edited over it by web/mapedit.js (window.MAPEDIT), which this file hands its view to. */
@@ -16,7 +16,7 @@
   document.querySelector(".bar").innerHTML = `
     <div class="group"><span class="title">Gidi drawing board · new frame 1:3</span><select id="district" aria-label="Go to a district"></select></div>
     <div class="group" id="layers"></div>
-    <div class="group"><button id="fit" title="The whole frame (0)">Whole frame</button><a href="board.html" id="old" title="The old 17-district map"><button>Old map</button></a><button id="theme" title="Light or dark">◐</button></div>`;
+    <div class="group"><button id="fit" title="The whole frame (0)">Whole frame</button><button id="theme" title="Light or dark">◐</button></div>`;
   const ME = window.MAPEDIT && F ? window.MAPEDIT : null;
   if (!ME) $("panel").style.display = "none";
   if (!F) {

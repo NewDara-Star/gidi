@@ -47,8 +47,8 @@ that. Block when you can point at:
   silently, prints PASS on a fallback, or was loosened, narrowed or given an exception to make a change pass; a GAP
   row in CHECKS.md turned PASS/PART without a check that really tests the rule; a test or threshold changed to fit
   the result.
-- The one rule (CLAUDE.md): a map gap fixed by changing a builder or generator rule (scripts/hand_spots/*,
-  rebuild_areas.py, gen_*) instead of a hand edit; legacy/blender or the old map's generated base extended.
+- The one rule (CLAUDE.md): a map gap fixed by changing a builder or a drafting rule (scripts/draft_*) instead of a
+  hand edit; the old map or old kit (deleted 25 Oct, git tag before-cleanup-25oct) brought back or built on.
 - "The new map is the truth" (owner, 24 Oct): new work that reads from or builds on the old map.
 - A decision made for the owner without asking, where DECISIONS.md says it is theirs; scope beyond what the commit says.
 - Dead code or stale comments/docs left behind by this change; names that don't say what things are; two things

@@ -117,9 +117,7 @@ def main():
             ext = os.path.splitext(path)[1].lower()
             size = os.path.getsize(full)
             row = {'repo': name, 'path': path, 'ext': ext, 'bytes': size, 'changed': when.get(path, ''),
-                   'lines': None, 'summary': '', 'text': ext in TEXT,
-                   # moved there for the owner to delete (24 Oct): listed, but its words point to nothing and it is no orphan
-                   'to_delete': name == 'gidi' and path.startswith('to-delete/')}
+                   'lines': None, 'summary': '', 'text': ext in TEXT}
             # this script's own output names every file: reading it would make everything look pointed to
             if row['text'] and size <= BIG and not (name == 'gidi' and path.startswith('docs/inventory/')):
                 try:
@@ -127,8 +125,7 @@ def main():
                 except (UnicodeDecodeError, OSError):
                     row['text'] = False
                 else:
-                    if not row['to_delete']:
-                        texts[(name, path)] = t
+                    texts[(name, path)] = t
                     row['lines'] = t.count('\n') + 1
                     row['summary'] = summary(path, ext, t)
             files.append(row)
@@ -249,7 +246,7 @@ def main():
     print(f'code: {len(graph["symbols"])} pieces in {len(graph["files"])} files ({st["used"]} used, {st["maybe"]} maybe, '
           f'{st["unused"]} unused), {len(graph["comments"])} comments naming what does not exist; {graph["note"]}')
     print(f'documents: {len(vault)} ({vs["orphan"]} orphans, {vs["near-orphan"]} near-orphans)')
-    print(f'{len(files)} files ({sum(1 for r in files if r["to_delete"])} in to-delete/), {len(texts)} read, {sum(1 for r in files if not r["refs_in"])} pointed to by nothing, '
+    print(f'{len(files)} files, {len(texts)} read, {sum(1 for r in files if not r["refs_in"])} pointed to by nothing, '
           f'{sum(len(v) for v in broken.values())} missing names in {len(broken)} files -> {a.out}')
 
 
@@ -304,15 +301,11 @@ def write_suspects(files, broken, out):
              'alive with nothing pointing to it.', '', '## Code and documents nothing points to', '']
     for repo in REPOS:
         rs = [r for r in files if r['repo'] == repo and not r['refs_in'] and r['lines'] is not None
-              and r['ext'] in CODE | {'.md'} and not r['to_delete']]
+              and r['ext'] in CODE | {'.md'}]
         lines += [f'### {repo} ({len(rs)})', '', '| file | lines | changed | what it says it is |', '|---|---|---|---|']
         for r in sorted(rs, key=lambda r: (r['changed'], r['path'])):
             lines.append(f"| `{r['path']}` | {r['lines']} | {r['changed']} | {cell(r['summary'], 120)} |")
         lines.append('')
-    gone = [r for r in files if r['to_delete']]
-    lines += [f'## In to-delete/, for the owner to delete ({len(gone)} files, {sum(r["bytes"] for r in gone) / 1e6:.1f} MB)', '',
-              'Not read for references or names; why each went is in `to-delete/README.md`.', '']
-    lines += [f"- `{r['path']}`" for r in sorted(gone, key=lambda r: r['path'])] + ['']
     lines += ['## Names of files that exist nowhere', '',
               'Paths named in a document or in code that match no file in any repo (outputs and caches skipped).', '']
     for k, v in sorted(broken.items()):

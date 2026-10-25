@@ -22,7 +22,7 @@ Each part is marked:
   never extended (CLAUDE.md), and new work never reads from it.
 - **history**: what a decision or study left behind; read it, don't build on it
 - **other project**: not Gidi
-- **to delete**: moved into `to-delete/` (24 Oct) for the owner to delete; `to-delete/README.md` says why each file went.
+- **deleted**: `to-delete/` (93 files) went on 25 Oct, with the owner's permission; git tag `before-cleanup-25oct` holds it.
   The inventory lists these files but doesn't read them for references or names.
 
 ## The map in one breath
@@ -74,7 +74,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `web/gidi-data.js`, `gen-*.json`, `hand/`, `network.json`, `layout-v2.json`, `terrain*.json`, `locked.json`, `civic.json` and the rest of `web/*.json` | the old map's data: generated, baked and hand-edited |
 | `web/app.js`, `shell.html`, `view3d.js`, `gidi-maps.html`, `scripts/build_viewer.py` | the old map viewer (2D and 3D) |
 | `study-*.json` (85, at the top of the repo) | each old district's pattern study, read by the generator |
-| `legacy/blender/` | the old map's Blender kit; the legacy tiles 6,12 / 7,12 / 8,13 must stay byte-identical; what it holds for the builders: `WHAT-IT-HELD.md` |
+| `docs/OLD-KIT.md` | what the old Blender kit held for the builders (the kit itself was deleted 25 Oct; git tag `before-cleanup-25oct`) |
 | `data/` | per-LGA numbers (`results/`) and the download scripts (`tools/`) |
 
 **Research (written for the old map; its real Lagos numbers still hold).** Indexed in `docs/RESEARCH.md`:
@@ -87,8 +87,8 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 
 **History**
 - `decisions/HISTORY.md`: decisions that later ones replaced, and dropped ideas, word for word with what replaced them
-- `to-delete/`: the old map's living tests, audits, calibration, plans and passes (91 files, 24 Oct), and this folder's
-  old NOW log; their lessons are in `docs/OLD-MAP-LESSONS.md`
+- the old map's living tests, audits, calibration, plans and passes, and the old NOW log: deleted 25 Oct (git tag
+  `before-cleanup-25oct`); their lessons are in `docs/OLD-MAP-LESSONS.md`
 
 ## gidi-game (`~/gidi-game`, 456 files; `Content/` is 34 GB on disk, nearly all generated or from Fab)
 
@@ -167,7 +167,7 @@ different game; Gidi uses none of it. Two Lagos files World Drive tracks (`lagos
 
 ## Next clean-ups (the owner said yes to 1-3 on 24 Oct: "the new map is the truth")
 
-1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it go into `legacy/`
+1. ~~**The old map, viewable only**~~ (replaced 25 Oct: deleted, git tag `before-cleanup-25oct`) (the owner's call, 24 Oct): its baked data and the board's view of it go into `legacy/`
    (the board still draws it); the scripts that make or tune it (the generator, studies, calibration, one-off fixes) go
    into `to-delete/`; the legacy tiles are checked byte-identical before merging. Its history docs went to `to-delete/`
    on 24 Oct.

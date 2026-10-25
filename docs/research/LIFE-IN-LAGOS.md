@@ -271,7 +271,7 @@ Every one of these has someone collecting a fee:
 
 ## 11. The calendar
 
-- **The rains** (`to-delete/docs/LAGOS-LOOK.md` covers the look):
+- **The rains:**
   - The rainy season runs April–October: early rains April–June, the peak July–September ([2026 flood guide](https://ejsdprogram.hedang.org/wp-content/uploads/2026/07/2026-FLOOD-GUIDE-FOR-LAGOS-STATE.pdf)).
   - Floods hit poor and rich areas alike: Ikorodu in Aug 2025, when residents were told to relocate, and Lekki ([Sahara Reporters, Aug 2025](https://saharareporters.com/2025/08/05/lagos-government-asks-residents-flood-prone-areas-relocate-ahead-heavy-downpour-flash)). In June 2026 roads were submerged across the city ([The Star/Xinhua, Jul 2026](https://www.thestar.com.my/news/world/2026/07/01/roundup-severe-flooding-cripples-nigeria039s-commercial-hub-lagos)).
 - **Harmattan** (Dec–Feb): dust haze, cool mornings.

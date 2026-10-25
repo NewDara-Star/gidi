@@ -32,4 +32,4 @@ These are the texture of every mission, not side content.
 - Jungle justice, drugs and kidnapping are shown with weight, never glamorised. Drugs are cargo, never a power-up.
 - Churches, mosques, schools, hospitals and clinics are safe ground.
 - Invented names, brands and people only. Sex work is off screen, and the women have their own lines and reasons.
-- Place names are Gidi's (`to-delete/docs/LAYOUT-V2.md`).
+- Place names are Gidi's (sound-alikes of the real ones, `docs/lagos-study/roads/NAMES.md`).

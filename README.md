@@ -20,7 +20,7 @@ outline, picture or name is copied in. Invented names only.
   `scripts/check_rules.py`
 - What the repos hold: `~/.venvs/gidi/bin/python scripts/inventory.py` (writes `docs/inventory/`)
 
-The old generated city (13-21 Oct) is still here, frozen: `legacy/OLD-MAP.md`.
+The old generated city (13-21 Oct) was deleted on 25 Oct; git tag `before-cleanup-25oct` holds it, and `docs/OLD-MAP-LESSONS.md` what it taught.
 
 ## Data credits
 - OpenStreetMap contributors (ODbL): the old map

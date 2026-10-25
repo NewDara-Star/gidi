@@ -65,29 +65,10 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; border: 1px sol
 </head>
 <body>
 <canvas id="cv"></canvas>
-<div class="bar">
-  <div class="group"><span class="title">Gidi drawing board</span><select id="district" aria-label="District"></select></div>
-  <div class="group" id="tools">
-    <button data-tool="select" class="on" title="Select, move, turn (V)">Select</button>
-    <button data-tool="furniture" title="Place street furniture (F)">Furniture</button>
-    <button data-tool="building" title="Draw a building: drag a box (B)">Building</button>
-    <button data-tool="street" title="Draw a street: click points, Enter to finish (S)">Street</button>
-    <button data-tool="surface" title="Paint a road's surface (U)">Surface</button>
-    <button data-tool="wall" title="Draw a compound wall: click points, Enter to finish (W)">Wall</button>
-    <button data-tool="gate" title="Put a gate in a wall (G)">Gate</button>
-    <button data-tool="tree" title="Plant a tree (T)">Tree</button>
-  </div>
-  <div class="group"><select id="kind" aria-label="Kind to place"></select></div>
-  <div class="group" id="layers"></div>
-  <div class="group"><a href="board.html?frame=new" title="The new frame: real Lagos at 1:3, to draw the new map on"><button>New frame</button></a><button id="theme" title="Light or dark">◐</button></div>
-</div>
+<div class="bar"></div>
 <div id="panel"></div>
 <div id="status"><div id="where">–</div><div id="pending">–</div><div id="checks">–</div></div>
 <div id="toast"></div>
-<script>
-// board.html?frame=new opens the new frame (real Lagos at 1:3, study layers: scripts/frame_study.py); plain board.html the old map
-if (new URLSearchParams(location.search).get("frame") === "new") document.write('<script src="frame-study.js"><\/script><script src="faceedit.js"><\/script><script src="mapedit.js"><\/script><script src="frame.js"><\/script>');
-else document.write('<script src="gidi-data.js"><\/script><script src="real-underlay.js"><\/script><script src="board.js"><\/script>');
-</script>
+<script src="frame-study.js"></script><script src="faceedit.js"></script><script src="mapedit.js"></script><script src="frame.js"></script>
 </body>
 </html>
