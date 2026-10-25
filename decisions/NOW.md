@@ -32,6 +32,27 @@ merged and checked, add new ones where they belong, and say here when the owner 
 5. [ ] Houses read their records' storeys and kind.
 6. [ ] Mùṣá in Unreal (after the owner restarts the Mac): the overhead against Google Earth's Mushin, street views
    against Street View.
+7. [ ] Lighter Gidi people (one skinned mesh, no grooms) so low and high carry a crowd again (gidi-game
+   docs/PERFORMANCE.md, "the next step" since 24 Oct); through Mass with detail by distance.
+8. [ ] Owed checks: a new check (a script in scripts/, not written yet) that every "next" / "to come" / "own commit" written in a commit since
+   25 Oct is cited on this page, run at stop; then the per-level budget check (CHECKS.md GAP); the other 35 GAP rows
+   in CHECKS.md are each a check still owed, worked through after Mùṣá.
+9. [ ] Clean-up from the inventory (25 Oct): the 21 pieces of code used nowhere (docs/inventory CODEMAP.md, outside
+   `legacy/`); the old map's Unreal side (`gidi_import.py`, `gidi_stream.py`, Gidi_City, Play_Ibudo) retired once
+   World Partition takes the new map (item 0d), `legacy/` itself kept frozen to view.
+
+**Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
+item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
+- Into item 0: pieces as ISM with per-instance colour, Custom Primitive Data (gidi-game b28652f, a8db77b); plank
+  bridges instanced (4a5d9d3); `tools/measure_csv.py` reads Play_Street_scene.json even for a named test street
+  (a8db77b, "to fix in its own commit", still not fixed: needed for item 0's measure); HLOD for the far city (PERFORMANCE.md).
+- Not understood yet, measure again: work mode slower than high on Underdeck; the over-the-roofs GPU median above the
+  frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
+- Road kit: never imported into Unreal (6a26dd1, dc5e664 "Unreal not run"); the drain litter's next look pass (dc5e664).
+- Plants kit for the ditch banks (55c14e7): item 3.
+- docs/MAP-FORMAT.md "Next steps": the format to `gidi-map/1.0` after the owner's answers; a real-names list for the
+  whole frame; the twin catalogue with ids; the board's district outline editor, day filter, and loading only the
+  districts in view.
 Alongside, whenever a build waits: study passes over the saved Street View shots for new kits and activities, one
 question per pass (memory: repeat passes on photos).
 Done: road kit edges (gutters, plank and slab bridges, kerbs, covered drains, grates, earth ditches: gidi-game

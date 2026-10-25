@@ -10,6 +10,8 @@ An open-world city inspired by Lagos, built from data and by hand. The owner wor
 
 **Research the industry standard first (owner, 24 Oct: "not just when we're stuck... when we want to start stuff, see how the industry standard is").** When starting anything new (a look, a model, a tool, a level, a performance fix), first find how studios, the engine's makers and expert artists do it (docs, talks, breakdowns, tutorials), adapt that, and say in the commit what was found and where. Not only when stuck: the street test of 375 houses could not load until research showed what games do (shared tiling textures, detail in images instead of triangles). Downloads still need the owner's OK.
 
+**The running order is the memory (owner, 25 Oct: "I am human and I'll forget things... you compact... we are always going to forget things").** Read the running order at the top of `decisions/NOW.md` before starting any work, and again after every compaction. Every time something is written down as "next", "to come", "later" or "in its own commit" (a commit, a doc, a check's GAP row), it goes into the running order or its Owed list in the same change; tick or remove it when it is merged and checked. Trial and error is expected: when a trial shows a better way, the order changes, and the change is written there.
+
 **Read `decisions/` first, every session:**
 - `decisions/NOW.md`: where the work stands and what's next.
 - `decisions/DECISIONS.md`: the owner's standing decisions and rules.
