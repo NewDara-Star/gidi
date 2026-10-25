@@ -136,7 +136,9 @@
       "side": "enum:side",
       "s": "num >=0",
       "w": "num >0",
-      "kind": "enum:crossing_kind"
+      "kind": "enum:crossing_kind",
+      "wear": "num 0..1?",
+      "boards": "table:board?"
     },
     "platform": {
       "h": "num 0..1.5",
@@ -478,6 +480,7 @@
     "streak": [["u", "num"], ["w", "num >0"], ["z_top", "num"], ["len", "num >0"], ["dark", "num 0..1"]],
     "chip": [["u", "num"], ["size", "num >0"]],
     "daub": [["u", "num"], ["z", "num"], ["text", "text"], ["colour", "hex"], ["size", "num >0"]],
+    "board": [["w", "num >0"], ["gap", "num >=0"], ["len", "num >=0"], ["shift", "num"], ["yaw", "num"], ["roll", "num"], ["warp", "num"], ["twist", "num"], ["age", "num 0..1"]],
     "slab": [["tip", "num"], ["roll", "num"], ["sink", "num"], ["dirt", "num 0..1"], ["dust", "num 0..1"], ["shade", "num >0"], ["gap", "num >=0"], ["broken", "bool"]],
     "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["age", "num 0..1"], ["buried", "num 0..1"]],
     "item": [["kind", "enum:goods_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["shade", "num >0"], ["cap", "hex?"]],

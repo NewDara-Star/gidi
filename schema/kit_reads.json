@@ -20,9 +20,11 @@
     "roof.fascia.colour",
     "roof.fascia.h",
     "roof.form",
+    "roof.material",
     "roof.parapet_h",
     "roof.pitch",
     "roof.ridge_face",
+    "roof.state",
     "storey_h",
     "windows",
     "windows.bar_colour",
@@ -65,6 +67,23 @@
     "faces[].windows",
     "faces[].windows.cols",
     "faces[].windows.rows",
+    "of"
+   ]
+  },
+  "block.roof_sheets": {
+   "record": "roof_sheets",
+   "reads": [
+    "sag",
+    "slopes",
+    "slopes[].face",
+    "slopes[].ph",
+    "slopes[].rows",
+    "slopes[].sheets",
+    "slopes[].sheets.cols",
+    "slopes[].sheets.rows",
+    "uprights",
+    "uprights.cols",
+    "uprights.rows",
     "of"
    ]
   },
@@ -143,6 +162,41 @@
     "kind",
     "turn",
     "wear"
+   ]
+  },
+  "leanto.leanto": {
+   "record": "leanto",
+   "reads": [
+    "depth",
+    "posts",
+    "sheet",
+    "sheet.colour",
+    "sheet.edge_colour",
+    "sheet.material",
+    "sheet.state",
+    "stand_z",
+    "u0",
+    "u1",
+    "z_front",
+    "z_wall",
+    "place"
+   ]
+  },
+  "leanto.roof_sheets": {
+   "record": "roof_sheets",
+   "reads": [
+    "sag",
+    "slopes",
+    "slopes[].face",
+    "slopes[].ph",
+    "slopes[].rows",
+    "slopes[].sheets",
+    "slopes[].sheets.cols",
+    "slopes[].sheets.rows",
+    "uprights",
+    "uprights.cols",
+    "uprights.rows",
+    "of"
    ]
   },
   "loose.goods": {
@@ -326,6 +380,49 @@
     "to_at",
     "from_pole",
     "to_pole"
+   ]
+  },
+  "road.litter": {
+   "record": "litter",
+   "reads": [
+    "pieces",
+    "pieces.cols",
+    "pieces.rows",
+    "of"
+   ]
+  },
+  "road.road": {
+   "record": "road",
+   "reads": [
+    "centreline",
+    "crossings",
+    "crossings[].boards",
+    "crossings[].boards.cols",
+    "crossings[].boards.rows",
+    "crossings[].kind",
+    "crossings[].s",
+    "crossings[].side",
+    "crossings[].w",
+    "crossings[].wear",
+    "crown",
+    "gutters",
+    "gutters[].depth",
+    "gutters[].kind",
+    "gutters[].offset",
+    "gutters[].s0",
+    "gutters[].s1",
+    "gutters[].side",
+    "gutters[].state",
+    "gutters[].width",
+    "sand_cover",
+    "surface",
+    "verges",
+    "verges[].s0",
+    "verges[].s1",
+    "verges[].side",
+    "verges[].surface",
+    "verges[].width",
+    "width"
    ]
   },
   "stall.goods": {
