@@ -37,7 +37,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
 8. [ ] Owed checks: a new check (a script in scripts/, not written yet) that every "next" / "to come" / "own commit" written in a commit since
    25 Oct is cited on this page, run at stop; then the per-level budget check (CHECKS.md GAP); the other 35 GAP rows
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
-9. [ ] Clean-up from the inventory (25 Oct): the 21 pieces of code used nowhere (docs/inventory CODEMAP.md, outside
+9. [ ] Clean-up from the inventory (25 Oct): the 16 pieces of code used nowhere outside `legacy/` (of 21 in docs/inventory CODEMAP.md, 5 in
    `legacy/`); the old map's Unreal side (`gidi_import.py`, `gidi_stream.py`, Gidi_City, Play_Ibudo) retired once
    World Partition takes the new map (item 0d), `legacy/` itself kept frozen to view.
 
