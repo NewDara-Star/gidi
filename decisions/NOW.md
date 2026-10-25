@@ -18,8 +18,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    the houses' triangles (Nanite streams them). So, reordered: (a2) [x] what fills it (gidi-game #91): an empty copy of
    the level uses 5.8 GB with no houses, nine tenths graphics pools of fixed size (Metal heaps 3.1 GB, 1.3-1.4 of them
    unused; Nanite/scene buffers 0.9; render targets 0.5; UAV textures 0.44); the 475 houses add ~0.8 GB; no leak over
-   5 min; the measure's CSV profiler adds ~0.5 GB of its own. Next, one at a time: (a3) the street in a packaged build
-   (Epic's packaging on Mac researched first), since the editor's share is in every number so far; (a4) each fixed pool
+   5 min; the measure's CSV profiler adds ~0.5 GB of its own. Next, one at a time: (a3) [x] the packaged game (gidi-game #92,
+   tools/package.sh): empty 4,231 MB, street ~4,535 (editor 5,850 / 6,666), so the houses cost a player ~0.3 GB and
+   ~3.5 GB of fixed graphics memory is the floor; (a4) each fixed pool, in the packaged game (-dpcvars, no re-cook),
    tried smaller on the empty level (shadow page pool, Nanite streaming pool, Metal heap, texture pool): what it saves,
    what it does to the picture; (a5) the roof edge pieces' two faults: at hip corners a piece pokes up to 0.15 m and
    it ignores the sheet's sag; first look at both close up, then sheets cut by a hip (or sagging past a limit) keep
