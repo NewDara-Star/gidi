@@ -71,8 +71,14 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Poles done (gidi-game #101): d15's 579 poles are 4 shapes, each one shared piece, the wires the pole's own mesh, the
   lean now a rotation (an instance has no shear); whole vs piece in Blender 0-5 of 480,000 pixels; 58 poles in Unreal
   67 -> 49 actors, 59 -> 41 meshes, frame, GPU and memory the same (PERFORMANCE.md "Poles as pieces").
-  Next builders in order: vehicles (keke_build exports no .glb; saloon,
-   okada, bus and suv have no builder, 676 of d15's 824 vehicles; danfo and lorry have _static variants), then stalls
+  Vehicles placed from shared models (gidi-game kit/vehicle-instances, PERFORMANCE.md "Vehicles as instances"): the
+  street test's 53 (200 m) from the built heroes (danfo, keke, okada, lorry, molue for the buses) in their condition's
+  paint with their own plates, City Sample cars standing in for saloon, suv and pickup; as instances 62 -> 40 actors,
+  frame and memory no different measurably; the plate material prints on instances (v5), the paint has a copy for
+  instances. The cost is the stand-ins: 27 City Sample cars ~2.4 ms GPU and 1.3 GB (60 -> 55 fps), the 26 built ones
+  0.37 M triangles. So next, before stalls: (b1) [ ] our own saloon (601 in d15), built the danfo's way (parts,
+  recipes, Nanite, opaque glass, M_GidiPaint, a _static export) from Lagos photos of the common saloons, then suv and
+  pickup (pickup_build exports no _static.glb yet; brt_build none either), replacing the stand-ins. Then stalls
    with goods/posters and printed umbrellas; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming; on that city, decide the shadow and Nanite pool sizes (smaller saves ~0.55 GB, PERFORMANCE.md;
    check over the roofs and down a long street for overflow) and whether the volumetric clouds stay (192 MB and the
@@ -116,6 +122,14 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   PERFORMANCE.md, 25 Oct); per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
   custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city and streaming for the new map's city, the engine's World Partition first, measured (gidi-game
   PERFORMANCE.md "what is on").
+- Plates: `plates.json`'s district rows and codes are the old map's districts; Mùṣá (d15) has none, so the street's
+  vehicles print the 'bush' row (GDI) for now (gidi-game `gidi_street.PLATE_DISTRICT`). The new map's districts each
+  want a row and a code (sound-alike, DECISIONS), then the plate textures made again (`tools/plates.py`).
+- Vehicles (gidi-game kit/vehicle-instances): `M_GidiPaint_Instanced` is a generated copy of M_GidiPaint for instances;
+  fold it into M_GidiPaint (instance space reads as local space on an actor) once that file's local change is settled;
+  the near danfo's shadow drawn as a broken sliver as an actor, whole as an instance (not traced); the underdeck level
+  not rebuilt since the lorries joined the heroes; the twelve old `lorry_ot45_*` test models in Art/Vehicles/LorryBuilt
+  to check (old kit or live).
 - Not understood yet, measure again: work mode slower than high on Underdeck; the over-the-roofs GPU median above the
   frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
 - Road kit: never imported into Unreal (6a26dd1, dc5e664 "Unreal not run"); the drain litter's next look pass (dc5e664).
