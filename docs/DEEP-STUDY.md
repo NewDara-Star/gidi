@@ -1,5 +1,7 @@
 # The deep study: every district's inspiration, from all the data
 
+> **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).
+
 The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt by one shared generator. Each district gets its own profile, and the profile is set from this study.
 
 **The rule:** Gidi takes numbers from the study, never an outline, a name or an image.

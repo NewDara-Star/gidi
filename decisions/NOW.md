@@ -27,10 +27,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      the new districts). gidi-data: the old kit's part viewer deleted (local commit; it has no remote). Untracked: the
      old test streets' levels and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct,
      the old perf files, this repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB).
-   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 279 names in 57 files after step 3b, up from 274 in 55: frame_motorpark.py named where its deletion is noted, and two old-kit names in docs that had only matched files inside the deleted `.venv/`; the live rules in
-     DECISIONS done in step 2); NOW.md's dated history and DECISIONS/CODEBASE trimmed to what is current, CODEBASE
-     rewritten for the new layout; the `?frame=new` mentions (README, NOW, CODEBASE, MAP-FORMAT, frame_study,
-     frame_footprints, mapedit) updated now that the board opens the new frame by default.
+   - [x] step 4: docs that name deleted files. Live docs fixed line by line (BOARD.md rewritten for today's board,
+     CODEBASE rewritten for the new layout, gidi-game PERFORMANCE's "what is on" (#100), MAP-FORMAT's board and import parts,
+     the `?frame=new` mentions); history docs carry a note at their top; `scripts/inventory.py` now counts the names not
+     marked as gone: 1 left, the output file `appendix.py` writes (not a pointer).
+   - [ ] step 4b: NOW.md's dated log and DECISIONS trimmed to what is current (the replaced parts to HISTORY.md).
    Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
@@ -84,14 +85,15 @@ merged and checked, add new ones where they belong, and say here when the owner 
 8. [ ] Owed checks: a new check (a script in scripts/, not written yet) that every "next" / "to come" / "own commit" written in a commit since
    25 Oct is cited on this page, run at stop; then the per-level budget check (CHECKS.md GAP); the other 35 GAP rows
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
-9. [ ] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
-   `gidi_import.py`, `gidi_stream.py`, Gidi_City, Play_Ibudo, is 00 step 3).
+9. [x] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
+   its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
   PERFORMANCE.md, 25 Oct); per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
-  custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city (PERFORMANCE.md).
+  custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city and streaming for the new map's city, the engine's World Partition first, measured (gidi-game
+  PERFORMANCE.md "what is on").
 - Not understood yet, measure again: work mode slower than high on Underdeck; the over-the-roofs GPU median above the
   frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
 - Road kit: never imported into Unreal (6a26dd1, dc5e664 "Unreal not run"); the drain litter's next look pass (dc5e664).
@@ -116,7 +118,7 @@ station, and 4,275 houses drafted from real footprints and redrawn block by bloc
 builders (`gidi-game/tools/*_build.py`), read from the map's records by `tools/map_build.py`; the Emmanuel St round trip
 passed. The old generated map is history: deleted 25 Oct (git tag `before-cleanup-25oct`). Nothing is running. Board:
 `cd ~/gidi && ~/.venvs/gidi/bin/python scripts/board_server.py --port 8779`, then
-`http://127.0.0.1:8779/web/board.html?frame=new`.
+`http://127.0.0.1:8779/web/board.html`.
 
 **Done 24 Oct.**
 - Hooks: "nothing is claimed without proof" (checks before every commit, push and stop; a `Checked:` paragraph; a second

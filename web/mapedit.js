@@ -1,4 +1,4 @@
-/* The new map's editor on the drawing board's new frame (board.html?frame=new; docs/MAP-FORMAT.md). Draws and saves the
+/* The new map's editor on the drawing board's new frame (board.html; docs/MAP-FORMAT.md). Draws and saves the
    plan layer, record by record, in map/<district>/district.json and plan.json through scripts/board_server.py, which runs
    scripts/check_map.py on every save. Everything is drawn by hand over the study underlay (web/frame.js): nothing from the
    study is copied into the map, except a new district's outline when it is first started. A field nobody has set stays
@@ -542,7 +542,7 @@ window.MAPEDIT = (() => {
   // "natural mix" (litter only): sizes mostly small, some medium, a few big; ages fresh, weathered and old, the old ones
   // often part buried. Each is picked once per piece, at stroke time, and every value is written into its row.
   const LIT_SIZE = { sachet: [0.12, 0.07, 0.01], bag: [0.3, 0.25, 0.12], bottle: [0.24, 0.07, 0.07], pack: [0.16, 0.1, 0.04], can: [0.12, 0.066, 0.066], husk: [0.18, 0.12, 0.1], paper: [0.21, 0.15, 0.005], rag: [0.4, 0.3, 0.04], tyre: [0.6, 0.6, 0.18] };   // w, d, h of a usual one, m
-  // the street mix (the old kit's, legacy street.py LITTER): colour, kind, how common; paper, rags and tyres only when picked
+  // the street mix (the old kit's litter list, deleted 25 Oct with that kit): colour, kind, how common; paper, rags and tyres only when picked
   const LIT_MIX = [["#e8f0f4", "sachet", 5], ["#9ccbe8", "sachet", 2], ["#1c1c1c", "bag", 3], ["#1e6fd0", "bag", 1], ["#d32f2f", "bag", 1], ["#cfe3d6", "bottle", 2], ["#ffffff", "pack", 1.5], ["#c0c0c0", "can", 1], ["#d9b85a", "husk", 1]];
   const LIT_COL = { paper: ["#d8d4cc", "#c9c3b5", "#e8e6e0", "#c8b48a"], rag: ["#c62828", "#f9a825", "#1f6fb8", "#2e9a46", "#e8dcc0", "#3b2a1a"], tyre: ["#1c1c1c"] };
   function fromMix(L) { let u = Math.random() * L.reduce((a, x) => a + x[2], 0); for (const x of L) { u -= x[2]; if (u <= 0) return x; } return L[L.length - 1]; }

@@ -8,7 +8,7 @@
 
 **Nothing here is built into Gidi yet.** That is the owner's "make it feel like Lagos" pass, after the whole map is done.
 
-**How it's measured.** `scripts/study_isms.py <study id>` writes `study-<id>-isms.json`, the same yardstick for every studied area. Coordinates are lon,lat, for looking up only; nothing is ever copied.
+**How it was measured.** `scripts/study_isms.py <study id>` (deleted 25 Oct with the old map, as was its OSM extract; the numbers here stand) wrote `study-<id>-isms.json`, the same yardstick for every studied area. Coordinates are lon,lat, for looking up only; nothing is ever copied.
 
 **Limits of the data:**
 - **OSM is incomplete.** Ikeja's buildings and every area's footpaths are under-mapped, so these are floors, not ceilings.
@@ -50,7 +50,7 @@
 
 § Old Shore's 7 bus stops sit on only 12 km of expressway: one every 1.7 km, the closest spacing of any area (the Hub has 9 on 82 km).
 
-One-way streets: the share of the length of primary to residential streets tagged one-way (expressways left out: their carriageways are always one-way). Measured on each study's extract, outside `study_isms.py`.
+One-way streets: the share of the length of primary to residential streets tagged one-way (expressways left out: their carriageways are always one-way). Measured on each study's extract, outside `study_isms.py` (deleted 25 Oct).
 
 ## The isms, one by one
 
@@ -272,4 +272,4 @@ One-way streets: the share of the length of primary to residential streets tagge
 - **14 Oct 2026:** the Heights' study (Ikoyi, Victoria Island, Banana Island; three boxes in Eti Osa) added. No new ism: it tops the gates (6.1 per km²) and missing links (2.7), and ties Lagos Island on one-way streets. The note that the DEM was not on this machine was wrong and is corrected.
 - **14 Oct 2026:** Old Island's study (Lagos Island, boxed to the island) added, and a new ism measured for every area: one-way streets.
 - **14 Oct 2026:** the Estate's study (Ikeja GRA, Magodo, Omole) added, and a new ism measured for every area: gates across residential streets.
-- **14 Oct 2026:** the log started. The backlog for the eight finished districts' studies was measured with `study_isms.py`, plus Railside's study (Agege, Ifako/Ijaye, Alimosho).
+- **14 Oct 2026:** the log started. The backlog for the eight finished districts' studies was measured with `study_isms.py` (deleted 25 Oct), plus Railside's study (Agege, Ifako/Ijaye, Alimosho).

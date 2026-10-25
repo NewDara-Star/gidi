@@ -1,10 +1,11 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3586 pieces of code in 133 files: 1 used nowhere, 52 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3589 pieces of code in 133 files: 2 used nowhere, 52 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
 - `gidi-data:research/google/kits/old-town/tests/facade_hand.py`: `sh_` (const, line 197)
+- `gidi-game:tools/lorry_build.py`: `mirror_y` (function, line 137)
 
 ## Every code file
 
@@ -170,7 +171,7 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 5 defined (5 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/lorry_build.py`
-65 defined (62 used, 3 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+66 defined (62 used, 3 maybe, 1 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/make_textures.py`
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -416,7 +417,7 @@ Used elsewhere: `common` in `gidi:scripts/draft_edge.py`; `fields` in `gidi:scri
 55 defined (55 used, 0 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
 
 ### `gidi:scripts/inventory.py`
-18 defined (18 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/doc_vault.py`. Imported by: nothing.
+20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/doc_vault.py`. Imported by: nothing.
 
 ### `gidi:scripts/js_symbols.mjs`
 8 defined (8 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.

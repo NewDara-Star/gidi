@@ -1,5 +1,5 @@
 """The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a
-27 x 10.5 km frame; roads first, districts by their borders). Open them with web/board.html?frame=new.
+27 x 10.5 km frame; roads first, districts by their borders). Open them with web/board.html.
 
 A study underlay to draw the new map on by hand, never map data: real names and real lines stay on the board, never in
 web/hand/ or any map file. The output (web/frame-study.js) is made from real data and is not committed (.gitignore).

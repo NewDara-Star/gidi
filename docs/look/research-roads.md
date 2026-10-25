@@ -1,5 +1,7 @@
 # Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse
 
+> Written for the old kit (deleted 25 Oct, git tag `before-cleanup-25oct`): the kit files it names (`rules.py` and the like) are there; what it lists about Lagos is real.
+
 This catalogue covers the honest Lagos: roads that are mud with potholes of water, mushy laterite lanes, failed asphalt, choked drains. It builds on `docs/look/research-street.md` §1 and §6.7–6.9, and does not repeat what is there: road widths by class, kerb paint colours, median types, basic drain sizes, basic pothole density, the tree census. It goes deeper on **condition** and on **how to select it from data**.
 
 Rule zero: this studies real Lagos to build Gidi. No real road, estate or brand is copied. Real places are named only as examples of a pattern.

@@ -15,7 +15,7 @@ outline, picture or name is copied in. Invented names only.
 
 ## Use
 - The drawing board: `~/.venvs/gidi/bin/python scripts/board_server.py --port 8779`, then
-  `http://127.0.0.1:8779/web/board.html?frame=new`
+  `http://127.0.0.1:8779/web/board.html`
 - Check the map: `~/.venvs/gidi/bin/python scripts/check_map.py map` (PASS means no problem; fields still to fill are counted on its TODO line; `--strict` fails on them) and
   `scripts/check_rules.py`
 - What the repos hold: `~/.venvs/gidi/bin/python scripts/inventory.py` (writes `docs/inventory/`)

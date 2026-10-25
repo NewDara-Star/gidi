@@ -504,9 +504,9 @@ The frame holds about 3 million real roofs; at 1:3 the land is a ninth, so Gidi 
 
 ### The board
 
-The board stops writing an edit log. Today it appends "add building at (x, y)" operations to `web/hand/<d>.json`, applied to a generated base and found again by position. The new map has no base: the files are the state, and git is the history. The board saves whole records by id.
+The board writes no edit log (the old map's, `web/hand/<d>.json`, was deleted with it on 25 Oct). The new map has no base: the files are the state, and git is the history. The board saves whole records by id.
 
-`scripts/board_server.py` keeps what works (local only on 127.0.0.1, one write at a time, atomic save, finite numbers only, undo). The old map's calls (`/api/edit`, `/api/undo`, `web/hand/<d>.json`) are unchanged. The new frame (`board.html?frame=new`, drawing code in `web/mapedit.js`) uses these:
+`scripts/board_server.py` keeps what works (local only on 127.0.0.1, one write at a time, atomic save, finite numbers only, undo). The board (`board.html`, drawing code in `web/mapedit.js`) uses these:
 
 - `GET /api/map/list`: which districts are started, and the 51 study districts.
 - `GET /api/map/load?d=dNN`: the district's plan records and the checker's problems, and which dress tiles it has.
@@ -518,24 +518,7 @@ The board stops writing an edit log. Today it appends "add building at (x, y)" o
 - `POST /api/map/undo`: the last save or delete, if nothing has changed it since.
 - `POST /api/map/check {d}`: `check_map.py` runs on every save; its problems come back with the record id and show red on the board.
 
-| Old board tool or op | New record |
-|---|---|
-| Select: move, turn, reshape, delete | any record, same id |
-| Building (drag a box); `set house`, `set storeys` | `building` (+ `plot`), its `kind`, `storeys`, `storey_h` |
-| Street; `reshape street`, `cut street`, `name road` | `road` (ends snap to another road's point) |
-| Surface | `road.surface`; ground paint for patches |
-| Wall, `cut wall`; Gate | `wall` or `frontage.wall`; `wall.gates` |
-| `set front` | `frontage.kind` |
-| Tree | `tree` |
-| Furniture: pole, street light, transformer | `pole` (`lamp`, `transformer`) |
-| Furniture: kiosk, stalls; `add thing` | `stall`, `furniture`, `heap` |
-| Furniture: hawkers, parking boy, agbero | `person_spot` (Person, I) |
-| Furniture: task force truck | `vehicle` |
-| `add place`, `move place` | `place` |
-| `add paint` | `ground` |
-| `add parcel`, `reshape parcel` | `plot` |
-
-New tools the board needs:
+The tools this asked for, all on the board now (`docs/BOARD.md` has each with its key):
 
 1. **Plot** and **Frontage** (pick a plot edge and its road).
 2. **Face editor:** one face drawn flat (u across, z up): windows, doors, shopfronts, balconies, screens, stains, add-ons, signs, awnings.
@@ -573,8 +556,12 @@ Roof sheets, wall bays and gutter slabs are numerous and fiddly. At first they c
 
 ### The Unreal import
 
-- The importer in `~/gidi-game` reads the same files. Gidi metres times 100 are Unreal centimetres; x and y go in as they are; `turn` is the yaw.
-- It imports tile by tile, so 100 m tiles line up with the world's streaming cells.
+- The game repo reads the same files: `tools/map_build.py` builds an area's records into a Blender scene, and the
+  street test (`tools/street_test.py` from a map folder, then `Content/Python/gidi_street.py`) brings built houses into
+  an Unreal level. Gidi metres times 100 are Unreal centimetres; x and y go
+  in as they are; `turn` is the yaw. (The old city's importer and its tile streaming were deleted 25 Oct.)
+- How the whole city streams is owed (NOW: World Partition first, measured); 100 m tiles are meant to line up with its
+  cells.
 - As already decided (17 Oct): it rebuilds from the map every time, and nothing it makes is committed.
 
 ## 7. Open questions for the owner
