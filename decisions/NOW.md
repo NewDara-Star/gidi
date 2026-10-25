@@ -6,10 +6,11 @@ then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scrip
 
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
-1. [ ] Road lines: hand-edit the road corners check_map lists (62 in d15: 12 repeated points, 14 lines doubling back,
-   36 corners too tight for their legs), each looked at on the board against the study; done when it lists none.
+1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
+   doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
+   lists them) and go to item 2.
 2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
-   it; tested on a T and a crossroads against photos.
+   it (and the 8 corners check_map still lists, all on junction nodes); tested on a T and a crossroads against photos.
 3. [ ] Trees, masts, heaps (92, 15 and 12 records in d15) and weeds: builders tested against photos; Meshy for the hard
    shapes before the credits expire on 11 Nov (cost stated first).
 4. [ ] Ground: the road and verge colours (grey dusty tar, not tan or black), sand and earth as the map paints them.
