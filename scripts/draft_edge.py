@@ -16,7 +16,8 @@ places what the words name, on that stretch and side, in the numbers below (a pl
   stalls on the carriageway edge"); a mast behind the frontage.
 A stretch with no pano takes the nearest seen stretch of the same road, and a road with none the reading draft_roads.py
 borrowed for it (the nearest seen road of its kind). Nothing is placed on a house, a carriageway (but parked vehicles and
-edge stalls), a crossing or another placed thing. Walls and gates wait for plots (MAP-FORMAT: a frontage belongs to one).
+stalls on its own edge), in front of a crossing on its side, or on another thing this draft placed; poles stand
+beside the carriageway, never on it. Walls and gates wait for plots (MAP-FORMAT: a frontage belongs to one).
 
 Industry: game cities dress their streets by rule where a prop follows the street and comes in numbers, and by hand
 where it does not (Astragon, "Brighton Was Not Built in a Day": Houdini places such props as instancing points; Unreal
@@ -73,7 +74,7 @@ SIZE = {'saloon': (0.9, 2.3), 'suv': (1.0, 2.4), 'keke': (0.7, 1.4), 'danfo': (1
         'bus': (1.25, 5.0), 'lorry': (1.25, 5.5), 'pickup': (0.95, 2.6), 'kiosk': (0.9, 0.9), 'umbrella': (1.1, 1.1),
         'plank_stall': (0.5, 1.0), 'container_shop': (1.2, 3.0), 'palm': (0.6, 0.6), 'shade': (1.5, 1.5),
         'drum': (0.35, 0.35), 'tyre_stack': (0.45, 0.45), 'water_tank': (0.8, 0.8), 'generator': (0.5, 0.8),
-        'bench': (0.3, 1.0), 'rubbish': (1.2, 1.2), 'sand': (1.4, 1.4), 'pole': (0.2, 0.2), 'lattice': (2.0, 2.0)}
+        'bench': (0.3, 1.0), 'rubbish': (1.2, 1.2), 'sand': (1.4, 1.4), 'pole': (0.15, 0.15), 'lattice': (2.0, 2.0)}
 CAR = ['#c0c0c0', '#1b1b1b', '#f2f2f2', '#2b3a55', '#7a1f1f', '#5b5b5b', '#8a8f93', '#3c4a3a']
 UMBRELLA = [['#f6c800', '#1f5fbf'], ['#d62828', '#f2f2f2'], ['#2e8b3a', '#f2f2f2'], ['#f6c800', '#1b1b1b'],
             ['#1f5fbf', '#f2f2f2']]
@@ -153,7 +154,7 @@ def main():
             return False
         if any(houses[j].intersects(shape) for j in htree.query(shape)):
             return False
-        if any(j != own and carriage[j].intersection(shape).area > 0.05 for j in ctree.query(shape)):
+        if any(j != own and carriage[j].intersection(shape).area > 0.001 for j in ctree.query(shape)):
             return False
         return not any(p.intersects(shape) for p in placed)
 
@@ -215,12 +216,14 @@ def main():
                 ok = False
                 for ds in (0, 2, -2, 4, -4, 6, -6):
                     s2 = min(max(s + ds, hl), L.length - hl)
-                    if inside and any(abs(c['s'] - s2) < c['w'] / 2 + hl + 0.3 and c['side'] == side for c in crossings):
-                        continue      # never parked across a gate's bridge
+                    if any(abs(c['s'] - s2) < c['w'] / 2 + hl + 1.0 and c['side'] == side for c in crossings):
+                        continue      # never across or in front of a gate's bridge
                     if inside:        # parked at the kerb
                         offs = [w / 2 - hw - 0.3]
                     elif rt == 'mast':
                         offs = [w / 2 + gut(side, s2) + 18 + k for k in backs]
+                    elif rt == 'pole':  # on the kerb line or the drain's wall, as Mushin's stand, else behind the drain
+                        offs = [w / 2 + hw + 0.02, w / 2 + gut(side, s2) + hw + 0.1]
                     else:
                         offs = [w / 2 + gut(side, s2) + hw + 0.3 + k for k in backs]
                     if on_road_ok:    # no room before the houses: on the road's own edge
@@ -259,7 +262,7 @@ def main():
                     p = put('pole', 'pole', side, s, lambda t: {
                         'kind': 'concrete', 'h': POLE_H, 'lean': [round(rng.uniform(-2, 2), 1), round(rng.uniform(-2, 2), 1)],
                         'transformer': transformer and k == k0, 'lamp': lamp, 'arm': True,
-                        'wear': round(rng.uniform(0.5, 0.8), 2), 'turn': round((t + 90) % 360, 1)}, on_road_ok=True)
+                        'wear': round(rng.uniform(0.5, 0.8), 2), 'turn': round((t + 90) % 360, 1)})
                     if p:
                         if prev_pole and math.dist(prev_pole['at'], p['at']) < 60:
                             new.append({'id': new_id('wi', rng, taken), 'type': 'wire', 'note': f'edge {rid}',
