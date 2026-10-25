@@ -135,6 +135,7 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 | `surface` | `tar_new`, `tar_worn`, `sand`, `earth`, `laterite`, `interlock`, `concrete`, `plank` | `"tar_worn"` |
 | `sand_cover` | `none`, `edges`, `full` | `"edges"` |
 | `kerb_left`, `kerb_right` | `none`, `drain_wall`, `painted_bw`, `raised_pavement` | `"drain_wall"` |
+| `kerb_paint`? | a painted kerb's two colours, in alternate blocks along its face (black and white when absent: Mushin has yellow and black at crossings, red and white by fields) | `["#c9a03a","#2b2b28"]` |
 | `median` | `none`, `low_concrete`, `jersey` | `"none"` |
 | `crown` | m, how much the middle stands above the edges | `0.06` |
 | `ground_look` | per layer (`earth`, `dust`, `tar`, `mud`): `colour` and photo `surface` | `{"tar":{"colour":"#4f3b2f","surface":"worn_asphalt"}}` |

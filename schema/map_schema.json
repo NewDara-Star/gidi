@@ -507,6 +507,7 @@
         "sand_cover": "enum:sand_cover",
         "kerb_left": "enum:kerb",
         "kerb_right": "enum:kerb",
+        "kerb_paint": "hexes?",
         "median": "enum:median",
         "crown": "num >=0",
         "ground_look": "obj:ground_look",
