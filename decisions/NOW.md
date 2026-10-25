@@ -53,7 +53,11 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   two rows deep), road_look mirrors Unreal's T_Streaks term, test renders use Khronos PBR Neutral (AgX greyed the sand:
   foreground sand now 224,199,163 against the photo's 213,192,164), planks bleached to the photo, drain litter coated by
   the silt water. Pictures sent to the owner. Still toy-like: litter shapes (puffy sachets, crisp paper), smeared board
-  grain, flat black silt, the drain narrower than the photo's. Next pass: those, then kerbs.
+  grain, flat black silt, the drain narrower than the photo's.
+- **Road kit, look pass 3** (gidi-game #82): litter as crumpled, sun-faded film half under sand (the photo's heap is pale
+  pink, cream and mint); drain silt dries grey-brown with the road's sand drifting in; board grain de-aliased (it was
+  finer than the 1 cm vertices). Boards still read soft: grain belongs in a scanned wood texture along each board's UVs,
+  which needs a download (item 7 below). Next: kerbs (painted, raised), grated covers, earth drains.
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
@@ -71,6 +75,8 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 5. **Download OK?** a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
 6. **Restart the Mac** when the owner is home (about two hours after 24 Oct evening; swap 4.3 GB); then re-measure
    work mode's shadow pass.
+7. **Download OK?** a weathered wood planks surface from Fab (Megascans, free for Unreal; ~50-300 MB at 2K-8K), for the
+   plank bridges' grain, laid along each board's UVs (25 Oct).
 
 **Next, in order.**
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
