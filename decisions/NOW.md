@@ -67,8 +67,14 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   0.915 m paint blocks (measured on test spot g02, the yellow-and-black kerb at the Ogunmokun St rail crossing:
   paint within 12-20 levels of the photo: yellow 12, black 16-20, the render darker) and raised_pavement HB2 kerbs with the footway at their top; where a drain
   takes over the edge, a cast block closes the join, and drains now have end walls. Open: g02's road reads warm tan
-  against the photo's grey (the ground pass); the kerb-to-drain block is plain. Next: grated covers (g03), earth
-  drains, then laying the pieces along the real centrelines.
+  against the photo's grey (the ground pass); the kerb-to-drain block is plain.
+- **Covered drains and grates** (gidi #327, gidi-game #85): gutters can carry a `covers` table (len, gap, slab/grate/missing,
+  lift, tilt, wear), drafted once by road_draft.py; crossings can be `grate`. Test spots: ot03 Ajose St (both sides
+  covered: the slabs read as one low strip with fine joints) and g03 Sadiku St (an 8 m grate crossing at a filling
+  station: 16 panels, three short slot rows), both by eye beside the photo after 2-3 passes. Open: the photo's slots are
+  fewer and longer; roads read too tan or too black against the photos' grey dusty tar (the ground pass); not tried on a
+  curve or in Unreal. Next: earth drains, then laying the pieces along the real centrelines; trees, masts, heaps (Meshy
+  before 11 Nov).
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
