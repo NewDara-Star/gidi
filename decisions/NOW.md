@@ -12,9 +12,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
 0. [ ] **Pieces as instances, first (owner, 25 Oct, DECISIONS "Pieces placed as instances"):** the audit found
    only block_build splits pieces (windows and doors, as one actor each, not instances) and 97% of a test house's
    triangles are its own roof sheets (46,308 of 47,631); the 25 Oct "Kits into pieces" never reached this list.
-   (a) The 375-house street rebuilt with roof sheets and windows as shared pieces placed as instances (ISM), measured
-   against PERFORMANCE.md's street numbers; (b) if it wins, each builder split in turn; (c) roads as simple shapes
-   with tiling textures and decals; (d) World Partition in place of our tile streaming.
+   (a) [x] Done 25 Oct (gidi-game #90): the street (475 houses now) with roof edges as 19 shared pieces and every
+   piece instanced, measured against a same-day build of main: files 900 -> 373 MB, actors 10,436 -> 1,183, but
+   frame 60 fps in both, GPU 16.2 -> 15.7 ms, process memory 7,156 vs 7,193 MB. The files shrink; the memory is not
+   the houses' triangles (Nanite streams them). So, reordered: (a2) find what fills the 7.2 GB (Unreal's memreport
+   and Insights' memory view, researched first) before splitting more; (b) each builder split in turn, for the files,
+   actors and World Partition; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
+   place of our tile streaming.
 2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
    it (and the 8 corners check_map still lists, all on junction nodes). Roads that meet now share a point (#335);
    the kit must also join the 50 staggered junctions check_map counts (two nodes a few metres apart, inside each
@@ -43,9 +47,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
-- Into item 0: pieces as ISM with per-instance colour, Custom Primitive Data (gidi-game b28652f, a8db77b); plank
-  bridges instanced (4a5d9d3); `tools/measure_csv.py` reads Play_Street_scene.json even for a named test street
-  (a8db77b, "to fix in its own commit", still not fixed: needed for item 0's measure); HLOD for the far city (PERFORMANCE.md).
+- Into item 0: per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
+  custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city (PERFORMANCE.md).
 - Not understood yet, measure again: work mode slower than high on Underdeck; the over-the-roofs GPU median above the
   frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
 - Road kit: never imported into Unreal (6a26dd1, dc5e664 "Unreal not run"); the drain litter's next look pass (dc5e664).
@@ -55,7 +58,7 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   districts in view.
 Alongside, whenever a build waits: study passes over the saved Street View shots for new kits and activities, one
 question per pass (memory: repeat passes on photos).
-Done: road kit edges (gutters, plank and slab bridges, kerbs, covered drains, grates, earth ditches: gidi-game
+Done: measure_csv reads a named street's level (gidi-game #90). Road kit edges (gutters, plank and slab bridges, kerbs, covered drains, grates, earth ditches: gidi-game
 #80-#86); roads laid along their real lines (#87, #88).
 
 **State.** The new map (real Lagos at 1:3, 27 x 10.5 km, 51 districts) has its format (`docs/MAP-FORMAT.md`), the board's
