@@ -57,7 +57,11 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 - **Road kit, look pass 3** (gidi-game #82): litter as crumpled, sun-faded film half under sand (the photo's heap is pale
   pink, cream and mint); drain silt dries grey-brown with the road's sand drifting in; board grain de-aliased (it was
   finer than the 1 cm vertices). Boards still read soft: grain belongs in a scanned wood texture along each board's UVs,
-  which needs a download (item 7 below). Next: kerbs (painted, raised), grated covers, earth drains.
+  which needs a download. Next: kerbs (painted, raised), grated covers, earth drains.
+- **Plank bridges' wood** (gidi-game #83; owner: "Yes download"): Poly Haven rough_wood (CC0, 7.6 MB; the project's own
+  woods were polished or veneer) laid along each board's UVs, in the test renders and in Unreal's new M_GidiTimber. Boards
+  read as weathered timber; g01z boards 205,191,171 against the photo's 219,194,162. Not yet seen on a mesh in Unreal.
+  Swap sits at 5.9-6.3 GB: the watchdog stops headless Unreal within a minute until the Mac is restarted.
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
@@ -75,8 +79,6 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 5. **Download OK?** a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
 6. **Restart the Mac** when the owner is home (about two hours after 24 Oct evening; swap 4.3 GB); then re-measure
    work mode's shadow pass.
-7. **Download OK?** a weathered wood planks surface from Fab (Megascans, free for Unreal; ~50-300 MB at 2K-8K), for the
-   plank bridges' grain, laid along each board's UVs (25 Oct).
 
 **Next, in order.**
 1. **The old map, viewable only** (the owner's call, 24 Oct): its baked data and the board's view of it into `legacy/`; the
