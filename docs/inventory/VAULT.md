@@ -62,7 +62,7 @@ Nearest in words: `gidi:decisions/story/acts-2-3-draft.md` (0.39); `gidi:decisio
 For: lean-to's, gutter's, lean-to, example, stand-in, shop-under-flats, bungalow's, stamped. Last changed 2026-10-22, 10 lines.
 Links to 6: `gidi:docs/MAP-FORMAT.md`, `gidi:docs/map-format-example/d15/district.json`, `gidi:docs/map-format-example/d15/dress/128_60.json`, `gidi:docs/map-format-example/d15/plan.json`, `gidi:schema/kit_reads.json`, `gidi:scripts/check_map.py`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
+Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.13); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
 
 ## Every document, by folder
 
@@ -128,7 +128,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: photo's, tractor, rubbish, bonneted, desk, dirt, flatbed, wings. Last changed 2026-10-24, 137 lines.
 Links to 12: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45.py`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45_2.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_pass.py`, `gidi-data:research/google/kits/old-town/tests/ot45/run45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/sbs.py`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:scripts/check_rules.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.27); `gidi:decisions/NOW.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.27); `gidi:decisions/NOW.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.26).
 
 ## gidi-data:research/google/kits/old-town/tests/ot73
 ### `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`
@@ -273,10 +273,10 @@ Nearest in words: `gidi:decisions/NOW.md` (0.52); `gidi:decisions/DECISIONS.md` 
 
 ### `gidi:decisions/CODEBASE.md`
 **What the code holds: the three repos, one page**. What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
-For: scripts, gidi-game, district's, draft, inventory, board's, deleted, map's. Last changed 2026-10-25, 175 lines.
+For: scripts, gidi-game, district's, draft, inventory, board's, deleted, map's. Last changed 2026-10-25, 179 lines.
 Links to 98: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/ASSET-INVENTORY.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh` ...
 Backlinks: 4 documents (`gidi:CLAUDE.md`, `gidi:README.md`, `gidi:decisions/NOW.md`, `gidi:decisions/README.md`), 3 code files (`gidi:.claude/hooks/checks-before-stop.sh`, `gidi:docs/lagos-study/similar/scripts/common.py`, `gidi:scripts/doc_vault.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.41); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
+Nearest in words: `gidi:decisions/NOW.md` (0.42); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
 
 ### `gidi:decisions/DECISIONS.md`
 **Decisions (the owner's standing rules)**. Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
@@ -301,10 +301,10 @@ Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 329 lines.
+For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 331 lines.
 Links to 79: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/furniture_build.py` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 1 code files (`gidi:.claude/hooks/review-before-push.sh`).
-Nearest in words: `gidi:decisions/CHECKS.md` (0.52); `gidi:decisions/DECISIONS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.41).
+Nearest in words: `gidi:decisions/CHECKS.md` (0.52); `gidi:decisions/DECISIONS.md` (0.51); `gidi:decisions/CODEBASE.md` (0.42).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
@@ -693,7 +693,7 @@ Nearest in words: `gidi:docs/look/research-street.md` (0.5); `gidi:docs/look/res
 For: lean-to's, gutter's, lean-to, example, stand-in, shop-under-flats, bungalow's, stamped. Last changed 2026-10-22, 10 lines.
 Links to 6: `gidi:docs/MAP-FORMAT.md`, `gidi:docs/map-format-example/d15/district.json`, `gidi:docs/map-format-example/d15/dress/128_60.json`, `gidi:docs/map-format-example/d15/plan.json`, `gidi:schema/kit_reads.json`, `gidi:scripts/check_map.py`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
+Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.13); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
 
 ## gidi:docs
 ### `gidi:docs/maze-pattern-study.md`

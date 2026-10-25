@@ -2,10 +2,10 @@
 import os, json, numpy as np
 from pyproj import Transformer
 DATA = '/Users/Star/gidi-data/research/data/'
-SCR = os.environ.get('GIDI_SCRATCH', '/private/tmp/claude-501/-Users-Star-gidi/bd25866f-2f1b-4b56-a662-5ab97de6e073/scratchpad/')
+SCR = os.environ.get('GIDI_SCRATCH', '/Users/Star/gidi-data/research/study-work/')   # kept out of temp folders (the first files were lost there)
 LAGOS = SCR + 'lagos/'          # the earlier study's 250 m grids (feat.npz, class.npz, bgrid65.npz, hgrid.npz, rgrid.npz)
 WORK = SCR + 'roads/'           # this study's working files
-OUT = os.environ.get('ROADS_OUT', os.path.expanduser('~/gidi-worktrees/roads/docs/lagos-study/roads/'))
+OUT = os.environ.get('ROADS_OUT', os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/')
 T = Transformer.from_crs(4326, 32631, always_xy=True)
 TI = Transformer.from_crs(32631, 4326, always_xy=True)
 X0, Y0 = 466250.0, 702750.0      # same origin as the 250 m grid
