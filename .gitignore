@@ -4,7 +4,6 @@ __pycache__/
 /out/
 .DS_Store
 __pycache__/
-web/city/
 .venv/
 web/frame-study.js
 web/frame-tiles/

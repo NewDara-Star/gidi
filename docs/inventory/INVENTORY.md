@@ -10,9 +10,9 @@ Made by `scripts/inventory.py` (gidi): every git-tracked file in gidi, gidi-game
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `.gitignore` | 11 | 2026-10-23 | 5 |  |
+| `.gitignore` | 10 | 2026-10-25 | 4 |  |
 | `CLAUDE.md` | 22 | 2026-10-25 | 26 | Gidi: An open-world city inspired by Lagos, built from data and by hand. The owner works across more than one Claude account. |
-| `README.md` | 32 | 2026-10-24 | 1 | Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the m… |
+| `README.md` | 32 | 2026-10-25 | 1 | Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the m… |
 
 ### gidi/.claude
 
@@ -26,7 +26,7 @@ Data: 1 files, 0.0 MB (.json); unpointed: 0.
 | `checks-before-commit.sh` | 16 | 2026-10-24 | 3 | CLAUDE.md, "Nothing is claimed without proof": before any git commit or push Claude makes in gidi or gidi-game, the checks run on the checkout the command acts… |
 | `checks-before-stop.sh` | 27 | 2026-10-24 | 3 | CLAUDE.md, "Nothing is claimed without proof": a turn doesn't end on broken checks. When Claude stops with code or the map changed but not committed, in any ch… |
 | `repo.sh` | 72 | 2026-10-24 | 4 | Shared by the hooks (CLAUDE.md, "Nothing is claimed without proof"). Work happens in worktrees (~/gidi-worktrees/<dir>) and in gidi-game, so the repo a git com… |
-| `review-before-push.sh` | 99 | 2026-10-24 | 3 | CLAUDE.md, "A second model reviews every push" (the owner's stride-web process, 24 Oct: "the scripts lying, or the agents lying to reach an outcome"): before C… |
+| `review-before-push.sh` | 99 | 2026-10-25 | 3 | CLAUDE.md, "A second model reviews every push" (the owner's stride-web process, 24 Oct: "the scripts lying, or the agents lying to reach an outcome"): before C… |
 
 ### gidi/data
 
@@ -53,11 +53,11 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `CHECKS.md` | 96 | 2026-10-25 | 8 | Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before eve… |
-| `CODEBASE.md` | 180 | 2026-10-25 | 7 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
+| `CODEBASE.md` | 175 | 2026-10-25 | 7 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
 | `DECISIONS.md` | 142 | 2026-10-25 | 14 | Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`… |
 | `HISTORY.md` | 61 | 2026-10-25 | 4 | Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we kno… |
 | `IDEAS.md` | 68 | 2026-10-24 | 5 | Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig,… |
-| `NOW.md` | 305 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
+| `NOW.md` | 321 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
 | `README.md` | 9 | 2026-10-24 | 1 | Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it w… |
 | `lived-in.md` | 154 | 2026-10-24 | 5 | The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, acro… |
 | `world-life.md` | 146 | 2026-10-16 | 4 | Life in Gidi: what makes the world feel like it exists: The owner's thinking from 16 Oct 2026, and Claude's proposals. The research behind it: `docs/research/L… |
@@ -84,7 +84,7 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `LAGOS-ISMS.md` | 276 | 2026-10-25 | 14 | Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things… |
 | `LAGOS-LIGHT.md` | 61 | 2026-10-25 | 2 | Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel … |
 | `MAP-FORMAT.md` | 599 | 2026-10-25 | 16 | The new map's data format (draft 0.1, for the owner to approve): The new map is the one ground truth (decisions, 22 Oct: "everything that we do must be in map … |
-| `OLD-KIT.md` | 98 |  | 7 | The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... … |
+| `OLD-KIT.md` | 98 | 2026-10-25 | 7 | The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... … |
 | `OLD-MAP-LESSONS.md` | 89 | 2026-10-25 | 7 | What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history, deleted 25 Oct (git tag `before-cleanup-25oct`; DECISIO… |
 | `RESEARCH.md` | 66 | 2026-10-24 | 2 | The Lagos research: what we know, and which new districts it serves: Everything gidi holds about real Lagos, in one place. Most of it was written for the old m… |
 | `bazaar-pattern-study.md` | 125 | 2026-10-14 | 1 | The Bazaar pattern study: Ojo round the electronics market → The Bazaar (v1): Status: generated for review (14 Oct 2026). Same method as every district: we mea… |
@@ -115,7 +115,7 @@ Data: 17 files, 0.3 MB (.json); unpointed: 16.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `borrowed-lagos.md` | 72 | 2026-10-23 | 4 | Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from plac… |
+| `borrowed-lagos.md` | 72 | 2026-10-25 | 4 | Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from plac… |
 | `maze-hub-lagos.md` | 53 | 2026-10-25 | 3 | The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md… |
 | `monument-briefs.md` | 30 | 2026-10-19 | 2 | Monuments: what each needs (19 Oct): The owner's rule: Meshy for statues and monuments nobody walks into; structures people walk into or under are built in Ble… |
 | `realnames.txt` | 8421 | 2026-10-21 | 5 |  |
@@ -178,7 +178,7 @@ Binary: 19 files, 13.0 MB (19 .png).
 | `research-landmarks.md` | 735 | 2026-10-14 | 1 | Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks: Rule zero applies here more than anywhere else. A landmark is the thing a player will r… |
 | `research-leisure.md` | 800 | 2026-10-14 | 1 | Gidi catalogue: education, sport, leisure and nightlife places: This catalogue extends `docs/look/research-buildings.md` and `docs/look/research-street.md`. It… |
 | `research-religious.md` | 625 | 2026-10-14 | 1 | Gidi look research: religious buildings and places: Scope: mosques, churches, white-garment churches, prayer camps, storefront worship, roadside prayer spaces,… |
-| `research-roads.md` | 1147 | 2026-10-23 | 1 | Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with pot… |
+| `research-roads.md` | 1147 | 2026-10-25 | 1 | Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with pot… |
 | `research-street.md` | 923 | 2026-10-14 | 9 | Gidi street catalogue: roads, vehicles, people, signage, props: This is research for a procedural generator. It studies real Lagos and describes patterns only.… |
 | `research-transport.md` | 886 | 2026-10-14 | 1 | Gidi transport and infrastructure catalogue: Research for the seeded Blender kit. Rule zero applies: real Lagos is studied as a pattern only. All names, liveri… |
 | `research-vehicles.md` | 1288 | 2026-10-14 | 1 | Gidi vehicle catalogue: everything that moves on Lagos roads and water: Research for the seeded Blender kit. **Rule zero:** study real Lagos, build our own cit… |
@@ -244,11 +244,11 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `board_server.py` | 408 | 2026-10-24 | 6 | The drawing board's server (owner, 16 Oct 2026: "we should hand draw... know where something meets something"). |
+| `board_server.py` | 408 | 2026-10-25 | 6 | The drawing board's server (owner, 16 Oct 2026: "we should hand draw... know where something meets something"). |
 | `check_map.py` | 636 | 2026-10-25 | 15 | The new map's checker (docs/MAP-FORMAT.md; owner, 22 Oct 2026: "one ground truth"). Nothing in the map is guessed: a record with an unknown field, a wrong type… |
 | `check_rules.py` | 18 | 2026-10-21 | 8 | Every rule in decisions/DECISIONS.md has a row in decisions/CHECKS.md saying what holds it (owner, 21 Oct 2026: gaps must not turn up only when someone asks). … |
 | `code_graph.py` | 350 | 2026-10-24 | 4 | The code graph, for scripts/inventory.py (owner, 24 Oct: "use the compiler to know what every single piece of code, every line, is connected to, and that every… |
-| `doc_vault.py` | 140 | 2026-10-24 | 2 | The documents as a vault, for scripts/inventory.py (owner, 24 Oct: "use word matching to know what every document is meant for, like an Obsidian vault; if a do… |
+| `doc_vault.py` | 140 | 2026-10-25 | 2 | The documents as a vault, for scripts/inventory.py (owner, 24 Oct: "use word matching to know what every document is meant for, like an Obsidian vault; if a do… |
 | `draft_buildings.py` | 303 | 2026-10-24 | 7 | A district's first draft of buildings, from its real blocks' own houses (owner, 23 Oct: "real footprints, then hand"). |
 | `draft_crossings.py` | 86 | 2026-10-25 | 3 | A district's first draft of each road's crossings: the bridges over its open gutters into the houses that face it. |
 | `draft_edge.py` | 331 | 2026-10-25 | 3 | A district's first draft of what stands along each road: poles and their wires, parked vehicles, stalls, trees, drums, tyre stacks, heaps and masts, from the S… |
@@ -261,7 +261,7 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `frame_study.py` | 303 | 2026-10-22 | 6 | The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts… |
 | `inventory.py` | 318 | 2026-10-25 | 8 | What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it. |
 | `js_symbols.mjs` | 53 | 2026-10-24 | 1 | What a JavaScript file declares, uses and says in its comments, read by the TypeScript compiler's parser (not by word matching), for scripts/code_graph.py:   n… |
-| `realnames.py` | 22 | 2026-10-24 | 3 | Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only). |
+| `realnames.py` | 22 | 2026-10-25 | 3 | Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only). |
 | `study_boxheights.py` | 31 | 2026-10-24 | 5 | Height bands for a neighbourhood-level study: data/results/heights.py measures whole LGAs; this measures the part of an LGA inside lon/lat boxes, the same way … |
 
 ### gidi/tests
@@ -274,24 +274,24 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `board.html` | 75 | 2026-10-22 | 9 | Gidi Drawing Board |
+| `board.html` | 75 | 2026-10-25 | 9 | Gidi Drawing Board |
 | `faceedit.js` | 235 | 2026-10-22 | 2 | The face editor on the new frame's board (docs/MAP-FORMAT.md, "faces"): one face of a building drawn flat, u across from the face's first corner, z up from the… |
-| `frame.js` | 239 | 2026-10-22 | 3 | The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Ope… |
+| `frame.js` | 239 | 2026-10-25 | 3 | The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Ope… |
 | `mapedit.js` | 1458 | 2026-10-24 | 6 | The new map's editor on the drawing board's new frame (board.html?frame=new; docs/MAP-FORMAT.md). Draws and saves the plan layer, record by record, in map/<dis… |
 
 ## gidi-game
 
-514 files.
+503 files.
 
 ### gidi-game/.
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `.gitattributes` | 17 | 2026-10-19 | 0 |  |
-| `.gitignore` | 47 | 2026-10-25 | 5 |  |
+| `.gitignore` | 47 | 2026-10-25 | 4 |  |
 | `ASSETS.md` | 36 | 2026-10-25 | 6 | Hand-made assets: / Asset / Where / Source / Status / /---/---/---/---/ / Danfo Basic 2.0 (font): the owner's danfo lettering (BirdFont, July 2022), spaced, ke… |
 | `CLAUDE.md` | 13 | 2026-10-24 | 26 | Gidi game (Unreal): Read the map repo's `decisions/` first (`~/gidi/decisions/NOW.md`, `DECISIONS.md`): the same rules apply here. |
-| `README.md` | 56 | 2026-10-24 | 1 | Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its d… |
+| `README.md` | 48 | 2026-10-25 | 1 | Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its r… |
 
 Data: 1 files, 0.0 MB (.json); unpointed: 0.
 
@@ -360,7 +360,7 @@ Binary: 19 files, 28.1 MB (19 .jpg).
 
 ### gidi-game/Art/Vehicles
 
-Data: 33 files, 0.0 MB (.json); unpointed: 29.
+Data: 33 files, 0.0 MB (.json); unpointed: 30.
 
 Binary: 120 files, 242.8 MB (62 .glb, 36 .blend, 14 .jpg, 8 .png).
 
@@ -371,7 +371,7 @@ Binary: 120 files, 242.8 MB (62 .glb, 36 .blend, 14 .jpg, 8 .png).
 | `DefaultDeviceProfiles.ini` | 102 | 2026-10-24 | 5 | sections: DeviceProfiles, Gidi_Work DeviceProfile, Gidi_Low DeviceProfile, Gidi_High DeviceProfile, Gidi_Full DeviceProfile, MacEditor DeviceProfile |
 | `DefaultEditor.ini` | 1 | 2026-10-17 | 0 | sections:  |
 | `DefaultEditorPerProjectUserSettings.ini` | 5 | 2026-10-17 | 0 | sections: /Script/ModelContextProtocolEngine.ModelContextProtocolSettings |
-| `DefaultEngine.ini` | 70 | 2026-10-24 | 1 | sections: /Script/EngineSettings.GameMapsSettings, /Script/Engine.RendererSettings, /Script/WindowsTargetPlatform.WindowsTargetSettings, /Script/LinuxTargetPla… |
+| `DefaultEngine.ini` | 70 | 2026-10-25 | 1 | sections: /Script/EngineSettings.GameMapsSettings, /Script/Engine.RendererSettings, /Script/WindowsTargetPlatform.WindowsTargetSettings, /Script/LinuxTargetPla… |
 | `DefaultGame.ini` | 5 | 2026-10-17 | 0 | sections: /Script/EngineSettings.GeneralProjectSettings |
 | `DefaultInput.ini` | 85 | 2026-10-17 | 0 | sections: /Script/Engine.InputSettings |
 
@@ -388,28 +388,22 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `.gitkeep` | 1 | 2026-10-17 | 0 |  |
-| `gidi_cam.py` | 16 | 2026-10-18 | 3 | Put the check camera in the city level: tools/shot.sh moves it, the game starts looking through it (auto-activates). |
-| `gidi_heroes.py` | 267 | 2026-10-25 | 10 | Hero models in the city: hand-made vehicles (Art/Vehicles, made by tools/vehicle_prep.py) placed wherever the map data puts one of their kind (the data's "thin… |
-| `gidi_import.py` | 379 | 2026-10-24 | 9 | The Gidi importer: the city in Unreal, made from the map repo's data (the map is never final, so this runs again and again). |
-| `gidi_look.py` | 49 | 2026-10-18 | 6 | The city's light and lens, set once in Gidi_City (run headless: tools/look.sh, or from gidi_import's _environment). |
-| `gidi_modes.py` | 111 | 2026-10-25 | 5 | The crowd per mode (decisions: "Build light, look full"; docs/PERFORMANCE.md). |
-| `gidi_paint.py` | 131 | 2026-10-19 | 3 | Painted panels that wear: M_GidiPaint, for the built vehicles' paint slots (gidi_heroes.py). |
-| `gidi_photo.py` | 96 | 2026-10-19 | 2 | Photo mode, for pictures to post: one danfo placed where it's wanted, a cinema camera on it, the sun where the picture wants it. Run headless before the game (… |
-| `gidi_plates.py` | 201 | 2026-10-19 | 6 | Number plates in Unreal: every vehicle its own number, from one material (tools/plates.py draws the pieces into Art/Plates). |
-| `gidi_play.py` | 80 | 2026-10-24 | 5 | The playable spot: Ìbùdó's Market Road under the Ring Road flyover (the map's spot 1), as its own level you play in. |
+| `gidi_heroes.py` | 226 | 2026-10-25 | 8 | Hero models: the built vehicles (Art/Vehicles, from the builders in tools/) imported once each, for a play level's layout to place (gidi_underdeck.py). |
+| `gidi_look.py` | 68 | 2026-10-25 | 4 | A play level's sky and light (environment(), placed once) and its lens (apply(), every build of the level). |
+| `gidi_modes.py` | 111 | 2026-10-25 | 4 | The crowd per mode (decisions: "Build light, look full"; docs/PERFORMANCE.md). |
+| `gidi_paint.py` | 131 | 2026-10-19 | 2 | Painted panels that wear: M_GidiPaint, for the built vehicles' paint slots (gidi_heroes.py). |
+| `gidi_plates.py` | 201 | 2026-10-19 | 5 | Number plates in Unreal: every vehicle its own number, from one material (tools/plates.py draws the pieces into Art/Plates). |
 | `gidi_scan_export.py` | 53 | 2026-10-25 | 1 | The project's Megascans surfaces written out as image files, so the Blender kit tests render with the same scans the game uses. |
-| `gidi_signs.py` | 88 | 2026-10-18 | 1 | Shop signs and painted lettering in Unreal, from the kit's tile records (gidi repo web/city/<detail>/tiles/<t>.json "signs"). |
-| `gidi_stream.py` | 82 | 2026-10-24 | 6 | The city streams in pieces around the player (decisions: "Build light, look full", (4); docs/PERFORMANCE.md). |
-| `gidi_street.py` | 364 | 2026-10-25 | 2 | The street test: a Mùṣá lane and the houses round it, each our own built house with its zinc roof, to measure. |
-| `gidi_surfaces.py` | 454 | 2026-10-25 | 9 | Textured surfaces: the city's walls, roofs, roads and ground get real texture, still in the kit's colours. |
-| `gidi_underdeck.py` | 282 | 2026-10-24 | 6 | The underdeck: a playable test street, a danfo park under a flyover pair (the owner, 22 Oct: video 1's real match, "try to build Obalende"). Its own level, Pla… |
+| `gidi_street.py` | 364 | 2026-10-25 | 5 | The street test: a Mùṣá lane and the houses round it, each our own built house with its zinc roof, to measure. |
+| `gidi_surfaces.py` | 530 | 2026-10-25 | 11 | Textured surfaces: the city's walls, roofs, roads and ground get real texture, still in the kit's colours. |
+| `gidi_underdeck.py` | 282 | 2026-10-25 | 7 | The underdeck: a playable test street, a danfo park under a flyover pair (the owner, 22 Oct: video 1's real match, "try to build Obalende"). Its own level, Pla… |
 
 ### gidi-game/docs
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `ASSET-INVENTORY.md` | 21 | 2026-10-23 | 3 | What's already in the project (check here before building anything): The owner's rule (19 Oct): look at what we have before building from scratch. Gidi's own t… |
-| `PERFORMANCE.md` | 270 | 2026-10-25 | 13 | Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, "Build light, look full"): build in a light mode,… |
+| `PERFORMANCE.md` | 270 | 2026-10-25 | 12 | Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, "Build light, look full"): build in a light mode,… |
 
 ### gidi-game/tools
 
@@ -417,8 +411,8 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 |---|---|---|---|---|
 | `block_build.py` | 668 | 2026-10-25 | 6 | The rendered block, built in Blender part by part: blender -b -P tools/block_build.py -- <out.blend> [recipe.json] |
 | `brt_build.py` | 288 | 2026-10-23 | 1 | The BRT bus, built in Blender part by part: blender -b -P tools/brt_build.py -- <out.blend> [variant.json] |
-| `danfo_build.py` | 521 | 2026-10-23 | 8 | The danfo, built in Blender part by part (not generated): blender -b -P tools/danfo_build.py -- <out.blend> [variant.json] |
-| `editor.sh` | 26 | 2026-10-24 | 6 | Open the editor in a mode: tools/editor.sh [work/low/high/full] [underdeck/ibudo/<map path>]   (any order) the mode   defaults to this machine's choice (tools/… |
+| `danfo_build.py` | 521 | 2026-10-23 | 7 | The danfo, built in Blender part by part (not generated): blender -b -P tools/danfo_build.py -- <out.blend> [variant.json] |
+| `editor.sh` | 26 | 2026-10-25 | 6 | Open the editor in a mode: tools/editor.sh [work/low/high/full] [street/underdeck/<map path>]   (any order) the mode   defaults to this machine's choice (tools… |
 | `fab_list.sh` | 9 | 2026-10-19 | 0 | What's in the project from Fab (added = in Content/Fab). tools/fab_list.sh |
 | `fields.py` | 122 | 2026-10-24 | 24 | What a builder reads from its recipe, declared beside its code and held to it (gidi decisions, 23 Oct: the interface works both ways: a field a builder grows m… |
 | `font_brush.py` | 227 | 2026-10-19 | 2 | Gidi Brush, the painted danfo lettering: ~/.venvs/gidi/bin/python tools/font_brush.py <TitanOne.ttf> <out.ttf> |
@@ -427,11 +421,10 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `font_punct.py` | 120 | 2026-10-19 | 2 | Punctuation for Danfo Basic, from its base font: ~/.venvs/gidi/bin/python tools/font_punct.py <danfo.ttf> <AlfaSlabOne.ttf> <out.ttf> |
 | `font_space.py` | 165 | 2026-10-19 | 6 | Space and kern a font by measurement (the owner's Danfo Basic, 2022: "I could not get the tracking or kerning right"). |
 | `font_specimen.py` | 42 | 2026-10-19 | 1 | Specimen sheets for a font, to judge it by eye (zoom in): ~/.venvs/gidi/bin/python tools/font_specimen.py <font.ttf> <out dir> |
-| `frame_motorpark.py` | 276 | 2026-10-19 | 2 | The first Lagos-pass frame: the Àdàrú motor park beside the expressway, seen from a footbridge (after the owner's photo, refs/lagos-life/09): blender -b -P too… |
+| `frame_motorpark.py` | 276 | 2026-10-19 | 3 | The first Lagos-pass frame: the Àdàrú motor park beside the expressway, seen from a footbridge (after the owner's photo, refs/lagos-life/09): blender -b -P too… |
 | `furniture_build.py` | 271 | 2026-10-23 | 3 | Street furniture, built in Blender part by part: blender -b -P tools/furniture_build.py -- <out.blend> [recipe.json] |
 | `goods_kit.py` | 349 | 2026-10-23 | 8 | Goods, built from a map `goods` record's rows: import goods_kit as G; G.build(rows, frame) -> objects. |
 | `img_diff.py` | 20 | 2026-10-25 | 2 | How many pixels differ between two pictures of the same view (renders, screenshots)? |
-| `import.sh` | 19 | 2026-10-19 | 5 | Bring the city in from the gidi repo: tools/import.sh maze / all / "25,9;25,10"  [--force] [--full] Close the Unreal editor first. GIDI_REPO points at the map … |
 | `junction_build.py` | 314 | 2026-10-25 | 3 | Where roads meet: a junction's own patch of road, and the open drains turning its corners. blender -b -P tools/junction_build.py -- <out.blend or folder> <reci… |
 | `junction_geo.py` | 503 | 2026-10-25 | 4 | Where roads meet: each junction's shape and where each road stops short of it. Plain Python (no Blender), read by the junction builder and by the road pieces m… |
 | `keke_build.py` | 357 | 2026-10-23 | 1 | The keke, built in Blender part by part: blender -b -P tools/keke_build.py -- <out.blend> [variant.json] |
@@ -441,13 +434,12 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `lap_check.py` | 53 | 2026-10-25 | 2 | How well the roof edge pieces' ribs nest at the side laps: python tools/lap_check.py <street dir or .pieces.json>... |
 | `leanto_build.py` | 239 | 2026-10-24 | 2 | The zinc lean-to, built in Blender part by part: blender -b -P tools/leanto_build.py -- <out.blend> [recipe.json] |
 | `lettering.py` | 129 | 2026-10-19 | 4 | Lettering laid out for a sticker: ~/.venvs/gidi/bin/python tools/lettering.py <font.ttf> <text> <cap metres> <arc radius or 0> <outline metres> <out.json> [--b… |
-| `look.sh` | 8 | 2026-10-18 | 2 | Set the city's light and lens (Content/Python/gidi_look.py) headless; GIDI_LOOK='{"ev_bias": -1.5}' tries other values. |
 | `look_travels.py` | 117 | 2026-10-25 | 3 | Does the look reach Unreal, and what does each built thing weigh: python tools/look_travels.py [--all] |
 | `loose_build.py` | 55 | 2026-10-23 | 0 | Goods and litter lying loose on the ground, built in Blender: blender -b -P tools/loose_build.py -- <out.blend> [recipe.json] |
 | `lorry_build.py` | 671 | 2026-10-23 | 2 | The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json] |
-| `make_textures.py` | 118 | 2026-10-18 | 4 | Seamless detail textures for the city's surfaces, made from noise (no photographs, so nothing to license and nothing to copy). |
-| `map_build.py` | 277 | 2026-10-25 | 8 | The map, built: ~/.venvs/gidi/bin/python tools/map_build.py <map dir> <district> <out folder> [--box=x0,y0,x1,y1] [--camera=x,y,z,turn,pitch,fov] [--spot=<spot… |
-| `measure.sh` | 11 | 2026-10-24 | 6 | Measure a play level in a mode against its budget (docs/PERFORMANCE.md): tools/measure.sh [underdeck/ibudo/street] [work/low/high/full/old] [seconds] [shot.png… |
+| `make_textures.py` | 118 | 2026-10-18 | 3 | Seamless detail textures for the city's surfaces, made from noise (no photographs, so nothing to license and nothing to copy). |
+| `map_build.py` | 277 | 2026-10-25 | 9 | The map, built: ~/.venvs/gidi/bin/python tools/map_build.py <map dir> <district> <out folder> [--box=x0,y0,x1,y1] [--camera=x,y,z,turn,pitch,fov] [--spot=<spot… |
+| `measure.sh` | 11 | 2026-10-25 | 7 | Measure a play level in a mode against its budget (docs/PERFORMANCE.md): tools/measure.sh [underdeck/street] [work/low/high/full/old] [seconds] [shot.png] Runs… |
 | `measure_csv.py` | 101 | 2026-10-25 | 4 | Read the CSV profile tools/measure.sh just took and write Saved/Perf/<spot>_<mode>.txt: the level's numbers against its budget (BUDGET below, docs/PERFORMANCE.… |
 | `memreport.sh` | 27 | 2026-10-25 | 2 | Where a play level's memory goes: tools/memreport.sh <level path> [mode] [seconds] Runs the game as tools/play.sh does (no CSV profiler: it holds every frame's… |
 | `memreport_later.py` | 20 | 2026-10-25 | 1 | Run inside the game (tools/memreport.sh passes it with -ExecCmds="py ..."): after GIDI_MEMREPORT_AFTER seconds (60), Unreal's memreport -full, once the level h… |
@@ -456,41 +448,38 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `molue_build.py` | 369 | 2026-10-23 | 1 | The molue, built in Blender part by part: blender -b -P tools/molue_build.py -- <out.blend> [variant.json] |
 | `package.sh` | 16 | 2026-10-25 | 3 | A packaged Development game of some play levels, to measure memory as a player's Mac would have it (Epic, and Tom Looman's optimisation talk: read memory in a … |
 | `person_build.py` | 293 | 2026-10-24 | 4 | A Gidi person, built with MakeHuman in Blender (MPFB, CC0 assets): blender -b -P tools/person_build.py -- <spec.json> <out.blend> [render.png] |
-| `photo.sh` | 19 | 2026-10-19 | 2 | Photo mode: tools/photo.sh '<GIDI_PHOTO json>' name [seconds]  (Content/Python/gidi_photo.py says what the json holds) Places the photo danfo and a cinema came… |
 | `pickup_build.py` | 516 | 2026-10-23 | 3 | The pickup, built in Blender part by part: blender -b -P tools/pickup_build.py -- <out.blend> [recipe.json] |
 | `piece_match.py` | 62 | 2026-10-25 | 1 | Does a shared piece put back by its placement look the same as the whole build? Renders both from one camera. |
-| `plates.py` | 246 | 2026-10-19 | 8 | Gidi's number plates: ~/.venvs/gidi/bin/python tools/plates.py  (writes Art/Plates/) |
-| `play.sh` | 102 | 2026-10-24 | 13 | Play a spot: tools/play.sh [underdeck] [work/low/high/full] [build]   (any order; defaults: Ìbùdó, work) (no name)  Ìbùdó's Market Road under the flyover (Cont… |
+| `plates.py` | 246 | 2026-10-25 | 9 | Gidi's number plates: ~/.venvs/gidi/bin/python tools/plates.py  (writes Art/Plates/) |
+| `play.sh` | 96 | 2026-10-25 | 12 | Play a spot: tools/play.sh [street/underdeck] [work/low/high/full] [build]   (any order; defaults: street, work) street     the street test: a Mùṣá lane and 37… |
 | `pole_build.py` | 357 | 2026-10-23 | 3 | The street pole, built in Blender part by part: blender -b -P tools/pole_build.py -- <out.blend> [recipe.json] |
-| `prop_basin_final.py` | 369 | 2026-10-19 | 3 | The basin of drinks, finished (the proof that a blockout becomes real): blender -b -P tools/prop_basin_final.py -- <out folder> [render.png] |
-| `props_build.py` | 259 | 2026-10-19 | 3 | Street props for the Lagos pass (docs/hand/lagos-pass.md, the owner's photos in refs/lagos-life/): blender -b -P tools/props_build.py -- <out folder> |
-| `road_build.py` | 1139 | 2026-10-25 | 6 | A road stretch as the map's road record says: the carriageway, its open drains, the bridges over them, the verges and the rubbish in the drains. blender -b -P … |
+| `prop_basin_final.py` | 369 | 2026-10-19 | 4 | The basin of drinks, finished (the proof that a blockout becomes real): blender -b -P tools/prop_basin_final.py -- <out folder> [render.png] |
+| `props_build.py` | 259 | 2026-10-19 | 4 | Street props for the Lagos pass (docs/hand/lagos-pass.md, the owner's photos in refs/lagos-life/): blender -b -P tools/props_build.py -- <out folder> |
+| `road_build.py` | 1139 | 2026-10-25 | 7 | A road stretch as the map's road record says: the carriageway, its open drains, the bridges over them, the verges and the rubbish in the drains. blender -b -P … |
 | `road_draft.py` | 175 | 2026-10-25 | 2 | A road's first draft of its loose things, stored as map records: python tools/road_draft.py <road.json> [--force] |
 | `road_look.py` | 310 | 2026-10-25 | 7 | A kit test picture with the game's surfaces: blender -b -P tools/road_look.py -- <built.blend> <view.json> <out.png> |
 | `scan_export.sh` | 9 | 2026-10-25 | 2 | The project's Megascans surfaces and decals as PNGs for the Blender kit tests (Content/Python/gidi_scan_export.py). Headless. |
 | `scan_shrink.py` | 14 | 2026-10-25 | 2 | Saved/ScanExports' PNGs shrunk to 2K in place (the light test renders need no more): python tools/scan_shrink.py [size] |
-| `shot.sh` | 20 | 2026-10-19 | 3 | A check picture of the imported city: tools/shot.sh "x y z pitch yaw" name  (map metres: x east, y south; degrees) Puts a camera in Gidi_City (headless), runs … |
 | `spot_assemble.py` | 228 | 2026-10-25 | 6 | A spot rebuilt from its records and rendered from the photo's camera: python tools/spot_assemble.py <spot.json> <out folder> |
 | `spot_to_map.py` | 336 | 2026-10-23 | 3 | A test spot as map records: python tools/spot_to_map.py <spot.json> <stamp dir> <district> --origin=x,y [--name=<stamp>] |
 | `stall_build.py` | 402 | 2026-10-25 | 3 | The street stall with its goods, built in Blender part by part: blender -b -P tools/stall_build.py -- <out.blend> [recipe.json] |
-| `stream.sh` | 8 | 2026-10-24 | 3 | Put the city's tiles on streaming volumes (Content/Python/gidi_stream.py; tools/import.sh does it after every import): a tile is drawn within 600 m of its edge… |
 | `street_ground.py` | 58 | 2026-10-24 | 2 | The street test's ground: blender -b --factory-startup -P tools/street_ground.py -- <street dir> |
 | `street_join.py` | 26 | 2026-10-24 | 3 | The street test's houses as one mesh each: blender -b --factory-startup -P tools/street_join.py -- <id>.blend ... |
-| `street_test.py` | 188 | 2026-10-25 | 3 | The street test's houses: python tools/street_test.py <map dir> <x> <y> <radius> [--road <id>] [--only N] [--name <n>] [--tiles] [--pieces] |
-| `surfaces.sh` | 8 | 2026-10-18 | 2 | Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the material, re-point the imported meshes. Headless. |
+| `street_test.py` | 188 | 2026-10-25 | 4 | The street test's houses: python tools/street_test.py <map dir> <x> <y> <radius> [--road <id>] [--only N] [--name <n>] [--tiles] [--pieces] |
+| `surfaces.sh` | 8 | 2026-10-25 | 1 | Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the masters and the surface instances. Headless. |
 | `trace_mark.py` | 39 | 2026-10-19 | 2 | A mark's outline traced from its picture: ~/.venvs/gidi/bin/python tools/trace_mark.py <mark.png> <out.json> |
 | `umbrella_build.py` | 347 | 2026-10-25 | 4 | The market umbrella, built in Blender part by part: blender -b -P tools/umbrella_build.py -- <out.blend> [recipe.json] |
-| `underdeck_build.py` | 1133 | 2026-10-24 | 5 | The underdeck set: a danfo park under a flyover pair, built from the study of the real one (the owner, 22 Oct: "try to build Obalende"; refs ~/gidi-data/resear… |
+| `underdeck_build.py` | 1133 | 2026-10-25 | 5 | The underdeck set: a danfo park under a flyover pair, built from the study of the real one (the owner, 22 Oct: "try to build Obalende"; refs ~/gidi-data/resear… |
 | `underdeck_extras.py` | 73 | 2026-10-22 | 4 | The underdeck's extra models, from the hand-made ones (generated into Saved/Underdeck, never committed): blender -b -P tools/underdeck_extras.py -- [out folder… |
 | `vehicle_export.py` | 22 | 2026-10-19 | 1 | A built vehicle's game models from its Blender file: blender -b <name>_parts.blend -P tools/vehicle_export.py -- <out base> |
 | `vehicle_kit.py` | 405 | 2026-10-23 | 17 | The shared pieces of the vehicle builders (Blender), copied from tools/danfo_build.py so the keke, the molue and the BRT build the same way: start() clears the… |
 | `vehicle_look.py` | 121 | 2026-10-19 | 3 | Look renders of a built vehicle: blender -b <parts.blend> -P tools/vehicle_look.py -- <out.jpg> [view ...] [--size W] |
-| `vehicle_prep.py` | 329 | 2026-10-19 | 3 | A generated vehicle (Meshy) made game-ready in Blender: blender -b -P tools/vehicle_prep.py -- <in.glb> <out.glb> <spec.json> |
+| `vehicle_prep.py` | 329 | 2026-10-19 | 2 | A generated vehicle (Meshy) made game-ready in Blender: blender -b -P tools/vehicle_prep.py -- <in.glb> <out.glb> <spec.json> |
 | `vehicle_stickers.py` | 192 | 2026-10-23 | 7 | Badges and stickers in 3D, for the vehicle builders (Blender): thin raised pieces, each its own object, so they stay sharp and come off for a variant. |
 | `wall_build.py` | 558 | 2026-10-23 | 3 | The boundary wall or fence and its gates, built in Blender part by part: blender -b -P tools/wall_build.py -- <out.blend> [recipe.json] |
 | `watchdog.sh` | 24 | 2026-10-24 | 1 | Guard the laptop while Unreal runs: tools/watchdog.sh [seconds] [log.csv]   (DECISIONS: Unreal only with the watchdog on) Every 2 s it logs memory, and it kill… |
 | `wear_layer.py` | 265 | 2026-10-23 | 7 | The wear layer: dust, grime, rust, fading and damp put on top of clean built parts, in Blender's shaders. |
-| `winshot.py` | 24 | 2026-10-24 | 4 | Save one window of a running process as a picture: ~/.venvs/gidi/bin/python tools/winshot.py <pid> <out.png> (the game's own screenshot is taken on its first d… |
+| `winshot.py` | 24 | 2026-10-24 | 2 | Save one window of a running process as a picture: ~/.venvs/gidi/bin/python tools/winshot.py <pid> <out.png> (the game's own screenshot is taken on its first d… |
 | `zinc_kit.py` | 453 | 2026-10-25 | 11 | Zinc and long-span sheets laid on a slope, for any builder with a roof_sheets record (the lean-to, the block's roof). |
 
 ## gidi-data
@@ -501,7 +490,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
-| `.gitignore` | 10 | 2026-10-24 | 4 |  |
+| `.gitignore` | 10 | 2026-10-24 | 3 |  |
 | `README.md` | 23 | 2026-10-24 | 1 | gidi-data: Gidi's study store: What Gidi studies Lagos from: open datasets, the Google study shots, reference pictures, the kit tests, textures and people asse… |
 
 ### gidi-data/research/data

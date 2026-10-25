@@ -198,7 +198,7 @@ def main():
             elif not research and p.endswith(('.py', '.sh', '.md')) and p not in on_disk and not p.startswith('_'):
                 broken[f'{key[0]}:{key[1]}'].add(p)
 
-    # A path a repo's .gitignore covers is made by a script (web/frame-study.js, web/city/...), so it is missing from a
+    # A path a repo's .gitignore covers is made by a script (web/frame-study.js, web/frame-tiles/...), so it is missing from a
     # fresh checkout by design: not a broken name. Asked of git itself, so the answer follows the real ignore rules.
     made = set()
     for repo in REPOS.values():

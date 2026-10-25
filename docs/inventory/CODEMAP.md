@@ -1,11 +1,10 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3836 pieces of code in 142 files: 9 used nowhere, 68 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3735 pieces of code in 136 files: 8 used nowhere, 68 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
 - `gidi-data:research/google/kits/old-town/tests/facade_hand.py`: `sh_` (const, line 197)
-- `gidi-game:Content/Python/gidi_signs.py`: `place_signs` (function, line 55)
 - `gidi-game:tools/map_build.py`: `BUILDER` (const, line 45)
 - `gidi-game:tools/plates.py`: `PLATE` (const, line 28)
 - `gidi:docs/lagos-study/roads/scripts/common.py`: `C250` (const, line 13), `lga_shapes` (function, line 24)
@@ -74,58 +73,38 @@ Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, cla
 ### `gidi-data:research/google/kits/old-town/tools/sheet.py`
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
-### `gidi-game:Content/Python/gidi_cam.py`
-9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
-
 ### `gidi-game:Content/Python/gidi_heroes.py`
-20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_underdeck.py`; `DEST` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `TILE` in `gidi-game:Content/Python/gidi_import.py`; `HERO_V` in `gidi-game:Content/Python/gidi_underdeck.py`; `HEROES` in `gidi-game:Content/Python/gidi_underdeck.py`; `_is_paint` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_master` in `gidi-game:Content/Python/gidi_street.py`; `_sig` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_import` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `load` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `place` in `gidi-game:Content/Python/gidi_import.py`
-
-### `gidi-game:Content/Python/gidi_import.py`
-31 defined (31 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `STATE` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `masters` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_slot_kind` in `gidi-game:Content/Python/gidi_underdeck.py`; `_pipeline` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_environment` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `tile_map` in `gidi-game:Content/Python/gidi_play.py`; `_sig` in `gidi-game:Content/Python/gidi_underdeck.py`
+17 defined (17 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_underdeck.py`; `DEST` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `STATE` in `gidi-game:Content/Python/gidi_underdeck.py`; `HERO_V` in `gidi-game:Content/Python/gidi_underdeck.py`; `HEROES` in `gidi-game:Content/Python/gidi_underdeck.py`; `_is_paint` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_master` in `gidi-game:Content/Python/gidi_street.py`; `_sig` in `gidi-game:Content/Python/gidi_underdeck.py`; `_import` in `gidi-game:Content/Python/gidi_underdeck.py`; `load` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_look.py`
-2 defined (2 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `apply` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
+3 defined (3 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `environment` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `apply` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_modes.py`
-9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `people_levels` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `open_clean` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `add_level` in `gidi-game:Content/Python/gidi_play.py`; `save_play` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `scene_count` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
+9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `people_levels` in `gidi-game:Content/Python/gidi_underdeck.py`; `open_clean` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `save_play` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `scene_count` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_paint.py`
-7 defined (7 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`.
-Used elsewhere: `MASTER` in `gidi-game:Content/Python/gidi_heroes.py`; `MASTER_V` in `gidi-game:Content/Python/gidi_heroes.py`; `WEAR` in `gidi-game:Content/Python/gidi_heroes.py`; `say` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`; `master` in `gidi-game:Content/Python/gidi_heroes.py`; `instance` in `gidi-game:Content/Python/gidi_heroes.py`
-
-### `gidi-game:Content/Python/gidi_photo.py`
-29 defined (29 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: nothing.
+7 defined (7 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_heroes.py`.
+Used elsewhere: `MASTER` in `gidi-game:Content/Python/gidi_heroes.py`; `MASTER_V` in `gidi-game:Content/Python/gidi_heroes.py`; `WEAR` in `gidi-game:Content/Python/gidi_heroes.py`; `say` in `gidi-game:Content/Python/gidi_heroes.py`; `master` in `gidi-game:Content/Python/gidi_heroes.py`; `instance` in `gidi-game:Content/Python/gidi_heroes.py`
 
 ### `gidi-game:Content/Python/gidi_plates.py`
-18 defined (18 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `ART` in `gidi-game:Content/Python/gidi_heroes.py`; `DEST` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `MASTER` in `gidi-game:Content/Python/gidi_heroes.py`; `MASTER_V` in `gidi-game:Content/Python/gidi_heroes.py`; `SPEC` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `number_for` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `data_for` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_master` in `gidi-game:Content/Python/gidi_heroes.py`; `instances` in `gidi-game:Content/Python/gidi_heroes.py`
-
-### `gidi-game:Content/Python/gidi_play.py`
-22 defined (22 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`. Imported by: nothing.
+18 defined (18 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `ART` in `gidi-game:Content/Python/gidi_heroes.py`; `DEST` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `MASTER` in `gidi-game:Content/Python/gidi_heroes.py`; `MASTER_V` in `gidi-game:Content/Python/gidi_heroes.py`; `SPEC` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `number_for` in `gidi-game:Content/Python/gidi_underdeck.py`; `data_for` in `gidi-game:Content/Python/gidi_underdeck.py`; `_master` in `gidi-game:Content/Python/gidi_heroes.py`; `instances` in `gidi-game:Content/Python/gidi_heroes.py`
 
 ### `gidi-game:Content/Python/gidi_scan_export.py`
 6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
-### `gidi-game:Content/Python/gidi_signs.py`
-6 defined (5 used, 0 maybe, 1 unused). Imports: none of ours. Imported by: nothing.
-
-### `gidi-game:Content/Python/gidi_stream.py`
-7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`.
-Used elsewhere: `MAP` in `gidi-game:Content/Python/gidi_import.py`; `say` in `gidi-game:Content/Python/gidi_import.py`; `apply` in `gidi-game:Content/Python/gidi_import.py`
-
 ### `gidi-game:Content/Python/gidi_street.py`
-21 defined (21 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`. Imported by: nothing.
+21 defined (21 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: nothing.
 
 ### `gidi-game:Content/Python/gidi_surfaces.py`
-28 defined (28 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_paint.py`.
-Used elsewhere: `GEN` in `gidi-game:Content/Python/gidi_import.py`; `MATS` in `gidi-game:Content/Python/gidi_import.py`; `_scan` in `gidi-game:Content/Python/gidi_paint.py`; `say` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_paint.py`; `textures` in `gidi-game:Content/Python/gidi_paint.py`; `instances` in `gidi-game:Content/Python/gidi_import.py`
+33 defined (33 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_underdeck.py`; `JUNK` in `gidi-game:Content/Python/gidi_underdeck.py`; `_scan` in `gidi-game:Content/Python/gidi_paint.py`; `say` in `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `textures` in `gidi-game:Content/Python/gidi_paint.py`; `_master` in `gidi-game:Content/Python/gidi_street.py`; `masters` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `slot_kind` in `gidi-game:Content/Python/gidi_underdeck.py`; `pipeline` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_underdeck.py`
-25 defined (25 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: nothing.
+25 defined (25 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: nothing.
 
 ### `gidi-game:tools/block_build.py`
 50 defined (50 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/zinc_kit.py`. Imported by: nothing.

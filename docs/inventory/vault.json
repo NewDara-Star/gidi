@@ -56,8 +56,8 @@
     "draft",
     "inventory",
     "board's",
-    "map's",
-    "old-map"
+    "deleted",
+    "map's"
    ]
   },
   {
@@ -71,8 +71,8 @@
     "view",
     "blender",
     "hand",
-    "unreal",
-    "laptop"
+    "laptop",
+    "unreal"
    ]
   },
   {
@@ -115,9 +115,9 @@
     "records",
     "sent",
     "unreal",
+    "test",
     "editor",
-    "layer",
-    "dress"
+    "layer"
    ]
   },
   {
@@ -309,8 +309,8 @@
     "wobble",
     "touching",
     "district's",
-    "settings",
     "measures",
+    "settings",
     "fabric",
     "measured"
    ]
@@ -1386,13 +1386,13 @@
    "state": "near-orphan",
    "words": [
     "editor",
-    "import",
-    "repo",
-    "wasd",
     "scripting",
+    "level's",
+    "repo",
     "meshy",
-    "tiles",
-    "console"
+    "committed",
+    "unreal",
+    "play"
    ]
   },
   {
@@ -1733,14 +1733,6 @@
   },
   {
    "from": "gidi:decisions/CHECKS.md",
-   "to": "gidi-game:Content/Python/gidi_import.py"
-  },
-  {
-   "from": "gidi:decisions/CHECKS.md",
-   "to": "gidi-game:Content/Python/gidi_stream.py"
-  },
-  {
-   "from": "gidi:decisions/CHECKS.md",
    "to": "gidi-game:tools/fields.py"
   },
   {
@@ -1837,15 +1829,7 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_cam.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:Content/Python/gidi_heroes.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_import.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1861,23 +1845,7 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_photo.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:Content/Python/gidi_plates.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_play.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_signs.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Content/Python/gidi_stream.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1913,10 +1881,6 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/import.sh"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/kit_fields.py"
   },
   {
@@ -1926,10 +1890,6 @@
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/lettering.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/look.sh"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1957,10 +1917,6 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/photo.sh"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/plates.py"
   },
   {
@@ -1977,19 +1933,11 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/shot.sh"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/spot_assemble.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/spot_to_map.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/stream.sh"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2457,14 +2405,6 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Content/Python/gidi_import.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:Content/Python/gidi_stream.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:docs/PERFORMANCE.md"
   },
   {
@@ -2478,6 +2418,10 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/fields.py"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi-game:tools/frame_motorpark.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -2521,6 +2465,10 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
+   "to": "gidi-game:tools/measure.sh"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/measure_csv.py"
   },
   {
@@ -2537,11 +2485,23 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
+   "to": "gidi-game:tools/plates.py"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/play.sh"
   },
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/pole_build.py"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi-game:tools/prop_basin_final.py"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi-game:tools/props_build.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -2810,6 +2770,10 @@
   {
    "from": "gidi:docs/DATA-SOURCES.md",
    "to": "gidi:docs/DEEP-STUDY.md"
+  },
+  {
+   "from": "gidi:docs/LAGOS-ISMS.md",
+   "to": "gidi-game:tools/road_build.py"
   },
   {
    "from": "gidi:docs/LAGOS-ISMS.md",
@@ -4001,11 +3965,15 @@
   },
   {
    "from": "gidi-game:README.md",
-   "to": "gidi-game:Content/Python/gidi_import.py"
+   "to": "gidi-game:Content/Python/gidi_look.py"
   },
   {
    "from": "gidi-game:README.md",
-   "to": "gidi-game:Content/Python/gidi_play.py"
+   "to": "gidi-game:Content/Python/gidi_street.py"
+  },
+  {
+   "from": "gidi-game:README.md",
+   "to": "gidi-game:Content/Python/gidi_surfaces.py"
   },
   {
    "from": "gidi-game:README.md",
@@ -4021,7 +3989,7 @@
   },
   {
    "from": "gidi-game:README.md",
-   "to": "gidi-game:tools/import.sh"
+   "to": "gidi-game:tools/map_build.py"
   },
   {
    "from": "gidi-game:README.md",
@@ -4037,7 +4005,7 @@
   },
   {
    "from": "gidi-game:README.md",
-   "to": "gidi-game:tools/shot.sh"
+   "to": "gidi-game:tools/street_test.py"
   },
   {
    "from": "gidi-game:README.md",
@@ -4093,19 +4061,11 @@
   },
   {
    "from": "gidi-game:docs/PERFORMANCE.md",
-   "to": "gidi-game:Content/Python/gidi_stream.py"
-  },
-  {
-   "from": "gidi-game:docs/PERFORMANCE.md",
    "to": "gidi-game:tools/editor.sh"
   },
   {
    "from": "gidi-game:docs/PERFORMANCE.md",
    "to": "gidi-game:tools/img_diff.py"
-  },
-  {
-   "from": "gidi-game:docs/PERFORMANCE.md",
-   "to": "gidi-game:tools/import.sh"
   },
   {
    "from": "gidi-game:docs/PERFORMANCE.md",
@@ -4142,10 +4102,6 @@
   {
    "from": "gidi-game:docs/PERFORMANCE.md",
    "to": "gidi-game:tools/play.sh"
-  },
-  {
-   "from": "gidi-game:docs/PERFORMANCE.md",
-   "to": "gidi-game:tools/stream.sh"
   },
   {
    "from": "gidi-game:docs/PERFORMANCE.md",

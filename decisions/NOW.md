@@ -14,12 +14,16 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Steps (git tag `before-cleanup-25oct` on main keeps every deleted file):
    - [x] step 1: `to-delete/` deleted (gidi, branch clean/to-delete).
    - [x] step 2: the old generated map and kit deleted (284 files: old scripts, `legacy/`, old web files, study-*.json).
-   - [ ] step 3 (gidi-game): untangle `gidi_street.py` and `gidi_underdeck.py` from `gidi_import`/`gidi_heroes`; delete the
-     old importer, stream, look, cam, play and signs scripts, Gidi_City and the history tools; `tools/plates.py` reads
-     `web/frame-study.js` instead of the deleted `web/gidi-data.js`; then delete gidi's `web/city/` (3.7 GB, untracked);
-     re-measure the street test.
-   - [ ] step 3b: the second reading of the inventory: CODEMAP's 9 unused and 68 maybe pieces, old research docs.
-   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 270 names in 54 files; the live rules in
+   - [x] step 3 (gidi-game #96): the street and underdeck levels no longer borrow from the old importer (masters and import
+     settings in `gidi_surfaces`, sky in `gidi_look`, hero state in `gidi_heroes`); the importer, streaming, signs, check
+     camera, Ìbùdó level and photo mode deleted with their tools and generated levels; default map Play_Street;
+     `tools/plates.py` reads `web/frame-study.js`; this repo's `web/city/` (3.7 GB, untracked) deleted.
+   - [ ] step 3a: re-measure the street test after step 3 (`tools/measure.sh street high`), against the tB row in
+     gidi-game `docs/PERFORMANCE.md`.
+   - [ ] step 3b: the second reading of the inventory: CODEMAP's 9 unused and 68 maybe pieces, old research docs, gidi-game's
+     19 Oct Lagos-pass tools (`frame_motorpark.py`, `props_build.py`, `prop_basin_final.py`) and the old test streets'
+     generated levels (Play_Street_base, _inst, _inst10, _kit10, _zinc10, _tA, _tB, _empty: about 1.5 GB).
+   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 274 names in 55 files after step 3; the live rules in
      DECISIONS done in step 2); NOW.md's dated history and DECISIONS/CODEBASE trimmed to what is current, CODEBASE
      rewritten for the new layout; the `?frame=new` mentions (README, NOW, CODEBASE, MAP-FORMAT, frame_study,
      frame_footprints, mapedit) updated now that the board opens the new frame by default.
@@ -193,7 +197,7 @@ passed. The old generated map is history: deleted 25 Oct (git tag `before-cleanu
 
 **Next, in order.**
 1. ~~**The old map, viewable only**~~ (24 Oct): replaced by item 00 (25 Oct): the old map and kit were deleted, kept at git
-   tag `before-cleanup-25oct`; `web/city/` goes when gidi-game's old importer does (00, step 3).
+   tag `before-cleanup-25oct`; `web/city/` deleted with gidi-game's old importer (00, step 3).
 2. **Mùṣá** (decided 24 Oct late, DECISIONS "Finish the map's first layer first": the plan layer everywhere first, a few fields per building, then house-type rules; the B1 sample is in `~/gidi-data/research/google/b1/STUDY.md`): the plan layer is done for every block: the small blocks were read 25 Oct (B30 got Oladeinde Coker Street, 21 houses; B31, B33, B35 and B36 were redrafted with no lane, 16, 13, 7 and 5 houses, B33's Ogidan Street left out for spacing and its railway strip, real bare ground, flagged; B34, B40 and B41, empty before, got 11, 2 and 1 houses; B32 and B37-B39 are slivers 3-16 m real wide, left empty); storeys drafted 25 Oct (`scripts/draft_storeys.py`, each house's real source found by shape, its Open Buildings 2.5D height read: 3,523 houses at 1-4 storeys; 35 read at 5+ and 787 with no source or no height left for a Street View check, listed in BUILDINGS.md); kind and ground floor drafted 25 Oct for the same 3,523 (`scripts/draft_kinds.py`: size, storeys and the street faced; lock-ups on busy roads); looks drafted 25 Oct for the same 3,523 (`scripts/draft_looks.py`: storey heights, roof, walls, windows, stair and wear by kind, shares from the old-town KIT.md study); the 35 read at 5+ checked in Street View 25 Oct (Hand pass 42: all 1-4 storeys, 2.5D read 13.5-20.5 m there); the 787 without storeys given their neighbours' median 25 Oct (`scripts/draft_storeys_nearby.py`; a sample of two judged in Street View were both wrong and fixed: rough, for the block-by-block pass), so every house now has all its fields; **finishing Mùṣá (owner 25 Oct, memory finish-musha-test: street by street, the final test is an Unreal overhead like Google Earth's plus random street views): roads read in Street View 25 Oct (#314: 529 points, 255 of 357 roads seen, `scripts/draft_roads.py`, STREETS.md "Roads read in Street View"; the read widths put 2,338 houses on carriageways, settled by hand pass 43: 2,301 set back, 377 cut, 70 left out, 4,275 houses); next: crossings over the gutters, the street edge from road_reads.tsv's edge column (walls, gates, kiosks, poles, parked cars, trees), ground patches, the gidi-game builders for road/ground/edge (research first), then the Unreal tests;** next the hand pass: schools, factory and B33's strip, front houses on busy roads, then the hero streets, then the other six core districts; B27 is the Vono Road factory compound (big sheds, no streets inside), left as it is for the per-building pass; B12, the corner by Palm Avenue, was read at z18 within B4's redo (its six lanes are in B4's table in STREETS.md) (B11, B10, B15, B14, B13, B16-B26, B28 and B29 done 24 Oct: 7, 9, 4, 7, 5, 4, 2, 4, 3, 3, 2, 2, 1, 2, 2, 1, 1 and 1 streets, 133, 169, 77, 113, 99, 55, 67, 56, 45, 51, 39, 24, 39, 28, 21, 19, 22 and 22 houses; B28 and B29 hold real school compounds the draft fills with houses, for the per-building pass); B0-B5's close-zoom recheck is done; then block by block
    kind, storeys, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the tidy-ups
    (Isolo Road kink near Omowunmi, Olushoga's zigzag); then its mix and person spots by hand from LIVING.md.
