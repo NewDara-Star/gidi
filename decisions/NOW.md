@@ -6,6 +6,12 @@ then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scrip
 
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
+00. [ ] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
+   read it in two passes (what each part is; then what it does and whether anything live uses it), then delete in
+   both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
+   dated notes whose lesson is written down, `legacy/` and the old map's Unreal side if nothing live needs them; NOW.md
+   and DECISIONS.md trimmed to what is current. Each deletion a commit saying what went and why, checks run.
+   Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.

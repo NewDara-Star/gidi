@@ -61,6 +61,18 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 - **Hold-offs:** don't publish to the live artifact link (a different account).
 - **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`.
 - **Cost:** use cheaper models where possible (Pro plan).
+- **Delete what we no longer use; use what the engine has before writing our own; read twice** (owner, 25 Oct
+  evening: "it's very calm to delete and get rid of something if we're no longer using it"; "why are we writing extra
+  code when there is probably a solution to it?"; "you have to do two passes"). Old code, old logs and old tools left in
+  the repos get picked up by mistake and old decisions contradict new ones, so: (1) code, scripts, logs and docs that are
+  no longer used or no longer true are deleted, not kept "just in case" (git history keeps them); a dated log or note
+  whose lesson is already written down goes; (2) before writing a tool, check what Unreal, Blender or a library already
+  does and use that, our code only for what is ours (the map's records); wrappers that only repeat an engine feature go;
+  (3) reading the inventory, or code before changing it, is two passes: the first to learn what each part is, the second
+  to understand what it does and whether it is still used. Outranks the "keep it frozen to view" wording for `legacy/`
+  and the old map's Unreal side (owner gave permission to delete what is no longer useful).
+- **Every kit draws instances** (owner, 25 Oct evening): all the builders go the way the houses did, shared pieces loaded
+  once and placed many times as instances, never one model per thing (900 umbrellas = one umbrella, 900 placements).
 
 ## Look and machine
 - **The look target** (18 Oct, from two videos the owner sent): Gidi should look like the stilt-town Unreal game (every surface a real scanned material, every prop a proper model) in the places that matter, and feel like the Lagos street video (danfos three deep, crowds on the verge, stalls, wet dirty ground, haze) everywhere. The street video is AI-made: its photo-real people are not a game target. The whole city is generated from the data with Megascans materials and real models for what repeats (danfo, keke, okada, stall, drum, generator, shutter); the hero places (Ladi Lane, the markets, where the story is) are finished by hand to the higher level.
