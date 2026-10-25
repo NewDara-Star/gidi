@@ -11,6 +11,18 @@ merged and checked, add new ones where they belong, and say here when the owner 
    both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
    dated notes whose lesson is written down, `legacy/` and the old map's Unreal side if nothing live needs them; NOW.md
    and DECISIONS.md trimmed to what is current. Each deletion a commit saying what went and why, checks run.
+   Steps (git tag `before-cleanup-25oct` on main keeps every deleted file):
+   - [x] step 1: `to-delete/` deleted (gidi, branch clean/to-delete).
+   - [x] step 2: the old generated map and kit deleted (284 files: old scripts, `legacy/`, old web files, study-*.json).
+   - [ ] step 3 (gidi-game): untangle `gidi_street.py` and `gidi_underdeck.py` from `gidi_import`/`gidi_heroes`; delete the
+     old importer, stream, look, cam, play and signs scripts, Gidi_City and the history tools; `tools/plates.py` reads
+     `web/frame-study.js` instead of the deleted `web/gidi-data.js`; then delete gidi's `web/city/` (3.7 GB, untracked);
+     re-measure the street test.
+   - [ ] step 3b: the second reading of the inventory: CODEMAP's 9 unused and 68 maybe pieces, old research docs.
+   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 270 names in 54 files; the live rules in
+     DECISIONS done in step 2); NOW.md's dated history and DECISIONS/CODEBASE trimmed to what is current, CODEBASE
+     rewritten for the new layout; the `?frame=new` mentions (README, NOW, CODEBASE, MAP-FORMAT, frame_study,
+     frame_footprints, mapedit) updated now that the board opens the new frame by default.
    Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
