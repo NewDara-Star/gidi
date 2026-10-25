@@ -67,7 +67,6 @@ def main():
                 else:
                     w, kind = DOOR, 'slab_bridge' if g['kind'] == 'open_concrete' else 'plank_bridge'
                 out.append({'side': g['side'], 's': round(s, 1), 'w': round(w, 1), 'kind': kind})
-                kinds[kind] += 1
         # one crossing per house: two gutter stretches meeting at a house's middle could both take it
         seen, uniq = set(), []
         for c in sorted(out, key=lambda c: (c['side'], c['s'])):
@@ -75,6 +74,7 @@ def main():
                 seen.add((c['side'], c['s']))
                 uniq.append(c)
         road['crossings'] = uniq
+        kinds.update(c['kind'] for c in uniq)
         n += 1
     print(f'{n} roads given crossings;', dict(kinds), f'; {sum(kinds.values())} in all')
     if '--dry' not in sys.argv:
