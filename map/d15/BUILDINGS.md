@@ -67,6 +67,10 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 39 (25 Oct): block B33 read at close zoom, houses redrafted
+
+B33 lies between Olateju Street and the railway, north of Ogunmokun Street (read at z18). Ogidan Street runs through it about 45 m from Olateju Street, too close to keep, so no lane was drawn; its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B33 now holds 13 buildings at 61% cover (was 5 at 31%). The real strip along the railway is mostly bare ground: the per-building pass should clear the plots there.
+
 ## Hand pass 38 (25 Oct): block B31 read at close zoom, houses redrafted
 
 B31 is the strip between Ibari road and Olorunsogo Street, one plot deep with no street of its own (read at z18), so no lane was drawn; its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B31 now holds 16 buildings at 58% cover (was 3 at 25%).
