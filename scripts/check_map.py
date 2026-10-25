@@ -26,6 +26,7 @@ HEADER = {'format', 'district', 'layer', 'tile', 'records'}
 ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
 
 errors = []
+corners = []                 # road lines the kit can't round without folding: hand edits still to do (amber, like TODO)
 TODO = re.compile(r": missing (?:field|value) '([^']+)'")      # what the board shows amber
 
 
@@ -410,7 +411,48 @@ def check(top, fix=False, only=None):
             if oid != rid and JOIN[0] < math.hypot(e[0] - q[0], e[1] - q[1]) < JOIN[1]:
                 err(f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
     on_road(recs)
+    road_lines(recs)
     return files, recs
+
+
+def road_lines(recs):
+    """Where the road kit (gidi-game tools/road_build.py, centre_at) can't lay a road along its line without folding its
+    carriageway or drains: a point repeated, a line doubling back (a turn over 150 degrees), or a corner whose legs are too
+    short to round it on a circle as wide as the road and its drains. The builder's own rule, read the same way: points
+    turning under 2 degrees are dropped, each corner's tangent points held to 0.45 of each leg. A hand edit of the line."""
+    for rid, r in recs.items():
+        if r.get('type') != 'road' or not is_num(r.get('width')) or not isinstance(r.get('centreline'), list):
+            continue
+        w = f'{r["_file"]} {rid}'
+        core = max([r['width'] / 2] + [g['offset'] + g.get('width', 0.5) / 2 + 0.15 for g in r.get('gutters') or []
+                                       if is_num(g.get('offset'))])
+        cl = [tuple(p[:2]) for p in r['centreline'] if is_pt(p)]
+        keep, s = [cl[0]], 0.0
+        for a, b in zip(cl, cl[1:]):
+            if math.hypot(b[0] - a[0], b[1] - a[1]) < 0.05:
+                corners.append(f'{w}: a point repeated at {list(b)}')
+        for a, b in zip(cl[1:], cl[2:]):
+            q = keep[-1]
+            if math.hypot(a[0] - q[0], a[1] - q[1]) < 0.05:
+                continue
+            h0, h1 = math.atan2(a[1] - q[1], a[0] - q[0]), math.atan2(b[1] - a[1], b[0] - a[0])
+            if abs((h1 - h0 + math.pi) % (2 * math.pi) - math.pi) > math.radians(2):
+                keep.append(a)
+        keep.append(cl[-1])
+        seg = [math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(keep, keep[1:])]
+        for i in range(1, len(keep) - 1):
+            s += seg[i - 1]
+            a, b, c = keep[i - 1], keep[i], keep[i + 1]
+            th = abs((math.atan2(c[1] - b[1], c[0] - b[0]) - math.atan2(b[1] - a[1], b[0] - a[0]) + math.pi) % (2 * math.pi) - math.pi)
+            if min(seg[i - 1], seg[i]) < 0.05 or th < 1e-3:
+                continue
+            if th > math.radians(150):
+                corners.append(f'{w}: doubles back {math.degrees(th):.0f} degrees at {list(b)} (s {s:.1f})')
+                continue
+            R = min((core + 0.5) * math.tan(th / 2), 0.45 * seg[i - 1], 0.45 * seg[i]) / math.tan(th / 2)
+            if R < core:
+                corners.append(f'{w}: its {math.degrees(th):.0f} degree corner at {list(b)} (s {s:.1f}) has legs of '
+                               f'{seg[i - 1]:.1f} and {seg[i]:.1f} m, too short to round {core:.1f} m out from the line')
 
 
 def on_road(recs):
@@ -507,8 +549,14 @@ if __name__ == '__main__':
     # field, so the problems stay readable and PASS means none. --strict fails on them too (a district called finished).
     todo = [e for e in errors if TODO.search(e)]
     bad = errors if '--strict' in args else [e for e in errors if not TODO.search(e)]
+    if '--strict' in args:
+        bad = bad + corners
     for e in bad:
         print('FAIL ', e)
+    if corners and '--strict' not in args:
+        for e in corners:
+            print('ROAD ', e)
+        print('TODO  %d road corners to hand-edit (the road kit would fold them)' % len(corners))
     if todo and '--strict' not in args:
         by = {}
         for e in todo:
