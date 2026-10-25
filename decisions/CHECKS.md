@@ -16,13 +16,11 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Safe ground: | places flagged safe are never crime sites | GAP: no crime sites in the data yet; check when they come |
 | If it's in the 3D, it's in the 2D | the kit places nothing of its own | gidi-game `tools/fields.py` (a build that reads an undeclared key stops) |
 | Hand-making happens on the drawing board | process | not a map rule |
-| The browser 3D is a quick preview; the full scene is for Unreal | process | not a map rule |
 | The map is never final | the game's builders build from the map's records every time; nothing made from the map is committed in gidi-game | gidi-game `tools/kit_fields.py` (every builder key is a map field); 17 and R0 held it on the old map |
 | New districts: | the district list | GAP: the new map has the airport (33) and Yaba-UNILAG (17, 18) in NAMES.md, but no check reads the district list; 4 held it on the old map |
 | Old Island is a true island, | water around it | GAP: no water check on the new map yet; 3 held it on the old map |
 | The research must be detailed: | studies in docs | owner's review |
 | Monuments are placed by hand | `add monument` edits | GAP: the new map has no monument records yet; 12 and 17 held it on the old map |
-| Claude decides when the owner says so | process | not a map rule |
 | The hand pass covers infrastructure and labels | furniture and labels placed by hand land where meant | GAP: `check_map.py` counts fields still unset (its TODO line), not whether every stop, light and label is there; 15 and 17 held it on the old map |
 | Roads have surfaces; poorer areas have unpaved and marshy ones | every road has a surface | GAP: no check that a street's surface matches what its twin photos show (earth, laterite, tar, interlock) |
 | Freeze everything | the map is hand records in git, with no bake | GAP: nothing checks that a builder makes the same model twice from the same record |
@@ -43,7 +41,6 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Cost: | process | not a map rule |
 | The look target | renders | owner's review |
 | The laptop is the target machine | frame rate | gidi-game measures |
-| Build order: outward from the Maze, not story order | process | not a map rule |
 | Consoles later: | process | not a map rule |
 | Number plates | gidi-game | gidi-game |
 | Fonts are custom | gidi-game | gidi-game |

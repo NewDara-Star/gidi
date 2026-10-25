@@ -25,8 +25,7 @@
    "refs_in": [
     "gidi-game:.claude/settings.json",
     "gidi:.claude/settings.json",
-    "gidi:decisions/CHECKS.md",
-    "gidi:scripts/inventory.py"
+    "gidi:decisions/CHECKS.md"
    ]
   },
   {
@@ -55,7 +54,9 @@
     "gidi:.claude/hooks/checked-before-commit.sh",
     "gidi:.claude/hooks/checks-before-commit.sh",
     "gidi:.claude/hooks/checks-before-stop.sh",
-    "gidi:.claude/hooks/review-before-push.sh"
+    "gidi:.claude/hooks/review-before-push.sh",
+    "gidi:scripts/inventory.py",
+    "gidi:tests/test_inventory.py"
    ]
   },
   {
@@ -265,9 +266,9 @@
    "repo": "gidi",
    "path": "decisions/CHECKS.md",
    "ext": ".md",
-   "bytes": 16037,
+   "bytes": 15790,
    "changed": "2026-10-25",
-   "lines": 96,
+   "lines": 93,
    "summary": "Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So \"are we covering all bases?\" is",
    "refs_in": [
     "gidi:.claude/hooks/repo.sh",
@@ -302,9 +303,9 @@
    "repo": "gidi",
    "path": "decisions/DECISIONS.md",
    "ext": ".md",
-   "bytes": 52229,
+   "bytes": 51308,
    "changed": "2026-10-25",
-   "lines": 142,
+   "lines": 135,
    "summary": "Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.",
    "refs_in": [
     "gidi-data:README.md",
@@ -327,10 +328,10 @@
    "repo": "gidi",
    "path": "decisions/HISTORY.md",
    "ext": ".md",
-   "bytes": 13920,
+   "bytes": 66786,
    "changed": "2026-10-25",
-   "lines": 61,
-   "summary": "Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct, word for",
+   "lines": 269,
+   "summary": "Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct (three more on 25 Oct), word for",
    "refs_in": [
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
@@ -358,15 +359,16 @@
    "repo": "gidi",
    "path": "decisions/NOW.md",
    "ext": ".md",
-   "bytes": 64736,
+   "bytes": 17790,
    "changed": "2026-10-25",
-   "lines": 333,
-   "summary": "Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:",
+   "lines": 177,
+   "summary": "Where the work stands (update at the end of every session): **HANDOVER, 25 Oct 2026. Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research: `docs/RESEARCH.md`. What the old map taught: `docs/OLD-MAP-LESSONS.md`. This page's dated log and done lists (16-25 Oct)",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
     "gidi-game:CLAUDE.md",
     "gidi:.claude/hooks/review-before-push.sh",
     "gidi:CLAUDE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/README.md"
    ]
   },
@@ -391,6 +393,7 @@
    "lines": 154,
    "summary": "The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, across every game, and for a \"lived-in layer\" plan for Gidi. **A proposal, not decided.** It builds on `world-life.md` (rhythm, systems, moments, texture: *what* Gidi's life is) and the IDEAS entry \"What makes Los Santos feel lived in\" (23 Oct). This file is about *the machinery*: what records and rules make that life show up in the game.",
    "refs_in": [
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
@@ -430,7 +433,7 @@
    "path": "decisions/story/acts-2-3-draft.md",
    "ext": ".md",
    "bytes": 7140,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 77,
    "summary": "Gidi Acts 2 and 3: working draft (updated 15 Oct 2026 after the owner's feedback): Builds on `act-1-draft.md`. The owner didn't like the pacing of Claude's first Acts 2\u20133 path (one run per district, the fake-revenge scapegoat, the finale structure). Only what the owner confirmed or asked for is kept below; Claude's proposals are marked as such.",
    "refs_in": [
@@ -507,7 +510,7 @@
    "path": "docs/BOARD.md",
    "ext": ".md",
    "bytes": 4603,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 64,
    "summary": "The drawing board: The owner, 16 Oct 2026: \"we should hand draw... we should know where something meets something... where the roads start, where the roads end, where the houses are, we should be able to move them.\"",
    "refs_in": [
@@ -522,7 +525,7 @@
    "path": "docs/DATA-SOURCES.md",
    "ext": ".md",
    "bytes": 3020,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 31,
    "summary": "Data sources, and what to delete later: Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gidi-data/research/data/` (about 20 GB, mostly Google's 2.5D tiles). The OpenStreetMap extract (`lagos.osm.pbf`, 55 MB) is gone from the Mac; the repo's links to it were removed on 24 Oct.",
    "refs_in": [
@@ -603,6 +606,7 @@
     "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/map-format-example/README.md",
@@ -626,6 +630,7 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/LAGOS-ISMS.md",
     "gidi:docs/MAP-FORMAT.md"
@@ -700,7 +705,7 @@
    "path": "docs/bazaar-pattern-study.md",
    "ext": ".md",
    "bytes": 8307,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 127,
    "summary": "The Bazaar pattern study: Ojo round the electronics market \u2192 The Bazaar (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -712,7 +717,7 @@
    "path": "docs/border-pattern-study.md",
    "ext": ".md",
    "bytes": 10080,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 139,
    "summary": "Border pattern study: Badagry \u2192 the Border (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -724,7 +729,7 @@
    "path": "docs/capital-pattern-study.md",
    "ext": ".md",
    "bytes": 11730,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 161,
    "summary": "The Capital pattern study: central Ikeja \u2192 The Capital (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -908,7 +913,7 @@
    "path": "docs/estate-pattern-study.md",
    "ext": ".md",
    "bytes": 10527,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 143,
    "summary": "Estate pattern study: Ikeja GRA, Magodo and Omole \u2192 the Estate (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -920,7 +925,7 @@
    "path": "docs/foodgate-pattern-study.md",
    "ext": ".md",
    "bytes": 11784,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 174,
    "summary": "Food Gate pattern study: Ojota\u2013Ketu\u2013Mile 12 (Kosofe) \u2192 Food Gate (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -932,7 +937,7 @@
    "path": "docs/frontier-pattern-study.md",
    "ext": ".md",
    "bytes": 11550,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 179,
    "summary": "Frontier pattern study: the Lekki peninsula \u2192 the Frontier (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -978,7 +983,7 @@
    "summary": "The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the old map's hand files and `scripts/hand.py`, deleted 25 Oct; on the new map it is drawn on the board), and where it comes from:",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/RESEARCH.md"
    ]
   },
@@ -1016,7 +1021,7 @@
    "path": "docs/heights-pattern-study.md",
    "ext": ".md",
    "bytes": 15517,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 210,
    "summary": "Heights pattern study: Ikoyi, Victoria Island and Banana Island \u2192 the Heights (v3): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -1028,7 +1033,7 @@
    "path": "docs/hub-pattern-study.md",
    "ext": ".md",
    "bytes": 19457,
-   "changed": "2026-10-13",
+   "changed": "2026-10-25",
    "lines": 280,
    "summary": "Hub pattern study: Oshodi/Isolo + Surulere \u2192 The Hub (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -1535,7 +1540,7 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 9270,
+   "bytes": 9229,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1574,7 +1579,7 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 296317,
+   "bytes": 296248,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1601,7 +1606,7 @@
    "path": "docs/jungle-pattern-study.md",
    "ext": ".md",
    "bytes": 15624,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 248,
    "summary": "Jungle City pattern study: Ajegunle (+ Festac) \u2192 Jungle City (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -1634,6 +1639,8 @@
    "summary": "Living in each district: the 51, for the brush and the lived-in layer: Study file (24 Oct 2026). Real place names live here and in other study files only, never in `map/`. The Gidi names come from `roads/NAMES.md`.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
     "gidi:decisions/lived-in.md",
@@ -1646,13 +1653,14 @@
    "path": "docs/lagos-study/STUDY.md",
    "ext": ".md",
    "bytes": 30722,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 322,
    "summary": "How the whole Lagos map works: a study before cutting districts: 22 Oct 2026. Read-only. Asked for by the owner's decision \"Gidi is Lagos, miniaturised; the map starts again\". This is evidence for a later frame proposal. It does not cut districts.",
    "refs_in": [
     "gidi-game:tools/junction_geo.py",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/RESEARCH.md",
     "gidi:docs/lagos-study/LIVING.md",
@@ -1683,7 +1691,7 @@
    "summary": "Lagos councils: the 20 LGAs and 37 LCDAs: 22 Oct 2026. Companion to `STUDY.md`. Read-only study; nothing here is a district yet.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/RESEARCH.md",
     "gidi:docs/lagos-study/LIVING.md",
     "gidi:docs/lagos-study/STUDY.md",
@@ -1699,7 +1707,7 @@
    "lines": 274,
    "summary": "Google Earth check of the borders (22 Oct 2026): `ROADS.md` section 6 left 15 borders the data could not settle. Each was looked at on Google Maps satellite (zoom 13 to 16) at the coordinates below. Study only: the 29 screenshots stay outside the repo, in `~/gidi-data/research/google/lagos-study/border-checks/` (file names carry the check number and the map",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/lagos-study/roads/NAMES.md",
     "gidi:docs/lagos-study/roads/ROADS.md",
@@ -1733,7 +1741,7 @@
    "lines": 510,
    "summary": "Roads first, districts by their borders: Step 1 of the new map plan (22 Oct): Gidi is real Lagos made smaller, at 1:3, in a frame about 27 \u00d7 10.5 km. This study lays down the skeleton of real roads, cuts Lagos into places along its real borders, measures every border, and joins places into districts only where they really touch and are alike.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/lagos-study/roads/EARTH-CHECK.md"
    ]
   },
@@ -2105,7 +2113,7 @@
    "lines": 31,
    "summary": "The close calls, checked on Google satellite (22 Oct 2026): The similarity numbers (`SIMILAR.md`) flagged 10 merges as close or doubtful. Each pair was looked at side by side on Google satellite, about 1 km across, at each unit's seed point. Study only: the pictures stay outside the repo (`~/gidi-data/research/google/lagos-study/close-calls/`, sheet `close_calls.jpg`).",
    "refs_in": [
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -2117,7 +2125,7 @@
    "lines": 957,
    "summary": "Which places are alike: numbers for cutting districts: 22 Oct 2026. Read-only study. It gives numbers for how many districts, and which places merge. It does not decide. Builds on `docs/lagos-study/STUDY.md` and `councils.md`, and reuses their 250 m grids.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/lagos-study/similar/GOOGLE-CHECK.md",
     "gidi:docs/lagos-study/similar/scripts/appendix.py",
     "gidi:docs/lagos-study/similar/scripts/plot_units.py",
@@ -2669,7 +2677,7 @@
    "refs_in": [
     "gidi-game:tools/spot_to_map.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -2706,7 +2714,7 @@
     "gidi-game:tools/spot_to_map.py",
     "gidi-game:tools/street_test.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -2727,7 +2735,7 @@
    "path": "docs/maze-pattern-study.md",
    "ext": ".md",
    "bytes": 20532,
-   "changed": "2026-10-16",
+   "changed": "2026-10-25",
    "lines": 256,
    "summary": "Maze pattern study: Mushin + Shomolu \u2192 The Maze (v2): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -2740,7 +2748,7 @@
    "path": "docs/oldisland-pattern-study.md",
    "ext": ".md",
    "bytes": 10787,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 145,
    "summary": "Old Island pattern study: Lagos Island \u2192 Old Island (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -2752,7 +2760,7 @@
    "path": "docs/oldshore-pattern-study.md",
    "ext": ".md",
    "bytes": 9706,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 147,
    "summary": "Old Shore pattern study: old Ikorodu \u2192 Old Shore (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -2764,7 +2772,7 @@
    "path": "docs/port-pattern-study.md",
    "ext": ".md",
    "bytes": 8256,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 130,
    "summary": "The Port pattern study: Apapa \u2192 The Port (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -2776,7 +2784,7 @@
    "path": "docs/railside-pattern-study.md",
    "ext": ".md",
    "bytes": 7945,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 127,
    "summary": "Railside pattern study: Agege, Ifako/Ijaye and Alimosho \u2192 Railside (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -2803,7 +2811,7 @@
    "path": "docs/studies/airport.md",
    "ext": ".md",
    "bytes": 8082,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 128,
    "summary": "The Airport: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2815,7 +2823,7 @@
    "path": "docs/studies/bazaar.md",
    "ext": ".md",
    "bytes": 8146,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Bazaar: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2827,7 +2835,7 @@
    "path": "docs/studies/border.md",
    "ext": ".md",
    "bytes": 6985,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 127,
    "summary": "The Border: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2839,7 +2847,7 @@
    "path": "docs/studies/capital.md",
    "ext": ".md",
    "bytes": 8139,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 127,
    "summary": "The Capital: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2851,7 +2859,7 @@
    "path": "docs/studies/estate.md",
    "ext": ".md",
    "bytes": 8159,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Estate: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2863,7 +2871,7 @@
    "path": "docs/studies/foodgate.md",
    "ext": ".md",
    "bytes": 8263,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Food Gate: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2875,7 +2883,7 @@
    "path": "docs/studies/frontier.md",
    "ext": ".md",
    "bytes": 8232,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Frontier: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2887,7 +2895,7 @@
    "path": "docs/studies/heights.md",
    "ext": ".md",
    "bytes": 8280,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Heights: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2899,7 +2907,7 @@
    "path": "docs/studies/hub.md",
    "ext": ".md",
    "bytes": 8240,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Hub: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2911,7 +2919,7 @@
    "path": "docs/studies/jungle.md",
    "ext": ".md",
    "bytes": 8134,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Jungle City: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2923,7 +2931,7 @@
    "path": "docs/studies/maze.md",
    "ext": ".md",
    "bytes": 8288,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Maze: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2935,7 +2943,7 @@
    "path": "docs/studies/oldisland.md",
    "ext": ".md",
    "bytes": 8322,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 127,
    "summary": "Old Island: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2947,7 +2955,7 @@
    "path": "docs/studies/oldshore.md",
    "ext": ".md",
    "bytes": 7990,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Old Shore: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2959,7 +2967,7 @@
    "path": "docs/studies/port.md",
    "ext": ".md",
    "bytes": 8283,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "The Port: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2971,7 +2979,7 @@
    "path": "docs/studies/railside.md",
    "ext": ".md",
    "bytes": 8292,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Railside: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2983,7 +2991,7 @@
    "path": "docs/studies/watertown.md",
    "ext": ".md",
    "bytes": 8190,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Water Town: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -2995,7 +3003,7 @@
    "path": "docs/studies/yaba.md",
    "ext": ".md",
    "bytes": 8202,
-   "changed": "2026-10-15",
+   "changed": "2026-10-25",
    "lines": 129,
    "summary": "Saba: the deep study: > **History (the old map, 13-21 Oct).** The scripts that made this study (`study_deep.py`, `deep_prep.py`) and the old districts it compares against were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md`).",
    "refs_in": [
@@ -3007,7 +3015,7 @@
    "path": "docs/watertown-pattern-study.md",
    "ext": ".md",
    "bytes": 12514,
-   "changed": "2026-10-14",
+   "changed": "2026-10-25",
    "lines": 166,
    "summary": "Water Town pattern study: the Makoko\u2013Iwaya and Bariga waterfront \u2192 Water Town (v1): > **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).",
    "refs_in": [
@@ -3025,7 +3033,7 @@
    "refs_in": [
     "gidi-game:tools/spot_to_map.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -3069,7 +3077,7 @@
     "gidi-game:tools/spot_to_map.py",
     "gidi-game:tools/street_test.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -3097,7 +3105,7 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/STREETS.md",
     "gidi:scripts/draft_buildings.py"
    ]
@@ -3112,7 +3120,7 @@
    "summary": "M\u00f9\u1e63\u00e1 (district 15): the road plan and where each street comes from: Roads only, drawn on the new frame (1:3). Every kept street sits on its real line, squeezed to the frame, at its real width (never shrunk). Real names live here only, never in the map. Buildings come later.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md"
    ]
   },
@@ -3127,7 +3135,7 @@
    "refs_in": [
     "gidi-game:tools/spot_to_map.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -3151,7 +3159,7 @@
     "gidi-game:tools/spot_to_map.py",
     "gidi-game:tools/street_test.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/board_server.py",
@@ -3176,7 +3184,7 @@
    "lines": 531,
    "summary": "",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/STREETS.md",
     "gidi:scripts/draft_crossings.py",
     "gidi:scripts/draft_edge.py",
@@ -3195,7 +3203,7 @@
     "gidi-game:tools/kit_fields.py",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
     "gidi:scripts/check_map.py"
@@ -3214,7 +3222,7 @@
     "gidi-game:tools/road_draft.py",
     "gidi-game:tools/spot_to_map.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:scripts/check_map.py",
@@ -3233,6 +3241,7 @@
    "refs_in": [
     "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
@@ -3255,7 +3264,7 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/map-format-example/README.md",
@@ -3324,7 +3333,7 @@
    "refs_in": [
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md",
     "gidi:scripts/draft_kinds.py",
     "gidi:scripts/draft_storeys.py"
@@ -3365,7 +3374,7 @@
    "lines": 95,
    "summary": "A district's first draft of each house's kind and ground floor, from its size, its storeys and the street it faces.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md",
     "gidi:scripts/draft_storeys_nearby.py"
    ]
@@ -3379,7 +3388,7 @@
    "lines": 157,
    "summary": "A district's first draft of each house's look, by its house type: storey heights, roof, walls, windows, outside stair, wear.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md"
    ]
   },
@@ -3394,7 +3403,7 @@
    "refs_in": [
     "gidi-game:tools/road_build.py",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/STREETS.md",
     "gidi:scripts/draft_edge.py"
    ]
@@ -3408,7 +3417,7 @@
    "lines": 168,
    "summary": "A district's first draft of storeys, from each house's real source in Google's Open Buildings 2.5D heights.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md",
     "gidi:scripts/draft_storeys_nearby.py"
    ]
@@ -3422,7 +3431,7 @@
    "lines": 60,
    "summary": "A district's first draft of storeys for the houses that draft_storeys.py could not read, from the houses around them.",
    "refs_in": [
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:map/d15/BUILDINGS.md"
    ]
   },
@@ -3436,6 +3445,7 @@
    "summary": "Real roofs under the new frame, for the drawing board's zoomed-in \"Real roofs\" layer (web/board.html).",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:web/frame.js"
@@ -3451,6 +3461,7 @@
    "summary": "The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts by their borders). Open them with web/board.html.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:map/d15/district.json",
@@ -3463,7 +3474,7 @@
    "repo": "gidi",
    "path": "scripts/inventory.py",
    "ext": ".py",
-   "bytes": 17634,
+   "bytes": 17666,
    "changed": "2026-10-25",
    "lines": 343,
    "summary": "What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it.",
@@ -3473,9 +3484,11 @@
     "gidi:README.md",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:scripts/code_graph.py",
-    "gidi:scripts/doc_vault.py"
+    "gidi:scripts/doc_vault.py",
+    "gidi:tests/test_inventory.py"
    ]
   },
   {
@@ -3526,13 +3539,14 @@
    "repo": "gidi",
    "path": "tests/test_inventory.py",
    "ext": ".py",
-   "bytes": 3248,
-   "changed": "2026-10-24",
-   "lines": 61,
+   "bytes": 3692,
+   "changed": "2026-10-25",
+   "lines": 68,
    "summary": "The inventory's code graph and comment check, down the four paths: python3 tests/test_inventory.py (exit 1 on a failure). Each case is a way the checker could lie: calling dead code used, letting a comment vouch for itself, missing a name built in an f-string, or reading nothing and passing.",
    "refs_in": [
     "gidi:.claude/hooks/repo.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:scripts/inventory.py"
    ]
   },
   {
@@ -3546,6 +3560,7 @@
    "refs_in": [
     "gidi:README.md",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
@@ -3588,12 +3603,12 @@
    "path": "web/mapedit.js",
    "ext": ".js",
    "bytes": 146470,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 1458,
    "summary": "The new map's editor on the drawing board's new frame (board.html; docs/MAP-FORMAT.md). Draws and saves the plan layer, record by record, in map/<district>/district.json and plan.json through scripts/board_server.py, which runs scripts/check_map.py on every save. Everything is drawn by hand over the study underlay (web/frame.js): nothing from the",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:web/board.html",
@@ -3715,6 +3730,7 @@
    "refs_in": [
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
     "gidi-game:tools/zinc_kit.py",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md"
    ]
   },
@@ -3729,7 +3745,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -3922,7 +3938,7 @@
    "summary": "",
    "refs_in": [
     "gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -4493,7 +4509,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -4965,7 +4981,7 @@
    "refs_in": [
     "gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md",
     "gidi-game:tools/zinc_kit.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -4979,7 +4995,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -5105,7 +5121,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -5399,7 +5415,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -5738,7 +5754,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -5872,7 +5888,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -6252,7 +6268,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -6791,7 +6807,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -7017,7 +7033,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -7041,7 +7057,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -7545,7 +7561,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -7671,7 +7687,7 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8039,6 +8055,7 @@
     "gidi-game:tools/vehicle_export.py",
     "gidi-game:tools/vehicle_prep.py",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md"
    ]
   },
@@ -8237,6 +8254,7 @@
     "gidi-game:tools/play.sh",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md"
    ]
   },
@@ -8254,7 +8272,7 @@
     "gidi-game:tools/fields.py",
     "gidi-game:tools/street_join.py",
     "gidi-game:tools/street_test.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8301,6 +8319,7 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/mode_sg.py",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md"
    ]
   },
@@ -8347,7 +8366,7 @@
     "gidi-game:tools/wall_build.py",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md"
    ]
   },
@@ -8441,7 +8460,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8459,7 +8478,7 @@
     "gidi-game:tools/loose_build.py",
     "gidi-game:tools/stall_build.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/OLD-KIT.md"
    ]
   },
@@ -8529,7 +8548,7 @@
    "summary": "A kit test picture beside its photo: python tools/kit_compare.py <render.png> <view.json>",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8561,6 +8580,7 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
@@ -8605,7 +8625,7 @@
    "summary": "The zinc lean-to, built in Blender part by part: blender -b -P tools/leanto_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8635,7 +8655,7 @@
     "gidi:.claude/hooks/repo.sh",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8658,7 +8678,7 @@
    "summary": "The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8691,6 +8711,8 @@
     "gidi-game:tools/spot_to_map.py",
     "gidi-game:tools/street_test.py",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md"
    ]
@@ -8724,7 +8746,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/measure.sh",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8824,7 +8846,7 @@
     "gidi-game:ASSETS.md",
     "gidi-game:tools/look_travels.py",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8838,7 +8860,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8894,7 +8916,7 @@
     "gidi-game:tools/mode.sh",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8908,7 +8930,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8952,6 +8974,7 @@
     "gidi-game:tools/junction_build.py",
     "gidi-game:tools/junction_geo.py",
     "gidi-game:tools/road_draft.py",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/LAGOS-ISMS.md",
     "gidi:scripts/check_map.py"
@@ -8968,7 +8991,7 @@
    "refs_in": [
     "gidi-game:tools/road_build.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -8987,7 +9010,7 @@
     "gidi-game:tools/look_travels.py",
     "gidi-game:tools/road_build.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9032,7 +9055,7 @@
     "gidi-game:tools/road_build.py",
     "gidi-game:tools/spot_to_map.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9045,7 +9068,7 @@
    "summary": "A test spot as map records: python tools/spot_to_map.py <spot.json> <stamp dir> <district> --origin=x,y [--name=<stamp>]",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md"
    ]
   },
@@ -9060,7 +9083,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9146,7 +9169,7 @@
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9276,7 +9299,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-game:docs/ASSET-INVENTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9289,6 +9312,7 @@
    "summary": "Guard the laptop while Unreal runs: tools/watchdog.sh [seconds] [log.csv]   (DECISIONS: Unreal only with the watchdog on) Every 2 s it logs memory, and it kills Unreal (the editor, its headless -Cmd and the shader workers) before the Mac can",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md"
    ]
   },
@@ -9306,6 +9330,7 @@
     "gidi-game:tools/look_travels.py",
     "gidi-game:tools/spot_assemble.py",
     "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/OLD-KIT.md"
    ]
@@ -9343,7 +9368,7 @@
     "gidi-game:tools/look_travels.py",
     "gidi-game:tools/street_test.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9434,7 +9459,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9442,13 +9467,13 @@
    "path": "research/google/ibudo/NOTES.md",
    "ext": ".md",
    "bytes": 4485,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 35,
    "summary": "\u00ccb\u00f9d\u00f3 study: Oshodi (19 Oct 2026). Study only: nothing here is copied into Gidi.: Views (Google Maps / Street View, Jul 2021 and Apr 2024): 01 interchange from above (300 m): the expressway crossing, the Terminal 3 oval, the footbridge, the market west of it. 02 market and bridge from above (250 m): Oshodi Market's red roofs packed between Oshodi Rd and the rail; dense shops.",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9486,7 +9511,7 @@
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
     "gidi-game:tools/road_build.py",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
+    "gidi:decisions/HISTORY.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
     "gidi:map/d15/BUILDINGS.md",
@@ -9542,7 +9567,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9609,7 +9634,7 @@
     "gidi-data:research/google/kits/old-town/tests/ot45/mk45_pass.py",
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot73/mk73_pass.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9623,7 +9648,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9637,7 +9662,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9752,7 +9777,7 @@
    "summary": "Kit eye test 4: ot73, Epe, Ogunmule Akinlogba St (Street View, May 2024, heading 180): The test: do the kit's parts hold on a fourth street they were not made for? The owner's eye judges. This is not a pass.",
    "refs_in": [
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9802,7 +9827,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9815,7 +9840,7 @@
    "summary": "Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles: The owner's ultimate test (DECISIONS, 23 Oct): list every thing in the real pictures, model each one clean to a standard look (whole, from every side, wear as a layer), rebuild the picture from those things alone, then rebuild the other angles.",
    "refs_in": [
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9829,7 +9854,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9843,7 +9868,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {
@@ -9857,7 +9882,7 @@
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-game:tools/underdeck_build.py",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/HISTORY.md"
    ]
   },
   {

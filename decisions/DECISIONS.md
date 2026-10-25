@@ -13,25 +13,19 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 ## The map
 - **If it's in the 3D, it's in the 2D** (owner, 16 Oct 2026). The map data describes everything that takes up ground: roads, plots, houses, walls, furniture. The 3D only dresses it: windows, roofs, paint, wear. It never places things of its own. Compound walls moved into the data (on the old map by `scripts/compounds.py`, deleted 25 Oct; on the new map they are records); balconies, canopies, trees and parked vehicles follow the same way.
 - **Hand-making happens on the drawing board** (16 Oct). A clean plan of the city to scale where everything can be checked, moved, resized, reshaped, added and deleted (`docs/BOARD.md`). Edits save straight into the map's records (`map/<dNN>/`).
-- **The browser 3D is a quick preview; the full scene is for Unreal** (owner, 16 Oct): "the only reason I want a 3d view is to quickly see what the world will look like... speed is important." Light tiles only. *Now:* the browser tiles are the old map's; the new map is seen in Unreal.
 - **The map is never final** (owner, 16 Oct). Gidi is tweaked until the game ships. Unreal will be one more view of the data, rebuilt by a re-runnable importer. *Now:* the game repo's builders build what the map's records say, every time (`gidi-game/tools/*_build.py`).
 - **New districts:** *(15 Oct, old-map names; the new map has both on their real spots: 33 Airport, 17 Yaba and 18 UNILAG in NAMES.md)*
   - **The Airport,** where the real airport sits.
   - **Saba** (the owner's name), the Yaba/Akoka district, with **Lagoon University** on the lagoon.
 - **Old Island is a true island,** with Gidi's versions of Third Mainland (the Long Bridge), Carter (Channel Bridge), Eko (Wharf Bridge) and the Lekki–Ikoyi Link (Cable Bridge, tolled). The Gold Island (after Banana Island) sits off the Heights on the Crescent Causeway. *Now:* the new map has the real island and its real bridges; the names here are old-map names, to be checked against the sound-alike rule ("Invented names only").
-- **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`).
+- **The research must be detailed:** "look at everything in the data". Every district has a deep study (`docs/DEEP-STUDY.md`, `docs/studies/`). *Now:* those deep studies were written for the old map's districts; the new map's is the study of all of Lagos (`docs/lagos-study/`, with a sheet per district in `LIVING.md`).
 - **Monuments are placed by hand** (16 Oct). Each is a record placed by hand on the board and built by its builder (Meshy for sculptural ones). The plan is in `docs/hand/borrowed-lagos.md`. A district with any hand-placed monument keeps only those.
-- **Claude decides when the owner says so** (16 Oct). "Decide. I trust your judgment." On 16 Oct Claude:
-  - merged Gidi v2 (PR #54)
-  - renamed **Pedro Print Row to Press Row** and **Daleko Grain Yard to Gari Yard** (both real Lagos names)
-  - kept **Ladi Lane** (invented; a nod to Ladipo, not a copy) and **National Bowl**
-  - accepted all 23 items of the Maze and Hub list (`docs/hand/maze-hub-lagos.md`)
-
-  Decisions made this way are recorded here like any other, and the owner can reverse any of them.
 - **The hand pass covers infrastructure and labels** (16 Oct). Hand placement must place infrastructure properly and label it properly: bus stops, traffic lights, street lights, roads, streets, everything. The hand files already add, move and delete buildings and furniture. They need:
   - road and street edits (add, move, delete, with the width class)
   - names and labels on everything
   - checks that nothing stands on a carriageway
+
+  *Now:* the hand files were the old map's (deleted 25 Oct). On the new map the board adds, moves and deletes roads and every other record, names are fields on the records, and `check_map.py` fails a house on a road.
 - **Roads have surfaces; poorer areas have unpaved and marshy ones** (16 Oct). Some Lagos roads barely look like roads: marshy ground, grime and mud, a truck driving through (the owner's photo). Every road and street carries a surface:
   - tarred
   - worn tar (potholes, broken edges)
@@ -59,7 +53,7 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 - **Git:** never push to main; branches and PRs. Self-merge is fine when the checks or living test pass. Docs-only PRs can merge directly.
 - **Writing:** plain words for a designer, honest critique, one recommendation. Look at what you make before showing it.
 - **Hold-offs:** don't publish to the live artifact link (a different account).
-- **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`.
+- **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`. *Now:* the importer was deleted 25 Oct; `gidi-game/tools/map_build.py` turns the map's records into the builders' recipes.
 - **Cost:** use cheaper models where possible (Pro plan).
 - **Delete what we no longer use; use what the engine has before writing our own; read twice** (owner, 25 Oct
   evening: "it's very calm to delete and get rid of something if we're no longer using it"; "why are we writing extra
@@ -77,7 +71,6 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 ## Look and machine
 - **The look target** (18 Oct, from two videos the owner sent): Gidi should look like the stilt-town Unreal game (every surface a real scanned material, every prop a proper model) in the places that matter, and feel like the Lagos street video (danfos three deep, crowds on the verge, stalls, wet dirty ground, haze) everywhere. The street video is AI-made: its photo-real people are not a game target. The whole city is generated from the data with Megascans materials and real models for what repeats (danfo, keke, okada, stall, drum, generator, shutter); the hero places (Ladi Lane, the markets, where the story is) are finished by hand to the higher level.
 - **The laptop is the target machine** (18 Oct): the owner's M4 MacBook, 16 GB. At least 30 frames a second at 1080p on it, memory kept in check; every new piece fits the budget, and the high-end look is a higher setting, never the floor. Measure, don't guess (frame counters in the game). Textures at 2K in the project (8K downloads are capped in Unreal). Nothing runs beside the editor: bakes, Blender builds and Unreal take turns.
-- **Build order: outward from the Maze, not story order** (19 Oct: "I don't even have a set story"). First one Maze street to the look target end to end (real models, the crowd, a walkable character, measured on the laptop); then the Maze's neighbours one at a time (the Hub, the Capital across Marigold Junction, Food Gate, then whatever borders the finished area), so the finished world is always one connected walkable piece. Each district: its Google Earth study (several real places), network and density, then kit and materials. *Now:* old-map names; on the new map the work started from Mùṣá (15 Mushin), the old Maze's real place.
 
 ## Brand
 - **Vehicles are built like the fonts** (19 Oct): the original as the base, in all its glory (the danfo is the T3-shape bus, measured from its real dimensions and the owner's references), then a short written list of Gidi's tweaks, distinct but not far off ("we are losing sauce" when it drifts into a generic design). No maker's badge (the owner's D instead). Built part by part in Blender (`gidi-game/tools/danfo_build.py`), so it comes apart for variants (rack, bull bar, hubcaps, mismatched panels) and wear levels. The same for the keke, okada, korope, molue and BRT.
