@@ -15,8 +15,15 @@ merged and checked, add new ones where they belong, and say here when the owner 
    (a) [x] Done 25 Oct (gidi-game #90): the street (475 houses now) with roof edges as 19 shared pieces and every
    piece instanced, measured against a same-day build of main: files 900 -> 373 MB, actors 10,436 -> 1,183, but
    frame 60 fps in both, GPU 16.2 -> 15.7 ms, process memory 7,156 vs 7,193 MB. The files shrink; the memory is not
-   the houses' triangles (Nanite streams them). So, reordered: (a2) find what fills the 7.2 GB (Unreal's memreport
-   and Insights' memory view, researched first) before splitting more; (b) each builder split in turn, for the files,
+   the houses' triangles (Nanite streams them). So, reordered: (a2) [x] what fills it (gidi-game #91): an empty copy of
+   the level uses 5.8 GB with no houses, nine tenths graphics pools of fixed size (Metal heaps 3.1 GB, 1.3-1.4 of them
+   unused; Nanite/scene buffers 0.9; render targets 0.5; UAV textures 0.44); the 475 houses add ~0.8 GB; no leak over
+   5 min; the measure's CSV profiler adds ~0.5 GB of its own. Next, one at a time: (a3) the street in a packaged build
+   (Epic's packaging on Mac researched first), since the editor's share is in every number so far; (a4) each fixed pool
+   tried smaller on the empty level (shadow page pool, Nanite streaming pool, Metal heap, texture pool): what it saves,
+   what it does to the picture; (a5) the roof edge pieces' two faults: at hip corners a piece pokes up to 0.15 m and
+   it ignores the sheet's sag; first look at both close up, then sheets cut by a hip (or sagging past a limit) keep
+   their modelled strip; (b) each builder split in turn, for the files,
    actors and World Partition; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming.
 2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
