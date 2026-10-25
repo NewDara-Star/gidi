@@ -37,17 +37,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
      out of DECISIONS (the browser 3D preview, "Claude decides", "Build order: outward from the Maze") and three given
      a *Now:* note. Rules that still have a GAP row stay, so no GAP is closed by moving it.
    Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
-01. [ ] **The fighter's camera looks straight down (owner, 25 Oct: "it's never showing like over the shoulder").**
-   Found 25 Oct: Play_Street's controller starts at pitch -89.9 (Unreal's limit), yaw 133.5, though Start_Street is
-   pitch 0, yaw 11.2; the same to the decimal in 6 runs; the rig is a normal one (BP_CombatCharacter's arm 100 cm,
-   pawn control rotation, no pitch of its own). Not a held input: no gamepad connected, the mouse still, and the
-   rotation set back to (-15, 11.2) at frame 30 stays there for 30 s, and the picture is then over the shoulder down
-   the lane (gidi-game Saved/Perf/cam_fighter3.png). Turning off capture-on-launch (-ini override) did not change it.
-   Left: what sets it once at startup (the possess, the Combat controller's graph, or the Mac mouse capture: SDL's
-   macOS bug, a big first relative-mouse delta, is the nearest known case); then the fix in the game itself, not a
-   script: the controller faces the start after possessing (Epic's own FinishRestartPlayer does ClientSetRotation),
-   checked by the same frame log and a shot. The measure levels keep their fixed Cam_Measure (30 m up), which is why
-   the measuring pictures are overhead too.
+01. [x] **The fighter's camera looked straight down (owner, 25 Oct: "it's never showing like over the shoulder").**
+   Fixed (gidi-game #102). Cause: on the Mac the first mouse event after the mouse-look mapping is added carries the
+   cursor's distance from the screen corner as one move (start pitch -89.9 with the cursor low, -52.5 with it high;
+   yaw likewise off), SDL's known macOS bug. `gidi_player.py` makes BP_GidiPlayerController (the Combat one, holding
+   the PlayerStart's direction at pitch -10 for the first second) and BP_GidiGameMode; both play levels use it. After:
+   first frame -10/11.18 on the street, -10/90 under the deck, mouse look and W move checked. The measure levels keep
+   their fixed Cam_Measure (30 m up), so the measuring pictures stay overhead on purpose.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
