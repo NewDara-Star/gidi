@@ -24,7 +24,8 @@
     "gutter_kind": ["open_concrete", "open_earth", "slab_covered", "centre_channel"],
     "gutter_state": ["clear", "half_blocked", "water"],
     "verge_surface": ["earth", "concrete_apron", "sand", "grass", "interlock", "laterite"],
-    "crossing_kind": ["slab_bridge", "plank_bridge", "gate_ramp"],
+    "crossing_kind": ["slab_bridge", "plank_bridge", "gate_ramp", "grate"],
+    "cover_kind": ["slab", "grate", "missing"],
     "plot_kind": ["house", "compound", "shop_row", "market", "motor_park", "church_ground", "mosque_ground", "school_ground", "open_ground", "under_build", "yard", "car_park"],
     "frontage_kind": ["shop_line_step", "leanto_to_road", "wall_gate", "platform_house", "low_wall_bars", "sheet_fence", "breeze_fence", "plank_fence", "open_forecourt"],
     "wall_finish": ["render", "bare_block", "breeze_block", "sheet", "plank", "railing"],
@@ -123,7 +124,8 @@
       "offset": "num >=0",
       "state": "enum:gutter_state",
       "slab_colour": "hex?",
-      "wall_colour": "hex?"
+      "wall_colour": "hex?",
+      "covers": "table:cover?"
     },
     "verge": {
       "side": "enum:side",
@@ -480,6 +482,7 @@
     "streak": [["u", "num"], ["w", "num >0"], ["z_top", "num"], ["len", "num >0"], ["dark", "num 0..1"]],
     "chip": [["u", "num"], ["size", "num >0"]],
     "daub": [["u", "num"], ["z", "num"], ["text", "text"], ["colour", "hex"], ["size", "num >0"]],
+    "cover": [["len", "num >0"], ["gap", "num >=0"], ["kind", "enum:cover_kind"], ["lift", "num"], ["tilt", "num"], ["wear", "num 0..1"]],
     "board": [["w", "num >0"], ["gap", "num >=0"], ["len", "num >=0"], ["shift", "num"], ["yaw", "num"], ["roll", "num"], ["warp", "num"], ["twist", "num"], ["age", "num 0..1"]],
     "slab": [["tip", "num"], ["roll", "num"], ["sink", "num"], ["dirt", "num 0..1"], ["dust", "num 0..1"], ["shade", "num >0"], ["gap", "num >=0"], ["broken", "bool"]],
     "litter_piece": [["kind", "enum:litter_kind"], ["colour", "hex"], ["x", "num"], ["y", "num"], ["z", "num"], ["turn", "num"], ["tilt", "num"], ["w", "num >0"], ["d", "num >0"], ["h", "num >0"], ["age", "num 0..1"], ["buried", "num 0..1"]],
