@@ -73,8 +73,15 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   covered: the slabs read as one low strip with fine joints) and g03 Sadiku St (an 8 m grate crossing at a filling
   station: 16 panels, three short slot rows), both by eye beside the photo after 2-3 passes. Open: the photo's slots are
   fewer and longer; roads read too tan or too black against the photos' grey dusty tar (the ground pass); not tried on a
-  curve or in Unreal. Next: earth drains, then laying the pieces along the real centrelines; trees, masts, heaps (Meshy
-  before 11 Nov).
+  curve or in Unreal.
+- **Earth ditches** (gidi-game #86): tested against ot135 (Ogunkoya Shina, Olodi); banks inside the record's width,
+  slumped, damp, mossy in patches, grey-green standing water. Weeds wait for the plants kit.
+- **Roads laid along their real lines** (gidi-game #87, #88; gidi #329): road_build bends what it builds along the
+  record's centreline, corners rounded on circles as wide as the road reaches (the spline-mesh way). Tested on d15
+  rd-oahy2qpj (295 m, three right-angle turns): 0 folds except where its line zigzags. check_map now lists 62 road
+  corners in d15 the kit would fold (12 repeated points, 14 lines doubling back, 36 corners too tight for their legs) as
+  amber TODO: each is a hand edit of the line on the board. Next: those hand edits; junctions (each road is laid alone,
+  the joins are not built yet); then trees, masts, heaps (Meshy before 11 Nov).
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
