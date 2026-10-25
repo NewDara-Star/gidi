@@ -427,6 +427,11 @@ def road_lines(recs):
         core = max([r['width'] / 2] + [g['offset'] + g.get('width', 0.5) / 2 + 0.15 for g in r.get('gutters') or []
                                        if is_num(g.get('offset'))])
         cl = [tuple(p[:2]) for p in r['centreline'] if is_pt(p)]
+        L = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(cl, cl[1:]))
+        for k, f in (('gutters', 's0'), ('gutters', 's1'), ('verges', 's0'), ('verges', 's1'), ('crossings', 's')):
+            for o in r.get(k) or []:   # a stretch placed past the road's end (its line cut shorter, its stretches not moved)
+                if is_num(o.get(f)) and o[f] > L + 0.5:
+                    err(w, f'a {k[:-1]} at {f} {o[f]} is past the road\'s end ({L:.1f} m along its line)')
         keep, s = [cl[0]], 0.0
         for a, b in zip(cl, cl[1:]):
             if math.hypot(b[0] - a[0], b[1] - a[1]) < 0.05:
