@@ -31,6 +31,9 @@ WORD = re.compile(r'[\w.\-/~]+')
 PATHY = re.compile(r'(?<![\w/.~-])((?:[\w.-]+/)*[\w.-]+\.(?:py|sh|md|js|mjs|ts|mts|html|json|ini|css|blend))\b')
 IMPORT_PY = re.compile(r'^\s*(?:from\s+([\w.]+)\s+import|import\s+([\w., ]+))', re.M)
 IMPORT_JS = re.compile(r'''(?:from\s+|require\(\s*|import\(\s*|import\s+)['"]([^'"]+)['"]''')
+# A missing name is marked as gone by the same words the push hook accepts, or by this tag near a document's top.
+HONEST = re.compile(r'never committed|lost|not in this repo|isn.t in this repo|exists nowhere|deleted|removed', re.I)
+TAG = 'before-cleanup-25oct'
 # Paths the code makes or reads outside git (outputs, caches, other machines' folders): not counted as broken.
 OUTSIDE = ('Saved/', 'Intermediate/', 'DerivedDataCache/', 'node_modules/', 'dist/', '/tmp', 'scratchpad', '~/',
            'Generated/', 'out/', 'build/', '.venv', 'http', 'Engine/', 'site-packages')
@@ -210,13 +213,29 @@ def main():
         if not broken[k]:
             del broken[k]
 
+    # Which missing names are still unmarked. Marked: the line naming it says it is gone, by the push hook's own words
+    # (.claude/hooks/checks-before-commit.sh, HONEST), or the document says so at its top (the history note naming the
+    # tag that holds the deleted files). Both counts are printed; the unmarked ones are the ones to fix.
+    unmarked = {}
+    for key, t in texts.items():
+        k = f'{key[0]}:{key[1]}'
+        if k not in broken:
+            continue
+        lines = t.split('\n')
+        if any(TAG in l for l in lines[:8]):
+            continue
+        left = {p for p in broken[k] if any(p in l and not HONEST.search(l) for l in lines)}
+        if left:
+            unmarked[k] = left
+
     os.makedirs(a.out, exist_ok=True)
     for r in files:
         r.pop('text')
-    json.dump({'files': files, 'broken': {k: sorted(v) for k, v in sorted(broken.items())}},
+    json.dump({'files': files, 'broken': {k: sorted(v) for k, v in sorted(broken.items())},
+               'unmarked': {k: sorted(v) for k, v in sorted(unmarked.items())}},
               open(os.path.join(a.out, 'inventory.json'), 'w'), indent=1)
     write_md(files, a.out)
-    write_suspects(files, broken, a.out)
+    write_suspects(files, broken, unmarked, a.out)
 
     # the code by its parsers, and the documents as a vault
     import code_graph
@@ -247,7 +266,8 @@ def main():
           f'{st["unused"]} unused), {len(graph["comments"])} comments naming what does not exist; {graph["note"]}')
     print(f'documents: {len(vault)} ({vs["orphan"]} orphans, {vs["near-orphan"]} near-orphans)')
     print(f'{len(files)} files, {len(texts)} read, {sum(1 for r in files if not r["refs_in"])} pointed to by nothing, '
-          f'{sum(len(v) for v in broken.values())} missing names in {len(broken)} files -> {a.out}')
+          f'{sum(len(v) for v in broken.values())} missing names in {len(broken)} files, '
+          f'{sum(len(v) for v in unmarked.values())} of them not marked as gone in {len(unmarked)} files -> {a.out}')
 
 
 def folder(path):
@@ -296,7 +316,7 @@ def write_md(files, out):
     open(os.path.join(out, 'INVENTORY.md'), 'w').write('\n'.join(lines))
 
 
-def write_suspects(files, broken, out):
+def write_suspects(files, broken, unmarked, out):
     lines = ['# Suspects', '', 'Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by hand can be '
              'alive with nothing pointing to it.', '', '## Code and documents nothing points to', '']
     for repo in REPOS:
@@ -308,8 +328,13 @@ def write_suspects(files, broken, out):
         lines.append('')
     lines += ['## Names of files that exist nowhere', '',
               'Paths named in a document or in code that match no file in any repo (outputs and caches skipped).', '']
-    for k, v in sorted(broken.items()):
+    lines += ['Not marked as gone (to fix: the line names a file as if it were there):', '']
+    for k, v in sorted(unmarked.items()):
         lines.append(f"- `{k}`: {', '.join(f'`{p}`' for p in sorted(v))}")
+    lines += ['', 'Marked as gone (the line says deleted, lost or never committed, or the document is history):', '']
+    for k, v in sorted(broken.items()):
+        if v - unmarked.get(k, set()):
+            lines.append(f"- `{k}`: {', '.join(f'`{p}`' for p in sorted(v - unmarked.get(k, set())))}")
     open(os.path.join(out, 'SUSPECTS.md'), 'w').write('\n'.join(lines) + '\n')
 
 
