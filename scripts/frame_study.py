@@ -251,19 +251,12 @@ for d in ids:
 print(len(dists), 'districts in the frame')
 
 
-def group_poly(pred):
-    m = np.isin(place, [p for p, q in PL.items() if pred(q)]) & (place > 0)
-    return unary_union([shape(g) for g, v in features.shapes(m.astype(np.uint8), mask=m, transform=AFF) if v == 1])
-
-
 def border(A, B):
     g = A.boundary.intersection(B.boundary)
     g = linemerge([p for p in getattr(g, 'geoms', [g]) if p.geom_type == 'LineString']) if not g.is_empty else g
     return lines_of(g, 60) if not g.is_empty else []
 
 
-starts = lambda *names: (lambda q: any(q['name'] == n or q['name'].startswith(n + ' ') or q['name'].startswith(n + ',') for n in names))
-inD = lambda d, pred: (lambda q: own[q['id']] == d and pred(q))
 # EARTH-CHECK.md, "Still unsure" and the lines marked *to trace*. kind: unsure = a question to settle, trace = a named
 # line to draw on the board against the fabric. The source votes of 22 Oct settled all of them but these: a line stays
 # here only while its vote is a coin-toss.

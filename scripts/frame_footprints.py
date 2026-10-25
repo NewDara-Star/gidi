@@ -32,7 +32,6 @@ TILE = 1000
 OUT = os.path.join(ROOT, 'web', 'frame-tiles')
 T = Transformer.from_crs(4326, 32631, always_xy=True)
 NUM = re.compile(r'-?\d+\.\d+')
-NI, NJ = FRAME[0] // TILE + 1, FRAME[1] // TILE + 1
 
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(OUT)

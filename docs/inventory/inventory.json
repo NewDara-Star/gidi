@@ -162,7 +162,6 @@
     "gidi:data/results/landpop.py",
     "gidi:docs/lagos-study/councils.md",
     "gidi:docs/lagos-study/roads/EARTH-CHECK.md",
-    "gidi:docs/lagos-study/roads/scripts/common.py",
     "gidi:docs/lagos-study/similar/scripts/common.py",
     "gidi:scripts/study_boxheights.py"
    ]
@@ -359,9 +358,9 @@
    "repo": "gidi",
    "path": "decisions/NOW.md",
    "ext": ".md",
-   "bytes": 63391,
+   "bytes": 64417,
    "changed": "2026-10-25",
-   "lines": 321,
+   "lines": 328,
    "summary": "Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
@@ -1490,7 +1489,7 @@
    "repo": "gidi",
    "path": "docs/inventory/CODEMAP.md",
    "ext": ".md",
-   "bytes": 52363,
+   "bytes": 48928,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1503,7 +1502,7 @@
    "repo": "gidi",
    "path": "docs/inventory/COMMENTS.md",
    "ext": ".md",
-   "bytes": 2045,
+   "bytes": 2208,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1516,7 +1515,7 @@
    "repo": "gidi",
    "path": "docs/inventory/INVENTORY.md",
    "ext": ".md",
-   "bytes": 60871,
+   "bytes": 58648,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1530,7 +1529,7 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 9739,
+   "bytes": 10044,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1544,7 +1543,7 @@
    "repo": "gidi",
    "path": "docs/inventory/VAULT.md",
    "ext": ".md",
-   "bytes": 116000,
+   "bytes": 116101,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1557,7 +1556,7 @@
    "repo": "gidi",
    "path": "docs/inventory/code_graph.json",
    "ext": ".json",
-   "bytes": 2357916,
+   "bytes": 2219208,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1569,7 +1568,7 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 305293,
+   "bytes": 298440,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1582,7 +1581,7 @@
    "repo": "gidi",
    "path": "docs/inventory/vault.json",
    "ext": ".json",
-   "bytes": 94990,
+   "bytes": 93665,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1917,11 +1916,12 @@
    "repo": "gidi",
    "path": "docs/lagos-study/roads/scripts/common.py",
    "ext": ".py",
-   "bytes": 1412,
+   "bytes": 1201,
    "changed": "2026-10-24",
-   "lines": 28,
+   "lines": 23,
    "summary": "Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid.",
    "refs_in": [
+    "gidi:decisions/NOW.md",
     "gidi:docs/lagos-study/roads/ROADS.md",
     "gidi:docs/lagos-study/roads/scripts/borders.py",
     "gidi:docs/lagos-study/roads/scripts/ladder.py",
@@ -2232,6 +2232,7 @@
    "lines": 43,
    "summary": "Shared by the similarity study's plot scripts: the grids, the units, the LGA lines. Needs the grids in ../lagos/ (feat.npz, class.npz), which were never committed and are lost (decisions/CODEBASE.md).",
    "refs_in": [
+    "gidi:decisions/NOW.md",
     "gidi:docs/lagos-study/roads/ROADS.md",
     "gidi:docs/lagos-study/roads/scripts/borders.py",
     "gidi:docs/lagos-study/roads/scripts/ladder.py",
@@ -3428,9 +3429,9 @@
    "repo": "gidi",
    "path": "scripts/frame_footprints.py",
    "ext": ".py",
-   "bytes": 3332,
+   "bytes": 3280,
    "changed": "2026-10-22",
-   "lines": 93,
+   "lines": 92,
    "summary": "Real roofs under the new frame, for the drawing board's zoomed-in \"Real roofs\" layer (web/board.html?frame=new).",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
@@ -3442,9 +3443,9 @@
    "repo": "gidi",
    "path": "scripts/frame_study.py",
    "ext": ".py",
-   "bytes": 15556,
+   "bytes": 15139,
    "changed": "2026-10-22",
-   "lines": 303,
+   "lines": 296,
    "summary": "The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts by their borders). Open them with web/board.html?frame=new.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md",
@@ -3646,7 +3647,7 @@
    "repo": "gidi-game",
    "path": "ASSETS.md",
    "ext": ".md",
-   "bytes": 10299,
+   "bytes": 10357,
    "changed": "2026-10-25",
    "lines": 36,
    "summary": "Hand-made assets: | Asset | Where | Source | Status | |---|---|---|---| | Danfo Basic 2.0 (font): the owner's danfo lettering (BirdFont, July 2022), spaced, kerned and given punctuation by script (tools/font_space.py, font_punct.py) | Art/Fonts/DanfoBasic.ttf (built by tools/font_build.sh from Art/Fonts/src: the 2022 letters and Alfa Slab One) | the owner, built on Alfa Slab One (JM Sol\u00e9), SIL Open Font License 1.1 (Art/Fonts/OFL.txt) | to use: danfo bodywork, signboards, the game's titles |",
@@ -3927,7 +3928,6 @@
    "summary": "",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi-game:tools/danfo_build.py",
     "gidi-game:tools/font_build.sh",
     "gidi-game:tools/labels.py",
     "gidi-game:tools/plates.py"
@@ -4130,7 +4130,6 @@
    "summary": "",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi-game:tools/frame_motorpark.py",
     "gidi-game:tools/underdeck_extras.py"
    ]
   },
@@ -5687,9 +5686,7 @@
    "changed": "2026-10-19",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi-game:tools/frame_motorpark.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi-game",
@@ -7000,9 +6997,7 @@
    "changed": "2026-10-19",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi-game:tools/frame_motorpark.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi-game",
@@ -7576,9 +7571,7 @@
    "changed": "2026-10-19",
    "lines": null,
    "summary": "",
-   "refs_in": [
-    "gidi-game:tools/frame_motorpark.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi-game",
@@ -8220,9 +8213,9 @@
    "repo": "gidi-game",
    "path": "docs/PERFORMANCE.md",
    "ext": ".md",
-   "bytes": 21149,
+   "bytes": 22173,
    "changed": "2026-10-25",
-   "lines": 270,
+   "lines": 286,
    "summary": "Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, \"Build light, look full\"): build in a light mode, play in the mode the machine can carry, flip to full only to look and take pictures. Near things carry detail and far things are simple. What the camera can't see is not drawn. The world streams in pieces around the player. Every level has a budget,",
    "refs_in": [
     "gidi-game:Config/DefaultDeviceProfiles.ini",
@@ -8260,8 +8253,8 @@
    "repo": "gidi-game",
    "path": "tools/brt_build.py",
    "ext": ".py",
-   "bytes": 16897,
-   "changed": "2026-10-23",
+   "bytes": 16892,
+   "changed": "2026-10-25",
    "lines": 288,
    "summary": "The BRT bus, built in Blender part by part: blender -b -P tools/brt_build.py -- <out.blend> [variant.json]",
    "refs_in": [
@@ -8272,9 +8265,9 @@
    "repo": "gidi-game",
    "path": "tools/danfo_build.py",
    "ext": ".py",
-   "bytes": 25947,
-   "changed": "2026-10-23",
-   "lines": 521,
+   "bytes": 25887,
+   "changed": "2026-10-25",
+   "lines": 520,
    "summary": "The danfo, built in Blender part by part (not generated): blender -b -P tools/danfo_build.py -- <out.blend> [variant.json]",
    "refs_in": [
     "gidi-game:Content/Python/gidi_heroes.py",
@@ -8425,20 +8418,6 @@
    "summary": "Specimen sheets for a font, to judge it by eye (zoom in): ~/.venvs/gidi/bin/python tools/font_specimen.py <font.ttf> <out dir>",
    "refs_in": [
     "gidi-game:ASSETS.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "tools/frame_motorpark.py",
-   "ext": ".py",
-   "bytes": 13034,
-   "changed": "2026-10-19",
-   "lines": 276,
-   "summary": "The first Lagos-pass frame: the \u00c0d\u00e0r\u00fa motor park beside the expressway, seen from a footbridge (after the owner's photo, refs/lagos-life/09): blender -b -P tools/frame_motorpark.py -- <out.png> [samples]",
-   "refs_in": [
-    "gidi-game:ASSETS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -8606,9 +8585,9 @@
    "repo": "gidi-game",
    "path": "tools/leanto_build.py",
    "ext": ".py",
-   "bytes": 12129,
-   "changed": "2026-10-24",
-   "lines": 239,
+   "bytes": 12112,
+   "changed": "2026-10-25",
+   "lines": 238,
    "summary": "The zinc lean-to, built in Blender part by part: blender -b -P tools/leanto_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-game:Art/Props/LeantoBuilt/GAPS.md",
@@ -8658,9 +8637,9 @@
    "repo": "gidi-game",
    "path": "tools/lorry_build.py",
    "ext": ".py",
-   "bytes": 42293,
-   "changed": "2026-10-23",
-   "lines": 671,
+   "bytes": 41827,
+   "changed": "2026-10-25",
+   "lines": 658,
    "summary": "The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-game:docs/ASSET-INVENTORY.md",
@@ -8685,9 +8664,9 @@
    "repo": "gidi-game",
    "path": "tools/map_build.py",
    "ext": ".py",
-   "bytes": 14945,
+   "bytes": 14837,
    "changed": "2026-10-25",
-   "lines": 277,
+   "lines": 276,
    "summary": "The map, built: ~/.venvs/gidi/bin/python tools/map_build.py <map dir> <district> <out folder> [--box=x0,y0,x1,y1] [--camera=x,y,z,turn,pitch,fov] [--spot=<spot.json>] [--origin=x,y] [--plan-only]   (the venv: junction_geo's house test needs shapely)",
    "refs_in": [
     "gidi-game:README.md",
@@ -8715,8 +8694,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/measure_csv.py",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -8861,9 +8839,9 @@
    "repo": "gidi-game",
    "path": "tools/plates.py",
    "ext": ".py",
-   "bytes": 12244,
+   "bytes": 12160,
    "changed": "2026-10-25",
-   "lines": 246,
+   "lines": 245,
    "summary": "Gidi's number plates: ~/.venvs/gidi/bin/python tools/plates.py  (writes Art/Plates/)",
    "refs_in": [
     "gidi-game:ASSETS.md",
@@ -9054,9 +9032,9 @@
    "repo": "gidi-game",
    "path": "tools/stall_build.py",
    "ext": ".py",
-   "bytes": 21740,
+   "bytes": 21387,
    "changed": "2026-10-25",
-   "lines": 402,
+   "lines": 393,
    "summary": "The street stall with its goods, built in Blender part by part: blender -b -P tools/stall_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
@@ -9292,9 +9270,9 @@
    "repo": "gidi-game",
    "path": "tools/wear_layer.py",
    "ext": ".py",
-   "bytes": 14506,
-   "changed": "2026-10-23",
-   "lines": 265,
+   "bytes": 14328,
+   "changed": "2026-10-25",
+   "lines": 257,
    "summary": "The wear layer: dust, grime, rust, fading and damp put on top of clean built parts, in Blender's shaders.",
    "refs_in": [
     "gidi-game:tools/kit_fields.py",
@@ -9908,6 +9886,9 @@
   "gidi-data:research/google/ibudo/NOTES.md": [
    "docs/TWINS.md"
   ],
+  "gidi-game:ASSETS.md": [
+   "tools/frame_motorpark.py"
+  ],
   "gidi-game:docs/PERFORMANCE.md": [
    "Content/Python/gidi_stream.py",
    "tools/import.sh",
@@ -9949,6 +9930,7 @@
    "study_extract.py",
    "study_isms.py",
    "tools/bake.sh",
+   "tools/frame_motorpark.py",
    "tools/perf.sh",
    "walknet.py"
   ],
@@ -9969,6 +9951,7 @@
    "scripts/twins.py"
   ],
   "gidi:decisions/NOW.md": [
+   "frame_motorpark.py",
    "gidi_import.py",
    "gidi_stream.py"
   ],
@@ -9992,7 +9975,8 @@
    "scripts/hand.py",
    "scripts/real_underlay.py",
    "scripts/roadends.py",
-   "scripts/things.py"
+   "scripts/things.py",
+   "scripts/trees.py"
   ],
   "gidi:docs/DATA-SOURCES.md": [
    "scripts/deep_prep.py",
@@ -10161,6 +10145,9 @@
   ],
   "gidi:docs/lagos-study/similar/scripts/appendix.py": [
    "appendix.md"
+  ],
+  "gidi:docs/look/research-roads.md": [
+   "rules.py"
   ],
   "gidi:docs/maze-pattern-study.md": [
    "check_district.py",

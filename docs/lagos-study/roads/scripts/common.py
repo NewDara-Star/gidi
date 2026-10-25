@@ -10,7 +10,6 @@ T = Transformer.from_crs(4326, 32631, always_xy=True)
 TI = Transformer.from_crs(32631, 4326, always_xy=True)
 X0, Y0 = 466250.0, 702750.0      # same origin as the 250 m grid
 C = 50; NX, NY = 3700, 785        # 185 km x 39.25 km
-C250 = 250
 SCALE = 3                         # Gidi is 1:3
 FRAME = (27000, 10500)            # Gidi's frame in metres
 
@@ -21,7 +20,3 @@ def up(a250):
     """250 m grid -> 50 m grid (repeat each cell 5 x 5)."""
     return np.repeat(np.repeat(a250, 5, axis=0), 5, axis=1)
 
-def lga_shapes():
-    from shapely.geometry import shape
-    g = json.load(open(DATA + 'lagos_lgas_utm31.geojson'))
-    return [(f['properties']['name'], shape(f['geometry'])) for f in g['features']]

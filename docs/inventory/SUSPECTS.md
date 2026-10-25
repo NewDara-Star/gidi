@@ -32,17 +32,18 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 Paths named in a document or in code that match no file in any repo (outputs and caches skipped).
 
 - `gidi-data:research/google/ibudo/NOTES.md`: `docs/TWINS.md`
+- `gidi-game:ASSETS.md`: `tools/frame_motorpark.py`
 - `gidi-game:docs/PERFORMANCE.md`: `Content/Python/gidi_stream.py`, `tools/import.sh`, `tools/stream.sh`
 - `gidi-game:tools/props_build.py`: `docs/hand/lagos-pass.md`
 - `gidi:decisions/CHECKS.md`: `check_district.py`, `check_real.py`
-- `gidi:decisions/CODEBASE.md`: `audit3d.py`, `bake_web.py`, `check_district.py`, `check_real.py`, `concept.py`, `district_profiles.py`, `draw_area.py`, `explore_city.py`, `fabric.py`, `frame_network.py`, `freeze_district.py`, `gen_fabric.py`, `hand.py`, `lagoon.py`, `landmarks.py`, `layout_v2.py`, `lgamap.py`, `lgas.py`, `rebuild_areas.py`, `scripts/build_viewer.py`, `scripts/check_real.py`, `scripts/compare.py`, `scripts/gen3d.py`, `sea.py`, `study.py`, `study_extract.py`, `study_isms.py`, `tools/bake.sh`, `tools/perf.sh`, `walknet.py`
+- `gidi:decisions/CODEBASE.md`: `audit3d.py`, `bake_web.py`, `check_district.py`, `check_real.py`, `concept.py`, `district_profiles.py`, `draw_area.py`, `explore_city.py`, `fabric.py`, `frame_network.py`, `freeze_district.py`, `gen_fabric.py`, `hand.py`, `lagoon.py`, `landmarks.py`, `layout_v2.py`, `lgamap.py`, `lgas.py`, `rebuild_areas.py`, `scripts/build_viewer.py`, `scripts/check_real.py`, `scripts/compare.py`, `scripts/gen3d.py`, `sea.py`, `study.py`, `study_extract.py`, `study_isms.py`, `tools/bake.sh`, `tools/frame_motorpark.py`, `tools/perf.sh`, `walknet.py`
 - `gidi:decisions/DECISIONS.md`: `scripts/compounds.py`, `scripts/cross_sections.py`, `scripts/roadends.py`, `tools/perf.sh`
 - `gidi:decisions/HISTORY.md`: `docs/LAYOUT-V2.md`, `docs/TWINS.md`, `docs/hand/lagos-pass.md`, `scripts/autoclean.py`, `scripts/check_real.py`, `scripts/hand_spots/ibudo_real_area.py`, `scripts/rebuild_areas.py`, `scripts/twins.py`
-- `gidi:decisions/NOW.md`: `gidi_import.py`, `gidi_stream.py`
+- `gidi:decisions/NOW.md`: `frame_motorpark.py`, `gidi_import.py`, `gidi_stream.py`
 - `gidi:decisions/story/README.md`: `gidi-performance-capture.md`, `gidi-roadmap.md`
 - `gidi:decisions/story/act-1-draft.md`: `gidi-roadmap.md`
 - `gidi:decisions/story/acts-2-3-draft.md`: `gidi-performance-capture.md`
-- `gidi:docs/BOARD.md`: `check_district.py`, `scripts/check_district.py`, `scripts/compounds.py`, `scripts/fronts.py`, `scripts/ground.py`, `scripts/groundpaint.py`, `scripts/hand.py`, `scripts/real_underlay.py`, `scripts/roadends.py`, `scripts/things.py`
+- `gidi:docs/BOARD.md`: `check_district.py`, `scripts/check_district.py`, `scripts/compounds.py`, `scripts/fronts.py`, `scripts/ground.py`, `scripts/groundpaint.py`, `scripts/hand.py`, `scripts/real_underlay.py`, `scripts/roadends.py`, `scripts/things.py`, `scripts/trees.py`
 - `gidi:docs/DATA-SOURCES.md`: `scripts/deep_prep.py`, `scripts/study_google.py`
 - `gidi:docs/DEEP-STUDY.md`: `scripts/deep_check.py`, `scripts/deep_prep.py`, `scripts/deep_profile.py`, `scripts/deep_report.py`, `scripts/rename_mains.py`, `scripts/structure.py`, `scripts/study_deep.py`
 - `gidi:docs/LAGOS-ISMS.md`: `scripts/isms.py`, `scripts/study_isms.py`, `study_isms.py`
@@ -61,6 +62,7 @@ Paths named in a document or in code that match no file in any repo (outputs and
 - `gidi:docs/jungle-pattern-study.md`: `scripts/check_district.py`, `scripts/district_profiles.py`, `scripts/draw_gen.py`, `scripts/gen_fabric.py`, `scripts/study_extract.py`, `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_landmarks.py`
 - `gidi:docs/lagos-study/STUDY.md`: `classify.py`, `feat.py`, `grid_bld.py`, `grid_orient.py`, `rasters.py`, `roads.py`
 - `gidi:docs/lagos-study/similar/scripts/appendix.py`: `appendix.md`
+- `gidi:docs/look/research-roads.md`: `rules.py`
 - `gidi:docs/maze-pattern-study.md`: `check_district.py`, `scripts/bake_web.py`, `scripts/build_viewer.py`, `scripts/check_district.py`, `scripts/district_profiles.py`, `scripts/draw_gen.py`, `scripts/gen_fabric.py`, `scripts/study_extract.py`, `scripts/study_landmarks.py`, `study_analyse.py`, `study_connect.py`, `study_core.py`
 - `gidi:docs/oldisland-pattern-study.md`: `check_district.py`, `explore_city.py`, `scripts/district_profiles.py`, `scripts/gen_fabric.py`, `scripts/study_extract.py`, `scripts/study_wellmapped.py`, `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_isms.py`, `study_landmarks.py`
 - `gidi:docs/oldshore-pattern-study.md`: `check_district.py`, `scripts/district_profiles.py`, `scripts/gen_fabric.py`, `scripts/study_extract.py`, `scripts/walknet.py`, `study_analyse.py`, `study_connect.py`, `study_core.py`, `study_isms.py`, `study_landmarks.py`
