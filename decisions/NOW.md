@@ -34,6 +34,22 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   scene file even for a named test street (fix); split the other builders (walls and gates, vehicles, stall goods,
   poles).
 
+**Done 25 Oct.**
+- Mùṣá's roads: crossings over the gutters and crowns (#316, 946 crossings); the street edge drafted from the Street View
+  notes (#317, 2,693 records after the re-run: poles, wires, vehicles, stalls, trees); "the road comes first" recorded, and
+  check_map fails a house on a road (#318); kits into pieces, Meshy where stuck, the credits expiring 11 Nov (#319).
+- **Road kit, first pieces** (gidi-game branch `kit/road-drain`, the owner's order: roads with gutters, bridges, kerbs and
+  verges first): `tools/road_build.py` builds a road record's ground, open drains, silt and water, plank and slab bridges
+  and litter, with the dirt in vertex colours (which M_GidiSurface reads); `tools/road_look.py` renders it with copies of
+  the Unreal slots from a Street View camera, and `tools/kit_compare.py` sets the two side by side (test spot g01, Ogunmokun
+  St). Litter and each bridge's boards are records, drafted once by `tools/road_draft.py`. The owner, 25 Oct: "make sure it
+  looks very, very close... all the grime, all the dirt". Not close yet: the drain reads narrower than the photo's; the
+  walls look clean from the road; bottles too big; no cables under the bridge; boards too even.
+  **Owed to "One ground truth":** the road's few cm of relief and the drain walls' chipped tops are still noise in the
+  builder; they become records with the road's bump and pothole records.
+  Next: kerbs (painted, raised), grated covers, earth drains, then laying the pieces along the real centrelines, road in
+  kit_fields' BUILDERS, then trees, masts and heaps.
+
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
    one skeleton; crowd people fully interactive (punch, run over, react, ragdoll). The proof still to run, when the Mac is
