@@ -1,6 +1,6 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3589 pieces of code in 133 files: 2 used nowhere, 52 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3591 pieces of code in 133 files: 2 used nowhere, 52 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
@@ -417,7 +417,8 @@ Used elsewhere: `common` in `gidi:scripts/draft_edge.py`; `fields` in `gidi:scri
 55 defined (55 used, 0 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
 
 ### `gidi:scripts/inventory.py`
-20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/doc_vault.py`. Imported by: nothing.
+20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/doc_vault.py`. Imported by: `gidi:tests/test_inventory.py`.
+Used elsewhere: `HONEST` in `gidi:tests/test_inventory.py`
 
 ### `gidi:scripts/js_symbols.mjs`
 8 defined (8 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -430,7 +431,7 @@ Used elsewhere: `core` in `gidi:scripts/check_map.py`; `cores` in `gidi:scripts/
 11 defined (11 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi:tests/test_inventory.py`
-15 defined (15 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`. Imported by: nothing.
+17 defined (17 used, 0 maybe, 0 unused). Imports: `gidi:scripts/code_graph.py`, `gidi:scripts/inventory.py`. Imported by: nothing.
 
 ### `gidi:web/faceedit.js`
 38 defined (38 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
