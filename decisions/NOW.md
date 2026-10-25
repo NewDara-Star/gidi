@@ -23,10 +23,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
    ~3.5 GB of fixed graphics memory is the floor; (a4) [x] the fixed pools, one at a time in the packaged game
    (gidi-game perf/pools, PERFORMANCE.md "The fixed pools"): shadow pool 1024 pages and Nanite pool 256 MB together
    free ~0.55 GB on the street with no change seen from the lane's camera, either alone ~0; texture pool, Lumen and the
-   two Metal heap settings 0; clouds off 192 MB. No default changed; (a5) the roof edge pieces' two faults: at hip corners a piece pokes up to 0.15 m and
-   it ignores the sheet's sag; first look at both close up, then sheets cut by a hip (or sagging past a limit) keep
-   their modelled strip; (b) each builder split in turn, for the files,
-   actors and World Partition; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
+   two Metal heap settings 0; clouds off 192 MB. No default changed; (a5) [x] the roof edge pieces' faults (gidi-game #94): close up there were three, all
+   fixed in zinc_kit: sheets a hip cuts keep their modelled strip (1,616 of 23,556); pieces whole ribs wide, so laps
+   nest (20,586 laps within 0.052 rib, tools/lap_check.py; slits before); each piece turned to meet the sheet's 5-7 mm
+   belly and sag. Seen in Blender only; (b) each builder split in turn, for the files,
+   actors and World Partition (its first street in Unreal also shows the new edge pieces, not yet seen there); (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming; on that city, decide the shadow and Nanite pool sizes (smaller saves ~0.55 GB, PERFORMANCE.md;
    check over the roofs and down a long street for overflow) and whether the volumetric clouds stay (192 MB and the
    largest GPU pass over the roofs, 8.5 ms) or become a cheaper sky.
