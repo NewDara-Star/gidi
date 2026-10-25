@@ -689,3 +689,9 @@ B30 (between Sadiku Street, Anifowoshe Street, Akanro Street and Agoro Bogunbolu
 | Gidi id | real twin | kind |
 |---|---|---|
 | rd-wmlmpxj0 | Oladeinde Coker Street | lane |
+
+## Roads read in Street View (25 Oct)
+
+Every road was read by eye in Street View at one point per 100 m of centreline (529 points, `road_reads.tsv`): the pano nearest each point, looking along the road, for width (kerb to kerb, against parked cars), surface, sand cover, kerbs, gutters, verges, a median, and what lines the road (in words, for the frontage pass). 394 points had a pano within about 60 m (those 20-50 m off carry a note); 135 had none. `scripts/draft_roads.py` put each road's readings together the way street-image surface surveys do (StreetSurfaceVis, Kapp et al. 2024, arXiv 2407.21454; SurfaceAI, arXiv 2409.18922: per-image readings aggregated to the road segment, human reading as the reference): the median width, the most common surface, sand, kerbs and median, and each reading's gutters and verges for its own 100 m. 255 of the 357 roads were seen; the 102 with no pano (94 lanes, 5 service roads, 2 home streets, 1 market street) took the fields of the nearest seen road of their kind and are for the hand pass. Written only where a field was missing: width 316, surface 345, sand cover 345, kerbs 347 and 338, median 342, verges 348, gutters 170 roads; the 18 widths and 15 medians set by hand before stayed. Read widths, median by kind: lane 7 m, home street 7, local main 8.5, market street 9, main road 10.75, service road 7. Houses then set back from them (BUILDINGS.md, hand pass 43).
+
+Still for the hand pass: rd-tk3atl5n (a market street) has two readings that disagree (Isolo Road, 16 m with a jersey median; Olu Aina, 8 m), so it took the first; 2 roads have no surface and 23 no width (no reading gave one); crossings (the slab and plank bridges over the gutters, noted in the edge column) are not drawn yet.

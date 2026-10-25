@@ -1,0 +1,530 @@
+#i	id	sv	width	surface	sand	kerbL	kerbR	gutL	gutR	vergeL	vergeR	edge
+0	rd-03o2r4u5	11 Sadiku St Mar2024	6.5	tar_worn	edges	none	none	-	-	concrete_apron:1.0	earth:0.8	L shop row shutters, R compound walls+gate, cars parked both sides
+1	rd-0bb0jt00	2 Martins St Jul2021	8	tar_worn	full	none	none	-	-	concrete_apron:1.2	sand:3	L rendered compound walls, R open ground rubble, umbrella stalls, kiosk
+2	rd-0cpdhblw	61 Haastrup St Jul2021	5.5	tar_worn	edges	none	drain_wall	-	open_concrete	earth:1	concrete_apron:0.8	L plank stalls+lean-tos, R 3-st walkups breeze fence, cars
+3	rd-0gi2ewca	26 Ojuwoye St Dec2016	7	tar_worn	edges	drain_wall	drain_wall	slab_covered	slab_covered	concrete_apron:2	concrete_apron:2	market: lean-to stalls both sides, umbrellas, 3-st shop rows, mosque at end
+4	rd-0gu6klk4	96 Layi Oyekanmi St Mar2024	7	tar_worn	edges	none	none	-	-	earth:2	earth:1.5	L stone-faced wall, big shade tree, parked lorry; R rendered compound walls, gates, weeds at foot
+5	rd-0i4ei708	177 Daleko Market Rd Jul2021	7	concrete	none	raised_pavement	raised_pavement	-	-	concrete_apron:1	concrete_apron:1	planned market: rows of lock-up shops, red roofs, danfos parked nose-in
+6	rd-0j8zaiv8	8 Wahab St Jul2021	6	earth	full	none	drain_wall	-	open_concrete	-	concrete_apron:1.5	2-st shop row with lean-tos, kiosks, umbrella stall, clothes hung, tyre
+7	rd-0pmc0xha	none	-	-	-	-	-	-	-	-	-	no Street View
+8	rd-0udahnvp	46 Alasalat St Jul2021	6	sand	full	none	none	-	open_earth	-	earth:1.5	L shacks, lean-to kiosks; R 2-4 st blocks, glass kiosk, scaffolding
+9	rd-0wdqpabq	3 C.A.C St Mar2024	6	tar_worn	edges	none	none	-	-	concrete_apron:1	earth:1	L 4-st walkup, steel-bar fence, cars; R breeze-block compound wall, steel gates
+10	rd-0yuaaxhr	14 Ogunfunmi St Dec2016	6	tar_worn	edges	none	none	-	-	concrete_apron:1	earth:1	cars parked both sides, steel gates, rails, timber poles, people
+11	rd-12jdsl3e	24 Labinjo St Jul2021 (pano ~70m off)	7	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:1.5	-	L shop row lean-tos; R open drain full of rubbish, zinc kiosks
+12	rd-13cjjcjg	13 Bakare St Jul2021	7	tar_worn	full	none	none	-	-	concrete_apron:1.5	concrete_apron:1	L red-painted shop front, grate, R compound walls+gates; danfo, keke, cars parked; poles
+13	rd-13cjjcjg	1 Odubiyi St Jul2021 (view across)	7	earth	full	drain_wall	none	open_concrete	-	concrete_apron:2	-	shop row on a raised platform, lean-to kiosks, tables; open drain wall; okada parked (side unsure)
+14	rd-145fsri7	none	-	-	-	-	-	-	-	-	-	no Street View
+15	rd-196r6fwm	8 Gbangba St Oct2019	6	tar_worn	edges	none	drain_wall	-	slab_covered	earth:1	concrete_apron:1	L compound walls with steel rails, R 2-st rows; palm at end
+16	rd-1ajcm4xn	41 Adeyemi St Jul2021	6	earth	full	none	none	-	open_earth	concrete_apron:1	earth:2	L fenced shop fronts, posters; R dug drain, plank kiosks, unfinished blocks
+17	rd-1h2058d6	18 Ali St Jul2021	6	sand	full	none	none	-	-	earth:2	earth:2	market lane: plank stalls under zinc lean-tos and tarps both sides
+18	rd-1uh80t1y	none	-	-	-	-	-	-	-	-	-	no Street View
+19	rd-23dgcrr6	20 Matanmi St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:1.5	earth:1	L shop fronts, stalls, umbrellas, water tank; R rendered compound wall; cars
+20	rd-2elgaw22	20 Akinbode St Jul2021 (heading not set: sides unsure)	7	sand	full	none	drain_wall	-	open_concrete	earth:1	concrete_apron:2	L house walls, parked cars; R 2-st shop row on raised platform, tables, campaign banner; poles
+21	rd-2sb6jwlg	none (snaps to Apapa-Oshodi Expy ~60m)	-	-	-	-	-	-	-	-	-	no Street View
+22	rd-3079cryq	22 Lagos-Ikorodu Rd Oct2019	-	tar_worn	none	raised_pavement	raised_pavement	-	-	-	-	motorway: BRT lane behind low concrete kerbs, grass strip, service road, danfos, bus shelter, lamp posts
+23	rd-3079cryq	none	-	-	-	-	-	-	-	-	-	no Street View
+24	rd-3079cryq	52 Ikorodu-Igbobi Rd Oct2019	-	tar_worn	edges	raised_pavement	raised_pavement	-	-	-	-	motorway: BRT lane with low concrete divider, ped bridge, parked cars on service side, billboard
+25	rd-3079cryq	117 Bayo Shodipo Jun2021	-	tar_worn	none	painted_bw	painted_bw	-	-	grass:3	grass:3	motorway: black-white painted kerbs, grass+palms in median, BRT bus
+26	rd-3079cryq	Bayo Shodipo Jun2021	-	tar_worn	none	raised_pavement	raised_pavement	-	-	-	-	motorway: BRT stop with blue canopy, fences, ped bridge
+27	rd-30966k78	Obele Rd Jul2021 (view across)	6	earth	full	none	none	-	-	earth:2	earth:2	zinc kiosks, plank stalls, rubbish, okada, raised concrete steps
+28	rd-30weiws7	Dosumu Rd Jul2021	7	tar_worn	edges	none	none	-	-	earth:2	concrete_apron:1.5	L long white boundary wall, heaps of used tyres, rubble; R zinc kiosks and shacks
+29	rd-30weiws7	29 Michael Ogun St Jul2021	7	tar_worn	edges	none	none	-	-	earth:1.5	earth:1.5	L long rendered boundary wall with piers; R breeze-band compound walls, black sheet gates; lamp post, lorry
+30	rd-30weiws7	Itire St Jul2021	9	tar_worn	edges	drain_wall	none	slab_covered	-	concrete_apron:2	earth:2	L shop row on raised platform, okadas; R stalls under shade trees, cars; palm
+31	rd-32ty8fh6	11 Akorohunfayo St Jul2021	6	tar_worn	edges	none	none	-	-	earth:1	concrete_apron:1	L block wall with razor wire; R steel railing fence, sheet gate; petrol station ahead
+32	rd-340okaz6	none	-	-	-	-	-	-	-	-	-	no Street View
+33	rd-345rcotj	48 Martins St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:1.5	concrete_apron:1	L 4-st blocks behind steel fences, kiosk; R railings, cars parked
+34	rd-345rcotj	none	-	-	-	-	-	-	-	-	-	no Street View
+35	rd-353wkzd5	16 Olayiwola Liasu St Jul2021	7	sand	full	none	drain_wall	-	open_concrete	earth:1	concrete_apron:1	L 2-st blocks, low wall; R open drain with slab crossings, kiosks, fridge stall; cars
+36	rd-353wkzd5	21 Sadiku St Jul2021	6.5	sand	full	none	drain_wall	-	open_concrete	earth:1	earth:1	L low compound wall, gates, cars parked; R open drain at house fronts, steel gates
+37	rd-353wkzd5	18 Sadiku St Jul2021	7	sand	full	drain_wall	none	slab_covered	-	concrete_apron:1.5	earth:2	L sheet gate, rendered wall, drain slabs with holes; R market sheds, umbrella, kekes, cars; many poles
+38	rd-364h94tc	none	-	-	-	-	-	-	-	-	-	no Street View
+39	rd-39eedx9o	3 Adefuwa St Jul2021	8	sand	full	none	none	-	-	earth:2	earth:2	L plank kiosk under tarp, fence, big shade tree; R sheet gates, zinc fence, 4-st block behind
+40	rd-3bmlmvqc	89 Ogunmokun St Jul2021	8	tar_worn	edges	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:2	concrete_apron:1.5	shop rows both sides, stalls, slab crossings, kekes, danfo, head-load seller
+41	rd-3bmlmvqc	Lagos (flyover side) Mar2024	7	tar_worn	edges	painted_bw	none	-	-	earth:3	-	L sand verge, bench, shops; R tall concrete flyover wall, people sitting at its foot
+42	rd-3c3x0ks3	43 Aborishade Rd Jul2021	7	earth	full	none	drain_wall	-	open_concrete	concrete_apron:1.5	concrete_apron:1	ruts; L zinc shacks, timber pole; R low drain wall, 2-3 st blocks; cars
+43	rd-3c3x0ks3	32 Aborishade Rd Jul2021	8	tar_worn	edges	drain_wall	drain_wall	slab_covered	open_concrete	concrete_apron:2	concrete_apron:2	L shop stalls on raised platform; R lock-up shops, posters; kekes, okada, lamp post
+44	rd-3g52z5ck	108 Olateju St Jul2021	9	tar_worn	edges	none	drain_wall	-	slab_covered	earth:2	concrete_apron:2	L shop row with stalls, umbrellas, tarps; R 2-st row, plank stalls, cars both sides, leaning pole
+45	rd-3g52z5ck	74 Olateju St Jul2021	9	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:1	concrete_apron:1.5	L compound wall with steel railings, gates; R red low wall, 3-st with balconies, kekes
+46	rd-3g52z5ck	42 Olateju St Jul2021	9	tar_worn	edges	drain_wall	drain_wall	open_concrete	slab_covered	concrete_apron:1.5	concrete_apron:2	L bungalows, blue shutters; R lock-up shops with breeze-block balcony above, tables; mast, poles
+47	rd-3g52z5ck	10 Olateju St Jul2021	9	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:1.5	earth:2	L container shop, plank kiosks; R kekes parked, shade trees, kiosks; okadas
+48	rd-3glst27l	8 Adekunle St Jul2021	6	tar_worn	full	none	none	-	-	earth:2	earth:2	market lane: plank stalls, basins, drums, zinc lean-tos both sides
+49	rd-3glzzql1	44 Cole St Oct2019	6	tar_worn	edges	none	none	-	-	concrete_apron:1	concrete_apron:1	L 3-4 st blocks, posters on sheet gate; R rail fence, clothes stall; danfo, keke; pole cluster
+50	rd-3glzzql1	7 Cole St Oct2019	6	tar_worn	full	none	none	-	-	concrete_apron:1	earth:1	L white railing fence, scroll gate; R stalls with umbrellas, kiosks; cars
+51	rd-3ir5l1tj	11 Aborishade Rd Jul2021	7	tar_worn	full	none	drain_wall	-	slab_covered	earth:2	concrete_apron:1.5	L clothes stalls under tarps; R lock-up shops, zinc awnings; okadas
+52	rd-3m6drqc3	5 Akin Baruwa St Jul2021 (corner, view across)	7	earth	full	none	none	-	-	earth:2	earth:2	kiosk and fruit stall under a big shade tree, transformer on a pole, sheet gate, signboard
+53	rd-3rgiuuc4	none	-	-	-	-	-	-	-	-	-	no Street View
+54	rd-3ysvvjrs	none	-	-	-	-	-	-	-	-	-	no Street View
+55	rd-4553yz2m	Adeniyi St Jul2021	6	sand	full	none	none	-	-	earth:2	earth:2	L zinc lean-to stalls, basins; R pot seller, sheet gate, 3-st block with balconies; water tank
+56	rd-4a3m9gq5	17 Alafia St Mar2024	7	tar_worn	full	none	none	-	-	earth:1	interlock:2	L red steel gates, compound walls; R interlock apron with grate, 3-st block; danfo
+57	rd-4d9x8zni	52 Ayilara St Oct2019	7	tar_worn	edges	none	none	-	-	concrete_apron:1.5	concrete_apron:1	L shop row behind steel bars, R steel railing fence, 4-5 st blocks; pole cluster
+58	rd-4h8mnpoo	4 Kareem Agoro St Jul2021	7	sand	full	drain_wall	none	slab_covered	-	concrete_apron:1.5	earth:1.5	L shop row, gap in drain slabs; R bare block wall; parked car
+59	rd-4m50afsk	none	-	-	-	-	-	-	-	-	-	no Street View
+60	rd-524395x5	27 Ajegunle St Jul2021	6	tar_worn	full	none	none	-	-	concrete_apron:1.5	earth:1	L shop fronts with glass cases, red drums, chickens; R bare block wall, cars both sides
+61	rd-549qul9s	32 Oguntoye St Mar2024	6	sand	full	none	none	-	-	earth:1.5	concrete_apron:1	L black sheet gates, walls, palm; R shop fronts, danfo, keke; plank bench
+62	rd-56ovxs0k	2 Akanro St Jul2021 (junction)	8	tar_worn	edges	none	drain_wall	-	slab_covered	earth:1	concrete_apron:3	L red gates, compound wall, 4-st block; R green bungalow with concrete forecourt, okada
+63	rd-5d0hjnqv	none	-	-	-	-	-	-	-	-	-	no Street View
+64	rd-5f7exkiz	none	-	-	-	-	-	-	-	-	-	no Street View
+65	rd-5y1k9nk7	none	-	-	-	-	-	-	-	-	-	no Street View
+66	rd-5z414dfc	14 Odunaike St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:1	earth:2	L shops, kiosks, posters, cars; R painted school wall, big shade tree, lamp post
+67	rd-608fssnq	11 Babashola St Jul2021	6	tar_worn	edges	none	drain_wall	-	slab_covered	concrete_apron:1	concrete_apron:1.5	market: zinc lean-to stalls L, plank stalls R on platforms; cars; poles
+68	rd-67sg60rp	23 Haruna St Jul2021	6	sand	full	none	none	-	-	earth:2	concrete_apron:1	L zinc lean-to stalls heaped with goods, greens, tyre on roof; R shop row with signboards, plank stalls, tables
+69	rd-6bv2yosa	37 Olateju St Jul2021 (junction)	7	sand	full	drain_wall	drain_wall	slab_covered	slab_covered	concrete_apron:2	concrete_apron:2	3-st blocks with balconies, kiosks under umbrellas, push-cart man, pole cluster with transformer
+70	rd-6qjnbv9a	Ajeabo St Jul2021	6	sand	full	none	none	-	-	grass:3	earth:2	L dense bush and big trees over a wall; R long plank-and-zinc sheds; warehouse behind
+71	rd-6qjnbv9a	8 Ajebo Str Nov2016	7	earth	full	none	none	-	-	earth:2	earth:2	crowded with parked cars and danfos (mechanic yard), zinc sheds, warehouses behind
+72	rd-74ayh5is	51 Ogunmokun St Jul2021 (junction)	7	sand	full	drain_wall	none	slab_covered	-	concrete_apron:1.5	earth:1	sacks of goods heaped at the corner, push cart, 3-st blocks, shop awnings, van
+73	rd-76xj78h3	11 Bishop St Jul2021	9	tar_worn	edges	drain_wall	drain_wall	open_concrete	slab_covered	concrete_apron:1.5	interlock:2.5	L green bungalow, tall poles; R 3-st blocks, carved sheet gates, interlock forecourts; stalls ahead
+74	rd-76xj78h3	none	-	-	-	-	-	-	-	-	-	no Street View
+75	rd-76xj78h3	none	-	-	-	-	-	-	-	-	-	no Street View
+76	rd-771zvqoe	2 Olapido Sode St Jul2021	7	tar_worn	full	none	none	open_earth	-	earth:1.5	earth:2	market lane: timber stall tables and zinc-roof stall rows both sides, 3-st blocks behind
+77	rd-790or58e	none	-	-	-	-	-	-	-	-	-	no Street View
+78	rd-7g32eziy	17 Bello St May2024	7	tar_worn	edges	drain_wall	none	slab_covered	-	-	concrete_apron:1.5	L compound walls, parked cars, grated drain; R school (college) walls and sheet gates, small trees
+79	rd-7g32eziy	10 Adetula St Jul2021	7	tar_worn	edges	none	none	-	-	earth:1.5	earth:2.5	L sheet gates, zinc kiosk; R shop row with crate stacks, planks over drain, bikes; poles
+80	rd-7qnvm1jp	none	-	-	-	-	-	-	-	-	-	no Street View
+81	rd-7uajwuxt	17 Owokoniran St Jul2021	6	tar_worn	edges	none	none	-	-	concrete_apron:1.5	concrete_apron:1	L walls, murals, gates, parked danfo; R 2-3 st houses, zinc kiosk at wall
+82	rd-80nwmh8a	none	-	-	-	-	-	-	-	-	-	no Street View
+83	rd-80nwmh8a	Lagos Mar2024	7	tar_worn	edges	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1	concrete_apron:1.5	L rail gates, 4-st block; R zinc lock-up shops, parked bus; tall poles
+84	rd-81xgmq7j	35 Shyllon St Jul2021	7	tar_worn	edges	none	raised_pavement	-	slab_covered	concrete_apron:1.5	concrete_apron:2	L 3-4 st blocks, railing fences, parked cars; R steel railing, paved forecourt, office block
+85	rd-8beruwdd	none	-	-	-	-	-	-	-	-	-	no Street View
+86	rd-8crtp77o	6 Fasanya St Jul2021	6	sand	full	none	none	-	open_earth	-	earth:2	L parked van, bare-block shell; R clothes stall, timber table, planks over drain, 2-st houses, sagging wires
+87	rd-8hoarai5	none	-	-	-	-	-	-	-	-	-	no Street View
+88	rd-8mm4jnop	none	-	-	-	-	-	-	-	-	-	no Street View
+89	rd-8odjq68t	20 Oyewole St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	slab_covered	open_concrete	concrete_apron:2	concrete_apron:2.5	L yellow supermarket, poles with transformers; R red sheet gate, billboards, one big tree, water tanks
+90	rd-8odjq68t	20 Majolate St Jul2021	8	tar_worn	full	none	drain_wall	-	open_concrete	earth:2.5	concrete_apron:1	L fence, kiosk, 2-st; R plank crossings over drain, provision shops, 2-st houses; solar streetlight
+91	rd-8p3596pi	6 Ilora St Jul2021	6	sand	full	none	none	centre_channel	-	concrete_apron:3	concrete_apron:2	L rusty-roof bungalows on concrete aprons, blue zinc kiosk; R big carved gate, bungalows; rubble heaps
+92	rd-8rjr3ndf	none	-	-	-	-	-	-	-	-	-	no Street View
+93	rd-8rjr3ndf	none	-	-	-	-	-	-	-	-	-	no Street View
+94	rd-90g2sje2	81 Akanro St Jul2021	8	tar_worn	edges	drain_wall	drain_wall	slab_covered	open_concrete	earth:1	concrete_apron:1	L long compound wall, parked cars, keke; R rendered compound walls, sheet gates, 2-3 st, hand cart
+95	rd-90g2sje2	55 Akanro St Jul2021	9	tar_worn	none	painted_bw	painted_bw	open_concrete	open_concrete	concrete_apron:1.5	concrete_apron:2	L billboards, 3-st blocks; R Baptist church with walls and railings, hedge; painted kerbs, zebra crossing
+96	rd-90g2sje2	48 Akanro St Jul2021	9	tar_worn	edges	none	none	open_earth	-	earth:3	earth:2	L 2-st houses, earth shoulder, parked cars; R timber and furniture workshop stalls under zinc, crate stacks
+97	rd-90g2sje2	16 Akanro St Jul2021	9	tar_worn	none	none	drain_wall	-	open_concrete	earth:2	concrete_apron:2	L stall with snacks, umbrella, traders seated; R compound walls with painted numbers, 2-st houses, water tank
+98	rd-96wuk9tz	Omoniyi St Jul2021	7	interlock	edges	none	none	slab_covered	-	interlock:3	interlock:1	market street: L stalls, umbrellas, bare yard; R arcaded 3-st shop block, parked danfos, traders' goods
+99	rd-97wkrkzt	none	-	-	-	-	-	-	-	-	-	no Street View
+100	rd-98o0vo6c	none	-	-	-	-	-	-	-	-	-	no Street View
+101	rd-98o0vo6c	30 Olorunsogo St Jul2021	7	tar_worn	full	none	none	-	-	earth:2	earth:2	L rusty-roof sheds, parked cars, bus; R plank-and-zinc kiosks under a 3-st block, traders; poles with transformer
+102	rd-98o0vo6c	Muibi St Jul2021	6	sand	full	none	none	open_earth	open_earth	concrete_apron:2	concrete_apron:2	market lane: L timber stalls, planks over drain; R grated shopfronts, crates, tables; tall poles
+103	rd-99r8996c	38 Fatai Atere Way Mar2024	9	tar_worn	edges	none	drain_wall	-	slab_covered	earth:3	concrete_apron:4	L blue-sheet warehouse walls; R bank with railings, flags, paved forecourt; keke; streetlights
+104	rd-9c0gondv	none	-	-	-	-	-	-	-	-	-	no Street View
+105	rd-9eb5vovf	3 Labinjo Ct Dec2016	-	-	-	-	-	-	-	-	-	pano faces a row of blue and plank zinc kiosks under a 3-st block; road not seen
+106	rd-9g6edwp4	30 Ojo St Jul2021	6	sand	full	none	none	-	-	concrete_apron:1.5	earth:3	L 3-st house, water tank, keke and okada; R long tarp-roof market stall row on timber posts; poles
+107	rd-9ho3snky	none	-	-	-	-	-	-	-	-	-	no Street View
+108	rd-9o8evlkl	10 Omowunmi St Mar2024	7	sand	full	none	none	-	-	concrete_apron:2.5	earth:2	L 3-st blocks, sheet gates, okada; R 2-st houses, water tanks on stands, tarp kiosk; parked cars
+109	rd-9o8evlkl	40 Isolo Rd Mar2024	10	tar_worn	edges	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1.5	concrete_apron:1.5	pano on Isolo Rd: L grated shopfronts, kekes, parked cars; R long rendered compound wall, steel frames, streetlights
+110	rd-9wkc2te6	none	-	-	-	-	-	-	-	-	-	no Street View
+111	rd-9wkc2te6	12 Adebesin St Jul2021	7	tar_worn	edges	none	none	open_earth	-	earth:2	earth:2	L timber stall under zinc lean-to, buckets, trader; R parked pick-up, compound walls, 2-st houses; poles
+112	rd-9wkc2te6	74 Coker St Jul2021	8	tar_worn	edges	none	drain_wall	-	open_concrete	earth:2.5	concrete_apron:1.5	L umbrella stall, okadas, tricycle cart; R blue shop-under-flat, grated shop, loaded tricycle; poles
+113	rd-aa7ee22h	none	-	-	-	-	-	-	-	-	-	no Street View
+114	rd-afuo4fxw	23 Bello St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	slab_covered	open_concrete	earth:1.5	earth:1.5	L rusty-roof bungalow, barred windows; R zinc kiosks, slab crossings, palm; tall poles, a car
+115	rd-aqj6lgu3	4 Itire St Jul2021	9	tar_worn	edges	none	none	-	-	earth:2.5	earth:2	L zinc-roof plank shop row; R parked cars and danfo, zinc kiosks, fenced compound; tall poles
+116	rd-aqj6lgu3	45 Itire St Jul2021	8	tar_worn	full	none	none	-	open_earth	earth:2	earth:3	L 2-st with balcony, parked van and danfo; R timber-post zinc shelters, umbrella stalls, rusty-roof bungalows
+117	rd-aqj6lgu3	83 Itire St Jul2021	9	tar_worn	full	none	none	-	open_earth	earth:2	earth:3	L red Mosque-front shops, plank kiosks; R zinc-roof shop row, slab crossings, okada; tall poles, many wires
+118	rd-aqj6lgu3	119 Itire St Jul2021	8	tar_worn	edges	none	none	open_concrete	-	concrete_apron:2	grass:2	L lock-up shops, blue shutters, slab crossings; R long painted compound wall with murals, grass strip; danfo
+119	rd-aqj6lgu3	149 Itire St Mar2024	8	tar_worn	full	none	none	open_concrete	-	earth:2	earth:1	L open market stalls under zinc on timber; R 3-st block wall, row of parked danfos; trees, poles
+120	rd-aqj6lgu3	183 Itire St Jul2021	9	tar_worn	edges	drain_wall	none	open_concrete	open_earth	concrete_apron:2	earth:2.5	L grated fences, 2-3 st; R 3-st block, stalls with umbrellas, tyre heap, rubbish; poles
+121	rd-avaupyki	7 Bayo Shodipo Nov2015	11	tar_worn	none	none	none	-	-	-	-	flyover deck with concrete parapets both sides, bus and danfo; Ikorodu Rd below with park and market
+122	rd-avaupyki	92 Alagbede-Igbobi Rd Jul2021	10	tar_worn	none	painted_bw	painted_bw	-	-	earth:3	grass:3	at-grade carriageway beside flyover: L walls, parked cars; R grass median with painted kerb, lorry
+123	rd-avaupyki	Alagbede-Igbobi Rd Oct2019	8	tar_worn	none	none	none	-	-	-	-	flyover deck one direction, concrete parapets, streetlights; side road and compounds below
+124	rd-avjtnca0	12 Ifelodun St Apr2024	6	tar_worn	edges	none	none	open_concrete	-	concrete_apron:2	earth:1.5	L food stall (tomato trays), 2-3 st blocks, walls; R container shop, parked cars, 2-st; poles
+125	rd-b0xmuid5	24 Kayode St Mar2024	7	tar_worn	full	none	painted_bw	-	-	earth:3	-	pano ~40 m off: L low block wall, bare earth strip, 2-st houses; painted kerb on far side; poles
+126	rd-b9jn4qv9	Omu St Jul2021	6	tar_worn	edges	none	none	-	-	-	earth:2	L rusty truck body, parked cars; R plank and block kiosks, zinc shed, danfo; palms
+127	rd-b9jn4qv9	40 Olushoga St Mar2024	6	sand	full	none	none	open_earth	-	earth:1.5	earth:3	party canopy and plastic chairs on road; L patterned breeze-block wall, gate; R rusty-roof bungalows
+128	rd-b9jn4qv9	23 Olushoga St Jul2021	9	sand	full	none	none	-	-	earth:3	earth:3	junction: L stalls, okadas, tyres; R 4-st shell block, orange tarp stall; rubble; poles
+129	rd-b9jn4qv9	none	-	-	-	-	-	-	-	-	-	no Street View
+130	rd-bg3ujvct	none	-	-	-	-	-	-	-	-	-	no Street View
+131	rd-blho77vn	none	-	-	-	-	-	-	-	-	-	no Street View
+132	rd-bm7zt6yx	none	-	-	-	-	-	-	-	-	-	no Street View
+133	rd-bqhbzj4y	32 Ojerinde St Jul2021	6	sand	full	none	none	open_earth	-	grass:2	earth:2	L bare-block shells, weeds, big trees, okadas; R crate-stacked provision shops, sacks, zinc lean-tos
+134	rd-c5n44yad	none	-	-	-	-	-	-	-	-	-	no Street View
+135	rd-c666dphk	none	-	-	-	-	-	-	-	-	-	no Street View
+136	rd-c6x0jntc	none	-	-	-	-	-	-	-	-	-	no Street View
+137	rd-c77w49vw	25 Ilasamaja Rd Jul2021	6	sand	full	none	none	-	-	grass:1.5	grass:1.5	L long compound wall, big tree, 3-st block; R parked trailer lorry, palms, bush; sand road
+138	rd-c77w49vw	16 Olarewaju St Jul2021	-	sand	full	none	none	-	-	earth:3	earth:3	pano looks at a junction: 2-st houses with balconies, zinc kiosk, parked cars, rubble; sides unsure
+139	rd-ca5m65kw	none	-	-	-	-	-	-	-	-	-	no Street View
+140	rd-ca5m65kw	Lagos Jul2021	7	tar_worn	full	none	none	open_earth	-	earth:3	concrete_apron:2	L zinc-roof plank stall rows, traders; R 3-st shop-under-flats with balconies, umbrella stall, signs; potholes; tall poles
+141	rd-cb2h4xa5	Isolo Rd Mar2024	14	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:3	earth:3	MEDIAN=low_concrete; L long market shed roof on steel, fenced; R parked container trucks and lorries; streetlights
+142	rd-cb2h4xa5	141 Isolo Rd Mar2024	16	tar_worn	none	none	raised_pavement	-	slab_covered	concrete_apron:2	concrete_apron:3	MEDIAN=jersey; L 3-st blocks, low wall; R 4-st block, railings, parked jeep; streetlights, gantry sign
+143	rd-cb2h4xa5	122 Isolo Rd Mar2024	16	tar_worn	edges	raised_pavement	none	open_concrete	-	concrete_apron:3	-	MEDIAN=jersey; L shopfronts with goods, tarp; R 4-st blocks; keke, danfos, traffic light
+144	rd-cb2h4xa5	96 Isolo Rd Mar2024	15	tar_worn	none	raised_pavement	none	-	-	concrete_apron:2.5	-	MEDIAN=jersey; L phone shops, 3-st block; R market shed, traders on median; kekes; mast
+145	rd-cb2h4xa5	74 Isolo Rd Mar2024	15	tar_worn	edges	none	none	-	-	earth:4	-	MEDIAN=jersey; L rusty-roof sheds, water tanks; R filling station, parked cars; tall poles
+146	rd-cb2h4xa5	41 Isolo Rd Mar2024	15	tar_worn	none	none	raised_pavement	-	slab_covered	-	concrete_apron:2	MEDIAN=jersey; L danfo rank on far side; R shop-under-flats, washing on balconies, parked cars
+147	rd-cb2h4xa5	14 Isolo Rd Jul2021	14	tar_worn	full	none	raised_pavement	-	open_concrete	earth:4	concrete_apron:2	MEDIAN=jersey; L umbrella market stalls on the carriageway edge; R 2-st shop arcade, danfo rank; streetlights
+148	rd-cbrqj76p	5 Alh. Akinwunmi St Jul2021	11	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:2	earth:3	market: L long market hall, tarp-covered stalls, pallets; R heaped goods, umbrellas, traders; streetlights, mast
+149	rd-cc9tth8j	24 Ashofihan St Jul2021	6	tar_worn	edges	none	none	-	-	concrete_apron:1.5	earth:2	L 2-st with balcony, water tanks on stand, walls; R 2-st red house, clothes rack stall, washing; parked cars
+150	rd-cfhigpz4	none	-	-	-	-	-	-	-	-	-	no Street View
+151	rd-cjk9hvop	110 Apapa Oworonshoki Expy Nov2015	22	tar_worn	edges	none	none	-	-	-	earth:6	MEDIAN=jersey; expressway: far carriageway beyond barrier, earth shoulder with parked vans, low sheds, streetlights
+152	rd-cpn887is	none	-	-	-	-	-	-	-	-	-	no Street View
+153	rd-cq1ohmmi	none	-	-	-	-	-	-	-	-	-	no Street View
+154	rd-cr6a2j9l	none	-	-	-	-	-	-	-	-	-	no Street View
+155	rd-cvnc099q	18 Mumuni St Jul2021	-	earth	full	none	none	open_earth	-	-	-	pano looks across at a 2-st shop-under-flat: crate-stacked provision stalls under zinc, plank decking over drain
+156	rd-d2h8std9	10 Opeloyeru St Jul2021	6	tar_worn	edges	none	drain_wall	-	open_concrete	earth:1.5	concrete_apron:1	L 2-st houses, low walls; R bare-block compound wall, 2-st house with balcony railings; poles
+157	rd-d4z92y9r	20 Dada Iyalode St Dec2016	6	earth	full	none	none	open_earth	open_earth	earth:3	earth:3	market: zinc-roof timber stall rows both sides, blue long-span sheds, 3-4 st blocks behind, washing; poles
+158	rd-d7mpoq41	18 Oyekanmi St Jul2021	6	earth	full	none	none	open_concrete	open_earth	earth:2	earth:2	rubble-lined earth road; L plank shacks, zinc lean-tos, open drain; R mosque domes behind, stall with buckets, tarp
+159	rd-d929n8kd	47 Ogungbaiye St Dec2016	6	sand	full	none	none	-	open_earth	earth:2	earth:3	L rendered walls, blue kiosk, umbrella; R rusty-roof stall sheds, buckets; solar streetlight; poles
+160	rd-d929n8kd	13 Ogungbaiye St Jul2021	8	sand	full	none	none	-	-	earth:2.5	earth:3	L rusty zinc shacks, tyres; R umbrella stalls, tables, 2-st houses; transformer pole; parked jeep
+161	rd-d929n8kd	20 Martins St Jul2021	7	tar_worn	edges	none	drain_wall	-	slab_covered	earth:2	concrete_apron:2	L crate stacks, parked car, 2-st; R 3-st shop-under-flats with balconies, drum, timber stalls; streetlight
+162	rd-d929n8kd	49 Labinjo St Jul2021	5	tar_worn	full	none	none	-	-	grass:1	grass:1	between two long block compound walls, weeds at foot; 2-st houses ahead
+163	rd-d9ib0rdk	none	-	-	-	-	-	-	-	-	-	pano snapped ~65 m away to Itire St; counted as none
+164	rd-dboedcs1	5 Awanatu St Mar2024	7	sand	full	none	none	open_earth	-	earth:2	earth:2.5	L lock-up shops under eaves, parked jeep; R 4-st block under scaffold, timber stall, kiosks; trees, poles
+165	rd-dla5ljj1	44 Alfa Nda St Apr2024	8	sand	full	none	none	-	-	concrete_apron:2	earth:3	L 3-st with breeze-block balconies, drums, stalls; R zinc-roof shop row, tree, kiosks; poles
+166	rd-dla5ljj1	19 Alfa Nda St Apr2024	6	tar_worn	full	none	none	-	-	concrete_apron:2	earth:2	L drums, stalls, umbrellas, parked cars both sides; R walls, 2-st, yellow 3-st block; poles
+167	rd-dn9auxmx	115 Palm Avenue Jul2021	8	tar_worn	edges	drain_wall	drain_wall	slab_covered	open_concrete	concrete_apron:1.5	earth:2	L red sheet fence and gate, lean-to; R tarp-covered stall, 4-st block, kekes; poles, streetlight
+168	rd-dn9auxmx	none	-	-	-	-	-	-	-	-	-	no Street View
+169	rd-dnrpnn94	none	-	-	-	-	-	-	-	-	-	no Street View
+170	rd-eahkl6c0	7 Alhaji Lasisi St Dec2016	7	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:2	concrete_apron:1	L stall rows, timber tables, tyre, pick-up; R painted 2-3 st (blue, green), slab crossings, hawker; mast
+171	rd-ed2dooh3	10 Akodu St Jul2021	7	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:1	earth:2	L pink bungalows behind red railing walls; R 2-3 st, breeze-block wall, sacks, parked cars; palms
+172	rd-ed6egqst	7 Abiodun St Jul2021	7	tar_worn	edges	drain_wall	none	slab_covered	-	concrete_apron:2.5	earth:3	L 3-st shop-under-flats, clothes racks, blue awnings; R 3-st shops, cable coil, tarp stall; parked cars
+173	rd-emgqj1wh	none	-	-	-	-	-	-	-	-	-	no Street View
+174	rd-emmu81lr	none	-	-	-	-	-	-	-	-	-	no Street View
+175	rd-eoffh636	6 Imoru St Jul2021	6	tar_worn	edges	none	painted_bw	open_earth	-	earth:1.5	concrete_apron:1	L plank-and-zinc shacks, umbrella, okadas; R red and white gateposts, painted kerb, school-like wall; poles
+176	rd-ep3ddbio	Rd 1 Nov2015	5	tar_worn	none	none	none	-	-	grass:6	grass:3	hospital campus road (LUTH): L 3-st ward block, lawn, trees; R 3-st staff flats, parked cars on grass, hedge
+177	rd-esu3rasg	none	-	-	-	-	-	-	-	-	-	no Street View
+178	rd-f0cw4h6z	21 Oziegbe Street Jul2021	6	tar_worn	edges	none	none	-	-	earth:1.5	earth:2	L bungalow, green-painted wall, parked jeep; R green-canopy kiosk, stalls, 2-3 st; mast, poles
+179	rd-f4ggg0x2	none	-	-	-	-	-	-	-	-	-	no Street View
+180	rd-f5ms4r2b	none	-	-	-	-	-	-	-	-	-	no Street View
+181	rd-f6n5u0g1	30 Tadeyo St Dec2016	-	tar_worn	edges	none	none	-	-	concrete_apron:2	-	pano looks across at a 3-st block behind a railing wall and green steel gate, kiosk, ladder; parked cars; sides unsure
+182	rd-f6q1n1wy	8 Fasanya St Dec2016	-	sand	full	none	none	open_earth	-	earth:3	-	pano looks across: rusty zinc kiosk with hanging goods, umbrella stalls, tables; 3-st blocks behind; sides unsure
+183	rd-f782px4g	47 Ogunmokun St Jul2021	8	tar_worn	edges	none	none	-	open_concrete	concrete_apron:2	earth:3	L 3-st shop-under-flats, glass kiosk, awnings; R umbrella stalls, drums, cooking pots, rusty roofs; danfos
+184	rd-fb96tfq9	24 Church St Mar2024	6	tar_worn	edges	none	none	-	-	earth:1.5	concrete_apron:1.5	L bungalows with satellite dish, parked cars; R 3-st stone-tiled block, shop, tyre; poles
+185	rd-fb96tfq9	3 Church St Mar2024	7	sand	full	none	none	-	open_earth	earth:2	earth:2	L long bare-block wall, bungalows; R zinc shacks, tarp, 2-st; mast; poles
+186	rd-ffpzwd6r	18 Omobola St Jul2021	9	sand	full	none	none	-	-	earth:4	earth:3	L timber planks heap, rusty-roof bungalows, kiosk; R rusty-roof shop row on posts; mast; poles
+187	rd-ffpzwd6r	35 Omobola St Jul2021	9	tar_worn	full	none	none	slab_covered	-	concrete_apron:2	concrete_apron:2	pano ~40 m off: L carved sheet gate, parked cars, van; R shop row, many parked cars; poles
+188	rd-fh7ahv9d	6 Oyegbola Street Jul2021	-	earth	full	none	none	-	-	earth:3	-	pano looks across: railing fence hung with clothes for sale, parked cars on earth, red container; sides unsure
+189	rd-fmvbnpr3	none	-	-	-	-	-	-	-	-	-	no Street View
+190	rd-fmvbnpr3	18 Owhin St Jul2021	7	sand	full	none	none	open_concrete	-	earth:2	earth:2	L railing fence, open drain with slab steps, kiosks, okadas; R red 4-st factory block, bare-block wall, parked cars; poles
+191	rd-fmvbnpr3	44 Oliyide St Mar2024	6	tar_worn	edges	none	none	-	-	earth:1.5	concrete_apron:1.5	L long yellow compound wall, water tank stand; R 3-st shop-under-flats, palms; parked cars
+192	rd-fmvbnpr3	5 Alokolaro Cres Mar2024	8	tar_worn	edges	none	none	-	open_concrete	concrete_apron:1.5	concrete_apron:2	L 2-3 st houses, railing, bins; R zinc shop row with ladders, slab crossings; parked cars
+193	rd-fotehnel	none	-	-	-	-	-	-	-	-	-	no Street View
+194	rd-fp25sdd6	40 Durojaiye St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	-	-	concrete_apron:1	concrete_apron:1.5	L razor-wire compound wall; R lock-up shops with shutters, bungalows; streetlight
+195	rd-fp25sdd6	10 Adebayo Street Jul2021	-	tar_worn	edges	none	none	-	-	earth:2	-	pano ~40 m off, looks across at 3-st houses, bare-block wall, tyre; sides unsure
+196	rd-fxei4ynh	1 Dada St Dec2016	6	sand	full	none	none	-	-	earth:3	earth:2	furniture lane: painted cabinets and shelves for sale on the road both sides; L rusty zinc workshop sheds; R block wall, signboard, 2-st
+197	rd-gb8kkto3	12 Ik Dairo St Jul2021	6	tar_worn	full	none	none	-	-	concrete_apron:2	earth:2	L shuttered shops, cement bags, stall; R metal workshops, steel boxes and gates for sale, zinc lean-tos; parked cars
+198	rd-gj6642yg	19 Oremeji St Jul2021	7	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:2	earth:1	L barred shopfronts under eaves, slab steps; R long drain with wall, rusty zinc shacks, green kiosk; pylon
+199	rd-gj6642yg	18 Ayuba Dawodu St Apr2024	6	tar_worn	full	none	none	-	-	concrete_apron:1.5	concrete_apron:1.5	L banner on wall, 2-st; R red sheet fence, 2-st with balustrade balcony; poles
+200	rd-gjzqjyr2	none	-	-	-	-	-	-	-	-	-	no Street View
+201	rd-gjzqjyr2	none	-	-	-	-	-	-	-	-	-	no Street View
+202	rd-gqsv49g9	45 Buari St Mar2024	8	sand	full	none	none	-	-	earth:3	concrete_apron:2	L zinc fences, sand and gravel heaps, scaffolded 3-st; R 3-4 st shop-under-flats, parked car, danfo; poles
+203	rd-gqsv49g9	16 Buari St Mar2024	8	tar_worn	full	none	none	-	-	earth:3	earth:2	L keke rank, stall sheds, 2-st with balconies; R 2-st houses, railing walls, parked cars; poles
+204	rd-gtkm5cxg	24 Fagbenro St Jul2021	6	tar_worn	edges	none	none	-	-	grass:1	concrete_apron:1.5	L long old block wall with razor wire (LUTH side); R 3-st block with blue railings, kiosks, timber stall; poles
+205	rd-gxcqgoq3	none	-	-	-	-	-	-	-	-	-	no Street View
+206	rd-h0a9i5fg	41 Ayonuga St Jul2021	-	sand	full	none	none	-	-	earth:3	-	pano looks across: umbrella stall, plastic tables, telecom mast, 2-st white house behind gate and shrubs; sides unsure
+207	rd-h0p4xdbd	21 Tadeyo St Jul2021	6	tar_worn	edges	drain_wall	none	open_concrete	-	-	concrete_apron:1	L long painted school wall, big shade tree, open drain; R 3-st block with washing, parked cars, van; poles
+208	rd-h0p4xdbd	none	-	-	-	-	-	-	-	-	-	no Street View
+209	rd-h1lgtwi5	none	-	-	-	-	-	-	-	-	-	no Street View
+210	rd-h8120zyk	4 Sosanya St Jul2021	5	tar_worn	edges	none	drain_wall	-	open_concrete	earth:1.5	concrete_apron:1	L bare-block walls, 3-st shell; R blue tarp kiosks, firewood, 2-st with washing; poles
+211	rd-habxxo75	40 Haruna St Jul2021	7	sand	full	none	none	-	-	earth:3	earth:3	market lane: L drinks stall, umbrellas, kiosk; R canopy stalls, tables, sacks, transformer pole; 2-3 st behind
+212	rd-hjh48h6m	3 Alafia St Mar2024	9	sand	full	none	none	-	-	earth:3	concrete_apron:2	L 2-st houses, umbrella stalls, parked jeep; R 4-st block with railing fence, keke; okadas; poles
+213	rd-hnz8n85y	none	-	-	-	-	-	-	-	-	-	no Street View
+214	rd-ht4h23eq	2 Bankole St Jul2021	6	tar_worn	edges	drain_wall	none	open_concrete	-	earth:2	concrete_apron:1	L rusty-roof bungalows, low drain wall; R 2-3 st with washing, parked cars; many wires
+215	rd-htzfpp2k	none	-	-	-	-	-	-	-	-	-	no Street View
+216	rd-htzqbqr8	116 Access Rd Dec2016	9	tar_worn	edges	none	none	-	-	concrete_apron:2	concrete_apron:2	L gateposts, auto-parts yard, parked jeeps; R market hall with rusty roof, umbrella stall, sheet gates; poles
+217	rd-htzqbqr8	79 Palm Avenue Jul2021	9	tar_worn	edges	none	drain_wall	-	open_concrete	-	concrete_apron:2	L danfo, filling-station canopy, 3-st blocks; R 4-st shop-under-flats, goods stall, cooking pots, planks; palms
+218	rd-htzqbqr8	84 Ladipo St Jul2021	10	tar_worn	full	none	none	-	-	earth:3	grass:2	L long white wall, cable coils; R 3-st shop-under-flats, keke rank, umbrella stalls; police jeep; poles
+219	rd-htzqbqr8	13 Palm Avenue Jul2021	10	tar_worn	full	none	none	-	-	earth:3	earth:3	L 3-st, tile stacks for sale, keke; R timber workshop, parked cars; lots of traffic; poles
+220	rd-htzqbqr8	2 Palm Avenue Mar2024	10	tar_worn	full	raised_pavement	none	-	-	concrete_apron:2	earth:3	L shuttered shops, orange storefront, stalls on pavement; R long fenced commercial block with railings, parked danfo; poles
+221	rd-htzqbqr8	12 Oyo St Jul2021	9	sand	full	none	none	-	-	earth:3	earth:2	L 2-st with balcony, umbrella stall, signboards, parked cars; R long green 3-st terrace, parked van; poles
+222	rd-htzqbqr8	none	-	-	-	-	-	-	-	-	-	no Street View
+223	rd-hvwdw3gi	20 Oguntoye St Mar2024	-	earth	full	none	none	-	-	earth:3	earth:3	pano at a market junction: umbrella and tarp stalls, timber tables, 3-st shop blocks; sides unsure
+224	rd-hvwdw3gi	11 Dakobiri St Jul2021	-	earth	full	none	none	-	-	earth:3	-	pano looks across: zinc-roofed timber stall front, drums, crates, umbrella goods table; sides unsure
+225	rd-hzvl6lf5	2 Daniel St Jul2021	7	earth	full	none	none	open_earth	-	earth:2	earth:3	L timber shacks, wheelbarrow, tarp; R umbrella food stalls, glass case, traders; potholed; 2-3 st behind
+226	rd-i10tsslu	Esther Dada Wy Jul2021	6	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:1	grass:0.5	L red railing gate, 2-st red block, awning; R old stone-block wall with hedge on top; trees
+227	rd-i3tv1gvr	none	-	-	-	-	-	-	-	-	-	no Street View
+228	rd-i4klmw3w	208 Lagos Ikorodu Expy Oct2019	9	tar_worn	none	none	none	-	-	-	-	flyover deck one direction, concrete parapets, streetlights; other deck beside; below L long zinc-roofed sheds (market/park), palms
+229	rd-i4klmw3w	Lagos Ikorodu Expy Oct2019	9	tar_worn	none	none	none	-	-	-	-	flyover deck one direction, concrete parapets; below R service road with umbrella stalls, keke, traders, 2-3 st blocks
+230	rd-i9d8jkyo	8 Shobayo St Jul2021	7	tar_worn	full	none	none	-	-	earth:2	earth:2	potholed sandy worn tar; cars parked both sides; L 2-3 st balconied blocks with block fences; R palms, bush, walls; poles and wires
+231	rd-ihiofwck	none	-	-	-	-	-	-	-	-	-	-	no Street View
+232	rd-ii9itgbq	15 Ogunjobi St Jul2021	6	tar_worn	edges	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1.5	concrete_apron:1	L slab bridges over drain, plank stall with goods, 1-st bungalows; R 3-st block with balconies, iron railing fence, sacks piled; keke, cars, poles and wires
+233	rd-iro9fmv2	11 Olafimihan St Jul2021	7	sand	full	drain_wall	none	slab_covered	-	concrete_apron:1.5	earth:3	L block wall with barbed wire, signboard, gate, drums; R zinc-roofed open shed, tables, car, 2-st blocks; poles and wires
+234	rd-ius2ua2s	10 Alhaji Lasisi St Dec2019	8	sand	full	none	drain_wall	-	open_concrete	earth:3	concrete_apron:1	L zinc-roofed 1-st rows, umbrella, cart with gas, danfo; R telecom mast behind wall, 3-st block, painted fence; yellow taxis, traders
+235	rd-ixprqj8g	34 Martins St Jul2021	8	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:2	market street: L 2-st with zinc shop awnings, iron grille stalls; R shop fronts, blue tarps, motorbikes, stalls; streetlights
+236	rd-iz10prdy	17 Kekereowo St Jul2021	8	sand	full	none	none	-	-	earth:3	concrete_apron:2	open sandy junction: L old 2-st with low wall, palms, umbrella; R umbrella kiosk on concrete apron, timber shed, 2-st balconied, parked cars
+237	rd-j54ymnoy	none	-	-	-	-	-	-	-	-	-	-	no Street View
+238	rd-j817mtxs	35 Omobola St Jul2021	8	tar_worn	full	none	none	-	-	earth:1	earth:2	pano ~29 m off; cars parked both sides; L 2-st houses, telecom mast; R 2-st white office, black wall with Post No Bill, painted fence; poles and wires
+239	rd-j817mtxs	26 Olufowobi St Dec2019	7	earth	full	drain_wall	none	open_earth	-	concrete_apron:1	earth:2	L block walls, slab steps over drain, motorbike, carts; R 1-st zinc-roofed bungalows, low walls, cars and bus parked; 3-4 st blocks behind; poles and wires
+240	rd-j8goyo7h	none	-	-	-	-	-	-	-	-	-	-	no Street View
+241	rd-jaf53pf0	none	-	-	-	-	-	-	-	-	-	-	no Street View
+242	rd-jaf53pf0	none	-	-	-	-	-	-	-	-	-	-	no Street View
+243	rd-jaf53pf0	none	-	-	-	-	-	-	-	-	-	-	no Street View
+244	rd-jb2o4e6d	11 Ajenifuja St Jul2021	6	tar_worn	edges	none	none	-	-	earth:1	concrete_apron:1	L long old block wall with posters, 1-st behind; R 2-st with balconies, streetlight on pole, shop awning, traders; cars parked both sides; wires
+245	rd-jc0mdz0x	42 Oba Ln Jul2021	6	sand	full	drain_wall	drain_wall	slab_covered	open_concrete	concrete_apron:1.5	concrete_apron:1	L zinc and timber kiosks with plank fronts, white tarp shacks; R 2-st shophouses with posters, blue awnings; cars parked R, okada
+246	rd-jc6sxw9f	10 Alayaki St Jul2021	7	earth	full	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:2	concrete_apron:1	L 2-st with benches and umbrellas, people sitting; R 3-st balconied, water tank, timber kiosk with ceramic pots on display; plank bridges; danfo, car
+247	rd-jcfqk5jf	none	-	-	-	-	-	-	-	-	-	-	no Street View
+248	rd-jq923w3v	40 Oloje St Mar2024	7	earth	full	none	none	-	-	earth:3	earth:3	L rusty zinc fences and timber gate, planks on ground; R 3-st white arched building, timber stalls with clothes, tarps; 3-st blue block across; open sandy
+249	rd-jxc6hu8b	33 Ayonuga St Jul2021	8	tar_worn	full	drain_wall	none	open_concrete	-	concrete_apron:1.5	earth:3	L white pillared fence with iron gate, tree, red 3-st with balconies; R market: umbrellas, tarps, goods on ground, sacks; poles with many wires
+250	rd-jxc6hu8b	12 Ayonuga St Jul2021	8	tar_worn	full	none	drain_wall	-	open_concrete	concrete_apron:2	concrete_apron:1	L 3-st balconied shophouses, blue tarp awning, stall; R green iron gates, low wall, open drain with slab bridges; danfo, people walking; streetlights
+251	rd-jz7sq90i	22 Ereko St Jul2021	6	tar_worn	full	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1	concrete_apron:1	L old 1-st with rusty zinc, timber shacks; R 2-st long block with balcony laundry; cars parked R; slab steps over drains; wires
+252	rd-k17bq15t	29 Adedoyin Rd Jul2021	7	tar_worn	edges	none	none	-	-	earth:2	earth:1	L old block wall with zinc gate, posters, rubbish heap, 2-st behind; R red zinc fence, 3-st block; cars parked R; poles with many wires
+253	rd-k2glzog0	46 Omosolape St Dec2019	5	earth	full	none	none	-	-	grass:4	grass:3	muddy rutted earth lane; L open grassy plot with roof frame being built, fence posts; R 2-st block, grassy plot, block walls; cars at end; wires
+254	rd-kfww6jfn	none	-	-	-	-	-	-	-	-	-	-	pano ~63 m off (looks across at green 4-st and demolition rubble); counted none
+255	rd-khhejacj	none	-	-	-	-	-	-	-	-	-	-	no Street View
+256	rd-khx710gd	Kugbuyi St Jul2021	8	tar_worn	edges	drain_wall	raised_pavement	open_concrete	slab_covered	concrete_apron:1.5	concrete_apron:2	L 2-st with zinc awning, low walls; R 4-st commercial with shop canopy, cars parked on apron; bus; poles with many wires
+257	rd-kjbrkrej	none	-	-	-	-	-	-	-	-	-	-	no Street View
+258	rd-kmzid1cy	none	-	-	-	-	-	-	-	-	-	-	pano ~69 m off on Layi Oyekanmi St; counted none
+259	rd-kmzid1cy	12 Da-Silva Ave Mar2024	8	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:2	L 3-st church-like with arched windows, timber stall; R long yellow compound wall with trees over it, pallets; cars parked both sides
+260	rd-kvh4h6jq	107 Ladipo St Jul2021	-	earth	full	none	none	-	-	-	-	pano ~23 m off, on Ladipo St at the lane mouth: potholed earth with puddles, rows of blue-painted timber and zinc market sheds (spare parts market), telecom mast, billboard; sides unsure
+261	rd-kvx590dw	43 Kekereowo St Apr2024	8	tar_worn	full	raised_pavement	drain_wall	slab_covered	open_concrete	concrete_apron:2	concrete_apron:1	L 3-st balconied blocks with grey iron gates, coloured fence pillars; R rusty zinc fence, 3-st block; danfo parked; streetlight
+262	rd-kvx590dw	17 Kekereowo St Jul2021	8	sand	full	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:1.5	concrete_apron:2	L long tan block wall, iron gate; R zinc shacks and stalls, umbrella, palms; sandy road; wires
+263	rd-kxa8hz1b	26 Lagos-Abeokuta Expy Mar2024	20	tar_worn	edges	painted_bw	none	-	-	earth:4	earth:3	MEDIAN=low_concrete (raised earth strip with kerb, poles in it); L 1-st red-roof shops, yellow walls; R tall trees, cars parked on earth verge, sweepers; streetlights in median
+264	rd-kxa8hz1b	56 Oshodi-Egba Rd Mar2024	20	tar_worn	edges	painted_bw	none	-	-	earth:2	grass:3	MEDIAN=low_concrete; traffic lights on gantry; L 3-st block with shops, cars parked; R 3-st blocks with balconies, grass verge, cars on apron; poles and wires
+265	rd-kxa8hz1b	none	-	-	-	-	-	-	-	-	-	-	no Street View
+266	rd-kxa8hz1b	110 A5 Jul2021	14	tar_worn	edges	none	raised_pavement	-	slab_covered	concrete_apron:2	concrete_apron:4	L 3-4 st shophouses with umbrellas, awnings, cars; R wide concrete forecourt, cars parked, flags, filling-station-like; streetlights; busy with pedestrians
+267	rd-kxa8hz1b	138 Ibari Jul2021	18	tar_worn	edges	none	raised_pavement	-	slab_covered	concrete_apron:2	concrete_apron:4	MEDIAN=low_concrete (unsure); L 2-st shops with awnings, stalls; R wide apron with yellow danfos parked (bus stop), 3-st blocks, mast; streetlights
+268	rd-kxa8hz1b	177 Ibari Mar2024	18	tar_worn	edges	painted_bw	none	-	-	concrete_apron:3	earth:4	MEDIAN=low_concrete (low kerb strip); L white 2-st shop row, keke parked; R red 2-st shops, wide earth apron, red iron gates; danfo; streetlights in median
+269	rd-kxa8hz1b	172 Lagos-Abeokuta Expy Mar2024	18	tar_worn	edges	painted_bw	none	-	-	concrete_apron:2	concrete_apron:3	MEDIAN=low_concrete; L danfos queuing, 3-st shops with signs; R 4-st shophouses with balconies, umbrella stalls, danfo park on road edge, traders
+270	rd-kxa8hz1b	206 A5 Mar2024	18	tar_worn	edges	painted_bw	none	-	-	earth:4	earth:3	MEDIAN=low_concrete; L blue 4-st, umbrella, keke, stalls on earth; R scrap/recycling heaps of sacks and junk on road edge, pink 2-st shop, umbrella; busy
+271	rd-kxa8hz1b	236 Lagos-Abeokuta Expy Mar2024	18	tar_worn	edges	none	none	-	-	earth:4	concrete_apron:3	MEDIAN=low_concrete; traffic lights; L tall tree, umbrellas, 2-st shops; R 3-4 st shops, red kiosk, people; streetlights
+272	rd-kxa8hz1b	274 Ibari Mar2024	18	tar_worn	edges	painted_bw	none	-	-	concrete_apron:3	concrete_apron:3	MEDIAN=low_concrete painted black/white; L 3-st shop rows with awnings; R 2-3 st shops, cars parked on apron, pylon; streetlights
+273	rd-kxa8hz1b	321 Lagos-Abeokuta Expy Mar2024	20	tar_worn	edges	none	none	-	-	earth:4	earth:3	MEDIAN=low_concrete; L 4-st glass office, trees, timber stalls; R 2-st shop row with blue tarps, flags; streetlights
+274	rd-kxa8hz1b	359 Ibari Mar2024	18	tar_worn	full	none	none	-	-	earth:4	earth:4	MEDIAN=low_concrete (unsure); L white 3-st, blue wall, bus; R warehouse sheds, metal kiosk on verge, electric poles; sandy edges
+275	rd-l3rs3wjs	20 Igbira St Jul2021	6	interlock	edges	raised_pavement	none	-	-	concrete_apron:1.5	earth:1	interlock paved lane; L 2-st with shop shed, people working, wall, solar streetlight; R grey block wall, 2-st pink and red houses; cars parked R
+276	rd-l96ihryl	none	-	-	-	-	-	-	-	-	-	-	pano ~70 m off on Agege Motor Rd (shop row: bakery, phone shop); counted none
+277	rd-laaw1anj	none	-	-	-	-	-	-	-	-	-	-	no Street View
+278	rd-ldpvzbt7	24 Abati St Jul2021	6	sand	full	raised_pavement	none	-	-	concrete_apron:1.5	earth:1	L white 2-st houses with concrete step-pavement, rooftop extension; R white tarp fence around an event canopy with red carpet; 4-st block at end; rubble
+279	rd-leh07psm	none	-	-	-	-	-	-	-	-	-	-	no Street View
+280	rd-leh07psm	52 Bello St Mar2024	8	tar_worn	full	none	none	-	-	earth:2	earth:3	junction with Alh. Amusa St; L 2-st with balcony, dark iron fence; R old 2-st corner house with shops, electric pole, pylon behind; people
+281	rd-lmd6wbjh	17 Agoro Bogunbolu St Jul2021	7	earth	full	none	none	-	-	earth:3	earth:3	red laterite-earth street; L rusty zinc and timber kiosks, bicycle, tyres; R yellow 3-st balconied blocks, low fences, umbrella stall, table; bus; palms
+282	rd-lmd6wbjh	Victory Gospel Church St Jul2021	7	sand	full	none	none	-	-	earth:1	concrete_apron:2	danfo park street: yellow danfos parked both sides; L 2-st long house; R long warehouse/church with zinc roof; wires
+283	rd-lmd6wbjh	2 Lamina St Apr2024	7	tar_worn	full	none	none	-	-	earth:2	concrete_apron:3	market street: L red block shops, car; R timber stalls with zinc roofs, umbrella, signboard, benches; pylon and HV line overhead
+284	rd-lnoqvges	14 Mallam Gana St Jul2021	6	earth	full	none	none	-	-	earth:2	earth:2	busy lane: L timber stall with crates and sacks, 3-st with balconies, iron gate; R timber shacks with tarps, people seated, 2-st with arched balcony; wires
+285	rd-ls7vi4p6	16 Obafemi Ajayi St Jul2021	6	tar_worn	edges	none	none	-	-	concrete_apron:1	earth:2	L 1-st with patterned tile wall and decorative grilles; R iron gate, food-vendor signboard, tree, yellow 2-st; cars parked both sides
+286	rd-lsk0nkts	4 Araba St Jul2021	8	sand	full	none	none	-	-	earth:3	earth:2	L zinc fence, wheelbarrow, pickup, 2-st long block with balconies; R 2-st arched-window house, zinc and plank kiosks, wood fence; keke at end
+287	rd-lv47qmiy	none	-	-	-	-	-	-	-	-	-	-	no Street View
+288	rd-lwd1maam	30 Ojo St Jul2021	6	interlock	none	none	drain_wall	-	open_concrete	earth:1	concrete_apron:0.5	interlock paved lane; L old block wall with zinc behind, long warehouse; R tall stained block wall of compound, drain at its foot; cars, danfo at end
+289	rd-m0yjgudq	7 Fagbile St Jul2021	6	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:2	concrete_apron:1	L blue zinc shacks, stalls with tarp awnings, drums; R timber kiosks, umbrella, red zinc fence; solar streetlight; 3-st block behind
+290	rd-m61sp7km	11 Olorunnibe St Jul2021	7	tar_worn	edges	raised_pavement	drain_wall	-	open_concrete	concrete_apron:1.5	concrete_apron:1	L 2-st pillared verandah house, iron railing, wall; R mosque minaret, 3-st shophouses, decorative breeze-block wall, green awnings, stalls; streetlights
+291	rd-m64dyubf	19 Badejo Kalesanwo St Mar2024	9	tar_new	none	none	raised_pavement	-	slab_covered	concrete_apron:1	concrete_apron:3	smooth tar; L long salmon compound wall, factory building with green roof; R telecom mast, cream compound wall, white iron gate, wide concrete apron; trees
+292	rd-m76g0s16	none	-	-	-	-	-	-	-	-	-	-	no Street View
+293	rd-m76g0s16	none	-	-	-	-	-	-	-	-	-	-	no Street View
+294	rd-m9b20y08	34 Araromi St Mar2024	6	sand	full	none	drain_wall	-	slab_covered	earth:1	concrete_apron:1.5	L zinc-roofed shacks with tarps, 2-st long house; R black iron gate, barbed-wire wall, 2-3 st blocks; cars parked both sides; wires
+295	rd-mw3dwbpl	none	-	-	-	-	-	-	-	-	-	-	no Street View
+296	rd-n63xdcg0	none	-	-	-	-	-	-	-	-	-	-	no Street View
+297	rd-n8hut0ew	Lagos Apr2024	9	sand	full	none	none	-	-	earth:3	earth:3	wide sandy street: L blue zinc shacks and stalls, table, 4-st new block behind; R telecom mast, timber stalls with zinc roofs, glass cases; cars at end
+298	rd-n8hut0ew	Lagos Jul2024	6	earth	full	none	none	-	-	earth:1	earth:3	L timber-plank gate, wall with posts, green painted gate; R white zinc kiosk, yellow tarps, scrap and planks, man seated, cart; rubble
+299	rd-n9c6t57b	32 Onanuga St Jul2021	8	sand	full	none	none	-	-	earth:3	earth:3	L umbrella with timber benches, stall, 2-st with iron grille; R timber stalls and shed with zinc roof, green awning, 2-st houses; potholes
+300	rd-nec7uo7x	none	-	-	-	-	-	-	-	-	-	-	no Street View
+301	rd-nec7uo7x	none	-	-	-	-	-	-	-	-	-	-	no Street View
+302	rd-nj3sfh8p	9 Oladeinde Coker St Jul2021	6	earth	full	none	drain_wall	-	open_concrete	earth:1	concrete_apron:1	muddy lane, cars and police van, keke; L low block wall, white 1-st with zinc awning, drums; R 3-st balconied block, cream wall, telecom mast; wires
+303	rd-njs0ka5v	none	-	-	-	-	-	-	-	-	-	-	no Street View
+304	rd-nl2ol8e2	31 Shokunbi St Dec2019	8	tar_worn	edges	none	none	-	-	earth:2	earth:3	L white iron fence pillars, wall, tyre, bus parked; R 3-st balconied block, timber kiosk with poster, stall; danfos; streetlights; wires
+305	rd-nl2ol8e2	15 Shokunbi St Jul2021	8	tar_worn	edges	drain_wall	none	slab_covered	-	concrete_apron:1	concrete_apron:2	L unpainted 3-st blocks, white sheets on wall; R 3-st red-brown block with balcony laundry, umbrella stall, green iron cage stall; cars parked both sides
+306	rd-nl2ol8e2	Shokunbi St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:2	grass:2	L long timber-and-iron market stall row with zinc roof, freezer; R tall old compound wall with bush, big tree, water tank tower; truck
+307	rd-ns5g7sgs	Dele Viju Cl Jul2021	5	tar_worn	edges	none	none	-	-	earth:1	grass:2	L 2-st painted house with iron gate and brick pillars; R low wall, grass, electric pole, zinc roofs beyond; trees
+308	rd-nssllco8	8 Efon Alaye St Jul2021	7	tar_worn	edges	none	none	-	-	earth:1	earth:2	L 3-st balconied blocks with barbed wire, timber fence; R 1-st zinc-roofed old house, stall; cars parked both sides; poles with dense wires
+309	rd-nvm72nt7	8 Calfos Dr Jul2021	7	tar_worn	edges	none	drain_wall	-	open_concrete	earth:1	concrete_apron:2	L 1-st with green zinc roof, white iron gates; R blue and rusty zinc fences and shacks, water tank on 2-st; car; wires
+310	rd-nxtksffe	7 Igbo Owu St Jul2021	7	sand	full	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1	concrete_apron:1.5	L pink fence, 2-st with long balcony railing, shop with awning; R green 2-st with balcony, low walls, junk; cars parked R
+311	rd-nxtksffe	35 Igbo Owu St Jul2021	7	earth	full	none	none	-	-	earth:3	earth:3	L green lorry, water tank on 2-st, red iron gate; R 1-st red block, zinc fence, blue hoarding; trees and palms; pickup and van
+312	rd-nz39jh82	112 Ojuelegba Rd Jul2021	12	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:3	busy main road: L 3-st shophouses with green awnings, no-parking sign; R 3-4 st shops with stairs, umbrellas, goods stalls; pedestrian bridge ahead; streetlights
+313	rd-oahy2qpj	22 Adeshiyan St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	slab_covered	slab_covered	concrete_apron:1.5	concrete_apron:1.5	L blue stall with shelves, old wall, 2-st; R 2-st shops with signs and posters, timber benches; cars and keke; poles with dense wires
+314	rd-oahy2qpj	9 Shyllon St Jul2021	6	earth	full	drain_wall	drain_wall	open_concrete	open_concrete	concrete_apron:1	concrete_apron:1.5	pano ~39 m off; L 3-st with black iron gate, umbrella stall; R 2-st shophouse, goods stall with traders seated, rolling shutter; keke; open drains
+315	rd-oahy2qpj	Lagos Jul2021	6	tar_worn	edges	none	none	-	-	earth:1	earth:2	L 2-st long house with laundry on balcony, barbed-wire wall; R rusty zinc fences and shacks, scrap; palms; cars at end
+316	rd-odaola3x	none	-	-	-	-	-	-	-	-	-	-	no Street View
+317	rd-oe3ndnqj	17 Alh. Amusa St Mar2024	7	earth	full	none	none	-	-	earth:2	earth:3	L long grey block wall with barbed wire, planks leaning, telecom mast; R umbrella, timber stalls with tarps, goods tables, traders; pylons and HV line
+318	rd-oe3ndnqj	12 Alh. Amusa St Mar2024	7	tar_worn	full	none	none	-	-	earth:2	earth:3	spare-parts market: L 1-st lock-up shop row with timber doors, mechanics sitting with parts on mats; R huge heaps of scrap car bodies and doors, car; pylon
+319	rd-og05m8ig	19 Ladipo St Jul2021	10	tar_worn	edges	none	none	-	open_earth	earth:2	earth:4	L buses and trucks parked in a row along wall and green fence; R open earth drain, timber and zinc shacks and sheds, mechanics; trees; wires
+320	rd-og05m8ig	125 Ladipo St Jul2021	16	tar_worn	edges	none	none	-	-	earth:3	earth:5	MEDIAN=low_concrete; L rusty iron fence with posters, telecom mast, red skip; R wide earth apron with timber carts and benches, smoke, 2-st shops; pylons
+321	rd-og05m8ig	155 Ladipo St Jul2021	10	tar_worn	edges	none	none	-	open_concrete	earth:4	earth:3	L blue 3-st block, red tarp stalls, shacks, motorbike on earth; R 3-st shops with signs, umbrella, iron roofing sheets stacked by open drain; trees
+322	rd-og05m8ig	Ojekunle St Jul2021	16	tar_worn	edges	none	none	-	-	earth:3	earth:5	MEDIAN=low_concrete (kerbed strip); L timber shacks, man seated, motorbike, billboard, palm; R wide earth service apron, 2-st shops with coloured doors, green gate
+323	rd-og05m8ig	71 Ladipo St Jul2021	10	tar_worn	edges	none	painted_bw	-	-	earth:3	earth:4	L white iron fence, blue building, tree, car; R cars parked on earth, red 2-st shops, okada riders; streetlight
+324	rd-og05m8ig	70 Ladipo St Jul2021	10	sand	full	none	none	-	open_earth	earth:4	earth:3	L 3-st blocks, people and okadas on wide sandy edge, stalls; R orange 2-st shops with solar panel, umbrella stalls, clothes, blue drums, hoses; wires
+325	rd-og05m8ig	25 Oguntoye St Mar2024	-	sand	full	none	none	-	-	-	-	pano at junction with Oguntoye St: wide open sandy ground, umbrellas, keke, timber stalls, 2-3 st blocks; danfo; sides unsure
+326	rd-og05m8ig	none	-	-	-	-	-	-	-	-	-	-	no Street View
+327	rd-oq1a8vtd	8 Ajegunle St Jul2021	7	tar_worn	edges	drain_wall	raised_pavement	slab_covered	slab_covered	concrete_apron:1	concrete_apron:1.5	L long stained compound wall with barbed wire, green 3-st; R pink 4-st balconied, zinc-roof timber stalls with clothes and shoes on display; danfo
+328	rd-oq1a8vtd	Ajegunle St Jul2021	7	earth	full	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:1	concrete_apron:1.5	L cream wall, black iron gate, 2-st duplex; R long white 1-st with green roof, red pillars; rubbish on earth road; stalls and sheds ahead; mast
+329	rd-ozs3ry4y	39 Bello St Jul2021	7	tar_worn	edges	none	drain_wall	open_concrete	slab_covered	concrete_apron:1	concrete_apron:1.5	L white kiosk, umbrella, stalls, transformer on poles; R shops with iron grilles and glass counters, tyre; dense wires, satellite dish
+330	rd-ozzwa52h	5 Shyllon St Jul2021	8	tar_worn	edges	none	raised_pavement	open_concrete	slab_covered	earth:2	concrete_apron:2	L 4-st with arched balconies, posters on wall, rubble; R compound walls with gates, palms, white metal kiosk; streetlight
+331	rd-p224w40k	none	-	-	-	-	-	-	-	-	-	-	no Street View
+332	rd-p3sthhi8	5 Bada St Jul2021	7	earth	full	none	drain_wall	-	open_concrete	earth:3	concrete_apron:1	potholed earth junction: L danfo, cars, 3-st block, kiosks; R 2-st orange house with poster, grass edge on drain; timber kiosk; poles with dense wires
+333	rd-pbwqrjkc	1 Ashaoku St Jul2021	6	tar_worn	edges	none	none	-	-	earth:2	earth:2	market lane: L zinc-roofed timber stalls with tarps, goods; R 2-st with timber shuttered shop, plank stalls, blue tarps; tanker truck at end; wires
+334	rd-pee3ohfv	none	-	-	-	-	-	-	-	-	-	-	pano ~80 m off on Coker St (school 2-st, breeze-block wall, white canopy); counted none
+335	rd-peirz7h1	none	-	-	-	-	-	-	-	-	-	-	no Street View
+336	rd-pf99fopw	5 Ilupeju Rd Jul2021	8	tar_worn	edges	drain_wall	raised_pavement	slab_covered	slab_covered	concrete_apron:1	concrete_apron:2	puddled road; L brown iron gate, wall, 3-st blocks behind; R 3-st new shophouse with balconies, blue drums, cars; keke; wires
+337	rd-pilgciql	7 Omowunmi St Mar2024	-	earth	full	none	none	-	-	-	-	pano looks across: 1-st yellow shop row with zinc verandah on timber posts, posters, plank deck over drain, benches, woman seated; sides unsure
+338	rd-pj8cd3wg	8 Oyegunle St Jul2021	7	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:1	earth:3	L school with painted mural wall, 1-st rusty roofs; R stalls with clothes hung on lines, timber shacks, zinc roofs; car; streetlight
+339	rd-potxzar5	none	-	-	-	-	-	-	-	-	-	-	no Street View
+340	rd-pp06u4v5	8 Wonuola St Jul2021	5	earth	full	none	none	-	-	earth:1	earth:1	yard lane through gate: L zinc-and-timber shed with tyres, open iron gate; R yellow-and-black painted zinc kiosk, shacks; mechanics yard beyond with pickups, lorries
+341	rd-pruajgib	none	-	-	-	-	-	-	-	-	-	-	no Street View
+342	rd-psjkkw9f	10 Oseni St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	open_concrete	slab_covered	concrete_apron:1.5	concrete_apron:1.5	L zinc-roofed shop row with display cases, drums, people seated, open drain; R stone-clad 4-st, iron gate, shops with grilles, people seated; cars
+343	rd-pz8kfbdt	none	-	-	-	-	-	-	-	-	-	-	no Street View
+344	rd-q1xvtu3t	27 Oloje St Jul2021	7	earth	full	drain_wall	none	open_concrete	-	concrete_apron:1	earth:3	muddy lane; L grey 1-st with white rolling doors, 3-st red block; R yellow 2-st with orange iron gates, palm, umbrella, bench; okada, cars
+345	rd-qb94w1lg	21 Mabo St Jul2021	8	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:2	L timber shacks with zinc awnings, 2-st old houses, green stall; R 3-st stone house with arched windows, food signboard, cars; streetlight, tree
+346	rd-qc8rcv8v	110 Apapa Oworonshoki Expy Nov2015	22	tar_worn	none	none	none	-	-	earth:3	grass:2	MEDIAN=jersey; L service road edge, 1-2 st houses, yellow fence, kiosk; R big warehouse/factory, mast, trees; streetlights
+347	rd-qc8rcv8v	Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	none	none	none	-	-	earth:4	earth:3	MEDIAN=jersey; pedestrian footbridge ahead; L keke park, 2-3 st blocks, trees; R service road, buses, sheds
+348	rd-qc8rcv8v	Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:6	earth:3	MEDIAN=jersey; L wide earth shoulder with lorries and cars parked, palms, telecom mast; R service road, 4-st office block, red-roofed warehouses; streetlights in median
+349	rd-qc8rcv8v	1 Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:6	earth:3	MEDIAN=jersey; L earth shoulder with lorries, trees, wall; R service road, earthmovers parked by long warehouse; danfo
+350	rd-qc8rcv8v	1 Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:6	earth:3	MEDIAN=jersey; L earth shoulder with flatbed trucks parked, trees, billboards; R service road, warehouses with red/blue walls, iron gate
+351	rd-qc8rcv8v	1 Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:5	earth:3	MEDIAN=jersey (low, kerbed here); L white iron fence, tall trees, palms; R service road, long factory sheds; man waiting at roadside
+352	rd-qc8rcv8v	Apapa Oworonshoki Expy Nov2015	22	tar_worn	edges	none	none	-	-	grass:3	grass:3	MEDIAN=jersey; pano on east carriageway; L across: lorries, palms, white fence; R 4-st office with red roofs behind iron railing, grass verge, pylon
+353	rd-qc8rcv8v	Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:3	grass:3	MEDIAN=jersey; footbridge ahead; L across: warehouses, trees; R blue glass office block, trees, grass verge, poles
+354	rd-qc8rcv8v	Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:4	earth:3	MEDIAN=jersey painted black/white; L across: container trucks parked in a long row; R long 3-st factory block, poles, earth verge
+355	rd-qc8rcv8v	Oworonshoki-Oshodi-Apapa Expy Nov2015	22	tar_worn	edges	none	none	-	-	earth:4	earth:4	MEDIAN=jersey painted; L across: tanker trucks, wall; R kerbed earth strip, red factory sheds, blue fence, danfo; streetlights
+356	rd-qc8rcv8v	Oshodi-Oworonshoki Expy Nov2015	22	tar_worn	none	none	none	-	-	grass:3	grass:8	MEDIAN=jersey painted; R grass embankment with laterite patches rising to palms; L across: trees, streetlights; crane in distance
+357	rd-qf3o0ux0	Lagos Jul2021	8	earth	full	none	none	-	-	earth:3	concrete_apron:2	L 1-st lock-up shop row with green doors, people; R unfinished 2-st with water tanks (IBCs), pickup loaded, cars; sandy earth; 3-st blocks at end
+358	rd-qhwuhayy	13 Moshalashi St Jul2021	6	tar_worn	edges	drain_wall	none	slab_covered	-	concrete_apron:2	earth:2	L blue 1-st bungalow with iron-sheet roof, concrete apron, drums; R white tarp stall, men seated, bench, wall; banana trees, red-roofed house at end
+359	rd-qmm0iloh	none	-	-	-	-	-	-	-	-	-	-	no Street View
+360	rd-qpyslofn	none	-	-	-	-	-	-	-	-	-	-	no Street View
+361	rd-qqm8wpxb	Apapa-Oshodi Expy Apr2024	7	tar_worn	edges	none	none	-	-	-	earth:5	pano ~32 m off on the expressway outer lane beside the service strip; low kerb/jersey on L; R wide earth verge, long warehouse wall, poles; billboard
+362	rd-qqm8wpxb	1 Oladele St Nov2015	-	earth	full	none	none	-	-	-	-	pano at Oladele St mouth looking toward expressway: fridge/freezer traders, crates, 2-st shops, palm; footbridge behind; sides unsure
+363	rd-qqm8wpxb	Apapa-Oshodi Expy Apr2024	7	tar_worn	edges	painted_bw	none	-	-	-	earth:3	service lane with keke, split from the expressway by a low kerb; R cars parked on earth, green-roof sheds, traders; mast
+364	rd-qqm8wpxb	Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	earth:4	service lane split from expressway by low kerb on L; R billboard steel legs, earth verge, warehouse wall, green-roofed sheds, poles and wires
+365	rd-qqm8wpxb	203 Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	concrete_apron:4	low kerb on L; R cows walking and lying on the apron, blue filling-station sign, shop with red roof, cars; poles
+366	rd-qqm8wpxb	22 Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	earth:3	low kerb on L; R car and truck parked on earth, wall with graffiti, mechanics junk, trees, palms; poles
+367	rd-qqm8wpxb	167 Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	concrete_apron:3	low kerb on L; keke; R 4-st office with red roofs behind iron railing, cars parked on apron, palms, pylons
+368	rd-qqm8wpxb	Bello St Oct2019	-	earth	full	none	none	-	-	-	-	pano ~34 m off at Bello St mouth: flooded earth, stalls, umbrellas, long warehouse beyond white wall; sides unsure
+369	rd-qqm8wpxb	103 Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	earth:4	low kerb on L; R kerbstones, rubble, zinc shack stall, car, 3-st factory block with iron fence; poles
+370	rd-qqm8wpxb	103 Apapa-Oshodi Expy Apr2024	8	tar_worn	edges	painted_bw	none	-	-	-	concrete_apron:4	danfo/car park: cars parked both sides, black bollards, people; R yellow wall, cars on apron, sheds; trucks ahead
+371	rd-qqm8wpxb	Apapa-Oshodi Expy Jul2021	8	tar_worn	edges	none	painted_bw	-	-	grass:6	concrete_apron:2	L grass embankment with kerbstone heaps and rubble; R red-blue painted bollards, hedge, long white factory wall, palms
+372	rd-qy07dnq8	9 Adeoyo St Jul2021	8	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:2	grass:1	L 1-st zinc-roofed shops, 3-st balconied block, car; R church with cross behind yellow wall and red iron railing, grass strip along wall; wires
+373	rd-qy07dnq8	34 Adeoyo St Jul2021	8	sand	full	drain_wall	none	open_concrete	-	earth:2	concrete_apron:2	L orange pillared fence, blue drums, tall cypress trees, 2-3 st; R salmon 3-4 st balconied blocks, black iron gates, blue drum; okada, keke, van
+374	rd-qy07dnq8	66 Adeoyo St Jul2021	8	tar_worn	edges	drain_wall	none	slab_covered	-	concrete_apron:1	concrete_apron:3	junction with Idowu Olaitan St; L mural-painted wall, tall tree, jeep; R 3-st blue balconied, zinc-roof shop row with goods stall, plank deck, drums; wires
+375	rd-qy07dnq8	5 Anifowoshe St Apr2024	9	interlock	full	none	none	-	-	earth:2	concrete_apron:2	interlock-paved street, sand on it; L 2-st long house with shop awning, schoolchildren, stalls; R 3-st long blocks, shop awnings, goods, people; busy
+376	rd-r2lepc3j	22 Garuba Musa St Jul2021	7	earth	full	none	drain_wall	-	open_concrete	earth:4	concrete_apron:1.5	L goats among parked cars and plank stalls, rubbish, bush, palms; R 2-st red house, green 1-st shop with zinc awning, slab bridges; okada
+377	rd-r3kcqjjf	65 Itire St Apr2024	12	tar_worn	edges	none	raised_pavement	-	slab_covered	earth:3	concrete_apron:2	L filling-station sign, 2-st and 3-st red block, danfo; R 2-st shophouse, generator sets on apron, shrub; streetlights
+378	rd-r3kcqjjf	29 Itire St Oct2019	11	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:2	busy: L shop rows with signs, blue container shop, pedestrians; R cars parked, zinc kiosks, traders; mast, streetlights; heavy traffic
+379	rd-r3kcqjjf	143 Ojuelegba Rd Jul2021	11	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:1.5	L 2-st long colonial-style shops with balconies, cars; R 3-st shophouses with airtel-red shutters, umbrella, posters; streetlights in middle
+380	rd-r444jznj	30 Agoro St Jul2021	6	sand	full	none	none	-	-	earth:1	concrete_apron:1	pano ~18 m off; L 1-st zinc-roof rows, white car; R blue painted wall with sign, barbed wire, gate; keke, people; pole
+381	rd-r9bbqsd1	9 Durodola St Jul2024	7	tar_worn	edges	none	none	-	-	earth:2	earth:2	market lane: both sides timber-post zinc stall canopies, traders, pickup; poles and wires
+382	rd-rbhmxjfp	19 Igbarere St Jul2021	8	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:2	L 2-st tiled-front houses, parked cars; R plank shacks, umbrella stall, rusty zinc roofs; solar streetlight
+383	rd-rby6c85s	3 Church St Mar2024	-	sand	full	none	none	-	-	earth:2	-	sides unsure, looks across: L zinc shack, R 4-st block, low wall gate, parked car
+384	rd-regiv15v	9 Olanrewaju St Mar2024	9	tar_worn	edges	none	none	-	-	earth:1	concrete_apron:3	L wall with gate, shrub; R 2-st and 3-st shophouses, low concrete planters; palms, poles and wires; cars parked
+385	rd-rey9587t	9 Bada St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:1	L 3-st balconied houses, shop with blue awning, people sitting; R painted fence, cars parked both sides; solar streetlight, poles
+386	rd-rfra6ops	1 Takuro St Jul2021	6	earth	full	none	none	open_concrete	open_concrete	concrete_apron:1	-	L zinc shacks, umbrella stall, open drain with slab bridges; R 2-st house, broken drain wall, tyres, laundry
+387	rd-rktb8bj7	none	-	-	-	-	-	-	-	-	-	no Street View
+388	rd-roqq0v3w	4 Akintan St Jul2021	9	tar_worn	edges	none	none	-	-	earth:3	earth:2	L 3-st and 4-st blocks (church cross), traders' tables, people; R umbrella stalls, used wheelchair and furniture sellers, zinc kiosks; poles and wires
+389	rd-roqq0v3w	Lagos Jul2021	9	tar_worn	edges	none	none	-	-	concrete_apron:2	concrete_apron:2	both sides rows of zinc and mesh-front lock-up shops on low concrete plinths, slab steps; poly tanks on roof; streetlight; 2-st blocks behind
+390	rd-rou8v2ci	none	-	-	-	-	-	-	-	-	-	no Street View
+391	rd-rpxzoyty	none	-	-	-	-	-	-	-	-	-	no Street View
+392	rd-rpxzoyty	none	-	-	-	-	-	-	-	-	-	no Street View
+393	rd-rqewtwxy	9 Post Office Rd Jul2021	8	tar_worn	edges	none	none	-	-	earth:2	earth:1	L 3-st blocks, lorry and cars parked; R danfo parked; heavy poles and HT wires, mast; jammed traffic
+394	rd-rqewtwxy	43 Post Office Rd Jul2021	9	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:2	L 3-st balconied blocks, zinc fences, shops; R 2-st house under construction (block, unrendered hip roof), danfo; streetlight, poles
+395	rd-rqewtwxy	Shokunbi St Jul2021	-	tar_worn	full	none	none	-	-	earth:3	earth:2	at a junction, looks down a side street: L zinc stalls, woman trader; R kiosk with blue zinc roof, 2-st house with balcony, cars
+396	rd-ru7lycas	none	-	-	-	-	-	-	-	-	-	no Street View
+397	rd-ru7lycas	none	-	-	-	-	-	-	-	-	-	no Street View
+398	rd-rv4ry0w9	none	-	-	-	-	-	-	-	-	-	no Street View
+399	rd-s40am6tw	3 Babalola St Jul2021	7	sand	full	none	none	open_concrete	-	earth:2	earth:2	L 1-st rendered rows with zinc roofs, plank bridges over drain, plastic chair; R 4-st and 5-st blocks, fridges, zinc stalls, satellite poles; people walking
+400	rd-s5h4f0w5	none	-	-	-	-	-	-	-	-	-	pano ~57 m off on Ladipo St: counted none
+401	rd-s783qtw5	10 Banire St Apr2024	8	tar_worn	edges	drain_wall	none	-	-	concrete_apron:2	concrete_apron:2	L 1-st rows, low concrete step wall, kiosks; R long shop row with zinc awning, campaign poster, benches; solar streetlights, poles
+402	rd-s96wwwah	22 Suberu Banire St Apr2024	8	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:2	L 3-st with balconies, shop counters, keke; R 3-st blocks behind wall, SUVs parked on shoulder; trees; church at end
+403	rd-sdso0qxv	3 Adeniyi St Jul2021	9	tar_worn	edges	none	painted_bw	-	-	earth:2	grass:10	L 2-st red-roofed rows, keke and cars parked; R red-white kerb along big grass field with tall trees, kiosk; poles
+404	rd-sfzm9yds	3 Oluwole St Mar2024	9	tar_worn	full	none	none	-	-	earth:2	earth:3	L ornate iron gates and wall, zinc-roof rows; R 3-st long block, plank stalls, umbrella trader, blue drums; bus, wheelbarrow, pole
+405	rd-sfzm9yds	52 Ayantuga St Jul2021	9	tar_worn	edges	none	none	-	-	earth:2	concrete_apron:2	L 2-st rows, blue roofs, keke; R long zinc-roof shop row with painted food-shop sign (buka), drums; poles and wires, streetlight
+406	rd-sfzm9yds	24 Ayantuga St Jul2021	10	tar_worn	edges	none	none	-	-	earth:1	earth:4	L block wall with billboards and posters, cars parked; R 2-st rows with zinc lean-to shops, kiosks, slab bridge over drain; poles, HT wires
+407	rd-sfzm9yds	2 Ayantuga St Jul2021	11	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:2	earth:3	L 3-st flour depot shop with red plinth wall; R steel water-tank tower, stalls with umbrellas, keke rank; lorry, okada; streetlight
+408	rd-si9baapu	none	-	-	-	-	-	-	-	-	-	no Street View
+409	rd-skzfzgm3	none	-	-	-	-	-	-	-	-	-	no Street View
+410	rd-sq9yr86z	23 Oyo St Jul2021	8	tar_worn	edges	none	drain_wall	-	open_concrete	concrete_apron:2	earth:2	L 2-st houses, shop fronts, blue poly tank, danfo; R 3-st balconied old house, open drain with slab, stalls; streetlight
+411	rd-ssz6ymgc	none	-	-	-	-	-	-	-	-	-	no Street View
+412	rd-ssz6ymgc	15 Omoniyi St Nov2024	6	tar_worn	full	none	none	-	-	earth:2	earth:2	market lane, pano ~16 m off: L zinc-roof stall sheds, danfo; R 3-st old block, tarp-covered stall with basins and buckets, waste; big tree
+413	rd-su4tdfqc	13 Olaniyi St Jul2021	-	tar_worn	none	raised_pavement	-	-	slab_covered	-	-	sides unsure, looks across: concrete transformer kiosk, tyre pile, block wall; 3-st flats behind; steel grating drain
+414	rd-su4tdfqc	1 Eniola St Jul2021	8	tar_worn	edges	none	none	-	-	earth:4	earth:2	L patterned painted fence, gravel heap, grass; R 2-st houses with iron gates, cars on shoulder; poles with transformers and wires
+415	rd-sznt34c5	none	-	-	-	-	-	-	-	-	-	pano ~50 m off on Palm Avenue: counted none
+416	rd-t07adhpt	none	-	-	-	-	-	-	-	-	-	no Street View
+417	rd-t0f428b6	9 Odushina St Mar2024	6	tar_worn	full	none	none	-	-	earth:2	earth:1	L rendered shop shack with painted POS sign, scrap pile, people; R 2-st with balcony, zinc kiosks, red banner; poles
+418	rd-tfrak2nd	none	-	-	-	-	-	-	-	-	-	no Street View
+419	rd-tiivalui	4 Amodu St Jul2021	7	earth	full	none	drain_wall	open_concrete	-	-	concrete_apron:1	L rusty zinc fences, open drain, poster; R painted plank shop fronts; umbrellas, stalls, 2-st block houses behind; poles
+420	rd-tjdct2l3	21 Tadeyo St Jul2021	-	tar_worn	edges	none	-	-	-	earth:1	-	sides unsure, looks across: school wall painted with ABC, pencil, LEARNING mural; big tree; red-roofed school behind
+421	rd-tk3atl5n	156 Isolo Rd Mar2024	16	tar_worn	edges	raised_pavement	raised_pavement	-	-	concrete_apron:2	concrete_apron:2	MEDIAN=jersey; L red gate, rendered walls, 4-st block; R 3-st shophouse rows; gantry sign across road, streetlights
+422	rd-tk3atl5n	32 Olu Aina St Mar2024	8	tar_worn	edges	none	none	-	-	concrete_apron:2	concrete_apron:2	L 2-st with balcony rails, blue drums, bagged waste; R 2-st shops with zinc awning, parked cars; mast, stalls at end; poles
+423	rd-tn5e2vxk	none	-	-	-	-	-	-	-	-	-	pano ~59 m off on C.A.C St: counted none
+424	rd-tpu9jzp8	25 Ojo St Jul2021	8	tar_worn	edges	none	raised_pavement	-	-	earth:2	concrete_apron:2	L 1-st house, pole, umbrella cart; R 3-st pink block with patterned balcony, tiled plinth; old 2-st colonial house ahead; solar streetlight
+425	rd-trz9qjln	10 Omoniyi St Jul2021	7	earth	full	none	none	-	-	earth:2	earth:2	market lane: both sides plank and zinc stall shacks, painted kiosks red and green, basket, tyre; streetlight
+426	rd-tweirlz8	10 Buraimoh St Jul2021	8	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:3	L bungalow with tiled front, arched gate, painted sign; R umbrella stalls, traders, zinc-roof rows; poles
+427	rd-txt3yk6k	none	-	-	-	-	-	-	-	-	-	no Street View
+428	rd-tzcgktxu	none	-	-	-	-	-	-	-	-	-	no Street View
+429	rd-u80w77ph	Ajose St Apr2024	8	tar_worn	edges	none	drain_wall	-	-	earth:2	concrete_apron:2	L lock-up shops with zinc awning, trader; R 2-st pink house with balcony, red iron gate, SUV; mast, poles
+430	rd-ua9h579y	30 Osoro St Jul2021	7	tar_worn	full	none	none	-	-	earth:2	earth:2	spare-parts lanes: L 1-st rows under rusty zinc, tarp-covered goods heaps; R 4-st unfinished block, 3-st shops with painted auto signs, plank ramps, tarps; cars
+431	rd-ua9h579y	5 Ojekunle St Jul2021	9	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:3	L long shop row with car-company signs, wall posters; R yellow container kiosk, umbrellas, POS sign, trader tables; poles
+432	rd-ua9h579y	Access Rd Jul2021	-	earth	full	none	-	-	-	earth:3	-	pano ~42 m off, looks across: 2-st block, zinc lean-to shops, green plank door, okadas parked, mechanic
+433	rd-udhlvf7d	1 Ajenifuja St Oct2019	6	earth	full	none	none	-	-	-	earth:2	pano ~47 m off: L long block wall of old warehouse; R zinc stall rows with traders, puddles; cars and danfo jammed; 2-st block ahead
+434	rd-ug65yhy2	Lagos Jul2021	9	tar_worn	edges	drain_wall	none	open_concrete	-	-	earth:3	L long yellow compound wall with barbed wire, solar streetlight; R zinc-roof market stalls, okada riders; 2-st block ahead
+435	rd-ug65yhy2	31 Vono Rd Jul2021	8	tar_worn	edges	none	none	-	-	earth:3	grass:4	L factory wall with ice-cream ad, blue bollards; R grass verge with tall trees, factory fence painted blue; lorry
+436	rd-ukmi0p9d	79 Ibidun St Oct2019	6	tar_worn	edges	none	drain_wall	-	open_concrete	earth:2	sand:1	L rusty iron gate, block wall, tyres, weeds; R 2-st green colonial house, low wall, gravel strip; poles, streetlight; 3-st long block behind
+437	rd-ukrlud0u	none	-	-	-	-	-	-	-	-	-	pano ~64 m off: counted none
+438	rd-ulqkx258	128 Ishaga Rd Jul2024	12	tar_worn	edges	none	raised_pavement	-	-	earth:3	concrete_apron:2	MEDIAN=low_concrete; L broken block wall, scrap, keke; R 2-st shop row with traders under zinc awnings, SUV; poles
+439	rd-ulqkx258	104 Ishaga Rd Jul2024	13	tar_worn	edges	none	raised_pavement	-	-	earth:3	concrete_apron:2	MEDIAN=low_concrete; L zinc-roof stall sheds, POS sign; R 3-st mosque with minaret, tiled shop row, crowd; streetlights in middle
+440	rd-ulqkx258	1 Obele Rd Jul2021	-	tar_worn	edges	none	-	-	-	earth:3	-	sides unsure, at Obele Rd junction: blue zinc hoarding with posters, umbrella seller, keke rank, white tents
+441	rd-ulqkx258	Ishaga Rd Jul2021	12	tar_worn	none	raised_pavement	raised_pavement	-	-	grass:2	concrete_apron:3	L tall hedge along hospital fence; R 3-st school behind panelled fence with iron railings, palms; big shade tree; streetlight
+442	rd-ulqkx258	45 Ishaga Rd Jul2021	14	tar_worn	none	raised_pavement	raised_pavement	-	slab_covered	concrete_apron:2	concrete_apron:2	MEDIAN=low_concrete; L 2-st offices, gate pillar; R 3-st and 4-st blocks with balconies; pole in median
+443	rd-ulqkx258	9 Ishaga Rd Jul2021	14	tar_worn	edges	none	raised_pavement	-	-	earth:3	concrete_apron:2	MEDIAN=low_concrete; L 2-st shop rows; R 2-st and 3-st shops with signs, cars parked, okadas; poles with transformers
+444	rd-uo9tlyvq	none	-	-	-	-	-	-	-	-	-	pano ~62 m off under the Agege Motor Rd flyover: counted none
+445	rd-upn7sjm7	56 Kekereowo St Jul2021	8	sand	full	none	none	-	-	concrete_apron:3	earth:1	L 3-st red block with open garage, black drums, tarp heap; R 2-st cream house with balcony rails, wall with posters, cars parked; pole
+446	rd-upzxrowm	12 Apesin St Oct2019	6	tar_worn	edges	none	none	-	-	earth:2	concrete_apron:1	L 2-st with timber balcony, iron fence; R 2-st pink block, zinc lean-to shops; streetlight, poles
+447	rd-uufgfc7r	6 Kasali St Jul2024	6	tar_worn	edges	drain_wall	drain_wall	-	-	concrete_apron:2	concrete_apron:2	L rusty zinc-roof 1-st rows, plank shops, raised concrete plinths; R zinc-roof stall sheds on high concrete plinths, people sitting; 2-st at end
+448	rd-uwom6nbe	75 Folarin St Jul2021	7	tar_worn	edges	drain_wall	drain_wall	-	open_concrete	earth:2	concrete_apron:2	L broken wall, plank and scrap heap, keke rank; R 3-st block with balconies, zinc kiosk, iron gate; tree
+449	rd-uwom6nbe	21 Alokolaro Cres Jul2021	7	tar_worn	edges	none	drain_wall	-	open_concrete	earth:2	-	L zinc shacks with blue tarp, white van; R high rendered wall with barbed wire, 2-st pink house; umbrella trader; poles, casuarina
+450	rd-uy3bbwus	none	-	-	-	-	-	-	-	-	-	no Street View
+451	rd-v4erxr45	1 Alh. Awoyejo St Jul2021	7	tar_worn	edges	none	none	-	-	earth:2	earth:3	L blue-painted zinc shop with poster, iron scrap; R 3-st pink block, laundry lines, stalls; cars; poles
+452	rd-ve4qwm14	4 Akinbayode St Mar2024	9	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:2	earth:2	L 3-st yellow block and 1-st rows with red gates, open drain; R blue lorry parked, 3-st red block, tree; poles with transformer
+453	rd-vlz0dge8	27 Ojerinde St Jul2021	-	tar_worn	-	none	-	-	-	earth:1	-	sides unsure, looks across: old block wall with arched iron gate, signs, 2-st colonial house behind; parked cars, tree
+454	rd-vlz0dge8	Idi-Araba Rd Jul2021	7	tar_worn	edges	none	none	-	-	earth:2	earth:2	both sides rusty zinc-roof plank stall sheds, traders' benches, tarps; 2-st houses behind; poles
+455	rd-vnres9ex	none	-	-	-	-	-	-	-	-	-	no Street View
+456	rd-vp2j6h9n	15 Olorunnisola St Jul2021	8	tar_worn	edges	none	none	-	-	earth:3	concrete_apron:1	L ram and goat pens, plank sheds, block wall, tree; R 4-st under construction with timber scaffold; cars
+457	rd-vq96bf9e	11 Okoh Dr Jul2021	8	tar_worn	edges	none	none	-	-	earth:3	earth:1	L cars parked on earth lot, 2-st red houses, tree; R 1-st plank and zinc rows with iron grilles; poles
+458	rd-vt757j5a	31 Olanibi St Mar2024	14	tar_worn	edges	none	raised_pavement	-	slab_covered	earth:2	concrete_apron:3	MEDIAN=low_concrete; L 3-st blocks, iron fences; R spare-parts shops with car-brand signs, yellow lock-ups; mast; okada
+459	rd-vt757j5a	6 Olanibi St Mar2024	14	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:2	earth:2	MEDIAN=low_concrete; L 2-st old block with balcony, shuttered shops; R long market shed, blue SUV; streetlight
+460	rd-vuw2n757	60 Oremeji St Apr2024	-	earth	full	none	-	-	-	earth:10	-	sides unsure, looks across an open earth lot used as a danfo and car park, sawn poles; R 3-st block with zinc lean-to, trader table
+461	rd-vvycykua	none	-	-	-	-	-	-	-	-	-	no Street View
+462	rd-w51808dt	Lagos Oct2019	7	interlock	none	none	none	-	-	grass:3	grass:3	pano ~44 m off, inside hospital grounds: interlock-paved drive and car park, 4-st white ward block, gatehouse, low wall, big shade trees, grass
+463	rd-w51808dt	none	-	-	-	-	-	-	-	-	-	no Street View
+464	rd-way26cym	none	-	-	-	-	-	-	-	-	-	no Street View
+465	rd-wh8bgje0	18 Kayode St Mar2024	7	tar_new	none	painted_bw	painted_bw	-	-	laterite:8	earth:3	L long high concrete retaining wall on cleared laterite strip (rail line); R 2-st old houses with timber balconies, blue container; streetlights
+466	rd-wh8bgje0	3 Kayode St Mar2024	8	tar_worn	edges	none	none	-	-	earth:3	earth:4	market: L red-painted lock-ups, plank tables, crates; R rows of umbrellas over food stalls, traders; 4-st and 8-st blocks behind; streetlight
+467	rd-wizltkz5	10 Oloruntoyin St Jul2021	6	tar_worn	full	drain_wall	drain_wall	-	open_concrete	earth:2	-	L 2-st houses, rendered walls, plank heap, men at car; R long rendered compound wall with open drain and rubbish; trees
+468	rd-wizltkz5	21 Ojekunle St Jul2021	-	earth	full	none	-	-	-	concrete_apron:3	-	pano ~37 m off, looks across: flooded earth road, raised plank-and-slab platform, blue painted compound wall, trees, okadas, pickup
+469	rd-wizltkz5	none	-	-	-	-	-	-	-	-	-	no Street View
+470	rd-wmlmpxj0	38 Oladeinde Coker St Jul2021	7	sand	full	drain_wall	none	open_concrete	open_concrete	-	earth:2	L school wall with painted mural, open drain; R 3-st and 4-st rendered blocks, plank kiosks with slab and plank bridges; mast, poles
+471	rd-wovdjsau	3 Oyedele St Dec2018	-	earth	full	none	-	-	-	-	-	sides unsure, looks across, pano ~20 m off: flooded road, perforated block wall, 2-st house with balcony laundry, zinc-roof bungalow
+472	rd-wqe12uoj	3 Bamgboye St Jul2021	9	sand	full	none	none	-	-	earth:2	concrete_apron:2	danfos parked on both sides; L 2-st old block rows; R 2-st with green-painted wall, signs, palm; poles
+473	rd-wqe12uoj	31 Bamgboye St Mar2024	8	tar_worn	edges	none	none	-	-	earth:2	concrete_apron:2	L rusty iron fence, 2-st red shops; R shop row with drink sign, SUV, traders; pole, HT wires
+474	rd-wsadnelk	11 Olawoyin St Mar2024	8	sand	full	none	none	-	-	earth:3	concrete_apron:2	L zinc and plank stall sheds, rusty fence; R 2-st block with red gate, crane lorry parked; people on bicycle
+475	rd-wt3bztea	32 Ayonuga St Jul2021	-	earth	full	none	-	-	-	concrete_apron:2	-	sides unsure, looks across, pano ~20 m off: 3-st unrendered block under construction, timber scaffold, red gate, blue van, 3-st flats
+476	rd-wwc5xw6r	8 Alh. Akinwunmi St Jul2021	8	tar_worn	edges	drain_wall	none	-	-	earth:3	-	one carriageway, R low concrete divider to the parallel carriageway; L blue zinc fences, umbrella stall, kiosks; 3-st block; trees; streetlights
+477	rd-wwc5xw6r	Alh. Akinwunmi St Jul2021	8	tar_worn	full	none	none	-	-	earth:4	-	one carriageway, R low concrete divider, long high wall beyond; L blue zinc kiosk, plank stall, cars, puddles; palm; solar streetlights
+478	rd-wzenm1tr	none	-	-	-	-	-	-	-	-	-	no Street View
+479	rd-wzqwmk8q	none	-	-	-	-	-	-	-	-	-	no Street View
+480	rd-x0hilxfr	5 Oyo St Jul2021	8	tar_worn	edges	drain_wall	none	-	-	concrete_apron:2	earth:3	market: L tiled shop plinth, basins, lock-ups; R rusty zinc-roof sheds, goods under tarps, mattresses; keke; streetlight
+481	rd-x0nmzqqy	44 Ayonuga St Jul2021	-	earth	full	none	-	-	-	earth:2	-	pano ~45 m off, looks across: zinc and plank shack row, signboards, plank bridges over drain, people; mast; 3-st blocks behind
+482	rd-x1ebutg6	Shittu St Jul2021	-	earth	full	none	-	-	-	earth:6	-	sides unsure, looks across: concrete kiosk, plank stalls, charcoal heaps in sacks, tyres, green shacks, crowd
+483	rd-x37bsf38	13 Ogun St Jul2021	7	sand	full	none	none	-	-	earth:2	earth:3	L zinc-roof shops, white tarp, keke; R plank stalls with yellow sign, rusty zinc fences; poles and wires, 2-st houses
+484	rd-x5gbmfao	17 Folarin St Jul2024	8	tar_worn	edges	drain_wall	none	open_concrete	-	earth:3	concrete_apron:2	L 1-st zinc-roof sheds, tyres, open drain; R 4-st pink block, umbrella stall with POS board, okada, blue tarp; poles
+485	rd-x7eslkeo	8 Macaulay St Jul2021	7	tar_worn	edges	none	none	-	-	earth:3	concrete_apron:3	L zinc-roof food sheds, puff-puff seller, tarp; R 2-st green house with balcony, kiosks, red-roof shop, plank bench; 4-st block ahead
+486	rd-xafls8id	none	-	-	-	-	-	-	-	-	-	no Street View
+487	rd-xclnzrz2	19 Akinbola St Jul2024	7	tar_worn	full	drain_wall	drain_wall	-	open_concrete	earth:3	earth:2	L blue poly tanks, cart, block wall, tree; R zinc-roof bungalow, plank kiosk; 3-st blocks behind
+488	rd-xd115opd	1 Adebayo Street Jul2021	7	tar_worn	edges	raised_pavement	none	-	open_concrete	concrete_apron:2	grass:1	L red iron fence, 3-st cream flats with arched windows; R wall with painted school signs, shrubs; poles and streetlight
+489	rd-xjd6yh6c	8 Akinbola St Mar2024	7	sand	full	none	painted_bw	-	-	earth:2	grass:1	L zinc-roof sheds, cars parked; R stone-clad house wall, painted black-white kerb with planted shrubs; poles and wires
+490	rd-xjvsti21	8 Odulana St Jul2021	7	sand	full	none	none	-	-	earth:3	concrete_apron:2	L block-making yard with stacked blocks, zinc fence; R 3-st old blocks with zinc lean-to shops, ladder; laundry
+491	rd-xp0cgtsa	27 Olufunmilayo St Jul2021	7	tar_worn	edges	none	none	-	-	concrete_apron:2	earth:2	danfos parked both sides; L rendered wall, blue drums, tyres; R 2-st with balcony laundry, zinc-roof bungalow; streetlight
+492	rd-xrm36c1i	none	-	-	-	-	-	-	-	-	-	no Street View
+493	rd-xvn9otuq	Lagos Jul2021	7	tar_worn	edges	none	raised_pavement	-	-	concrete_apron:3	concrete_apron:2	both sides long 2-st market blocks with concrete colonnades and arcade; L huge white sacks, old sofa; R lock-ups with shutters; green van
+494	rd-xvy8425r	none	-	-	-	-	-	-	-	-	-	no Street View
+495	rd-xwiedrw2	16 Alao Adegboyega St Dec2018	6	earth	full	drain_wall	none	-	-	-	grass:20	L low wall along zinc shack yard, laundry; R open grass and scrub land, felled tree; old cars parked; 3-st blocks behind
+496	rd-xwiedrw2	Alao Adegboyega St Dec2018	7	earth	full	none	drain_wall	-	-	grass:4	-	L big lot of parked and scrap cars, danfos, grass; R long rendered wall with red iron gate, barbed wire; stacked blocks; pole
+497	rd-y3099jnt	2 Folami St Jul2021	8	tar_worn	edges	none	none	-	-	earth:3	earth:3	market: L rusty zinc sheds, wire mesh, goods on ground; R umbrellas, traders with produce, sacks; white 4-st mosque with minarets ahead; streetlight
+498	rd-y7rfqvf1	28 Apesin St Oct2019	7	tar_worn	edges	none	none	-	-	concrete_apron:3	earth:3	pano ~49 m off: L 3-st old blocks with balconies, white van; R zinc shacks, photocopy shop, iron sheets; 2-st with balcony; poles
+499	rd-y7rfqvf1	none	-	-	-	-	-	-	-	-	-	no Street View
+500	rd-ycxjs88t	1 Olaniyi St Jul2021	8	tar_worn	edges	raised_pavement	raised_pavement	slab_covered	slab_covered	concrete_apron:2	concrete_apron:1	L black iron gates, 3-st block, rendered walls; R long low compound wall, slab-covered drain with broken slabs, kiosks; palms, poles
+501	rd-ycxjs88t	11 Matuwo St Jul2021	8	tar_worn	edges	drain_wall	raised_pavement	-	-	earth:1	concrete_apron:2	L green-painted wall, wrecked danfo, big tree; R 2-st with balcony rails, plank stall row on raised plinth; vans; poles
+502	rd-yeqmwvdn	16 Jimade St Jul2021	9	tar_worn	edges	none	drain_wall	-	-	earth:3	concrete_apron:4	L blue-painted factory wall with sign, old cars; R warehouse with stacked goods on roof, concrete apron; mast, palm; vans
+503	rd-yeqmwvdn	none	-	-	-	-	-	-	-	-	-	no Street View
+504	rd-yfxvt7jz	none	-	-	-	-	-	-	-	-	-	no Street View
+505	rd-ygloxipl	Lagos Jul2021	6	sand	full	drain_wall	drain_wall	-	-	-	concrete_apron:1	L long block wall of 2-st arched church hall, cars parked; R low walls of 1-st houses, laundry; colourful 4-st school ahead
+506	rd-yj4woxpz	18 Alh. Isiaka Nda St Jul2024	7	tar_worn	edges	drain_wall	raised_pavement	open_concrete	-	earth:1	concrete_apron:2	L red-painted walls and iron gates, open drain, blue drum; R 2-st pink house with patterned wall; poles, streetlight
+507	rd-yp7rd186	none	-	-	-	-	-	-	-	-	-	no Street View
+508	rd-yp8z89b0	none	-	-	-	-	-	-	-	-	-	no Street View
+509	rd-ypmlhk6e	none	-	-	-	-	-	-	-	-	-	no Street View
+510	rd-ytjvbcdm	10 Folarin St Jul2021	6	sand	full	none	drain_wall	-	open_concrete	concrete_apron:2	concrete_apron:1	L yellow wall with blue zinc roof, red gate, 4-st pink block; R rusty zinc fence, tarp, block wall, slab bridges; cars parked
+511	rd-z3i9yyex	none	-	-	-	-	-	-	-	-	-	no Street View
+512	rd-z3i9yyex	2016 Shasere Ajibade St Jul2021	5	laterite	none	none	none	-	-	grass:2	grass:1	red laterite lane between long high block walls with pillars, grass and weeds both sides, plantain; 4-st unfinished block behind
+513	rd-z3i9yyex	Shasere Ajibade St Apr2024	8	tar_worn	edges	drain_wall	none	open_concrete	-	concrete_apron:2	earth:4	L zinc-roof stall shed with benches, open drain; R zinc-roof shack, cars on earth shoulder; 3-st green block; poles
+514	rd-z7y18cz7	3 Ali Ln Mar2024	6	sand	full	none	drain_wall	-	open_concrete	earth:1	concrete_apron:1	L 2-st old house, minivan; R high walls, zinc lean-to shed, gate; umbrella stall at end
+515	rd-zai52ajf	none	-	-	-	-	-	-	-	-	-	no Street View
+516	rd-zai52ajf	none	-	-	-	-	-	-	-	-	-	no Street View
+517	rd-zh0fu8w7	none	-	-	-	-	-	-	-	-	-	no Street View
+518	rd-zhn2pif5	21 Abati George St Jul2021	7	interlock	none	drain_wall	drain_wall	-	-	concrete_apron:3	concrete_apron:3	market: L wooden lock-up stalls, plastic chairs, speakers; R umbrellas, produce barrows, baskets, tarp sheds; white van, people
+519	rd-ziw0h5ax	none	-	-	-	-	-	-	-	-	-	no Street View
+520	rd-zoczvixp	19 Atunrase St Jul2021	6	sand	full	none	drain_wall	-	slab_covered	concrete_apron:1	concrete_apron:1	L 2-st red-brick estate houses with perforated block screen walls; R 2-st with balconies, iron gate, broken slabs over drain; cars parked; poles
+521	rd-zpb4ffh6	Lagos Oct2019	7	tar_worn	none	raised_pavement	raised_pavement	-	-	grass:4	grass:3	hospital avenue: L planted grass median with hedge and palms beyond which the other carriageway; R iron railing, shrubs, white 1-st office blocks; tall palms
+522	rd-zq9bs5v6	2 Omoniyi St Jul2021	-	interlock	none	none	-	-	-	concrete_apron:3	-	sides unsure, looks across: stall row with betting kiosk sign, crates, plank tables, tyres; 3-st blocks behind; pole
+523	rd-zr9sx05c	9 Caxton Cl Dec2018	7	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:2	earth:2	L rendered wall with school sign, iron gate, big tree in pavement; R 3-st house, kiosks, people; poles with transformers
+524	rd-zvenwhp0	44 Ojekunle St Mar2024	16	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:3	earth:6	MEDIAN=low_concrete; L 3-st shop rows with signs, sacks, plank stall, parked car; R open earth market ground with blue zinc sheds; trees; streetlights
+525	rd-zvenwhp0	6 Ojekunle St Mar2024	16	tar_worn	edges	none	none	-	-	earth:4	earth:4	MEDIAN=low_concrete; L rubble heap, 1-st blue-roofed house, 3-st red shophouse; R blue zinc fences, kiosk, wind-bent tree; streetlights in median
+526	rd-zwt7kfiu	none	-	-	-	-	-	-	-	-	-	no Street View
+527	rd-zwt7kfiu	28 Paul Okuntola St Jul2021	9	tar_worn	edges	none	none	-	-	concrete_apron:3	earth:2	L zinc-roof shop rows with drink signs, balloons, plastic chairs, crates; R 1-st rendered houses, kiosk, keke and danfo; 4-st blocks behind
+528	rd-zwt7kfiu	66 Paul Okuntola St Jul2021	8	tar_worn	edges	raised_pavement	none	-	-	concrete_apron:2	earth:2	L shops with zinc awnings, blue plastic chairs; R block wall, painted lock-up with phone number, kiosks; water tower; poles
