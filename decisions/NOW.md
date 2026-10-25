@@ -49,6 +49,11 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   builder; they become records with the road's bump and pothole records.
   Next: kerbs (painted, raised), grated covers, earth drains, then laying the pieces along the real centrelines, road in
   kit_fields' BUILDERS, then trees, masts and heaps.
+- **Road kit, look pass 2** (gidi-game #81): the drain walls' inner faces now carry the dirt (a `frange` bug had left them
+  two rows deep), road_look mirrors Unreal's T_Streaks term, test renders use Khronos PBR Neutral (AgX greyed the sand:
+  foreground sand now 224,199,163 against the photo's 213,192,164), planks bleached to the photo, drain litter coated by
+  the silt water. Pictures sent to the owner. Still toy-like: litter shapes (puffy sachets, crisp paper), smeared board
+  grain, flat black silt, the drain narrower than the photo's. Next pass: those, then kerbs.
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
