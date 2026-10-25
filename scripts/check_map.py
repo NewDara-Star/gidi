@@ -484,13 +484,19 @@ def on_road(recs):
                     'set the house back, cut its front or leave it out; never narrow the road')
 
 
+RUN_NEAR, RUN_LONG = 1.0, 8.0   # m: two roads meeting at 15 degrees lie within 1 m of each other for about 8 m
+
+
 def road_nodes(recs):
     """Where roads meet, they share a point (a node): the junction kit builds a junction at each shared point and nowhere
     else. Fails: two centrelines crossing without one, or a road end inside another road's carriageway with no node of
     that road near it (within its half width): a hand edit puts the point on both lines. An end on a node of its own a few
     metres from the other road's node (within its half width + 0.5 m) is a staggered junction, left as drawn and counted
     on a TODO line: the junction kit (not built yet) must join nodes that close into one junction (pulling them onto one
-    point pushed 26 houses into the roads, 25 Oct). --strict fails on them."""
+    point pushed 26 houses into the roads, 25 Oct). --strict fails on them. Also fails two roads drawn on top of each
+    other: centrelines within RUN_NEAR of each other for more than RUN_LONG (a road record has no level, so in plan one
+    road is the other drawn twice; the junction kit can't build it, 25 Oct). A hand edit cuts the copy back to where it
+    joins."""
     try:
         from shapely.geometry import LineString, Point
         from shapely.strtree import STRtree
@@ -519,9 +525,15 @@ def road_nodes(recs):
                                      f'road {oid}\'s node, inside it: a staggered junction for the junction kit to join')
                     continue
                 err(w, f'its end at {list(e)} is inside road {oid} with no node of it near (no junction)')
-        for j in tree.query(lines[k]):
+        for j in tree.query(lines[k].buffer(RUN_NEAR)):
             oid = rs[j][0]
-            if oid <= rid or not lines[k].crosses(lines[j]):
+            if oid <= rid:
+                continue
+            run = min(lines[k].intersection(lines[j].buffer(RUN_NEAR)).length, lines[j].intersection(lines[k].buffer(RUN_NEAR)).length)
+            if run > RUN_LONG:
+                err(w, f'runs on top of road {oid} for {run:.0f} m (centrelines within {RUN_NEAR} m): one is the other '
+                       f'drawn twice; cut it back to where it joins')
+            if not lines[k].crosses(lines[j]):
                 continue
             x = lines[k].intersection(lines[j])
             for g in getattr(x, 'geoms', [x]):

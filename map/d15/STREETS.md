@@ -65,6 +65,7 @@ Roads only, drawn on the new frame (1:3). Every kept street sits on its real lin
 | rd-sdso0qxv | m02d | Oshodi-Apapa Expressway, east service road (south) | service_road | 7.0 | as m02c, south of the inside junction | as m02c |
 | rd-cbrqj76p | s40 | Alhaji Akinwunmi Street (Ladipo market) | market_street | missing | a lane into the market off Ladipo Street | none yet |
 | rd-sfzm9yds | s01 | Ayantuga Street | market_street | 9.0 | kit test ot149; corner shops, kiosks, cage stalls | ot149 kit test (Ayantuga St) |
+| rd-sfzm9yd2 | s01 | Ayantuga Street (east end) | market_street | 9.0 | its last 31 m past the 18 m it ran on rd-3g52z5ck, a record of its own (25 Oct) | as rd-sfzm9yds |
 | rd-rqewtwxy | s02 | Post Office Road | home_street | missing | NIPOST; links Agege Motor Road to Coker Road | none yet |
 | rd-d4z92y9r | s03 | Dada Iyalode Street (Ojuwoye market) | market_street | missing | the busy market core (ot08, ot126) | ot08/ot126: broken, puddled earth street in the market core |
 | rd-xafls8id | s04 | Oguntoye Street | market_street | missing | market street of plank and zinc kiosks (ot07, ot127) | ot07/ot127: sandy unpaved market street |
@@ -82,6 +83,7 @@ Roads only, drawn on the new frame (1:3). Every kept street sits on its real lin
 | rd-gj6642yg | s18 | Ayuba Daudu Street | home_street | missing | south of Akanro; links Abeokuta to the canal side | none yet |
 | rd-b9jn4qv9 | s19 | Olushoga Street | home_street | missing | workshop sheds (ot174) | ot174: sandy earth, no kerb, no drain |
 | rd-9o8evlkl | s20 | Omowunmi Street | home_street | missing | school and vulcaniser off Isolo Road (ot05, ot124) | ot05/ot124: sandy earth, no tar, open drain with slab bridge |
+| rd-9o8evlk2 | s20 | Omowunmi Street (hook) | home_street | missing | the hook off Isolo Road past the 56 m the street ran on rd-cb2h4xa5, a record of its own (25 Oct) | as rd-9o8evlkl |
 | rd-98o0vo6c | s21 | Olorunsogo Street | home_street | missing | the Olorunsogo quarter, west of Agege Motor Road | none yet |
 | rd-n63xdcg0 | s22 | Idera Street | home_street | missing | east of the rail, to Majolate | none yet |
 | rd-oahy2qpj | s23 | Adeshiyan Street | home_street | missing | north-east lobe off Ilupeju Road | none yet |
