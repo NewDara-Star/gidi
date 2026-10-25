@@ -6,6 +6,12 @@ then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scrip
 
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
+00. [ ] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
+   read it in two passes (what each part is; then what it does and whether anything live uses it), then delete in
+   both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
+   dated notes whose lesson is written down, `legacy/` and the old map's Unreal side if nothing live needs them; NOW.md
+   and DECISIONS.md trimmed to what is current. Each deletion a commit saying what went and why, checks run.
+   Then item 0(b) widened: every kit (all the builders, not only stalls) as shared pieces drawn as instances.
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
@@ -27,7 +33,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
    fixed in zinc_kit: sheets a hip cuts keep their modelled strip (1,616 of 23,556); pieces whole ribs wide, so laps
    nest (20,586 laps within 0.052 rib, tools/lap_check.py; slits before); each piece turned to meet the sheet's 5-7 mm
    belly and sag. Seen in Blender only; (b) each builder split in turn, for the files,
-   actors and World Partition (its first street in Unreal also shows the new edge pieces, not yet seen there); (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
+   actors and World Partition (its first street in Unreal also shows the new edge pieces, not yet seen there).
+   Progress 25 Oct (gidi-game kit/stall-pieces): plain stalls and umbrellas as 3 shared pieces (street_test --things
+   --thing-pieces): 117 things 126 -> 24 actors, 118 -> 4 meshes, frame and GPU the same, memory ~0.12 GB lower (a hint).
+   Next builders in order: poles (4 variants; wires stay unique), then vehicles (keke_build exports no .glb; saloon,
+   okada, bus and suv have no builder, 676 of d15's 824 vehicles; danfo and lorry have _static variants), then stalls
+   with goods/posters and printed umbrellas; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming; on that city, decide the shadow and Nanite pool sizes (smaller saves ~0.55 GB, PERFORMANCE.md;
    check over the roofs and down a long street for overflow) and whether the volumetric clouds stay (192 MB and the
    largest GPU pass over the roofs, 8.5 ms) or become a cheaper sky.
@@ -59,7 +70,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
-- Into item 0: per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
+- Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
+  PERFORMANCE.md, 25 Oct); per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
   custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city (PERFORMANCE.md).
 - Not understood yet, measure again: work mode slower than high on Underdeck; the over-the-roofs GPU median above the
   frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
