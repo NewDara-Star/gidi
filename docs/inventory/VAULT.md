@@ -34,7 +34,7 @@ Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.27); `gidi:decisions/DECISI
 For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-25, 32 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CODEBASE.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:scripts/board_server.py`, `gidi:scripts/check_map.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/inventory.py`, `gidi:web/board.html`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.22); `gidi:decisions/DECISIONS.md` (0.2).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
@@ -104,7 +104,7 @@ Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.21); `gidi:docs/
 For: eyes, shots, desk, steel, example, sheet, timber, fields. Last changed 2026-10-24, 682 lines.
 Links to 2: `gidi-data:research/google/kits/old-town/tests/facade_hand.py`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`
 Backlinks: 11 documents (`gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md` ...), 6 code files (`gidi-data:research/google/kits/old-town/tests/ot13/mk13_first.py`, `gidi-data:research/google/kits/old-town/tests/ot149/mk149_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_first.py`, `gidi-game:tools/road_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.2); `gidi:decisions/NOW.md` (0.18); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.18).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.2); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.18); `gidi:decisions/NOW.md` (0.18).
 
 ## gidi-data:research/google/kits/old-town/tests/ot149
 ### `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`
@@ -120,7 +120,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: reused, pass, camera, darker, sacks, textured, colour, ruts. Last changed 2026-10-24, 234 lines.
 Links to 2: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/facade_hand.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.33); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.3); `gidi:decisions/NOW.md` (0.26).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.33); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.3); `gidi:decisions/NOW.md` (0.25).
 
 ## gidi-data:research/google/kits/old-town/tests/ot45
 ### `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`
@@ -128,7 +128,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: photo's, tractor, rubbish, bonneted, desk, dirt, flatbed, wings. Last changed 2026-10-24, 137 lines.
 Links to 12: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45.py`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45_2.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_pass.py`, `gidi-data:research/google/kits/old-town/tests/ot45/run45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/sbs.py`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:scripts/check_rules.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.28); `gidi:decisions/NOW.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.27); `gidi:decisions/NOW.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
 
 ## gidi-data:research/google/kits/old-town/tests/ot73
 ### `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`
@@ -136,7 +136,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` 
 For: photo's, drafted, kerbs, balls, grass, rider, fence, lean. Last changed 2026-10-24, 76 lines.
 Links to 6: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot73/hand73.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_first.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_pass.py`
 Backlinks: 1 documents (`gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md` (0.28); `gidi:decisions/NOW.md` (0.23).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md` (0.27); `gidi:decisions/NOW.md` (0.22).
 
 ## gidi-data:research/google/kits/old-town/tests/ot91
 ### `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md`
@@ -149,7 +149,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`
 ## gidi-data:research/google/kits/old-town/tests/ut01_emmanuel
 ### `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`
 **Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles**. Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles: The owner's ultimate test (DECISIONS, 23 Oct): list every thing in the real pictures, model each one clean to a standard look (whole, from every side, wear as a layer), rebuild the picture from those things alone, then rebuild the other angles.
-For: angles, crates, emmanuel, gidi-game, bench, pallet, pickup, stall. Last changed 2026-10-24, 102 lines.
+For: angles, crates, emmanuel, gidi-game, bench, pallet, pickup, timber. Last changed 2026-10-24, 102 lines.
 Links to 8: `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`
 Backlinks: 2 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/NOW.md`), 0 code files ().
 Nearest in words: `gidi:decisions/NOW.md` (0.3); `gidi-game:docs/ASSET-INVENTORY.md` (0.29); `gidi:docs/look/research-housing.md` (0.2).
@@ -197,10 +197,10 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`
 ## (top)
 ### `gidi-game:ASSETS.md`
 **Hand-made assets**. Hand-made assets: | Asset | Where | Source | Status | |---|---|---|---| | Danfo Basic 2.0 (font): the owner's danfo lettering (BirdFont, July 2022), spaced, kerned and given punctuation by script (tools/font_space.py, font_punct.py) | Art/Fonts/DanfoBasic.ttf (built by tools/font_build.sh from Art/Fonts/src: the 2022 letters and Alfa Slab One) | the owner, built on Alfa Slab One (JM Solé), SIL Open Font License 1.1 (Art/Fonts/OFL.txt) | to use: danfo bodywork, signboards, the game's titles |
-For: content, font, claude, makehuman, tools, gidiplate, ambientcg, plates. Last changed 2026-10-25, 36 lines.
-Links to 33: `gidi-game:Art/People/hawker/hawker.blend`, `gidi-game:Art/People/hawker/spec.json`, `gidi-game:Art/Plates/plates.json`, `gidi-game:Art/Vehicles/BrtBuilt/brt_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/brt_red_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/red.json`, `gidi-game:Art/Vehicles/Danfo/danfo.blend`, `gidi-game:Art/Vehicles/KekeBuilt/keke_parts.blend`, `gidi-game:Art/Vehicles/MolueBuilt/molue_parts.blend`, `gidi-game:Art/Vehicles/Okada/okada.blend`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_plates.py` ...
+For: content, font, claude, tools, makehuman, gidiplate, ambientcg, plates. Last changed 2026-10-25, 36 lines.
+Links to 32: `gidi-game:Art/People/hawker/hawker.blend`, `gidi-game:Art/People/hawker/spec.json`, `gidi-game:Art/Plates/plates.json`, `gidi-game:Art/Vehicles/BrtBuilt/brt_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/brt_red_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/red.json`, `gidi-game:Art/Vehicles/Danfo/danfo.blend`, `gidi-game:Art/Vehicles/KekeBuilt/keke_parts.blend`, `gidi-game:Art/Vehicles/MolueBuilt/molue_parts.blend`, `gidi-game:Art/Vehicles/Okada/okada.blend`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_plates.py` ...
 Backlinks: 4 documents (`gidi-game:CLAUDE.md`, `gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`), 2 code files (`gidi-game:.gitignore`, `gidi-game:Content/Python/gidi_underdeck.py`).
-Nearest in words: `gidi-game:docs/ASSET-INVENTORY.md` (0.21); `gidi:decisions/IDEAS.md` (0.18); `gidi:decisions/DECISIONS.md` (0.17).
+Nearest in words: `gidi-game:docs/ASSET-INVENTORY.md` (0.22); `gidi:decisions/IDEAS.md` (0.18); `gidi:decisions/DECISIONS.md` (0.17).
 
 ## gidi-game:Art/Buildings/BlockBuilt
 ### `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`
@@ -239,14 +239,14 @@ Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.27); `gidi:decisions/DECISI
 For: recipes, tools, manny, asphalt, concrete, animations, map's, build. Last changed 2026-10-23, 21 lines.
 Links to 9: `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 2 code files (`gidi-game:.gitignore`, `gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md` (0.29); `gidi-game:ASSETS.md` (0.21); `gidi:decisions/NOW.md` (0.18).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md` (0.29); `gidi-game:ASSETS.md` (0.22); `gidi:decisions/NOW.md` (0.18).
 
 ### `gidi-game:docs/PERFORMANCE.md`
 **Performance: modes, near detail, streaming, budgets**. Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, "Build light, look full"): build in a light mode, play in the mode the machine can carry, flip to full only to look and take pictures. Near things carry detail and far things are simple. What the camera can't see is not drawn. The world streams in pieces around the player. Every level has a budget,
-For: tools, mode, lumen, editor, play, modes, unrealeditor, saved. Last changed 2026-10-25, 270 lines.
+For: tools, mode, lumen, editor, play, modes, unrealeditor, saved. Last changed 2026-10-25, 286 lines.
 Links to 16: `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/img_diff.py`, `gidi-game:tools/lap_check.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`, `gidi-game:tools/memreport.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/package.sh`, `gidi-game:tools/piece_match.py` ...
 Backlinks: 4 documents (`gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 8 code files (`gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`).
-Nearest in words: `gidi-game:README.md` (0.27); `gidi:decisions/NOW.md` (0.17); `gidi-game:docs/ASSET-INVENTORY.md` (0.16).
+Nearest in words: `gidi-game:README.md` (0.27); `gidi-game:docs/ASSET-INVENTORY.md` (0.16); `gidi:decisions/NOW.md` (0.16).
 
 ## (top)
 ### `gidi:CLAUDE.md`
@@ -261,7 +261,7 @@ Nearest in words: `gidi-game:CLAUDE.md` (0.37); `gidi:decisions/DECISIONS.md` (0
 For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-25, 32 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CODEBASE.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:scripts/board_server.py`, `gidi:scripts/check_map.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/inventory.py`, `gidi:web/board.html`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.22); `gidi:decisions/DECISIONS.md` (0.2).
 
 ## gidi:decisions
 ### `gidi:decisions/CHECKS.md`
@@ -274,9 +274,9 @@ Nearest in words: `gidi:decisions/NOW.md` (0.52); `gidi:decisions/DECISIONS.md` 
 ### `gidi:decisions/CODEBASE.md`
 **What the code holds: the three repos, one page**. What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
 For: scripts, gidi-game, district's, draft, inventory, board's, deleted, map's. Last changed 2026-10-25, 175 lines.
-Links to 99: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/ASSET-INVENTORY.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh` ...
+Links to 98: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/ASSET-INVENTORY.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh` ...
 Backlinks: 4 documents (`gidi:CLAUDE.md`, `gidi:README.md`, `gidi:decisions/NOW.md`, `gidi:decisions/README.md`), 3 code files (`gidi:.claude/hooks/checks-before-stop.sh`, `gidi:docs/lagos-study/similar/scripts/common.py`, `gidi:scripts/doc_vault.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.4); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
+Nearest in words: `gidi:decisions/NOW.md` (0.41); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
 
 ### `gidi:decisions/DECISIONS.md`
 **Decisions (the owner's standing rules)**. Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
@@ -301,8 +301,8 @@ Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, pass, records, sent, unreal, test, editor, layer. Last changed 2026-10-25, 321 lines.
-Links to 80: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/frame_motorpark.py` ...
+For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 328 lines.
+Links to 79: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/furniture_build.py` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 1 code files (`gidi:.claude/hooks/review-before-push.sh`).
 Nearest in words: `gidi:decisions/CHECKS.md` (0.52); `gidi:decisions/DECISIONS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.41).
 
@@ -527,7 +527,7 @@ Nearest in words: `gidi:docs/oldisland-pattern-study.md` (0.34); `gidi:docs/fron
 For: slip, knot, maze, stadium, northern, terminal, skywalks, percentile. Last changed 2026-10-13, 278 lines.
 Links to 3: `gidi:data/results/lga_table.json`, `gidi:docs/img/hub-station-skywalk.png`, `gidi:docs/img/hub-vs-real.png`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/maze-pattern-study.md` (0.38); `gidi:docs/foodgate-pattern-study.md` (0.28); `gidi:docs/jungle-pattern-study.md` (0.26).
+Nearest in words: `gidi:docs/maze-pattern-study.md` (0.38); `gidi:docs/foodgate-pattern-study.md` (0.28); `gidi:docs/jungle-pattern-study.md` (0.25).
 
 ### `gidi:docs/jungle-pattern-study.md`
 **Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1)**. Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1): Status: generated for review (13 Oct 2026). Same method as the Maze and the Hub: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
@@ -626,7 +626,7 @@ Nearest in words: `gidi:docs/look/research-transport.md` (0.47); `gidi:docs/look
 
 ### `gidi:docs/look/research-commerce.md`
 **Gidi commerce catalogue: markets, shops, commerce and industry**. Gidi commerce catalogue: markets, shops, commerce and industry: Purpose: specs for the seeded Blender kit. This builds on `docs/look/research-buildings.md` §6 (shop bays, container shop, kiosk, stall, plaza) and `docs/look/research-street.md` §6 (stall goods, umbrellas, chairs, generators, water tanks, night light). Those base specs are **not repeated**. Where they apply, this file refers to them as `B§6.x` and `S§6.x`.
-For: mapping, select, condition, variants, steel, props, plazas, night. Last changed 2026-10-16, 883 lines.
+For: mapping, select, condition, variants, steel, props, plazas, timber. Last changed 2026-10-16, 883 lines.
 Links to 2: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/look/research-transport.md` (0.52); `gidi:docs/look/research-housing.md` (0.51); `gidi:docs/look/research-leisure.md` (0.45).
@@ -880,5 +880,5 @@ Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` 
 For: lane, repeats, nearby, parallel, twin, shot, south, isolo. Last changed 2026-10-25, 708 lines.
 Links to 5: `gidi:map/d15/BUILDINGS.md`, `gidi:map/d15/road_reads.tsv`, `gidi:scripts/draft_crossings.py`, `gidi:scripts/draft_edge.py`, `gidi:scripts/draft_roads.py`
 Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`, `gidi:map/d15/BUILDINGS.md`), 0 code files ().
-Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.17); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.13); `gidi:map/d15/BUILDINGS.md` (0.11).
+Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.17); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.13); `gidi:map/d15/BUILDINGS.md` (0.1).
 

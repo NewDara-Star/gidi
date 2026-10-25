@@ -18,12 +18,19 @@ merged and checked, add new ones where they belong, and say here when the owner 
      settings in `gidi_surfaces`, sky in `gidi_look`, hero state in `gidi_heroes`); the importer, streaming, signs, check
      camera, Ìbùdó level and photo mode deleted with their tools and generated levels; default map Play_Street;
      `tools/plates.py` reads `web/frame-study.js`; this repo's `web/city/` (3.7 GB, untracked) deleted.
-   - [ ] step 3a: re-measure the street test after step 3 (`tools/measure.sh street high`), against the tB row in
-     gidi-game `docs/PERFORMANCE.md`.
-   - [ ] step 3b: the second reading of the inventory: CODEMAP's 9 unused and 68 maybe pieces, old research docs, gidi-game's
-     19 Oct Lagos-pass tools (`frame_motorpark.py`, `props_build.py`, `prop_basin_final.py`) and the old test streets'
-     generated levels (Play_Street_base, _inst, _inst10, _kit10, _zinc10, _tA, _tB, _empty: about 1.5 GB).
-   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 274 names in 55 files after step 3; the live rules in
+   - [x] step 3a (gidi-game #97): tB measured again: GPU 13.9/13.8 ms (was 15.2/14.7), memory 5,987/6,000 MB, same
+     picture (0.07% of pixels); why the GPU is ~1 ms lower is not found.
+   - [ ] step 3b: the second reading of the inventory. Done: gidi-game #98 (dead names out of the builders,
+     `frame_motorpark.py` deleted, `props_build.py` and `prop_basin_final.py` kept as live recipes); this repo's dead
+     names in `frame_study.py`, `frame_footprints.py` and the roads study's `common.py`; the old test streets' levels
+     and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct, the old perf files, this
+     repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB), all untracked. Still to do: the old research docs,
+     and the research "maybe" pieces (the roads study scripts, `~/gidi-data` kit tests that import the deleted kit).
+   - [ ] step 3c: the frame study cannot be re-run: `frame_study.py` and `frame_footprints.py` read the roads study's
+     working files (network.json, skel.pkl, wc50.npz, places.npz/json), which lived in a temp folder (`common.py` SCR)
+     and are gone. Rebuild them with `docs/lagos-study/roads/scripts` into `~/gidi-data`, point SCR/WORK there, and
+     check the output against `web/frame-study.js` (copy kept in `~/gidi-data/frame-backup-25oct/`, with frame-tiles).
+   - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 279 names in 57 files after step 3b, up from 274 in 55: frame_motorpark.py named where its deletion is noted, and two old-kit names in docs that had only matched files inside the deleted `.venv/`; the live rules in
      DECISIONS done in step 2); NOW.md's dated history and DECISIONS/CODEBASE trimmed to what is current, CODEBASE
      rewritten for the new layout; the `?frame=new` mentions (README, NOW, CODEBASE, MAP-FORMAT, frame_study,
      frame_footprints, mapedit) updated now that the board opens the new frame by default.

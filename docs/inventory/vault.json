@@ -115,9 +115,9 @@
     "records",
     "sent",
     "unreal",
-    "test",
     "editor",
-    "layer"
+    "layer",
+    "dress"
    ]
   },
   {
@@ -792,7 +792,7 @@
     "steel",
     "props",
     "plazas",
-    "night"
+    "timber"
    ]
   },
   {
@@ -1328,8 +1328,8 @@
     "content",
     "font",
     "claude",
-    "makehuman",
     "tools",
+    "makehuman",
     "gidiplate",
     "ambientcg",
     "plates"
@@ -1587,7 +1587,7 @@
     "bench",
     "pallet",
     "pickup",
-    "stall"
+    "timber"
    ]
   },
   {
@@ -1870,10 +1870,6 @@
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/fields.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/frame_motorpark.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2421,10 +2417,6 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/frame_motorpark.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/furniture_build.py"
   },
   {
@@ -2462,10 +2454,6 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi-game:tools/map_build.py"
-  },
-  {
-   "from": "gidi:decisions/NOW.md",
-   "to": "gidi-game:tools/measure.sh"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -2610,6 +2598,10 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi:docs/lagos-study/roads/ROADS.md"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi:docs/lagos-study/roads/scripts/common.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -3858,10 +3850,6 @@
   {
    "from": "gidi-game:ASSETS.md",
    "to": "gidi-game:tools/font_specimen.py"
-  },
-  {
-   "from": "gidi-game:ASSETS.md",
-   "to": "gidi-game:tools/frame_motorpark.py"
   },
   {
    "from": "gidi-game:ASSETS.md",
