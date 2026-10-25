@@ -412,6 +412,7 @@ def check(top, fix=False, only=None):
                 err(f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
     on_road(recs)
     road_lines(recs)
+    road_nodes(recs)
     return files, recs
 
 
@@ -480,6 +481,48 @@ def on_road(recs):
             if a > ON_ROAD:
                 err(f'{recs[hs[j][0]]["_file"]} {hs[j][0]}', f'stands {a:.1f} m2 inside road {rid} ({r["width"]} m wide): '
                     'set the house back, cut its front or leave it out; never narrow the road')
+
+
+def road_nodes(recs):
+    """Where roads meet, they share a point (a node): the junction kit builds a junction at each shared point and nowhere
+    else. Fails: two centrelines crossing without one, or a road end inside another road's carriageway with no node of
+    that road near it (within its half width): a hand edit puts the point on both lines. An end on a node of its own a few
+    metres from the other road's node is a staggered junction, left as drawn: the junction kit joins nodes that close into
+    one junction (pulling them onto one point pushed 26 houses into the roads, 25 Oct)."""
+    try:
+        from shapely.geometry import LineString, Point
+        from shapely.strtree import STRtree
+    except ImportError:
+        return err('map', 'the road-node check needs shapely (run with ~/.venvs/gidi/bin/python)')
+    rs = [(rid, r) for rid, r in recs.items() if r.get('type') == 'road' and is_num(r.get('width'))
+          and isinstance(r.get('centreline'), list) and len([p for p in r['centreline'] if is_pt(p)]) >= 2]
+    pts = {rid: [tuple(p[:2]) for p in r['centreline'] if is_pt(p)] for rid, r in rs}
+    lines = [LineString(pts[rid]) for rid, _ in rs]
+    tree = STRtree(lines)
+    node = {}
+    for rid, _ in rs:
+        for q in {(round(a[0], 1), round(a[1], 1)) for a in pts[rid]}:
+            node[q] = node.get(q, 0) + 1
+    near = lambda q, ps: any(math.hypot(q[0] - a[0], q[1] - a[1]) < 0.3 for a in ps)
+    for k, (rid, r) in enumerate(rs):
+        w = f'{r["_file"]} {rid}'
+        for e in (pts[rid][0], pts[rid][-1]):
+            for j in tree.query(Point(e).buffer(60)):
+                oid, o = rs[j]
+                if oid == rid or lines[j].distance(Point(e)) >= o['width'] / 2 or near(e, pts[oid]):
+                    continue
+                if node.get((round(e[0], 1), round(e[1], 1)), 0) > 1 and \
+                        min(math.hypot(e[0] - a[0], e[1] - a[1]) for a in pts[oid]) < o['width'] / 2 + 0.5:
+                    continue   # a staggered junction: two nodes closer than the road is wide
+                err(w, f'its end at {list(e)} is inside road {oid} with no node of it near (no junction)')
+        for j in tree.query(lines[k]):
+            oid = rs[j][0]
+            if oid <= rid or not lines[k].crosses(lines[j]):
+                continue
+            x = lines[k].intersection(lines[j])
+            for g in getattr(x, 'geoms', [x]):
+                if g.geom_type == 'Point' and not (near((g.x, g.y), pts[rid]) and near((g.x, g.y), pts[oid])):
+                    err(w, f'crosses road {oid} at {[round(g.x, 2), round(g.y, 2)]} without a shared point (no node)')
 
 
 # ------------------------------------------------------------------ what each kit part reads
