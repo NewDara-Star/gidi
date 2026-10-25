@@ -13,6 +13,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
    it (and the 8 corners check_map still lists, all on junction nodes). Roads that meet now share a point (#335);
    the kit must also join the 50 staggered junctions check_map counts (two nodes a few metres apart, inside each
    other's road) into one junction each; tested on a T and a crossroads against photos.
+   Progress 25 Oct: duplicate roads cut back (#336); gidi-game #89 merged: `tools/junction_geo.py` (each junction's
+   shape from the roads, staggered ones grouped; `--check`: 554 junctions, 553 patches valid, cuts median 5.66 m),
+   `tools/junction_build.py` (the patch and the drains turning its corners), and map_build now lays each road as
+   stretches between junctions, the seams within 5 mm. Left: the motorway merge at 13294,6305 (70 m2 over a house,
+   a 115k-face patch); the one invalid patch (12547.9,6070.6, a corner on check_map's list); the T and crossroads
+   against photos; the box with houses (block_build fails on an L-shaped pitched roof there: item 5).
 3. [ ] Trees, masts, heaps (92, 15 and 12 records in d15) and weeds: builders tested against photos; Meshy for the hard
    shapes before the credits expire on 11 Nov (cost stated first).
 4. [ ] Ground: the road and verge colours (grey dusty tar, not tan or black), sand and earth as the map paints them.
