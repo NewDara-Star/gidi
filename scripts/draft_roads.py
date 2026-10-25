@@ -17,6 +17,9 @@ the OSM segment). Here every image is read by hand and the readings of one road 
   reading with no MEDIAN= in its edge counts as none);
 - gutters and verges: each reading holds for its own 100 m stretch (s0 to s1 along the centreline), offset from the
   centreline by half the width plus half the gutter; gutters 0.5 m wide, 0.45 deep, half blocked (the state seen most);
+- gutters and verges none seen: an empty list (drawn, none there);
+- crown: half the width times the normal cross slope, 2% for a sealed surface (tar, concrete, interlock: AASHTO's 1.5-2%
+  for high-type pavements) and 4% for a loose one (sand, earth, laterite: FHWA's Gravel Roads guide), 0 for plank;
 - a road with no reading of its own (no Street View) takes the fields of the nearest road of the same kind that has
   one, whole length; it is listed for the hand pass.
 
@@ -32,6 +35,8 @@ from collections import Counter
 from shapely.geometry import LineString
 
 GUT_W, GUT_D = 0.5, 0.45
+SLOPE = {'tar_new': 0.02, 'tar_worn': 0.02, 'concrete': 0.02, 'interlock': 0.02, 'sand': 0.04, 'earth': 0.04,
+         'laterite': 0.04, 'plank': 0.0}
 
 
 def common(vals):
@@ -61,11 +66,13 @@ def fields(road, rows, L):
             if r[vc] not in ('-', ''):
                 sf, vw = r[vc].split(':')
                 ver.append({'side': side, 's0': s0, 's1': s1, 'surface': sf, 'width': float(vw)})
-    if gut:
-        f['gutters'] = gut
-    if ver:
-        f['verges'] = ver
+    f['gutters'], f['verges'] = gut, ver
     return f
+
+
+def crown(road):
+    slope = SLOPE.get(road.get('surface'))
+    return round(slope * road['width'] / 2, 2) if slope is not None and road.get('width') else None
 
 
 def main():
@@ -106,6 +113,9 @@ def main():
             if k not in road:
                 road[k] = v
                 written[k] += 1
+        if 'crown' not in road and crown(road) is not None:
+            road['crown'] = crown(road)
+            written['crown'] += 1
     print(f'{own} roads from their own readings; {len(borrowed)} from the nearest read road of their kind')
     print('fields written:', dict(written))
     for a, b in borrowed:
