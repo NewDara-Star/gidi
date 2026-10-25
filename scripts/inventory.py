@@ -214,7 +214,7 @@ def main():
             del broken[k]
 
     # Which missing names are still unmarked. Marked: the line naming it says it is gone, by the push hook's own words
-    # (.claude/hooks/checks-before-commit.sh, HONEST), or the document says so at its top (the history note naming the
+    # (.claude/hooks/repo.sh, HONEST; tests/test_inventory.py holds the two the same), or the document says so at its top (the history note naming the
     # tag that holds the deleted files). Both counts are printed; the unmarked ones are the ones to fix.
     unmarked = {}
     for key, t in texts.items():

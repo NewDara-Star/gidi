@@ -56,5 +56,12 @@ if C.find_ts():
 else:
     fails.append('no TypeScript compiler: the JavaScript cases could not run')
 
+# The words that mark a missing file as gone: the inventory's must be the push hook's, or the two counts disagree
+import re  # noqa: E402
+import inventory as I  # noqa: E402
+hook = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.claude', 'hooks', 'repo.sh')).read()
+m = re.search(r"HONEST = re\.compile\(r'([^']*)'", hook)
+check("the inventory's gone-words are the hook's", I.HONEST.pattern, m and m.group(1))
+
 print('\n'.join(fails) or 'test_inventory: all cases pass')
 sys.exit(1 if fails else 0)

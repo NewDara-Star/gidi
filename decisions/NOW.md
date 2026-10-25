@@ -28,7 +28,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
      old test streets' levels and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct,
      the old perf files, this repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB).
    - [x] step 4: docs that name deleted files. Live docs fixed line by line (BOARD.md rewritten for today's board,
-     CODEBASE rewritten for the new layout, gidi-game PERFORMANCE's "what is on", MAP-FORMAT's board and import parts,
+     CODEBASE rewritten for the new layout, gidi-game PERFORMANCE's "what is on" (#100), MAP-FORMAT's board and import parts,
      the `?frame=new` mentions); history docs carry a note at their top; `scripts/inventory.py` now counts the names not
      marked as gone: 1 left, the output file `appendix.py` writes (not a pointer).
    - [ ] step 4b: NOW.md's dated log and DECISIONS trimmed to what is current (the replaced parts to HISTORY.md).
