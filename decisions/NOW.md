@@ -62,6 +62,13 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
   woods were polished or veneer) laid along each board's UVs, in the test renders and in Unreal's new M_GidiTimber. Boards
   read as weathered timber; g01z boards 205,191,171 against the photo's 219,194,162. Not yet seen on a mesh in Unreal.
   Swap sits at 5.9-6.3 GB: the watchdog stops headless Unreal within a minute until the Mac is restarted.
+- **Kerbs** (gidi #325, gidi-game #84): roads can say a painted kerb's colours (`kerb_paint`; black and white when
+  absent; rd-sdso0qxv set red and white from its reading). The road kit builds painted_bw kerbs 0.40 m tall in
+  0.915 m paint blocks (measured on test spot g02, the yellow-and-black kerb at the Ogunmokun St rail crossing:
+  paint within 12-16 levels of the photo) and raised_pavement HB2 kerbs with the footway at their top; where a drain
+  takes over the edge, a cast block closes the join, and drains now have end walls. Open: g02's road reads warm tan
+  against the photo's grey (the ground pass); the kerb-to-drain block is plain. Next: grated covers (g03), earth
+  drains, then laying the pieces along the real centrelines.
 
 **Waiting on the owner.**
 1. **People** (settled 24 Oct, DECISIONS "People"): MakeHuman one-mesh crowd, MetaHuman for the people you interact with,
