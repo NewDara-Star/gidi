@@ -1,6 +1,6 @@
 # The story of Gidi
 
-Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire (`to-delete/docs/gidi-districts-v0.3.md`).
+Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire.
 
 | File | What | In this repo? |
 |---|---|---|
@@ -9,12 +9,8 @@ Tunde, an okada rider, in debt to the boss who runs the motor park. The city ope
 | `gidi-roadmap.md`, `gidi-act1-flow.mermaid` | The roadmap (the story pass is stage 3) and Act 1's flowchart | **No.** It's with the owner's other account; paste it here |
 | `gidi-performance-capture.md` | Dialogue-first prototyping (Ink), then cutscenes | **No.** It's with the owner's other account; paste it here |
 
-**Already built into the map** (`to-delete/docs/CITY-LIVING-TEST.md`):
-- the opening at Ladi Lane Parts Market in the Maze: The steal's stall, the boss's post at the market's west mouth
-- the boss's motor park in the Hub
-- Tunde's room, a few minutes' walk from the market
-
-**One thing to settle:** `to-delete/docs/gidi-districts-v0.3.md` puts Tunde's room in Jungle City; the locked opening puts it in the Maze.
+**Places in the map:** none yet. The opening (Ladi Lane Parts Market, the boss's motor park, Tunde's room) was placed on
+the old generated map, which is gone; on the new map they are placed by hand when their districts are drawn.
 
 **Next (owner):** write the characters, using the character sheet in `acts-2-3-draft.md`.
 

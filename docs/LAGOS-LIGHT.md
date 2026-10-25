@@ -1,6 +1,6 @@
 # Lagos light: why the city looks different
 
-The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel of the light aren't the same. Most of it is physics. This is the lighting brief for Gidi's look, in the browser now and in Unreal later (`to-delete/docs/UNREAL-PORT-PLAN.md`).
+The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel of the light aren't the same. Most of it is physics. This is the lighting brief for Gidi's look, in the browser now and in Unreal later.
 
 ## 1. A high sun
 - Lagos is about 6° north of the equator, so for most of the day the sun is nearly overhead.

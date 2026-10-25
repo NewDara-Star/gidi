@@ -1,11 +1,11 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 6728 pieces of code in 240 files: 21 used nowhere, 111 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 7257 pieces of code in 266 files: 21 used nowhere, 114 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
 - `gidi-game:Content/Python/gidi_signs.py`: `place_signs` (function, line 55)
-- `gidi-game:tools/map_build.py`: `BUILDER` (const, line 41)
+- `gidi-game:tools/map_build.py`: `BUILDER` (const, line 45)
 - `gidi-game:tools/plates.py`: `PLATE` (const, line 28)
 - `gidi:docs/lagos-study/roads/scripts/common.py`: `C250` (const, line 13), `lga_shapes` (function, line 24)
 - `gidi:legacy/blender/city.py`: `_clear` (function, line 287), `blocks_faces` (function, line 453)
@@ -87,20 +87,20 @@ Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, cla
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:Content/Python/gidi_heroes.py`
-20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_underdeck.py`; `DEST` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `TILE` in `gidi-game:Content/Python/gidi_import.py`; `HERO_V` in `gidi-game:Content/Python/gidi_underdeck.py`; `HEROES` in `gidi-game:Content/Python/gidi_underdeck.py`; `_is_paint` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_sig` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_import` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `load` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `place` in `gidi-game:Content/Python/gidi_import.py`
+20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_underdeck.py`; `DEST` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `TILE` in `gidi-game:Content/Python/gidi_import.py`; `HERO_V` in `gidi-game:Content/Python/gidi_underdeck.py`; `HEROES` in `gidi-game:Content/Python/gidi_underdeck.py`; `_is_paint` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_master` in `gidi-game:Content/Python/gidi_street.py`; `_sig` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_import` in `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `load` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `place` in `gidi-game:Content/Python/gidi_import.py`
 
 ### `gidi-game:Content/Python/gidi_import.py`
-31 defined (31 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `STATE` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `masters` in `gidi-game:Content/Python/gidi_underdeck.py`; `_slot_kind` in `gidi-game:Content/Python/gidi_underdeck.py`; `_pipeline` in `gidi-game:Content/Python/gidi_underdeck.py`; `_environment` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `tile_map` in `gidi-game:Content/Python/gidi_play.py`; `_sig` in `gidi-game:Content/Python/gidi_underdeck.py`
+31 defined (31 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `STATE` in `gidi-game:Content/Python/gidi_underdeck.py`; `say` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `masters` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_slot_kind` in `gidi-game:Content/Python/gidi_underdeck.py`; `_pipeline` in `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `_environment` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `tile_map` in `gidi-game:Content/Python/gidi_play.py`; `_sig` in `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_look.py`
-2 defined (2 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `apply` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`
+2 defined (2 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `apply` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_modes.py`
-9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
-Used elsewhere: `people_levels` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `open_clean` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `add_level` in `gidi-game:Content/Python/gidi_play.py`; `save_play` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `scene_count` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`
+9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
+Used elsewhere: `people_levels` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `open_clean` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `add_level` in `gidi-game:Content/Python/gidi_play.py`; `save_play` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`; `scene_count` in `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`
 
 ### `gidi-game:Content/Python/gidi_paint.py`
 7 defined (7 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_surfaces.py`. Imported by: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_photo.py`.
@@ -116,6 +116,9 @@ Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:
 ### `gidi-game:Content/Python/gidi_play.py`
 22 defined (22 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`. Imported by: nothing.
 
+### `gidi-game:Content/Python/gidi_scan_export.py`
+6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
 ### `gidi-game:Content/Python/gidi_signs.py`
 6 defined (5 used, 0 maybe, 1 unused). Imports: none of ours. Imported by: nothing.
 
@@ -123,15 +126,18 @@ Used elsewhere: `HERE` in `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:
 7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`.
 Used elsewhere: `MAP` in `gidi-game:Content/Python/gidi_import.py`; `say` in `gidi-game:Content/Python/gidi_import.py`; `apply` in `gidi-game:Content/Python/gidi_import.py`
 
+### `gidi-game:Content/Python/gidi_street.py`
+21 defined (21 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`. Imported by: nothing.
+
 ### `gidi-game:Content/Python/gidi_surfaces.py`
-22 defined (22 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_paint.py`.
+28 defined (28 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_paint.py`.
 Used elsewhere: `GEN` in `gidi-game:Content/Python/gidi_import.py`; `MATS` in `gidi-game:Content/Python/gidi_import.py`; `_scan` in `gidi-game:Content/Python/gidi_paint.py`; `say` in `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_paint.py`; `textures` in `gidi-game:Content/Python/gidi_paint.py`; `instances` in `gidi-game:Content/Python/gidi_import.py`
 
 ### `gidi-game:Content/Python/gidi_underdeck.py`
 25 defined (25 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: nothing.
 
 ### `gidi-game:tools/block_build.py`
-41 defined (41 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+50 defined (50 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/zinc_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/brt_build.py`
 65 defined (63 used, 2 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/vehicle_stickers.py`. Imported by: nothing.
@@ -140,8 +146,8 @@ Used elsewhere: `GEN` in `gidi-game:Content/Python/gidi_import.py`; `MATS` in `g
 83 defined (81 used, 2 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_stickers.py`. Imported by: nothing.
 
 ### `gidi-game:tools/fields.py`
-19 defined (19 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/spot_to_map.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`.
-Used elsewhere: `OPTIONS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`; `kind` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/map_build.py`; `name` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/lorry_build.py`; `get` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`; `items` in `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`; `values` in `gidi-game:tools/lorry_build.py`, `gidi-game:tools/spot_to_map.py`; `track` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`
+19 defined (19 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/junction_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/road_build.py`, `gidi-game:tools/spot_to_map.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`.
+Used elsewhere: `OPTIONS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`; `kind` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/junction_build.py`, `gidi-game:tools/loose_build.py`; `name` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/leanto_build.py`; `get` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`; `items` in `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`; `values` in `gidi-game:tools/lorry_build.py`, `gidi-game:tools/road_build.py`, `gidi-game:tools/spot_to_map.py`; `track` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/furniture_build.py`
 
 ### `gidi-game:tools/font_brush.py`
 13 defined (13 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/font_space.py`. Imported by: nothing.
@@ -169,8 +175,21 @@ Used elsewhere: `SIDE` in `gidi-game:tools/font_plate.py`; `Flat` in `gidi-game:
 34 defined (34 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/vehicle_kit.py`. Imported by: `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/stall_build.py`.
 Used elsewhere: `PHI` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/stall_build.py`; `rgb` in `gidi-game:tools/stall_build.py`; `Goods` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/stall_build.py`; `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`; `m` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/stall_build.py`; `bm` in `gidi-game:tools/stall_build.py`; `box` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/stall_build.py`; `cyl` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/stall_build.py`; `ring` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/stall_build.py`; `done` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/stall_build.py`; `build` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/stall_build.py`; `materials` in `gidi-game:tools/furniture_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/stall_build.py`; `litter` in `gidi-game:tools/loose_build.py`
 
+### `gidi-game:tools/img_diff.py`
+12 defined (12 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/junction_build.py`
+28 defined (28 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/road_build.py`. Imported by: nothing.
+
+### `gidi-game:tools/junction_geo.py`
+43 defined (43 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/map_build.py`, `gidi-game:tools/road_build.py`.
+Used elsewhere: `T_WALL` in `gidi-game:tools/road_build.py`; `add` in `gidi-game:tools/map_build.py`; `left` in `gidi-game:tools/road_build.py`; `length` in `gidi-game:tools/road_build.py`; `at` in `gidi-game:tools/map_build.py`; `edge` in `gidi-game:tools/road_build.py`; `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`; `side` in `gidi-game:tools/road_build.py`; `out` in `gidi-game:tools/map_build.py`, `gidi-game:tools/road_build.py`; `groups` in `gidi-game:tools/map_build.py`; `junction` in `gidi-game:tools/map_build.py`; `nodes` in `gidi-game:tools/map_build.py`; `pieces` in `gidi-game:tools/map_build.py`, `gidi-game:tools/road_build.py`; `clear_of` in `gidi-game:tools/map_build.py`; `recipe` in `gidi-game:tools/map_build.py`; `d` in `gidi-game:tools/map_build.py`, `gidi-game:tools/road_build.py`; `roads` in `gidi-game:tools/map_build.py`; `P` in `gidi-game:tools/road_build.py`; `j` in `gidi-game:tools/map_build.py`, `gidi-game:tools/road_build.py`; `gs` in `gidi-game:tools/road_build.py`
+
 ### `gidi-game:tools/keke_build.py`
 84 defined (82 used, 2 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/vehicle_stickers.py`. Imported by: nothing.
+
+### `gidi-game:tools/kit_compare.py`
+6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/kit_fields.py`
 20 defined (20 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`.
@@ -179,8 +198,17 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 ### `gidi-game:tools/labels.py`
 13 defined (13 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
+### `gidi-game:tools/lap_check.py`
+4 defined (4 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/leanto_build.py`
+36 defined (34 used, 2 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/zinc_kit.py`. Imported by: nothing.
+
 ### `gidi-game:tools/lettering.py`
 38 defined (38 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/font_space.py`. Imported by: nothing.
+
+### `gidi-game:tools/look_travels.py`
+10 defined (10 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/loose_build.py`
 5 defined (5 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
@@ -192,10 +220,14 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/map_build.py`
-33 defined (32 used, 0 maybe, 1 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`. Imported by: nothing.
+33 defined (32 used, 0 maybe, 1 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/junction_geo.py`, `gidi-game:tools/kit_fields.py`. Imported by: `gidi-game:tools/street_test.py`.
+Used elsewhere: `load` in `gidi-game:tools/street_test.py`; `rows` in `gidi-game:tools/street_test.py`; `recipe` in `gidi-game:tools/street_test.py`; `things` in `gidi-game:tools/street_test.py`; `localise` in `gidi-game:tools/street_test.py`; `a` in `gidi-game:tools/street_test.py`; `OUT` in `gidi-game:tools/street_test.py`; `recs` in `gidi-game:tools/street_test.py`; `ts` in `gidi-game:tools/street_test.py`; `x` in `gidi-game:tools/street_test.py`; `y` in `gidi-game:tools/street_test.py`; `z` in `gidi-game:tools/street_test.py`; `turn` in `gidi-game:tools/street_test.py`; `pitch` in `gidi-game:tools/street_test.py`
 
 ### `gidi-game:tools/measure_csv.py`
 33 defined (33 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/memreport_later.py`
+4 defined (4 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/mode_sg.py`
 3 defined (3 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -209,6 +241,9 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 ### `gidi-game:tools/pickup_build.py`
 57 defined (55 used, 2 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`, `gidi-game:tools/vehicle_stickers.py`. Imported by: nothing.
 
+### `gidi-game:tools/piece_match.py`
+6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
 ### `gidi-game:tools/plates.py`
 29 defined (28 used, 0 maybe, 1 unused). Imports: none of ours. Imported by: nothing.
 
@@ -221,21 +256,43 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 ### `gidi-game:tools/props_build.py`
 37 defined (35 used, 2 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
+### `gidi-game:tools/road_build.py`
+99 defined (98 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/junction_geo.py`. Imported by: `gidi-game:tools/junction_build.py`.
+Used elsewhere: `A` in `gidi-game:tools/junction_build.py`; `FIELDS` in `gidi-game:tools/junction_build.py`; `HW` in `gidi-game:tools/junction_build.py`; `SURF` in `gidi-game:tools/junction_build.py`; `T_WALL` in `gidi-game:tools/junction_build.py`; `KERB` in `gidi-game:tools/junction_build.py`; `SAND_C` in `gidi-game:tools/junction_build.py`; `EARTH` in `gidi-game:tools/junction_build.py`; `SILT_WET` in `gidi-game:tools/junction_build.py`; `SILT_CRUST` in `gidi-game:tools/junction_build.py`; `WATER` in `gidi-game:tools/junction_build.py`; `lerp3` in `gidi-game:tools/junction_build.py`; `n3` in `gidi-game:tools/junction_build.py`; `smooth` in `gidi-game:tools/junction_build.py`; `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`; `vert` in `gidi-game:tools/junction_build.py`; `face` in `gidi-game:tools/junction_build.py`; `part` in `gidi-game:tools/junction_build.py`; `grid` in `gidi-game:tools/junction_build.py`; `fsplit` in `gidi-game:tools/junction_build.py`; `frange` in `gidi-game:tools/junction_build.py`; `rows` in `gidi-game:tools/junction_build.py`; `road_z` in `gidi-game:tools/junction_build.py`; `road_colour` in `gidi-game:tools/junction_build.py`; `slot_of` in `gidi-game:tools/junction_build.py`; `runs` in `gidi-game:tools/junction_build.py`; `silt_z` in `gidi-game:tools/junction_build.py`; `water_z` in `gidi-game:tools/junction_build.py`; `wall_colour` in `gidi-game:tools/junction_build.py`; `make_objects` in `gidi-game:tools/junction_build.py`
+
+### `gidi-game:tools/road_draft.py`
+14 defined (14 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/road_look.py`
+50 defined (50 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/scan_shrink.py`
+2 defined (2 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
 ### `gidi-game:tools/spot_assemble.py`
-19 defined (19 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/wear_layer.py`. Imported by: nothing.
+20 defined (20 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/wear_layer.py`. Imported by: nothing.
 
 ### `gidi-game:tools/spot_to_map.py`
 25 defined (25 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`. Imported by: nothing.
 Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font_space.py`, `gidi:legacy/blender/gidi_kit/core.py`, `gidi:scripts/board_server.py`
 
 ### `gidi-game:tools/stall_build.py`
-62 defined (61 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+74 defined (73 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+
+### `gidi-game:tools/street_ground.py`
+17 defined (17 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/street_join.py`
+0 defined (0 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/street_test.py`
+34 defined (34 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/map_build.py`. Imported by: nothing.
 
 ### `gidi-game:tools/trace_mark.py`
 15 defined (15 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/umbrella_build.py`
-50 defined (49 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+59 defined (58 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/underdeck_build.py`
 90 defined (90 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -248,8 +305,8 @@ Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font
 6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/vehicle_kit.py`
-33 defined (33 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`.
-Used elsewhere: `MATS` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `ROOT` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/molue_build.py`; `sc` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`; `mat` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `rgb` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `start` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `obj` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `apply_mods` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/umbrella_build.py`; `solidify` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `smooth` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `_box` in `gidi-game:tools/goods_kit.py`; `boolean` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/pickup_build.py`; `cut` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `copy` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_yz` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_xy` in `gidi-game:tools/block_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`; `grow` in `gidi-game:tools/pickup_build.py`; `box` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`; `tube` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `cylinder` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `join` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `fillet` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `lin` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `arc` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `loft` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `opening` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `cut_door` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `wheel` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `arc_shell` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/pickup_build.py`
+33 defined (33 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/loose_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`, `gidi-game:tools/zinc_kit.py`.
+Used elsewhere: `MATS` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `ROOT` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/molue_build.py`; `sc` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/lorry_build.py`; `mat` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `rgb` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `start` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `obj` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `apply_mods` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/umbrella_build.py`; `solidify` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `smooth` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `_box` in `gidi-game:tools/goods_kit.py`; `boolean` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/pickup_build.py`; `cut` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `copy` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `prism` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_yz` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_xy` in `gidi-game:tools/block_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`; `grow` in `gidi-game:tools/pickup_build.py`; `box` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`; `tube` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `cylinder` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `join` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `fillet` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `lin` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `arc` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `loft` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `opening` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `cut_door` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `wheel` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `arc_shell` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/pickup_build.py`
 
 ### `gidi-game:tools/vehicle_look.py`
 68 defined (67 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -270,6 +327,10 @@ Used elsewhere: `ground` in `gidi-game:tools/spot_assemble.py`; `apply` in `gidi
 
 ### `gidi-game:tools/winshot.py`
 5 defined (5 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi-game:tools/zinc_kit.py`
+33 defined (33 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/vehicle_kit.py`. Imported by: `gidi-game:tools/block_build.py`, `gidi-game:tools/leanto_build.py`.
+Used elsewhere: `RUST_DARK` in `gidi-game:tools/block_build.py`; `table` in `gidi-game:tools/leanto_build.py`; `hexmix` in `gidi-game:tools/block_build.py`; `slope` in `gidi-game:tools/block_build.py`, `gidi-game:tools/leanto_build.py`
 
 ### `gidi:data/results/heights.py`
 8 defined (8 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -545,7 +606,7 @@ Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font
 36 defined (36 used, 0 maybe, 0 unused). Imports: `gidi:scripts/cross_sections.py`, `gidi:scripts/ground.py`, `gidi:scripts/walknet.py`. Imported by: nothing.
 
 ### `gidi:scripts/check_map.py`
-39 defined (39 used, 0 maybe, 0 unused). Imports: `gidi:scripts/realnames.py`. Imported by: `gidi:scripts/board_server.py`.
+48 defined (48 used, 0 maybe, 0 unused). Imports: `gidi:scripts/realnames.py`. Imported by: `gidi:scripts/board_server.py`.
 Used elsewhere: `ROOT` in `gidi:scripts/board_server.py`; `SCHEMA` in `gidi:scripts/board_server.py`; `ID_RE` in `gidi:scripts/board_server.py`; `errors` in `gidi:scripts/board_server.py`; `parse` in `gidi:scripts/board_server.py`; `anchor` in `gidi:scripts/board_server.py`; `tile_of` in `gidi:scripts/board_server.py`; `canonical` in `gidi:scripts/board_server.py`; `check` in `gidi:scripts/board_server.py`; `args` in `gidi:scripts/board_server.py`; `top` in `gidi:scripts/board_server.py`; `files` in `gidi:scripts/board_server.py`; `recs` in `gidi:scripts/board_server.py`; `by` in `gidi:scripts/board_server.py`
 
 ### `gidi:scripts/check_real.py`
@@ -600,7 +661,31 @@ Used elsewhere: `height_bands` in `gidi:scripts/gen_fabric.py`; `STOREY_BANDS` i
 Used elsewhere: `WORD` in `gidi:scripts/inventory.py`; `build` in `gidi:scripts/inventory.py`; `write` in `gidi:scripts/inventory.py`
 
 ### `gidi:scripts/draft_buildings.py`
-27 defined (26 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+27 defined (26 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/draft_kinds.py`, `gidi:scripts/draft_storeys.py`.
+Used elsewhere: `FU` in `gidi:scripts/draft_storeys.py`; `FV` in `gidi:scripts/draft_storeys.py`; `RH` in `gidi:scripts/draft_storeys.py`; `FRONT` in `gidi:scripts/draft_kinds.py`; `WIDTH` in `gidi:scripts/draft_kinds.py`; `footprints` in `gidi:scripts/draft_storeys.py`; `main` in `gidi:scripts/draft_kinds.py`, `gidi:scripts/draft_storeys.py`
+
+### `gidi:scripts/draft_crossings.py`
+7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi:scripts/draft_edge.py`
+10 defined (10 used, 0 maybe, 0 unused). Imports: `gidi:scripts/draft_roads.py`. Imported by: nothing.
+
+### `gidi:scripts/draft_kinds.py`
+7 defined (7 used, 0 maybe, 0 unused). Imports: `gidi:scripts/draft_buildings.py`. Imported by: `gidi:scripts/draft_storeys_nearby.py`.
+Used elsewhere: `KIOSK` in `gidi:scripts/draft_storeys_nearby.py`; `main` in `gidi:scripts/draft_storeys_nearby.py`
+
+### `gidi:scripts/draft_looks.py`
+15 defined (15 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+
+### `gidi:scripts/draft_roads.py`
+7 defined (7 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:scripts/draft_edge.py`.
+Used elsewhere: `common` in `gidi:scripts/draft_edge.py`; `fields` in `gidi:scripts/draft_edge.py`; `main` in `gidi:scripts/draft_edge.py`
+
+### `gidi:scripts/draft_storeys.py`
+10 defined (10 used, 0 maybe, 0 unused). Imports: `gidi:scripts/draft_buildings.py`. Imported by: nothing.
+
+### `gidi:scripts/draft_storeys_nearby.py`
+2 defined (2 used, 0 maybe, 0 unused). Imports: `gidi:scripts/draft_kinds.py`. Imported by: nothing.
 
 ### `gidi:scripts/draw_area.py`
 33 defined (31 used, 2 maybe, 0 unused). Imports: none of ours. Imported by: nothing.

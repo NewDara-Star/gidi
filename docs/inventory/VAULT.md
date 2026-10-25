@@ -2,7 +2,7 @@
 
 Made by `scripts/inventory.py` with `scripts/doc_vault.py`: every markdown document in gidi, gidi-game and gidi-data, what it is for (its title, first line and the words that mark it out), what it links to, what points to it, and the documents nearest it in words. The repo folders open as a vault in Obsidian as they are; `vault.json` holds the same graph.
 
-113 documents: 0 orphans (nothing points to them), 0 near-orphans (only CODEBASE.md or OLD-MAP.md do).
+115 documents: 0 orphans (nothing points to them), 0 near-orphans (only CODEBASE.md or OLD-MAP.md do).
 
 ## Orphans
 
@@ -13,50 +13,50 @@ Made by `scripts/inventory.py` with `scripts/doc_vault.py`: every markdown docum
 ## (top)
 ### `gidi-data:README.md`
 **gidi-data: Gidi's study store**. gidi-data: Gidi's study store: What Gidi studies Lagos from: open datasets, the Google study shots, reference pictures, the kit tests, textures and people assets. It lived inside World Drive's folder (`~/Real-world`) until 24 Oct 2026; the owner moved it out ("take out the Gidi stuff from real world").
-For: datasets, shots, reference, assets, scripts, notes, deep-study, cache. Last changed 2026-10-24, 23 lines.
+For: datasets, shots, reference, assets, notes, scripts, deep-study, cache. Last changed 2026-10-24, 23 lines.
 Links to 4: `gidi-data:research/data/pull-data.sh`, `gidi-data:research/refs/REVIEW.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/DATA-SOURCES.md`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.13); `gidi:decisions/NOW.md` (0.1).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.26); `gidi:decisions/DECISIONS.md` (0.13); `gidi:docs/DATA-SOURCES.md` (0.11).
 
 ## gidi-data:research/google/estate
 ### `gidi-data:research/google/estate/NOTES.md`
 **The Estate: Magodo, Omole, Ikeja GRA (study, 18 Oct 2026). Study only; nothing copied.**. The Estate: Magodo, Omole, Ikeja GRA (study, 18 Oct 2026). Study only; nothing copied.: - Planned: long parallel streets bending with the land, blocks ~60 m wide (two rows of plots back to back) x 200-300 m. - A main drive cuts across; closes end at the estate's edge (the green valley); a clear edge between estate and bush. - Plots in even rows, houses set back with compound walls; roofs: terracotta, grey, some blue.
-For: valley, unplanned, rows, drive, parallel, closes, planned, network. Last changed 2026-10-24, 26 lines.
+For: valley, unplanned, rows, drive, parallel, planned, network, closes. Last changed 2026-10-24, 26 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi:docs/estate-pattern-study.md` (0.15); `gidi:docs/lagos-study/STUDY.md` (0.11); `gidi-data:research/google/maze/NOTES.md` (0.11).
+Nearest in words: `gidi:docs/estate-pattern-study.md` (0.14); `gidi:docs/lagos-study/STUDY.md` (0.11); `gidi-data:research/google/maze/NOTES.md` (0.11).
 
 ## gidi-data:research/google/ibudo
 ### `gidi-data:research/google/ibudo/NOTES.md`
 **Ìbùdó study: Oshodi (19 Oct 2026). Study only: nothing here is copied into Gidi.**. Ìbùdó study: Oshodi (19 Oct 2026). Study only: nothing here is copied into Gidi.: Views (Google Maps / Street View, Jul 2021 and Apr 2024): 01 interchange from above (300 m): the expressway crossing, the Terminal 3 oval, the footbridge, the market west of it. 02 market and bridge from above (250 m): Oshodi Market's red roofs packed between Oshodi Rd and the rail; dense shops.
-For: twin, adekoya, steel, oshodi, poles, shop, awnings, footbridge. Last changed 2026-10-24, 35 lines.
-Links to 1: `gidi:to-delete/docs/TWINS.md`
+For: twin, adekoya, steel, oshodi, shop, awnings, poles, footbridge. Last changed 2026-10-24, 35 lines.
+Links to 0: 
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi:docs/hand/ibudo/README.md` (0.28); `gidi:docs/hand/ibudo/child_plan.md` (0.23); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.21).
+Nearest in words: `gidi:docs/hand/ibudo/README.md` (0.28); `gidi:docs/hand/ibudo/child_plan.md` (0.24); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.21).
 
 ## gidi-data:research/google/ibudo/study
 ### `gidi-data:research/google/ibudo/study/INVENTORY.md`
 **Ìbùdó study, phase 1: Oshodi and Ojuelegba inventory (19 Oct 2026)**. Ìbùdó study, phase 1: Oshodi and Ojuelegba inventory (19 Oct 2026): Study only, from Google Maps satellite with labels and Street View. Nothing here is traced or copied into Gidi; it describes how the two real places are built and how they work, so Ìbùdó's streets and places can be invented from them.
-For: cres, oshodi, ojuelegba, yaba, arena, railway, ilupeju, army. Last changed 2026-10-24, 280 lines.
+For: cres, oshodi, ojuelegba, yaba, arena, ilupeju, stadium, army. Last changed 2026-10-24, 280 lines.
 Links to 0: 
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 2 code files (`gidi:scripts/code_graph.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:docs/hand/ibudo/child_plan.md` (0.54); `gidi-data:research/google/ibudo/NOTES.md` (0.21); `gidi:docs/lagos-study/STUDY.md` (0.19).
+Nearest in words: `gidi:docs/hand/ibudo/child_plan.md` (0.55); `gidi-data:research/google/ibudo/NOTES.md` (0.21); `gidi:docs/lagos-study/STUDY.md` (0.19).
 
 ## gidi-data:research/google/kits/old-town
 ### `gidi-data:research/google/kits/old-town/KIT.md`
 **Dense old town kit**. Dense old town kit: This is the kit list for the dense old towns of Lagos, ready for the owner to check. It is built only from the Street View shots in this folder. Their notes are in `shots.tsv`. A number like ot42 means shot `ot42_*.jpg`.
-For: eyes, shots, desk, steel, sheet, timber, example, plank. Last changed 2026-10-24, 682 lines.
+For: eyes, shots, desk, steel, example, sheet, timber, pass. Last changed 2026-10-24, 682 lines.
 Links to 7: `gidi-data:research/google/kits/old-town/tests/facade_hand.py`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi:legacy/blender/city.py`, `gidi:legacy/blender/generate.py`, `gidi:legacy/blender/gidi_kit/draft.py`, `gidi:legacy/blender/kit_draft.py`, `gidi:legacy/blender/kit_test.py`
-Backlinks: 9 documents (`gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md` ...), 13 code files (`gidi-data:research/google/kits/old-town/tests/ot13/mk13_first.py`, `gidi-data:research/google/kits/old-town/tests/ot149/mk149_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_first.py`, `gidi:legacy/blender/gidi_kit/core.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.2); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.19); `gidi:decisions/NOW.md` (0.19).
+Backlinks: 11 documents (`gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md` ...), 15 code files (`gidi-data:research/google/kits/old-town/tests/ot13/mk13_first.py`, `gidi-data:research/google/kits/old-town/tests/ot149/mk149_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_first.py`, `gidi-game:tools/road_build.py`).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.2); `gidi:decisions/NOW.md` (0.18); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.18).
 
 ## gidi-data:research/google/kits/old-town/tests/ot149
 ### `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`
 **Kit eye test 3: ot149, Mushin, Ayantuga St (Street View, Jul 2021, heading 180)**. Kit eye test 3: ot149, Mushin, Ayantuga St (Street View, Jul 2021, heading 180): The test: do the kit's parts hold on a third street they were not made for? The owner's eye judges. This is not a pass.
-For: apron, photo, turned, photo's, render, cage, test, toned. Last changed 2026-10-24, 79 lines.
+For: apron, turned, photo, photo's, cage, render, toned, camera. Last changed 2026-10-24, 79 lines.
 Links to 6: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/hand149.py`, `gidi-data:research/google/kits/old-town/tests/ot149/mk149_first.py`, `gidi-data:research/google/kits/old-town/tests/ot149/mk149_pass.py`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi:legacy/blender/kit_draft.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.35); `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.32); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.3).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.34); `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.3).
 
 ## gidi-data:research/google/kits/old-town/tests/ot175
 ### `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`
@@ -64,7 +64,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: reused, pass, camera, darker, sacks, colour, textured, ruts. Last changed 2026-10-24, 234 lines.
 Links to 9: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/facade_hand.py`, `gidi:legacy/blender/gidi_kit/goods.py`, `gidi:legacy/blender/gidi_kit/gutters.py`, `gidi:legacy/blender/gidi_kit/oldtown.py`, `gidi:legacy/blender/gidi_kit/roadbed.py`, `gidi:legacy/blender/gidi_kit/textured.py`, `gidi:legacy/blender/kit_draft.py`, `gidi:legacy/blender/kit_test.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.33); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.3); `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md` (0.25).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.33); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.3); `gidi:decisions/NOW.md` (0.26).
 
 ## gidi-data:research/google/kits/old-town/tests/ot45
 ### `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`
@@ -72,7 +72,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: photo's, tractor, rubbish, bonneted, desk, dirt, flatbed, wings. Last changed 2026-10-24, 137 lines.
 Links to 13: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45.py`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45_2.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_pass.py`, `gidi-data:research/google/kits/old-town/tests/ot45/run45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/sbs.py`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:legacy/blender/kit_draft.py` ...
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.27).
+Nearest in words: `gidi:decisions/NOW.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
 
 ## gidi-data:research/google/kits/old-town/tests/ot73
 ### `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`
@@ -80,23 +80,23 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` 
 For: photo's, drafted, kerbs, balls, grass, rider, lean, fence. Last changed 2026-10-24, 76 lines.
 Links to 8: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot73/hand73.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_first.py`, `gidi-data:research/google/kits/old-town/tests/ot73/mk73_pass.py`, `gidi:legacy/blender/city_run.py`, `gidi:legacy/blender/kit_draft.py`
 Backlinks: 1 documents (`gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.32); `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.2).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md` (0.28); `gidi:decisions/NOW.md` (0.23).
 
 ## gidi-data:research/google/kits/old-town/tests/ot91
 ### `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md`
 **Kit eye test 2: ot91, Isale Eko, Balogun area (Street View, date n/a, heading 0)**. Kit eye test 2: ot91, Isale Eko, Balogun area (Street View, date n/a, heading 0): The test: do the parts built for ot175 hold on a street they were not made for? The owner's eye judges. This is not a pass.
-For: jitter, stored, positions, goods, scaffold, render, records, test. Last changed 2026-10-24, 168 lines.
+For: jitter, stored, positions, goods, scaffold, records, render, test. Last changed 2026-10-24, 168 lines.
 Links to 4: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/facade_hand.py`, `gidi:legacy/blender/gidi_kit/materials.py`, `gidi:legacy/blender/kit_draft.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.35); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.33); `gidi:decisions/NOW.md` (0.29).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.34); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.33); `gidi:decisions/NOW.md` (0.29).
 
 ## gidi-data:research/google/kits/old-town/tests/ut01_emmanuel
 ### `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`
 **Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles**. Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles: The owner's ultimate test (DECISIONS, 23 Oct): list every thing in the real pictures, model each one clean to a standard look (whole, from every side, wear as a layer), rebuild the picture from those things alone, then rebuild the other angles.
-For: angles, gidi-game, crates, emmanuel, bench, pallet, timber, pickup. Last changed 2026-10-24, 102 lines.
+For: angles, crates, emmanuel, gidi-game, bench, pallet, pickup, stall. Last changed 2026-10-24, 102 lines.
 Links to 8: `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`
 Backlinks: 2 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:decisions/NOW.md` (0.31); `gidi-game:docs/ASSET-INVENTORY.md` (0.29); `gidi:docs/look/research-housing.md` (0.21).
+Nearest in words: `gidi:decisions/NOW.md` (0.3); `gidi-game:docs/ASSET-INVENTORY.md` (0.29); `gidi:docs/look/research-street.md` (0.2).
 
 ## gidi-data:research/google/maze
 ### `gidi-data:research/google/maze/NOTES.md`
@@ -104,23 +104,23 @@ Nearest in words: `gidi:decisions/NOW.md` (0.31); `gidi-game:docs/ASSET-INVENTOR
 For: shomolu, mushin, terraced, hierarchy, alleys, curving, coverage, interiors. Last changed 2026-10-24, 15 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi:docs/maze-pattern-study.md` (0.2); `gidi:docs/look/research-buildings.md` (0.11); `gidi-data:research/google/estate/NOTES.md` (0.11).
+Nearest in words: `gidi:docs/maze-pattern-study.md` (0.21); `gidi-data:research/google/estate/NOTES.md` (0.11); `gidi:docs/look/research-buildings.md` (0.11).
 
 ## gidi-data:research/google/twins
 ### `gidi-data:research/google/twins/NOTES.md`
 **(no title)**. Twins outside Ìbùdó (Street View, 19 Oct): ikorodu_kokoro_abu_st_sprawl_stalls (Feb 2017): a sprawl street, tar with sandy edges, a long row of zinc-roofed stalls on timber posts selling bags and plastics, an open drain with tyres, bungalows, palms, okadas. Twin: sprawl street, shed row, open gutter.
-For: sprawl, kokoro, twins, zinc-roofed, plastics, selling, stalls, gutter. Last changed 2026-10-24, 3 lines.
+For: sprawl, kokoro, twins, zinc-roofed, plastics, selling, stalls, sandy. Last changed 2026-10-24, 3 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.17); `gidi:docs/look/research-commerce.md` (0.1); `gidi:docs/border-pattern-study.md` (0.1).
+Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.18); `gidi:docs/look/research-commerce.md` (0.1); `gidi:docs/border-pattern-study.md` (0.1).
 
 ## gidi-data:research/google/video1-street
 ### `gidi-data:research/google/video1-street/NOTES.md`
 **Video 1 street: reference notes (22 Oct 2026)**. Video 1 street: reference notes (22 Oct 2026): Video 1 (`../../refs/video1/`) is an AI-made "Lagos game" clip. It shows a third-person view under a flyover, a levy quest, danfos, a crowd and stalls, and wet broken ground with litter. These notes say what the real places look like, so the test street is built from Lagos and not from the clip.
-For: deck, piers, palisade, kerb, obalende, shade, ojuelegba, buses. Last changed 2026-10-24, 51 lines.
+For: deck, piers, palisade, kerb, obalende, ojuelegba, shade, buses. Last changed 2026-10-24, 51 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 3 code files (`gidi-game:tools/underdeck_build.py`, `gidi:scripts/design_density.py`, `gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi:docs/look/research-transport.md` (0.24); `gidi:docs/look/research-street.md` (0.19); `gidi-data:research/google/ibudo/NOTES.md` (0.16).
+Nearest in words: `gidi:docs/look/research-transport.md` (0.23); `gidi:docs/look/research-street.md` (0.18); `gidi-data:research/google/ibudo/NOTES.md` (0.16).
 
 ## gidi-data:research/refs
 ### `gidi-data:research/refs/REVIEW.md`
@@ -133,32 +133,49 @@ Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.18); `gidi:docs/
 ## gidi-data:textures
 ### `gidi-data:textures/README.md`
 **Gidi textures (outside the repo)**. Gidi textures (outside the repo): Downloaded 22 Oct 2026 with the owner's OK. Poly Haven, CC0 (free for any use, including a sold game). 2K maps per surface: diffuse, nor_gl (OpenGL normal: Blender; flip green for Unreal or use Unreal's flip option), rough, displacement, ao where offered.
-For: plaster, flip, iron, asphalt, damaged, rough, metal, painted. Last changed 2026-10-24, 9 lines.
+For: plaster, flip, iron, asphalt, damaged, painted, rough, rusty. Last changed 2026-10-24, 9 lines.
 Links to 0: 
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.24); `gidi:docs/look/research-buildings.md` (0.15); `gidi-game:docs/ASSET-INVENTORY.md` (0.12).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.23); `gidi:docs/look/research-buildings.md` (0.15); `gidi-game:ASSETS.md` (0.13).
 
 ## (top)
 ### `gidi-game:ASSETS.md`
 **Hand-made assets**. Hand-made assets: | Asset | Where | Source | Status | |---|---|---|---| | Danfo Basic 2.0 (font): the owner's danfo lettering (BirdFont, July 2022), spaced, kerned and given punctuation by script (tools/font_space.py, font_punct.py) | Art/Fonts/DanfoBasic.ttf (built by tools/font_build.sh from Art/Fonts/src: the 2022 letters and Alfa Slab One) | the owner, built on Alfa Slab One (JM Solé), SIL Open Font License 1.1 (Art/Fonts/OFL.txt) | to use: danfo bodywork, signboards, the game's titles |
-For: content, font, claude, makehuman, tools, gidiplate, ambientcg, plates. Last changed 2026-10-24, 34 lines.
-Links to 31: `gidi-game:Art/People/hawker/hawker.blend`, `gidi-game:Art/People/hawker/spec.json`, `gidi-game:Art/Plates/plates.json`, `gidi-game:Art/Vehicles/BrtBuilt/brt_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/brt_red_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/red.json`, `gidi-game:Art/Vehicles/Danfo/danfo.blend`, `gidi-game:Art/Vehicles/KekeBuilt/keke_parts.blend`, `gidi-game:Art/Vehicles/MolueBuilt/molue_parts.blend`, `gidi-game:Art/Vehicles/Okada/okada.blend`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_plates.py` ...
+For: content, font, claude, tools, makehuman, gidiplate, ambientcg, plates. Last changed 2026-10-25, 36 lines.
+Links to 33: `gidi-game:Art/People/hawker/hawker.blend`, `gidi-game:Art/People/hawker/spec.json`, `gidi-game:Art/Plates/plates.json`, `gidi-game:Art/Vehicles/BrtBuilt/brt_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/brt_red_parts.blend`, `gidi-game:Art/Vehicles/BrtBuilt/red.json`, `gidi-game:Art/Vehicles/Danfo/danfo.blend`, `gidi-game:Art/Vehicles/KekeBuilt/keke_parts.blend`, `gidi-game:Art/Vehicles/MolueBuilt/molue_parts.blend`, `gidi-game:Art/Vehicles/Okada/okada.blend`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_plates.py` ...
 Backlinks: 4 documents (`gidi-game:CLAUDE.md`, `gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`), 2 code files (`gidi-game:.gitignore`, `gidi-game:Content/Python/gidi_underdeck.py`).
 Nearest in words: `gidi-game:docs/ASSET-INVENTORY.md` (0.22); `gidi:decisions/IDEAS.md` (0.18); `gidi:decisions/DECISIONS.md` (0.17).
 
+## gidi-game:Art/Buildings/BlockBuilt
+### `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`
+**Zinc on the block's roof: the gaps**. Zinc on the block's roof: the gaps: The rebuild rule (gidi DECISIONS "Rebuild the old kit's things the new way"): the old roof beside real ones, the gaps written down, the new build beside the same photos with each gap marked. The sheet: `roof_look_v1.jpg` (the photos are Street View, kept for study only: ot17 14 Oyeshile St, ot25 50 Alasalat St, ot42 11 Raufu Alajo St, ot172 5 Rasheed
+For: sheets, sheet, eave, closed, format, lapped, ribs, roof's. Last changed 2026-10-24, 28 lines.
+Links to 2: `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:tools/zinc_kit.py`
+Backlinks: 2 documents (`gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/zinc_kit.py`).
+Nearest in words: `gidi-game:Art/Props/LeantoBuilt/GAPS.md` (0.51); `gidi:decisions/NOW.md` (0.15); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
+
+## gidi-game:Art/Props/LeantoBuilt
+### `gidi-game:Art/Props/LeantoBuilt/GAPS.md`
+**The zinc lean-to: the old kit against the real ones**. The zinc lean-to: the old kit against the real ones: The first rebuild under gidi DECISIONS "Rebuild the old kit's things the new way" (24 Oct). Before building, the old kit's lean-to (the ot175 kit eye test, pass 5: `~/gidi-data/research/google/kits/old-town/tests/ot175/closeups/goods_sbs.jpg`)
+For: purlins, lapped, beam, sheet, lean-to, rust, sheets, closed. Last changed 2026-10-24, 39 lines.
+Links to 5: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/vehicle_look.py`, `gidi-game:tools/zinc_kit.py`
+Backlinks: 2 documents (`gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/zinc_kit.py`).
+Nearest in words: `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md` (0.51); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.15); `gidi:decisions/NOW.md` (0.14).
+
+## (top)
 ### `gidi-game:CLAUDE.md`
 **Gidi game (Unreal)**. Gidi game (Unreal): Read the map repo's `decisions/` first (`~/gidi/decisions/NOW.md`, `DECISIONS.md`): the same rules apply here.
 For: push, commit, repo's, generates, commands, unreal, paragraph, master. Last changed 2026-10-24, 13 lines.
 Links to 4: `gidi-game:.claude/settings.json`, `gidi-game:ASSETS.md`, `gidi-game:tools/kit_fields.py`, `gidi:decisions/DECISIONS.md`
-Backlinks: 2 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`), 23 code files (`gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`).
-Nearest in words: `gidi:CLAUDE.md` (0.45); `gidi-game:README.md` (0.17); `gidi:decisions/DECISIONS.md` (0.14).
+Backlinks: 3 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 23 code files (`gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`).
+Nearest in words: `gidi:CLAUDE.md` (0.38); `gidi-game:README.md` (0.17); `gidi:decisions/CHECKS.md` (0.13).
 
 ### `gidi-game:README.md`
 **Gidi: the game**. Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its data and the kit's tiles.
-For: editor, import, repo, wasd, scripting, meshy, console, tiles. Last changed 2026-10-24, 56 lines.
+For: editor, import, repo, wasd, scripting, meshy, tiles, console. Last changed 2026-10-24, 56 lines.
 Links to 15: `gidi-game:.mcp.json`, `gidi-game:ASSETS.md`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh`, `gidi-game:tools/import.sh`, `gidi-game:tools/measure.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/play.sh`, `gidi-game:tools/shot.sh` ...
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.32); `gidi:decisions/DECISIONS.md` (0.19); `gidi:decisions/CODEBASE.md` (0.18).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.29); `gidi:decisions/DECISIONS.md` (0.19); `gidi-game:CLAUDE.md` (0.17).
 
 ## gidi-game:docs
 ### `gidi-game:docs/ASSET-INVENTORY.md`
@@ -166,94 +183,94 @@ Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.32); `gidi:decisions/DECISI
 For: recipes, tools, manny, asphalt, concrete, animations, build, map's. Last changed 2026-10-23, 21 lines.
 Links to 9: `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/pole_build.py`, `gidi-game:tools/stall_build.py`, `gidi-game:tools/umbrella_build.py`, `gidi-game:tools/wall_build.py`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 2 code files (`gidi-game:.gitignore`, `gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md` (0.29); `gidi-game:ASSETS.md` (0.22); `gidi:decisions/NOW.md` (0.2).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md` (0.29); `gidi-game:ASSETS.md` (0.22); `gidi:decisions/NOW.md` (0.18).
 
 ### `gidi-game:docs/PERFORMANCE.md`
 **Performance: modes, near detail, streaming, budgets**. Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, "Build light, look full"): build in a light mode, play in the mode the machine can carry, flip to full only to look and take pictures. Near things carry detail and far things are simple. What the camera can't see is not drawn. The world streams in pieces around the player. Every level has a budget,
-For: mode, tools, lumen, editor, modes, play, scalability, saved. Last changed 2026-10-24, 112 lines.
-Links to 12: `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/import.sh`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`, `gidi-game:tools/mode.sh`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi-game:tools/stream.sh`, `gidi:decisions/DECISIONS.md`
-Backlinks: 3 documents (`gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 8 code files (`gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`).
-Nearest in words: `gidi-game:README.md` (0.32); `gidi:decisions/NOW.md` (0.14); `gidi:decisions/DECISIONS.md` (0.13).
+For: tools, mode, lumen, editor, play, modes, unrealeditor, saved. Last changed 2026-10-25, 270 lines.
+Links to 19: `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/img_diff.py`, `gidi-game:tools/import.sh`, `gidi-game:tools/lap_check.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`, `gidi-game:tools/memreport.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/mode_sg.py` ...
+Backlinks: 4 documents (`gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 9 code files (`gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/measure.sh`).
+Nearest in words: `gidi-game:README.md` (0.29); `gidi-game:docs/ASSET-INVENTORY.md` (0.17); `gidi:decisions/NOW.md` (0.16).
 
 ## (top)
 ### `gidi:CLAUDE.md`
 **Gidi**. Gidi: An open-world city inspired by Lagos, built from data and by hand. The owner works across more than one Claude account.
-For: commit, push, hook, session, checked, account, extend, loosen. Last changed 2026-10-24, 18 lines.
+For: commit, trial, checked, forget, push, showed, hook, session. Last changed 2026-10-25, 22 lines.
 Links to 6: `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:scripts/inventory.py`, `gidi:scripts/rebuild_areas.py`
-Backlinks: 2 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`), 23 code files (`gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`).
-Nearest in words: `gidi-game:CLAUDE.md` (0.45); `gidi:decisions/README.md` (0.32); `gidi:decisions/CHECKS.md` (0.25).
+Backlinks: 3 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 23 code files (`gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`).
+Nearest in words: `gidi-game:CLAUDE.md` (0.38); `gidi:decisions/DECISIONS.md` (0.28); `gidi:decisions/CHECKS.md` (0.24).
 
 ### `gidi:README.md`
 **Gidi**. Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the map. It holds every road, block, building and thing the game puts there, as records in `map/`, plus the drawing board they are made on. The game itself (the builders and the Unreal project) is
 For: repos, airbus, provided, drawing, newdara-star, glo, odbl, open-world. Last changed 2026-10-24, 32 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CODEBASE.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:legacy/OLD-MAP.md`, `gidi:scripts/board_server.py`, `gidi:scripts/check_map.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/inventory.py`, `gidi:web/board.html`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.21); `gidi:CLAUDE.md` (0.19).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.26); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
 
 ## gidi:decisions
 ### `gidi:decisions/CHECKS.md`
 **Which check holds each rule**. Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
-For: process, gidi-game, held, rule, builder, review, script, builders. Last changed 2026-10-24, 90 lines.
-Links to 23: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md` ...
-Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/MAP-FORMAT.md`), 3 code files (`gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`).
-Nearest in words: `gidi:decisions/DECISIONS.md` (0.45); `gidi:decisions/NOW.md` (0.38); `gidi:decisions/CODEBASE.md` (0.35).
+For: gidi-game, process, held, builder, rule, review, instances, fails. Last changed 2026-10-25, 98 lines.
+Links to 27: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md` ...
+Backlinks: 5 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`), 3 code files (`gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`).
+Nearest in words: `gidi:decisions/NOW.md` (0.51); `gidi:decisions/DECISIONS.md` (0.5); `gidi:decisions/CODEBASE.md` (0.37).
 
 ### `gidi:decisions/CODEBASE.md`
 **What the code holds: the three repos, one page**. What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
-For: scripts, gidi-game, inventory, board's, map's, remote, old-map, board. Last changed 2026-10-24, 173 lines.
-Links to 132: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_cam.py`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_signs.py` ...
+For: scripts, gidi-game, district's, draft, inventory, board's, map's, remote. Last changed 2026-10-25, 180 lines.
+Links to 138: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_cam.py`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_signs.py` ...
 Backlinks: 6 documents (`gidi:CLAUDE.md`, `gidi:README.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/NOW.md`, `gidi:decisions/README.md`, `gidi:legacy/OLD-MAP.md`), 3 code files (`gidi:.claude/hooks/checks-before-stop.sh`, `gidi:docs/lagos-study/similar/scripts/common.py`, `gidi:scripts/doc_vault.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.36); `gidi:decisions/CHECKS.md` (0.35); `gidi:decisions/DECISIONS.md` (0.31).
+Nearest in words: `gidi:decisions/NOW.md` (0.4); `gidi:decisions/CHECKS.md` (0.37); `gidi:decisions/DECISIONS.md` (0.33).
 
 ### `gidi:decisions/DECISIONS.md`
 **Decisions (the owner's standing rules)**. Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
-For: we're, kits, hand, view, object, records, blender, laptop. Last changed 2026-10-24, 125 lines.
-Links to 34: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:ASSETS.md`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/plates.py`, `gidi-game:tools/umbrella_build.py`, `gidi:decisions/CHECKS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/story/acts-2-3-draft.md`, `gidi:docs/BOARD.md` ...
+For: kits, we're, view, records, hand, blender, laptop, unreal. Last changed 2026-10-25, 143 lines.
+Links to 37: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:ASSETS.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/plates.py`, `gidi-game:tools/umbrella_build.py`, `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md` ...
 Backlinks: 13 documents (`gidi-data:README.md`, `gidi-game:CLAUDE.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/NOW.md` ...), 3 code files (`gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`, `gidi:scripts/rebuild_areas.py`).
-Nearest in words: `gidi:decisions/CHECKS.md` (0.45); `gidi:decisions/NOW.md` (0.43); `gidi:docs/MAP-FORMAT.md` (0.32).
+Nearest in words: `gidi:decisions/NOW.md` (0.51); `gidi:decisions/CHECKS.md` (0.5); `gidi:decisions/CODEBASE.md` (0.33).
 
 ### `gidi:decisions/HISTORY.md`
 **Decisions that were replaced (history)**. Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct, word for
-For: replaced, hand-made, miniaturised, plan, clean-up, seams, oshodi, hand. Last changed 2026-10-24, 59 lines.
-Links to 15: `gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/hand/borrowed-lagos.md`, `gidi:scripts/autoclean.py`, `gidi:scripts/check_real.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/rebuild_areas.py`, `gidi:scripts/twins.py`, `gidi:to-delete/docs/LAYOUT-V2.md` ...
+For: replaced, hand-made, miniaturised, plan, oshodi, seams, clean-up, child. Last changed 2026-10-24, 59 lines.
+Links to 12: `gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/hand/borrowed-lagos.md`, `gidi:scripts/autoclean.py`, `gidi:scripts/check_real.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/rebuild_areas.py`, `gidi:scripts/twins.py`, `gidi:web/twins.json`
 Backlinks: 4 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:decisions/DECISIONS.md` (0.31); `gidi:decisions/CODEBASE.md` (0.2); `gidi:decisions/NOW.md` (0.2).
+Nearest in words: `gidi:decisions/DECISIONS.md` (0.29); `gidi:decisions/CODEBASE.md` (0.21); `gidi:decisions/NOW.md` (0.2).
 
 ### `gidi:decisions/IDEAS.md`
 **Ideas (not decided; newest first)**. Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig, code Apache-2.0, experimental): a video of one person, whole body in frame, becomes motion on a Mixamo character (.glb for Blender/Unreal); Blender add-on tested on Apple Silicon, slow but fine on CPU (3-15 min per 30 s clip). Fills the gap Mixamo's library leaves: Lagos-only moves (basin on the head, conductor hanging off the door, frying akara, bargaining, climbing on an okada), filmed by the owner or friends who agree, never strangers' clips. **Catch:** it needs SMPL-X, non-commercial by default (a commercial licence is a separate deal), and the GVHMR weights have their own licence: use it for study and prototypes (person spots), then licence it or redo final animations with a sale-cleared tool before shipping. To set up (needs the owner's OK): repo + Python packages; about 5 GB of weights on first run; the SMPL-X file (owner signs up on the SMPL-X site); a Mixamo FBX from the owner's Adobe account. Mixamo itself: free library, retarget onto City Sample/MetaHuman in Unreal; usable in a shipped game, raw files not shared.
 For: refs, motion, video, metahuman, yoruba, talk, sound, parlour. Last changed 2026-10-24, 68 lines.
 Links to 5: `gidi:decisions/lived-in.md`, `gidi:decisions/world-life.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:docs/lagos-study/roads/NAMES.md`
 Backlinks: 5 documents (`gidi:CLAUDE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/README.md`, `gidi:docs/lagos-study/roads/NAMES.md`), 0 code files ().
-Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS.md` (0.23); `gidi:decisions/world-life.md` (0.21).
+Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS.md` (0.22); `gidi:decisions/world-life.md` (0.21).
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, dress, sent, pass, records, editor, hand, layer. Last changed 2026-10-24, 148 lines.
-Links to 56: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/kit_fields.py` ...
+For: gidi-game, pass, records, sent, unreal, layer, editor, dress. Last changed 2026-10-25, 307 lines.
+Links to 81: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 2 code files (`gidi:.claude/hooks/review-before-push.sh`, `gidi:web/hand/hub.json`).
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.46); `gidi:decisions/DECISIONS.md` (0.43); `gidi:decisions/CHECKS.md` (0.38).
+Nearest in words: `gidi:decisions/DECISIONS.md` (0.51); `gidi:decisions/CHECKS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.42).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
-For: session, decided, ideas, instructions, whenever, keeping, update, newest. Last changed 2026-10-24, 9 lines.
+For: session, decided, ideas, instructions, keeping, update, whenever, newest. Last changed 2026-10-24, 9 lines.
 Links to 4: `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:CLAUDE.md` (0.32); `gidi:README.md` (0.14); `gidi:decisions/DECISIONS.md` (0.1).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:CLAUDE.md` (0.23); `gidi:README.md` (0.14); `gidi:decisions/DECISIONS.md` (0.1).
 
 ### `gidi:decisions/lived-in.md`
 **The lived-in layer: what every GTA does, and Gidi's plan**. The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, across every game, and for a "lived-in layer" plan for Gidi. **A proposal, not decided.** It builds on `world-life.md` (rhythm, systems, moments, texture: *what* Gidi's life is) and the IDEAS entry "What makes Los Santos feel lived in" (23 Oct). This file is about *the machinery*: what records and rules make that life show up in the game.
-For: grandtheftwiki, spots, moments, proposed, player, speech, mods, jobs. Last changed 2026-10-24, 154 lines.
+For: grandtheftwiki, spots, moments, proposed, speech, player, mods, jobs. Last changed 2026-10-24, 154 lines.
 Links to 2: `gidi:decisions/world-life.md`, `gidi:docs/lagos-study/LIVING.md`
 Backlinks: 5 documents (`gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`), 0 code files ().
-Nearest in words: `gidi:decisions/IDEAS.md` (0.24); `gidi:decisions/world-life.md` (0.22); `gidi:decisions/DECISIONS.md` (0.16).
+Nearest in words: `gidi:decisions/IDEAS.md` (0.24); `gidi:decisions/world-life.md` (0.22); `gidi:decisions/DECISIONS.md` (0.15).
 
 ## gidi:decisions/story
 ### `gidi:decisions/story/README.md`
-**The story of Gidi**. The story of Gidi: Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire (`to-delete/docs/gidi-districts-v0.3.md`).
-For: paste, acts, boss's, account, story, roadmap, prototyping, puts. Last changed 2026-10-24, 22 lines.
-Links to 4: `gidi:decisions/story/act-1-draft.md`, `gidi:decisions/story/acts-2-3-draft.md`, `gidi:to-delete/docs/CITY-LIVING-TEST.md`, `gidi:to-delete/docs/gidi-districts-v0.3.md`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:decisions/story/acts-2-3-draft.md` (0.33); `gidi:decisions/story/act-1-draft.md` (0.33); `gidi:decisions/story/novels/1-the-ledger.md` (0.24).
+**The story of Gidi**. The story of Gidi: Tunde, an okada rider, in debt to the boss who runs the motor park. The city opens in three acts: Survive, Hustle, Empire.
+For: paste, acts, account, boss's, story, roadmap, prototyping, empire. Last changed 2026-10-24, 18 lines.
+Links to 2: `gidi:decisions/story/act-1-draft.md`, `gidi:decisions/story/acts-2-3-draft.md`
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:decisions/story/acts-2-3-draft.md` (0.33); `gidi:decisions/story/act-1-draft.md` (0.32); `gidi:decisions/story/novels/README.md` (0.25).
 
 ### `gidi:decisions/story/act-1-draft.md`
 **Gidi Act 1: draft (the owner's outline, 15 Oct 2026, with Claude's notes)**. Gidi Act 1: draft (the owner's outline, 15 Oct 2026, with Claude's notes): **Status:** a draft for the story pass, stage 3 of `gidi-roadmap.md` (not in this repo yet). The owner decides; the notes are suggestions. The flowchart, `gidi-act1-flow.mermaid`, isn't in this repo; the flow below is the same in words.
@@ -275,14 +292,14 @@ Nearest in words: `gidi:decisions/story/act-1-draft.md` (0.53); `gidi:decisions/
 For: tunde, chairman, ledger, bike, player, alpha, tunde's, mama. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:decisions/story/act-1-draft.md`, `gidi:decisions/story/acts-2-3-draft.md`
 Backlinks: 1 documents (`gidi:decisions/story/novels/README.md`), 0 code files ().
-Nearest in words: `gidi:decisions/story/novels/2-union.md` (0.51); `gidi:decisions/story/novels/3-the-phone.md` (0.48); `gidi:decisions/story/acts-2-3-draft.md` (0.46).
+Nearest in words: `gidi:decisions/story/novels/2-union.md` (0.52); `gidi:decisions/story/novels/3-the-phone.md` (0.48); `gidi:decisions/story/acts-2-3-draft.md` (0.46).
 
 ### `gidi:decisions/story/novels/2-union.md`
 **2. Union**. 2. Union: *Claude's draft, 15 Oct 2026. It keeps the owner's Act 1 (the steal, the boss's rescue, the okada on hire purchase, the robbery), then gives the city its own clock: an election.*
 For: tunde, election, envelopes, chairman, lorry's, ledger, wins, lorry. Last changed 2026-10-15, 75 lines.
 Links to 0: 
 Backlinks: 1 documents (`gidi:decisions/story/novels/README.md`), 0 code files ().
-Nearest in words: `gidi:decisions/story/novels/1-the-ledger.md` (0.51); `gidi:decisions/story/novels/3-the-phone.md` (0.37); `gidi:decisions/story/acts-2-3-draft.md` (0.33).
+Nearest in words: `gidi:decisions/story/novels/1-the-ledger.md` (0.52); `gidi:decisions/story/novels/3-the-phone.md` (0.37); `gidi:decisions/story/acts-2-3-draft.md` (0.33).
 
 ### `gidi:decisions/story/novels/3-the-phone.md`
 **3. The Phone**. 3. The Phone: *Claude's draft, 15 Oct 2026. It keeps the owner's Act 1 (the steal, the rescue, the okada on hire purchase), then turns the open world into a thriller: one object that keeps ringing.*
@@ -294,9 +311,9 @@ Nearest in words: `gidi:decisions/story/novels/1-the-ledger.md` (0.48); `gidi:de
 ### `gidi:decisions/story/novels/README.md`
 **Three stories for Gidi (Claude's drafts, 15 Oct 2026, for the owner to pick from)**. Three stories for Gidi (Claude's drafts, 15 Oct 2026, for the owner to pick from): The owner asked for "two or three novels of the story" to read, pick from, and build their own. These are short stories, about 15 minutes' reading each, not full novels. Each one names the people who drive the plot and the side characters who give it colour, and it's told the way it would play in an open world.
 For: story, debt, novels, drugs, stories, force, betting, task. Last changed 2026-10-24, 36 lines.
-Links to 4: `gidi:decisions/story/novels/1-the-ledger.md`, `gidi:decisions/story/novels/2-union.md`, `gidi:decisions/story/novels/3-the-phone.md`, `gidi:to-delete/docs/LAYOUT-V2.md`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:decisions/story/acts-2-3-draft.md` (0.39); `gidi:decisions/story/act-1-draft.md` (0.34); `gidi:decisions/story/README.md` (0.24).
+Links to 4: `gidi:decisions/story/novels/1-the-ledger.md`, `gidi:decisions/story/novels/2-union.md`, `gidi:decisions/story/novels/3-the-phone.md`, `gidi:docs/lagos-study/roads/NAMES.md`
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:decisions/story/acts-2-3-draft.md` (0.39); `gidi:decisions/story/act-1-draft.md` (0.34); `gidi:decisions/story/README.md` (0.25).
 
 ## gidi:decisions
 ### `gidi:decisions/world-life.md`
@@ -309,87 +326,87 @@ Nearest in words: `gidi:docs/research/LIFE-IN-LAGOS.md` (0.27); `gidi:decisions/
 ## gidi:docs
 ### `gidi:docs/BOARD.md`
 **The drawing board**. The drawing board: The owner, 16 Oct 2026: "we should hand draw... we should know where something meets something... where the roads start, where the roads end, where the houses are, we should be able to move them."
-For: bake, click, drag, edit, edits, dashed, furniture, select. Last changed 2026-10-24, 98 lines.
+For: bake, click, drag, edit, dashed, edits, furniture, select. Last changed 2026-10-24, 98 lines.
 Links to 13: `gidi:scripts/board_server.py`, `gidi:scripts/check_district.py`, `gidi:scripts/compounds.py`, `gidi:scripts/fronts.py`, `gidi:scripts/ground.py`, `gidi:scripts/groundpaint.py`, `gidi:scripts/hand.py`, `gidi:scripts/real_underlay.py`, `gidi:scripts/roadends.py`, `gidi:scripts/things.py`, `gidi:scripts/trees.py`, `gidi:web/board.html` ...
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`), 0 code files ().
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.19); `gidi:decisions/NOW.md` (0.18); `gidi:decisions/DECISIONS.md` (0.17).
+Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.19); `gidi:decisions/NOW.md` (0.17); `gidi:decisions/DECISIONS.md` (0.16).
 
 ### `gidi:docs/DATA-SOURCES.md`
 **Data sources, and what to delete later**. Data sources, and what to delete later: Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gidi-data/research/data/` (about 20 GB, mostly Google's 2.5D tiles). The OpenStreetMap extract (`lagos.osm.pbf`, 55 MB) is gone from the Mac; the repo's links to it were removed on 24 Oct.
 For: final, cdla, delete, licence, studies, outlines, downloaded, google's. Last changed 2026-10-24, 31 lines.
 Links to 4: `gidi:docs/DEEP-STUDY.md`, `gidi:scripts/deep_prep.py`, `gidi:scripts/study_google.py`, `gidi:web/terrain.json`
 Backlinks: 4 documents (`gidi-data:README.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`), 0 code files ().
-Nearest in words: `gidi:docs/gidi-data-plan.md` (0.11); `gidi:decisions/DECISIONS.md` (0.11); `gidi-data:README.md` (0.1).
+Nearest in words: `gidi:docs/gidi-data-plan.md` (0.12); `gidi-data:README.md` (0.11); `gidi:decisions/DECISIONS.md` (0.11).
 
 ### `gidi:docs/DEEP-STUDY.md`
-**The deep study: every district's inspiration, from all the data**. The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt in the v2 frame (`to-delete/docs/LAYOUT-V2.md`) by one shared generator. Each district gets its own profile, and the profile is set from this study.
-For: types, wobble, touching, district's, settings, measures, fabric, counts. Last changed 2026-10-24, 65 lines.
-Links to 9: `gidi:scripts/deep_check.py`, `gidi:scripts/deep_prep.py`, `gidi:scripts/deep_profile.py`, `gidi:scripts/deep_report.py`, `gidi:scripts/rename_mains.py`, `gidi:scripts/structure.py`, `gidi:scripts/study_deep.py`, `gidi:to-delete/docs/DISTRICT-BRIEF.md`, `gidi:to-delete/docs/LAYOUT-V2.md`
+**The deep study: every district's inspiration, from all the data**. The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt by one shared generator. Each district gets its own profile, and the profile is set from this study.
+For: types, wobble, touching, district's, measures, settings, fabric, counts. Last changed 2026-10-24, 65 lines.
+Links to 7: `gidi:scripts/deep_check.py`, `gidi:scripts/deep_prep.py`, `gidi:scripts/deep_profile.py`, `gidi:scripts/deep_report.py`, `gidi:scripts/rename_mains.py`, `gidi:scripts/structure.py`, `gidi:scripts/study_deep.py`
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/DATA-SOURCES.md`, `gidi:docs/RESEARCH.md`), 5 code files (`gidi:scripts/deep_prep.py`, `gidi:scripts/deep_profile.py`, `gidi:scripts/deep_tune.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/study_deep.py`).
 Nearest in words: `gidi:docs/studies/border.md` (0.24); `gidi:docs/studies/yaba.md` (0.23); `gidi:docs/studies/port.md` (0.21).
 
 ### `gidi:docs/LAGOS-ISMS.md`
 **Lagos-isms: the eccentricities in the real data (a running log)**. Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things a tidy generator would never make, but that make Lagos feel like Lagos. For each one: - what it is - where it shows up in the real data (LGA and coordinates)
 For: suits, one-way, expressway, reserve, island, kosofe, acute, railside. Last changed 2026-10-24, 276 lines.
-Links to 7: `gidi:data/results/lga_table.json`, `gidi:data/tools/pull-data.sh`, `gidi:legacy/blender/generate.py`, `gidi:legacy/blender/gidi_kit/rules.py`, `gidi:scripts/isms.py`, `gidi:scripts/study_isms.py`, `gidi:to-delete/docs/ISMS-BUILD.md`
+Links to 6: `gidi:data/results/lga_table.json`, `gidi:data/tools/pull-data.sh`, `gidi:legacy/blender/generate.py`, `gidi:legacy/blender/gidi_kit/rules.py`, `gidi:scripts/isms.py`, `gidi:scripts/study_isms.py`
 Backlinks: 15 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/border-pattern-study.md`, `gidi:docs/estate-pattern-study.md`, `gidi:docs/frontier-pattern-study.md`, `gidi:docs/hand/maze-hub-lagos.md` ...), 3 code files (`gidi:legacy/blender/gidi_kit/rules.py`, `gidi:scripts/isms.py`, `gidi:scripts/study_isms.py`).
-Nearest in words: `gidi:docs/border-pattern-study.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.26); `gidi:docs/estate-pattern-study.md` (0.25).
+Nearest in words: `gidi:docs/border-pattern-study.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.26); `gidi:docs/estate-pattern-study.md` (0.26).
 
 ### `gidi:docs/LAGOS-LIGHT.md`
-**Lagos light: why the city looks different**. Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel of the light aren't the same. Most of it is physics. This is the lighting brief for Gidi's look, in the browser now and in Unreal later (`to-delete/docs/UNREAL-PORT-PLAN.md`).
+**Lagos light: why the city looks different**. Lagos light: why the city looks different: The owner's observation: photos taken in Nigeria look different from photos taken abroad. The vibrancy and the feel of the light aren't the same. Most of it is physics. This is the lighting brief for Gidi's look, in the browser now and in Unreal later.
 For: shadows, light, abroad, haze, contrast, dusk, warm, soft. Last changed 2026-10-24, 61 lines.
-Links to 1: `gidi:to-delete/docs/UNREAL-PORT-PLAN.md`
+Links to 0: 
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.12); `gidi:docs/look/research-street.md` (0.1); `gidi:docs/look/research-transport.md` (0.08).
 
 ### `gidi:docs/MAP-FORMAT.md`
 **The new map's data format (draft 0.1, for the owner to approve)**. The new map's data format (draft 0.1, for the owner to approve): The new map is the one ground truth (decisions, 22 Oct: "everything that we do must be in map data. Every single thing"). The drawing board saves into it. The Blender kit and the Unreal import read it. Nothing else holds the city.
-For: dress, record, field, stroke, value, records, face, relief. Last changed 2026-10-24, 598 lines.
+For: dress, record, field, stroke, value, records, face, degrees. Last changed 2026-10-25, 599 lines.
 Links to 19: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`, `gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/lived-in.md`, `gidi:docs/lagos-study/roads/EARTH-CHECK.md`, `gidi:docs/map-format-example/d15/district.json`, `gidi:docs/map-format-example/d15/dress/128_60.json`, `gidi:docs/map-format-example/d15/plan.json` ...
-Backlinks: 7 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/map-format-example/README.md`, `gidi:legacy/README.md`), 9 code files (`gidi-game:tools/block_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`, `gidi:schema/map_schema.json`).
-Nearest in words: `gidi:decisions/NOW.md` (0.46); `gidi:decisions/DECISIONS.md` (0.32); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.28).
+Backlinks: 7 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/map-format-example/README.md`, `gidi:legacy/README.md`), 10 code files (`gidi-game:tools/block_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/road_draft.py`, `gidi-game:tools/spot_to_map.py`).
+Nearest in words: `gidi:decisions/NOW.md` (0.42); `gidi:decisions/DECISIONS.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.28).
 
 ### `gidi:docs/OLD-MAP-LESSONS.md`
-**What the old map taught: still true for the new one**. What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history (`legacy/OLD-MAP.md`; DECISIONS, "The new map is the truth"). Its plans and pass reports went to `to-delete/` on 24 Oct. Before they went, each was read for what still holds for the new map (real Lagos at 1:3, drawn by hand) and the builders. That is this page. Each lesson names the file it came from, under
+**What the old map taught: still true for the new one**. What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history (`legacy/OLD-MAP.md`; DECISIONS, "The new map is the truth"). Its plans and pass reports were deleted on 25 Oct (git tag `before-cleanup-25oct` holds them). Before they went, each was read for what still holds for the new map
 For: ramp, reimport, unreal, viewing, misses, often, missed, living. Last changed 2026-10-24, 89 lines.
-Links to 13: `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:legacy/OLD-MAP.md`, `gidi:to-delete/docs/FLOW-AUDIT.md`, `gidi:to-delete/docs/ISMS-BUILD.md`, `gidi:to-delete/docs/KIT-GAPS.md`, `gidi:to-delete/docs/REBUILD-PLAN.md`, `gidi:to-delete/docs/UNREAL-PORT-PLAN.md`, `gidi:to-delete/docs/hand/lagos-pass.md`, `gidi:to-delete/docs/junctions.md`, `gidi:to-delete/docs/pilot-foodgate.md`, `gidi:to-delete/docs/road-heights.md` ...
+Links to 3: `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:legacy/OLD-MAP.md`
 Backlinks: 6 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:docs/RESEARCH.md`, `gidi:legacy/blender/WHAT-IT-HELD.md`), 0 code files ().
-Nearest in words: `gidi:decisions/DECISIONS.md` (0.18); `gidi:decisions/NOW.md` (0.17); `gidi:docs/LAGOS-ISMS.md` (0.16).
+Nearest in words: `gidi:decisions/NOW.md` (0.2); `gidi:decisions/DECISIONS.md` (0.18); `gidi:docs/LAGOS-ISMS.md` (0.16).
 
 ### `gidi:docs/RESEARCH.md`
 **The Lagos research: what we know, and which new districts it serves**. The Lagos research: what we know, and which new districts it serves: Everything gidi holds about real Lagos, in one place. Most of it was written for the old map (13-21 Oct), but what it measured is real Lagos, so it still holds for the new map (real Lagos at 1:3). Only its Gidi parts are history: the old district names, the generator settings, the "Gidi against real" columns. Read the real numbers; skip the old-map parts.
-For: shomolu-bariga, measured, echo, serves, written, festac, districts, island. Last changed 2026-10-24, 66 lines.
+For: shomolu-bariga, measured, echo, serves, written, festac, island, districts. Last changed 2026-10-24, 66 lines.
 Links to 60: `gidi:data/results/lga_table.json`, `gidi:decisions/lived-in.md`, `gidi:decisions/world-life.md`, `gidi:docs/DEEP-STUDY.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/LAGOS-LIGHT.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/bazaar-pattern-study.md`, `gidi:docs/border-pattern-study.md`, `gidi:docs/capital-pattern-study.md`, `gidi:docs/estate-pattern-study.md`, `gidi:docs/foodgate-pattern-study.md` ...
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:docs/lagos-study/STUDY.md` (0.22); `gidi:docs/lagos-study/councils.md` (0.22); `gidi:legacy/OLD-MAP.md` (0.2).
+Nearest in words: `gidi:docs/lagos-study/STUDY.md` (0.23); `gidi:docs/lagos-study/councils.md` (0.22); `gidi:legacy/OLD-MAP.md` (0.2).
 
 ### `gidi:docs/bazaar-pattern-study.md`
 **The Bazaar pattern study: Ojo round the electronics market → The Bazaar (v1)**. The Bazaar pattern study: Ojo round the electronics market → The Bazaar (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
 For: bazaar, expressway, electronics, wholesale, fair, jungle, plazas, avenue. Last changed 2026-10-14, 125 lines.
 Links to 12: `gidi:data/results/lga_table.json`, `gidi:docs/img/bazaar-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_landmarks.py`, `gidi:web/gen-bazaar.json`, `gidi:web/network.json`
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/jungle-pattern-study.md` (0.34); `gidi:docs/railside-pattern-study.md` (0.32); `gidi:docs/capital-pattern-study.md` (0.31).
+Nearest in words: `gidi:docs/jungle-pattern-study.md` (0.34); `gidi:docs/railside-pattern-study.md` (0.31); `gidi:docs/capital-pattern-study.md` (0.31).
 
 ### `gidi:docs/border-pattern-study.md`
 **Border pattern study: Badagry → the Border (v1)**. Border pattern study: Badagry → the Border (v1): Status: generated for review (15 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
 For: border, badagry, bush, expressway, estimated, post, sprawl, bazaar. Last changed 2026-10-15, 137 lines.
 Links to 16: `gidi:data/results/lga_table.json`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/img/border-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/explore_city.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_boxheights.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.3); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.25).
+Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.3); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:legacy/OLD-MAP.md` (0.26).
 
 ### `gidi:docs/capital-pattern-study.md`
 **The Capital pattern study: central Ikeja → The Capital (v1)**. The Capital pattern study: central Ikeja → The Capital (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
-For: capital, estimated, ikeja, cantonment, railside, typical, shrine, gateways. Last changed 2026-10-14, 159 lines.
+For: capital, ikeja, estimated, cantonment, railside, typical, shrine, gateways. Last changed 2026-10-14, 159 lines.
 Links to 14: `gidi:data/results/lga_table.json`, `gidi:docs/img/capital-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_landmarks.py`, `gidi:scripts/study_undermapped.py`, `gidi:study-capital-core.json` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/railside-pattern-study.md` (0.41); `gidi:docs/estate-pattern-study.md` (0.34); `gidi:docs/foodgate-pattern-study.md` (0.32).
+Nearest in words: `gidi:docs/railside-pattern-study.md` (0.41); `gidi:docs/estate-pattern-study.md` (0.35); `gidi:docs/foodgate-pattern-study.md` (0.32).
 
 ### `gidi:docs/estate-pattern-study.md`
 **Estate pattern study: Ikeja GRA, Magodo and Omole → the Estate (v1)**. Estate pattern study: Ikeja GRA, Magodo and Omole → the Estate (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
 For: estates, ikeja, gates, gra's, kosofe, estate's, omole's, quarters. Last changed 2026-10-14, 141 lines.
 Links to 15: `gidi:data/results/lga_table.json`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/img/estate-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_isms.py`, `gidi:scripts/study_landmarks.py` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/capital-pattern-study.md` (0.34); `gidi:docs/railside-pattern-study.md` (0.32); `gidi:docs/heights-pattern-study.md` (0.27).
+Nearest in words: `gidi:docs/capital-pattern-study.md` (0.35); `gidi:docs/railside-pattern-study.md` (0.33); `gidi:docs/heights-pattern-study.md` (0.27).
 
 ### `gidi:docs/foodgate-pattern-study.md`
 **Food Gate pattern study: Ojota–Ketu–Mile 12 (Kosofe) → Food Gate (v1)**. Food Gate pattern study: Ojota–Ketu–Mile 12 (Kosofe) → Food Gate (v1): Status: generated for review (13 Oct 2026). Same method as the other districts: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
@@ -410,22 +427,22 @@ Nearest in words: `gidi:docs/heights-pattern-study.md` (0.32); `gidi:docs/border
 For: cc-by, blocked, daramola's, tier, token, mapillary, eti-osa, saloons. Last changed 2026-10-24, 186 lines.
 Links to 4: `gidi:data/results/heights.py`, `gidi:data/results/heights_by_lga.json`, `gidi:data/results/landpop.py`, `gidi:data/results/lga_table.json`
 Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/look/research-roads.md`), 0 code files ().
-Nearest in words: `gidi:docs/LAGOS-ISMS.md` (0.18); `gidi:docs/RESEARCH.md` (0.16); `gidi:legacy/OLD-MAP.md` (0.16).
+Nearest in words: `gidi:docs/LAGOS-ISMS.md` (0.18); `gidi:docs/RESEARCH.md` (0.17); `gidi:legacy/OLD-MAP.md` (0.16).
 
 ## gidi:docs/hand
 ### `gidi:docs/hand/borrowed-lagos.md`
 **Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026)**. Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from places that didn't inspire the districts, to give a taste of everywhere, tastefully and tactfully... research the actual Lagos map and see things you could take and creatively integrate."
-For: placed, capital, saba, channel, mall, national, museum, bridge's. Last changed 2026-10-23, 72 lines.
+For: placed, capital, saba, channel, mall, national, museum, rail's. Last changed 2026-10-23, 72 lines.
 Links to 2: `gidi:legacy/blender/gidi_kit/landmarks.py`, `gidi:legacy/blender/gidi_kit/monuments.py`
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/RESEARCH.md`), 4 code files (`gidi:scripts/layout_v2.py`, `gidi:web/hand/capital.json`, `gidi:web/hand/heights.json`, `gidi:web/hand/port.json`).
-Nearest in words: `gidi:docs/capital-pattern-study.md` (0.2); `gidi:docs/LAGOS-ISMS.md` (0.2); `gidi:docs/look/research-landmarks.md` (0.2).
+Nearest in words: `gidi:docs/capital-pattern-study.md` (0.21); `gidi:docs/LAGOS-ISMS.md` (0.2); `gidi:docs/look/research-landmarks.md` (0.2).
 
 ## gidi:docs/hand/ibudo
 ### `gidi:docs/hand/ibudo/README.md`
 **Ìbùdó, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct)**. Ìbùdó, spot 1: the market road under the Ring Road flyover (design v1, 19 Oct): Oshodi, studied on Google Earth and Street View (`~/gidi-data/research/google/ibudo/`, notes there), rebuilt one-for-one first, then made ours (the owner's method: like the fonts and the danfo). `design_v1.png`: metres, north up, 320 x 320 m.
 For: one-for-one, flyover, footbridge, flyover's, rusty-roof, oshodi, design, parasols. Last changed 2026-10-24, 19 lines.
 Links to 0: 
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
 Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.28); `gidi-data:research/google/video1-street/NOTES.md` (0.14); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.11).
 
 ### `gidi:docs/hand/ibudo/child_plan.md`
@@ -433,22 +450,22 @@ Nearest in words: `gidi-data:research/google/ibudo/NOTES.md` (0.28); `gidi-data:
 For: oshodi, mafoluku, osolo, cres, ojuelegba, jibowu, coach, arena. Last changed 2026-10-24, 32 lines.
 Links to 0: 
 Backlinks: 0 documents (), 1 code files (`gidi:scripts/child_plan.py`).
-Nearest in words: `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.54); `gidi-data:research/google/ibudo/NOTES.md` (0.23); `gidi:docs/lagos-study/STUDY.md` (0.15).
+Nearest in words: `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.55); `gidi-data:research/google/ibudo/NOTES.md` (0.24); `gidi:docs/lagos-study/STUDY.md` (0.15).
 
 ## gidi:docs/hand
 ### `gidi:docs/hand/maze-hub-lagos.md`
 **The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026)**. The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from: - **photo:** the owner's reference photos (`~/gidi-data/research/refs/REVIEW.md`)
 For: brief, photo, story, yard, print, assets, daleko, bowl. Last changed 2026-10-24, 53 lines.
-Links to 6: `gidi:decisions/story/act-1-draft.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:scripts/hand.py`, `gidi:to-delete/docs/KIT-GAPS.md`, `gidi:web/districts_info.json`, `gidi:web/locked.json`
+Links to 5: `gidi:decisions/story/act-1-draft.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:scripts/hand.py`, `gidi:web/districts_info.json`, `gidi:web/locked.json`
 Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/RESEARCH.md`), 1 code files (`gidi:web/hand/hub.json`).
-Nearest in words: `gidi:decisions/story/README.md` (0.19); `gidi:docs/maze-pattern-study.md` (0.16); `gidi-data:research/refs/REVIEW.md` (0.14).
+Nearest in words: `gidi:docs/maze-pattern-study.md` (0.16); `gidi:decisions/story/README.md` (0.14); `gidi-data:research/refs/REVIEW.md` (0.14).
 
 ### `gidi:docs/hand/monument-briefs.md`
 **Monuments: what each needs (19 Oct)**. Monuments: what each needs (19 Oct): The owner's rule: Meshy for statues and monuments nobody walks into; structures people walk into or under are built in Blender part by part. Credits are spent in two steps: a concept picture first (nano-banana-2, 6 credits), the owner approves
 For: bronze, concept, credits, menu, rider, masquerade, saxophonist, eyo-style. Last changed 2026-10-19, 30 lines.
 Links to 0: 
 Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/hand/borrowed-lagos.md` (0.14); `gidi:docs/look/research-landmarks.md` (0.13); `gidi:decisions/DECISIONS.md` (0.08).
+Nearest in words: `gidi:docs/hand/borrowed-lagos.md` (0.14); `gidi:docs/look/research-landmarks.md` (0.13); `gidi:legacy/blender/WHAT-IT-HELD.md` (0.08).
 
 ## gidi:docs
 ### `gidi:docs/heights-pattern-study.md`
@@ -467,10 +484,10 @@ Nearest in words: `gidi:docs/maze-pattern-study.md` (0.4); `gidi:docs/foodgate-p
 
 ### `gidi:docs/jungle-pattern-study.md`
 **Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1)**. Jungle City pattern study: Ajegunle (+ Festac) → Jungle City (v1): Status: generated for review (13 Oct 2026). Same method as the Maze and the Hub: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
-For: jungle, flats, expressway, adeleke, median, ajegunle, maze's, footbridge. Last changed 2026-10-14, 246 lines.
+For: jungle, flats, expressway, adeleke, ajegunle, median, maze's, footbridge. Last changed 2026-10-14, 246 lines.
 Links to 13: `gidi:data/results/lga_table.json`, `gidi:docs/img/jungle-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/draw_gen.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_landmarks.py`, `gidi:web/gen-jungle.json` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/maze-pattern-study.md` (0.47); `gidi:docs/bazaar-pattern-study.md` (0.34); `gidi:docs/foodgate-pattern-study.md` (0.32).
+Nearest in words: `gidi:docs/maze-pattern-study.md` (0.46); `gidi:docs/bazaar-pattern-study.md` (0.34); `gidi:docs/foodgate-pattern-study.md` (0.32).
 
 ### `gidi:docs/lagos-lgas-research.md`
 **Lagos, one local government at a time: research for Gidi**. Lagos, one local government at a time: research for Gidi: 13 October 2026. Twenty researchers, one per local government area (LGA), each asked what makes the place itself: buildings, landmarks, roads, markets, transport, sound and smell, people, food, history, danger, environment, sacred things, pop culture, what Gidi can borrow and what to avoid. The full reports are below the summary, unedited.
@@ -489,31 +506,31 @@ Nearest in words: `gidi:docs/lagos-lgas-research.md` (0.32); `gidi:docs/lagos-st
 
 ### `gidi:docs/lagos-study/STUDY.md`
 **How the whole Lagos map works: a study before cutting districts**. How the whole Lagos map works: a study before cutting districts: 22 Oct 2026. Read-only. Asked for by the owner's decision "Gidi is Lagos, miniaturised; the map starts again". This is evidence for a later frame proposal. It does not cut districts.
-For: belt, bldg, tilt, ikorodu, mile, surveyed, lekki, planned. Last changed 2026-10-24, 322 lines.
+For: belt, bldg, tilt, mile, ikorodu, surveyed, lekki, planned. Last changed 2026-10-24, 322 lines.
 Links to 6: `gidi:data/results/heights.py`, `gidi:data/results/heights_by_lga.json`, `gidi:data/results/lga_table.json`, `gidi:docs/lagos-study/councils.md`, `gidi:docs/lagos-study/roads/scripts/gaz.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`
-Backlinks: 7 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:docs/lagos-study/councils.md`, `gidi:docs/lagos-study/similar/SIMILAR.md`), 0 code files ().
+Backlinks: 7 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:docs/lagos-study/councils.md`, `gidi:docs/lagos-study/similar/SIMILAR.md`), 2 code files (`gidi-game:tools/junction_geo.py`, `gidi:scripts/draft_kinds.py`).
 Nearest in words: `gidi:docs/lagos-study/councils.md` (0.58); `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.35); `gidi:docs/lagos-study/roads/ROADS.md` (0.34).
 
 ### `gidi:docs/lagos-study/councils.md`
 **Lagos councils: the 20 LGAs and 37 LCDAs**. Lagos councils: the 20 LGAs and 37 LCDAs: 22 Oct 2026. Companion to `STUDY.md`. Read-only study; nothing here is a district yet.
-For: known, zones, lcdas, amuwo-odofin, lcda, apapa, mainland, neighbours. Last changed 2026-10-24, 212 lines.
+For: zones, known, lcdas, amuwo-odofin, lcda, apapa, mainland, neighbours. Last changed 2026-10-24, 212 lines.
 Links to 2: `gidi:data/results/heights_by_lga.json`, `gidi:docs/lagos-study/STUDY.md`
 Backlinks: 6 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`, `gidi:docs/lagos-study/STUDY.md`, `gidi:docs/lagos-study/similar/SIMILAR.md`), 0 code files ().
-Nearest in words: `gidi:docs/lagos-study/STUDY.md` (0.58); `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.39); `gidi:docs/lagos-study/roads/ROADS.md` (0.35).
+Nearest in words: `gidi:docs/lagos-study/STUDY.md` (0.58); `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.4); `gidi:docs/lagos-study/roads/ROADS.md` (0.35).
 
 ## gidi:docs/lagos-study/roads
 ### `gidi:docs/lagos-study/roads/EARTH-CHECK.md`
 **Google Earth check of the borders (22 Oct 2026)**. Google Earth check of the borders (22 Oct 2026): `ROADS.md` section 6 left 15 borders the data could not settle. Each was looked at on Google Maps satellite (zoom 13 to 16) at the coordinates below. Study only: the 29 screenshots stay outside the repo, in `~/gidi-data/research/google/lagos-study/border-checks/` (file names carry the check number and the map
-For: east, west, south, likely, trace, north, neutral, isolo. Last changed 2026-10-24, 274 lines.
+For: east, west, south, likely, trace, north, isolo, expressway. Last changed 2026-10-24, 274 lines.
 Links to 2: `gidi:docs/lagos-study/roads/ROADS.md`, `gidi:docs/lagos-study/roads/places.csv`
 Backlinks: 4 documents (`gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/lagos-study/roads/NAMES.md`, `gidi:docs/lagos-study/roads/ROADS.md`), 1 code files (`gidi:scripts/frame_study.py`).
-Nearest in words: `gidi:docs/lagos-study/roads/ROADS.md` (0.58); `gidi:docs/lagos-study/councils.md` (0.39); `gidi:docs/lagos-study/STUDY.md` (0.35).
+Nearest in words: `gidi:docs/lagos-study/roads/ROADS.md` (0.59); `gidi:docs/lagos-study/councils.md` (0.4); `gidi:docs/lagos-study/STUDY.md` (0.35).
 
 ### `gidi:docs/lagos-study/roads/NAMES.md`
 **Echo names for the 51 districts (draft, 22 Oct 2026)**. Echo names for the 51 districts (draft, 22 Oct 2026): Working names for the 51 districts in `EARTH-CHECK.md` ("District list after the checks"), as the map format's fourth call asks (`decisions/DECISIONS.md`, "The map format's four calls", point 4; the rule is in `decisions/IDEAS.md`, "Place names: echo names"). **Every name here is a draft: the owner reviews it**, and any of them can change later.
 For: yoruba, consonant, english, vowel, sound, mile, leke, sounds. Last changed 2026-10-22, 115 lines.
 Links to 4: `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:docs/lagos-study/roads/EARTH-CHECK.md`, `gidi:docs/lagos-study/roads/places.csv`
-Backlinks: 6 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`), 0 code files ().
+Backlinks: 7 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:decisions/story/novels/README.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`), 0 code files ().
 Nearest in words: `gidi:decisions/IDEAS.md` (0.2); `gidi:docs/lagos-lgas-research.md` (0.13); `gidi:docs/lagos-study/LIVING.md` (0.12).
 
 ### `gidi:docs/lagos-study/roads/ROADS.md`
@@ -521,7 +538,7 @@ Nearest in words: `gidi:decisions/IDEAS.md` (0.2); `gidi:docs/lagos-lgas-researc
 For: morogbo, north-east, imota, east, ijegun-egba, west, apapa, swamp. Last changed 2026-10-24, 510 lines.
 Links to 29: `gidi:docs/lagos-study/roads/EARTH-CHECK.md`, `gidi:docs/lagos-study/roads/borders.csv`, `gidi:docs/lagos-study/roads/districts.csv`, `gidi:docs/lagos-study/roads/districts_55.png`, `gidi:docs/lagos-study/roads/districts_55_inner.png`, `gidi:docs/lagos-study/roads/districts_60.png`, `gidi:docs/lagos-study/roads/districts_60_inner.png`, `gidi:docs/lagos-study/roads/districts_65.png`, `gidi:docs/lagos-study/roads/districts_65_inner.png`, `gidi:docs/lagos-study/roads/ladder.csv`, `gidi:docs/lagos-study/roads/not_neighbours.csv`, `gidi:docs/lagos-study/roads/places.csv` ...
 Backlinks: 2 documents (`gidi:decisions/NOW.md`, `gidi:docs/lagos-study/roads/EARTH-CHECK.md`), 0 code files ().
-Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.58); `gidi:docs/lagos-study/similar/SIMILAR.md` (0.36); `gidi:docs/lagos-study/councils.md` (0.35).
+Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.59); `gidi:docs/lagos-study/similar/SIMILAR.md` (0.36); `gidi:docs/lagos-study/councils.md` (0.35).
 
 ## gidi:docs/lagos-study/similar
 ### `gidi:docs/lagos-study/similar/GOOGLE-CHECK.md`
@@ -536,14 +553,14 @@ Nearest in words: `gidi:docs/lagos-study/STUDY.md` (0.21); `gidi:docs/lagos-stud
 For: belt, bungalow, ogba-agidingbi-alausa, isheri-olowora, ijora-badia, apapa-tin, alaba-ojo-lasu, agric-majidun-ogolonto. Last changed 2026-10-24, 957 lines.
 Links to 12: `gidi:docs/lagos-study/STUDY.md`, `gidi:docs/lagos-study/councils.md`, `gidi:docs/lagos-study/roads/scripts/report.py`, `gidi:docs/lagos-study/similar/ladder.csv`, `gidi:docs/lagos-study/similar/pairs.csv`, `gidi:docs/lagos-study/similar/scripts/analyse.py`, `gidi:docs/lagos-study/similar/scripts/finger.py`, `gidi:docs/lagos-study/similar/scripts/know.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`, `gidi:docs/lagos-study/similar/scripts/seeds.py`, `gidi:docs/lagos-study/similar/scripts/units.py`, `gidi:docs/lagos-study/similar/units.csv`
 Backlinks: 2 documents (`gidi:decisions/NOW.md`, `gidi:docs/lagos-study/similar/GOOGLE-CHECK.md`), 4 code files (`gidi:docs/lagos-study/similar/scripts/appendix.py`, `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`, `gidi:docs/lagos-study/similar/scripts/report.py`).
-Nearest in words: `gidi:docs/lagos-study/similar/districts.md` (0.91); `gidi:docs/lagos-study/roads/ROADS.md` (0.36); `gidi:docs/lagos-study/STUDY.md` (0.31).
+Nearest in words: `gidi:docs/lagos-study/similar/districts.md` (0.92); `gidi:docs/lagos-study/roads/ROADS.md` (0.36); `gidi:docs/lagos-study/STUDY.md` (0.31).
 
 ### `gidi:docs/lagos-study/similar/districts.md`
 **At 90%: 81 districts (71 after folding tiny plain units)**. At 90%: 81 districts (71 after folding tiny plain units): Rich or distinct units still alone (24): Isale Eko-Idumota-Marina, Ikoyi-Banana Island, Victoria Island, Lekki FTZ-Dangote, Agric-Majidun-Ogolonto, Ogijo-Sagamu Rd, Isheri-Olowora (Ikosi-Isheri), UNILAG, Ebute Metta-Oyingbo-Otto-Iddo, Makoko-Iwaya, Surulere (Ojuelegba-Bode Thomas-Stadium), Ilupeju, Papa Ajao-Ladipo, Oshodi-Mafoluku, Apapa-Tin Can, Ijora-Badia, Ajegunle (Ajeromi), Amukoko-Layeni (Ifelodun), Mile 2-Amuwo, Kirikiri-Navy Town, Alaba-Ojo-LASU, Ikeja GRA, Allen-Opebi-Computer Village, Ogba-Agidingbi-Alausa industrial.
 For: ftz-dangote, agric-majidun-ogolonto, eko-idumota-marina, isheri-olowora, allen-opebi-computer, ogba-agidingbi-alausa, ijora-badia, makoko-iwaya. Last changed 2026-10-22, 469 lines.
 Links to 0: 
 Backlinks: 0 documents (), 2 code files (`gidi:docs/lagos-study/similar/scripts/appendix.py`, `gidi:docs/lagos-study/similar/scripts/report.py`).
-Nearest in words: `gidi:docs/lagos-study/similar/SIMILAR.md` (0.91); `gidi:docs/lagos-study/roads/ROADS.md` (0.33); `gidi:docs/lagos-study/STUDY.md` (0.17).
+Nearest in words: `gidi:docs/lagos-study/similar/SIMILAR.md` (0.92); `gidi:docs/lagos-study/roads/ROADS.md` (0.33); `gidi:docs/lagos-study/STUDY.md` (0.17).
 
 ## gidi:docs/look
 ### `gidi:docs/look/research-buildings.md`
@@ -551,74 +568,74 @@ Nearest in words: `gidi:docs/lagos-study/similar/SIMILAR.md` (0.91); `gidi:docs/
 For: elite, select, often, white, long-span, older, painted, green. Last changed 2026-10-14, 697 lines.
 Links to 0: 
 Backlinks: 7 documents (`gidi:docs/RESEARCH.md`, `gidi:docs/look/research-civic.md`, `gidi:docs/look/research-commerce.md`, `gidi:docs/look/research-housing.md`, `gidi:docs/look/research-landmarks.md`, `gidi:docs/look/research-leisure.md`, `gidi:docs/look/research-religious.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-housing.md` (0.64); `gidi:docs/look/research-street.md` (0.46); `gidi:docs/look/research-leisure.md` (0.44).
+Nearest in words: `gidi:docs/look/research-housing.md` (0.63); `gidi:docs/look/research-street.md` (0.45); `gidi:docs/look/research-leisure.md` (0.44).
 
 ### `gidi:docs/look/research-civic.md`
 **Civic and public-service buildings: a catalogue for the Gidi generator**. Civic and public-service buildings: a catalogue for the Gidi generator: Scope: hospitals, clinics, chemists, police (stations, command, posts, checkpoints, barracks), fire, government offices, customs, prison, army, courts, cemeteries, post offices, traffic/task-force posts, and power-company offices and transformers. This builds on `docs/look/research-buildings.md` sections 10.7, 10.8, 10.11 and 10.12, and on `docs/look/research-street.md` sections 2.2 and 3.8. It goes further and does not repeat those sections.
-For: agency, crest, white, police, variants, steel, pound, select. Last changed 2026-10-14, 647 lines.
+For: agency, crest, white, police, variants, pound, select, steel. Last changed 2026-10-14, 647 lines.
 Links to 2: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-transport.md` (0.48); `gidi:docs/look/research-housing.md` (0.46); `gidi:docs/look/research-leisure.md` (0.43).
+Nearest in words: `gidi:docs/look/research-transport.md` (0.47); `gidi:docs/look/research-housing.md` (0.46); `gidi:docs/look/research-leisure.md` (0.43).
 
 ### `gidi:docs/look/research-commerce.md`
 **Gidi commerce catalogue: markets, shops, commerce and industry**. Gidi commerce catalogue: markets, shops, commerce and industry: Purpose: specs for the seeded Blender kit. This builds on `docs/look/research-buildings.md` §6 (shop bays, container shop, kiosk, stall, plaza) and `docs/look/research-street.md` §6 (stall goods, umbrellas, chairs, generators, water tanks, night light). Those base specs are **not repeated**. Where they apply, this file refers to them as `B§6.x` and `S§6.x`.
-For: mapping, select, variants, condition, steel, props, timber, plazas. Last changed 2026-10-16, 883 lines.
+For: mapping, select, condition, variants, steel, props, plazas, night. Last changed 2026-10-16, 883 lines.
 Links to 2: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-transport.md` (0.53); `gidi:docs/look/research-housing.md` (0.52); `gidi:docs/look/research-leisure.md` (0.46).
+Nearest in words: `gidi:docs/look/research-transport.md` (0.53); `gidi:docs/look/research-housing.md` (0.52); `gidi:docs/look/research-leisure.md` (0.45).
 
 ### `gidi:docs/look/research-housing.md`
 **Lagos housing types beyond the front/back house: a catalogue for the Gidi kit**. Lagos housing types beyond the front/back house: a catalogue for the Gidi kit: Scope: every housing type (and the housing-adjacent structures that sit on residential plots) that the Gidi census lists, other than the generic front/back house that `docs/look/research-buildings.md` already covers. This file builds on that document (§0 constants, §1 rooming house, §7 Brazilian house, §8 stilt house, §9 elite) and goes deeper. It does not repeat its paint palette, weathering grammar or sandcrete constants. Use those as the base layer.
 For: elite, steel, condition, white, mapping, flats, variants, select. Last changed 2026-10-14, 926 lines.
 Links to 1: `gidi:docs/look/research-buildings.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-buildings.md` (0.64); `gidi:docs/look/research-commerce.md` (0.52); `gidi:docs/look/research-leisure.md` (0.51).
+Nearest in words: `gidi:docs/look/research-buildings.md` (0.63); `gidi:docs/look/research-commerce.md` (0.52); `gidi:docs/look/research-leisure.md` (0.51).
 
 ### `gidi:docs/look/research-landmarks.md`
 **Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks**. Lagos landmarks as patterns: a catalogue for Gidi's invented landmarks: Rule zero applies here more than anywhere else. A landmark is the thing a player will recognise, so **every Gidi landmark must be an original design**. Real Lagos structures appear below only as references for a *type*: what makes that kind of thing striking, how big it is, what it is made of and how it ages. Each item ends with 1-2 invented Gidi designs that share the spirit but not the silhouette of any real one.
 For: oldisland, white, canon, condition, reference, designs, select, concrete. Last changed 2026-10-14, 735 lines.
 Links to 3: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`, `gidi:web/districts_info.json`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 2 code files (`gidi:legacy/blender/gidi_kit/landmarks.py`, `gidi:legacy/blender/gidi_kit/monuments.py`).
-Nearest in words: `gidi:docs/look/research-transport.md` (0.43); `gidi:docs/look/research-leisure.md` (0.41); `gidi:docs/look/research-housing.md` (0.41).
+Nearest in words: `gidi:docs/look/research-transport.md` (0.43); `gidi:docs/look/research-leisure.md` (0.41); `gidi:docs/look/research-housing.md` (0.4).
 
 ### `gidi:docs/look/research-leisure.md`
 **Gidi catalogue: education, sport, leisure and nightlife places**. Gidi catalogue: education, sport, leisure and nightlife places: This catalogue extends `docs/look/research-buildings.md` and `docs/look/research-street.md`. It does not repeat their walls, gates, roofs, generators, umbrellas, plastic chairs or crowd tables. It reuses them by name: "compound wall (buildings §4)", "event canopy (street §6.3)".
-For: white, condition, elite, mapping, painted, select, club, variants. Last changed 2026-10-14, 800 lines.
+For: white, condition, elite, select, mapping, club, painted, variants. Last changed 2026-10-14, 800 lines.
 Links to 2: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-housing.md` (0.51); `gidi:docs/look/research-transport.md` (0.46); `gidi:docs/look/research-commerce.md` (0.46).
+Nearest in words: `gidi:docs/look/research-housing.md` (0.51); `gidi:docs/look/research-transport.md` (0.45); `gidi:docs/look/research-commerce.md` (0.45).
 
 ### `gidi:docs/look/research-religious.md`
 **Gidi look research: religious buildings and places**. Gidi look research: religious buildings and places: Scope: mosques, churches, white-garment churches, prayer camps, storefront worship, roadside prayer spaces, traditional shrines and festival structures, and how each one sits in the street. Builds on `docs/look/research-buildings.md` §10.5–10.6 and `research-street.md` (loudspeakers, banners, Friday/Sunday dress). This file goes deeper. It does not repeat those sections.
-For: dome, white, prayer, green, hall, mosque, minaret, blue. Last changed 2026-10-14, 625 lines.
+For: dome, white, prayer, hall, green, mosque, minaret, blue. Last changed 2026-10-14, 625 lines.
 Links to 2: `gidi:docs/look/research-buildings.md`, `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-housing.md` (0.45); `gidi:docs/look/research-buildings.md` (0.43); `gidi:docs/look/research-leisure.md` (0.43).
+Nearest in words: `gidi:docs/look/research-housing.md` (0.44); `gidi:docs/look/research-buildings.md` (0.43); `gidi:docs/look/research-leisure.md` (0.42).
 
 ### `gidi:docs/look/research-roads.md`
 **Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse**. Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with potholes of water, mushy laterite lanes, failed asphalt, choked drains. It builds on `docs/look/research-street.md` §1 and §6.7–6.9, and does not repeat what is there: road widths by class, kerb paint colours, median types, basic drain sizes, basic pothole density, the tree census. It goes deeper on **condition** and on **how to select it from data**.
 For: select, mapping, sand, mains, research-street, asphalt, laterite, refuse. Last changed 2026-10-23, 1147 lines.
 Links to 2: `gidi:docs/look/research-street.md`, `gidi:legacy/blender/gidi_kit/rules.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-street.md` (0.36); `gidi:docs/look/research-transport.md` (0.36); `gidi:docs/look/research-commerce.md` (0.34).
+Nearest in words: `gidi:docs/look/research-street.md` (0.36); `gidi:docs/look/research-transport.md` (0.35); `gidi:docs/look/research-commerce.md` (0.34).
 
 ### `gidi:docs/look/research-street.md`
 **Gidi street catalogue: roads, vehicles, people, signage, props**. Gidi street catalogue: roads, vehicles, people, signage, props: This is research for a procedural generator. It studies real Lagos and describes patterns only. Every brand is described generically, and Gidi must invent its own names, liveries and slogans.
-For: select, black, white, yellow, often, colours, blue, painted. Last changed 2026-10-14, 923 lines.
+For: select, black, white, yellow, often, colours, blue, expressways. Last changed 2026-10-14, 923 lines.
 Links to 0: 
 Backlinks: 9 documents (`gidi:docs/RESEARCH.md`, `gidi:docs/look/research-civic.md`, `gidi:docs/look/research-commerce.md`, `gidi:docs/look/research-landmarks.md`, `gidi:docs/look/research-leisure.md`, `gidi:docs/look/research-religious.md`, `gidi:docs/look/research-roads.md`, `gidi:docs/look/research-transport.md` ...), 2 code files (`gidi:legacy/blender/gidi_kit/people.py`, `gidi:legacy/blender/gidi_kit/street.py`).
-Nearest in words: `gidi:docs/look/research-vehicles.md` (0.51); `gidi:docs/look/research-buildings.md` (0.46); `gidi:docs/look/research-transport.md` (0.45).
+Nearest in words: `gidi:docs/look/research-vehicles.md` (0.51); `gidi:docs/look/research-buildings.md` (0.45); `gidi:docs/look/research-transport.md` (0.45).
 
 ### `gidi:docs/look/research-transport.md`
 **Gidi transport and infrastructure catalogue**. Gidi transport and infrastructure catalogue: Research for the seeded Blender kit. Rule zero applies: real Lagos is studied as a pattern only. All names, liveries and logos in the kit must be invented; real places below are examples of a pattern, not things to copy.
-For: white, mapping, select, condition, steel, colours, yellow, concrete. Last changed 2026-10-14, 886 lines.
+For: white, select, mapping, condition, colours, steel, yellow, deck. Last changed 2026-10-14, 886 lines.
 Links to 1: `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/look/research-commerce.md` (0.53); `gidi:docs/look/research-housing.md` (0.5); `gidi:docs/look/research-civic.md` (0.48).
+Nearest in words: `gidi:docs/look/research-commerce.md` (0.53); `gidi:docs/look/research-housing.md` (0.49); `gidi:docs/look/research-civic.md` (0.47).
 
 ### `gidi:docs/look/research-vehicles.md`
 **Gidi vehicle catalogue: everything that moves on Lagos roads and water**. Gidi vehicle catalogue: everything that moves on Lagos roads and water: Research for the seeded Blender kit. **Rule zero:** study real Lagos, build our own city. Every real model, operator, union, agency and brand below is a *pattern reference* only. In Gidi, invent the liveries, names, logos, plates and slogans; describe makes only as body shapes ("1980s boxy rear-engine van", "bonneted American-style tractor").
-For: rear, occupants, street-research, black, mapping, select, dimensions, white. Last changed 2026-10-14, 1288 lines.
+For: rear, occupants, street-research, black, mapping, select, dimensions, yellow. Last changed 2026-10-14, 1288 lines.
 Links to 1: `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 1 code files (`gidi:legacy/blender/gidi_kit/vehicles.py`).
 Nearest in words: `gidi:docs/look/research-street.md` (0.51); `gidi:docs/look/research-transport.md` (0.41); `gidi:docs/look/research-commerce.md` (0.37).
@@ -626,10 +643,10 @@ Nearest in words: `gidi:docs/look/research-street.md` (0.51); `gidi:docs/look/re
 ## gidi:docs/map-format-example
 ### `gidi:docs/map-format-example/README.md`
 **Worked example of the new map format**. Worked example of the new map format: One short home street in district d15 (20 m, invented names), written as the map would hold it (docs/MAP-FORMAT.md):
-For: lean-to's, gutter's, lean-to, shop-under-flats, bungalow's, example, stand-in, pothole. Last changed 2026-10-22, 10 lines.
+For: lean-to's, gutter's, lean-to, example, stand-in, shop-under-flats, bungalow's, stamped. Last changed 2026-10-22, 10 lines.
 Links to 6: `gidi:docs/MAP-FORMAT.md`, `gidi:docs/map-format-example/d15/district.json`, `gidi:docs/map-format-example/d15/dress/128_60.json`, `gidi:docs/map-format-example/d15/plan.json`, `gidi:schema/kit_reads.json`, `gidi:scripts/check_map.py`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.13).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
 
 ## gidi:docs
 ### `gidi:docs/maze-pattern-study.md`
@@ -637,7 +654,7 @@ Nearest in words: `gidi:docs/MAP-FORMAT.md` (0.25); `gidi:decisions/NOW.md` (0.1
 For: maze, adeleke, crossings, gateways, mushin, median, track, gang. Last changed 2026-10-16, 254 lines.
 Links to 17: `gidi:data/results/lga_table.json`, `gidi:docs/img/maze-vs-real.png`, `gidi:scripts/bake_web.py`, `gidi:scripts/build_viewer.py`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/draw_gen.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py` ...
 Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/jungle-pattern-study.md` (0.47); `gidi:docs/hub-pattern-study.md` (0.4); `gidi:docs/foodgate-pattern-study.md` (0.37).
+Nearest in words: `gidi:docs/jungle-pattern-study.md` (0.46); `gidi:docs/hub-pattern-study.md` (0.4); `gidi:docs/foodgate-pattern-study.md` (0.37).
 
 ### `gidi:docs/oldisland-pattern-study.md`
 **Old Island pattern study: Lagos Island → Old Island (v1)**. Old Island pattern study: Lagos Island → Old Island (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
@@ -655,7 +672,7 @@ Nearest in words: `gidi:docs/oldisland-pattern-study.md` (0.31); `gidi:legacy/OL
 
 ### `gidi:docs/port-pattern-study.md`
 **The Port pattern study: Apapa → The Port (v1)**. The Port pattern study: Apapa → The Port (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.**
-For: port, quay, apapa, yard, farm, container, yards, reserve. Last changed 2026-10-14, 128 lines.
+For: port, apapa, quay, yard, farm, container, yards, reserve. Last changed 2026-10-14, 128 lines.
 Links to 12: `gidi:data/results/lga_table.json`, `gidi:docs/img/port-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_landmarks.py`, `gidi:web/gen-port.json`, `gidi:web/network.json`
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
 Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.28); `gidi:docs/watertown-pattern-study.md` (0.25); `gidi:docs/capital-pattern-study.md` (0.22).
@@ -665,135 +682,135 @@ Nearest in words: `gidi:docs/bazaar-pattern-study.md` (0.28); `gidi:docs/waterto
 For: railside, lgas, capital's, landmarks, pipeline, roundabout, mounds, ring. Last changed 2026-10-14, 125 lines.
 Links to 14: `gidi:data/results/lga_table.json`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/img/railside-vs-real.png`, `gidi:scripts/check_district.py`, `gidi:scripts/district_profiles.py`, `gidi:scripts/gen_fabric.py`, `gidi:scripts/study_analyse.py`, `gidi:scripts/study_connect.py`, `gidi:scripts/study_core.py`, `gidi:scripts/study_extract.py`, `gidi:scripts/study_isms.py`, `gidi:scripts/study_landmarks.py` ...
 Backlinks: 2 documents (`gidi:docs/RESEARCH.md`, `gidi:legacy/OLD-MAP.md`), 0 code files ().
-Nearest in words: `gidi:docs/capital-pattern-study.md` (0.41); `gidi:docs/estate-pattern-study.md` (0.32); `gidi:docs/bazaar-pattern-study.md` (0.32).
+Nearest in words: `gidi:docs/capital-pattern-study.md` (0.41); `gidi:docs/estate-pattern-study.md` (0.33); `gidi:docs/bazaar-pattern-study.md` (0.31).
 
 ## gidi:docs/research
 ### `gidi:docs/research/LIFE-IN-LAGOS.md`
 **Life in Lagos: what it's like to live there**. Life in Lagos: what it's like to live there: A research pass, 16 Oct 2026, for the owner's ask: "immerse yourself in what it's like to live in Lagos".
 For: what's, japa, feels, guardian, december, true, rent, sapa. Last changed 2026-10-24, 329 lines.
-Links to 4: `gidi:decisions/DECISIONS.md`, `gidi:decisions/world-life.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:to-delete/docs/LAGOS-LOOK.md`
+Links to 3: `gidi:decisions/DECISIONS.md`, `gidi:decisions/world-life.md`, `gidi:docs/LAGOS-ISMS.md`
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/world-life.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/lagos-study/LIVING.md`), 0 code files ().
 Nearest in words: `gidi:decisions/world-life.md` (0.27); `gidi:docs/lagos-lgas-research.md` (0.22); `gidi:decisions/IDEAS.md` (0.15).
 
 ## gidi:docs/studies
 ### `gidi:docs/studies/airport.md`
 **The Airport: the deep study**. The Airport: the deep study: Inspired by Murtala Muhammed International Airport, Ikeja. Study area: 15.81 km², 15.81 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: airport, median, touching, transit, airline, storeys, restaurant, tenth. Last changed 2026-10-15, 126 lines.
+For: airport, touching, median, transit, airline, restaurant, tenth, storeys. Last changed 2026-10-15, 126 lines.
 Links to 2: `gidi:docs/img/study-airport.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/estate.md` (0.76); `gidi:docs/studies/heights.md` (0.73); `gidi:docs/studies/capital.md` (0.73).
 
 ### `gidi:docs/studies/bazaar.md`
 **The Bazaar: the deep study**. The Bazaar: the deep study: Inspired by Ojo (electronics market) + Trade Fair. Study area: 21.78 km², 21.49 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, power, median, energy, storeys, tenth, education, transit. Last changed 2026-10-15, 127 lines.
+For: touching, power, median, energy, tenth, storeys, education, transit. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-bazaar.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/oldshore.md` (0.81); `gidi:docs/studies/foodgate.md` (0.79); `gidi:docs/studies/railside.md` (0.78).
 
 ### `gidi:docs/studies/border.md`
 **The Border: the deep study**. The Border: the deep study: Inspired by Badagry. Study area: 24.72 km², 20.74 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: median, touching, storeys, tenth, roman, squares, catholic, power. Last changed 2026-10-15, 125 lines.
+For: touching, median, tenth, storeys, roman, squares, catholic, power. Last changed 2026-10-15, 125 lines.
 Links to 2: `gidi:docs/img/study-border.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/studies/foodgate.md` (0.78); `gidi:docs/studies/oldshore.md` (0.76); `gidi:docs/studies/jungle.md` (0.74).
+Nearest in words: `gidi:docs/studies/foodgate.md` (0.78); `gidi:docs/studies/oldshore.md` (0.75); `gidi:docs/studies/jungle.md` (0.74).
 
 ### `gidi:docs/studies/capital.md`
 **The Capital: the deep study**. The Capital: the deep study: Inspired by Ikeja. Study area: 15.64 km², 15.64 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: developed, median, power, touching, storeys, tenth, manufacturer, squares. Last changed 2026-10-15, 125 lines.
+For: developed, power, touching, median, tenth, storeys, manufacturer, squares. Last changed 2026-10-15, 125 lines.
 Links to 2: `gidi:docs/img/study-capital.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/oldshore.md` (0.85); `gidi:docs/studies/estate.md` (0.83); `gidi:docs/studies/maze.md` (0.83).
 
 ### `gidi:docs/studies/estate.md`
 **The Estate: the deep study**. The Estate: the deep study: Inspired by Magodo, Omole, Ikeja GRA. Study area: 24.26 km², 24.21 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, storeys, tenth, barrier, transportation, developed, squares. Last changed 2026-10-15, 127 lines.
+For: touching, median, tenth, storeys, barrier, transportation, developed, squares. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-estate.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/hub.md` (0.86); `gidi:docs/studies/capital.md` (0.83); `gidi:docs/studies/oldshore.md` (0.83).
 
 ### `gidi:docs/studies/foodgate.md`
 **Food Gate: the deep study**. Food Gate: the deep study: Inspired by Kosofe (Mile 12, Ketu, Ojota). Study area: 19.24 km², 19.2 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: median, touching, power, developed, storeys, tenth, religious, transit. Last changed 2026-10-15, 127 lines.
+For: touching, median, power, developed, tenth, storeys, religious, transit. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-foodgate.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/oldshore.md` (0.87); `gidi:docs/studies/hub.md` (0.84); `gidi:docs/studies/port.md` (0.83).
 
 ### `gidi:docs/studies/frontier.md`
 **The Frontier: the deep study**. The Frontier: the deep study: Inspired by Lekki + Ibeju-Lekki. Study area: 91.01 km², 88.92 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, barrier, storeys, tenth, power, grocery, squares. Last changed 2026-10-15, 127 lines.
+For: touching, median, barrier, tenth, storeys, power, grocery, squares. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-frontier.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/oldshore.md` (0.86); `gidi:docs/studies/maze.md` (0.83); `gidi:docs/studies/heights.md` (0.83).
 
 ### `gidi:docs/studies/heights.md`
 **The Heights: the deep study**. The Heights: the deep study: Inspired by Ikoyi, VI, Banana Island. Study area: 19.09 km², 16.99 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, storeys, tenth, historic, service, barrier, squares. Last changed 2026-10-15, 127 lines.
+For: touching, median, tenth, storeys, historic, service, barrier, squares. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-heights.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/frontier.md` (0.83); `gidi:docs/studies/estate.md` (0.8); `gidi:docs/studies/capital.md` (0.79).
 
 ### `gidi:docs/studies/hub.md`
 **The Hub: the deep study**. The Hub: the deep study: Inspired by Oshodi + Ojuelegba (Surulere). Study area: 64.56 km², 64.5 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: transit, touching, median, transportation, storeys, tenth, squares, beauty. Last changed 2026-10-15, 127 lines.
+For: transit, touching, median, transportation, tenth, storeys, squares, beauty. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-hub.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/studies/estate.md` (0.86); `gidi:docs/studies/port.md` (0.86); `gidi:docs/studies/oldshore.md` (0.85).
+Nearest in words: `gidi:docs/studies/estate.md` (0.86); `gidi:docs/studies/port.md` (0.85); `gidi:docs/studies/oldshore.md` (0.85).
 
 ### `gidi:docs/studies/jungle.md`
 **Jungle City: the deep study**. Jungle City: the deep study: Inspired by Ajegunle + Festac. Study area: 11.93 km², 11.85 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: median, touching, communication, storeys, tenth, power, transit, squares. Last changed 2026-10-15, 127 lines.
+For: touching, median, communication, tenth, storeys, power, transit, squares. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-jungle.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/frontier.md` (0.81); `gidi:docs/studies/oldshore.md` (0.8); `gidi:docs/studies/hub.md` (0.79).
 
 ### `gidi:docs/studies/maze.md`
 **The Maze: the deep study**. The Maze: the deep study: Inspired by Mushin + Shomolu. Study area: 33.66 km², 32.92 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, storeys, tenth, dealer, power, transit, transportation. Last changed 2026-10-15, 127 lines.
+For: touching, median, tenth, storeys, dealer, power, transit, transportation. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-maze.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/hub.md` (0.84); `gidi:docs/studies/frontier.md` (0.83); `gidi:docs/studies/capital.md` (0.83).
 
 ### `gidi:docs/studies/oldisland.md`
 **Old Island: the deep study**. Old Island: the deep study: Inspired by Lagos Island. Study area: 9.38 km², 5.9 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: recreation, median, service, touching, travel, pedestrian, storeys, tenth. Last changed 2026-10-15, 125 lines.
+For: recreation, service, touching, median, travel, pedestrian, tenth, storeys. Last changed 2026-10-15, 125 lines.
 Links to 2: `gidi:docs/img/study-oldisland.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/hub.md` (0.77); `gidi:docs/studies/estate.md` (0.77); `gidi:docs/studies/capital.md` (0.76).
 
 ### `gidi:docs/studies/oldshore.md`
 **Old Shore: the deep study**. Old Shore: the deep study: Inspired by Ikorodu + Epe. Study area: 20.35 km², 19.82 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, power, storeys, tenth, religious, transit, developed. Last changed 2026-10-15, 127 lines.
+For: touching, median, power, tenth, storeys, religious, transit, developed. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-oldshore.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/foodgate.md` (0.87); `gidi:docs/studies/frontier.md` (0.86); `gidi:docs/studies/hub.md` (0.85).
 
 ### `gidi:docs/studies/port.md`
 **The Port: the deep study**. The Port: the deep study: Inspired by Apapa + Mile 2 + the prison. Study area: 26.96 km², 19.36 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, pier, storeys, tenth, power, transit, transportation. Last changed 2026-10-15, 127 lines.
+For: touching, median, pier, tenth, storeys, power, transit, transportation. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-port.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/studies/hub.md` (0.86); `gidi:docs/studies/foodgate.md` (0.83); `gidi:docs/studies/oldshore.md` (0.83).
+Nearest in words: `gidi:docs/studies/hub.md` (0.85); `gidi:docs/studies/foodgate.md` (0.83); `gidi:docs/studies/oldshore.md` (0.83).
 
 ### `gidi:docs/studies/railside.md`
 **Railside: the deep study**. Railside: the deep study: Inspired by Agege + Ifako-Ijaiye + Alimosho. Study area: 215.35 km², 215.35 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: power, median, touching, storeys, tenth, squares, beauty, planning. Last changed 2026-10-15, 127 lines.
+For: power, touching, median, tenth, storeys, squares, beauty, planning. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-railside.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/studies/oldshore.md` (0.84); `gidi:docs/studies/capital.md` (0.81); `gidi:docs/studies/hub.md` (0.81).
+Nearest in words: `gidi:docs/studies/oldshore.md` (0.83); `gidi:docs/studies/capital.md` (0.81); `gidi:docs/studies/hub.md` (0.81).
 
 ### `gidi:docs/studies/watertown.md`
 **Water Town: the deep study**. Water Town: the deep study: Inspired by Makoko + Bariga + Agboyi + the sawmill. Study area: 7.27 km², 5.45 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, christian, storeys, tenth, education, venue, power. Last changed 2026-10-15, 127 lines.
+For: touching, median, christian, tenth, storeys, education, venue, power. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-watertown.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/oldshore.md` (0.82); `gidi:docs/studies/yaba.md` (0.82); `gidi:docs/studies/frontier.md` (0.81).
 
 ### `gidi:docs/studies/yaba.md`
 **Saba: the deep study**. Saba: the deep study: Inspired by Yaba and Akoka: the university, Sabo, Ojuelegba. Study area: 12.88 km², 10.64 km² of it land. Made by `scripts/study_deep.py` from Google's buildings and heights, Microsoft's buildings, OpenStreetMap, Overture, WorldCover, WorldPop and Copernicus. Gidi takes numbers from this, never an outline, a name or an image.
-For: touching, median, education, storeys, tenth, financial, service, transportation. Last changed 2026-10-15, 127 lines.
+For: touching, education, median, tenth, storeys, financial, service, transportation. Last changed 2026-10-15, 127 lines.
 Links to 2: `gidi:docs/img/study-yaba.png`, `gidi:scripts/study_deep.py`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 1 code files (`gidi:scripts/district_profiles.py`).
-Nearest in words: `gidi:docs/studies/maze.md` (0.83); `gidi:docs/studies/hub.md` (0.83); `gidi:docs/studies/watertown.md` (0.82).
+Nearest in words: `gidi:docs/studies/maze.md` (0.82); `gidi:docs/studies/hub.md` (0.82); `gidi:docs/studies/watertown.md` (0.82).
 
 ## gidi:docs
 ### `gidi:docs/watertown-pattern-study.md`
@@ -807,37 +824,37 @@ Nearest in words: `gidi:docs/port-pattern-study.md` (0.25); `gidi:docs/oldshore-
 ### `gidi:legacy/OLD-MAP.md`
 **The old map (13-21 Oct 2026): what it was**. The old map (13-21 Oct 2026): what it was: The first Gidi: 15, then 17, invented districts generated from patterns measured in real Lagos (OpenStreetMap, then Google's data), baked into `web/gidi-data.js`, hand-edited in `web/hand/`, styled by the Blender kit in `legacy/blender/`. On 22 Oct the owner restarted the map as real Lagos miniaturised (decisions/DECISIONS.md); this
 For: statistics, banned, okadas, gateways, palace, stadiums, island, extract. Last changed 2026-10-24, 52 lines.
-Links to 44: `gidi:data/results/lga_table.json`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/bazaar-pattern-study.md`, `gidi:docs/border-pattern-study.md`, `gidi:docs/capital-pattern-study.md`, `gidi:docs/estate-pattern-study.md`, `gidi:docs/foodgate-pattern-study.md`, `gidi:docs/frontier-pattern-study.md`, `gidi:docs/heights-pattern-study.md`, `gidi:docs/hub-pattern-study.md` ...
+Links to 39: `gidi:data/results/lga_table.json`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/bazaar-pattern-study.md`, `gidi:docs/border-pattern-study.md`, `gidi:docs/capital-pattern-study.md`, `gidi:docs/estate-pattern-study.md`, `gidi:docs/foodgate-pattern-study.md`, `gidi:docs/frontier-pattern-study.md`, `gidi:docs/heights-pattern-study.md`, `gidi:docs/hub-pattern-study.md` ...
 Backlinks: 3 documents (`gidi:README.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:legacy/README.md`), 1 code files (`gidi:scripts/doc_vault.py`).
-Nearest in words: `gidi:docs/heights-pattern-study.md` (0.26); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:docs/border-pattern-study.md` (0.25).
+Nearest in words: `gidi:docs/heights-pattern-study.md` (0.26); `gidi:docs/LAGOS-ISMS.md` (0.26); `gidi:docs/border-pattern-study.md` (0.26).
 
 ### `gidi:legacy/README.md`
 **Legacy: the old map's kit (frozen)**. Legacy: the old map's kit (frozen): What the old map was and its parts: `OLD-MAP.md`.
-For: builder, tab's, tiles, frozen, fields, old-town, legacy, builders. Last changed 2026-10-24, 14 lines.
+For: builder, tab's, tiles, frozen, fields, legacy, builders, old-town. Last changed 2026-10-24, 14 lines.
 Links to 5: `gidi:docs/MAP-FORMAT.md`, `gidi:legacy/OLD-MAP.md`, `gidi:legacy/blender/city.py`, `gidi:schema/map_schema.json`, `gidi:web/gidi-data.js`
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`), 2 code files (`gidi:scripts/audit3d.py`, `gidi:scripts/inventory.py`).
-Nearest in words: `gidi:legacy/blender/WHAT-IT-HELD.md` (0.33); `gidi:decisions/CODEBASE.md` (0.23); `gidi:decisions/NOW.md` (0.19).
+Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 1 code files (`gidi:scripts/audit3d.py`).
+Nearest in words: `gidi:legacy/blender/WHAT-IT-HELD.md` (0.31); `gidi:decisions/CODEBASE.md` (0.23); `gidi:decisions/NOW.md` (0.18).
 
 ## gidi:legacy/blender
 ### `gidi:legacy/blender/WHAT-IT-HELD.md`
 **The old Blender kit: what it held, and what the builders can take from it**. The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel". This page answers that. The kit is frozen (DECISIONS, "The interface works both ways; the builders are the kit"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made
-For: builder, know-how, worth, fields, builders, conditions, sheet, fresh. Last changed 2026-10-24, 98 lines.
+For: builder, know-how, worth, builders, conditions, fields, sheet, fresh. Last changed 2026-10-24, 98 lines.
 Links to 16: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/wear_layer.py`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:legacy/blender/gidi_kit/draft.py`, `gidi:legacy/blender/gidi_kit/goods.py`, `gidi:legacy/blender/gidi_kit/gutters.py`, `gidi:legacy/blender/gidi_kit/materials.py`, `gidi:legacy/blender/gidi_kit/people.py`, `gidi:legacy/blender/gidi_kit/roadbed.py`, `gidi:legacy/blender/gidi_kit/street.py` ...
 Backlinks: 4 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:legacy/README.md` (0.33); `gidi:decisions/DECISIONS.md` (0.25); `gidi:decisions/NOW.md` (0.24).
+Nearest in words: `gidi:legacy/README.md` (0.31); `gidi:decisions/NOW.md` (0.25); `gidi:decisions/DECISIONS.md` (0.24).
 
 ## gidi:map/d15
 ### `gidi:map/d15/BUILDINGS.md`
 **Mùṣá: the buildings draft and its hand pass**. Mùṣá: the buildings draft and its hand pass: Drafted by `scripts/draft_buildings.py` (owner, 23 Oct: real footprints, then hand). 1457 houses in 41 blocks. Each block's number is its place in size order. After the run, 31 houses that crossed the district line were taken out (the tool now keeps only houses wholly inside), leaving 1426; the counts below are from before that.
-For: redrafted, hand, pass, lanes, twin's, redrawn, cleared, close-zoom. Last changed 2026-10-24, 143 lines.
-Links to 2: `gidi:map/d15/STREETS.md`, `gidi:scripts/draft_buildings.py`
-Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi:scripts/draft_buildings.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.12); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.09).
+For: redrafted, cleared, pass, zoom, hand, given, holds, lanes. Last changed 2026-10-25, 263 lines.
+Links to 6: `gidi:map/d15/STREETS.md`, `gidi:scripts/draft_buildings.py`, `gidi:scripts/draft_kinds.py`, `gidi:scripts/draft_looks.py`, `gidi:scripts/draft_storeys.py`, `gidi:scripts/draft_storeys_nearby.py`
+Backlinks: 5 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:map/d15/STREETS.md`), 1 code files (`gidi:scripts/draft_buildings.py`).
+Nearest in words: `gidi:decisions/NOW.md` (0.22); `gidi:decisions/DECISIONS.md` (0.13); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.11).
 
 ### `gidi:map/d15/STREETS.md`
 **Mùṣá (district 15): the road plan and where each street comes from**. Mùṣá (district 15): the road plan and where each street comes from: Roads only, drawn on the new frame (1:3). Every kept street sits on its real line, squeezed to the frame, at its real width (never shrunk). Real names live here only, never in the map. Buildings come later.
-For: repeats, lane, nearby, parallel, missing, twin, home, east. Last changed 2026-10-24, 536 lines.
-Links to 0: 
-Backlinks: 2 documents (`gidi:decisions/CODEBASE.md`, `gidi:map/d15/BUILDINGS.md`), 0 code files ().
-Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.15); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.12); `gidi:docs/hand/ibudo/child_plan.md` (0.1).
+For: lane, repeats, nearby, parallel, shot, twin, isolo, south. Last changed 2026-10-25, 708 lines.
+Links to 5: `gidi:map/d15/BUILDINGS.md`, `gidi:map/d15/road_reads.tsv`, `gidi:scripts/draft_crossings.py`, `gidi:scripts/draft_edge.py`, `gidi:scripts/draft_roads.py`
+Backlinks: 3 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/NOW.md`, `gidi:map/d15/BUILDINGS.md`), 0 code files ().
+Nearest in words: `gidi:docs/lagos-study/roads/EARTH-CHECK.md` (0.16); `gidi-data:research/google/ibudo/study/INVENTORY.md` (0.13); `gidi:docs/hand/ibudo/child_plan.md` (0.11).
 

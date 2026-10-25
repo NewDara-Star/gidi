@@ -103,10 +103,9 @@ passed. The old generated map is history: viewable only, frozen (`legacy/`). Not
 - **Branches:** every merged branch deleted after checking its work is in main (gidi 198 local and 197 remote, gidi-game 27
   and all remote); the unmerged ones were checked against the decisions, found replaced, saved as patches in
   `~/gidi-data/to-delete/branches/` and removed (PR #18 closed). Each repo now has only `main`.
-- **Triage:** 91 old-map docs and pictures moved to `to-delete/` (the owner deletes them; `to-delete/README.md` says why
-  each went); 14 replaced decisions and 3 dropped ideas moved to `decisions/HISTORY.md`; the sound-alike names rule is in
+- **Triage:** 91 old-map docs and pictures moved out (deleted 25 Oct, git tag `before-cleanup-25oct`); 14 replaced decisions and 3 dropped ideas moved to `decisions/HISTORY.md`; the sound-alike names rule is in
   DECISIONS ("Invented names only"); CHECKS rows made honest where only an old-map check held a rule; the old log of this
-  page (16-22 Oct) moved to `to-delete/decisions/NOW-log-16-22-oct.md`.
+  page (16-22 Oct) went with them.
 
 - **Kit pieces** (gidi-game #79, the rule "Save what makes a house, not each house"): block_build's windows and doors are
   shared pieces (`kit_pieces`), placed by each house's `.pieces.json` with that house's own slot colours. Full street:

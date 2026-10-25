@@ -1,6 +1,6 @@
 # The deep study: every district's inspiration, from all the data
 
-The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt in the v2 frame (`to-delete/docs/LAYOUT-V2.md`) by one shared generator. Each district gets its own profile, and the profile is set from this study.
+The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt by one shared generator. Each district gets its own profile, and the profile is set from this study.
 
 **The rule:** Gidi takes numbers from the study, never an outline, a name or an image.
 
@@ -48,7 +48,7 @@ The owner asked for this on 15 Oct 2026: "the research should look at everything
 ## Known limits
 - **Places and street things** are what people have mapped. They cluster on main roads, and lamps, signals and bus stops are badly under-mapped, so they're floors, not counts.
 - **Heights** are 2023 estimates at about 3 m a storey. A zinc roof on a high plinth can read as two storeys.
-- **Study areas** are the boxes and LGAs each district was first studied on (`to-delete/docs/DISTRICT-BRIEF.md`). The two new ones:
+- **Study areas** are the boxes and LGAs each district was first studied on. The two new ones:
   - **Saba:** Yaba, Sabo, Akoka and the university (Lagos Mainland and Shomolu, 3.368–3.405 E, 6.497–6.528 N)
   - **The Airport:** the airport, its cargo side and hotel strip (Ikeja and Oshodi/Isolo, 3.295–3.345 E, 6.555–6.592 N)
 

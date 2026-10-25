@@ -22,7 +22,7 @@ Each part is marked:
   never extended (CLAUDE.md), and new work never reads from it.
 - **history**: what a decision or study left behind; read it, don't build on it
 - **other project**: not Gidi
-- **to delete**: moved into `to-delete/` (24 Oct) for the owner to delete; `to-delete/README.md` says why each file went.
+- **deleted**: `to-delete/` (93 files) went on 25 Oct, with the owner's permission; git tag `before-cleanup-25oct` holds it.
   The inventory lists these files but doesn't read them for references or names.
 
 ## The map in one breath
@@ -87,8 +87,8 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 
 **History**
 - `decisions/HISTORY.md`: decisions that later ones replaced, and dropped ideas, word for word with what replaced them
-- `to-delete/`: the old map's living tests, audits, calibration, plans and passes (91 files, 24 Oct), and this folder's
-  old NOW log; their lessons are in `docs/OLD-MAP-LESSONS.md`
+- the old map's living tests, audits, calibration, plans and passes, and the old NOW log: deleted 25 Oct (git tag
+  `before-cleanup-25oct`); their lessons are in `docs/OLD-MAP-LESSONS.md`
 
 ## gidi-game (`~/gidi-game`, 456 files; `Content/` is 34 GB on disk, nearly all generated or from Fab)
 
