@@ -9,6 +9,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
+0. [ ] **Pieces as instances, first (owner, 25 Oct, DECISIONS "Pieces placed as instances"):** the audit found
+   only block_build splits pieces (windows and doors, as one actor each, not instances) and 97% of a test house's
+   triangles are its own roof sheets (46,308 of 47,631); the 25 Oct "Kits into pieces" never reached this list.
+   (a) The 375-house street rebuilt with roof sheets and windows as shared pieces placed as instances (ISM), measured
+   against PERFORMANCE.md's street numbers; (b) if it wins, each builder split in turn; (c) roads as simple shapes
+   with tiling textures and decals; (d) World Partition in place of our tile streaming.
 2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
    it (and the 8 corners check_map still lists, all on junction nodes). Roads that meet now share a point (#335);
    the kit must also join the 50 staggered junctions check_map counts (two nodes a few metres apart, inside each
