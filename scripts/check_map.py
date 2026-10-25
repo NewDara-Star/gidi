@@ -20,6 +20,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCHEMA = json.load(open(os.path.join(ROOT, 'schema', 'map_schema.json')))
 TILE = 100.0                 # dress tiles, m
+ON_ROAD = 1.0                # m2 of a house inside a carriageway that fails (DECISIONS: the road comes first)
 JOIN = (0.01, 1.0)           # two road ends closer than 1 m but not on the same point: a slip, not a junction
 HEADER = {'format', 'district', 'layer', 'tile', 'records'}
 ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
@@ -408,7 +409,30 @@ def check(top, fix=False, only=None):
         for oid, q in pts:
             if oid != rid and JOIN[0] < math.hypot(e[0] - q[0], e[1] - q[1]) < JOIN[1]:
                 err(f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
+    on_road(recs)
     return files, recs
+
+
+def on_road(recs):
+    """The road comes first (DECISIONS, 25 Oct): no house stands more than ON_ROAD m2 inside a road's real width."""
+    try:
+        from shapely.geometry import LineString, Polygon
+        from shapely.strtree import STRtree
+    except ImportError:
+        return err('map', 'the on-road check needs shapely (run with ~/.venvs/gidi/bin/python)')
+    hs = [(hid, Polygon(h['footprint'])) for hid, h in recs.items() if h.get('type') == 'building'
+          and isinstance(h.get('footprint'), list) and len(h['footprint']) >= 3 and all(is_pt(p) for p in h['footprint'])]
+    hs = [(hid, p) for hid, p in hs if p.is_valid]
+    tree = STRtree([p for _, p in hs])
+    for rid, r in recs.items():
+        if r.get('type') != 'road' or not is_num(r.get('width')) or not isinstance(r.get('centreline'), list):
+            continue
+        cw = LineString([p[:2] for p in r['centreline'] if is_pt(p)]).buffer(r['width'] / 2, cap_style=2)
+        for j in tree.query(cw):
+            a = hs[j][1].intersection(cw).area
+            if a > ON_ROAD:
+                err(f'{recs[hs[j][0]]["_file"]} {hs[j][0]}', f'stands {a:.1f} m2 inside road {rid} ({r["width"]} m wide): '
+                    'set the house back, cut its front or leave it out; never narrow the road')
 
 
 # ------------------------------------------------------------------ what each kit part reads
