@@ -105,19 +105,14 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `Art/` | hand-made assets in Git LFS (vehicles 153, props 128, people 23, fonts, plates, textures); listed in `ASSETS.md` |
 | `docs/ASSET-INVENTORY.md` | what the project already has (City Sample, Fab, Megascans): check before building |
 
-**Reads the old map** (still runs, but on the generated city, so it moves to the new map when Unreal does)
-- `Content/Python/gidi_import.py`, `tools/import.sh`: the city importer (old map tiles from gidi `web/city/`)
-- `gidi_stream.py`, `tools/stream.sh`: tile streaming
-- `gidi_heroes.py`: vehicles at the old map's spots
-- `gidi_signs.py`: shop signs from the old kit's tiles
-- `gidi_look.py`, `gidi_surfaces.py`, `gidi_cam.py`, `tools/shot.sh`, `look.sh`, `surfaces.sh`, `make_textures.py`
-- `gidi_play.py`: the Ìbùdó play level
-- `tools/perf.sh`: the old laptop test on Gidi_City, removed 24 Oct (gidi-game #70); `measure.sh` replaces it
+| `Content/Python/gidi_surfaces.py`, `gidi_look.py`, `gidi_heroes.py`, `tools/surfaces.sh`, `make_textures.py` | the masters, surfaces and import settings; a level's sky and lens; the built vehicles brought in |
+
+**Deleted 25 Oct** (gidi-game #96; git tag `before-cleanup-25oct`): the old city's Unreal side, which read the old map's
+tiles: the importer, tile streaming, shop signs, the check camera, the Ìbùdó play level, photo mode, and their tools.
 
 **History**
 - `tools/frame_motorpark.py`, `props_build.py`, `prop_basin_final.py` (the 19 Oct Lagos pass)
-- `tools/vehicle_prep.py`, `vehicle_look.py`, `vehicle_export.py`, `photo.sh`, `Content/Python/gidi_photo.py` (the Meshy
-  vehicles and photo mode)
+- `tools/vehicle_prep.py`, `vehicle_look.py`, `vehicle_export.py` (the Meshy vehicles)
 
 ## gidi-data (`~/gidi-data`): Gidi's study store, about 22 GB
 

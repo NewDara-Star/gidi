@@ -23,18 +23,18 @@ Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
 Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.23); `gidi:docs/look/research-buildings.md` (0.14); `gidi-game:ASSETS.md` (0.13).
 
 ### `gidi-game:README.md`
-**Gidi: the game**. Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its data and the kit's tiles.
-For: editor, import, repo, wasd, scripting, meshy, tiles, console. Last changed 2026-10-24, 56 lines.
-Links to 14: `gidi-game:.mcp.json`, `gidi-game:ASSETS.md`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh`, `gidi-game:tools/import.sh`, `gidi-game:tools/measure.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/play.sh`, `gidi-game:tools/shot.sh` ...
+**Gidi: the game**. Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its records (`map/<dNN>/`), drawn on the drawing board.
+For: editor, scripting, level's, repo, meshy, committed, unreal, play. Last changed 2026-10-25, 48 lines.
+Links to 15: `gidi-game:.mcp.json`, `gidi-game:ASSETS.md`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh`, `gidi-game:tools/map_build.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/play.sh` ...
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.29); `gidi:decisions/DECISIONS.md` (0.19); `gidi-game:CLAUDE.md` (0.17).
+Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.22); `gidi:decisions/NOW.md` (0.22).
 
 ### `gidi:README.md`
 **Gidi**. Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the map. It holds every road, block, building and thing the game puts there, as records in `map/`, plus the drawing board they are made on. The game itself (the builders and the Unreal project) is
-For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-24, 32 lines.
+For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-25, 32 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CODEBASE.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:scripts/board_server.py`, `gidi:scripts/check_map.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/inventory.py`, `gidi:web/board.html`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.28); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
@@ -128,7 +128,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` 
 For: photo's, tractor, rubbish, bonneted, desk, dirt, flatbed, wings. Last changed 2026-10-24, 137 lines.
 Links to 12: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45.py`, `gidi-data:research/google/kits/old-town/tests/ot45/hand45_2.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_first.py`, `gidi-data:research/google/kits/old-town/tests/ot45/mk45_pass.py`, `gidi-data:research/google/kits/old-town/tests/ot45/run45.sh`, `gidi-data:research/google/kits/old-town/tests/ot45/sbs.py`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:scripts/check_rules.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.28); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md` (0.28); `gidi:decisions/NOW.md` (0.27); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.26).
 
 ## gidi-data:research/google/kits/old-town/tests/ot73
 ### `gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`
@@ -144,7 +144,7 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md`
 For: jitter, stored, positions, goods, scaffold, records, test, render. Last changed 2026-10-24, 168 lines.
 Links to 2: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/facade_hand.py`
 Backlinks: 2 documents (`gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/underdeck_build.py`).
-Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.34); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.33); `gidi:decisions/NOW.md` (0.29).
+Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.34); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.33); `gidi:decisions/NOW.md` (0.28).
 
 ## gidi-data:research/google/kits/old-town/tests/ut01_emmanuel
 ### `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`
@@ -208,7 +208,7 @@ Nearest in words: `gidi-game:docs/ASSET-INVENTORY.md` (0.21); `gidi:decisions/ID
 For: sheets, sheet, eave, closed, format, lapped, ribs, roof's. Last changed 2026-10-24, 28 lines.
 Links to 2: `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:tools/zinc_kit.py`
 Backlinks: 2 documents (`gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/zinc_kit.py`).
-Nearest in words: `gidi-game:Art/Props/LeantoBuilt/GAPS.md` (0.51); `gidi:decisions/NOW.md` (0.15); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
+Nearest in words: `gidi-game:Art/Props/LeantoBuilt/GAPS.md` (0.51); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.13).
 
 ## gidi-game:Art/Props/LeantoBuilt
 ### `gidi-game:Art/Props/LeantoBuilt/GAPS.md`
@@ -216,7 +216,7 @@ Nearest in words: `gidi-game:Art/Props/LeantoBuilt/GAPS.md` (0.51); `gidi:decisi
 For: purlins, lapped, beam, sheet, lean-to, rust, sheets, closed. Last changed 2026-10-24, 39 lines.
 Links to 5: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/vehicle_look.py`, `gidi-game:tools/zinc_kit.py`
 Backlinks: 2 documents (`gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi:decisions/NOW.md`), 1 code files (`gidi-game:tools/zinc_kit.py`).
-Nearest in words: `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md` (0.51); `gidi:decisions/NOW.md` (0.14); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.14).
+Nearest in words: `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md` (0.51); `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md` (0.14); `gidi:decisions/NOW.md` (0.14).
 
 ## (top)
 ### `gidi-game:CLAUDE.md`
@@ -227,11 +227,11 @@ Backlinks: 4 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:de
 Nearest in words: `gidi:CLAUDE.md` (0.37); `gidi-game:README.md` (0.17); `gidi:decisions/CHECKS.md` (0.13).
 
 ### `gidi-game:README.md`
-**Gidi: the game**. Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its data and the kit's tiles.
-For: editor, import, repo, wasd, scripting, meshy, tiles, console. Last changed 2026-10-24, 56 lines.
-Links to 14: `gidi-game:.mcp.json`, `gidi-game:ASSETS.md`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh`, `gidi-game:tools/import.sh`, `gidi-game:tools/measure.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/play.sh`, `gidi-game:tools/shot.sh` ...
+**Gidi: the game**. Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its records (`map/<dNN>/`), drawn on the drawing board.
+For: editor, scripting, level's, repo, meshy, committed, unreal, play. Last changed 2026-10-25, 48 lines.
+Links to 15: `gidi-game:.mcp.json`, `gidi-game:ASSETS.md`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh`, `gidi-game:tools/map_build.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/play.sh` ...
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.29); `gidi:decisions/DECISIONS.md` (0.19); `gidi-game:CLAUDE.md` (0.17).
+Nearest in words: `gidi-game:docs/PERFORMANCE.md` (0.27); `gidi:decisions/DECISIONS.md` (0.22); `gidi:decisions/NOW.md` (0.22).
 
 ## gidi-game:docs
 ### `gidi-game:docs/ASSET-INVENTORY.md`
@@ -244,9 +244,9 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/i
 ### `gidi-game:docs/PERFORMANCE.md`
 **Performance: modes, near detail, streaming, budgets**. Performance: modes, near detail, streaming, budgets: The owner's rule (gidi `decisions/DECISIONS.md`, 22 Oct, "Build light, look full"): build in a light mode, play in the mode the machine can carry, flip to full only to look and take pictures. Near things carry detail and far things are simple. What the camera can't see is not drawn. The world streams in pieces around the player. Every level has a budget,
 For: tools, mode, lumen, editor, play, modes, unrealeditor, saved. Last changed 2026-10-25, 270 lines.
-Links to 19: `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/img_diff.py`, `gidi-game:tools/import.sh`, `gidi-game:tools/lap_check.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`, `gidi-game:tools/memreport.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/mode_sg.py` ...
-Backlinks: 4 documents (`gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 9 code files (`gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/measure.sh`).
-Nearest in words: `gidi-game:README.md` (0.29); `gidi-game:docs/ASSET-INVENTORY.md` (0.16); `gidi:decisions/NOW.md` (0.16).
+Links to 16: `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/img_diff.py`, `gidi-game:tools/lap_check.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`, `gidi-game:tools/memreport.sh`, `gidi-game:tools/mode.sh`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/package.sh`, `gidi-game:tools/piece_match.py` ...
+Backlinks: 4 documents (`gidi-game:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 8 code files (`gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/measure.sh`, `gidi-game:tools/measure_csv.py`).
+Nearest in words: `gidi-game:README.md` (0.27); `gidi:decisions/NOW.md` (0.17); `gidi-game:docs/ASSET-INVENTORY.md` (0.16).
 
 ## (top)
 ### `gidi:CLAUDE.md`
@@ -258,29 +258,29 @@ Nearest in words: `gidi-game:CLAUDE.md` (0.37); `gidi:decisions/DECISIONS.md` (0
 
 ### `gidi:README.md`
 **Gidi**. Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the map. It holds every road, block, building and thing the game puts there, as records in `map/`, plus the drawing board they are made on. The game itself (the builders and the Unreal project) is
-For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-24, 32 lines.
+For: repos, airbus, provided, drawing, newdara-star, contributors, glo, odbl. Last changed 2026-10-25, 32 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CODEBASE.md`, `gidi:docs/MAP-FORMAT.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:scripts/board_server.py`, `gidi:scripts/check_map.py`, `gidi:scripts/check_rules.py`, `gidi:scripts/inventory.py`, `gidi:web/board.html`
 Backlinks: 1 documents (`gidi:decisions/CODEBASE.md`), 0 code files ().
-Nearest in words: `gidi:decisions/CODEBASE.md` (0.28); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
+Nearest in words: `gidi:decisions/CODEBASE.md` (0.27); `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.2).
 
 ## gidi:decisions
 ### `gidi:decisions/CHECKS.md`
 **Which check holds each rule**. Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So "are we covering all bases?" is
 For: gidi-game, process, held, builder, rule, fails, instances, review. Last changed 2026-10-25, 96 lines.
-Links to 25: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh` ...
+Links to 23: `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/look_travels.py`, `gidi-game:tools/mode_sg.py`, `gidi-game:tools/play.sh`, `gidi:.claude/hooks/checked-before-commit.sh`, `gidi:.claude/hooks/checks-before-commit.sh`, `gidi:.claude/hooks/checks-before-stop.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md` ...
 Backlinks: 5 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/NOW.md`, `gidi:docs/MAP-FORMAT.md`), 3 code files (`gidi:.claude/hooks/repo.sh`, `gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.51); `gidi:decisions/DECISIONS.md` (0.5); `gidi:decisions/CODEBASE.md` (0.36).
+Nearest in words: `gidi:decisions/NOW.md` (0.52); `gidi:decisions/DECISIONS.md` (0.5); `gidi:decisions/CODEBASE.md` (0.36).
 
 ### `gidi:decisions/CODEBASE.md`
 **What the code holds: the three repos, one page**. What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: "use the compiler to know what every piece of code is connected
-For: scripts, gidi-game, district's, draft, inventory, board's, map's, old-map. Last changed 2026-10-25, 180 lines.
-Links to 110: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_cam.py`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_photo.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_play.py`, `gidi-game:Content/Python/gidi_signs.py` ...
+For: scripts, gidi-game, district's, draft, inventory, board's, deleted, map's. Last changed 2026-10-25, 175 lines.
+Links to 99: `gidi-game:ASSETS.md`, `gidi-game:Config/DefaultDeviceProfiles.ini`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_look.py`, `gidi-game:Content/Python/gidi_modes.py`, `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`, `gidi-game:Content/Python/gidi_surfaces.py`, `gidi-game:Content/Python/gidi_underdeck.py`, `gidi-game:docs/ASSET-INVENTORY.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/editor.sh` ...
 Backlinks: 4 documents (`gidi:CLAUDE.md`, `gidi:README.md`, `gidi:decisions/NOW.md`, `gidi:decisions/README.md`), 3 code files (`gidi:.claude/hooks/checks-before-stop.sh`, `gidi:docs/lagos-study/similar/scripts/common.py`, `gidi:scripts/doc_vault.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.39); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
+Nearest in words: `gidi:decisions/NOW.md` (0.4); `gidi:decisions/CHECKS.md` (0.36); `gidi:decisions/DECISIONS.md` (0.32).
 
 ### `gidi:decisions/DECISIONS.md`
 **Decisions (the owner's standing rules)**. Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
-For: kits, we're, records, view, blender, hand, unreal, laptop. Last changed 2026-10-25, 142 lines.
+For: kits, we're, records, view, blender, hand, laptop, unreal. Last changed 2026-10-25, 142 lines.
 Links to 26: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:ASSETS.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/danfo_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/person_build.py`, `gidi-game:tools/plates.py`, `gidi-game:tools/umbrella_build.py`, `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md` ...
 Backlinks: 12 documents (`gidi-data:README.md`, `gidi-game:CLAUDE.md`, `gidi-game:docs/PERFORMANCE.md`, `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/NOW.md` ...), 2 code files (`gidi:.claude/hooks/review-before-push.sh`, `gidi:scripts/check_rules.py`).
 Nearest in words: `gidi:decisions/NOW.md` (0.51); `gidi:decisions/CHECKS.md` (0.5); `gidi:decisions/CODEBASE.md` (0.32).
@@ -290,7 +290,7 @@ Nearest in words: `gidi:decisions/NOW.md` (0.51); `gidi:decisions/CHECKS.md` (0.
 For: replaced, hand-made, miniaturised, hand, frozen, plan, builder, programs. Last changed 2026-10-25, 61 lines.
 Links to 9: `gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/IDEAS.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/data/deep/hub.json`, `gidi:docs/hand/borrowed-lagos.md`, `gidi:scripts/check_rules.py`
 Backlinks: 4 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`), 0 code files ().
-Nearest in words: `gidi:decisions/DECISIONS.md` (0.28); `gidi:decisions/CODEBASE.md` (0.24); `gidi:decisions/CHECKS.md` (0.21).
+Nearest in words: `gidi:decisions/DECISIONS.md` (0.29); `gidi:decisions/CODEBASE.md` (0.24); `gidi:decisions/NOW.md` (0.22).
 
 ### `gidi:decisions/IDEAS.md`
 **Ideas (not decided; newest first)**. Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig, code Apache-2.0, experimental): a video of one person, whole body in frame, becomes motion on a Mixamo character (.glb for Blender/Unreal); Blender add-on tested on Apple Silicon, slow but fine on CPU (3-15 min per 30 s clip). Fills the gap Mixamo's library leaves: Lagos-only moves (basin on the head, conductor hanging off the door, frying akara, bargaining, climbing on an okada), filmed by the owner or friends who agree, never strangers' clips. **Catch:** it needs SMPL-X, non-commercial by default (a commercial licence is a separate deal), and the GVHMR weights have their own licence: use it for study and prototypes (person spots), then licence it or redo final animations with a sale-cleared tool before shipping. To set up (needs the owner's OK): repo + Python packages; about 5 GB of weights on first run; the SMPL-X file (owner signs up on the SMPL-X site); a Mixamo FBX from the owner's Adobe account. Mixamo itself: free library, retarget onto City Sample/MetaHuman in Unreal; usable in a shipped game, raw files not shared.
@@ -301,10 +301,10 @@ Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 305 lines.
-Links to 77: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:Content/Python/gidi_import.py`, `gidi-game:Content/Python/gidi_stream.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh` ...
+For: gidi-game, pass, records, sent, unreal, test, editor, layer. Last changed 2026-10-25, 321 lines.
+Links to 80: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/frame_motorpark.py` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 1 code files (`gidi:.claude/hooks/review-before-push.sh`).
-Nearest in words: `gidi:decisions/CHECKS.md` (0.51); `gidi:decisions/DECISIONS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.42).
+Nearest in words: `gidi:decisions/CHECKS.md` (0.52); `gidi:decisions/DECISIONS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.41).
 
 ### `gidi:decisions/README.md`
 **Decisions and ideas**. Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it whenever the owner decides something or a good idea comes up. Newest first within each file.
@@ -396,7 +396,7 @@ Nearest in words: `gidi:docs/gidi-data-plan.md` (0.12); `gidi-data:README.md` (0
 
 ### `gidi:docs/DEEP-STUDY.md`
 **The deep study: every district's inspiration, from all the data**. The deep study: every district's inspiration, from all the data: The owner asked for this on 15 Oct 2026: "the research should look at everything in the data and take them into consideration". Every Gidi district is rebuilt by one shared generator. Each district gets its own profile, and the profile is set from this study.
-For: types, wobble, touching, district's, settings, measures, fabric, measured. Last changed 2026-10-25, 65 lines.
+For: types, wobble, touching, district's, measures, settings, fabric, measured. Last changed 2026-10-25, 65 lines.
 Links to 0: 
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:docs/DATA-SOURCES.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/studies/border.md` (0.22); `gidi:docs/studies/yaba.md` (0.21); `gidi:docs/studies/airport.md` (0.19).
@@ -404,7 +404,7 @@ Nearest in words: `gidi:docs/studies/border.md` (0.22); `gidi:docs/studies/yaba.
 ### `gidi:docs/LAGOS-ISMS.md`
 **Lagos-isms: the eccentricities in the real data (a running log)**. Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things a tidy generator would never make, but that make Lagos feel like Lagos. For each one: - what it is - where it shows up in the real data (LGA and coordinates)
 For: suits, one-way, expressway, reserve, kosofe, island, railside, acute. Last changed 2026-10-25, 276 lines.
-Links to 3: `gidi:data/results/lga_table.json`, `gidi:data/tools/pull-data.sh`, `gidi:docs/OLD-KIT.md`
+Links to 4: `gidi-game:tools/road_build.py`, `gidi:data/results/lga_table.json`, `gidi:data/tools/pull-data.sh`, `gidi:docs/OLD-KIT.md`
 Backlinks: 14 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/OLD-MAP-LESSONS.md`, `gidi:docs/RESEARCH.md`, `gidi:docs/border-pattern-study.md`, `gidi:docs/estate-pattern-study.md`, `gidi:docs/frontier-pattern-study.md`, `gidi:docs/hand/maze-hub-lagos.md` ...), 0 code files ().
 Nearest in words: `gidi:docs/border-pattern-study.md` (0.26); `gidi:docs/estate-pattern-study.md` (0.26); `gidi:docs/jungle-pattern-study.md` (0.22).
 
@@ -420,21 +420,21 @@ Nearest in words: `gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md`
 For: dress, record, field, stroke, value, records, degrees, face. Last changed 2026-10-25, 599 lines.
 Links to 19: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:tools/fields.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/spot_to_map.py`, `gidi:decisions/CHECKS.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/lived-in.md`, `gidi:docs/OLD-KIT.md`, `gidi:docs/lagos-study/roads/EARTH-CHECK.md`, `gidi:docs/map-format-example/d15/district.json`, `gidi:docs/map-format-example/d15/dress/128_60.json` ...
 Backlinks: 6 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/map-format-example/README.md`), 10 code files (`gidi-game:tools/block_build.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/map_build.py`, `gidi-game:tools/road_draft.py`, `gidi-game:tools/spot_to_map.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.42); `gidi:decisions/DECISIONS.md` (0.31); `gidi:decisions/CHECKS.md` (0.28).
+Nearest in words: `gidi:decisions/NOW.md` (0.41); `gidi:decisions/DECISIONS.md` (0.31); `gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md` (0.28).
 
 ### `gidi:docs/OLD-KIT.md`
 **The old Blender kit: what it held, and what the builders can take from it**. The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel". This page answers that. The kit is frozen (DECISIONS, "The interface works both ways; the builders are the kit"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made
-For: builder, know-how, worth, builders, fields, conditions, page, sheet. Last changed ?, 98 lines.
+For: builder, know-how, worth, builders, fields, conditions, page, sheet. Last changed 2026-10-25, 98 lines.
 Links to 5: `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/kit_fields.py`, `gidi-game:tools/wear_layer.py`, `gidi:docs/OLD-MAP-LESSONS.md`
 Backlinks: 7 documents (`gidi:CLAUDE.md`, `gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/MAP-FORMAT.md`), 0 code files ().
-Nearest in words: `gidi:decisions/NOW.md` (0.25); `gidi:decisions/DECISIONS.md` (0.24); `gidi:decisions/CHECKS.md` (0.23).
+Nearest in words: `gidi:decisions/NOW.md` (0.24); `gidi:decisions/DECISIONS.md` (0.24); `gidi:decisions/CHECKS.md` (0.23).
 
 ### `gidi:docs/OLD-MAP-LESSONS.md`
 **What the old map taught: still true for the new one**. What the old map taught: still true for the new one: The old generated map (13-21 Oct 2026) is history, deleted 25 Oct (git tag `before-cleanup-25oct`; DECISIONS, "The new map is the truth"). Its plans and pass reports were deleted on 25 Oct (git tag `before-cleanup-25oct` holds them). Before they went, each was read for what still holds for the new map
 For: ramp, reimport, unreal, viewing, misses, often, living, missed. Last changed 2026-10-25, 89 lines.
 Links to 2: `gidi:docs/LAGOS-ISMS.md`, `gidi:docs/lagos-study/LIVING.md`
 Backlinks: 7 documents (`gidi:README.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/HISTORY.md`, `gidi:decisions/IDEAS.md`, `gidi:decisions/NOW.md`, `gidi:docs/OLD-KIT.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:decisions/NOW.md` (0.2); `gidi:decisions/DECISIONS.md` (0.18); `gidi:docs/LAGOS-ISMS.md` (0.16).
+Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.18); `gidi:docs/LAGOS-ISMS.md` (0.16).
 
 ### `gidi:docs/RESEARCH.md`
 **The Lagos research: what we know, and which new districts it serves**. The Lagos research: what we know, and which new districts it serves: Everything gidi holds about real Lagos, in one place. Most of it was written for the old map (13-21 Oct), but what it measured is real Lagos, so it still holds for the new map (real Lagos at 1:3). Only its Gidi parts are history: the old district names, the generator settings, the "Gidi against real" columns. Read the real numbers; skip the old-map parts.
@@ -495,10 +495,10 @@ Nearest in words: `gidi:docs/LAGOS-ISMS.md` (0.18); `gidi:docs/RESEARCH.md` (0.1
 ## gidi:docs/hand
 ### `gidi:docs/hand/borrowed-lagos.md`
 **Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026)**. Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: "take inspiration from the places to build the area... also from places that didn't inspire the districts, to give a taste of everywhere, tastefully and tactfully... research the actual Lagos map and see things you could take and creatively integrate."
-For: placed, capital, saba, channel, mall, national, museum, rail's. Last changed 2026-10-23, 72 lines.
+For: placed, capital, saba, channel, mall, national, museum, rail's. Last changed 2026-10-25, 72 lines.
 Links to 0: 
 Backlinks: 4 documents (`gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/HISTORY.md`, `gidi:docs/RESEARCH.md`), 0 code files ().
-Nearest in words: `gidi:docs/capital-pattern-study.md` (0.21); `gidi:docs/LAGOS-ISMS.md` (0.2); `gidi:docs/look/research-landmarks.md` (0.2).
+Nearest in words: `gidi:docs/capital-pattern-study.md` (0.21); `gidi:docs/look/research-landmarks.md` (0.2); `gidi:docs/LAGOS-ISMS.md` (0.2).
 
 ### `gidi:docs/hand/maze-hub-lagos.md`
 **The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026)**. The Maze and the Hub: what makes them unmistakably Lagos (agreed 16 Oct 2026): The first hand-made districts: Act 1 opens here (`decisions/story/act-1-draft.md`). Each item says what it is, where it goes in Gidi, how it gets built (the hand files, `scripts/hand.py`), and where it comes from: - **photo:** the owner's reference photos (`~/gidi-data/research/refs/REVIEW.md`)
@@ -661,7 +661,7 @@ Nearest in words: `gidi:docs/look/research-housing.md` (0.44); `gidi:docs/look/r
 
 ### `gidi:docs/look/research-roads.md`
 **Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse**. Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with potholes of water, mushy laterite lanes, failed asphalt, choked drains. It builds on `docs/look/research-street.md` §1 and §6.7–6.9, and does not repeat what is there: road widths by class, kerb paint colours, median types, basic drain sizes, basic pothole density, the tree census. It goes deeper on **condition** and on **how to select it from data**.
-For: select, mapping, sand, mains, research-street, asphalt, laterite, refuse. Last changed 2026-10-23, 1147 lines.
+For: select, mapping, sand, mains, research-street, asphalt, laterite, refuse. Last changed 2026-10-25, 1147 lines.
 Links to 1: `gidi:docs/look/research-street.md`
 Backlinks: 1 documents (`gidi:docs/RESEARCH.md`), 0 code files ().
 Nearest in words: `gidi:docs/look/research-street.md` (0.36); `gidi:docs/look/research-transport.md` (0.35); `gidi:docs/look/research-commerce.md` (0.34).
@@ -873,7 +873,7 @@ Nearest in words: `gidi:docs/port-pattern-study.md` (0.25); `gidi:docs/oldshore-
 For: redrafted, pass, cleared, zoom, hand, given, holds, lanes. Last changed 2026-10-25, 263 lines.
 Links to 6: `gidi:map/d15/STREETS.md`, `gidi:scripts/draft_buildings.py`, `gidi:scripts/draft_kinds.py`, `gidi:scripts/draft_looks.py`, `gidi:scripts/draft_storeys.py`, `gidi:scripts/draft_storeys_nearby.py`
 Backlinks: 5 documents (`gidi:decisions/CHECKS.md`, `gidi:decisions/CODEBASE.md`, `gidi:decisions/DECISIONS.md`, `gidi:decisions/NOW.md`, `gidi:map/d15/STREETS.md`), 1 code files (`gidi:scripts/draft_buildings.py`).
-Nearest in words: `gidi:decisions/NOW.md` (0.22); `gidi:decisions/DECISIONS.md` (0.12); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.11).
+Nearest in words: `gidi:decisions/NOW.md` (0.21); `gidi:decisions/DECISIONS.md` (0.12); `gidi-data:research/google/kits/old-town/tests/ot149/NOTES.md` (0.11).
 
 ### `gidi:map/d15/STREETS.md`
 **Mùṣá (district 15): the road plan and where each street comes from**. Mùṣá (district 15): the road plan and where each street comes from: Roads only, drawn on the new frame (1:3). Every kept street sits on its real line, squeezed to the frame, at its real width (never shrunk). Real names live here only, never in the map. Buildings come later.

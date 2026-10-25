@@ -61,8 +61,8 @@
    "repo": "gidi",
    "path": ".claude/hooks/review-before-push.sh",
    "ext": ".sh",
-   "bytes": 5975,
-   "changed": "2026-10-24",
+   "bytes": 5985,
+   "changed": "2026-10-25",
    "lines": 99,
    "summary": "CLAUDE.md, \"A second model reviews every push\" (the owner's stride-web process, 24 Oct: \"the scripts lying, or the agents lying to reach an outcome\"): before Claude pushes gidi or gidi-game, a separate Claude reads the rules, the commit messages and the diff since origin/main, and blocks the push with findings when a change claims what it",
    "refs_in": [
@@ -87,14 +87,13 @@
    "repo": "gidi",
    "path": ".gitignore",
    "ext": "",
-   "bytes": 108,
-   "changed": "2026-10-23",
-   "lines": 11,
+   "bytes": 98,
+   "changed": "2026-10-25",
+   "lines": 10,
    "summary": "",
    "refs_in": [
     "gidi-data:.gitignore",
     "gidi-data:README.md",
-    "gidi-game:Content/Python/gidi_import.py",
     "gidi:scripts/frame_study.py",
     "gidi:scripts/inventory.py"
    ]
@@ -141,7 +140,7 @@
    "path": "README.md",
    "ext": ".md",
    "bytes": 1805,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 32,
    "summary": "Gidi: The city for an open-world game: Gidi is real Lagos miniaturised, 51 districts, each street and place drawn by hand from the real one. This repo is the map. It holds every road, block, building and thing the game puts there, as records in `map/`, plus the drawing board they are made on. The game itself (the builders and the Unreal project) is",
    "refs_in": [
@@ -267,7 +266,7 @@
    "repo": "gidi",
    "path": "decisions/CHECKS.md",
    "ext": ".md",
-   "bytes": 16049,
+   "bytes": 16037,
    "changed": "2026-10-25",
    "lines": 96,
    "summary": "Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before every commit and push (`.claude/hooks/checks-before-commit.sh`): it fails when a rule has no row, and lists every rule marked **GAP** (a map rule nothing checks yet). So \"are we covering all bases?\" is",
@@ -286,9 +285,9 @@
    "repo": "gidi",
    "path": "decisions/CODEBASE.md",
    "ext": ".md",
-   "bytes": 15368,
+   "bytes": 15117,
    "changed": "2026-10-25",
-   "lines": 180,
+   "lines": 175,
    "summary": "What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it is, when it last changed and who points to it, is in `docs/inventory/INVENTORY.md`. What looks dead or broken is in `docs/inventory/SUSPECTS.md`. Since 24 Oct also (owner: \"use the compiler to know what every piece of code is connected",
    "refs_in": [
     "gidi:.claude/hooks/checks-before-stop.sh",
@@ -304,7 +303,7 @@
    "repo": "gidi",
    "path": "decisions/DECISIONS.md",
    "ext": ".md",
-   "bytes": 52039,
+   "bytes": 52229,
    "changed": "2026-10-25",
    "lines": 142,
    "summary": "Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`, with what replaced it. Where a later decision changed part of one, the change is noted at its end. Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.",
@@ -329,7 +328,7 @@
    "repo": "gidi",
    "path": "decisions/HISTORY.md",
    "ext": ".md",
-   "bytes": 13887,
+   "bytes": 13920,
    "changed": "2026-10-25",
    "lines": 61,
    "summary": "Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we know what was decided before and why it changed; none of them guides new work. Moved out of `DECISIONS.md` on 24 Oct, word for",
@@ -360,9 +359,9 @@
    "repo": "gidi",
    "path": "decisions/NOW.md",
    "ext": ".md",
-   "bytes": 61725,
+   "bytes": 63391,
    "changed": "2026-10-25",
-   "lines": 305,
+   "lines": 321,
    "summary": "Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
@@ -551,7 +550,7 @@
    "repo": "gidi",
    "path": "docs/LAGOS-ISMS.md",
    "ext": ".md",
-   "bytes": 21869,
+   "bytes": 22011,
    "changed": "2026-10-25",
    "lines": 276,
    "summary": "Lagos-isms: the eccentricities in the real data (a running log): **What this is.** While each district is studied, we log the real places' oddities: the things a tidy generator would never make, but that make Lagos feel like Lagos. For each one: - what it is - where it shows up in the real data (LGA and coordinates)",
@@ -617,7 +616,7 @@
    "path": "docs/OLD-KIT.md",
    "ext": ".md",
    "bytes": 8118,
-   "changed": "",
+   "changed": "2026-10-25",
    "lines": 98,
    "summary": "The old Blender kit: what it held, and what the builders can take from it: The owner (24 Oct): \"we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old Blender kit, so we see what we need to remodel\". This page answers that. The kit is frozen (DECISIONS, \"The interface works both ways; the builders are the kit\"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made",
    "refs_in": [
@@ -934,7 +933,7 @@
    "path": "docs/hand/borrowed-lagos.md",
    "ext": ".md",
    "bytes": 10056,
-   "changed": "2026-10-23",
+   "changed": "2026-10-25",
    "lines": 72,
    "summary": "Borrowed from Lagos: real places reimagined in Gidi (16 Oct 2026): The owner's direction: \"take inspiration from the places to build the area... also from places that didn't inspire the districts, to give a taste of everywhere, tastefully and tactfully... research the actual Lagos map and see things you could take and creatively integrate.\"",
    "refs_in": [
@@ -1531,7 +1530,7 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 10050,
+   "bytes": 9739,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1545,7 +1544,7 @@
    "repo": "gidi",
    "path": "docs/inventory/VAULT.md",
    "ext": ".md",
-   "bytes": 116622,
+   "bytes": 116000,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1558,7 +1557,7 @@
    "repo": "gidi",
    "path": "docs/inventory/code_graph.json",
    "ext": ".json",
-   "bytes": 2357862,
+   "bytes": 2357916,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1570,7 +1569,7 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 305142,
+   "bytes": 305293,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1583,7 +1582,7 @@
    "repo": "gidi",
    "path": "docs/inventory/vault.json",
    "ext": ".json",
-   "bytes": 94268,
+   "bytes": 94990,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -2587,7 +2586,7 @@
    "path": "docs/look/research-roads.md",
    "ext": ".md",
    "bytes": 70188,
-   "changed": "2026-10-23",
+   "changed": "2026-10-25",
    "lines": 1147,
    "summary": "Gidi ground catalogue: roads in every condition, drains, ground, water, vegetation, refuse: This catalogue covers the honest Lagos: roads that are mud with potholes of water, mushy laterite lanes, failed asphalt, choked drains. It builds on `docs/look/research-street.md` \u00a71 and \u00a76.7\u20136.9, and does not repeat what is there: road widths by class, kerb paint colours, median types, basic drain sizes, basic pothole density, the tree census. It goes deeper on **condition** and on **how to select it from data**.",
    "refs_in": [
@@ -3219,7 +3218,7 @@
    "path": "scripts/board_server.py",
    "ext": ".py",
    "bytes": 19425,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 408,
    "summary": "The drawing board's server (owner, 16 Oct 2026: \"we should hand draw... know where something meets something\").",
    "refs_in": [
@@ -3296,7 +3295,7 @@
    "path": "scripts/doc_vault.py",
    "ext": ".py",
    "bytes": 7970,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 140,
    "summary": "The documents as a vault, for scripts/inventory.py (owner, 24 Oct: \"use word matching to know what every document is meant for, like an Obsidian vault; if a document is sort of an orphan, look into it and see its use\").",
    "refs_in": [
@@ -3460,7 +3459,7 @@
    "repo": "gidi",
    "path": "scripts/inventory.py",
    "ext": ".py",
-   "bytes": 16048,
+   "bytes": 16055,
    "changed": "2026-10-25",
    "lines": 318,
    "summary": "What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it.",
@@ -3492,7 +3491,7 @@
    "path": "scripts/realnames.py",
    "ext": ".py",
    "bytes": 1101,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 22,
    "summary": "Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only).",
    "refs_in": [
@@ -3535,7 +3534,7 @@
    "path": "web/board.html",
    "ext": ".html",
    "bytes": 6024,
-   "changed": "2026-10-22",
+   "changed": "2026-10-25",
    "lines": 75,
    "summary": "Gidi Drawing Board",
    "refs_in": [
@@ -3568,7 +3567,7 @@
    "path": "web/frame.js",
    "ext": ".js",
    "bytes": 19775,
-   "changed": "2026-10-22",
+   "changed": "2026-10-25",
    "lines": 239,
    "summary": "The drawing board's new frame (owner, 22 Oct 2026): real Lagos miniaturised at 1:3 in a 27 x 10.5 km frame, as study layers to draw the new map on by hand. Opened with board.html. Data: window.FRAME (scripts/frame_study.py) and, zoomed in, web/frame-tiles/ (scripts/frame_footprints.py), Gidi metres,",
    "refs_in": [
@@ -3627,7 +3626,6 @@
    "refs_in": [
     "gidi-data:.gitignore",
     "gidi-data:README.md",
-    "gidi-game:Content/Python/gidi_import.py",
     "gidi:scripts/frame_study.py",
     "gidi:scripts/inventory.py"
    ]
@@ -6850,9 +6848,7 @@
    "changed": "2026-10-23",
    "lines": 18,
    "summary": "keys: seed, rear, rack, bullbar, guard_R, bumpers, hubcaps_missing, paint_alt",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_photo.py"
-   ]
+   "refs_in": []
   },
   {
    "repo": "gidi-game",
@@ -7885,8 +7881,8 @@
    "repo": "gidi-game",
    "path": "Config/DefaultEngine.ini",
    "ext": ".ini",
-   "bytes": 2171,
-   "changed": "2026-10-24",
+   "bytes": 2179,
+   "changed": "2026-10-25",
    "lines": 70,
    "summary": "sections: /Script/EngineSettings.GameMapsSettings, /Script/Engine.RendererSettings, /Script/WindowsTargetPlatform.WindowsTargetSettings, /Script/LinuxTargetPlatform.LinuxTargetSettings, /Script/MacTargetPlatform.MacTargetSettings, /Script/AndroidFileServerEditor.AndroidFileServerRuntimeSettings",
    "refs_in": [
@@ -8031,31 +8027,15 @@
   },
   {
    "repo": "gidi-game",
-   "path": "Content/Python/gidi_cam.py",
-   "ext": ".py",
-   "bytes": 930,
-   "changed": "2026-10-18",
-   "lines": 16,
-   "summary": "Put the check camera in the city level: tools/shot.sh moves it, the game starts looking through it (auto-activates).",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_photo.py",
-    "gidi-game:tools/shot.sh",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "Content/Python/gidi_heroes.py",
    "ext": ".py",
-   "bytes": 16151,
+   "bytes": 14118,
    "changed": "2026-10-25",
-   "lines": 267,
-   "summary": "Hero models in the city: hand-made vehicles (Art/Vehicles, made by tools/vehicle_prep.py) placed wherever the map data puts one of their kind (the data's \"things\": parked at the road edges, packed in the motor parks), in place of the kit's drawn ones (the kit leaves the hero kinds out of the tiles Unreal imports).",
+   "lines": 226,
+   "summary": "Hero models: the built vehicles (Art/Vehicles, from the builders in tools/) imported once each, for a play level's layout to place (gidi_underdeck.py).",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi-game:Content/Python/gidi_import.py",
     "gidi-game:Content/Python/gidi_paint.py",
-    "gidi-game:Content/Python/gidi_photo.py",
     "gidi-game:Content/Python/gidi_street.py",
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:tools/vehicle_export.py",
@@ -8066,38 +8046,16 @@
   },
   {
    "repo": "gidi-game",
-   "path": "Content/Python/gidi_import.py",
+   "path": "Content/Python/gidi_look.py",
    "ext": ".py",
-   "bytes": 17412,
-   "changed": "2026-10-24",
-   "lines": 379,
-   "summary": "The Gidi importer: the city in Unreal, made from the map repo's data (the map is never final, so this runs again and again).",
+   "bytes": 3612,
+   "changed": "2026-10-25",
+   "lines": 68,
+   "summary": "A play level's sky and light (environment(), placed once) and its lens (apply(), every build of the level).",
    "refs_in": [
-    "gidi-game:Content/Python/gidi_play.py",
-    "gidi-game:Content/Python/gidi_stream.py",
     "gidi-game:Content/Python/gidi_street.py",
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:README.md",
-    "gidi-game:tools/import.sh",
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "Content/Python/gidi_look.py",
-   "ext": ".py",
-   "bytes": 2625,
-   "changed": "2026-10-18",
-   "lines": 49,
-   "summary": "The city's light and lens, set once in Gidi_City (run headless: tools/look.sh, or from gidi_import's _environment).",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_import.py",
-    "gidi-game:Content/Python/gidi_play.py",
-    "gidi-game:Content/Python/gidi_street.py",
-    "gidi-game:Content/Python/gidi_underdeck.py",
-    "gidi-game:tools/look.sh",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -8105,12 +8063,11 @@
    "repo": "gidi-game",
    "path": "Content/Python/gidi_modes.py",
    "ext": ".py",
-   "bytes": 6028,
+   "bytes": 6011,
    "changed": "2026-10-25",
    "lines": 111,
    "summary": "The crowd per mode (decisions: \"Build light, look full\"; docs/PERFORMANCE.md).",
    "refs_in": [
-    "gidi-game:Content/Python/gidi_play.py",
     "gidi-game:Content/Python/gidi_street.py",
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:docs/PERFORMANCE.md",
@@ -8127,20 +8084,6 @@
    "summary": "Painted panels that wear: M_GidiPaint, for the built vehicles' paint slots (gidi_heroes.py).",
    "refs_in": [
     "gidi-game:Content/Python/gidi_heroes.py",
-    "gidi-game:Content/Python/gidi_photo.py",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "Content/Python/gidi_photo.py",
-   "ext": ".py",
-   "bytes": 4640,
-   "changed": "2026-10-19",
-   "lines": 96,
-   "summary": "Photo mode, for pictures to post: one danfo placed where it's wanted, a cinema camera on it, the sun where the picture wants it. Run headless before the game (tools/photo.sh does), like gidi_cam.py:",
-   "refs_in": [
-    "gidi-game:tools/photo.sh",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -8155,25 +8098,8 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:Content/Python/gidi_heroes.py",
-    "gidi-game:Content/Python/gidi_photo.py",
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:tools/plates.py",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "Content/Python/gidi_play.py",
-   "ext": ".py",
-   "bytes": 4144,
-   "changed": "2026-10-24",
-   "lines": 80,
-   "summary": "The playable spot: \u00ccb\u00f9d\u00f3's Market Road under the Ring Road flyover (the map's spot 1), as its own level you play in.",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_modes.py",
-    "gidi-game:Content/Python/gidi_underdeck.py",
-    "gidi-game:README.md",
-    "gidi-game:tools/play.sh",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -8191,42 +8117,16 @@
   },
   {
    "repo": "gidi-game",
-   "path": "Content/Python/gidi_signs.py",
-   "ext": ".py",
-   "bytes": 4503,
-   "changed": "2026-10-18",
-   "lines": 88,
-   "summary": "Shop signs and painted lettering in Unreal, from the kit's tile records (gidi repo web/city/<detail>/tiles/<t>.json \"signs\").",
-   "refs_in": [
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "Content/Python/gidi_stream.py",
-   "ext": ".py",
-   "bytes": 4110,
-   "changed": "2026-10-24",
-   "lines": 82,
-   "summary": "The city streams in pieces around the player (decisions: \"Build light, look full\", (4); docs/PERFORMANCE.md).",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_import.py",
-    "gidi-game:docs/PERFORMANCE.md",
-    "gidi-game:tools/stream.sh",
-    "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/NOW.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "Content/Python/gidi_street.py",
    "ext": ".py",
-   "bytes": 21423,
+   "bytes": 21425,
    "changed": "2026-10-25",
    "lines": 364,
    "summary": "The street test: a M\u00f9\u1e63\u00e1 lane and the houses round it, each our own built house with its zinc roof, to measure.",
    "refs_in": [
+    "gidi-game:Content/Python/gidi_modes.py",
+    "gidi-game:Content/Python/gidi_surfaces.py",
+    "gidi-game:README.md",
     "gidi-game:tools/play.sh",
     "gidi-game:tools/street_test.py"
    ]
@@ -8235,15 +8135,17 @@
    "repo": "gidi-game",
    "path": "Content/Python/gidi_surfaces.py",
    "ext": ".py",
-   "bytes": 23381,
+   "bytes": 27368,
    "changed": "2026-10-25",
-   "lines": 454,
+   "lines": 530,
    "summary": "Textured surfaces: the city's walls, roofs, roads and ground get real texture, still in the kit's colours.",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi-game:Content/Python/gidi_import.py",
     "gidi-game:Content/Python/gidi_paint.py",
     "gidi-game:Content/Python/gidi_scan_export.py",
+    "gidi-game:Content/Python/gidi_street.py",
+    "gidi-game:Content/Python/gidi_underdeck.py",
+    "gidi-game:README.md",
     "gidi-game:tools/look_travels.py",
     "gidi-game:tools/road_build.py",
     "gidi-game:tools/road_look.py",
@@ -8255,13 +8157,14 @@
    "repo": "gidi-game",
    "path": "Content/Python/gidi_underdeck.py",
    "ext": ".py",
-   "bytes": 16079,
-   "changed": "2026-10-24",
+   "bytes": 16024,
+   "changed": "2026-10-25",
    "lines": 282,
-   "summary": "The underdeck: a playable test street, a danfo park under a flyover pair (the owner, 22 Oct: video 1's real match, \"try to build Obalende\"). Its own level, Play_Underdeck; the \u00ccb\u00f9d\u00f3 play level is left as it is.",
+   "summary": "The underdeck: a playable test street, a danfo park under a flyover pair (the owner, 22 Oct: video 1's real match, \"try to build Obalende\"). Its own level, Play_Underdeck.",
    "refs_in": [
     "gidi-game:Content/Python/gidi_heroes.py",
     "gidi-game:Content/Python/gidi_modes.py",
+    "gidi-game:Content/Python/gidi_surfaces.py",
     "gidi-game:README.md",
     "gidi-game:tools/play.sh",
     "gidi-game:tools/underdeck_build.py",
@@ -8279,16 +8182,11 @@
    "refs_in": [
     "gidi-game:README.md",
     "gidi-game:tools/editor.sh",
-    "gidi-game:tools/import.sh",
-    "gidi-game:tools/look.sh",
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/package.sh",
-    "gidi-game:tools/photo.sh",
     "gidi-game:tools/play.sh",
     "gidi-game:tools/scan_export.sh",
-    "gidi-game:tools/shot.sh",
-    "gidi-game:tools/stream.sh",
     "gidi-game:tools/surfaces.sh"
    ]
   },
@@ -8296,10 +8194,10 @@
    "repo": "gidi-game",
    "path": "README.md",
    "ext": ".md",
-   "bytes": 3689,
-   "changed": "2026-10-24",
-   "lines": 56,
-   "summary": "Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its data and the kit's tiles.",
+   "bytes": 3179,
+   "changed": "2026-10-25",
+   "lines": 48,
+   "summary": "Gidi: the game: The Unreal Engine 5.8 project for Gidi. The city itself lives in the map repo, [NewDara-Star/gidi](https://github.com/NewDara-Star/gidi): its records (`map/<dNN>/`), drawn on the drawing board.",
    "refs_in": [
     "gidi:decisions/CODEBASE.md"
    ]
@@ -8329,7 +8227,6 @@
    "refs_in": [
     "gidi-game:Config/DefaultDeviceProfiles.ini",
     "gidi-game:Content/Python/gidi_modes.py",
-    "gidi-game:Content/Python/gidi_stream.py",
     "gidi-game:README.md",
     "gidi-game:tools/look_travels.py",
     "gidi-game:tools/measure.sh",
@@ -8381,7 +8278,6 @@
    "summary": "The danfo, built in Blender part by part (not generated): blender -b -P tools/danfo_build.py -- <out.blend> [variant.json]",
    "refs_in": [
     "gidi-game:Content/Python/gidi_heroes.py",
-    "gidi-game:Content/Python/gidi_photo.py",
     "gidi-game:tools/brt_build.py",
     "gidi-game:tools/keke_build.py",
     "gidi-game:tools/lorry_build.py",
@@ -8394,10 +8290,10 @@
    "repo": "gidi-game",
    "path": "tools/editor.sh",
    "ext": ".sh",
-   "bytes": 1661,
-   "changed": "2026-10-24",
+   "bytes": 1694,
+   "changed": "2026-10-25",
    "lines": 26,
-   "summary": "Open the editor in a mode: tools/editor.sh [work|low|high|full] [underdeck|ibudo|<map path>]   (any order) the mode   defaults to this machine's choice (tools/mode.sh), else work the level  defaults to the editor's start map (Config/DefaultEngine.ini)",
+   "summary": "Open the editor in a mode: tools/editor.sh [work|low|high|full] [street|underdeck|<map path>]   (any order) the mode   defaults to this machine's choice (tools/mode.sh), else work the level  defaults to the editor's start map (Config/DefaultEngine.ini)",
    "refs_in": [
     "gidi-game:README.md",
     "gidi-game:docs/PERFORMANCE.md",
@@ -8541,7 +8437,8 @@
    "summary": "The first Lagos-pass frame: the \u00c0d\u00e0r\u00fa motor park beside the expressway, seen from a footbridge (after the owner's photo, refs/lagos-life/09): blender -b -P tools/frame_motorpark.py -- <out.png> [samples]",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -8588,22 +8485,6 @@
    "refs_in": [
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/piece_match.py"
-   ]
-  },
-  {
-   "repo": "gidi-game",
-   "path": "tools/import.sh",
-   "ext": ".sh",
-   "bytes": 1627,
-   "changed": "2026-10-19",
-   "lines": 19,
-   "summary": "Bring the city in from the gidi repo: tools/import.sh maze | all | \"25,9;25,10\"  [--force] [--full] Close the Unreal editor first. GIDI_REPO points at the map repo (default ~/gidi). The kit's tiles must be built first. Unreal runs a few tiles at a time (GIDI_BATCH, default 4) and starts again, so memory stays flat however big the city.",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_import.py",
-    "gidi-game:README.md",
-    "gidi-game:docs/PERFORMANCE.md",
-    "gidi-game:tools/stream.sh",
-    "gidi:decisions/CODEBASE.md"
    ]
   },
   {
@@ -8751,19 +8632,6 @@
   },
   {
    "repo": "gidi-game",
-   "path": "tools/look.sh",
-   "ext": ".sh",
-   "bytes": 499,
-   "changed": "2026-10-18",
-   "lines": 8,
-   "summary": "Set the city's light and lens (Content/Python/gidi_look.py) headless; GIDI_LOOK='{\"ev_bias\": -1.5}' tries other values.",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_look.py",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "tools/look_travels.py",
    "ext": ".py",
    "bytes": 5944,
@@ -8809,7 +8677,6 @@
    "summary": "Seamless detail textures for the city's surfaces, made from noise (no photographs, so nothing to license and nothing to copy).",
    "refs_in": [
     "gidi-game:Content/Python/gidi_surfaces.py",
-    "gidi-game:tools/import.sh",
     "gidi-game:tools/surfaces.sh",
     "gidi:decisions/CODEBASE.md"
    ]
@@ -8823,6 +8690,7 @@
    "lines": 277,
    "summary": "The map, built: ~/.venvs/gidi/bin/python tools/map_build.py <map dir> <district> <out folder> [--box=x0,y0,x1,y1] [--camera=x,y,z,turn,pitch,fov] [--spot=<spot.json>] [--origin=x,y] [--plan-only]   (the venv: junction_geo's house test needs shapely)",
    "refs_in": [
+    "gidi-game:README.md",
     "gidi-game:tools/junction_build.py",
     "gidi-game:tools/leanto_build.py",
     "gidi-game:tools/road_build.py",
@@ -8837,24 +8705,25 @@
    "repo": "gidi-game",
    "path": "tools/measure.sh",
    "ext": ".sh",
-   "bytes": 743,
-   "changed": "2026-10-24",
+   "bytes": 737,
+   "changed": "2026-10-25",
    "lines": 11,
-   "summary": "Measure a play level in a mode against its budget (docs/PERFORMANCE.md): tools/measure.sh [underdeck|ibudo|street] [work|low|high|full|old] [seconds] [shot.png] Runs the game at 1920x1080 with Unreal's CSV profiler (frame, game, draw and GPU times per frame, the GPU's passes, draw",
+   "summary": "Measure a play level in a mode against its budget (docs/PERFORMANCE.md): tools/measure.sh [underdeck|street] [work|low|high|full|old] [seconds] [shot.png] Runs the game at 1920x1080 with Unreal's CSV profiler (frame, game, draw and GPU times per frame, the GPU's passes, draw",
    "refs_in": [
     "gidi-game:Content/Python/gidi_street.py",
     "gidi-game:README.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/measure_csv.py",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
    "repo": "gidi-game",
    "path": "tools/measure_csv.py",
    "ext": ".py",
-   "bytes": 4924,
+   "bytes": 4901,
    "changed": "2026-10-25",
    "lines": 101,
    "summary": "Read the CSV profile tools/measure.sh just took and write Saved/Perf/<spot>_<mode>.txt: the level's numbers against its budget (BUDGET below, docs/PERFORMANCE.md), and what the GPU spends its time on. python tools/measure_csv.py <spot> <mode>",
@@ -8964,19 +8833,6 @@
   },
   {
    "repo": "gidi-game",
-   "path": "tools/photo.sh",
-   "ext": ".sh",
-   "bytes": 1335,
-   "changed": "2026-10-19",
-   "lines": 19,
-   "summary": "Photo mode: tools/photo.sh '<GIDI_PHOTO json>' name [seconds]  (Content/Python/gidi_photo.py says what the json holds) Places the photo danfo and a cinema camera in Gidi_City (headless), then runs the game through it, lets it settle (default",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_photo.py",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "tools/pickup_build.py",
    "ext": ".py",
    "bytes": 34294,
@@ -9005,8 +8861,8 @@
    "repo": "gidi-game",
    "path": "tools/plates.py",
    "ext": ".py",
-   "bytes": 12174,
-   "changed": "2026-10-19",
+   "bytes": 12244,
+   "changed": "2026-10-25",
    "lines": 246,
    "summary": "Gidi's number plates: ~/.venvs/gidi/bin/python tools/plates.py  (writes Art/Plates/)",
    "refs_in": [
@@ -9017,21 +8873,21 @@
     "gidi-game:tools/molue_build.py",
     "gidi-game:tools/vehicle_prep.py",
     "gidi:decisions/CODEBASE.md",
-    "gidi:decisions/DECISIONS.md"
+    "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
    "repo": "gidi-game",
    "path": "tools/play.sh",
    "ext": ".sh",
-   "bytes": 6177,
-   "changed": "2026-10-24",
-   "lines": 102,
-   "summary": "Play a spot: tools/play.sh [underdeck] [work|low|high|full] [build]   (any order; defaults: \u00ccb\u00f9d\u00f3, work) (no name)  \u00ccb\u00f9d\u00f3's Market Road under the flyover (Content/Python/gidi_play.py, from the map's tiles) street     the street test: a M\u00f9\u1e63\u00e1 lane and 375 built houses round it (Content/Python/gidi_street.py; build makes the",
+   "bytes": 5751,
+   "changed": "2026-10-25",
+   "lines": 96,
+   "summary": "Play a spot: tools/play.sh [street|underdeck] [work|low|high|full] [build]   (any order; defaults: street, work) street     the street test: a M\u00f9\u1e63\u00e1 lane and 375 built houses round it (Content/Python/gidi_street.py; build makes the houses first: tools/street_test.py, then imports them)",
    "refs_in": [
     "gidi-game:Config/DefaultDeviceProfiles.ini",
     "gidi-game:Content/Python/gidi_modes.py",
-    "gidi-game:Content/Python/gidi_play.py",
     "gidi-game:Content/Python/gidi_street.py",
     "gidi-game:Content/Python/gidi_underdeck.py",
     "gidi-game:README.md",
@@ -9069,7 +8925,8 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:tools/look_travels.py",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -9083,7 +8940,8 @@
    "refs_in": [
     "gidi-game:ASSETS.md",
     "gidi-game:tools/prop_basin_final.py",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -9100,6 +8958,7 @@
     "gidi-game:tools/junction_geo.py",
     "gidi-game:tools/road_draft.py",
     "gidi:decisions/NOW.md",
+    "gidi:docs/LAGOS-ISMS.md",
     "gidi:scripts/check_map.py"
    ]
   },
@@ -9162,20 +9021,6 @@
   },
   {
    "repo": "gidi-game",
-   "path": "tools/shot.sh",
-   "ext": ".sh",
-   "bytes": 1372,
-   "changed": "2026-10-19",
-   "lines": 20,
-   "summary": "A check picture of the imported city: tools/shot.sh \"x y z pitch yaw\" name  (map metres: x east, y south; degrees) Puts a camera in Gidi_City (headless), runs the game through it with the display kept awake, waits SHOT_SECS (default 300) for the tiles, Nanite and the shaders to settle, and saves the game's window as Saved/Shots/<name>.png (tools/winshot.py:",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_cam.py",
-    "gidi-game:README.md",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "tools/spot_assemble.py",
    "ext": ".py",
    "bytes": 11588,
@@ -9221,20 +9066,6 @@
   },
   {
    "repo": "gidi-game",
-   "path": "tools/stream.sh",
-   "ext": ".sh",
-   "bytes": 569,
-   "changed": "2026-10-24",
-   "lines": 8,
-   "summary": "Put the city's tiles on streaming volumes (Content/Python/gidi_stream.py; tools/import.sh does it after every import): a tile is drawn within 600 m of its edge, kept in memory to 1 km, let go beyond. Loads the whole city once: editor closed,",
-   "refs_in": [
-    "gidi-game:Content/Python/gidi_stream.py",
-    "gidi-game:docs/PERFORMANCE.md",
-    "gidi:decisions/CODEBASE.md"
-   ]
-  },
-  {
-   "repo": "gidi-game",
    "path": "tools/street_ground.py",
    "ext": ".py",
    "bytes": 2830,
@@ -9270,6 +9101,7 @@
    "summary": "The street test's houses: python tools/street_test.py <map dir> <x> <y> <radius> [--road <id>] [--only N] [--name <n>] [--tiles] [--pieces]",
    "refs_in": [
     "gidi-game:Content/Python/gidi_street.py",
+    "gidi-game:README.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/play.sh"
    ]
@@ -9278,12 +9110,11 @@
    "repo": "gidi-game",
    "path": "tools/surfaces.sh",
    "ext": ".sh",
-   "bytes": 579,
-   "changed": "2026-10-18",
+   "bytes": 574,
+   "changed": "2026-10-25",
    "lines": 8,
-   "summary": "Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the material, re-point the imported meshes. Headless.",
+   "summary": "Textured surfaces (Content/Python/gidi_surfaces.py): make the textures, build the masters and the surface instances. Headless.",
    "refs_in": [
-    "gidi-game:Content/Python/gidi_surfaces.py",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -9319,8 +9150,8 @@
    "repo": "gidi-game",
    "path": "tools/underdeck_build.py",
    "ext": ".py",
-   "bytes": 61294,
-   "changed": "2026-10-24",
+   "bytes": 61308,
+   "changed": "2026-10-25",
    "lines": 1133,
    "summary": "The underdeck set: a danfo park under a flyover pair, built from the study of the real one (the owner, 22 Oct: \"try to build Obalende\"; refs ~/gidi-data/research/google/video1-street, shots 09, 10, 12-16, NOTES.md \"in depth\"). blender -b -P tools/underdeck_build.py -- [out folder, default Saved/Underdeck]",
    "refs_in": [
@@ -9410,7 +9241,6 @@
    "summary": "A generated vehicle (Meshy) made game-ready in Blender: blender -b -P tools/vehicle_prep.py -- <in.glb> <out.glb> <spec.json>",
    "refs_in": [
     "gidi-game:ASSETS.md",
-    "gidi-game:Content/Python/gidi_heroes.py",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -9485,9 +9315,7 @@
    "lines": 24,
    "summary": "Save one window of a running process as a picture: ~/.venvs/gidi/bin/python tools/winshot.py <pid> <out.png> (the game's own screenshot is taken on its first drawn frame, before its shaders are ready; this is taken whenever asked). The window is brought to the front and its area of the screen is saved (macOS refuses a capture by window id here), less",
    "refs_in": [
-    "gidi-game:tools/photo.sh",
     "gidi-game:tools/play.sh",
-    "gidi-game:tools/shot.sh",
     "gidi:decisions/CODEBASE.md"
    ]
   },
@@ -9523,7 +9351,6 @@
    "summary": "",
    "refs_in": [
     "gidi-data:README.md",
-    "gidi-game:Content/Python/gidi_import.py",
     "gidi:scripts/frame_study.py",
     "gidi:scripts/inventory.py"
    ]
@@ -10081,11 +9908,13 @@
   "gidi-data:research/google/ibudo/NOTES.md": [
    "docs/TWINS.md"
   ],
+  "gidi-game:docs/PERFORMANCE.md": [
+   "Content/Python/gidi_stream.py",
+   "tools/import.sh",
+   "tools/stream.sh"
+  ],
   "gidi-game:tools/props_build.py": [
    "docs/hand/lagos-pass.md"
-  ],
-  "gidi:.claude/hooks/review-before-push.sh": [
-   "rebuild_areas.py"
   ],
   "gidi:decisions/CHECKS.md": [
    "check_district.py",
@@ -10138,6 +9967,10 @@
    "scripts/hand_spots/ibudo_real_area.py",
    "scripts/rebuild_areas.py",
    "scripts/twins.py"
+  ],
+  "gidi:decisions/NOW.md": [
+   "gidi_import.py",
+   "gidi_stream.py"
   ],
   "gidi:decisions/story/README.md": [
    "gidi-performance-capture.md",

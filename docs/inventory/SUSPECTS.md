@@ -32,12 +32,13 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 Paths named in a document or in code that match no file in any repo (outputs and caches skipped).
 
 - `gidi-data:research/google/ibudo/NOTES.md`: `docs/TWINS.md`
+- `gidi-game:docs/PERFORMANCE.md`: `Content/Python/gidi_stream.py`, `tools/import.sh`, `tools/stream.sh`
 - `gidi-game:tools/props_build.py`: `docs/hand/lagos-pass.md`
-- `gidi:.claude/hooks/review-before-push.sh`: `rebuild_areas.py`
 - `gidi:decisions/CHECKS.md`: `check_district.py`, `check_real.py`
 - `gidi:decisions/CODEBASE.md`: `audit3d.py`, `bake_web.py`, `check_district.py`, `check_real.py`, `concept.py`, `district_profiles.py`, `draw_area.py`, `explore_city.py`, `fabric.py`, `frame_network.py`, `freeze_district.py`, `gen_fabric.py`, `hand.py`, `lagoon.py`, `landmarks.py`, `layout_v2.py`, `lgamap.py`, `lgas.py`, `rebuild_areas.py`, `scripts/build_viewer.py`, `scripts/check_real.py`, `scripts/compare.py`, `scripts/gen3d.py`, `sea.py`, `study.py`, `study_extract.py`, `study_isms.py`, `tools/bake.sh`, `tools/perf.sh`, `walknet.py`
 - `gidi:decisions/DECISIONS.md`: `scripts/compounds.py`, `scripts/cross_sections.py`, `scripts/roadends.py`, `tools/perf.sh`
 - `gidi:decisions/HISTORY.md`: `docs/LAYOUT-V2.md`, `docs/TWINS.md`, `docs/hand/lagos-pass.md`, `scripts/autoclean.py`, `scripts/check_real.py`, `scripts/hand_spots/ibudo_real_area.py`, `scripts/rebuild_areas.py`, `scripts/twins.py`
+- `gidi:decisions/NOW.md`: `gidi_import.py`, `gidi_stream.py`
 - `gidi:decisions/story/README.md`: `gidi-performance-capture.md`, `gidi-roadmap.md`
 - `gidi:decisions/story/act-1-draft.md`: `gidi-roadmap.md`
 - `gidi:decisions/story/acts-2-3-draft.md`: `gidi-performance-capture.md`
