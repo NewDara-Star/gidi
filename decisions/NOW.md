@@ -10,7 +10,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
 2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
-   it (and the 8 corners check_map still lists, all on junction nodes); tested on a T and a crossroads against photos.
+   it (and the 8 corners check_map still lists, all on junction nodes). Roads that meet now share a point (#335);
+   the kit must also join the 50 staggered junctions check_map counts (two nodes a few metres apart, inside each
+   other's road) into one junction each; tested on a T and a crossroads against photos.
 3. [ ] Trees, masts, heaps (92, 15 and 12 records in d15) and weeds: builders tested against photos; Meshy for the hard
    shapes before the credits expire on 11 Nov (cost stated first).
 4. [ ] Ground: the road and verge colours (grey dusty tar, not tan or black), sand and earth as the map paints them.

@@ -27,6 +27,7 @@ ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
 
 errors = []
 corners = []                 # road lines the kit can't round without folding: hand edits still to do (amber, like TODO)
+staggered = []               # road ends on a node within reach of another road's node: one junction the kit must still join
 TODO = re.compile(r": missing (?:field|value) '([^']+)'")      # what the board shows amber
 
 
@@ -487,8 +488,9 @@ def road_nodes(recs):
     """Where roads meet, they share a point (a node): the junction kit builds a junction at each shared point and nowhere
     else. Fails: two centrelines crossing without one, or a road end inside another road's carriageway with no node of
     that road near it (within its half width): a hand edit puts the point on both lines. An end on a node of its own a few
-    metres from the other road's node is a staggered junction, left as drawn: the junction kit joins nodes that close into
-    one junction (pulling them onto one point pushed 26 houses into the roads, 25 Oct)."""
+    metres from the other road's node (within its half width + 0.5 m) is a staggered junction, left as drawn and counted
+    on a TODO line: the junction kit (not built yet) must join nodes that close into one junction (pulling them onto one
+    point pushed 26 houses into the roads, 25 Oct). --strict fails on them."""
     try:
         from shapely.geometry import LineString, Point
         from shapely.strtree import STRtree
@@ -513,7 +515,9 @@ def road_nodes(recs):
                     continue
                 if node.get((round(e[0], 1), round(e[1], 1)), 0) > 1 and \
                         min(math.hypot(e[0] - a[0], e[1] - a[1]) for a in pts[oid]) < o['width'] / 2 + 0.5:
-                    continue   # a staggered junction: two nodes closer than the road is wide
+                    staggered.append(f'{w}: its end at {list(e)} is a node {min(math.hypot(e[0] - a[0], e[1] - a[1]) for a in pts[oid]):.1f} m from '
+                                     f'road {oid}\'s node, inside it: a staggered junction for the junction kit to join')
+                    continue
                 err(w, f'its end at {list(e)} is inside road {oid} with no node of it near (no junction)')
         for j in tree.query(lines[k]):
             oid = rs[j][0]
@@ -598,13 +602,17 @@ if __name__ == '__main__':
     todo = [e for e in errors if TODO.search(e)]
     bad = errors if '--strict' in args else [e for e in errors if not TODO.search(e)]
     if '--strict' in args:
-        bad = bad + corners
+        bad = bad + corners + staggered
     for e in bad:
         print('FAIL ', e)
     if corners and '--strict' not in args:
         for e in corners:
             print('ROAD ', e)
         print('TODO  %d road corners to hand-edit (the road kit would fold them)' % len(corners))
+    if staggered and '--strict' not in args:
+        for e in staggered:
+            print('NODE ', e)
+        print('TODO  %d staggered junctions for the junction kit to join (nodes within reach of each other)' % len(staggered))
     if todo and '--strict' not in args:
         by = {}
         for e in todo:
