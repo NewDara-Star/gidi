@@ -135,8 +135,12 @@ different game; Gidi uses none of it. Two Lagos files World Drive tracks (`lagos
 - **The study scripts of `docs/lagos-study/` are lost.** `STUDY.md` lists them (grid_bld, grid_orient, heights, roads,
   rasters, feat, classify, plots, gaz) and six data grids as "all in this folder". They were never committed and
   aren't anywhere on disk. The numbers stand, but can't be rebuilt.
+- **The roads study and the frame study can't be re-run either** (found 25 Oct): their working files lived in a temp
+  folder and are gone, and the roads study reads the lost 250 m grids above. Their outputs stand (`docs/lagos-study/roads/`,
+  `web/frame-study.js`); what a re-run takes is in NOW's Owed list.
 - **A rule was "checked" by a script that never existed.** CHECKS.md held "Freeze everything" with the bake's
-  DETERMINISTIC line from `tools/bake.sh`, which was never committed. It is marked GAP now.
+  DETERMINISTIC line from `tools/bake.sh`, which was never committed. It is marked GAP now. (Found 25 Oct, untracked in
+  `~/gidi-worktrees/tools/`: it baked the old generated map, so it was deleted with that folder's old renders and logs.)
 - **The OSM extract is gone** (`lagos.osm.pbf`, `adm6.geojson`: the repo held only links to a deleted scratch
   folder). The old-map scripts that read it (`study_extract.py`, `study_isms.py`) can't run. That is fine: OSM is not
   used now.

@@ -2154,7 +2154,6 @@
    "self": false,
    "maybe": [],
    "text": [
-    "gidi:decisions/NOW.md",
     "gidi:docs/look/research-buildings.md"
    ]
   },
@@ -78335,7 +78334,7 @@
     "gidi:scripts/frame_footprints.py",
     "gidi:scripts/frame_study.py"
    ],
-   "uses": 33
+   "uses": 35
   },
   "gidi:docs/lagos-study/roads/scripts/gaz.py": {
    "lang": "python",

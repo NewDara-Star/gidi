@@ -53,11 +53,11 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | file | lines | changed | refs | what it says it is |
 |---|---|---|---|---|
 | `CHECKS.md` | 96 | 2026-10-25 | 8 | Which check holds each rule: Every rule in `DECISIONS.md` has a row here: the check that enforces it, or why none can. `scripts/check_rules.py` runs before eve… |
-| `CODEBASE.md` | 175 | 2026-10-25 | 7 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
+| `CODEBASE.md` | 179 | 2026-10-25 | 7 | What the code holds: the three repos, one page: Read this before building anything new, so new work starts from what exists. Every file, with what it says it i… |
 | `DECISIONS.md` | 142 | 2026-10-25 | 14 | Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`… |
 | `HISTORY.md` | 61 | 2026-10-25 | 4 | Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we kno… |
 | `IDEAS.md` | 68 | 2026-10-24 | 5 | Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig,… |
-| `NOW.md` | 329 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
+| `NOW.md` | 331 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
 | `README.md` | 9 | 2026-10-24 | 1 | Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it w… |
 | `lived-in.md` | 154 | 2026-10-24 | 5 | The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, acro… |
 | `world-life.md` | 146 | 2026-10-16 | 4 | Life in Gidi: what makes the world feel like it exists: The owner's thinking from 16 Oct 2026, and Claude's proposals. The research behind it: `docs/research/L… |
@@ -136,10 +136,10 @@ Binary: 8 files, 2.8 MB (5 .md, 3 .json).
 | `roads/EARTH-CHECK.md` | 274 | 2026-10-24 | 5 | Google Earth check of the borders (22 Oct 2026): `ROADS.md` section 6 left 15 borders the data could not settle. Each was looked at on Google Maps satellite (z… |
 | `roads/NAMES.md` | 115 | 2026-10-22 | 7 | Echo names for the 51 districts (draft, 22 Oct 2026): Working names for the 51 districts in `EARTH-CHECK.md` ("District list after the checks"), as the map for… |
 | `roads/ROADS.md` | 510 | 2026-10-24 | 2 | Roads first, districts by their borders: Step 1 of the new map plan (22 Oct): Gidi is real Lagos made smaller, at 1:3, in a frame about 27 × 10.5 km. This stud… |
-| `roads/scripts/borders.py` | 147 | 2026-10-22 | 1 | Every border between two places: what it is, how long, whether built land meets across it; plus each place's fingerprint and the similarity of every pair (the … |
+| `roads/scripts/borders.py` | 147 | 2026-10-25 | 1 | Every border between two places: what it is, how long, whether built land meets across it; plus each place's fingerprint and the similarity of every pair (the … |
 | `roads/scripts/common.py` | 23 | 2026-10-25 | 15 | Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid. |
 | `roads/scripts/gaz.py` | 238 | 2026-10-22 | 4 | Neighbourhood names for naming places. [K] general knowledge: points are approximate (+-0.5-1 km), not measured. Extends the earlier study's list (docs/lagos-s… |
-| `roads/scripts/ladder.py` | 140 | 2026-10-22 | 1 | Join places into districts: only places that really touch (built land meets across 200 m or more of their border) and are alike enough. The Google checks of 22… |
+| `roads/scripts/ladder.py` | 140 | 2026-10-25 | 1 | Join places into districts: only places that really touch (built land meets across 200 m or more of their border) and are alike enough. The Google checks of 22… |
 | `roads/scripts/network.py` | 226 | 2026-10-22 | 1 | Measure the skeleton, choose the real extent that fits Gidi's 27 x 10.5 km frame at 1:3, draw it. ---------- 1. the frame: the 81 x 31.5 km real window (27 x 1… |
 | `roads/scripts/ob50.py` | 25 | 2026-10-22 | 1 | Open Buildings v3 (confidence >= 0.65) onto the 50 m grid: count and roof area per cell. Streams the 430 MB csv.gz in chunks; keeps only two small grids in mem… |
 | `roads/scripts/places.py` | 256 | 2026-10-22 | 1 | Cut Lagos land into places bounded by real borders, on the 50 m grid. Borders: big roads (motorway, trunk, primary), rail, narrow water (canals, creeks), secon… |
@@ -155,7 +155,7 @@ Binary: 8 files, 2.8 MB (5 .md, 3 .json).
 | `similar/scripts/common.py` | 43 | 2026-10-24 | 15 | Shared by the similarity study's plot scripts: the grids, the units, the LGA lines. Needs the grids in ../lagos/ (feat.npz, class.npz), which were never commit… |
 | `similar/scripts/finger.py` | 52 | 2026-10-24 | 1 | Per-unit fingerprint from the 250 m grids + Overture places + knowledge lists. Overture places (confidence >= 0.5) |
 | `similar/scripts/know.py` | 86 | 2026-10-22 | 2 | [K] general knowledge, not measured. Per unit: markets ; hubs (motor parks, interchanges, stations, jetties) ; landmarks (campus, port, industry, institutions,… |
-| `similar/scripts/plot_units.py` | 24 | 2026-10-24 | 0 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
+| `similar/scripts/plot_units.py` | 24 | 2026-10-25 | 0 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
 | `similar/scripts/plots.py` | 59 | 2026-10-22 | 2 | ---- similarity.png ---- ladder pictures |
 | `similar/scripts/report.py` | 31 | 2026-10-24 | 2 | SIMILAR.md's ladder: how many districts at each similarity threshold, from analysis.json. |
 | `similar/scripts/seeds.py` | 91 | 2026-10-22 | 2 | Unit seeds: name / lat,lon ; lat,lon ... Coordinates from general knowledge [K], approximate (+-0.5-1 km). A unit = the 250 m cells closest (by road-penalised … |

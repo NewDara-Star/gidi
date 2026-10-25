@@ -10,7 +10,7 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 |---|---|---|---|
 | `data/tools/probe-tiles.sh` | 6 | 2026-10-13 | Reads only the first 128 KB of each height tile (its location), so we can skip tiles outside Lagos. Takes about a minut… |
 | `docs/lagos-study/similar/scripts/appendix.py` | 27 | 2026-10-24 | Appendix A and B of SIMILAR.md (unit fingerprints, neighbour pairs) from analysis.json. |
-| `docs/lagos-study/similar/scripts/plot_units.py` | 24 | 2026-10-24 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
+| `docs/lagos-study/similar/scripts/plot_units.py` | 24 | 2026-10-25 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
 
 ### gidi-game (2)
 

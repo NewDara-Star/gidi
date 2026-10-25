@@ -27,10 +27,6 @@ merged and checked, add new ones where they belong, and say here when the owner 
      the new districts). gidi-data: the old kit's part viewer deleted (local commit; it has no remote). Untracked: the
      old test streets' levels and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct,
      the old perf files, this repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB).
-   - [ ] step 3c: the frame study cannot be re-run: `frame_study.py` and `frame_footprints.py` read the roads study's
-     working files (network.json, skel.pkl, wc50.npz, places.npz/json), which lived in a temp folder (`common.py` SCR)
-     and are gone. Rebuild them with `docs/lagos-study/roads/scripts` into `~/gidi-data`, point SCR/WORK there, and
-     check the output against `web/frame-study.js` (copy kept in `~/gidi-data/frame-backup-25oct/`, with frame-tiles).
    - [ ] step 4: docs that still name deleted files (scripts/inventory.py: 279 names in 57 files after step 3b, up from 274 in 55: frame_motorpark.py named where its deletion is noted, and two old-kit names in docs that had only matched files inside the deleted `.venv/`; the live rules in
      DECISIONS done in step 2); NOW.md's dated history and DECISIONS/CODEBASE trimmed to what is current, CODEBASE
      rewritten for the new layout; the `?frame=new` mentions (README, NOW, CODEBASE, MAP-FORMAT, frame_study,
@@ -100,6 +96,12 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   frame median; Nanite's fallback triangle count against the GPU's own (95b0053).
 - Road kit: never imported into Unreal (6a26dd1, dc5e664 "Unreal not run"); the drain litter's next look pass (dc5e664).
 - Plants kit for the ditch banks (55c14e7): item 3.
+- The frame study, only if the frame changes: `scripts/frame_study.py` and `frame_footprints.py` read the roads study's
+  working files (network.json, skel.pkl, wc50.npz, places.npz/json), written to a temp folder (`common.py` SCR) and gone;
+  the roads study itself reads the first study's 250 m grids, whose scripts are lost too (CODEBASE "Known problems").
+  A re-run means writing those grids' scripts again from `docs/lagos-study/STUDY.md` (raw data all in
+  `~/gidi-data/research/data/`) with SCR in `~/gidi-data`. Until then `web/frame-study.js` and `web/frame-tiles/` stand
+  (copy in `~/gidi-data/frame-backup-25oct/`).
 - docs/MAP-FORMAT.md "Next steps": the format to `gidi-map/1.0` after the owner's answers; a real-names list for the
   whole frame; the twin catalogue with ids; the board's district outline editor, day filter, and loading only the
   districts in view.
