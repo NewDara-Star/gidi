@@ -6,7 +6,7 @@ B = json.load(open(WORK + 'borders.json')); rows = B['rows']; borders = B['borde
 PL = json.load(open(WORK + 'places.json'))['places']; NW = json.load(open(WORK + 'network.json'))
 Sim = np.load(WORK + 'sim.npy')
 fu, fv = NW['fu'], NW['fv']
-NP = len(PL); byid = {q['id']: q for q in PL}; R = {r['id']: r for r in rows}
+byid = {q['id']: q for q in PL}; R = {r['id']: r for r in rows}
 OPEN_ROOF = 0.10          # km2 of roof: below this a place is open land (bush, swamp, sand), not a district
 built = [q['id'] for q in PL if q['roof_km2'] >= OPEN_ROOF]
 bset = set(built)

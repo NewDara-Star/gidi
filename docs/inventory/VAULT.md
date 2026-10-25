@@ -301,7 +301,7 @@ Nearest in words: `gidi:decisions/lived-in.md` (0.24); `gidi:decisions/DECISIONS
 
 ### `gidi:decisions/NOW.md`
 **Where the work stands (update at the end of every session)**. Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
-For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 328 lines.
+For: gidi-game, pass, records, sent, unreal, editor, layer, dress. Last changed 2026-10-25, 329 lines.
 Links to 79: `gidi-data:research/google/estate/NOTES.md`, `gidi-data:research/google/kits/old-town/KIT.md`, `gidi-data:research/google/kits/old-town/tests/ot149/tone.py`, `gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md`, `gidi-game:Art/Buildings/BlockBuilt/ROOF-GAPS.md`, `gidi-game:Art/Props/LeantoBuilt/GAPS.md`, `gidi-game:Content/Python/gidi_heroes.py`, `gidi-game:docs/PERFORMANCE.md`, `gidi-game:tools/block_build.py`, `gidi-game:tools/editor.sh`, `gidi-game:tools/fields.py`, `gidi-game:tools/furniture_build.py` ...
 Backlinks: 4 documents (`gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md`, `gidi-game:CLAUDE.md`, `gidi:CLAUDE.md`, `gidi:decisions/README.md`), 1 code files (`gidi:.claude/hooks/review-before-push.sh`).
 Nearest in words: `gidi:decisions/CHECKS.md` (0.52); `gidi:decisions/DECISIONS.md` (0.51); `gidi:docs/MAP-FORMAT.md` (0.41).

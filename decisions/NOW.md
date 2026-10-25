@@ -20,12 +20,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
      `tools/plates.py` reads `web/frame-study.js`; this repo's `web/city/` (3.7 GB, untracked) deleted.
    - [x] step 3a (gidi-game #97): tB measured again: GPU 13.9/13.8 ms (was 15.2/14.7), memory 5,987/6,000 MB, same
      picture (0.07% of pixels); why the GPU is ~1 ms lower is not found.
-   - [ ] step 3b: the second reading of the inventory. Done: gidi-game #98 (dead names out of the builders,
-     `frame_motorpark.py` deleted, `props_build.py` and `prop_basin_final.py` kept as live recipes); this repo's dead
-     names in `frame_study.py`, `frame_footprints.py` and the roads study's `common.py`; the old test streets' levels
-     and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct, the old perf files, this
-     repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB), all untracked. Still to do: the old research docs,
-     and the research "maybe" pieces (the roads study scripts, `~/gidi-data` kit tests that import the deleted kit).
+   - [x] step 3b: the second reading of the inventory. gidi-game #98, #99: dead names out of the builders,
+     `frame_motorpark.py` deleted, `props_build.py` and `prop_basin_final.py` kept as live recipes. Here: dead names out
+     of `frame_study.py`, `frame_footprints.py` and the roads and similarity study scripts; the old map pictures nothing
+     pointed to (v0.3, the v1 terrain, the v2 layout) deleted; the research docs kept (`docs/RESEARCH.md` maps each to
+     the new districts). gidi-data: the old kit's part viewer deleted (local commit; it has no remote). Untracked: the
+     old test streets' levels and folders (5.6 GB), Saved/Shots, StagedBuilds and Cooked (4.1 GB), logs before 25 Oct,
+     the old perf files, this repo's SUMO-era `.venv/` and `study-*.pkl` caches (684 MB).
    - [ ] step 3c: the frame study cannot be re-run: `frame_study.py` and `frame_footprints.py` read the roads study's
      working files (network.json, skel.pkl, wc50.npz, places.npz/json), which lived in a temp folder (`common.py` SCR)
      and are gone. Rebuild them with `docs/lagos-study/roads/scripts` into `~/gidi-data`, point SCR/WORK there, and

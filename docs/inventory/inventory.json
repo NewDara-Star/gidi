@@ -358,9 +358,9 @@
    "repo": "gidi",
    "path": "decisions/NOW.md",
    "ext": ".md",
-   "bytes": 64417,
+   "bytes": 64517,
    "changed": "2026-10-25",
-   "lines": 328,
+   "lines": 329,
    "summary": "Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced ones are in `HISTORY.md`), then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:",
    "refs_in": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
@@ -919,16 +919,6 @@
   },
   {
    "repo": "gidi",
-   "path": "docs/gidi-map-v0.3.png",
-   "ext": ".png",
-   "bytes": 270661,
-   "changed": "2026-10-13",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
    "path": "docs/hand/borrowed-lagos.md",
    "ext": ".md",
    "bytes": 10056,
@@ -1152,16 +1142,6 @@
    "refs_in": [
     "gidi:docs/jungle-pattern-study.md"
    ]
-  },
-  {
-   "repo": "gidi",
-   "path": "docs/img/layout-v2.png",
-   "ext": ".png",
-   "bytes": 110685,
-   "changed": "2026-10-20",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
   },
   {
    "repo": "gidi",
@@ -1441,16 +1421,6 @@
   },
   {
    "repo": "gidi",
-   "path": "docs/img/terrain.png",
-   "ext": ".png",
-   "bytes": 218680,
-   "changed": "2026-10-15",
-   "lines": null,
-   "summary": "",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi",
    "path": "docs/img/watertown-fingers.png",
    "ext": ".png",
    "bytes": 649096,
@@ -1529,7 +1499,7 @@
    "repo": "gidi",
    "path": "docs/inventory/SUSPECTS.md",
    "ext": ".md",
-   "bytes": 10044,
+   "bytes": 10012,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1568,7 +1538,7 @@
    "repo": "gidi",
    "path": "docs/inventory/inventory.json",
    "ext": ".json",
-   "bytes": 298440,
+   "bytes": 298402,
    "changed": "2026-10-25",
    "lines": null,
    "summary": "",
@@ -1904,7 +1874,7 @@
    "repo": "gidi",
    "path": "docs/lagos-study/roads/scripts/borders.py",
    "ext": ".py",
-   "bytes": 11032,
+   "bytes": 11013,
    "changed": "2026-10-22",
    "lines": 147,
    "summary": "Every border between two places: what it is, how long, whether built land meets across it; plus each place's fingerprint and the similarity of every pair (the fingerprint method of docs/lagos-study/similar/scripts/analyse.py). ---------- land borders",
@@ -1917,7 +1887,7 @@
    "path": "docs/lagos-study/roads/scripts/common.py",
    "ext": ".py",
    "bytes": 1201,
-   "changed": "2026-10-24",
+   "changed": "2026-10-25",
    "lines": 23,
    "summary": "Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid.",
    "refs_in": [
@@ -1957,7 +1927,7 @@
    "repo": "gidi",
    "path": "docs/lagos-study/roads/scripts/ladder.py",
    "ext": ".py",
-   "bytes": 7675,
+   "bytes": 7661,
    "changed": "2026-10-22",
    "lines": 140,
    "summary": "Join places into districts: only places that really touch (built land meets across 200 m or more of their border) and are alike enough. The Google checks of 22 Oct are fixed: some pairs never join, two always do. district names: its three biggest places by roof",
@@ -2278,9 +2248,9 @@
    "repo": "gidi",
    "path": "docs/lagos-study/similar/scripts/plot_units.py",
    "ext": ".py",
-   "bytes": 1445,
+   "bytes": 1350,
    "changed": "2026-10-24",
-   "lines": 25,
+   "lines": 24,
    "summary": "Map of the study units (SIMILAR.md's unit pictures), drawn with common.py.",
    "refs_in": []
   },
@@ -3430,7 +3400,7 @@
    "path": "scripts/frame_footprints.py",
    "ext": ".py",
    "bytes": 3280,
-   "changed": "2026-10-22",
+   "changed": "2026-10-25",
    "lines": 92,
    "summary": "Real roofs under the new frame, for the drawing board's zoomed-in \"Real roofs\" layer (web/board.html?frame=new).",
    "refs_in": [
@@ -3444,7 +3414,7 @@
    "path": "scripts/frame_study.py",
    "ext": ".py",
    "bytes": 15139,
-   "changed": "2026-10-22",
+   "changed": "2026-10-25",
    "lines": 296,
    "summary": "The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts by their borders). Open them with web/board.html?frame=new.",
    "refs_in": [
@@ -8637,9 +8607,9 @@
    "repo": "gidi-game",
    "path": "tools/lorry_build.py",
    "ext": ".py",
-   "bytes": 41827,
+   "bytes": 41686,
    "changed": "2026-10-25",
-   "lines": 658,
+   "lines": 651,
    "summary": "The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json]",
    "refs_in": [
     "gidi-game:docs/ASSET-INVENTORY.md",
@@ -8911,8 +8881,8 @@
    "repo": "gidi-game",
    "path": "tools/props_build.py",
    "ext": ".py",
-   "bytes": 11810,
-   "changed": "2026-10-19",
+   "bytes": 11797,
+   "changed": "2026-10-25",
    "lines": 259,
    "summary": "Street props for the Lagos pass (docs/hand/lagos-pass.md, the owner's photos in refs/lagos-life/): blender -b -P tools/props_build.py -- <out folder>",
    "refs_in": [
@@ -9199,9 +9169,9 @@
    "repo": "gidi-game",
    "path": "tools/vehicle_look.py",
    "ext": ".py",
-   "bytes": 4539,
-   "changed": "2026-10-19",
-   "lines": 121,
+   "bytes": 4456,
+   "changed": "2026-10-25",
+   "lines": 120,
    "summary": "Look renders of a built vehicle: blender -b <parts.blend> -P tools/vehicle_look.py -- <out.jpg> [view ...] [--size W]",
    "refs_in": [
     "gidi-game:ASSETS.md",
@@ -9789,28 +9759,6 @@
    "refs_in": [
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/NOW.md"
-   ]
-  },
-  {
-   "repo": "gidi-data",
-   "path": "research/google/kits/old-town/tools/part_view.py",
-   "ext": ".py",
-   "bytes": 4484,
-   "changed": "2026-10-24",
-   "lines": 87,
-   "summary": "Render kit parts alone (outside the repo; a test tool). blender -b --factory-startup -P part_view.py -- --gidi <repo> --build <spec.py> --out <file.jpg> [--mode street|sheet] [--size w,h] spec.py defines build(mb, M, kit) -> (half_length, half_width, height) of what it built, and may set LABEL.",
-   "refs_in": []
-  },
-  {
-   "repo": "gidi-data",
-   "path": "research/google/kits/old-town/tools/sheet.py",
-   "ext": ".py",
-   "bytes": 556,
-   "changed": "2026-10-24",
-   "lines": 14,
-   "summary": "",
-   "refs_in": [
-    "gidi-data:research/google/kits/old-town/tools/part_view.py"
    ]
   },
   {

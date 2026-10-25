@@ -3,7 +3,7 @@
 import json, csv, re, pickle, collections, numpy as np, pyarrow.parquet as pq, shapely
 from scipy import ndimage as nd
 from common import *
-Pz = np.load(WORK + 'places.npz'); place = Pz['place']; BT = Pz['BT']; BN = Pz['BN']; fab = Pz['fab']; land = Pz['land']; wide = Pz['wide']
+Pz = np.load(WORK + 'places.npz'); place = Pz['place']; BT = Pz['BT']; BN = Pz['BN']; fab = Pz['fab']; wide = Pz['wide']
 D = json.load(open(WORK + 'places.json')); PL = D['places']; RNAMES = D['road_names']; FG = D['FG']
 NP = len(PL); byid = {q['id']: q for q in PL}
 OB = np.load(WORK + 'ob50.npz'); WC = np.load(WORK + 'wc50.npz')

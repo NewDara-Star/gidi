@@ -10,7 +10,7 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 |---|---|---|---|
 | `data/tools/probe-tiles.sh` | 6 | 2026-10-13 | Reads only the first 128 KB of each height tile (its location), so we can skip tiles outside Lagos. Takes about a minut… |
 | `docs/lagos-study/similar/scripts/appendix.py` | 27 | 2026-10-24 | Appendix A and B of SIMILAR.md (unit fingerprints, neighbour pairs) from analysis.json. |
-| `docs/lagos-study/similar/scripts/plot_units.py` | 25 | 2026-10-24 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
+| `docs/lagos-study/similar/scripts/plot_units.py` | 24 | 2026-10-24 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
 
 ### gidi-game (2)
 
@@ -19,13 +19,12 @@ Made by `scripts/inventory.py`. A list to read, not to delete: a tool run by han
 | `tools/fab_list.sh` | 9 | 2026-10-19 | What's in the project from Fab (added = in Content/Fab). tools/fab_list.sh |
 | `tools/loose_build.py` | 55 | 2026-10-23 | Goods and litter lying loose on the ground, built in Blender: blender -b -P tools/loose_build.py -- <out.blend> [recipe… |
 
-### gidi-data (3)
+### gidi-data (2)
 
 | file | lines | changed | what it says it is |
 |---|---|---|---|
 | `research/data/probe-tiles.sh` | 6 | 2026-10-24 | Reads only the first 128 KB of each height tile (its location), so we can skip tiles outside Lagos. Takes about a minut… |
 | `research/google/kits/old-town/tests/ot13/mk13_first.py` | 55 | 2026-10-24 | ot13 map as first written from the Street View frame: only KIT.md section 12 fields, by eye (usage: mk13_first.py map_f… |
-| `research/google/kits/old-town/tools/part_view.py` | 87 | 2026-10-24 | Render kit parts alone (outside the repo; a test tool). blender -b --factory-startup -P part_view.py -- --gidi <repo> -… |
 
 ## Names of files that exist nowhere
 
