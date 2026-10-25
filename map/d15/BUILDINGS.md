@@ -67,6 +67,26 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 41 (25 Oct): the empty small blocks B34, B40 and B41 given houses
+
+B34 (the strip between Ibari road and Olorunsogo Street, north of Fafolu Street), B40 and B41 (wedges between Isolo Road and the streets off it) held no houses; at z18 all three are built up, with no street inside, so their houses were drafted with `--frontage --sizes=12,20000`: B34 11 buildings at 64% cover, B40 2 at 19%, B41 1 at 20%. B32, B37, B38 and B39 stay empty: they are slivers between roads or along the district edge, 3 to 16 m real wide on average.
+
+## Hand pass 40 (25 Oct): blocks B35 and B36 read at close zoom, houses redrafted
+
+B35 is the triangle of Oluwole Street, Ladipo Street and Ibari road; B36 lies between Ibari road and Olumorokun Street, from Ayantuga Street to Post Office Road. Neither has a street inside (read at z18), so no lanes were drawn; their houses were cleared and redrafted with `--frontage --sizes=12,20000`. B35 now holds 7 buildings at 53% cover (was 1 at 13%), B36 5 at 56% (was 3 at 28%).
+
+## Hand pass 39 (25 Oct): block B33 read at close zoom, houses redrafted
+
+B33 lies between Olateju Street and the railway, north of Ogunmokun Street (read at z18). Ogidan Street runs through it about 45 m from Olateju Street, too close to keep, so no lane was drawn; its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B33 now holds 13 buildings at 61% cover (was 5 at 31%). The real strip along the railway is mostly bare ground: the per-building pass should clear the plots there.
+
+## Hand pass 38 (25 Oct): block B31 read at close zoom, houses redrafted
+
+B31 is the strip between Ibari road and Olorunsogo Street, one plot deep with no street of its own (read at z18), so no lane was drawn; its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B31 now holds 16 buildings at 58% cover (was 3 at 25%).
+
+## Hand pass 37 (25 Oct): block B30 given its street at close zoom
+
+B30 got 1 of its real streets (STREETS.md); its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B30 now holds 21 buildings at 55% cover (was 6 at 34%).
+
 ## Hand pass 36 (24 Oct): block B29 given its street at close zoom
 
 B29 got 1 of its real streets (STREETS.md); its houses were cleared and redrafted with `--frontage --sizes=12,20000`. B29 now holds 22 buildings at 59% cover (was 4 at 30%). South of Danmegoro Street it is a real school compound: the draft fills it with houses for now; the per-building pass should give those plots the school.
