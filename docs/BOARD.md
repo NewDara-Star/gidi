@@ -2,96 +2,62 @@
 
 The owner, 16 Oct 2026: "we should hand draw... we should know where something meets something... where the roads start, where the roads end, where the houses are, we should be able to move them."
 
-The drawing board is a clean plan of Gidi to scale, in the browser. Every road edge, plot, wall, house, piece of street furniture and place is drawn where it stands, and can be checked, moved, turned, deleted or added. Each edit is saved as a hand edit (`web/hand/<district>.json`), the same edits the bake applies, so the bake, the checks and the 3D city all follow the drawing. The map data stays the master copy.
+The drawing board is where the map is made by hand. Under it lies a study of real Lagos at 1:3 (the new frame, 27 x 10.5 km); on top, every road, plot, wall, building, lean-to, stall, pole, tree, place and person spot of the map is drawn, moved, turned and deleted, record by record. Each save writes whole records into `map/<dNN>/` (the format is `docs/MAP-FORMAT.md`), and the map is the truth: the builders in the game repo build what it says.
 
 ## Open it
 
 ```
-python3 scripts/board_server.py
+python3 scripts/board_server.py [--port 8777]
 ```
 
-Then open http://127.0.0.1:8777/web/board.html.
+Then open http://127.0.0.1:8777/web/board.html (or the port you gave).
 
-- Without the server the board still opens (from any local server), but read-only.
+- Without the server the study still shows, but nothing loads or saves.
 - The address bar keeps where you are looking (`#x,y,zoom`). Bookmark a spot, or send it to someone.
 
-## What it shows
+## The study underlay
 
-- **Roads at true width, in bands:** the walkway, the gutter, then the carriageway in its surface colour (tar, worn, interlock, laterite, sand, mud), from the agreed cross-sections. Junctions merge where the bands overlap. Dashed lines run down the main roads and arterials, and named roads carry their names.
-- **Decks:** flyovers, bridges and ramps, with a dashed outline.
-- **Gutters:** open or covered.
-- **Plots and walls:** plots dashed green, estate walls as dark lines, market-street zones in amber.
-- **Shops, canopies and balconies:** a shop's front side in thick orange, its canopy as an orange box, balconies as dashed blue boxes, all to scale. The bake works them out (`scripts/fronts.py`): a shop at the kit's share for its district, half the shops with a canopy cut short of the carriageway, balconies only where the 1.1 m slab clears neighbours and roads.
-- **Trees:** green circles, about the size of the crown; palms with spokes. The bake plants them (`scripts/trees.py`) at the kit's densities, clear of roads, buildings, walls, furniture and water, including the bush outside the districts.
-- **Compound walls and gates:** brick-red lines and blue squares. The bake works them out (`scripts/compounds.py`): a share of houses is walled by district (a third in the dense districts, nearly all in the estates), each compound reaches 2 m round its house, stops at the walkway and at other buildings, and neighbours share one wall line. The 3D draws exactly these walls.
-- **Buildings:** each footprint, tinted by use: homes, trade, civic, works, water.
-- **Street furniture,** each kind with its own symbol:
-  - poles, street lights (with the arm), traffic lights
-  - bus stops, LASMA posts, transformers, police kiosks
-  - overhead signs, the task force truck, people placed by hand
-- **Road signs:** direction signs before the big junctions, speed limits after them, no-parking discs by the markets, gantries over the expressways and bridges (`scripts/things.py`, the rules the kit used to run itself).
-- **Road ends:** a close's round turning space, in its road's surface. A road that stops short of anything is ringed in red (`scripts/roadends.py`).
-- **Vehicles and people** (layer "Vehicles & people"): every parked car, keke, okada and bus at the road edges and in the parks, the people standing in the markets and parks, the port's machines, the boats, canoes, trains and rail stalls, each to scale and turned the way it faces. The bake places them (`scripts/things.py`); traffic and walkers move in the game, so the data holds how many and what kind ("life"), not where each one is.
-- **Ground use** (layer, off at first): what each piece of ground is for (`scripts/ground.py`): the parking strips at the carriageway's edges in blue, motor parks, markets, yards and other plots tinted, the rail corridor. The bottom bar names the ground under the mouse and who may be on it.
-- **Ground paint** (layer): grass lots, dry grass, mud by the gutters, worn dirt paths, sandy shores (`scripts/groundpaint.py`). Click one to see it; `Delete` removes it. The soil colour, weeds at the walls, dust at the road edges and litter are district rules in the data (`ground_paint.rules`), drawn by the kit.
-- **Monuments** (stars) and **named places** (pins).
-- **Real place** (layer): the real footprints (magenta dashed) and roads (magenta) each Ìbùdó area is the child of, placed by that area's anchor, so buildings and streets can be moved onto their real spots by hand. Made by `python3 scripts/real_underlay.py` (needs `~/gidi-data`) into `web/real-underlay.js`, which is never committed: a study aid, not map data.
-- **Layers:** each of the above can be switched off in the top bar.
+Real Lagos, miniaturised, to draw over. Switch each layer in the top bar: water, motorways, trunk, primary and secondary roads, ramps, rail, bridges, the districts' outlines, the unsure lines, real places, and, zoomed in, the real roofs. It is a study aid only: real names and lines are shown and never written into the map (a new district's outline is the one thing copied, when it is first started).
 
-## The checks (red outlines)
+The underlay is generated (`web/frame-study.js` by `scripts/frame_study.py`, `web/frame-tiles/` by `scripts/frame_footprints.py`) and never committed. Those scripts can't be re-run today (their inputs are lost; NOW's Owed list); a copy is in `~/gidi-data/frame-backup-25oct/`.
 
-Problems the built city would have, found live as you work:
-- **A canopy over the carriageway, or a balcony or canopy into a neighbour.**
-- **A tree in the road or inside a building.**
-- **A building or a compound wall on a road:** inside the carriageway or gutter. Stalls and kiosks in a declared market-street zone are the market spill and are allowed, as `scripts/check_district.py` allows them.
-- **Overlapping buildings:** an edge crossing, or a corner well inside another.
-- **Furniture in the carriageway, or inside a building.**
-- **A thing on the wrong ground:** a car on a junction's carriageway, the tracks or the water, a person in the road or the gutter, a boat on land. Each kind of ground says who may be on it (`scripts/ground.py`), and `check_district.py` check 16 tests the same.
-- **A road that stops short:** it meets no road, house, gate or water.
+## Drawing
 
-The bar at the bottom counts the problems in view. **Click the count to go to each problem in turn.** Zoom in past about 0.6 px per metre for the checks to run.
-
-## Editing
+Pick the district to draw in, then a tool (its key in brackets):
 
 | Tool | Key | What it does |
 |---|---|---|
-| Select | `V` | Click to select; drag to move. Furniture snaps to the walkway, facing the road; hold `Shift` to place it freely. `R` / `Shift R` turns 15°, `[` `]` turns 1°, `Delete` removes, `⌘Z` undoes. |
-| Reshape | (select) | A selected building, plot, zone or street shows handles. Drag a **square** to move a corner or point (corners snap to nearby corners; a street's ends snap onto other roads), drag a **circle** to add one, `⌥`-click a square to remove one. Buildings, furniture and monuments also take **exact numbers** in the side panel: width, depth, angle and middle (setting a size makes a building a rectangle), or x, y and angle. |
-| Furniture | `F` | Pick a kind, click to place (it snaps to the walkway). |
-| Building | `B` | Pick a kind, drag a box. Turn it afterwards with `R`. |
-| Street | `S` | Pick street, lane or main, then click points. Points snap onto existing roads, ends first, so a new street joins the network exactly. `Enter` finishes, `Backspace` takes back a point, `Esc` cancels. |
-| Surface | `U` | Pick a surface, click a road. |
-| Wall | `W` | Draw a compound wall: click points, `Enter` to finish. Select a wall to delete the piece or cut a 3 m opening where you clicked. |
-| Tree | `T` | Pick broad or palm, click to plant. Drag a tree to move it; `Delete` removes it. |
-| Gate | `G` | Click a wall to put a gate in it; select a gate and press `Delete` to remove it. |
+| Select | `V` | Click to select; drag to move. `R` / `Shift R` turns 15°, `[` `]` turns 1°, `Delete` removes. The side panel shows every field, and asks for the ones still unset. |
+| Street | `S` | A road, street, lane or path: click points, `Enter` to finish, `Backspace` takes back a point. |
+| Building, Plot | `B`, `P` | Drag a box. |
+| Wall | `W` | Click points, `Enter` to finish. |
+| Gate | `G` | Click a wall where the gate starts, then where it ends. |
+| Lean-to | `L` | Click a building side or a wall where it starts, then where it ends. |
+| Tree | `T` | Click to plant. |
+| Furniture | `F` | Stalls, poles, parked vehicles, furniture, heaps: click to place. |
+| Place | `A` | What the game uses a spot for: drag a box. |
+| Surface | `U` | Click a road to give it the surface. |
+| Frontage | `E` | Click a plot's side that faces a street. |
+| Stamp | `K` | Copy records, with their dress, from the map or a stamp source (`map-stamps/`, the format example), then place them; `R`, `[` `]` turn the copy. |
+| Face | `C` | Click a building's side to dress it: windows, doors, shopfronts, stains, add-ons (the face editor). |
+| Goods | `O` | Click inside a lean-to, stall, heap or bin to put an item there. |
+| Ground | `D` | Paint a patch of ground: click points, `Enter` to finish. |
+| Relief | `H` | Drag a box for a bump-and-dip grid; click a cell to raise it, `⌥`-click to lower. |
+| Litter | `X` | Click to drop a piece of litter. |
+| Brush | `N` | Brush litter, goods, relief or ground paint; every stroke writes full records. `⌥` erases, `[` `]` size the brush. |
+| Person | `I` | A person spot: where someone does something, and when. Click (drag to face them). |
+| Wire | `J` | Click a pole, then another pole (a line) or a house side or wall (a drop); `Shift` keeps going from the last pole. |
 
-- **Pan:** drag empty ground, hold `Space`, or use the right button. Scroll to zoom.
-- **A house's front:** select a front or back house. The panel sets its front side, whether it's a shop, its canopy depth, and which sides have a balcony.
-- **Name:** bus stops, traffic lights, LASMA posts and police kiosks can be named in the side panel. That's the label they carry, such as a bus stop's name.
-- **Not deletable here:** main roads and arterials. They're the city's frame, from the layout.
+- **Pan:** drag empty ground, hold `Space`, or use the right button. Scroll to zoom. `0` shows the whole frame.
+- **Undo:** `⌘Z` takes back the last save or delete, as long as nothing has changed it since.
+- **Unset fields:** a record may be saved before every value is known. It shows dashed amber, each missing field in red in the panel. The board never fills a value in.
 
-## From the board to the city
+## Checks
 
-1. **Each edit is written into the district's hand file at once,** and kept in `web/board-pending.json`, which isn't committed. The board shows pending edits on top of the last bake. The bottom bar says how many there are.
-2. **Ask Claude to "bake the board".** Claude runs the bake:
-   - Road edits (street added, deleted, cut or reshaped, a road named) in a frozen district need a thaw bake (`GIDI_THAW=<districts>`), then the district is frozen again. The bar flags these.
-   - The other edits apply in an ordinary bake.
-   - Then the district checks, then the tiles in the edited area.
-3. **Undo (`⌘Z`)** takes back the last board edit, as long as it hasn't been baked. After a bake, undo with a new edit.
-
-## New hand-file operations (16 Oct 2026, for the board)
-
-- `move building` takes an optional `rotate` (degrees, about its middle, after the move).
-- `move furniture`: `{at, kind, to, ang}`. The nearest of its kind within 2 m.
-- `move monument` / `delete monument`: `{at, to, ang}` / `{at}`. The nearest within 3 m.
-- `delete place`: `{name}`.
-- Fronts and trees (applied after `scripts/fronts.py` and `scripts/trees.py`): `set front` `{at, kind, e, shop, aw, bal}` (any of them), `add tree` `{x, y, kind}`, `move tree` `{at, to}`, `delete tree` `{at}`. A tree in the bush is edited through the nearest district's hand file with `"d": "bush"`.
-- Compound walls (applied after `scripts/compounds.py`): `cut wall` `{at, gap}`, `delete wall` `{at}`, `add wall` `{pts}`, `add gate` `{x, y}`, `delete gate` `{at}`.
-- `reshape building`: `{at, kind, pts}`; `reshape parcel` / `reshape zone`: `{at, pts}`. A new outline.
-- `reshape street`: `{at, pts}`. A road edit: the street, lane or district main nearest the point takes a new line.
+The server runs `scripts/check_map.py` on the district after every save; each record's problems come back with its id and show red on the board. The same checker runs before every commit.
 
 ## Files
 
-- `web/board.html`, `web/board.js`: the board, one canvas, no libraries.
-- `scripts/board_server.py`: serves the repo on 127.0.0.1 and saves edits. It accepts only the hand-file operations, and writes only `web/hand/` and `web/board-pending.json`.
-- `scripts/hand.py`: applies the edits in the bake.
+- `web/board.html`: the page. `web/frame.js`: the study underlay and the view. `web/mapedit.js`: the map editor. `web/faceedit.js`: the face editor.
+- `scripts/board_server.py`: serves the repo on 127.0.0.1 only, loads and saves whole records by id (MAP-FORMAT section 6 has the calls), and writes only `map/`.
+- `schema/map_schema.json`: the fields the panel offers and the server accepts.

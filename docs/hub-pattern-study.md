@@ -1,5 +1,7 @@
 # Hub pattern study: Oshodi/Isolo + Surulere → The Hub (v1)
 
+> **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).
+
 Status: generated for review (13 Oct 2026). Same method as the Maze: we measure the real place, turn the numbers into rules, and generate original streets and buildings from the rules. **No real street, building or name is copied into Gidi.** Data: OpenStreetMap (ODbL), Lagos extract, plus building heights from Google Open Buildings 2.5D (via `data/results/lga_table.json`). Area studied: Oshodi/Isolo + Surulere LGAs, 64.6 km² by the OpenStreetMap boundaries. The height and people table uses the government land areas, which add up to 75.9 km²; the shares are not affected.
 
 ![The Hub (left) beside a dense real square (right)](img/hub-vs-real.png)

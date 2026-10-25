@@ -11,7 +11,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gi
 | Folder or file | What it is | Licence | Size | Used for | Delete when |
 |---|---|---|---|---|---|
 | `open-buildings-2023/` | Google Open Buildings 2.5D Temporal, 2016–2023: where buildings are, how tall, roughly how many, on a 4 m grid | CC BY 4.0 | 17 GB | storey bands in 11 district studies | map final |
-| `open-buildings-v3/lagos_open_buildings_v3.csv.gz` | Google Open Buildings v3: every building outline in Lagos (4.09 million) | CC BY 4.0 | 433 MB | real density, sizes and structure (`scripts/study_google.py`) | map final |
+| `open-buildings-v3/lagos_open_buildings_v3.csv.gz` | Google Open Buildings v3: every building outline in Lagos (4.09 million) | CC BY 4.0 | 433 MB | real density, sizes and structure (the old map's `scripts/study_google.py`, deleted 25 Oct) | map final |
 | `open-buildings-v3/103_buildings.csv.gz` | the same, for a whole slice of West Africa (the Lagos file was cut from it) | CC BY 4.0 | 2.0 GB | nothing more: the Lagos cut replaces it | **now, if you want the space** |
 | `ms-buildings/` | Microsoft building outlines over Lagos (4 tiles), a second machine-traced set | CDLA Permissive 2.0 | 186 MB | cross-check of Google's | map final |
 | `overture-lagos/` | Overture Maps for Lagos: 63,204 places (shops, churches, salons, event planners...), infrastructure, land use, roads, land | CDLA / ODbL by layer | 42 MB | what each district has, beyond OSM | map final |
@@ -20,7 +20,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gi
 | `worldcover/` | ESA WorldCover 10 m, 2021 | CC BY 4.0 | 271 MB | empty land vs untraced land | map final |
 | `worldpop/` | WorldPop 100 m population, 2020 | CC BY 4.0 | 59 MB | people per district | map final |
 | `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | deleted (24 Oct: not on the Mac) |
-| `deep-cache/` | the buildings of each district's study area, cut once from Google's and Microsoft's files (`scripts/deep_prep.py`) | as above | ~250 MB | the deep study (`docs/DEEP-STUDY.md`) | map final |
+| `deep-cache/` | the buildings of each district's study area, cut once from Google's and Microsoft's files (`scripts/deep_prep.py`, deleted 25 Oct with the old map) | as above | ~250 MB | the deep study (`docs/DEEP-STUDY.md`) | map final |
 | `study-*.pkl` (scratch folders) | each district study's extract | from the above | small | regenerating districts | map final |
 
 **What can't be downloaded:**

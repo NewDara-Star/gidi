@@ -1,5 +1,7 @@
 # Water Town pattern study: the Makoko–Iwaya and Bariga waterfront → Water Town (v1)
 
+> **History (the old map, 13-21 Oct).** The scripts, data files and generated districts this page names were deleted on 25 Oct (git tag `before-cleanup-25oct`); the real-Lagos numbers stand (`docs/RESEARCH.md` maps them to the new districts).
+
 Status: generated for review (13 Oct 2026; v2 the same day: the land is rebuilt as fingers running down to the shore). Same method as every district: we measure the real place, turn the numbers into rules, and generate original streets, houses and stilt houses from the rules. **No real street, building or name is copied into Gidi.**
 
 Data:

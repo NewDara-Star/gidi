@@ -1,4 +1,4 @@
-"""Real roofs under the new frame, for the drawing board's zoomed-in "Real roofs" layer (web/board.html?frame=new).
+"""Real roofs under the new frame, for the drawing board's zoomed-in "Real roofs" layer (web/board.html).
 
 Google Open Buildings v3 footprints (confidence 0.65 or more) moved into the 1:3 frame the same way as scripts/frame_study.py,
 cut into 1 km tiles (Gidi metres): web/frame-tiles/<i>_<j>.txt, one roof per line, "x,y,x,y,..." in decimetres from the

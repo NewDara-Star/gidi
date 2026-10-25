@@ -1,5 +1,7 @@
 # The old Blender kit: what it held, and what the builders can take from it
 
+> The kit this page describes was deleted on 25 Oct (git tag `before-cleanup-25oct`); the files it names are there.
+
 The owner (24 Oct): "we took a lot of time to build stuff in the old Blender kit... can we see what we need in the old
 Blender kit, so we see what we need to remodel". This page answers that. The kit is frozen (DECISIONS, "The interface
 works both ways; the builders are the kit"): nothing here is extended. A builder in `gidi-game/tools/*_build.py` is made

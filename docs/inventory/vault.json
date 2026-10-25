@@ -25,9 +25,9 @@
     "provided",
     "drawing",
     "newdara-star",
+    "problem",
     "contributors",
-    "glo",
-    "odbl"
+    "glo"
    ]
   },
   {
@@ -50,14 +50,14 @@
    "title": "What the code holds: the three repos, one page",
    "state": "linked",
    "words": [
-    "scripts",
     "gidi-game",
-    "district's",
-    "draft",
     "inventory",
-    "board's",
-    "deleted",
-    "map's"
+    "gidi-data",
+    "re-run",
+    "remote",
+    "parser",
+    "javascript",
+    "compiler"
    ]
   },
   {
@@ -82,9 +82,9 @@
    "words": [
     "replaced",
     "hand-made",
-    "miniaturised",
-    "hand",
     "frozen",
+    "hand",
+    "miniaturised",
     "plan",
     "builder",
     "programs"
@@ -117,7 +117,7 @@
     "unreal",
     "editor",
     "layer",
-    "dress"
+    "test"
    ]
   },
   {
@@ -157,12 +157,12 @@
    "words": [
     "paste",
     "acts",
+    "repo",
     "account",
     "boss's",
     "story",
     "roadmap",
-    "prototyping",
-    "empire"
+    "prototyping"
    ]
   },
   {
@@ -251,8 +251,8 @@
     "drugs",
     "stories",
     "force",
-    "betting",
-    "task"
+    "task",
+    "betting"
    ]
   },
   {
@@ -275,14 +275,14 @@
    "title": "The drawing board",
    "state": "linked",
    "words": [
-    "bake",
     "click",
     "drag",
-    "edit",
-    "edits",
-    "dashed",
-    "select",
-    "furniture"
+    "underlay",
+    "server",
+    "save",
+    "editor",
+    "finish",
+    "brush"
    ]
   },
   {
@@ -311,8 +311,8 @@
     "district's",
     "measures",
     "settings",
-    "fabric",
-    "measured"
+    "counts",
+    "fabric"
    ]
   },
   {
@@ -354,9 +354,9 @@
     "record",
     "field",
     "stroke",
-    "value",
-    "records",
     "degrees",
+    "records",
+    "value",
     "face"
    ]
   },
@@ -368,11 +368,11 @@
     "builder",
     "know-how",
     "worth",
-    "builders",
-    "fields",
     "conditions",
-    "page",
-    "sheet"
+    "fields",
+    "builders",
+    "sheet",
+    "fresh"
    ]
   },
   {
@@ -385,8 +385,8 @@
     "unreal",
     "viewing",
     "misses",
-    "often",
     "living",
+    "often",
     "missed"
    ]
   },
@@ -400,9 +400,9 @@
     "echo",
     "serves",
     "festac",
+    "island",
     "written",
-    "districts",
-    "island"
+    "catalogues"
    ]
   },
   {
@@ -595,9 +595,9 @@
     "expressway",
     "adeleke",
     "ajegunle",
+    "median",
     "maze's",
-    "footbridge",
-    "maze"
+    "footbridge"
    ]
   },
   {
@@ -624,8 +624,8 @@
     "careful",
     "draft",
     "traders",
-    "workers",
     "spots",
+    "workers",
     "moving",
     "okada"
    ]
@@ -772,8 +772,8 @@
    "words": [
     "agency",
     "crest",
-    "white",
     "police",
+    "white",
     "pound",
     "variants",
     "secretariat",
@@ -848,8 +848,8 @@
     "dome",
     "white",
     "prayer",
-    "mosque",
     "green",
+    "mosque",
     "hall",
     "minaret",
     "blue"
@@ -861,12 +861,12 @@
    "state": "linked",
    "words": [
     "select",
-    "mapping",
     "sand",
+    "mapping",
     "mains",
     "research-street",
-    "asphalt",
     "laterite",
+    "asphalt",
     "refuse"
    ]
   },
@@ -923,10 +923,10 @@
     "lean-to's",
     "gutter's",
     "lean-to",
-    "example",
     "stand-in",
     "shop-under-flats",
     "bungalow's",
+    "example",
     "stamped"
    ]
   },
@@ -941,8 +941,8 @@
     "crossings",
     "mushin",
     "track",
-    "footbridge",
-    "gang"
+    "median",
+    "footbridge"
    ]
   },
   {
@@ -1014,8 +1014,8 @@
     "feels",
     "what's",
     "guardian",
-    "december",
     "true",
+    "december",
     "rent",
     "sapa"
    ]
@@ -1027,12 +1027,12 @@
    "words": [
     "airport",
     "touching",
+    "median",
     "transit",
     "airline",
     "restaurant",
     "tenth",
-    "service",
-    "squares"
+    "service"
    ]
   },
   {
@@ -1042,12 +1042,12 @@
    "words": [
     "touching",
     "power",
+    "median",
     "energy",
     "tenth",
     "education",
     "transit",
-    "store",
-    "squares"
+    "store"
    ]
   },
   {
@@ -1056,13 +1056,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "tenth",
     "roman",
     "squares",
     "catholic",
     "power",
-    "worship",
-    "services"
+    "worship"
    ]
   },
   {
@@ -1073,11 +1073,11 @@
     "developed",
     "power",
     "touching",
+    "median",
     "tenth",
     "manufacturer",
     "squares",
-    "beauty",
-    "planning"
+    "beauty"
    ]
   },
   {
@@ -1086,13 +1086,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "tenth",
     "barrier",
     "transportation",
     "developed",
     "squares",
-    "hospital",
-    "beauty"
+    "hospital"
    ]
   },
   {
@@ -1101,13 +1101,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "power",
     "developed",
     "tenth",
     "religious",
     "transit",
-    "worship",
-    "organization"
+    "worship"
    ]
   },
   {
@@ -1116,13 +1116,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "barrier",
     "tenth",
     "power",
     "grocery",
     "squares",
-    "beauty",
-    "planning"
+    "beauty"
    ]
   },
   {
@@ -1131,13 +1131,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "tenth",
     "historic",
     "barrier",
     "service",
     "squares",
-    "communication",
-    "hotel"
+    "communication"
    ]
   },
   {
@@ -1147,12 +1147,12 @@
    "words": [
     "transit",
     "touching",
+    "median",
     "transportation",
     "tenth",
     "squares",
     "beauty",
-    "power",
-    "christian"
+    "power"
    ]
   },
   {
@@ -1161,13 +1161,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "communication",
     "tenth",
     "power",
     "transit",
     "squares",
-    "cemetery",
-    "worship"
+    "cemetery"
    ]
   },
   {
@@ -1176,13 +1176,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "tenth",
     "dealer",
     "power",
     "transit",
     "transportation",
-    "developed",
-    "squares"
+    "developed"
    ]
   },
   {
@@ -1193,11 +1193,11 @@
     "recreation",
     "touching",
     "service",
+    "median",
     "travel",
     "pedestrian",
     "tenth",
-    "barrier",
-    "transit"
+    "barrier"
    ]
   },
   {
@@ -1206,13 +1206,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "power",
     "tenth",
     "religious",
     "transit",
     "developed",
-    "squares",
-    "beauty"
+    "squares"
    ]
   },
   {
@@ -1221,13 +1221,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "pier",
     "tenth",
     "power",
     "transit",
     "transportation",
-    "developed",
-    "squares"
+    "developed"
    ]
   },
   {
@@ -1237,12 +1237,12 @@
    "words": [
     "power",
     "touching",
+    "median",
     "tenth",
     "squares",
     "beauty",
     "planning",
-    "landfill",
-    "health"
+    "landfill"
    ]
   },
   {
@@ -1251,13 +1251,13 @@
    "state": "linked",
    "words": [
     "touching",
+    "median",
     "christian",
     "tenth",
     "education",
     "venue",
     "power",
-    "transit",
-    "worship"
+    "transit"
    ]
   },
   {
@@ -1267,12 +1267,12 @@
    "words": [
     "touching",
     "education",
+    "median",
     "tenth",
     "financial",
     "service",
     "transportation",
-    "squares",
-    "beauty"
+    "squares"
    ]
   },
   {
@@ -1302,7 +1302,7 @@
     "hand",
     "given",
     "holds",
-    "lanes"
+    "close"
    ]
   },
   {
@@ -1361,8 +1361,8 @@
     "sheet",
     "lean-to",
     "rust",
-    "sheets",
-    "closed"
+    "closed",
+    "posts"
    ]
   },
   {
@@ -1376,8 +1376,8 @@
     "generates",
     "commands",
     "unreal",
-    "paragraph",
-    "master"
+    "master",
+    "paragraph"
    ]
   },
   {
@@ -1388,11 +1388,11 @@
     "editor",
     "scripting",
     "level's",
-    "repo",
     "meshy",
+    "repo",
     "committed",
-    "unreal",
-    "play"
+    "play",
+    "unreal"
    ]
   },
   {
@@ -1406,7 +1406,7 @@
     "asphalt",
     "concrete",
     "animations",
-    "map's",
+    "combo",
     "build"
    ]
   },
@@ -1435,9 +1435,9 @@
     "reference",
     "assets",
     "notes",
-    "scripts",
     "deep-study",
-    "cache"
+    "cache",
+    "folder"
    ]
   },
   {
@@ -1451,7 +1451,7 @@
     "drive",
     "parallel",
     "planned",
-    "closes",
+    "plots",
     "network"
    ]
   },
@@ -1494,10 +1494,10 @@
     "shots",
     "desk",
     "steel",
-    "example",
     "sheet",
     "timber",
-    "fields"
+    "example",
+    "sand"
    ]
   },
   {
@@ -1525,8 +1525,8 @@
     "camera",
     "darker",
     "sacks",
-    "textured",
     "colour",
+    "textured",
     "ruts"
    ]
   },
@@ -1825,10 +1825,6 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:Config/DefaultDeviceProfiles.ini"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:Content/Python/gidi_heroes.py"
   },
   {
@@ -1846,6 +1842,14 @@
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:Content/Python/gidi_plates.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:Content/Python/gidi_scan_export.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:Content/Python/gidi_street.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1869,11 +1873,27 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/fab_list.sh"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/fields.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/goods_kit.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/img_diff.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/junction_geo.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/kit_compare.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1885,7 +1905,15 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/lap_check.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/lettering.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/look_travels.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1905,11 +1933,27 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/memreport.sh"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/memreport_later.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/mode.sh"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/mode_sg.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/package.sh"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/piece_match.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1921,11 +1965,19 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/prop_basin_final.py"
+   "to": "gidi-game:tools/road_draft.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi-game:tools/props_build.py"
+   "to": "gidi-game:tools/road_look.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/scan_export.sh"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/scan_shrink.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1934,6 +1986,18 @@
   {
    "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/spot_to_map.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/street_ground.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/street_join.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/street_test.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -1973,6 +2037,10 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi-game:tools/watchdog.sh"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi-game:tools/wear_layer.py"
   },
   {
@@ -1981,7 +2049,7 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:CLAUDE.md"
+   "to": "gidi-game:tools/zinc_kit.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2145,38 +2213,6 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_buildings.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_crossings.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_edge.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_kinds.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_looks.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_roads.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_storeys.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
-   "to": "gidi:scripts/draft_storeys_nearby.py"
-  },
-  {
-   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:scripts/frame_footprints.py"
   },
   {
@@ -2189,7 +2225,15 @@
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:scripts/js_symbols.mjs"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
    "to": "gidi:scripts/realnames.py"
+  },
+  {
+   "from": "gidi:decisions/CODEBASE.md",
+   "to": "gidi:scripts/study_boxheights.py"
   },
   {
    "from": "gidi:decisions/CODEBASE.md",
@@ -2561,6 +2605,10 @@
   },
   {
    "from": "gidi:decisions/NOW.md",
+   "to": "gidi:docs/BOARD.md"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
    "to": "gidi:docs/MAP-FORMAT.md"
   },
   {
@@ -2610,6 +2658,10 @@
   {
    "from": "gidi:decisions/NOW.md",
    "to": "gidi:docs/lagos-study/similar/SIMILAR.md"
+  },
+  {
+   "from": "gidi:decisions/NOW.md",
+   "to": "gidi:docs/lagos-study/similar/scripts/appendix.py"
   },
   {
    "from": "gidi:decisions/NOW.md",
@@ -2753,15 +2805,51 @@
   },
   {
    "from": "gidi:docs/BOARD.md",
+   "to": "gidi:docs/MAP-FORMAT.md"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:schema/map_schema.json"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
    "to": "gidi:scripts/board_server.py"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:scripts/check_map.py"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:scripts/frame_footprints.py"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:scripts/frame_study.py"
   },
   {
    "from": "gidi:docs/BOARD.md",
    "to": "gidi:web/board.html"
   },
   {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:web/faceedit.js"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:web/frame.js"
+  },
+  {
+   "from": "gidi:docs/BOARD.md",
+   "to": "gidi:web/mapedit.js"
+  },
+  {
    "from": "gidi:docs/DATA-SOURCES.md",
    "to": "gidi:docs/DEEP-STUDY.md"
+  },
+  {
+   "from": "gidi:docs/DEEP-STUDY.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/LAGOS-ISMS.md",
@@ -2785,6 +2873,10 @@
   },
   {
    "from": "gidi:docs/MAP-FORMAT.md",
+   "to": "gidi-game:Content/Python/gidi_street.py"
+  },
+  {
+   "from": "gidi:docs/MAP-FORMAT.md",
    "to": "gidi-game:tools/fields.py"
   },
   {
@@ -2801,6 +2893,10 @@
   },
   {
    "from": "gidi:docs/MAP-FORMAT.md",
+   "to": "gidi-game:tools/street_test.py"
+  },
+  {
+   "from": "gidi:docs/MAP-FORMAT.md",
    "to": "gidi:decisions/CHECKS.md"
   },
   {
@@ -2810,6 +2906,10 @@
   {
    "from": "gidi:docs/MAP-FORMAT.md",
    "to": "gidi:decisions/lived-in.md"
+  },
+  {
+   "from": "gidi:docs/MAP-FORMAT.md",
+   "to": "gidi:docs/BOARD.md"
   },
   {
    "from": "gidi:docs/MAP-FORMAT.md",
@@ -3129,6 +3229,10 @@
   },
   {
    "from": "gidi:docs/bazaar-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/bazaar-pattern-study.md",
    "to": "gidi:docs/img/bazaar-vs-real.png"
   },
   {
@@ -3138,6 +3242,10 @@
   {
    "from": "gidi:docs/border-pattern-study.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
+  },
+  {
+   "from": "gidi:docs/border-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/border-pattern-study.md",
@@ -3153,6 +3261,10 @@
   },
   {
    "from": "gidi:docs/capital-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/capital-pattern-study.md",
    "to": "gidi:docs/img/capital-vs-real.png"
   },
   {
@@ -3165,11 +3277,19 @@
   },
   {
    "from": "gidi:docs/estate-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/estate-pattern-study.md",
    "to": "gidi:docs/img/estate-vs-real.png"
   },
   {
    "from": "gidi:docs/foodgate-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
+  },
+  {
+   "from": "gidi:docs/foodgate-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/foodgate-pattern-study.md",
@@ -3182,6 +3302,10 @@
   {
    "from": "gidi:docs/frontier-pattern-study.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
+  },
+  {
+   "from": "gidi:docs/frontier-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/frontier-pattern-study.md",
@@ -3225,6 +3349,10 @@
   },
   {
    "from": "gidi:docs/heights-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/heights-pattern-study.md",
    "to": "gidi:docs/img/heights-vs-real.png"
   },
   {
@@ -3237,6 +3365,10 @@
   },
   {
    "from": "gidi:docs/hub-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/hub-pattern-study.md",
    "to": "gidi:docs/img/hub-station-skywalk.png"
   },
   {
@@ -3246,6 +3378,10 @@
   {
    "from": "gidi:docs/jungle-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
+  },
+  {
+   "from": "gidi:docs/jungle-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/jungle-pattern-study.md",
@@ -3585,6 +3721,10 @@
   },
   {
    "from": "gidi:docs/maze-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/maze-pattern-study.md",
    "to": "gidi:docs/img/maze-vs-real.png"
   },
   {
@@ -3594,6 +3734,10 @@
   {
    "from": "gidi:docs/oldisland-pattern-study.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
+  },
+  {
+   "from": "gidi:docs/oldisland-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/oldisland-pattern-study.md",
@@ -3609,6 +3753,10 @@
   },
   {
    "from": "gidi:docs/oldshore-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/oldshore-pattern-study.md",
    "to": "gidi:docs/img/oldshore-vs-real.png"
   },
   {
@@ -3621,6 +3769,10 @@
   },
   {
    "from": "gidi:docs/port-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/port-pattern-study.md",
    "to": "gidi:docs/img/port-vs-real.png"
   },
   {
@@ -3630,6 +3782,10 @@
   {
    "from": "gidi:docs/railside-pattern-study.md",
    "to": "gidi:docs/LAGOS-ISMS.md"
+  },
+  {
+   "from": "gidi:docs/railside-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/railside-pattern-study.md",
@@ -3649,7 +3805,15 @@
   },
   {
    "from": "gidi:docs/studies/airport.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/airport.md",
    "to": "gidi:docs/img/study-airport.png"
+  },
+  {
+   "from": "gidi:docs/studies/bazaar.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/bazaar.md",
@@ -3657,7 +3821,15 @@
   },
   {
    "from": "gidi:docs/studies/border.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/border.md",
    "to": "gidi:docs/img/study-border.png"
+  },
+  {
+   "from": "gidi:docs/studies/capital.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/capital.md",
@@ -3665,7 +3837,15 @@
   },
   {
    "from": "gidi:docs/studies/estate.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/estate.md",
    "to": "gidi:docs/img/study-estate.png"
+  },
+  {
+   "from": "gidi:docs/studies/foodgate.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/foodgate.md",
@@ -3673,7 +3853,15 @@
   },
   {
    "from": "gidi:docs/studies/frontier.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/frontier.md",
    "to": "gidi:docs/img/study-frontier.png"
+  },
+  {
+   "from": "gidi:docs/studies/heights.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/heights.md",
@@ -3681,7 +3869,15 @@
   },
   {
    "from": "gidi:docs/studies/hub.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/hub.md",
    "to": "gidi:docs/img/study-hub.png"
+  },
+  {
+   "from": "gidi:docs/studies/jungle.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/jungle.md",
@@ -3689,7 +3885,15 @@
   },
   {
    "from": "gidi:docs/studies/maze.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/maze.md",
    "to": "gidi:docs/img/study-maze.png"
+  },
+  {
+   "from": "gidi:docs/studies/oldisland.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/oldisland.md",
@@ -3697,7 +3901,15 @@
   },
   {
    "from": "gidi:docs/studies/oldshore.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/oldshore.md",
    "to": "gidi:docs/img/study-oldshore.png"
+  },
+  {
+   "from": "gidi:docs/studies/port.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/port.md",
@@ -3705,11 +3917,23 @@
   },
   {
    "from": "gidi:docs/studies/railside.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/railside.md",
    "to": "gidi:docs/img/study-railside.png"
   },
   {
    "from": "gidi:docs/studies/watertown.md",
+   "to": "gidi:docs/RESEARCH.md"
+  },
+  {
+   "from": "gidi:docs/studies/watertown.md",
    "to": "gidi:docs/img/study-watertown.png"
+  },
+  {
+   "from": "gidi:docs/studies/yaba.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/studies/yaba.md",
@@ -3718,6 +3942,10 @@
   {
    "from": "gidi:docs/watertown-pattern-study.md",
    "to": "gidi:data/results/lga_table.json"
+  },
+  {
+   "from": "gidi:docs/watertown-pattern-study.md",
+   "to": "gidi:docs/RESEARCH.md"
   },
   {
    "from": "gidi:docs/watertown-pattern-study.md",

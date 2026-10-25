@@ -318,4 +318,4 @@ any more, so this study can't be rebuilt; its results stand as written.
 
 - `STUDY.md`, `councils.md`, `skeleton.png`, `skeleton_inner.png`, `character.png`
 - Numbers: `lga_stats.json` (per LGA), `zones.json` (every contiguous zone >= 1 km²), `feat.npz` / `class.npz` / `hgrid.npz` / `bgrid65.npz` / `rgrid.npz` / `ogrid.npz` (per-cell grids)
-- Scripts: `grid_bld.py` (buildings), `grid_orient.py` (building directions), `heights.py` (2.5D), `roads.py`, `rasters.py`, `feat.py`, `classify.py`, `plots.py`, `gaz.py` (knowledge place list)
+- Scripts (lost): `grid_bld.py` (buildings), `grid_orient.py` (building directions), `heights.py` (2.5D), `roads.py`, `rasters.py`, `feat.py`, `classify.py`, `plots.py`, `gaz.py` (knowledge place list)

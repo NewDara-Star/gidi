@@ -119,7 +119,7 @@ def write(vault, out):
          'the documents nearest it in words. The repo folders open as a vault in Obsidian as they are; `vault.json` holds '
          'the same graph.', '',
          f'{len(vault)} documents: {len(orph)} orphans (nothing points to them), {len(near)} near-orphans (only '
-         'CODEBASE.md or OLD-MAP.md do).', '', '## Orphans', '']
+         'CODEBASE.md does).', '', '## Orphans', '']
     for k in sorted(orph):
         L += entry(k, vault[k])
     L += ['## Near-orphans', '']

@@ -24,7 +24,7 @@ Builds on `act-1-draft.md`. The owner didn't like the pacing of Claude's first A
   - clothes, phones and other things to buy
 
   Everything touches Tunde's money.
-- **Dialogue-first prototype.** Before any cutscene, write each scene's dialogue as a comic or text version to check the story works (see `gidi-performance-capture.md`: Ink).
+- **Dialogue-first prototype.** Before any cutscene, write each scene's dialogue as a comic or text version to check the story works (see `gidi-performance-capture.md`, not in this repo yet: Ink).
 - **Act 1 is the first target.** Act 2 will take far longer to build (maybe a year).
 
 ## The ending (owner, 15 Oct): the standoff

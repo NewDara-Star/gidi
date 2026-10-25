@@ -59,7 +59,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -277,7 +277,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -1005,8 +1005,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -1065,10 +1065,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -1162,6 +1162,7 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
     "gidi:docs/lagos-lgas-research.md",
@@ -1230,8 +1231,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -2864,7 +2865,9 @@
    "state": "used",
    "used_in": [],
    "self": true,
-   "maybe": [],
+   "maybe": [
+    "gidi:scripts/inventory.py"
+   ],
    "text": []
   },
   {
@@ -3096,7 +3099,6 @@
     "gidi:docs/lagos-study/similar/scripts/analyse.py"
    ],
    "text": [
-    "gidi:docs/BOARD.md",
     "gidi:map/d15/road_reads.tsv"
    ]
   },
@@ -3671,10 +3673,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -3735,7 +3737,6 @@
    ],
    "text": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
-    "gidi:docs/BOARD.md",
     "gidi:web/board.html"
    ]
   },
@@ -3855,9 +3856,7 @@
     "gidi-game:tools/wall_build.py",
     "gidi:scripts/draft_buildings.py"
    ],
-   "text": [
-    "gidi:docs/BOARD.md"
-   ]
+   "text": []
   },
   {
    "file": "gidi:docs/lagos-study/roads/scripts/network.py",
@@ -3964,7 +3963,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -4256,7 +4255,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -4640,8 +4639,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -4736,10 +4735,10 @@
     "gidi-data:research/google/ibudo/study/INVENTORY.md",
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
     "gidi-data:research/google/maze/NOTES.md",
-    "gidi-game:docs/PERFORMANCE.md",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/HISTORY.md"
+    "gidi:decisions/HISTORY.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -5349,7 +5348,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -5529,8 +5528,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -5825,7 +5824,7 @@
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/acts-2-3-draft.md",
     "gidi:decisions/story/novels/1-the-ledger.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/DATA-SOURCES.md"
    ]
   },
   {
@@ -6056,7 +6055,7 @@
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/acts-2-3-draft.md",
     "gidi:decisions/story/novels/1-the-ledger.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/DATA-SOURCES.md"
    ]
   },
   {
@@ -6074,11 +6073,11 @@
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi-data:research/google/video1-street/NOTES.md",
+    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/novels/2-union.md",
-    "gidi:docs/LAGOS-LIGHT.md",
-    "gidi:docs/heights-pattern-study.md"
+    "gidi:docs/LAGOS-LIGHT.md"
    ]
   },
   {
@@ -6505,7 +6504,6 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/borrowed-lagos.md"
    ]
   },
@@ -6925,7 +6923,7 @@
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/acts-2-3-draft.md",
     "gidi:decisions/story/novels/1-the-ledger.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/DATA-SOURCES.md"
    ]
   },
   {
@@ -6979,8 +6977,7 @@
    ],
    "text": [
     "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
-    "gidi:docs/BOARD.md"
+    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md"
    ]
   },
   {
@@ -7469,7 +7466,7 @@
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/acts-2-3-draft.md",
     "gidi:decisions/story/novels/1-the-ledger.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/DATA-SOURCES.md"
    ]
   },
   {
@@ -7519,8 +7516,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -8203,6 +8200,7 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
     "gidi:docs/lagos-lgas-research.md",
@@ -8758,7 +8756,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -8900,8 +8898,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -9009,8 +9007,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -9666,7 +9664,6 @@
     "gidi:docs/lagos-study/roads/scripts/ladder.py"
    ],
    "text": [
-    "gidi:docs/BOARD.md",
     "gidi:map/d15/road_reads.tsv"
    ]
   },
@@ -9999,7 +9996,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -10094,8 +10091,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -10261,7 +10258,6 @@
    ],
    "text": [
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
@@ -10500,7 +10496,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -10592,8 +10588,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -10652,10 +10648,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -10753,7 +10749,6 @@
    ],
    "text": [
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
@@ -10789,8 +10784,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -11425,8 +11420,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -11816,8 +11811,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -12065,7 +12060,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -12157,8 +12152,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -12894,6 +12889,7 @@
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hand/realnames.txt",
     "gidi:docs/look/research-vehicles.md"
@@ -13754,7 +13750,6 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/borrowed-lagos.md"
    ]
   },
@@ -15003,9 +14998,9 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/bazaar-pattern-study.md"
+    "gidi:docs/bazaar-pattern-study.md",
+    "gidi:docs/foodgate-pattern-study.md"
    ]
   },
   {
@@ -15953,10 +15948,10 @@
     "gidi-data:research/google/ibudo/study/INVENTORY.md",
     "gidi-data:research/google/kits/old-town/KIT.md",
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/hand/realnames.txt",
-    "gidi:docs/look/research-buildings.md"
+    "gidi:docs/look/research-buildings.md",
+    "gidi:docs/look/research-civic.md"
    ]
   },
   {
@@ -16135,8 +16130,8 @@
     "gidi-game:Art/Props/RoadBuilt/recipes/g03_sadiku_grate.json",
     "gidi-game:Art/Props/RoadBuilt/recipes/ot03_ajose_covered.json",
     "gidi-game:Art/Props/RoadBuilt/recipes/ot135_olodi_earth.json",
-    "gidi:docs/BOARD.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/MAP-FORMAT.md",
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -16310,11 +16305,11 @@
     "gidi-data:research/google/kits/old-town/KIT.md",
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
     "gidi-game:Art/Plates/plates.json",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md"
+    "gidi:docs/DEEP-STUDY.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -17794,7 +17789,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -17849,7 +17844,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -17936,7 +17931,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -18047,11 +18042,41 @@
   },
   {
    "file": "gidi:scripts/inventory.py",
-   "name": "OUTSIDE",
+   "name": "HONEST",
    "kind": "const",
    "owner": "",
    "line": 35,
+   "end": 35,
+   "state": "used",
+   "used_in": [],
+   "self": true,
+   "maybe": [],
+   "text": [
+    "gidi:.claude/hooks/repo.sh"
+   ]
+  },
+  {
+   "file": "gidi:scripts/inventory.py",
+   "name": "TAG",
+   "kind": "const",
+   "owner": "",
+   "line": 36,
    "end": 36,
+   "state": "used",
+   "used_in": [],
+   "self": true,
+   "maybe": [
+    "gidi:docs/lagos-study/roads/scripts/ladder.py"
+   ],
+   "text": []
+  },
+  {
+   "file": "gidi:scripts/inventory.py",
+   "name": "OUTSIDE",
+   "kind": "const",
+   "owner": "",
+   "line": 38,
+   "end": 39,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18063,8 +18088,8 @@
    "name": "git",
    "kind": "function",
    "owner": "",
-   "line": 39,
-   "end": 40,
+   "line": 42,
+   "end": 43,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18085,8 +18110,8 @@
    "name": "last_changes",
    "kind": "function",
    "owner": "",
-   "line": 43,
-   "end": 50,
+   "line": 46,
+   "end": 53,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18098,8 +18123,8 @@
    "name": "first_text",
    "kind": "function",
    "owner": "",
-   "line": 53,
-   "end": 64,
+   "line": 56,
+   "end": 67,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18111,8 +18136,8 @@
    "name": "summary",
    "kind": "function",
    "owner": "",
-   "line": 67,
-   "end": 98,
+   "line": 70,
+   "end": 101,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18133,8 +18158,8 @@
    "name": "main",
    "kind": "function",
    "owner": "",
-   "line": 101,
-   "end": 250,
+   "line": 104,
+   "end": 270,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18164,8 +18189,8 @@
    "name": "folder",
    "kind": "function",
    "owner": "",
-   "line": 253,
-   "end": 255,
+   "line": 273,
+   "end": 275,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18195,8 +18220,8 @@
    "name": "cell",
    "kind": "function",
    "owner": "",
-   "line": 258,
-   "end": 260,
+   "line": 278,
+   "end": 280,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18208,11 +18233,11 @@
     "gidi-data:research/google/kits/old-town/KIT.md",
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-MAP-LESSONS.md",
     "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md",
-    "gidi:docs/estate-pattern-study.md"
+    "gidi:docs/capital-pattern-study.md"
    ]
   },
   {
@@ -18220,8 +18245,8 @@
    "name": "write_md",
    "kind": "function",
    "owner": "",
-   "line": 263,
-   "end": 296,
+   "line": 283,
+   "end": 316,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18233,8 +18258,8 @@
    "name": "write_suspects",
    "kind": "function",
    "owner": "",
-   "line": 299,
-   "end": 313,
+   "line": 319,
+   "end": 338,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -18426,7 +18451,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -18601,10 +18626,10 @@
     "gidi:.claude/hooks/repo.sh",
     "gidi:README.md",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/HISTORY.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/NOW.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -18958,9 +18983,9 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/OLD-KIT.md",
-    "gidi:docs/OLD-MAP-LESSONS.md"
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -19658,7 +19683,6 @@
     "gidi-game:CLAUDE.md",
     "gidi-game:README.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/realnames.txt",
     "gidi:docs/lagos-lgas-research.md",
     "gidi:docs/look/research-housing.md"
@@ -20483,8 +20507,8 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
     "gidi:decisions/story/act-1-draft.md",
-    "gidi:docs/BOARD.md",
-    "gidi:docs/LAGOS-ISMS.md"
+    "gidi:docs/LAGOS-ISMS.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -21106,14 +21130,14 @@
    "self": false,
    "maybe": [],
    "text": [
-    "gidi:decisions/CODEBASE.md",
     "gidi:docs/data/deep/port.json",
     "gidi:docs/lagos-lgas-research.md",
     "gidi:docs/lagos-study/LIVING.md",
     "gidi:docs/lagos-study/councils.md",
     "gidi:docs/lagos-study/similar/units.csv",
     "gidi:docs/look/research-commerce.md",
-    "gidi:docs/look/research-transport.md"
+    "gidi:docs/look/research-transport.md",
+    "gidi:docs/look/research-vehicles.md"
    ]
   },
   {
@@ -21987,8 +22011,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -22044,10 +22068,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -22448,8 +22472,8 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ut01_emmanuel/inventory.md",
     "gidi:data/results/heights_by_lga.json",
-    "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md"
+    "gidi:decisions/CODEBASE.md",
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -23372,10 +23396,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/frontier-pattern-study.md"
    ]
   },
   {
@@ -24457,7 +24481,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -25157,10 +25181,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/frontier-pattern-study.md"
    ]
   },
   {
@@ -25178,13 +25202,13 @@
    ],
    "text": [
     "gidi:.claude/hooks/repo.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/look/research-buildings.md",
     "gidi:docs/look/research-civic.md",
     "gidi:docs/look/research-housing.md",
     "gidi:docs/look/research-landmarks.md",
-    "gidi:docs/look/research-religious.md"
+    "gidi:docs/look/research-religious.md",
+    "gidi:docs/look/research-transport.md"
    ]
   },
   {
@@ -25973,10 +25997,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:decisions/lived-in.md"
+    "gidi:decisions/lived-in.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -26033,9 +26057,9 @@
     "gidi-game:Art/Props/StallBuilt/recipes/kiosk_white_sheet.json",
     "gidi-game:Art/Props/StallBuilt/recipes/yellow_rack.json",
     "gidi:decisions/DECISIONS.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/look/research-civic.md",
-    "gidi:docs/look/research-landmarks.md"
+    "gidi:docs/look/research-civic.md"
    ]
   },
   {
@@ -26816,9 +26840,9 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt",
-    "gidi:docs/lagos-study/LIVING.md"
+    "gidi:docs/hand/realnames.txt"
    ]
   },
   {
@@ -28052,7 +28076,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -28806,9 +28830,9 @@
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/look/research-buildings.md"
+    "gidi:docs/lagos-lgas-research.md"
    ]
   },
   {
@@ -29805,6 +29829,7 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
     "gidi:docs/lagos-lgas-research.md",
@@ -30911,7 +30936,7 @@
     "gidi-game:Art/Fonts/src/titanone/OFL.txt",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -32404,7 +32429,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -32767,6 +32791,7 @@
     "gidi-game:docs/ASSET-INVENTORY.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/look/research-roads.md"
    ]
@@ -33168,7 +33193,6 @@
    "text": [
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/lagos-lgas-research.md"
    ]
   },
@@ -33392,9 +33416,9 @@
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md"
+    "gidi:decisions/NOW.md",
+    "gidi:decisions/story/README.md"
    ]
   },
   {
@@ -33621,10 +33645,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -33711,10 +33735,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot175/NOTES.md",
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/realnames.txt",
     "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/lagos-study/roads/EARTH-CHECK.md"
+    "gidi:docs/lagos-study/roads/EARTH-CHECK.md",
+    "gidi:web/board.html"
    ]
   },
   {
@@ -34100,7 +34124,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -34842,9 +34866,9 @@
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt",
-    "gidi:docs/lagos-study/LIVING.md"
+    "gidi:docs/hand/realnames.txt"
    ]
   },
   {
@@ -36598,11 +36622,24 @@
   },
   {
    "file": "gidi-game:tools/lorry_build.py",
-   "name": "group",
+   "name": "mirror_y",
    "kind": "function",
    "owner": "",
    "line": 137,
-   "end": 139,
+   "end": 141,
+   "state": "unused",
+   "used_in": [],
+   "self": false,
+   "maybe": [],
+   "text": []
+  },
+  {
+   "file": "gidi-game:tools/lorry_build.py",
+   "name": "group",
+   "kind": "function",
+   "owner": "",
+   "line": 144,
+   "end": 146,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36632,8 +36669,8 @@
    "name": "tractor_frame",
    "kind": "function",
    "owner": "",
-   "line": 143,
-   "end": 191,
+   "line": 150,
+   "end": 198,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36645,8 +36682,8 @@
    "name": "tractor_tanks",
    "kind": "function",
    "owner": "",
-   "line": 194,
-   "end": 216,
+   "line": 201,
+   "end": 223,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36658,8 +36695,8 @@
    "name": "exhaust",
    "kind": "function",
    "owner": "",
-   "line": 219,
-   "end": 229,
+   "line": 226,
+   "end": 236,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36684,8 +36721,8 @@
    "name": "cab_shell",
    "kind": "function",
    "owner": "",
-   "line": 233,
-   "end": 244,
+   "line": 240,
+   "end": 251,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36697,8 +36734,8 @@
    "name": "cab",
    "kind": "function",
    "owner": "",
-   "line": 247,
-   "end": 299,
+   "line": 254,
+   "end": 306,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36725,8 +36762,8 @@
    "name": "cab_over",
    "kind": "function",
    "owner": "",
-   "line": 302,
-   "end": 330,
+   "line": 309,
+   "end": 337,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36746,8 +36783,8 @@
    "name": "bonneted",
    "kind": "function",
    "owner": "",
-   "line": 333,
-   "end": 365,
+   "line": 340,
+   "end": 372,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36770,8 +36807,8 @@
    "name": "lines",
    "kind": "function",
    "owner": "",
-   "line": 369,
-   "end": 383,
+   "line": 376,
+   "end": 390,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36793,7 +36830,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -36801,8 +36838,8 @@
    "name": "trailer",
    "kind": "function",
    "owner": "",
-   "line": 387,
-   "end": 472,
+   "line": 394,
+   "end": 479,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36826,8 +36863,8 @@
    "name": "container",
    "kind": "function",
    "owner": "",
-   "line": 476,
-   "end": 558,
+   "line": 483,
+   "end": 565,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36853,8 +36890,8 @@
    "name": "dent",
    "kind": "function",
    "owner": "",
-   "line": 561,
-   "end": 568,
+   "line": 568,
+   "end": 575,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36870,8 +36907,8 @@
    "name": "place_door",
    "kind": "function",
    "owner": "",
-   "line": 571,
-   "end": 578,
+   "line": 578,
+   "end": 585,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36883,8 +36920,8 @@
    "name": "frame",
    "kind": "const",
    "owner": "",
-   "line": 583,
-   "end": 583,
+   "line": 590,
+   "end": 590,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36914,8 +36951,8 @@
    "name": "tanks",
    "kind": "const",
    "owner": "",
-   "line": 584,
-   "end": 584,
+   "line": 591,
+   "end": 591,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36938,8 +36975,8 @@
    "name": "ex",
    "kind": "const",
    "owner": "",
-   "line": 585,
-   "end": 585,
+   "line": 592,
+   "end": 592,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36958,8 +36995,8 @@
    "name": "body",
    "kind": "const",
    "owner": "",
-   "line": 586,
-   "end": 586,
+   "line": 593,
+   "end": 593,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -36989,8 +37026,8 @@
    "name": "doors",
    "kind": "const",
    "owner": "",
-   "line": 586,
-   "end": 586,
+   "line": 593,
+   "end": 593,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37017,8 +37054,8 @@
    "name": "glass",
    "kind": "const",
    "owner": "",
-   "line": 586,
-   "end": 586,
+   "line": 593,
+   "end": 593,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37048,8 +37085,8 @@
    "name": "cabparts",
    "kind": "const",
    "owner": "",
-   "line": 586,
-   "end": 586,
+   "line": 593,
+   "end": 593,
    "state": "maybe",
    "used_in": [],
    "self": false,
@@ -37063,8 +37100,8 @@
    "name": "boxes",
    "kind": "const",
    "owner": "",
-   "line": 619,
-   "end": 620,
+   "line": 626,
+   "end": 627,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37088,8 +37125,8 @@
    "name": "base",
    "kind": "const",
    "owner": "",
-   "line": 640,
-   "end": 640,
+   "line": 647,
+   "end": 647,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37119,8 +37156,8 @@
    "name": "meshes",
    "kind": "const",
    "owner": "",
-   "line": 644,
-   "end": 644,
+   "line": 651,
+   "end": 651,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37149,8 +37186,8 @@
    "name": "first",
    "kind": "const",
    "owner": "",
-   "line": 645,
-   "end": 645,
+   "line": 652,
+   "end": 652,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37173,8 +37210,8 @@
    "name": "first",
    "kind": "const",
    "owner": "",
-   "line": 648,
-   "end": 648,
+   "line": 655,
+   "end": 655,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37197,8 +37234,8 @@
    "name": "first",
    "kind": "const",
    "owner": "",
-   "line": 648,
-   "end": 648,
+   "line": 655,
+   "end": 655,
    "state": "used",
    "used_in": [],
    "self": true,
@@ -37243,8 +37280,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -37341,8 +37378,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/lagos-lgas-research.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -37538,7 +37575,6 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/borrowed-lagos.md"
    ]
   },
@@ -37952,11 +37988,11 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/lagos-study/LIVING.md"
+    "gidi:docs/lagos-study/LIVING.md",
+    "gidi:docs/look/research-leisure.md"
    ]
   },
   {
@@ -39141,8 +39177,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/editor.sh",
     "gidi-game:tools/mode.sh",
-    "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi-game:tools/play.sh"
    ]
   },
   {
@@ -39798,10 +39833,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/frontier-pattern-study.md"
    ]
   },
   {
@@ -40390,7 +40425,7 @@
     "gidi-game:docs/ASSET-INVENTORY.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -40785,6 +40820,8 @@
    "text": [
     "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
+    "gidi:decisions/NOW.md",
+    "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/look/research-leisure.md"
    ]
   },
@@ -41453,8 +41490,8 @@
     "gidi-game:Art/Props/RoadBuilt/recipes/g03_sadiku_grate.json",
     "gidi-game:Art/Props/RoadBuilt/recipes/ot03_ajose_covered.json",
     "gidi-game:Art/Props/RoadBuilt/recipes/ot135_olodi_earth.json",
-    "gidi:docs/BOARD.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/MAP-FORMAT.md",
+    "gidi:docs/OLD-KIT.md"
    ]
   },
   {
@@ -43523,10 +43560,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/OLD-KIT.md",
-    "gidi:docs/frontier-pattern-study.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/frontier-pattern-study.md"
    ]
   },
   {
@@ -43544,13 +43581,13 @@
    ],
    "text": [
     "gidi:.claude/hooks/repo.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/look/research-buildings.md",
     "gidi:docs/look/research-civic.md",
     "gidi:docs/look/research-housing.md",
     "gidi:docs/look/research-landmarks.md",
-    "gidi:docs/look/research-religious.md"
+    "gidi:docs/look/research-religious.md",
+    "gidi:docs/look/research-transport.md"
    ]
   },
   {
@@ -44308,10 +44345,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -44344,7 +44381,6 @@
    ],
    "text": [
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
@@ -44486,10 +44522,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-data:research/google/video1-street/NOTES.md",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/MAP-FORMAT.md",
+    "gidi:docs/hand/realnames.txt"
    ]
   },
   {
@@ -45009,10 +45045,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -45332,7 +45368,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -45488,7 +45524,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -45676,8 +45712,7 @@
    ],
    "text": [
     "gidi-data:research/google/kits/old-town/KIT.md",
-    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
-    "gidi:docs/BOARD.md"
+    "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md"
    ]
   },
   {
@@ -49110,8 +49145,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/lagos-lgas-research.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -49435,10 +49470,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -49672,8 +49707,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -50148,7 +50183,6 @@
     "gidi-game:tools/underdeck_build.py"
    ],
    "text": [
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/RESEARCH.md",
@@ -51347,8 +51381,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/lagos-lgas-research.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -53493,6 +53527,7 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md"
    ]
   },
@@ -53786,7 +53821,6 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/hand/borrowed-lagos.md"
    ]
   },
@@ -53931,11 +53965,11 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/lagos-lgas-research.md",
-    "gidi:docs/lagos-study/LIVING.md"
+    "gidi:docs/lagos-study/LIVING.md",
+    "gidi:docs/look/research-leisure.md"
    ]
   },
   {
@@ -54179,10 +54213,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -54974,9 +55008,9 @@
     "gidi-game:Art/Props/StallBuilt/recipes/kiosk_white_sheet.json",
     "gidi-game:Art/Props/StallBuilt/recipes/yellow_rack.json",
     "gidi:decisions/DECISIONS.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/look/research-civic.md",
-    "gidi:docs/look/research-landmarks.md"
+    "gidi:docs/look/research-civic.md"
    ]
   },
   {
@@ -55308,7 +55342,7 @@
     "gidi-game:docs/ASSET-INVENTORY.md",
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -55486,8 +55520,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -55600,7 +55634,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -55732,7 +55766,6 @@
     "gidi-game:tools/underdeck_build.py"
    ],
    "text": [
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/RESEARCH.md",
@@ -55800,7 +55833,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -56761,10 +56794,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-data:research/google/video1-street/NOTES.md",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/MAP-FORMAT.md",
+    "gidi:docs/hand/realnames.txt"
    ]
   },
   {
@@ -57119,7 +57152,7 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi:.claude/hooks/repo.sh",
     "gidi:decisions/CHECKS.md",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/DECISIONS.md"
    ]
   },
   {
@@ -57596,8 +57629,8 @@
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/play.sh",
     "gidi:decisions/NOW.md",
-    "gidi:docs/DEEP-STUDY.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/DEEP-STUDY.md"
    ]
   },
   {
@@ -58470,8 +58503,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -58584,7 +58617,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -59077,7 +59110,6 @@
     "gidi-game:tools/street_ground.py"
    ],
    "text": [
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/NOW.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/RESEARCH.md",
@@ -60201,10 +60233,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-data:research/google/video1-street/NOTES.md",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md"
+    "gidi:docs/MAP-FORMAT.md",
+    "gidi:docs/hand/realnames.txt"
    ]
   },
   {
@@ -60273,7 +60305,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -61920,7 +61952,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -62621,7 +62653,6 @@
    ],
    "text": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
-    "gidi:docs/BOARD.md",
     "gidi:web/board.html"
    ]
   },
@@ -62650,10 +62681,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -62672,7 +62703,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -62694,7 +62724,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -62790,7 +62819,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -62809,7 +62838,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -62831,7 +62859,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -62862,10 +62889,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -62923,10 +62950,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -62975,7 +63002,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -63006,10 +63032,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -63143,7 +63169,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -63174,10 +63199,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -63226,7 +63251,6 @@
    "text": [
     "gidi-game:ASSETS.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/look/research-street.md",
     "gidi:docs/look/research-vehicles.md",
     "gidi:web/board.html"
@@ -63257,10 +63281,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -63907,10 +63931,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -63935,7 +63959,6 @@
    ],
    "text": [
     "gidi-data:research/google/kits/old-town/tests/ot45/NOTES.md",
-    "gidi:docs/BOARD.md",
     "gidi:web/board.html"
    ]
   },
@@ -65888,10 +65911,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -66548,6 +66571,7 @@
    ],
    "text": [
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
     "gidi:docs/lagos-lgas-research.md",
@@ -67736,7 +67760,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -67954,7 +67978,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -68129,7 +68153,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -68317,9 +68341,9 @@
     "gidi-game:docs/PERFORMANCE.md",
     "gidi-game:tools/mode.sh",
     "gidi-game:tools/package.sh",
+    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
-    "gidi:decisions/NOW.md",
-    "gidi:docs/lagos-study/LIVING.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -68689,10 +68713,10 @@
     "gidi-data:research/google/kits/old-town/tests/ot149/closeups149.sh",
     "gidi-data:research/google/kits/old-town/tests/ot45/closeups45.sh",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
     "gidi:docs/hub-pattern-study.md",
-    "gidi:docs/lagos-study/STUDY.md",
-    "gidi:docs/lagos-study/councils.md"
+    "gidi:docs/lagos-study/STUDY.md"
    ]
   },
   {
@@ -69239,11 +69263,11 @@
     "gidi-data:research/google/kits/old-town/tests/ot73/NOTES.md",
     "gidi-data:research/google/kits/old-town/tests/ot91/NOTES.md",
     "gidi-data:research/refs/REVIEW.md",
+    "gidi:decisions/CODEBASE.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/HISTORY.md",
     "gidi:decisions/IDEAS.md",
-    "gidi:decisions/NOW.md",
-    "gidi:decisions/lived-in.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -70054,8 +70078,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -70102,8 +70126,8 @@
     "gidi-game:ASSETS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/hand/monument-briefs.md",
-    "gidi:docs/hub-pattern-study.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/hand/monument-briefs.md"
    ]
   },
   {
@@ -70628,7 +70652,7 @@
     "gidi-game:Art/Vehicles/PickupBuilt/recipes/white_504_wreck.json",
     "gidi:decisions/NOW.md",
     "gidi:decisions/world-life.md",
-    "gidi:docs/MAP-FORMAT.md"
+    "gidi:docs/BOARD.md"
    ]
   },
   {
@@ -72003,9 +72027,9 @@
     "gidi-game:tools/font_build.sh",
     "gidi:decisions/IDEAS.md",
     "gidi:decisions/NOW.md",
+    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/bazaar-pattern-study.md",
-    "gidi:docs/capital-pattern-study.md"
+    "gidi:docs/bazaar-pattern-study.md"
    ]
   },
   {
@@ -75098,7 +75122,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -75870,7 +75894,7 @@
     "gidi-game:Art/Vehicles/LorryBuilt/recipes/ot45_1.json",
     "gidi-game:tools/watchdog.sh",
     "gidi:.claude/hooks/review-before-push.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -76209,8 +76233,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/lagos-lgas-research.md"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -76258,7 +76282,6 @@
    "maybe": [],
    "text": [
     "gidi:decisions/NOW.md",
-    "gidi:docs/BOARD.md",
     "gidi:docs/MAP-FORMAT.md"
    ]
   },
@@ -77417,8 +77440,8 @@
     "gidi:decisions/CHECKS.md",
     "gidi:decisions/DECISIONS.md",
     "gidi:decisions/NOW.md",
-    "gidi:docs/MAP-FORMAT.md",
-    "gidi:docs/hand/realnames.txt"
+    "gidi:docs/BOARD.md",
+    "gidi:docs/MAP-FORMAT.md"
    ]
   },
   {
@@ -77786,7 +77809,7 @@
     "gidi-game:tools/memreport.sh",
     "gidi-game:tools/package.sh",
     "gidi-game:tools/play.sh",
-    "gidi:decisions/CODEBASE.md"
+    "gidi:decisions/NOW.md"
    ]
   },
   {
@@ -78651,7 +78674,7 @@
     "gidi:scripts/doc_vault.py"
    ],
    "imported_by": [],
-   "uses": 213
+   "uses": 217
   },
   "gidi:scripts/realnames.py": {
    "lang": "python",
@@ -79019,7 +79042,7 @@
     "gidi-game:tools/vehicle_kit.py"
    ],
    "imported_by": [],
-   "uses": 490
+   "uses": 492
   },
   "gidi-game:tools/make_textures.py": {
    "lang": "python",
