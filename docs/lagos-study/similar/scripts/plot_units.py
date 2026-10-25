@@ -2,8 +2,7 @@
 from common import *
 from matplotlib.colors import ListedColormap
 unit=Un['unit']; n=len(NAMES)
-rng=np.random.default_rng(3); pal=plt.cm.tab20(np.linspace(0,1,20)); cols=np.array([pal[(k*7)%20] for k in range(n)])
-water=np.where(Un['area']|(F['lga']>=0)&(K['cl']!=0),np.nan,1.0)
+pal=plt.cm.tab20(np.linspace(0,1,20)); cols=np.array([pal[(k*7)%20] for k in range(n)])
 def panel(ax,box,fs,title):
     img=np.ones((ny,nx,4)); img[...,:3]=[0.80,0.88,0.95]
     m=unit>=0; img[m]=cols[unit[m]]; img[m,3]=0.55

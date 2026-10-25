@@ -1,11 +1,10 @@
 # Code map
 
-Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3649 pieces of code in 135 files: 2 used nowhere, 60 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
+Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, class, method and top-level constant in gidi, gidi-game and gidi-data, read by the parsers (JavaScript read by the TypeScript compiler at /Users/Star/stride-web/node_modules/typescript). 3586 pieces of code in 133 files: 1 used nowhere, 52 used only by name where their file is not imported (a hint: a call by string, or dead). "Imported by" is Python imports; a page's scripts share its names. A file run as a script (by a shell line, Blender, the board) shows in INVENTORY.md's "Refs", not here.
 
 ## Used nowhere (by file)
 
 - `gidi-data:research/google/kits/old-town/tests/facade_hand.py`: `sh_` (const, line 197)
-- `gidi-game:tools/lorry_build.py`: `mirror_y` (function, line 137)
 
 ## Every code file
 
@@ -62,12 +61,6 @@ Made by `scripts/inventory.py` with `scripts/code_graph.py`: every function, cla
 
 ### `gidi-data:research/google/kits/old-town/tests/ot73/mk73_pass.py`
 17 defined (17 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
-
-### `gidi-data:research/google/kits/old-town/tools/part_view.py`
-46 defined (44 used, 2 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
-
-### `gidi-data:research/google/kits/old-town/tools/sheet.py`
-9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:Content/Python/gidi_heroes.py`
 17 defined (17 used, 0 maybe, 0 unused). Imports: `gidi-game:Content/Python/gidi_paint.py`, `gidi-game:Content/Python/gidi_plates.py`. Imported by: `gidi-game:Content/Python/gidi_street.py`, `gidi-game:Content/Python/gidi_underdeck.py`.
@@ -177,7 +170,7 @@ Used elsewhere: `TOOLS` in `gidi-game:tools/map_build.py`, `gidi-game:tools/spot
 5 defined (5 used, 0 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/lorry_build.py`
-66 defined (62 used, 3 maybe, 1 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
+65 defined (62 used, 3 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/vehicle_kit.py`. Imported by: nothing.
 
 ### `gidi-game:tools/make_textures.py`
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -217,7 +210,7 @@ Used elsewhere: `load` in `gidi-game:tools/street_test.py`; `rows` in `gidi-game
 121 defined (121 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/props_build.py`
-37 defined (35 used, 2 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+35 defined (35 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/road_build.py`
 99 defined (98 used, 1 maybe, 0 unused). Imports: `gidi-game:tools/fields.py`, `gidi-game:tools/junction_geo.py`. Imported by: `gidi-game:tools/junction_build.py`.
@@ -272,7 +265,7 @@ Used elsewhere: `__init__` in `gidi-game:tools/fields.py`, `gidi-game:tools/font
 Used elsewhere: `MATS` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `ROOT` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/molue_build.py`; `sc` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/leanto_build.py`, `gidi-game:tools/lorry_build.py`; `mat` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `rgb` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `start` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `obj` in `gidi-game:tools/block_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`, `gidi-game:tools/keke_build.py`; `apply_mods` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`, `gidi-game:tools/umbrella_build.py`; `solidify` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `smooth` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `_box` in `gidi-game:tools/goods_kit.py`; `boolean` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/pickup_build.py`; `cut` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `copy` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `prism` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_yz` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `prism_xy` in `gidi-game:tools/block_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/pickup_build.py`; `grow` in `gidi-game:tools/pickup_build.py`; `box` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/goods_kit.py`; `tube` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/leanto_build.py`; `cylinder` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `join` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/furniture_build.py`, `gidi-game:tools/keke_build.py`; `fillet` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `lin` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `arc` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `loft` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `opening` in `gidi-game:tools/block_build.py`, `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`; `cut_door` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `wheel` in `gidi-game:tools/brt_build.py`, `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`; `arc_shell` in `gidi-game:tools/keke_build.py`, `gidi-game:tools/lorry_build.py`, `gidi-game:tools/molue_build.py`, `gidi-game:tools/pickup_build.py`
 
 ### `gidi-game:tools/vehicle_look.py`
-68 defined (67 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
+67 defined (67 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi-game:tools/vehicle_prep.py`
 77 defined (77 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
@@ -302,7 +295,7 @@ Used elsewhere: `RUST_DARK` in `gidi-game:tools/block_build.py`; `table` in `gid
 9 defined (9 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi:docs/lagos-study/roads/scripts/borders.py`
-84 defined (77 used, 7 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
+83 defined (77 used, 6 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
 
 ### `gidi:docs/lagos-study/roads/scripts/common.py`
 16 defined (16 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:docs/lagos-study/roads/scripts/borders.py`, `gidi:docs/lagos-study/roads/scripts/ladder.py`, `gidi:docs/lagos-study/roads/scripts/network.py`, `gidi:docs/lagos-study/roads/scripts/ob50.py`, `gidi:docs/lagos-study/roads/scripts/places.py`, `gidi:docs/lagos-study/roads/scripts/plot_places.py`, `gidi:docs/lagos-study/roads/scripts/report.py`, `gidi:docs/lagos-study/roads/scripts/skeleton.py`, `gidi:docs/lagos-study/roads/scripts/wc50.py`, `gidi:scripts/frame_footprints.py`, `gidi:scripts/frame_study.py`.
@@ -313,7 +306,7 @@ Used elsewhere: `DATA` in `gidi:docs/lagos-study/roads/scripts/borders.py`, `gid
 Used elsewhere: `load` in `gidi:docs/lagos-study/roads/scripts/network.py`, `gidi:docs/lagos-study/roads/scripts/places.py`
 
 ### `gidi:docs/lagos-study/roads/scripts/ladder.py`
-47 defined (45 used, 2 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
+46 defined (45 used, 1 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`. Imported by: nothing.
 
 ### `gidi:docs/lagos-study/roads/scripts/network.py`
 79 defined (73 used, 6 maybe, 0 unused). Imports: `gidi:docs/lagos-study/roads/scripts/common.py`, `gidi:docs/lagos-study/roads/scripts/gaz.py`. Imported by: nothing.
@@ -344,8 +337,8 @@ Used elsewhere: `Pz` in `gidi:docs/lagos-study/roads/scripts/report.py`; `place`
 6 defined (6 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: nothing.
 
 ### `gidi:docs/lagos-study/similar/scripts/common.py`
-22 defined (22 used, 0 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`.
-Used elsewhere: `F` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `K` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`; `Un` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `ny` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `nx` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `ext` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `NAMES` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`; `draw_lga` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`; `boundaries` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `centroid` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `STATE` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `CORE` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `INNER` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`
+22 defined (21 used, 1 maybe, 0 unused). Imports: none of ours. Imported by: `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`.
+Used elsewhere: `F` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `Un` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `ny` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `nx` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `ext` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `NAMES` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`; `draw_lga` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`; `boundaries` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `centroid` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `STATE` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `CORE` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`; `INNER` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `gidi:docs/lagos-study/similar/scripts/plots.py`
 
 ### `gidi:docs/lagos-study/similar/scripts/finger.py`
 23 defined (22 used, 1 maybe, 0 unused). Imports: `gidi:docs/lagos-study/similar/scripts/know.py`. Imported by: nothing.
@@ -355,7 +348,7 @@ Used elsewhere: `F` in `gidi:docs/lagos-study/similar/scripts/plot_units.py`, `g
 Used elsewhere: `KNOW` in `gidi:docs/lagos-study/similar/scripts/finger.py`; `items` in `gidi:docs/lagos-study/similar/scripts/finger.py`
 
 ### `gidi:docs/lagos-study/similar/scripts/plot_units.py`
-8 defined (5 used, 3 maybe, 0 unused). Imports: `gidi:docs/lagos-study/similar/scripts/common.py`. Imported by: nothing.
+6 defined (5 used, 1 maybe, 0 unused). Imports: `gidi:docs/lagos-study/similar/scripts/common.py`. Imported by: nothing.
 
 ### `gidi:docs/lagos-study/similar/scripts/plots.py`
 17 defined (15 used, 2 maybe, 0 unused). Imports: `gidi:docs/lagos-study/similar/scripts/common.py`. Imported by: nothing.

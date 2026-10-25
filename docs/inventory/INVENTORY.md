@@ -4,7 +4,7 @@ Made by `scripts/inventory.py` (gidi): every git-tracked file in gidi, gidi-game
 
 ## gidi
 
-262 files.
+259 files.
 
 ### gidi/.
 
@@ -57,7 +57,7 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `DECISIONS.md` | 142 | 2026-10-25 | 14 | Decisions (the owner's standing rules): What still guides the work. A decision that a later one replaced, or that held only for the old map, is in `HISTORY.md`… |
 | `HISTORY.md` | 61 | 2026-10-25 | 4 | Decisions that were replaced (history): The owner's decisions that later ones replaced, or that held only for the old generated map (13-21 Oct). Kept so we kno… |
 | `IDEAS.md` | 68 | 2026-10-24 | 5 | Ideas (not decided; newest first): - **Our own Lagos motion from video, and AI video** (owner, 23 Oct). Motion2MixamoRig (github.com/MaxLiu22/Motion2MixamoRig,… |
-| `NOW.md` | 328 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
+| `NOW.md` | 329 | 2026-10-25 | 5 | Where the work stands (update at the end of every session): **HANDOVER, 24 Oct 2026 (evening). Start here.** Read `DECISIONS.md` (the standing rules; replaced … |
 | `README.md` | 9 | 2026-10-24 | 1 | Decisions and ideas: The owner works across more than one Claude account. This folder is the shared memory: **read it first in every session**, and add to it w… |
 | `lived-in.md` | 154 | 2026-10-24 | 5 | The lived-in layer: what every GTA does, and Gidi's plan: The owner asked on 24 Oct 2026 for research from public material on how GTA's worlds feel alive, acro… |
 | `world-life.md` | 146 | 2026-10-16 | 4 | Life in Gidi: what makes the world feel like it exists: The owner's thinking from 16 Oct 2026, and Claude's proposals. The research behind it: `docs/research/L… |
@@ -105,8 +105,6 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `railside-pattern-study.md` | 125 | 2026-10-14 | 1 | Railside pattern study: Agege, Ifako/Ijaye and Alimosho → Railside (v1): Status: generated for review (14 Oct 2026). Same method as every district: we measure … |
 | `watertown-pattern-study.md` | 164 | 2026-10-14 | 1 | Water Town pattern study: the Makoko–Iwaya and Bariga waterfront → Water Town (v1): Status: generated for review (13 Oct 2026; v2 the same day: the land is reb… |
 
-Binary: 1 files, 0.3 MB (1 .png).
-
 ### gidi/docs/data
 
 Data: 17 files, 0.3 MB (.json); unpointed: 16.
@@ -122,7 +120,7 @@ Data: 17 files, 0.3 MB (.json); unpointed: 16.
 
 ### gidi/docs/img
 
-Binary: 40 files, 19.5 MB (40 .png).
+Binary: 38 files, 19.1 MB (38 .png).
 
 ### gidi/docs/inventory
 
@@ -139,7 +137,7 @@ Binary: 8 files, 2.8 MB (5 .md, 3 .json).
 | `roads/NAMES.md` | 115 | 2026-10-22 | 7 | Echo names for the 51 districts (draft, 22 Oct 2026): Working names for the 51 districts in `EARTH-CHECK.md` ("District list after the checks"), as the map for… |
 | `roads/ROADS.md` | 510 | 2026-10-24 | 2 | Roads first, districts by their borders: Step 1 of the new map plan (22 Oct): Gidi is real Lagos made smaller, at 1:3, in a frame about 27 × 10.5 km. This stud… |
 | `roads/scripts/borders.py` | 147 | 2026-10-22 | 1 | Every border between two places: what it is, how long, whether built land meets across it; plus each place's fingerprint and the similarity of every pair (the … |
-| `roads/scripts/common.py` | 23 | 2026-10-24 | 15 | Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid. |
+| `roads/scripts/common.py` | 23 | 2026-10-25 | 15 | Shared paths and the 50 m grid. The 50 m grid nests 5 x 5 inside the earlier study's 250 m grid. |
 | `roads/scripts/gaz.py` | 238 | 2026-10-22 | 4 | Neighbourhood names for naming places. [K] general knowledge: points are approximate (+-0.5-1 km), not measured. Extends the earlier study's list (docs/lagos-s… |
 | `roads/scripts/ladder.py` | 140 | 2026-10-22 | 1 | Join places into districts: only places that really touch (built land meets across 200 m or more of their border) and are alike enough. The Google checks of 22… |
 | `roads/scripts/network.py` | 226 | 2026-10-22 | 1 | Measure the skeleton, choose the real extent that fits Gidi's 27 x 10.5 km frame at 1:3, draw it. ---------- 1. the frame: the 81 x 31.5 km real window (27 x 1… |
@@ -157,7 +155,7 @@ Binary: 8 files, 2.8 MB (5 .md, 3 .json).
 | `similar/scripts/common.py` | 43 | 2026-10-24 | 15 | Shared by the similarity study's plot scripts: the grids, the units, the LGA lines. Needs the grids in ../lagos/ (feat.npz, class.npz), which were never commit… |
 | `similar/scripts/finger.py` | 52 | 2026-10-24 | 1 | Per-unit fingerprint from the 250 m grids + Overture places + knowledge lists. Overture places (confidence >= 0.5) |
 | `similar/scripts/know.py` | 86 | 2026-10-22 | 2 | [K] general knowledge, not measured. Per unit: markets ; hubs (motor parks, interchanges, stations, jetties) ; landmarks (campus, port, industry, institutions,… |
-| `similar/scripts/plot_units.py` | 25 | 2026-10-24 | 0 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
+| `similar/scripts/plot_units.py` | 24 | 2026-10-24 | 0 | Map of the study units (SIMILAR.md's unit pictures), drawn with common.py. |
 | `similar/scripts/plots.py` | 59 | 2026-10-22 | 2 | ---- similarity.png ---- ladder pictures |
 | `similar/scripts/report.py` | 31 | 2026-10-24 | 2 | SIMILAR.md's ladder: how many districts at each similarity threshold, from analysis.json. |
 | `similar/scripts/seeds.py` | 91 | 2026-10-22 | 2 | Unit seeds: name / lat,lon ; lat,lon ... Coordinates from general knowledge [K], approximate (+-0.5-1 km). A unit = the 250 m cells closest (by road-penalised … |
@@ -257,8 +255,8 @@ Data: 2 files, 0.0 MB (.json); unpointed: 0.
 | `draft_roads.py` | 129 | 2026-10-25 | 6 | A district's first draft of each road's surface, width, kerbs, drains and verges, from Street View readings by hand. |
 | `draft_storeys.py` | 168 | 2026-10-25 | 4 | A district's first draft of storeys, from each house's real source in Google's Open Buildings 2.5D heights. |
 | `draft_storeys_nearby.py` | 60 | 2026-10-25 | 3 | A district's first draft of storeys for the houses that draft_storeys.py could not read, from the houses around them. |
-| `frame_footprints.py` | 92 | 2026-10-22 | 3 | Real roofs under the new frame, for the drawing board's zoomed-in "Real roofs" layer (web/board.html?frame=new). |
-| `frame_study.py` | 296 | 2026-10-22 | 6 | The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts… |
+| `frame_footprints.py` | 92 | 2026-10-25 | 3 | Real roofs under the new frame, for the drawing board's zoomed-in "Real roofs" layer (web/board.html?frame=new). |
+| `frame_study.py` | 296 | 2026-10-25 | 6 | The new frame's study layers for the drawing board (owner, 22 Oct 2026: Gidi is real Lagos miniaturised at 1:3, in a 27 x 10.5 km frame; roads first, districts… |
 | `inventory.py` | 318 | 2026-10-25 | 8 | What the three repos hold: every tracked file, what it says it is, when it last changed, and who points to it. |
 | `js_symbols.mjs` | 53 | 2026-10-24 | 1 | What a JavaScript file declares, uses and says in its comments, read by the TypeScript compiler's parser (not by word matching), for scripts/code_graph.py:   n… |
 | `realnames.py` | 22 | 2026-10-25 | 3 | Gidi's names are its own: no name on the map may share its core with a real name (decisions: invented names only). |
@@ -435,7 +433,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `lettering.py` | 129 | 2026-10-19 | 4 | Lettering laid out for a sticker: ~/.venvs/gidi/bin/python tools/lettering.py <font.ttf> <text> <cap metres> <arc radius or 0> <outline metres> <out.json> [--b… |
 | `look_travels.py` | 117 | 2026-10-25 | 3 | Does the look reach Unreal, and what does each built thing weigh: python tools/look_travels.py [--all] |
 | `loose_build.py` | 55 | 2026-10-23 | 0 | Goods and litter lying loose on the ground, built in Blender: blender -b -P tools/loose_build.py -- <out.blend> [recipe.json] |
-| `lorry_build.py` | 658 | 2026-10-25 | 2 | The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json] |
+| `lorry_build.py` | 651 | 2026-10-25 | 2 | The container lorry, built in Blender part by part: blender -b -P tools/lorry_build.py -- <out.blend> [recipe.json] |
 | `make_textures.py` | 118 | 2026-10-18 | 3 | Seamless detail textures for the city's surfaces, made from noise (no photographs, so nothing to license and nothing to copy). |
 | `map_build.py` | 276 | 2026-10-25 | 9 | The map, built: ~/.venvs/gidi/bin/python tools/map_build.py <map dir> <district> <out folder> [--box=x0,y0,x1,y1] [--camera=x,y,z,turn,pitch,fov] [--spot=<spot… |
 | `measure.sh` | 11 | 2026-10-25 | 6 | Measure a play level in a mode against its budget (docs/PERFORMANCE.md): tools/measure.sh [underdeck/street] [work/low/high/full/old] [seconds] [shot.png] Runs… |
@@ -453,7 +451,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `play.sh` | 96 | 2026-10-25 | 12 | Play a spot: tools/play.sh [street/underdeck] [work/low/high/full] [build]   (any order; defaults: street, work) street     the street test: a Mùṣá lane and 37… |
 | `pole_build.py` | 357 | 2026-10-23 | 3 | The street pole, built in Blender part by part: blender -b -P tools/pole_build.py -- <out.blend> [recipe.json] |
 | `prop_basin_final.py` | 369 | 2026-10-19 | 4 | The basin of drinks, finished (the proof that a blockout becomes real): blender -b -P tools/prop_basin_final.py -- <out folder> [render.png] |
-| `props_build.py` | 259 | 2026-10-19 | 4 | Street props for the Lagos pass (docs/hand/lagos-pass.md, the owner's photos in refs/lagos-life/): blender -b -P tools/props_build.py -- <out folder> |
+| `props_build.py` | 259 | 2026-10-25 | 4 | Street props for the Lagos pass (docs/hand/lagos-pass.md, the owner's photos in refs/lagos-life/): blender -b -P tools/props_build.py -- <out folder> |
 | `road_build.py` | 1139 | 2026-10-25 | 7 | A road stretch as the map's road record says: the carriageway, its open drains, the bridges over them, the verges and the rubbish in the drains. blender -b -P … |
 | `road_draft.py` | 175 | 2026-10-25 | 2 | A road's first draft of its loose things, stored as map records: python tools/road_draft.py <road.json> [--force] |
 | `road_look.py` | 310 | 2026-10-25 | 7 | A kit test picture with the game's surfaces: blender -b -P tools/road_look.py -- <built.blend> <view.json> <out.png> |
@@ -472,7 +470,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `underdeck_extras.py` | 73 | 2026-10-22 | 4 | The underdeck's extra models, from the hand-made ones (generated into Saved/Underdeck, never committed): blender -b -P tools/underdeck_extras.py -- [out folder… |
 | `vehicle_export.py` | 22 | 2026-10-19 | 1 | A built vehicle's game models from its Blender file: blender -b <name>_parts.blend -P tools/vehicle_export.py -- <out base> |
 | `vehicle_kit.py` | 405 | 2026-10-23 | 17 | The shared pieces of the vehicle builders (Blender), copied from tools/danfo_build.py so the keke, the molue and the BRT build the same way: start() clears the… |
-| `vehicle_look.py` | 121 | 2026-10-19 | 3 | Look renders of a built vehicle: blender -b <parts.blend> -P tools/vehicle_look.py -- <out.jpg> [view ...] [--size W] |
+| `vehicle_look.py` | 120 | 2026-10-25 | 3 | Look renders of a built vehicle: blender -b <parts.blend> -P tools/vehicle_look.py -- <out.jpg> [view ...] [--size W] |
 | `vehicle_prep.py` | 329 | 2026-10-19 | 2 | A generated vehicle (Meshy) made game-ready in Blender: blender -b -P tools/vehicle_prep.py -- <in.glb> <out.glb> <spec.json> |
 | `vehicle_stickers.py` | 192 | 2026-10-23 | 7 | Badges and stickers in 3D, for the vehicle builders (Blender): thin raised pieces, each its own object, so they stay sharp and come off for a variant. |
 | `wall_build.py` | 558 | 2026-10-23 | 3 | The boundary wall or fence and its gates, built in Blender part by part: blender -b -P tools/wall_build.py -- <out.blend> [recipe.json] |
@@ -483,7 +481,7 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 
 ## gidi-data
 
-42 files.
+40 files.
 
 ### gidi-data/.
 
@@ -534,8 +532,6 @@ Binary: 9 files, 0.2 MB (9 .uasset).
 | `kits/old-town/tests/ot73/mk73_pass.py` | 37 | 2026-10-24 | 1 | ot73 pass: the field fixes on top of map_first.json (usage: mk73_pass.py map_first.json map.json). |
 | `kits/old-town/tests/ot91/NOTES.md` | 168 | 2026-10-24 | 3 | Kit eye test 2: ot91, Isale Eko, Balogun area (Street View, date n/a, heading 0): The test: do the parts built for ot175 hold on a street they were not made fo… |
 | `kits/old-town/tests/ut01_emmanuel/inventory.md` | 102 | 2026-10-24 | 2 | Ultimate test 1: Shomolu, Emmanuel St junction (Street View, Jul 2021), three angles: The owner's ultimate test (DECISIONS, 23 Oct): list every thing in the re… |
-| `kits/old-town/tools/part_view.py` | 87 | 2026-10-24 | 0 | Render kit parts alone (outside the repo; a test tool). blender -b --factory-startup -P part_view.py -- --gidi <repo> --build <spec.py> --out <file.jpg> [--mod… |
-| `kits/old-town/tools/sheet.py` | 14 | 2026-10-24 | 1 |  |
 | `maze/NOTES.md` | 15 | 2026-10-24 | 3 | The Maze: Mushin + Shomolu (study, 18 Oct 2026). Screenshots are for study only; nothing here is copied into Gidi.: - Coverage: Mushin 75-85% roof, Shomolu ~85… |
 | `twins/NOTES.md` | 3 | 2026-10-24 | 3 | Twins outside Ìbùdó (Street View, 19 Oct): ikorodu_kokoro_abu_st_sprawl_stalls (Feb 2017): a sprawl street, tar with sandy edges, a long row of zinc-roofed sta… |
 | `video1-street/NOTES.md` | 51 | 2026-10-24 | 3 | Video 1 street: reference notes (22 Oct 2026): Video 1 (`../../refs/video1/`) is an AI-made "Lagos game" clip. It shows a third-person view under a flyover, a … |
