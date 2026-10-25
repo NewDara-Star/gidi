@@ -56,6 +56,7 @@ On 22 Oct the map restarted: Gidi is real Lagos miniaturised, 51 districts, ever
 | `scripts/draft_kinds.py` | a district's first draft of each house's kind and ground floor, from its size, storeys and the street it faces |
 | `scripts/draft_storeys_nearby.py` | a district's first draft of storeys for the houses draft_storeys.py could not read, from the median of the houses within 30 m |
 | `scripts/draft_roads.py` | a district's first draft of each road's width, surface, sand, kerbs, median, gutters and verges, from the Street View readings by hand in `<district>/road_reads.tsv` |
+| `scripts/draft_crossings.py` | a district's first draft of each road's crossings: a slab, plank or gate ramp over an open gutter before each house that faces it |
 | `scripts/draft_looks.py` | a district's first draft of each house's look (storey heights, roof, walls, windows, outside stair, wear) by its kind, from the old-town Street View study's shares |
 | `scripts/check_real.py`, `realnames.py` | how close a map is to its real places; no real name on the map |
 | `scripts/inventory.py` | this inventory |
