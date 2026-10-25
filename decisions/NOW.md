@@ -4,6 +4,23 @@
 then this page. What the repos hold: `CODEBASE.md` and `docs/inventory/` (`scripts/inventory.py`). The real Lagos research:
 `docs/RESEARCH.md`. What the old map taught: `docs/OLD-MAP-LESSONS.md`.
 
+**Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
+merged and checked, add new ones where they belong, and say here when the owner reorders it).
+1. [ ] Road lines: hand-edit the road corners check_map lists (62 in d15: 12 repeated points, 14 lines doubling back,
+   36 corners too tight for their legs), each looked at on the board against the study; done when it lists none.
+2. [ ] Junctions: research how road tools build them, then a junction piece where roads meet, the roads cut back to
+   it; tested on a T and a crossroads against photos.
+3. [ ] Trees, masts, heaps (92, 15 and 12 records in d15) and weeds: builders tested against photos; Meshy for the hard
+   shapes before the credits expire on 11 Nov (cost stated first).
+4. [ ] Ground: the road and verge colours (grey dusty tar, not tan or black), sand and earth as the map paints them.
+5. [ ] Houses read their records' storeys and kind.
+6. [ ] Mùṣá in Unreal (after the owner restarts the Mac): the overhead against Google Earth's Mushin, street views
+   against Street View.
+Alongside, whenever a build waits: study passes over the saved Street View shots for new kits and activities, one
+question per pass (memory: repeat passes on photos).
+Done: road kit edges (gutters, plank and slab bridges, kerbs, covered drains, grates, earth ditches: gidi-game
+#80-#86); roads laid along their real lines (#87, #88).
+
 **State.** The new map (real Lagos at 1:3, 27 x 10.5 km, 51 districts) has its format (`docs/MAP-FORMAT.md`), the board's
 tools (plan, dress, brushes, person spots, wires, clock) and its first district, Mùṣá (15 Mushin): 357 roads, the rail and its
 station, and 4,275 houses drafted from real footprints and redrawn block by block (all 42 blocks read by 25 Oct; B27, a factory, and four slivers left as they were). The kit is the game repo's
