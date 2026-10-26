@@ -127,9 +127,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
 9. [x] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
    its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
 10. [ ] Mùṣá's hand pass on the map (carried from the old "Next, in order", 25 Oct; it runs on the map beside items
-   2-5): the school compounds in B28 and B29 (both drawn 26 Oct, branch map/b29-school, BUILDINGS.md hand
-   pass 45: plots, places, blocks; their compound walls, gates and faces still to draw; B28's real name to read), the Vono Road factory (B27; drawn 26 Oct, hand pass 46: plot and four sheds; its wall,
-   gate and faces to draw) and B33's railway strip (looked at 26 Oct, hand pass 47: already clear); the 10 houses
+   2-5): the school compounds in B28 and B29 (both drawn 26 Oct, BUILDINGS.md hand
+   pass 45: plots, places, blocks; walls and gates 26 Oct, hand pass 58; faces still to draw; B28's real name to read), the Vono Road factory (B27; drawn 26 Oct, hand pass 46: plot and four sheds; wall and gate, hand pass 58;
+   faces and the wall's ice-cream advert to draw) and B33's railway strip (looked at 26 Oct, hand pass 47: already clear); the 10 houses
    7.7-9.0 m from the rail's centre elsewhere set back to 9.5 m by hand (26 Oct, hand pass 48); front houses on the
    busy roads (26 Oct, hand pass 49: 57 given lock-ups from their roads' reads, 12 kept as homes); every road's
    ground colours from Mushin Street View (26 Oct, hand pass 50; still owed: a laterite and a concrete road sampled from

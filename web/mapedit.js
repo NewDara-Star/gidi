@@ -277,7 +277,10 @@ window.MAPEDIT = (() => {
       for (const r of roads) if (onRoad(b.footprint, r)) { bad.set(b.id, "on the road " + r.id); break; }
       if (!bad.has(b.id)) for (const o of bs) if (o !== b && polysOverlap(b.footprint, o.footprint)) { bad.set(b.id, "overlaps " + o.id); break; }
     }
-    for (const w of recsOf(["wall"])) if (Array.isArray(w.line) && w.line.length > 1) for (const r of roads) { const half = r.width / 2 - 0.05; if (w.line.some((p, i) => i && r.centreline.some((q, j) => j && (segsCross(w.line[i - 1], p, r.centreline[j - 1], q) || segDist(p, r.centreline[j - 1], q) < half)))) { bad.set(w.id, "across the road " + r.id); break; } }
+    // a wall is its line 0.2 m thick, tested against the same carriageway as a house (flat ends; owner, 26 Oct)
+    const wallStrip = (a, b) => { const L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, n = [-(b[1] - a[1]) / L * 0.1, (b[0] - a[0]) / L * 0.1];
+      return [[a[0] + n[0], a[1] + n[1]], [b[0] + n[0], b[1] + n[1]], [b[0] - n[0], b[1] - n[1]], [a[0] - n[0], a[1] - n[1]]]; };
+    for (const w of recsOf(["wall"])) if (Array.isArray(w.line) && w.line.length > 1) for (const r of roads) { if (w.line.some((p, i) => i && (r.centreline.some((q, j) => j && segsCross(w.line[i - 1], p, r.centreline[j - 1], q)) || onRoad(wallStrip(w.line[i - 1], p), r)))) { bad.set(w.id, "across the road " + r.id); break; } }
     return bad;
   }
   let boardBad = new Map();

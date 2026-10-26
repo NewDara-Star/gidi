@@ -67,6 +67,18 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 58 (26 Oct): walls and gates round the two schools and the Vono Road factory
+
+Mùṣá's first `wall` records. Each runs 0.2 m inside its plot's edge (the plot less the roads' carriageways), and is open
+where a neighbour's house already closes the compound (B28's north side: five pieces). The reads give the look: "painted
+school wall", "long painted school wall" (rows 66, 207, 338), so the schools' walls are rendered, painted cream
+(#d8c9a0), 2.1 m, mouldy, piers every bay, with a 4 m two-leaf sheet-steel gate with a wicket (blue, #2f6b8a): B28's at
+Bakare Close's dead end (STREETS.md B28), B29's on Post Office Road (chosen: its driveway is not read). The factory
+(row 435: "factory wall", "factory fence painted blue"): 2.8 m rendered wall with razor wire, piers every bay, and a 7 m
+blue sheet-steel gate on Vono Road beside its gatehouse. B29's plot and place reached 2.1 m2 onto Palm Avenue's
+carriageway and the factory's 0.09 m2 onto its road; both were cut back to the carriageway's edge. Still to draw: the
+schools' and factory's faces, the ice-cream advert on the factory wall.
+
 ## Hand pass 57 (26 Oct): the Jibowu coach yard, Mùṣá's one motor park
 
 The coach yards at Jibowu front Ikorodu Road between Rahony Travels and Polarplus (Google satellite at zoom 19 and the
