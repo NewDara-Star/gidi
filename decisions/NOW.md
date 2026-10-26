@@ -76,8 +76,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
   paint with their own plates, City Sample cars standing in for saloon, suv and pickup; as instances 62 -> 40 actors,
   frame and memory no different measurably; the plate material prints on instances (v5), the paint has a copy for
   instances. The cost is the stand-ins: 27 City Sample cars ~2.4 ms GPU and 1.3 GB (60 -> 55 fps), the 26 built ones
-  0.37 M triangles. So next, before stalls: (b1) [x] our own saloon (601 in d15), built the danfo's way (gidi-game
-  saloon branch, `tools/saloon_build.py`: Corolla, Camry, Accord, nine recipes, opaque glass, M_GidiPaint, _static
+  0.37 M triangles. So next, before stalls: (b1) [ ] our own saloon (601 in d15), built the danfo's way (on gidi-game
+  branch `saloon`, PR to come; tick when merged; `tools/saloon_build.py`: Corolla, Camry, Accord, nine recipes, opaque glass, M_GidiPaint, _static
   25-28.5 k faces; schema `vehicle.saloon` here): 25 saloons on the street test GPU 15.0-15.8 -> 13.0-13.1 ms, 7.4 ->
   6.2 GB, 41.8 -> 3.8 M triangles (PERFORMANCE.md "Our own saloon"). Saloon owed: (b1a) [ ] a close look in Unreal (only
   the raised camera so far) and photo passes against ot162 and the other saloon photos (ot122, ot149, ot175, ot198,
