@@ -67,6 +67,17 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 60 (26 Oct): Western Avenue's side road
+
+Western Avenue (rd-avaupyki) was one 35 m motorway, the width read at z19 for "both carriageways and the side road"
+(STREETS.md m05a). On the satellite (study only) the decks are a flyover, and the road at ground level runs on the
+west, the Mùṣá side. Split inside the old 35 m, the centreline unmoved (its ends are joints and a seam): the decks are
+22 m, then a 0.5 m gap and a 6 m `service_road`, rd-wavside1, centred 14.5 m off on the house side, 303 m long, from
+the trunk's first point (where it bends in, like a slip road) south to the district edge. Ojuelegba Road (rd-nz39jh82)
+and Cole Street (rd-3glzzql1) now end on the side road, 14.5 m short of the old centreline, with their verges and
+gutters cut to their new ends; each ends on a point shared with the side road, at their crossing (Cole Street at
+(13213.76,6509.49), 145.3 m). The decks' old verges (at the 35 m edges) went.
+
 ## Hand pass 59 (26 Oct): the danfo park at the Agege Motor Road / Isolo Road junction; two road shapes looked at
 
 STREETS.md names a motor park at the Agege Motor Road / Isolo Road junction ("the park itself is a place for later"),
