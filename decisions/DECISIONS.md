@@ -65,6 +65,12 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   (3) reading the inventory, or code before changing it, is two passes: the first to learn what each part is, the second
   to understand what it does and whether it is still used. Outranks the "keep it frozen to view" wording for the old map
   and its Unreal side (owner gave permission to delete what is no longer useful).
+- **Map and brush first, Unreal on hold** (owner, 26 Oct: "Should we hold on on unreal first and just do map and brush
+  work to complete all the districts. I might renege of this later, but let's just continue with map work right now").
+  The work is the map on the board in Chrome, the plan layer and then the brush (dress) layer, district by district
+  until all of them are complete. Unreal work (builders, the street test, levels, measuring) waits; nothing in gidi-game
+  is deleted or undone, and the Unreal items stay in the running order, marked as waiting. Outranks "Working first"'s
+  "(c) the game working" while it stands; the owner may take it back.
 - **Working first, polish later** (owner, 26 Oct: "improving the models will always be an iterative process... We really
   just need to get them working... The important thing right now is completing the map and getting the game to actually
   work"). Every kind of thing on the map needs a model that works in the game (built, placed, light enough); looking
