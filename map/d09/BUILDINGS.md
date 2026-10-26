@@ -14,6 +14,11 @@ linked to their ground.
 - A cemetery, a factory compound (16,051 m2) and the signals barracks (18,249 m2, razor wire on the wall).
 - The grounds' own buildings go to the look pass, as Sọ̀rọ̀lérè's.
 
+The map picture (26 Oct) shows an empty east-west band across the middle (about x 11,500-12,450, y 8,440-8,570).
+Looked into in the data, not by eye on the satellite: Overture marks it as wetland (about 21,400 m2 in the band), scrub,
+a power-line corridor and the signals barracks (21,400 m2 of the band), with one bridge (a lane over the wet ground).
+Real open land, so it stays open; its wet ground and scrub are owed to the scatter (painted areas) when that is drawn.
+
 ## Hand pass 3 (26 Oct): the real places
 
 284 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
