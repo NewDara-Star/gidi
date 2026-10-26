@@ -161,7 +161,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      street but 18 pieces under the expressways, 98% of road length on a real line; the Lagos-Badagry and
      Apapa-Oworonshoki Expressways one 25 m record each along the border). Houses done (hand pass 2,
      map/d09/BUILDINGS.md: 1,472, each with a kind and storeys, 16.0% of the district). Places done (hand pass 3: 262
-     places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Next: landmarks, then the map picture.
+     places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Landmarks done (hand pass 4: 16
+     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band is wetland, scrub and the barracks: d09 BUILDINGS hand pass 4). Next: Agunda (d12).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -192,6 +193,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   as held, join their streets to them, and settle the border line by hand (d09 STREETS.md).
 - Ayégúnlẹ̀'s bus stops and motor parks beyond Overture's two stops (Boundary, Mosafejo, the expressway stops), read on
   the map (study only) and drawn as Ìtìrí's park (d09 BUILDINGS hand pass 3).
+- Ayégúnlẹ̀'s wetland and scrub band across its middle (about x 11,500-12,450, y 8,440-8,570, from Overture's land):
+  painted as scatter areas when the district's ground is drawn (d09 BUILDINGS hand pass 4).
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end

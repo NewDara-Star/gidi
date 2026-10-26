@@ -1,5 +1,24 @@
 # Ayégúnlẹ̀ (district 9): the buildings and their hand passes
 
+## Hand pass 4 (26 Oct): the landmarks, walled with a gate each
+
+Sọ̀rọ̀lérè's hand pass 5 recipe on Overture's land use in Gidi metres: each ground less the carriageways along it is a
+plot (the largest piece where a road cuts it), a wall 0.2 m inside its edge, open where houses close it, one 4 m gate
+where it comes nearest a road (no road enters any). **16 plots**, 47 wall pieces, 16 gates; 18 houses inside are
+linked to their ground.
+
+- 11 school grounds, each with its school place (the plot's outline).
+- 2 markets: a named market (464 m2) and Boundary Market's echo, 66% of it inside the border (1,076 m2 after the
+  carriageways; the rest over the eastern border). A third named market lies wholly on the street (a street
+  market) and was left out.
+- A cemetery, a factory compound (16,051 m2) and the signals barracks (18,249 m2, razor wire on the wall).
+- The grounds' own buildings go to the look pass, as Sọ̀rọ̀lérè's.
+
+The map picture (26 Oct) shows an empty east-west band across the middle (about x 11,500-12,450, y 8,440-8,570).
+Looked into in the data, not by eye on the satellite: Overture marks it as wetland (about 21,400 m2 in the band), scrub,
+a power-line corridor and the signals barracks (21,400 m2 of the band), with one bridge (a lane over the wet ground).
+Real open land, so it stays open; its wet ground and scrub are owed to the scatter (painted areas) when that is drawn.
+
 ## Hand pass 3 (26 Oct): the real places
 
 284 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
