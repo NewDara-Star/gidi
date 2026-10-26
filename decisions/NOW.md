@@ -177,7 +177,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      bar** (26 Oct); its map picture looked at and sent. Its bus stops and motor parks owed (below).
    - Gbàgede (d28), started 26 Oct: roads done (hand pass 1, map/d28/STREETS.md: 1,190 records, 65.5 km, every real
      street inside the border; Ikorodu Road, the Apapa-Oworonshoki Expressway and the Third Axial Road on from
-     Ṣọmọlá's ends, the cloverleaf's ramps in the north-west notch). Next: houses, places, bus stops and motor parks,
+     Ṣọmọlá's ends, the cloverleaf's ramps in the north-west notch). Houses done (hand pass 2, map/d28/BUILDINGS.md:
+     1,702 houses, 13.0% cover, the board's test 0). Next: places, bus stops and motor parks,
      landmarks (the Deeper Life church ground by Ajayi Aina Street among them, drawn with care), working_bar d28 and
      the map picture.
 
@@ -241,6 +242,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   Bariga, Pedro, Ikorodu Road by Mùṣá, the Gbagada interchange, the expressway stops), as Agunda's.
 - Ṣọmọlá's 5 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d27/BUILDINGS.md): three are
   29-39 m2, too small for it; the two larger (b-5097e7c0 166 m2, b-7c249835 169 m2) to look at on Street View and the
+  satellite (the look pass, unless one is a landmark).
+- Gbàgede's 5 tall height readings (5+ storeys) took their neighbours' 1-2 storeys (map/d28/BUILDINGS.md): three are
+  18-36 m2, too small for it; the two larger (b-e058528f 284 m2, b-ae17f158 124 m2) to look at on Street View and the
   satellite (the look pass, unless one is a landmark).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
   (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
