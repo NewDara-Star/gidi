@@ -179,8 +179,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
      street inside the border; Ikorodu Road, the Apapa-Oworonshoki Expressway and the Third Axial Road on from
      Ṣọmọlá's ends, the cloverleaf's ramps in the north-west notch). Houses done (hand pass 2, map/d28/BUILDINGS.md:
      1,702 houses, 13.0% cover, the board's test 0). Places done (hand pass 3: 261, the denominational churches taken
-     by hand; working_bar d28 PASS). Next: landmarks (the Deeper Life church ground by Ajayi Aina Street among them,
-     drawn with care), working_bar d28 again and the map picture. Its bus stops and motor parks owed (below).
+     by hand; working_bar d28 PASS). Landmarks done (hand pass 4: 24 walled plots, the Deeper Life church's ground by
+     Ajayi Aina Street kept whole with its hall). **At the working bar** (26 Oct); its map picture looked at and sent.
+     Its bus stops and motor parks owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
