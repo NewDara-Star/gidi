@@ -148,7 +148,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      (working_bar d14 PASS, check 0, the board's own test 0, 26 Oct). 
    - Sọ̀rọ̀lérè (d13), started 26 Oct: roads done (hand pass 1, map/d13/STREETS.md: 452 records, every real street
      but 31 pieces under Western Avenue, 100% of road length on a real line; Western Avenue carried on from Mùṣá's
-     flyover; Ogunlana Drive stays Ìtìrí's). Next: houses, places, bus stops and motor parks, landmarks (Randle
+     flyover; Ogunlana Drive stays Ìtìrí's). Houses done (hand pass 2, map/d13/BUILDINGS.md: 518, each with a kind and storeys, 14.4%
+     of the district, drafted on the 17 main roads then cut back from every road). Next: places, bus stops and motor parks, landmarks (Randle
      General Hospital's echo given care: the owner was born there), then working_bar d13.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
@@ -159,7 +160,7 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   (`ground_look` lacks one); the places' sound-alike names (owner: later) and hours; the 787 houses given their
   neighbours' storeys, then kind, ground floor and roof block by block from the shots; ground patches; the `LIVING.md`
   sheets checked against Street View (thin ones first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu
-  towns, Àgbàlá); buildings for Mùṣá's six place squares in open ground (hand pass 63) and Ìtìrí's 65 (d14 hand pass 3); Ìtìrí's houses filled up and its four grounds' buildings (18.8% of the district against the real 37.5%; d14 BUILDINGS hand pass 2) and b-7aa9e512's storeys (2.5D read 5+) checked in Street View; Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
+  towns, Àgbàlá); buildings for Mùṣá's six place squares in open ground (hand pass 63) and Ìtìrí's 65 (d14 hand pass 3); Ìtìrí's houses filled up and its four grounds' buildings (18.8% of the district against the real 37.5%; d14 BUILDINGS hand pass 2) and b-7aa9e512's storeys (2.5D read 5+) checked in Street View; Sọ̀rọ̀lérè's houses filled up (14.4%) and its six 5+ readings (d13 BUILDINGS hand pass 2) checked in Street View; Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
 - Mushin station's footbridge: from the hall b-mshstn01 over the tracks to both platforms, as the real one (a path
   whose points carry z, clear of the rail by 6 m; the check reads road z only, so rail clearance is a check to add
   with it). With item a2's rail and station builders, which also build `station_hall`.
@@ -171,6 +172,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Real names in record notes (push review, 26 Oct): d13, d14 and d15 road and district notes name real streets
   (Western Avenue, Ojuelegba, Ogunlana Drive...) while each STREETS.md says real names live there only. Settle it once:
   strip the notes to ids and sound-alikes, or reword the STREETS.md line; in its own commit.
+- The land between Mùṣá, Ìtìrí and Sọ̀rọ̀lérè that no district holds (about 12900-13200 × 6500-6860: the frame
+  study's Mushin, left out of Mùṣá's drawn border; Western Avenue crosses it): give it to one, by hand.
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
   (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
