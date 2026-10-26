@@ -139,6 +139,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture
    places, bus stops and motor parks, landmarks, check at 0, then `scripts/working_bar.py dNN` passing (written 26 Oct; CHECKS.md
    row PART).
+   - Ìtìrí (d14), started 26 Oct: roads done (hand pass 1, map/d14/STREETS.md: 367 records, every real street, 99% of
+     road length on a real line, Lawanson Road at read widths, the seam with Mùṣá joined; working_bar d15 still PASS).
+     Next for Ìtìrí: houses (draft_buildings, storeys, kinds), Overture places (218 for the game), bus stops, the Itire
+     Road Motor Park (Owed below), landmarks with walls and gates, then working_bar d14.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -157,6 +161,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - For the road kit in gidi-game (Unreal is on hold): road points' z, the deck, its parapets and piers; and the board
   server reloading check_map.py when it changes (it holds the old road-node check until restarted: on 26 Oct it showed
   rd-isodeck1 crossing rd-qqm8wpxb with no node, which the new check passes as a bridge).
+- Ogunlana Drive runs on Ìtìrí's seam with Sọ̀rọ̀lérè (13): drawn with Ìtìrí for now; which district owns it is
+  decided when Sọ̀rọ̀lérè is drawn (d14 STREETS.md).
 - For Ìtìrí (d14), when it is drawn (owner, 26 Oct: "Remember this"): Itire Road Motor Park, a real motor park
   (Google Maps, study only: plus code 6FR5G87M+GM, 6.51381,3.33419; Gidi (12141.2,6436.7)) falls in d14, 95 m outside
   Mùṣá, so it is drawn with d14 as a `motor_park` place, not with Mùṣá (d15 hand pass 56).
