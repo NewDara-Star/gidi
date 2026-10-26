@@ -1,5 +1,28 @@
 # Ìtìrí: the buildings draft and its hand pass
 
+## Hand pass 4 (26 Oct): the landmarks with walls and gates, and the board's own house test
+
+**Landmarks** (a one-off scratch script, not kept), from Overture's land use in Gidi metres, as LUTH (Mùṣá hand pass 63): each ground
+less the carriageways along it is a plot, a wall 0.2 m inside its edge, open where houses close it. No road enters any of
+them, so each has one 4 m gate where its wall comes nearest a road. 4 plots, 6 wall records, 4 gates:
+
+| plot | what | m² | wall m (of the edge) | houses inside, linked |
+|---|---|---|---|---|
+| pl-itr259e9 | school ground (its place pc-itr259e9), sheet steel gate | 2086 | 146.7 of 190.9 | 0 |
+| pl-itrbb775 | school ground (its place pc-itrbb775), sheet steel gate | 998 | 72.2 of 129.0 | 1 |
+| pl-itr58634 | factory compound, 2.8 m with razor wire, sheet steel gate | 5945 | 295.2 of 330.6 | 3 |
+| pl-itr4b3a8 | church ground, bar gate | 501 | 80.9 of 122.9 | 1 |
+
+Left out: a 210 m² pitch (not walled). The grounds' buildings (classrooms, sheds) are owed to the look pass.
+
+**The board's own test** (web/mapedit.js boardProblems: a house on a carriageway with round bends and flat ends, or on
+another house) flagged houses that check_map passes, by slivers: 4 house pairs overlapping by up to 0.7 m² (trimmed
+to a party wall); then 43 Ìtìrí houses with slivers the earlier cuts' simplify left (re-cut unsimplified to the
+carriageway + 0.1 m and 0.05 m off the larger neighbour, 30.8 m² in all, at most 2.5 m² a house); then 18 whose corner
+sat at a lane's flat end or bend (notched, then cut 0.15 m past the end; at most 2.6 m² a house). Five Ìtìrí roads repeated a point (rd-4388eab9,
+rd-7fd4aeca, rd-8078760d, rd-95e589a5, rd-c9abda39); the repeats went. The same test run headless (node, the board's
+own functions on both districts' records): 0.
+
 ## Hand pass 3 (26 Oct): the real places, the bus stops and the Itire Road Motor Park
 
 218 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules). **202
