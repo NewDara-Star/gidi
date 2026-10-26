@@ -141,8 +141,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    row PART).
    - Ìtìrí (d14), started 26 Oct: roads done (hand pass 1, map/d14/STREETS.md: 367 records, every real street, 99% of
      road length on a real line, Lawanson Road at read widths, the seam with Mùṣá joined; working_bar d15 still PASS).
-     Next for Ìtìrí: houses (draft_buildings, storeys, kinds), Overture places (218 for the game), bus stops, the Itire
-     Road Motor Park (Owed below), landmarks with walls and gates, then working_bar d14.
+     Houses done (hand pass 2, map/d14/BUILDINGS.md: 687, each with a kind and storeys, drafted on the 37 main roads
+     then cut back from the lanes). Next for Ìtìrí: Overture places (218 for the game), bus stops, the Itire Road Motor
+     Park (Owed below), landmarks with walls and gates, then working_bar d14.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -152,7 +153,7 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   (`ground_look` lacks one); the places' sound-alike names (owner: later) and hours; the 787 houses given their
   neighbours' storeys, then kind, ground floor and roof block by block from the shots; ground patches; the `LIVING.md`
   sheets checked against Street View (thin ones first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu
-  towns, Àgbàlá); buildings for Mùṣá's six place squares in open ground (hand pass 63); Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
+  towns, Àgbàlá); buildings for Mùṣá's six place squares in open ground (hand pass 63); Ìtìrí's houses filled up (18.8% of the district against the real 37.5%; d14 BUILDINGS hand pass 2) and b-7aa9e512's storeys (2.5D read 5+) checked in Street View; Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
 - Mushin station's footbridge: from the hall b-mshstn01 over the tracks to both platforms, as the real one (a path
   whose points carry z, clear of the rail by 6 m; the check reads road z only, so rail clearance is a check to add
   with it). With item a2's rail and station builders, which also build `station_hall`.
