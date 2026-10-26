@@ -150,8 +150,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
      but 31 pieces under Western Avenue, 100% of road length on a real line; Western Avenue carried on from Mùṣá's
      flyover; Ogunlana Drive stays Ìtìrí's). Houses done (hand pass 2, map/d13/BUILDINGS.md: 518, each with a kind and storeys, 14.4%
      of the district, drafted on the 17 main roads then cut back from every road). Places done (hand pass 3: 143 places, 0 real places missing, 1 bus stop; working_bar d13
-     PASS, with no landmark plot yet). Next: landmarks (Randle
-     General Hospital's echo given care: the owner was born there), then working_bar d13.
+     PASS, with no landmark plot yet). The south lobe below Itire Road (Randle, Akerele, Falolu, Karimu, Clegg; in
+     no district till now, the owner's 23 Oct decision) added to the outline, its streets drawn (hand pass 4, d13
+     STREETS.md: 177 new roads; district now 0.670 km²). Next: the lobe's houses and places, then landmarks (Randle
+     General Hospital's echo given care: the owner was born there; its points are in the lobe), then working_bar d13.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -173,8 +175,6 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Real names in record notes (push review, 26 Oct): d13, d14 and d15 road and district notes name real streets
   (Western Avenue, Ojuelegba, Ogunlana Drive...) while each STREETS.md says real names live there only. Settle it once:
   strip the notes to ids and sound-alikes, or reword the STREETS.md line; in its own commit.
-- The land between Mùṣá, Ìtìrí and Sọ̀rọ̀lérè that no district holds (about 12900-13200 × 6500-6860: the frame
-  study's Mushin, left out of Mùṣá's drawn border; Western Avenue crosses it): give it to one, by hand.
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
