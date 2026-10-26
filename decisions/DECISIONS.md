@@ -65,6 +65,12 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   (3) reading the inventory, or code before changing it, is two passes: the first to learn what each part is, the second
   to understand what it does and whether it is still used. Outranks the "keep it frozen to view" wording for the old map
   and its Unreal side (owner gave permission to delete what is no longer useful).
+- **Working first, polish later** (owner, 26 Oct: "improving the models will always be an iterative process... We really
+  just need to get them working... The important thing right now is completing the map and getting the game to actually
+  work"). Every kind of thing on the map needs a model that works in the game (built, placed, light enough); looking
+  right comes in later passes. So: a proper inventory of what is to be modelled and where each stands; then the map
+  completed and the game working; model passes against photos wait until then (kept on the Owed list, not dropped).
+  Outranks "passes per photo until returns are small" while the map and game are unfinished.
 - **Every kit draws instances** (owner, 25 Oct evening): all the builders go the way the houses did, shared pieces loaded
   once and placed many times as instances, never one model per thing (900 umbrellas = one umbrella, 900 placements).
 
