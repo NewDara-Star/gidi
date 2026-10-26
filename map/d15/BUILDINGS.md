@@ -67,12 +67,21 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 47 (26 Oct): B33's railway strip looked at again
+
+Hand pass 39 said the real strip along the railway in B33 (between Olateju Street and the rail, now the block at
+x 13107-13162, y 5756-5825: block numbers moved when lanes were added) is mostly bare ground. On the underlay at close
+zoom the bare ground is a strip of about 4-6 m between the houses and the line, the rest of the block is built; in the
+map no house in the block stands nearer than 9.0 m to the rail's centre line, which is that strip. Nothing removed. The
+rail's own corridor, tracks, ballast and fences are still unset (the rail record's note; check_map's missing fields).
+
 ## Hand pass 46 (26 Oct): the Vono Road factory (the old B27)
 
 The factory inside Vono Road's loop (road_reads 435: factory wall, blue fence) held two drafted shop-under-flats
 (b-7dc8c34e, b-4ba51d3c), removed. Drawn in our own layout after the underlay's pattern (big sheds round a loading yard),
-not traced: a `compound` plot pl-b27facto on all the land between Vono Road, the trunk road and d15's edge (5,710 m2), and
-four `shed` records b-b27fac01..04: the big shed in the north tongue (928 m2, 7.5 m), the long shed along Vono Road (492
+not traced: a `compound` plot pl-b27facto on the land between Vono Road, the trunk road and d15's edge, kept 10 m clear
+of the rail's centre line (5,469 m2), and
+four `shed` records b-b27fac01..04: the big shed in the north tongue (736 m2, 7.5 m, 12.3 m from the rail's centre), the long shed along Vono Road (492
 m2), the store along the trunk road (217 m2), all longspan gable roofs and workshop ground floors, and a gatehouse on Vono
 Road. The schema has no factory kinds (plot, house or place); shed and compound stand in. Still to draw: the factory wall
 and gate, faces.
