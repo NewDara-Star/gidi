@@ -162,7 +162,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      Apapa-Oworonshoki Expressways one 25 m record each along the border). Houses done (hand pass 2,
      map/d09/BUILDINGS.md: 1,472, each with a kind and storeys, 16.0% of the district). Places done (hand pass 3: 262
      places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Landmarks done (hand pass 4: 16
-     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band is wetland, scrub and the barracks: d09 BUILDINGS hand pass 4). Next: Agunda (d12).
+     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band is wetland, scrub and the barracks: d09 BUILDINGS hand pass 4).
+   - Agunda (d12), started 26 Oct: roads done (hand pass 1, map/d12/STREETS.md: 882 records, 44.6 km, every real street
+     but what Ìtìrí, Sọ̀rọ̀lérè and Ayégúnlẹ̀ hold; the Apapa-Oworonshoki Expressway one 25 m record on the west border;
+     the seam joined on Agunda's side). Next: houses, places, bus stops and motor parks, landmarks, working_bar d12 and
+     the map picture.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -197,6 +201,13 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   painted as scatter areas when the district's ground is drawn (d09 BUILDINGS hand pass 4).
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
+- Agunda's Apapa-Oworonshoki Expressway record rd-cd2a7637 runs on its west border, half its width over the frame land
+  west of it: the district drawn there takes it as held and draws its first 70 m (d12 STREETS.md). Ijora-Iganmu-Costain
+  (d11) draws the 5 Apapa Road pieces on Agunda's east border. Alhaji Masha Road's 13.5 m (merged in two rounds) to
+  read against the satellite first.
+- scripts/working_bar.py checks one district without its neighbours, so a seam junction (a node shared with a
+  neighbour's road) reads as unjoined: load the neighbours, count only the district's problems (4 in Agunda), in its own
+  commit.
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
   (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
