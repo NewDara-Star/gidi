@@ -67,6 +67,23 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 63 (26 Oct): the real places still missing, and LUTH's campus walled
+
+`scripts/working_bar.py d15` found real places (Overture) with no place of their kind near, and LUTH's campus with no
+wall or gate. Places: 25 put on the house nearest their point (one place per house and kind, the house linked; pc- ids
+from the house and kind), as pass 55 did. Six lay in open ground, no house within 10 m (two churches and a church
+organisation, a bank, the cancer centre, the School of Nursing): each is a 6 m square at its point, moved off a road
+or house where needed (4.5 m and 0.5 m; and 12.5 m for the church whose point is on Western Avenue's decks, to just past the side
+road on the house side); the four house places first made for them went (pc-b8813d37, pc-c97a0cf9, pc-bcfbd954,
+pc-69a3c55a). A bus station's point 1.9 m from b-2f0e6a1a, no road within 20 m, keeps that house as its office.
+LUTH: Overture's land_use outline (24 points, 27176 m2) less the carriageways of the three roads along its edge is
+plot pl-luthcamp (kind compound, 26773 m2) and a clinic place over it (pc-luthcamp); its 19 houses wholly inside are
+linked to the plot. The wall (14 pieces, 450 m of the 755 m ring) stands 0.2 m inside the plot, open where 18 houses
+close it and where the drive rd-zpb4ffh6 runs along the edge (9.3 m); rendered cream, 2.4 m. Four green bar gates
+across the five drives that cross it, each the drive's carriageway plus 0.6 m a side: 8.6, 8.05 and 8.2 m, and 22.6 m
+at the main entrance, where rd-y7rfqvf1 and rd-8rjr3ndf cross 12.7 m apart. The station hall (pass 62) overlapped
+lane rd-z7y18cz7 by 0.013 m2 at a bend (the board's flag; pass 62's "overlapping neither" was wrong): moved 0.1 m off.
+
 ## Hand pass 62 (26 Oct): Mushin station's hall
 
 On Google's satellite (study only) the real station hall stands east of the tracks: 48 x 18 m, two green longspan roofs,
