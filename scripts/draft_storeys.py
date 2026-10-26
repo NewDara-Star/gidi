@@ -114,7 +114,7 @@ def heights(src):
         if not box(*r.bounds).intersects(to(ext)):
             continue
         for i, g in utm.items():
-            if i in out:
+            if out.get(i) is not None:   # an empty tile over the house: read the next one that overlaps it
                 continue
             a = to(g)
             if not box(*r.bounds).contains(a):

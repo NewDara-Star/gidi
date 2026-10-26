@@ -187,10 +187,7 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   run `scripts/map_picture.py`'s gap count and fail on red land beside the district.
 - A hospital house type (Randle's two blocks are walkup and face_me_bungalow stand-ins, d13 hand pass 5); the landmark
   grounds' own buildings (the stadium's bowl and stands, the schools, the Tejuosho market, the factory) to the look pass.
-- `scripts/draft_storeys.py` stops at the first Open Buildings tile that holds a house, even when that tile has no
-  built pixels there and an overlapping one does (Ayégúnlẹ̀: tile_HKIm1T8zqO4 empty, tile_qNSfrvnK9X8 full; d09
-  BUILDINGS hand pass 2 read it from a scratch copy). A drafting script: fixed only when the owner asks (CLAUDE.md).
-  And a Street View check of Ayégúnlẹ̀'s 10 tall 2.5D readings (d09 BUILDINGS.md).
+- A Street View check of Ayégúnlẹ̀'s 10 tall 2.5D readings (d09 BUILDINGS.md).
 - When Mile 2-Amuwo Odofin (6), Kirikiri-Tin Can (8) and Apapa (10) are drawn: Ayégúnlẹ̀'s two expressway records
   (rd-b2b8a5cc, rd-f1478f6a) run on their shared border, half their width over those districts' frame land; take them
   as held, join their streets to them, and settle the border line by hand (d09 STREETS.md).
