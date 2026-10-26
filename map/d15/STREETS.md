@@ -216,7 +216,8 @@ Dropped on purpose from the first draft: Odulana Street (its line could not be t
 
 ## Given to Surulere (13), 23 Oct
 
-These were drawn here and left the district with the south lobe. Surulere takes them when it is drawn.
+These were drawn here and left the district with the south lobe. Surulere takes them when it is drawn: Sọ̀rọ̀lérè (13) drew
+them on their real lines on 26 Oct (d13 STREETS.md, hand pass 4).
 
 | Gidi id | key | real street | kind | width | why kept | values seen |
 |---|---|---|---|---|---|---|

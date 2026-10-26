@@ -44,6 +44,21 @@ places come in their own passes (NOW item 11).
   Sọ̀rọ̀lérè), and Sọ̀rọ̀lérè's lane rd-51b26fe5 ends on its node (12755.24,6862.6). No Ìtìrí record changed.
 - Western Avenue south of the border (Iponri, Costain) is the next district's (11) to carry on from rd-32d33ffa's end.
 
+## Hand pass 4 (26 Oct): the south lobe
+
+The land below Itire Road between Mùṣá, Ìtìrí and Sọ̀rọ̀lérè (Randle, Akerele, Falolu, Karimu, Clegg) was in no
+district: the frame study gave it to Mushin, Mùṣá's drawn border left it out, and the owner gave it to Surulere on 23
+Oct (DECISIONS: "give it to surulere"). It is added to the outline by hand (0.140 km²; its whole 1757 m edge is
+Sọ̀rọ̀lérè's old border, 917 m, Ìtìrí's, 403 m, and Mùṣá's, 437 m). The district is now 0.670 km².
+
+- Its real streets as in hand pass 1, clipped to the lobe: **177 new records, 6964 m** (4 local main, 26 home streets,
+  147 lanes), 28 named streets among them (Akerele Road and Randle Avenue as local mains); 8 Sọ̀rọ̀lérè roads that
+  ended on the old border carried on into it (370 m more).
+- Left out: 10 Western Avenue pieces under the avenue's corridor (its 25 m and Mùṣá's decks hold them) and 4 short
+  Ogunlana Drive pieces weaving over Ìtìrí's border (Ogunlana Drive stays Ìtìrí's).
+- Seams: Ìtìrí's rd-45205df9 and rd-586381eb gained a junction vertex each (their lines within 0.003 m); no
+  neighbour end moved. Mùṣá unchanged. Mùṣá's "Given to Surulere" streets (d15 STREETS.md) are these.
+
 ## Every road record
 
 | id | real name | kind | width m | length m | source |
@@ -500,3 +515,180 @@ places come in their own passes (NOW item 11).
 | rd-fcd09181 | (unnamed) | lane | 7 | 38.4 | Overture line, width Mùṣá's for the kind |
 | rd-fdab3e1d | (unnamed) | lane | 7 | 12.8 | Overture line, width Mùṣá's for the kind |
 | rd-ffcc084d | (unnamed) | lane | 7 | 53.8 | Overture line, width Mùṣá's for the kind |
+| rd-0019535e | (unnamed) | lane | 7 | 24.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-00bc2272 | Ayilara Street | home_street | 7 | 108.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0159a54c | (unnamed) | lane | 7 | 46.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-03d38bc0 | Karimu Street | home_street | 7 | 148.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-04841476 | (unnamed) | lane | 7 | 21.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-09d85855 | (unnamed) | lane | 7 | 28.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-09f8290f | (unnamed) | lane | 7 | 23.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0c0a847e | (unnamed) | lane | 7 | 39.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0cc34d39 | (unnamed) | lane | 7 | 20.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0e4faeb0 | (unnamed) | lane | 7 | 15.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0ee2aa65 | (unnamed) | lane | 7 | 51.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-0fb9cfe6 | (unnamed) | lane | 7 | 11.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-10c138fb | (unnamed) | lane | 7 | 17.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1195c4e3 | (unnamed) | lane | 7 | 16.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-131caef0 | (unnamed) | lane | 7 | 10.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1344a4c8 | Akintan Street | home_street | 7 | 138.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-135fc258 | (unnamed) | lane | 7 | 24.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-13612e49 | (unnamed) | lane | 7 | 67.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-15426d74 | (unnamed) | lane | 7 | 14.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-17ea63e0 | (unnamed) | lane | 7 | 14.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-180f4519 | Ogunlana Lane | home_street | 7 | 26.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-18f621f4 | (unnamed) | lane | 7 | 18.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-194ded54 | (unnamed) | lane | 7 | 20.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1973a814 | Taiwo Way | home_street | 7 | 44.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-19ddd93d | (unnamed) | lane | 7 | 9.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1bfb1174 | (unnamed) | lane | 7 | 23.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1d964deb | (unnamed) | lane | 7 | 9.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1e6a95a1 | (unnamed) | lane | 7 | 23.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-1eadb711 | (unnamed) | lane | 7 | 39.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2011a315 | (unnamed) | lane | 7 | 39.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-207dbe41 | (unnamed) | lane | 7 | 18.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2122fa7e | (unnamed) | lane | 7 | 41.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-216faec0 | (unnamed) | lane | 7 | 15.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-21b94f4a | (unnamed) | lane | 7 | 10.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2229267b | (unnamed) | lane | 7 | 13.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2433ba9f | (unnamed) | lane | 7 | 13.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-26b0ca47 | Abimbola Shadipe Street | home_street | 7 | 61.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-27ff770f | (unnamed) | lane | 7 | 26.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2841a8ed | (unnamed) | lane | 7 | 40.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-296749d1 | (unnamed) | lane | 7 | 8.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2a2d1946 | (unnamed) | lane | 7 | 27.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2bec1bd6 | (unnamed) | lane | 7 | 11.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2cba3ee6 | (unnamed) | lane | 7 | 18.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2e7dfb76 | (unnamed) | lane | 7 | 39.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-2f4264b2 | (unnamed) | lane | 7 | 17.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-3077a2f2 | (unnamed) | lane | 7 | 32.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-30968ac4 | (unnamed) | lane | 7 | 20.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-34779b6f | (unnamed) | lane | 7 | 10.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-36ee9ef0 | (unnamed) | lane | 7 | 24.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-3950a2bb | (unnamed) | lane | 7 | 19.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-3aaac7fd | (unnamed) | lane | 7 | 19.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-3d945acf | (unnamed) | lane | 7 | 32.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-3dabf78b | (unnamed) | lane | 7 | 20.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-409c65ad | (unnamed) | lane | 7 | 23.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-40c442ca | (unnamed) | lane | 7 | 32.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-40ddcd56 | (unnamed) | lane | 7 | 104.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-42b0017a | (unnamed) | lane | 7 | 33.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-42ff09e0 | (unnamed) | lane | 7 | 13.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-430c8c76 | (unnamed) | lane | 7 | 76.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-465d55d5 | (unnamed) | lane | 7 | 8.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-46b22b35 | (unnamed) | lane | 7 | 12.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-47d1bbf0 | (unnamed) | lane | 7 | 16.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-4b95dc5f | (unnamed) | lane | 7 | 9.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-4e1c6169 | (unnamed) | lane | 7 | 24.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-53044130 | (unnamed) | lane | 7 | 24.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-55305d62 | (unnamed) | lane | 7 | 34.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-55d4ea21 | (unnamed) | lane | 7 | 30.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5797295e | (unnamed) | lane | 7 | 17.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-59e67f3c | (unnamed) | lane | 7 | 8.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5b2635ae | (unnamed) | lane | 7 | 22.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5dd8642d | (unnamed) | lane | 7 | 20.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5e1424ed | (unnamed) | lane | 7 | 12.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5e21851d | (unnamed) | lane | 7 | 8.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-5e67624c | (unnamed) | lane | 7 | 11.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-62b5323b | (unnamed) | lane | 7 | 33.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6792f8ab | (unnamed) | lane | 7 | 37.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-682681cd | (unnamed) | lane | 7 | 18.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-684026af | (unnamed) | lane | 7 | 19.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6875fa68 | Oni Street | home_street | 7 | 111.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6877da61 | (unnamed) | lane | 7 | 51.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-69e2fe67 | Ishola Street | home_street | 7 | 101.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6b9345ba | (unnamed) | lane | 7 | 43.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6bb3b6b7 | Benson Street | home_street | 7 | 79.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6d28eb15 | (unnamed) | lane | 7 | 12.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6dffbb6d | Bishop Crowther Street | home_street | 7 | 89.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-6f2801f7 | (unnamed) | lane | 7 | 20.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-7373b901 | (unnamed) | lane | 7 | 27.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-7676f6f1 | Omolewa Street | home_street | 7 | 71.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-799449cf | (unnamed) | lane | 7 | 36.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-799df84f | Falolu Road | home_street | 7 | 241.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-7d7d9491 | (unnamed) | lane | 7 | 40.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-7fd5da9e | Abina Street | home_street | 7 | 146.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-80851d2e | (unnamed) | lane | 7 | 35.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-81a7fb82 | Onitolo Street | home_street | 7 | 74.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-81b1f04c | (unnamed) | lane | 7 | 35.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-84c1a6bf | (unnamed) | lane | 7 | 17.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-84fd30c8 | (unnamed) | lane | 7 | 43.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-86ed35c2 | (unnamed) | lane | 7 | 115.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-87a4d472 | Oyekan Street | home_street | 7 | 40.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-87c30703 | (unnamed) | lane | 7 | 19.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8ac96c09 | Makinde Street | home_street | 7 | 47.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8b828f8f | (unnamed) | lane | 7 | 44.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8c7d2417 | (unnamed) | lane | 7 | 29.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8e13b1c9 | (unnamed) | lane | 7 | 40.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8eca3cf9 | Salawu Street | home_street | 7 | 135.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8ed0fe56 | (unnamed) | lane | 7 | 23.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-8eec2e5d | (unnamed) | lane | 7 | 12.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-97305661 | (unnamed) | lane | 7 | 35.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-98f9c0e5 | (unnamed) | lane | 7 | 16.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-9c1f7b4a | (unnamed) | lane | 7 | 42.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-9e054c92 | (unnamed) | lane | 7 | 39.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-9ea7a11f | (unnamed) | lane | 7 | 39.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a0b0a633 | (unnamed) | lane | 7 | 11.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a1d56a43 | (unnamed) | lane | 7 | 11.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a23a9d46 | (unnamed) | lane | 7 | 23.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a28a8f6b | (unnamed) | lane | 7 | 19.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a435d15a | (unnamed) | lane | 7 | 36.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-a694c671 | (unnamed) | lane | 7 | 38.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ab5d9ebe | (unnamed) | lane | 7 | 11.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-abd5d214 | (unnamed) | lane | 7 | 22.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-acea56ff | Dabiri Close | home_street | 7 | 27.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ae7b7470 | (unnamed) | lane | 7 | 42.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-af27e226 | (unnamed) | lane | 7 | 33.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-affef102 | (unnamed) | lane | 7 | 11.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b011ca9f | Remilekun Road | home_street | 7 | 50.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b0237b8e | (unnamed) | lane | 7 | 20.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b3818068 | (unnamed) | local_main | 8.5 | 169.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b38c1e94 | (unnamed) | lane | 7 | 13.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b3bddd31 | (unnamed) | lane | 7 | 18.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b4001c34 | (unnamed) | lane | 7 | 21.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b4c0d5ec | Oyekan Street | home_street | 7 | 24.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b6d53234 | (unnamed) | lane | 7 | 47.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-b7d2c7e1 | Awoyemi Close | home_street | 7 | 45.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ba9f7636 | (unnamed) | lane | 7 | 17.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-bade4726 | (unnamed) | lane | 7 | 11.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-bc12ebf0 | (unnamed) | lane | 7 | 43.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-bd05d134 | Gbaja Street | home_street | 7 | 74.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-be7f35fa | (unnamed) | local_main | 8.5 | 140.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-bfb1336d | (unnamed) | lane | 7 | 19.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-c040afe5 | (unnamed) | lane | 7 | 27.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-c254a7e6 | (unnamed) | lane | 7 | 10.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-c40a7d38 | (unnamed) | lane | 7 | 42.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-c806a30b | (unnamed) | lane | 7 | 23.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-c927c7de | (unnamed) | lane | 7 | 17.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ceae8094 | Akerele Road | local_main | 8.5 | 312.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-cf60048d | (unnamed) | lane | 7 | 19.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d08ce6f2 | (unnamed) | lane | 7 | 8.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d1edc25d | (unnamed) | lane | 7 | 20.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d2907a35 | (unnamed) | lane | 7 | 28.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d4ddf350 | (unnamed) | lane | 7 | 10.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d753712f | (unnamed) | lane | 7 | 21.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-d79267b6 | Randle Avenue | local_main | 8.5 | 264.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-da69332d | (unnamed) | lane | 7 | 8.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-dc538de5 | (unnamed) | lane | 7 | 10.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-dd700495 | (unnamed) | lane | 7 | 38.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ddf72cc7 | (unnamed) | lane | 7 | 22.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-df828139 | (unnamed) | lane | 7 | 22.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-dfc8b466 | Lawani Street | home_street | 7 | 68.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-e16b689a | (unnamed) | lane | 7 | 18.8 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-e1bcab89 | (unnamed) | lane | 7 | 14.4 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-e26f4d6b | (unnamed) | lane | 7 | 39.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-e8e33308 | (unnamed) | lane | 7 | 14.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-e9d6bf03 | (unnamed) | lane | 7 | 12.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ea02a56a | (unnamed) | lane | 7 | 21.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-ea74bc35 | (unnamed) | lane | 7 | 54.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-efc6c094 | Olorogun Street | home_street | 7 | 52.3 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-efecf3e4 | (unnamed) | lane | 7 | 18.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-effbb523 | (unnamed) | lane | 7 | 13.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f2ca9a18 | (unnamed) | lane | 7 | 22.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f309e5cd | (unnamed) | lane | 7 | 16.6 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f45f5c10 | (unnamed) | lane | 7 | 19.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f6021de2 | (unnamed) | lane | 7 | 32.1 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f680dcde | (unnamed) | lane | 7 | 17.9 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f6b04fd3 | Ibidun Street | home_street | 7 | 127.2 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-f73ccb04 | (unnamed) | lane | 7 | 24.5 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-fa6532b6 | (unnamed) | lane | 7 | 12.0 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
+| rd-fd8d2beb | Clegg Street | home_street | 7 | 189.7 | Overture line, the south lobe (hand pass 4), width Mùṣá's for the kind |
