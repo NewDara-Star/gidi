@@ -48,8 +48,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
 03. [ ] **Map and brush first; Unreal on hold (owner, 26 Oct, DECISIONS "Map and brush first, Unreal on hold"; they
-   may take it back):** the work is the map on the board in Chrome until every district is complete: Mùṣá's hand pass
-   (item 10) and its brush layer first, then the other districts in the order item 10 names. The Unreal items wait
+   may take it back):** the work is the map on the board in Chrome until every district is complete: Mùṣá to working
+   (item 10), then the other districts to working, breadth-first (item 11); polish after (the look pass). The Unreal items wait
    (02(a1)-(a3) and (c), 0, 2-8): kept here, not worked, until the owner says.
 02. [ ] **Working first (owner, 26 Oct, DECISIONS "Working first, polish later"):** (a) [x] the inventory of what is to be
    modelled: `docs/MODEL-INVENTORY.md`, written by `scripts/model_inventory.py --write` from the map, the schema, the
@@ -126,26 +126,26 @@ merged and checked, add new ones where they belong, and say here when the owner 
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
 9. [x] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
    its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
-10. [ ] Mùṣá's hand pass on the map (carried from the old "Next, in order", 25 Oct; it runs on the map beside items
-   2-5): the school compounds in B28 and B29 (both drawn 26 Oct, BUILDINGS.md hand
-   pass 45: plots, places, blocks; walls and gates 26 Oct, hand pass 58; faces still to draw; B28's real name to read), the Vono Road factory (B27; drawn 26 Oct, hand pass 46: plot and four sheds; wall and gate, hand pass 58;
-   faces and the wall's ice-cream advert to draw) and B33's railway strip (looked at 26 Oct, hand pass 47: already clear); the 10 houses
-   7.7-9.0 m from the rail's centre elsewhere set back to 9.5 m by hand (26 Oct, hand pass 48); front houses on the
-   busy roads (26 Oct, hand pass 49: 57 given lock-ups from their roads' reads, 12 kept as homes); every road's
-   ground colours from Mushin Street View (26 Oct, hand pass 50; still owed: a laterite and a concrete road sampled from
-   their own panos, and a layer for interlock's pavers, which `ground_look` lacks); the rail's and station's missing
-   fields and the spare-parts market's uses (26 Oct, hand pass 51: d15's check now 0 problems); the station's
-   platforms from the satellite, houses off the road edges and party-wall hairlines (26 Oct, hand passes 52-54; still
-   owed: the station building); the board's road test made square at a road's ends like the check's (owner, 26 Oct:
-   the 106 houses where lanes stop no longer show red; d15 shows 0 problems on the board); the real places from Overture (26 Oct, hand pass 55: 516 churches, schools, garages, clinics, bukas, mosques, bars and the rest, each in its house; still owed: their sound-alike names (owner: later) and hours); bus stops at Mushin and Olosha (hand pass 56); the Jibowu coach yard, Mùṣá's one motor park, on two motorway-front houses' ground (hand pass 57); the 787 houses given their neighbours' storeys (rough: both sampled were wrong), then block by block
-   kind, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the Isolo Road
-   kink near Omowunmi, Olushoga's zigzag; ground patches; the `LIVING.md` sheets checked against Street View (the thin
-   sheets first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu towns, Àgbàlá), then Mùṣá's mix and person
-   spots by hand (after the owner's yes, Waiting 2); then the hero streets and the other six core districts (Ayégúnlẹ̀ 9,
-   Agunda 12, Sọ̀rọ̀lérè 13, Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28).
+10. [ ] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Done, hand passes 1-58 in
+   BUILDINGS.md: roads at read widths, houses with kinds and storeys, 516 Overture places in their houses, bus stops,
+   the Jibowu coach yard, the market, the two schools and the factory with walls and gates, the rail and station
+   platforms, check and board at 0 problems. Left for working: the road shapes (Western Avenue's side road, the Isolo
+   Road interchange, the Isolo Road kink near Omowunmi, Olushoga's zigzag) and the station building. Everything else
+   that was owed here moved to the look pass in the Owed list.
+11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
+   Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture
+   places, bus stops and motor parks, landmarks, check at 0. Owed with it: a check that reports a district against the
+   bar (CHECKS.md GAP row, "Every district to working first"), written before the second district is done.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
+- The look pass (after every district is working, hero streets first; DECISIONS "Every district to working first"),
+  moved from Mùṣá's item 10 on 26 Oct: the schools' and factory's faces and the factory wall's ice-cream advert; B28's
+  real name to read; laterite and concrete roads sampled from their own panos, and a layer for interlock's pavers
+  (`ground_look` lacks one); the places' sound-alike names (owner: later) and hours; the 787 houses given their
+  neighbours' storeys, then kind, ground floor and roof block by block from the shots; ground patches; the `LIVING.md`
+  sheets checked against Street View (thin ones first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu
+  towns, Àgbàlá); Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
 - For Ìtìrí (d14), when it is drawn (owner, 26 Oct: "Remember this"): Itire Road Motor Park, a real motor park
   (Google Maps, study only: plus code 6FR5G87M+GM, 6.51381,3.33419; Gidi (12141.2,6436.7)) falls in d14, 95 m outside
   Mùṣá, so it is drawn with d14 as a `motor_park` place, not with Mùṣá (d15 hand pass 56).

@@ -71,6 +71,14 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   until all of them are complete. Unreal work (builders, the street test, levels, measuring) waits; nothing in gidi-game
   is deleted or undone, and the Unreal items stay in the running order, marked as waiting. Outranks "Working first"'s
   "(c) the game working" while it stands; the owner may take it back.
+- **Every district to "working" first, breadth-first** (owner, 26 Oct, agreeing after four days and 56 hand passes on
+  Mùṣá alone: "Okay I agree"). A district is *working* when it has: its roads at their real widths and on their real
+  lines; its houses with a kind and storeys (rough is fine); its real places in their houses (Overture), bus stops and
+  motor parks; its landmarks drawn (markets, schools, stations, factories, with walls and gates); and the check at 0
+  problems. All 51 districts reach that bar before any district gets polish. Polish (faces, adverts, road ground
+  samples, ground patches, storeys block by block, the LIVING sheets, brush and person spots) waits for a look pass,
+  done first on the hero streets. Each step Mùṣá proved is run as one pass across a district in one sitting, still a
+  hand pass at each spot and written in its BUILDINGS.md. Aim: about a day a district at first.
 - **Working first, polish later** (owner, 26 Oct: "improving the models will always be an iterative process... We really
   just need to get them working... The important thing right now is completing the map and getting the game to actually
   work"). Every kind of thing on the map needs a model that works in the game (built, placed, light enough); looking
