@@ -161,7 +161,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      street but 18 pieces under the expressways, 98% of road length on a real line; the Lagos-Badagry and
      Apapa-Oworonshoki Expressways one 25 m record each along the border). Houses done (hand pass 2,
      map/d09/BUILDINGS.md: 1,472, each with a kind and storeys, 16.0% of the district). Places done (hand pass 3: 262
-     places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Next: landmarks, then the map picture.
+     places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Landmarks done (hand pass 4: 16
+     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture sent 26 Oct. Next: Agunda (d12).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
