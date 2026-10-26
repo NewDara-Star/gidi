@@ -67,6 +67,16 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 57 (26 Oct): the Jibowu coach yard, Mùṣá's one motor park
+
+The coach yards at Jibowu front Ikorodu Road between Rahony Travels and Polarplus (Google satellite at zoom 19 and the
+ySG Park Jibowu point, study only: open 24 hours). Read off the satellite, the yard (about 39 by 50 m real) lands in Gidi
+at (13349-13363, 6180-6197), 186 of its 219 m2 on the motorway rd-3079cryq: the road is drawn at its full width, so the
+yard moves off it. Houses give way: the two houses that fronted the motorway at that spot, b-a368fc34 (2 storeys, 85 m2)
+and b-11567139 (a 28 m2 bungalow), neither holding a place, are removed. Their ground is now pc-jbwyard1, a motor_park of
+119 m2 (12.6 by 14.6 m; the two houses' hull, kept 0.15 m clear of the neighbours and the road). Uses pick_up, drop_off,
+load and unload; hours 00-24; no name ("name to give (a sound-alike)"). It is small for coaches, about two or three.
+
 ## Hand pass 56 (26 Oct): two more bus stops; motor parks looked for
 
 Two real bus stops inside Mùṣá were found on Google Maps (study only: a point each, nothing copied): Mushin Bus Stop, on
