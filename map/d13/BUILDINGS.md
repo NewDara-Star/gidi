@@ -1,5 +1,16 @@
 # Sọ̀rọ̀lérè (district 13): the buildings and their hand passes
 
+## Hand pass 4, places (26 Oct): the south lobe's real places
+
+The lobe brought 83 more real places (234 in the district now). Hand pass 3's rules, run again over the whole district
+(the older places come out the same; 3 had their area brought to their house's re-cut footprint): **76 new places**,
+all in the lobe: church 31, clinic 18, school 10, buka 8, bar 7, mosque 1, garage 1.
+
+- 44 on houses (36 lobe houses newly linked), 31 as 6 m squares in open ground.
+- 1 buka by hand: its point at the border just past where Ìtìrí's Ogunlana Drive ends, its nearest house's buka 12.2 m
+  off and no 6 m of open ground within 9 m, so its spot is the 65 m2 open strip by the street around its point.
+- **219 places** in the district; 0 real places missing. No new bus stop or motor park in Overture here (still owed).
+
 ## Hand pass 4 (26 Oct): the south lobe's houses
 
 The south lobe (STREETS.md hand pass 4) built as hand pass 2 built the rest, no builder changed: `draft_buildings.py`
