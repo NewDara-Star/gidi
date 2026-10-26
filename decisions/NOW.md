@@ -187,7 +187,6 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   run `scripts/map_picture.py`'s gap count and fail on red land beside the district.
 - A hospital house type (Randle's two blocks are walkup and face_me_bungalow stand-ins, d13 hand pass 5); the landmark
   grounds' own buildings (the stadium's bowl and stands, the schools, the Tejuosho market, the factory) to the look pass.
-- A Street View check of Ayégúnlẹ̀'s 10 tall 2.5D readings (d09 BUILDINGS.md).
 - When Mile 2-Amuwo Odofin (6), Kirikiri-Tin Can (8) and Apapa (10) are drawn: Ayégúnlẹ̀'s two expressway records
   (rd-b2b8a5cc, rd-f1478f6a) run on their shared border, half their width over those districts' frame land; take them
   as held, join their streets to them, and settle the border line by hand (d09 STREETS.md).
