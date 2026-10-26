@@ -1,5 +1,18 @@
 # Sọ̀rọ̀lérè (district 13): the buildings and their hand passes
 
+## Hand pass 3 (26 Oct): the real places and the bus stop
+
+151 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules). **143
+places**: church 51, school 25, buka 21, clinic 19, bar 9, bank 5, mosque 5, garage 4, fuel 2, bus_stop 1, police 1.
+
+- 89 on the house their point stands in or the nearest within 8 m, on 77 houses (11 hold two or more kinds; the
+  house links the first). 8 real places shared a house and kind with another, so one place serves both.
+- 1 with no open ground within 15 m of its point, on its nearest house (9.6 m off). 78 houses carry a place link.
+- 53 as 6 m squares at their point (the bus stop, which stands on the street, and 52 in open ground with no house
+  within 8 m), moved up to 14.5 m off roads and houses; their buildings are owed to the look pass, as Ìtìrí's.
+- Only one bus stop is in Overture here, and no motor park: Ojuelegba's park and stops and Sọ̀rọ̀lérè's other stops
+  (the stadium, Masha, Adeniran Ogunsanya) are owed to a study of the map (NOW).
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **518 houses**, each with a kind and storeys; they cover 14.4% of the district (76,366 m²; Ìtìrí 18.8%). The real
