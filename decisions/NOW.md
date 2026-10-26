@@ -175,6 +175,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      (hand pass 2, map/d27/BUILDINGS.md: 1,988, each with a kind and storeys, 16.7% of the district). Places done (hand pass 3: 427,
      0 real places missing); working_bar d27 PASS. Landmarks done (hand pass 4: 14 walled plots). **At the working
      bar** (26 Oct); its map picture looked at and sent. Its bus stops and motor parks owed (below).
+   - Gbàgede (d28), started 26 Oct: roads done (hand pass 1, map/d28/STREETS.md: 1,190 records, 65.5 km, every real
+     street inside the border; Ikorodu Road, the Apapa-Oworonshoki Expressway and the Third Axial Road on from
+     Ṣọmọlá's ends, the cloverleaf's ramps in the north-west notch). Next: houses, places, bus stops and motor parks,
+     landmarks (the Deeper Life church ground by Ajayi Aina Street among them, drawn with care), working_bar d28 and
+     the map picture.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -228,6 +233,10 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
   29-53 m2, too small for it; the three larger (b-0e26f361 103 m2, b-6493aef7 194 m2, b-e9e29b9e 135 m2) to look at
   on Street View and the satellite (the look pass, unless one is a landmark).
+- Gbàgede's Ikorodu Road record rd-9e02217d runs along its west border, about half its width over the land west of
+  it, and Ikorodu Road's north stretch crosses the north-west notch in five short pieces: the districts drawn there
+  take them as held and draw on from them. The cloverleaf's own centre lies outside the notch. The 40 m and 25 m
+  widths to read against the satellite, as Ṣọmọlá's.
 - Ṣọmọlá's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Shomolu,
   Bariga, Pedro, Ikorodu Road by Mùṣá, the Gbagada interchange, the expressway stops), as Agunda's.
 - Ṣọmọlá's 5 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d27/BUILDINGS.md): three are
