@@ -1090,7 +1090,7 @@ window.MAPEDIT = (() => {
   }
 
   // ------------------------------------------------------------------ drawing (world metres; frame.js has set the transform)
-  const KIND_FILL = (k) => ({ face_me_bungalow: "--home", compound_house: "--home", colonial_house: "--home", walkup: "--home", shop_under_flats: "--trade", market_block: "--trade", kiosk_row: "--trade", church: "--civic", mosque: "--civic", school: "--civic" }[k] || "--works");
+  const KIND_FILL = (k) => ({ face_me_bungalow: "--home", compound_house: "--home", colonial_house: "--home", walkup: "--home", shop_under_flats: "--trade", market_block: "--trade", kiosk_row: "--trade", church: "--civic", mosque: "--civic", school: "--civic", station_hall: "--civic" }[k] || "--works");
   const SURF = { tar_new: "--tar", tar_worn: "--worn", sand: "--sand", earth: "--mud", laterite: "--laterite", interlock: "--interlock" };
   const GROUND = { tar: "#3e3e40", earth: "#8a6a4a", laterite: "#a0522d", sand: "#d6c08a", dust: "#b8a688", mud: "#5a4632", wet: "#4b555e", water: "#3b6e8f", concrete: "#a7a49d", interlock: "#9a8070", grass: "#5f8a3a", rubble: "#8d8478" };   // drawing colours only
   const surfCol = (k) => SURF[k] ? css(SURF[k]) : k === "concrete" ? "#a7a49d" : k === "plank" ? "#8a6a4a" : css("--worn");

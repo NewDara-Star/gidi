@@ -67,6 +67,18 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 62 (26 Oct): Mushin station's hall
+
+On Google's satellite (study only) the real station hall stands east of the tracks: 48 x 18 m, two green longspan roofs,
+a footbridge from it over the tracks to the platforms. Placed at its real centre in Gidi it fell on the rail's corridor,
+and slid along the rail no 48 m spot beside the platforms is clear of the two lanes there, so the road came first: the
+hall keeps its real depth (18 m) and turn and is 40 m long, the longest that clears every carriageway (it touches lane rd-z7y18cz7 at 0.0 m and main road
+rd-3bmlmvqc at 0.16 m, overlapping neither), 10 m off the rail's line and 1.7 m from the station's ground. b-mshstn01, a new kind `station_hall` (schema, MAP-FORMAT, the
+board's civic fill): 2 storeys (5.0 and 4.5 m), an arcade ground floor, a green longspan hip roof, cream render with a
+brick-red base, uses pick_up, drop_off and buy. Five houses under it went (b-3545230d, b-6e889dbf, b-73840e63,
+b-e327e7c9, b-ec05ab45; none had a place or a plot); b-ac560e2e, 4.0 m2 under it, was cut back 0.15 m clear. The
+footbridge is owed.
+
 ## Hand pass 61 (26 Oct): Isolo Road over the expressway
 
 Isolo Road met the expressway's carriageway at grade. The real road crosses over it on a bridge: Overture marks 288 m
