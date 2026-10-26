@@ -67,6 +67,19 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 61 (26 Oct): Isolo Road over the expressway
+
+Isolo Road met the expressway's carriageway at grade. The real road crosses over it on a bridge: Overture marks 288 m
+of Isolo Road `is_bridge`, level 1, over both carriageways and the frontage roads, with slip roads joining it where the
+side streets do. Inside Isolo Road's old 16 m, from the seam to 124.5 m along: rd-isodeck1, a 9 m `ramp` whose points
+carry z, 6.7 m up (5.5 m clear plus the deck) over the motorway and the east service road rd-qqm8wpxb, then down at
+6.5% to the ground at (12338.83,5785.46); and two 3.5 m `service_road`s at grade either side of it, rd-isolan01
+(north) and rd-isolan02 (south), from the service road to the ramp's foot, where they and the ramp join Isolo Road.
+The four side streets that met Isolo Road before the foot (rd-z3i9yyex and rd-0i4ei708 north, rd-oe3ndnqj and
+rd-vt757j5a south) now end on the lane on their side. Isolo Road starts at the foot (570.2 m, was 694.7); its verges,
+gutters and crossings before the foot went to the lanes. No house moved. The deck west of the seam, and its ramp down
+past the west service road, are Isolo-Ladipo's (d30).
+
 ## Hand pass 60 (26 Oct): Western Avenue's side road
 
 Western Avenue (rd-avaupyki) was one 35 m motorway, the width read at z19 for "both carriageways and the side road"

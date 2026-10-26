@@ -130,7 +130,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
    BUILDINGS.md: roads at read widths, houses with kinds and storeys, 516 Overture places in their houses, bus stops,
    the Jibowu coach yard, the market, the two schools and the factory with walls and gates, the rail and station
    platforms, the danfo park at the Agege Motor Road / Isolo Road junction (hand pass 59), check and board at 0
-   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Left for working: the Isolo Road interchange and the station building. Everything else
+   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Isolo Road's bridge over the expressway (hand pass 61). Left for working: the station building. Everything else
    that was owed here moved to the look pass in the Owed list.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
    Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture
@@ -146,6 +146,11 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   neighbours' storeys, then kind, ground floor and roof block by block from the shots; ground patches; the `LIVING.md`
   sheets checked against Street View (thin ones first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu
   towns, Àgbàlá); Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
+- For Isolo-Ladipo (d30), when it is drawn: Isolo Road's deck goes on from the seam at 6.7 m over the expressway's west
+  half and west service road, then ramps down at 6.5% with lanes at grade beside it, as d15's side (hand pass 61).
+- For the road kit in gidi-game (Unreal is on hold): road points' z, the deck, its parapets and piers; and the board
+  server reloading check_map.py when it changes (it holds the old road-node check until restarted: on 26 Oct it showed
+  rd-isodeck1 crossing rd-qqm8wpxb with no node, which the new check passes as a bridge).
 - For Ìtìrí (d14), when it is drawn (owner, 26 Oct: "Remember this"): Itire Road Motor Park, a real motor park
   (Google Maps, study only: plus code 6FR5G87M+GM, 6.51381,3.33419; Gidi (12141.2,6436.7)) falls in d14, 95 m outside
   Mùṣá, so it is drawn with d14 as a `motor_park` place, not with Mùṣá (d15 hand pass 56).
