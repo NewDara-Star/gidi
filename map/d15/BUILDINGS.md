@@ -67,6 +67,27 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 50 (26 Oct): every road's ground colours, from Mushin Street View
+
+357 of the 359 roads had no `ground_look` (the check's 357 "missing field" rows); the other two keep the Ladi Lane shot's.
+Each road now has the colours of its own read surface (road_reads.tsv), as the median of a patch of road in a Street View
+pano of a Mushin street with that surface. These are lit photo colours (sun or overcast, as noted), not albedo; how much
+dust lies on a road is still its `sand_cover`. A surface without a layer leaves it out (no tar on sand, earth, interlock
+or concrete).
+
+| surface | roads | tar | dust | earth | mud | from (pano, light) |
+|---|---|---|---|---|---|---|
+| tar_worn | 225 | #a6937c | #b89e86 | #886e59 | #866e53 | 11 Sadiku St, Jul 2021, sun (bare tar, dusted middle, earth verge) |
+| sand | 71 | | #dfbca3 | #d0b99a | #866e53 | 46 Alasalat St, Jul 2021, sun (road middle, apron) |
+| earth | 44 | | #b3a18d | #b38a67 | #9b8970 | 8 Wahab St, Jul 2021, overcast (road, apron, wet tyre track) |
+| interlock | 11 | | #aea496 | #aca195 | #866e53 | 20 Igbira St, Jul 2021, overcast (dusted pavers, earth edge) |
+| concrete | 3 | | #c6bbaf | #886e59 | #866e53 | Igbira St's concrete slab (Daleko Market Rd's road was hidden by a crowd) |
+| tar_new | 2 | #655e53 | #6c6352 | #886e59 | #866e53 | 19 Badejo Kalesanwo St, Mar 2024, overcast (middle, edge) |
+| laterite | 1 | | #b3a18d | #b38a67 | #9b8970 | none sampled: Wahab St's earth for now |
+
+The mud everywhere but on earth roads is Wahab St's wet earth by the drain (#866e53). Owed (NOW item 10): a laterite and
+a concrete road sampled from their own panos; interlock's paver colour has no layer in `ground_look` (the dust stands in).
+
 ## Hand pass 49 (26 Oct): front houses on the busy roads given lock-ups
 
 `draft_kinds.py` gave lock-ups only to houses within 3 m of a busy road (market, main, trunk, local main, service), so
