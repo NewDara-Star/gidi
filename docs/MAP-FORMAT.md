@@ -238,6 +238,7 @@ A lean-to stands on the **right** of what it leans on, walking from `u0` to `u1`
 What the kind's builder reads beyond these sits in an object named after the kind (all optional; the builder's own default when left out):
 - `pickup`: `body` (`hilux`, `hilux4`, `p504`), `cab`, `police`, `lower_colour`, `lower_band`, `bumper`, `bumpers_missing`, `glass` (`whole`, `cracked`, `gone`), `tailgate` (`up`, `down`, `missing`), `wheels` (`steel`, `alloy`), `wheels_missing`, `mirrors_missing`, `load`, `load_colour`, `load_rows`;
 - `danfo`: `rack`, `bullbar`, `bumpers`, `guard_R`, `plate_R`, `hubcaps_missing`, `paint_alt` (parts in a replacement yellow), `rear` (`slogan`, `line`, `year`), `seed` (which hand the lettering is in: a stored choice, not a dice roll);
+- `saloon`: `body` (`corolla`, `camry`, `accord`), `wheels` (`cover`, `alloy`, `steel`), `bumper` (`painted`, `black`), `glass`, `tint`, `taxi` (the yellow band), `panel_alt` (parts in `panel_colour`, a replacement panel), `bumpers_missing`, `mirrors_missing`, `hubcaps_missing`, `wheels_missing`;
 - `keke`: `letter_colour`, `rear` (`line`), `seed`;  `molue`: `route`, `line`, `seed`;  `brt`: `band`, `route`;
 - `lorry`: `tractor_kind`, `trailer`, `box`, `axles`, `roof`, `doors`, `exhaust`, `bumper`, `deflector`, `spare`, `stripes`, `glass`, `colour2`, `bonnet_colour`, `trailer_colour`, `rim_colour`, `cab_doors_missing`, `mirrors_missing`, `wheels_missing`, `dents` (each `side`, `u`, `v`?, `z`, `r`, `depth`, `box`?).
 

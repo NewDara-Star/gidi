@@ -406,6 +406,9 @@
     "crossings[].wear",
     "crown",
     "gutters",
+    "gutters[].covers",
+    "gutters[].covers.cols",
+    "gutters[].covers.rows",
     "gutters[].depth",
     "gutters[].kind",
     "gutters[].offset",
@@ -414,6 +417,9 @@
     "gutters[].side",
     "gutters[].state",
     "gutters[].width",
+    "kerb_left",
+    "kerb_paint",
+    "kerb_right",
     "sand_cover",
     "surface",
     "verges",
@@ -423,6 +429,28 @@
     "verges[].surface",
     "verges[].width",
     "width"
+   ]
+  },
+  "saloon.vehicle": {
+   "record": "vehicle",
+   "reads": [
+    "colour",
+    "saloon.body",
+    "saloon.bumper",
+    "saloon.bumpers_missing",
+    "saloon.glass",
+    "saloon.hubcaps_missing",
+    "saloon.mirrors_missing",
+    "saloon.panel_alt",
+    "saloon.panel_colour",
+    "saloon.taxi",
+    "saloon.tint",
+    "saloon.wheels",
+    "saloon.wheels_missing",
+    "at",
+    "kind",
+    "turn",
+    "wear"
    ]
   },
   "stall.goods": {
