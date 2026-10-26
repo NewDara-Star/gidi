@@ -173,8 +173,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      street but what Mùṣá holds; Ikorodu Road on from Mùṣá's end, Third Mainland Bridge and Third Axial Road meeting at
      the Gbagada interchange with its two ramps, the Apapa-Oworonshoki Expressway on the south border). Houses done
      (hand pass 2, map/d27/BUILDINGS.md: 1,988, each with a kind and storeys, 16.7% of the district). Places done (hand pass 3: 427,
-     0 real places missing); working_bar d27 PASS. Next: landmarks and the map picture; its bus stops and motor parks
-     owed (below).
+     0 real places missing); working_bar d27 PASS. Landmarks done (hand pass 4: 14 walled plots). **At the working
+     bar** (26 Oct); its map picture looked at and sent. Its bus stops and motor parks owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -199,6 +199,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Real names in record notes (push review, 26 Oct): d13, d14 and d15 road and district notes name real streets
   (Western Avenue, Ojuelegba, Ogunlana Drive...) while each STREETS.md says real names live there only. Settle it once:
   strip the notes to ids and sound-alikes, or reword the STREETS.md line; in its own commit.
+- `scripts/map_picture.py`'s near view (26 Oct, Ṣọmọlá's): the frame stops at the near district's neighbours, but
+  the names of drawn districts further off are still placed, stretching the picture with a blank lower half. Keep the
+  names inside the frame (a fix to the tool, in its own commit).
 - The map picture's GAP row (CHECKS.md): nothing yet fails a district closed without its picture; working_bar could
   run `scripts/map_picture.py`'s gap count and fail on red land beside the district.
 - A hospital house type (Randle's two blocks are walkup and face_me_bungalow stand-ins, d13 hand pass 5); the landmark
