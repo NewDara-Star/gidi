@@ -153,9 +153,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
      PASS, with no landmark plot yet). The south lobe below Itire Road (Randle, Akerele, Falolu, Karimu, Clegg; in
      no district till now, the owner's 23 Oct decision) added to the outline, its streets drawn (hand pass 4, d13
      STREETS.md: 177 new roads; district now 0.670 km²). Its houses drawn (hand pass 4, d13 BUILDINGS.md: 222, 17.2% of the lobe). Its places drawn (d13 BUILDINGS hand pass 4: 76 more, 219 in all, 0 real places missing; working_bar d13 PASS,
-     no landmark plot yet). Next: landmarks (Randle
-     General Hospital's echo given care: the owner was born there; its points are in the lobe), then working_bar d13 and the map picture
-     (`scripts/map_picture.py`, DECISIONS: a picture at every district's close).
+     no landmark plot yet). Landmarks done (hand pass 5, d13
+     BUILDINGS.md: 15 grounds walled with a gate each: 11 schools, the factory, the Tejuosho market, the stadium, and
+     Randle's echo, the general hospital's compound, given care). **Sọ̀rọ̀lérè is at the working bar** (working_bar d13
+     PASS, check 0, the board's own test 0, map picture gap 0, 26 Oct). Next core district: Ayégúnlẹ̀ (9).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -179,6 +180,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   strip the notes to ids and sound-alikes, or reword the STREETS.md line; in its own commit.
 - The map picture's GAP row (CHECKS.md): nothing yet fails a district closed without its picture; working_bar could
   run `scripts/map_picture.py`'s gap count and fail on red land beside the district.
+- A hospital house type (Randle's two blocks are walkup and face_me_bungalow stand-ins, d13 hand pass 5); the landmark
+  grounds' own buildings (the stadium's bowl and stands, the schools, the Tejuosho market, the factory) to the look pass.
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end

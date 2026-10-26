@@ -1,5 +1,23 @@
 # Sọ̀rọ̀lérè (district 13): the buildings and their hand passes
 
+## Hand pass 5 (26 Oct): the landmarks, walled with a gate each
+
+From Overture's land use in Gidi metres, as Ìtìrí's (d14 hand pass 4): each ground less the carriageways along it, a
+wall 0.2 m inside its edge (2.4 m, rendered), one gate at the point of the wall nearest a road. **15 landmark plots**:
+
+- 11 school grounds (184 to 2,096 m2), each with a school place whose area is the ground.
+- The factory compound (979 m2), Dorman Long's echo.
+- The shopping centre at Tejuosho as a market ground (4,829 m2); its 2 houses inside linked to it.
+- The national stadium's ground (3,948 m2); the drafted house standing in its bowl removed. The bowl and stands go to
+  the look pass (owed).
+- **Randle's echo** (the owner was born at Randle General Hospital, so given care): the general hospital's compound,
+  Overture's named 'hospital' outline, 1,426 m2 after the carriageways, filling the triangle between Randle Avenue and
+  Ishola Street (studied on the satellite, nothing lifted; Overture's points at 48 and 68 Randle Avenue agree with it).
+  The 3 drafted houses and 2 place squares on it removed; two blocks of our own drawn from the ground (3 m in, cut into
+  a north and a south band): the main block, 3 storeys, 388 m2, and a ward, 1 storey, 431 m2, as walkup and
+  face_me_bungalow stand-ins until a hospital house type exists (owed); a clinic place over the ground.
+- 6 older houses linked to their ground (plot); 38 wall pieces with 15 gates.
+
 ## Hand pass 4, places (26 Oct): the south lobe's real places
 
 The lobe brought 83 more real places (234 in the district now). Hand pass 3's rules, run again over the whole district
