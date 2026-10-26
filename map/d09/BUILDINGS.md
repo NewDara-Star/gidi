@@ -23,10 +23,15 @@ How, in Sọ̀rọ̀lérè's order (no change to any builder; drafts on scratch 
    draft script itself unchanged, its fix owed, NOW): **691 read** (1: 157, 2: 446, 3: 77, 4: 11), 10 read 5 or
    more and left; `draft_storeys_nearby.py` gave 537 more their neighbours' median (56 small ones 1 storey before
    the reading); the last 188 (3 of the tall readings among them) had no house with storeys within 30 m and were set
-   by hand to their 5 nearest houses' median, noted on each. A Street View check of the 10 tall readings is owed.
-   Storeys: 1: 464, 2: 888, 3: 106, 4: 14.
-6. **Kinds** (`draft_kinds.py`): compound_house 805, face_me_bungalow 402, walkup 110, shop_under_flats 85, shack 52,
-   shed 14, kiosk_row 4.
+   by hand to their 5 nearest houses' median, noted on each. Of the 10 tall readings (5+ storeys, 15-34 m), 9 were checked by eye on the satellite and Street View (study only,
+   26 Oct):
+   the six by the Maracana ground and canal stand on tin shacks, long sheds and stands, so the reading was blur: set by
+   hand to 1-2 storeys with a fitting kind (a shed, 2 shacks and a bungalow of 1, 2 compound houses of 2);
+   the two on Iganmu Road are 2-storey shop rows (one 3-storey block nearby), so their 2 stays; the Amukoko one keeps 3
+   (2-3 storey rows); the last keeps the common 2 without being looked at. Each changed house's note says so.
+   Storeys after the check: 1: 468, 2: 890, 3: 101, 4: 13 (before it 464, 888, 106, 14).
+6. **Kinds** (`draft_kinds.py`): compound_house 807, face_me_bungalow 403, walkup 104, shop_under_flats 85, shack 54,
+   shed 15, kiosk_row 4 (after the height check: 6 walkups became the low kinds above).
 
 ## The frontage draft: real houses on a road
 
