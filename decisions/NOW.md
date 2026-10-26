@@ -166,8 +166,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Agunda (d12), started 26 Oct: roads done (hand pass 1, map/d12/STREETS.md: 882 records, 44.6 km, every real street
      but what Ìtìrí, Sọ̀rọ̀lérè and Ayégúnlẹ̀ hold; the Apapa-Oworonshoki Expressway one 25 m record on the west border;
      the seam joined on Agunda's side). Houses done (hand pass 2, map/d12/BUILDINGS.md: 963, each with a kind and
-     storeys, 15.2% of the district). Next: places, bus stops and motor parks, landmarks, working_bar d12 and the map
-     picture.
+     storeys, 15.2% of the district). Places done (hand pass 3: 234, 0 real places missing); working_bar d12 PASS.
+     Next: landmarks, then the map picture; its bus stops and motor parks owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -209,6 +209,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   west of it: the district drawn there takes it as held and draws its first 70 m (d12 STREETS.md). Ijora-Iganmu-Costain
   (d11) draws the 5 Apapa Road pieces on Agunda's east border. Alhaji Masha Road's 13.5 m (merged in two rounds) to
   read against the satellite first.
+- Agunda's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Aguda,
+  Ogunlana Drive, Coker, Orile, the expressway stops), as Ayégúnlẹ̀'s.
 - Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
   29-53 m2, too small for it; the three larger (b-0e26f361 103 m2, b-6493aef7 194 m2, b-e9e29b9e 135 m2) to look at
   on Street View and the satellite (the look pass, unless one is a landmark).
