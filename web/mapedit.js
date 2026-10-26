@@ -280,7 +280,13 @@ window.MAPEDIT = (() => {
     // a wall is its line 0.2 m thick, tested against the same carriageway as a house (flat ends; owner, 26 Oct)
     const wallStrip = (a, b) => { const L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, n = [-(b[1] - a[1]) / L * 0.1, (b[0] - a[0]) / L * 0.1];
       return [[a[0] + n[0], a[1] + n[1]], [b[0] + n[0], b[1] + n[1]], [b[0] - n[0], b[1] - n[1]], [a[0] - n[0], a[1] - n[1]]]; };
-    for (const w of recsOf(["wall"])) if (Array.isArray(w.line) && w.line.length > 1) for (const r of roads) { if (w.line.some((p, i) => i && (r.centreline.some((q, j) => j && segsCross(w.line[i - 1], p, r.centreline[j - 1], q)) || onRoad(wallStrip(w.line[i - 1], p), r)))) { bad.set(w.id, "across the road " + r.id); break; } }
+    // ...except inside one of its gates: a gate may stand across a drive, the road passing through it (LUTH's, 26 Oct)
+    const inGate = (w, u0, u1) => ((w.wall && w.wall.gates) || []).some((g) => g.u0 <= u0 + 0.05 && u1 <= g.u1 + 0.05);
+    const wallOn = (w, r) => { let u = 0; return w.line.some((p, i) => { if (!i) return false; const a = w.line[i - 1], L = Math.hypot(p[0] - a[0], p[1] - a[1]), n = Math.max(1, Math.ceil(L / 0.25)), u0 = u; u += L;
+      for (let k = 0; k < n; k++) { const t0 = k / n, t1 = (k + 1) / n, A = [a[0] + (p[0] - a[0]) * t0, a[1] + (p[1] - a[1]) * t0], B = [a[0] + (p[0] - a[0]) * t1, a[1] + (p[1] - a[1]) * t1];
+        if ((r.centreline.some((q, j) => j && segsCross(A, B, r.centreline[j - 1], q)) || onRoad(wallStrip(A, B), r)) && !inGate(w, u0 + L * t0, u0 + L * t1)) return true; }
+      return false; }); };
+    for (const w of recsOf(["wall"])) if (Array.isArray(w.line) && w.line.length > 1) for (const r of roads) { if (wallOn(w, r)) { bad.set(w.id, "across the road " + r.id); break; } }
     return bad;
   }
   let boardBad = new Map();
