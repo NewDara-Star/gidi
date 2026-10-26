@@ -1,5 +1,28 @@
 # Gbàgede (district 28): the buildings and their hand passes
 
+## Hand pass 3 (26 Oct): the real places
+
+250 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules); by hand
+here, 22 more real churches whose Overture category names a denomination (pentecostal, Roman Catholic, Baptist,
+Anglican, protestant: `place_kind` gives those no kind, NOW) were taken as churches too, the Deeper Life church by
+Ajayi Aina Street among them. Placed by Ṣọmọlá's hand pass 3 rules: **261 places**: church 137, school 45, buka 23,
+clinic 23, bar 12, bank 8, fuel 5, mosque 2, bus_stop 2, police 2, garage 2.
+
+- On the house their point stands in or the nearest within 8 m, one place per house and kind (10 real places shared
+  a house and kind with another, so one place serves both; one place serves two real places of a kind); the rest as
+  6 m squares at their point (the 2 bus stops on the street, the others in open ground with no house within 8 m),
+  moved up to 15 m off roads and houses; 8 with no open ground near, on their nearest house. 136 houses carry a
+  place link.
+- The Deeper Life church's point stands in open ground by Ajayi Aina Street: its place is a 6 m square there
+  (pc-50392cb5), its ground the landmarks' (hand pass 4).
+- By hand, where the rule left a real place more than 10 m from any place of its kind (measured from the road's edge
+  when the point is on a carriageway, as the working bar does): a church whose point is on the Apapa-Oworonshoki
+  Expressway and the main road beside it, and a school whose point is on Ikorodu Road, had no open ground within
+  10 m: each became a 5 m stall on the nearest open ground (12.1 and 12.2 m off; the rule had put them on houses
+  22.9 and 33.0 m away, which lost their links); a buka put on a house 10.0 m off became a 4 m stall 4.9 m off.
+- Only two bus stops are in Overture here and no motor park: Gbàgede's stops and parks are owed to a study of the
+  map (NOW), as Ṣọmọlá's.
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **1,702 houses**, each with a kind and storeys; they cover 13.0% of the district (218,564 m²; Ṣọmọlá 16.7%,

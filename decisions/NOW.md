@@ -178,9 +178,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Gbàgede (d28), started 26 Oct: roads done (hand pass 1, map/d28/STREETS.md: 1,190 records, 65.5 km, every real
      street inside the border; Ikorodu Road, the Apapa-Oworonshoki Expressway and the Third Axial Road on from
      Ṣọmọlá's ends, the cloverleaf's ramps in the north-west notch). Houses done (hand pass 2, map/d28/BUILDINGS.md:
-     1,702 houses, 13.0% cover, the board's test 0). Next: places, bus stops and motor parks,
-     landmarks (the Deeper Life church ground by Ajayi Aina Street among them, drawn with care), working_bar d28 and
-     the map picture.
+     1,702 houses, 13.0% cover, the board's test 0). Places done (hand pass 3: 261, the denominational churches taken
+     by hand; working_bar d28 PASS). Next: landmarks (the Deeper Life church ground by Ajayi Aina Street among them,
+     drawn with care), working_bar d28 again and the map picture. Its bus stops and motor parks owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -238,6 +238,12 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   it, and Ikorodu Road's north stretch crosses the north-west notch in five short pieces: the districts drawn there
   take them as held and draw on from them. The cloverleaf's own centre lies outside the notch. The 40 m and 25 m
   widths to read against the satellite, as Ṣọmọlá's.
+- `working_bar.place_kind` gives no kind to real churches whose Overture category names a denomination
+  (pentecostal 181, Roman Catholic 176, Baptist 104, Anglican 71, protestant 58, Jehovah's Witness 3 across Lagos's
+  places): fix the check in its own commit, then add the missed churches by hand in the districts already at the bar
+  (Mùṣá, Ìtìrí, Sọ̀rọ̀lérè, Ayégúnlẹ̀, Agunda, Ṣọmọlá). Gbàgede took its 22 by hand (map/d28/BUILDINGS.md).
+- Gbàgede's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Gbagada
+  phase 1 and 2, the expressway stops, Ifako, Anthony by Ikorodu Road), as Ṣọmọlá's.
 - Ṣọmọlá's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Shomolu,
   Bariga, Pedro, Ikorodu Road by Mùṣá, the Gbagada interchange, the expressway stops), as Agunda's.
 - Ṣọmọlá's 5 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d27/BUILDINGS.md): three are
