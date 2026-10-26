@@ -1,5 +1,19 @@
 # Agunda (district 12): the buildings and their hand passes
 
+## Hand pass 4 (26 Oct): the landmarks, walled with a gate each
+
+Ayégúnlẹ̀'s hand pass 4 recipe on Overture's land use in Gidi metres: each ground less the carriageways along it is a
+plot (the largest piece where a road cuts it), a wall 0.2 m inside its edge, open where houses close it, one 4 m gate
+where it comes nearest a road (no road enters any). **3 plots**, 5 wall pieces, 3 gates: two factory compounds (882
+and 965 m² after the carriageways, razor wire on the wall) and a school ground (588 m²) with its school place. No
+house stands wholly inside one. Overture's land use names nothing else here (no named market, cemetery or
+barracks), so Agunda's other grounds (its 44 schools' yards, the markets) are owed to the look pass, as the other
+districts'.
+
+The map picture (26 Oct, looked at): no land between districts left unclaimed (0 km²). Agunda reads lighter than its
+neighbours: dense lanes, houses covering 15.2%, sparser in the north middle and the east lobe; filling up is the look
+pass's (NOW), as the other districts'.
+
 ## Hand pass 3 (26 Oct): the real places
 
 252 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
