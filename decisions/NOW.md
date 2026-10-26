@@ -205,9 +205,6 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   west of it: the district drawn there takes it as held and draws its first 70 m (d12 STREETS.md). Ijora-Iganmu-Costain
   (d11) draws the 5 Apapa Road pieces on Agunda's east border. Alhaji Masha Road's 13.5 m (merged in two rounds) to
   read against the satellite first.
-- scripts/working_bar.py checks one district without its neighbours, so a seam junction (a node shared with a
-  neighbour's road) reads as unjoined: load the neighbours, count only the district's problems (4 in Agunda), in its own
-  commit.
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
   (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game

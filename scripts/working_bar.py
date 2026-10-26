@@ -92,9 +92,11 @@ def bar(d):
     T = Transformer.from_crs(4326, 32631, always_xy=True)
     R, fails, lines = {}, [], []
 
+    # the whole map is loaded, so a seam junction on a node shared with a neighbour's road reads as joined; only this
+    # district's own problems count
     del C.errors[:]
-    C.check(os.path.join(ROOT, 'map'), only=[d])
-    bad = [e for e in C.errors if not C.TODO.search(e)]
+    C.check(os.path.join(ROOT, 'map'))
+    bad = [e for e in C.errors if e.startswith(d + '/') and not C.TODO.search(e)]
     R['check problems'] = len(bad)
     if bad:
         fails.append(f'check: {len(bad)} problems (check_map.py)')
