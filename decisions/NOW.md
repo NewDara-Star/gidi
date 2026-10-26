@@ -165,11 +165,15 @@ merged and checked, add new ones where they belong, and say here when the owner 
      grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band is wetland, scrub and the barracks: d09 BUILDINGS hand pass 4).
    - Agunda (d12), started 26 Oct: roads done (hand pass 1, map/d12/STREETS.md: 882 records, 44.6 km, every real street
      but what Ìtìrí, Sọ̀rọ̀lérè and Ayégúnlẹ̀ hold; the Apapa-Oworonshoki Expressway one 25 m record on the west border;
-     the seam joined on Agunda's side). Next: houses, places, bus stops and motor parks, landmarks, working_bar d12 and
-     the map picture.
+     the seam joined on Agunda's side). Houses done (hand pass 2, map/d12/BUILDINGS.md: 963, each with a kind and
+     storeys, 15.2% of the district). Next: places, bus stops and motor parks, landmarks, working_bar d12 and the map
+     picture.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
+- **Meshy's credits run out on 11 Nov** (owner, 26 Oct: none used yet): before then, spend them on the hard shapes code
+  can't get right (DECISIONS: monuments, sculptural one-offs; first candidates the landmarks the districts' map work
+  names), each cost stated first. Map work comes first; this is done around it.
 - The look pass (after every district is working, hero streets first; DECISIONS "Every district to working first"),
   moved from Mùṣá's item 10 on 26 Oct: the schools' and factory's faces and the factory wall's ice-cream advert; B28's
   real name to read; laterite and concrete roads sampled from their own panos, and a layer for interlock's pavers
@@ -205,6 +209,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   west of it: the district drawn there takes it as held and draws its first 70 m (d12 STREETS.md). Ijora-Iganmu-Costain
   (d11) draws the 5 Apapa Road pieces on Agunda's east border. Alhaji Masha Road's 13.5 m (merged in two rounds) to
   read against the satellite first.
+- Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
+  29-53 m2, too small for it; the three larger (b-0e26f361 103 m2, b-6493aef7 194 m2, b-e9e29b9e 135 m2) to look at
+  on Street View and the satellite (the look pass, unless one is a landmark).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
   (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
