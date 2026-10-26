@@ -1,5 +1,21 @@
 # Ṣọmọlá (district 27): the buildings and their hand passes
 
+## Hand pass 4 (26 Oct): the landmarks, walled with a gate each
+
+Agunda's hand pass 4 recipe on Overture's land use in Gidi metres: each ground less the carriageways along it
+(Ṣọmọlá's and Mùṣá's: Mùṣá's Ikorodu Road edges the hospital ground) is a plot (the largest piece where a road cuts
+it), a wall 0.2 m inside its edge, open where houses close it, one 4 m gate where it comes nearest a road (no road
+enters any). **14 plots**, 42 wall pieces, one gate each: 9 school grounds (246-3,864 m², each with its school
+place), a hospital compound (5,991 m², the largest), 3 small industrial compounds (57-162 m²) and a retail ground
+drawn as a market (469 m²). No house footprint was cut: where a house stands on a ground's edge the wall stops at it (the house closes the wall); 10 houses wholly inside are linked to their ground.
+Two grounds that are all carriageway (a 51 m² hospital piece and an 11 m² industrial one) were left out. The first run
+cut only against Ṣọmọlá's roads, and the board's test found the hospital wall across Mùṣá's Ikorodu Road (108.6 m² of
+the ground on its carriageway); run again with Mùṣá's roads, the ground went from 6,099 to 5,991 m² and the test to 0.
+The schools' and the hospital's own buildings are the look pass's, as the other districts'.
+
+The map picture (26 Oct, looked at): no land between districts left unclaimed (0.000 km²). Ṣọmọlá reads lighter than
+Mùṣá beside it (houses cover 16.7%), its lanes dense and winding; filling up is the look pass's (NOW).
+
 ## Hand pass 3 (26 Oct): the real places
 
 452 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
