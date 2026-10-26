@@ -47,6 +47,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
+03. [ ] **Map and brush first; Unreal on hold (owner, 26 Oct, DECISIONS "Map and brush first, Unreal on hold"; they
+   may take it back):** the work is the map on the board in Chrome until every district is complete: Mùṣá's hand pass
+   (item 10) and its brush layer first, then the other districts in the order item 10 names. The Unreal items wait
+   (02(a1)-(a3) and (c), 0, 2-8): kept here, not worked, until the owner says.
 02. [ ] **Working first (owner, 26 Oct, DECISIONS "Working first, polish later"):** (a) [x] the inventory of what is to be
    modelled: `docs/MODEL-INVENTORY.md`, written by `scripts/model_inventory.py --write` from the map, the schema, the
    builders and the street test. Of the 40 kinds on the map: 18 working in Unreal; 13 built but not placed (roads: 0(c);
