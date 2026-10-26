@@ -152,7 +152,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      of the district, drafted on the 17 main roads then cut back from every road). Places done (hand pass 3: 143 places, 0 real places missing, 1 bus stop; working_bar d13
      PASS, with no landmark plot yet). The south lobe below Itire Road (Randle, Akerele, Falolu, Karimu, Clegg; in
      no district till now, the owner's 23 Oct decision) added to the outline, its streets drawn (hand pass 4, d13
-     STREETS.md: 177 new roads; district now 0.670 km²). Its houses drawn (hand pass 4, d13 BUILDINGS.md: 222, 17.2% of the lobe). Next: the lobe's places, then landmarks (Randle
+     STREETS.md: 177 new roads; district now 0.670 km²). Its houses drawn (hand pass 4, d13 BUILDINGS.md: 222, 17.2% of the lobe). Its places drawn (d13 BUILDINGS hand pass 4: 76 more, 219 in all, 0 real places missing; working_bar d13 PASS,
+     no landmark plot yet). Next: landmarks (Randle
      General Hospital's echo given care: the owner was born there; its points are in the lobe), then working_bar d13.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
