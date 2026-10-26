@@ -1,5 +1,19 @@
 # Ayégúnlẹ̀ (district 9): the buildings and their hand passes
 
+## Hand pass 3 (26 Oct): the real places
+
+284 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
+Sọ̀rọ̀lérè's hand pass 3 rules. **262 places**: church 158, school 51, clinic 18, mosque 13, bar 10, buka 4, fuel 3,
+garage 2, bus_stop 2, police 1.
+
+- 156 on the house their point stands in or the nearest within 8 m; 18 real places shared a house and kind with
+  another, so one place serves both. 147 houses carry a place link.
+- 3 with no open ground within 15 m of their point, on their nearest house (9.0-21.1 m off).
+- 103 as 6 m squares at their point (the 2 bus stops, which stand on the street, and the rest in open ground with no
+  house within 8 m), moved up to 15 m off roads and houses; their buildings are owed to the look pass, as Ìtìrí's.
+- Only two bus stops are in Overture here and no motor park: Ayégúnlẹ̀'s stops and parks (Boundary, Mosafejo, the
+  expressway stops) are owed to a study of the map (NOW).
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **1,472 houses**, each with a kind and storeys; they cover 16.0% of the district (222,791 m²; Sọ̀rọ̀lérè 15.0%, Ìtìrí
