@@ -1,5 +1,21 @@
 # Sọ̀rọ̀lérè (district 13): the buildings and their hand passes
 
+## Hand pass 4 (26 Oct): the south lobe's houses
+
+The south lobe (STREETS.md hand pass 4) built as hand pass 2 built the rest, no builder changed: `draft_buildings.py`
+on a scratch copy holding only the lobe and its 5 main-street records (Akerele Road and Randle Avenue among them), 151 houses, each then cut
+back from every road's carriageway (+0.05 m) and off every house already drawn: **129 kept** (102 cut, 22 left out
+under 12 m2 or a third of themselves). Then `--frontage` on a scratch copy of the whole district: 93 houses, all in the
+lobe's still-empty blocks. **222 houses**, 24,079 m2, 17.2% of the lobe (the district now 15.0%).
+
+- Two frontage houses stood on Mùṣá's side road rd-wavside1: cut back (26.2 -> 18.1 and 43.8 -> 41.6 m2).
+- Storeys: 167 from 2.5D heights (no reading of 5+), 51 from neighbours within 30 m, 4 by hand (no source and no house
+  within 30 m: 1 storey under 60 m2, else 2). 1: 64, 2: 142, 3: 14, 4: 2.
+- Kinds (`draft_kinds.py`): compound_house 132, face_me_bungalow 55, shack 17, walkup 12, shop_under_flats 4, kiosk_row 2.
+- The board's own test then flagged 24 (13 overlapping pairs, 11 on a road): slivers cut (28 houses, 20.1 m2, most
+  4.0 m2), then the 11 cut to the round-ended carriageway + 0.1 m where a lane ends or bends at them; one older
+  house, b-f4f4613f, lost 26.5 m2 where the lobe's rd-dc1b715f ends at it. Then 0.
+
 ## Hand pass 3 (26 Oct): the real places and the bus stop
 
 151 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules). **143
