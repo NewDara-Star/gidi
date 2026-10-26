@@ -145,8 +145,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      then cut back from the lanes). Places, the 2 bus stops and the Itire Road
      Motor Park done (hand pass 3: 202 places, 0 real places missing; working_bar d14 PASS). Landmarks done (hand
      pass 4: two school grounds, a factory and a church ground, walled with a gate each). **Ìtìrí is at the working bar**
-     (working_bar d14 PASS, check 0, the board's own test 0, 26 Oct). Next in item 11: Sọ̀rọ̀lérè (13), the next
-     of the core six.
+     (working_bar d14 PASS, check 0, the board's own test 0, 26 Oct). 
+   - Sọ̀rọ̀lérè (d13), started 26 Oct: roads done (hand pass 1, map/d13/STREETS.md: 452 records, every real street
+     but 31 pieces under Western Avenue, 100% of road length on a real line; Western Avenue carried on from Mùṣá's
+     flyover; Ogunlana Drive stays Ìtìrí's). Next: houses, places, bus stops and motor parks, landmarks (Randle
+     General Hospital's echo given care: the owner was born there), then working_bar d13.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -165,8 +168,11 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - For the road kit in gidi-game (Unreal is on hold): road points' z, the deck, its parapets and piers; and the board
   server reloading check_map.py when it changes (it holds the old road-node check until restarted: on 26 Oct it showed
   rd-isodeck1 crossing rd-qqm8wpxb with no node, which the new check passes as a bridge).
-- Ogunlana Drive runs on Ìtìrí's seam with Sọ̀rọ̀lérè (13): drawn with Ìtìrí for now; which district owns it is
-  decided when Sọ̀rọ̀lérè is drawn (d14 STREETS.md).
+- Real names in record notes (push review, 26 Oct): d13, d14 and d15 road and district notes name real streets
+  (Western Avenue, Ojuelegba, Ogunlana Drive...) while each STREETS.md says real names live there only. Settle it once:
+  strip the notes to ids and sound-alikes, or reword the STREETS.md line; in its own commit.
+- For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
+  (13241.36,7384.58), 25 m, its values (d13 STREETS.md).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
   PERFORMANCE.md, 25 Oct); per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
   custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city and streaming for the new map's city, the engine's World Partition first, measured (gidi-game

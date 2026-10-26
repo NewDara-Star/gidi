@@ -48,7 +48,8 @@ places come in their own passes (NOW item 11).
 - **Mùṣá houses in Ìtìrí's carriageways**: the road comes first. 25 Mùṣá houses stood in Lawanson, Mushin Road or a lane;
   22 had their front cut back to the carriageway edge + 0.05 m (each note gives the m² before and after), and 3 left
   under 12 m² or a third of themselves went (b-11a07824, b-5d145ef8, b-9eca34fa; no place linked them).
-- Owed: Ogunlana Drive runs on the Sọ̀rọ̀lérè (13) seam; which district owns it is decided when Surulere is drawn.
+- Ogunlana Drive runs on the Sọ̀rọ̀lérè (13) seam and stays Ìtìrí's: decided when Sọ̀rọ̀lérè was drawn (its whole
+  line is on Ìtìrí's side; d13 STREETS.md).
 
 ## Every road record
 
