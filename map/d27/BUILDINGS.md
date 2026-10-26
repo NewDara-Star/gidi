@@ -1,5 +1,28 @@
 # Ṣọmọlá (district 27): the buildings and their hand passes
 
+## Hand pass 3 (26 Oct): the real places
+
+452 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
+Agunda's hand pass 3 rules. **427 places**: church 282, school 56, clinic 27, buka 25, mosque 10, bar 9, fuel 7,
+bank 6, bus_stop 2, garage 2, police 1.
+
+- 284 on the house their point stands in or the nearest within 8 m (2 of them a second real place of a kind at the
+  same house: one place serves both); 22 more real places shared a house and kind with another, so one place serves
+  both. 271 houses carry a place link.
+- 12 with no open ground within 15 m of their point, on their nearest house (three of them moved by hand, below).
+- 134 as 6 m squares at their point (the 2 bus stops, which stand on the street, and the rest in open ground with no
+  house within 8 m), moved up to 15 m off roads and houses; their buildings are owed to the look pass, as Agunda's.
+- By hand, where the rule left a real place more than 10 m from any place of its kind:
+  - three real places whose points are on Ikorodu Road's carriageway, by Mùṣá's border, with no house within 10 m: a
+    mosque made a 5 m stall on the nearest open ground, 8.3 m off (the rule had put it on a house 23.0 m away); a
+    clinic and two churches 8.2 m apart on the 3.2 m strip of open ground between the road and the lane east of it,
+    as two narrow roadside stalls (20.5 and 16.4 m²), the clinic 6.0 m off, the one church 6.0 and 9.9 m off and
+    serving both (the rule had put the clinic and one church on a house 17.6 m away, and the other church's square
+    stood 11.0 m off: that square went, and the house lost its link);
+  - a church put on its house 9.6 m away (b-7f79efcf; the rule's square stood 11.0 m off).
+- Only two bus stops are in Overture here and no motor park: Ṣọmọlá's stops and parks are owed to a study of the map
+  (NOW), as Agunda's.
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **1,988 houses**, each with a kind and storeys; they cover 16.7% of the district (221,935 m²; Agunda 15.2%,

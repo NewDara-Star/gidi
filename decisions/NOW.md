@@ -172,8 +172,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Ṣọmọlá (d27), started 26 Oct: roads done (hand pass 1, map/d27/STREETS.md: 1,071 records, 66.0 km, every real
      street but what Mùṣá holds; Ikorodu Road on from Mùṣá's end, Third Mainland Bridge and Third Axial Road meeting at
      the Gbagada interchange with its two ramps, the Apapa-Oworonshoki Expressway on the south border). Houses done
-     (hand pass 2, map/d27/BUILDINGS.md: 1,988, each with a kind and storeys, 16.7% of the district). Next: places,
-     bus stops and motor parks, landmarks, working_bar d27 and the map picture.
+     (hand pass 2, map/d27/BUILDINGS.md: 1,988, each with a kind and storeys, 16.7% of the district). Places done (hand pass 3: 427,
+     0 real places missing); working_bar d27 PASS. Next: landmarks and the map picture; its bus stops and motor parks
+     owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -224,6 +225,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
   29-53 m2, too small for it; the three larger (b-0e26f361 103 m2, b-6493aef7 194 m2, b-e9e29b9e 135 m2) to look at
   on Street View and the satellite (the look pass, unless one is a landmark).
+- Ṣọmọlá's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Shomolu,
+  Bariga, Pedro, Ikorodu Road by Mùṣá, the Gbagada interchange, the expressway stops), as Agunda's.
 - Ṣọmọlá's 5 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d27/BUILDINGS.md): three are
   29-39 m2, too small for it; the two larger (b-5097e7c0 166 m2, b-7c249835 169 m2) to look at on Street View and the
   satellite (the look pass, unless one is a landmark).
