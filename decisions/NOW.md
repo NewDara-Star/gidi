@@ -146,6 +146,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
+- For Ìtìrí (d14), when it is drawn (owner, 26 Oct: "Remember this"): Itire Road Motor Park, a real motor park
+  (Google Maps, study only: plus code 6FR5G87M+GM, 6.51381,3.33419; Gidi (12141.2,6436.7)) falls in d14, 95 m outside
+  Mùṣá, so it is drawn with d14 as a `motor_park` place, not with Mùṣá (d15 hand pass 56).
 - Into item 0: plank stalls carry 17-30 material slots, one per timber shade: one material for the shades (gidi-game
   PERFORMANCE.md, 25 Oct); per-instance colour for the windows (custom data, in place of tint MIs; the ISM and UV-shift
   custom data are in, #90); plank bridges instanced (4a5d9d3); HLOD for the far city and streaming for the new map's city, the engine's World Partition first, measured (gidi-game
