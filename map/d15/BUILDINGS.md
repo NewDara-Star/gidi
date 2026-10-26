@@ -67,6 +67,17 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 49 (26 Oct): front houses on the busy roads given lock-ups
+
+`draft_kinds.py` gave lock-ups only to houses within 3 m of a busy road (market, main, trunk, local main, service), so
+front houses standing 3-6 m back stayed homes (the note above). 113 homes stand 3-6 m from a busy road; 69 of them face
+it with nothing between (no other building across the gap from the house's nearest point to the road edge, and at least
+4 m of the house within 1.5 m of that nearest distance). Each road's Street View reads (road_reads.tsv) were read by
+eye: on the 22 roads whose reads show shop rows, lock-ups, kiosks or stall rows, the 57 front houses there were given
+lock-ups (45 two-storey compound houses became shop-under-flats; 8 bungalows and 4 shacks kept their kind with lock-ups
+on the ground floor; ground storey at least 3.4 m). On rd-76xj78h3, rd-90g2sje2 and rd-c77w49vw (reads: compound walls
+and gates) and rd-yp7rd186 and rd-8rjr3ndf (no Street View) the 12 stay homes. Each record's note says which road.
+
 ## Hand pass 48 (26 Oct): the 10 houses inside the rail corridor set back
 
 Hand pass 47's measure found 10 houses 7.7-9.0 m from the rail's centre line (inside the 18 m corridor the drafting
