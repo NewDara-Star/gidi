@@ -129,8 +129,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
 10. [ ] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Done, hand passes 1-58 in
    BUILDINGS.md: roads at read widths, houses with kinds and storeys, 516 Overture places in their houses, bus stops,
    the Jibowu coach yard, the market, the two schools and the factory with walls and gates, the rail and station
-   platforms, check and board at 0 problems. Left for working: the road shapes (Western Avenue's side road, the Isolo
-   Road interchange, the Isolo Road kink near Omowunmi, Olushoga's zigzag) and the station building. Everything else
+   platforms, the danfo park at the Agege Motor Road / Isolo Road junction (hand pass 59), check and board at 0
+   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Left for working: Western Avenue's side road, the Isolo Road interchange and the station building. Everything else
    that was owed here moved to the look pass in the Owed list.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
    Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture

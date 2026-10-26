@@ -67,6 +67,21 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 59 (26 Oct): the danfo park at the Agege Motor Road / Isolo Road junction; two road shapes looked at
+
+STREETS.md names a motor park at the Agege Motor Road / Isolo Road junction ("the park itself is a place for later"),
+which pass 56 missed when it called none in Mùṣá (and pass 57 called Jibowu the one). On the satellite (study only) the
+danfos load in the mouth of Isolo Road beside the junction, with no yard off the road. So the park is drawn the way the
+bus stops are: pc-ojuwyprk, a motor_park place 6 m deep on Isolo Road's south edge (half on the carriageway, where the
+danfos stand), 12 to 42 m west of the junction, clear of the trunk and cut 0.15 m off the houses: 124.3 m2. Uses
+pick_up, drop_off, load and unload; hours 05-23, a guess; no name.
+Two road shapes owed in NOW item 10 were measured against Overture's real street segments (open data, converted to
+Gidi): both are on their real lines, so nothing was redrawn. Olushoga Street (rd-b9jn4qv9) follows four real segments
+round a small block, through Olawoyin Street's end and Church Street's start: its 19 points lie 0.01-1.42 m from a real
+segment. Omowunmi's hook (rd-9o8evlk2) is a real service lane looping off Isolo Road and back: 5 points, at most 0.10 m
+off. The "Isolo Road kink near Omowunmi" was where Omowunmi ran 56 m along Isolo Road, split off as the hook on 25 Oct
+(STREETS.md, rd-9o8evlk2's row); Isolo Road's own line now turns 28 degrees at most.
+
 ## Hand pass 58 (26 Oct): walls and gates round the two schools and the Vono Road factory
 
 Mùṣá's first `wall` records. Each runs 0.2 m inside its plot's edge (the plot less the roads' carriageways), and is open
@@ -79,7 +94,7 @@ blue sheet-steel gate on Vono Road beside its gatehouse. B29's plot and place re
 carriageway and the factory's 0.09 m2 onto its road; both were cut back to the carriageway's edge. Still to draw: the
 schools' and factory's faces, the ice-cream advert on the factory wall.
 
-## Hand pass 57 (26 Oct): the Jibowu coach yard, Mùṣá's one motor park
+## Hand pass 57 (26 Oct): the Jibowu coach yard (and see pass 59: not Mùṣá's only motor park)
 
 The coach yards at Jibowu front Ikorodu Road between Rahony Travels and Polarplus (Google satellite at zoom 19 and the
 ySG Park Jibowu point, study only: open 24 hours). Read off the satellite, the yard (about 39 by 50 m real) lands in Gidi
