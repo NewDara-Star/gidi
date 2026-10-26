@@ -67,6 +67,19 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 56 (26 Oct): two more bus stops; motor parks looked for
+
+Two real bus stops inside Mùṣá were found on Google Maps (study only: a point each, nothing copied): Mushin Bus Stop, on
+trunk rd-kxa8hz1b, and Olosha Bus Stop, on home street rd-0bb0jt00. Each is a 6 m bus_stop square on its road's edge
+(pc-7410cdf5, pc-d1518de7), with uses pick_up and drop_off and no name ("name to give (a sound-alike)"). Neither was
+within 40 m of the two stops already in from Overture. Motor parks: Google's "motor park" and "garage" searches around
+Mùṣá give Itire Road Motor Park (95 m outside Mùṣá, so it belongs to the neighbour), ySG Park Jibowu (its point lands on
+Ikorodu Road's carriageway at Mùṣá's edge, 18 m in) and transport companies' offices (God Is Good Motors on the
+expressway: an office, not a yard). Daleko, seen on the satellite, is market sheds, not a park. So no motor park was
+drawn: Mùṣá's danfos load at its bus stops. Overture's 11 "parking" points and 1 "park" in Mùṣá were read by name: all
+are businesses or a school (services firms, events, decor, a builder, a charity, a garden, a private school), none a
+park or yard (their spots were not looked at on the satellite); a yard at Jibowu (Lawani Street side) is owed, drawn from the satellite.
+
 ## Hand pass 55 (26 Oct): the real churches, mosques, schools, clinics and the rest, as places
 
 Overture's places (open data, CDLA, docs/DATA-SOURCES.md) hold 2,437 points inside Mùṣá. Those whose category, or, for the
