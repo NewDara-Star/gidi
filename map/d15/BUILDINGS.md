@@ -67,6 +67,13 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 65 (26 Oct): slivers the board saw
+
+The board's own test (a house on a carriageway or on another house; Ìtìrí hand pass 4) flagged Mùṣá houses by slivers,
+from hand pass 64's simplified cuts and older party walls: 25 re-cut unsimplified (7.8 m² in all, at most 1.1 m² a
+house), b-1f855215 cut 0.4 m² more at Mushin Road's piece and a repeated corner removed. The test run headless on both
+districts: 0. check_map 0, working_bar d15 PASS.
+
 ## Hand pass 64 (26 Oct): houses cut back from Ìtìrí's roads at the seam
 
 Ìtìrí (d14) drew Lawanson Road, which Mùṣá had dropped, at its read widths (10.2 and 13.0 m). 25 Mùṣá houses stood in
