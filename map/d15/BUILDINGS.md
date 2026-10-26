@@ -67,6 +67,14 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 64 (26 Oct): houses cut back from Ìtìrí's roads at the seam
+
+Ìtìrí (d14) drew Lawanson Road, which Mùṣá had dropped, at its read widths (10.2 and 13.0 m). 25 Mùṣá houses stood in
+it, in Mushin Road's pieces or in a lane. The road comes first: 22 had their front cut back to the carriageway edge +
+0.05 m (each note gives the m² before and after); 3 left under 12 m² or a third of themselves went (b-11a07824,
+b-5d145ef8, b-9eca34fa; no place linked them). Mùṣá's lanes up to Lawanson now end on its centreline. The seam's road
+changes are in map/d14/STREETS.md. Checked: check_map 0, working_bar d15 PASS.
+
 ## Hand pass 63 (26 Oct): the real places still missing, and LUTH's campus walled
 
 `scripts/working_bar.py d15` found real places (Overture) with no place of their kind near, and LUTH's campus with no
