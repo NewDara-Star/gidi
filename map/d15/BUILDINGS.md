@@ -72,7 +72,8 @@ B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in pl
 Hand pass 47's measure found 10 houses 7.7-9.0 m from the rail's centre line (inside the 18 m corridor the drafting
 keeps clear): b-16cede5b, b-1a6726da, b-2bb2123d, b-42865a3a, b-48838f4b, b-5671f844, b-7c6ca644, b-aa9de80a,
 b-d2f534c2, b-e37c0b5c. Each was trimmed on its rail side to 9.5 m from the centre (1 to 27 m2 off, the median 5),
-its other sides and its winding kept.
+its other sides and its winding kept. Five others stand 9.04-9.35 m from the centre (b-1710cb6d, b-62815b08,
+b-7f54d471, b-480b54b4, b-12474b6a), outside the 9 m half-corridor, and are left as they are.
 
 ## Hand pass 47 (26 Oct): B33's railway strip looked at again
 
