@@ -168,7 +168,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      the seam joined on Agunda's side). Houses done (hand pass 2, map/d12/BUILDINGS.md: 963, each with a kind and
      storeys, 15.2% of the district). Places done (hand pass 3: 234, 0 real places missing); working_bar d12 PASS.
      Landmarks done (hand pass 4: 3 walled plots). **At the working bar** (26 Oct); its map picture looked at and sent.
-     Its bus stops and motor parks owed (below). Next district: Ṣọmọlá (27).
+     Its bus stops and motor parks owed (below).
+   - Ṣọmọlá (d27), started 26 Oct: roads done (hand pass 1, map/d27/STREETS.md: 1,071 records, 66.0 km, every real
+     street but what Mùṣá holds; Ikorodu Road on from Mùṣá's end, Third Mainland Bridge and Third Axial Road meeting at
+     the Gbagada interchange with its two ramps, the Apapa-Oworonshoki Expressway on the south border). Next: houses,
+     places, bus stops and motor parks, landmarks, working_bar d27 and the map picture.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -210,6 +214,10 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   west of it: the district drawn there takes it as held and draws its first 70 m (d12 STREETS.md). Ijora-Iganmu-Costain
   (d11) draws the 5 Apapa Road pieces on Agunda's east border. Alhaji Masha Road's 13.5 m (merged in two rounds) to
   read against the satellite first.
+- Ṣọmọlá's Apapa-Oworonshoki Expressway record rd-f58919a3 runs on its south border, about half its width over the
+  land south of it: the district drawn there takes it as held. Third Mainland Bridge and Third Axial Road leave
+  Ṣọmọlá's border north-east and south: the districts there go on from their ends. Their 25 m widths (Ayégúnlẹ̀'s
+  expressway's) to read against the satellite.
 - Agunda's bus stops and motor parks: Overture has 2 stops and no park; a study of the map for its real ones (Aguda,
   Ogunlana Drive, Coker, Orile, the expressway stops), as Ayégúnlẹ̀'s.
 - Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
