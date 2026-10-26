@@ -124,7 +124,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
 10. [ ] Mùṣá's hand pass on the map (carried from the old "Next, in order", 25 Oct; it runs on the map beside items
    2-5): the school compounds in B28 and B29 (both drawn 26 Oct, branch map/b29-school, BUILDINGS.md hand
-   pass 45: plots, places, blocks; their compound walls, gates and faces still to draw; B28's real name to read), the Vono Road factory (B27) and B33's railway strip; front houses on the
+   pass 45: plots, places, blocks; their compound walls, gates and faces still to draw; B28's real name to read), the Vono Road factory (B27; drawn 26 Oct, hand pass 46: plot and four sheds; its wall,
+   gate and faces to draw) and B33's railway strip; front houses on the
    busy roads; the 787 houses given their neighbours' storeys (rough: both sampled were wrong), then block by block
    kind, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the Isolo Road
    kink near Omowunmi, Olushoga's zigzag; ground patches; the `LIVING.md` sheets checked against Street View (the thin
