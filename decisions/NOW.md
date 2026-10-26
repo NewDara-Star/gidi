@@ -47,6 +47,14 @@ merged and checked, add new ones where they belong, and say here when the owner 
 1. [x] Road lines: 54 of the 62 corners in d15 hand-edited (gidi #332, #333): 12 repeated points dropped, 14
    doubling-back places cut (in 9 roads), 28 tight corners smoothed. The 8 left turn on junction nodes (check_map
    lists them) and go to item 2.
+02. [ ] **Working first (owner, 26 Oct, DECISIONS "Working first, polish later"):** (a) [x] the inventory of what is to be
+   modelled: `docs/MODEL-INVENTORY.md`, written by `scripts/model_inventory.py --write` from the map, the schema, the
+   builders and the street test. Of the 40 kinds on the map: 18 working in Unreal; 13 built but not placed (roads: 0(c);
+   furniture: (a1)); pickup built with a stand-in still in Unreal (0(b2)); no builder for suv (0(b2)), tree palm and shade,
+   mast, heap (item 3), rail and station (a2); container_shop not in stall_build (a3). (a1) [ ] furniture placed in the
+   street test; (a2) [ ] rail and station builders, simple; (a3) [ ] the container shop (a container on blocks).
+   (b) the map completed (item 10, on the board in Chrome); (c) the game working on it (items 0(b2)-(d), 6). Model look
+   passes (0(b1a) and the like) wait.
 0. [ ] **Pieces as instances, first (owner, 25 Oct, DECISIONS "Pieces placed as instances"):** the audit found
    only block_build splits pieces (windows and doors, as one actor each, not instances) and 97% of a test house's
    triangles are its own roof sheets (46,308 of 47,631); the 25 Oct "Kits into pieces" never reached this list.
@@ -82,7 +90,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
   6.2 GB, 41.8 -> 3.8 M triangles (PERFORMANCE.md "Our own saloon"). Saloon owed: (b1a) [ ] a close look in Unreal (only
   the raised camera so far) and photo passes against ot162 and the other saloon photos (ot122, ot149, ot175, ot198,
   ot73); on a red body the tail lamps blend into the paint; the mirrors are blobby; a dark notch at the top of the rear
-  quarter (C-pillar); the Corolla's quarter glass and the Accord's door_FR cut by the FLOAT fallback (clean by eye).
+  quarter (C-pillar); the Corolla's quarter glass and the Accord's door_FR cut by the FLOAT fallback (clean by eye);
+  thin fins in the body at the windscreen's lower corners by the mirrors (three trials did not move them). Pass 1 done
+  (gidi-game saloon-pass1: mirror, wipers, tail lamps off the wing top); the rest waits (item 02).
   (b2) [ ] suv and pickup (pickup_build exports no _static.glb yet; brt_build none either), replacing the last stand-ins. Then stalls
    with goods/posters and printed umbrellas; (c) roads as simple shapes with tiling textures and decals; (d) World Partition in
    place of our tile streaming; on that city, decide the shadow and Nanite pool sizes (smaller saves ~0.55 GB, PERFORMANCE.md;
