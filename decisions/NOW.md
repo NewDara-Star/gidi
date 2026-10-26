@@ -134,7 +134,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    busy roads (26 Oct, hand pass 49: 57 given lock-ups from their roads' reads, 12 kept as homes); every road's
    ground colours from Mushin Street View (26 Oct, hand pass 50; still owed: a laterite and a concrete road sampled from
    their own panos, and a layer for interlock's pavers, which `ground_look` lacks); the rail's and station's missing
-   fields (tracks, corridor, ballast, fences, canopy) and pc-4xhy1iet's `uses`; the 787 houses given their neighbours' storeys (rough: both sampled were wrong), then block by block
+   fields and the spare-parts market's uses (26 Oct, hand pass 51: d15's check now 0 problems; the station's area and
+   platforms are still placeholders to draw from the satellite); the 787 houses given their neighbours' storeys (rough: both sampled were wrong), then block by block
    kind, ground floor and roof from the shots; Western Avenue's side road, the Isolo Road interchange, the Isolo Road
    kink near Omowunmi, Olushoga's zigzag; ground patches; the `LIVING.md` sheets checked against Street View (the thin
    sheets first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu towns, Àgbàlá), then Mùṣá's mix and person

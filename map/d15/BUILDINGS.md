@@ -67,6 +67,15 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 51 (26 Oct): the rail's, the station's and the market's missing fields
+
+Google's satellite view of the real line at the station (about 70 m across, by eye) shows the standard gauge and the Red
+Line side by side: 4 tracks on stone ballast, a concrete wall on each side, and both platforms roofed end to end. So
+rl-u7rtwbrj has tracks 4, ballast stone, fence_left and fence_right wall, and corridor 18 m: that is the drafting width
+the houses were already set back to (hand passes 47-48), and it holds 4 tracks at about 4 m apart. sn-romgcujc has canopy
+true; its area and platforms are still the placeholders from the station point. The spare-parts market pc-4xhy1iet
+(after Ladipo) has uses buy, sell, fix_vehicle, load and unload, open 08:00-18:00. d15's check: 0 problems.
+
 ## Hand pass 50 (26 Oct): every road's ground colours, from Mushin Street View
 
 357 of the 359 roads had no `ground_look` (the check's 357 "missing field" rows); the other two keep the Ladi Lane shot's.
