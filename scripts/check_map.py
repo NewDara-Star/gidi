@@ -485,6 +485,22 @@ def on_road(recs):
 
 
 RUN_NEAR, RUN_LONG = 1.0, 8.0   # m: two roads meeting at 15 degrees lie within 1 m of each other for about 8 m
+DECK_OVER = 6.7   # m between road surfaces where one crosses over the other: 5.5 m clearance + a 1.2 m deck (OLD-MAP-LESSONS)
+RAMP_MAX = 0.08   # a ramp's steepest grade: flyovers ramp at about 6.5% (OLD-MAP-LESSONS); 8% is a steep urban ramp
+
+
+def road_z(cl, q):
+    """A road's surface height at the point of its line nearest q: its points' z (MAP-FORMAT: an absolute height, for
+    bridges and ramps) taken along the line, 0 where a point has none."""
+    best = (float('inf'), 0.0)
+    for a, b in zip(cl, cl[1:]):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        t = max(0.0, min(1.0, ((q[0] - a[0]) * dx + (q[1] - a[1]) * dy) / (dx * dx + dy * dy or 1)))
+        d = math.hypot(a[0] + t * dx - q[0], a[1] + t * dy - q[1])
+        za, zb = (a[2] if len(a) > 2 else 0.0), (b[2] if len(b) > 2 else 0.0)
+        if d < best[0]:
+            best = (d, za + t * (zb - za))
+    return best[1]
 
 
 def road_nodes(recs):
@@ -496,7 +512,10 @@ def road_nodes(recs):
     point pushed 26 houses into the roads, 25 Oct). --strict fails on them. Also fails two roads drawn on top of each
     other: centrelines within RUN_NEAR of each other for more than RUN_LONG (a road record has no level, so in plan one
     road is the other drawn twice; the junction kit can't build it, 25 Oct). A hand edit cuts the copy back to where it
-    joins."""
+    joins. A road whose points carry z passes over another without a node (a bridge, as OpenStreetMap's layer and
+    Overture's level_rules keep crossings on different levels unjoined) when their surfaces there are DECK_OVER apart;
+    nearer than that and not joined, it fails as a deck too low to pass under. Also fails a ramp steeper than RAMP_MAX
+    between two points."""
     try:
         from shapely.geometry import LineString, Point
         from shapely.strtree import STRtree
@@ -506,6 +525,14 @@ def road_nodes(recs):
           and isinstance(r.get('centreline'), list) and len([p for p in r['centreline'] if is_pt(p)]) >= 2]
     pts = {rid: [tuple(p[:2]) for p in r['centreline'] if is_pt(p)] for rid, r in rs}
     lines = [LineString(pts[rid]) for rid, _ in rs]
+    pz = {rid: [tuple(p) for p in r['centreline'] if is_pt(p)] for rid, r in rs}
+    over = lambda a, b, q: abs(road_z(pz[a], q) - road_z(pz[b], q)) >= DECK_OVER
+    for rid, _ in rs:
+        for a, b in zip(pz[rid], pz[rid][1:]):
+            run, rise = math.hypot(b[0] - a[0], b[1] - a[1]), abs((b[2] if len(b) > 2 else 0) - (a[2] if len(a) > 2 else 0))
+            if rise and rise > RAMP_MAX * run:
+                err(f'{recs[rid]["_file"]} {rid}', f'climbs {rise:.2f} m in {run:.1f} m at {list(b)}, steeper than '
+                    f'{RAMP_MAX:.0%}: lengthen the ramp')
     tree = STRtree(lines)
     node = {}
     for rid, _ in rs:
@@ -517,7 +544,7 @@ def road_nodes(recs):
         for e in (pts[rid][0], pts[rid][-1]):
             for j in tree.query(Point(e).buffer(60)):
                 oid, o = rs[j]
-                if oid == rid or lines[j].distance(Point(e)) >= o['width'] / 2 or near(e, pts[oid]):
+                if oid == rid or lines[j].distance(Point(e)) >= o['width'] / 2 or near(e, pts[oid]) or over(rid, oid, e):
                     continue
                 if node.get((round(e[0], 1), round(e[1], 1)), 0) > 1 and \
                         min(math.hypot(e[0] - a[0], e[1] - a[1]) for a in pts[oid]) < o['width'] / 2 + 0.5:
@@ -538,7 +565,11 @@ def road_nodes(recs):
             x = lines[k].intersection(lines[j])
             for g in getattr(x, 'geoms', [x]):
                 if g.geom_type == 'Point' and not (near((g.x, g.y), pts[rid]) and near((g.x, g.y), pts[oid])):
-                    err(w, f'crosses road {oid} at {[round(g.x, 2), round(g.y, 2)]} without a shared point (no node)')
+                    if over(rid, oid, (g.x, g.y)):
+                        continue
+                    dz = abs(road_z(pz[rid], (g.x, g.y)) - road_z(pz[oid], (g.x, g.y)))
+                    err(w, f'crosses road {oid} at {[round(g.x, 2), round(g.y, 2)]} without a shared point (no node)'
+                        + (f', {dz:.1f} m above it: a deck needs {DECK_OVER} m' if dz else ''))
 
 
 # ------------------------------------------------------------------ what each kit part reads
