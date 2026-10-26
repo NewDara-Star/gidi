@@ -30,7 +30,7 @@ Roads only, drawn on the new frame (1:3). Every kept street sits on its real lin
 - **Ladipo market is all in Mùṣá:** the border moved north-west to the expressway and the market's north end.
 - **Edge roads** belong to the district on the side where the road's life is; the neighbour joins onto them. The expressway's west service road lives on the Isolo side, so Isolo-Ladipo (30) draws it.
 - **Rail and stations** have record types now (`rail`, `station`, MAP-FORMAT section 2).
-- **Service roads are their own streets** (`service_road`). The expressway's 41 m corridor is split into 25 m of carriageways and median plus a 7 m service road each side (estimate: check on z19). Streets that met the expressway now meet its east service road; Isolo Road still meets the carriageway (it crosses on a bridge, an interchange to draw later). Western Avenue's side road is not split yet: which side it runs is still to be seen.
+- **Service roads are their own streets** (`service_road`). The expressway's 41 m corridor is split into 25 m of carriageways and median plus a 7 m service road each side (estimate: check on z19). Streets that met the expressway now meet its east service road; Isolo Road crosses over it on a deck with side lanes at grade (hand pass 61). Western Avenue's side road runs on the Mùṣá side (hand pass 60).
 
 ## Kept streets
 
@@ -43,6 +43,9 @@ Roads only, drawn on the new frame (1:3). Every kept street sits on its real lin
 | rd-i4klmw3w | m04b | Ikorodu Road (Idi-Oro bend) | motorway | 40.0 | Ikorodu Road bending into Western Avenue at Idi-Oro; seam | width as m04 |
 | rd-avaupyki | m05a | Western Avenue | motorway | 35.0 | the south-east edge (Yaba, Surulere beyond); seam | width z19 at 6.50798,3.36336: both carriageways and the side road |
 | rd-cb2h4xa5 | m06 | Isolo Road | main_road | 16.0 | the main road west to the expressway; Daleko market on it | z19 satellite 06 (16 m kerb to kerb); ot87/ot88 jersey barrier |
+| rd-isodeck1 | m06 | Isolo Road (bridge) | ramp | 9.0 | the bridge over the expressway, 6.7 m up, down at 6.5% to the ground 124.5 m along; seam | Overture: Isolo Road is_bridge, level 1, 288 m |
+| rd-isolan01 | m06 | Isolo Road (north side lane) | service_road | 3.5 | at grade beside the ramp: the side streets meet it | as m06 |
+| rd-isolan02 | m06 | Isolo Road (south side lane) | service_road | 3.5 | at grade beside the ramp: the side streets meet it | as m06 |
 | rd-og05m8ig | m07 | Ladipo Street | main_road | missing | the spare-parts market's street: from the expressway's east service road through the market, then south-east to the Agege Motor Road | ot45 (Ladipo St, just over the edge): low concrete median, worn tar |
 | rd-htzqbqr8 | m08 | Palm Avenue | main_road | 11.5 | the timber market street (ot146); Isolo Road to Agege Motor Road and on | ot146: wide tar, earth edges, no kerb; width z19 at 6.53696,3.35144 |
 | rd-aqj6lgu3 | m09 | Mushin Road (Idi-Araba side) | main_road | 9.0 | skeleton: Isolo Road south past Ishaga Road to Itire | width z19 at 6.52155,3.34725 |
