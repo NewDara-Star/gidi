@@ -1,5 +1,22 @@
 # Agunda (district 12): the buildings and their hand passes
 
+## Hand pass 3 (26 Oct): the real places
+
+252 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), by
+Ayégúnlẹ̀'s hand pass 3 rules. **234 places**: church 135, school 44, clinic 20, buka 13, bar 6, fuel 4, garage 4,
+mosque 3, bus_stop 2, police 2, bank 1.
+
+- 121 on the house their point stands in or the nearest within 8 m; 18 real places shared a house and kind with
+  another, so one place serves both. 113 houses carry a place link.
+- 2 with no open ground within 15 m of their point, on their nearest house.
+- 109 as 6 m squares at their point (the 2 bus stops, which stand on the street, and the rest in open ground with no
+  house within 8 m), moved up to 13.5 m off roads and houses; their buildings are owed to the look pass, as Ìtìrí's.
+- 2 by hand, where the rule left the place more than 10 m from its point: a church put on its house 9.3 m away
+  (b-94181111; the rule's square stood 10.5 m off), and a buka whose point is in a main-road junction made a 5 m stall
+  on the nearest open ground, 9.9 m off (the rule had put it on a house 35.2 m away).
+- Only two bus stops are in Overture here and no motor park: Agunda's stops and parks are owed to a study of the map
+  (NOW), as Ayégúnlẹ̀'s.
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **963 houses**, each with a kind and storeys; they cover 15.2% of the district (147,253 m²; Ayégúnlẹ̀ 16.0%, Sọ̀rọ̀lérè
