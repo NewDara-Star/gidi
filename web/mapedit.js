@@ -255,9 +255,22 @@ window.MAPEDIT = (() => {
     const bs = recsOf(["building"]).filter((b) => Array.isArray(b.footprint) && b.footprint.length > 2 && hit(bboxOf(b.footprint), v));
     if (V.s < 0.5) return bad;
     const onRoad = (fp, r) => {   // the carriageway (half the width each side of the centreline) reaches into the footprint
+      // flat at the road's two ends, round on the outside of its bends, as the check draws it (check_map.py: buffer with
+      // cap_style=2), so a lane that stops at a house's wall does not bulge into it (owner, 26 Oct)
       const c = r.centreline, half = r.width / 2 - 0.05;
       if (c.some((p) => inPoly(p, fp))) return true;
-      for (let i = 1; i < c.length; i++) for (let j = 0; j < fp.length; j++) { const q = fp[j], q2 = fp[(j + 1) % fp.length]; if (segsCross(c[i - 1], c[i], q, q2) || segDist(q, c[i - 1], c[i]) < half || segDist(c[i - 1], q, q2) < half || segDist(c[i], q, q2) < half) return true; }
+      for (let i = 1; i < c.length; i++) {
+        const a = c[i - 1], b = c[i], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, n = [-(b[1] - a[1]) / L * half, (b[0] - a[0]) / L * half];
+        if (polysOverlap(fp, [[a[0] + n[0], a[1] + n[1]], [b[0] + n[0], b[1] + n[1]], [b[0] - n[0], b[1] - n[1]], [a[0] - n[0], a[1] - n[1]]])) return true;
+      }
+      for (let i = 1; i < c.length - 1; i++) {   // a bend's round join: a fan on the outside of the turn only
+        const a = c[i - 1], m = c[i], b = c[i + 1], a1 = Math.atan2(m[1] - a[1], m[0] - a[0]);
+        let d = Math.atan2(b[1] - m[1], b[0] - m[0]) - a1; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI;
+        if (Math.abs(d) < 1e-3) continue;
+        const s = d > 0 ? -1 : 1, fan = [m];   // a left turn's outside is on the right
+        for (let k = 0; k <= 6; k++) { const t = a1 + d * k / 6 + s * Math.PI / 2; fan.push([m[0] + Math.cos(t) * half, m[1] + Math.sin(t) * half]); }
+        if (polysOverlap(fp, fan)) return true;
+      }
       return false;
     };
     for (const b of bs) {
