@@ -1,5 +1,24 @@
 # Ìtìrí: the buildings draft and its hand pass
 
+## Hand pass 3 (26 Oct): the real places, the bus stops and the Itire Road Motor Park
+
+218 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules). **202
+places**: church 104, school 33, clinic 21, buka 10, mosque 9, bar 8, bank 6, fuel 4, garage 3, bus_stop 2, police 1,
+motor_park 1.
+
+- 130 on the house their point stands in or the nearest within 8 m (one place per house and kind; 19 points shared a
+  house and kind with another; 122 houses linked to their place).
+- 4 with no open ground within 15 m of their point on their nearest house (8.8 to 10.1 m off; one, a bar 40.6 m off,
+  was replaced as below).
+- 65 as 6 m squares at their point (the 2 bus stops, which stand on the street, and 63 in open ground with no house
+  within 8 m), moved up to 11.5 m off roads and houses; their buildings are owed to the look pass, as Mùṣá's six.
+- A church and a bar whose shared point lies on the expressway 5 m from the border: two 6 m squares on open ground at
+  the motorway's edge, 21.5 m from the point (the bar measures a point on a road from its edge).
+- **Itire Road Motor Park** (owner, 26 Oct, "Remember this"; Google Maps, study only, 6.51381,3.33419): its point is
+  1.0 m from Adeniyi Street's centreline. As Mùṣá's danfo park (hand pass 59), a 6 m strip on the street's edge, 30 m
+  along it at the point, on the side with no houses (the other would take 62.5 m² of houses), cut back from the side
+  streets crossing it: 13.5 m along the street left, 80.5 m², pc-itrpark1; hours 05-23, a guess.
+
 ## Hand pass 2 (26 Oct): houses, storeys and kinds
 
 **687 houses**, each with a kind and storeys; they cover 18.8% of the district. The real buildings under it (Microsoft
