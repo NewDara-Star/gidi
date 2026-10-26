@@ -67,6 +67,16 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 45 (26 Oct): the school compounds in B28 and B29
+
+The two real schools (STREETS.md B28 and B29) were filled with drafted houses. Those inside each compound were removed
+(B29: b-cedf79a7, b-b76ab891, b-2538195c, b-5c1fe22a; B28: b-1a8f2d7e, b-0c2d321d, b-2e3a7a74, b-b15fa18a) and each
+school drawn in our own layout after the real one's pattern on the underlay, not traced: a `school_ground` plot behind
+the kept frontage houses, a `school` place on the same outline (uses learn, 07:30-14:00) and classroom blocks of kind
+`school`. B29, Ṣokúnlé Primary School (sound-alike of Shokunbi Primary): five blocks round two yards (b-b29sch01..05).
+B28, name not read yet: four blocks round one yard (b-b28sch01..04), its gate side at Bakare Close's dead end. Still to
+draw: their compound walls, gates and faces.
+
 ## Hand pass 44 (25 Oct): houses set back from the 23 lanes given widths by hand
 
 The 23 lanes no Street View reading gave a width were given the gap their houses leave (STREETS.md); where that put a house on a lane or its gutter, the house was set back as in hand pass 43: 162 set back (0.2 m at the median, 1.7 m at most), 65 of them trimmed to a neighbour's wall, 9 cut to the road edge, none left out. After: no house more than 1 m2 inside a carriageway, no overlap over 0.5 m2; 4,275 houses.
