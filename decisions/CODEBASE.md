@@ -39,6 +39,7 @@ taught).
 | `map-stamps/` | records made from a test spot (`ut01_emmanuel`), to stamp onto the board |
 | `docs/MAP-FORMAT.md`, `docs/map-format-example/` | the format, and a worked example (also a stamp source) |
 | `scripts/check_map.py`, `realnames.py` | the map's checker (`check_map.py map`: PASS means no problem; fields still to fill are counted on its TODO line); no real name on the map (`docs/hand/realnames.txt`) |
+| `scripts/map_picture.py` | a picture of the map at every district's close: the whole city and a close view, red where land a drawn district should hold is held by none |
 | `scripts/check_rules.py` | every rule in DECISIONS.md has a row in CHECKS.md |
 | `scripts/board_server.py`, `web/board.html`, `frame.js`, `mapedit.js`, `faceedit.js`, `docs/BOARD.md` | the drawing board: serves the repo on 127.0.0.1, saves whole records into `map/` |
 | `scripts/frame_study.py`, `frame_footprints.py` | the board's study underlay (`web/frame-study.js`, `web/frame-tiles/`: generated, never committed; can't be re-run, see below) |
