@@ -194,7 +194,7 @@ A road crossing the rail shares a point with its centreline (a level crossing); 
 | Field | Type, units | Example |
 |---|---|---|
 | `plot`? | id | |
-| `kind` | `face_me_bungalow`, `walkup`, `shop_under_flats`, `market_block`, `compound_house`, `church`, `mosque`, `school`, `colonial_house`, `kiosk_row`, `shack`, `shed`, `under_build` | `"shop_under_flats"` |
+| `kind` | `face_me_bungalow`, `walkup`, `shop_under_flats`, `market_block`, `compound_house`, `church`, `mosque`, `school`, `colonial_house`, `kiosk_row`, `shack`, `shed`, `under_build`, `station_hall` (a rail station's ticket hall, beside its `station`) | `"shop_under_flats"` |
 | `footprint` | ring (any outline: L-shapes, wings) | `[[12831,6083.5],[12841,6083.5],[12841,6075],[12831,6075]]` |
 | `storeys` | 1 to 12 | `2` |
 | `storey_h` | m, one per storey (their sum is the eaves height) | `[3.1, 2.9]` |

@@ -33,7 +33,7 @@
     "piers": ["none", "at_gate", "every_bay"],
     "wall_top": ["none", "razor_wire", "steel_rail", "broken_glass"],
     "gate_kind": ["sheet_steel", "bar", "plank"],
-    "house_type": ["face_me_bungalow", "walkup", "shop_under_flats", "market_block", "compound_house", "church", "mosque", "school", "colonial_house", "kiosk_row", "shack", "shed", "under_build"],
+    "house_type": ["face_me_bungalow", "walkup", "shop_under_flats", "market_block", "compound_house", "church", "mosque", "school", "colonial_house", "kiosk_row", "shack", "shed", "under_build", "station_hall"],
     "ground_floor": ["home", "flats", "lock_ups", "open_stalls", "workshop", "arcade", "cage_stalls"],
     "roof_form": ["hip", "gable", "mono", "flat"],
     "roof_material": ["zinc", "longspan", "tile", "slab"],

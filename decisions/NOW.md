@@ -126,11 +126,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
 9. [x] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
    its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
-10. [ ] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Done, hand passes 1-58 in
+10. [x] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Done, hand passes 1-58 in
    BUILDINGS.md: roads at read widths, houses with kinds and storeys, 516 Overture places in their houses, bus stops,
    the Jibowu coach yard, the market, the two schools and the factory with walls and gates, the rail and station
    platforms, the danfo park at the Agege Motor Road / Isolo Road junction (hand pass 59), check and board at 0
-   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Isolo Road's bridge over the expressway (hand pass 61). Left for working: the station building. Everything else
+   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Isolo Road's bridge over the expressway (hand pass 61). The station hall (hand pass 62): Mùṣá is at the bar, 26 Oct. Everything else
    that was owed here moved to the look pass in the Owed list.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
    Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture
@@ -146,6 +146,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   neighbours' storeys, then kind, ground floor and roof block by block from the shots; ground patches; the `LIVING.md`
   sheets checked against Street View (thin ones first: Agunda, Ìlúpẹ̀lẹ́, Starlight Town, Ìwà, the outer Ikorodu
   towns, Àgbàlá); Mùṣá's mix and person spots (after the owner's yes, Waiting 2); the brush layer; the hero streets.
+- Mushin station's footbridge: from the hall b-mshstn01 over the tracks to both platforms, as the real one (a path
+  whose points carry z, clear of the rail by 6 m; the check reads road z only, so rail clearance is a check to add
+  with it). With item a2's rail and station builders, which also build `station_hall`.
 - For Isolo-Ladipo (d30), when it is drawn: Isolo Road's deck goes on from the seam at 6.7 m over the expressway's west
   half and west service road, then ramps down at 6.5% with lanes at grade beside it, as d15's side (hand pass 61).
 - For the road kit in gidi-game (Unreal is on hold): road points' z, the deck, its parapets and piers; and the board
