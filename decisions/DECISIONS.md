@@ -153,7 +153,11 @@ Standing decisions for later parts of the game; nothing is built on them yet.
 - **Who Gidi is for** (owner, 26 Oct): first, the Nigerian or African man away from home who owns a PS5 and plays a few
   games to let off steam after his shift; then Nigerians living in Nigeria. Distribution follows from this: the
   diaspora buys on PSN and Steam where they live; Nigeria has no PlayStation Store of its own (players use US/UK
-  accounts and gift cards) and plays more on PC and phones, so how to reach home is still an open question (IDEAS.md).
+  accounts and gift cards); the owner (26 Oct): Nigerians at home who own a PlayStation already pay with dollar cards
+  (PS Plus, online play), so that settles it.
+- **PS5 and Steam, self-published, digital only** (owner, 26 Oct): consoles matter most for this audience (more of
+  them play on a PS5 than on a PC rig); no discs; no publisher, no co-founder. The PS5 port still goes through Sony's
+  Partners programme (Consoles later, below).
 - **Consoles later:** a PS5 build needs Sony's PlayStation Partners programme (an application, an agreement, a dev kit). Build for Mac and PC first; apply when there's a playable piece of Gidi to show.
 - **Number plates** (19 Oct): Gidi's own system (gidi-game `Art/Plates`, `tools/plates.py`), in the custom Gidi Plate font (from Montserrat Bold; slashed zero, a G with a crossbar). Number: district code, three figures, two letters (MZE-361-JY). Class by colour: **commercial red lettering on white** (the owner chose Lagos's red over a yellow plate), private blue, government green, services black with a red band, transit white on blue. Motto along the bottom: **NO DEY SLEEP** (the owner's). A GIDI band at the left stands in until the coat of arms is drawn.
 - **Fonts are custom** (19 Oct): every font Gidi uses is its own, built on open-licence bases (Alfa Slab One, Montserrat) and credited.

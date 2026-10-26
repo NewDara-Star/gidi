@@ -69,6 +69,15 @@ The owner asked whether Gidi's places could just be parodies of the real names, 
 - **Distribution and the money** (26 Oct, owner shared a postmortem where $560k Steam gross became $73k take-home):
   the cuts are the store (30%), refunds, US withholding (30% on US sales when the seller's country has no US tax
   treaty; Nigeria has none, the UK has one), a publisher's share, local tax, partners; Unreal adds 5% only past
-  $1M gross per game. Open: where the company sits (a treaty country cuts the withholding), self-publishing vs a
-  publisher, a PS5 port after the PC build (Sony's Partners programme), and how players in Nigeria pay (no
-  PlayStation Store there; Steam in dollars; piracy). Not decided; to research with sources before choosing.
+  $1M gross per game. Open: where the company sits (a treaty country cuts the withholding). Settled by the owner on
+  26 Oct (DECISIONS.md): self-published, PS5 and Steam, digital only; players at home pay with dollar cards. To
+  research with sources before choosing where the company sits.
+
+- **Gidi Online: a shared city for connection** (owner, 26 Oct): many Nigerians abroad are lonely; next to the story,
+  Gidi can be a place to meet friends, talk and do things together, as FC's Clubs is for the owner. Activities are the
+  soul of a shared space and must be good enough to bring people back. The owner's examples (a wider idea, not the
+  list): racing with people, free driving around the city to let off steam (as in Forza), football, basketball,
+  tennis, table tennis. Your own face on your character (as FC's face scan was meant to be). For the map now: the
+  courts, pitches, school grounds and race-worthy roads it holds are where these happen. Not decided; online play
+  (servers, matchmaking, moderation) is a large cost to research before choosing.
+- **Nigerians don't ask for refunds; they stop buying from you** (owner, 26 Oct): the first game has to earn trust.
