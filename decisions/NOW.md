@@ -156,7 +156,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
      no landmark plot yet). Landmarks done (hand pass 5, d13
      BUILDINGS.md: 15 grounds walled with a gate each: 11 schools, the factory, the Tejuosho market, the stadium, and
      Randle's echo, the general hospital's compound, given care). **Sọ̀rọ̀lérè is at the working bar** (working_bar d13
-     PASS, check 0, the board's own test 0, map picture gap 0, 26 Oct). Next core district: Ayégúnlẹ̀ (9).
+     PASS, check 0, the board's own test 0, map picture gap 0, 26 Oct).
+   - Ayégúnlẹ̀ (d09), started 26 Oct: roads done (hand pass 1, map/d09/STREETS.md: 1,015 records, 63.7 km, every real
+     street but 18 pieces under the expressways, 98% of road length on a real line; the Lagos-Badagry and
+     Apapa-Oworonshoki Expressways one 25 m record each along the border). Next: houses, places, bus stops and
+     motor parks, landmarks, working_bar d09 and the map picture.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -182,6 +186,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   run `scripts/map_picture.py`'s gap count and fail on red land beside the district.
 - A hospital house type (Randle's two blocks are walkup and face_me_bungalow stand-ins, d13 hand pass 5); the landmark
   grounds' own buildings (the stadium's bowl and stands, the schools, the Tejuosho market, the factory) to the look pass.
+- When Mile 2-Amuwo Odofin (6), Kirikiri-Tin Can (8) and Apapa (10) are drawn: Ayégúnlẹ̀'s two expressway records
+  (rd-b2b8a5cc, rd-f1478f6a) run on their shared border, half their width over those districts' frame land; take them
+  as held, join their streets to them, and settle the border line by hand (d09 STREETS.md).
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
 - For Ijora-Iganmu-Costain (d11), when it is drawn: Western Avenue goes on south from Sọ̀rọ̀lérè's rd-32d33ffa end
