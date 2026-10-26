@@ -67,6 +67,21 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 55 (26 Oct): the real churches, mosques, schools, clinics and the rest, as places
+
+Overture's places (open data, CDLA, docs/DATA-SOURCES.md) hold 2,437 points inside Mùṣá. Those whose category, or, for the
+vaguer categories, whose name, says what the game uses them for were made into 516 places: 227 churches, 130 schools,
+48 garages (mechanics), 32 clinics, 32 bukas, 16 mosques, 16 bars, 4 banks, 4 fuel stations, 3 chemists, 2 police
+stations and 2 bus stops. A "religious organization" counts as a church or mosque only when its name says so; a church
+newspaper and a fellowship's chapter are left out. A school from the "education" category also needs its name to say so.
+Each place's area is the house its point stands in, or the nearest house within 8 m (43 points had none and were left
+out). There is one place per house and kind (54 repeats dropped), and none inside the market and the two schools already
+drawn (9 dropped). 462 houses now point to their place: a house with two kinds points to the first. A bus stop is a 6 m
+square at its point, not a house. One stop stood 16 m off any road and was moved onto the nearest road's edge. No real
+names went on the map: each note says "name to give (a sound-alike)", and the place's category and Overture's confidence.
+Uses: church and mosque pray, school learn, clinic heal, chemist buy and heal, bank money, fuel fuel and buy, bus stop
+pick up and drop off, bar drink and rest, buka eat and buy, garage fix_vehicle, police story. Hours are left empty.
+
 ## Hand passes 52-54 (26 Oct): the station's platforms; houses off the road edges and off each other's walls
 
 **52, the station.** The real canopies' two ends were read off Google's satellite (right-click: 6.533319, 3.361079 and
