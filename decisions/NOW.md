@@ -126,16 +126,18 @@ merged and checked, add new ones where they belong, and say here when the owner 
    in CHECKS.md are each a check still owed, worked through after Mùṣá.
 9. [x] Clean-up from the inventory (25 Oct): folded into item 00 (`legacy/` deleted 25 Oct; the old map's Unreal side,
    its importer and streaming, Gidi_City and Play_Ibudo, deleted in 00 step 3, gidi-game #96).
-10. [x] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Done, hand passes 1-58 in
+10. [ ] Mùṣá to "working" (DECISIONS "Every district to working first", owner 26 Oct). Drawn so far, hand passes 1-58 in
    BUILDINGS.md: roads at read widths, houses with kinds and storeys, 516 Overture places in their houses, bus stops,
    the Jibowu coach yard, the market, the two schools and the factory with walls and gates, the rail and station
    platforms, the danfo park at the Agege Motor Road / Isolo Road junction (hand pass 59), check and board at 0
-   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Isolo Road's bridge over the expressway (hand pass 61). The station hall (hand pass 62): Mùṣá is at the bar, 26 Oct. Everything else
+   problems; Olushoga's zigzag and the Omowunmi kink measured on their real lines (pass 59, no change). Western Avenue's side road (hand pass 60). Isolo Road's bridge over the expressway (hand pass 61). The station hall (hand pass 62). Called at the bar on 26 Oct too soon: the bar check (scripts/working_bar.py, item
+   11) then found 37 real places with no place near (6 inside drawn grounds, 3 roadside, 28 to place: hand pass 63) and LUTH's campus
+   with no wall or gates (owed since hand pass 4). Left for working: those two, then working_bar.py d15 passing. Everything else
    that was owed here moved to the look pass in the Owed list.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
    Ìtìrí 14, Ṣọmọlá 27, Gbàgede 28), then outward. Per district, in one sitting: roads read and set, houses, Overture
-   places, bus stops and motor parks, landmarks, check at 0. Owed with it: a check that reports a district against the
-   bar (CHECKS.md GAP row, "Every district to working first"), written before the second district is done.
+   places, bus stops and motor parks, landmarks, check at 0, then `scripts/working_bar.py dNN` passing (written 26 Oct; CHECKS.md
+   row PART).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
