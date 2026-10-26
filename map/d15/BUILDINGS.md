@@ -67,6 +67,30 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand passes 52-54 (26 Oct): the station's platforms; houses off the road edges and off each other's walls
+
+**52, the station.** The real canopies' two ends were read off Google's satellite (right-click: 6.533319, 3.361079 and
+6.531498, 3.361809; study only, two points); in Gidi they fall 2-3 m off the rail's line, 72 m apart. sn-romgcujc now
+has two island platforms between those ends, each 3 m wide, 3-6 m either side of the line, and its area is the
+corridor (9 m each side) between the ends. The placeholder area was 30 m wide and took in houses. The station building
+beside it is not drawn yet.
+
+**53, slivers on the road.** 110 houses reached into a carriageway by less than 1 m2, which the check lets through.
+Each was cut back to 0.15 m clear of the carriageway's edge (as in hand pass 43, the road stays): 28 m2 in all,
+0.99 m2 at most.
+
+**54, party-wall hairlines.** The board marks a house red when its outline crosses another's (web/mapedit.js
+`polysOverlap`), which the check lets through up to 0.5 m2. 1,221 houses crossed a neighbour, mostly by hairlines from
+rounding (median 0.002 m2, 0.23 at most). In each pair the smaller house was cut back 2 cm off the bigger one's wall, as
+in hand pass 2: 655 houses, 61 m2 in all, 0.48 m2 at most. After that the board's test, run over all of d15, finds no
+crossings. Passes 53 and 54 together changed 758 houses (89.7 m2 in all; the smallest house left is 13.3 m2), and each
+one's note names its pass.
+
+Left: the board also counts a house as on a road when it falls inside the road's rounded end, i.e. within half the
+width of the end point. The check, and pass 53, end a road flat. 106 houses are inside a rounded end, by up to 24 m2,
+mostly where a lane stops at a house. Whether a road ends round or flat is a question for the board's test, not the
+houses, so it is owed (NOW item 10).
+
 ## Hand pass 51 (26 Oct): the rail's, the station's and the market's missing fields
 
 Google's satellite view of the real line at the station (about 70 m across, by eye) shows the standard gauge and the Red
