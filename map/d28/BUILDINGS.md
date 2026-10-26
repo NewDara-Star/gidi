@@ -1,5 +1,31 @@
 # Gbàgede (district 28): the buildings and their hand passes
 
+## Hand pass 4 (26 Oct): the landmarks, walled with a gate each
+
+Ṣọmọlá's hand pass 4 recipe on Overture's land use in Gidi metres: each ground less the carriageways along it
+(Gbàgede's and Ṣọmọlá's) is a plot (the largest piece where a road cuts it), a wall 0.2 m inside its edge, open where
+houses close it, a gate across each road that enters or else one 4 m gate where it comes nearest a road. **24 plots**,
+65 wall pieces, 26 gates: 12 school grounds (70-4,757 m², each with its school place), 7 factory compounds
+(52-8,530 m²), 4 church grounds (116-6,300 m²) and a hospital compound (4,529 m²); no named market in Overture here.
+No house footprint was cut: where a house stands on a ground's edge the wall stops at it; 11 houses wholly inside are
+linked to their ground. One wall piece (wl-b11d2001, a school's) was shorter than its 4 m gate: the gate starts at its
+first point (2.85 m). A 59 m lane wholly inside a factory compound (rd-ff7f2d54, joined to no other road) is its yard
+road, inside the plot.
+
+The map picture (26 Oct, looked at): no land between districts left unclaimed (0.000 km²). Gbàgede reads lighter than
+Ṣọmọlá (houses cover 13.0%), with open stretches by eye around its middle west of the expressway; filling up is the
+look pass's (NOW). The near view's lower half is still blank (the tool's fix is owed, NOW).
+
+- **The Deeper Life church's ground** (the owner's grandma's house is on Ajayi Aina Street, in front of it: given
+  care, as Randle in Sọ̀rọ̀lérè): Overture's 'religious' ground around the church's point, kept whole (3,788 m²): its
+  three lanes inside (rd-0c07ce25, rd-54400772, rd-5e86aae3) are its drives, the two that cross the wall entering by
+  3 gates (the first set by hand to start at the wall's first point, 0-7.55 m: the board's test found the wall
+  across that drive where it bends by the wall's start). Its hall drawn by hand: the real footprint under the church's point (Microsoft's, real size, its
+  centre at a third of its real place, Gidi's 1:3), clipped 2 m in from the wall and off its drives and houses, 442 m² of the 665,
+  kind church, 2 storeys standing for one tall hall; the church's place made the hall. Ajayi Aina Street runs up to
+  its east side and ends there (33 m from the point). A smaller church ground just north (849 m²) is its own plot. The houses facing
+  it are the draft's; their look is the look pass's.
+
 ## Hand pass 3 (26 Oct): the real places
 
 250 real places (Overture) have a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules); by hand
