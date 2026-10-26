@@ -41,6 +41,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Cost: | process | not a map rule |
 | The look target | renders | owner's review |
 | The laptop is the target machine | frame rate | gidi-game measures |
+| Who Gidi is for | process | not a map rule |
 | Consoles later: | process | not a map rule |
 | Number plates | gidi-game | gidi-game |
 | Fonts are custom | gidi-game | gidi-game |

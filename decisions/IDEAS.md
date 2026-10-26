@@ -65,3 +65,10 @@ The owner asked whether Gidi's places could just be parodies of the real names, 
 
 ## A living test for the new map (24 Oct, from the old map's living tests)
 - **Walk and ride the city between named places,** once a few districts join: cheap agents on foot, danfo, okada and keke, a standard trip list run after every change, each trip's length against its real one. On the old map this found what the numbers missed: places you can't reach, absurd detours, everything funnelling onto one road, houses with no way in, an okada ban that cut a district off. The lessons: `docs/OLD-MAP-LESSONS.md` ("Checking").
+
+- **Distribution and the money** (26 Oct, owner shared a postmortem where $560k Steam gross became $73k take-home):
+  the cuts are the store (30%), refunds, US withholding (30% on US sales when the seller's country has no US tax
+  treaty; Nigeria has none, the UK has one), a publisher's share, local tax, partners; Unreal adds 5% only past
+  $1M gross per game. Open: where the company sits (a treaty country cuts the withholding), self-publishing vs a
+  publisher, a PS5 port after the PC build (Sony's Partners programme), and how players in Nigeria pay (no
+  PlayStation Store there; Steam in dollars; piracy). Not decided; to research with sources before choosing.
