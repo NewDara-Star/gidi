@@ -1,5 +1,27 @@
 # Saba (district 17): the buildings and their hand passes
 
+## Hand pass 3 (27 Oct): the real places
+
+The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
+hand, as Gbàgede, the real churches whose Overture category names a denomination (`place_kind` gives those no kind,
+NOW): 9 of them here. Placed by Gbàgede's hand pass 3 rules: **202 places**: church 95, school 41, buka 17, clinic
+16, bar 13, bank 8, police 4, fuel 4, mosque 2, bus_stop 1, garage 1.
+
+- On the house their point stands in or the nearest within 8 m, one place per house and kind (a second real place of
+  a kind at the same house shares its place: 3 times); the rest as 6 m squares at their point, moved up to 15 m off
+  roads and houses (the most 14.5 m); 3 with no open ground near, on their nearest house. 97 houses carry a place
+  link.
+- By hand, where the rule left a real place more than 10 m from any place of its kind (measured from the road's edge
+  when the point is on a carriageway, as the working bar does): a church whose point is at the Ikorodu Road and
+  Murtala Muhammed Way junction (put on a house 43.1 m off) and a school whose point is on a main road (on a house
+  17.6 m off) each became a stall on the nearest open ground (5 m, 4.5 m off; 4 m, 13.3 m off the point); their
+  houses (b-4c95ad7b, b-96d5f922) lost their links.
+- **No bus stop or motor park is in Overture inside Saba.** By hand, one stop: on Ikorodu Road at the Murtala
+  Muhammed Way junction, by the interstate coach terminal there (Overture's point, travel_and_transportation), a 6 m
+  square on the street, 1 m off the point clear of the church stall. Saba's other stops and its parks (Yaba's bus
+  stop and market park, Sabo, Jibowu's coach parks, the Ikorodu Road and Herbert Macaulay Way stops) are owed to a
+  study of the map (NOW), as Gbàgede's.
+
 ## Hand pass 2 (27 Oct): houses, storeys and kinds
 
 **831 houses**, each with a kind and storeys; they cover 14.4% of the district (101,824 m²; Ṣọmọlá 16.7%, Gbàgede

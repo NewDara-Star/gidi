@@ -185,8 +185,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Saba (d17), started 26 Oct: roads done (hand pass 1, map/d17/STREETS.md: 669 records, 33.9 km, every real street
      but what its neighbours hold; Murtala Muhammed Way drawn again as one record, the trunk roads set to main roads,
      Ikorodu Road left to Mùṣá's expressway). Houses done (hand pass 2, map/d17/BUILDINGS.md:
-     831, each with a kind and storeys, 14.4% of the district, the board's test 0). Places and landmarks next (item
-     11's recipe).
+     831, each with a kind and storeys, 14.4% of the district, the board's test 0). Places done (hand pass 3: 202, one bus stop by hand;
+     working_bar d17 PASS). Landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -261,6 +261,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Gbàgede's 5 tall height readings (5+ storeys) took their neighbours' 1-2 storeys (map/d28/BUILDINGS.md): three are
   18-36 m2, too small for it; the two larger (b-e058528f 284 m2, b-ae17f158 124 m2) to look at on Street View and the
   satellite (the look pass, unless one is a landmark).
+- Saba's bus stops and motor parks: Overture has none inside Saba; one stop was put by hand on Ikorodu Road by the
+  coach terminal (map/d17/BUILDINGS.md). A study of the map for its real ones (Yaba's stop and market park, Sabo,
+  Jibowu's coach parks, the Ikorodu Road and Herbert Macaulay Way stops), as Gbàgede's.
 - Saba's 2 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d17/BUILDINGS.md): b-1b827014 is
   40 m2, too small for it; b-e9b783b2 (143 m2) to look at on Street View and the satellite (the look pass, unless it
   is a landmark).
