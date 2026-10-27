@@ -15,7 +15,8 @@ child of), and the study note of the last district done at the bar (map/d15/BUIL
 Your job, for the district you are given:
 1. Find its real inspirations from NAMES.md / districts.csv and its outline in map/dNN/district.json if it exists.
 2. Study them from public sources: Wikipedia, news, papers, blogs, YouTube descriptions, OSM tags. Google Earth/Maps/
-   Street View may be studied but never copied: no imagery, no geometry into the repo (DECISIONS).
+   Street View may be studied but never copied: no pictures or traced shapes into the repo (DECISIONS); open data such
+   as Google Open Buildings may be measured (CLAUDE.md "Google first").
 3. Read twice. First pass: write what you found. Second pass: re-read every source against your notes and correct
    or cut anything the source does not back. Mark each line with its source; mark guesses as guesses.
 4. Write a Markdown file named for the district (its number, as d16) in the folder docs/lagos-study/districts/: what the place is like (streets, trades, markets, churches and mosques,
