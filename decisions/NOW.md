@@ -165,6 +165,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
        come out small and roads take the land. A creative call for the owner, options with numbers first (how GTA V
        shrank Los Angeles while keeping road widths, read from its files and talks; what share of land roads take in
        real Lagos, in Mùṣá and in GTA's Los Santos).
+       **Decided by the owner, 27 Oct (DECISIONS "Streets by the ratio"):** roads keep their full width; the number of
+       streets follows the scale, so a district's street km per km² matches the real one, picked by hand from a study
+       of the whole district that keeps its defining streets. Owed: (1) each district's real street km per km² read
+       from Google Maps (Overture is thin), (2) a street-density row in working_bar.py once (1) gives a figure to
+       match, (3) the drawn districts' streets thinned by hand to it, defining streets first.
    (g) [ ] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, each
        ending with its "Checked:" list, before those districts are drawn (CLAUDE.md "Every agent claim"). Spot-checked so
        far: d11's expressway gap (true), d29's rail end (true) and expressway point (a d28 road end, not a border
