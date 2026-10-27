@@ -143,7 +143,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
    other four are at a third to a half; which count as matching waits for the band in (a). Street length (ours vs Overture's network, per real km²): ours is 2.1x
    (Mùṣá) to 3.7x (Saba) the real figure, so our blocks are smaller than real and roads take more of the land; read
    against Google Maps before it is gated (Overture is OpenStreetMap's network, thin in Lagos).
-   (a) [ ] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
+   (a) [x] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
        thresholds, from Google's per-tile threshold file: a download, the owner asked first; the blocks furthest
        below listed; street length printed, not gated yet), and its CHECKS.md row.
    (b) [ ] `scripts/draft_buildings.py` drafts from Google Open Buildings v3 (owner asked, 27 Oct: "Should you switch
