@@ -200,6 +200,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
      hand). Landmarks done (hand pass 4: one walled hospital compound, the only landmark ground Overture has in
      Makoro). **At the working bar** (27 Oct); its map picture looked at and sent. Its canoe landings, stops and
      8 tall readings owed (below).
+   - Ìbùdó Mẹ́ta (d16, the frame study's Ebute Metta-Oyingbo-Otto; its working name in NAMES.md; study note
+     docs/lagos-study/districts/d16.md), started 27 Oct: roads done (hand pass 1, map/d16/STREETS.md: 300 records,
+     19.5 km, every real street but what Saba and Makoro hold; Clinic Road's second carriageway dropped by hand, as its
+     neighbours hold one). Its bridges and ramps owed (below). Houses next.
 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
@@ -308,6 +312,10 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Third Mainland Bridge crosses Makoro's south-east corner for about 60 m (map/d19/STREETS.md) and runs on over the
   lagoon, drawn in no district yet: draw it whole by hand (both carriageways, its real width read first), with
   Ṣọmọlá's end of it (above).
+- Ìbùdó Mẹ́ta's bridges and ramps (map/d16/STREETS.md): not drawn, Eko Bridge 689 m, Third Mainland Bridge 598 m along
+  its water edge and 1,231 m of unnamed ramps (Overture's motorways, all raised); drawn on the ground for now but
+  raised in Overture, Clinic Road 505 m (Saba's and Makoro's pieces too), Carter Bridge 298 m, the Ijora Causeway, the
+  Oyingbo Flyover Bridge: draw them by hand as decks and ramps (as Mùṣá's rd-isodeck1), with Third Mainland Bridge.
 - Lagoon University's campus wall: 5 gates of 38-157 m where campus roads run along the wall's line (map/d18/
   BUILDINGS.md hand pass 4): close them with railings or a wall set back off the road in the look pass.
 - Makoro's stops and parks: one stop by hand on its spine street (map/d19/BUILDINGS.md); its canoe landings and
@@ -316,8 +324,11 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   shuttle's stops and the gate's motor park to a study of the map, with Saba's.
 - Makoro's 8 tall height readings (5+ storeys read; 7 in its north-east corner) took 3 or 4 storeys from their
   neighbours, b-0dcdd67b 2 (map/d19/BUILDINGS.md): to look at on Street View in the look pass.
-- Ìbùdó Mẹ́ta (d16), for the owner before it is drawn: the real Oko-Baba sawmill moved to Agbowa in May 2025
-  (docs/lagos-study/districts/d16.md); does Gidi keep a working sawmill on its waterfront (LIVING sheet 16's trade)?
+- Ìbùdó Mẹ́ta (d16): the sawmill ground is **cleared** (owner, 27 Oct: "If the sawmill has already moved to another
+  site, then clear it"; the real one moved to Agbowa in May 2025). Claude's call on what makes it worth a visit: open
+  waterfront ground in a packed town, with what was left behind (stacked old timber, sawdust, a broken shed, a
+  hoarding for the coming redevelopment), room for a street-football pitch and a canoe landing. To draw with d16's
+  landmarks.
 - Lagoon University's tall height reading b-8bd534f5 (76 m2, 5+ storeys read) took its neighbours' 3 storeys
   (map/d18/BUILDINGS.md): to look at on Street View in the look pass.
 - Saba's 2 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d17/BUILDINGS.md): b-1b827014 is
