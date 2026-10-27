@@ -22,6 +22,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gi
 | `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | deleted (24 Oct: not on the Mac) |
 | `deep-cache/` | the buildings of each district's study area, cut once from Google's and Microsoft's files (`scripts/deep_prep.py`, deleted 25 Oct with the old map) | as above | ~250 MB | the deep study (`docs/DEEP-STUDY.md`) | map final |
 | `study-*.pkl` (scratch folders) | each district study's extract | from the above | small | regenerating districts | map final |
+| `~/gidi-data/tools/CodeWalker/` | CodeWalker's C# source (github.com/dexyfex/CodeWalker, shallow clone 27 Oct, owner's OK), read to open GTA V's archives for study | copyright dexyfex (no licence file; parts MIT) | 22 MB | DECISIONS "Study other games from the inside" | when the GTA study is done |
 
 **What can't be downloaded:**
 - Google Earth imagery and Street View: for looking only.

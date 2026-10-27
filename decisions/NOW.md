@@ -236,6 +236,18 @@ merged and checked, add new ones where they belong, and say here when the owner 
    driving better than GTA's "arcadey" feel), then Forza 2's repo when the owner brings it (a download: ask). Write
    it as our own notes, in plain words, with "what Gidi should think about" for each; nothing copied. First: a reader
    for the game's archive files, written by us; any program from the folder is run only on the owner's OK.
+   First pass done 27 Oct (a helper; its counts spot-checked by Claude: 115 schedules, 248 handling entries,
+   77,248 road nodes and 80,592 links, Gidi's 0 lane fields and 0 person spots): `~/gidi-data/research/gta/GTA-STUDY.md`
+   (off the repos: it quotes GTA's counts). Its 15 gaps, for the owner to pick from: traffic fields on roads (lanes,
+   one-way, speed), spawning around the player, population by area and hour, who can appear, people's spots with
+   conditions and chains, reactions, cheap far-away life, junction rules, ambient sound, moments that wake near the
+   player, crime and witnesses, local light moods, a driving sheet per vehicle with a wheel profile, parked-car
+   spawners, hard budgets. The lessons, in our words: IDEAS "What GTA's own files taught us".
+   Next: (a) [ ] the locked archives: CodeWalker's source downloaded (owner's OK, 27 Oct) to `~/gidi-data/tools/`; a
+   helper is porting its key search and archive reader to Python, run over the browser port's engine file;
+   (b) [ ] Forza 2: the repo is github.com/0herculabs/hl360-Forza2 (a Windows port, machine-translated code, no game
+   files: the owner to decide if it is worth the download); (c) [ ] the owner's PSP God of War games and Harry
+   Potter and the Chamber of Secrets (in iCloud, PPSSPP) for how a story is built.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):

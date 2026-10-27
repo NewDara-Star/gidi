@@ -1,5 +1,41 @@
 # Ideas (not decided; newest first)
 
+- **What GTA's own files taught us** (27 Oct; owner: "it's not so much graphics and more like very, very tiny
+  interactions written into code... carefully thought out one by one and layered on top of each other"). From
+  studying GTA V's files from the inside (DECISIONS "Study other games from the inside"; the study with its evidence
+  stays off the repos, `~/gidi-data/research/gta/GTA-STUDY.md`; nothing copied). In our words, as Gidi would do it:
+  1. **Traffic and people exist only near the player.** They are made just out of sight ahead and quietly removed
+     behind, from a fixed pool; far away they use cheap physics, and very far traffic is only moving lights. The city
+     feels full on a laptop because only a small ring of it is ever alive.
+  2. **Who is on the street is a timetable** per kind of area, per two-hour slot, weekdays and weekends apart: how
+     many people and cars, and which kinds. The owner's picture: school closes at 3, on Fridays at 1:30, and at that
+     hour the street fills with children in uniform. Gidi's version: a timetable record per area type (market,
+     school street, estate, motor park, waterfront), written from Lagos life.
+  3. **Who can appear** is a named mix per area (the Mùṣá mix: hawkers, okada riders, mechanics, market women...),
+     for people, vehicles and the props they carry.
+  4. **Life is hundreds of small "someone does this here" spots**, each a short pre-made action (sit at the bus stop,
+     fry akara, sweep the shop front, argue with the conductor), with conditions (rain, hour, rich or poor area) and
+     chains (walk from the kiosk to the gate). Researched from Lagos one by one and scattered over the map, each
+     running on its own: together they read as life. Gidi has the `person_spot` record for this; none placed yet.
+  5. **People react, Lagos style**: a list of things people notice (bad driving, a crash, a fight, a bursting tyre)
+     and how each kind of person answers: insults, "you dey craze?", crowds gathering, a mob, people filming.
+  6. **Roads carry driving rules** placed by hand along every road: lanes each way, one-way, speed, how busy, what may
+     use it, turns not allowed. AI cars follow these like rails. Gidi's road centrelines are the start; the rules go
+     on them in the finishing pass.
+  7. **Junction rules**: who runs each junction (lights, a warden, police, nobody) and how traffic flows there.
+  8. **Small moments wake only near the player** (a breakdown, a preacher on the bus, a street fight), rate-limited.
+  9. **Sound zones**: each area's sound by hour and weather, plus speakers (a music shop, a church, a generator).
+  10. **Crime is seen by witnesses**, who report it; who responds depends on the area (traffic officers, checkpoints,
+      area boys, a mob).
+  11. **Local light and air**: the look of each hour and weather, dust, haze, flies by the market.
+  12. **Driving feel in three layers kept apart**: each vehicle's own sheet (a danfo top-heavy, a keke that tips, an
+      okada that leans); the input layer, with a wheel mode that turns the steering help off; helpers you can turn
+      down. Then tune it on the owner's wheel until it feels right (the owner prefers Forza's feel to GTA's).
+  13. **Parked-car spawners**: "a keke usually waits here, 6am to 10pm", and places where nothing parks.
+  14. **Hard budgets**: a fixed number of cars, people and objects, decided for the laptop before crowds are built.
+  15. **Few bodies, many outfits**: variety from clothes and colours, not from many models.
+  **When** (owner, 27 Oct): in the finishing passes after every district is at the working bar (lanes, timetables,
+  activities brushed on the map), step by step over years, not rushed. Builds on "The lived-in layer" below.
 - **Gidi City hour to hour, and the pilot** (lagos-life-designer's research, 27 Oct, checked as noted there:
   docs/gidi-city-research.md). Its proposals, for the owner to take, change or drop: start friends-only, voice through
   the PS5 or Steam party; meet at "the joint" (a buka or beer parlour with a table and a chalkboard), three or four
