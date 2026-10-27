@@ -219,10 +219,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
      - [ ] a NOT ASSESSED answer for the checks, so a missing value never passes quietly ("a gate you have not
        watched fail is not a gate");
      - [ ] each input in map-auditor's and district-scout's briefs marked FOUND or ABSENT, NOT ASSESSED with no data;
-     - [ ] a hook that blocks when district-scout stops without writing its note (the owner's OK first);
+     - [ ] a hook that blocks when district-scout stops without writing its note (the owner's OK given, 27 Oct);
      - [ ] notes that describe a passing state (e.g. "Unreal on hold") carry what would end it;
-     - [ ] a guard on whole-file reads of markdown over 40 KB (17 such files; CLAUDE.md, NOW.md, DECISIONS.md exempt;
-       the owner's OK first);
+     - [x] dropped (owner, 27 Oct): a guard on whole-file reads of big markdown; "Important things are in the nuances,
+       and if you ignore the nuances, you ignore the important things". Big files are read in full, in parts if need be;
    (e) [x] dropped (owner, 27 Oct): the roadmap and the story's twelve flowcharts stay with the owner's other
    account; "just build the world and we'll think about story afterwards";
    (f) [ ] a one-page "Gidi City at the end" from DECISIONS, IDEAS and the story, for the owner to cut and change.
