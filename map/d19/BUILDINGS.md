@@ -1,5 +1,24 @@
 # Makoro (district 19): the buildings and their hand passes
 
+## Hand pass 4 (27 Oct): the landmark, walled with a gate
+
+Gbàgede's hand pass 4 recipe, as Saba's and Lagoon University's, on Overture's land use in Gidi metres, searched over
+Makoro's own box (3.379-3.401 E, 6.486-6.513 N): each ground less the carriageways along it (Makoro's and its
+neighbours') is a plot, a wall 0.2 m inside its edge, open where houses close it, a gate across each road that
+enters or else one 4 m gate where it comes nearest a road. Overture has **one** landmark ground here: a hospital
+compound, **pl-makf546e**, 146 m² of outline, 130 m² of plot once the carriageways are off. Its wall is 2 pieces,
+26.2 m of the 44.6 m edge (the rest is closed by 3 houses standing on the edge, none cut), with one 4 m sheet-steel
+gate (no road enters it). No school ground, market or church ground in Overture's land use in Makoro; its churches
+and schools stand as places on their houses (hand pass 3).
+
+The board's own test (web/mapedit.js boardProblems, headless, all ten drawn districts): **0**. check_map: 25157
+records, 0 problems. working_bar d19: PASS (landmark plots 1).
+
+The map picture (27 Oct, looked at): no land between districts left unclaimed (0.000 km²). Makoro's east half, to
+the lagoon, is houses with no roads between them, by eye: the stilt town reached by water; its canoe landings and
+water ways are owed (NOW). The near view still frames badly: the drawing sits in a box in its middle with blank
+round it (the tool's fix is owed, NOW).
+
 ## Hand pass 3 (27 Oct): the real places
 
 The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
