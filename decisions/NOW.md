@@ -188,6 +188,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
      831, each with a kind and storeys, 14.4% of the district, the board's test 0). Places done (hand pass 3: 202, one bus stop by hand;
      working_bar d17 PASS). Landmarks done (hand pass 4: 9 walled plots). **At the working bar** (27 Oct);
      its map picture looked at and sent. Its bus stops and motor parks owed (below).
+   - Lagoon University (d18, the frame study's UNILAG; its working name in NAMES.md), started 27 Oct: roads done
+     (hand pass 1, map/d18/STREETS.md: 186 records, 8.3 km, every real street but what Saba holds). Houses, places and
+     landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -265,6 +268,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Saba's bus stops and motor parks: Overture has none inside Saba; one stop was put by hand on Ikorodu Road by the
   coach terminal (map/d17/BUILDINGS.md). A study of the map for its real ones (Yaba's stop and market park, Sabo,
   Jibowu's coach parks, the Ikorodu Road and Herbert Macaulay Way stops), as Gbàgede's.
+- Lagoon University's University Road (rd-cbdf1d43) ends on Saba's node on rd-beee86ae, its last 18 m over Saba's
+  7 m lane rd-0dd14298, drawn twice there (map/d18/STREETS.md): the seam's hand pass decides which keeps the stretch.
 - Saba's 2 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d17/BUILDINGS.md): b-1b827014 is
   40 m2, too small for it; b-e9b783b2 (143 m2) to look at on Street View and the satellite (the look pass, unless it
   is a landmark).
