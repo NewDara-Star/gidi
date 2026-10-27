@@ -12,6 +12,7 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gi
 |---|---|---|---|---|---|
 | `open-buildings-2023/` | Google Open Buildings 2.5D Temporal, 2016–2023: where buildings are, how tall, roughly how many, on a 4 m grid | CC BY 4.0 | 17 GB | storey bands in 11 district studies | map final |
 | `open-buildings-v3/lagos_open_buildings_v3.csv.gz` | Google Open Buildings v3: every building outline in Lagos (4.09 million) | CC BY 4.0 | 433 MB | real density, sizes and structure (the old map's `scripts/study_google.py`, deleted 25 Oct) | map final |
+| `open-buildings-v3/thresholds/score_thresholds_s2_level_4.csv` | Google's per-tile confidence thresholds for 80%, 85% and 90% precision (Lagos's tile 103: 0.651 / 0.697 / 0.749); downloaded 27 Oct with the owner's OK | CC BY 4.0 | 76 KB | the density row of `scripts/working_bar.py` | map final |
 | `open-buildings-v3/103_buildings.csv.gz` | the same, for a whole slice of West Africa (the Lagos file was cut from it) | CC BY 4.0 | 2.0 GB | nothing more: the Lagos cut replaces it | **now, if you want the space** |
 | `ms-buildings/` | Microsoft building outlines over Lagos (4 tiles), a second machine-traced set | CDLA Permissive 2.0 | 186 MB | cross-check of Google's | map final |
 | `overture-lagos/` | Overture Maps for Lagos: 63,204 places (shops, churches, salons, event planners...), infrastructure, land use, roads, land | CDLA / ODbL by layer | 42 MB | what each district has, beyond OSM | map final |

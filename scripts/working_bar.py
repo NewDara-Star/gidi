@@ -15,12 +15,18 @@ with walls and gates, and the check at 0. This reports each part in numbers and 
             roadside place's point often falls on the road.
   parks     motor parks and bus stops are counted; none of either fails (every Lagos district has a stop).
   landmarks every plot (a school ground, market, factory: the walled landmarks) has a wall with a gate.
+  density   our roof cover inside the outline lies between Google Open Buildings v3's cover there at Google's own
+            90%- and 80%-precision confidence thresholds for the district's tile (CLAUDE.md "Working means it
+            matches", owner 27 Oct); the street blocks furthest below Google are listed. Street km per km² is printed
+            against Overture's streets, not gated until read from Google Maps.
 
   ~/.venvs/gidi/bin/python scripts/working_bar.py d15 [d09 ...]
 
 Not held here, by eye in the running order: whether the widths were read (BUILDINGS.md and STREETS.md say where), and
 which landmarks a district has (a landmark not drawn as a plot is not seen).
 """
+import csv
+import gzip
 import json
 import math
 import os
@@ -33,6 +39,10 @@ OVERTURE = os.path.expanduser('~/gidi-data/research/data/overture-lagos')
 LINE_NEAR, LINE_SHARE = 4.0, 0.5     # m, and the share of a road that must lie that near a real street
 PLACE_NEAR = 10.0                     # m from a real place's point to a Gidi place of its kind
 GROUNDS = ('market', 'school', 'motor_park')   # places drawn whole: a real place inside one is in it
+GOOGLE = os.path.expanduser('~/gidi-data/research/data/open-buildings-v3/lagos_open_buildings_v3.csv.gz')
+THRESHOLDS = os.path.expanduser('~/gidi-data/research/data/open-buildings-v3/thresholds/score_thresholds_s2_level_4.csv')
+STREET_CLASSES = {'motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'residential', 'living_street', 'unclassified'}
+BLOCKS_LISTED = 8                     # street blocks furthest below Google's cover, listed for the hand pass
 WRITTEN = re.compile(r'study|google|satellite|split|service road|side road|ramp|bridge|deck|hand pass|z1[789]', re.I)
 
 CHURCH = r'church|ministr|assembl|parish|chapel|rccg|c\.?c\.?c|c\.?a\.?c|cathedral|gospel|tabernacle|christ|evangel|apostolic|baptist|methodist|anglican|catholic|redeem|bethel|cherubim|seraphim|deeper life|winners'
@@ -111,14 +121,16 @@ def bar(d):
     minx, miny, maxx, maxy = ring.buffer(200).bounds
     inv = Transformer.from_crs(32631, 4326, always_xy=True)
     (w, n), (e, s) = inv.transform(500525 + 3 * minx, 707825 + 3 * (10500 - miny)), inv.transform(500525 + 3 * maxx, 707825 + 3 * (10500 - maxy))
-    seg = pq.read_table(os.path.join(OVERTURE, 'lagos_overture_segment.parquet'), columns=['subtype', 'geometry', 'bbox'])
-    real = []
+    seg = pq.read_table(os.path.join(OVERTURE, 'lagos_overture_segment.parquet'), columns=['subtype', 'class', 'geometry', 'bbox'])
+    real, streets_real = [], []
     for r in seg.to_pylist():
         b = r['bbox']
         if r['subtype'] != 'road' or b['xmax'] < w or b['xmin'] > e or b['ymax'] < s or b['ymin'] > n:
             continue
         g = shapely.from_wkb(r['geometry'])
         real.append(LineString([gidi(x, y, T) for x, y in g.coords]))
+        if r['class'] in STREET_CLASSES:
+            streets_real.append(real[-1])
     near = unary_union([g.buffer(LINE_NEAR) for g in real]) if real else Polygon()
     roads = [r for r in recs if r['type'] == 'road']
     sf = os.path.join(top, 'STREETS.md')                 # the district's street list: each row says what it was read from
@@ -183,6 +195,48 @@ def bar(d):
     R['landmark plots'], R['plots without a gated wall'] = len(plots), len(unwalled)
     if unwalled:
         fails.append(f'landmarks: {len(unwalled)} plots with no wall and gate, e.g. {unwalled[:3]}')
+    # density (CLAUDE.md "Working means it matches", owner 27 Oct): our roof cover inside the outline against Google
+    # Open Buildings' inside the same outline, between Google's own 90%- and 80%-precision confidence thresholds for the
+    # tile holding the district (their per-tile file); a per-area figure, so the 1:3 scale does not change it
+    lon0, lat0 = inv.transform(500525 + 3 * ring.centroid.x, 707825 + 3 * (10500 - ring.centroid.y))
+    t80 = t90 = None
+    for r in csv.DictReader(open(THRESHOLDS)):
+        if shapely.from_wkt(r['geometry']).contains(Point(lon0, lat0)):
+            t80, t90 = float(r['confidence_threshold_80%_precision']), float(r['confidence_threshold_90%_precision'])
+    if t80 is None:
+        fails.append('density: no Google threshold tile holds the district')
+    else:
+        g80, g90 = [], []
+        with gzip.open(GOOGLE, 'rt') as f:
+            for r in csv.DictReader(f):
+                c, la, lo = float(r['confidence']), float(r['latitude']), float(r['longitude'])
+                if c < t80 or not (w <= lo <= e and s <= la <= n):
+                    continue
+                g = shapely.transform(shapely.from_wkt(r['geometry']), lambda a: [gidi(x, y, T) for x, y in a])
+                g80.append(g)
+                if c >= t90:
+                    g90.append(g)
+        ours = unary_union([Polygon(b['footprint']) for b in B]).intersection(ring).area / ring.area
+        lo_, hi_ = (unary_union(gg).intersection(ring).area / ring.area for gg in (g90, g80))
+        R['cover'] = f'{ours:.2%} (Google {lo_:.2%}-{hi_:.2%} at confidence {t90}-{t80})'
+        if not lo_ <= ours <= hi_:
+            fails.append(f'density: our cover {ours:.2%} is outside Google\'s {lo_:.2%}-{hi_:.2%}')
+        # the street blocks (the outline less this district's carriageways) furthest below Google at its 90% figure
+        G90 = unary_union(g90)
+        OU = unary_union([Polygon(b['footprint']) for b in B])
+        blocks = ring.difference(unary_union(cws))
+        blocks = list(getattr(blocks, 'geoms', [blocks]))
+        short = sorted(((bk.intersection(G90).area - bk.intersection(OU).area, bk) for bk in blocks), key=lambda t: -t[0])
+        for sh, bk in short[:BLOCKS_LISTED]:
+            if sh > 0:
+                lines.append(('block', f'({bk.centroid.x:.0f},{bk.centroid.y:.0f})', round(bk.area),
+                              round(bk.intersection(OU).area / bk.area, 2), f'Google {bk.intersection(G90).area / bk.area:.0%}, {sh:.0f} m2 short'))
+    # street length per km2 against Overture's real roads, printed, not gated: Overture is OpenStreetMap's network, thin
+    # in Lagos, and the real figure is to be read from Google Maps first (NOW 16)
+    km2 = ring.area / 1e6
+    ours_km = sum(LineString([q[:2] for q in r['centreline']]).intersection(ring).length for r in roads) / 1000
+    real_km = sum(g.intersection(ring).length for g in streets_real) / 1000 / 3      # real length (x3) per real area (x9)
+    R['street km per km2'] = f'{ours_km / km2:.1f} (Overture {real_km / km2:.1f}, not gated)'
     R['district'] = d
     return dict(R, fails=fails), lines
 
@@ -194,6 +248,9 @@ def main():
         R, lines = bar(d)
         print(f'{d}: ' + ', '.join(f'{k} {v}' for k, v in R.items() if k not in ('fails', 'district')))
         for l in lines:
+            if l[0] == 'block':
+                print(f'  block at {l[1]}, {l[2]} m2: ours {l[3]:.0%}, {l[4]}')
+                continue
             print(f'  under {LINE_SHARE:.0%} on a real street: {l[0]} {l[1]} {l[2]} m, {l[3]:.0%}, {l[4]}')
         for f in R['fails']:
             print(f'  FAIL {f}')

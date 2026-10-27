@@ -140,22 +140,37 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Google Open Buildings v3 (confidence 0.65 / 0.7 / 0.75): Mùṣá 43.2% vs 47.7 / 45.9 / 43.2; Ìbùdó Mẹ́ta 11.4% vs
    30.5 / 29.0 / 26.4; Saba 14.4% vs 31.5 / 30.5 / 29.1; Makoro 13.1% vs 44.9 / 40.9 / 34.9; Sọ̀rọ̀lérè 15.1% vs
    37.1 / 35.7 / 33.6 (Mùṣá to two decimals: 43.22% vs 47.67 / 45.92 / 43.19). Mùṣá is near Google's figures, the
-   other four are at a third to a half; which count as matching waits for the band in (a). Street length (ours vs Overture's network, per real km²): ours is 2.1x
+   other four are at a third to a half; by the band in (a), Mùṣá fails by 0.04 points (43.22%
+   against 43.26-47.65%) and Ìbùdó Mẹ́ta at 11.39% against 26.49-30.45%; the other nine are not run against it yet
+   (item 16 d brings them up). Mùṣá's item 10 tick stands for the bar of 26 Oct, not this one. Street length (ours vs Overture's network, per real km²): ours is 2.1x
    (Mùṣá) to 3.7x (Saba) the real figure, so our blocks are smaller than real and roads take more of the land; read
    against Google Maps before it is gated (Overture is OpenStreetMap's network, thin in Lagos).
-   (a) [ ] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
+   (a) [x] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
        thresholds, from Google's per-tile threshold file: a download, the owner asked first; the blocks furthest
        below listed; street length printed, not gated yet), and its CHECKS.md row.
    (b) [ ] `scripts/draft_buildings.py` drafts from Google Open Buildings v3 (owner asked, 27 Oct: "Should you switch
        the house drafting to Google's data? Please do that"), Microsoft only where Google has no house; the
        industry-standard read first (Google's own guidance on confidence thresholds), said in the commit.
-   (c) [ ] The finished definition: every topic a district needs to be done (from the Mùṣá list of 27 Oct, the GTA
-       lessons, IDEAS and the owner's list: roads, lanes and one-ways, houses, places, landmarks, ground and soil,
-       brushes, poles, street furniture, activities, timetables, sound, art, music), each with how it is measured.
-       Mùṣá is not done until every topic passes; that list says what it still lacks.
+   (c) [ ] What "done" means, researched before it is written (owner, 27 Oct: "research, look at the map, look at our
+       district... look at GTA, look at the code in GTA, see what done means according to their definition, then both
+       of us will come and talk about it"): agents read (1) GTA V's own files for what a finished block holds per
+       km² (placed objects, scenario spots, traffic lanes, population zones, sound zones), (2) how studios and the
+       engine's makers define a finished open-world area, (3) Mùṣá against both; Claude checks every claim; then the
+       owner and Claude agree the list. Every topic gets how it is measured. Mùṣá is not done until each passes.
+       "Working" is re-read against it.
    (d) [ ] The 11 districts drawn so far (d09, d12-d19, d27, d28) re-measured and brought to the DENSITY row by hand:
        one agent per district reads it in Chrome (Google Maps, satellite at z17-18, Street View) and proposes fixes
        with evidence; Claude checks every claim and makes the edits, one editor per district at a time.
+   (f) [ ] Our streets are 2.1-3.7x as dense per km² as the real ones (roads at full width on a 1:3 map), so blocks
+       come out small and roads take the land. A creative call for the owner, options with numbers first (how GTA V
+       shrank Los Angeles while keeping road widths, read from its files and talks; what share of land roads take in
+       real Lagos, in Mùṣá and in GTA's Los Santos).
+   (g) [ ] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, each
+       ending with its "Checked:" list, before those districts are drawn (CLAUDE.md "Every agent claim"). Spot-checked so
+       far: d11's expressway gap (true), d29's rail end (true) and expressway point (a d28 road end, not a border
+       point), d10's rd-f1478f6a (exists).
+   (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
+       types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
