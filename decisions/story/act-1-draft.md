@@ -1,6 +1,6 @@
 # Gidi Act 1: draft (the owner's outline, 15 Oct 2026, with Claude's notes)
 
-**Status:** a draft for the story pass, stage 3 of `gidi-roadmap.md` (not in this repo yet). The owner decides; the notes are suggestions. The flowchart, `gidi-act1-flow.mermaid`, isn't in this repo; the flow below is the same in words.
+**Status:** a draft for the story pass, stage 3 of `gidi-roadmap.md` (not in this repo; with the owner, not needed until the story pass). The owner decides; the notes are suggestions. The flowchart, `gidi-act1-flow.mermaid`, isn't in this repo; the flow below is the same in words.
 
 ## The flow (owner, 15 Oct)
 1. **The steal and the chase.** Tunde steals at Mama Put's in Ladi Lane Parts Market, and the "Ole!" chase runs down the aisle.
