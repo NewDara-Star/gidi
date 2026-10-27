@@ -36,5 +36,21 @@
         ]
       }
     ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(~/.venvs/gidi/bin/python scripts/check_map.py)",
+      "Bash(~/.venvs/gidi/bin/python scripts/check_rules.py)",
+      "Bash(~/.venvs/gidi/bin/python scripts/working_bar.py *)",
+      "Bash(gh run watch *)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__list_connected_browsers",
+      "mcp__claude-in-chrome__read_console_messages",
+      "mcp__claude-in-chrome__read_network_requests",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__meshy-mcp-server__meshy_get_task_status",
+      "mcp__meshy-mcp-server__meshy_check_balance",
+      "mcp__claude_ai_Cloudflare_Developer_Platform__search_cloudflare_documentation"
+    ]
   }
 }
