@@ -44,6 +44,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Who Gidi is for | process | not a map rule |
 | PS5 and Steam, self-published, digital only | process | not a map rule |
 | Consoles later: | process | not a map rule |
+| Not "GTA for Lagos" | direction: systems and missions come from Lagos life | owner's review; not a map rule |
 | Number plates | gidi-game | gidi-game |
 | Fonts are custom | gidi-game | gidi-game |
 | Vehicles are built like the fonts | gidi-game | gidi-game |
