@@ -140,7 +140,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Google Open Buildings v3 (confidence 0.65 / 0.7 / 0.75): Mùṣá 43.2% vs 47.7 / 45.9 / 43.2; Ìbùdó Mẹ́ta 11.4% vs
    30.5 / 29.0 / 26.4; Saba 14.4% vs 31.5 / 30.5 / 29.1; Makoro 13.1% vs 44.9 / 40.9 / 34.9; Sọ̀rọ̀lérè 15.1% vs
    37.1 / 35.7 / 33.6 (Mùṣá to two decimals: 43.22% vs 47.67 / 45.92 / 43.19). Mùṣá is near Google's figures, the
-   other four are at a third to a half; which count as matching waits for the band in (a). Street length (ours vs Overture's network, per real km²): ours is 2.1x
+   other four are at a third to a half; by the band in (a), Mùṣá fails by 0.04 points (43.22%
+   against 43.26-47.65%) and Ìbùdó Mẹ́ta at 11.39% against 26.49-30.45%; the other nine are not run against it yet
+   (item 16 d brings them up). Mùṣá's item 10 tick stands for the bar of 26 Oct, not this one. Street length (ours vs Overture's network, per real km²): ours is 2.1x
    (Mùṣá) to 3.7x (Saba) the real figure, so our blocks are smaller than real and roads take more of the land; read
    against Google Maps before it is gated (Overture is OpenStreetMap's network, thin in Lagos).
    (a) [x] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
