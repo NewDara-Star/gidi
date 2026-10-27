@@ -97,7 +97,7 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   hand pass at each spot and written in its BUILDINGS.md. Aim: about a day a district at first. *Changed 27 Oct*
   (owner: "the density should match... they should match to be called working"): the bar above left out density, and the
   districts measured on 27 Oct (Saba, Makoro, Sọ̀rọ̀lérè, Ìbùdó Mẹ́ta) passed it at a third to a half of the real
-  building cover; only Mùṣá matched. Working now also needs the cover to match
+  building cover (Mùṣá came near Google's figures). Working now also needs the cover to match
   Google Open Buildings' (CLAUDE.md "Working means it matches"; NOW item 16), and houses are drafted from Google's
   footprints (CLAUDE.md "Google first"; the owner asked for the switch, 27 Oct).
 - **Working first, polish later** (owner, 26 Oct: "improving the models will always be an iterative process... We really

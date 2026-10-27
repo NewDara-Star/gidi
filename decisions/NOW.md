@@ -139,10 +139,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
    matches").** Comes before item 11's next district. Measured 27 Oct, building cover inside each outline, ours vs
    Google Open Buildings v3 (confidence 0.65 / 0.7 / 0.75): Mùṣá 43.2% vs 47.7 / 45.9 / 43.2; Ìbùdó Mẹ́ta 11.4% vs
    30.5 / 29.0 / 26.4; Saba 14.4% vs 31.5 / 30.5 / 29.1; Makoro 13.1% vs 44.9 / 40.9 / 34.9; Sọ̀rọ̀lérè 15.1% vs
-   37.1 / 35.7 / 33.6. Only Mùṣá matches. Street length (ours vs Overture's network, per real km²): ours is 2.1x
+   37.1 / 35.7 / 33.6 (Mùṣá to two decimals: 43.22% vs 47.67 / 45.92 / 43.19). Mùṣá is near Google's figures, the
+   other four are at a third to a half; which count as matching waits for the band in (a). Street length (ours vs Overture's network, per real km²): ours is 2.1x
    (Mùṣá) to 3.7x (Saba) the real figure, so our blocks are smaller than real and roads take more of the land; read
    against Google Maps before it is gated (Overture is OpenStreetMap's network, thin in Lagos).
-   (a) [ ] `scripts/working_bar.py`: a DENSITY row (cover between Google's 0.75 and 0.65 figures; the blocks furthest
+   (a) [ ] `scripts/working_bar.py`: a DENSITY row (cover between Google's figures at Lagos's 90%- and 80%-precision
+       thresholds, from Google's per-tile threshold file: a download, the owner asked first; the blocks furthest
        below listed; street length printed, not gated yet), and its CHECKS.md row.
    (b) [ ] `scripts/draft_buildings.py` drafts from Google Open Buildings v3 (owner asked, 27 Oct: "Should you switch
        the house drafting to Google's data? Please do that"), Microsoft only where Google has no house; the
