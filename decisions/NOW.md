@@ -196,7 +196,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      bar** (27 Oct); its map picture looked at and sent.
    - Makoro (d19, the frame study's Makoko; its working name in NAMES.md), started 27 Oct: roads done (hand pass 1,
      map/d19/STREETS.md: 144 records, 7.1 km, every real street but what Saba and Lagoon University hold); houses
-     done (hand pass 2, map/d19/BUILDINGS.md: 286, cover 13.1%). Places and landmarks next (item 11's recipe).
+     done (hand pass 2, map/d19/BUILDINGS.md: 286, cover 13.1%); places done (hand pass 3: 44, a bus stop by
+     hand). Landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -281,6 +282,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   Ṣọmọlá's end of it (above).
 - Lagoon University's campus wall: 5 gates of 38-157 m where campus roads run along the wall's line (map/d18/
   BUILDINGS.md hand pass 4): close them with railings or a wall set back off the road in the look pass.
+- Makoro's stops and parks: one stop by hand on its spine street (map/d19/BUILDINGS.md); its canoe landings and
+  water stops to a study of the map, with Saba's and Lagoon University's.
 - Lagoon University's stops and parks: one stop by hand at the main gate (map/d18/BUILDINGS.md); the campus
   shuttle's stops and the gate's motor park to a study of the map, with Saba's.
 - Makoro's 8 tall height readings (5+ storeys read; 7 in its north-east corner) took 3 or 4 storeys from their
