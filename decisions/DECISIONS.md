@@ -5,6 +5,19 @@ What still guides the work. A decision that a later one replaced, or that held o
 Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 
 ## The world
+- **Gidi City: a shared space that feels like home** (owner, 27 Oct; Gidi City is the working title). Why the world
+  comes first: Gidi City is an online shared space for Nigerians scattered around the world (and anyone else) to meet,
+  hang out and play together, the way friends meet every night in FC Pro Clubs, Fortnite or UFC on a party; "the game
+  is the activity where we connect". It has to feel like home, which is why the details matter: "Lagos is not real",
+  every bus ride has a story. Life is the content: the random Lagos moments, and the games people grew up playing
+  (police and thief, table tennis, the biro game, five-a-side with two captains picking, Ludo). The social pull is the
+  point (FC 27's The Grounds is the only part of FC the owner plays; Lagos Life kept them 30 minutes for a conversation
+  with a stranger, then had nothing to do). Stories sit on top as playable films on the same world: Tunde's (about
+  15 hours) first, then other people's stories as downloadable characters, written by storytellers (the owner's
+  friends among them) using the world as their set. PS5 first: most of the people it is made for play there. Gidi
+  City stays Gidi City: after release, a lifetime of updates, details and activities, the most Lagos virtual Lagos
+  there has been. *(This explains "Open world first" below; the story is no longer only optional: it is one way to play
+  the shared world.)*
 - **Open world first; narrative optional** (15 Oct 2026). "The entire world right now feels more placeholder and open world for me than having a set narrative." Districts are defined by what a player can do and meet there. The world comes first and is built to stand on its own; Tunde's story is layered on it. Don't push plot or characters beyond what the owner has confirmed.
 - **Gidi is our city.** Inspired by Lagos but our own. Data is a starting point; the owner's vision and the game's needs win.
 - **Invented names only.** No real Lagos names in the game. Every place gets an echo name: a sound-alike in the same language (owner, 22 Oct: "Make the names sound similar. So if something is English, it should be English. Something is Yoruba, it should be Yoruba"; Yaba → Saba, Computer Village → Gadget Village), never the real name, a real nearby place, rude or a cheap shot. Working names for all 51 districts: `docs/lagos-study/roads/NAMES.md`. Brands and businesses are always invented. *Changed 22-23 Oct:* "never traced" no longer holds for geometry: roads run on real lines ("Real Lagos roads") and houses are drafted from open footprints ("Houses: real footprints first"); Google's geometry stays out ("Google: study yes, lift no").
