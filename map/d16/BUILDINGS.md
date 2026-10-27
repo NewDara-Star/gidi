@@ -1,10 +1,55 @@
 # Ìbùdó Mẹ́ta (district 16): the buildings and their hand passes
 
+## Hand pass 4 (27 Oct): the landmarks
+
+**17 landmark plots**, each walled with a gate (working bar: PASS, 0 plots without a gated wall), and Oyingbo Market.
+
+- **15 from Overture's land use** (in Gidi metres, less the carriageways along them; a wall 0.2 m inside the edge, open
+  where houses close it, one 4 m gate where it comes nearest a road; Makoro's hand pass 4 rules): Iddo Market, the Otto
+  side's market, St Jude's church ground and its primary school, Apena Cemetery, Ebute Metta Primary, St Saviour's School
+  and two more school grounds (each school ground with its school place), and six yards (Overture `industrial`, not
+  read further): five at the Iddo end by the Lagos Terminus, one by Otto.
+- **Oyingbo Bus Terminal** from its real outline (Overture infrastructure, `bus_station`): a 1,207 m² compound with a
+  motor park place on it.
+- **Oyingbo Market** (b-oyingbom, `market_block`, 4 storeys, 565 m², and its market place): the real block read off
+  Google satellite at 18z (study only). The picture was calibrated on two real points (Mainland Hotel and the Total
+  station on Coates Street, Overture): 0.665 m a pixel both ways, the check point 0.4 m off. Both real market points
+  fall on it (1.4 m and 0 m). The drafted houses gave way: b-59961128 and b-d9448d3c (wholly under it) and b-0d689aad
+  and b-d3afa977 (under 20 m² left) removed, b-ed4bbfdb trimmed 0.2 m clear (119 to 64 m²). The buka on the removed
+  house keeps its real point, now the market's food market.
+- **The cleared sawmill ground at Oko-Baba** (owner: the real sawmill moved to Agbowa in May 2025, so clear it): pl-ibusawmi,
+  8,825 m² of the waterfront block east of Oko-Baba Street, north of Ondo Street's line carried on to the lagoon (the
+  real yards run on further south; that part stays the town's). Four drafted houses removed; the largest, b-e6189a77,
+  kept as the sawmill's broken shed. A sheet hoarding along its road sides (552 m of 718 m), open to the lagoon, one 4 m
+  gate. Its street-football pitch and canoe landing are owed to the look pass (NOW).
+- **Not drawn yet:** the railway compound with Jaekel House, the Federal Medical Centre and the Oyingbo Red Line station
+  share one block by the railway, which only Mùṣá has drawn; they come with the railway (NOW).
+
+## Hand pass 3 (27 Oct): the real places
+
+The real places (Overture) with a kind the game uses (`working_bar.place_kind`), and the real churches whose Overture
+category names a denomination, placed by Saba's and Makoro's hand pass 3 rules: **98 places** (church 53, school 17,
+buka 10, clinic 5, bar 3, fuel 3, bank 3, garage 2, mosque 1, police 1), 58 on the house their point stands in or the
+nearest, 34 as squares at their point moved up to 14.5 m off roads and houses. Where two real points of one kind stand
+in one house, one place serves both (14). Like Makoro, a town of many small churches (by count; not checked against a
+picture).
+
+- By hand: b-b56066ad (where a real bar, garage and church point stand together, 10.3 m off) grown 0.6 m toward the
+  point (26.4 to 27.7 m²; 9.5 m off), and its three places' areas set to the new footprint.
+- By hand, at the Saba seam: two real points sit on ground our neighbours' roads and houses fill. Each is a place on
+  free ground inside Ìbùdó Mẹ́ta, 0.2 m clear of everything, no neighbour touched: a small roadside church (35.9 m²,
+  2.5 m from its point) on the ground between the three main roads, and a fuel station's pumps (10.8 m², 7.4 m from its
+  point) on the strip by the seam, the station running on into Saba.
+- By hand, the **bus stop**: a 6 m square on the edge of rd-bc0c9c23 (main road), 9.3 m from the real Oyingbo Bus
+  Terminal point; the terminal itself comes with the landmarks.
+- Working bar: PASS (107 real places, 0 missing; 100 places; 1 bus stop).
+
 ## Hand pass 2 (27 Oct): houses, storeys and kinds
 
 **402 houses**, each with a kind and storeys; they cover 11.4% of the district (54,279 m² of 475,276 m²; Makoro
-13.1%, Saba 14.4%). The real cover was not measured; filling up is owed to the look pass (NOW), as the other
-districts'. The cleared sawmill ground (NOW, the owner's call) is drawn with the landmarks.
+13.1%, Saba 14.4%). The real cover, measured 27 Oct against Google Open Buildings v3 inside the same outline, is
+26.4-30.5% (confidence 0.75-0.65): ours is a third to a half of it, so the district is not at the working bar under
+the 27 Oct density rule; filling up comes in NOW item 16, by hand. The cleared sawmill ground (NOW, the owner's call) is drawn with the landmarks.
 
 How, in Makoro's order (no change to any builder; drafts on scratch copies of map/d16):
 
