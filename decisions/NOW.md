@@ -194,6 +194,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
      one bus stop by hand at the main gate). Landmarks done (hand pass 4: the campus as one walled
      school ground kept whole with its inside roads, 71% of the district, and its clinic compound). **At the working
      bar** (27 Oct); its map picture looked at and sent.
+   - Makoro (d19, the frame study's Makoko; its working name in NAMES.md), started 27 Oct: roads done (hand pass 1,
+     map/d19/STREETS.md: 144 records, 7.1 km, every real street but what Saba and Lagoon University hold). Houses,
+     places and landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -273,6 +276,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   Jibowu's coach parks, the Ikorodu Road and Herbert Macaulay Way stops), as Gbàgede's.
 - Lagoon University's University Road (rd-cbdf1d43) ends on Saba's node on rd-beee86ae, its last 18 m over Saba's
   7 m lane rd-0dd14298, drawn twice there (map/d18/STREETS.md): the seam's hand pass decides which keeps the stretch.
+- Third Mainland Bridge crosses Makoro's south-east corner for about 60 m (map/d19/STREETS.md) and runs on over the
+  lagoon, drawn in no district yet: draw it whole by hand (both carriageways, its real width read first), with
+  Ṣọmọlá's end of it (above).
 - Lagoon University's campus wall: 5 gates of 38-157 m where campus roads run along the wall's line (map/d18/
   BUILDINGS.md hand pass 4): close them with railings or a wall set back off the road in the look pass.
 - Lagoon University's stops and parks: one stop by hand at the main gate (map/d18/BUILDINGS.md); the campus
