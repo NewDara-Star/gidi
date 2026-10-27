@@ -1,5 +1,22 @@
 # Lagoon University (district 18): the buildings and their hand passes
 
+## Hand pass 3 (27 Oct): the real places
+
+The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
+hand, as Saba, the real churches whose Overture category names a denomination (none here). Placed by Saba's hand pass
+3 rules: 26 real points, **26 places**: church 12, school 5, buka 2, bank 2, clinic 1, fuel 1, mosque 1, bar 1 and a
+bus stop by hand.
+
+- On the house their point stands in or the nearest within 8 m: 9 places on 8 houses (b-9d4fe6f6 carries both the
+  fuel station and a bank; its link is the fuel station's); a second real place of a kind at the same house shares
+  its place once (26 real points, 25 places from Overture). The other 16 as 6 m squares at their point, moved up to
+  12.5 m off roads and houses. 8 houses carry a place link. Every real place has a place of its kind within 10 m
+  (working bar).
+- **No bus stop or motor park is in Overture inside Lagoon University** (the nearest, a bus_station point, is 158 m
+  outside it and outside Saba too). By hand, one stop: at the university's main gate on its main road in from Saba
+  (rd-cbdf1d43), a 6 m square on the street's edge 40 m in from the border, clear of carriageways, houses and places.
+  The campus shuttle's stops and the gate's motor park are owed to a study of the map (NOW), as Saba's.
+
 ## Hand pass 2 (27 Oct): houses, storeys and kinds
 
 **144 houses**, each with a kind and storeys; they cover 7.3% of the district (21,587 m²; Saba 14.4%). Most of the
