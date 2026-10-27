@@ -10,6 +10,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Rule | How it is held | Checked by |
 |---|---|---|
 | The story: Tunde's | story docs | not a map rule |
+| Gidi City: a shared space that feels like home | direction: online, social, the world as the content | owner's review; not a map rule |
 | Open world first; narrative optional | direction | not a map rule |
 | Gidi is our city. | direction | owner's review |
 | Invented names only. | no name on the map shares its core with a real Lagos name (`docs/hand/realnames.txt`); sound-alikes are judged by the owner | `check_map.py` (a name or text sharing a real name's core fails); N1 on the old map; the sound-alike is by ear (owner's review of NAMES.md) |

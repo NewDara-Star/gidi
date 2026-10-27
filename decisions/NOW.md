@@ -199,6 +199,22 @@ merged and checked, add new ones where they belong, and say here when the owner 
      done (hand pass 2, map/d19/BUILDINGS.md: 286, cover 13.1%); places done (hand pass 3: 44, a bus stop by
      hand). Landmarks next (item 11's recipe).
 
+12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
+   The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
+   map-auditor, lagos-life-designer; made 27 Oct, their reports checked before they are passed on):
+   (a) [ ] what a player does hour to hour, the pilot shared activity and a first playable slice for the owner and
+   their friends (the lagos-life-designer's brief, 27 Oct; to IDEAS.md, the owner decides);
+   (b) [ ] online from the start: before Unreal resumes, research how a shared world is built in UE5 (players per
+   session, Epic Online Services and crossplay, servers and their cost, testing on PC with friends first, what PS5
+   development needs, voice chat, moderation and safety, age rating);
+   (c) [ ] controls: how the big open-world games map run (GTA, RDR2, Cyberpunk, Spider-Man, Sleeping Dogs) and what
+   R2 does on foot if it runs (IDEAS "Run on R2, like FC");
+   (d) [ ] the open-source studio pack (Claude Code Game Studios) read in three passes: what to take now, later,
+   adapted, or not (an agent's report, checked); nothing installed without the owner's OK;
+   (e) [ ] the owner to paste the roadmap (`gidi-roadmap.md`, not in this repo) and the Act 1 flowchart from their other
+   account;
+   (f) [ ] a one-page "Gidi City at the end" from DECISIONS, IDEAS and the story, for the owner to cut and change.
+
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
 - **Meshy's credits run out on 11 Nov** (owner, 26 Oct: none used yet): before then, spend them on the hard shapes code
