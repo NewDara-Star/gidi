@@ -204,17 +204,27 @@ merged and checked, add new ones where they belong, and say here when the owner 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
    map-auditor, lagos-life-designer; made 27 Oct, their reports checked before they are passed on):
-   (a) [ ] what a player does hour to hour, the pilot shared activity and a first playable slice for the owner and
-   their friends (the lagos-life-designer's brief, 27 Oct; to IDEAS.md, the owner decides);
+   (a) [x] what a player does hour to hour, the pilot shared activity and a first playable slice for the owner and
+   their friends: researched 27 Oct (docs/gidi-city-research.md, IDEAS "Gidi City hour to hour"); the owner decides;
    (b) [ ] online from the start: before Unreal resumes, research how a shared world is built in UE5 (players per
    session, Epic Online Services and crossplay, servers and their cost, testing on PC with friends first, what PS5
    development needs, voice chat, moderation and safety, age rating);
    (c) [ ] controls: how the big open-world games map run (GTA, RDR2, Cyberpunk, Spider-Man, Sleeping Dogs) and what
    R2 does on foot if it runs (IDEAS "Run on R2, like FC");
-   (d) [ ] the open-source studio pack (Claude Code Game Studios) read in three passes: what to take now, later,
-   adapted, or not (an agent's report, checked); nothing installed without the owner's OK;
-   (e) [ ] the owner to paste the roadmap (`gidi-roadmap.md`, not in this repo) and the Act 1 flowchart from their other
-   account;
+   (d) [x] the open-source studio packs, read 27 Oct (an agent's triage; its quotes and counts were taken from the
+   two clones, about a quarter of the big pack's 638 files read in full, the rest by description; Solo Studio's 34
+   all read): install neither. The big pack's 49 agents all ask "May I write?" first, 2 of its 15 hooks can block, and
+   it would cost about 10,900 tokens a session; Solo Studio's hooks and skills probably never load. Five ideas owed,
+   rewritten for Gidi, each in its own commit:
+     - [ ] a NOT ASSESSED answer for the checks, so a missing value never passes quietly ("a gate you have not
+       watched fail is not a gate");
+     - [ ] each input in map-auditor's and district-scout's briefs marked FOUND or ABSENT, NOT ASSESSED with no data;
+     - [ ] a hook that blocks when district-scout stops without writing its note (the owner's OK given, 27 Oct);
+     - [ ] notes that describe a passing state (e.g. "Unreal on hold") carry what would end it;
+     - [x] dropped (owner, 27 Oct): a guard on whole-file reads of big markdown; "Important things are in the nuances,
+       and if you ignore the nuances, you ignore the important things". Big files are read in full, in parts if need be;
+   (e) [x] dropped (owner, 27 Oct): the roadmap and the story's twelve flowcharts stay with the owner's other
+   account; "just build the world and we'll think about story afterwards";
    (f) [ ] a one-page "Gidi City at the end" from DECISIONS, IDEAS and the story, for the owner to cut and change.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
@@ -306,6 +316,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   shuttle's stops and the gate's motor park to a study of the map, with Saba's.
 - Makoro's 8 tall height readings (5+ storeys read; 7 in its north-east corner) took 3 or 4 storeys from their
   neighbours, b-0dcdd67b 2 (map/d19/BUILDINGS.md): to look at on Street View in the look pass.
+- Ìbùdó Mẹ́ta (d16), for the owner before it is drawn: the real Oko-Baba sawmill moved to Agbowa in May 2025
+  (docs/lagos-study/districts/d16.md); does Gidi keep a working sawmill on its waterfront (LIVING sheet 16's trade)?
 - Lagoon University's tall height reading b-8bd534f5 (76 m2, 5+ storeys read) took its neighbours' 3 storeys
   (map/d18/BUILDINGS.md): to look at on Street View in the look pass.
 - Saba's 2 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d17/BUILDINGS.md): b-1b827014 is

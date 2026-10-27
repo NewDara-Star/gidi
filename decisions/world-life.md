@@ -135,7 +135,7 @@ The preacher, the crusade and the call to prayer are life, never jokes or crime.
 - **People:** strangers with small stories, met and met again.
 
 ## Online
-- **Later, if ever.** GTA Online came after the single-player game, with a huge team, servers, anti-cheat and years of updates.
+- **Replaced 27 Oct** by DECISIONS "Gidi City: a shared space that feels like home": online, friends together, from the start. Kept for its history: **Later, if ever.** GTA Online came after the single-player game, with a huge team, servers, anti-cheat and years of updates.
 - **For now:** design the single-player world so it could go online. Gidi's life suits it: crews as unions, owned businesses, betting leagues, races.
 - **Start with the world.**
 

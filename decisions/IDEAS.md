@@ -1,5 +1,14 @@
 # Ideas (not decided; newest first)
 
+- **Gidi City hour to hour, and the pilot** (lagos-life-designer's research, 27 Oct, checked as noted there:
+  docs/gidi-city-research.md). Its proposals, for the owner to take, change or drop: start friends-only, voice through
+  the PS5 or Steam party; meet at "the joint" (a buka or beer parlour with a table and a chalkboard), three or four
+  short rounds, a danfo ride between them; Lagos moments made by the city, never by a player, 2-4 an hour. The pilot:
+  Ludo, then Whot!, at one table (Ayò, draughts and chess share its code: about a month for all five); the first
+  slice "Friday night at the joint" with the owner, their brother and a friend on PC. Chess as a game to watch, a
+  children's club on a stilt veranda in Makoro (Gidi's own, never the real charity). Gameplay Football: code free to
+  reuse, its animations' licence unknown, months to port; read it and build a 2v2 from scratch. Faces through
+  MetaHuman from an iPhone. Not to attempt early: strangers, open voice, real money, ranked play, more than ~8 players.
 - **Run on R2, like FC** (owner, 27 Oct, playing GTA: "I really like the fact that I'm using R2 to run. Like, the effort
   is given"; GTA's tap-X-to-sprint does not feel natural to someone who mostly plays FC). Claude's view, to research
   before deciding: hold R2 to run on foot by default, so R2 means "go faster" on foot and in a vehicle alike (it is the
