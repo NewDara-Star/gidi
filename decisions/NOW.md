@@ -256,11 +256,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    colours, Spider-Man; and how roads get their dirt and grime, read from GTA's own files (its shaders, decal and
    timecycle files: "don't do as I say, do as I do"). For games we have no files of, the lesson is marked "from talks,
    not seen in files". Every lesson written down in IDEAS. (e) [ ] how GTA's missions force one method (owner, 27 Oct: ramming a
-   fleeing target "did nothing"): read in Vice City Stories' mission script, and in GTA V's scripts if a reader is
-   downloaded (owner to OK); IDEAS "Missions: the goal fixed, the way open". Rematch and MK1 (owner, 27 Oct: download them to study,
-   not to play): the owner's copies are on PlayStation (locked; not readable). The route is the owner buying the PC
-   version on Steam, then its Windows files fetched with Steam's own command-line tool (a download: ask); nothing
-   from unofficial sources. Rematch first (Unreal, ~$25–30).
+   fleeing target "did nothing"): read 27 Oct in Vice City Stories' script and program and GTA V's scripts (the native-name list
+   and PPSSPP's decryption source downloaded with the owner's OK); IDEAS "Missions: the goal fixed, the way open". Rematch and MK1: not needed (owner, 27 Oct: "Don't worry about rematch"; Fortnite too: "We can get our art
+   style without it"); their look lessons stay marked "from talks, not seen in files".
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
