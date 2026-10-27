@@ -182,6 +182,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
      by hand; working_bar d28 PASS). Landmarks done (hand pass 4: 24 walled plots, the Deeper Life church's ground by
      Ajayi Aina Street kept whole with its hall). **At the working bar** (26 Oct); its map picture looked at and sent.
      Its bus stops and motor parks owed (below).
+   - Saba (d17), started 26 Oct: roads done (hand pass 1, map/d17/STREETS.md: 669 records, 33.9 km, every real street
+     but what its neighbours hold; Murtala Muhammed Way drawn again as one record, the trunk roads set to main roads,
+     Ikorodu Road left to Mùṣá's expressway). Houses, places and landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -235,6 +238,9 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
 - Agunda's 9 tall height readings (5+ storeys) took their neighbours' 2-3 storeys (map/d12/BUILDINGS.md): six are
   29-53 m2, too small for it; the three larger (b-0e26f361 103 m2, b-6493aef7 194 m2, b-e9e29b9e 135 m2) to look at
   on Street View and the satellite (the look pass, unless one is a landmark).
+- The roads draft's kinds have no trunk: Overture's trunk roads come in as lanes. Saba set its three by hand (main
+  roads, map/d17/STREETS.md); each district drawn next checks its trunk roads the same way. Saba's Murtala Muhammed Way
+  (rd-9e64ec60, 10.75 m) is a divided road: its width and median to read against the satellite.
 - Gbàgede's Ikorodu Road record rd-9e02217d runs along its west border, about half its width over the land west of
   it, and Ikorodu Road's north stretch crosses the north-west notch in five short pieces: the districts drawn there
   take them as held and draw on from them. The cloverleaf's own centre lies outside the notch. The 40 m and 25 m
