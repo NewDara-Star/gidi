@@ -133,3 +133,30 @@ The owner asked whether Gidi's places could just be parodies of the real names, 
   courts, pitches, school grounds and race-worthy roads it holds are where these happen. Not decided; online play
   (servers, matchmaking, moderation) is a large cost to research before choosing.
 - **Nigerians don't ask for refunds; they stop buying from you** (owner, 26 Oct): the first game has to earn trust.
+
+## Gidi's look: an art style or plain realism? (owner asked, 27 Oct; not decided)
+The owner likes Fortnite's look though it isn't realistic, and Rematch's. Claude's recommendation: **real Lagos, painted
+light**: real sizes, real materials and all the grime (no toy look), but the light and colours chosen by us like a
+painter's, a fixed colour list per district, a little simplification in the surfaces (Rematch's way), not photo-chasing.
+Why: plain realism costs the most and ages fastest (GTA V now looks off: its hand-set orange sun and early-clipping
+highlights, from its own files, `~/gidi-data/research/look/LOOK-STUDY.md`); a chosen look ages well and makes Gidi
+recognisable in one frame. To decide by eye: one Mùṣá street rendered three ways when Unreal work resumes (map first).
+Fortnite: not downloaded (owner, 27 Oct: "We can get our art style without it").
+
+## Missions: the goal fixed, the way open (owner, 27 Oct; not decided)
+The owner stopped playing GTA over one mission: a target flees on a bike and must be shot; ramming him with a car "did
+nothing", and shooting from a moving car needed a steadiness that made it a chore. "You have to go through a certain
+step to get a predetermined goal. You cannot take another step." They also note Red Dead pulls you into exploring while
+GTA is mission-led, and that players ask for open worlds "with lots of 'side' stuff to complete" (a post the owner shared).
+For Gidi: a mission states the outcome (he must not reach the bridge; the package must get to Oshodi by six) and accepts
+any way the world allows: a car, a friend, a shortcut, a bribe, a crowd. Fail only on the outcome, never on the method.
+Being checked in the files (NOW item 13): how GTA's mission scripts force the method (damage immunity flags on
+targets, scripted chases, fail conditions), in Vice City Stories' script and, if the owner approves the download of a
+script reader, GTA V's.
+What the files showed (27 Oct; ~/gidi-data/research/gta/MISSION-METHOD.md and ~/gidi-data/research/psp/PSP-NOTES.md):
+Vice City Stories forces the method often (a character made immune to cars in 37 of 59 story missions; a fleeing
+dealer put on a vehicle and then made ram-proof; fail lines like "You used a gun."). GTA V mostly fails on outcomes
+(747 fail lines; only 8 about the wrong way or time, none asking for a weapon); it shuts the way with chases on rails
+("Chop": the rider ram-proof and never knocked off), invincible things the player would naturally attack, and "too
+early" fails; it rewards a style with medals instead of failing the other ways. For Gidi: the outcome fails, never
+the method; a rule, if any, is said up front; style earns a bonus, not a fail.

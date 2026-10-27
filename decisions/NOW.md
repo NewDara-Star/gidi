@@ -203,7 +203,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Ìbùdó Mẹ́ta (d16, the frame study's Ebute Metta-Oyingbo-Otto; its working name in NAMES.md; study note
      docs/lagos-study/districts/d16.md), started 27 Oct: roads done (hand pass 1, map/d16/STREETS.md: 300 records,
      19.5 km, every real street but what Saba and Makoro hold; Clinic Road's second carriageway dropped by hand, as its
-     neighbours hold one). Its bridges and ramps owed (below). Houses next.
+     neighbours hold one). Its bridges and ramps owed (below). Houses done (hand pass 2, map/d16/BUILDINGS.md: 402
+     houses, 11.4% cover; one tall reading, b-c0559b50, given 2 storeys from nearby: owed a Street View look). Places next.
 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
@@ -245,9 +246,21 @@ merged and checked, add new ones where they belong, and say here when the owner 
    spawners, hard budgets. The lessons, in our words: IDEAS "What GTA's own files taught us".
    Next: (a) [ ] the locked archives: CodeWalker's source downloaded (owner's OK, 27 Oct) to `~/gidi-data/tools/`; a
    helper is porting its key search and archive reader to Python, run over the browser port's engine file;
-   (b) [ ] Forza 2: the repo is github.com/0herculabs/hl360-Forza2 (a Windows port, machine-translated code, no game
-   files: the owner to decide if it is worth the download); (c) [ ] the owner's PSP God of War games and Harry
-   Potter and the Chamber of Secrets (in iCloud, PPSSPP) for how a story is built.
+   (b) [x] Forza 2: dropped (owner, 27 Oct: "If the Forza thing is not useful... then there's no point"; the repo
+   found was a machine-translated Windows port with no game files). The owner still wants driving that is not arcadey;
+   (c) [ ] the owner's PSP games for how a story is built, read from the discs themselves (owner, 27 Oct: "the entire
+   truth will always be in code"; talks only point where to look). Copied out of iCloud with the owner's OK to
+   `~/gidi-data/research/psp/discs/`. Found in iCloud Drive, `Mac Archive 2026-08/PPSSPP/`: God of War Ghost of
+   Sparta and Chains of Olympus, Harry Potter and the Goblet of Fire (not Chamber of Secrets), and GTA Vice City
+   Stories; (d) [ ] how clean, real-looking games get their look (owner, 27 Oct): Rematch (Unreal), Mortal Kombat 1's
+   colours, Spider-Man; and how roads get their dirt and grime, read from GTA's own files (its shaders, decal and
+   timecycle files: "don't do as I say, do as I do"). For games we have no files of, the lesson is marked "from talks,
+   not seen in files". Every lesson written down in IDEAS. (e) [ ] how GTA's missions force one method (owner, 27 Oct: ramming a
+   fleeing target "did nothing"): read in Vice City Stories' mission script, and in GTA V's scripts if a reader is
+   downloaded (owner to OK); IDEAS "Missions: the goal fixed, the way open". Rematch and MK1 (owner, 27 Oct: download them to study,
+   not to play): the owner's copies are on PlayStation (locked; not readable). The route is the owner buying the PC
+   version on Steam, then its Windows files fetched with Steam's own command-line tool (a download: ask); nothing
+   from unofficial sources. Rematch first (Unreal, ~$25–30).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
