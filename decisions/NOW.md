@@ -197,7 +197,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Makoro (d19, the frame study's Makoko; its working name in NAMES.md), started 27 Oct: roads done (hand pass 1,
      map/d19/STREETS.md: 144 records, 7.1 km, every real street but what Saba and Lagoon University hold); houses
      done (hand pass 2, map/d19/BUILDINGS.md: 286, cover 13.1%); places done (hand pass 3: 44, a bus stop by
-     hand). Landmarks next (item 11's recipe).
+     hand). Landmarks done (hand pass 4: one walled hospital compound, the only landmark ground Overture has in
+     Makoro). **At the working bar** (27 Oct); its map picture looked at and sent. Its canoe landings, stops and
+     8 tall readings owed (below).
 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
