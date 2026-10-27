@@ -70,7 +70,7 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 - **Hold-offs:** don't publish to the live artifact link (a different account).
 - **Unreal (go, 17 Oct):** the game is its own repo, `~/gidi-game`. The gidi data is the master copy: the importer rebuilds the city from it every time and nothing it makes is committed. Hand-made assets go through Git LFS, each listed in `ASSETS.md`. *Now:* the importer was deleted 25 Oct; `gidi-game/tools/map_build.py` turns the map's records into the builders' recipes.
 - **Cost:** use cheaper models where possible (Pro plan).
-- **Delete what we no longer use; use what the engine has before writing our own; read twice** (owner, 25 Oct **Game builds don't pile up** (owner, 27 Oct: Unreal open takes too much memory, so the game is tested as a packaged build; "we need to be deleting those files so they don't pile up"): once a packaged test build has been looked at, it is deleted (only the newest is kept), and the disk's free space is checked before any big download.
+- **Delete what we no longer use; use what the engine has before writing our own; read twice** (owner, 25 Oct
   evening: "it's very calm to delete and get rid of something if we're no longer using it"; "why are we writing extra
   code when there is probably a solution to it?"; "you have to do two passes"). Old code, old logs and old tools left in
   the repos get picked up by mistake and old decisions contradict new ones, so: (1) code, scripts, logs and docs that are
@@ -80,6 +80,7 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   (3) reading the inventory, or code before changing it, is two passes: the first to learn what each part is, the second
   to understand what it does and whether it is still used. Outranks the "keep it frozen to view" wording for the old map
   and its Unreal side (owner gave permission to delete what is no longer useful).
+- **Game builds don't pile up** (owner, 27 Oct: Unreal open takes too much memory, so the game is tested as a packaged build; "we need to be deleting those files so they don't pile up"): once a packaged test build has been looked at, it is deleted (only the newest is kept), and the disk's free space is checked before any big download.
 - **Map and brush first, Unreal on hold** (owner, 26 Oct: "Should we hold on on unreal first and just do map and brush
   work to complete all the districts. I might renege of this later, but let's just continue with map work right now").
   The work is the map on the board in Chrome, the plan layer and then the brush (dress) layer, district by district
