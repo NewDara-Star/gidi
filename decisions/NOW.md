@@ -172,7 +172,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
        match, (3) the drawn districts' streets thinned by hand to it, defining streets first. No dropped street turns
        into a footpath (DECISIONS "No forced footpaths"). Order per district (DECISIONS "Study the district first"):
        several checked study passes wide and close; a 1:3 plan with streets and buildings by the ratio; the owner sees
-       the thinning before it is drawn. Trial on one district first (Mùṣá, whose building study is running).
+       the thinning before it is drawn. Trial on one district first: Mùṣá, its building study done (docs/lagos-study/buildings/d15.md), then its owed
+       hand pass (16 h).
    (g) [ ] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, each
        ending with its "Checked:" list, before those districts are drawn (CLAUDE.md "Every agent claim"). Spot-checked so
        far: d11's expressway gap (true), d29's rail end (true) and expressway point (a d28 road end, not a border
