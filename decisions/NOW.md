@@ -230,6 +230,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
    (e) [x] dropped (owner, 27 Oct): the roadmap and the story's twelve flowcharts stay with the owner's other
    account; "just build the world and we'll think about story afterwards";
    (f) [ ] a one-page "Gidi City at the end" from DECISIONS, IDEAS and the story, for the owner to cut and change.
+13. [ ] **What are we not thinking about?** (owner, 27 Oct, DECISIONS "Study other games from the inside"): study GTA
+   V's unpacked files (`~/gta5/playgta5`) to learn what a living world needs and how it was solved simply (traffic
+   that appears around you, crowds and what they do at each spot and hour, driving feel; the owner finds Forza's
+   driving better than GTA's "arcadey" feel), then Forza 2's repo when the owner brings it (a download: ask). Write
+   it as our own notes, in plain words, with "what Gidi should think about" for each; nothing copied. First: a reader
+   for the game's archive files, written by us; any program from the folder is run only on the owner's OK.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
