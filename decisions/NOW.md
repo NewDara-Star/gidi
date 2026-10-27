@@ -191,7 +191,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Lagoon University (d18, the frame study's UNILAG; its working name in NAMES.md), started 27 Oct: roads done
      (hand pass 1, map/d18/STREETS.md: 186 records, 8.3 km, every real street but what Saba holds); houses done (hand
      pass 2, map/d18/BUILDINGS.md: 144, cover 7.3%, the campus left to the landmark plots); places done (hand pass 3: 26,
-     one bus stop by hand at the main gate). Landmarks next (item 11's recipe).
+     one bus stop by hand at the main gate). Landmarks done (hand pass 4: the campus as one walled
+     school ground kept whole with its inside roads, 71% of the district, and its clinic compound). **At the working
+     bar** (27 Oct); its map picture looked at and sent.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -271,6 +273,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   Jibowu's coach parks, the Ikorodu Road and Herbert Macaulay Way stops), as Gbàgede's.
 - Lagoon University's University Road (rd-cbdf1d43) ends on Saba's node on rd-beee86ae, its last 18 m over Saba's
   7 m lane rd-0dd14298, drawn twice there (map/d18/STREETS.md): the seam's hand pass decides which keeps the stretch.
+- Lagoon University's campus wall: 5 gates of 38-157 m where campus roads run along the wall's line (map/d18/
+  BUILDINGS.md hand pass 4): close them with railings or a wall set back off the road in the look pass.
 - Lagoon University's stops and parks: one stop by hand at the main gate (map/d18/BUILDINGS.md); the campus
   shuttle's stops and the gate's motor park to a study of the map, with Saba's.
 - Lagoon University's tall height reading b-8bd534f5 (76 m2, 5+ storeys read) took its neighbours' 3 storeys
