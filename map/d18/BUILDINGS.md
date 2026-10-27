@@ -1,5 +1,32 @@
 # Lagoon University (district 18): the buildings and their hand passes
 
+## Hand pass 4 (27 Oct): the landmarks, walled with a gate each
+
+Saba's hand pass 4 recipe on Overture's land use in Gidi metres, with two kinds added by hand for this district: a
+university ground (a school ground, with its school place) and a clinic compound. **2 plots**:
+
+- **The campus** (Overture's university ground, 95% of it inside the district): one school ground of 211,528 m², 71% of
+  the district. It is kept whole with its 139 inside roads, as Gbàgede kept the Deeper Life ground whole (a campus is
+  one walled ground its own roads run through), less the carriageways of the roads that only pass along it. Its wall
+  0.2 m inside the edge: 15 pieces, 2,904 m of the 3,086 m edge (open where 16 houses stand on the edge), and a gate
+  across each of the 14 roads that enter. The board's test then found 4 wall pieces across a road (where a road ends
+  at the wall or meets it slanting, its round end reached past the gate): by hand, those 4 gates were widened to the
+  road's whole carriageway along the wall + 0.6 m (by 2.1 to 11.8 m). The board's test then named 3 more (it names one
+  road per wall), so every wall was tested the board's way (0.25 m pieces, 0.2 m thick, against every carriageway of
+  Lagoon University and Saba, half width - 0.05 m, flat ends) and every stretch on a carriageway outside a gate got
+  one, + 0.6 m: 3 walls, 4 stretches, 49.5 m (two of 35 m and 14 m where a campus road runs along the wall's line);
+  the same test then finds none. Where a road runs along the wall rather than through it the gate covers its whole
+  run, so 5 of the campus's gates are 38 m or longer, the longest 156.5 m: open stretches of wall, the look
+  pass's to close with railings or a wall set back off the road (NOW). 89 houses wholly inside are linked to it; the school place is its outline.
+- **The campus clinic** (Overture's clinic ground, wholly inside): a compound of 2,008 m² inside the campus, its wall
+  271 m of 278 m with one 4 m gate where it comes nearest a road (none enters it).
+- Left out: the college of education's ground (none of it inside the district), and the pitches,
+  the track, the cricket oval and the grass (no plot kind for them yet; the look pass's).
+
+The map picture (27 Oct, looked at): no land between districts left unclaimed (0.000 km²). Lagoon University reads
+open next to Saba (houses cover 7.3%): the campus's halls and faculties are to come as buildings in the look pass. The
+near view still frames off-centre with its labels outside the drawing (the tool's fix is owed, NOW).
+
 ## Hand pass 3 (27 Oct): the real places
 
 The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
