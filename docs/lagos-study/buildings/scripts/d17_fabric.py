@@ -37,6 +37,22 @@ OVERRIDE = {
                'at its south edge (Google Maps label)', 'shed (workshop), kiosk_row; a yard plot *guess*'),
     'D19-31': ('split by grain, see "Land or water: the data": the stilt town over water in the south-east, land compounds '
                'in the north-west', 'shack (home) on the water; compound_house, face_me_bungalow on land'),
+    'D13-123': ('stadium complex: the National Stadium bowl, Teslim Balogun Stadium, Legacy Pitch, the indoor sports '
+                'hall and dark ponds (Google Maps labels and satellite, 27 Oct); Overture stadium, pitches, wetland '
+                '16%, farmland 5%; compound houses only on its edges', 'none in the grounds (stadium stands, halls: '
+                'look pass); compound_house (home) at the edges'),
+    'D13-162': ('estate flats: Royal Estate Phase 1 and 2, parallel rows of long salmon-roofed slab blocks, with Eric '
+                'Moore Heights by Eric Moore Road (Google Maps labels and satellite, 27 Oct)',
+                'walkup (flats) in rows'),
+    'D13-169': ('school campus: Government College Lagos, long blue-roofed classroom blocks round open ground '
+                '(Google Maps labels and satellite, 27 Oct)', 'school (halls)'),
+    'D12-226': ('split by cell, see d12.md "The east lobe": cleared open ground (green scrub and trees by eye, Overture '
+                'scrub and brownfield) in the middle, packed compounds and small shacks round it; labels Ijora Badia, '
+                'Ijora 7up Market (Google Maps)', 'none (open ground) in the middle; compound_house, face_me_bungalow, '
+                'shack (home) round it'),
+    'D12-139': ('compound houses, 2 storeys, packed, along a canal (by eye: a dark channel with houses to its banks; '
+                'Google Maps labels Orile Iganmu, Coker Rd); several real blocks, Overture has no streets through it',
+                'compound_house (home), face_me_bungalow (home)'),
 }
 
 
