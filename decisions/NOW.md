@@ -227,7 +227,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
      docs/lagos-study/districts/d16.md), started 27 Oct: roads done (hand pass 1, map/d16/STREETS.md: 300 records,
      19.5 km, every real street but what Saba and Makoro hold; Clinic Road's second carriageway dropped by hand, as its
      neighbours hold one). Its bridges and ramps owed (below). Houses done (hand pass 2, map/d16/BUILDINGS.md: 402
-     houses, 11.4% cover; one tall reading, b-c0559b50, given 2 storeys from nearby: owed a Street View look). Places next.
+     houses, 11.4% cover; one tall reading, b-c0559b50, given 2 storeys from nearby: owed a Street View look). Places done (hand pass 3: 98 places, the bus stop by
+     the Oyingbo terminal, two seam places by hand on free ground; working bar PASS). Landmarks done (hand pass 4: 17
+     plots from Overture's land use and the bus terminal's outline, Oyingbo Market as a 4-storey market block read off
+     satellite, the cleared sawmill ground at Oko-Baba). Owed: the railway compound (Jaekel House), the Federal Medical
+     Centre and the Red Line station, with the railway; the sawmill ground's football pitch and canoe landing, and
+     Oyingbo Market's look, in the look pass.
+     Not at the working bar under the 27 Oct density rule (item 16): cover 11.4% against Google's 26.4-30.5%.
 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
@@ -282,12 +288,41 @@ merged and checked, add new ones where they belong, and say here when the owner 
    fleeing target "did nothing"): read 27 Oct in Vice City Stories' script and program and GTA V's scripts (the native-name list
    and PPSSPP's decryption source downloaded with the owner's OK); IDEAS "Missions: the goal fixed, the way open". Rematch and MK1: not needed (owner, 27 Oct: "Don't worry about rematch"; Fortnite too: "We can get our art
    style without it"); their look lessons stay marked "from talks, not seen in files".
+14. [ ] **A faster board test, run alongside the old one (owner, 27 Oct: "used in tandem... so nothing falls through
+   any gap"; plan agreed: "this plan").** The board test (bpall.js on web/mapedit.js boardProblems) takes 65-80 min for
+   the 11 drawn districts. First time where the hour goes (not measured yet). If it is the pair-by-pair compare, the
+   fast test buckets houses and roads into map squares and runs the same exact touch test on pairs that share a square.
+   (a) [ ] a self-test of planted problems (a house on a road, two houses overlapping, a house across a square's edge),
+   on a scratch copy, that both tests must catch, run first every time; (b) [ ] trial: both tests on every district,
+   their lists matching line for line, a mismatch blocks the commit until explained by hand; (c) [ ] after the trial,
+   the fast test every time, the old one at each district's close (before its map picture) and once a week; any
+   mismatch goes back to (b). Its own commit, after Ìbùdó Mẹ́ta.
+15. [ ] **Know what's in the code base, routinely (owner, 27 Oct: "you should do that routinely... to have like a
+   headspace").** scripts/inventory.py (3 s) run at every session start and after each compaction, its SUSPECTS read;
+   the committed docs/inventory and CODEBASE.md (last 26 Oct) refreshed when the repos changed. First run 27 Oct: 888
+   files (gidi 308, gidi-game 540, gidi-data 40), code 3,720 pieces (2 unused), 1 line naming a file that is not there
+   (docs/lagos-study/similar/scripts/appendix.py). As a DECISIONS rule with its CHECKS row, its own commit.
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
 - **Meshy's credits run out on 11 Nov** (owner, 26 Oct: none used yet): before then, spend them on the hard shapes code
   can't get right (DECISIONS: monuments, sculptural one-offs; first candidates the landmarks the districts' map work
   names), each cost stated first. Map work comes first; this is done around it.
+- The Saba (d17) and Makoro (d19) audit of 27 Oct (map-auditor, read-only; its cover figures and three findings
+  re-checked by Claude: pc-472dd1cc 34.6 of 36 m² on carriageway, rd-a4ed4412 a 27.2 m stub, 14 four-storey houses in
+  d19), to fix by hand in item 16 (d): Makoro's east half (59 houses where Google has about 5,900; footpaths or water
+  for the stilt town); 12 four-storey walkups on the lagoon edge set to 1-2 storeys; 64 road ends 0-3 m short of a
+  road in d17 and 2 in d19; 30 broken-in-two streets in d17, 2 in d19; 122 dead stops in d17, 37 in d19; seams not
+  joined with d16 (Clinic Road, Murtala), d18, d19 and d27; Akoka Road's three doubling-backs and three repeated
+  points; pc-044db919 and pc-472dd1cc off the road; pl-sab44155 a church_ground linked to pc-c01928e5; pl-sabc962e
+  linked to pc-0de85f48; pl-sabb6735's two school places; pl-sab35696 a school house, not a walled plot; three
+  houses on water in d17's north-east; every road tar_worn with no median; Murtala's three free pieces through d11 (to
+  d11's Owed). The auditor's full lists (ends, odd kinds and storeys) are to be re-run, not copied: its scripts were in
+  a scratch folder.
+- The Lagos-Badagry Expressway stops at Agunda's edge: d09's rd-b2b8a5cc (25 m motorway) ends at (12568.69, 7733.91),
+  13 m from the d09/d12 line, and no road wider than 13 m lies within 300 m of that end in d12 (checked 27 Oct from
+  the plan files, after the d11 scout's note found it). Drawn by hand across Agunda's corner to d11's border when d11
+  is drawn (a seam pass; Agunda's houses give way).
 - The look pass (after every district is working, hero streets first; DECISIONS "Every district to working first"),
   moved from Mùṣá's item 10 on 26 Oct: the schools' and factory's faces and the factory wall's ice-cream advert; B28's
   real name to read; laterite and concrete roads sampled from their own panos, and a layer for interlock's pavers
