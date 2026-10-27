@@ -43,6 +43,10 @@ that. Block when you can point at:
   "matches", "fixed", "done", "verified", counts and percentages that no script in the diff or the repo produces;
   something judged by eye written as if a script checked it; a step skipped and not said. The same for claims in
   decisions/NOW.md, CHECKS.md and the docs this change edits.
+- An agent's work used unchecked (owner, 27 Oct: "don't trust them fully... cross-check what they said"): a commit,
+  study note (docs/lagos-study/districts/), audit or doc that carries an agent's numbers, positions or findings must
+  say which were re-run or re-read by the main session and which are marked "not checked". Block agent output that
+  goes in with no such line, or a study note used to draw a district before its claims were checked.
 - A check that lies: one that passes when its input is missing or empty, catches an exception and carries on, skips
   silently, prints PASS on a fallback, or was loosened, narrowed or given an exception to make a change pass; a GAP
   row in CHECKS.md turned PASS/PART without a check that really tests the rule; a test or threshold changed to fit
@@ -53,7 +57,8 @@ that. Block when you can point at:
 - A decision made for the owner without asking, where DECISIONS.md says it is theirs; scope beyond what the commit says.
 - Dead code or stale comments/docs left behind by this change; names that don't say what things are; two things
   that can now disagree.
-- Real place names, Google geometry copied or traced (study yes, lift no), sacred places or people made criminal.
+- Real place names, Google's pictures copied or traced (study yes, lift no; Google Open Buildings data may be used,
+  credited, since 27 Oct), sacred places or people made criminal.
 
 Only block for a clear breach you can point to (file and line, or the commit), with what the fix is. Don't block on
 taste, style, or things outside this change. A commit message paragraph starting `Review:` is the author answering
