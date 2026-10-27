@@ -266,8 +266,8 @@ so blocks are small and roads take the land.
 
 **What is still owed before the owner chooses:** the real street km per km² and road share of land in each drawn
 district, read from Google Maps (NOW 16 f). The same for GTA V's Los Santos from its files (NOW 16 c(1)). Then put
-both next to UN-Habitat's 18 km/km² and 30%, and the Matrix city's 16 km/km². I did not compute our absolute
-figures: `scripts/working_bar.py` needs `pyarrow`, which is not installed, and installing it is a download.
+both next to UN-Habitat's 18 km/km² and 30%, and the Matrix city's 16 km/km². Our own figures are in the Checked
+section below (from `scripts/working_bar.py`).
 
 ## Checked (main session, 27 Oct)
 
@@ -279,5 +279,6 @@ figures: `scripts/working_bar.py` needs `pyarrow`, which is not installed, and i
   order and the per-km² Matrix counts: **not checked** yet; they are the agent's reading, with its links above.
 - Set against Gidi (working_bar.py and the Saba/Makoro audit, 27 Oct): our street length is 27.5-47.8 km per km²
   (UN-Habitat's floor is 18; Overture's real Lagos 8.4-17.1, thin). Saba's carriageways take 32.8% of its land,
-  Makoro's 18.5% (the auditor's figures, not re-run), near UN-Habitat's 20-30% band. Off the roads, Saba's houses cover 21.4% of the land against
-  Google's 38.5% there, so most of the cover gap is houses not drawn, not land lost to roads.
+  Makoro's 18.5%, near UN-Habitat's 20-30% band. Off the roads, Saba's houses cover 21.4% of the land against
+  Google's 38.5% there. All four are the auditor's figures, **not re-run**; if they hold, more of the cover gap is
+  houses not drawn than land lost to roads, but that is not yet a finding.
