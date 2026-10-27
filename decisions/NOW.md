@@ -186,7 +186,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      but what its neighbours hold; Murtala Muhammed Way drawn again as one record, the trunk roads set to main roads,
      Ikorodu Road left to Mùṣá's expressway). Houses done (hand pass 2, map/d17/BUILDINGS.md:
      831, each with a kind and storeys, 14.4% of the district, the board's test 0). Places done (hand pass 3: 202, one bus stop by hand;
-     working_bar d17 PASS). Landmarks next (item 11's recipe).
+     working_bar d17 PASS). Landmarks done (hand pass 4: 9 walled plots). **At the working bar** (27 Oct);
+     its map picture looked at and sent. Its bus stops and motor parks owed (below).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):

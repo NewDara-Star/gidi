@@ -1,5 +1,21 @@
 # Saba (district 17): the buildings and their hand passes
 
+## Hand pass 4 (27 Oct): the landmarks, walled with a gate each
+
+Gbàgede's hand pass 4 recipe on Overture's land use in Gidi metres: each ground less the carriageways along it
+(Saba's and its neighbours') is a plot (the largest piece where a road cuts it), a wall 0.2 m inside its edge, open
+where houses close it, a gate across each road that enters or else one 4 m gate where it comes nearest a road.
+**9 plots**, 39 wall pieces, 9 gates (no road enters any of them): 4 school grounds (57-1,026 m², each with its
+school place; one is Overture's "College Hall"), 3 hospital compounds (175-4,880 m²: Overture's Federal Psychiatric
+Hospital Yaba, 525 m², the Harvey Road health centre, 4,880 m² of its 12,730 m² ground where roads cut it, and the
+emergency operations centre, 175 m²), a barracks (4,439 m², unnamed in Overture) and a church ground (276 m²). No
+named market in Overture's land use here. No house footprint was cut: where a house stands on a ground's edge the wall
+stops at it; 16 houses wholly inside are linked to their ground.
+
+The map picture (27 Oct, looked at): no land between districts left unclaimed (0.000 km²). Saba reads lighter than
+Mùṣá beside it (houses cover 14.4%), most by eye in its north half between Mùṣá's expressway and Ṣọmọlá; filling up
+is the look pass's (NOW). The near view's lower half is still blank (the tool's fix is owed, NOW).
+
 ## Hand pass 3 (27 Oct): the real places
 
 The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
