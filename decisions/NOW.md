@@ -169,16 +169,23 @@ merged and checked, add new ones where they belong, and say here when the owner 
        streets follows the scale, so a district's street km per km² matches the real one, picked by hand from a study
        of the whole district that keeps its defining streets. Owed: (1) each district's real street km per km² read
        from Google Maps (Overture is thin), (2) a street-density row in working_bar.py once (1) gives a figure to
-       match, (3) the drawn districts' streets thinned by hand to it, defining streets first.
+       match, (3) the drawn districts' streets thinned by hand to it, defining streets first. No dropped street turns
+       into a footpath (DECISIONS "No forced footpaths"). Order per district (DECISIONS "Study the district first"):
+       several checked study passes wide and close; a 1:3 plan with streets and buildings by the ratio; the owner sees
+       the thinning before it is drawn. Trial on one district first: Mùṣá, its building study done (docs/lagos-study/buildings/d15.md), then its owed
+       hand pass (16 h).
    (g) [ ] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, each
        ending with its "Checked:" list, before those districts are drawn (CLAUDE.md "Every agent claim"). Spot-checked so
        far: d11's expressway gap (true), d29's rail end (true) and expressway point (a d28 road end, not a border
        point), d10's rd-f1478f6a (exists).
    (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
        types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
-       Done and checked: d16, d17, d19 (docs/lagos-study/buildings/). Owed from them: a house on stilts over water in
-       the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); the owner's call on
-       Makoro before or after the clearances of Dec 2025; d19_water.py and d17_fabric.py re-run by the main session.
+       Done and checked: d12, d13, d15, d16, d17, d18, d19 (docs/lagos-study/buildings/). Still to study: d09, d14,
+       d27, d28. Owed from them: Mùṣá's hand pass (its match hides LUTH drawn at 44% against 22% and the factories
+       half empty; our houses median 84 m² against Google's 169: fewer, bigger houses at the same cover); kinds the map
+       lacks for d18 (hall of residence, faculty block, detached house in a yard: the owner's call); a house on stilts over water in
+       the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); Makoro drawn with its
+       stilt town (owner, 27 Oct: DECISIONS "Makoro keeps its stilt town"); d19_water.py and d17_fabric.py re-run by the main session.
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
