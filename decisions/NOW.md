@@ -176,6 +176,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
        point), d10's rd-f1478f6a (exists).
    (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
        types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
+       Done and checked: d16, d17, d19 (docs/lagos-study/buildings/). Owed from them: a house on stilts over water in
+       the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); the owner's call on
+       Makoro before or after the clearances of Dec 2025; d19_water.py and d17_fabric.py re-run by the main session.
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
