@@ -203,7 +203,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
    - Ìbùdó Mẹ́ta (d16, the frame study's Ebute Metta-Oyingbo-Otto; its working name in NAMES.md; study note
      docs/lagos-study/districts/d16.md), started 27 Oct: roads done (hand pass 1, map/d16/STREETS.md: 300 records,
      19.5 km, every real street but what Saba and Makoro hold; Clinic Road's second carriageway dropped by hand, as its
-     neighbours hold one). Its bridges and ramps owed (below). Houses next.
+     neighbours hold one). Its bridges and ramps owed (below). Houses done (hand pass 2, map/d16/BUILDINGS.md: 402
+     houses, 11.4% cover; one tall reading, b-c0559b50, given 2 storeys from nearby: owed a Street View look). Places next.
 
 12. [ ] **Gidi City, the shared space (owner, 27 Oct, DECISIONS "Gidi City: a shared space that feels like home").**
    The map work (item 11) stays first; alongside it, by the agents in `.claude/agents/` (district-scout,
@@ -236,6 +237,28 @@ merged and checked, add new ones where they belong, and say here when the owner 
    driving better than GTA's "arcadey" feel), then Forza 2's repo when the owner brings it (a download: ask). Write
    it as our own notes, in plain words, with "what Gidi should think about" for each; nothing copied. First: a reader
    for the game's archive files, written by us; any program from the folder is run only on the owner's OK.
+   First pass done 27 Oct (a helper; its counts spot-checked by Claude: 115 schedules, 248 handling entries,
+   77,248 road nodes and 80,592 links, Gidi's 0 lane fields and 0 person spots): `~/gidi-data/research/gta/GTA-STUDY.md`
+   (off the repos: it quotes GTA's counts). Its 15 gaps, for the owner to pick from: traffic fields on roads (lanes,
+   one-way, speed), spawning around the player, population by area and hour, who can appear, people's spots with
+   conditions and chains, reactions, cheap far-away life, junction rules, ambient sound, moments that wake near the
+   player, crime and witnesses, local light moods, a driving sheet per vehicle with a wheel profile, parked-car
+   spawners, hard budgets. The lessons, in our words: IDEAS "What GTA's own files taught us".
+   Next: (a) [ ] the locked archives: CodeWalker's source downloaded (owner's OK, 27 Oct) to `~/gidi-data/tools/`; a
+   helper is porting its key search and archive reader to Python, run over the browser port's engine file;
+   (b) [x] Forza 2: dropped (owner, 27 Oct: "If the Forza thing is not useful... then there's no point"; the repo
+   found was a machine-translated Windows port with no game files). The owner still wants driving that is not arcadey;
+   (c) [ ] the owner's PSP games for how a story is built, read from the discs themselves (owner, 27 Oct: "the entire
+   truth will always be in code"; talks only point where to look). Copied out of iCloud with the owner's OK to
+   `~/gidi-data/research/psp/discs/`. Found in iCloud Drive, `Mac Archive 2026-08/PPSSPP/`: God of War Ghost of
+   Sparta and Chains of Olympus, Harry Potter and the Goblet of Fire (not Chamber of Secrets), and GTA Vice City
+   Stories; (d) [ ] how clean, real-looking games get their look (owner, 27 Oct): Rematch (Unreal), Mortal Kombat 1's
+   colours, Spider-Man; and how roads get their dirt and grime, read from GTA's own files (its shaders, decal and
+   timecycle files: "don't do as I say, do as I do"). For games we have no files of, the lesson is marked "from talks,
+   not seen in files". Every lesson written down in IDEAS. (e) [ ] how GTA's missions force one method (owner, 27 Oct: ramming a
+   fleeing target "did nothing"): read 27 Oct in Vice City Stories' script and program and GTA V's scripts (the native-name list
+   and PPSSPP's decryption source downloaded with the owner's OK); IDEAS "Missions: the goal fixed, the way open". Rematch and MK1: not needed (owner, 27 Oct: "Don't worry about rematch"; Fortnite too: "We can get our art
+   style without it"); their look lessons stay marked "from talks, not seen in files".
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
