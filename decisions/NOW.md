@@ -195,8 +195,8 @@ merged and checked, add new ones where they belong, and say here when the owner 
      school ground kept whole with its inside roads, 71% of the district, and its clinic compound). **At the working
      bar** (27 Oct); its map picture looked at and sent.
    - Makoro (d19, the frame study's Makoko; its working name in NAMES.md), started 27 Oct: roads done (hand pass 1,
-     map/d19/STREETS.md: 144 records, 7.1 km, every real street but what Saba and Lagoon University hold). Houses,
-     places and landmarks next (item 11's recipe).
+     map/d19/STREETS.md: 144 records, 7.1 km, every real street but what Saba and Lagoon University hold); houses
+     done (hand pass 2, map/d19/BUILDINGS.md: 286, cover 13.1%). Places and landmarks next (item 11's recipe).
 
 **Owed: written down as "next" and not yet done** (swept from both repos' commits and docs, 25 Oct; each goes into an
 item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lands here or in the order, same change):
@@ -283,6 +283,8 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   BUILDINGS.md hand pass 4): close them with railings or a wall set back off the road in the look pass.
 - Lagoon University's stops and parks: one stop by hand at the main gate (map/d18/BUILDINGS.md); the campus
   shuttle's stops and the gate's motor park to a study of the map, with Saba's.
+- Makoro's 8 tall height readings (5+ storeys read; 7 in its north-east corner) took 3 or 4 storeys from their
+  neighbours, b-0dcdd67b 2 (map/d19/BUILDINGS.md): to look at on Street View in the look pass.
 - Lagoon University's tall height reading b-8bd534f5 (76 m2, 5+ storeys read) took its neighbours' 3 storeys
   (map/d18/BUILDINGS.md): to look at on Street View in the look pass.
 - Saba's 2 tall height readings (5+ storeys) took their neighbours' 2 storeys (map/d17/BUILDINGS.md): b-1b827014 is
