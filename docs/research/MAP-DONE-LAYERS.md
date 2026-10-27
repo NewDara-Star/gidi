@@ -3,8 +3,8 @@
 A draft for the owner and Claude to go through (NOW 16 c; DECISIONS "'Done' is the map's bar", 27 Oct). Map done
 means every layer a finished open-world area holds is in the district's records, so that later the kits only read
 them: a house already says its kind, storeys and colour; a junction already says who goes first; a street already
-says what drives on it at 8 in the morning. Nothing here is decided. Written by an agent on 27 Oct; **not yet checked
-by the main session**.
+says what drives on it at 8 in the morning. Nothing here is decided. Written by an agent on 27 Oct; the main session re-checked
+its map counts and schema gaps (the Checked section at the end); the rest is not checked.
 
 **Sources read for it:**
 - GTA V's files, our reading: `~/gidi-data/research/gta/FINISHED-AREA.md` (three 0.16 km² sample boxes: a dense

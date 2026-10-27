@@ -158,12 +158,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
        engine's makers define a finished open-world area, (3) Mùṣá against both; Claude checks every claim; then the
        owner and Claude agree the list. Every topic gets how it is measured. Mùṣá is not done until each passes.
        "Working" is re-read against it. **Owner, 27 Oct: map done is now the bar for every district** (DECISIONS
-       "Done is the map's bar"). Next: one agent drafts the map-done layer list from GTA V's finished-block layers
-       (~/gidi-data/research/gta/FINISHED-AREA.md, checked 27 Oct), docs/research/FINISHED-AREA-INDUSTRY.md, the
-       owner's list (timetables, litter, infrastructure, civil services, houses, streets, kinds of cars, traffic
-       lights, traffic signs, road colour) and what the map format holds now (Mùṣá: buildings, vehicles, stalls,
-       poles, places, roads, wires, trees, furniture, walls, masts, heaps, plots); for each layer: what it is, how it
-       is measured, whether the format holds it; Claude checks it; then the owner and Claude go through it.
+       "Done is the map's bar"). The draft list is written and its counts checked: docs/research/MAP-DONE-LAYERS.md
+       (65 layers in six groups; the format holds 28, partly 20, not 17; 29 format gaps). Next: the owner and Claude
+       go through the 65 layers, cut and change them, then each agreed layer gets its measure and its row in a check.
    (d) [ ] The 11 districts drawn so far (d09, d12-d19, d27, d28) re-measured and brought to the DENSITY row by hand:
        one agent per district reads it in Chrome (Google Maps, satellite at z17-18, Street View) and proposes fixes
        with evidence; Claude checks every claim and makes the edits, one editor per district at a time.
