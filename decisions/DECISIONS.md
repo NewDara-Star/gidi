@@ -161,3 +161,8 @@ Standing decisions for later parts of the game; nothing is built on them yet.
 - **Consoles later:** a PS5 build needs Sony's PlayStation Partners programme (an application, an agreement, a dev kit). Build for Mac and PC first; apply when there's a playable piece of Gidi to show.
 - **Number plates** (19 Oct): Gidi's own system (gidi-game `Art/Plates`, `tools/plates.py`), in the custom Gidi Plate font (from Montserrat Bold; slashed zero, a G with a crossbar). Number: district code, three figures, two letters (MZE-361-JY). Class by colour: **commercial red lettering on white** (the owner chose Lagos's red over a yellow plate), private blue, government green, services black with a red band, transit white on blue. Motto along the bottom: **NO DEY SLEEP** (the owner's). A GIDI band at the left stands in until the coat of arms is drawn.
 - **Fonts are custom** (19 Oct): every font Gidi uses is its own, built on open-licence bases (Alfa Slab One, Montserrat) and credited.
+- **Not "GTA for Lagos"** (owner, 27 Oct, after watching other people's city games on Twitter): those games try to
+  make GTA in their city and forget to make a game; Sleeping Dogs, Yakuza and Red Dead are not "GTA for" anywhere.
+  What makes this kind of game is how it relates to the player's plight: how it feels, the little things it gets
+  right, the realities of Lagos (which are not Los Angeles's). Gidi's systems and missions grow out of Lagos life,
+  not out of GTA's checklist.
