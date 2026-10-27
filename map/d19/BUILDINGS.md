@@ -1,5 +1,26 @@
 # Makoro (district 19): the buildings and their hand passes
 
+## Hand pass 3 (27 Oct): the real places
+
+The real places (Overture) with a kind the game uses (`working_bar.place_kind`, Mùṣá's hand pass 55 rules), and by
+hand, as Saba, the real churches whose Overture category names a denomination. Placed by Saba's hand pass 3 rules:
+43 real points, **44 places**: church 34, school 6, bar 1, clinic 1, buka 1 and a bus stop by hand. Makoro reads as
+it should: a town of many small churches (by count; not checked against a picture).
+
+- On the house their point stands in or the nearest within 8 m: 29 places on 27 houses (b-9b421f39 and b-6e93ef95
+  each carry a church and a school (both real points stand in the house; a church school, by guess); each house links one). The clinic's point has no open
+  ground within 15 m, so it is on its nearest house, 8.2 m off. The other 14 as 6 m squares at their point, moved up
+  to 14.0 m off roads and houses.
+- By hand: pc-ac587e36 (a church) sat 10.5 m off its real point, past the bar's 10 m: its point is in a junction
+  ringed by carriageways and no 6 m square fits nearer, so it is a 5 m square 9.2 m off.
+- The first run used Lagoon University's search box (copied with its script) and found 23 of the 43 points; the
+  working bar named the 20 missing; the box was set to Makoro's, those 23 places and 14 links taken out, and the
+  places drawn again. Every real place now has a place of its kind within 10 m (working bar: PASS).
+- **No bus stop or motor park is in Overture inside Makoro** (the nearest transport point, a taxi service, is 43 m
+  outside). By hand, one stop on its spine street where it comes in at the border (rd-1ddbc022, local_main, 407 m),
+  a 6 m square on the street's edge 56 m in, clear of carriageways, houses and places. The water side's canoe landings
+  and stops are owed to a study of the map (NOW), with Saba's and Lagoon University's.
+
 ## Hand pass 2 (27 Oct): houses, storeys and kinds
 
 **286 houses**, each with a kind and storeys; they cover 13.1% of the district (33,973 m²; Saba 14.4%, Lagoon
