@@ -5,7 +5,8 @@ only things we are taking from Lagos one to one").
 Reads Overture's road and rail segments (OpenStreetMap's lines; ~/gidi-data/research/data/overture-lagos/) of class motorway,
 trunk, primary and secondary and their links, put into the Gidi frame (working_bar.gidi, 1:3). Prints the km per
 class, the bridges, tunnels, raised levels and under-construction pieces Overture flags, the named roads by length,
-and the junctions (Overture's connectors shared by two or more main segments: where the real roads join). Draws the
+and the junctions: Overture's connectors where three or more main segments meet, or two of a different class or
+name (a connector on two segments of one road is that road continuing, not a junction). Draws the
 network over the 51 districts of the frame study with the drawn districts' own roads, so what we have drawn can be
 seen against the real lines. A line here is a reading to draw from by hand, read again on Google piece by piece: OSM
 can hold roads still only planned, and Overture carries no widths for Lagos.
@@ -51,7 +52,7 @@ def main():
         L = LineString([gidi(x, y, T) for x, y in g.coords])
         if L.intersects(FRAME):
             segs.append((r, L.intersection(FRAME)))
-    km, link, flags, levels, names, joins = Counter(), Counter(), Counter(), Counter(), defaultdict(float), Counter()
+    km, link, flags, levels, names, joins = Counter(), Counter(), Counter(), Counter(), defaultdict(float), defaultdict(list)
     for r, L in segs:
         c = r['class']
         km[c] += L.length / 1000
@@ -64,13 +65,15 @@ def main():
             levels[lv['value']] += 1
         names[(c, (r['names'] or {}).get('primary') or '(no name)')] += L.length / 1000
         for cc in r['connectors'] or []:
-            joins[cc['connector_id']] += 1
+            joins[cc['connector_id']].append((c, (r['names'] or {}).get('primary')))
     print('km Gidi (1:3) inside the frame, by class (of which ramps and links):')
     for c in MAIN:
         print(f'   {c:10s} {km[c]:6.1f} km  (links {link[c]:.1f})')
     print('flagged, km Gidi:', ', '.join(f'{c} {f[3:]} {v:.1f}' for (c, f), v in sorted(flags.items())))
     print('segments with a level (above or below the ground):', dict(sorted(levels.items())))
-    print('junctions (a connector on two or more main segments):', sum(1 for v in joins.values() if v >= 2))
+    junctions = [v for v in joins.values() if len(v) >= 3 or (len(v) == 2 and v[0] != v[1])]
+    print(f'junctions: {len(junctions)} ({sum(1 for v in junctions if len(v) >= 3)} of three or more segments); '
+          f'{sum(1 for v in joins.values() if len(v) == 2 and v[0] == v[1])} more connectors are one road continuing')
     print('named roads, longest first (km Gidi):')
     for (c, nm), v in sorted(names.items(), key=lambda x: -x[1])[:40]:
         print(f'   {c:10s} {v:6.2f}  {nm}')

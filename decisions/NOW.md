@@ -227,7 +227,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
        or a centreline with a width) so d00 can hold the water too (owner, 28 Oct: "real roads and interconnections as
        well as its waters are the only things we are taking from Lagos one to one"), and Unreal's map_build.py reading
        d00 (owed while Unreal is on hold); (2c) [x] the real network to draw from: `scripts/city_network.py` (Overture's
-       motorway 120.7, trunk 124.1, primary 135.0, secondary 201.4 km Gidi inside the frame; rail 45.6 km; 8,689
+       motorway 120.7, trunk 124.1, primary 135.0, secondary 201.4 km Gidi inside the frame; rail 45.6 km; 2,535
        junctions; 36.1 km of motorway flagged under construction, the Fourth Mainland Bridge and Lekki Regional Road:
        the owner decides whether Gidi builds them); (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
        flyover with its height, the rail and the water edges, drawn by hand from the real lines, widths and heights
