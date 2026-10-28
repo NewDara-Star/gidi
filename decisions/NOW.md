@@ -229,9 +229,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
        map_build.py reading d00 and a kit part for water (while Unreal is on hold); (2c) [x] the real network to draw from: `scripts/city_network.py` (Overture's
        motorway 120.7, trunk 124.1, primary 135.0, secondary 201.4 km Gidi inside the frame; rail 45.6 km; 2,535
        junctions; 36.1 km of motorway flagged under construction, the Fourth Mainland Bridge and Lekki Regional Road:
-       the owner decides whether Gidi builds them); (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
+       built too, owner 28 Oct, asked first where they would cut something already drawn); (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
        flyover with its height, the rail and the water edges, drawn by hand from the real lines, widths and heights
-       read on Google, piece by piece, the owner checking each piece; (4) the 11 drawn districts' roads measured
+       read on Google, piece by piece, the owner checking each piece. Piece 1 [x] the Third Mainland Bridge (rd-e7a23019, moved from Ṣọmọlá into d00 at its full real length, 3,266 m Gidi, 37 m wide; 12 Ṣọmọlá houses left out, 20 cut, 1 Ìbùdó Mẹ́ta house left out, 3 lanes moved off it, 1 removed); owed on it: [ ] its heights z (Overture flags it raised all the way, but Street View at Oworonshoki, Jul 2021, shows it at grade there; the over-water deck height is not read, no published figure found), [ ] then put back Ìbùdó Mẹ́ta's lane rd-0877e4b9 under the deck (removed 28 Oct: it ran under the bridge with no height to pass under; its record is in the git history of map/d16/plan.json), [ ] the Ṣọmọlá lanes that end on the bridge at grade (rd-80254433, rd-efb526e0 and others at the interchange) read on Google, as the real road is fenced there. Piece 2 [ ] Ikorodu Road; (4) the 11 drawn districts' roads measured
        against it and fixed by hand where they miss, the layer winning; (5) a check row: a district's roads must sit
        on the city layer where they meet it.
    (l) [ ] **Study first, then lines, district by district** (owner, 28 Oct, DECISIONS "Study the district first, then

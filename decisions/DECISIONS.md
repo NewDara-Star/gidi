@@ -59,6 +59,10 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   under); nothing in them is invented or moved for taste. Everything else (buildings, places, names, dress) stays
   Gidi's own, inspired by Lagos. A district never bends the network: where they disagree, the district is fixed by
   hand (NOW 16 m).
+  **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
+  which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
+  into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
+  block a creek the water layer holds), the owner is asked first.
 - **Freeze everything** once a district is built: the map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths were `scripts/cross_sections.py` (deleted 25 Oct). *Changed 22 Oct:* the building line, the walkways and the fixed widths are replaced by "Real Lagos roads": real lines, real widths, people walking on the road's edge.
 - **Markets spill onto the road:** traders take the carriageway, with a lane kept clear.
