@@ -183,8 +183,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
        point), d10's rd-f1478f6a (exists).
    (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
        types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
-       Done and checked: d12, d13, d15, d16, d17, d18, d19 (docs/lagos-study/buildings/). Still to study: d09, d14,
-       d27, d28. Owed from them: Mùṣá's hand pass (its match hides LUTH drawn at 44% against 22% and the factories
+       Done and checked: all eleven drawn districts, d09, d12-d19, d27, d28 (docs/lagos-study/buildings/; the last four 28
+       Oct). Real cover against ours: d09 42.0/16.0%, d14 47.0/18.7%, d27 39.2/16.7%, d28 27.3/13.0%. Owed from them:
+       the Deeper Life hall in Gbàgede (real 4,703 m², ours 442 m²; at real size it overfills its ground at 1:3: a smaller
+       hall or a ground drawn larger, the owner's call; d28.md); Ebute Ilaje's shacks over the lagoon (d27.md) join the
+       stilt house below; Okunade Estate's detached houses (d27.md) join the d18 kinds below; Ìtìrí's D14-41 and
+       Gbàgede's D28-126 are each many real blocks Overture's streets leave joined, their streets read from Google Maps
+       in the street pass (16f); Mùṣá's hand pass (its match hides LUTH drawn at 44% against 22% and the factories
        half empty; our houses median 84 m² against Google's 169: fewer, bigger houses at the same cover); kinds the map
        lacks for d18 (hall of residence, faculty block, detached house in a yard: the owner's call); a house on stilts over water in
        the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); Makoro drawn with its
@@ -218,7 +223,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
      Apapa-Oworonshoki Expressways one 25 m record each along the border). Houses done (hand pass 2,
      map/d09/BUILDINGS.md: 1,472, each with a kind and storeys, 16.0% of the district). Places done (hand pass 3: 262
      places, 0 real places missing, 2 bus stops; working_bar d09 PASS). Landmarks done (hand pass 4: 16
-     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band is wetland, scrub and the barracks: d09 BUILDINGS hand pass 4).
+     grounds walled and gated). Ayégúnlẹ̀ is at the working bar; map picture looked at and sent 26 Oct (the empty middle band was read as wetland, scrub and the barracks in d09 BUILDINGS hand pass 4; the building study of 28 Oct shows it is a canal with packed houses, see the Owed item).
    - Agunda (d12), started 26 Oct: roads done (hand pass 1, map/d12/STREETS.md: 882 records, 44.6 km, every real street
      but what Ìtìrí, Sọ̀rọ̀lérè and Ayégúnlẹ̀ hold; the Apapa-Oworonshoki Expressway one 25 m record on the west border;
      the seam joined on Agunda's side). Houses done (hand pass 2, map/d12/BUILDINGS.md: 963, each with a kind and
@@ -386,8 +391,10 @@ item above, or stays here until it does. Rule in CLAUDE.md: every new "next" lan
   as held, join their streets to them, and settle the border line by hand (d09 STREETS.md).
 - Ayégúnlẹ̀'s bus stops and motor parks beyond Overture's two stops (Boundary, Mosafejo, the expressway stops), read on
   the map (study only) and drawn as Ìtìrí's park (d09 BUILDINGS hand pass 3).
-- Ayégúnlẹ̀'s wetland and scrub band across its middle (about x 11,500-12,450, y 8,440-8,570, from Overture's land):
-  painted as scatter areas when the district's ground is drawn (d09 BUILDINGS hand pass 4).
+- Ayégúnlẹ̀'s middle band (about x 11,500-12,450, y 8,440-8,570): not wetland and scrub as hand pass 4 read it from
+  Overture's land, but a narrow canal with houses packed to both banks (docs/lagos-study/buildings/d09.md: 1,733 Google
+  buildings at 36% cover there against our 97 at 12%); the canal drawn as a narrow open strip with houses to it, only
+  its west end by Signals Barracks open ground with trees, and the band's houses filled in the density hand pass.
 - Sọ̀rọ̀lérè's bus stops and motor parks beyond Overture's one stop: Ojuelegba's park and stops, the stadium, Masha,
   Adeniran Ogunsanya, read on the map (study only) and drawn as Ìtìrí's park (d13 BUILDINGS hand pass 3).
 - Agunda's Apapa-Oworonshoki Expressway record rd-cd2a7637 runs on its west border, half its width over the frame land

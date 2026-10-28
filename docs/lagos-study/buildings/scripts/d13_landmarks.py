@@ -101,7 +101,7 @@ def main(d='d13'):
             if gid.intersects(hp):
                 h = houses[k]
                 print(f"  ours: {h['id']} {h.get('kind')} storeys {h.get('storeys')} {hp.area:.0f} Gidi m2 "
-                      f"({hp.area * 9:.0f} real m2 at 1:3)")
+                      "(drawn at real size: never times 9)")
 
 
 if __name__ == '__main__':

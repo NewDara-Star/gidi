@@ -1,6 +1,8 @@
 """Agunda (d12): the big blocks cut into 150 m real cells (building study, 27 Oct).
 
-  ~/.venvs/gidi/bin/python -I docs/lagos-study/buildings/scripts/d12_cells.py [--min 150000] [--cell 150] [--json out.json]
+  ~/.venvs/gidi/bin/python -I docs/lagos-study/buildings/scripts/d12_cells.py [dNN] [--min 150000] [--cell 150] [--json out.json]
+
+(dNN added 28 Oct for d28's study; d12 when left out.)
 
 d17_blocks.py d12 leaves two blocks far bigger than a street block (D12-226, 1.15 km2 real, in the east; D12-139,
 0.82 km2, in the middle), because Overture's street network has no segments through them. This takes every block of
@@ -26,7 +28,7 @@ def main():
     MIN = float(a[a.index('--min') + 1]) if '--min' in a else 150000
     CELL = float(a[a.index('--cell') + 1]) if '--cell' in a else 150
     out = a[a.index('--json') + 1] if '--json' in a else None
-    d = 'd12'
+    d = next((x for x in a[1:] if x.startswith('d') and x[1:].isdigit()), 'd12')
     # run the block study once, but measure cells instead of blocks: re-use study()'s inner pieces by patching
     D, recs, ring_g, ring_u = B.load(d)
     w, s, e, n = B.lonlat_box(ring_u)
