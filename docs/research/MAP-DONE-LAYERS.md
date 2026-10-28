@@ -382,6 +382,6 @@ line). Underground pipes are not a map layer.
 
 Checked (main session, 28 Oct): the GTA report's counts re-run from the game files without running any program
 of the game (one wording corrected: ladders on 922 objects, not 1,262); eight of the industry report's web
-claims re-read (six agree, City Sample only partly, one blocked); 24 of the repo report's references
+claims re-read (six agree, City Sample only partly, one blocked); 24 of the repo report's 215 line references
 read at the cited lines (21 agree, three had moved or were misnamed); the schema facts re-read. Not checked:
 the rest of each report, listed in LINE-LAYERS-CHECKED.md.
