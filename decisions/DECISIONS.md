@@ -77,6 +77,15 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   problems inside the network, or inside a district, fail as before; `--strict` fails clashes too, and
   `working_bar.py` fails a district until its clashes are gone. Streets are then hand-picked per district at 1:3
   (fewer real streets, each at its real width), grown from the roads.
+  **1:3 sets where things are; a road keeps its real shape** (owner, 28 Oct, "B", after a picture of both on Ikorodu
+  Road; and on scale: keep 1:3, not 1:5: "the fact that we are making the map the source of the data makes it so that
+  we can actually scale really well"). Positions and the distances between places are 1:3. A road's own make-up is
+  real: widths, the spacing of its carriageways, medians, BRT and service roads, a flyover's ramp length, the room a
+  junction needs to turn. The land beside the road takes the squeeze. Dual carriageways (two one-way lines in
+  OpenStreetMap) become one record along their middle, the median inside it (merged with neatnet, Fleischmann et al.
+  2025, installed 28 Oct with the owner's OK); interchange ramps are drawn from the original link lines, as neatnet
+  drops them. Why not 1:5: real widths would crush the blocks between streets (a 100 m block becomes 20 m) and ramps
+  and interchanges would not fit; the work is cut by scope (a dense core first), not scale.
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
