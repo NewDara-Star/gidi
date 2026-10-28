@@ -204,6 +204,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
        water (Makoro's stilt town is about 28% of d19), detached house in a yard, hall of residence, faculty block; then
        a kit for each in gidi-game (owner: "more kits to make for the instances"); Makoro drawn with its
        stilt town (owner, 27 Oct: DECISIONS "Makoro keeps its stilt town").
+   (k) [ ] The square survey (owner, 28 Oct, DECISIONS "Looking is turned into counting"). Pilot read: ten Mùṣá
+       squares (docs/lagos-study/squares/d15-pilot.md); nine of ten have a line ours lacks, seven a ground or walled
+       plot; the railway stops 83 m short of d15-1612 and about 290 m Gidi of it is missing inside the outline. Next:
+       (1) the owner settles the ten squares and the seven open questions (the answer key); (2) a helper reads the
+       same ten blind, its misses counted against the key; (3) the rail drawn on to the outline by hand, with its
+       walls; (4) a rail row and a per-square cover row in working_bar.py; (5) if the miss rate is low, all 250 Mùṣá
+       squares by helpers in blind pairs, then Mùṣá's line hand pass from them.
    (i) [ ] The Google look for the eleven drawn districts (d09, d12-d19, d27, d28), owner 28 Oct: "even the ones drawn
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
        look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
