@@ -11,7 +11,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
    Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
-   and Lekki Regional as being built), every junction a shared point; (c) [ ] rail into d00 (PR #453 waits for the
+   and Lekki Regional as being built), every junction a shared point and named in its record for the real place it stands for and the district it lands in, so a district's streets know where they meet the network when it is remade (owner, 28 Oct: "we need to be able to match them to the actual spot in the districts, so we can add them slip roads and streets"); slip roads and ramps drawn with their main road at real length (DECISIONS "1:3 sets where things are"); (c) [ ] rail into d00 (PR #453 waits for the
    owner); (d) [ ] water into d00; (e) [ ] gidi-game builds d00 alone on the land (relief grids as one Landscape,
    roads from road_build) with a car to drive; (f) [ ] the owner drives it. District work waits except what a piece
    forces; clashes with district work are listed by check_map (CLASH), not fixed (DECISIONS "Clashes with district
