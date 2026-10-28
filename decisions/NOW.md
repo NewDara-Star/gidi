@@ -215,7 +215,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
        look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
        Street View for the street look; written into the district's study notes, checked by the main session, before
-       the density and street hand passes (d, f). Done: d15 (docs/lagos-study/google/d15.md, 28 Oct). Of its map figures
+       the density and street hand passes (d, f). Done: d15 (docs/lagos-study/google/d15.md, 28 Oct); d09 (docs/lagos-study/google/d09.md, 28 Oct: its 65 table rows and district counts re-run by the main session, all agree; it finds no water drawn though canals and a creek run through, roofs at 16% against Google 42%, fields and a container lot drawn as houses, 71 of 121 street names missing). Of its map figures
        the main session re-ran the north-west box, roof shares, trees, shacks, kiosks, market and police counts and the
        street names, and later the r30 column, coordinates, outline tests and medians with
        docs/lagos-study/google/scripts/d15_look.py (21 of 23 views agree; S13 corrected to 9 houses). Its readings of the real place are the agent's, by eye, not yet re-looked (the
