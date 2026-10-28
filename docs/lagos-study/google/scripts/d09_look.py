@@ -9,7 +9,7 @@ Reads map/d09/district.json, map/d09/plan.json and map/d09/STREETS.md only (noth
   is in the circle, the roof cover of the circle (footprints clipped to it), the median footprint, kinds, storeys,
   places (any part in the circle), plots, and the nearest road with its real name from STREETS.md;
 - district-wide counts the note quotes: record types, house kinds and storeys, places, plots, roads by kind;
-- the Google street names read on Maps, each grepped in STREETS.md (whole name, case ignored).
+- the Google street names read on Maps, each searched in STREETS.md by a core pattern of the name (NAMES below), case ignored.
 Real names are in this file and the note only, never in map records.
 """
 import collections
