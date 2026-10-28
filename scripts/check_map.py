@@ -495,6 +495,8 @@ def land(recs):
         err(f'{CITY} relief', f'{len(clash) - 5} more grids differ from a neighbour on shared points')
     if outside:
         err(f'{CITY} relief', f'{outside} grids lie off the frame\'s {c} m spacing or outside it')
+    global LAND
+    LAND = (np.nan_to_num(Z) / 1000, c)
     missing = np.argwhere(~np.isfinite(Z))
     if len(missing):
         j, i = missing[0]
@@ -573,17 +575,38 @@ DECK_OVER = 6.7   # m between road surfaces where one crosses over the other: 5.
 RAMP_MAX = 0.08   # a ramp's steepest grade: flyovers ramp at about 6.5% (OLD-MAP-LESSONS); 8% is a steep urban ramp
 
 
+LAND = None       # the city layer's land as one grid (m, its spacing), set by land(); None: the land is at 0
+SHARED_DZ = 0.2   # m: where roads share a point, their surfaces there differ by no more (a kerb's height is 0.15 m)
+
+
+def land_at(q):
+    """The land's height at a point, read bilinearly from the city layer's relief grids (MAP-FORMAT), 0 without them."""
+    if LAND is None:
+        return 0.0
+    Z, c = LAND
+    x = min(max(q[0] / c, 0.0), Z.shape[1] - 1.000001)
+    y = min(max(q[1] / c, 0.0), Z.shape[0] - 1.000001)
+    i, j = int(x), int(y)
+    fx, fy = x - i, y - j
+    return float(Z[j, i] * (1 - fx) * (1 - fy) + Z[j, i + 1] * fx * (1 - fy) + Z[j + 1, i] * (1 - fx) * fy
+                 + Z[j + 1, i + 1] * fx * fy)
+
+
 def road_z(cl, q):
     """A road's surface height at the point of its line nearest q: its points' z (MAP-FORMAT: an absolute height, for
-    bridges and ramps) taken along the line, 0 where a point has none."""
+    bridges and ramps) taken along the line; where its points have none it lies on the land, read there."""
     best = (float('inf'), 0.0)
     for a, b in zip(cl, cl[1:]):
         dx, dy = b[0] - a[0], b[1] - a[1]
         t = max(0.0, min(1.0, ((q[0] - a[0]) * dx + (q[1] - a[1]) * dy) / (dx * dx + dy * dy or 1)))
-        d = math.hypot(a[0] + t * dx - q[0], a[1] + t * dy - q[1])
-        za, zb = (a[2] if len(a) > 2 else 0.0), (b[2] if len(b) > 2 else 0.0)
+        x, y = a[0] + t * dx, a[1] + t * dy
+        d = math.hypot(x - q[0], y - q[1])
         if d < best[0]:
-            best = (d, za + t * (zb - za))
+            if len(a) < 3 and len(b) < 3:
+                best = (d, land_at((x, y)))
+            else:
+                za, zb = (a[2] if len(a) > 2 else land_at(a)), (b[2] if len(b) > 2 else land_at(b))
+                best = (d, za + t * (zb - za))
     return best[1]
 
 
@@ -598,8 +621,9 @@ def road_nodes(recs):
     road is the other drawn twice; the junction kit can't build it, 25 Oct). A hand edit cuts the copy back to where it
     joins. A road whose points carry z passes over another without a node (a bridge, as OpenStreetMap's layer and
     Overture's level_rules keep crossings on different levels unjoined) when their surfaces there are DECK_OVER apart;
-    nearer than that and not joined, it fails as a deck too low to pass under. Also fails a ramp steeper than RAMP_MAX
-    between two points."""
+    nearer than that and not joined, it fails as a deck too low to pass under; a road with no z lies on the land, read
+    from the city layer's relief grids. Where roads share a point their surfaces there are one height, within SHARED_DZ
+    (a road with no z at the land's). Also fails a ramp steeper than RAMP_MAX between two points."""
     try:
         from shapely.geometry import LineString, Point
         from shapely.strtree import STRtree
@@ -617,6 +641,19 @@ def road_nodes(recs):
             if rise and rise > RAMP_MAX * run:
                 err(f'{recs[rid]["_file"]} {rid}', f'climbs {rise:.2f} m in {run:.1f} m at {list(b)}, steeper than '
                     f'{RAMP_MAX:.0%}: lengthen the ramp')
+    shared = {}
+    for rid, _ in rs:
+        for a in pz[rid]:
+            shared.setdefault((round(a[0], 2), round(a[1], 2)), {}).setdefault(rid, a[2] if len(a) > 2 else None)
+    for q, by in shared.items():
+        if len(by) < 2 or all(z is None for z in by.values()):
+            continue
+        zs = {rid: (land_at(q) if z is None else z) for rid, z in by.items()}
+        lo, hi = min(zs, key=zs.get), max(zs, key=zs.get)
+        if zs[hi] - zs[lo] > SHARED_DZ:
+            clash(recs, hi, lo, f'{recs[hi]["_file"]} {hi}', f'meets road {lo} at {list(q)} {zs[hi] - zs[lo]:.2f} m above it '
+                  f'({zs[hi]:.2f} against {zs[lo]:.2f}{", the land" if by[lo] is None else ""}): where roads share a point '
+                  f'they share its height, within {SHARED_DZ} m')
     tree = STRtree(lines)
     node = {}
     for rid, _ in rs:

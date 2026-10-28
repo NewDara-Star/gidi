@@ -15,7 +15,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
    owner); (d) [ ] water into d00; (e) [ ] gidi-game builds d00 alone on the land (relief grids as one Landscape,
    roads from road_build) with a car to drive; (f) [ ] the owner drives it. District work waits except what a piece
    forces; clashes with district work are listed by check_map (CLASH), not fixed (DECISIONS "Clashes with district
-   work are listed"). Owed: [ ] check_map reads heights where roads meet and cross: today a road with no z counts as at 0 m, so a crossing over it always passes, and heights at a shared point are not compared (the push review found steps of up to 15 m at Ojota's first try, 28 Oct); read a z-less road at the land's height and fail a shared point whose heights differ; [ ] the board shows the CLASH list (today it shows check_map's failures only, not
+   work are listed"). Owed: [x] check_map reads heights where roads meet and cross (28 Oct): a road with no z lies on the land, read from the relief grids, and roads sharing a point share its height within 0.2 m (SHARED_DZ); it found Isolo Road's deck in d15 still drawn on the old 0 m ground, lifted by hand onto the land (+8.25 m), and 24 rows where Ojota's ramps and raised Ikorodu Road meet Gbàgede streets less than 6.7 m below (crossings, and street ends now inside a ramp), listed as clashes for the d28 pass; [ ] the board shows the CLASH list (today it shows check_map's failures only, not
    looked at for clashes); [ ] research on how studios build a city from a real place
    (~/gidi-data/research/OPEN-WORLD-CITY-METHOD.md, agent running 28 Oct) read and checked, and this order changed
    if it shows a better way.
