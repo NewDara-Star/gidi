@@ -3,9 +3,13 @@
 # when Claude Code is about to ask for permission. While the owner is away it answers for them, so no helper sits on a
 # prompt for hours; while they are here it says nothing and the prompt shows as normal.
 # Away = asleep, 21:00-06:00 Ireland time, every day; or the away flag, ~/.claude/gidi-away, holding the time it ends
-# (written when the owner says they are away, as their shifts move: "my work is not specifically weekdays").
+# in epoch seconds (`date -j -f '%Y-%m-%d %H:%M' '2026-10-28 15:30' +%s`), written when the owner says they are away,
+# as their shifts move ("my work is not specifically weekdays"). A flag that is past, unreadable or more than 24 hours
+# ahead is deleted, so a mistyped flag can never leave away mode on.
 # While away: downloads are refused ("the downloads should be locked when I'm away"), and so are deletes and history
-# rewrites, which can't be taken back; everything else, the GTA folder too ("that works too"), is allowed.
+# rewrites, which can't be taken back; everything else, the GTA folder too ("that works too"), is allowed. The lists
+# are words in a shell command: a file overwritten with mv or >, a delete or download from inside a script, and the
+# Write and Edit tools (which the work needs) are not caught; git history pushed to GitHub is the safety net there.
 # Every answer is logged to ~/.claude/gidi-away.log for the morning.
 input=$(cat)
 log="$HOME/.claude/gidi-away.log"
@@ -16,7 +20,11 @@ away=""
 case "$hour" in 21|22|23|00|01|02|03|04|05) away="asleep";; esac
 if [ -z "$away" ] && [ -f "$flag" ]; then
   until=$(head -1 "$flag" | tr -dc 0-9)
-  if [ -n "$until" ] && [ "$until" -gt "$now" ]; then away="away flag"; else rm -f "$flag"; fi
+  if [ -n "$until" ] && [ "${#until}" -le 11 ] && [ "$until" -gt "$now" ] && [ "$until" -le $((now + 86400)) ]; then
+    away="away flag"
+  else
+    rm -f "$flag"
+  fi
 fi
 [ -z "$away" ] && exit 0
 
@@ -27,7 +35,7 @@ held=""
 if [ "$tool" = "Bash" ]; then
   if printf "%s" "$what" | grep -Eq '(^|[^A-Za-z_-])(curl|wget|aria2c|yt-dlp|scp|sftp|ftp|huggingface-cli|hf download|git clone|git lfs (pull|fetch)|gh release download|gh repo clone|(pip3?|uv pip|npm|pnpm|yarn|bun|brew|gem|cargo) (install|add)|softwareupdate)([^A-Za-z_-]|$)'; then
     held="a download: downloads wait for the owner"
-  elif printf "%s" "$what" | grep -Eq '(^|[^A-Za-z_-])(rm|rmdir|trash|shred|srm)( |$)|git (reset --hard|clean|push (-f|--force)|branch -D|filter-branch|filter-repo)|gh (repo|release) delete|find .* -delete'; then
+  elif printf "%s" "$what" | grep -Eq '(^|[^A-Za-z_-])(rm|rmdir|unlink|trash|shred|srm)( |$)|git (reset --hard|clean|rebase|commit .*--amend|push .*(-f|--force|[[:space:]]\+[A-Za-z0-9_/.-])|branch -D|stash (drop|clear)|checkout .*-- |restore|filter-branch|filter-repo)|gh (repo|release) delete|find .* -delete|rmtree|os\.remove|\.unlink\('; then
     held="a delete or history rewrite: those wait for the owner"
   fi
 fi
