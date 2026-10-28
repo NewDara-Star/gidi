@@ -208,6 +208,9 @@ def record_error(d, r):
 def district_from_study(d):
     """A new district record: its number and its outline from the frame study (scripts/frame_study.py). No name: names
     are given by hand (a working name per district, decisions 22 Oct)."""
+    if d == 'd00':                     # the city layer: the whole frame (owner, 28 Oct: the roads for the entire map first)
+        return {'id': d, 'type': 'district', 'n': 0, 'name': 'Gidi', 'outline': [[[0, 0], [27000, 0], [27000, 10500], [0, 10500]]],
+                'note': 'the city layer: the main roads, bridges and rail of the whole map, not cut at district lines'}
     s = open(STUDY).read()
     F = json.loads(s[s.index('{'):s.rindex('}') + 1])
     n = int(d[1:])
@@ -327,7 +330,7 @@ class Board(http.server.SimpleHTTPRequestHandler):
             return self.send_json({'ok': True, 'd': d, 'changed': [recs[rid] for rid, _, _ in steps if rid in recs],
                                    'removed': [rid for rid, _, _ in steps if rid not in recs], 'problems': map_problems(d)})
         d = body.get('d')
-        if not isinstance(d, str) or not DISTRICT_RE.match(d) or not 1 <= int(d[1:]) <= 99:
+        if not isinstance(d, str) or not DISTRICT_RE.match(d) or not 0 <= int(d[1:]) <= 99:
             return self.send_json({'error': f'no district {d!r}'}, 400)
         if self.path == '/api/map/start':      # the first drawing in a district: its record and an empty plan
             if d in map_started():

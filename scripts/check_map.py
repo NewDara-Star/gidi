@@ -293,8 +293,15 @@ def load_map(top, fix, only=None):
     return files
 
 
+CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges and rail of the whole map,
+CITY_TYPES = {'district', 'road', 'rail'}   # not cut at district lines; districts' streets join them on shared points
+CITY_ROADS = {'motorway', 'trunk', 'main_road', 'local_main', 'ramp'}
+
+
 def check(top, fix=False, only=None):
     """Check the map under top (only: a list of district folders to check, as the board does on each save)."""
+    if only and CITY not in only and os.path.isdir(os.path.join(top, CITY)):
+        only = list(only) + [CITY]    # the city roads cross every district: a district is checked with them in view
     files = load_map(top, fix, only)
     recs, where_of, refs = {}, {}, []
     for d, n, p, doc in files:
@@ -402,6 +409,10 @@ def check(top, fix=False, only=None):
             a, D = anchor(r), dist.get(r['_district'])
             if a and D and isinstance(D.get('outline'), list) and not any(in_poly(a, ring) for ring in D['outline']):
                 err(w, f'stands outside its district {r["_district"]}')
+        if r['_district'] == CITY and rt not in CITY_TYPES:
+            err(w, f'the city layer {CITY} holds only main roads and rail, not a {rt}')
+        if r['_district'] == CITY and rt == 'road' and r.get('kind') not in CITY_ROADS:
+            err(w, f'the city layer holds main roads ({", ".join(sorted(CITY_ROADS))}), not a {r.get("kind")!r}')
 
     ends = [(rid, p) for rid, r in recs.items() if r.get('type') == 'road' and isinstance(r.get('centreline'), list)
             for p in (r['centreline'][0], r['centreline'][-1]) if is_pt(p)]

@@ -46,10 +46,13 @@ def main():
     near = next((a.split('=')[1] for a in sys.argv[2:] if a.startswith('--near=')), None)
     s = open(os.path.join(ROOT, 'web', 'frame-study.js')).read()
     F = json.loads(s[s.index('{'):s.rindex('}') + 1])
-    drawn = {}
+    drawn, city = {}, []
     for d in sorted(os.listdir(os.path.join(ROOT, 'map'))):
         f = os.path.join(ROOT, 'map', d, 'district.json')
-        if d.startswith('d') and os.path.exists(f):
+        if d == 'd00':                 # the city layer: its roads drawn over every district, no outline of its own
+            plan = os.path.join(ROOT, 'map', d, 'plan.json')
+            city = json.load(open(plan))['records'] if os.path.exists(plan) else []
+        elif d.startswith('d') and os.path.exists(f):
             D = next(r for r in json.load(open(f))['records'] if r['type'] == 'district')
             plan = os.path.join(ROOT, 'map', d, 'plan.json')
             drawn[D['n']] = (d, D, MultiPolygon([Polygon(o) for o in D['outline']]).buffer(0),
@@ -64,6 +67,10 @@ def main():
             g = polys(x['rings'])
             fill(ax, g, fc='#ffffff' if x['n'] in drawn else '#f1ece2', ec='#b9ad97', lw=0.6)
         fill(ax, gap, fc='#e05a4a', ec='none', alpha=0.45)
+        for r in city:
+            if r['type'] == 'road':
+                fill(ax, LineString([q[:2] for q in r['centreline']]).buffer(r['width'] / 2, cap_style=2),
+                     fc='#6f6f6f' if r['kind'] in ('motorway', 'trunk') else '#9a9a9a', ec='none')
         for n, (d, D, ring, recs) in drawn.items():
             fill(ax, ring, fc='none', ec='#a0301e', lw=0.8)
             for r in recs:

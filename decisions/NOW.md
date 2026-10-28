@@ -222,8 +222,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
        districts by their borders", 22 Oct, step 1 never drawn as records). Comes before (l)'s drawing step.
        (1) [x] how today's districts sit on the real main roads: scripts/main_road_fit.py,
        docs/lagos-study/roads/MAIN-ROAD-FIT.md (seven of 11 at 90%+ on; d14 65%, d16 59% with the Third Mainland
-       Bridge interchange missing, d19 74%); (2) a home for city-wide roads in the format (a city layer the districts
-       join to), its own commit; (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
+       Bridge interchange missing, d19 74%); (2) [x] a home for city-wide roads in the format: `map/d00/`, the city
+       layer (MAP-FORMAT section 1); (2b) [ ] a water record in the format (lagoon, creek, canal, sea edge; an area
+       or a centreline with a width) so d00 can hold the water too (owner, 28 Oct: "real roads and interconnections as
+       well as its waters are the only things we are taking from Lagos one to one"), and Unreal's map_build.py reading
+       d00 (owed while Unreal is on hold); (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
        flyover with its height, the rail and the water edges, drawn by hand from the real lines, widths and heights
        read on Google, piece by piece, the owner checking each piece; (4) the 11 drawn districts' roads measured
        against it and fixed by hand where they miss, the layer winning; (5) a check row: a district's roads must sit
