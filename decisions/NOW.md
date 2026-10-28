@@ -200,7 +200,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
        look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
        Street View for the street look; written into the district's study notes, checked by the main session, before
-       the density and street hand passes (d, f).
+       the density and street hand passes (d, f). Done: d15 (docs/lagos-study/google/d15.md, 28 Oct). Of its map figures
+       the main session re-ran the north-west box, roof shares, trees, shacks, kiosks, market and police counts and the
+       street names; not checked: the r30 column of the 22 views, the coordinate conversions and outline tests, the
+       medians (owed: re-run from plan.json before the hand pass). Its readings of the real place are the agent's, by eye, not yet re-looked (the
+       north-west belt as sheds under our drawn flats, LUTH as ward blocks in lawns, four open grounds drawn as houses,
+       a canal and a drain we lack, 9+ markets, 20 street names absent and 2 perhaps drawn under shorter names); the
+       main session re-looks those key spots in Chrome before Mùṣá's hand pass uses them. Still to look: d09, d12, d13, d14, d16, d17, d18, d19, d27, d28.
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
