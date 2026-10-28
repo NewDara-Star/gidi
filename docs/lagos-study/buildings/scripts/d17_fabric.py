@@ -50,9 +50,41 @@ OVERRIDE = {
                 'scrub and brownfield) in the middle, packed compounds and small shacks round it; labels Ijora Badia, '
                 'Ijora 7up Market (Google Maps)', 'none (open ground) in the middle; compound_house, face_me_bungalow, '
                 'shack (home) round it'),
+    # d14 Ìtìrí (building-study agent, 28 Oct): Google Maps satellite and labels at about z17-18, by eye; the splits
+    # are the agent's reading, *guess* where marked; roof shares from d14_landmarks.py
+    'D14-03': ('factory compound: Dana Pharmaceuticals and Dana Plast (Overture places; Google Maps labels "Dana Plast '
+               'Limited", "LK Plast Nigeria Limited (Manufacturing Facility)"), long pale sheds east of Adeniyi St; 6 '
+               'roofs of 1,000 m2+ hold 74% of the roof; compound houses and lock-ups on the edges by eye',
+               'shed (workshop) in a walled plot; compound_house (home), shop_under_flats (lock_ups) at the edges'),
+    'D14-135': ('warehouses on the expressway side, compound houses east: Google Maps label "Ibeto Warehouse" on the '
+                'big sheds east of the Apapa-Oshodi Expressway; 4 roofs of 1,000 m2+ hold 49% of the roof; packed '
+                'compounds east of them by eye', 'shed (workshop) west; compound_house, face_me_bungalow (home) east'),
+    'D14-222': ('warehouses on the expressway side, compound houses east: Google Maps labels "Odo Olowu Warehouse", '
+                '"Bharat Ventures Limited" (blue-roofed sheds); Overture industrial land use 77% of the block, but 2 '
+                'roofs of 1,000 m2+ hold 38% of the roof and the east half is packed compounds by eye',
+                'shed (workshop) west; compound_house, face_me_bungalow (home) east'),
+    'D14-41': ('NOT ONE BLOCK: about 0.42 km2 joined through gaps in Overture\'s streets (14 dead ends); Google Maps '
+               'centred inside it (6.508, 3.329) shows a grid of streets (labels Kushimo St, Oremerin St, Oluwashina St). Packed 2-storey compounds '
+               'with 3-storey walk-ups among them (Street View, Kushimo St, Jul 2024), and in its north a strip of sheds '
+               'between the Apapa-Oshodi Expressway and the canal (Google Maps labels "Multivista West Africa Limited", '
+               '"Onitire Town Hall")', 'compound_house, face_me_bungalow (home), walkup (flats); shed (workshop) in the '
+               'north strip'),
     'D12-139': ('compound houses, 2 storeys, packed, along a canal (by eye: a dark channel with houses to its banks; '
                 'Google Maps labels Orile Iganmu, Coker Rd); several real blocks, Overture has no streets through it',
                 'compound_house (home), face_me_bungalow (home)'),
+    # d27 Somolu-Bariga: *guess* labels, by eye on the satellite at z17 (28 Oct, study only), not measured; see d27.md
+    'D27-372': ('*guess* split by grain: shacks packed to the lagoon edge west of Third Mainland Bridge, some over '
+                'water (Ebute Ilaje; Overture place "RCCG Ebute Ilaje"), packed compound houses on the grid west of '
+                'it (Unity St, Adedoyin Oshibanjo St on Google Maps)', 'shack (home) at the water; compound_house, '
+                'face_me_bungalow (home) inland'),
+    'D27-166': ('*guess* lagoon edge: compound houses of Oworonshoki on the land side (Oworo Palace, Gulf Flower '
+                'International School on Google Maps), lagoon water, wetland and a scrub point the rest (WorldCover '
+                'water 23%, wetland 19%)', 'compound_house (home) on land; none on water or wetland'),
+    'D27-235': ('*guess* open fill: sand and grass ground east of Third Mainland Bridge, a few houses (Overture '
+                'brownfield 66%, WorldCover grass 64%)', 'none (open ground); compound_house at the edge'),
+    'D27-338': ('*guess* estate of detached houses on sand fill, half open: Dr Kayode Okunade Estate (Google Maps '
+                'label), detached houses on loop streets with open sand plots', 'detached houses (no map kind yet: '
+                'compound_house (home) nearest), none on the open plots'),
 }
 
 
