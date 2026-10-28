@@ -57,6 +57,9 @@ STUB = 50.0         # Gidi m: a piece with a loose end, shorter than this, is a 
 TOUCH = 0.05        # Gidi m: an end this near another line is on it
 JOIN = 15.0         # Gidi m past a road's kerb: a loose end this near it is a junction the merge left open
 EDGE = 0.5          # Gidi m: centrelines kept this far inside the frame (d00's own outline)
+OVER = 6.0          # Gidi m: a piece this near another road's centreline is on top of it
+LEFTOVER = 1500.0   # Gidi m: only a piece shorter than this is taken off as a leftover
+SNAP = 1.5          # Gidi m: a joined end goes to the road's own point when one is this near
 MARK = 'scripts/draft_network.py'
 
 
@@ -117,6 +120,16 @@ def with_point(L, at):
     return L
 
 
+def tidy(L):
+    """L with its points at whole centimetres and no point repeated."""
+    cs = []
+    for x, y in L.coords:
+        q = (round(x, 2), round(y, 2))
+        if not cs or q != cs[-1]:
+            cs.append(q)
+    return LineString(cs)
+
+
 def to_gidi(L):
     return LineString([gidi(x, y) for x, y in L.coords])
 
@@ -155,7 +168,20 @@ def main():
             for e in (p.coords[0], p.coords[-1]):
                 if Point(e).distance(hand_zone.boundary) < 0.5:
                     cut_ends.append((e, c, n))
-            pieces.append((p, c, n))
+            pieces.append((tidy(p), c, n))
+
+    # leftovers: a piece that lies mostly on top of other roads is what neatnet left of an interchange's slip roads
+    # or a carriageway it did not take in; taken off, shortest first, so of two copies one stays
+    pieces.sort(key=lambda x: x[0].length)
+    k = 0
+    while k < len(pieces):
+        p = pieces[k][0]
+        others = [q for j, (q, _, _) in enumerate(pieces) if j != k and q.distance(p) < OVER]
+        if p.length < LEFTOVER and others and \
+                p.intersection(unary_union([q.buffer(OVER) for q in others])).length > 0.6 * p.length:
+            del pieces[k]
+        else:
+            k += 1
 
     # stubs: a short piece with an end on nothing is what is left of an interchange's slip road; taken off until none
     while True:
@@ -187,7 +213,8 @@ def main():
             j = best[1]
             q = pieces[j][0]
             at = q.interpolate(q.project(e))
-            at = (round(at.x, 2), round(at.y, 2))
+            near = min(q.coords, key=lambda a: Point(a).distance(at))
+            at = near if Point(near).distance(at) < SNAP else (round(at.x, 2), round(at.y, 2))
             pieces[j] = (with_point(q, at), pieces[j][1], pieces[j][2])
             cs = list(p.coords)
             pieces[k] = (LineString([at] + cs if first else cs + [at]), c, n)
@@ -216,18 +243,23 @@ def main():
         for L in getattr(m, 'geoms', [m]):    # a junction linemerge ran through stays a vertex of the line
             roads.append((L, c, n))
 
-    # flyovers to draw: two roads crossing with no shared point
-    lines = [L for L, _, _ in roads]
-    tree = STRtree(lines)
-    crossings = []
-    for i, L in enumerate(lines):
-        for j in tree.query(L):
-            if j <= i or not L.crosses(lines[j]):
+    # two roads crossing with no shared point: a flyover or a junction, read on Google by hand; until then they
+    # share a point there, so the network can be driven flat (heights owed)
+    crossings = {}
+    for i in range(len(roads)):
+        for j in range(i + 1, len(roads)):
+            L, M = roads[i][0], roads[j][0]
+            if not L.crosses(M):
                 continue
-            x = L.intersection(lines[j])
+            x = L.intersection(M)
             for g in getattr(x, 'geoms', [x]):
-                if g.geom_type == 'Point':
-                    crossings.append((round(g.x, 1), round(g.y, 1)))
+                if g.geom_type != 'Point':
+                    continue
+                at = (round(g.x, 2), round(g.y, 2))
+                L, M = with_point(L, at), with_point(M, at)
+                crossings[(round(at[0], 1), round(at[1], 1))] = (i, j)
+            roads[i] = (L, roads[i][1], roads[i][2])
+            roads[j] = (M, roads[j][1], roads[j][2])
 
     # where each junction is: district and nearest real place (frame study)
     s = open(os.path.join(ROOT, 'web', 'frame-study.js')).read()
@@ -241,30 +273,33 @@ def main():
         return d, pl['n'], ((pl['at'][0] - q[0]) ** 2 + (pl['at'][1] - q[1]) ** 2) ** 0.5
 
     jid = {q: 'jn-' + hashlib.sha1(f'd00 junction {q[0]} {q[1]}'.encode()).hexdigest()[:8] for q in junctions}
-    tsv = ['id\tx\ty\tdistrict\tdistrict_name\tnearest_place\tplace_m\troads']
-    for q, ks in sorted(junctions.items()):
+    jid.update({q: 'jn-' + hashlib.sha1(f'd00 junction {q[0]} {q[1]}'.encode()).hexdigest()[:8] for q in crossings})
+    tsv = ['id\tx\ty\tkind\tdistrict\tdistrict_name\tnearest_place\tplace_m\troads']
+    rows = [(q, 'meets', [pieces[k] for k in ks]) for q, ks in junctions.items()] + \
+           [(q, 'crossing: flyover or junction, not read', [roads[i], roads[j]]) for q, (i, j) in crossings.items()]
+    for q, kind, rs in sorted(rows):
         (dn, dname), pl, pm = where(q)
-        names = sorted({f'{pieces[k][2] or "(no name)"} ({pieces[k][1]})' for k in ks})
-        tsv.append(f'{jid[q]}\t{q[0]}\t{q[1]}\td{dn:02d}\t{dname}\t{pl}\t{pm:.0f}\t{"; ".join(names)}')
+        names = sorted({f'{n or "(no name)"} ({c})' for _, c, n in rs})
+        tsv.append(f'{jid[q]}\t{q[0]}\t{q[1]}\t{kind}\td{dn:02d}\t{dname}\t{pl}\t{pm:.0f}\t{"; ".join(names)}')
 
     km = Counter()
     for L, c, _ in roads:
         km[c] += L.length / 1000
     print(f'draft: {len(roads)} roads, ' + ', '.join(f'{c} {km[c]:.1f} km' for c in CLASSES)
           + f' (Gidi km); {len(junctions)} junctions; {len(dead)} dead ends inside the frame; '
-          f'{len(cut_ends)} ends cut back from the hand records; {len(crossings)} crossings with no shared point '
-          f'(flyovers to draw, or junctions neatnet missed)')
+          f'{len(cut_ends)} ends cut back from the hand records; {len(crossings)} crossings given a shared point '
+          f'(flyover or junction, to read)')
     open(os.path.join(out_dir, 'junctions.tsv'), 'w').write('\n'.join(tsv) + '\n')
-    json.dump({'dead': dead, 'cut_ends': [e for e, _, _ in cut_ends], 'crossings': crossings},
+    json.dump({'dead': dead, 'cut_ends': [e for e, _, _ in cut_ends], 'crossings': list(crossings)},
               open(os.path.join(out_dir, 'draft_network_ends.json'), 'w'))
-    picture(out_dir, roads, hand_lines, list(junctions), dead, cut_ends, crossings, FS)
+    picture(out_dir, roads, hand_lines, list(junctions), dead, cut_ends, list(crossings), FS)
 
     if not write:
         return
     unbuilt = unary_union([to_gidi(L).buffer(1.0) for L, u in zip(merged.geometry, merged.unbuilt) if u])
     new = []
     for L, c, n in roads:
-        on = [jid[q] for q in junctions if Point(q).distance(L) < 0.05]
+        on = [jid[q] for q in jid if Point(q).distance(L) < 0.1]
         rid = 'rd-' + hashlib.sha1(f'd00 network {L.wkt}'.encode()).hexdigest()[:8]
         new.append({'id': rid, 'type': 'road', 'kind': KIND[c], 'width': WIDTH[c], 'surface': 'tar_worn',
                     'sand_cover': 'none', 'kerb_left': 'raised_pavement', 'kerb_right': 'raised_pavement',
@@ -306,7 +341,7 @@ def picture(out_dir, roads, hand_lines, junctions, dead, cut_ends, crossings, FS
         ax.scatter(*zip(*dead), s=14, marker='x', c='#7a00a8', zorder=6, label=f'dead ends ({len(dead)})')
     if crossings:
         ax.scatter(*zip(*crossings), s=12, marker='o', facecolors='none', edgecolors='#0a8a3a', zorder=6,
-                   label=f'crossings with no shared point ({len(crossings)})')
+                   label=f'crossings given a shared point, flyover or junction to read ({len(crossings)})')
     if cut_ends:
         ax.scatter(*zip(*[e for e, _, _ in cut_ends]), s=18, marker='s', facecolors='none', edgecolors='#1f4fb0',
                    zorder=6, label=f'cut back from hand roads ({len(cut_ends)})')
