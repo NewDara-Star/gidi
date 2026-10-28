@@ -63,6 +63,12 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
   block a creek the water layer holds), the owner is asked first.
+  **The land's own height too** (owner, 28 Oct: "since we're making the city... this is the best time to include things
+  like terrain... the topography of the land... how high some places are to ground level and how low"). The ground's
+  height (and the water's beds) goes into the city layer with the network, from a bare-earth terrain model (buildings and
+  trees taken out), so every road, bridge and house sits on the real rise and fall of the land. Heights are kept real
+  (metres, not scaled), as road widths are; only lengths are 1:3, so slopes come out three times steeper than Lagos's
+  (Lagos is low and flat, so they stay gentle). The data source and the format are in NOW 16 m.
 - **Freeze everything** once a district is built: the map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths were `scripts/cross_sections.py` (deleted 25 Oct). *Changed 22 Oct:* the building line, the walkways and the fixed widths are replaced by "Real Lagos roads": real lines, real widths, people walking on the road's edge.
 - **Markets spill onto the road:** traders take the carriageway, with a lane kept clear.
