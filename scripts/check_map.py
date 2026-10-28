@@ -299,7 +299,7 @@ CITY_TYPES = {'district', 'road', 'rail', 'water', 'relief'}   # not cut at dist
 FRAME = (27000, 10500)            # the frame, Gidi m: the city layer's land covers it all
 WATER_AREA = {'sea', 'lagoon', 'pond', 'marsh'}     # as Unreal's water bodies: a closed outline at one level (ocean, lake)
 WATER_LINE = {'river', 'creek', 'canal'}            # or an open line with a width, one per point if they vary (river)
-CITY_ROADS = {'motorway', 'trunk', 'main_road', 'local_main', 'ramp'}
+CITY_ROADS = {'motorway', 'trunk', 'main_road', 'local_main', 'service_road', 'ramp'}
 
 
 def check(top, fix=False, only=None):

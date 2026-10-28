@@ -38,6 +38,8 @@ sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 OVERTURE = os.path.expanduser('~/gidi-data/research/data/overture-lagos')
 LINE_NEAR, LINE_SHARE = 4.0, 0.5     # m, and the share of a road that must lie that near a real street
 PLACE_NEAR = 10.0                     # m from a real place's point to a Gidi place of its kind
+CITY_GAP = 8.0                        # m: half the widest divider the city layer leaves in one road (Ikorodu Road
+                                      # at Onipanu east, 15.1 m with its bus bay, Google satellite 28 Oct)
 GROUNDS = ('market', 'school', 'motor_park')   # places drawn whole: a real place inside one is in it
 GOOGLE = os.path.expanduser('~/gidi-data/research/data/open-buildings-v3/lagos_open_buildings_v3.csv.gz')
 THRESHOLDS = os.path.expanduser('~/gidi-data/research/data/open-buildings-v3/thresholds/score_thresholds_s2_level_4.csv')
@@ -79,6 +81,24 @@ def gidi(lon, lat, T):
     """Real WGS84 to Gidi metres (UTM 31N, 1:3 from the frame's south-west corner)."""
     u, v = T.transform(lon, lat)
     return (u - 500525) / 3, 10500 - (v - 707825) / 3
+
+
+def across(p, corridor, clines):
+    """How far from p to the far edge of the city layer's road it stands in, across that road: a cut square to the
+    nearest centreline, the piece of it inside the road that holds p, its far end."""
+    from shapely.geometry import LineString, Point
+    L = min(clines, key=lambda c: c.distance(p))
+    s = L.project(p)
+    a, b = L.interpolate(max(s - 1, 0)), L.interpolate(min(s + 1, L.length))
+    dx, dy = b.x - a.x, b.y - a.y
+    n = math.hypot(dx, dy) or 1
+    nx, ny = -dy / n * 200, dx / n * 200
+    cut = LineString([(p.x - nx, p.y - ny), (p.x + nx, p.y + ny)]).intersection(corridor)
+    piece = next((g for g in getattr(cut, 'geoms', [cut]) if g.distance(p) < 1e-6), None)
+    if piece is None or piece.is_empty:
+        return 0.0
+    c = list(piece.coords)
+    return max(p.distance(Point(c[0])), p.distance(Point(c[-1])))
 
 
 def bar(d):
@@ -154,8 +174,16 @@ def bar(d):
         if r['type'] == 'place' and r.get('area'):
             have.setdefault(r.get('kind'), []).append(Polygon(r['area'][0]))
     trees = {k: STRtree(v) for k, v in have.items()}
-    cws = [LineString([q[:2] for q in r['centreline']]).buffer(r['width'] / 2, cap_style=2) for r in roads]
-    cwh = [r['width'] / 2 for r in roads]
+    # the city layer's roads through the district count as carriageway too (Ikorodu Road moved there, 28 Oct)
+    city = os.path.join(ROOT, 'map', 'd00', 'plan.json')
+    cr = [r for r in json.load(open(city))['records'] if r['type'] == 'road'] if d != 'd00' and os.path.exists(city) else []
+    cr = [r for r in cr if ring.intersects(LineString([q[:2] for q in r['centreline']]))]
+    cws = [LineString([q[:2] for q in r['centreline']]).buffer(r['width'] / 2, cap_style=2) for r in roads + cr]
+    cwh = [r['width'] / 2 for r in roads + cr]
+    # the city layer draws one road as strips (express, dividers, service roads): a point anywhere across it is measured
+    # from the whole road's outer edge, as the old single record was; dividers up to 2*CITY_GAP wide are closed over
+    corridor = unary_union(cws[len(roads):]).buffer(CITY_GAP).buffer(-CITY_GAP) if cr else Polygon()
+    clines = [LineString([q[:2] for q in r['centreline']]) for r in cr]
     cw = STRtree(cws)
     want = miss = 0
     for r in pl.to_pylist():
@@ -176,6 +204,12 @@ def bar(d):
         t = trees.get(k)
         on = [c for c in cw.query(p) if cws[c].contains(p)]      # a point on a carriageway: measured from the road's edge
         slack = max((cwh[c] for c in on), default=0.0)
+        if t is not None and corridor.contains(p):
+            # across the city layer's road: a place of its kind on either side, standing within PLACE_NEAR of its edge
+            reach = max(slack, across(p, corridor, clines))
+            if any(have[k][i].distance(p) <= PLACE_NEAR + reach and have[k][i].distance(corridor) <= PLACE_NEAR
+                   for i in t.query(p.buffer(PLACE_NEAR + reach))):
+                continue
         if t is None or have[k][t.nearest(p)].distance(p) > PLACE_NEAR + slack:
             miss += 1
             if miss <= 9:

@@ -59,6 +59,16 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   under); nothing in them is invented or moved for taste. Everything else (buildings, places, names, dress) stays
   Gidi's own, inspired by Lagos. A district never bends the network: where they disagree, the district is fixed by
   hand (NOW 16 m).
+  **The whole network first, to a drive in Unreal; districts wait** (owner, 28 Oct, the fourth time: "don't worry
+  about the districts per se. Just worry about getting railroads into about that first... build it up until the point
+  that everything is connected... get it to the point that I can literally go on Unreal... I have a car that I can
+  just" [message cut there; read as "drive around on", and the owner agreed: "make sure we get all the roads and interconnected travel lines correct and right, everything and not be bogged down by the district work we have done, as we will update them after"]). Every main road, bridge,
+  interchange, rail line and water goes into d00 before any more district work; district fixes are only what a
+  network piece forces (houses under it, roads drawn twice). Then Unreal builds d00 alone (the network on the bare
+  land) and the owner drives a car round it, empty land between the roads. District streets come after, joined to
+  it. This lifts "Map and brush first, Unreal on hold" for the network drive only. Widths stay real and only lengths
+  shrink at 1:3, so real streets keep their real width; what the scale squeezes is the land between them (fewer,
+  not narrower, houses), settled when the districts come back.
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
