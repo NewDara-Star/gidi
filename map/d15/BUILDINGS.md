@@ -67,6 +67,24 @@ B1's lanes were redrawn on the real streets' lines (STREETS.md: 20 streets in pl
 
 B0's lanes were redrawn on the real streets' lines (STREETS.md: 36 streets in place of the 9 lanes of hand pass 4). Its houses were cleared and redrafted: the housing with `--frontage --sizes=12,20000`, the LUTH campus with `--frontage --sizes=300,20000`. B0 now holds 520 buildings at 49% cover (was 343 at 39%).
 
+## Hand pass 66 (28 Oct): the railway drawn on to the outline at Jibowu
+
+The square survey (docs/lagos-study/squares/d15-pilot.md, square d15-1612) found the rail `rl-u7rtwbrj` stopping at
+(13246,5994) while the real line runs on through the district to its east edge. Three points of Overture's
+standard-gauge line (the one ours already followed exactly) were added: (13313.4,6160.7), (13342.9,6233.2) and an end
+1 m inside the outline at (13353.2,6258.5). The rail now runs 864.6 m inside the outline against Overture's 866.
+Its 18 m corridor was cleared as hand pass 48 did: the 16 houses whose middle lay inside 9.5 m of the centre line were
+taken out (b-0f55ad6e, b-1fc06fea, b-261d246c, b-424aa916, b-44343688, b-4460ac8d, b-7c0e47fd, b-a138e47c, b-bc14a72a,
+b-c0ec9de7, b-c50a852a, b-d306eb57, b-d3a1b793, b-d7fa85c9, b-e2d634b5, b-ef8f1ea2), the 9 others touching it trimmed on
+the rail side to 9.5 m (b-5e61e13b, b-677e9864, b-79fd9399, b-8f531320, b-aefc0e21, b-ba05f1e9, b-c576a887, b-c66ceb43,
+b-ea4deafa), one stall in it taken out (st-xl7ir9h1) and four poles moved out to 10.5 m (po-0hexjoq2, po-opwaef66,
+po-rudocbe2, po-z00qvhq0). Only the new piece's band was cleared; the five houses hand pass 48 left at 9.04-9.35 m
+are unchanged.
+
+Owed: on Google's satellite (28 Oct, z19, by eye) the A1 (Ikorodu Road's expressway) crosses over the railway at
+Jibowu on a flyover. Our motorway `rd-i4klmw3w` crosses the new piece at (13346,6241) with no height, so the
+flyover's z is still to be drawn, and the neighbours d13 and d17 hold no rail beyond the edge (the seam).
+
 ## Hand pass 65 (26 Oct): slivers the board saw
 
 The board's own test (a house on a carriageway or on another house; Ìtìrí hand pass 4) flagged Mùṣá houses by slivers,

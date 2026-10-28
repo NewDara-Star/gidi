@@ -213,8 +213,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
        (1) the owner settles the ten squares and the seven open questions (the answer key), at home on the computer
        (owner, 28 Oct, at work); (2) a helper reads the same ten blind, its misses counted against the key: started
        28 Oct before the key, since the read does not need it (~/gidi-data/research/squares/d15-blind-1.md), scored
-       once the key is settled; (3) the rail drawn on to the outline by hand, with its
-       walls; (4) a rail row and a per-square cover row in working_bar.py; (5) if the miss rate is low, all 250 Mùṣá
+       once the key is settled; (3) [x] the rail drawn on to the outline by hand, with its
+       walls (28 Oct, BUILDINGS.md hand pass 66; owed from it: the A1 flyover's height where it crosses the rail at
+       Jibowu, and the rail through the d13/d17 seam); (4) a rail row and a per-square cover row in working_bar.py; (5) if the miss rate is low, all 250 Mùṣá
        squares by helpers in blind pairs, then Mùṣá's line hand pass from them.
    (i) [ ] The Google look for the eleven drawn districts (d09, d12-d19, d27, d28), owner 28 Oct: "even the ones drawn
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
