@@ -8,8 +8,9 @@
 # ahead is deleted, so a mistyped flag can never leave away mode on.
 # While away: downloads are refused ("the downloads should be locked when I'm away"), and so are deletes and history
 # rewrites, which can't be taken back; everything else, the GTA folder too ("that works too"), is allowed. The lists
-# are words in a shell command: a file overwritten with mv or >, a delete or download from inside a script, and the
-# Write and Edit tools (which the work needs) are not caught; git history pushed to GitHub is the safety net there.
+# are words in a shell command: a file overwritten with mv or >, a delete or download from inside a script, a
+# download or form sent from a web page in Chrome, and the Write and Edit tools (which the work needs) are not caught;
+# git history pushed to GitHub is the safety net for the files.
 # Every answer is logged to ~/.claude/gidi-away.log for the morning.
 input=$(cat)
 log="$HOME/.claude/gidi-away.log"
@@ -39,7 +40,19 @@ if [ "$tool" = "Bash" ]; then
     held="a delete or history rewrite: those wait for the owner"
   fi
 fi
-case "$tool" in mcp__*meshy_*) held="Meshy spends credits: that waits for the owner";; esac
+# Other tools (MCP): while away only the browser (the Google looks need it) and tools that only read are answered
+# yes; anything that sends, deletes, shares, deploys, spends or changes an outside service waits for the owner.
+case "$tool" in
+  mcp__*meshy_*) held="Meshy spends credits: that waits for the owner";;
+  mcp__claude-in-chrome__file_upload|mcp__claude-in-chrome__upload_image) held="an upload from the laptop: that waits for the owner";;
+  mcp__claude-in-chrome__*) ;;
+  mcp__*)
+    short=${tool##*__}
+    case "$short" in
+      get*|list*|search*|read*|query*|view*|fetch*|find*|describe*|count*|aggregate*|whoami|guide) ;;
+      *) held="a tool that changes or sends to an outside service: that waits for the owner";;
+    esac;;
+esac
 if [ -n "$held" ]; then
   printf "%s  REFUSED (%s)  %s  %s  [%s]\n" "$stamp" "$away" "$tool" "$what" "$held" >> "$log"
   jq -n --arg m "Away mode ($away): $held. Note it as not run, and carry on with other work." \
