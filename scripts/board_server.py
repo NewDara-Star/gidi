@@ -210,7 +210,7 @@ def district_from_study(d):
     are given by hand (a working name per district, decisions 22 Oct)."""
     if d == 'd00':                     # the city layer: the whole frame (owner, 28 Oct: the roads for the entire map first)
         return {'id': d, 'type': 'district', 'n': 0, 'name': 'Gidi', 'outline': [[[0, 0], [27000, 0], [27000, 10500], [0, 10500]]],
-                'note': 'the city layer: the main roads, bridges and rail of the whole map, not cut at district lines'}
+                'note': 'the city layer: the main roads, bridges, rail and water of the whole map, not cut at district lines'}
     s = open(STUDY).read()
     F = json.loads(s[s.index('{'):s.rindex('}') + 1])
     n = int(d[1:])

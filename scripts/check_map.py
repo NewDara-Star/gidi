@@ -293,7 +293,7 @@ def load_map(top, fix, only=None):
     return files
 
 
-CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges and rail of the whole map,
+CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges, rail and water of the whole map,
 CITY_TYPES = {'district', 'road', 'rail', 'water'}   # not cut at district lines; districts' streets join them on shared points
 WATER_AREA = {'sea', 'lagoon', 'pond', 'marsh'}     # as Unreal's water bodies: a closed outline at one level (ocean, lake)
 WATER_LINE = {'river', 'creek', 'canal'}            # or an open line with a width, one per point if they vary (river)
