@@ -34,6 +34,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Downloads, by asking | process | not a map rule; each download asked for in chat |
 | One test spot in Unreal for each new kind of record | process | GAP: no list yet of record kinds and their test spot (NOW 16 c) |
 | Away mode: no prompt waits while the owner is away | process | the hook itself; its log read each morning |
+| Looking is turned into counting | `scripts/square_survey.py` cuts a district into squares and counts them | GAP: no check yet refuses a district with unread squares or reads the miss log; the pilot is by hand (d15-pilot.md) |
 | A timeline of messages | process | the hook itself |
 | Study other games from the inside | nothing from another game is in gidi or gidi-game | by hand (what is learned is written in our own words) |
 | Fetching, what works | process | not a map rule |
