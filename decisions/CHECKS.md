@@ -32,6 +32,8 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Claude builds Gidi | process | not a map rule |
 | Google: study yes, lift no. | Google pictures stay outside the repo | by hand (never committed) |
 | Downloads, by asking | process | not a map rule; each download asked for in chat |
+| Away mode: no prompt waits while the owner is away | process | the hook itself; its log read each morning |
+| A timeline of messages | process | the hook itself |
 | Study other games from the inside | nothing from another game is in gidi or gidi-game | by hand (what is learned is written in our own words) |
 | Fetching, what works | process | not a map rule |
 | Look first: | references | owner's review |
