@@ -246,13 +246,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
        look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
        Street View for the street look; written into the district's study notes, checked by the main session, before
-       the density and street hand passes (d, f). Done: d15 (docs/lagos-study/google/d15.md, 28 Oct); d09 (docs/lagos-study/google/d09.md, 28 Oct: its 65 table rows and district counts re-run by the main session, all agree; it finds no water drawn though canals and a creek run through, roofs at 16% against Google 42%, fields and a container lot drawn as houses, 71 of 121 street names missing). Of its map figures
+       the density and street hand passes (d, f). Done: d15 (docs/lagos-study/google/d15.md, 28 Oct); d09 (docs/lagos-study/google/d09.md, 28 Oct: its 65 table rows and district counts re-run by the main session, all agree; it finds no water drawn though canals and a creek run through, roofs at 16% against Google 42%, fields and a container lot drawn as houses, 71 of 121 street names missing); d12 (docs/lagos-study/google/d12.md, 28 Oct: its 71 table rows and district counts re-run by the main session, all agree; one one-off distance corrected, S9 to the expressway 18.4 m not 15.1; it finds no water drawn though a canal network, creeks and a 500 x 400 m marsh run through, houses in the marsh, roofs at 15% against Google 41%, no market places, 123 of 191 street names missing). Of its map figures
        the main session re-ran the north-west box, roof shares, trees, shacks, kiosks, market and police counts and the
        street names, and later the r30 column, coordinates, outline tests and medians with
        docs/lagos-study/google/scripts/d15_look.py (21 of 23 views agree; S13 corrected to 9 houses). Its readings of the real place are the agent's, by eye, not yet re-looked (the
        north-west belt as sheds under our drawn flats, LUTH as ward blocks in lawns, four open grounds drawn as houses,
        a canal and a drain we lack, 9+ markets, 20 street names absent and 2 perhaps drawn under shorter names); the
-       main session re-looks those key spots in Chrome before Mùṣá's hand pass uses them. Still to look: d09, d12, d13, d14, d16, d17, d18, d19, d27, d28.
+       main session re-looks those key spots in Chrome before Mùṣá's hand pass uses them. Still to look: d13, d14, d16, d17, d18, d19, d27, d28.
    (j) [ ] Away mode in gidi-game (DECISIONS "Away mode", 28 Oct): its `.claude/settings.json` calls gidi's
        away-allow.sh and timeline.sh; committed on its own branch there (hooks/away-mode, c4a1164), ticked here once merged. Also owed: see the hook
        answer a real prompt (its log, ~/.claude/gidi-away.log, read the first morning after a night's work).
