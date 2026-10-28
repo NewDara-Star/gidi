@@ -126,12 +126,13 @@ def bar(d):
     # district's own problems count
     del C.errors[:]
     del C.clashes[:]
+    del C.clash_of[:]
     C.check(os.path.join(ROOT, 'map'))
     bad = [e for e in C.errors if e.startswith(d + '/') and not C.TODO.search(e)]
     R['check problems'] = len(bad)
     if bad:
         fails.append(f'check: {len(bad)} problems (check_map.py)')
-    cl = [e for e in C.clashes if e.startswith(d + '/')]
+    cl = [e for e, cd in zip(C.clashes, C.clash_of) if cd == d]     # filed by the district record's own district
     R['clashes with the network'] = len(cl)
     if cl:      # not a map failure (DECISIONS "The whole network first"), but a district is not working until it fits
         fails.append(f'network: {len(cl)} clashes with the city layer still to fit by hand (check_map.py CLASH lines)')

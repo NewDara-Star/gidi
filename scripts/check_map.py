@@ -29,6 +29,7 @@ errors = []
 corners = []                 # road lines the kit can't round without folding: hand edits still to do (amber, like TODO)
 staggered = []               # road ends on a node within reach of another road's node: one junction the kit must still join
 clashes = []                 # the city layer's network against district work drawn before it: listed for the street pass
+clash_of = []                # the district each clash is to be fitted in (the non-city record's), one per line of clashes
 TODO = re.compile(r": missing (?:field|value) '([^']+)'")      # what the board shows amber
 
 
@@ -40,8 +41,10 @@ def clash(recs, a, b, where, msg):
     """A problem between a city-layer record and a district's record is a clash for the street pass, not a failure
     (owner, 28 Oct, DECISIONS "The whole network first": the roads supersede what the districts drew; the districts
     are remade around them after). Between two city-layer records, or two district records, it fails as before."""
-    if (recs[a].get('_district') == CITY) != (recs[b].get('_district') == CITY):
+    da, db = recs[a].get('_district'), recs[b].get('_district')
+    if (da == CITY) != (db == CITY):
         clashes.append(f'{where}: {msg}')
+        clash_of.append(db if da == CITY else da)
     else:
         err(where, msg)
 
