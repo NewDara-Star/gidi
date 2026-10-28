@@ -5,10 +5,12 @@ of the land... how high some places are to ground level and how low"; DECISIONS 
 
 Reads GEDTM30 v1.2, a bare-earth model (buildings and trees taken off; 1 arc-second, about 30 m; OpenGeoHub, CC BY 4.0,
 credited in the game; ~/gidi-data/research/data/gedtm30/README.md), and writes it into map/d00 as `relief` grids: one
-per 1 km Gidi tile, CELL m between points, so a grid's point is one of the model's own 30 m cells at 1:3. Heights stay
-real metres above sea level (lengths 1:3, heights real: DECISIONS), written in whole millimetres rounded to ROUND mm,
-as the model's own uncertainty (median 0.58 m) makes finer figures noise. Neighbouring grids share their edge points
-with the same values, as an Unreal Landscape's components share their edge vertices.
+per 1 km Gidi tile, CELL m between points, so a grid's point is one of the model's own 30 m cells at 1:3. Heights are
+1:3 too, the model's metres above sea level divided by VSCALE, so every slope is as steep as the real one (owner, 28 Oct,
+DECISIONS "The land's own height too": with real heights a third of Ikorodu Road's land at Ojota came out steeper than
+8%). They are written in whole millimetres rounded to ROUND mm, as the model's own uncertainty (median 0.58 m, 0.19 m
+at 1:3) makes finer figures noise. Neighbouring grids share their edge points with the same values, as an Unreal
+Landscape's components share their edge vertices.
 
 Each point is the model's height at that place, read bilinearly from the four cells round it; where some of those are
 open water with no reading (the middle of the lagoons) the readings that exist are averaged, and a point with none
@@ -35,9 +37,10 @@ DEM = os.path.expanduser('~/gidi-data/research/data/gedtm30/lagos_gedtm30_rf_m_v
 W, H = 27000, 10500     # the frame, Gidi m
 TILE = 1000             # Gidi m a grid
 CELL = 10.0             # Gidi m between points: the model's 30 m at 1:3
+VSCALE = 3              # heights 1:3, as lengths
 ROUND = 100             # mm
-SRC = ('GEDTM30 v1.2 bare-earth heights (OpenGeoHub, CC BY 4.0), read bilinearly at each point; first draft, '
-       'scripts/draft_terrain.py, 28 Oct')
+SRC = ('GEDTM30 v1.2 bare-earth heights (OpenGeoHub, CC BY 4.0), read bilinearly at each point and divided by 3 '
+       '(heights 1:3, as lengths); drafted by scripts/draft_terrain.py, 28 Oct')
 
 
 def heights(xs, ys):
@@ -62,6 +65,11 @@ def heights(xs, ys):
     return np.where(wsum > 0, acc / np.where(wsum > 0, wsum, 1), np.nan)
 
 
+def land(xs, ys):
+    """The land's height in Gidi m at Gidi points: the model's, at 1:3."""
+    return heights(xs, ys) / VSCALE
+
+
 def main():
     top = sys.argv[1]
     dry = '--dry' in sys.argv
@@ -75,7 +83,7 @@ def main():
             cols = int(min(TILE, W - tx) / CELL) + 1
             rows = int(min(TILE, H - ty) / CELL) + 1
             gx, gy = np.meshgrid(tx + CELL * np.arange(cols), ty + CELL * np.arange(rows))
-            z = heights(gx.ravel(), gy.ravel())
+            z = land(gx.ravel(), gy.ravel())
             none = int(np.isnan(z).sum())
             mm = [int(v) for v in (np.round(np.nan_to_num(z, nan=0.0) * 1000 / ROUND) * ROUND)]
             none_total += none
