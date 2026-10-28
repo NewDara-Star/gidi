@@ -177,10 +177,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
        several checked study passes wide and close; a 1:3 plan with streets and buildings by the ratio; the owner sees
        the thinning before it is drawn. Trial on one district first: Mùṣá, its building study done (docs/lagos-study/buildings/d15.md), then its owed
        hand pass (16 h).
-   (g) [ ] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, each
-       ending with its "Checked:" list, before those districts are drawn (CLAUDE.md "Every agent claim"). Spot-checked so
-       far: d11's expressway gap (true), d29's rail end (true) and expressway point (a d28 road end, not a border
-       point), d10's rd-f1478f6a (exists).
+   (g) [x] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, 28
+       Oct: one checking agent each, with a re-runnable script (docs/lagos-study/districts/scripts/, one per note) the
+       main session re-ran; corrections in place, marked "corrected on check" or "added on check" (markers: d10 18, d11 10, d29 19, d30 10);
+       each note ends with its Checked list. Owed before each is drawn: its Google-first reading in Chrome (CLAUDE.md),
+       and the web claims that rest on search summaries only or on pages that refused the fetch (listed per note).
    (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
        types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
        Done and checked: all eleven drawn districts, d09, d12-d19, d27, d28 (docs/lagos-study/buildings/; the last four 28
