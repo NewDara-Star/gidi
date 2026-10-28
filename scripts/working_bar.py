@@ -125,11 +125,16 @@ def bar(d):
     # the whole map is loaded, so a seam junction on a node shared with a neighbour's road reads as joined; only this
     # district's own problems count
     del C.errors[:]
+    del C.clashes[:]
     C.check(os.path.join(ROOT, 'map'))
     bad = [e for e in C.errors if e.startswith(d + '/') and not C.TODO.search(e)]
     R['check problems'] = len(bad)
     if bad:
         fails.append(f'check: {len(bad)} problems (check_map.py)')
+    cl = [e for e in C.clashes if e.startswith(d + '/')]
+    R['clashes with the network'] = len(cl)
+    if cl:      # not a map failure (DECISIONS "The whole network first"), but a district is not working until it fits
+        fails.append(f'network: {len(cl)} clashes with the city layer still to fit by hand (check_map.py CLASH lines)')
 
     B = [r for r in recs if r['type'] == 'building']
     nok = [b['id'] for b in B if not b.get('kind') or not isinstance(b.get('storeys'), int) or b['storeys'] < 1]
