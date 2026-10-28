@@ -446,10 +446,12 @@ def check(top, fix=False, only=None):
 def land(recs):
     """The city layer's relief grids are the land's height (DECISIONS "The land's own height too"): together they cover
     the whole frame at one spacing, and where two grids meet their shared points carry the same height, as an Unreal
-    Landscape's components share their edge vertices. Checked only once the land is in."""
+    Landscape's components share their edge vertices. The city layer without its land fails too."""
     grids = [(rid, r) for rid, r in recs.items() if r['_district'] == CITY and r.get('type') == 'relief'
              and isinstance(r.get('z_mm'), list) and len(r['z_mm']) == r.get('cols', 0) * r.get('rows', 0)]
     if not grids:
+        if any(r.get('type') == 'district' and r['_district'] == CITY for r in recs.values()):
+            err(f'{CITY} relief', 'the city layer holds no land height: its relief grids are missing (scripts/draft_terrain.py drafted them once)')
         return
     cells = {r['cell'] for _, r in grids}
     if len(cells) != 1:
