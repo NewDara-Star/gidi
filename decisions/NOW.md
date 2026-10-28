@@ -193,7 +193,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
        half empty; our houses median 84 m² against Google's 169: fewer, bigger houses at the same cover); kinds the map
        lacks for d18 (hall of residence, faculty block, detached house in a yard: the owner's call); a house on stilts over water in
        the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); Makoro drawn with its
-       stilt town (owner, 27 Oct: DECISIONS "Makoro keeps its stilt town"); d19_water.py and d17_fabric.py re-run by the main session.
+       stilt town (owner, 27 Oct: DECISIONS "Makoro keeps its stilt town").
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
