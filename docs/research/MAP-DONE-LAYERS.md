@@ -1,6 +1,6 @@
 # What a "map done" district holds: the layer list (draft)
 
-A draft for the owner and Claude to go through (NOW 16 c; DECISIONS "'Done' is the map's bar", 27 Oct). Map done
+A draft for the owner and Claude to go through (28 Oct, the owner said yes to adding 11 layers and marking which draw lines: see "Added 28 Oct" at the end) (NOW 16 c; DECISIONS "'Done' is the map's bar", 27 Oct). Map done
 means every layer a finished open-world area holds is in the district's records, so that later the kits only read
 them: a house already says its kind, storeys and colour; a junction already says who goes first; a street already
 says what drives on it at 8 in the morning. Nothing here is decided. Written by an agent on 27 Oct; the main session re-checked
@@ -73,103 +73,121 @@ What the fields carry (same count):
 - **Done when:** the measure. A real figure from the real place where one can be read (Google Maps, satellite,
   Street View, Open Buildings, Overture). Reference figures are labelled with their file. *guess* marks my guesses.
   "Not read yet" means nobody has the real figure.
+- **Lines:** **yes** if the layer draws or moves a line on the map (a road edge, a drain, a plot, a footprint), so it
+  must be settled before a district is "working"; **no** if it sits on lines already drawn.
 - Densities per km² compare directly because houses, cars and stalls stay real size on the 1:3 map; only street
   length per km² does not (FINISHED-AREA-INDUSTRY.md, finding 1).
 
 ## A. Ground and roads
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| A1 | Streets on real lines | every road, street, lane and path, its kind | driving, walking, the map players read | 100% of length on a real line (STREETS.md per district); street km per km² matches the real district read from Google Maps (owed, NOW 16 f). Reference: UN-Habitat at least 18 km/km²; GTA V's files 23-50 road km/km² (FINISHED-AREA.md) | yes: `road.centreline`, `road.kind` (10 kinds); 6,816 roads | tool (Street) |
-| A2 | Road width | kerb to kerb | traffic fits; roads take their real share of land | every road's width read from satellite; road share of land against the real district (UN-Habitat: 20-30% of urban land for roads and parking, FINISHED-AREA-INDUSTRY.md) | yes: `road.width`; on all | tool |
-| A3 | Road surface and colour (the owner's "road color") | tar new or worn, laterite, sand, earth, interlock; its colours per layer | the look of every street; poor and wet places read as such (DECISIONS 16 Oct "Roads have surfaces") | 100% of roads with a surface and colours **read** from Street View or the owner's photos, none left "to read"; Overture's surface tags are not trusted (DECISIONS, "Data caution") | yes: `surface`, `sand_cover`, `ground_look`; filled on all, but 6,445 outside Mùṣá are Mùṣá's defaults "to read" | tool (Surface); patches by brush now (ground paint) |
-| A4 | Lanes and direction | lanes each way; one-way streets; divided roads | traffic needs lanes to drive; a one-way street driven the wrong way is a Lagos moment | every road with more than one lane, or one-way, says so, read from Street View and Google Maps (one-way arrows: whether Google shows them in Lagos *not checked*). Reference: GTA V's files 45-97 lane-km/km², 28-57% of length one direction only (counts divided roads too) (FINISHED-AREA.md) | **no** field | table (per road, in the panel) |
-| A5 | Speed and road class for driving | how fast traffic goes on each road | driving feel; traffic that crawls on Ikorodu-type roads and races on the expressway | every road kind has a speed; per-road where real speed differs (*guess*: Street View cannot show speed; read from Google Maps typical traffic, not checked) | **no** | table |
-| A6 | Kerbs, medians, road crown | raised kerb, drain wall, painted kerb, median barrier | the road's edge and what cars hit | every main road's kerbs and median read from Street View | yes: `kerb_left/right`, `kerb_paint`, `median`, `crown`; on all, mostly `none` (6,712 left kerbs) and defaults outside Mùṣá | tool |
-| A7 | Roadside drains | open, slab-covered or earth gutters, their state | the Lagos street edge; flooding; slabs to trip on | share of road length with its drains read per side from Street View; 100% of roads read | yes: `road.gutters`, dress `gutter_pieces`; 171 roads, all Mùṣá | tool now; brush could (along a road) |
-| A8 | Walkways, verges and drain crossings | the strip beside the road, the slab or plank over the drain at each gate | walking; every gate reachable | every gate and shop door over a drain has its crossing; verges read | yes: `verges`, `crossings`, kerb `raised_pavement`; 351 roads with verges, all Mùṣá | tool; brush could |
-| A9 | Road markings | lane lines, zebra crossings, stop lines, painted kerbs, BRT lane lines | traffic symbols the owner named; where markings are worn or absent, that is the look too | every main road's markings read from Street View (most local streets have none, *guess*) | **partly**: only `kerb_paint` (1 road) | brush could (a line along a road) |
-| A10 | Bumps, potholes, ruts, speed breakers | the road's broken surface, home-made speed breakers | driving feel; the Lagos road | potholes and breakers per km of road, read on a Street View sample (figure not read yet) | **partly**: dress `relief` and `ground_marks` (potholes, ruts); no kind says "speed breaker"; 0 placed | brush now (relief); tool (Relief) |
-| A11 | Ground off the road | yards, open ground, sand, laterite, grass, mud, puddles, water | every square metre has a ground (DECISIONS "Account for every square metre") | 100% of open land painted with a kind (the industry draft's topic 10, FINISHED-AREA-INDUSTRY.md) | yes: dress `ground` (12 kinds); 0 placed | brush now (ground paint) |
-| A12 | Big drains and canals | the open storm channels and canals across the city | floods, bridges over them, a landmark of Lagos | every canal seen on Google Maps and satellite drawn | **no** (only a `ground` patch of `water`) | new tool |
-| A13 | Bridges, flyovers, footbridges | roads in the air, overhead footbridges over expressways | crossings; the Lagos skyline of flyovers | every flyover and footbridge on Google Maps drawn | **partly**: road points with height, kind `ramp`; no piers, rails or footbridge structure | tool (Street, with heights) |
-| A14 | Water, shore, water lanes, jetties | the lagoon, creeks, the canoe channels of the stilt town, landing places | Makoro's stilt town (DECISIONS "Makoro keeps its stilt town"); boats | shoreline drawn; every channel in the stilt town drawn (d19 study, finding 3) | **partly**: `ground` kind `water` with a level `z`; no water lane or jetty | brush now (ground paint); new tool for lanes |
-| A15 | Rail and stations | the line, level crossings, stations | trains, crossings, the station crowd | every line and station on Google Maps drawn | yes: `rail`, `station`; 1 each, Mùṣá | tool |
-| A16 | Trees and plants | palms, shade trees, plantain, shrubs, grass | shade, the look from above against the satellite | trees per km² against the satellite (figure not read yet; WorldCover reads 30% trees in d18, d18 study) | yes: `tree` (6 kinds), `ground` kind `grass`; 92 trees, all Mùṣá | tool; brush could |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| A1 | Streets on real lines | every road, street, lane and path, its kind | driving, walking, the map players read | 100% of length on a real line (STREETS.md per district); street km per km² matches the real district read from Google Maps (owed, NOW 16 f). Reference: UN-Habitat at least 18 km/km²; GTA V's files 23-50 road km/km² (FINISHED-AREA.md) | yes: `road.centreline`, `road.kind` (10 kinds); 6,816 roads | tool (Street) | yes |
+| A2 | Road width | kerb to kerb | traffic fits; roads take their real share of land | every road's width read from satellite; road share of land against the real district (UN-Habitat: 20-30% of urban land for roads and parking, FINISHED-AREA-INDUSTRY.md) | yes: `road.width`; on all | tool | yes |
+| A3 | Road surface and colour (the owner's "road color") | tar new or worn, laterite, sand, earth, interlock; its colours per layer | the look of every street; poor and wet places read as such (DECISIONS 16 Oct "Roads have surfaces") | 100% of roads with a surface and colours **read** from Street View or the owner's photos, none left "to read"; Overture's surface tags are not trusted (DECISIONS, "Data caution") | yes: `surface`, `sand_cover`, `ground_look`; filled on all, but 6,445 outside Mùṣá are Mùṣá's defaults "to read" | tool (Surface); patches by brush now (ground paint) | no |
+| A4 | Lanes and direction | lanes each way; one-way streets; divided roads | traffic needs lanes to drive; a one-way street driven the wrong way is a Lagos moment | every road with more than one lane, or one-way, says so, read from Street View and Google Maps (one-way arrows: whether Google shows them in Lagos *not checked*). Reference: GTA V's files 45-97 lane-km/km², 28-57% of length one direction only (counts divided roads too) (FINISHED-AREA.md) | **no** field | table (per road, in the panel) | yes |
+| A5 | Speed and road class for driving | how fast traffic goes on each road | driving feel; traffic that crawls on Ikorodu-type roads and races on the expressway | every road kind has a speed; per-road where real speed differs (*guess*: Street View cannot show speed; read from Google Maps typical traffic, not checked) | **no** | table | no |
+| A6 | Kerbs, medians, road crown | raised kerb, drain wall, painted kerb, median barrier | the road's edge and what cars hit | every main road's kerbs and median read from Street View | yes: `kerb_left/right`, `kerb_paint`, `median`, `crown`; on all, mostly `none` (6,712 left kerbs) and defaults outside Mùṣá | tool | yes |
+| A7 | Roadside drains | open, slab-covered or earth gutters, their state | the Lagos street edge; flooding; slabs to trip on | share of road length with its drains read per side from Street View; 100% of roads read | yes: `road.gutters`, dress `gutter_pieces`; 171 roads, all Mùṣá | tool now; brush could (along a road) | yes |
+| A8 | Walkways, verges and drain crossings | the strip beside the road, the slab or plank over the drain at each gate | walking; every gate reachable | every gate and shop door over a drain has its crossing; verges read | yes: `verges`, `crossings`, kerb `raised_pavement`; 351 roads with verges, all Mùṣá | tool; brush could | yes |
+| A9 | Road markings | lane lines, zebra crossings, stop lines, painted kerbs, BRT lane lines | traffic symbols the owner named; where markings are worn or absent, that is the look too | every main road's markings read from Street View (most local streets have none, *guess*) | **partly**: only `kerb_paint` (1 road) | brush could (a line along a road) | no |
+| A10 | Bumps, potholes, ruts, speed breakers | the road's broken surface, home-made speed breakers | driving feel; the Lagos road | potholes and breakers per km of road, read on a Street View sample (figure not read yet) | **partly**: dress `relief` and `ground_marks` (potholes, ruts); no kind says "speed breaker"; 0 placed | brush now (relief); tool (Relief) | no |
+| A11 | Ground off the road | yards, open ground, sand, laterite, grass, mud, puddles, water | every square metre has a ground (DECISIONS "Account for every square metre") | 100% of open land painted with a kind (the industry draft's topic 10, FINISHED-AREA-INDUSTRY.md) | yes: dress `ground` (12 kinds); 0 placed | brush now (ground paint) | no |
+| A12 | Big drains and canals | the open storm channels and canals across the city | floods, bridges over them, a landmark of Lagos | every canal seen on Google Maps and satellite drawn | **no** (only a `ground` patch of `water`) | new tool | yes |
+| A13 | Bridges, flyovers, footbridges | roads in the air, overhead footbridges over expressways | crossings; the Lagos skyline of flyovers | every flyover and footbridge on Google Maps drawn | **partly**: road points with height, kind `ramp`; no piers, rails or footbridge structure | tool (Street, with heights) | yes |
+| A14 | Water, shore, water lanes, jetties | the lagoon, creeks, the canoe channels of the stilt town, landing places | Makoro's stilt town (DECISIONS "Makoro keeps its stilt town"); boats | shoreline drawn; every channel in the stilt town drawn (d19 study, finding 3) | **partly**: `ground` kind `water` with a level `z`; no water lane or jetty | brush now (ground paint); new tool for lanes | yes |
+| A15 | Rail and stations | the line, level crossings, stations | trains, crossings, the station crowd | every line and station on Google Maps drawn | yes: `rail`, `station`; 1 each, Mùṣá | tool | yes |
+| A16 | Trees and plants | palms, shade trees, plantain, shrubs, grass | shade, the look from above against the satellite | trees per km² against the satellite (figure not read yet; WorldCover reads 30% trees in d18, d18 study) | yes: `tree` (6 kinds), `ground` kind `grass`; 92 trees, all Mùṣá | tool; brush could | no |
+| A17 | Ground height and where it floods | the lie of the land over a district: high ground, low ground, the streets that flood in the rains | water runs downhill; flooded streets are a Lagos season | every district's low ground and flood streets read (Google satellite after rain, news reports; method *not decided*) | **partly**: dress `relief` is a fine grid in mm for bumps, `ground` kind `water` has a level `z`; no district height, no flood area | brush now (relief, for small ground); new tool for flood areas | no |
+| A18 | Road rules beyond lanes | no right turn, no lorries, slip lanes (the street's name is C16) | AI traffic needs the rules (GTA V's paths carry 25 kinds of road attribute, GTA-STUDY.md section 5, item 1) | every rule seen on Street View or Google Maps set | **no**: no turn ban, vehicle ban or slip lane | table; tool for slip lanes | yes |
 
 ## B. Traffic
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| B1 | Junctions and who goes first | each meeting of 3+ roads and its rule: lights, roundabout, warden, nobody | traffic cannot cross without it | every junction of 3+ roads has a rule. Reference: 30-116 junctions per 0.16 km² box in GTA V's files, 188-725 per km² *(arithmetic)* (FINISHED-AREA.md) | **partly**: roads join by sharing a point; no junction record or rule | new tool (click a junction) |
-| B2 | Traffic lights (the owner's "kind of traffic lights") | the lights, their kind, whether they work | the owner named them; dead lights with a warden are Lagos | every lit junction on Google Maps or Street View drawn, with working or not (*guess*: many are dark). Reference: 0-3 signal junctions per 0.16 km² box (FINISHED-AREA.md) | **no** | new tool |
-| B3 | Traffic signs and street-name boards (the owner's "traffic symbols") | stop, no entry, no parking, BRT only, speed, direction boards, street-name blades | the owner named them; finding the way | signs per km of main road read from Street View (figure not read yet); every named street has a name board where real | **partly**: `pole.boards` (street-name blades only); no sign record | new tool; brush could (along a road) |
-| B4 | Moving traffic: what drives where and when (the owner's "kind of cars") | the mix of okada, keke, danfo, molue, BRT, cars, lorries, tankers, carts per road kind and hour; okada and keke bans | the street at 8 am is not the street at 11 pm | a table per district per 2-hour slot whose shares add to 100 (lived-in.md, "the district mix", proposed), seeded from LIVING.md and Street View; method for real counts *not decided* | **no** (the old map had an `okada_ban` field, LIFE-IN-LAGOS.md line 64; the new schema has none) | table |
-| B5 | Parked vehicles | each parked car, danfo, keke, lorry, wreck: kind, colour, spot | the street's look; cars to take | parked vehicles per 100 m of street, against a Street View sample (figure not read yet). Mùṣá now 679 per Gidi km². Reference: 1,050-2,081 parked-car spots per km² (FINISHED-AREA.md) | yes: `vehicle` (13 kinds, per-kind detail); 824, all Mùṣá | tool; brush could (along a kerb) |
-| B6 | Transport routes and timetables (the owner's "timetable") | danfo, molue and BRT routes, their stops in order, how often by hour; train and ferry times | getting about; the conductor's route call; missions | every bus stop on at least one route; routes read from Google Maps (whether it carries Lagos danfo routes *not checked*) | **no** | table |
-| B7 | Bus stops, lay-bys, shelters, BRT stations | where people wait and vehicles stop | the bus stop crowd, touts | 0 real bus stops missing (Google Maps); each with its shelter or none read | **partly**: place `bus_stop` (20 in all); no shelter or lay-by structure | tool (Place); new tool for the shelter |
-| B8 | Motor parks, okada and keke ranks | parks, and the ranks at junctions | the busiest spots in a district | 0 real parks missing (Google Maps); every rank seen on Street View drawn | **partly**: place and plot `motor_park` (4 places); no rank kind (activity `wait_on_okada` exists) | tool |
-| B9 | Fuel stations | the forecourt, canopy, pumps, queue | fuel, fuel queues (a world state, E7) | 0 real stations missing (Overture, Google Maps) | **partly**: place `fuel` (42), crossing kind `grate`; no canopy or pump | tool; new kind |
-| B10 | Traffic police, wardens, checkpoints | who stands in the road | the "roger" at the checkpoint, the warden at the dead light | every busy junction and checkpoint seen has its spots | **partly**: activities `direct_traffic`, `police_check` (person spots, 0 placed) | tool (Person) |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| B1 | Junctions and who goes first | each meeting of 3+ roads and its rule: lights, roundabout, warden, nobody | traffic cannot cross without it | every junction of 3+ roads has a rule. Reference: 30-116 junctions per 0.16 km² box in GTA V's files, 188-725 per km² *(arithmetic)* (FINISHED-AREA.md) | **partly**: roads join by sharing a point; no junction record or rule | new tool (click a junction) | yes |
+| B2 | Traffic lights (the owner's "kind of traffic lights") | the lights, their kind, whether they work | the owner named them; dead lights with a warden are Lagos | every lit junction on Google Maps or Street View drawn, with working or not (*guess*: many are dark). Reference: 0-3 signal junctions per 0.16 km² box (FINISHED-AREA.md) | **no** | new tool | no |
+| B3 | Traffic signs and street-name boards (the owner's "traffic symbols") | stop, no entry, no parking, BRT only, speed, direction boards, street-name blades | the owner named them; finding the way | signs per km of main road read from Street View (figure not read yet); every named street has a name board where real | **partly**: `pole.boards` (street-name blades only); no sign record | new tool; brush could (along a road) | no |
+| B4 | Moving traffic: what drives where and when (the owner's "kind of cars") | the mix of okada, keke, danfo, molue, BRT, cars, lorries, tankers, carts per road kind and hour; okada and keke bans | the street at 8 am is not the street at 11 pm | a table per district per 2-hour slot whose shares add to 100 (lived-in.md, "the district mix", proposed), seeded from LIVING.md and Street View; method for real counts *not decided* | **no** (the old map had an `okada_ban` field, LIFE-IN-LAGOS.md line 64; the new schema has none) | table | no |
+| B5 | Parked vehicles | each parked car, danfo, keke, lorry, wreck: kind, colour, spot | the street's look; cars to take | parked vehicles per 100 m of street, against a Street View sample (figure not read yet). Mùṣá now 679 per Gidi km². Reference: 1,050-2,081 parked-car spots per km² (FINISHED-AREA.md) | yes: `vehicle` (13 kinds, per-kind detail); 824, all Mùṣá | tool; brush could (along a kerb) | no |
+| B6 | Transport routes and timetables (the owner's "timetable") | danfo, molue and BRT routes, their stops in order, how often by hour; train and ferry times | getting about; the conductor's route call; missions | every bus stop on at least one route; routes read from Google Maps (whether it carries Lagos danfo routes *not checked*) | **no** | table | no |
+| B7 | Bus stops, lay-bys, shelters, BRT stations | where people wait and vehicles stop | the bus stop crowd, touts | 0 real bus stops missing (Google Maps); each with its shelter or none read | **partly**: place `bus_stop` (20 in all); no shelter or lay-by structure | tool (Place); new tool for the shelter | yes |
+| B8 | Motor parks, okada and keke ranks | parks, and the ranks at junctions | the busiest spots in a district | 0 real parks missing (Google Maps); every rank seen on Street View drawn | **partly**: place and plot `motor_park` (4 places); no rank kind (activity `wait_on_okada` exists) | tool | yes |
+| B9 | Fuel stations | the forecourt, canopy, pumps, queue | fuel, fuel queues (a world state, E7) | 0 real stations missing (Overture, Google Maps) | **partly**: place `fuel` (42), crossing kind `grate`; no canopy or pump | tool; new kind | yes |
+| B10 | Traffic police, wardens, checkpoints | who stands in the road | the "roger" at the checkpoint, the warden at the dead light | every busy junction and checkpoint seen has its spots | **partly**: activities `direct_traffic`, `police_check` (person spots, 0 placed) | tool (Person) | no |
+| B11 | Vehicle spawn spots and no-spawn areas | where a vehicle usually appears and when (a keke waiting at a junction 6 am to 10 pm), and where nothing may appear | parked and waiting vehicles that change through the day without a fixed record each (GTA V: car generators and no-spawn zones, GTA-STUDY.md section 5, item 14) | every rank, park and kerb the street view shows busy has a spawn spot with hours (figure not read yet) | **no** (`vehicle` records are fixed) | tool; brush could (along a kerb) | no |
+| B12 | Boats and planes | canoes in the stilt town's channels, ferries on the lagoon, planes at the airport | the water and the sky move too | every channel and jetty has its boats; the airport has its planes (*owner's call* on how many) | **no** | tool, once the kinds exist | no |
 
 ## C. Buildings (the owner's "houses")
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| C1 | Footprints and cover | each house's outline | the district looks like the real place from above | cover between Google's 90%- and 80%-precision figures (CLAUDE.md, gated in `working_bar.py`); Mùṣá 43.22% against 43.26-47.65% (NOW 16) | yes: `building.footprint`; 13,475 | tool; draft from Open Buildings |
-| C2 | Kind | what sort of house | the kit builds from it; it says who lives there | every house has a kind that fits its block's real fabric (the building studies) | yes: `kind` (14 kinds); on all (gaps in C12) | tool |
-| C3 | Storeys and heights | storeys and each storey's height | the skyline | storey mix within 2 points of Google's 2.5D per band (as d15's study measured) | yes: `storeys` on all; `storey_h` on Mùṣá's 4,268 only | tool |
-| C4 | Wall finish and colour (the owner's "colour") | render, bare block, tiles; the paint | a house "already says its colour" (DECISIONS) | 100% of houses with a finish and colour, read from Street View or satellite per block | yes: `finish`; on Mùṣá's 4,268 only (31.7%) | tool; brush could (a block's colours) |
-| C5 | Roof | form, material, rust, colour | the overhead view against Google Earth | 100% with a roof; roof colours against the satellite by eye | yes: `roof`; on Mùṣá's 4,268 only | tool |
-| C6 | Ground floor | home, lock-up shops, workshop, stalls | street life sits on it | 100% set, front houses read from Street View | yes: `ground_floor`; 13,474 of 13,475 | tool |
-| C7 | Faces | windows, doors, shopfronts, balconies, burglar bars, stains, AC units, shop signs | the street look close up | every house on a street front has its faces (back houses: *owner's call*) | yes: dress `faces`; 0 placed | tool (Face); stamp |
-| C8 | Frontages, walls, gates, fences | the plot's edge on the street, its wall and gate | the street edge; gates to enter | every plot edge on a street has a frontage | yes: `frontage`, `wall` (126 gates on 314 walls); 0 frontages | tool (Frontage, Wall, Gate) |
-| C9 | Lean-tos, stalls, kiosks, containers | the shade and selling things on the front | markets spill onto the road (DECISIONS) | per 100 m of shop front, against Street View (figure not read yet) | yes: `leanto`, `stall` (10 kinds); 0 lean-tos; 726 stalls, all Mùṣá | tool; stamp; brush could |
-| C10 | Plots and grounds | compounds, school, church and market grounds, yards | landmarks walled with a gate (the working bar) | every landmark ground drawn and walled | yes: `plot` (12 kinds); 109 | tool |
-| C11 | Places in houses | what each building is used for in the game | shops, food, faith, money, missions | 0 real places missing (Overture; the working bar's row) | yes: `place`, `building.place`; 2,589 places, 1,587 houses linked | tool (Place) |
-| C12 | Kinds the map lacks | hall of residence, faculty block, detached house in a yard (d18 study); house on stilts over water (d19 study); hospital block (owed, d13 study and d13 BUILDINGS.md hand pass 5); estate slab blocks (d13's Royal Estate, nearest kind walkup, *my reading*); factory and warehouse (only `shed`); fuel station canopy | without them the nearest kind is a guess (d18 study's words) | 0 blocks whose study fabric has no kind | **no** | tool, once the kinds exist |
-| C13 | Unfinished buildings and scaffolding | houses under build, rebar stubs, scaffolds | half-built houses are common in Lagos (*guess*) | per km² against the satellite (figure not read yet) | **partly**: kind and plot `under_build`, add-on `rebar_stubs`; `scaffold` is "still to add" (MAP-FORMAT.md) | tool |
-| C14 | Rooftop clutter | water tanks, dishes, masts, generators on roofs | the overhead look. Reference: about 500 rooftop props per 0.16 km² housing box (FINISHED-AREA.md) | per house against the satellite by eye | **partly**: face add-ons (water tank, dish, mast), `furniture` with a height `z`; nothing for a roof's top as such | tool |
-| C15 | Interiors: which buildings open | the doors the player can go through | shops, homes, missions. Reference: 0-2 interiors per 0.16 km² box (FINISHED-AREA.md) | a list per district of enterable places (*owner's call*) | **partly**: `building.use` (10 set); no interior | table |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| C1 | Footprints and cover | each house's outline | the district looks like the real place from above | cover between Google's 90%- and 80%-precision figures (CLAUDE.md, gated in `working_bar.py`); Mùṣá 43.22% against 43.26-47.65% (NOW 16) | yes: `building.footprint`; 13,475 | tool; draft from Open Buildings | yes |
+| C2 | Kind | what sort of house | the kit builds from it; it says who lives there | every house has a kind that fits its block's real fabric (the building studies) | yes: `kind` (14 kinds); on all (gaps in C12) | tool | no |
+| C3 | Storeys and heights | storeys and each storey's height | the skyline | storey mix within 2 points of Google's 2.5D per band (as d15's study measured) | yes: `storeys` on all; `storey_h` on Mùṣá's 4,268 only | tool | no |
+| C4 | Wall finish and colour (the owner's "colour") | render, bare block, tiles; the paint | a house "already says its colour" (DECISIONS) | 100% of houses with a finish and colour, read from Street View or satellite per block | yes: `finish`; on Mùṣá's 4,268 only (31.7%) | tool; brush could (a block's colours) | no |
+| C5 | Roof | form, material, rust, colour | the overhead view against Google Earth | 100% with a roof; roof colours against the satellite by eye | yes: `roof`; on Mùṣá's 4,268 only | tool | no |
+| C6 | Ground floor | home, lock-up shops, workshop, stalls | street life sits on it | 100% set, front houses read from Street View | yes: `ground_floor`; 13,474 of 13,475 | tool | no |
+| C7 | Faces | windows, doors, shopfronts, balconies, burglar bars, stains, AC units, shop signs | the street look close up | every house on a street front has its faces (back houses: *owner's call*) | yes: dress `faces`; 0 placed | tool (Face); stamp | no |
+| C8 | Frontages, walls, gates, fences | the plot's edge on the street, its wall and gate | the street edge; gates to enter | every plot edge on a street has a frontage | yes: `frontage`, `wall` (126 gates on 314 walls); 0 frontages | tool (Frontage, Wall, Gate) | yes |
+| C9 | Lean-tos, stalls, kiosks, containers | the shade and selling things on the front | markets spill onto the road (DECISIONS) | per 100 m of shop front, against Street View (figure not read yet) | yes: `leanto`, `stall` (10 kinds); 0 lean-tos; 726 stalls, all Mùṣá | tool; stamp; brush could | no |
+| C10 | Plots and grounds | compounds, school, church and market grounds, yards | landmarks walled with a gate (the working bar) | every landmark ground drawn and walled | yes: `plot` (12 kinds); 109 | tool | yes |
+| C11 | Places in houses | what each building is used for in the game | shops, food, faith, money, missions | 0 real places missing (Overture; the working bar's row) | yes: `place`, `building.place`; 2,589 places, 1,587 houses linked | tool (Place) | no |
+| C12 | Kinds the map lacks | hall of residence, faculty block, detached house in a yard (d18 study); house on stilts over water (d19 study); hospital block (owed, d13 study and d13 BUILDINGS.md hand pass 5); estate slab blocks (d13's Royal Estate, nearest kind walkup, *my reading*); factory and warehouse (only `shed`); fuel station canopy | without them the nearest kind is a guess (d18 study's words) | 0 blocks whose study fabric has no kind | **no** | tool, once the kinds exist | yes |
+| C13 | Unfinished buildings and scaffolding | houses under build, rebar stubs, scaffolds | half-built houses are common in Lagos (*guess*) | per km² against the satellite (figure not read yet) | **partly**: kind and plot `under_build`, add-on `rebar_stubs`; `scaffold` is "still to add" (MAP-FORMAT.md) | tool | no |
+| C14 | Rooftop clutter | water tanks, dishes, masts, generators on roofs | the overhead look. Reference: about 500 rooftop props per 0.16 km² housing box (FINISHED-AREA.md) | per house against the satellite by eye | **partly**: face add-ons (water tank, dish, mast), `furniture` with a height `z`; nothing for a roof's top as such | tool | no |
+| C15 | Interiors: which buildings open | the doors the player can go through | shops, homes, missions. Reference: 0-2 interiors per 0.16 km² box (FINISHED-AREA.md) | a list per district of enterable places (*owner's call*) | **partly**: `building.use` (10 set); no interior | table | no |
+| C16 | Names | the name of every road, market, school, church, mosque and landmark, as a Gidi sound-alike (DECISIONS "Place names: sound-alikes") | the map players read, the satnav, the conductor's call, missions | every road with a real name has its Gidi name; every place with a real name too | **partly**: `road.name` (0 of 6,816) and `place.name` (1 of 2,589) | table; tool | no |
 
 ## D. Services and infrastructure (the owner's "infrastructure" and "civil services")
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| D1 | Power lines | poles, mains, service drops, transformers | the Lagos skyline of wires; NEPA | poles per km of street against Street View (figure not read yet); Mùṣá 477 poles per Gidi km² | yes: `pole`, `wire`; 579 poles, 360 wires, 12 transformers, all Mùṣá | tool (Wire); brush could (a pole line) |
-| D2 | Generators | house and shop generators | NEPA off: the whole street's sound and light (LIFE-IN-LAGOS.md section 3) | per frontage from Street View (figure not read yet) | yes: `furniture` kind `generator`; 1 | tool; brush could |
-| D3 | Street lights | lamps on poles, tall lamp standards on main roads, solar lamps; working or dead | night; safety | lamps per km of road read from Street View (figure not read yet). Reference: City Sample 1,740 lamp posts per km² (FINISHED-AREA-INDUSTRY.md, *not checked* by the main session) | **partly**: `pole.lamp` (steel arm, solar), `lamp_reach`; 182 lamps, Mùṣá; no "working" field | tool |
-| D4 | Phone masts | lattice towers, monopoles | skyline landmarks | every mast seen on satellite or Street View drawn | yes: `mast`; 15, Mùṣá | tool |
-| D5 | Water | tanks on stands, boreholes, wells, taps, water sellers | the daily water run | per block from Street View (figure not read yet) | **partly**: `furniture` water_tank, tank_stand; add-on water_tank; activities fetch_water, sell_water; no borehole or well | tool |
-| D6 | Refuse | bins, dumps, collection points, cart pushers, refuse trucks | the street's dirt and who carries it | every dump seen on satellite or Street View drawn | **partly**: `heap` kind rubbish (12), `furniture` bin (0); no dump-site kind; no refuse truck among vehicle kinds | tool |
-| D7 | Litter | sachets, bags, bottles on the ground and in drains | the owner named it | pieces per m² of street on a Street View sample (figure not read yet). Reference: about 443 rubbish props in the 0.16 km² housing box (FINISHED-AREA.md) | yes: dress `litter`, gutter `caught`; 0 placed | brush now (litter) |
-| D8 | Civil services | police stations, fire stations, hospitals, clinics, schools, council offices, courts, post offices; their vehicles (police pickup, fire engine, ambulance) | the owner named them; safe ground (never crime sites, LIFE-IN-LAGOS.md) | 0 missing against Overture and Google Maps inside the outline | **partly**: place kinds police, clinic, school; `pickup.police`; no fire station, hospital, council office, court or post office; no fire engine or ambulance | tool, once the kinds exist |
-| D9 | Faith, trade and money places | churches, mosques, markets, bukas, bars, betting, banks, chemists, garages | where people go | 0 real places missing (Overture; the working bar's row) | yes: 18 place kinds | tool (Place) |
-| D10 | Billboards, adverts, posters | big roadside boards, painted walls, posters, shop signs | the city's loudest look | per km of main road against Street View (figure not read yet) | **partly**: dress `posters`, `faces.signs`, `wall_bays.daubs`, umbrella prints; no big billboard | tool; new kind |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| D1 | Power lines | poles, mains, service drops, transformers | the Lagos skyline of wires; NEPA | poles per km of street against Street View (figure not read yet); Mùṣá 477 poles per Gidi km² | yes: `pole`, `wire`; 579 poles, 360 wires, 12 transformers, all Mùṣá | tool (Wire); brush could (a pole line) | no |
+| D2 | Generators | house and shop generators | NEPA off: the whole street's sound and light (LIFE-IN-LAGOS.md section 3) | per frontage from Street View (figure not read yet) | yes: `furniture` kind `generator`; 1 | tool; brush could | no |
+| D3 | Street lights | lamps on poles, tall lamp standards on main roads, solar lamps; working or dead | night; safety | lamps per km of road read from Street View (figure not read yet). Reference: City Sample 1,740 lamp posts per km² (FINISHED-AREA-INDUSTRY.md, *not checked* by the main session) | **partly**: `pole.lamp` (steel arm, solar), `lamp_reach`; 182 lamps, Mùṣá; no "working" field | tool | no |
+| D4 | Phone masts | lattice towers, monopoles | skyline landmarks | every mast seen on satellite or Street View drawn | yes: `mast`; 15, Mùṣá | tool | no |
+| D5 | Water | tanks on stands, boreholes, wells, taps, water sellers | the daily water run | per block from Street View (figure not read yet) | **partly**: `furniture` water_tank, tank_stand; add-on water_tank; activities fetch_water, sell_water; no borehole or well | tool | no |
+| D6 | Refuse | bins, dumps, collection points, cart pushers, refuse trucks | the street's dirt and who carries it | every dump seen on satellite or Street View drawn | **partly**: `heap` kind rubbish (12), `furniture` bin (0); no dump-site kind; no refuse truck among vehicle kinds | tool | no |
+| D7 | Litter | sachets, bags, bottles on the ground and in drains | the owner named it | pieces per m² of street on a Street View sample (figure not read yet). Reference: about 443 rubbish props in the 0.16 km² housing box (FINISHED-AREA.md) | yes: dress `litter`, gutter `caught`; 0 placed | brush now (litter) | no |
+| D8 | Civil services | police stations, fire stations, hospitals, clinics, schools, council offices, courts, post offices; their vehicles (police pickup, fire engine, ambulance) | the owner named them; safe ground (never crime sites, LIFE-IN-LAGOS.md) | 0 missing against Overture and Google Maps inside the outline | **partly**: place kinds police, clinic, school; `pickup.police`; no fire station, hospital, council office, court or post office; no fire engine or ambulance | tool, once the kinds exist | yes |
+| D9 | Faith, trade and money places | churches, mosques, markets, bukas, bars, betting, banks, chemists, garages | where people go | 0 real places missing (Overture; the working bar's row) | yes: 18 place kinds | tool (Place) | no |
+| D10 | Billboards, adverts, posters | big roadside boards, painted walls, posters, shop signs | the city's loudest look | per km of main road against Street View (figure not read yet) | **partly**: dress `posters`, `faces.signs`, `wall_bays.daubs`, umbrella prints; no big billboard | tool; new kind | no |
 
 ## E. Life and time (the owner's "timetable")
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| E1 | Person spots | where someone does something, how many, at what hours | the people layer; finished means people as dense as objects (FINISHED-AREA.md lesson) | every place, bus stop, lock-up row and junction has its spots (lived-in.md aim); per 100 m of street against Street View (figure not read yet). Reference: 2,188-6,925 activity spots per km² (FINISHED-AREA.md) | yes: `person_spot` (69 activities, hours, count); 0 placed | tool (Person); brush could |
-| E2 | Day types | weekday, Friday, Saturday, Sunday, Sanitation Saturday, market days | the Jumat crowd and Sunday best only on their days | every spot and place says its days (lived-in.md, `days` proposed) | **no** | table |
-| E3 | The area's day: how many people and vehicles, by hour | per 2-hour slot, the most people and vehicles and the share by Lagos group | the street fills and empties right | a table per district per slot, shares adding to 100 (lived-in.md "district mix", proposed). Reference: each area in GTA V's files caps people, cars and parked cars per time row (FINISHED-AREA.md) | **no** | table |
-| E4 | Opening hours | when a place is open | shops shut at night, the beer parlour opens | 100% of places with hours | yes: `place.hours` (text); 7 of 2,589 | tool |
-| E5 | Who the area is | wealth, how rough, how fast police come, which people live and work here | who is cast; how the street treats the player | every district has them (LIVING.md sheets as a start) | **no**. Reference: each area in GTA V's files carries a roughness level and a police response level (FINISHED-AREA.md) | table |
-| E6 | Small events | the bus preacher, wedding convoy, drivers' quarrel, accident | surprise on a known street | a first list per district (lived-in.md: 10 for the first district, proposed). Reference: 1-6 event trigger points per 0.16 km² box (FINISHED-AREA.md) | **no** (`moment` proposed) | new tool |
-| E7 | World states | NEPA off, rain, fuel scarce, task-force raid, street party, market day | the city changes; spots switch on and off | each state lists what it changes (lived-in.md, `state` proposed) | **no** | table |
-| E8 | Routines | a walk to the borehole, queue, fill, carry home; boarding the danfo | people go somewhere, not only stand | *guess*: a few per district first | **no** (`route` proposed) | new tool |
-| E9 | Animals | goats, chickens, dogs, rats | street life. Reference: 32 animal points in the 0.16 km² housing box (FINISHED-AREA.md) | per district against Street View (figure not read yet) | **no** | tool, once a kind exists |
-| E10 | Things that change with the hour | shutters up or down, stalls packed away, umbrellas closed, gates shut at night | night looks different from day. Reference: 1-29 time-switched objects per 0.16 km² box (FINISHED-AREA.md) | every shopfront, stall and gate says its open hours, or follows its place's | **partly**: `open` on shopfronts, umbrellas and gates is one value, not by hour | table |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| E1 | Person spots | where someone does something, how many, at what hours | the people layer; finished means people as dense as objects (FINISHED-AREA.md lesson) | every place, bus stop, lock-up row and junction has its spots (lived-in.md aim); per 100 m of street against Street View (figure not read yet). Reference: 2,188-6,925 activity spots per km² (FINISHED-AREA.md) | yes: `person_spot` (69 activities, hours, count); 0 placed | tool (Person); brush could | no |
+| E2 | Day types | weekday, Friday, Saturday, Sunday, Sanitation Saturday, market days | the Jumat crowd and Sunday best only on their days | every spot and place says its days (lived-in.md, `days` proposed) | **no** | table | no |
+| E3 | The area's day: how many people and vehicles, by hour | per 2-hour slot, the most people and vehicles and the share by Lagos group | the street fills and empties right | a table per district per slot, shares adding to 100 (lived-in.md "district mix", proposed). Reference: each area in GTA V's files caps people, cars and parked cars per time row (FINISHED-AREA.md) | **no** | table | no |
+| E4 | Opening hours | when a place is open | shops shut at night, the beer parlour opens | 100% of places with hours | yes: `place.hours` (text); 7 of 2,589 | tool | no |
+| E5 | Who the area is | wealth, how rough, how fast police come, which people live and work here | who is cast; how the street treats the player | every district has them (LIVING.md sheets as a start) | **no**. Reference: each area in GTA V's files carries a roughness level and a police response level (FINISHED-AREA.md) | table | no |
+| E6 | Small events | the bus preacher, wedding convoy, drivers' quarrel, accident | surprise on a known street | a first list per district (lived-in.md: 10 for the first district, proposed). Reference: 1-6 event trigger points per 0.16 km² box (FINISHED-AREA.md) | **no** (`moment` proposed) | new tool | no |
+| E7 | World states | NEPA off, rain, fuel scarce, task-force raid, street party, market day | the city changes; spots switch on and off | each state lists what it changes (lived-in.md, `state` proposed) | **no** | table | no |
+| E8 | Routines | a walk to the borehole, queue, fill, carry home; boarding the danfo | people go somewhere, not only stand | *guess*: a few per district first | **no** (`route` proposed) | new tool | no |
+| E9 | Animals | goats, chickens, dogs, rats | street life. Reference: 32 animal points in the 0.16 km² housing box (FINISHED-AREA.md) | per district against Street View (figure not read yet) | **no** | tool, once a kind exists | no |
+| E10 | Things that change with the hour | shutters up or down, stalls packed away, umbrellas closed, gates shut at night | night looks different from day. Reference: 1-29 time-switched objects per 0.16 km² box (FINISHED-AREA.md) | every shopfront, stall and gate says its open hours, or follows its place's | **partly**: `open` on shopfronts, umbrellas and gates is one value, not by hour | table | no |
+| E11 | Language of an area | what is spoken in each area and by whom: Yoruba, Pidgin, Hausa, Igbo, English | every voice line (the bus preacher, the tout, the trader) is recorded in a language; the area decides which | every district says its languages and shares, by the people kinds of E5 (from the study notes; method *not decided*) | **no** | table | no |
+| E12 | Group and vehicle scenes | several people and things that make one scene: a broken-down danfo and its stranded passengers, a wedding party, a street football match | one spot holds a whole moment, not one person (GTA V: scenario clusters and vehicle scenes, GTA-STUDY.md section 5, item 5) | a first list per district (*guess*: a few) | **partly**: `person_spot` has a `count`, so several people can share an activity; no scene that joins people and vehicles | new tool | no |
+| E13 | What people wear | the clothes of each area and day: work clothes, school uniforms, Friday and Sunday best, market wrappers | who is cast looks like the area | every district and day type says its dress (from Street View and the study notes) | **partly**: `person_look` gives one person `clothes` and `colours`; nothing says the clothes of an area or a day | table | no |
 
 ## F. Sound and light
 
-| # | Layer | What it is | Why the game needs it | Done when | Now | Brush |
-|---|---|---|---|---|---|---|
-| F1 | Sound zones | market roar, expressway, lagoon, quiet compound | the city is heard before it is seen; sound makes a small map feel big (FINISHED-AREA-INDUSTRY.md) | every part of a district in one zone; by ear. Reference: 2-15 zones centred in a 0.16 km² box (FINISHED-AREA.md) | **no** | brush could (paint zones) |
-| F2 | Sound at a spot | church and mosque speakers, generators, music shops, touts, welding | the street's voice | every speaker and generator says what it plays and when. Reference: 0-12 fixed emitters per 0.16 km² box (FINISHED-AREA.md) | **partly**: `furniture` speaker and generator, add-on speaker; nothing says what it plays or when | tool |
-| F3 | Night lights | which windows, shops and lamps are lit; generator-lit or dark; lanterns | night is half the game; NEPA off | per street by eye against real night photos (FINISHED-AREA-INDUSTRY.md topic 11). Reference: 3,362-5,969 far lights per km² (FINISHED-AREA.md) | **no** | table; brush could |
-| F4 | Air and mood | haze, grill smoke, dust, harmattan, lagoon mist | the look of each area at each hour. Reference: 10-39 mood boxes touch a 0.16 km² box (FINISHED-AREA.md) | every district has its zones (*owner's call*) | **no** | brush could |
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| F1 | Sound zones | market roar, expressway, lagoon, quiet compound | the city is heard before it is seen; sound makes a small map feel big (FINISHED-AREA-INDUSTRY.md) | every part of a district in one zone; by ear. Reference: 2-15 zones centred in a 0.16 km² box (FINISHED-AREA.md) | **no** | brush could (paint zones) | no |
+| F2 | Sound at a spot | church and mosque speakers, generators, music shops, touts, welding | the street's voice | every speaker and generator says what it plays and when. Reference: 0-12 fixed emitters per 0.16 km² box (FINISHED-AREA.md) | **partly**: `furniture` speaker and generator, add-on speaker; nothing says what it plays or when | tool | no |
+| F3 | Night lights | which windows, shops and lamps are lit; generator-lit or dark; lanterns | night is half the game; NEPA off | per street by eye against real night photos (FINISHED-AREA-INDUSTRY.md topic 11). Reference: 3,362-5,969 far lights per km² (FINISHED-AREA.md) | **no** | table; brush could | no |
+| F4 | Air and mood | haze, grill smoke, dust, harmattan, lagoon mist | the look of each area at each hour. Reference: 10-39 mood boxes touch a 0.16 km² box (FINISHED-AREA.md) | every district has its zones (*owner's call*) | **no** | brush could | no |
+
+## G. Story and play
+
+| # | Layer | What it is | Why the game needs it | Done when | Now | Brush | Lines |
+|---|---|---|---|---|---|---|---|
+| G1 | Story and mission spots | where the story and missions start and happen; safe houses | Tunde's story is layered on the world (DECISIONS "Open world first") | every mission's spots are records (*owner's call*, after the map) | **partly**: place kind `story` and game use `story` exist; 0 placed | tool (Place) | no |
+| G2 | Closed areas | areas shut for a mission or a part of the story, without redrawing the map | GTA V shuts roads and areas with switches in its scripts (a restricted-areas script and per-mission switches), not in its map files (STORY-AND-MAP.md section 2) | each closed area has its outline and its reason (*owner's call*) | **no** | new tool (draw an area) | no |
+| G3 | Map icons | what the player's map and phone show: places, shops, missions | finding the way | every place kind has its icon (a table, not per place) | **no** | table | no |
 
 **Not map layers** (built in Unreal from the records, so not in this list): far stand-ins, collision, walking and
 driving meshes, the frame rate (FINISHED-AREA-INDUSTRY.md topics 13-14). Grass counts and decals vary too much
@@ -177,16 +195,27 @@ between areas to be a bar (FINISHED-AREA.md, layer 12).
 
 ## The count
 
-**65 layers.** The format holds **28 yes, 20 partly, 17 no.**
+**76 layers** (65 in the first draft, 11 added 28 Oct). The format holds **28 yes, 25 partly, 23 no.** **20 layers draw
+lines**; the other 56 sit on top of them.
 
-| group | layers | yes | partly | no |
-|---|---|---|---|---|
-| A. Ground and roads | 16 | 9 | 4 | 3 |
-| B. Traffic | 10 | 1 | 6 | 3 |
-| C. Buildings | 15 | 11 | 3 | 1 |
-| D. Services and infrastructure | 10 | 5 | 5 | 0 |
-| E. Life and time | 10 | 2 | 1 | 7 |
-| F. Sound and light | 4 | 0 | 1 | 3 |
+| group | layers | yes | partly | no | draw lines |
+|---|---|---|---|---|---|
+| A. Ground and roads | 18 | 9 | 5 | 4 | 11 |
+| B. Traffic | 12 | 1 | 6 | 5 | 4 |
+| C. Buildings | 16 | 11 | 4 | 1 | 4 |
+| D. Services and infrastructure | 10 | 5 | 5 | 0 | 1 |
+| E. Life and time | 13 | 2 | 3 | 8 | 0 |
+| F. Sound and light | 4 | 0 | 1 | 3 | 0 |
+| G. Story and play | 3 | 0 | 1 | 2 | 0 |
+
+**The line layers, settled for "working"** (owner, 28 Oct: "what can we do on the list that gets a map to working so
+we can have all the district set and not have to start drawing new lines after a district has been made"): A1
+streets, A2 widths, A4 lanes (they set the width), A6 kerbs and medians, A7 roadside drains, A8 walkways and verges,
+A12 canals, A13 bridges and flyovers with their ramps, A14 shore and jetties, A15 rail and stations, A18 slip lanes,
+B1 junction shapes (a roundabout takes land), B7 lay-bys and BRT stations, B8 motor parks, B9 fuel stations, C1
+footprints, C8 plot edges, walls and gates, C10 plots and grounds, C12 the missing kinds' footprints, D8 the grounds
+of civil services. A district at "working" has every one of these read against Google and drawn; every later layer
+only dresses it.
 
 "Yes" is the format, not the data: of the 28, most are empty or placeholder outside Mùṣá, and the whole dress layer
 is empty everywhere.
@@ -224,6 +253,15 @@ is empty everywhere.
 27. **Open or shut by hour** for shopfronts, stalls, gates (E10).
 28. **Sound zones** and **what a sound source plays** (F1-F2).
 29. **Night lights** (F3) and **air/mood zones** (F4).
+30. **District height and flood areas** (A17).
+31. **Road rules:** turn bans, vehicle bans, slip lanes (A18).
+32. **Vehicle spawn spots and no-spawn areas** (B11).
+33. **Boats and planes** as vehicle kinds (B12).
+34. **Language of an area** (E11).
+35. **Scenes** joining people and vehicles (E12).
+36. **Clothes per area and day** (E13).
+37. **Closed areas** (G2).
+38. **Map icons** per place kind (G3).
 
 ## What I could not read, and what is not checked
 
@@ -261,3 +299,28 @@ is empty everywhere.
 - Not checked: every real-Lagos figure is "not read yet" (Street View samples owed); the GTA reference figures are
   from FINISHED-AREA.md (four of its scripts re-run 27 Oct, three not); the brush column is judged from docs/BOARD.md,
   not tried on the board; the 65 rows' wording and grouping are the agent's, for the owner to go through.
+
+## Added 28 Oct (main session)
+
+The owner asked whether the list was complete and whether it had been read against the GTA findings. It had been
+read against one of the three GTA notes only: its sources name `FINISHED-AREA.md`, not `GTA-STUDY.md` (section 5,
+"The 15 things Gidi is most likely missing") or `STORY-AND-MAP.md`. Both were read by the main session on 28 Oct, and
+the owner's own example (a preacher on a bus, with his voice and language) was set against the rows. Added: A17,
+A18, B11, B12, C16, E11, E12, E13 and the new group G (G1-G3). The "Lines" column was added to every row.
+
+Not added, and why:
+- **Things the player uses** (ATMs, food sellers): already held. Every one of the 2,589 places carries `uses`
+  (game uses: buy, eat, money, fix_vehicle and the rest), counted 28 Oct. Claude had named it missing in chat; it is not.
+- **Weather:** already in two rows, rain as a world state (E7) and harmattan and haze as mood (F4).
+- **Spawning around the player, far-away crowds, the driving sheet, reactions, budgets** (GTA-STUDY.md section 5,
+  items 2, 6, 7, 13, 15): built in Unreal, not held in the map.
+
+Checked (main session, 28 Oct): read three times (owner: "Read over thrice"). First, every row read against the
+reason for its Lines mark. Second, a python -I pass over the file: 76 layer rows, every table row 8 cells; per group
+yes/partly/no and Lines counted from the rows themselves (the count table above is that output). Third, the new
+rows' "Now" column against `schema/map_schema.json` and the map: `road.name` exists (0 of 6,816 filled),
+`place.name` (1 of 2,589), `place.uses` (on all 2,589), place kind and game use `story` (0 placed), `relief` is a mm
+grid, `person_look` has `clothes` and `colours` per person (this third read corrected the row, which first said
+it had no clothes); no field for language, flood, spawn, scene, closed area, icon, boat or
+plane (grep). Not checked: the Lines marks are the main session's judgement, for the owner to go through; GTA-STUDY.md's
+readings are its own (checked when written, 27 Oct).
