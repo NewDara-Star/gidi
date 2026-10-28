@@ -324,3 +324,64 @@ grid, `person_look` has `clothes` and `colours` per person (this third read corr
 it had no clothes); no field for language, flood, spawn, scene, closed area, icon, boat or
 plane (grep). Not checked: the Lines marks are the main session's judgement, for the owner to go through; GTA-STUDY.md's
 readings are its own (checked when written, 27 Oct).
+
+## The line sweep, round one (28 Oct): candidates, not yet in the tables
+
+The owner (28 Oct): a district is working only when every line is settled. Three helpers swept for lines the
+rows above miss: GTA V's own files, studio and street-design sources, and our own repos and studies. Their
+reports and what the main session checked of them are in `~/gidi-data/research/` (LINE-LAYERS-GTA.md,
+LINE-LAYERS-INDUSTRY.md, LINE-LAYERS-REPO.md, LINE-LAYERS-CHECKED.md). Below, the three merged into one list.
+"Checked" names the evidence the main session re-read; everything else is the helper's alone. Nothing here
+changes a row yet: the owner goes through the list, then the agreed ones become rows or widen rows.
+
+Lines marks to change on rows that exist:
+1. **A17 ground height: Lines = yes.** Every game source fixes the ground first and stamps roads and water
+   into it. Checked: Level Design Book (terrain hard to move after the first sculpt), Ghost Recon Wildlands
+   (roads stamped into terrain), GTA V's heightmap file (a 183 x 249 grid).
+2. **C3 storeys and heights: Lines = yes.** Massing is fixed at blockout. Checked: City Sample's zones set a
+   maximum height. Not checked: the other blockout sources.
+
+New rows proposed:
+3. **Below and beside the road: tunnels, underpasses, cuttings, embankments, retaining walls.** Checked:
+   GTA V marks 95 tunnel nodes in its road paths; the Maryland/Mende underpass rebuilt in 2022; cuttings with
+   retaining walls (Level Design Book); our studies name the Apapa and Snake Island tunnels (d10.md:154) and
+   "tunnel and cutting pieces" (d29.md:166). Road `z` covers bridges and ramps only (MAP-FORMAT.md:63).
+4. **Corridors: road reserve, power lines with their cleared band, pipelines, rail reserve.** Checked: Lagos's
+   2019 regulations define the right of way to hold canals, footpaths, transmission lines, railways, highways and
+   pipelines (Lekki-Epe: 94 m); pylon lines in our Google looks (d15.md:141) and a cleared band (d19 buildings
+   note:140).
+5. **Crossing points: median openings, U-turns, refuge islands.** Checked: GTA V marks 1,362 road-crossing
+   nodes; the staggered crossing needs a median at least 3 m wide (Global Street Design Guide). Not checked: the
+   refuge-island sizes.
+6. **Barriers: guardrails, road fences, median walls, bollards.** Not checked: the GTA barrier counts, the Ojota
+   median wall article (blocked), the highway manual's fencing chapter.
+7. **Steps, stairs, ladders, floor levels.** Checked: GTA V carries 1,262 ladders on 922 objects; landings at the
+   top and bottom of stairs (Level Design Book); no floor-level field in our schema (only `outside_stair`).
+8. **Entrances: where each building is entered.** Not checked (the helpers' sources only).
+9. **Toll plazas.** Checked: Admiralty Toll Plaza named in the Lekki-Epe notice; STUDY.md:295.
+10. **Civil grounds as plot kinds: power stations, airport airside, port quays and yards, under-flyover grounds,
+    pitches, courts, stadium, cemeteries, barracks, landfill, tank farms, lorry parks, factory yards.** Checked:
+    the quay and berths (d10.md:163), the stadium (d13 buildings note:84), Bishop Aggey field (d15 Google
+    look:26); `plot_kind` has 12 kinds and none of these. The rest not checked.
+11. **Building kinds: monuments and plinths, gatehouses, towers.** Checked: d11.md:233, LIVING.md:348,
+    OLD-KIT.md:71.
+
+Rows to widen:
+12. **A12/A14 water:** water level and depth (checked: GTA V has 504 water quads), stilt-town walkways and
+    channels (d19 buildings note:119), wetland, pond and stream edges (d15 Google look:41), sand-fill edges
+    (d16 buildings note:65).
+13. **A7/A12 drains:** collector drains, outfalls, culverts. Not checked (the Lagos collectors article, the
+    highway manual's drainage volume).
+14. **C8 gates:** gates across public streets. Checked: Lagos's order that street gates stay open 5 am to
+    midnight, manned, and open for emergency services (Nairametrics, Dec 2020).
+15. **A2/A8:** shoulders on expressways; the kept-clear lane through a street market (d09 Google look:144).
+    Not checked: the shoulder sources.
+
+Already held: car parks (`plot_kind` car_park). Setbacks are measured, not drawn (owner, 22 Oct: no building
+line). Underground pipes are not a map layer.
+
+Checked (main session, 28 Oct): the GTA report's counts re-run from the game files without running any program
+of the game (one wording corrected: ladders on 922 objects, not 1,262); eight of the industry report's web
+claims re-read (six agree, City Sample only partly, one blocked); 24 of the repo report's references
+read at the cited lines (21 agree, three had moved or were misnamed); the schema facts re-read. Not checked:
+the rest of each report, listed in LINE-LAYERS-CHECKED.md.

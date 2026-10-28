@@ -168,7 +168,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
        In progress (28 Oct, owner: working means every line settled, DECISIONS "Every district to working", changed
        28 Oct): the line sweep, three helpers (GTA V's files, industry and planning standards, our own repos and
        studies), then further rounds until one finds almost nothing new; each finding checked; then the line rows
-       go into working_bar.py (CHECKS GAP).
+       go into working_bar.py (CHECKS GAP). Round one done and checked in part (28 Oct): 15 candidates merged at the
+       end of MAP-DONE-LAYERS.md (two Lines marks to change, A17 and C3; nine new rows; four rows widened), with
+       what was and was not checked in ~/gidi-data/research/LINE-LAYERS-CHECKED.md. Next: the owner goes through
+       the 15; round two by a fresh helper; the unchecked claims checked before their row goes in.
    (d) [ ] The 11 districts drawn so far (d09, d12-d19, d27, d28) re-measured and brought to the DENSITY row by hand:
        one agent per district reads it in Chrome (Google Maps, satellite at z17-18, Street View) and proposes fixes
        with evidence; Claude checks every claim and makes the edits, one editor per district at a time.
