@@ -180,21 +180,27 @@ merged and checked, add new ones where they belong, and say here when the owner 
    (g) [x] The four scout notes of 27 Oct (docs/lagos-study/districts/d10, d11, d29, d30) checked claim by claim, 28
        Oct: one checking agent each, with a re-runnable script (docs/lagos-study/districts/scripts/, one per note) the
        main session re-ran; corrections in place, marked "corrected on check" or "added on check" (markers: d10 18, d11 10, d29 19, d30 10);
-       each note ends with its Checked list. Owed before each is drawn: its Google-first reading in Chrome (CLAUDE.md),
+       each note ends with its Checked list. Owed before each is drawn: its Google look in Chrome (DECISIONS "Every district gets its own Google look"),
        and the web claims that rest on search summaries only or on pages that refused the fetch (listed per note).
    (h) [ ] A building study per district (.claude/agents/building-study.md, owner 27 Oct: "start studying the house
        types... is this residential?"): one agent per district, the drawn eleven first, each checked line by line.
        Done and checked: all eleven drawn districts, d09, d12-d19, d27, d28 (docs/lagos-study/buildings/; the last four 28
        Oct). Real cover against ours: d09 42.0/16.0%, d14 47.0/18.7%, d27 39.2/16.7%, d28 27.3/13.0%. Owed from them:
-       the Deeper Life hall in Gbàgede (real 4,703 m², ours 442 m²; at real size it overfills its ground at 1:3: a smaller
-       hall or a ground drawn larger, the owner's call; d28.md); Ebute Ilaje's shacks over the lagoon (d27.md) join the
+       the Deeper Life hall in Gbàgede redrawn smaller, fitting its ground at 1:3, fan-shaped, facing Ajayi Aina (real
+       4,703 m², ours 442 m²; owner 28 Oct, DECISIONS "The Deeper Life hall is drawn smaller"; d28.md); Ebute Ilaje's shacks over the lagoon (d27.md) join the
        stilt house below; Okunade Estate's detached houses (d27.md) join the d18 kinds below; Ìtìrí's D14-41 and
        Gbàgede's D28-126 are each many real blocks Overture's streets leave joined, their streets read from Google Maps
        in the street pass (16f); Mùṣá's hand pass (its match hides LUTH drawn at 44% against 22% and the factories
-       half empty; our houses median 84 m² against Google's 169: fewer, bigger houses at the same cover); kinds the map
-       lacks for d18 (hall of residence, faculty block, detached house in a yard: the owner's call); a house on stilts over water in
-       the map format (Makoro's stilt town is about 28% of d19; the schema has no such house); Makoro drawn with its
+       half empty; our houses median 84 m² against Google's 169: fewer, bigger houses at the same cover); the four new
+       house kinds in the map format, approved by the owner 28 Oct (DECISIONS "New kinds of house"): stilt house over
+       water (Makoro's stilt town is about 28% of d19), detached house in a yard, hall of residence, faculty block; then
+       a kit for each in gidi-game (owner: "more kits to make for the instances"); Makoro drawn with its
        stilt town (owner, 27 Oct: DECISIONS "Makoro keeps its stilt town").
+   (i) [ ] The Google look for the eleven drawn districts (d09, d12-d19, d27, d28), owner 28 Oct: "even the ones drawn
+       needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
+       look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
+       Street View for the street look; written into the district's study notes, checked by the main session, before
+       the density and street hand passes (d, f).
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,

@@ -27,3 +27,9 @@ For each district you are given:
 
 Rules: read-only. No writes to any file except under the scratchpad your task names, no commits, no pushes. Do not
 loosen or skip a check. Truth over feelings: report what the records show even if a note says otherwise.
+
+Never leave the owner's laptop waiting on a prompt (owner, 28 Oct: two agents waited from 00:30 to about 02:20 on a
+permission prompt while the owner slept). The working folder is already ~/gidi: run each command plain and on its
+own, with no `cd` prefix, no `;` or `&&` chains, no `time`, no `echo ====` separators, and scratch files only in the
+session's scratchpad folder. Use Read and Grep for files where you can. If a command is refused or held, do not wait:
+note it as "not run" and carry on with the rest.

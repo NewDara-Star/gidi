@@ -30,3 +30,9 @@ Your job, for the district you are given:
 Rules: write only under docs/lagos-study/districts/. No downloads, no git commits, no pushes, no edits to map/,
 scripts/ or decisions/. Nothing claimed without a source. Truth over feelings: if the evidence says the place is not
 what its working name suggests, say so.
+
+Never leave the owner's laptop waiting on a prompt (owner, 28 Oct: two agents waited from 00:30 to about 02:20 on a
+permission prompt while the owner slept). The working folder is already ~/gidi: run each command plain and on its
+own, with no `cd` prefix, no `;` or `&&` chains, no `time`, no `echo ====` separators, and scratch files only in the
+session's scratchpad folder. Use Read and Grep for files where you can. If a command is refused or held, do not wait:
+note it as "not run" and carry on with the rest.
