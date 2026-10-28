@@ -86,6 +86,11 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   2025, installed 28 Oct with the owner's OK); interchange ramps are drawn from the original link lines, as neatnet
   drops them. Why not 1:5: real widths would crush the blocks between streets (a 100 m block becomes 20 m) and ramps
   and interchanges would not fit; the work is cut by scope (a dense core first), not scale.
+  **Where a real bridge does not fit at 1:3, the crossing moves, not the slope** (owner, 28 Oct, choice C on
+  Murtala Muhammed Way's bridge at Jibowu, after a Street View picture and a side view of three ways: "C: real slope,
+  move 50 m"; the others were a 9.5% ramp or leaving the road on the ground). The bridge climbs at the real slope
+  and the road it passes over is moved along it (58 m there) until the climb fits; the turning traffic keeps a ground
+  service road beside it, and the district streets round it are redrawn to meet it in their passes.
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
