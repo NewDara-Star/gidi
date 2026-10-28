@@ -14,7 +14,11 @@ merged and checked, add new ones where they belong, and say here when the owner 
    and Lekki Regional as being built), every junction a shared point; (c) [ ] rail into d00 (PR #453 waits for the
    owner); (d) [ ] water into d00; (e) [ ] gidi-game builds d00 alone on the land (relief grids as one Landscape,
    roads from road_build) with a car to drive; (f) [ ] the owner drives it. District work waits except what a piece
-   forces.
+   forces; clashes with district work are listed by check_map (CLASH), not fixed (DECISIONS "Clashes with district
+   work are listed"). Owed: [ ] the board shows the CLASH list (today it shows check_map's failures only, not
+   looked at for clashes); [ ] research on how studios build a city from a real place
+   (~/gidi-data/research/OPEN-WORLD-CITY-METHOD.md, agent running 28 Oct) read and checked, and this order changed
+   if it shows a better way.
 00. [x] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
    read it in two passes (what each part is; then what it does and whether anything live uses it), then delete in
    both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
