@@ -11,6 +11,8 @@
 # are words in a shell command: a file overwritten with mv or >, a delete or download from inside a script, a
 # download or form sent from a web page in Chrome, and the Write and Edit tools (which the work needs) are not caught;
 # git history pushed to GitHub is the safety net for the files.
+# The owner's switches (here-or-goodnight.sh, 28 Oct): "I'm here" turns away mode off while they keep talking, the
+# night hours too; "goodnight" writes the away flag until 06:00.
 # Every answer is logged to ~/.claude/gidi-away.log for the morning.
 input=$(cat)
 log="$HOME/.claude/gidi-away.log"
@@ -18,6 +20,15 @@ flag="$HOME/.claude/gidi-away"
 now=$(TZ=Europe/Dublin date +%s)
 hour=${GIDI_AWAY_TEST_HOUR:-$(TZ=Europe/Dublin date +%H)}  # the test hour is for testing this script only
 away=""
+# The here switch (here-or-goodnight.sh): the owner said they are here and is still talking, so prompts show as normal
+here="$HOME/.claude/gidi-here"
+if [ -f "$here" ]; then
+  hu=$(head -1 "$here" | tr -dc 0-9)
+  if [ -n "$hu" ] && [ "${#hu}" -le 11 ] && [ "$hu" -gt "$now" ] && [ "$hu" -le $((now + 7260)) ]; then
+    exit 0
+  fi
+  rm -f "$here"
+fi
 case "$hour" in 21|22|23|00|01|02|03|04|05) away="asleep";; esac
 if [ -z "$away" ] && [ -f "$flag" ]; then
   until=$(head -1 "$flag" | tr -dc 0-9)
