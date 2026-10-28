@@ -32,6 +32,31 @@
             "command": "\"$HOME\"/gidi/.claude/hooks/checks-before-stop.sh",
             "timeout": 120,
             "statusMessage": "Checking changed code before stopping"
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/timeline.sh"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/away-allow.sh",
+            "statusMessage": "Away mode: answers prompts while the owner is away"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/timeline.sh"
           }
         ]
       }

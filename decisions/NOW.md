@@ -207,6 +207,9 @@ merged and checked, add new ones where they belong, and say here when the owner 
        north-west belt as sheds under our drawn flats, LUTH as ward blocks in lawns, four open grounds drawn as houses,
        a canal and a drain we lack, 9+ markets, 20 street names absent and 2 perhaps drawn under shorter names); the
        main session re-looks those key spots in Chrome before Mùṣá's hand pass uses them. Still to look: d09, d12, d13, d14, d16, d17, d18, d19, d27, d28.
+   (j) [ ] Away mode in gidi-game (DECISIONS "Away mode", 28 Oct): its `.claude/settings.json` calls gidi's
+       away-allow.sh and timeline.sh; committed on its own branch there (hooks/away-mode, c4a1164), ticked here once merged. Also owed: see the hook
+       answer a real prompt (its log, ~/.claude/gidi-away.log, read the first morning after a night's work).
    (e) [ ] Then the topic passes ("the recursive loop", owner 27 Oct): one agent per topic going over each district
        again and again until its topic passes, Mùṣá first.
 11. [ ] The other 50 districts to "working", breadth-first: the core six first (Ayégúnlẹ̀ 9, Agunda 12, Sọ̀rọ̀lérè 13,
