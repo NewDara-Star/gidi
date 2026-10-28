@@ -86,7 +86,9 @@ place of its own (its area the new house's footprint, the house's `place` set): 
 to b-ea4deafa, the church pc-8b30077b from b-d7fa85c9 to b-c576a887, the church pc-397ca641 from b-d3a1b793 to
 b-dc50fec6, the bank pc-0b7979f6 from b-ef8f1ea2 to b-c9f06f09 (20-25 m from where they were). The Jibowu coach yard
 pc-jbwyard1 reached 7.3 m from the centre and was trimmed on the rail side to 9.5 m (119 to 109 m2); a parked car in
-the band, vh-73apsbo2 (8.7 m from the centre), was taken out.
+the band, vh-73apsbo2 (8.7 m from the centre), was taken out. Five lanes ran on into the band and were cut back to end 9.5 m from the centre, at the rail's wall
+(rd-340okaz6, rd-3rgiuuc4, rd-jz7sq90i, rd-m61sp7km, rd-rv4ry0w9; 1-6 m off each), their gutters and verges ended
+with them and two drain crossings moved back to 0.5 m short of the new ends.
 
 Owed: on Google's satellite (28 Oct, z19, by eye) the A1 (Ikorodu Road's expressway) crosses over the railway at
 Jibowu on a flyover. Our motorway `rd-i4klmw3w` crosses the new piece at (13346,6241) with no height, so the
