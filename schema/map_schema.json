@@ -17,6 +17,7 @@
     "rail_kind": ["main_line", "siding"],
     "rail_fence": ["none", "wall", "mesh", "broken_wall"],
     "ballast": ["stone", "earth", "sand"],
+    "water_kind": ["sea", "lagoon", "pond", "marsh", "river", "creek", "canal"],
     "road_surface": ["tar_new", "tar_worn", "sand", "earth", "laterite", "interlock", "concrete", "plank"],
     "sand_cover": ["none", "edges", "full"],
     "kerb": ["none", "drain_wall", "painted_bw", "raised_pavement"],
@@ -620,6 +621,19 @@
         "ballast": "enum:ballast",
         "fence_left": "enum:rail_fence",
         "fence_right": "enum:rail_fence"
+      }
+    },
+    "water": {
+      "layer": "plan", "prefix": "wt", "kit": false,
+      "fields": {
+        "kind": "enum:water_kind",
+        "name": "name?",
+        "rings": "rings?",
+        "centreline": "line?",
+        "width": "num >0?",
+        "widths": "nums?",
+        "level": "num",
+        "depth": "num >0"
       }
     },
     "station": {

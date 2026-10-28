@@ -293,8 +293,10 @@ def load_map(top, fix, only=None):
     return files
 
 
-CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges and rail of the whole map,
-CITY_TYPES = {'district', 'road', 'rail'}   # not cut at district lines; districts' streets join them on shared points
+CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges, rail and water of the whole map,
+CITY_TYPES = {'district', 'road', 'rail', 'water'}   # not cut at district lines; districts' streets join them on shared points
+WATER_AREA = {'sea', 'lagoon', 'pond', 'marsh'}     # as Unreal's water bodies: a closed outline at one level (ocean, lake)
+WATER_LINE = {'river', 'creek', 'canal'}            # or an open line with a width, one per point if they vary (river)
 CITY_ROADS = {'motorway', 'trunk', 'main_road', 'local_main', 'ramp'}
 
 
@@ -410,7 +412,17 @@ def check(top, fix=False, only=None):
             if a and D and isinstance(D.get('outline'), list) and not any(in_poly(a, ring) for ring in D['outline']):
                 err(w, f'stands outside its district {r["_district"]}')
         if r['_district'] == CITY and rt not in CITY_TYPES:
-            err(w, f'the city layer {CITY} holds only main roads and rail, not a {rt}')
+            err(w, f'the city layer {CITY} holds only main roads, rail and water, not a {rt}')
+        if rt == 'water' and r.get('kind') in WATER_AREA and ('rings' not in r or 'centreline' in r):
+            err(w, f'a {r["kind"]} is an outline (rings) at one level, not a centreline')
+        if rt == 'water' and r.get('kind') in WATER_LINE:
+            c = r.get('centreline')
+            if not isinstance(c, list) or 'rings' in r:
+                err(w, f'a {r["kind"]} is a centreline with a width, not an outline')
+            elif ('width' in r) == ('widths' in r):
+                err(w, 'give the water one width, or widths (one per centreline point), not both or neither')
+            elif 'widths' in r and len(r['widths']) != len(c):
+                err(w, f'{len(r["widths"])} widths for {len(c)} centreline points')
         if r['_district'] == CITY and rt == 'road' and r.get('kind') not in CITY_ROADS:
             err(w, f'the city layer holds main roads ({", ".join(sorted(CITY_ROADS))}), not a {r.get("kind")!r}')
 

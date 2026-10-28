@@ -38,7 +38,7 @@ map/
 - **Dress files per 100 m tile.** A dense tile is about 1 to 3 MB. The board, the kit and Unreal load only the tiles they need.
 - **A dress record lives in its parent's tile:** the tile of the parent's first point (first footprint point, first centreline point, or `at`). The checker enforces it. Records with no parent (free ground patches, relief grids, people) go in the tile of their own first point.
 - **Roads are cut at district lines.** Each road piece lives in one district. Pieces join by sharing an end point exactly (district seams stay hand-joined).
-- **The city layer, `map/d00/` (owner, 28 Oct).** The main roads, bridges and rail of the whole map, drawn first and not cut at district lines: City Sample keeps its freeway as a network of its own, joined to the street grid by ramps. d00's outline is the whole frame (0..27000 x 0..10500); it holds only `district`, `road` (kinds motorway, trunk, main_road, local_main, ramp) and `rail` records, and the checker refuses anything else there. A district's streets join a d00 road by sharing a point with it. d00 is checked with every district (`check_map.py dNN` adds it), is left out of the per-district counts (`working_bar.py all`, `main_road_fit.py all`), and `map_picture.py` draws its roads over every district with no outline. Unreal's reader (`~/gidi-game/tools/map_build.py`) does not read d00 yet (owed, NOW 16 m).
+- **The city layer, `map/d00/` (owner, 28 Oct).** The main roads, bridges, rail and water of the whole map, drawn first and not cut at district lines: City Sample keeps its freeway as a network of its own, joined to the street grid by ramps. d00's outline is the whole frame (0..27000 x 0..10500); it holds only `district`, `road` (kinds motorway, trunk, main_road, local_main, ramp), `rail` and `water` records, and the checker refuses anything else there. A district's streets join a d00 road by sharing a point with it. d00 is checked with every district (`check_map.py dNN` adds it), is left out of the per-district counts (`working_bar.py all`, `main_road_fit.py all`), and `map_picture.py` draws its roads over every district with no outline. Unreal's reader (`~/gidi-game/tools/map_build.py`) does not read d00 yet (owed, NOW 16 m).
 
 ### File layout
 
@@ -157,6 +157,21 @@ The tables below give each field's meaning. `schema/map_schema.json` holds the e
 | `fence_left`, `fence_right` | `none`, `wall`, `mesh`, `broken_wall` | `"broken_wall"` |
 
 A road crossing the rail shares a point with its centreline (a level crossing); a bridge over it is a road whose points carry z.
+
+#### water (`wt-`): the sea, a lagoon, a creek, a canal
+The real water is taken one to one (owner, 28 Oct: "real roads and interconnections as well as its waters are the only things we are taking from Lagos one to one"). Shaped as Unreal's water bodies are (Water Body Actors, dev.epicgames.com, read 28 Oct): an ocean or a lake is a closed spline at one height, a river an open spline whose points each carry a width and a depth.
+
+| Field | Type, units | Example |
+|---|---|---|
+| `kind` | `sea`, `lagoon`, `pond`, `marsh` (an outline) or `river`, `creek`, `canal` (a centreline) | `"canal"` |
+| `name`? | Gidi name | |
+| `rings`? | for an outline: the shore first, then each island in it | |
+| `centreline`? | for a river, creek or canal: line, m, down the middle of the water | `[[12100,7255],[11976,7550]]` |
+| `width`? or `widths`? | m, the water's width; `widths` one per centreline point where it varies | `5` |
+| `level` | m, the water's surface height (one for the whole record) | `0` |
+| `depth` | m, water depth at the middle | `1.5` |
+
+The checker holds an outline kind to `rings` and a line kind to a `centreline` with `width` or `widths` (as many as its points). A road over water is a bridge: its points carry z above the level. The city layer `map/d00/` holds the sea, the lagoons and the big creeks; a district holds its own canals and ponds. No kit part builds water yet (`kit` false in the schema; owed with Unreal's reader, NOW 16 m).
 
 #### station (`sn-`): a rail station
 | Field | Type, units | Example |

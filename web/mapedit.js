@@ -87,6 +87,8 @@ window.MAPEDIT = (() => {
     if (r.type === "building" && Array.isArray(r.footprint)) return { pts: r.footprint, closed: true, set: (q, P) => { q.footprint = P; } };
     if (r.type === "plot" && Array.isArray(r.outline)) return { pts: r.outline, closed: true, set: (q, P) => { q.outline = P; } };
     if (r.type === "place" && Array.isArray(r.area) && r.area[0]) return { pts: r.area[0], closed: true, set: (q, P) => { q.area = [P, ...q.area.slice(1)]; } };
+    if (r.type === "water" && Array.isArray(r.centreline)) return { pts: r.centreline, closed: false, set: (q, P) => { q.centreline = P; } };
+    if (r.type === "water" && Array.isArray(r.rings) && r.rings[0]) return { pts: r.rings[0], closed: true, set: (q, P) => { q.rings = [P, ...q.rings.slice(1)]; } };
     if (r.type === "ground" && Array.isArray(r.rings) && r.rings[0]) return { pts: r.rings[0], closed: true, set: (q, P) => { q.rings = [P, ...q.rings.slice(1)]; } };
     return null;
   }
@@ -1118,6 +1120,13 @@ window.MAPEDIT = (() => {
     const BAD = css("--bad"), WARN = css("--warn");
     const edge = (r, normal, w) => { const b = badness(r); ctx.strokeStyle = b === "bad" ? BAD : b === "incomplete" ? WARN : normal; ctx.lineWidth = b ? Math.max(w, 2.5 * px) : w; ctx.setLineDash(b === "incomplete" ? [5 * px, 3 * px] : []); ctx.stroke(); ctx.setLineDash([]); };
     const inView = (pts) => pts && pts.length && hit(bboxOf(pts), v);
+    for (const r of recsOf(["water"])) {   // under everything: an outline filled, or a centreline at its width (the widest of its widths)
+      ctx.fillStyle = ctx.strokeStyle = r.kind === "marsh" ? "#5d7f6a" : GROUND.water;
+      const rs = Array.isArray(r.rings) ? r.rings.filter((g) => Array.isArray(g) && g.length > 2) : [];   // the first ring the shore, the rest islands
+      if (rs.length && inView(rs[0])) { ctx.beginPath(); for (const g of rs) { ctx.moveTo(g[0][0], g[0][1]); for (let i = 1; i < g.length; i++) ctx.lineTo(g[i][0], g[i][1]); ctx.closePath(); } ctx.fill("evenodd"); edge(r, "#2c5470", px); }
+      const c = r.centreline, w = r.width || (Array.isArray(r.widths) ? Math.max(...r.widths) : 0);
+      if (Array.isArray(c) && c.length > 1 && inView(c)) { ctx.lineJoin = "round"; ctx.lineCap = "round"; path(ctx, c); ctx.strokeStyle = r.kind === "marsh" ? "#5d7f6a" : GROUND.water; ctx.lineWidth = Math.max(w, px); ctx.stroke(); }
+    }
     for (const r of recsOf(["place"])) for (const ring of (Array.isArray(r.area) ? r.area : [])) if (ring.length > 2 && inView(ring)) { path(ctx, ring, true); ctx.fillStyle = "rgba(31,111,235,.06)"; ctx.fill(); }
     for (const r of recsOf(["road"])) {
       const c = r.centreline; if (!Array.isArray(c) || c.length < 2 || !inView(c)) continue;
