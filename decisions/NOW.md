@@ -161,6 +161,14 @@ merged and checked, add new ones where they belong, and say here when the owner 
        "Done is the map's bar"). The draft list is written and its counts checked: docs/research/MAP-DONE-LAYERS.md
        (65 layers in six groups; the format holds 28, partly 20, not 17; 29 format gaps). Next: the owner and Claude
        go through the 65 layers, cut and change them, then each agreed layer gets its measure and its row in a check.
+       Owed on the list (28 Oct, from the main session's reading of GTA-STUDY.md section 5 and STORY-AND-MAP.md, which
+       the draft did not use, and the owner's preacher example): names on places; the language spoken per area;
+       ground height and flood zones; weather; story and mission anchors and closed areas; things the player uses
+       (ATMs, food sellers); map icons; boats and planes; dress per area; road rules beyond lanes (turn bans, no
+       lorries, slip lanes, the name the GPS reads); vehicle spawners ("a keke waits here 6-22") and no-spawn
+       areas; group scenes and vehicle scenes (a broken-down danfo). And a mark per layer: does it move lines
+       (roads, drains, plots, footprints) or sit on top, so "working" settles every line layer and the rest never
+       redraws a line. Each new record kind gets a test spot in Unreal (DECISIONS "One test spot", 28 Oct).
    (d) [ ] The 11 districts drawn so far (d09, d12-d19, d27, d28) re-measured and brought to the DENSITY row by hand:
        one agent per district reads it in Chrome (Google Maps, satellite at z17-18, Street View) and proposes fixes
        with evidence; Claude checks every claim and makes the edits, one editor per district at a time.
