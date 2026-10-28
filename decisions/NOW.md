@@ -216,6 +216,18 @@ merged and checked, add new ones where they belong, and say here when the owner 
        once the key is settled; (3) the rail drawn on to the outline by hand, with its
        walls; (4) a rail row and a per-square cover row in working_bar.py; (5) if the miss rate is low, all 250 Mùṣá
        squares by helpers in blind pairs, then Mùṣá's line hand pass from them.
+   (m) [ ] **The city road layer, before the districts** (owner, 28 Oct: "lay out roads for the entire map... the
+       main roads, the bridges... whenever we now want to lay the streets, we make sure that the streets connect to
+       the bridges properly... we have to be very, very sure that we get it correctly"; DECISIONS "Roads first,
+       districts by their borders", 22 Oct, step 1 never drawn as records). Comes before (l)'s drawing step.
+       (1) [x] how today's districts sit on the real main roads: scripts/main_road_fit.py,
+       docs/lagos-study/roads/MAIN-ROAD-FIT.md (seven of 11 at 90%+ on; d14 65%, d16 59% with the Third Mainland
+       Bridge interchange missing, d19 74%); (2) a home for city-wide roads in the format (a city layer the districts
+       join to), its own commit; (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
+       flyover with its height, the rail and the water edges, drawn by hand from the real lines, widths and heights
+       read on Google, piece by piece, the owner checking each piece; (4) the 11 drawn districts' roads measured
+       against it and fixed by hand where they miss, the layer winning; (5) a check row: a district's roads must sit
+       on the city layer where they meet it.
    (l) [ ] **Study first, then lines, district by district** (owner, 28 Oct, DECISIONS "Study the district first, then
        scale it, then draw", widened 28 Oct). The 15 line-sweep findings are in MAP-DONE-LAYERS's tables (83 layers, 29 lines). Order: Mùṣá (d15)
        first: (1) all 250 squares studied against the 29 line layers, written per square in
