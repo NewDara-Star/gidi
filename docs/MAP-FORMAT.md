@@ -38,7 +38,7 @@ map/
 - **Dress files per 100 m tile.** A dense tile is about 1 to 3 MB. The board, the kit and Unreal load only the tiles they need.
 - **A dress record lives in its parent's tile:** the tile of the parent's first point (first footprint point, first centreline point, or `at`). The checker enforces it. Records with no parent (free ground patches, relief grids, people) go in the tile of their own first point.
 - **Roads are cut at district lines.** Each road piece lives in one district. Pieces join by sharing an end point exactly (district seams stay hand-joined).
-- **The city layer, `map/d00/` (owner, 28 Oct).** The main roads, bridges, rail and water of the whole map, drawn first and not cut at district lines: City Sample keeps its freeway as a network of its own, joined to the street grid by ramps. d00's outline is the whole frame (0..27000 x 0..10500); it holds only `district`, `road` (kinds motorway, trunk, main_road, local_main, ramp), `rail` and `water` records, and the checker refuses anything else there. A district's streets join a d00 road by sharing a point with it. d00 is checked with every district (`check_map.py dNN` adds it), is left out of the per-district counts (`working_bar.py all`, `main_road_fit.py all`), and `map_picture.py` draws its roads over every district with no outline. Unreal's reader (`~/gidi-game/tools/map_build.py`) does not read d00 yet (owed, NOW 16 m).
+- **The city layer, `map/d00/` (owner, 28 Oct).** The main roads, bridges, rail and water of the whole map, drawn first and not cut at district lines: City Sample keeps its freeway as a network of its own, joined to the street grid by ramps. d00's outline is the whole frame (0..27000 x 0..10500); it holds only `district`, `road` (kinds motorway, trunk, main_road, local_main, ramp), `rail` and `water` records, and the land's own height as `relief` grids in its dress tiles (one per 1 km, 10 m between points, drafted from the GEDTM30 bare-earth model by `scripts/draft_terrain.py`; the checker holds them to one spacing, the whole frame covered, and equal heights where two grids meet), and the checker refuses anything else there. A district's streets join a d00 road by sharing a point with it. d00 is checked with every district (`check_map.py dNN` adds it), is left out of the per-district counts (`working_bar.py all`, `main_road_fit.py all`), and `map_picture.py` draws its roads over every district with no outline. Unreal's reader (`~/gidi-game/tools/map_build.py`) does not read d00 yet (owed, NOW 16 m).
 
 ### File layout
 
@@ -61,7 +61,7 @@ Every file is one JSON object:
 |---|---|
 | Frame | Gidi metres in the 1:3 frame, as the board's new frame draws it: x east 0 to 27,000, y **south** 0 to 10,500, z up. (0, 0) is the frame's north-west corner. |
 | Lengths | metres, written to 0.01 (a centimetre). No unit suffixes in names: the unit comes from the schema. |
-| Heights `z` | metres above the ground under the thing (flat ground plus any relief grid there). Road points may carry a third number: an absolute height, for bridges and ramps. |
+| Heights `z` | metres above the ground under the thing: the land's height (the city layer's relief grids, real metres above sea level) plus any district relief grid there. Road points may carry a third number: an absolute height above sea level, for bridges and ramps. |
 | Angles | degrees. `turn` is 0 = facing east (+x), 90 = facing south (+y): clockwise on the board. |
 | Colours | `"#rrggbb"`, lower case. |
 | Shares, wear, `shade` | 0 to 1; `shade` is a multiplier on a colour (1 = as given). |
@@ -332,7 +332,7 @@ On a face, `u` is metres along the face from its first corner (footprint corner 
 `of`? (a road or plot), `kind` (`tar`, `earth`, `laterite`, `sand`, `dust`, `mud`, `wet`, `water`, `concrete`, `interlock`, `grass`, `rubble`), `rings`, `order` (later paints over earlier), `z`? (a water level), `lip`? (how proud tar patches stand), `colour`?, `surface`?. Sand, mud and puddles are painted areas, never scatters.
 
 #### relief (`rl-`): bumps and dips
-`origin` ([x, y]), `cell` (m), `cols`, `rows`, `z_mm` (cols x rows whole millimetres, row by row). Ground with no relief grid is flat: that is a value, not a guess.
+`origin` ([x, y]), `cell` (m), `cols`, `rows`, `z_mm` (cols x rows whole millimetres, row by row). Ground with no relief grid is flat: that is a value, not a guess. In the city layer d00 the relief grids are the land itself, in metres above sea level (DECISIONS "The land's own height too"); a district's relief grid adds its bumps and dips on top. Between grid points the height is read bilinearly. Under open water with no reading the land holds 0, the water's level; the bed comes from the water record's depth. Unreal reads the land as a Landscape (a 16-bit heightmap, Z scale = the height range in cm / 512, Landscape Technical Guide, dev.epicgames.com, read 28 Oct): 2,701 x 1,051 points at 10 m fits one Landscape of 22 x 9 components of 126 quads, under Epic's 1,024-component limit. Not built yet (owed with `map_build.py` reading d00).
 
 #### ground_marks (`gm-`), of a road or plot
 `potholes` table (`x`, `y`, `r`, `depth`, `stretch`, `turn`, `mud`) and `ruts` (each `line`, `w`, `depth`, `mud`, `packed`).
