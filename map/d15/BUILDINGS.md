@@ -81,6 +81,13 @@ b-ea4deafa), one stall in it taken out (st-xl7ir9h1) and four poles moved out to
 po-rudocbe2, po-z00qvhq0). Only the new piece's band was cleared; the five houses hand pass 48 left at 9.04-9.35 m
 are unchanged.
 
+Four places stood in houses taken out and were moved, each to the nearest house outside the corridor with no
+place of its own (its area the new house's footprint, the house's `place` set): the bar pc-59eb72f8 from b-261d246c
+to b-ea4deafa, the church pc-8b30077b from b-d7fa85c9 to b-c576a887, the church pc-397ca641 from b-d3a1b793 to
+b-dc50fec6, the bank pc-0b7979f6 from b-ef8f1ea2 to b-c9f06f09 (20-25 m from where they were). The Jibowu coach yard
+pc-jbwyard1 reached 7.3 m from the centre and was trimmed on the rail side to 9.5 m (119 to 109 m2); a parked car in
+the band, vh-73apsbo2 (8.7 m from the centre), was taken out.
+
 Owed: on Google's satellite (28 Oct, z19, by eye) the A1 (Ikorodu Road's expressway) crosses over the railway at
 Jibowu on a flyover. Our motorway `rd-i4klmw3w` crosses the new piece at (13346,6241) with no height, so the
 flyover's z is still to be drawn, and the neighbours d13 and d17 hold no rail beyond the edge (the seam).
