@@ -69,6 +69,14 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   it. This lifts "Map and brush first, Unreal on hold" for the network drive only. Widths stay real and only lengths
   shrink at 1:3, so real streets keep their real width; what the scale squeezes is the land between them (fewer,
   not narrower, houses), settled when the districts come back.
+  **Clashes with district work are listed, not fixed, while the network goes in** (owner, 28 Oct: "we list the
+  clashes... we're still going to go back and remake most of the districts... the road supersedes anything that we
+  have. Now, when we get into the fractals of the streets, we'll now start fixing the streets and making sure they
+  align with the roads"). `check_map.py` puts a problem between a d00 record and a district's record (a house in a
+  city road, a crossing or end with no node, a road on top of a city road) on a CLASH list that does not fail;
+  problems inside the network, or inside a district, fail as before; `--strict` fails clashes too, and
+  `working_bar.py` fails a district until its clashes are gone. Streets are then hand-picked per district at 1:3
+  (fewer real streets, each at its real width), grown from the roads.
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or

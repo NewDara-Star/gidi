@@ -144,6 +144,9 @@ recognisable in one frame. To decide by eye: one Mùṣá street rendered three 
 Fortnite: not downloaded (owner, 27 Oct: "We can get our art style without it").
 
 ## Missions: the goal fixed, the way open (owner, 27 Oct; not decided)
+More posts the owner shared, 28 Oct: players wanting "numerous ways to get to an outcome" in Rockstar missions after
+Baldur's Gate 3, Rob Nelson reported as saying GTA 6 missions get more freedom (not checked), and a reply that RDR2's
+missions are still fun on rails. Same point: fix the outcome, open the way.
 The owner stopped playing GTA over one mission: a target flees on a bike and must be shot; ramming him with a car "did
 nothing", and shooting from a moving car needed a steadiness that made it a chore. "You have to go through a certain
 step to get a predetermined goal. You cannot take another step." They also note Red Dead pulls you into exploring while

@@ -28,11 +28,25 @@ ID_RE = re.compile(r'^[a-z]{1,2}-[a-z0-9]{8}$')
 errors = []
 corners = []                 # road lines the kit can't round without folding: hand edits still to do (amber, like TODO)
 staggered = []               # road ends on a node within reach of another road's node: one junction the kit must still join
+clashes = []                 # the city layer's network against district work drawn before it: listed for the street pass
+clash_of = []                # the district each clash is to be fitted in (the non-city record's), one per line of clashes
 TODO = re.compile(r": missing (?:field|value) '([^']+)'")      # what the board shows amber
 
 
 def err(where, msg):
     errors.append(f'{where}: {msg}')
+
+
+def clash(recs, a, b, where, msg):
+    """A problem between a city-layer record and a district's record is a clash for the street pass, not a failure
+    (owner, 28 Oct, DECISIONS "The whole network first": the roads supersede what the districts drew; the districts
+    are remade around them after). Between two city-layer records, or two district records, it fails as before."""
+    da, db = recs[a].get('_district'), recs[b].get('_district')
+    if (da == CITY) != (db == CITY):
+        clashes.append(f'{where}: {msg}')
+        clash_of.append(db if da == CITY else da)
+    else:
+        err(where, msg)
 
 
 # ------------------------------------------------------------------ real names (a Gidi name may not share a real name's core)
@@ -435,7 +449,7 @@ def check(top, fix=False, only=None):
     for rid, e in ends:             # a road end that almost lands on another road: join it or pull it back
         for oid, q in pts:
             if oid != rid and JOIN[0] < math.hypot(e[0] - q[0], e[1] - q[1]) < JOIN[1]:
-                err(f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
+                clash(recs, rid, oid, f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
     land(recs)
     on_road(recs)
     road_lines(recs)
@@ -550,7 +564,7 @@ def on_road(recs):
         for j in tree.query(cw):
             a = hs[j][1].intersection(cw).area
             if a > ON_ROAD:
-                err(f'{recs[hs[j][0]]["_file"]} {hs[j][0]}', f'stands {a:.1f} m2 inside road {rid} ({r["width"]} m wide): '
+                clash(recs, hs[j][0], rid, f'{recs[hs[j][0]]["_file"]} {hs[j][0]}', f'stands {a:.1f} m2 inside road {rid} ({r["width"]} m wide): '
                     'set the house back, cut its front or leave it out; never narrow the road')
 
 
@@ -621,14 +635,14 @@ def road_nodes(recs):
                     staggered.append(f'{w}: its end at {list(e)} is a node {min(math.hypot(e[0] - a[0], e[1] - a[1]) for a in pts[oid]):.1f} m from '
                                      f'road {oid}\'s node, inside it: a staggered junction for the junction kit to join')
                     continue
-                err(w, f'its end at {list(e)} is inside road {oid} with no node of it near (no junction)')
+                clash(recs, rid, oid, w, f'its end at {list(e)} is inside road {oid} with no node of it near (no junction)')
         for j in tree.query(lines[k].buffer(RUN_NEAR)):
             oid = rs[j][0]
             if oid <= rid:
                 continue
             run = min(lines[k].intersection(lines[j].buffer(RUN_NEAR)).length, lines[j].intersection(lines[k].buffer(RUN_NEAR)).length)
             if run > RUN_LONG:
-                err(w, f'runs on top of road {oid} for {run:.0f} m (centrelines within {RUN_NEAR} m): one is the other '
+                clash(recs, rid, oid, w, f'runs on top of road {oid} for {run:.0f} m (centrelines within {RUN_NEAR} m): one is the other '
                        f'drawn twice; cut it back to where it joins')
             if not lines[k].crosses(lines[j]):
                 continue
@@ -638,7 +652,7 @@ def road_nodes(recs):
                     if over(rid, oid, (g.x, g.y)):
                         continue
                     dz = abs(road_z(pz[rid], (g.x, g.y)) - road_z(pz[oid], (g.x, g.y)))
-                    err(w, f'crosses road {oid} at {[round(g.x, 2), round(g.y, 2)]} without a shared point (no node)'
+                    clash(recs, rid, oid, w, f'crosses road {oid} at {[round(g.x, 2), round(g.y, 2)]} without a shared point (no node)'
                         + (f', {dz:.1f} m above it: a deck needs {DECK_OVER} m' if dz else ''))
 
 
@@ -715,7 +729,7 @@ if __name__ == '__main__':
     todo = [e for e in errors if TODO.search(e)]
     bad = errors if '--strict' in args else [e for e in errors if not TODO.search(e)]
     if '--strict' in args:
-        bad = bad + corners + staggered
+        bad = bad + corners + staggered + clashes
     for e in bad:
         print('FAIL ', e)
     if corners and '--strict' not in args:
@@ -726,6 +740,11 @@ if __name__ == '__main__':
         for e in staggered:
             print('NODE ', e)
         print('TODO  %d staggered junctions for the junction kit to join (nodes within reach of each other)' % len(staggered))
+    if clashes and '--strict' not in args:
+        for e in clashes:
+            print('CLASH', e)
+        print('TODO  %d clashes between the city layer and district work, for the street pass (DECISIONS "The whole '
+              'network first")' % len(clashes))
     if todo and '--strict' not in args:
         by = {}
         for e in todo:
