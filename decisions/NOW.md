@@ -7,6 +7,14 @@ are in `HISTORY.md`, word for word; what they still owed is in the running order
 
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
+000. [ ] **The network to a drive, first (owner, 28 Oct, DECISIONS "The whole network first, to a drive in Unreal"):**
+   (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
+   `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
+   Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
+   and Lekki Regional as being built), every junction a shared point; (c) [ ] rail into d00 (PR #453 waits for the
+   owner); (d) [ ] water into d00; (e) [ ] gidi-game builds d00 alone on the land (relief grids as one Landscape,
+   roads from road_build) with a car to drive; (f) [ ] the owner drives it. District work waits except what a piece
+   forces.
 00. [x] **Clean-up first (owner, 25 Oct evening, DECISIONS "Delete what we no longer use"):** run scripts/inventory.py,
    read it in two passes (what each part is; then what it does and whether anything live uses it), then delete in
    both repos what is no longer used or true: dead code and tools, wrappers that repeat an engine feature, old logs and
