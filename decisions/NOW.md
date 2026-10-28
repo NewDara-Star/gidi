@@ -223,10 +223,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
        (1) [x] how today's districts sit on the real main roads: scripts/main_road_fit.py,
        docs/lagos-study/roads/MAIN-ROAD-FIT.md (seven of 11 at 90%+ on; d14 65%, d16 59% with the Third Mainland
        Bridge interchange missing, d19 74%); (2) [x] a home for city-wide roads in the format: `map/d00/`, the city
-       layer (MAP-FORMAT section 1); (2b) [ ] a water record in the format (lagoon, creek, canal, sea edge; an area
-       or a centreline with a width) so d00 can hold the water too (owner, 28 Oct: "real roads and interconnections as
-       well as its waters are the only things we are taking from Lagos one to one"), and Unreal's map_build.py reading
-       d00 (owed while Unreal is on hold); (2c) [x] the real network to draw from: `scripts/city_network.py` (Overture's
+       layer (MAP-FORMAT section 1); (2b) [x] a water record in the format (`water`, MAP-FORMAT section 2: an outline
+       for sea, lagoon, pond, marsh; a centreline with widths for river, creek, canal; d00 holds it) (owner, 28 Oct: "real roads and interconnections as
+       well as its waters are the only things we are taking from Lagos one to one"); [ ] still owed: Unreal's
+       map_build.py reading d00 and a kit part for water (while Unreal is on hold); (2c) [x] the real network to draw from: `scripts/city_network.py` (Overture's
        motorway 120.7, trunk 124.1, primary 135.0, secondary 201.4 km Gidi inside the frame; rail 45.6 km; 2,535
        junctions; 36.1 km of motorway flagged under construction, the Fourth Mainland Bridge and Lekki Regional Road:
        the owner decides whether Gidi builds them); (3) every motorway, trunk, primary and secondary road of the frame, every bridge and
