@@ -85,7 +85,7 @@ def main():
     arg = sys.argv[1]
     T = Transformer.from_crs(4326, 32631, always_xy=True)
     real = real_main(T)
-    ds = sorted(x for x in os.listdir(os.path.join(ROOT, 'map')) if x.startswith('d')) if arg == 'all' else [arg]
+    ds = sorted(x for x in os.listdir(os.path.join(ROOT, 'map')) if x.startswith('d') and x != 'd00') if arg == 'all' else [arg]
     for d in ds:
         ring, by, on, tot, offd, st = fit(d, real)
         if not tot:

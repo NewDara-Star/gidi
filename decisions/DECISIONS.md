@@ -48,6 +48,17 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   Main roads stay tarred, even when broken. Mud goes to the poorer, wetter places: low ground, near water, back streets, the open fabric types.
 
   **Data caution:** Overture tags most of Lagos's local streets "unpaved" where it tags them at all (98% even in Yaba, which is mostly tarred), so the tags are checked against Street View and the owner's photos before they set anything.
+- **Top down: the things that join the city first, one to one with Lagos** (owner, 28 Oct, the third time roads
+  first was asked: "this should have been our method from the get go. Make the bigger things that connect the city.
+  Then go down. So things sit properly"; "if we had made sure they were city wide and interconnected from the start we
+  won't have problems"; "our connection should map 1 to 1. Real roads and interconnections as well as its waters are
+  the only things we are taking from Lagos one to one"). The order of all map work is: the city-wide network first
+  (main roads, bridges and flyovers, interchanges, rail, water), drawn whole in the city layer `map/d00/` and joined
+  everywhere; then each district's streets, joined to it; then what stands on them. The network and the water follow
+  the real lines, shrunk to the 1:3 frame, with every real connection kept (which road meets which, where, over or
+  under); nothing in them is invented or moved for taste. Everything else (buildings, places, names, dress) stays
+  Gidi's own, inspired by Lagos. A district never bends the network: where they disagree, the district is fixed by
+  hand (NOW 16 m).
 - **Freeze everything** once a district is built: the map must come out the same every time.
 - **Account for every square metre:** carriageway, gutter, walkway, building line, declared encroachment. Furniture never stands on the road; decks are decks. Road widths were `scripts/cross_sections.py` (deleted 25 Oct). *Changed 22 Oct:* the building line, the walkways and the fixed widths are replaced by "Real Lagos roads": real lines, real widths, people walking on the road's edge.
 - **Markets spill onto the road:** traders take the carriageway, with a lane kept clear.

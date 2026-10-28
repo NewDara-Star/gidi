@@ -512,7 +512,7 @@
   "records": {
     "district": {
       "layer": "plan", "prefix": "d", "kit": false,
-      "fields": {"n": "int >=1", "name": "name", "outline": "rings"}
+      "fields": {"n": "int >=0", "name": "name", "outline": "rings"}
     },
     "road": {
       "layer": "plan", "prefix": "rd", "kit": true,

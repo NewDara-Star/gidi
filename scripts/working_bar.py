@@ -242,7 +242,7 @@ def bar(d):
 
 
 def main():
-    ds = [a for a in sys.argv[1:] if re.fullmatch(r'd\d\d', a)] or sorted(x for x in os.listdir(os.path.join(ROOT, 'map')) if re.fullmatch(r'd\d\d', x))
+    ds = [a for a in sys.argv[1:] if re.fullmatch(r'd\d\d', a)] or sorted(x for x in os.listdir(os.path.join(ROOT, 'map')) if re.fullmatch(r'd\d\d', x) and x != 'd00')
     bad = 0
     for d in ds:
         R, lines = bar(d)
