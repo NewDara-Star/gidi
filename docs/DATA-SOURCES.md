@@ -17,7 +17,8 @@ Everything we've downloaded to study real Lagos lives on Daramola's Mac in `~/gi
 | `ms-buildings/` | Microsoft building outlines over Lagos (4 tiles), a second machine-traced set | CDLA Permissive 2.0 | 186 MB | cross-check of Google's | map final |
 | `overture-lagos/` | Overture Maps for Lagos: 63,204 places (shops, churches, salons, event planners...), infrastructure, land use, roads, land | CDLA / ODbL by layer | 42 MB | what each district has, beyond OSM | map final |
 | `yaba_*` | early samples for Yaba (Google, Overture) | as above | ~13 MB | superseded by the Lagos files | map final |
-| `dem/`, `lagos_copernicus_glo30_dsm.tif` | Copernicus 30 m surface model | Copernicus licence | 95 MB | `web/terrain.json` | keep until Unreal has its Landscape |
+| `dem/`, `lagos_copernicus_glo30_dsm.tif` | Copernicus 30 m surface model (buildings and trees still in it; the `lagos_` cut is in tenths of a metre, the `dem/` tiles in metres) | Copernicus licence | 95 MB | the cross-check of GEDTM30 (`web/terrain.json`, its old use, is gone) | keep until Unreal has its Landscape |
+| `gedtm30/` | GEDTM30 v1.2 bare-earth heights (buildings and trees taken off), the Gidi window only; README there; downloaded 28 Oct with the owner's OK | CC BY 4.0 (credit OpenGeoHub, Ho et al. 2025) | 8 MB | **copied into Gidi**: the land's height in map/d00 (`scripts/draft_terrain.py`), as DECISIONS "The land's own height too" asks | never: the credit stays with the land |
 | `worldcover/` | ESA WorldCover 10 m, 2021 | CC BY 4.0 | 271 MB | empty land vs untraced land | map final |
 | `worldpop/` | WorldPop 100 m population, 2020 | CC BY 4.0 | 59 MB | people per district | map final |
 | `lagos.osm.pbf` (repo folder) | OpenStreetMap, Lagos | ODbL | 55 MB | roads, land use, the first district studies | deleted (24 Oct: not on the Mac) |

@@ -294,7 +294,9 @@ def load_map(top, fix, only=None):
 
 
 CITY = 'd00'                      # the city layer (owner, 28 Oct): the main roads, bridges, rail and water of the whole map,
-CITY_TYPES = {'district', 'road', 'rail', 'water'}   # not cut at district lines; districts' streets join them on shared points
+CITY_TYPES = {'district', 'road', 'rail', 'water', 'relief'}   # not cut at district lines; districts' streets join them on
+                                                    # shared points; its relief grids are the land's own height (owner, 28 Oct)
+FRAME = (27000, 10500)            # the frame, Gidi m: the city layer's land covers it all
 WATER_AREA = {'sea', 'lagoon', 'pond', 'marsh'}     # as Unreal's water bodies: a closed outline at one level (ocean, lake)
 WATER_LINE = {'river', 'creek', 'canal'}            # or an open line with a width, one per point if they vary (river)
 CITY_ROADS = {'motorway', 'trunk', 'main_road', 'local_main', 'ramp'}
@@ -412,7 +414,7 @@ def check(top, fix=False, only=None):
             if a and D and isinstance(D.get('outline'), list) and not any(in_poly(a, ring) for ring in D['outline']):
                 err(w, f'stands outside its district {r["_district"]}')
         if r['_district'] == CITY and rt not in CITY_TYPES:
-            err(w, f'the city layer {CITY} holds only main roads, rail and water, not a {rt}')
+            err(w, f'the city layer {CITY} holds only main roads, rail, water and the land\'s height, not a {rt}')
         if rt == 'water' and r.get('kind') in WATER_AREA and ('rings' not in r or 'centreline' in r):
             err(w, f'a {r["kind"]} is an outline (rings) at one level, not a centreline')
         if rt == 'water' and r.get('kind') in WATER_LINE:
@@ -434,10 +436,55 @@ def check(top, fix=False, only=None):
         for oid, q in pts:
             if oid != rid and JOIN[0] < math.hypot(e[0] - q[0], e[1] - q[1]) < JOIN[1]:
                 err(f'{recs[rid]["_file"]} {rid}', f'its end {e} almost meets {oid} at {q}: join them on one point or pull it back')
+    land(recs)
     on_road(recs)
     road_lines(recs)
     road_nodes(recs)
     return files, recs
+
+
+def land(recs):
+    """The city layer's relief grids are the land's height (DECISIONS "The land's own height too"): together they cover
+    the whole frame at one spacing, and where two grids meet their shared points carry the same height, as an Unreal
+    Landscape's components share their edge vertices. The city layer without its land fails too."""
+    grids = [(rid, r) for rid, r in recs.items() if r['_district'] == CITY and r.get('type') == 'relief'
+             and isinstance(r.get('z_mm'), list) and len(r['z_mm']) == r.get('cols', 0) * r.get('rows', 0)]
+    if not grids:
+        if any(r.get('type') == 'district' and r['_district'] == CITY for r in recs.values()):
+            err(f'{CITY} relief', 'the city layer holds no land height: its relief grids are missing (scripts/draft_terrain.py drafted them once)')
+        return
+    cells = {r['cell'] for _, r in grids}
+    if len(cells) != 1:
+        return err(f'{CITY} relief', f'the land\'s grids should share one spacing, have {sorted(cells)}')
+    c = cells.pop()
+    import numpy as np
+    nx, ny = round(FRAME[0] / c) + 1, round(FRAME[1] / c) + 1
+    Z, who = np.full((ny, nx), np.nan), np.full((ny, nx), -1)
+    clash, outside = [], 0
+    for n, (rid, r) in enumerate(grids):
+        i0, j0 = r['origin'][0] / c, r['origin'][1] / c
+        if i0 != round(i0) or j0 != round(j0) or i0 < 0 or j0 < 0 or i0 + r['cols'] > nx or j0 + r['rows'] > ny:
+            outside += 1
+            continue
+        i0, j0 = round(i0), round(j0)
+        z = np.array(r['z_mm'], dtype=float).reshape(r['rows'], r['cols'])
+        win, wwho = Z[j0:j0 + r['rows'], i0:i0 + r['cols']], who[j0:j0 + r['rows'], i0:i0 + r['cols']]
+        bad = np.isfinite(win) & (win != z)
+        if bad.any():
+            j, i = np.argwhere(bad)[0]
+            clash.append((rid, grids[wwho[j, i]][0], [float((i0 + i) * c), float((j0 + j) * c)], int(bad.sum())))
+        new = ~np.isfinite(win)
+        win[new], wwho[new] = z[new], n
+    for rid, oid, pt, k in clash[:5]:
+        err(f'{recs[rid]["_file"]} {rid}', f'{k} of its points differ from {oid}\'s, the first at {pt}: grids that meet share their edge heights')
+    if len(clash) > 5:
+        err(f'{CITY} relief', f'{len(clash) - 5} more grids differ from a neighbour on shared points')
+    if outside:
+        err(f'{CITY} relief', f'{outside} grids lie off the frame\'s {c} m spacing or outside it')
+    missing = np.argwhere(~np.isfinite(Z))
+    if len(missing):
+        j, i = missing[0]
+        err(f'{CITY} relief', f'the land leaves {len(missing)} points of the frame without a height, the first at {[float(i * c), float(j * c)]}')
 
 
 def road_lines(recs):
