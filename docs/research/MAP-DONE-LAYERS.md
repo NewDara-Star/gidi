@@ -88,18 +88,23 @@ What the fields carry (same count):
 | A4 | Lanes and direction | lanes each way; one-way streets; divided roads | traffic needs lanes to drive; a one-way street driven the wrong way is a Lagos moment | every road with more than one lane, or one-way, says so, read from Street View and Google Maps (one-way arrows: whether Google shows them in Lagos *not checked*). Reference: GTA V's files 45-97 lane-km/km², 28-57% of length one direction only (counts divided roads too) (FINISHED-AREA.md) | **no** field | table (per road, in the panel) | yes |
 | A5 | Speed and road class for driving | how fast traffic goes on each road | driving feel; traffic that crawls on Ikorodu-type roads and races on the expressway | every road kind has a speed; per-road where real speed differs (*guess*: Street View cannot show speed; read from Google Maps typical traffic, not checked) | **no** | table | no |
 | A6 | Kerbs, medians, road crown | raised kerb, drain wall, painted kerb, median barrier | the road's edge and what cars hit | every main road's kerbs and median read from Street View | yes: `kerb_left/right`, `kerb_paint`, `median`, `crown`; on all, mostly `none` (6,712 left kerbs) and defaults outside Mùṣá | tool | yes |
-| A7 | Roadside drains | open, slab-covered or earth gutters, their state | the Lagos street edge; flooding; slabs to trip on | share of road length with its drains read per side from Street View; 100% of roads read | yes: `road.gutters`, dress `gutter_pieces`; 171 roads, all Mùṣá | tool now; brush could (along a road) | yes |
-| A8 | Walkways, verges and drain crossings | the strip beside the road, the slab or plank over the drain at each gate | walking; every gate reachable | every gate and shop door over a drain has its crossing; verges read | yes: `verges`, `crossings`, kerb `raised_pavement`; 351 roads with verges, all Mùṣá | tool; brush could | yes |
+| A7 | Roadside drains | open, slab-covered or earth gutters, their state; the collector drains between gutters and canals, outfalls, culverts under roads (line sweep, 28 Oct) | the Lagos street edge; flooding; slabs to trip on | share of road length with its drains read per side from Street View; 100% of roads read | yes: `road.gutters`, dress `gutter_pieces`; 171 roads, all Mùṣá | tool now; brush could (along a road) | yes |
+| A8 | Walkways, verges and drain crossings | the strip beside the road, the slab or plank over the drain at each gate; shoulders on expressways; the kept-clear lane through a street market (line sweep, 28 Oct) | walking; every gate reachable | every gate and shop door over a drain has its crossing; verges read | yes: `verges`, `crossings`, kerb `raised_pavement`; 351 roads with verges, all Mùṣá | tool; brush could | yes |
 | A9 | Road markings | lane lines, zebra crossings, stop lines, painted kerbs, BRT lane lines | traffic symbols the owner named; where markings are worn or absent, that is the look too | every main road's markings read from Street View (most local streets have none, *guess*) | **partly**: only `kerb_paint` (1 road) | brush could (a line along a road) | no |
 | A10 | Bumps, potholes, ruts, speed breakers | the road's broken surface, home-made speed breakers | driving feel; the Lagos road | potholes and breakers per km of road, read on a Street View sample (figure not read yet) | **partly**: dress `relief` and `ground_marks` (potholes, ruts); no kind says "speed breaker"; 0 placed | brush now (relief); tool (Relief) | no |
 | A11 | Ground off the road | yards, open ground, sand, laterite, grass, mud, puddles, water | every square metre has a ground (DECISIONS "Account for every square metre") | 100% of open land painted with a kind (the industry draft's topic 10, FINISHED-AREA-INDUSTRY.md) | yes: dress `ground` (12 kinds); 0 placed | brush now (ground paint) | no |
 | A12 | Big drains and canals | the open storm channels and canals across the city | floods, bridges over them, a landmark of Lagos | every canal seen on Google Maps and satellite drawn | **no** (only a `ground` patch of `water`) | new tool | yes |
 | A13 | Bridges, flyovers, footbridges | roads in the air, overhead footbridges over expressways | crossings; the Lagos skyline of flyovers | every flyover and footbridge on Google Maps drawn | **partly**: road points with height, kind `ramp`; no piers, rails or footbridge structure | tool (Street, with heights) | yes |
-| A14 | Water, shore, water lanes, jetties | the lagoon, creeks, the canoe channels of the stilt town, landing places | Makoro's stilt town (DECISIONS "Makoro keeps its stilt town"); boats | shoreline drawn; every channel in the stilt town drawn (d19 study, finding 3) | **partly**: `ground` kind `water` with a level `z`; no water lane or jetty | brush now (ground paint); new tool for lanes | yes |
+| A14 | Water, shore, water lanes, jetties | the lagoon, creeks, the canoe channels of the stilt town, landing places; water level and depth, stilt-town walkways, wetland, pond and stream edges, sand-fill edges (line sweep, 28 Oct) | Makoro's stilt town (DECISIONS "Makoro keeps its stilt town"); boats | shoreline drawn; every channel in the stilt town drawn (d19 study, finding 3) | **partly**: `ground` kind `water` with a level `z`; no water lane or jetty | brush now (ground paint); new tool for lanes | yes |
 | A15 | Rail and stations | the line, level crossings, stations | trains, crossings, the station crowd | every line and station on Google Maps drawn | yes: `rail`, `station`; 1 each, Mùṣá | tool | yes |
 | A16 | Trees and plants | palms, shade trees, plantain, shrubs, grass | shade, the look from above against the satellite | trees per km² against the satellite (figure not read yet; WorldCover reads 30% trees in d18, d18 study) | yes: `tree` (6 kinds), `ground` kind `grass`; 92 trees, all Mùṣá | tool; brush could | no |
-| A17 | Ground height and where it floods | the lie of the land over a district: high ground, low ground, the streets that flood in the rains | water runs downhill; flooded streets are a Lagos season | every district's low ground and flood streets read (Google satellite after rain, news reports; method *not decided*) | **partly**: dress `relief` is a fine grid in mm for bumps, `ground` kind `water` has a level `z`; no district height, no flood area | brush now (relief, for small ground); new tool for flood areas | no |
+| A17 | Ground height and where it floods | the lie of the land over a district: high ground, low ground, the streets that flood in the rains | water runs downhill; flooded streets are a Lagos season | every district's low ground and flood streets read (Google satellite after rain, news reports; method *not decided*) | **partly**: dress `relief` is a fine grid in mm for bumps, `ground` kind `water` has a level `z`; no district height, no flood area | brush now (relief, for small ground); new tool for flood areas | yes (line sweep, 28 Oct) |
 | A18 | Road rules beyond lanes | no right turn, no lorries, slip lanes (the street's name is C16) | AI traffic needs the rules (GTA V's paths carry 25 kinds of road attribute, GTA-STUDY.md section 5, item 1) | every rule seen on Street View or Google Maps set | **no**: no turn ban, vehicle ban or slip lane | table; tool for slip lanes | yes |
+| A19 | Below and beside the road | tunnels, underpasses, cuttings, embankments, retaining walls (line sweep, 28 Oct) | roads below ground and on raised fill; drops and walls to drive and walk against | every tunnel, underpass, cutting and embankment on Google Maps and satellite drawn | **partly**: road points carry `z` (bridges and ramps); no tunnel, cutting or retaining wall | new tool | yes |
+| A20 | Corridors | the road reserve beyond the kerbs, power lines with their cleared band, pipelines, the rail's land (Lagos's 2019 right of way, line sweep, 28 Oct) | where houses may not stand; the pylons over the city | every pylon line and pipeline reserve seen on satellite drawn | **no** (rail has `corridor`; nothing else) | new tool | yes |
+| A21 | Crossing points | median openings, U-turn points, refuge islands, where people cross (line sweep, 28 Oct) | traffic turns and people cross only where the road lets them | every median gap and refuge island on the main roads read from satellite | **no**: `median` has no gaps; `crossings` are drain crossings | new tool | yes |
+| A22 | Road barriers | guardrails, crash barriers, road fences, median walls, bollards (line sweep, 28 Oct) | what cars hit; what pushes people to the footbridges | every barrier on the main roads read from Street View | **partly**: `median: jersey`; no roadside barrier, fence or bollard | new tool | yes |
+| A23 | Toll plazas | the booth line, canopy and widened road at a toll gate (line sweep, 28 Oct) | a structure across the road | every toll plaza drawn | **no** | new tool | yes |
 
 ## B. Traffic
 
@@ -124,20 +129,22 @@ What the fields carry (same count):
 |---|---|---|---|---|---|---|---|
 | C1 | Footprints and cover | each house's outline | the district looks like the real place from above | cover between Google's 90%- and 80%-precision figures (CLAUDE.md, gated in `working_bar.py`); Mùṣá 43.22% against 43.26-47.65% (NOW 16) | yes: `building.footprint`; 13,475 | tool; draft from Open Buildings | yes |
 | C2 | Kind | what sort of house | the kit builds from it; it says who lives there | every house has a kind that fits its block's real fabric (the building studies) | yes: `kind` (14 kinds); on all (gaps in C12) | tool | no |
-| C3 | Storeys and heights | storeys and each storey's height | the skyline | storey mix within 2 points of Google's 2.5D per band (as d15's study measured) | yes: `storeys` on all; `storey_h` on Mùṣá's 4,268 only | tool | no |
+| C3 | Storeys and heights | storeys and each storey's height | the skyline | storey mix within 2 points of Google's 2.5D per band (as d15's study measured) | yes: `storeys` on all; `storey_h` on Mùṣá's 4,268 only | tool | yes (line sweep, 28 Oct) |
 | C4 | Wall finish and colour (the owner's "colour") | render, bare block, tiles; the paint | a house "already says its colour" (DECISIONS) | 100% of houses with a finish and colour, read from Street View or satellite per block | yes: `finish`; on Mùṣá's 4,268 only (31.7%) | tool; brush could (a block's colours) | no |
 | C5 | Roof | form, material, rust, colour | the overhead view against Google Earth | 100% with a roof; roof colours against the satellite by eye | yes: `roof`; on Mùṣá's 4,268 only | tool | no |
 | C6 | Ground floor | home, lock-up shops, workshop, stalls | street life sits on it | 100% set, front houses read from Street View | yes: `ground_floor`; 13,474 of 13,475 | tool | no |
 | C7 | Faces | windows, doors, shopfronts, balconies, burglar bars, stains, AC units, shop signs | the street look close up | every house on a street front has its faces (back houses: *owner's call*) | yes: dress `faces`; 0 placed | tool (Face); stamp | no |
-| C8 | Frontages, walls, gates, fences | the plot's edge on the street, its wall and gate | the street edge; gates to enter | every plot edge on a street has a frontage | yes: `frontage`, `wall` (126 gates on 314 walls); 0 frontages | tool (Frontage, Wall, Gate) | yes |
+| C8 | Frontages, walls, gates, fences | the plot's edge on the street, its wall and gate; community gates across public streets (line sweep, 28 Oct) | the street edge; gates to enter | every plot edge on a street has a frontage | yes: `frontage`, `wall` (126 gates on 314 walls); 0 frontages | tool (Frontage, Wall, Gate) | yes |
 | C9 | Lean-tos, stalls, kiosks, containers | the shade and selling things on the front | markets spill onto the road (DECISIONS) | per 100 m of shop front, against Street View (figure not read yet) | yes: `leanto`, `stall` (10 kinds); 0 lean-tos; 726 stalls, all Mùṣá | tool; stamp; brush could | no |
-| C10 | Plots and grounds | compounds, school, church and market grounds, yards | landmarks walled with a gate (the working bar) | every landmark ground drawn and walled | yes: `plot` (12 kinds); 109 | tool | yes |
+| C10 | Plots and grounds | compounds, school, church and market grounds, yards; civil grounds with no kind yet: power stations, airport airside, port quays and yards, under-flyover grounds, pitches, courts, stadium, cemeteries, barracks, landfill, tank farms, lorry parks, factory yards (line sweep, 28 Oct) | landmarks walled with a gate (the working bar) | every landmark ground drawn and walled | yes: `plot` (12 kinds); 109 | tool | yes |
 | C11 | Places in houses | what each building is used for in the game | shops, food, faith, money, missions | 0 real places missing (Overture; the working bar's row) | yes: `place`, `building.place`; 2,589 places, 1,587 houses linked | tool (Place) | no |
-| C12 | Kinds the map lacks | hall of residence, faculty block, detached house in a yard (d18 study); house on stilts over water (d19 study); hospital block (owed, d13 study and d13 BUILDINGS.md hand pass 5); estate slab blocks (d13's Royal Estate, nearest kind walkup, *my reading*); factory and warehouse (only `shed`); fuel station canopy | without them the nearest kind is a guess (d18 study's words) | 0 blocks whose study fabric has no kind | **no** | tool, once the kinds exist | yes |
+| C12 | Kinds the map lacks | hall of residence, faculty block, detached house in a yard (d18 study); house on stilts over water (d19 study); hospital block (owed, d13 study and d13 BUILDINGS.md hand pass 5); estate slab blocks (d13's Royal Estate, nearest kind walkup, *my reading*); factory and warehouse (only `shed`); fuel station canopy; monuments and plinths, gatehouses, hotel and office towers (line sweep, 28 Oct) | without them the nearest kind is a guess (d18 study's words) | 0 blocks whose study fabric has no kind | **no** | tool, once the kinds exist | yes |
 | C13 | Unfinished buildings and scaffolding | houses under build, rebar stubs, scaffolds | half-built houses are common in Lagos (*guess*) | per km² against the satellite (figure not read yet) | **partly**: kind and plot `under_build`, add-on `rebar_stubs`; `scaffold` is "still to add" (MAP-FORMAT.md) | tool | no |
 | C14 | Rooftop clutter | water tanks, dishes, masts, generators on roofs | the overhead look. Reference: about 500 rooftop props per 0.16 km² housing box (FINISHED-AREA.md) | per house against the satellite by eye | **partly**: face add-ons (water tank, dish, mast), `furniture` with a height `z`; nothing for a roof's top as such | tool | no |
 | C15 | Interiors: which buildings open | the doors the player can go through | shops, homes, missions. Reference: 0-2 interiors per 0.16 km² box (FINISHED-AREA.md) | a list per district of enterable places (*owner's call*) | **partly**: `building.use` (10 set); no interior | table | no |
 | C16 | Names | the name of every road, market, school, church, mosque and landmark, as a Gidi sound-alike (DECISIONS "Place names: sound-alikes") | the map players read, the satnav, the conductor's call, missions | every road with a real name has its Gidi name; every place with a real name too | **partly**: `road.name` (0 of 6,816) and `place.name` (1 of 2,589) | table; tool | no |
+| C17 | Steps, stairs, floor levels | the step from street to door, flood plinths, outside stairs, ladders (line sweep, 28 Oct) | collision and the flood line; climbing | every building's ground floor level and front steps read on a Street View sample | **partly**: `outside_stair`; no floor level, step or ladder | tool | yes |
+| C18 | Entrances | where each building is entered (line sweep, 28 Oct) | going in; interiors (C15) and person spots hang on it | every building has its entrance | **partly**: faces carry doors (`door_kind`); not every building has a face | tool | yes |
 
 ## D. Services and infrastructure (the owner's "infrastructure" and "civil services")
 
@@ -195,14 +202,14 @@ between areas to be a bar (FINISHED-AREA.md, layer 12).
 
 ## The count
 
-**76 layers** (65 in the first draft, 11 added 28 Oct). The format holds **28 yes, 25 partly, 23 no.** **20 layers draw
-lines**; the other 56 sit on top of them.
+**83 layers** (65 in the first draft, 11 added 28 Oct, 7 more from the line sweep the same day). The format holds
+**28 yes, 29 partly, 26 no.** **29 layers draw lines**; the other 54 sit on top of them.
 
 | group | layers | yes | partly | no | draw lines |
 |---|---|---|---|---|---|
-| A. Ground and roads | 18 | 9 | 5 | 4 | 11 |
+| A. Ground and roads | 23 | 9 | 7 | 7 | 17 |
 | B. Traffic | 12 | 1 | 6 | 5 | 4 |
-| C. Buildings | 16 | 11 | 4 | 1 | 4 |
+| C. Buildings | 18 | 11 | 6 | 1 | 7 |
 | D. Services and infrastructure | 10 | 5 | 5 | 0 | 1 |
 | E. Life and time | 13 | 2 | 3 | 8 | 0 |
 | F. Sound and light | 4 | 0 | 1 | 3 | 0 |
@@ -211,10 +218,11 @@ lines**; the other 56 sit on top of them.
 **The line layers, settled for "working"** (owner, 28 Oct: "what can we do on the list that gets a map to working so
 we can have all the district set and not have to start drawing new lines after a district has been made"): A1
 streets, A2 widths, A4 lanes (they set the width), A6 kerbs and medians, A7 roadside drains, A8 walkways and verges,
-A12 canals, A13 bridges and flyovers with their ramps, A14 shore and jetties, A15 rail and stations, A18 slip lanes,
+A12 canals, A13 bridges and flyovers with their ramps, A14 shore and jetties, A15 rail and stations, A17 ground height, A18 slip
+lanes, A19 tunnels, cuttings and embankments, A20 corridors, A21 crossing points, A22 road barriers, A23 toll plazas,
 B1 junction shapes (a roundabout takes land), B7 lay-bys and BRT stations, B8 motor parks, B9 fuel stations, C1
-footprints, C8 plot edges, walls and gates, C10 plots and grounds, C12 the missing kinds' footprints, D8 the grounds
-of civil services. A district at "working" has every one of these read against Google and drawn; every later layer
+footprints, C3 heights, C8 plot edges, walls and gates, C10 plots and grounds, C12 the missing kinds' footprints, C17
+steps and floor levels, C18 entrances, D8 the grounds of civil services. A district at "working" has every one of these read against Google and drawn; every later layer
 only dresses it.
 
 "Yes" is the format, not the data: of the 28, most are empty or placeholder outside Mùṣá, and the whole dress layer
@@ -325,7 +333,12 @@ it had no clothes); no field for language, flood, spawn, scene, closed area, ico
 plane (grep). Not checked: the Lines marks are the main session's judgement, for the owner to go through; GTA-STUDY.md's
 readings are its own (checked when written, 27 Oct).
 
-## The line sweep, round one (28 Oct): candidates, not yet in the tables
+## The line sweep, round one (28 Oct): candidates, now in the tables
+
+Owner, 28 Oct: "Add the 15. Split them into line and dress." Done the same day: A17 and C3 marked lines; seven new
+rows (A19-A23, C17, C18), all lines; items 10 and 11 widen C10 and C12 (they are kinds within those rows); the
+widenings in A7, A8, A14 and C8, each marked "line sweep, 28 Oct". The list below is kept as the record of where
+each came from.
 
 The owner (28 Oct): a district is working only when every line is settled. Three helpers swept for lines the
 rows above miss: GTA V's own files, studio and street-design sources, and our own repos and studies. Their

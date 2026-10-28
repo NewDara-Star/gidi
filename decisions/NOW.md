@@ -216,6 +216,14 @@ merged and checked, add new ones where they belong, and say here when the owner 
        once the key is settled; (3) the rail drawn on to the outline by hand, with its
        walls; (4) a rail row and a per-square cover row in working_bar.py; (5) if the miss rate is low, all 250 Mùṣá
        squares by helpers in blind pairs, then Mùṣá's line hand pass from them.
+   (l) [ ] **Study first, then lines, district by district** (owner, 28 Oct, DECISIONS "Study the district first, then
+       scale it, then draw", widened 28 Oct). The 15 line-sweep findings are in MAP-DONE-LAYERS's tables (83 layers, 29 lines). Order: Mùṣá (d15)
+       first: (1) all 250 squares studied against the 29 line layers, written per square in
+       docs/lagos-study/squares/d15/ (helpers in blind pairs once the answer key, 16 k, gives their miss rate; Claude
+       checks every reading it uses); (2) the lines drawn by hand from that study, the study winning where the map
+       disagrees, roads and outline kept; (3) dress; (4) a check row counting the map against the study. Then d09,
+       d12-d14, d16-d19, d27, d28 the same way, then the undrawn districts. The Google look (16 i) is each district's
+       first wide read, before its squares.
    (i) [ ] The Google look for the eleven drawn districts (d09, d12-d19, d27, d28), owner 28 Oct: "even the ones drawn
        needs its own look in Google Maps, satellite and Street View" (DECISIONS "Every district gets its own Google
        look"). One agent per district in Chrome: Maps for streets and places, satellite at z17-18 for blocks and density,
