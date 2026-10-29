@@ -20,9 +20,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
    from Mile 2's (its end slip out), the east one from 140 m past the curved ramp rd-c56ec7e1 (a real ramp east of the
    expressway, seen on Google satellite; the straight rd-b93544e8 beside it is the expressway), both to 140 m short of
    Oshodi's knot on slips; rd-511a39bd meets the west one; the expressway's 67 deg kink there put back on Overture's line
-   (by hand). [ ] Oshodi onward to Anthony and Oworonshoki (the draft's other corners on the way to read first: 62 deg at
-   (12256.9, 5166.8), the jogs at (12749-12754, 4907) and (12950-12956, 4821)); [ ] Mile 2 south to Apapa; the d12, d14,
-   d15 rows the new roads make (one list line each, leftovers).
+   (by hand). [x] The 62 deg corner at (12256.9, 5166.8) was the Airport Road junction (29 Oct): the expressway on
+   Overture's middle at real size within 120 m, the Airport Road ending 280 m out where it fans into its four ramps, the
+   ramps drawn by hand at their real distances (two capped 140 m short of Oshodi's knot and the Agege ramp); owed there:
+   [ ] the ramps' bridges and the expressway's levels (flat for now), [ ] the service roads' links (Overture ddbbab,
+   5e5af0), [ ] widths read. [ ] Oshodi onward to Anthony and Oworonshoki (the jogs at (12749-12754, 4907) and
+   (12950-12956, 4821) to read first); [ ] Mile 2 south to Apapa; the d12, d14, d15 rows the new roads make (one list
+   line each, leftovers; the Airport Road junction adds 3 d15 rows on rd-qc8rcv8v).
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
    Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
