@@ -10,7 +10,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
 000. [ ] **The network to a drive, first (owner, 28 Oct, DECISIONS "The whole network first, to a drive in Unreal"):**
    Districts already drawn are only leftovers while this is built (DECISIONS, owner 29 Oct): they never move a network
    road, get no fixes or long notes, and a clash with one is one line in the list for that district's turn.
-   [ ] **The Apapa-Oworonshoki Expressway's service roads (asked of the owner 29 Oct, waiting):** Overture holds 42.4 km
+   [ ] **The Apapa-Oworonshoki Expressway's service roads (owner, 29 Oct, 09:1x, asked "Should I draw them?": "Yes, draw them", the choice of both sides on their real lines like Ikorodu Road's, joined at every junction):** first, how Ikorodu Road's service roads were placed beside its express read and followed; Overture holds 42.4 km
    (191 pieces, class primary, named after the expressway) beside its 45.9 km of motorway; the first draft merged them into
    the expressway's one line (neatnet), so none is in d00, while Ikorodu Road's service roads are drawn. Waiting on them:
    Anthony's Apapa Road rd-f458561e and Anthony Village Road rd-1503de43 ends (they run on as Overture 165aa9 and 762511,
