@@ -25,19 +25,24 @@ say what each one is, what the owner said, and what was found. The running order
 `style2.py` render it in one of seven looks, as a wide shot, a face (the hawker) and an object (the danfo's nose).
 `sheet.py` puts them on one numbered sheet.
 
-| # | Look (file) | What it is |
-|---|---|---|
-| 1 | Grainy film (`look_film.png`) | Smooth real shading, a cool sky, colour slightly held back, film grain, vignette, warm grade |
-| 2 | Painted Lagos (`look_painted.png`) | Smooth shading, a warm sky, colour pushed, a Kuwahara paint filter |
-| 3 | Comic ink (`look_comic.png`) | |
-| 4 | Poster colour (`look_poster.png`) | |
-| 5 | Toon-real (`look_toonreal.png`) | |
-| 6 | Flat planes (`look_planar.png`) | Made after the owner's second reference picture |
-| 7 | Painterly faceted (`look_faceted.png`) | Made after the owner's Olise picture |
+One script makes all seven: `style2.py` (`style.py` is its first version, with the same table), run once per look,
+e.g. `blender -b street.blend -P style2.py -- film look_film.png wide`. Each look is one row of the table at its top:
 
-Settings for 1 and 2 are read from `style.py`; 3 to 7 are not described here (read `style.py`). Face and object
-versions are `face_*.png` and `object_*.png`; the sheets are `sheet_wide/face/object.jpg`. The owner's two
-reference pictures for this test are `1d197ac5-image.jpg` and `fac1674b-image.jpg` (not checked which is which).
+| # | Look (file) | Light | Colour and finish |
+|---|---|---|---|
+| 1 | Grainy film (`look_film.png`) | Smooth real shading, sun 4.0, grey-blue sky | Colour held back (0.92), warm grade 0.35, film grain 0.22, vignette 0.45 |
+| 2 | Painted Lagos (`look_painted.png`) | Smooth real shading, sun 4.5, warm sky | Colour pushed (1.18), Kuwahara paint filter 7, warm 0.25, vignette 0.2 |
+| 3 | Comic ink (`look_comic.png`) | 2 hard light bands, blue-grey shadows, blue sky | Colour 1.1, black ink outlines 2.2 px |
+| 4 | Poster colour (`look_poster.png`) | 2 hard bands, purple shadows, orange sky, cream clouds | Colour pushed hard (1.4), paint filter 4, warm 0.1 |
+| 5 | Toon-real (`look_toonreal.png`) | 3 bands, blue-grey shadows, blue sky | Colour 1.08, thin brown outlines 0.9 px, warm 0.1 |
+| 6 | Flat planes (`look_planar.png`) | Flat shading with no highlights, cool sky | Colour held back (0.78), paint filter 3, round things cut into planes |
+| 7 | Painterly faceted (`look_faceted.png`) | 3 bands, violet shadows, violet sky, pink clouds | Colour 1.3, strong stretched paint filter 11, round things cut into planes, vignette 0.15 |
+
+Colour is a saturation multiplier (1 = as built). The paint filter is Blender's Kuwahara (anisotropic), larger = bigger
+brush blobs. Hard bands are made by a colour ramp on the light; outlines are Blender's Freestyle; the planes come
+from a Decimate modifier. Look 6 was made after the owner's second reference picture, look 7 after the Olise picture.
+Face and object versions are `face_*.png` and `object_*.png`; the sheets are `sheet_wide/face/object.jpg`. The owner's
+two reference pictures for this test are `1d197ac5-image.jpg` and `fac1674b-image.jpg` (not checked which is which).
 `16427b52-image.jpg` is another picture the owner sent (not checked what it was for).
 
 **The owner's picks:** 2 Painted Lagos, 7 Painterly faceted and 4 Poster colour, to be mixed into one Gidi look.
