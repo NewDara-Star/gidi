@@ -28,6 +28,16 @@ if printf "%s" "$msg" | grep -Eq "^good ?night([^a-z]|$)"; then
   echo "$six" > "$flag"
   printf "%s  SWITCH goodnight: away until %s\n" "$stamp" "$(TZ=Europe/Dublin date -r "$six" '+%a %H:%M')" >> "$log"
   echo "Goodnight switch: away mode on until $(TZ=Europe/Dublin date -r "$six" '+%a %H:%M') (Ireland); the here switch is off."
+elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) (at work|away|out)([^a-z]|$)"; then
+  # "I'm at work" (owner, 29 Oct, after saying it and finding away mode off: "did you initiate the I'm away
+  # protocol?"): the here switch off and away mode on until 21:00, when the night hours take over
+  nine=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 21:00" +%s)
+  if [ "$nine" -gt "$now" ]; then
+    rm -f "$here"
+    echo "$nine" > "$flag"
+    printf "%s  SWITCH at work: away until 21:00\n" "$stamp" >> "$log"
+    echo "Away switch: away mode on until 21:00 (Ireland), then the night hours; the here switch is off."
+  fi
 elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) here([^a-z]|$)"; then
   rm -f "$flag"
   printf "%s\n%s\n" $((now + 7200)) "$sid" > "$here"
