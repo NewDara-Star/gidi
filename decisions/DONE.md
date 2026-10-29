@@ -8,6 +8,9 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 29 Oct: corner sweep pass 8, the Festac links off the Apapa-Oworonshoki Expressway (6.470 N 3.324 E): rd-c56ec7e1,
+  two real links drawn as one with a 180 degree double-back, split into rd-c56ec7e1 and rd-35ed3005 (ramps, 8.7 m),
+  each eased onto Overture's line; d00's corner rows 45 -> 38.
 - 29 Oct: corner sweep pass 7, Orchid Road rd-ee461730 (Lekki): its three corners squeezed by 1:3 eased (the U-turn
   link start, the turn south, the roundabout); d00's corner rows 53 -> 45.
 - 29 Oct: the running order cut to what is live; this file made; NOW.md as it stood kept below word for word.
