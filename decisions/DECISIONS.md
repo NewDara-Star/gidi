@@ -105,6 +105,13 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   the loops at every size below real.
   (Same day, on the result: "having the real thingy there and then having the problem points fixed by hand. Yes
   let's imbibe that.")
+  **While the network is built, the districts already drawn are only leftovers** (owner, 29 Oct, asked again after
+  the rail note the same morning, "ignore anything the districts had previously done... the districts are the last
+  things to be done anyway and are supposed to shape around the interconnection", and then: "did you not remember the
+  district rule we currently have... does the fact that we kinda have some districts built confuse you when you
+  compact"; the wording below given and answered "Yes"). The districts already drawn never decide where a network
+  road goes, and they get no fixes or long notes. A clash with one gets one line in the list for that district's turn.
+  The push reviewer reads this too: district detail is not a reason to block a network change.
   **The road kit comes from Street View, with a road done list** (owner, 29 Oct, asked again after "kits photo-close"
   of 25 Oct: "work till the point where you get all the roads, and then begin to make kits for the instances for
   them, so we can run it in Unreal and drive a real car or danfo or keke or Okada there... It would mean a lot of
