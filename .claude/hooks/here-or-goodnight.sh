@@ -1,5 +1,5 @@
 #!/bin/sh
-# The owner's two switches for away mode (owner, 28 Oct, at 21:26, after the night rule held a prompt while they were
+# The owner's switches for away mode (owner, 28 Oct, at 21:26, after the night rule held a prompt while they were
 # up: "an I'm here switch and a goodnight switch"). Runs on every message the owner sends.
 # "I'm here": away mode stays off, the night hours too, while they keep talking: the switch holds 2 hours from their
 # last message in the session they said it in, so if they fall asleep without saying goodnight away mode comes back 2
@@ -7,6 +7,7 @@
 # ~/.claude/gidi-here as the time it ends in epoch seconds, then that session's id; away-allow.sh reads the time.
 # "goodnight" (or "good night"): the here switch off and away mode on until 06:00 Ireland time, day or night, through
 # the away flag ~/.claude/gidi-away that away-allow.sh already reads.
+# "I'm at work" or "I'm away" (owner, 29 Oct): the here switch off and the away flag written until 15:30 that day.
 # Each switch is logged to ~/.claude/gidi-away.log, and said back so Claude can tell the owner.
 input=$(cat)
 here="$HOME/.claude/gidi-here"
@@ -28,15 +29,15 @@ if printf "%s" "$msg" | grep -Eq "^good ?night([^a-z]|$)"; then
   echo "$six" > "$flag"
   printf "%s  SWITCH goodnight: away until %s\n" "$stamp" "$(TZ=Europe/Dublin date -r "$six" '+%a %H:%M')" >> "$log"
   echo "Goodnight switch: away mode on until $(TZ=Europe/Dublin date -r "$six" '+%a %H:%M') (Ireland); the here switch is off."
-elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) (at work|away|out)([^a-z]|$)"; then
+elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) (at work|away)([^a-z]|$)"; then
   # "I'm at work" (owner, 29 Oct, after saying it and finding away mode off: "did you initiate the I'm away
-  # protocol?"): the here switch off and away mode on until 21:00, when the night hours take over
-  nine=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 21:00" +%s)
+  # protocol?"): the here switch off and away mode on until 15:30, the end of a 05:30-15:00 shift (DECISIONS "Away mode")
+  nine=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 15:30" +%s)
   if [ "$nine" -gt "$now" ]; then
     rm -f "$here"
     echo "$nine" > "$flag"
-    printf "%s  SWITCH at work: away until 21:00\n" "$stamp" >> "$log"
-    echo "Away switch: away mode on until 21:00 (Ireland), then the night hours; the here switch is off."
+    printf "%s  SWITCH at work: away until 15:30\n" "$stamp" >> "$log"
+    echo "Away switch: away mode on until 15:30 (Ireland); the here switch is off; I'm here turns it off sooner."
   fi
 elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) here([^a-z]|$)"; then
   rm -f "$flag"
