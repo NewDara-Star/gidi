@@ -93,6 +93,16 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   move 50 m"; the others were a 9.5% ramp or leaving the road on the ground). The bridge climbs at the real slope
   and the road it passes over is moved along it (58 m there) until the climb fits; the turning traffic keeps a ground
   service road beside it, and the district streets round it are redrawn to meet it in their passes.
+  **A big junction keeps its real size and shape; where it bumps, the road is fixed by hand** (owner, 29 Oct, on the
+  Lagos Island cloverleaf, after a picture of three ways, as a rule for every big junction to come: "panel B is
+  everything at its real size... where they crash or where they bump into the three other roads, you would just hand
+  draw them and make sure that they don't bump... you're giving the visual shape of what it looks like, but you're
+  fixing the thing by hand... is it going to run over a particular bridge? Is it going to run into a particular road?
+  You cut it back to the point where it is proper with the road"). The whole junction goes in at real size, with its
+  real shape. At each spot where it would run over a bridge or into another road, that road of the junction is cut
+  back or bent by hand so it lands cleanly onto the road it is meant to join. Each fix is named in the commit and
+  NOW. Shrinking the junction's parts to fit was tried on the cloverleaf and fails: the shrunk outer roads crash into
+  the loops at every size below real.
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
