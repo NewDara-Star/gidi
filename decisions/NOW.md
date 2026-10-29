@@ -8,6 +8,8 @@ are in `HISTORY.md`, word for word; what they still owed is in the running order
 **Running order** (owner, 25 Oct: "keep a running order". Work down it without asking "next?"; tick an item when it is
 merged and checked, add new ones where they belong, and say here when the owner reorders it).
 000. [ ] **The network to a drive, first (owner, 28 Oct, DECISIONS "The whole network first, to a drive in Unreal"):**
+   Districts already drawn are only leftovers while this is built (DECISIONS, owner 29 Oct): they never move a network
+   road, get no fixes or long notes, and a clash with one is one line in the list for that district's turn.
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
    Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
