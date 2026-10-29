@@ -13,8 +13,7 @@ merged and checked, add new ones where they belong, and say here when the owner 
    [ ] **The Apapa-Oworonshoki Expressway's service roads (owner, 29 Oct, 09:1x, asked "Should I draw them?": "Yes, draw them", the choice of both sides on their real lines like Ikorodu Road's, joined at every junction):** first, how Ikorodu Road's service roads were placed beside its express read and followed; Overture holds 42.4 km
    (191 pieces, class primary, named after the expressway) beside its 45.9 km of motorway; the first draft merged them into
    the expressway's one line (neatnet), so none is in d00, while Ikorodu Road's service roads are drawn. Waiting on them:
-   Anthony's Apapa Road rd-f458561e and Anthony Village Road rd-1503de43 ends (they run on as Overture 165aa9 and 762511,
-   both these service roads), Oshodi's westbound link
+   Oshodi's westbound link
    off to the frontage road, Iyana-Ipaja's service roads.
    Stretches: [x] Mile 2 to Oshodi (29 Oct): both sides at Overture's offsets read every 20 m (17.5-19.6 m), the west one on
    from Mile 2's (its end slip out), the east one from 140 m past the curved ramp rd-c56ec7e1 (a real ramp east of the
@@ -28,8 +27,10 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Motor Road under the bridge (shared points on the land); the south one ends on Anthony's loose west link rd-0fbc2dcc;
    the two one-point jogs on the expressway there straightened (by hand). Owed: [ ] the south piece runs up to 45 m off
    the expressway before Anthony, where Anthony's real-size junction bends the expressway north and the real service road
-   stays straight (by eye; read on satellite). [ ] Anthony onward to Oworonshoki (Apapa Road rd-f458561e and Anthony
-   Village Road rd-1503de43's ends wait); [ ] Mile 2 south to Apapa; the d12, d14, d15 rows the new roads make (one list
+   stays straight (by eye; read on satellite). [x] Anthony to the next junction (29 Oct): Anthony Village Road and
+   Apapa Road go on as the north and south service roads to slips 60 m before the junction's ramps (both slips land on
+   one express node: [ ] read whether the real ones stagger); [ ] the d27 and d28 rows they make (one list line each,
+   leftovers: 14 listed under d27, 43 under d28, 19 under d00 naming d27/d28 roads). [ ] That junction (14171.8, 5125.8) at real size, then on to Oworonshoki; [ ] Mile 2 south to Apapa; the d12, d14, d15 rows the new roads make (one list
    line each, leftovers; the Airport Road junction adds 3 d15 rows on rd-qc8rcv8v).
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
