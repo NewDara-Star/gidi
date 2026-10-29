@@ -8,6 +8,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 29 Oct: corner sweep pass 7, Orchid Road rd-ee461730 (Lekki): its three corners squeezed by 1:3 eased (the U-turn
+  link start, the turn south, the roundabout); d00's corner rows 53 -> 45.
 - 29 Oct: the running order cut to what is live; this file made; NOW.md as it stood kept below word for word.
 - 29 Oct: look notes written (docs/look/LOOK-NOTES.md, #559, #560); the look scripts committed in gidi-data.
 - 29 Oct: corner sweep passes 5 (Berger: rd-afb32773 redrawn, rd-6bc615c3 out, #557) and 6 (Trade Fair:
