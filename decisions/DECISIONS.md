@@ -103,6 +103,15 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   back or bent by hand so it lands cleanly onto the road it is meant to join. Each fix is named in the commit and
   NOW. Shrinking the junction's parts to fit was tried on the cloverleaf and fails: the shrunk outer roads crash into
   the loops at every size below real.
+  (Same day, on the result: "having the real thingy there and then having the problem points fixed by hand. Yes
+  let's imbibe that.")
+  **The road kit comes from Street View, with a road done list** (owner, 29 Oct, asked again after "kits photo-close"
+  of 25 Oct: "work till the point where you get all the roads, and then begin to make kits for the instances for
+  them, so we can run it in Unreal and drive a real car or danfo or keke or Okada there... It would mean a lot of
+  street view photos, and ticking off on the map done list things that are important to the road. Please don't
+  forget"). When the network is in d00, the road kit is made as shared instanced pieces, read from many Street View
+  photos of Lagos roads (study only, nothing copied). A done list of what matters on a road is written from those
+  photos first; each thing is ticked on the map as it is drawn and built (NOW 000(e)).
   **Roads still being built are built too** (owner, 28 Oct, on the Fourth Mainland Bridge and the Lekki Regional Road,
   which OpenStreetMap flags under construction: "if they won't affect anything, yeah build them as well"). They go
   into d00 on their planned lines. Where one would change something already there (cut a drawn district's houses, or
