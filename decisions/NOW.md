@@ -105,7 +105,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (f) [ ] The owner drives it.
    Owed: [ ] the board shows the CLASH list; [ ] the research on how studios build a city from a real place
    (~/gidi-data/research/OPEN-WORLD-CITY-METHOD.md) read and checked, and this order changed if it shows a better way;
-   [ ] `scripts/find_past.py`: one search over git history, DONE.md and NOW.md that also tries each road's names from
+   [ ] a search script (in scripts/, not written yet): one search over git history, DONE.md and NOW.md that also tries each road's names from
    the map records and a short list of synonyms (owner, 29 Oct: "what if... grep fails?"); a meaning search only if
    that is not enough (a model download, asked first).
 
