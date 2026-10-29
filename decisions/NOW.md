@@ -16,6 +16,13 @@ merged and checked, add new ones where they belong, and say here when the owner 
    Anthony's Apapa Road rd-f458561e and Anthony Village Road rd-1503de43 ends (they run on as Overture 165aa9 and 762511,
    both these service roads), Anthony's west link rd-0fbc2dcc (on 1ef663 and 59f726 beside it), Oshodi's westbound link
    off to the frontage road, Iyana-Ipaja's service roads.
+   Stretches: [x] Mile 2 to Oshodi (29 Oct): both sides at Overture's offsets read every 20 m (17.5-19.6 m), the west one on
+   from Mile 2's (its end slip out), the east one from 140 m past the curved ramp rd-c56ec7e1 (a real ramp east of the
+   expressway, seen on Google satellite; the straight rd-b93544e8 beside it is the expressway), both to 140 m short of
+   Oshodi's knot on slips; rd-511a39bd meets the west one; the expressway's 67 deg kink there put back on Overture's line
+   (by hand). [ ] Oshodi onward to Anthony and Oworonshoki (the draft's other corners on the way to read first: 62 deg at
+   (12256.9, 5166.8), the jogs at (12749-12754, 4907) and (12950-12956, 4821)); [ ] Mile 2 south to Apapa; the d12, d14,
+   d15 rows the new roads make (one list line each, leftovers).
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
    Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
