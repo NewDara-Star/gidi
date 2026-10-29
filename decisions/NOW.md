@@ -10,6 +10,12 @@ merged and checked, add new ones where they belong, and say here when the owner 
 000. [ ] **The network to a drive, first (owner, 28 Oct, DECISIONS "The whole network first, to a drive in Unreal"):**
    Districts already drawn are only leftovers while this is built (DECISIONS, owner 29 Oct): they never move a network
    road, get no fixes or long notes, and a clash with one is one line in the list for that district's turn.
+   [ ] **The Apapa-Oworonshoki Expressway's service roads (asked of the owner 29 Oct, waiting):** Overture holds 42.4 km
+   (191 pieces, class primary, named after the expressway) beside its 45.9 km of motorway; the first draft merged them into
+   the expressway's one line (neatnet), so none is in d00, while Ikorodu Road's service roads are drawn. Waiting on them:
+   Anthony's Apapa Road rd-f458561e and Anthony Village Road rd-1503de43 ends (they run on as Overture 165aa9 and 762511,
+   both these service roads), Anthony's west link rd-0fbc2dcc (on 1ef663 and 59f726 beside it), Oshodi's westbound link
+   off to the frontage road, Iyana-Ipaja's service roads.
    (a) [x] Third Mainland Bridge, [x] Ikorodu Road (abcaf53); (b) [ ] the other main roads in d00 from
    `scripts/city_network.py`'s list, longest first (the expressways, Herbert Macaulay, Murtala Muhammed, Western and
    Eastern Avenue, Funsho Williams, Apapa road, Lagos-Badagry, Lekki-Epe; the bridges Eko and Carter; Fourth Mainland
