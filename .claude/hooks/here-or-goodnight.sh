@@ -32,12 +32,14 @@ if printf "%s" "$msg" | grep -Eq "^good ?night([^a-z]|$)"; then
 elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) (at work|away)([^a-z]|$)"; then
   # "I'm at work" (owner, 29 Oct, after saying it and finding away mode off: "did you initiate the I'm away
   # protocol?"): the here switch off and away mode on until 15:30, the end of a 05:30-15:00 shift (DECISIONS "Away mode")
-  nine=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 15:30" +%s)
-  if [ "$nine" -gt "$now" ]; then
+  shift_end=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 15:30" +%s)
+  if [ "$shift_end" -gt "$now" ]; then
     rm -f "$here"
-    echo "$nine" > "$flag"
+    echo "$shift_end" > "$flag"
     printf "%s  SWITCH at work: away until 15:30\n" "$stamp" >> "$log"
     echo "Away switch: away mode on until 15:30 (Ireland); the here switch is off; I'm here turns it off sooner."
+  else
+    echo "Away switch NOT set: it is past 15:30, when it would end. Tell the owner, and ask until when they are away."
   fi
 elif printf "%s" "$msg" | grep -Eq "^(i'?m|i am) here([^a-z]|$)"; then
   rm -f "$flag"
