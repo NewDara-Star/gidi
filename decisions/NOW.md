@@ -18,9 +18,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (a) Third Mainland Bridge, Ikorodu Road: done (DONE.md).
    (b) The other main roads in d00 (`scripts/city_network.py`'s list), every junction a shared point named for its real
    place and district; slip roads and ramps at real length (DECISIONS "1:3 sets where things are"):
-   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 45 left on 29 Oct after passes 1-7
-     (#557, #558, Orchid Road rd-ee461730). Next: rd-c56ec7e1 (7, a U-turn at 11785,8080), rd-8f4843b7 (5).
-     Orchid Road's small roundabout at (20840, 9433) waits for the street pass. Helper:
+   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 38 left on 29 Oct after passes 1-8
+     (#557, #558, Orchid Road rd-ee461730, the Festac links rd-c56ec7e1 and rd-35ed3005). Next: rd-8f4843b7 (5).
+     Orchid Road's small roundabout at (20840, 9433) waits for the street pass; so does New Festac Bridge Road,
+     where rd-c56ec7e1 and rd-35ed3005 end loose at (11785.32, 8080.44). Helper:
      Gidi metres to lat, lon from the frame corner in scripts/draft_buildings.py (FU 500525, FV 707825, 1:3, y south).
      Then the rest read one by one (real bends at 1:3 left for the drive, draft kinks eased).
    - [ ] **District borders, the 22 Oct way** (DECISIONS, owner 29 Oct): read where the 51 came from; council
