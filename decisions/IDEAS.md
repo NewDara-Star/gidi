@@ -1,5 +1,15 @@
 # Ideas (not decided; newest first)
 
+- **A schematic twin of the game level** (30 Oct; owner shared a Bengaluru game's maker's posts: "Seee"). He keeps a
+  second Unreal level where everything in the game has a plain twin: each lane a coloured line with direction arrows,
+  walk lines, every tree, lamp and parked car a simple shape with its kind and id written over it, layers switched on
+  and off by kind with counts, "Go to #id", click anything to see what it is, and edits saved back to the data
+  ("Rebuild from data"). His reason: models cannot see a finished scene the way people do, so a labelled level lets
+  Claude and the owner point at the same thing by id and check it from a picture. For Gidi: the map's records already
+  carry ids (rd-..., b-..., jn-...), and the board shows them in 2D; the twin would be the board in 3D, built by the
+  same builders, for the hand pass and for checking Unreal against the map. Not started (Unreal on hold while d00's
+  network is built).
+
 - **What GTA's own files taught us** (27 Oct; owner: "it's not so much graphics and more like very, very tiny
   interactions written into code... carefully thought out one by one and layered on top of each other"). From
   studying GTA V's files from the inside (DECISIONS "Study other games from the inside"; the study with its evidence
