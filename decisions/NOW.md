@@ -31,8 +31,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      at level 2, no wards); after roads, rail and water, cut the map on its hard edges,
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
-     - Ojota: how far the slips leave the land on Street View (rd-7b01bdb8); Ikorodu Road's
-       own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
+     - Ojota: how far the slips leave the land on Street View (rd-7b01bdb8: in the map its start is 9-11 m over the
+       land, higher than the 7.5 m deck; 30 Oct, Street View Jun 2021 at 6.59514 N 3.38186 E and 6.59394 N 3.38236 E
+       shows the roads round the north loop near the ground, a bank by the crossing, no height read; the Overture loop
+       for it not found by id); Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join
+       rows.
      - Jibowu / Murtala: Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
