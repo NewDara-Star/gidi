@@ -36,7 +36,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Jibowu / Murtala: Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
-       1.5-3 m over the land's dip at s 340-370, 30 Oct); slips' width (all four, 8.7 m not read); whether Street
+       1.5-3 m over the land's dip at s 340-370, 30 Oct); whether Street
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
        west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels); link width.
@@ -44,7 +44,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
        rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; widths.
      - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m); Diya Street's level-3 bridge (d27's pass); the links'
-       far ends 14-29 m off the real spots; links' width.
+       far ends 14-29 m off the real spots.
      - Third Mainland's Lagos Island end: which road is on top (Street View); Ring Road raised (level 1); slips to
        Adeniji Adele (Overture has none, read at z18); the Lagoon Highway's heights.
      - Lagos Island cloverleaf: rd-252c0e0f / rd-ee4feee6 joined or ended with Lagos Island's streets; loops b44bf9
@@ -222,10 +222,13 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d19: rd-d6d07182 under rd-aae94fd5 for 12 m, crossed by both links; b-20052ac2, b-74a64b3f, b-494e9843; rd-a27ac3a6,
   rd-00c23990, rd-a15fbfdf.
 - d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
-  rd-a557b7a2 still holds rd-e923727a's old start points (eased in pass 16) and runs on it 61 m (1 clash row).
+  rd-a557b7a2 still holds rd-e923727a's old start points (eased in pass 16) and runs on it 61 m (1 clash row);
+  Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
+  inside it, 13 street ends 4.4-5.7 m from the links' nodes (NODE rows: rd-02e38b95, rd-04d48b48, rd-20954906,
+  rd-241002da, rd-395d5c12, rd-3c4bd7ed, rd-570636d8, rd-95ef5c6d, rd-ae0fbe3b, rd-c7428a3d, rd-d9fdf047 twice).
 - d28: rd-db0655fe ends loose inside Ikorodu Road; Ojota's 24 street rows under ramps; Anthony: 31 houses,
   rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from the
-  service roads.
+  service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct).
 - d30 (Isolo-Ladipo, when drawn): Isolo Road stays on the ground under the expressway, as d00 has it.
 - d11 (Ijora-Iganmu-Costain, when drawn): Western Avenue on south from d13's rd-32d33ffa end (13241.36, 7384.58);
   the 5 Apapa Road pieces on Agunda's east border; the Lagos-Badagry Expressway carried across Agunda's corner from
