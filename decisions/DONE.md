@@ -8,9 +8,11 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Jibowu, the ground service road on the Murtala Muhammed Way bridge's east side, rd-2218bb4b and
+  rd-b1b129a5, widened from 7.0 to 11.0 m (Google satellite reads 9.6-12.0 m by eye). PR: map/jibowu-service-width.
 - 30 Oct: d00 Ojota, the four cloverleaf loops rd-062e7d84, rd-7b01bdb8, rd-80442ca9, rd-d46e4407 widened from
   8.7 to 10.0 m (Google satellite reads 9.6-10.9 m by eye); the 14 straight slips keep 8.7 (one read, 8.8 m).
-  PR: map/ojota-loop-width.
+  #578.
 - 30 Oct: d00 Maryland, the express rd-db6dfdd1 north of its flyover: its heights from s 1436 to 1706 raised (most
   1.39 m, at s 1526) to the lowest on or above the land with no step over 5.5%; it had run up to 1.37 m below the
   land. #577.

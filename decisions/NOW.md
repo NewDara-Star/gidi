@@ -33,7 +33,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
      - Ojota: how far the slips leave the land on Street View (rd-7b01bdb8); Ikorodu Road's
        own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
-     - Jibowu / Murtala: service roads' width (7 m not read); Western Avenue's bridge 150 m south; Western Avenue's
+     - Jibowu / Murtala: Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
        1.5-3 m over the land's dip at s 340-370, 30 Oct); slips' width (all four, 8.7 m not read); whether Street
@@ -217,7 +217,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links.
 - d17: rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
   rd-b2d9b4b0; rd-188b1a2a re-joined; Clinic Road's end 1 m from rd-96ed58e3 / rd-93fdb33d; houses b-120302f2,
-  b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links.
+  b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links; Jibowu's east service road at
+  11 m (30 Oct): rd-1a3d2748, rd-32d111e0 end inside it with no junction, rd-d76aa192's end 4.7 m from its node.
 - d19: rd-d6d07182 under rd-aae94fd5 for 12 m, crossed by both links; b-20052ac2, b-74a64b3f, b-494e9843; rd-a27ac3a6,
   rd-00c23990, rd-a15fbfdf.
 - d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
