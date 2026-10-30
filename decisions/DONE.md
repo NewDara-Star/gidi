@@ -8,6 +8,9 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 9, the Airport-Alimosho bypass rd-8f4843b7 (being built; Google shows only a track by the
+  airport fence): its start off rd-ec813d89, the bend at s 202 m and its end onto Egbe Road rd-6d1e566d eased; d00's
+  corner rows 38 -> 33.
 - 29 Oct: corner sweep pass 8, the Festac links off the Apapa-Oworonshoki Expressway (6.470 N 3.324 E): rd-c56ec7e1,
   two real links drawn as one with a 180 degree double-back, split into rd-c56ec7e1 and rd-35ed3005 (ramps, 8.7 m),
   each eased onto Overture's line; d00's corner rows 45 -> 38.
