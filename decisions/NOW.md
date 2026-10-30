@@ -118,8 +118,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        water; its east end runs 110 m on d09's rd-44cd2dee (d09 line); Kirikiri Road joined to the expressway at
        (11597.34, 8907.57) in d09's pass, read on Google first.
      - Kirikiri to Tin Can: the S-bend's 96 m bends looked at again in the drive.
-     - Iyana-Ipaja: Ipaja Road north of the roundabout is the district's; the BRT lane's own bridge (Overture 3602e7);
-       Google z18 and Street View; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
+     - Iyana-Ipaja: Ipaja Road north of the roundabout is the district's; the BRT lane's own bridge (Overture 3602e7) read 30 Oct: a canal bridge of about 25 m (frac
+       0.775-0.785, at 6.6258 N 3.2983 E), the expressway's carriageways bridged beside it (566ac3, 2239ef), all at the
+       road's level, no rise (satellite z19; Street View Mar 2024 at 6.62606 N 3.29844 E heading 200, the BRT lane
+       kerbed in the middle); nothing for the map until the canal's water is drawn; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
      - Anthony: the loop off the westbound bridge (Overture 7f326d) left out; Ikorodu Road's six slips here; Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
