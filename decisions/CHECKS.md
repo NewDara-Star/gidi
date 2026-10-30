@@ -60,7 +60,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Vehicles are built like the fonts | gidi-game | gidi-game |
 | The first goal: the street video's scene | gidi-game | owner's review |
 | Meshy's place | process | not a map rule |
-| Models: Meshy first, then broken down in Blender | process; each spend confirmed with the owner | not a map rule: the owner's review; the credits are read with Meshy's balance call |
+| Models: Meshy first, then built properly in Blender | process; each spend confirmed with the owner | not a map rule: the owner's review; the credits are read with Meshy's balance call |
 | Painted first, graded until it is liked | the look | not a map rule: the owner's eye |
 | Matching Lagos | match passes | owner's review |
 | The kit session gets exact lists | process | not a map rule |

@@ -151,11 +151,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    that is not enough (a model download, asked first).
 
 04. [ ] **Art style** (resumed 30 Oct beside the road session; all of it in `docs/look/LOOK-NOTES.md`, scripts in
-   ~/gidi-data/research/look-test-29oct/). The owner's turn (30 Oct, DECISIONS "Models: Meshy first, then broken down
+   ~/gidi-data/research/look-test-29oct/). The owner's turn (30 Oct, DECISIONS "Models: Meshy first, then built properly
    in Blender", "Painted first, graded until it is liked", "30 fps on an 8 GB machine is the floor"): the danfo's
    weak point was the model, not the paint. [ ] The keke from Meshy first (the 19 Oct sheet,
-   ~/gidi-data/research/models/keke/ref_v1_sheet.jpg; credits confirmed with the owner), broken into parts in Blender,
-   painted; then the danfo the same way (its 19 Oct Meshy model is already in Art/Vehicles/Danfo); then the rest
+   ~/gidi-data/research/models/keke/ref_v1_sheet.jpg; credits confirmed with the owner), then built part by part in Blender
+   against it (every detail Meshy shows listed and checked off), painted; then the danfo the same way (its 19 Oct Meshy model is already in Art/Vehicles/Danfo); then the rest
    while the credits last (they end 11 Nov 2026: 3,022 on 30 Oct). [ ] The painter's "down" on curved parts, checked
    again on the Meshy keke. [ ] The colour grade in passes until the owner likes it (bright colours settled there).
    [ ] Ask: what "Looks 1 and 2, that's the photorealistic mode" means (a second, photo-like mode?). [ ] The painter
