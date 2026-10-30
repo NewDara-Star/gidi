@@ -90,9 +90,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Anthony: the loop off the westbound bridge (Overture 7f326d) left out; Ikorodu Road's six slips here; Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
-     - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b); which link is on top (Street
-       View) and the bridge's height over the swamp; with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4
-       and rd-e38c8fd1 end 5.8 m off its node, inside it (a staggered join for the junction kit).
+     - Third Mainland's fork at Ebute-Metta: which link is on top (Street View) and the bridge's height over the
+       swamp; with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its node,
+       inside it (a staggered join for the junction kit).
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
        whether it really meets the Marina junction's road.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
