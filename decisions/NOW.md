@@ -89,9 +89,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Anthony: the loop off the westbound bridge (Overture 7f326d) left out; Ikorodu Road's six slips here; Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
-     - Third Mainland's fork at Ebute-Metta: which link is on top (Street View) and the bridge's height over the
-       swamp; with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its node,
-       inside it (a staggered join for the junction kit).
+     - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b, Okobaba Street's curve to
+       Clinic Road; put back 30 Oct) joined to the network; which link is on top (Street View) and the bridge's height
+       over the swamp; with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
+       node, inside it (a staggered join for the junction kit).
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
        whether it really meets the Marina junction's road.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
@@ -242,7 +243,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
   it, 30 Oct); at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
   and 4.4 m off its node and rd-cb2h4xa5, rd-xafls8id, rd-hvwdw3gi cross it with no node (3 clash, 2 node rows; pass 12).
-- d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links.
+- d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links;
+  rd-9d3c94cc drawn on top of d00's rd-b0b218e4 for 67 m (1 clash, 5 node rows).
 - d17: rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
   rd-b2d9b4b0; rd-188b1a2a re-joined; Clinic Road's end 1 m from rd-96ed58e3 / rd-93fdb33d; houses b-120302f2,
   b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links; Jibowu's east service road at

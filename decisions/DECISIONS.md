@@ -124,6 +124,14 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   compact"; the wording below given and answered "Yes"). The districts already drawn never decide where a network
   road goes, and they get no fixes or long notes. A clash with one gets one line in the list for that district's turn.
   The push reviewer reads this too: district detail is not a reason to block a network change.
+  Nor is a district's drawing ever a reason for a network road to go or stay (owner, 30 Oct, after #604 took out
+  Ebute-Metta's rd-b0b218e4 because d16 drew the same street: "the districts as drawn now are leftovers from the past
+  process... anything we do has to be centered around the roads, because we are probably going to redraw the
+  districts... I've told you this like countless times"). The road work reads only the real place (Google, Street
+  View, Overture) and the network itself; the districts may be renumbered and redrawn.
+  **Street View as much as it needs** (owner, 30 Oct: "you can connect to Google Chrome, so you can do as much Street
+  View as you need... Do anything that needs Street View and get it right"). Work that needs Street View is done in
+  Chrome, not put aside for the owner; a height or width is read there before it is guessed.
   **The road kit comes from Street View, with a road done list** (owner, 29 Oct, asked again after "kits photo-close"
   of 25 Oct: "work till the point where you get all the roads, and then begin to make kits for the instances for
   them, so we can run it in Unreal and drive a real car or danfo or keke or Okada there... It would mean a lot of
