@@ -100,7 +100,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        3.3642 E: the bands where slips rd-001dc84f, rd-9ffc6c80, rd-cc5af0f9 run read 11-15 m but were not told
        apart from Apapa Road's carriageways beside them; Street View first).
      - Tin Can: Tincan Island Port Road drawn in its district and loops rd-2b1023ff, rd-4615c8ad joined; the bridge's
-       real run over the creek (Street View); the outer loop rd-4615c8ad's width on its east side (8.7 kept: 7.3-8.0 m
+       real run over the creek read 30 Oct (Overture's bridge 290-295 m, f7754e and 15cd13, from 6.43888 N 3.33655 E to 6.43673 N 3.33810 E, the loops passing under its south-east end about 40 m from it; satellite at 6.4378 N 3.3372 E: a creek about 100 m wide just north of the loops; Street View Nov 2016 at 6.43790 N 3.33712 E: twin decks, nearly flat, some 4-6 m over the water by eye; the map's rd-c0a3f989 is 2-4.5 m at s 388-432 and 9 m over the loops at s 517-548, so close; its raised part over 5 m runs s 442-608, the real bridge's line about s 275-575 by the loops' place: to settle when the creek's water is drawn, the land under it 1.3-2.0 m now); the outer loop rd-4615c8ad's width on its east side (8.7 kept: 7.3-8.0 m
        on the west, unclear in the east).
      - Mile 2: the deck's clearance read on Street View under the bridge (30 Oct, rough: Street View Apr 2024 at
        6.46008 N 3.31474 E looking east along the Badagry Expressway, a bridge with lorries on it some 50-150 m ahead,
