@@ -52,7 +52,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Idumagbo Avenue rd-4aeee6d8 joined (Google labels it Adeniji Adele Bridge); the four outer
        slips' width (8.7 m; satellite 9-12 m, no clear edge, 30 Oct).
      - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's two decks' lanes (width read rough, 28 m); loop rd-82b977fa overlaps the Lagoon
-       Highway rd-fb8f7300 by up to 5.8 m, settled with the highway's heights; widths.
+       Highway rd-fb8f7300 by up to 5.8 m at 8.7 m (0.9 m more at 10.5 m, 30 Oct), settled with the highway's heights.
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
        levels; Mobil Road rd-85e1874d and Wharf Road on (street pass); which carriageway is on top (Street View) and
