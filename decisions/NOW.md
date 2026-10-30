@@ -72,7 +72,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m; Street View Mar 2024 at 6.54686 N
        3.39660 E, 30 Oct: no lane paint, about two lanes by eye between parapets, people walking on its kerbs; lane
        count not set); Diya Street's level-3 bridge (d27's pass); the links' far ends 14-29 m off the real spots.
-     - Third Mainland's Lagos Island end: which road is on top (Street View); Ring Road raised (level 1); slips to
+     - Third Mainland's Lagos Island end: Third Mainland on top of Ring Road, as the map has it (read 30 Oct:
+       Overture's bridge feb1a8 and fd9e07 at level 1 over Ring Road d79b10 and 36767c at level 0, at 6.4658 N
+       3.3922 E; Street View Jul 2021 at 6.46566 N 3.39317 E on Ring Road (Adeniji Adele Access Road) on the
+       ground, the bridge's deck on piers beside and over it, a bus on it); Ring Road raised (level 1) east of
+       there (Overture 608408, 083b70, 3711f2 at about 6.461-6.464 N 3.396 E), not read; slips to
        Adeniji Adele (Overture has none, read at z18); the Lagoon Highway's heights.
      - Lagos Island cloverleaf: rd-252c0e0f / rd-ee4feee6 joined or ended with Lagos Island's streets; Ring Road's
        curve west against the lagoon edge; Idumagbo Avenue rd-4aeee6d8 joined (Google labels it Adeniji Adele Bridge);
