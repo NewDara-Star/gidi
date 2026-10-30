@@ -99,7 +99,14 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        6.46008 N 3.31474 E looking east along the Badagry Expressway, a bridge with lorries on it some 50-150 m ahead,
        danfos under it give about 5.5-7 m clear by eye, so about 7-8.5 m to its deck top with the deck's depth; the
        map has the Apapa-Oworonshoki deck 7.1-7.6 m over the land; not changed. Not sure it is the same bridge: the
-       pano at 6.46004 N 3.31581 E stands on a raised road east of it; read again from closer).
+       pano at 6.46004 N 3.31581 E stands on a raised road east of it; read again from closer). Read again 30 Oct
+       from closer: Apr 2024 at 6.46004 N 3.31591 E heading 262, on the Badagry Expressway's carriageway right at
+       the Apapa-Oworonshoki bridge's east face (the crossing on satellite z18 about 6.4600 N 3.3156 E, so the same
+       bridge): a container lorry (about 4.0 m to the container's top) passes under with little room, a danfo
+       beyond it, so a clearance of about 4.3-5 m by eye and the deck's top about 5.5-6.5 m up, lower than the map's
+       7.1-7.6 m; the check's DECK_OVER (6.7 m: 5.5 m clear + 1.2 m deck) does not let it come lower. Not changed:
+       by eye from one panorama, and 5.5 m is the design clearance the check was set from; to weigh with Ojuelegba
+       (about 4.5-5.5 m clear by eye) if more bridges read under 5.5 m.
      - Kirikiri: bridge road rd-be737149's west end joined to its district's streets, and its second bridge with the
        water; its east end runs 110 m on d09's rd-44cd2dee (d09 line); Kirikiri Road joined to the expressway at
        (11597.34, 8907.57) in d09's pass, read on Google first.
