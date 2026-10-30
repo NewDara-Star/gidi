@@ -50,6 +50,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Cost: | process | not a map rule |
 | The look target | renders | owner's review |
 | The laptop is the target machine | frame rate | gidi-game measures |
+| 30 fps on an 8 GB machine is the floor | frame rate and memory on an 8 GB Mac | GAP: no 8 GB machine measured yet; gidi-game measures the frame rate on the 16 GB laptop only |
 | Who Gidi is for | process | not a map rule |
 | PS5 and Steam, self-published, digital only | process | not a map rule |
 | Consoles later: | process | not a map rule |
@@ -59,6 +60,8 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Vehicles are built like the fonts | gidi-game | gidi-game |
 | The first goal: the street video's scene | gidi-game | owner's review |
 | Meshy's place | process | not a map rule |
+| Models: Meshy first, then built properly in Blender | process; each spend confirmed with the owner | not a map rule: the owner's review; the credits are read with Meshy's balance call |
+| Painted first, graded until it is liked | the look | not a map rule: the owner's eye |
 | Matching Lagos | match passes | owner's review |
 | The kit session gets exact lists | process | not a map rule |
 | Light by default on the laptop | process | not a map rule |
