@@ -8,9 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 the Lagos Island cloverleaf's four loops rd-2db62fc1, rd-4b7c8697, rd-7295d681, rd-fc4f9a75 widened
+  from 8.7 to 10.5 m (kerb dashes 10.3 m apart on Google satellite by eye). PR: map/lagos-island-loop-width.
 - 30 Oct: hook here-or-goodnight.sh: a switch phrase now counts at the start of any line of a message of 60 letters
-  or fewer (was: the message's start, 30 letters), so "Lovely / I'm away so turn on away mode" fires. PR:
-  hook/here-or-goodnight-lines.
+  or fewer (was: the message's start, 30 letters), so "Lovely / I'm away so turn on away mode" fires. #581.
 - 30 Oct: d00 Oworonshoki, the four links rd-416f06ca, rd-7a24933e, rd-bc322629, rd-e28cb5e7 widened from 8.7 to
   10.5 m (two lanes, 10.0-11.0 m on Google satellite by eye); rd-416f06ca's last bend eased to one curve. Maryland's
   four slips read about 7-8 m (openings through the separator), 8.7 kept. #580.
