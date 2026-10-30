@@ -71,7 +71,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Tin Can: Tincan Island Port Road drawn in its district and loops rd-2b1023ff, rd-4615c8ad joined; the bridge's
        real run over the creek (Street View); the outer loop rd-4615c8ad's width on its east side (8.7 kept: 7.3-8.0 m
        on the west, unclear in the east).
-     - Mile 2: the deck's clearance read on Street View under the bridge.
+     - Mile 2: the deck's clearance read on Street View under the bridge (30 Oct, rough: Street View Apr 2024 at
+       6.46008 N 3.31474 E looking east along the Badagry Expressway, a bridge with lorries on it some 50-150 m ahead,
+       danfos under it give about 5.5-7 m clear by eye, so about 7-8.5 m to its deck top with the deck's depth; the
+       map has the Apapa-Oworonshoki deck 7.1-7.6 m over the land; not changed. Not sure it is the same bridge: the
+       pano at 6.46004 N 3.31581 E stands on a raised road east of it; read again from closer).
      - Kirikiri: bridge road rd-be737149's west end joined to its district's streets, and its second bridge with the
        water; its east end runs 110 m on d09's rd-44cd2dee (d09 line); Kirikiri Road joined to the expressway at
        (11597.34, 8907.57) in d09's pass, read on Google first.
