@@ -8,10 +8,13 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Maryland, the Maryland-Opebi-Ojota Link Bridge rd-c0fe3e17 on its own deck (Overture is_bridge, level
+  2): 6.0 m from the Opebi side, down at 5.5% to the land at its junction with the west service road; every point
+  carries z. PR: map/maryland-link-bridge.
 - 30 Oct: d00 Maryland, the express's second slip pair north of its underpass (rd-db6dfdd1): the old pair rd-eb682999,
   rd-fb35cab8 moved north (its express end from s 1136 to s 1202), the south pair rd-860fae2a, rd-8dc7b0a5 drawn at
   the underpass mouth after Overture's d9e2ed, bb0fbc; both pairs on the stretch where the express runs on the land.
-  PR: map/maryland-north-slips.
+  #575.
 - 30 Oct: Osborne, link rd-289fa504: width 24 to 28 m, read by eye on Google satellite at 6.46215 N 3.41911 E (two
   parallel decks of about 13-14 m, about 29 m edge to edge; Overture one line, 5115b2). #574.
 - 30 Oct: Oworonshoki, the Diya Street slip rd-e923727a: kind ramp, 12.0 m (was the 24 m motorway default), read by eye

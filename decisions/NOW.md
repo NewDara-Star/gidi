@@ -35,7 +35,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
      - Jibowu / Murtala: service roads' width (7 m not read); Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
-     - Maryland: link bridge rd-c0fe3e17 on its own bridge; the express 1.4 m below the land at s 1526 of
+     - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
+       1.5-3 m over the land's dip at s 340-370, 30 Oct); the express 1.4 m below the land at s 1526 of
        rd-db6dfdd1 (cutting or new profile); slips' width (all four, 8.7 m not read); whether Street View shows the
        south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
@@ -145,6 +146,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 7. [ ] Lighter Gidi people (one skinned mesh, no grooms), through Mass with detail by distance.
 8. [ ] Owed checks: a script that every "next" written in a commit since 25 Oct is cited on this page, run at stop;
    the per-level budget check; the other 35 GAP rows in CHECKS.md.
+   Hook: here-or-goodnight.sh missed "Lovely / I'm away so turn on away mode" (30 Oct 08:07: it starts with another
+   word and is over 30 letters); away mode set by hand until 15:30. Fix the hook in its own commit.
 
 16. [ ] **Working means it matches the real place** (owner, 27 Oct). Comes before item 11's next district. Cover
    measured 27 Oct (DONE.md snapshot): Mùṣá 43.22% fails the band 43.26-47.65% by 0.04 points; the others at a third
