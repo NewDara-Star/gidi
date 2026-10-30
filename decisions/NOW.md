@@ -36,8 +36,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        shows the roads round the north loop near the ground, a bank by the crossing, no height read; the Overture loop
        for it not found by id); Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join
        rows.
-     - Jibowu / Murtala: Western Avenue's bridge 150 m south; Western Avenue's
-       service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
+     - Jibowu / Murtala: Western Avenue's bridge over Ojuelegba Road (raised 30 Oct, deck s 1074-1096 on rd-41dbe473,
+       15-35 m south of the real crossing): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is not in the city layer,
+       owed under the deck there; the deck's height on Street View; Western Avenue's service roads and slips; d13
+       rd-955a0307 drawn twice with the city layer's.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
        1.5-3 m over the land's dip at s 340-370, 30 Oct); whether Street
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
@@ -228,11 +230,16 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d12: rows from Isolo Road and the Airport Road junction; Ijora: rd-0009669d, rd-6741a469, rd-e4dd8803, b-03eb90ec
   beside the west road; frontage road rd-beb7773a: rd-fe80ec1c, rd-31de79b1, rd-5d55c27c; Badagry Ijora: streets
   rd-63ff2dcb, rd-b645f07f, rd-da8895b1 re-joined; rd-9df13b08, rd-e71a0ffa, rd-f150b7c4 on the expressway.
-- d13: rd-c92310d9, rd-02b98288 round Murtala's bridge; rd-41075d23 re-joined on the ground; rd-955a0307.
+- d13: rd-c92310d9, rd-02b98288 round Murtala's bridge; rd-41075d23 re-joined on the ground; rd-955a0307; Western
+  Avenue raised over Ojuelegba Road (30 Oct): its own copy rd-32d33ffa (6 crossings, its end on the deck); streets
+  rd-8e13b1c9, rd-e0c151c1, rd-e2a411ea, rd-edb383fb, rd-fd8d2beb under the ramps with 2.0-6.0 m clear; ends now on the
+  raised road: rd-27ff770f, rd-eaa6945b, rd-04c5713a, rd-138d2a3a, rd-255c5238, rd-26b0ca47, rd-55305d62,
+  rd-dd700495, rd-ea74bc35 (their joins go to the ground under it).
 - d14: rows from Isolo Road.
 - d15: Isolo Road deck rd-isodeck1 is the wrong way round (the expressway goes over); rd-qc8rcv8v crossed twice at the
   knot and 3 rows at the Airport Road junction; rd-qqm8wpxb lies on the east service road 533 m (9 clash, 5 node rows);
-  rd-avaupyki re-joined on the ground; at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
+  rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
+  it, 30 Oct); at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
   and 4.4 m off its node and rd-cb2h4xa5, rd-xafls8id, rd-hvwdw3gi cross it with no node (3 clash, 2 node rows; pass 12).
 - d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links.
 - d17: rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
