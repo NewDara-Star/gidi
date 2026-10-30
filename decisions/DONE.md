@@ -7,6 +7,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
+- 30 Oct: Ijora on Apapa Road, which road is on top read on Street View; the map agrees, no change (rd-c74ce92c, rd-399391e3, rd-714694a5, rd-8bbc873e). PR: now/ijora-on-top.
 - 30 Oct: Third Mainland's fork at Ebute-Metta turned the right way up: the Third Mainland Bridge rd-e7a23019 on
   top (8.19 m) where links rd-f691d9e0 and rd-e38c8fd1 cross it, the links on the ground under it, as Overture's
   levels and Street View show. #617.
