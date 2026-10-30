@@ -15,12 +15,15 @@ flag="$HOME/.claude/gidi-away"
 log="$HOME/.claude/gidi-away.log"
 now=$(TZ=Europe/Dublin date +%s)
 stamp=$(TZ=Europe/Dublin date '+%a %d %b %H:%M')
-# Only the owner's own short message is a switch: it starts with the phrase and is 30 letters or fewer ("I'm here
-# oooo", "Goodnight fam"). A longer prompt that only quotes the words (the push reviewer reading a commit message,
-# pasted text) is not: the first push of this hook let the review's own prompt fire goodnight.
-msg=$(printf "%s" "$input" | jq -r '.prompt // ""' | tr '\n' ' ' | sed "s/’/'/g" | tr '[:upper:]' '[:lower:]' \
-  | tr -cd "a-z' " | tr -s ' ' | sed 's/^ //; s/ $//')
-[ "${#msg}" -gt 30 ] && msg=""
+# Only the owner's own short message is a switch: 60 letters or fewer in all, with a line that starts with the phrase
+# ("I'm here oooo", "Goodnight fam", "Lovely" then "I'm away so turn on away mode" on the next line: that one, 30 Oct,
+# 36 letters and starting with another word, was missed when the cap was 30 and only the message's start counted).
+# A longer prompt that only quotes the words (the push reviewer reading a commit message, pasted text) is not: the
+# first push of this hook let the review's own prompt fire goodnight.
+raw=$(printf "%s" "$input" | jq -r '.prompt // ""' | sed "s/’/'/g" | tr '[:upper:]' '[:lower:]')
+all=$(printf "%s" "$raw" | tr '\n' ' ' | tr -cd "a-z' " | tr -s ' ' | sed 's/^ //; s/ $//')
+msg=$(printf "%s\n" "$raw" | tr -cd "a-z' \n" | tr -s ' ' | sed 's/^ //; s/ $//')
+[ "${#all}" -gt 60 ] && msg=""
 sid=$(printf "%s" "$input" | jq -r '.session_id // ""')
 if printf "%s" "$msg" | grep -Eq "^good ?night([^a-z]|$)"; then
   six=$(TZ=Europe/Dublin date -j -f '%Y-%m-%d %H:%M' "$(TZ=Europe/Dublin date +%Y-%m-%d) 06:00" +%s)

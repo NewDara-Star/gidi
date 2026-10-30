@@ -145,8 +145,6 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 7. [ ] Lighter Gidi people (one skinned mesh, no grooms), through Mass with detail by distance.
 8. [ ] Owed checks: a script that every "next" written in a commit since 25 Oct is cited on this page, run at stop;
    the per-level budget check; the other 35 GAP rows in CHECKS.md.
-   Hook: here-or-goodnight.sh missed "Lovely / I'm away so turn on away mode" (30 Oct 08:07: it starts with another
-   word and is over 30 letters); away mode set by hand until 15:30. Fix the hook in its own commit.
 
 16. [ ] **Working means it matches the real place** (owner, 27 Oct). Comes before item 11's next district. Cover
    measured 27 Oct (DONE.md snapshot): Mùṣá 43.22% fails the band 43.26-47.65% by 0.04 points; the others at a third
