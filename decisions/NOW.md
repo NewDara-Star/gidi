@@ -78,7 +78,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
        whether it really meets the Marina junction's road.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
-       Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View); widths.
+       Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View).
      - Abule Ado loop bridge (8900, 8530): the service roads the ramps and links land on; streets at the ramps' loose
        ends; Street View; widths.
      - Airport Road rd-37c2a1ad: its real lift (level 1) over Airport Road's crossing near (11665, 4485).
