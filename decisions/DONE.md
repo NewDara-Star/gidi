@@ -8,8 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Anthony, links rd-a550750d (7.0-7.6 m) and rd-b4be5eda (about 6.6 m) read on Google satellite; 8.7
+  kept, the reads in their notes. PR: map/anthony-link-read.
 - 30 Oct: d00 Iyana-Ipaja, the link rd-365def05 widened from 8.7 to 10.5 m (9.5-11.7 m on Google satellite by eye);
-  rd-a601faa2 (about 9.4 m) and rd-67b33568 (not readable) keep 8.7. PR: map/iyana-ipaja-link-width.
+  rd-a601faa2 (about 9.4 m) and rd-67b33568 (not readable) keep 8.7. #585.
 - 30 Oct: d00 Tin Can, the inner loop rd-2b1023ff widened from 8.7 to 10.5 m (10.2-12.4 m on Google satellite by
   eye); the outer loop rd-4615c8ad keeps 8.7 (7.3-8.0 m on its west side). #584.
 - 30 Oct: d00 Osborne, the four ramps rd-149d3209, rd-27f1d1e5, rd-82b977fa, rd-a3e9864c widened from 8.7 to 10.5 m
