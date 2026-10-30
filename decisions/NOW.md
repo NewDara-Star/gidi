@@ -127,7 +127,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Abule Ado loop bridge (8900, 8530): the service roads the ramps and links land on; streets at the ramps' loose
        ends; Street View; widths: ramps rd-2ab78c89, rd-166a257a read on hazy satellite (8.8-10.8 and 7.3-9.3 m, 8.7
        kept, 30 Oct), Street View to settle; links rd-3622e3bd, rd-f3179f2f (11.0 m) not readable (satellite hazy
-       there; the nearest Street View, Nov 2016 at 6.45576 N 3.24559 E, is under the bridge, not on it).
+       there; the nearest Street View, Nov 2016 at 6.45576 N 3.24559 E, is under the bridge, not on it). Street
+       View 30 Oct: Nov 2019 at 6.45732 N 3.24637 E heading 200, where Overture's 389cfd (rd-3622e3bd) and d4e72c
+       (rd-166a257a) meet, a paved road climbing between a low kerb wall and a concrete barrier, about 6.5-7.5 m
+       across by eye against a car (which of the two it is not told); Apr 2024 at 6.45677 N 3.24625 E, sand and
+       market stalls, no ramp in view (works on the expressway, or off the ramp's line): widths not set.
      - Airport Road rd-37c2a1ad's lift over Airport Road (raised 30 Oct, deck s 282-312): Airport Road itself
        (Overture 856426cb, 07c32fee, 1c6668a6, 9ad6f5d7) is not in the city layer, owed under the deck. Read 30 Oct
        on Street View (Jun-Jul 2021): from Airport Road east of it (6.56669 N 3.32201 E, heading 270) twin decks on
