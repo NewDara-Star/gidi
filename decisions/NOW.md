@@ -122,8 +122,15 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        kept, 30 Oct), Street View to settle; links rd-3622e3bd, rd-f3179f2f (11.0 m) not readable (satellite hazy
        there; the nearest Street View, Nov 2016 at 6.45576 N 3.24559 E, is under the bridge, not on it).
      - Airport Road rd-37c2a1ad's lift over Airport Road (raised 30 Oct, deck s 282-312): Airport Road itself
-       (Overture 856426cb, 07c32fee, 1c6668a6, 9ad6f5d7) is not in the city layer, owed under the deck; the deck's
-       height and the ramps' real ends on Street View.
+       (Overture 856426cb, 07c32fee, 1c6668a6, 9ad6f5d7) is not in the city layer, owed under the deck. Read 30 Oct
+       on Street View (Jun-Jul 2021): from Airport Road east of it (6.56669 N 3.32201 E, heading 270) twin decks on
+       piers over the road, the approaches between concrete retaining walls (walls owed to the road kit, not earth
+       banks), clearance about 5.5-6.5 m by eye, the road on top about 7-8.5 m up; the map's deck 7.6 m over the
+       land, kept. The south ramp meets the ground at about 6.5632 N (walled and low at 6.5640, at grade at 6.5627),
+       where the map's does (s 442, about 6.5628). The north ramp meets it at about 6.5696 N (just ahead of the
+       panorama at 6.5698, at grade at 6.5710); the map's starts at s 145, about 6.5709, some 46 m (1:3) further
+       out: brought in (s 191), its ramp over about 91 m would be 8.4%, over RAMP_MAX 8%, unless the deck comes down to
+       about DECK_OVER (14.0 m, 7.5%); left as it is, to decide with the other ramps' lengths.
    - [ ] The Apapa-Oworonshoki Expressway's service roads, open parts: Oshodi's westbound link (above); the loose
      start of Anthony's west link rd-0fbc2dcc joined to the streets west of Ikorodu Road; Tincan Island Port Road in
      the street pass; widths.
