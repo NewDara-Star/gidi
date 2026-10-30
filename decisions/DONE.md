@@ -8,10 +8,14 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 15: Ozumba Mbadiwe Avenue rd-e997b7da redrawn between its carriageways (it dipped up to 23 m
+  south to meet the Falomo road), and the Falomo road rd-674f17fb now leaves it at Overture's 19db2e and follows it south;
+  the coastal highway rd-e1e529ec's 38.5 m double-back taken out, the motorway rd-3dd6f2eb carried 16.9 m on to a T on
+  it. d00 corner rows 4 to 2. PR: map/corner-sweep-15.
 - 30 Oct: corner sweep pass 14, eight hook points by road ends dropped (29 to 84 degree turns on legs of 2 to 8 m):
   ramps rd-ea98cf5e, rd-525c863d, rd-7b01bdb8 met their roads at exactly 90 degrees, now 27 to 39; trunks rd-1533d520, rd-674f17fb,
   rd-8d0f5181; motorway rd-41dbe473; and rd-b0b218e4's 2 m stub past d16's rd-47294012. d00 corner rows 12 to 4.
-  PR: map/corner-sweep-14.
+  #570.
 - 30 Oct: corner sweep pass 13, four short jogs: Idi-Iroko Road rd-17305e85 (four points on Overture's crossover stub
   dropped, at most 1.7 m off its line), rd-823043ec (a 0.8 m leg), rd-9a745dcf (a 3.2 m jog), and rd-c6144c6c's step from
   Allen Avenue's line onto Opebi Road's middle (one curve); d00 corner rows 20 to 12. #569.
