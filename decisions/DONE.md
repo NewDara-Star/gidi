@@ -9,7 +9,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 ## Done, newest first
 
 - 30 Oct: #604 undone: d00 rd-b0b218e4 put back (a district's drawing is never a reason for a network road to
-  go; owner, DECISIONS). PR: map/ebute-metta-piece-back.
+  go; owner, DECISIONS). #606.
 - 30 Oct: Lagos Island cloverleaf, the loops' joins on Third Axial rd-36ade1eb: in pairs at one node each side of
   Ring Road as Overture and Google (b44bf9 + 80f28d at s 282.7, 2b32e6 + ae7985 at s 321.6); rd-4b7c8697,
   rd-2db62fc1, rd-7295d681, rd-fc4f9a75 ends moved 17.7-27.7 m. #605.

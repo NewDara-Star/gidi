@@ -31,11 +31,15 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      at level 2, no wards); after roads, rail and water, cut the map on its hard edges,
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
-     - Ojota: how far the slips leave the land on Street View (rd-7b01bdb8: in the map its start is 9-11 m over the
-       land, higher than the 7.5 m deck; 30 Oct, Street View Jun 2021 at 6.59514 N 3.38186 E and 6.59394 N 3.38236 E
-       shows the roads round the north loop near the ground, a bank by the crossing, no height read; the Overture loop
-       for it not found by id); Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join
-       rows.
+     - Ojota: the slips against the land. Read 30 Oct on Street View (Jun 2021): the south loop rd-7b01bdb8 (Overture
+       ad005b, no level) is at grade all round (6.59207 N 3.38260 E, 6.59221 N 3.38349 E: flat road beside a flat
+       garden), and where it splits from rd-cd9ab431 (Overture 3ba481, a bridge for its first 74%, then on the ground)
+       the road is on a low bank, about 2-3 m over the ground beside it by eye (6.59272 N 3.38331 E). In the map the
+       loop is 9-11 m over the land in its curve: the land under the real-size junction is 1:3 land, 0.8-14.0 m across
+       its 550 m box (5.6 m at the split, 3.9 in the loop, 8.2 at its end), so a road at grade in Lagos meets a hollow
+       here. Waiting on the owner (asked 30 Oct): shape the land under an interchange to its roads (cut and fill, as
+       engine road splines do) or keep the roads lifted over it. Ikorodu Road's own 4 slips 500-570 real m out; the
+       twins catalogue's two old flat-join rows.
      - Jibowu / Murtala: Western Avenue's bridge over Ojuelegba Road (raised 30 Oct, deck s 1074-1096 on rd-41dbe473,
        15-35 m south of the real crossing): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is not in the city layer,
        owed under the deck there; the deck's height on Street View; Western Avenue's service roads and slips; d13
