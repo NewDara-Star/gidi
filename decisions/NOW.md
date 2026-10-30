@@ -18,12 +18,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (a) Third Mainland Bridge, Ikorodu Road: done (DONE.md).
    (b) The other main roads in d00 (`scripts/city_network.py`'s list), every junction a shared point named for its real
    place and district; slip roads and ramps at real length (DECISIONS "1:3 sets where things are"):
-   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 2 left on 30 Oct after passes 1-15
-     (#557, #558, Orchid Road rd-ee461730, the Festac links rd-c56ec7e1 and rd-35ed3005, the Airport-Alimosho bypass
-     rd-8f4843b7, the Shasha links rd-ec813d89 and rd-5e5d9830, Obafemi Awolowo Way rd-f68b428f and Olowopopo Drive
-     rd-5f8597a1, Agege Motor Road rd-798553cb, short jogs on rd-17305e85, rd-823043ec, rd-9a745dcf, rd-c6144c6c, eight end hooks, Ozumba Mbadiwe rd-e997b7da at the Falomo road
-     rd-674f17fb, the coastal highway rd-e1e529ec's double-back at the motorway rd-3dd6f2eb). Left: rd-e923727a (2 rows; its
-     first points are shared with d27's rd-a557b7a2, so easing it leaves d27 a leftover). The bypass's end at Egbe Road
+   - Corner sweep finished 30 Oct (passes 1-16, each in DONE.md): d00 has no ROAD corner rows left. For the street
+     pass: the bypass's end at Egbe Road
      rd-6d1e566d is eased inside Overture's hook by up to 8 m; its junction waits for a published design or the street pass.
      Orchid Road's small roundabout at (20840, 9433) waits for the street pass; so does New Festac Bridge Road,
      where rd-c56ec7e1 and rd-35ed3005 end loose at (11785.32, 8080.44). Helper:
@@ -219,7 +215,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links.
 - d19: rd-d6d07182 under rd-aae94fd5 for 12 m, crossed by both links; b-20052ac2, b-74a64b3f, b-494e9843; rd-a27ac3a6,
   rd-00c23990, rd-a15fbfdf.
-- d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads.
+- d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
+  rd-a557b7a2 still holds rd-e923727a's old start points (eased in pass 16) and runs on it 61 m (1 clash row).
 - d28: rd-db0655fe ends loose inside Ikorodu Road; Ojota's 24 street rows under ramps; Anthony: 31 houses,
   rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from the
   service roads.
