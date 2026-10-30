@@ -286,7 +286,9 @@ layer (main roads, land); 11 districts drawn. The kit is gidi-game's builders, r
 `cd ~/gidi && ~/.venvs/gidi/bin/python scripts/board_server.py --port 8779`, then `http://127.0.0.1:8779/web/board.html`.
 Map check: `~/.venvs/gidi/bin/python scripts/check_map.py`. Unreal (on hold): gidi-game `tools/editor.sh` with
 `tools/watchdog.sh`. VoiceMode's whisper and kokoro are disabled (`launchctl enable gui/501/com.voicemode.<name>`).
-gidi-data has no remote and Time Machine failed to mount its disk on 29 Oct: the look scripts are on this Mac only.
+gidi-data's notes and scripts are on GitHub, private (NewDara-Star/gidi-data, 30 Oct; push after each commit); its
+data, pictures and .blend files, and the other-game studies (research/gta, research/psp, ignored), are on this Mac
+only: Time Machine failed to mount its disk on 29 Oct.
 
 **Waiting on the owner.**
 1. People: the proof run (N one-mesh people against N City Sample people in the Underdeck) when the Mac is free.

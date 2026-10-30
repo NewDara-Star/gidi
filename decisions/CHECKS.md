@@ -14,6 +14,8 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Open world first; narrative optional | direction | not a map rule |
 | Gidi is our city. | direction | owner's review |
 | Invented names only. | no name on the map shares its core with a real Lagos name (`docs/hand/realnames.txt`); sound-alikes are judged by the owner | `check_map.py` (a name or text sharing a real name's core fails); N1 on the old map; the sound-alike is by ear (owner's review of NAMES.md) |
+| The best it can be, not shrunk to a device | Unreal, PC and console first; a web or phone build only as a later port | not a map rule: the owner's review |
+| Goals, not instructions | missions give a goal and accept any method that reaches it | GAP: no missions in the data yet; check when they come |
 | Safe ground: | places flagged safe are never crime sites | GAP: no crime sites in the data yet; check when they come |
 | If it's in the 3D, it's in the 2D | the kit places nothing of its own | gidi-game `tools/fields.py` (a build that reads an undeclared key stops) |
 | Hand-making happens on the drawing board | process | not a map rule |
@@ -39,7 +41,7 @@ that held only for the old map went with them to `HISTORY.md` (24 Oct).
 | Study other games from the inside | nothing from another game is in gidi or gidi-game | by hand (what is learned is written in our own words) |
 | Fetching, what works | process | not a map rule |
 | Look first: | references | owner's review |
-| Gidi's data stays on this Mac | `~/gidi-data` has no git remote | by hand: `git -C ~/gidi-data remote` printed nothing (24 Oct) |
+| Gidi's data stays on this Mac | `~/gidi-data`'s one remote is private, and its data, pictures, .blend files and the other-game studies are ignored | by hand (30 Oct): the remote is NewDara-Star/gidi-data, PRIVATE; the 80 tracked files are notes and scripts only (.md .py .sh .mjs); research/gta, research/psp, tools/, to-delete/ ignored |
 | Keep a delete-later list | `docs/DATA-SOURCES.md` | by hand |
 | Git: | branches, PRs | GitHub |
 | Writing: | process | not a map rule |
