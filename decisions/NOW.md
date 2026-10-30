@@ -87,7 +87,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        more at 10.5 m, 30 Oct), settled with the highway's heights.
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
-       levels; Mobil Road rd-85e1874d and Wharf Road on (street pass); which carriageway is on top (Street View);
+       levels; Mobil Road rd-85e1874d and Wharf Road on (street pass); which road is on top read 30 Oct and the map agrees: the loop rd-399391e3 meets rd-c74ce92c at a shared point at 6.05 m (its merge, not a crossing), Apapa Road is 8.56 m over the loop's ground part (1.14 m) at its s 1092; Street View Nov 2019 at 6.45876 N 3.36528 E stands on a walled one-carriageway ramp beside Apapa Road's deck, lorry roofs well below, falling south to the ground (heights by eye, not measured); the links under the loop, rd-714694a5 and rd-8bbc873e, have no heights yet;
        Apapa Road does not stay raised to the Eko Bridge (read 30 Oct: Overture level 1 from about 6.453 to 6.470 N,
        level 0 from 6.470 to 6.474 N, level 2 over the Badagry junction north of it; Street View Dec 2016 at 6.47177
        N 3.36309 E, the dual carriageway on the ground both ways, rising to the south in the distance); the map's
