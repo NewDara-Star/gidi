@@ -26,15 +26,18 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      Gidi metres to lat, lon from the frame corner in scripts/draft_buildings.py (FU 500525, FV 707825, 1:3, y south).
      Then the rest read one by one (real bends at 1:3 left for the drive, draft kinks eased).
    - [ ] **District borders, the 22 Oct way** (DECISIONS, owner 29 Oct): read where the 51 came from; council
-     boundaries as a reference (a download asked first); after roads, rail and water, cut the map on its hard edges,
+     boundaries as a reference (downloaded 30 Oct, owner's OK: HDX OCHA nga_admin_boundaries.geojson.zip, Office of
+     the Surveyor General, CC BY-IGO, in ~/gidi-data/research/data/admin-boundaries-nga/; Lagos is its 20 councils
+     at level 2, no wards); after roads, rail and water, cut the map on its hard edges,
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
      - Ojota: slips' width (8.7 m not read); how far they leave the land on Street View (rd-7b01bdb8); Ikorodu Road's
        own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
      - Jibowu / Murtala: service roads' width (7 m not read); Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
-     - Maryland: second slip pair at the underpass's north mouth; link bridge rd-c0fe3e17 on its own bridge; the
-       express 1.4 m below the land at s 1526 of rd-db6dfdd1 (cutting or new profile); slips' width.
+     - Maryland: link bridge rd-c0fe3e17 on its own bridge; the express 1.4 m below the land at s 1526 of
+       rd-db6dfdd1 (cutting or new profile); slips' width (all four, 8.7 m not read); whether Street View shows the
+       south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
        west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels); link width.
      - Airport Road junction: ramps' bridges and the expressway's levels (flat now); west service road rd-8d6f0550's
