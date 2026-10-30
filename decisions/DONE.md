@@ -8,8 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Ijora on Apapa Road, slips rd-ce943f23 and rd-b158299d read at about 8.8 m on Google satellite; 8.7
+  kept, the reads in their notes. PR: map/ijora-apapa-slip-read.
 - 30 Oct: d00 Oshodi, slip rd-cad04ec1 read at about 8.8 m on Google satellite (Overture ba001b); 8.7 kept, the read
-  in its note. PR: map/oshodi-slip-read.
+  in its note. #592.
 - 30 Oct: d00 Airport Road junction, ramp rd-6a2d3255 widened from 8.7 to 10.5 m (10.5 m on Google satellite by eye);
   rd-054d3d02, rd-39b7e0c0, rd-0f54d744 read at 7.3-8.8 m, 8.7 kept. #591.
 - 30 Oct: d00 Eko Bridge's Lagos Island end, loops rd-243b5af1 (about 8.9 m) and rd-dc498b0b (about 8.3 m) read on
