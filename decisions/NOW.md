@@ -74,7 +74,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b); which link is on top (Street
-       View) and the bridge's height over the swamp; widths.
+       View) and the bridge's height over the swamp; the widths of rd-e38c8fd1 and rd-a8efbae0 (not read).
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
        whether it really meets the Marina junction's road; widths.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
@@ -222,7 +222,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links; Jibowu's east service road at
   11 m (30 Oct): rd-1a3d2748, rd-32d111e0 end inside it with no junction, rd-d76aa192's end 4.7 m from its node.
 - d19: rd-d6d07182 under rd-aae94fd5 for 12 m, crossed by both links; b-20052ac2, b-74a64b3f, b-494e9843; rd-a27ac3a6,
-  rd-00c23990, rd-a15fbfdf.
+  rd-00c23990, rd-a15fbfdf; with the fork's links at 10.0 m: 23 house clashes larger, b-4655f02f and b-fa201702
+  new, street ends rd-325023fc, rd-7a9d8b06, rd-a0b710b5 now NODE rows inside rd-7382f27e.
 - d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
   rd-a557b7a2 still holds rd-e923727a's old start points (eased in pass 16) and runs on it 61 m (1 clash row);
   Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
