@@ -117,6 +117,16 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
   the loops at every size below real.
   (Same day, on the result: "having the real thingy there and then having the problem points fixed by hand. Yes
   let's imbibe that.")
+  **Under a big junction the land is shaped to its roads** (owner, 30 Oct, at Ojota, where Street View shows the south
+  loop flat on the ground and the map's 1:3 land dropped 5 m under it, so the loop floated 9-11 m up; chosen from
+  three ways, "Shape land to roads": "under each interchange, raise or cut the ground to fit the roads, the way
+  Unreal's road splines raise terrain. Roads that are at ground level in Lagos sit on the ground in Gidi; only real
+  bridges stay bridges"; the others were keeping the roads lifted, or Ojota alone by hand). The real-size junction
+  stands on squeezed land, so its own ground is shaped: along every road part that is on the ground in Lagos (Overture
+  no level, Street View) the land takes the road's height, inside its loops it is filled smoothly from the roads round
+  it, and it eases back to the old land at no more than 1 in 3; under the decks it stays a deck's depth below. Where
+  two ground roads sit too close for a bank between them, the lower one keeps the land and a wall is owed to the road
+  kit.
   **While the network is built, the districts already drawn are only leftovers** (owner, 29 Oct, asked again after
   the rail note the same morning, "ignore anything the districts had previously done... the districts are the last
   things to be done anyway and are supposed to shape around the interconnection", and then: "did you not remember the

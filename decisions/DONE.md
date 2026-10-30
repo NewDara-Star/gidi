@@ -7,6 +7,9 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
+- 30 Oct: Ojota's land shaped to its roads (d00 rl-e5c8720d, rl-ac324ab1; 2,071 points, filled up to 11.47 m, cut up
+  to 4.05 m): the south loop rd-7b01bdb8 from up to 11.4 m over the land to 1.1, rd-8d2b45b4 8.8 to 0.6, rd-062e7d84 8.4
+  to 0.8; DECISIONS rule. PR: map/ojota-land-pad.
 
 - 30 Oct: #604 undone: d00 rd-b0b218e4 put back (a district's drawing is never a reason for a network road to
   go; owner, DECISIONS). #606.

@@ -31,15 +31,17 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      at level 2, no wards); after roads, rail and water, cut the map on its hard edges,
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
-     - Ojota: the slips against the land. Read 30 Oct on Street View (Jun 2021): the south loop rd-7b01bdb8 (Overture
-       ad005b, no level) is at grade all round (6.59207 N 3.38260 E, 6.59221 N 3.38349 E: flat road beside a flat
-       garden), and where it splits from rd-cd9ab431 (Overture 3ba481, a bridge for its first 74%, then on the ground)
-       the road is on a low bank, about 2-3 m over the ground beside it by eye (6.59272 N 3.38331 E). In the map the
-       loop is 9-11 m over the land in its curve: the land under the real-size junction is 1:3 land, 0.8-14.0 m across
-       its 550 m box (5.6 m at the split, 3.9 in the loop, 8.2 at its end), so a road at grade in Lagos meets a hollow
-       here. Waiting on the owner (asked 30 Oct): shape the land under an interchange to its roads (cut and fill, as
-       engine road splines do) or keep the roads lifted over it. Ikorodu Road's own 4 slips 500-570 real m out; the
+     - Ojota, after its land was shaped to its roads (30 Oct, DONE; DECISIONS "Under a big junction the land is shaped
+       to its roads"). Owed: rd-6eed686f runs 11.6-14 m (centre to centre) beside the expressway rd-e35d7679, their
+       carriageways overlapping 2.5-4.9 m in plan, 3.5-5.7 m above it from (14024, 3635) to its end node with
+       rd-e5e55c42 and rd-525c863d (4.5-4.7 m, about 2 m over the land): in Lagos both on the ground side by side, a
+       hand edit of its line and heights; the bridge ends (abutments) of rd-05dccea9, rd-cd9ab431 and rd-9a3ba1dd,
+       where the ramps run up to 7 m over the land for 5-15 m, owed to the road kit with the walls; the deck heights
+       and rd-cd9ab431's split bank (2-3 m by eye) on Street View; Ikorodu Road's own 4 slips 500-570 real m out; the
        twins catalogue's two old flat-join rows.
+     - The other interchanges' land: each junction's ground roads measured against the land, and shaped as at Ojota
+       where they float or dig in (DECISIONS "Under a big junction the land is shaped to its roads"; the way and the
+       numbers in Ojota's PR).
      - Jibowu / Murtala: Western Avenue's bridge over Ojuelegba Road (raised 30 Oct, deck s 1074-1096 on rd-41dbe473,
        15-35 m south of the real crossing): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is not in the city layer,
        owed under the deck there; the deck's height on Street View; Western Avenue's service roads and slips; d13
@@ -265,9 +267,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
   inside it, 13 street ends 4.4-5.7 m from the links' nodes (NODE rows: rd-02e38b95, rd-04d48b48, rd-20954906,
   rd-241002da, rd-395d5c12, rd-3c4bd7ed, rd-570636d8, rd-95ef5c6d, rd-ae0fbe3b, rd-c7428a3d, rd-d9fdf047 twice).
-- d28: rd-db0655fe ends loose inside Ikorodu Road; Ojota's 24 street rows under ramps; Anthony: 31 houses,
-  rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from the
-  service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct).
+- d28: rd-db0655fe ends loose inside Ikorodu Road; Ojota's 24 street rows under ramps, and since its land was shaped
+  (30 Oct) 15 more crossings of its ramps at grade and 10 node rows, 89 houses on the changed land; Anthony: 31
+  houses, rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from
+  the service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct).
 - d30 (Isolo-Ladipo, when drawn): Isolo Road stays on the ground under the expressway, as d00 has it.
 - d11 (Ijora-Iganmu-Costain, when drawn): Western Avenue on south from d13's rd-32d33ffa end (13241.36, 7384.58);
   the 5 Apapa Road pieces on Agunda's east border; the Lagos-Badagry Expressway carried across Agunda's corner from
