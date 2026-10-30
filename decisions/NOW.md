@@ -55,8 +55,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        numbers in Ojota's PR).
      - Jibowu / Murtala: Western Avenue's bridge over Ojuelegba Road (raised 30 Oct, deck s 1074-1096 on rd-41dbe473,
        15-35 m south of the real crossing): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is not in the city layer,
-       owed under the deck there; the deck's height on Street View; Western Avenue's service roads and slips; d13
-       rd-955a0307 drawn twice with the city layer's.
+       owed under the deck there; Western Avenue's service roads and slips; d13 rd-955a0307 drawn twice with the city
+       layer's. The deck's height read 30 Oct on Street View (Apr 2024, on Ojuelegba Road at 6.51003 N 3.36344 E,
+       heading 265): one beam deck on piers across the road, clearance about 4.5-5.5 m by eye against the danfos and
+       people under it, the road on top about 6.5-7.5 m up; the map's deck 7.5-7.7 m over the land (DECK_OVER 6.7),
+       so kept as it is.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
        1.5-3 m over the land's dip at s 340-370, 30 Oct); whether Street
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
