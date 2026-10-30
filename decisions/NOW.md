@@ -150,12 +150,16 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    the map records and a short list of synonyms (owner, 29 Oct: "what if... grep fails?"); a meaning search only if
    that is not enough (a model download, asked first).
 
-04. [ ] **Art style** (paused for the roads; all of it in `docs/look/LOOK-NOTES.md`, scripts in
-   ~/gidi-data/research/look-test-29oct/, committed in gidi-data 29 Oct). When it resumes: [ ] start from what stands
-   out to the owner in looks 1 (Grainy film) and 2 (Painted Lagos); [ ] the painter's "down" on curved parts (the
-   keke's tub); bright paints kept under clipping (the owner's call by eye); the next objects (a wall, the red
-   generator, a drum); the painter as a gidi-game tool once two or three pass; [ ] models more detailed, in the dress
-   pass; [ ] the chosen look into DECISIONS, rebuilt in Unreal and measured there (8 GB or 16 GB machine: ask).
+04. [ ] **Art style** (resumed 30 Oct beside the road session; all of it in `docs/look/LOOK-NOTES.md`, scripts in
+   ~/gidi-data/research/look-test-29oct/). The owner's turn (30 Oct, DECISIONS "Models: Meshy first, then broken down
+   in Blender", "Painted first, graded until it is liked", "30 fps on an 8 GB machine is the floor"): the danfo's
+   weak point was the model, not the paint. [ ] The keke from Meshy first (the 19 Oct sheet,
+   ~/gidi-data/research/models/keke/ref_v1_sheet.jpg; credits confirmed with the owner), broken into parts in Blender,
+   painted; then the danfo the same way (its 19 Oct Meshy model is already in Art/Vehicles/Danfo); then the rest
+   while the credits last (they end 11 Nov 2026: 3,022 on 30 Oct). [ ] The painter's "down" on curved parts, checked
+   again on the Meshy keke. [ ] The colour grade in passes until the owner likes it (bright colours settled there).
+   [ ] Ask: what "Looks 1 and 2, that's the photorealistic mode" means (a second, photo-like mode?). [ ] The painter
+   as a gidi-game tool once two or three objects pass; the chosen look rebuilt in Unreal and measured on 8 GB.
 
 03. [ ] **Map and brush first; Unreal on hold** (owner, 26 Oct; they may take it back). The Unreal items (02(a1)-(a3)
    and (c), 0, 2-8) are kept here, not worked, until the owner says.
@@ -357,7 +361,7 @@ only: Time Machine failed to mount its disk on 29 Oct.
 4. Kit eye tests: ut01_emmanuel angle A v2, layers 1-7 (the pickup reads weird).
 5. Download OK? a CC0 grass texture (Poly Haven, ~10-20 MB) for verges.
 6. Restart the Mac when home; then re-measure work mode's shadow pass.
-7. The look: 8 GB or 16 GB as the target machine; exposure or deeper paint for bright colours.
+7. The look: answered 30 Oct (8 GB is the floor; bright colours in the grade), DECISIONS "Look and machine".
 
 **Parked** (decided or asked for, not being worked on now).
 - The built danfo's wear material in the game; the keke, korope, molue and BRT the same way.
