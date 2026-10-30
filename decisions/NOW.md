@@ -61,7 +61,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        ea9474); Eric Moore Road's bridge and links (54c741, c417d8, 3a5200, 7396da), rd-1533d520 redrawn with them;
        the merge onto the link north and the turn-back loop read at z18; widths.
      - Tin Can: Tincan Island Port Road drawn in its district and loops rd-2b1023ff, rd-4615c8ad joined; the bridge's
-       real run over the creek (Street View); widths.
+       real run over the creek (Street View); the outer loop rd-4615c8ad's width on its east side (8.7 kept: 7.3-8.0 m
+       on the west, unclear in the east).
      - Mile 2: the deck's clearance read on Street View under the bridge.
      - Kirikiri: bridge road rd-be737149's west end joined to its district's streets, and its second bridge with the
        water; its east end runs 110 m on d09's rd-44cd2dee (d09 line); Kirikiri Road joined to the expressway at
@@ -203,7 +204,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   houses and streets (rd-f1478f6a still on the expressway 175 m, rd-86aea104 on a loop); Mile 2: 18 houses, 19 streets
   (houses b-2fe7abd3, b-9e425fbe, b-33e30e85; streets rd-b2b8a5cc, rd-fb81677f, rd-a9d4115f,
   rd-7fd9e952 and more); Tin Can's streets also rd-6a1edf61, rd-6bb4f684, rd-84ca7bdd, rd-b45f16c6, rd-d9222226,
-  rd-d9912b10, rd-cd2781a4, rd-d2139b18, rd-d9c43b32, rd-e5cca523, rd-f5a1740e, rd-fe5e0e67; rd-6727064e crosses the new expressway piece without a shared point.
+  rd-d9912b10, rd-cd2781a4, rd-d2139b18, rd-d9c43b32, rd-e5cca523, rd-f5a1740e, rd-fe5e0e67; rd-6727064e crosses the new expressway piece without a shared point; with loop rd-2b1023ff at
+  10.5 m: 9 houses' clashes larger, and street ends rd-2c0c9f67, rd-6a1edf61, rd-84ca7bdd, rd-86aea104, rd-d9912b10,
+  rd-ea4776e0 now NODE rows inside it.
 - d12: rows from Isolo Road and the Airport Road junction; Ijora: rd-0009669d, rd-6741a469, rd-e4dd8803, b-03eb90ec
   beside the west road; frontage road rd-beb7773a: rd-fe80ec1c, rd-31de79b1, rd-5d55c27c; Badagry Ijora: streets
   rd-63ff2dcb, rd-b645f07f, rd-da8895b1 re-joined; rd-9df13b08, rd-e71a0ffa, rd-f150b7c4 on the expressway.

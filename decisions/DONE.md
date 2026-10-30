@@ -8,9 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Tin Can, the inner loop rd-2b1023ff widened from 8.7 to 10.5 m (10.2-12.4 m on Google satellite by
+  eye); the outer loop rd-4615c8ad keeps 8.7 (7.3-8.0 m on its west side). PR: map/tin-can-loop-width.
 - 30 Oct: d00 Osborne, the four ramps rd-149d3209, rd-27f1d1e5, rd-82b977fa, rd-a3e9864c widened from 8.7 to 10.5 m
-  (9.3-11.4 m on Google satellite by eye); rd-289fa504's 5 m stub past their shared node taken off. PR:
-  map/osborne-ramp-width.
+  (9.3-11.4 m on Google satellite by eye); rd-289fa504's 5 m stub past their shared node taken off. #583.
 - 30 Oct: d00 the Lagos Island cloverleaf's four loops rd-2db62fc1, rd-4b7c8697, rd-7295d681, rd-fc4f9a75 widened
   from 8.7 to 10.5 m (kerb dashes 10.3 m apart on Google satellite by eye). #582.
 - 30 Oct: hook here-or-goodnight.sh: a switch phrase now counts at the start of any line of a message of 60 letters
