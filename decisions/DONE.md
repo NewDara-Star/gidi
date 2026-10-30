@@ -9,7 +9,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 ## Done, newest first
 - 30 Oct: Ojota's south-east slip rd-6eed686f brought down beside the expressway rd-e35d7679 (1.84-5.7 m over it, now
   0-1.25): the split with rd-cd9ab431 and rd-7b01bdb8 at 13.0 m (was 14.81), the end node with rd-e5e55c42 and
-  rd-525c863d at 2.4 (was 4.54); the land pad rebuilt (rl-e5c8720d, rl-ac324ab1). PR: map/ojota-slip-down.
+  rd-525c863d at 2.4 (was 4.54); the land pad rebuilt (rl-e5c8720d, rl-ac324ab1). #610.
 - 30 Oct: Ojota's land shaped to its roads (d00 rl-e5c8720d, rl-ac324ab1; 2,071 points, filled up to 11.47 m, cut up
   to 4.05 m): the south loop rd-7b01bdb8 from up to 11.4 m over the land to 1.1, rd-8d2b45b4 8.8 to 0.6, rd-062e7d84 8.4
   to 0.8; DECISIONS rule. #608.
