@@ -76,7 +76,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b); which link is on top (Street
        View) and the bridge's height over the swamp; the widths of rd-e38c8fd1 and rd-a8efbae0 (not read).
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
-       whether it really meets the Marina junction's road; widths.
+       whether it really meets the Marina junction's road.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
        Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View); widths.
      - Abule Ado loop bridge (8900, 8530): the service roads the ramps and links land on; streets at the ramps' loose

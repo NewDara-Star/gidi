@@ -8,8 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Ring Road over Awolowo Road, links rd-7e02d6d7, rd-2191f68a, rd-a4abb554 read at 7.6-8.8 m on Google
+  satellite; 8.7 kept, the reads in their notes. PR: map/ring-road-awolowo-link-read.
 - 30 Oct: d00 Third Mainland's fork at Ebute-Metta, links rd-aae94fd5, rd-f691d9e0, rd-7382f27e widened from 8.7 to
-  10.0 m (9.5-10.0 m parapet to parapet on Google satellite by eye). PR: map/ebute-metta-link-width.
+  10.0 m (9.5-10.0 m parapet to parapet on Google satellite by eye). #588.
 - 30 Oct: d00 Anthony, link rd-0fbc2dcc read at about 6.0-6.6 m on Google satellite; 8.7 kept, the read in its
   note. #587.
 - 30 Oct: d00 Anthony, links rd-a550750d (7.0-7.6 m) and rd-b4be5eda (about 6.6 m) read on Google satellite; 8.7
