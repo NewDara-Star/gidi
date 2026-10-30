@@ -18,9 +18,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (a) Third Mainland Bridge, Ikorodu Road: done (DONE.md).
    (b) The other main roads in d00 (`scripts/city_network.py`'s list), every junction a shared point named for its real
    place and district; slip roads and ramps at real length (DECISIONS "1:3 sets where things are"):
-   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 29 left on 30 Oct after passes 1-10
+   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 23 left on 30 Oct after passes 1-11
      (#557, #558, Orchid Road rd-ee461730, the Festac links rd-c56ec7e1 and rd-35ed3005, the Airport-Alimosho bypass
-     rd-8f4843b7, the Shasha links rd-ec813d89 and rd-5e5d9830). Next: rd-f68b428f, rd-798553cb, rd-5f8597a1 (3 each). The bypass's end at Egbe Road
+     rd-8f4843b7, the Shasha links rd-ec813d89 and rd-5e5d9830, Obafemi Awolowo Way rd-f68b428f and Olowopopo Drive
+     rd-5f8597a1). Next: rd-798553cb (3), then rd-e923727a, rd-c6144c6c, rd-9a745dcf, rd-823043ec, rd-17305e85 (2 each). The bypass's end at Egbe Road
      rd-6d1e566d is eased inside Overture's hook by up to 8 m; its junction waits for a published design or the street pass.
      Orchid Road's small roundabout at (20840, 9433) waits for the street pass; so does New Festac Bridge Road,
      where rd-c56ec7e1 and rd-35ed3005 end loose at (11785.32, 8080.44). Helper:
