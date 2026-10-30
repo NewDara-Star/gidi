@@ -21,6 +21,18 @@ Each rule has a row in `CHECKS.md`. Ideas not decided yet are in `IDEAS.md`.
 - **Open world first; narrative optional** (15 Oct 2026). "The entire world right now feels more placeholder and open world for me than having a set narrative." Districts are defined by what a player can do and meet there. The world comes first and is built to stand on its own; Tunde's story is layered on it. Don't push plot or characters beyond what the owner has confirmed.
 - **Gidi is our city.** Inspired by Lagos but our own. Data is a starting point; the owner's vision and the game's needs win.
 - **Invented names only.** No real Lagos names in the game. Every place gets an echo name: a sound-alike in the same language (owner, 22 Oct: "Make the names sound similar. So if something is English, it should be English. Something is Yoruba, it should be Yoruba"; Yaba → Saba, Computer Village → Gadget Village), never the real name, a real nearby place, rude or a cheap shot. Working names for all 51 districts: `docs/lagos-study/roads/NAMES.md`. Brands and businesses are always invented. *Changed 22-23 Oct:* "never traced" no longer holds for geometry: roads run on real lines ("Real Lagos roads") and houses are drafted from open footprints ("Houses: real footprints first"). Names are working names (owner, 27 Oct): naming is a creative pass the owner comes back to again and again, like the font, once the city is built.
+- **The best it can be, not shrunk to a device** (owner, 30 Oct, after reading about the Lagos games on phones and in
+  browsers: "why not make something that is the best it can be... as opposed to trying to shrink yourself just because
+  you want to serve some things"; "my primary goal is to make the best open world Lagos game I can possibly make").
+  Gidi is a full game for PC and console in Unreal; it is never cut down to fit a phone or a browser. Other ways to
+  reach players (the web among them) are welcome later, as ports of the real game once it is well optimised, never
+  as the target that sets the bar. It must look "unmistakably Lagos": the other Lagos games the owner has seen do not
+  look like Lagos, and taking the time to refine the place is the point.
+- **Goals, not instructions** (owner, 30 Oct, said before: "that's why I've been speaking about having a goal, and they
+  should not specifically tell you how to hit the goal. You just figure it out your way. Whatever method works"). A
+  mission gives the player a goal and lets any method that reaches it count. Long, slow story stretches lose players
+  (the owner's friends on Red Dead's story mode; Lagos Run "lost me real fast"); combat and moment-to-moment play
+  should feel good, as in God of War.
 - **Safe ground:** churches, mosques, schools, hospitals, clinics and places flagged `safe` are never crime sites. Sacred traditions are never criminal, and sacred things like the masquerades (Eyo) are never joked about (owner, 27 Oct: "never joke").
 
 ## The map
