@@ -9,7 +9,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 ## Done, newest first
 
 - 30 Oct: Abule Ado loop bridge, ramps rd-2ab78c89 (dc8c42) and rd-166a257a (d4e72c) read on hazy satellite at
-  8.8-10.8 and 7.3-9.3 m; 8.7 kept. PR: map/abule-ado-loop-width-read.
+  8.8-10.8 and 7.3-9.3 m; 8.7 kept. #597.
 - 30 Oct: Ebute-Metta fork, last two widths read: Clinic Road eastbound rd-a8efbae0 (b35dbc) 8.7 -> 14.0 m;
   rd-e38c8fd1 (5fe0d5) about 8.8, keeps 8.7. IDEAS: someone else's labelled twin level, the owner's view. #596.
 - 30 Oct: d00 Ijora on Apapa Road, slips rd-ce943f23 and rd-b158299d read at about 8.8 m on Google satellite; 8.7

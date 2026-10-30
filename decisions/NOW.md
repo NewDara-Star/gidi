@@ -87,7 +87,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View).
      - Abule Ado loop bridge (8900, 8530): the service roads the ramps and links land on; streets at the ramps' loose
        ends; Street View; widths: ramps rd-2ab78c89, rd-166a257a read on hazy satellite (8.8-10.8 and 7.3-9.3 m, 8.7
-       kept, 30 Oct), Street View to settle; links rd-3622e3bd, rd-f3179f2f (11.0 m) not read.
+       kept, 30 Oct), Street View to settle; links rd-3622e3bd, rd-f3179f2f (11.0 m) not readable (satellite hazy
+       there; the nearest Street View, Nov 2016 at 6.45576 N 3.24559 E, is under the bridge, not on it).
      - Airport Road rd-37c2a1ad: its real lift (level 1) over Airport Road's crossing near (11665, 4485).
    - [ ] The Apapa-Oworonshoki Expressway's service roads, open parts: Oshodi's westbound link (above); the loose
      start of Anthony's west link rd-0fbc2dcc joined to the streets west of Ikorodu Road; Tincan Island Port Road in
