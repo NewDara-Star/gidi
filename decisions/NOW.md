@@ -122,7 +122,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        the links and the bridge on low decks over the swamp); the Third Mainland Bridge's ramps over the links read
        on Street View for their real length (set at 5.5% from the 8.2 m top, 30 Oct); with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
        node, inside it (a staggered join for the junction kit).
-     - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
+     - Ring Road over Awolowo Road: Ring Road raised, read 30 Oct on Street View (Oct 2019 at 6.44416 N 3.40623 E,
+       on the deck over rooftops; Jul 2021 on Awolowo Road at 6.44388 N 3.40528 E, the deck across the road ahead),
+       as the map has it (rd-288c15dd 8.58 m over Awolowo Road's land of 1.07 m at s 288); its clearance not read;
+       Awolowo Road rd-747e0c42's heights (none yet) and east end;
        whether it really meets the Marina junction's road.
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
        Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View).
