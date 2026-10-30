@@ -8,9 +8,12 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Maryland, the express rd-db6dfdd1 north of its flyover: its heights from s 1436 to 1706 raised (most
+  1.39 m, at s 1526) to the lowest on or above the land with no step over 5.5%; it had run up to 1.37 m below the
+  land. PR: map/maryland-express-dip.
 - 30 Oct: d00 Maryland, the Maryland-Opebi-Ojota Link Bridge rd-c0fe3e17 on its own deck (Overture is_bridge, level
   2): 6.0 m from the Opebi side, down at 5.5% to the land at its junction with the west service road; every point
-  carries z. PR: map/maryland-link-bridge.
+  carries z. #576.
 - 30 Oct: d00 Maryland, the express's second slip pair north of its underpass (rd-db6dfdd1): the old pair rd-eb682999,
   rd-fb35cab8 moved north (its express end from s 1136 to s 1202), the south pair rd-860fae2a, rd-8dc7b0a5 drawn at
   the underpass mouth after Overture's d9e2ed, bb0fbc; both pairs on the stretch where the express runs on the land.

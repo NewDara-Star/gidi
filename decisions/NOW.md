@@ -36,9 +36,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Jibowu / Murtala: service roads' width (7 m not read); Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
-       1.5-3 m over the land's dip at s 340-370, 30 Oct); the express 1.4 m below the land at s 1526 of
-       rd-db6dfdd1 (cutting or new profile); slips' width (all four, 8.7 m not read); whether Street View shows the
-       south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
+       1.5-3 m over the land's dip at s 340-370, 30 Oct); slips' width (all four, 8.7 m not read); whether Street
+       View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
        west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels); link width.
      - Airport Road junction: ramps' bridges and the expressway's levels (flat now); west service road rd-8d6f0550's
