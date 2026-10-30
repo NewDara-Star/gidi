@@ -8,9 +8,12 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Ojota, the four cloverleaf loops rd-062e7d84, rd-7b01bdb8, rd-80442ca9, rd-d46e4407 widened from
+  8.7 to 10.0 m (Google satellite reads 9.6-10.9 m by eye); the 14 straight slips keep 8.7 (one read, 8.8 m).
+  PR: map/ojota-loop-width.
 - 30 Oct: d00 Maryland, the express rd-db6dfdd1 north of its flyover: its heights from s 1436 to 1706 raised (most
   1.39 m, at s 1526) to the lowest on or above the land with no step over 5.5%; it had run up to 1.37 m below the
-  land. PR: map/maryland-express-dip.
+  land. #577.
 - 30 Oct: d00 Maryland, the Maryland-Opebi-Ojota Link Bridge rd-c0fe3e17 on its own deck (Overture is_bridge, level
   2): 6.0 m from the Opebi side, down at 5.5% to the land at its junction with the west service road; every point
   carries z. #576.
