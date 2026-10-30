@@ -156,7 +156,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    weak point was the model, not the paint. [ ] The keke from Meshy first (the 19 Oct sheet,
    ~/gidi-data/research/models/keke/ref_v1_sheet.jpg; credits confirmed with the owner), then built part by part in Blender
    against it (every detail Meshy shows listed and checked off), painted; then the danfo the same way (its 19 Oct Meshy model is already in Art/Vehicles/Danfo); then the rest
-   while the credits last (they end 11 Nov 2026: 3,022 on 30 Oct). [ ] The painter's "down" on curved parts, checked
+   while the credits last (they end 11 Nov 2026: 3,022 on 30 Oct). [ ] The credit plan (about 30-36 a model with
+   its reference image; an estimate): vehicles ~10 (~350), landmarks ~15 (~550), street-kit pieces ~50 from the
+   Street View study (~1,800 with their images), ~300 spare; a list of every base first, the owner's OK per spend.
+   [ ] The painter's "down" on curved parts, checked
    again on the Meshy keke. [ ] The colour grade in passes until the owner likes it (bright colours settled there).
    [ ] Ask: what "Looks 1 and 2, that's the photorealistic mode" means (a second, photo-like mode?). [ ] The painter
    as a gidi-game tool once two or three objects pass; the chosen look rebuilt in Unreal and measured on 8 GB.
