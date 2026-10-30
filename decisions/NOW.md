@@ -32,15 +32,17 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
      - Ojota, after its land was shaped to its roads (30 Oct, DONE; DECISIONS "Under a big junction the land is shaped
-       to its roads"). Owed: the bridge ends (abutments) of rd-05dccea9, rd-cd9ab431 and rd-9a3ba1dd, where the ramps
-       run up to 7 m over the land for 5-15 m, owed to the road kit with the walls; the split, brought down to the
-       expressway's height (30 Oct), on a 2-3 m bank by eye in Lagos and on the ground here. Read 30 Oct on Street
-       View: from Ikorodu Road (6.59301 N 3.38277 E, heading 36, Oct 2019) the expressway and its ramps cross on one
-       wide level deck, its west end on a grassed earth bank, not a wall (so the 1-in-3 banks are the right kind); the
-       clearance about 5.5-6 m by eye against the cars, the map's decks 7.5-9.0 m over the roads under them (DECK_OVER
-       6.7, so they could come down up to about 1-2 m, not done); on the expressway (6.59391 N 3.38271 E, Jun 2021, 5
-       m onto Overture's bridge 5f8028) the road is level with its twin and the links beside it, which are on the same
-       bank; Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
+       to its roads"). Owed: the expressway's width (rd-e35d7679 and rd-62d35e3f at 24 m, the default for their kind,
+       not read; in Lagos two carriageways, 5f8028 and 05aab4, about 27 m apart) on satellite; the bridge ends
+       (abutments) of rd-05dccea9, rd-cd9ab431 and rd-9a3ba1dd, where the ramps run up to 7 m over the land for 5-15
+       m, owed to the road kit with the walls; the split, brought down to the expressway's height (30 Oct), on a 2-3 m
+       bank by eye in Lagos and on the ground here. Read 30 Oct on Street View: from Ikorodu Road (6.59301 N 3.38277
+       E, heading 36, Oct 2019) the expressway and its ramps cross on one wide level deck, its west end on a grassed
+       earth bank, not a wall (so the 1-in-3 banks are the right kind); the clearance about 5.5-6 m by eye against the
+       cars, the map's decks 7.5-9.0 m over the roads under them (DECK_OVER 6.7, so they could come down up to about
+       1-2 m, not done); on the expressway (6.59391 N 3.38271 E, Jun 2021, 5 m onto Overture's bridge 5f8028) the road
+       is level with its twin and the links beside it, which are on the same bank; Ikorodu Road's own 4 slips 500-570
+       real m out; the twins catalogue's two old flat-join rows.
      - The other interchanges' land: each junction's ground roads measured against the land, and shaped as at Ojota
        where they float or dig in (DECISIONS "Under a big junction the land is shaped to its roads"; the way and the
        numbers in Ojota's PR).
