@@ -8,6 +8,9 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 10, the Shasha links off the Lagos-Abeokuta Expressway (6.607 N 3.310 E): rd-ec813d89, two
+  real links drawn as one with a 105 degree turn at the bypass's start, split into rd-ec813d89 and rd-5e5d9830 (ramps,
+  8.7 m), each eased; d00's corner rows 33 -> 29.
 - 30 Oct: corner sweep pass 9, the Airport-Alimosho bypass rd-8f4843b7 (being built; Google shows only a track by the
   airport fence): its start off rd-ec813d89, the bend at s 202 m and its end onto Egbe Road rd-6d1e566d eased; d00's
   corner rows 38 -> 33.
