@@ -39,7 +39,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        1.5-3 m over the land's dip at s 340-370, 30 Oct); whether Street
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
-       west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels); link width.
+       west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels).
      - Airport Road junction: ramps' bridges and the expressway's levels (flat now); west service road rd-8d6f0550's
        levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
        rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
