@@ -8,9 +8,11 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 rd-b0b218e4 taken out: Overture 94da8b, a 57 m street piece of Okobaba Street (Google satellite)
+  that d16's rd-9d3c94cc draws; it joined nothing in the network. 6 check rows gone. PR: map/ebute-metta-stray-piece.
 - 30 Oct: d00 Airport Road rd-37c2a1ad lifted over Airport Road (Overture 79510c, 23b062 level 1): heights on every
   point, deck 14.81 m at s 282-312, real-length ramps at 5.5% from s 145 to 442; relief dips filled up to 0.43 m.
-  PR: map/airport-road-lift.
+  #603.
 - 30 Oct: d00 Western Avenue rd-41dbe473 raised over Ojuelegba Road (Overture 04ccac, b002bb level 1): deck 9.78 m at
   s 1074-1096, ramps 5.5% from s 932 to 1234, crossing moved 15-35 m south (DECISIONS "the crossing moves"); d13, d15
   rows listed. #602.
