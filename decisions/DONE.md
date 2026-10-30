@@ -7,7 +7,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 30 Oct: Anthony, the loop off the westbound bridge drawn at real size, 241 m from the deck to Ikorodu Road's west service road (rd-f610a5d5, rd-70ccddf6, rd-f3d66aee, Overture 7f326d). PR: map/anthony-loop.
+- 30 Oct: Anthony, Ikorodu Road's six express-service slips drawn (rd-2f09552f, rd-c62494cd, rd-bdffe2ef, rd-3d59336e, rd-4c2a5608, rd-a87314b7; rd-db6dfdd1, rd-f3d66aee, rd-69e78e59; Overture aafe7a, 3b104d, e02741, 6b77ee, 3fea15, a048c9). PR: map/anthony-slips.
+- 30 Oct: Anthony, the loop off the westbound bridge drawn at real size, 241 m from the deck to Ikorodu Road's west service road (rd-f610a5d5, rd-70ccddf6, rd-f3d66aee, Overture 7f326d). #626.
 - 30 Oct: Iyana-Ipaja, the BRT lane's bridge read: a canal bridge at road level, no map change (Overture 3602e7, rd-4d25be78). #625.
 - 30 Oct: Tin Can, the bridge's run over the creek read; close to the map, settled when the water is drawn (rd-c0a3f989, rd-2b1023ff, rd-4615c8ad). #624.
 - 30 Oct: Ijora on the Badagry Expressway, Eric Moore Road's links read in the junction's frame; they need their own placement (rd-e844766c, rd-1533d520, rd-beb7773a). #623.
