@@ -8,9 +8,11 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: Osborne, link rd-289fa504: width 24 to 28 m, read by eye on Google satellite at 6.46215 N 3.41911 E (two
+  parallel decks of about 13-14 m, about 29 m edge to edge; Overture one line, 5115b2). PR: map/osborne-link-width.
 - 30 Oct: Oworonshoki, the Diya Street slip rd-e923727a: kind ramp, 12.0 m (was the 24 m motorway default), read by eye
   on Google satellite at 6.54684 N 3.39659 E (one raised deck labelled Diya St, about 12-13 m, no median); 8 d27 staggered
-  node rows gone. PR: map/oworonshoki-slip-width.
+  node rows gone. #573.
 - 30 Oct: corner sweep pass 16, the last: rd-e923727a (the Gbagada interchange ramp drafted as a 24 m motorway) eased
   from its start (on d27's rd-399bb139, Overture's Diya Street 30241c) to its old point 6 as one curve (tightest bend 15.2 to 62.1 m, at most 1.6 m off); d27's
   rd-a557b7a2 left on the old points. d00 corner rows 2 to 0: the corner sweep is finished. #572.

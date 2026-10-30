@@ -47,7 +47,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Lagos Island cloverleaf: rd-252c0e0f / rd-ee4feee6 joined or ended with Lagos Island's streets; loops b44bf9
        and 2b32e6 meeting Third Axial under Ring Road read at z18; Ring Road's curve west against the lagoon edge;
        Idumagbo Avenue rd-4aeee6d8 joined (Google labels it Adeniji Adele Bridge); widths.
-     - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's width (24 m drafted, Google shows two-way); loop rd-82b977fa overlaps the Lagoon
+     - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's two decks' lanes (width read rough, 28 m); loop rd-82b977fa overlaps the Lagoon
        Highway rd-fb8f7300 by up to 5.8 m, settled with the highway's heights; widths.
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
