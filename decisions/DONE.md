@@ -8,9 +8,12 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Airport Road rd-37c2a1ad lifted over Airport Road (Overture 79510c, 23b062 level 1): heights on every
+  point, deck 14.81 m at s 282-312, real-length ramps at 5.5% from s 145 to 442; relief dips filled up to 0.43 m.
+  PR: map/airport-road-lift.
 - 30 Oct: d00 Western Avenue rd-41dbe473 raised over Ojuelegba Road (Overture 04ccac, b002bb level 1): deck 9.78 m at
   s 1074-1096, ramps 5.5% from s 932 to 1234, crossing moved 15-35 m south (DECISIONS "the crossing moves"); d13, d15
-  rows listed. PR: map/western-avenue-ojuelegba-bridge.
+  rows listed. #602.
 - 30 Oct: Abule Ado loop bridge, ramps rd-2ab78c89 (dc8c42) and rd-166a257a (d4e72c) read on hazy satellite at
   8.8-10.8 and 7.3-9.3 m; 8.7 kept. #597.
 - 30 Oct: Ebute-Metta fork, last two widths read: Clinic Road eastbound rd-a8efbae0 (b35dbc) 8.7 -> 14.0 m;
