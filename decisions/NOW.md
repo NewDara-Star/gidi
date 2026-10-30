@@ -31,7 +31,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      at level 2, no wards); after roads, rail and water, cut the map on its hard edges,
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
-     - Ojota: slips' width (8.7 m not read); how far they leave the land on Street View (rd-7b01bdb8); Ikorodu Road's
+     - Ojota: how far the slips leave the land on Street View (rd-7b01bdb8); Ikorodu Road's
        own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
      - Jibowu / Murtala: service roads' width (7 m not read); Western Avenue's bridge 150 m south; Western Avenue's
        service roads and slips; d13 rd-955a0307 drawn twice with the city layer's.
