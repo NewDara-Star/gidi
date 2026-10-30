@@ -8,9 +8,13 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 14, eight hook points by road ends dropped (29 to 84 degree turns on legs of 2 to 8 m):
+  ramps rd-ea98cf5e, rd-525c863d, rd-7b01bdb8 met their roads at exactly 90 degrees, now 27 to 39; trunks rd-1533d520, rd-674f17fb,
+  rd-8d0f5181; motorway rd-41dbe473; and rd-b0b218e4's 2 m stub past d16's rd-47294012. d00 corner rows 12 to 4.
+  PR: map/corner-sweep-14.
 - 30 Oct: corner sweep pass 13, four short jogs: Idi-Iroko Road rd-17305e85 (four points on Overture's crossover stub
   dropped, at most 1.7 m off its line), rd-823043ec (a 0.8 m leg), rd-9a745dcf (a 3.2 m jog), and rd-c6144c6c's step from
-  Allen Avenue's line onto Opebi Road's middle (one curve); d00 corner rows 20 to 12. PR: map/corner-sweep-13.
+  Allen Avenue's line onto Opebi Road's middle (one curve); d00 corner rows 20 to 12. #569.
 - 30 Oct: corner sweep pass 12, Agege Motor Road rd-798553cb: its 1.8 m jog just past Isolo Road rd-9de842be's end
   dropped, and its junction with rd-b8adf9a6 (3422 north) moved 0.93 m onto its own straight line in both roads; d00
   corner rows 23 to 20; d15 left 3 clash and 2 node rows there (its leftover line). #568.
