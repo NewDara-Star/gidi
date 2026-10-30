@@ -8,8 +8,11 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: Lagos Island cloverleaf, the loops' joins on Third Axial rd-36ade1eb: in pairs at one node each side of
+  Ring Road as Overture and Google (b44bf9 + 80f28d at s 282.7, 2b32e6 + ae7985 at s 321.6); rd-4b7c8697,
+  rd-2db62fc1, rd-7295d681, rd-fc4f9a75 ends moved 17.7-27.7 m. PR: map/lagos-island-loop-joins.
 - 30 Oct: d00 rd-b0b218e4 taken out: Overture 94da8b, a 57 m street piece of Okobaba Street (Google satellite)
-  that d16's rd-9d3c94cc draws; it joined nothing in the network. 6 check rows gone. PR: map/ebute-metta-stray-piece.
+  that d16's rd-9d3c94cc draws; it joined nothing in the network. 6 check rows gone. #604.
 - 30 Oct: d00 Airport Road rd-37c2a1ad lifted over Airport Road (Overture 79510c, 23b062 level 1): heights on every
   point, deck 14.81 m at s 282-312, real-length ramps at 5.5% from s 145 to 442; relief dips filled up to 0.43 m.
   #603.
