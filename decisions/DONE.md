@@ -8,10 +8,13 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 12, Agege Motor Road rd-798553cb: its 1.8 m jog just past Isolo Road rd-9de842be's end
+  dropped, and its junction with rd-b8adf9a6 (3422 north) moved 0.93 m onto its own straight line in both roads; d00
+  corner rows 23 to 20; d15 left 3 clash and 2 node rows there (its leftover line). PR: map/corner-sweep-12.
 - 30 Oct: corner sweep pass 11, Obafemi Awolowo Way rd-f68b428f into Dr. Nurudeen Olowopopo Drive rd-5f8597a1 (the
   Lagos-Ibadan Expressway's west service road, Alausa): the way's last 2 m hop and its turn into the drive eased, and the
   drive's bends into the junction and onto the expressway rd-a4d4d18c eased, at most 2.93 m off the old lines; d00
-  corner rows 29 to 23. PR: map/corner-sweep-11.
+  corner rows 29 to 23. #567.
 - 30 Oct: corner sweep pass 10, the Shasha links off the Lagos-Abeokuta Expressway (6.607 N 3.310 E): rd-ec813d89, two
   real links drawn as one with a 105 degree turn at the bypass's start, split into rd-ec813d89 and rd-5e5d9830 (ramps,
   8.7 m), each eased; d00's corner rows 33 -> 29.

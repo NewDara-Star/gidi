@@ -18,10 +18,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (a) Third Mainland Bridge, Ikorodu Road: done (DONE.md).
    (b) The other main roads in d00 (`scripts/city_network.py`'s list), every junction a shared point named for its real
    place and district; slip roads and ramps at real length (DECISIONS "1:3 sets where things are"):
-   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 23 left on 30 Oct after passes 1-11
+   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 20 left on 30 Oct after passes 1-12
      (#557, #558, Orchid Road rd-ee461730, the Festac links rd-c56ec7e1 and rd-35ed3005, the Airport-Alimosho bypass
      rd-8f4843b7, the Shasha links rd-ec813d89 and rd-5e5d9830, Obafemi Awolowo Way rd-f68b428f and Olowopopo Drive
-     rd-5f8597a1). Next: rd-798553cb (3), then rd-e923727a, rd-c6144c6c, rd-9a745dcf, rd-823043ec, rd-17305e85 (2 each). The bypass's end at Egbe Road
+     rd-5f8597a1, Agege Motor Road rd-798553cb). Next: rd-e923727a, rd-c6144c6c, rd-9a745dcf, rd-823043ec, rd-17305e85 (2 each). The bypass's end at Egbe Road
      rd-6d1e566d is eased inside Overture's hook by up to 8 m; its junction waits for a published design or the street pass.
      Orchid Road's small roundabout at (20840, 9433) waits for the street pass; so does New Festac Bridge Road,
      where rd-c56ec7e1 and rd-35ed3005 end loose at (11785.32, 8080.44). Helper:
@@ -209,7 +209,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d14: rows from Isolo Road.
 - d15: Isolo Road deck rd-isodeck1 is the wrong way round (the expressway goes over); rd-qc8rcv8v crossed twice at the
   knot and 3 rows at the Airport Road junction; rd-qqm8wpxb lies on the east service road 533 m (9 clash, 5 node rows);
-  rd-avaupyki re-joined on the ground.
+  rd-avaupyki re-joined on the ground; at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
+  and 4.4 m off its node and rd-cb2h4xa5, rd-xafls8id, rd-hvwdw3gi cross it with no node (3 clash, 2 node rows; pass 12).
 - d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links.
 - d17: rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
   rd-b2d9b4b0; rd-188b1a2a re-joined; Clinic Road's end 1 m from rd-96ed58e3 / rd-93fdb33d; houses b-120302f2,
