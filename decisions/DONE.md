@@ -8,8 +8,11 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Oworonshoki, the four links rd-416f06ca, rd-7a24933e, rd-bc322629, rd-e28cb5e7 widened from 8.7 to
+  10.5 m (two lanes, 10.0-11.0 m on Google satellite by eye); rd-416f06ca's last bend eased to one curve. Maryland's
+  four slips read about 7-8 m (openings through the separator), 8.7 kept. PR: map/oworonshoki-link-width.
 - 30 Oct: d00 Jibowu, the ground service road on the Murtala Muhammed Way bridge's east side, rd-2218bb4b and
-  rd-b1b129a5, widened from 7.0 to 11.0 m (Google satellite reads 9.6-12.0 m by eye). PR: map/jibowu-service-width.
+  rd-b1b129a5, widened from 7.0 to 11.0 m (Google satellite reads 9.6-12.0 m by eye). #579.
 - 30 Oct: d00 Ojota, the four cloverleaf loops rd-062e7d84, rd-7b01bdb8, rd-80442ca9, rd-d46e4407 widened from
   8.7 to 10.0 m (Google satellite reads 9.6-10.9 m by eye); the 14 straight slips keep 8.7 (one read, 8.8 m).
   #578.
