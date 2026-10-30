@@ -117,8 +117,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b, Okobaba Street's curve to
-       Clinic Road; put back 30 Oct) joined to the network; which link is on top (Street View) and the bridge's height
-       over the swamp; with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
+       Clinic Road; put back 30 Oct) joined to the network; the bridge's height over the swamp elsewhere (it lies
+       on the land at 0-1.7 m along its run, the water not drawn; Street View Nov 2016 at 6.48783 N 3.39436 E shows
+       the links and the bridge on low decks over the swamp); the Third Mainland Bridge's ramps over the links read
+       on Street View for their real length (set at 5.5% from the 8.2 m top, 30 Oct); with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
        node, inside it (a staggered join for the junction kit).
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
        whether it really meets the Marina junction's road.
