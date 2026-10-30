@@ -8,9 +8,12 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: corner sweep pass 13, four short jogs: Idi-Iroko Road rd-17305e85 (four points on Overture's crossover stub
+  dropped, at most 1.7 m off its line), rd-823043ec (a 0.8 m leg), rd-9a745dcf (a 3.2 m jog), and rd-c6144c6c's step from
+  Allen Avenue's line onto Opebi Road's middle (one curve); d00 corner rows 20 to 12. PR: map/corner-sweep-13.
 - 30 Oct: corner sweep pass 12, Agege Motor Road rd-798553cb: its 1.8 m jog just past Isolo Road rd-9de842be's end
   dropped, and its junction with rd-b8adf9a6 (3422 north) moved 0.93 m onto its own straight line in both roads; d00
-  corner rows 23 to 20; d15 left 3 clash and 2 node rows there (its leftover line). PR: map/corner-sweep-12.
+  corner rows 23 to 20; d15 left 3 clash and 2 node rows there (its leftover line). #568.
 - 30 Oct: corner sweep pass 11, Obafemi Awolowo Way rd-f68b428f into Dr. Nurudeen Olowopopo Drive rd-5f8597a1 (the
   Lagos-Ibadan Expressway's west service road, Alausa): the way's last 2 m hop and its turn into the drive eased, and the
   drive's bends into the junction and onto the expressway rd-a4d4d18c eased, at most 2.93 m off the old lines; d00
