@@ -18,12 +18,12 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (a) Third Mainland Bridge, Ikorodu Road: done (DONE.md).
    (b) The other main roads in d00 (`scripts/city_network.py`'s list), every junction a shared point named for its real
    place and district; slip roads and ramps at real length (DECISIONS "1:3 sets where things are"):
-   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 4 left on 30 Oct after passes 1-14
+   - [ ] **Corner sweep** on d00's own ROAD corner rows (check_map), spot by spot. 2 left on 30 Oct after passes 1-15
      (#557, #558, Orchid Road rd-ee461730, the Festac links rd-c56ec7e1 and rd-35ed3005, the Airport-Alimosho bypass
      rd-8f4843b7, the Shasha links rd-ec813d89 and rd-5e5d9830, Obafemi Awolowo Way rd-f68b428f and Olowopopo Drive
-     rd-5f8597a1, Agege Motor Road rd-798553cb, short jogs on rd-17305e85, rd-823043ec, rd-9a745dcf, rd-c6144c6c, eight end hooks). Next: rd-e923727a (2 rows; its first points
-     are shared with d27's rd-a557b7a2, so easing it leaves d27 a leftover), rd-e997b7da (its junction point with rd-674f17fb
-     kinks 65 degrees), rd-e1e529ec (its first 38 m double back from rd-3dd6f2eb's start to rd-52faba3e's end). The bypass's end at Egbe Road
+     rd-5f8597a1, Agege Motor Road rd-798553cb, short jogs on rd-17305e85, rd-823043ec, rd-9a745dcf, rd-c6144c6c, eight end hooks, Ozumba Mbadiwe rd-e997b7da at the Falomo road
+     rd-674f17fb, the coastal highway rd-e1e529ec's double-back at the motorway rd-3dd6f2eb). Left: rd-e923727a (2 rows; its
+     first points are shared with d27's rd-a557b7a2, so easing it leaves d27 a leftover). The bypass's end at Egbe Road
      rd-6d1e566d is eased inside Overture's hook by up to 8 m; its junction waits for a published design or the street pass.
      Orchid Road's small roundabout at (20840, 9433) waits for the street pass; so does New Festac Bridge Road,
      where rd-c56ec7e1 and rd-35ed3005 end loose at (11785.32, 8080.44). Helper:
