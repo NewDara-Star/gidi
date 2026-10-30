@@ -57,7 +57,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
        levels; Mobil Road rd-85e1874d and Wharf Road on (street pass); which carriageway is on top (Street View) and
-       whether Apapa Road stays raised to the Eko Bridge; widths.
+       whether Apapa Road stays raised to the Eko Bridge; widths of the loops rd-afd75ba3 and rd-399391e3 (not told
+       apart on satellite) and the links south (rd-294c09f7, rd-714694a5, rd-e79bf93a, rd-a726bd01, rd-5b076100,
+       rd-f2e0ead0).
      - Ijora on the Badagry Expressway: frontage roads the slips end on (Overture 6dfa61, 745b12, a9cbc5, 83aefb,
        ea9474); Eric Moore Road's bridge and links (54c741, c417d8, 3a5200, 7396da), rd-1533d520 redrawn with them;
        the merge onto the link north and the turn-back loop read at z18; widths.
