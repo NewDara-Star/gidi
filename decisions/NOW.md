@@ -44,16 +44,19 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
        rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
        and which rd-0f54d744 (7.8 and 8.8 m on satellite, 8.7 kept).
-     - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m); Diya Street's level-3 bridge (d27's pass); the links'
-       far ends 14-29 m off the real spots.
+     - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m; Street View Mar 2024 at 6.54686 N
+       3.39660 E, 30 Oct: no lane paint, about two lanes by eye between parapets, people walking on its kerbs; lane
+       count not set); Diya Street's level-3 bridge (d27's pass); the links' far ends 14-29 m off the real spots.
      - Third Mainland's Lagos Island end: which road is on top (Street View); Ring Road raised (level 1); slips to
        Adeniji Adele (Overture has none, read at z18); the Lagoon Highway's heights.
      - Lagos Island cloverleaf: rd-252c0e0f / rd-ee4feee6 joined or ended with Lagos Island's streets; loops b44bf9
        and 2b32e6 meeting Third Axial under Ring Road read at z18; Ring Road's curve west against the lagoon edge;
        Idumagbo Avenue rd-4aeee6d8 joined (Google labels it Adeniji Adele Bridge); the four outer
        slips' width (8.7 m; satellite 9-12 m, no clear edge, 30 Oct).
-     - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's two decks' lanes (width read rough, 28 m); loop rd-82b977fa overlaps the Lagoon
-       Highway rd-fb8f7300 by up to 5.8 m at 8.7 m (0.9 m more at 10.5 m, 30 Oct), settled with the highway's heights.
+     - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's two decks' lanes (width read rough, 28 m; no lane paint
+       on either deck, each about two to three lanes wide by eye, Street View Jul 2021 at 6.46216 N 3.41914 E, 30 Oct;
+       lane count not set); loop rd-82b977fa overlaps the Lagoon Highway rd-fb8f7300 by up to 5.8 m at 8.7 m (0.9 m
+       more at 10.5 m, 30 Oct), settled with the highway's heights.
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
        levels; Mobil Road rd-85e1874d and Wharf Road on (street pass); which carriageway is on top (Street View) and
