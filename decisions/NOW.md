@@ -32,17 +32,24 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
      - Ojota, after its land was shaped to its roads (30 Oct, DONE; DECISIONS "Under a big junction the land is shaped
-       to its roads"). Owed: the expressway's width (rd-e35d7679 and rd-62d35e3f at 24 m, the default for their kind,
-       not read; in Lagos two carriageways, 5f8028 and 05aab4, about 27 m apart) on satellite; the bridge ends
-       (abutments) of rd-05dccea9, rd-cd9ab431 and rd-9a3ba1dd, where the ramps run up to 7 m over the land for 5-15
-       m, owed to the road kit with the walls; the split, brought down to the expressway's height (30 Oct), on a 2-3 m
-       bank by eye in Lagos and on the ground here. Read 30 Oct on Street View: from Ikorodu Road (6.59301 N 3.38277
-       E, heading 36, Oct 2019) the expressway and its ramps cross on one wide level deck, its west end on a grassed
-       earth bank, not a wall (so the 1-in-3 banks are the right kind); the clearance about 5.5-6 m by eye against the
-       cars, the map's decks 7.5-9.0 m over the roads under them (DECK_OVER 6.7, so they could come down up to about
-       1-2 m, not done); on the expressway (6.59391 N 3.38271 E, Jun 2021, 5 m onto Overture's bridge 5f8028) the road
-       is level with its twin and the links beside it, which are on the same bank; Ikorodu Road's own 4 slips 500-570
-       real m out; the twins catalogue's two old flat-join rows.
+       to its roads"). Owed: the expressway's width: rd-e35d7679 and rd-62d35e3f are one 24 m line (the default for
+       their kind, not read); read 30 Oct on satellite north of the deck (6.5947 N 3.3820 E, z19, about 0.31 m a pixel
+       by the 20 m scale bar, colours read across the road): two carriageways about 11-12 m each with a grass median
+       about 16-17 m, each carriageway paved together with its slip beside it (bands about 20-22 m), so about 40 m
+       edge to edge, the carriageways' centres 26.3 m apart (Overture 5f8028, 05aab4); by eye and by colour, the bands
+       placed about 9 m off Overture's lines (the picture's centre estimated). By DECISIONS "1:3 sets where things
+       are; a road keeps its real shape" (one record along the middle, the median inside it, real widths) the two want
+       their real width, about 40 m here, read along their length (rd-e35d7679 runs 1.9 km; 36 of d00's 41 motorways
+       are at the 24 m default), and the slips beside them (centres 9.4-10.5 m from the carriageways') then share the
+       paved band, as in Lagos; the bridge ends (abutments) of rd-05dccea9, rd-cd9ab431 and rd-9a3ba1dd, where the
+       ramps run up to 7 m over the land for 5-15 m, owed to the road kit with the walls; the split, brought down to
+       the expressway's height (30 Oct), on a 2-3 m bank by eye in Lagos and on the ground here. Read 30 Oct on Street
+       View: from Ikorodu Road (6.59301 N 3.38277 E, heading 36, Oct 2019) the expressway and its ramps cross on one
+       wide level deck, its west end on a grassed earth bank, not a wall (so the 1-in-3 banks are the right kind); the
+       clearance about 5.5-6 m by eye against the cars, the map's decks 7.5-9.0 m over the roads under them (DECK_OVER
+       6.7, so they could come down up to about 1-2 m, not done); on the expressway (6.59391 N 3.38271 E, Jun 2021, 5
+       m onto Overture's bridge 5f8028) the road is level with its twin and the links beside it, which are on the same
+       bank; Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
      - The other interchanges' land: each junction's ground roads measured against the land, and shaped as at Ojota
        where they float or dig in (DECISIONS "Under a big junction the land is shaped to its roads"; the way and the
        numbers in Ojota's PR).
@@ -118,6 +125,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      start of Anthony's west link rd-0fbc2dcc joined to the streets west of Ikorodu Road; Tincan Island Port Road in
      the street pass; widths.
    - [ ] The Fourth Mainland's ends when its design is read (no published layout found, 29 Oct; kept as being built).
+   - [ ] The main roads' widths: 36 of d00's 41 motorways and 27 of its 32 trunk roads are at their kind's default
+     width, not read (30 Oct, from their notes). Each is read on satellite along its length and set to its real
+     width, both carriageways and the median inside one record (DECISIONS "1:3 sets where things are; a road keeps
+     its real shape"); the Ojota expressway's reading (about 40 m, its line above) is the first.
    - [ ] Loose ends: 37 left after 6 gaps closed (29 Oct); the junctions' own are in their lines above.
    - [ ] Badagry's and Lekki's carriageways left as two lines (rd-52faba3e's are up to 100.5 m apart).
    - [ ] Each road's width read, longest first; the junction place names read.
