@@ -69,7 +69,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        (11597.34, 8907.57) in d09's pass, read on Google first.
      - Kirikiri to Tin Can: the S-bend's 96 m bends looked at again in the drive.
      - Iyana-Ipaja: Ipaja Road north of the roundabout is the district's; the BRT lane's own bridge (Overture 3602e7);
-       Google z18 and Street View; widths.
+       Google z18 and Street View; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
      - Anthony: the loop off the westbound bridge (Overture 7f326d) left out; Ikorodu Road's six slips here; Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18; widths.
