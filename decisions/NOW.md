@@ -62,7 +62,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        rd-f2e0ead0).
      - Ijora on the Badagry Expressway: frontage roads the slips end on (Overture 6dfa61, 745b12, a9cbc5, 83aefb,
        ea9474); Eric Moore Road's bridge and links (54c741, c417d8, 3a5200, 7396da), rd-1533d520 redrawn with them;
-       the merge onto the link north and the turn-back loop read at z18; widths.
+       the merge onto the link north and the turn-back loop read at z18; widths (30 Oct, satellite at 6.4764 N
+       3.3642 E: the bands where slips rd-001dc84f, rd-9ffc6c80, rd-cc5af0f9 run read 11-15 m but were not told
+       apart from Apapa Road's carriageways beside them; Street View first).
      - Tin Can: Tincan Island Port Road drawn in its district and loops rd-2b1023ff, rd-4615c8ad joined; the bridge's
        real run over the creek (Street View); the outer loop rd-4615c8ad's width on its east side (8.7 kept: 7.3-8.0 m
        on the west, unclear in the east).

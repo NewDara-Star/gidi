@@ -9,7 +9,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 ## Done, newest first
 
 - 30 Oct: d00 Ijora on Apapa Road, slips rd-ce943f23 and rd-b158299d read at about 8.8 m on Google satellite; 8.7
-  kept, the reads in their notes. PR: map/ijora-apapa-slip-read.
+  kept, the reads in their notes. #593.
 - 30 Oct: d00 Oshodi, slip rd-cad04ec1 read at about 8.8 m on Google satellite (Overture ba001b); 8.7 kept, the read
   in its note. #592.
 - 30 Oct: d00 Airport Road junction, ramp rd-6a2d3255 widened from 8.7 to 10.5 m (10.5 m on Google satellite by eye);
