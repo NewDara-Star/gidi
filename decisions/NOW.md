@@ -42,7 +42,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels); link width.
      - Airport Road junction: ramps' bridges and the expressway's levels (flat now); west service road rd-8d6f0550's
        levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
-       rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; widths.
+       rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
+       and which rd-0f54d744 (7.8 and 8.8 m on satellite, 8.7 kept).
      - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m); Diya Street's level-3 bridge (d27's pass); the links'
        far ends 14-29 m off the real spots.
      - Third Mainland's Lagos Island end: which road is on top (Street View); Ring Road raised (level 1); slips to

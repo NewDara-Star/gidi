@@ -8,8 +8,10 @@ words a session used. The full account of each piece of work is its commit's `Ch
 
 ## Done, newest first
 
+- 30 Oct: d00 Airport Road junction, ramp rd-6a2d3255 widened from 8.7 to 10.5 m (10.5 m on Google satellite by eye);
+  rd-054d3d02, rd-39b7e0c0, rd-0f54d744 read at 7.3-8.8 m, 8.7 kept. PR: map/airport-road-ramp-width.
 - 30 Oct: d00 Eko Bridge's Lagos Island end, loops rd-243b5af1 (about 8.9 m) and rd-dc498b0b (about 8.3 m) read on
-  Google satellite; 8.7 kept, the reads in their notes. PR: map/eko-bridge-loop-read.
+  Google satellite; 8.7 kept, the reads in their notes. #590.
 - 30 Oct: d00 Ring Road over Awolowo Road, links rd-7e02d6d7, rd-2191f68a, rd-a4abb554 read at 7.6-8.8 m on Google
   satellite; 8.7 kept, the reads in their notes. #589.
 - 30 Oct: d00 Third Mainland's fork at Ebute-Metta, links rd-aae94fd5, rd-f691d9e0, rd-7382f27e widened from 8.7 to
