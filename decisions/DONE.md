@@ -9,7 +9,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 ## Done, newest first
 - 30 Oct: Third Mainland's fork at Ebute-Metta turned the right way up: the Third Mainland Bridge rd-e7a23019 on
   top (8.19 m) where links rd-f691d9e0 and rd-e38c8fd1 cross it, the links on the ground under it, as Overture's
-  levels and Street View show. PR: map/tmb-fork-on-top.
+  levels and Street View show. #617.
 - 30 Oct: Ojota's south-east slip rd-6eed686f brought down beside the expressway rd-e35d7679 (1.84-5.7 m over it, now
   0-1.25): the split with rd-cd9ab431 and rd-7b01bdb8 at 13.0 m (was 14.81), the end node with rd-e5e55c42 and
   rd-525c863d at 2.4 (was 4.54); the land pad rebuilt (rl-e5c8720d, rl-ac324ab1). #610.
