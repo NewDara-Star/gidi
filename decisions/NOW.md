@@ -72,7 +72,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Google z18 and Street View; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
      - Anthony: the loop off the westbound bridge (Overture 7f326d) left out; Ikorodu Road's six slips here; Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
-       corners read at z18; link rd-0fbc2dcc's width (off the screen read; the other two read 6.6-7.6 m, 8.7 kept).
+       corners read at z18.
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b); which link is on top (Street
        View) and the bridge's height over the swamp; widths.
      - Ring Road over Awolowo Road: Ring Road raised level 2 (Street View); Awolowo Road rd-747e0c42's east end;
