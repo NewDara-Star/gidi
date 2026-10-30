@@ -172,3 +172,11 @@ dealer put on a vehicle and then made ram-proof; fail lines like "You used a gun
 ("Chop": the rider ram-proof and never knocked off), invincible things the player would naturally attack, and "too
 early" fails; it rewards a style with medals instead of failing the other ways. For Gidi: the outcome fails, never
 the method; a rule, if any, is said up front; style earns a bonus, not a fail.
+
+## An AI playtester for the drive test (owner sent the link, 30 Oct; not decided)
+Aura Autopilot (github.com/ramenvr/autopilot, Apache 2.0, read 30 Oct): a plugin for Unreal 5.4-5.8 (also Unity,
+Godot; Windows and Mac) that plays the game in the editor from a prompt ("go through this level and tell me what
+looks wrong", "verify that ...") and writes a report; it can be driven from Claude Code through its MCP server. It
+needs an Aura account and plan or one's own API keys, and offers to share runs with its makers (off for Gidi). Of
+use once the road kit drives in Unreal (Unreal is on hold for the map): e.g. "drive Third Mainland to Ojota and
+report every bump, gap or fall-through", the drive the running order keeps owing. A download, so asked first.
