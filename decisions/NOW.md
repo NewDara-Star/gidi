@@ -112,14 +112,14 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        rd-40fd0e71, rd-ca23588b drawn at real size, #645; the links under the bridge, Overture 61a01f and 1b5da8,
        are the service roads' own stretch there, read 31 Oct: 5.9-7.4 m and 0.3-1.4 m from rd-8d6f0550 and
        rd-714e4c81 in the frame, and satellite z19 by eye shows one service road each side running on under the
-       deck; its ramps regraded foot to foot, 3.97% and 3.80%, PR map/isolo-ramps: Street View shows the road
+       deck; its ramps regraded foot to foot, 3.97% and 3.80%: Street View shows the road
        raised from the west foot to the east foot, so the land under it stays; #647). Piers or walls, read by eye
-       in Street View from the ground roads (31 Oct), in m along 17a9b2 (west foot 41, east foot 471): walls from
-       the west foot to at least 75 m (Jul 2021 at 6.53152 N 3.33465 E, a solid wall about 2.5-3 m by eye, and
-       at 6.53142 N 3.33417 E the low walled ramp starting); open piers with vans parked under them by 130 m
-       (Jun and Jul 2021 at 6.53144 N 3.33515 E and 6.53160 N 3.33515 E); walls past 360 m (#647's panos).
-       Still owed: where the walls end between 75 and 130 m west and where the piers end between 281 and 360 m
-       east (more panos), for the road kit; the ground roads' width (7.0 m, not read).
+       in Street View from the ground roads (31 Oct, #648 and PR now/isolo-piers2), in m along 17a9b2 (west foot
+       41, east foot 471), each pano's place projected onto 17a9b2 in the frame: walls from the west foot to an
+       abutment at about 92 m (Jul 2021 at 6.53155 N 3.33477 E: the wall ends, the open span begins); open piers
+       from there to an abutment at about 382 m (Mar 2024 at 6.53181 N 3.33740 E; piers with market stalls under
+       them at 337 and 358 m, Mar 2024); walls from there to the east foot (#647's panos). So about 290 m on piers
+       (Overture's level 1 is 288 m but at 41-329 m), for the road kit. Still owed: the ground roads' width (7.0 m, not read).
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
