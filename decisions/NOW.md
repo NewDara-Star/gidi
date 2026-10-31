@@ -79,9 +79,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Kirikiri's bridge road rd-be737149 (the
        Berger Car Depot Bridge, read 31 Oct, #651): its land shaped (31 Oct, PR map/kirikiri-land; tile 110_80;
        deck s 235-315), as Street View Apr 2024 from the expressway (6.44979 N 3.31867 E, looking south) shows a
-       plain overpass about 5-6 m over the expressway on the ground, its west end on a grassed bank (by eye). The
-       land script also fills the two loop centres (16,304 and 16,370 m2), as at Ojota and Mile 2; in Lagos
-       they are flat yards (satellite z18 by eye): owed, whether loop centres stay filled. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
+       plain overpass about 5-6 m over the expressway on the ground, its west end on a grassed bank (by eye). Its two
+       loop centres put back on their own low ground (31 Oct, PR map/kirikiri-yards), the flat yards they are in
+       Lagos (satellite z18 by eye). Owed: the same reading at the other places whose land script filled closed
+       pieces over 1,000 m2: Mile 2 (6,098, 6,152, 6,306 m2), Oshodi and Anthony (1,997, 8,157 m2), Iyana-Ipaja
+       (5,064, 5,488 m2) and Ojota (not yet listed); each on Google first, then kept on the ground or left filled. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
        its ramps on grassed earth banks in Lagos (Street View Dec 2021), its land shaped (tiles 100_20, 110_20), its
        deck s 215-280 (Overture's bridge 64-66 m). Owed to the road
        kit with the walls: Iyana-Ipaja's deck ends (rd-9e6fc47d s 205-215, 280-290); Mile 2's (31 Oct) bridge ends on the Apapa-Oworonshoki Expressway rd-f9d2b236 (s 598-618,
@@ -364,7 +366,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 **District leftovers** (one line per clash, for each district's own turn; detail in DONE.md snapshot, item 000):
 - d09: Kirikiri junction 109 clash + 27 node rows; Kirikiri's land shaped (31 Oct, PR map/kirikiri-land) moved 37
   of its streets (20 by over 1 m, most rd-ec0eecec 6.69 m, rd-93e90e99 4.94 m) and 59 houses (13 by over 2 m, most
-  b-e9105b6a 5.59 m), and left rd-ec0eecec crossing rd-5c5d3200 twice and rd-be737149, rd-93e90e99 crossing
+  b-e9105b6a 5.59 m); its loop centres put back on their ground (31 Oct, PR map/kirikiri-yards) moved 21 of its streets again (16 by over 1 m, most rd-b26cb29b 3.40 m, rd-c697289f 3.37 m) and 33 houses (9 by over 2 m, most b-49c864e6 3.44 m; the three read, b-49c864e6, b-97df2fd4 and rd-b26cb29b, went down); and left rd-ec0eecec crossing rd-5c5d3200 twice and rd-be737149, rd-93e90e99 crossing
   rd-5722faee and rd-be737149, rd-10d9f527 crossing rd-be18a2d1, without nodes; Kirikiri to Tin Can 40 + 11 (14 houses under roads); Tin Can 30
   houses and streets (rd-f1478f6a still on the expressway 175 m, rd-86aea104 on a loop); Mile 2: 18 houses, 19 streets
   (houses b-2fe7abd3, b-9e425fbe, b-33e30e85; streets rd-b2b8a5cc, rd-fb81677f, rd-a9d4115f,
