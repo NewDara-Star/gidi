@@ -70,9 +70,6 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
        rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
        and which rd-0f54d744 (7.8 and 8.8 m on satellite, 8.7 kept).
-     - Oworonshoki: Diya Street slip rd-e923727a's lanes (width read rough, 12 m; Street View Mar 2024 at 6.54686 N
-       3.39660 E, 30 Oct: no lane paint, about two lanes by eye between parapets, people walking on its kerbs; lane
-       count not set); Diya Street's level-3 bridge (d27's pass); the links' far ends 14-29 m off the real spots.
      - Third Mainland's Lagos Island end: Third Mainland on top of Ring Road, as the map has it (read 30 Oct:
        Overture's bridge feb1a8 and fd9e07 at level 1 over Ring Road d79b10 and 36767c at level 0, at 6.4658 N
        3.3922 E; Street View Jul 2021 at 6.46566 N 3.39317 E on Ring Road (Adeniji Adele Access Road) on the
@@ -331,7 +328,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   new, street ends rd-325023fc, rd-7a9d8b06, rd-a0b710b5 now NODE rows inside rd-7382f27e; with Clinic Road eastbound
   rd-a8efbae0 at 14.0 m: b-012287e1, b-20052ac2, b-494e9843, b-d879cf99 further under it, b-d9224f21 new, rd-00c23990's
   end inside it with no node, rd-a27ac3a6's end a NODE row 6.2 m from its node.
-- d27: the Third Mainland Bridge rd-e7a23019 raised (31 Oct): streets rd-72e04943, rd-80254433 (s 133-136, 1.8-2.1 m
+- d27: Diya Street's bridge over the Oworonshoki junction (Overture level 3), moved here from the interchange list
+  (31 Oct); the Third Mainland Bridge rd-e7a23019 raised (31 Oct): streets rd-72e04943, rd-80254433 (s 133-136, 1.8-2.1 m
   under it) and rd-c8cf2af0, rd-df933e79 (s 240-265, 5.0 m under it, where Lagos has no street on the bridge) share its
   points at the land's height (4 rows); rd-72e04943, rd-80254433 also cross rd-7a24933e, rd-bc322629 0.4-1.8 m apart;
   b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
