@@ -65,9 +65,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Road and waits on the Badagry junction's redraw (its line below); at the south end, rd-c74ce92c still stands
        7.4 m over the land at s 1120, where Street View Nov 2019 at 6.45253 N 3.36684 E stands at the foot of the
        ramp on the ground, rising north in a walled ramp (by eye): the road comes down some 120 m too late (the pano falls at s 1120,
-       the map within 1 m of the land only at s 1240), but it
-       crosses the loop rd-399391e3 (on the ground) at s 1092, so the crossing's place against Lagos is read first,
-       a road height fix, not land. Mile 2's service roads stand over 1.5 m above their ends for s 40-332 of 508 m
+       the map within 1 m of the land only at s 1240), read 31 Oct
+       (PR map/costain-foot): two real crossings hold it up, the loop rd-399391e3 at s 1092 (Overture b24f59 level 2
+       over 3e0b15 level 0) and the link rd-e79bf93a (Overture 1f6d9a, under Apapa Road) at s 1110, both needing it
+       6.7 m over them; at 1:3 Lagos's ~90 m from the loop to the foot is ~30 m, too short for a real slope. Its ramp
+       now falls at 5.8% from just before the link, within 1 m of the land from s 1224 (was 1240); no more is possible. Mile 2's service roads stand over 1.5 m above their ends for s 40-332 of 508 m
        (rd-7a727450) and s 50-293 of 464 m (rd-baef55b0), on banks now (31 Oct); Street View Nov 2016 at 6.46211 N
        3.31590 E has the east one on the ground (by eye), 259 m from the crossing in Lagos (Overture a7d803 x 6150d6); where that
        falls on the map's real-size junction not worked out: their climb's length read against Street View. Maryland read 31 Oct, no land to shape: rd-db6dfdd1 s 910-1050 is
