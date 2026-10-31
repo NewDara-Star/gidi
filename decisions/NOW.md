@@ -54,8 +54,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        where they float or dig in (DECISIONS "Under a big junction the land is shaped to its roads"; the way and the
        numbers in Ojota's PR).
      - Jibowu / Murtala: Western Avenue's bridge over Ojuelegba Road (raised 30 Oct, deck s 1074-1096 on rd-41dbe473,
-       15-35 m south of the real crossing): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is not in the city layer,
-       owed under the deck there; Western Avenue's service roads and slips; d13 rd-955a0307 drawn twice with the city
+       15-35 m south of the real crossing; 31 Oct: s 1104-1117 at the real crossing raised to 6.76-7.02 m over the
+       land, so the real place clears too): Ojuelegba Road itself (Overture 2f0b8b, ebbc3e) is a secondary, a street
+       of d13 and d15 (on d13's line); Western Avenue's service roads and slips; d13 rd-955a0307 drawn twice with the city
        layer's. The deck's height read 30 Oct on Street View (Apr 2024, on Ojuelegba Road at 6.51003 N 3.36344 E,
        heading 265): one beam deck on piers across the road, clearance about 4.5-5.5 m by eye against the danfos and
        people under it, the road on top about 6.5-7.5 m up; the map's deck 7.5-7.7 m over the land (DECK_OVER 6.7),
@@ -301,7 +302,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d12: rows from Isolo Road and the Airport Road junction; Ijora: rd-0009669d, rd-6741a469, rd-e4dd8803, b-03eb90ec
   beside the west road; frontage road rd-beb7773a: rd-fe80ec1c, rd-31de79b1, rd-5d55c27c; Badagry Ijora: streets
   rd-63ff2dcb, rd-b645f07f, rd-da8895b1 re-joined; rd-9df13b08, rd-e71a0ffa, rd-f150b7c4 on the expressway.
-- d13: rd-c92310d9, rd-02b98288 round Murtala's bridge; rd-41075d23 re-joined on the ground; rd-955a0307; Western
+- d13: Ojuelegba Road under Western Avenue's deck (31 Oct): a secondary, so a district street (d13, d15), not the city
+  layer's; d13's piece rd-b7ac36fe (23 m) stops at the deck's old end (0.7 m off rd-41dbe473 at s 1096); the deck now
+  clears 6.76-7.02 m over the land at the real crossing (s 1104-1117), so the road goes under it there;
+  rd-c92310d9, rd-02b98288 round Murtala's bridge; rd-41075d23 re-joined on the ground; rd-955a0307; Western
   Avenue raised over Ojuelegba Road (30 Oct): its own copy rd-32d33ffa (6 crossings, its end on the deck); streets
   rd-8e13b1c9, rd-e0c151c1, rd-e2a411ea, rd-edb383fb, rd-fd8d2beb under the ramps with 2.0-6.0 m clear; ends now on the
   raised road: rd-27ff770f, rd-eaa6945b, rd-04c5713a, rd-138d2a3a, rd-255c5238, rd-26b0ca47, rd-55305d62,

@@ -7,7 +7,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 31 Oct: Third Mainland Bridge rd-e7a23019 raised over the lagoon (Overture level 1 throughout, Street View Nov 2016), at least 5 m over the land from s 100; ten roads lifted to meet it (rd-f691d9e0, rd-aae94fd5, rd-e38c8fd1, rd-7382f27e, rd-7a24933e, rd-bc322629, rd-fb8f7300, rd-36ade1eb, rd-2fb123ed, rd-c93b6d4f). PR: map/fork-ramps.
+- 31 Oct: Western Avenue rd-41dbe473's deck over Ojuelegba Road made to clear at the real crossing (s 1104-1117, Overture 2f0b8b, ebbc3e); Ojuelegba Road put on d13's line. PR: map/oworonshoki.
+- 31 Oct: Third Mainland Bridge rd-e7a23019 raised over the lagoon (Overture level 1 throughout, Street View Nov 2016), at least 5 m over the land from s 100; ten roads lifted to meet it (rd-f691d9e0, rd-aae94fd5, rd-e38c8fd1, rd-7382f27e, rd-7a24933e, rd-bc322629, rd-fb8f7300, rd-36ade1eb, rd-2fb123ed, rd-c93b6d4f). #634.
 - 31 Oct: open parts read, nothing changed in the map: Abule Ado ramps rd-2ab78c89, rd-166a257a (Street View Mar 2017, width not settled), Airport Road under rd-37c2a1ad (a street of an undrawn district), Osborne rd-289fa504 (no lane field). #633.
 - 31 Oct: Awolowo Road rd-747e0c42 under Ring Road rd-288c15dd read: its real west end is a knot with Force Road (Overture 4922f5), the join on rd-b05f0ee7 stands for it; on the land; the deck’s clearance by eye. #632.
 - 31 Oct: Eko Bridge's Lagos Island end, the bridge rd-8d8116e2 raised from s 45 where Lagos's leaves the ground (Overture cba190, 4dc3c0; Street View Oct 2019), the loops rd-dc498b0b and rd-243b5af1 lifted to meet it. #631.
