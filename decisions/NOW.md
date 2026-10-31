@@ -83,7 +83,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        the four outer slips' width (8.7 m; satellite 9-12 m, no clear edge, 30 Oct).
      - Osborne (Osborne Road rd-a39f888e): link rd-289fa504's two decks' lanes (width read rough, 28 m; no lane paint
        on either deck, each about two to three lanes wide by eye, Street View Jul 2021 at 6.46216 N 3.41914 E, 30 Oct;
-       lane count not set); loop rd-82b977fa overlaps the Lagoon Highway rd-fb8f7300 by up to 5.8 m at 8.7 m (0.9 m
+       lane count not set; 31 Oct: road records have no lane field (kind, width, kerbs, median, crown ...), so there is
+       nothing to set until the road kit reads lanes; the 28 m kept); loop rd-82b977fa overlaps the Lagoon Highway rd-fb8f7300 by up to 5.8 m at 8.7 m (0.9 m
        more at 10.5 m, 30 Oct), settled with the highway's heights.
      - Ijora on Apapa Road: east frontage road (Overture 6dfa61, 63aefb) from slip rd-9ffc6c80's loose end to
        the east link rd-9b4f42f6 waits for the Eko Bridge rd-62a2320f's
@@ -148,9 +149,15 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        View 30 Oct: Nov 2019 at 6.45732 N 3.24637 E heading 200, where Overture's 389cfd (rd-3622e3bd) and d4e72c
        (rd-166a257a) meet, a paved road climbing between a low kerb wall and a concrete barrier, about 6.5-7.5 m
        across by eye against a car (which of the two it is not told); Apr 2024 at 6.45677 N 3.24625 E, sand and
-       market stalls, no ramp in view (works on the expressway, or off the ramp's line): widths not set.
+       market stalls, no ramp in view (works on the expressway, or off the ramp's line): widths not set. 31 Oct:
+       Mar 2017 at 6.45770 N 3.24588 E heading 190 (dc8c42's and 38524f's shared start): a danfo on a paved road
+       between a gate and a low wall, the ramp rising to the left, about 6-7 m across by eye, which road not told;
+       not enough to change 8.7 m. Next read: a pano on the deck itself, if Google has one (none found yet).
      - Airport Road rd-37c2a1ad's lift over Airport Road (raised 30 Oct, deck s 282-312): Airport Road itself
-       (Overture 856426cb, 07c32fee, 1c6668a6, 9ad6f5d7) is not in the city layer, owed under the deck. Read 30 Oct
+       (Overture 856426cb, 07c32fee, 1c6668a6, 9ad6f5d7) is not in the city layer, owed under the deck: 31 Oct, its
+       pieces there are 64-80 m (secondary and service) at 1:3 [11628-11675, 4483-4487], the nearest other city-layer
+       road 358 m off (rd-8f4843b7), no district drawn round it, so it is a street of that undrawn district, to come
+       with it (alone it would be a loose 50 m stub under the deck). Read 30 Oct
        on Street View (Jun-Jul 2021): from Airport Road east of it (6.56669 N 3.32201 E, heading 270) twin decks on
        piers over the road, the approaches between concrete retaining walls (walls owed to the road kit, not earth
        banks), clearance about 5.5-6.5 m by eye, the road on top about 7-8.5 m up; the map's deck 7.6 m over the
