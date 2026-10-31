@@ -310,6 +310,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    tiling textures and decals; (d) World Partition in place of our streaming, then the shadow and Nanite pool sizes and
    the volumetric clouds decided on that city. Saloon owed (b1a): a close look in Unreal and photo passes (ot162 etc.):
    tail lamps on red, blobby mirrors, the C-pillar notch, the Corolla and Accord FLOAT cuts, the windscreen fins.
+   Keke owed (b3, gidi-game PR #108, tools/keke_build.py, its list in ~/gidi-data/research/models/keke/DETAILS.md):
+   [ ] the round-lamp face as a variant (two round lamps and the RE badge in a black band, Odenike St, Apr 2024; ours
+   has the rectangular pair read at Adekoya St); [ ] the rest of DETAILS.md's open list (canvas seams, floor step,
+   windscreen rubber, brake cable, sticker band, plate box); [ ] the Meshy model's fine detail baked to maps on ours.
 
 0. [ ] **Pieces as instances** (owner, 25 Oct): (b) each builder split into shared pieces in turn (stalls, poles,
    vehicles and the saloon done: DONE.md); then the rest.
