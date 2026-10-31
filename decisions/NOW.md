@@ -66,9 +66,20 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
      - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
        west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels).
-     - Airport Road junction: ramps' bridges and the expressway's levels (flat now); west service road rd-8d6f0550's
-       levels with the ramps'; the real loop north (Overture 5e5af0, b58652, fb1327, 350fd6) with the ramps' levels;
-       rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
+     - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
+       Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
+       e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
+       expressway and the loop: a6e5f3 (rd-0f54d744) level 1 on 0.33-0.72 over the expressway; 384318 (rd-6a2d3255)
+       on 0.19-0.68 over a7b525, a6e5f3 (both level 1 at their crossing in Overture: which is on top, Street View),
+       ddbbab and the east service road; a7f60d, a7b525 level 1 only near Airport Road's end, over the loop. The map's
+       ramps, drawn as curves in their corners, cross nothing, so flat is consistent for now. A redraw on the real lines
+       needs: each ramp's end on a new node at its real spot on the expressway (a6e5f3's real start is 1.6 m off it at
+       s 82, the map's node is at s 134; 384318's real end is 65.5 m off the 1:3 stretch, so that one keeps its node),
+       the loop and ddbbab drawn, the west service road rd-8d6f0550 re-joined (it now ends on rd-0f54d744 at s 97 and
+       crosses rd-39b7e0c0 at s 324 on the ground), and the levels set from the crossings. Blending the real lines onto
+       today's nodes runs a6e5f3 along the expressway's middle (crossing it 4 times), so it is not done that way.
+       (The ramps' bridges, the loop and rd-8d6f0550's levels come with that redraw; the expressway's levels are
+       settled.) Also open: rd-70ccddf6's 6% step at (12749.4, 4907.0) looked at again in the drive; which curving ramp is rd-39b7e0c0
        and which rd-0f54d744 (7.8 and 8.8 m on satellite, 8.7 kept).
      - Third Mainland's Lagos Island end: Third Mainland on top of Ring Road, as the map has it (read 30 Oct:
        Overture's bridge feb1a8 and fd9e07 at level 1 over Ring Road d79b10 and 36767c at level 0, at 6.4658 N
