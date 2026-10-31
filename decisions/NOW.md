@@ -32,8 +32,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      read each piece's character, split or join; each border shown to the owner.
    - [ ] The 15 interchanges' open parts (each junction's done part and its numbers: DONE.md snapshot, item 000):
      - Ojota, after its land was shaped to its roads (30 Oct, DONE; DECISIONS "Under a big junction the land is shaped
-       to its roads"). Owed: the expressway's width: rd-e35d7679 and rd-62d35e3f are one 24 m line (the default for
-       their kind, not read); read 30 Oct on satellite north of the deck (6.5947 N 3.3820 E, z19, about 0.31 m a pixel
+       to its roads"). The expressway's width set 31 Oct (PR map/ojota-width): rd-e35d7679 and rd-62d35e3f 39.5 m (were the
+       24 m default), as read at s 900 (satellite z20, about 39.4 m) and here (about 40 m), Overture's carriageways
+       23.5-26.2 m apart along most of its length. First read 30 Oct on satellite north of the deck (6.5947 N 3.3820 E, z19, about 0.31 m a pixel
        by the 20 m scale bar, colours read across the road): two carriageways about 11-12 m each with a grass median
        about 16-17 m, each carriageway paved together with its slip beside it (bands about 20-22 m), so about 40 m
        edge to edge, the carriageways' centres 26.3 m apart (Overture 5f8028, 05aab4); by eye and by colour, the bands
@@ -247,7 +248,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    - [ ] The main roads' widths: 36 of d00's 41 motorways and 27 of its 32 trunk roads are at their kind's default
      width, not read (30 Oct, from their notes). Each is read on satellite along its length and set to its real
      width, both carriageways and the median inside one record (DECISIONS "1:3 sets where things are; a road keeps
-     its real shape"); the Ojota expressway's reading (about 40 m, its line above) is the first.
+     its real shape"); the first two set 31 Oct (PR map/ojota-width): the Ojota expressway rd-e35d7679 and rd-62d35e3f, 39.5 m.
    - [ ] Loose ends: 37 left after 6 gaps closed (29 Oct); the junctions' own are in their lines above.
    - [ ] Badagry's and Lekki's carriageways left as two lines (rd-52faba3e's are up to 100.5 m apart).
    - [ ] Each road's width read, longest first; the junction place names read.
@@ -416,7 +417,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   new, street ends rd-325023fc, rd-7a9d8b06, rd-a0b710b5 now NODE rows inside rd-7382f27e; with Clinic Road eastbound
   rd-a8efbae0 at 14.0 m: b-012287e1, b-20052ac2, b-494e9843, b-d879cf99 further under it, b-d9224f21 new, rd-00c23990's
   end inside it with no node, rd-a27ac3a6's end a NODE row 6.2 m from its node.
-- d27: Diya Street's bridge over the Oworonshoki junction (Overture level 3), moved here from the interchange list
+- d27: the Ojota expressway rd-e35d7679 widened to 39.5 m (31 Oct, PR map/ojota-width) put 18 houses partly on it (b-182d7f67, b-1be033e4, b-1ef855f0, b-36aa958b, b-4ad7f2e9, b-537ea6c5, b-61696027, b-8292c039, b-8345971c, b-8a5e9d81, b-94666a88, b-9b0ae47a, b-a72355d5, b-acb9400e, b-b74a048f, b-bc09050c, b-bfede23a, b-ce480a6c), and 1 street end inside it with no node and 4 staggered nodes (CLASH/NODE rows naming rd-e35d7679); Diya Street's bridge over the Oworonshoki junction (Overture level 3), moved here from the interchange list
   (31 Oct); the Third Mainland Bridge rd-e7a23019 raised (31 Oct): streets rd-72e04943, rd-80254433 (s 133-136, 1.8-2.1 m
   under it) and rd-c8cf2af0, rd-df933e79 (s 240-265, 5.0 m under it, where Lagos has no street on the bridge) share its
   points at the land's height (4 rows); rd-72e04943, rd-80254433 also cross rd-7a24933e, rd-bc322629 0.4-1.8 m apart;
@@ -425,7 +426,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
   inside it, 13 street ends 4.4-5.7 m from the links' nodes (NODE rows: rd-02e38b95, rd-04d48b48, rd-20954906,
   rd-241002da, rd-395d5c12, rd-3c4bd7ed, rd-570636d8, rd-95ef5c6d, rd-ae0fbe3b, rd-c7428a3d, rd-d9fdf047 twice).
-- d28: rd-db0655fe ends loose inside Ikorodu Road; Anthony's slips (30 Oct): rd-b3f6aee2 ends 0.9 m from slip rd-3d59336e's end (a near miss and a staggered node) and rd-0bdae85c 1.4 m from rd-c62494cd's (a staggered node), joined in d28's pass; Ojota's 24 street rows under ramps, and since its land was shaped
+- d28: the Ojota expressway rd-e35d7679 widened to 39.5 m (31 Oct, PR map/ojota-width) put 37 houses partly on it (b-0d4f9e05, b-183f09f2, b-1897a6ea, b-1dcced99, b-23f5f125, b-24faa958, b-32352965, b-380df90c, b-4562df92, b-4ccba6e9, b-53e3a505, b-5e7d3848, b-64d4fbfe, b-7093a8c8, b-7a7d02ba, b-8386a4f9, b-8cdeabe6, b-939f0d31, b-a5b1cd79, b-ab049087, b-acddfd70, b-aed3f942, b-b0598ce7, b-c7055a61, b-cdbc6226, b-ce5dda2d, b-ce6daa2e, b-d65b5b9e, b-d7cc21ea, b-d7de424a, b-ddc687a1, b-df0609e1, b-e1b6355a, b-e3f177f0, b-f566f803, b-f59f9177, b-fe87bab6), and 18 street ends inside it with no node (5 such rows gone) and 17 staggered nodes (CLASH/NODE rows naming rd-e35d7679); rd-db0655fe ends loose inside Ikorodu Road; Anthony's slips (30 Oct): rd-b3f6aee2 ends 0.9 m from slip rd-3d59336e's end (a near miss and a staggered node) and rd-0bdae85c 1.4 m from rd-c62494cd's (a staggered node), joined in d28's pass; Ojota's 24 street rows under ramps, and since its land was shaped
   (30 Oct) 15 more crossings of its ramps at grade and 10 node rows, 89 houses on the changed land; Anthony: 31
   houses, rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from
   the service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct); Oshodi's land shaped (31 Oct): 5 houses on moved land, 4 by over 2 m (most 3.82 m).
