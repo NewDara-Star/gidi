@@ -7,6 +7,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
+- 31 Oct: Oshodi's and Anthony's land shaped to their roads (d00 relief in tiles 120_40, 120_50, 130_40, 130_50; 664 grid points, filled up to 5.57 m, cut up to 1.62 m): rd-a550750d from up to 5.5 m over the land, rd-abc8ec22 3.6, rd-cad04ec1 4.0, rd-f610a5d5 3.5, the expressway rd-70ccddf6's ground parts 6.1, all now on it but at the bridge ends (owed to the road kit). PR: map/oshodi-land.
 - 31 Oct: which Airport Road ramp is on top where 384318 (rd-6a2d3255) crosses a6e5f3 (rd-0f54d744): 384318, a6e5f3 on the ground there (Overture and Street View Apr 2024); the NOW line's "both level 1" corrected. #638.
 - 31 Oct: the Airport Road junction's levels read against Overture in its real-size frame (rd-0f54d744, rd-6a2d3255, rd-054d3d02, rd-39b7e0c0, rd-70ccddf6): the expressway on the ground as drawn; what a real-line redraw needs written on NOW's line. #637.
 - 31 Oct: Oworonshoki's open parts closed: the Diya Street slip rd-e923727a's lanes (no lane field; 12 m kept), Diya Street's level-3 bridge moved to d27's line, the links' far ends 14-29 m off the real spots kept (the expressway is one centreline for both carriageways, so a link meets it at the middle, not its own carriageway). #636.
