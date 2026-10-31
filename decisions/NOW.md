@@ -52,18 +52,19 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        bank; Ikorodu Road's own 4 slips 500-570 real m out; the twins catalogue's two old flat-join rows.
      - The other interchanges' land: each junction's ground roads measured against the land, and shaped as at Ojota
        where they float or dig in (DECISIONS "Under a big junction the land is shaped to its roads"; the way and the
-       numbers in Ojota's PR; Oshodi and Anthony, Jibowu done 31 Oct, DONE). The way, settled at Oshodi and Jibowu:
+       numbers in Ojota's PR; Oshodi and Anthony, Jibowu, Mile 2 done 31 Oct, DONE). The way, settled at Oshodi and Jibowu:
        decks are only the map's real crossings (a stretch Overture raises over nothing it has, water or a drain, is
        not a deck: under it the land would be dug for no road); under a deck the land keeps its old height, lowered to
        stay 6.7 m below only under a road with no heights (its width and 2 m); d00 roads with no heights keep their
        land, held a whole grid cell's diagonal (14.2 m) each side, as the land read on a road comes from that far. A survey of d00 (31 Oct, every 5 m, more than 1.5 m over or
        under the land, 40 m round crossings left out) lists the places still to read, each against Overture's levels
-       and Street View first (much of it is real bridge): Ijora (rd-f9d2b236 and its ramps, x 11100-11700, y 8100-8700), Costain (rd-c74ce92c,
+       and Street View first (much of it is real bridge): Costain (rd-c74ce92c,
        rd-001dc84f, rd-9ffc6c80, rd-399391e3), Maryland (rd-c0fe3e17, rd-db6dfdd1 dug in 1.6-5.7 m at x 13200-13500,
        y 4200), the Airport Road junction (rd-37c2a1ad, with its redraw), rd-70ccddf6 and rd-7bf7ed83 at x 12000,
        y 5400-5700, rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, rd-9e6fc47d at x 10800, y 2400, Abule Ado, Eko,
        Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Owed to the road
-       kit with the walls: Jibowu's (31 Oct) bridge ends on rd-41dbe473 (s 1038-1053, 1170-1184, 1311-1320) and rd-e2992213
+       kit with the walls: Mile 2's (31 Oct) bridge ends on the Apapa-Oworonshoki Expressway rd-f9d2b236 (s 598-618,
+       694-716, up to 7.2 m) and its service roads rd-7a727450 (s 137-146, 222-229) and rd-baef55b0 (s 122-131, 207); Jibowu's (31 Oct) bridge ends on rd-41dbe473 (s 1038-1053, 1170-1184, 1311-1320) and rd-e2992213
        (s 153-173), up to 6.4 m, and Murtala Muhammed Way's climb rd-84d3b36d and rd-9e50c90a (up to 5.7 m), walled in
        Lagos with a street at grade beside it (Street View Jul 2021 at 6.51770 N 3.36822 E); Oshodi's and Anthony's four bridge ends, where rd-70ccddf6 stands up to 6.6 m over the land
        for 13-17 m (s 1176-1193, 1266-1279, 1727-1743, 1878-1893), with rd-a550750d's and rd-cad04ec1's ends there.
@@ -335,6 +336,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   rd-d9912b10, rd-cd2781a4, rd-d2139b18, rd-d9c43b32, rd-e5cca523, rd-f5a1740e, rd-fe5e0e67; rd-6727064e crosses the new expressway piece without a shared point; with loop rd-2b1023ff at
   10.5 m: 9 houses' clashes larger, and street ends rd-2c0c9f67, rd-6a1edf61, rd-84ca7bdd, rd-86aea104, rd-d9912b10,
   rd-ea4776e0 now NODE rows inside it.
+  Mile 2's land shaped (31 Oct): 11 streets on moved land, 4 by over 1 m (most rd-0a89f19c, 5.02 m), 15 houses, 5 by
+  over 2 m (most b-eaa506f4, 5.61 m).
 - d12: rows from Isolo Road and the Airport Road junction; Ijora: rd-0009669d, rd-6741a469, rd-e4dd8803, b-03eb90ec
   beside the west road; frontage road rd-beb7773a: rd-fe80ec1c, rd-31de79b1, rd-5d55c27c; Badagry Ijora: streets
   rd-63ff2dcb, rd-b645f07f, rd-da8895b1 re-joined; rd-9df13b08, rd-e71a0ffa, rd-f150b7c4 on the expressway.
