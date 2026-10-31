@@ -70,8 +70,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
        expressway and the loop: a6e5f3 (rd-0f54d744) level 1 on 0.33-0.72 over the expressway; 384318 (rd-6a2d3255)
-       on 0.19-0.68 over a7b525, a6e5f3 (both level 1 at their crossing in Overture: which is on top, Street View),
-       ddbbab and the east service road; a7f60d, a7b525 level 1 only near Airport Road's end, over the loop. The map's
+       on 0.19-0.68 over a7b525, a6e5f3 (on top: a6e5f3 crosses under it at 0.755 of its length, 27.6 m past its own
+       level-1 stretch, so on the ground; Street View Apr 2024 at 6.54846 N 3.33687 E, 3 m from the crossing, shows
+       the pano road running about 140/320 deg, as a6e5f3 does (313), under one deck), ddbbab and the east service road; a7f60d, a7b525 level 1 only near Airport Road's end, over the loop. The map's
        ramps, drawn as curves in their corners, cross nothing, so flat is consistent for now. A redraw on the real lines
        needs: each ramp's end on a new node at its real spot on the expressway (a6e5f3's real start is 1.6 m off it at
        s 82, the map's node is at s 134; 384318's real end is 65.5 m off the 1:3 stretch, so that one keeps its node),
