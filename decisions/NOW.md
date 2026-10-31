@@ -123,10 +123,12 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        0.775-0.785, at 6.6258 N 3.2983 E), the expressway's carriageways bridged beside it (566ac3, 2239ef), all at the
        road's level, no rise (satellite z19; Street View Mar 2024 at 6.62606 N 3.29844 E heading 200, the BRT lane
        kerbed in the middle); nothing for the map until the canal's water is drawn; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
-     - Third Mainland's fork at Ebute-Metta: the bridge's height over the swamp elsewhere (it lies
-       on the land at 0-1.7 m along its run, the water not drawn; Street View Nov 2016 at 6.48783 N 3.39436 E shows
-       the links and the bridge on low decks over the swamp); the Third Mainland Bridge's ramps over the links read
-       on Street View for their real length (set at 5.5% from the 8.2 m top, 30 Oct); with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
+     - Third Mainland's fork at Ebute-Metta: the bridge rd-e7a23019 raised over the lagoon (31 Oct): Overture has it at
+       level 1 from 6.4631 to 6.5458 N, so it has no ramps at the fork; now at least 5 m over the land from s 100 to its
+       end (by eye on Street View Nov 2016 at 6.48783 N 3.39436 E, short piers over the swamp; no published height
+       found), the links and roads sharing its points lifted to meet it. Owed: the deck's height read closer (a pano
+       on the bridge looking down, or a published figure); the links' own decks over the swamp (Overture levels) and
+       the water under it when the lagoon is drawn; Lagos Island's end (s 3278, 6.0 m) with Adeniji Adele. With Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
        node, inside it (a staggered join for the junction kit).
      - Ring Road over Awolowo Road: Ring Road raised, read 30 Oct on Street View (Oct 2019 at 6.44416 N 3.40623 E,
        on the deck over rooftops; Jul 2021 on Awolowo Road at 6.44388 N 3.40528 E, the deck across the road ahead),
@@ -325,7 +327,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   new, street ends rd-325023fc, rd-7a9d8b06, rd-a0b710b5 now NODE rows inside rd-7382f27e; with Clinic Road eastbound
   rd-a8efbae0 at 14.0 m: b-012287e1, b-20052ac2, b-494e9843, b-d879cf99 further under it, b-d9224f21 new, rd-00c23990's
   end inside it with no node, rd-a27ac3a6's end a NODE row 6.2 m from its node.
-- d27: b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
+- d27: the Third Mainland Bridge rd-e7a23019 raised (31 Oct): streets rd-72e04943, rd-80254433 (s 133-136, 1.8-2.1 m
+  under it) and rd-c8cf2af0, rd-df933e79 (s 240-265, 5.0 m under it, where Lagos has no street on the bridge) share its
+  points at the land's height (4 rows); rd-72e04943, rd-80254433 also cross rd-7a24933e, rd-bc322629 0.4-1.8 m apart;
+  b-560314a0 under an Oworonshoki link; rd-20954906, rd-80254433 crossing it; 14 rows from Anthony's service roads; its ramp
   rd-a557b7a2 still holds rd-e923727a's old start points (eased in pass 16) and runs on it 61 m (1 clash row);
   Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
   inside it, 13 street ends 4.4-5.7 m from the links' nodes (NODE rows: rd-02e38b95, rd-04d48b48, rd-20954906,
