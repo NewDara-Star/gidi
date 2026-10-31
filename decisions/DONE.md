@@ -7,7 +7,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 31 Oct: Awolowo Road rd-747e0c42 under Ring Road rd-288c15dd read: its real west end is a knot with Force Road (Overture 4922f5), the join on rd-b05f0ee7 stands for it; on the land; the deck's clearance by eye. PR: map/ring-awolowo.
+- 31 Oct: open parts read, nothing changed in the map: Abule Ado ramps rd-2ab78c89, rd-166a257a (Street View Mar 2017, width not settled), Airport Road under rd-37c2a1ad (a street of an undrawn district), Osborne rd-289fa504 (no lane field). PR: map/abule-ado.
+- 31 Oct: Awolowo Road rd-747e0c42 under Ring Road rd-288c15dd read: its real west end is a knot with Force Road (Overture 4922f5), the join on rd-b05f0ee7 stands for it; on the land; the deck’s clearance by eye. #632.
 - 31 Oct: Eko Bridge's Lagos Island end, the bridge rd-8d8116e2 raised from s 45 where Lagos's leaves the ground (Overture cba190, 4dc3c0; Street View Oct 2019), the loops rd-dc498b0b and rd-243b5af1 lifted to meet it. #631.
 - 31 Oct: Ebute-Metta, Okobaba Street rd-b0b218e4 (Overture 94da8b) joined to the network: redrawn in the Third Mainland fork's real-size frame from rd-2689394b to Clinic Road's node on rd-750432c4 / rd-a8efbae0; its 1:3 piece in d16 gone. #630.
 - 31 Oct: Anthony, Anthony Village Road rd-1503de43 and Apapa Road rd-f458561e meet Ikorodu Road's east service road rd-69e78e59 square, as on Google satellite (they came in at a 58-degree slant with a 7.5-8 m kink); Anthony's interchange line closed. #629.
