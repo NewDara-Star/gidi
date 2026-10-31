@@ -108,11 +108,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        known Oshodi sight with it). Claude's pick: bend the frontage road, since the loop is what Oshodi looks like
        from above and the road comes first. The earlier option, rd-9266faaf carried west past ramp rd-6a2d3255,
        waits with the Airport Road junction's redraw (the ramp's end stays; its levels read in #637, #638).
-     - Isolo Road over the expressway (31 Oct): the ground roads beside its bridge that meet the service roads in
-       Lagos (Overture 8b83d7, 3c364b west, ffc9ff, d840b5 east, and the service roads' links under it, 61a01f,
-       1b5da8), so Isolo Road reaches the service roads again (the bridge took it off them); the land under its
-       approaches (up to 7.3 m over it); the bridge's real length (Overture 288 m, level 1 from 41 m to 329 m of
-       17a9b2) against the map's deck and approaches.
+     - Isolo Road over the expressway (31 Oct; its line and four ground roads rd-ffe84bb8, rd-64bacb0d,
+       rd-40fd0e71, rd-ca23588b drawn at real size, PR map/isolo-ground): still owed, the service roads' links
+       under the bridge (Overture 61a01f, 1b5da8); the land under Isolo Road's approaches (up to 6.85 m over it);
+       the bridge's real length (Overture 288 m, level 1 from 41 m to 329 m of 17a9b2) against the map's deck
+       (s 689-756) and approaches; the ground roads' width (7.0 m, not read).
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
@@ -372,7 +372,13 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
 - d14: rows from Isolo Road.
 - d15: Isolo Road deck rd-isodeck1 was the right way round after all (Isolo Road goes over, 31 Oct); Isolo Road's
   deck in d00 (31 Oct) changed its rows with rd-qc8rcv8v, rd-cb2h4xa5, rd-fmvbnpr3, rd-h0p4xdbd, rd-isolan02,
-  rd-qqm8wpxb, rd-qy07dnq8, rd-tk3atl5n, rd-0gu6klk4, rd-zwt7kfiu (now asking for decks or still crossing it); rd-qc8rcv8v crossed twice at the
+  rd-qqm8wpxb, rd-qy07dnq8, rd-tk3atl5n, rd-0gu6klk4, rd-zwt7kfiu (now asking for decks or still crossing it); the
+  junction at real size (31 Oct, map/isolo-ground) leaves Isolo Road crossing rd-c5n44yad, rd-htzqbqr8, rd-oe3ndnqj,
+  rd-vt757j5a (they ended on it before), its ground roads crossing rd-isodeck1, rd-isolan01, rd-isolan02,
+  rd-qqm8wpxb, rd-oe3ndnqj, rd-vt757j5a, and 24 houses inside the new roads (b-05bba645, b-2670e4de, b-2bd67334,
+  b-43507d84, b-531d730c, b-5338aed9, b-54023ea9, b-55d4fe0b, b-615584d5, b-83253982, b-9104cc8e, b-9e319c87,
+  b-9ec80693, b-a42c3bc3, b-ab5ed9c8, b-ba939d15, b-c3026676, b-c6550f70, b-cbc67d62, b-cc8cd7de,
+  b-f756791b, b-fabb8c5d, b-fd450be7, b-ffc95667); rd-qc8rcv8v crossed twice at the
   knot and 3 rows at the Airport Road junction; rd-qqm8wpxb lies on the east service road 533 m (9 clash, 5 node rows);
   rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
   it, 30 Oct); at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
