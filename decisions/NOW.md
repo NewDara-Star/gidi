@@ -82,7 +82,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        plain overpass about 5-6 m over the expressway on the ground, its west end on a grassed bank (by eye). Its two
        loop centres put back on their own low ground (31 Oct, PR map/kirikiri-yards), the flat yards they are in
        Lagos (satellite z18 by eye). Owed: the same reading at the other places whose land script filled closed
-       pieces over 1,000 m2 (Mile 2's three done 31 Oct, PR map/mile2-yards, flat yards and a pond on satellite z17 by eye): Oshodi and Anthony (1,997, 8,157 m2), Iyana-Ipaja
+       pieces over 1,000 m2 (Mile 2's three done 31 Oct, PR map/mile2-yards, flat yards and a pond on satellite z17 by eye; Oshodi's 8,157 m2 loop centre done 31 Oct, PR map/oshodi-yard, Bus Terminal 1's flat site on satellite z18; its 1,997 m2 strip between the expressway and a service road left filled): Iyana-Ipaja
        (5,064, 5,488 m2) and Ojota (not yet listed); each on Google first, then kept on the ground or left filled. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
        its ramps on grassed earth banks in Lagos (Street View Dec 2021), its land shaped (tiles 100_20, 110_20), its
        deck s 215-280 (Overture's bridge 64-66 m). Owed to the road
