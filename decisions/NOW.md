@@ -58,8 +58,17 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        stay 6.7 m below only under a road with no heights (its width and 2 m); d00 roads with no heights keep their
        land, held a whole grid cell's diagonal (14.2 m) each side, as the land read on a road comes from that far. A survey of d00 (31 Oct, every 5 m, more than 1.5 m over or
        under the land, 40 m round crossings left out) lists the places still to read, each against Overture's levels
-       and Street View first (much of it is real bridge): Costain (rd-c74ce92c,
-       rd-001dc84f, rd-9ffc6c80, rd-399391e3), Maryland (rd-c0fe3e17, rd-db6dfdd1 dug in 1.6-5.7 m at x 13200-13500,
+       and Street View first (much of it is real bridge): Costain and Ijora read 31 Oct, no land to shape yet: Apapa Road
+       rd-c74ce92c s 620-1100 and the loop rd-399391e3 s 420-640 are real viaduct (Overture level 1-2 beside them
+       all along; the loop the walled ramp of Street View Nov 2019), so their land stays; north of s 490 the Costain
+       junction (rd-c74ce92c s 60-490 up to 14.4 m, slips rd-001dc84f, rd-9ffc6c80) lies 60-90 m off Overture's Apapa
+       Road and waits on the Badagry junction's redraw (its line below); at the south end, rd-c74ce92c still stands
+       7.4 m over the land at s 1120, where Street View Nov 2019 at 6.45253 N 3.36684 E stands at the foot of the
+       ramp on the ground, rising north in a walled ramp (by eye): the road comes down some 100 m too late, but it
+       crosses the loop rd-399391e3 (on the ground) at s 1092, so the crossing's place against Lagos is read first,
+       a road height fix, not land. Mile 2's service roads rd-7a727450, rd-baef55b0 climb for some 300 m each side
+       (31 Oct, on banks now), but Street View Nov 2016 at 6.46211 N 3.31590 E has the east one on the ground 240 m
+       north of the crossing: their climb's length read against Street View. Maryland (rd-c0fe3e17, rd-db6dfdd1 dug in 1.6-5.7 m at x 13200-13500,
        y 4200), the Airport Road junction (rd-37c2a1ad, with its redraw), rd-70ccddf6 and rd-7bf7ed83 at x 12000,
        y 5400-5700, rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, rd-9e6fc47d at x 10800, y 2400, Abule Ado, Eko,
        Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Owed to the road
