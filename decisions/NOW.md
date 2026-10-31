@@ -34,7 +34,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Ojota, after its land was shaped to its roads (30 Oct, DONE; DECISIONS "Under a big junction the land is shaped
        to its roads"). The expressway's width set 31 Oct (PR map/ojota-width): rd-e35d7679 and rd-62d35e3f 39.5 m (were the
        24 m default), as read at s 900 (satellite z20, about 39.4 m) and here (about 40 m), Overture's carriageways
-       23.5-26.2 m apart along most of its length. First read 30 Oct on satellite north of the deck (6.5947 N 3.3820 E, z19, about 0.31 m a pixel
+       22.9-28.8 m apart where a cut every 150 m meets exactly two (9 of 14 cuts; 7 of them 23.5-26.2 m). First read 30 Oct on satellite north of the deck (6.5947 N 3.3820 E, z19, about 0.31 m a pixel
        by the 20 m scale bar, colours read across the road): two carriageways about 11-12 m each with a grass median
        about 16-17 m, each carriageway paved together with its slip beside it (bands about 20-22 m), so about 40 m
        edge to edge, the carriageways' centres 26.3 m apart (Overture 5f8028, 05aab4); by eye and by colour, the bands
