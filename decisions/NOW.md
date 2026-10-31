@@ -122,7 +122,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        0.775-0.785, at 6.6258 N 3.2983 E), the expressway's carriageways bridged beside it (566ac3, 2239ef), all at the
        road's level, no rise (satellite z19; Street View Mar 2024 at 6.62606 N 3.29844 E heading 200, the BRT lane
        kerbed in the middle); nothing for the map until the canal's water is drawn; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
-     - Anthony: Ikorodu Road's six slips here; Anthony
+     - Anthony: Anthony
        Village Road on (762511) and the loose ends of Apapa Road and rd-0fbc2dcc joined; the side streets' 6 m
        corners read at z18.
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b, Okobaba Street's curve to
@@ -317,7 +317,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   Oworonshoki's links at 10.5 m (30 Oct): houses b-2798e61a, b-6baf47f5 newly under rd-7a24933e, rd-8e84bcfc ends
   inside it, 13 street ends 4.4-5.7 m from the links' nodes (NODE rows: rd-02e38b95, rd-04d48b48, rd-20954906,
   rd-241002da, rd-395d5c12, rd-3c4bd7ed, rd-570636d8, rd-95ef5c6d, rd-ae0fbe3b, rd-c7428a3d, rd-d9fdf047 twice).
-- d28: rd-db0655fe ends loose inside Ikorodu Road; Ojota's 24 street rows under ramps, and since its land was shaped
+- d28: rd-db0655fe ends loose inside Ikorodu Road; Anthony's slips (30 Oct): rd-b3f6aee2 ends 0.9 m from slip rd-3d59336e's end (a near miss and a staggered node) and rd-0bdae85c 1.4 m from rd-c62494cd's (a staggered node), joined in d28's pass; Ojota's 24 street rows under ramps, and since its land was shaped
   (30 Oct) 15 more crossings of its ramps at grade and 10 node rows, 89 houses on the changed land; Anthony: 31
   houses, rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from
   the service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct).
