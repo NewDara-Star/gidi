@@ -248,7 +248,19 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    - [ ] The main roads' widths: 36 of d00's 41 motorways and 27 of its 32 trunk roads are at their kind's default
      width, not read (30 Oct, from their notes). Each is read on satellite along its length and set to its real
      width, both carriageways and the median inside one record (DECISIONS "1:3 sets where things are; a road keeps
-     its real shape"); the first two set 31 Oct (PR map/ojota-width): the Ojota expressway rd-e35d7679 and rd-62d35e3f, 39.5 m.
+     its real shape"); the first two set 31 Oct (#660): the Ojota expressway rd-e35d7679 and rd-62d35e3f, 39.5 m. Groundwork
+     read 31 Oct from Overture (no satellite yet: Chrome dropped when the account changed): the gap between its
+     carriageway lines, centre to centre, cut square every 100 m of the map line where a cut meets one line each side (cuts, range,
+     median): rd-a5bd0021 Badagry Expressway (every 300 m) 14/17, 28.8-54.1, 42.5;
+     rd-7bf7ed83 27/27, 11.0-15.8, 14.0; rd-70ccddf6 7/21, 12.0-16.3, 14.3; rd-a4d4d18c 13/18, 17.5-27.3, 19.5;
+     rd-fe843adb 11/16, 19.8-22.5, 20.7; rd-41dbe473 8/15, 10.3-15.0, 14.1; rd-e844766c 14/15, 14.6-61.7, 36.3;
+     rd-8d8116e2 4/14, 10.6-12.0, 10.9; rd-37c2a1ad 8/12, 19.7-41.8, 34.2; rd-a5cc56c7 9/11, 17.7-22.0, 20.4;
+     rd-c0a3f989 2/10, 16.7-17.5; rd-f9d2b236 4/10, 10.9-16.7, 13.4; rd-490724c3 7/9, 11.6-20.6, 14.2; rd-6300e6de
+     3/8, 11.6-17.1, 12.0. No cut with one line each side (a single line, or both lines on one side: read on
+     satellite which): rd-fb8f7300 and rd-ff8fd057 (the Fourth Mainland, being built: its own line), rd-2926eb85,
+     rd-e542d807, rd-c74ce92c, rd-74fdb793, rd-e7cd1003, rd-36ade1eb, rd-288c15dd; rd-8f4843b7 and rd-2bfb0509
+     1 cut each (1.6, 1.3 m: two lines on one place). Each width = the gap + one carriageway's width read on
+     satellite, as at Ojota. 35 of the 41 still at the 24 m default; not yet measured: the 10 under 250 m.
    - [ ] Loose ends: 37 left after 6 gaps closed (29 Oct); the junctions' own are in their lines above.
    - [ ] Badagry's and Lekki's carriageways left as two lines (rd-52faba3e's are up to 100.5 m apart).
    - [ ] Each road's width read, longest first; the junction place names read.
