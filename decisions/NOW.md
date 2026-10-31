@@ -77,16 +77,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        Road (31 Oct): rd-70ccddf6 and rd-7bf7ed83 there were raised by #528, the wrong way round (DONE). The Airport
        Road junction (rd-37c2a1ad, with its redraw), rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, Abule Ado, Eko,
        Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Kirikiri's bridge road rd-be737149 (the
-       Berger Car Depot Bridge, read 31 Oct): the map raises it s 170-430 (up to 7.5 m over the land at s 280) over
-       the service roads rd-78fda70d (s 257), rd-5722faee (s 290) and the expressway rd-f9d2b236 (s 270), with its
-       loops rd-5c5d3200 (s 160-262 up to 6.9 m) and rd-6a9b5781 (s 0-50 up to 3.1 m); Overture's bridge is only
-       about 95 m (9b3d2a level 1 at 0.106-0.868 of 125 m, 1173ea at 0.069-0.469 of 232 m). Street View, by eye:
-       Nov 2019 at 6.44831 N 3.31718 E (7922b9's middle, about 130 m west of the bridge) and 6.44906 N 3.31981 E
-       (e0a436's middle, about 50 m east) the road on the ground among car yards; Dec 2016 at 6.44865 N 3.31790 E
-       the west end starting up a low earth bank; Nov 2019 at 6.44914 N 3.31940 E (Overture's bridge end) the road
-       about level with the ground, the bridge hidden by parked lorries. So Lagos's ramps look far shorter than
-       the map's; how (the expressway lower, or a lower deck) is not read: owed, a Street View read from the
-       expressway under it and the bridge's top, before any land or height change. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
+       Berger Car Depot Bridge, read 31 Oct, #651): its land shaped (31 Oct, PR map/kirikiri-land; tile 110_80;
+       deck s 235-315), as Street View Apr 2024 from the expressway (6.44979 N 3.31867 E, looking south) shows a
+       plain overpass about 5-6 m over the expressway on the ground, its west end on a grassed bank (by eye). The
+       land script also fills the two loop centres (16,304 and 16,370 m2), as at Ojota and Mile 2; in Lagos
+       they are flat yards (satellite z18 by eye): owed, whether loop centres stay filled. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
        its ramps on grassed earth banks in Lagos (Street View Dec 2021), its land shaped (tiles 100_20, 110_20), its
        deck s 215-280 (Overture's bridge 64-66 m). Owed to the road
        kit with the walls: Iyana-Ipaja's deck ends (rd-9e6fc47d s 205-215, 280-290); Mile 2's (31 Oct) bridge ends on the Apapa-Oworonshoki Expressway rd-f9d2b236 (s 598-618,
@@ -367,7 +362,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    CHECKS row, its own commit.
 
 **District leftovers** (one line per clash, for each district's own turn; detail in DONE.md snapshot, item 000):
-- d09: Kirikiri junction 109 clash + 27 node rows; Kirikiri to Tin Can 40 + 11 (14 houses under roads); Tin Can 30
+- d09: Kirikiri junction 109 clash + 27 node rows; Kirikiri's land shaped (31 Oct, PR map/kirikiri-land) moved 37
+  of its streets (20 by over 1 m, most rd-ec0eecec 6.69 m, rd-93e90e99 4.94 m) and 59 houses (13 by over 2 m, most
+  b-e9105b6a 5.59 m), and left rd-ec0eecec crossing rd-5c5d3200 twice and rd-be737149, rd-93e90e99 crossing
+  rd-5722faee and rd-be737149, rd-10d9f527 crossing rd-be18a2d1, without nodes; Kirikiri to Tin Can 40 + 11 (14 houses under roads); Tin Can 30
   houses and streets (rd-f1478f6a still on the expressway 175 m, rd-86aea104 on a loop); Mile 2: 18 houses, 19 streets
   (houses b-2fe7abd3, b-9e425fbe, b-33e30e85; streets rd-b2b8a5cc, rd-fb81677f, rd-a9d4115f,
   rd-7fd9e952 and more); Tin Can's streets also rd-6a1edf61, rd-6bb4f684, rd-84ca7bdd, rd-b45f16c6, rd-d9222226,
