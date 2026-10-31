@@ -375,9 +375,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   rd-qqm8wpxb, rd-qy07dnq8, rd-tk3atl5n, rd-0gu6klk4, rd-zwt7kfiu (now asking for decks or still crossing it); the
   junction at real size (31 Oct, map/isolo-ground) leaves Isolo Road crossing rd-c5n44yad, rd-htzqbqr8, rd-oe3ndnqj,
   rd-vt757j5a (they ended on it before), its ground roads crossing rd-isodeck1, rd-isolan01, rd-isolan02,
-  rd-qqm8wpxb, rd-oe3ndnqj, rd-vt757j5a, and 25 houses inside the new roads (b-05bba645, b-2670e4de, b-2bd67334,
+  rd-qqm8wpxb, rd-oe3ndnqj, rd-vt757j5a, and 24 houses inside the new roads (b-05bba645, b-2670e4de, b-2bd67334,
   b-43507d84, b-531d730c, b-5338aed9, b-54023ea9, b-55d4fe0b, b-615584d5, b-83253982, b-9104cc8e, b-9e319c87,
-  b-9ec80693, b-a42c3bc3, b-ab5ed9c8, b-b27fac01, b-ba939d15, b-c3026676, b-c6550f70, b-cbc67d62, b-cc8cd7de,
+  b-9ec80693, b-a42c3bc3, b-ab5ed9c8, b-ba939d15, b-c3026676, b-c6550f70, b-cbc67d62, b-cc8cd7de,
   b-f756791b, b-fabb8c5d, b-fd450be7, b-ffc95667); rd-qc8rcv8v crossed twice at the
   knot and 3 rows at the Airport Road junction; rd-qqm8wpxb lies on the east service road 533 m (9 clash, 5 node rows);
   rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
