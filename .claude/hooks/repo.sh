@@ -30,6 +30,7 @@ run_checks() {
     out=$(cd "$r" && "$PY" scripts/check_rules.py 2>&1) || { echo "check_rules.py fails (a rule with no row in CHECKS.md, or a check that fails):"; printf "%s\n" "$out" | grep -v '^GAP\|^PASS' | tail -20; return 1; }
     out=$(cd "$r" && "$PY" scripts/check_map.py map 2>&1) || { echo "check_map.py map fails:"; printf "%s\n" "$out" | grep -v '^TODO' | tail -20; return 1; }
     out=$(cd "$r" && "$PY" tests/test_inventory.py 2>&1) || { echo "tests/test_inventory.py fails (the inventory's checker would lie):"; printf "%s\n" "$out" | tail -10; return 1; }
+    out=$(cd "$r" && "$PY" tests/test_find.py 2>&1) || { echo "tests/test_find.py fails (the search before saying or building would miss what exists):"; printf "%s\n" "$out" | tail -10; return 1; }
     inv=$(mktemp -d)
     out=$(cd "$r" && "$PY" scripts/inventory.py --untracked --out "$inv" 2>&1) || { echo "inventory.py can't run:"; printf "%s\n" "$out" | tail -10; rm -rf "${inv:?}"; return 1; }
     # A line this change adds that names a file of ours that exists nowhere: the name is wrong, or the file was never
