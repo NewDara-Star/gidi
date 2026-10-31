@@ -113,10 +113,13 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        are the service roads' own stretch there, read 31 Oct: 5.9-7.4 m and 0.3-1.4 m from rd-8d6f0550 and
        rd-714e4c81 in the frame, and satellite z19 by eye shows one service road each side running on under the
        deck; its ramps regraded foot to foot, 3.97% and 3.80%, PR map/isolo-ramps: Street View shows the road
-       raised from the west foot to the east foot, so the land under it stays): still owed, the 288 m on piers
-       (Overture level 1, 41-329 m of 17a9b2) against the map's 67 m deck and its ramps: which stretch is piers,
-       which is walls (Street View shows walls only past the bridge's east end, at 360-471 m; the rest not read),
-       for the road kit; the ground roads' width (7.0 m, not read).
+       raised from the west foot to the east foot, so the land under it stays; #647). Piers or walls, read by eye
+       in Street View from the ground roads (31 Oct), in m along 17a9b2 (west foot 41, east foot 471): walls from
+       the west foot to at least 75 m (Jul 2021 at 6.53152 N 3.33465 E, a solid wall about 2.5-3 m by eye, and
+       at 6.53142 N 3.33417 E the low walled ramp starting); open piers with vans parked under them by 130 m
+       (Jun and Jul 2021 at 6.53144 N 3.33515 E and 6.53160 N 3.33515 E); walls past 360 m (#647's panos).
+       Still owed: where the walls end between 75 and 130 m west and where the piers end between 281 and 360 m
+       east (more panos), for the road kit; the ground roads' width (7.0 m, not read).
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
