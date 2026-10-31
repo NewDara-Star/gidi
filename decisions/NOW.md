@@ -76,7 +76,17 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        (level 1-2); the cut's approach walls and the flyover's ends are owed to the road kit with the walls. Isolo
        Road (31 Oct): rd-70ccddf6 and rd-7bf7ed83 there were raised by #528, the wrong way round (DONE). The Airport
        Road junction (rd-37c2a1ad, with its redraw), rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, Abule Ado, Eko,
-       Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
+       Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Kirikiri's bridge road rd-be737149 (the
+       Berger Car Depot Bridge, read 31 Oct): the map raises it s 170-430 (up to 7.5 m over the land at s 280) over
+       the service roads rd-78fda70d (s 257), rd-5722faee (s 290) and the expressway rd-f9d2b236 (s 270), with its
+       loops rd-5c5d3200 (s 160-262 up to 6.9 m) and rd-6a9b5781 (s 0-50 up to 3.1 m); Overture's bridge is only
+       about 95 m (9b3d2a level 1 at 0.106-0.868 of 125 m, 1173ea at 0.069-0.469 of 232 m). Street View, by eye:
+       Nov 2019 at 6.44831 N 3.31718 E (7922b9's middle, about 130 m west of the bridge) and 6.44906 N 3.31981 E
+       (e0a436's middle, about 50 m east) the road on the ground among car yards; Dec 2016 at 6.44865 N 3.31790 E
+       the west end starting up a low earth bank; Nov 2019 at 6.44914 N 3.31940 E (Overture's bridge end) the road
+       about level with the ground, the bridge hidden by parked lorries. So Lagos's ramps look far shorter than
+       the map's; how (the expressway lower, or a lower deck) is not read: owed, a Street View read from the
+       expressway under it and the bridge's top, before any land or height change. Iyana-Ipaja's flyover rd-9e6fc47d (31 Oct, PR map/iyana-land):
        its ramps on grassed earth banks in Lagos (Street View Dec 2021), its land shaped (tiles 100_20, 110_20), its
        deck s 215-280 (Overture's bridge 64-66 m). Owed to the road
        kit with the walls: Iyana-Ipaja's deck ends (rd-9e6fc47d s 205-215, 280-290); Mile 2's (31 Oct) bridge ends on the Apapa-Oworonshoki Expressway rd-f9d2b236 (s 598-618,
