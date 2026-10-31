@@ -64,8 +64,19 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
      - Maryland: link bridge rd-c0fe3e17's clearance over the canal once water is drawn (its deck comes down to
        1.5-3 m over the land's dip at s 340-370, 30 Oct); whether Street
        View shows the south pair's openings (30 Oct: Jun 2021 at 6.57435 N 3.36906 E, not seen either way).
-     - Oshodi: westbound link to the frontage road (Overture c530e1) does not fit at 1:3 (needs rd-9266faaf carried
-       west past ramp rd-6a2d3255, or left out; decide with the Airport ramps' levels).
+     - Oshodi: westbound link to the frontage road (Overture c530e1), waiting on the owner (read 31 Oct): in Lagos it
+       is Oshodi's big loop, seen on satellite (Google, 31 Oct, about 6.5558 N 3.3508 E): it leaves the expressway
+       westbound, swings round the cleared block by Oshodi Transport Interchange Terminal 2 and comes back east onto
+       the frontage road (Overture 261cba, b92ab4, a primary named for the expressway); 175.6 m, tightest radius 27.2
+       m, 100 by 79 m across, ground but for a 10.4 m level-1 stretch over nothing Overture has. Placed at real size
+       on its spot on the map's expressway rd-70ccddf6 (turned to the expressway's direction there), it crosses the
+       frontage road rd-9266faaf and ends 64.5 m north of it: the frontage road is about 80 m out in Lagos and about
+       20 m at 1:3, so a real-size loop, the frontage road where 1:3 puts it, and the loop ending on it cannot all
+       hold. Options for the owner: bend rd-9266faaf about 64 m north round the loop (a long detour of a network
+       road); a loop smaller than real (against ramps at real length); or leave it out (the turn is lost, and a
+       known Oshodi sight with it). Claude's pick: bend the frontage road, since the loop is what Oshodi looks like
+       from above and the road comes first. The earlier option, rd-9266faaf carried west past ramp rd-6a2d3255,
+       waits with the Airport Road junction's redraw (the ramp's end stays; its levels read in #637, #638).
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
