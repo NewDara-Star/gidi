@@ -122,7 +122,6 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        0.775-0.785, at 6.6258 N 3.2983 E), the expressway's carriageways bridged beside it (566ac3, 2239ef), all at the
        road's level, no rise (satellite z19; Street View Mar 2024 at 6.62606 N 3.29844 E heading 200, the BRT lane
        kerbed in the middle); nothing for the map until the canal's water is drawn; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
-     - Anthony: the side streets' 6 m corners read at z18.
      - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b, Okobaba Street's curve to
        Clinic Road; put back 30 Oct) joined to the network; the bridge's height over the swamp elsewhere (it lies
        on the land at 0-1.7 m along its run, the water not drawn; Street View Nov 2016 at 6.48783 N 3.39436 E shows
