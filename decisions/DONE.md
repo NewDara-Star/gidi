@@ -7,7 +7,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 31 Oct: Ebute-Metta, Okobaba Street rd-b0b218e4 (Overture 94da8b) joined to the network: redrawn in the Third Mainland fork's real-size frame from rd-2689394b to Clinic Road's node on rd-750432c4 / rd-a8efbae0; its 1:3 piece in d16 gone. PR: map/okobaba-joined.
+- 31 Oct: Eko Bridge's Lagos Island end, the bridge rd-8d8116e2 raised from s 45 where Lagos's leaves the ground (Overture cba190, 4dc3c0; Street View Oct 2019), the loops rd-dc498b0b and rd-243b5af1 lifted to meet it. PR: map/eko-bridge-lift.
+- 31 Oct: Ebute-Metta, Okobaba Street rd-b0b218e4 (Overture 94da8b) joined to the network: redrawn in the Third Mainland fork's real-size frame from rd-2689394b to Clinic Road's node on rd-750432c4 / rd-a8efbae0; its 1:3 piece in d16 gone. #630.
 - 31 Oct: Anthony, Anthony Village Road rd-1503de43 and Apapa Road rd-f458561e meet Ikorodu Road's east service road rd-69e78e59 square, as on Google satellite (they came in at a 58-degree slant with a 7.5-8 m kink); Anthony's interchange line closed. #629.
 - 31 Oct: Anthony's open ends: Anthony Village Road on (Overture 762511) was already drawn as rd-9549a3c3 (29 Oct, its stale note corrected on rd-1503de43); Apapa Road rd-f458561e already met rd-e6df00c7; the west link rd-0fbc2dcc's 39.6 m loose stub cut so it starts at rd-1130e674's end, where Lagos's link (047ce7) starts. #628.
 - 30 Oct: Anthony, Ikorodu Road's six express-service slips drawn (rd-2f09552f, rd-c62494cd, rd-bdffe2ef, rd-3d59336e, rd-4c2a5608, rd-a87314b7; rd-db6dfdd1, rd-f3d66aee, rd-69e78e59; Overture aafe7a, 3b104d, e02741, 6b77ee, 3fea15, a048c9). #627.

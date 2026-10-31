@@ -132,8 +132,13 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        as the map has it (rd-288c15dd 8.58 m over Awolowo Road's land of 1.07 m at s 288); its clearance not read;
        Awolowo Road rd-747e0c42's heights (none yet) and east end;
        whether it really meets the Marina junction's road.
-     - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac), the Inner Ring Road and Adeniji
-       Adele Road on; the bridge's height on to Apogbon and the loops' heights (Street View).
+     - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac): in Lagos a flyover over Apongbon
+       Street from 6.4589 N to the Marina roundabout (Street View Oct 2019 at 6.4566 N 3.3822 E: a deck about a storey
+       up, a twin deck beside it); the map's bridge rd-8d8116e2 meets the 1:3 Marina road rd-b05f0ee7 79 m before the
+       flyover starts, so the flyover belongs to the Marina's seam, to settle there. The Inner Ring Road and Adeniji
+       Adele Road on. The bridge raised from s 45 (31 Oct), but the land under s 60-150 stands 4.0-4.5 m, which leaves
+       the deck 1.3 m over it at the Street View pano (s 80) where Lagos shows about a storey: the land shaped to the
+       bridge, as at Ojota, owed. The loops' own heights (Overture level 1 at their joins) on Street View.
      - Abule Ado loop bridge (8900, 8530): the service roads the ramps and links land on; streets at the ramps' loose
        ends; Street View; widths: ramps rd-2ab78c89, rd-166a257a read on hazy satellite (8.8-10.8 and 7.3-9.3 m, 8.7
        kept, 30 Oct), Street View to settle; links rd-3622e3bd, rd-f3179f2f (11.0 m) not readable (satellite hazy
