@@ -7,7 +7,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 31 Oct: which Airport Road ramp is on top where 384318 (rd-6a2d3255) crosses a6e5f3 (rd-0f54d744): 384318, a6e5f3 on the ground there (Overture and Street View Apr 2024); the NOW line's "both level 1" corrected. PR: map/airport-crossing.
+- 31 Oct: which Airport Road ramp is on top where 384318 (rd-6a2d3255) crosses a6e5f3 (rd-0f54d744): 384318, a6e5f3 on the ground there (Overture and Street View Apr 2024); the NOW line's "both level 1" corrected. #638.
 - 31 Oct: the Airport Road junction's levels read against Overture in its real-size frame (rd-0f54d744, rd-6a2d3255, rd-054d3d02, rd-39b7e0c0, rd-70ccddf6): the expressway on the ground as drawn; what a real-line redraw needs written on NOW's line. #637.
 - 31 Oct: Oworonshoki's open parts closed: the Diya Street slip rd-e923727a's lanes (no lane field; 12 m kept), Diya Street's level-3 bridge moved to d27's line, the links' far ends 14-29 m off the real spots kept (the expressway is one centreline for both carriageways, so a link meets it at the middle, not its own carriageway). #636.
 - 31 Oct: Western Avenue rd-41dbe473's deck over Ojuelegba Road made to clear at the real crossing (s 1104-1117, Overture 2f0b8b, ebbc3e); Ojuelegba Road put on d13's line. #635.
