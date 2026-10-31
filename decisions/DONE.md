@@ -7,7 +7,8 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
-- 31 Oct: Anthony's open ends: Anthony Village Road on (Overture 762511) was already drawn as rd-9549a3c3 (29 Oct, its stale note corrected on rd-1503de43); Apapa Road rd-f458561e already met rd-e6df00c7; the west link rd-0fbc2dcc's 39.6 m loose stub cut so it starts at rd-1130e674's end, where Lagos's link (047ce7) starts. PR: map/anthony-village-road.
+- 31 Oct: Anthony, Anthony Village Road rd-1503de43 and Apapa Road rd-f458561e meet Ikorodu Road's east service road rd-69e78e59 square, as on Google satellite (they came in at a 58-degree slant with a 7.5-8 m kink); Anthony's interchange line closed. PR: map/anthony-tees.
+- 31 Oct: Anthony's open ends: Anthony Village Road on (Overture 762511) was already drawn as rd-9549a3c3 (29 Oct, its stale note corrected on rd-1503de43); Apapa Road rd-f458561e already met rd-e6df00c7; the west link rd-0fbc2dcc's 39.6 m loose stub cut so it starts at rd-1130e674's end, where Lagos's link (047ce7) starts. #628.
 - 30 Oct: Anthony, Ikorodu Road's six express-service slips drawn (rd-2f09552f, rd-c62494cd, rd-bdffe2ef, rd-3d59336e, rd-4c2a5608, rd-a87314b7; rd-db6dfdd1, rd-f3d66aee, rd-69e78e59; Overture aafe7a, 3b104d, e02741, 6b77ee, 3fea15, a048c9). #627.
 - 30 Oct: Anthony, the loop off the westbound bridge drawn at real size, 241 m from the deck to Ikorodu Road's west service road (rd-f610a5d5, rd-70ccddf6, rd-f3d66aee, Overture 7f326d). #626.
 - 30 Oct: Iyana-Ipaja, the BRT lane's bridge read: a canal bridge at road level, no map change (Overture 3602e7, rd-4d25be78). #625.
