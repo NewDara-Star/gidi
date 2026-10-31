@@ -122,8 +122,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        0.775-0.785, at 6.6258 N 3.2983 E), the expressway's carriageways bridged beside it (566ac3, 2239ef), all at the
        road's level, no rise (satellite z19; Street View Mar 2024 at 6.62606 N 3.29844 E heading 200, the BRT lane
        kerbed in the middle); nothing for the map until the canal's water is drawn; the link rd-67b33568's width (lost in the bus park on satellite; 8.7 kept).
-     - Third Mainland's fork at Ebute-Metta: rd-b0b218e4's loose end (Overture 94da8b, Okobaba Street's curve to
-       Clinic Road; put back 30 Oct) joined to the network; the bridge's height over the swamp elsewhere (it lies
+     - Third Mainland's fork at Ebute-Metta: the bridge's height over the swamp elsewhere (it lies
        on the land at 0-1.7 m along its run, the water not drawn; Street View Nov 2016 at 6.48783 N 3.39436 E shows
        the links and the bridge on low decks over the swamp); the Third Mainland Bridge's ramps over the links read
        on Street View for their real length (set at 5.5% from the 8.2 m top, 30 Oct); with Clinic Road eastbound rd-a8efbae0 at 14.0 m, rd-750432c4 and rd-e38c8fd1 end 5.8 m off its
@@ -297,9 +296,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
   it, 30 Oct); at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
   and 4.4 m off its node and rd-cb2h4xa5, rd-xafls8id, rd-hvwdw3gi cross it with no node (3 clash, 2 node rows; pass 12).
-- d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links;
-  rd-9d3c94cc drawn on top of d00's rd-b0b218e4 for 67 m (1 clash, 5 node rows).
-- d17: rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
+- d16: rd-d6e90d7a, rd-3ee9757d, b-c3e45656 by the Eko Bridge's tie; houses and streets under the Ebute-Metta links.
+- d17: Okobaba Street rd-b0b218e4 at real size (31 Oct): its start on rd-2689394b inside d17's rd-96ed58e3, its end
+  at Clinic Road's node inside rd-768e6e2a; streets rd-cfa6fcdf, rd-e263b083, rd-f3bdefe2, rd-f3c1b995, rd-568ade94,
+  rd-7c653e98, rd-7de08d56, rd-7ef7c404, rd-864a5690 crossing it or ending in it; houses b-06a96887, b-1344fa28,
+  b-336e8b00, b-6980a223, b-fc667f1d under it; rd-9e64ec60 (Murtala drawn again, under the deck), rd-5acd2735, rd-96ed58e3, rd-0c855838, rd-7ec58da0,
   rd-b2d9b4b0; rd-188b1a2a re-joined; Clinic Road's end 1 m from rd-96ed58e3 / rd-93fdb33d; houses b-120302f2,
   b-2ce5fff2, b-a8591e2f and streets rd-65ae9b6c, rd-768e6e2a by the Clinic Road links; Jibowu's east service road at
   11 m (30 Oct): rd-1a3d2748, rd-32d111e0 end inside it with no junction, rd-d76aa192's end 4.7 m from its node;
