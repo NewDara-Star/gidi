@@ -109,8 +109,10 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        from above and the road comes first. The earlier option, rd-9266faaf carried west past ramp rd-6a2d3255,
        waits with the Airport Road junction's redraw (the ramp's end stays; its levels read in #637, #638).
      - Isolo Road over the expressway (31 Oct; its line and four ground roads rd-ffe84bb8, rd-64bacb0d,
-       rd-40fd0e71, rd-ca23588b drawn at real size, PR map/isolo-ground): still owed, the service roads' links
-       under the bridge (Overture 61a01f, 1b5da8); the land under Isolo Road's approaches (up to 6.85 m over it);
+       rd-40fd0e71, rd-ca23588b drawn at real size, #645; the links under the bridge, Overture 61a01f and 1b5da8,
+       are the service roads' own stretch there, read 31 Oct: 5.9-7.4 m and 0.3-1.4 m from rd-8d6f0550 and
+       rd-714e4c81 in the frame, and satellite z19 by eye shows one service road each side running on under the
+       deck): still owed, the land under Isolo Road's approaches (up to 6.85 m over it);
        the bridge's real length (Overture 288 m, level 1 from 41 m to 329 m of 17a9b2) against the map's deck
        (s 689-756) and approaches; the ground roads' width (7.0 m, not read).
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
