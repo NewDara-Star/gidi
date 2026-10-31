@@ -7,6 +7,7 @@ words a session used. The full account of each piece of work is its commit's `Ch
 `git log --all --grep=<id or word>`. Nothing here is read at session start; search it when it is needed.
 
 ## Done, newest first
+- 31 Oct: Kirikiri's land shaped to its cloverleaf (d00 relief in tile 110_80; 724 grid points, filled up to 6.71 m, cut up to 0.95 m): the bridge road rd-be737149 on banks either side of its deck s 235-315 over the service roads rd-78fda70d, rd-5722faee and the expressway rd-f9d2b236, its loops rd-5c5d3200, rd-6a9b5781, rd-91206891 on the land. PR: map/kirikiri-land.
 - 31 Oct: Iyana-Ipaja's land shaped to its flyover (d00 relief in tiles 100_20, 110_20; 187 grid points, filled up to 6.55 m, cut up to 0.50 m): rd-9e6fc47d's ramps on earth banks either side of its deck s 215-280 over the expressway rd-4d25be78 and Ipaja Road rd-57fbbfbf, as Street View shows them. #650.
 - 31 Oct: d00 Isolo Road's bridge ramps rd-61a6626a, rd-9de842be regraded straight from the west foot (the ground roads' join) to the 15.15 m deck and down to the east foot (3.97%, 3.80%), as Street View shows them raised from foot to foot. #647.
 - 31 Oct: d00 Isolo Road's junction with the Apapa-Oworonshoki Expressway at real size: Isolo Road rd-61a6626a, rd-9de842be redrawn on Overture's 17a9b2 through it, its deck at 15.15 m over the service roads and the expressway, and four one-way ground roads beside the bridge (rd-ffe84bb8, rd-64bacb0d, rd-40fd0e71, rd-ca23588b) from the service roads rd-8d6f0550, rd-714e4c81 to Isolo Road where it is on the land. #645.
