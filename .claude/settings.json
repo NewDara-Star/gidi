@@ -62,6 +62,10 @@
             "type": "command",
             "command": "\"$HOME\"/gidi/.claude/hooks/here-or-goodnight.sh",
             "statusMessage": "The owner's here and goodnight switches"
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/gidi/.claude/hooks/search-first.sh"
           }
         ]
       }

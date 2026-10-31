@@ -57,6 +57,9 @@ that. Block when you can point at:
 - A decision made for the owner without asking, where DECISIONS.md says it is theirs; scope beyond what the commit says.
 - Dead code or stale comments/docs left behind by this change; names that don't say what things are; two things
   that can now disagree.
+- A second copy (CLAUDE.md, "Search before saying or building"): a new file, function, material or check that does
+  what one already in the three repos does. Search for it (grep ~/gidi, ~/gidi-game, ~/gidi-data, or run
+  python3 ~/gidi/scripts/find.py <words>), and check the commit's `Searched:` paragraph names what was found.
 - Real place names, Google's pictures copied or traced (study yes, lift no; Google Open Buildings data may be used,
   credited, since 27 Oct), sacred places or people made criminal.
 

@@ -288,9 +288,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
    (f) [ ] The owner drives it.
    Owed: [ ] the board shows the CLASH list; [ ] the research on how studios build a city from a real place
    (~/gidi-data/research/OPEN-WORLD-CITY-METHOD.md) read and checked, and this order changed if it shows a better way;
-   [ ] a search script (in scripts/, not written yet): one search over git history, DONE.md and NOW.md that also tries each road's names from
-   the map records and a short list of synonyms (owner, 29 Oct: "what if... grep fails?"); a meaning search only if
-   that is not enough (a model download, asked first).
+   the search script (owner, 29 Oct: "what if... grep fails?"): [x] `scripts/find.py` (31 Oct, branch
+   rules/search-before-saying): the three repos' files (DONE.md and NOW.md among them) and every branch's commits, with
+   `decisions/WORDS.md`'s other names; [ ] still owed: a road's names read from the map records (find.py leaves map/
+   out unless --map and doesn't turn a road's name into its id); a meaning search only if words are not enough (a
+   model download, asked first).
 
 04. [ ] **Art style** (paused for the roads; all of it in `docs/look/LOOK-NOTES.md`, scripts in
    ~/gidi-data/research/look-test-29oct/, committed in gidi-data 29 Oct). When it resumes: [ ] start from what stands
