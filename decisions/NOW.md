@@ -69,10 +69,7 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        (PR map/costain-foot): two real crossings hold it up, the loop rd-399391e3 at s 1092 (Overture b24f59 level 2
        over 3e0b15 level 0) and the link rd-e79bf93a (Overture 1f6d9a, under Apapa Road) at s 1110, both needing it
        6.7 m over them; at 1:3 Lagos's ~90 m from the loop to the foot is ~30 m, too short for a real slope. Its ramp
-       now falls at 5.8% from just before the link, within 1 m of the land from s 1224 (was 1240); no more is possible. Mile 2's service roads stand over 1.5 m above their ends for s 40-332 of 508 m
-       (rd-7a727450) and s 50-293 of 464 m (rd-baef55b0), on banks now (31 Oct); Street View Nov 2016 at 6.46211 N
-       3.31590 E has the east one on the ground (by eye), 259 m from the crossing in Lagos (Overture a7d803 x 6150d6); where that
-       falls on the map's real-size junction not worked out: their climb's length read against Street View. Maryland read 31 Oct, no land to shape: rd-db6dfdd1 s 910-1050 is
+       now falls at 5.8% from just before the link, within 1 m of the land from s 1224 (was 1240); no more is possible.  Maryland read 31 Oct, no land to shape: rd-db6dfdd1 s 910-1050 is
        dug in because Lagos's Ikorodu Road is an underpass there (Overture 286584, be6371 level -1), and s 1270-1430
        is its level-2 flyover (d4b26b, 11f2a8) over the Link Bridge, with rd-c0fe3e17 s 185-365 the Link Bridge itself
        (level 1-2); the cut's approach walls and the flyover's ends are owed to the road kit with the walls. Isolo
