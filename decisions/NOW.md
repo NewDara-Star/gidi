@@ -70,9 +70,12 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        a road height fix, not land. Mile 2's service roads stand over 1.5 m above their ends for s 40-332 of 508 m
        (rd-7a727450) and s 50-293 of 464 m (rd-baef55b0), on banks now (31 Oct); Street View Nov 2016 at 6.46211 N
        3.31590 E has the east one on the ground (by eye), 259 m from the crossing in Lagos (Overture a7d803 x 6150d6); where that
-       falls on the map's real-size junction not worked out: their climb's length read against Street View. Maryland (rd-c0fe3e17, rd-db6dfdd1 dug in 1.6-5.7 m at x 13200-13500,
-       y 4200), the Airport Road junction (rd-37c2a1ad, with its redraw), rd-70ccddf6 and rd-7bf7ed83 at x 12000,
-       y 5400-5700, rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, rd-9e6fc47d at x 10800, y 2400, Abule Ado, Eko,
+       falls on the map's real-size junction not worked out: their climb's length read against Street View. Maryland read 31 Oct, no land to shape: rd-db6dfdd1 s 910-1050 is
+       dug in because Lagos's Ikorodu Road is an underpass there (Overture 286584, be6371 level -1), and s 1270-1430
+       is its level-2 flyover (d4b26b, 11f2a8) over the Link Bridge, with rd-c0fe3e17 s 185-365 the Link Bridge itself
+       (level 1-2); the cut's approach walls and the flyover's ends are owed to the road kit with the walls. Isolo
+       Road (31 Oct): rd-70ccddf6 and rd-7bf7ed83 there were raised by #528, the wrong way round (DONE). The Airport
+       Road junction (rd-37c2a1ad, with its redraw), rd-a80472dc and rd-c0a3f989 at x 12000, y 9000, rd-9e6fc47d at x 10800, y 2400, Abule Ado, Eko,
        Third Mainland's links, Lagos Island and Osborne (these four wait on their own lines above). Owed to the road
        kit with the walls: Mile 2's (31 Oct) bridge ends on the Apapa-Oworonshoki Expressway rd-f9d2b236 (s 598-618,
        694-716, up to 7.2 m) and its service roads rd-7a727450 (s 137-146, 222-229) and rd-baef55b0 (s 122-131, 207); Jibowu's (31 Oct) bridge ends on rd-41dbe473 (s 1038-1053, 1170-1184, 1311-1320) and rd-e2992213
@@ -105,6 +108,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        known Oshodi sight with it). Claude's pick: bend the frontage road, since the loop is what Oshodi looks like
        from above and the road comes first. The earlier option, rd-9266faaf carried west past ramp rd-6a2d3255,
        waits with the Airport Road junction's redraw (the ramp's end stays; its levels read in #637, #638).
+     - Isolo Road over the expressway (31 Oct): the ground roads beside its bridge that meet the service roads in
+       Lagos (Overture 8b83d7, 3c364b west, ffc9ff, d840b5 east, and the service roads' links under it, 61a01f,
+       1b5da8), so Isolo Road reaches the service roads again (the bridge took it off them); the land under its
+       approaches (up to 7.3 m over it); the bridge's real length (Overture 288 m, level 1 from 41 m to 329 m of
+       17a9b2) against the map's deck and approaches.
      - Airport Road junction: read 31 Oct (a session script, not kept; its method is in #637's message: frame fitted to the expressway's and Airport
        Road's real-size stretches, 1.2 and 5.5 m rms): the expressway is on the ground through it in Lagos (a5948f,
        e9030a, f485a0, f4996b: no level), as the map has it. The ramps rise only where they cross each other, the
@@ -362,7 +370,9 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   rd-dd700495, rd-ea74bc35 (their joins go to the ground under it).
   Jibowu's land shaped (31 Oct): 31 of its streets on moved land, 17 by over 1 m (most rd-32d33ffa, 4.91 m: its copy of Western Avenue now on the bank), 11 houses, 1 by over 2 m (4.73 m).
 - d14: rows from Isolo Road.
-- d15: Isolo Road deck rd-isodeck1 is the wrong way round (the expressway goes over); rd-qc8rcv8v crossed twice at the
+- d15: Isolo Road deck rd-isodeck1 was the right way round after all (Isolo Road goes over, 31 Oct); Isolo Road's
+  deck in d00 (31 Oct) changed its rows with rd-qc8rcv8v, rd-cb2h4xa5, rd-fmvbnpr3, rd-h0p4xdbd, rd-isolan02,
+  rd-qqm8wpxb, rd-qy07dnq8, rd-tk3atl5n, rd-0gu6klk4, rd-zwt7kfiu (now asking for decks or still crossing it); rd-qc8rcv8v crossed twice at the
   knot and 3 rows at the Airport Road junction; rd-qqm8wpxb lies on the east service road 533 m (9 clash, 5 node rows);
   rd-avaupyki re-joined on the ground, and its south end now on Western Avenue's Ojuelegba deck (crossed 5.0 m over
   it, 30 Oct); at Agege Motor Road rd-798553cb by Isolo Road, rd-cb2h4xa5 and rd-0gi2ewca end 2.0
@@ -396,7 +406,8 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
   (30 Oct) 15 more crossings of its ramps at grade and 10 node rows, 89 houses on the changed land; Anthony: 31
   houses, rd-cbaebc6a (the expressway again, 193 m), rd-90772fe4, rd-79282a08, rd-ae7949a3, rd-30407730; 43 rows from
   the service roads; rd-eb7f5d73's end 5.6 m from rd-e28cb5e7's node (Oworonshoki's links at 10.5 m, 30 Oct); Oshodi's land shaped (31 Oct): 5 houses on moved land, 4 by over 2 m (most 3.82 m).
-- d30 (Isolo-Ladipo, when drawn): Isolo Road stays on the ground under the expressway, as d00 has it.
+- d30 (Isolo-Ladipo, when drawn): Isolo Road goes over the expressway on its bridge, as d00 has it (31 Oct), with
+  its ground roads beside the bridge (owed in d00).
 - d11 (Ijora-Iganmu-Costain, when drawn): Western Avenue on south from d13's rd-32d33ffa end (13241.36, 7384.58);
   the 5 Apapa Road pieces on Agunda's east border; the Lagos-Badagry Expressway carried across Agunda's corner from
   d09's rd-b2b8a5cc end (12568.69, 7733.91).
