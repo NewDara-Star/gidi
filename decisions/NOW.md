@@ -129,9 +129,11 @@ and checked, its line moves to DONE.md; add new ones where they belong, and say 
        node, inside it (a staggered join for the junction kit).
      - Ring Road over Awolowo Road: Ring Road raised, read 30 Oct on Street View (Oct 2019 at 6.44416 N 3.40623 E,
        on the deck over rooftops; Jul 2021 on Awolowo Road at 6.44388 N 3.40528 E, the deck across the road ahead),
-       as the map has it (rd-288c15dd 8.58 m over Awolowo Road's land of 1.07 m at s 288); its clearance not read;
-       Awolowo Road rd-747e0c42's heights (none yet) and east end;
-       whether it really meets the Marina junction's road.
+       as the map has it (rd-288c15dd 8.58 m over Awolowo Road's land of 1.07 m at s 288). Its clearance by eye
+       (31 Oct, same pano): well over a lorry, not measurable from the picture; the map's 7.5 m kept. Awolowo Road
+       rd-747e0c42 (31 Oct): on the land, no heights of its own; its west end in Lagos is a knot with Force Road
+       (Overture 4922f5), not on Ahmadu Bello Way, and the join on rd-b05f0ee7 stands for it (20 m short); Force
+       Road and the loose east end [15195.92, 9064.09] wait for Lagos Island's streets (district undrawn).
      - Eko Bridge's Lagos Island end: Apogbon Bridge south (Overture f1f330, d17eac): in Lagos a flyover over Apongbon
        Street from 6.4589 N to the Marina roundabout (Street View Oct 2019 at 6.4566 N 3.3822 E: a deck about a storey
        up, a twin deck beside it); the map's bridge rd-8d8116e2 meets the 1:3 Marina road rd-b05f0ee7 79 m before the
